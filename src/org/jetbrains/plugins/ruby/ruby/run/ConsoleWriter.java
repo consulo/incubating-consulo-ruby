@@ -16,19 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionManager;
-import com.intellij.execution.ExecutionRegistry;
+import com.intellij.execution.Executor;
+import com.intellij.execution.ExecutorRegistry;
+import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.execution.runners.JavaProgramRunner;
-import com.intellij.execution.ui.CloseAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.execution.ui.actions.CloseAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,7 +62,7 @@ public class ConsoleWriter {
                         new RunContentDescriptor(consoleView, null,
                                 new ConsolePanel(consoleView, toolbarActions),
                                 consoleTitle);
-                JavaProgramRunner defaultRunner = ExecutionRegistry.getInstance().getDefaultRunner();
+                Executor defaultRunner = ExecutorRegistry.getInstance().getExecutorById(DefaultRunExecutor.EXECUTOR_ID);
                 toolbarActions.add(new CloseAction(defaultRunner, myDescriptor, project));
                 ExecutionManager.getInstance(project).getContentManager().showRunContent(defaultRunner, myDescriptor);
             }

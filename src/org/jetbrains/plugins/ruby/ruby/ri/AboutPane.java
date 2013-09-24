@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.ri;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
@@ -63,7 +63,7 @@ class AboutPane {
     }
 
     public void fireJDKChanged() {
-        ProjectJdk jdk = myDocPanel.getProjectJdk();
+        Sdk jdk = myDocPanel.getSdk();
         if (RubySdkUtil.isKindOfRubySDK(jdk)){
             myJdkField.setForeground(Color.BLACK);
             myJdkField.setText(jdk.getName());

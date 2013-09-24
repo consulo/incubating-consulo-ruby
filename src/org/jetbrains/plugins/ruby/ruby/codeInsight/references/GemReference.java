@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -130,7 +130,7 @@ public class GemReference implements RPsiPolyvariantReference{
         if (myElement instanceof RBaseString) {
             final RFile rFile = RubyPsiUtil.getRFile(myOwner);
             assert rFile!=null;
-            final ProjectJdk sdk = rFile.getSdk();
+            final Sdk sdk = rFile.getSdk();
             if (sdk!=null && RubySdkUtil.isKindOfRubySDK(sdk)){
                 final List<String> rootUrls = RubySdkType.getGemsRootUrls(sdk);
                 if (rootUrls != null) {

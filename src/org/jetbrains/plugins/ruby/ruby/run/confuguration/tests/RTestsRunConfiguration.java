@@ -16,16 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.runners.JavaProgramRunner;
-import com.intellij.execution.runners.RunnerInfo;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.*;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
+import java.io.File;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -47,8 +39,20 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigur
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScopeUtil;
-
-import java.io.File;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Executor;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.options.SettingsEditor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -96,22 +100,14 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
         return new RTestsRunConfiguration(getProject(), getFactory(), getName());
     }
 
-    @SuppressWarnings({"deprecation"})
-    public JDOMExternalizable createRunnerSettings(final ConfigurationInfoProvider provider) {
-        return null;
-    }
 
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new RTestsRunConfigurationEditor(getProject(), this);
     }
 
-    @SuppressWarnings({"deprecation"})
-    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(final JavaProgramRunner runner) {
-        return null;
-    }
-
-    public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runnerSettings, final ConfigurationPerRunnerSettings configurationSettings) throws ExecutionException {
-        try {
+	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
+	{
+		try {
             validateConfiguration(true);
         } catch (ExecutionException ee) {
             throw ee;
@@ -120,7 +116,7 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
         }
 
 
-        return new RTestsRunCommandLineState(this, runnerSettings, configurationSettings);
+        return new RTestsRunCommandLineState(this, executionEnvironment);
     }
 
     protected void validateConfiguration(boolean isExecution) throws Exception {

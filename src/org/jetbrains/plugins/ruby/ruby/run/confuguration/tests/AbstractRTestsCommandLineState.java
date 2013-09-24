@@ -16,25 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.execution.CantRunException;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionResult;
-import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.RunnerSettings;
-import com.intellij.execution.filters.TextConsoleBuilder;
-import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
+import java.io.File;
+
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
-
-import java.io.File;
+import com.intellij.execution.CantRunException;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionResult;
+import com.intellij.execution.Executor;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.filters.TextConsoleBuilder;
+import com.intellij.execution.filters.TextConsoleBuilderFactory;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.runners.ProgramRunner;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Key;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,9 +48,8 @@ public abstract class AbstractRTestsCommandLineState extends ColouredCommandLine
     protected File tempFile;
 
     protected AbstractRTestsCommandLineState(final AbstractRubyRunConfiguration config,
-                                             final RunnerSettings runnerSettings,
-                                             final ConfigurationPerRunnerSettings configurationSettings) {
-        super(runnerSettings, configurationSettings);
+                                             ExecutionEnvironment executionEnvironment) {
+        super(executionEnvironment);
         final Project project = config.getProject();
 
         final TextConsoleBuilder consoleBuilder =
@@ -60,8 +61,10 @@ public abstract class AbstractRTestsCommandLineState extends ColouredCommandLine
         attachCompilerForJRuby(config);
     }
 
-    public ExecutionResult execute() throws ExecutionException {
-        final ExecutionResult result = super.execute();
+
+	public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException
+	{
+		final ExecutionResult result = super.execute(executor, runner);
         if (result != null) {
             result.getProcessHandler().addProcessListener(new ProcessListener() {
                 public void startNotified(final ProcessEvent event) {

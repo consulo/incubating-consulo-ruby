@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -69,7 +69,7 @@ public abstract class AbstractScriptAction extends AnAction {
 
         final IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
         final Module module = DataKeys.MODULE.getData(dataContext);
-        final ProjectJdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+        final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
 
         assert module != null;
         assert jdk != null;

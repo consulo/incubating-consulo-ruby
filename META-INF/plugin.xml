@@ -95,6 +95,7 @@
         <!--Converting-->
         <project.converterFactory implementation="org.jetbrains.plugins.ruby.rails.facet.converting.RailsModule_ConverterFactory"/>
 
+		<lang.parserDefinition language="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition" />
     </extensions>
 
     <application-components>
@@ -165,9 +166,7 @@
     </application-components>
 
     <project-components>
-        <component>
-            <implementation-class>org.jetbrains.plugins.ruby.rails.module.view.RailsProjectViewPane</implementation-class>
-        </component>
+
         <component>
             <implementation-class>org.jetbrains.plugins.ruby.ruby.pom.impl.RubyPomAspectImpl</implementation-class>
         </component>

@@ -16,15 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.facet.ui.FacetEditorValidator;
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
-
-import javax.swing.*;
-
 /**
  * Created by IntelliJ IDEA.
  *
@@ -32,17 +23,17 @@ import javax.swing.*;
  * @date: Mar 13, 2008
  */
 
-public class JRailsFacetSupportProvider extends BaseRailsFacetSupportProvider<JRailsFacet> {
-    public JRailsFacetSupportProvider() {
+public class JRailsFacetSupportProvider /*extends BaseRailsFacetSupportProvider<JRailsFacet> */{
+ /*   public JRailsFacetSupportProvider() {
         super(JRailsFacetType.INSTANCE);
     }
 
     @Nullable
-    protected ProjectJdk getSDKFromMagic(final JComponent component) {
+    protected Sdk getSDKFromMagic(final JComponent component) {
         final JComboBox comboBox = NiiChAVOUtil.getJRubyFacetSdkChooserMagic(component);
         if (comboBox != null) {
             // JRails facet
-            return (ProjectJdk) comboBox.getSelectedItem();
+            return (Sdk) comboBox.getSelectedItem();
         }
         return null;
     }
@@ -88,5 +79,5 @@ public class JRailsFacetSupportProvider extends BaseRailsFacetSupportProvider<JR
 //            });
 //        }
 //    }
-
+       */
 }

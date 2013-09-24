@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.addins.jsSupport;
 
-import com.intellij.lang.javascript.JSTokenTypes;
-import com.intellij.lang.javascript.psi.impl.JSEmbeddedContentImpl;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 
@@ -29,10 +27,12 @@ import com.intellij.psi.tree.IElementType;
  */
 public class JavaScriptIntegrationUtil {
     public static boolean isJSEmbeddedContent(final PsiElement htmlPsi) {
-        return htmlPsi instanceof JSEmbeddedContentImpl;
+       // return htmlPsi instanceof JSEmbeddedContentImpl;
+		return false;
     }
 
     public static boolean isJSStringContentNode(final IElementType nodeType) {
-        return nodeType == JSTokenTypes.STRING_LITERAL;
+       // return nodeType == JSTokenTypes.STRING_LITERAL;
+		return false;
     }
 }

@@ -54,7 +54,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
     }
 
     public Language[] getLanguages() {
-        return new Language[]{RubyLanguage.RUBY, RHTMLLanguage.RHTML};
+        return new Language[]{RubyLanguage.RUBY, RHTMLLanguage.INSTANCE};
     }
 
     public boolean acceptElement(@NotNull final PsiElement element) {
@@ -67,12 +67,12 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
             return false;
         }
         
-        if (psiFile.getLanguage() == RHTMLLanguage.RHTML) {
+        if (psiFile.getLanguage() == RHTMLLanguage.INSTANCE) {
             return true;
         }
 
         final PsiFile origFile = psiFile.getOriginalFile();
-        if (origFile != null && origFile.getLanguage() == RHTMLLanguage.RHTML) {
+        if (origFile != null && origFile.getLanguage() == RHTMLLanguage.INSTANCE) {
             return true;
         }
 
@@ -132,7 +132,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         final FileViewProvider provider = psiElement.getContainingFile().getViewProvider();
         final int startOffset = psiElement.getTextRange().getStartOffset();
 
-        if (lang == RHTMLLanguage.RHTML) {
+        if (lang == RHTMLLanguage.INSTANCE) {
         //Parent is RHTML
             //Omit new Line
             final ASTNode node = psiElement.getNode();
@@ -154,7 +154,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
             }
         } else if (lang == RubyLanguage.RUBY) {
             //RUBY_CODE_CHARACTERS
-            PsiElement parent = provider.findElementAt(startOffset, RHTMLLanguage.RHTML);
+            PsiElement parent = provider.findElementAt(startOffset, RHTMLLanguage.INSTANCE);
 
 
             //noinspection ConstantConditions
@@ -227,7 +227,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         final Language lang = getLangageForElement(psiElement);        
         if (lang == RubyLanguage.RUBY) {
             return RBundle.message("breadcrumbs.rhtml.presentation.ruby.injection");
-        } else if (lang == RHTMLLanguage.RHTML) {
+        } else if (lang == RHTMLLanguage.INSTANCE) {
             final ASTNode node;
 
             if (psiElement instanceof RHTMLRubyInjectionTag) {

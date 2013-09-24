@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -42,7 +42,7 @@ public class RubyRSpecInstallComponentsForm {
     }
 
     protected void initBeforeShow() {
-        final ProjectJdk sdk = myBuilder.getSdk();
+        final Sdk sdk = myBuilder.getSdk();
 
         //check is gem installed.
         final boolean gemExists = RubySdkUtil.isKindOfRubySDK(sdk) ? RSpecUtil.checkIfRSpecGemExists(sdk) : null;

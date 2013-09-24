@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.sdk.ui;
 
 import com.intellij.ide.util.projectWizard.JdkChooserPanel;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.MultiLineLabelUI;
@@ -75,14 +75,14 @@ public class RubySdkChooserPanel extends JComponent {
         myJdkChooser.setAllowedJdkTypes(new SdkType[]{RubySdkType.getInstance(),
                                                       JRubySdkType.getInstance()});
 
-        final ProjectJdk selectedJdk = project == null
+        final Sdk selectedJdk = project == null
                 ? null
-                : ProjectRootManager.getInstance(project).getProjectJdk();
+                : ProjectRootManager.getInstance(project).getSdk();
         myJdkChooser.updateList(selectedJdk, null);
     }
 
     @Nullable
-    public ProjectJdk getChosenJdk() {
+    public Sdk getChosenJdk() {
         return myJdkChooser.getChosenJdk();
     }
 
@@ -90,7 +90,7 @@ public class RubySdkChooserPanel extends JComponent {
         return myJdkChooser;
     }
 
-    public void selectSdk(@Nullable final ProjectJdk sdk) {
+    public void selectSdk(@Nullable final Sdk sdk) {
         myJdkChooser.selectJdk(sdk);
     }
 }

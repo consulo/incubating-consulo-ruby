@@ -16,12 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.util.SystemInfo;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.util.SystemInfo;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,10 +54,7 @@ public class RubyUtil {
      * @return true if is ruby module.
      */
     public static boolean isRubyModuleType(@Nullable final Module module) {
-        return module != null && RubyModuleType.getInstance() == module.getModuleType();
+        return true;
     }
 
-    public static boolean isRubyModuleType(final ModuleType moduleType) {
-        return RubyModuleType.getInstance() == moduleType;
-    }
 }

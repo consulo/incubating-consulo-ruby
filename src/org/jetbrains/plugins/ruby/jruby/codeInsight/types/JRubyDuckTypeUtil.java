@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
-import com.intellij.psi.*;
+import org.consulo.psi.PsiPackage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JavaPsiUtil;
@@ -28,6 +28,14 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.CoreTypes;
+import com.intellij.psi.PsiArrayType;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiClassType;
+import com.intellij.psi.PsiField;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiPrimitiveType;
+import com.intellij.psi.PsiType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -97,7 +105,7 @@ public class JRubyDuckTypeUtil {
 
     @NotNull
     public static Children getChildrenByJavaPackage(@Nullable final FileSymbol fileSymbol,
-                                                    @Nullable final PsiPackage packaggge){
+                                                    @Nullable final PsiJavaPackage packaggge){
         final Children children = new Children(null);
 
         // Here we add JavaProxyMethods to children

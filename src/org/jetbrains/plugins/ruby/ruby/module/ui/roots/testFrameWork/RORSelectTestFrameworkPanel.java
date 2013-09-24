@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork;
 
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -130,7 +130,7 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
 
         myBGetRSpecGemVersion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 if (sdk == null || !RubySdkUtil.isSDKValid(sdk)) {
                     final String msg = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.messages");
                     final String title = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.title");

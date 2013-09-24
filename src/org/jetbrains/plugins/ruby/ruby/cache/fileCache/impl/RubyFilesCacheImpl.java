@@ -44,14 +44,11 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.impl.RFilesStorageImpl;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.ide.caches.FileContent;
-import com.intellij.ide.startup.FileSystemSynchronizer;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -61,7 +58,6 @@ import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
-import com.intellij.openapi.vfs.ex.VirtualFileManagerEx;
 
 /**
  * Created by IntelliJ IDEA.
@@ -405,7 +401,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
 // CacheUpdaterFunctionality
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public VirtualFile[] queryNeededFiles() {
+    public VirtualFile[] queryNeededFiles(ProgressIndicator progressIndicator) {
         final Set<String> urls2Remove = new HashSet<String>(myRFilesStorage.getAllUrls());
         final Collection<VirtualFile> foundFiles = scanForFiles(myCacheRootURLs);
         final Set<VirtualFile> neededFiles = new HashSet<VirtualFile>();
@@ -427,7 +423,14 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         return neededFiles.toArray(new VirtualFile[neededFiles.size()]);
     }
 
-    public void processFile(@NotNull final FileContent fileContent) {
+	@Override
+	public int getNumberOfPendingUpdateJobs()
+	{
+		return 0;
+	}
+
+	@Override
+	public void processFile(@NotNull final FileContent fileContent) {
         regenerateFileInfo(fileContent.getVirtualFile());
     }
 
@@ -527,15 +530,15 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
     }
 
     private void unregisterAsCacheUpdater(){
-        ProjectRootManagerEx.getInstanceEx(myProject).unregisterChangeUpdater(this);
-        ((VirtualFileManagerEx)VirtualFileManagerEx.getInstance()).unregisterRefreshUpdater(this);
+      //  ProjectRootManagerEx.getInstanceEx(myProject).unregisterChangeUpdater(this);
+      //  ((VirtualFileManagerEx)VirtualFileManagerEx.getInstance()).unregisterRefreshUpdater(this);
     }
 
     /**
      * Used in debug puproses
      */
     public void forceUpdate(){
-        final FileSystemSynchronizer synchronizer = new FileSystemSynchronizer();
+       /* final FileSystemSynchronizer synchronizer = new FileSystemSynchronizer();
         synchronizer.registerCacheUpdater(this);
         if (!ApplicationManager.getApplication().isUnitTestMode() && myProject.isOpen()) {
             Runnable process = new Runnable() {
@@ -546,7 +549,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
             ProgressManager.getInstance().runProcessWithProgressSynchronously(process, RBundle.message("project.root.change.loading.progress"), false, myProject);
         } else {
             synchronizer.execute();
-        }
+        }  */
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

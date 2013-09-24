@@ -16,17 +16,18 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiPackage;
-import com.intellij.psi.search.GlobalSearchScope;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.consulo.psi.PsiPackage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.search.GlobalSearchScope;
 
 /**
  * Created by IntelliJ IDEA.
@@ -55,9 +56,8 @@ public class JavaResolveUtil {
 
     @NotNull
     public static List<PsiElement> getTopLevelPackagesAndClasses(@NotNull final Project project) {
-        final PsiManager psiManager = PsiManager.getInstance(project);
         final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
-        final PsiPackage topLevel = psiManager.findPackage("");
+        final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
         if (topLevel != null) {
 // Add ALL top level packages
             for (PsiPackage psiPackage : topLevel.getSubPackages()) {
@@ -77,18 +77,17 @@ public class JavaResolveUtil {
 
     @NotNull
     public static List<PsiElement> getAllowedTopLevelPackagesAndClasses(@NotNull final Project project) {
-        final PsiManager psiManager = PsiManager.getInstance(project);
         final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 // Add ALLOWED top level packages
         for (String name : TOP_LEVEL_JAVA_ALLOWED) {
-            final PsiPackage psiPackage = psiManager.findPackage(name);
+            final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(name);
             if (psiPackage!=null && psiPackage.isValid()){
                 list.add(psiPackage);
             }
         }
 
 // Add top level classes
-        final PsiPackage topLevel = psiManager.findPackage("");
+        final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
         if (topLevel != null && topLevel.isValid()) {
             for (PsiClass psiClass : topLevel.getClasses()) {
                 if (psiClass.isValid()){
@@ -101,12 +100,11 @@ public class JavaResolveUtil {
 
     @Nullable
     public static PsiElement getPackageOrClass(@NotNull final Project project, @NotNull final String fullName) {
-        final PsiManager psiManager = PsiManager.getInstance(project);
-        final PsiPackage psiPackage = psiManager.findPackage(fullName);
+        final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(fullName);
         if (psiPackage!=null && psiPackage.isValid()){
             return psiPackage;
         }
-        final PsiClass psiClass = psiManager.findClass(fullName, GlobalSearchScope.allScope(project));
+        final PsiClass psiClass = JavaPsiFacade.getInstance(project).findClass(fullName, GlobalSearchScope.allScope(project));
         if (psiClass!=null && psiClass.isValid()){
             return psiClass;
         }

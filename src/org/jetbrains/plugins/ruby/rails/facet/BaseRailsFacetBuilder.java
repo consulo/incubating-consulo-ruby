@@ -16,29 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
-import com.intellij.ProjectTopics;
-import com.intellij.facet.Facet;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.fileChooser.ex.FileChooserDialogImpl;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.ModuleAdapter;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.roots.*;
-import com.intellij.openapi.startup.StartupManager;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.ActionRunner;
-import com.intellij.util.messages.MessageBusConnection;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -61,10 +42,34 @@ import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import com.intellij.ProjectTopics;
+import com.intellij.facet.Facet;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
+import com.intellij.openapi.fileChooser.ex.FileChooserDialogImpl;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
+import com.intellij.openapi.project.ModuleAdapter;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ContentIterator;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleFileIndex;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.startup.StartupManager;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.util.ActionRunner;
+import com.intellij.util.messages.MessageBusConnection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -144,7 +149,7 @@ public class BaseRailsFacetBuilder {
         assert !conf.isInitialized();
         assert uncommitedModule.isLoaded(); //Otherwise we have come from Wizard and RailsAppHomeRoot != null
 
-        final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(uncommitedModule);
+        final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(uncommitedModule);
 ///////////////// Rails Home Root /////////////////////////////////////////////////
         // Can occur only by adding new Rails/JRails Facet from Module Settings Dialog!
         final Ref<String> railsFacetHomePathRef = new Ref<String>();
@@ -210,7 +215,7 @@ public class BaseRailsFacetBuilder {
     public static void initGreenhornFacet(final BaseRailsFacet railsFacet,
                                           @NotNull final ModifiableRootModel rootModel,
                                           @NotNull final String applicationHomePath,
-                                          @Nullable final ProjectJdk sdk) {
+                                          @Nullable final Sdk sdk) {
 
         /**
          * WARNING: Module Root Model is uncommited!!!!!
@@ -250,7 +255,7 @@ public class BaseRailsFacetBuilder {
          * Thus we should take SDK from settings and use it. This behaviour works both with
          * jruby facet and ruby module type.
          */
-        final ProjectJdk sdk = settings.getSdk();
+        final Sdk sdk = settings.getSdk();
 
         final String applicationHomePath = RailsFacetUtil.getRailsAppHomeDirPath(uncommitedModule);
         assert applicationHomePath != null;
@@ -296,7 +301,7 @@ public class BaseRailsFacetBuilder {
 //        RModuleUtil.refreshRubyModuleTypeContent(module);    
 }
     private static void generateRailsApplication(final Module module,
-                                                 @NotNull final ProjectJdk sdk,
+                                                 @NotNull final Sdk sdk,
                                                  final RunContentDescriptorFactory descriptorFactory,
                                                  @NotNull final RailsWizardSettingsHolder settings,
                                                  @NotNull final String applicationHomePath,
@@ -326,7 +331,7 @@ public class BaseRailsFacetBuilder {
     }
 
     private static Runnable createOnRailsAppGenerated(final RunContentDescriptorFactory.PinTabsFactory descFactory,
-                                                      final Module uncommitedModule, final ProjectJdk sdk,
+                                                      final Module uncommitedModule, final Sdk sdk,
                                                       final BaseRailsFacet railsFacet,
                                                       final RailsWizardSettingsHolder settings,
                                                       final String applicationHomePath,
@@ -393,7 +398,7 @@ public class BaseRailsFacetBuilder {
     
     private static void installComponents(@NotNull final Module uncommitedModule,
                                           @NotNull final BaseRailsFacet railsFacet,
-                                          @NotNull final ProjectJdk sdk,
+                                          @NotNull final Sdk sdk,
                                           @NotNull final RailsWizardSettingsHolder settings,
                                           @NotNull final String applicationHomePath) {
 
@@ -416,17 +421,17 @@ public class BaseRailsFacetBuilder {
     }
 
     public static void regenerateRakeTasksAndGeneratorsSettings(final BaseRailsFacet railsFacet,
-                                                               @Nullable  final ProjectJdk sdk) {
+                                                               @Nullable  final Sdk sdk) {
        loadRakeTasksAndGeneratorsSettings(railsFacet, sdk, true);
     }
 
     private static void loadRakeTasksAndGeneratorsSettings(final BaseRailsFacet railsFacet,
-                                                           @Nullable  final ProjectJdk sdk) {
+                                                           @Nullable  final Sdk sdk) {
        loadRakeTasksAndGeneratorsSettings(railsFacet, sdk, false);
     }
 
     private static void loadRakeTasksAndGeneratorsSettings(final BaseRailsFacet railsFacet,
-                                                           @Nullable final ProjectJdk sdk,
+                                                           @Nullable final Sdk sdk,
                                                            final boolean forceRegenerate) {
         // Reloads list of tasks and generators
         final BaseRailsFacetConfigurationLowLevel configuration = (BaseRailsFacetConfigurationLowLevel)railsFacet.getConfiguration();
@@ -440,7 +445,7 @@ public class BaseRailsFacetBuilder {
                                             final RunContentDescriptorFactory descFactory,
                                             @Nullable final ActionRunner.InterruptibleRunnable nextAction,
                                             final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf,
-                                            @NotNull final ProjectJdk sdk) {
+                                            @NotNull final Sdk sdk) {
 
         final ActionRunner.InterruptibleRunnable installRSpecRails = new ActionRunner.InterruptibleRunnable() {
             public void run() {
@@ -479,7 +484,7 @@ public class BaseRailsFacetBuilder {
     }
 
     private static void configureRakeTasksAndGenerators(final Facet facet,
-                                                        @Nullable  final ProjectJdk sdk) {
+                                                        @Nullable  final Sdk sdk) {
         final Module module = facet.getModule();
         /**
            * If project is initialized
@@ -511,7 +516,7 @@ public class BaseRailsFacetBuilder {
         }
     }
 
-    private static Runnable loadRakeTasksAndGeneratorsIfArentLoadedRunnalbe(@Nullable final ProjectJdk sdk,
+    private static Runnable loadRakeTasksAndGeneratorsIfArentLoadedRunnalbe(@Nullable final Sdk sdk,
                                                                             final Facet facet) {
         return new Runnable() {
             public void run() {

@@ -16,18 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPackage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
@@ -40,10 +50,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiJavaPackage;
 
 /**
  * Created by IntelliJ IDEA.
@@ -401,8 +411,8 @@ public class SymbolBuilder {
         LOG.assertTrue(context!=null, "Context cannot be null");
         final String fullName = includeJavaPackage.getQualifiedName();
         final PsiElement psiPackage = fullName!=null ? JavaResolveUtil.getPackageOrClass(symbol.getProject(), fullName) : null;
-        if (psiPackage instanceof PsiPackage){
-            for (PsiClass clazzz : ((PsiPackage) psiPackage).getClasses()) {
+        if (psiPackage instanceof PsiJavaPackage){
+            for (PsiClass clazzz : ((PsiJavaPackage) psiPackage).getClasses()) {
                 myFileSymbol.addChild(context, new ProxyJavaSymbol(myFileSymbol, clazzz.getName(), clazzz, context, includeJavaPackage));
             }
         }

@@ -16,6 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.BlackAndWhiteLexer;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.TreePatcher;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
@@ -27,22 +34,20 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.SingleRootFileViewProvider;
 import com.intellij.psi.impl.source.DummyHolder;
 import com.intellij.psi.impl.source.PsiFileImpl;
-import com.intellij.psi.impl.source.jsp.jspJava.OuterLanguageElement;
 import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
-import com.intellij.psi.impl.source.tree.*;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.impl.source.tree.FileElement;
+import com.intellij.psi.impl.source.tree.LeafElement;
+import com.intellij.psi.impl.source.tree.SharedImplUtil;
+import com.intellij.psi.impl.source.tree.TreeElement;
+import com.intellij.psi.impl.source.tree.TreeUtil;
+import com.intellij.psi.templateLanguages.OuterLanguageElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.CharTable;
 import com.intellij.util.LocalTimeCounter;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.BlackAndWhiteLexer;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.TreePatcher;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.

@@ -8,6 +8,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacCompilerConfiguration">
+    <option name="MAXIMUM_HEAP_SIZE" value="510" />
+  </component>
   <component name="ResourceCompilerConfiguration">
     <resourceExtensions />
     <wildcardResourcePatterns>

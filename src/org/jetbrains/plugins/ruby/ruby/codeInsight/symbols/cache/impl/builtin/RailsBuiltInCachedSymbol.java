@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.nameConventions.MailersConventions;
@@ -41,7 +41,7 @@ public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol {
 
     public RailsBuiltInCachedSymbol(@NotNull final Project project,
                                     @NotNull final String url,
-                                    @Nullable final ProjectJdk sdk) {
+                                    @Nullable final Sdk sdk) {
         super(project, url, sdk);
     }
 

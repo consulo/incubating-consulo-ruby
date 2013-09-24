@@ -16,9 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
 
-import com.intellij.formatting.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLRubyInjectionBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.FormattingModel;
+import com.intellij.formatting.FormattingModelBuilder;
+import com.intellij.formatting.FormattingModelProvider;
+import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -28,14 +42,6 @@ import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 import com.intellij.psi.xml.XmlAttribute;
 import com.intellij.psi.xml.XmlAttributeValue;
 import com.intellij.psi.xml.XmlElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLRubyInjectionBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
 
 /**
  * Created by IntelliJ IDEA.
@@ -90,4 +96,11 @@ public class RHTMLFormattingModelBuilder implements FormattingModelBuilder {
         }
         return FormattingModelProvider.createFormattingModelForPsiFile(psiFile, block, settings);
     }
+
+	@Nullable
+	@Override
+	public TextRange getRangeAffectingIndent(PsiFile psiFile, int i, ASTNode astNode)
+	{
+		return null;
+	}
 }

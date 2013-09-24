@@ -20,8 +20,9 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.RunnerSettings;
+import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -31,6 +32,7 @@ import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.AbstractRTestsCommandLineState;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -51,9 +53,8 @@ public class RSpecRunCommandLineState extends AbstractRTestsCommandLineState {
     private final RSpecRunConfiguration myConfig;
 
     public RSpecRunCommandLineState(final RSpecRunConfiguration config,
-                                    final RunnerSettings runnerSettings,
-                                    final ConfigurationPerRunnerSettings configurationSettings) {
-        super(config, runnerSettings, configurationSettings);
+                                    ExecutionEnvironment executionEnvironment) {
+        super(config, executionEnvironment);
         myConfig = config;
     }
 
@@ -64,9 +65,9 @@ public class RSpecRunCommandLineState extends AbstractRTestsCommandLineState {
         final String specArgs = pathcSpecArgsWithColouringArgIfNecessary(myConfig.getSpecArgs());
 
         //ruby executable  path
-        final ProjectJdk sdk = myConfig.getSdk();
+        final Sdk sdk = myConfig.getSdk();
         assert sdk != null;
-        final String rubyExecutablePath = sdk.getVMExecutablePath();
+        final String rubyExecutablePath = RubySdkUtil.getVMExecutablePath(sdk);
 
         //rspecScriptPath
         final Module module = myConfig.getModule();

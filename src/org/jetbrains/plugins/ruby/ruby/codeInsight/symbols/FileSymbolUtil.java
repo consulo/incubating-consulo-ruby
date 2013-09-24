@@ -20,7 +20,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.HashMap;
@@ -108,7 +108,7 @@ public class FileSymbolUtil {
         }
 
         if (isRubyTestMode) {
-            final ProjectJdk sdk = rFile.getSdk();
+            final Sdk sdk = rFile.getSdk();
             final RubyFilesCache[] caches = FileSymbolUtil.getCaches(project, module, sdk);
             final FileSymbol fileSymbol = new FileSymbol(null, project, jrubyEnabled, caches);
             FileSymbolUtil.process(fileSymbol, url, InterpretationMode.ONLY_TESTS_EXTERNAL, true);
@@ -116,7 +116,7 @@ public class FileSymbolUtil {
         }
 
         //noinspection ConstantConditions
-        final ProjectJdk sdk = module != null
+        final Sdk sdk = module != null
                 ? RModuleUtil.getModuleOrJRubyFacetSdk(module)
                 : RubySdkCachesManager.getInstance(project).getFirstSdkForFile(rFile.getVirtualFile());
 
@@ -129,7 +129,7 @@ public class FileSymbolUtil {
 
     public static RubyFilesCache[] getCaches(@NotNull final Project project,
                                              @Nullable final Module module,
-                                             @Nullable final ProjectJdk sdk) {
+                                             @Nullable final Sdk sdk) {
         final List<RubyFilesCache> cachesList = RVirtualPsiUtil.getCaches(project, module, sdk);
         return cachesList.toArray(new RubyFilesCache[cachesList.size()]);
     }

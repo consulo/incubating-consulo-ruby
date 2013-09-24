@@ -16,30 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.templates;
 
+import java.io.InputStream;
+import java.util.HashMap;
+
+import org.jdom.Element;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.RComponents;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.codeInsight.template.Template;
 import com.intellij.codeInsight.template.impl.TemplateContext;
 import com.intellij.codeInsight.template.impl.TemplateImpl;
 import com.intellij.codeInsight.template.impl.TemplateSettings;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
-import com.intellij.ide.fileTemplates.impl.FileTemplateImpl;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.RComponents;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -110,7 +105,7 @@ public class RubyTemplatesLoader implements ApplicationComponent {
         final FileTemplate template =
                 myFileTemplateManager.addTemplate(name, RubyFileType.RUBY.getDefaultExtension());
 // setting template as internal
-        ((FileTemplateImpl) template).setInternal(true);
+       // ((FileTemplateImpl) template).setInternal(true);
 // setting template text
         template.setText(text);
     }
@@ -119,12 +114,12 @@ public class RubyTemplatesLoader implements ApplicationComponent {
         if (myFileTemplateManager.getPattern(name) != null) {
             return;
         }
-        final FileTemplate pattern =
+      /*  final FileTemplate pattern =
                 myFileTemplateManager.addPattern(name, RubyFileType.RUBY.getDefaultExtension());
 // setting pattern as internal
-        ((FileTemplateImpl) pattern).setInternal(true);
+      //  ((FileTemplateImpl) pattern).setInternal(true);
 // setting pattern text
-        pattern.setText(text);
+        pattern.setText(text); */
     }
 
     public void initComponent() {
@@ -142,7 +137,7 @@ public class RubyTemplatesLoader implements ApplicationComponent {
      * @param templateName Template Name
      */
     public void loadTemplates(@NotNull final InputStream inputStream, final String templateName) {
-        final SAXBuilder parser = new SAXBuilder();
+      /*  final SAXBuilder parser = new SAXBuilder();
         try {
             final Document doc = parser.build(inputStream);
             final Element root = doc.getRootElement();
@@ -161,7 +156,7 @@ public class RubyTemplatesLoader implements ApplicationComponent {
             LOG.warn(e);
         } catch (IOException e) {
             LOG.warn(e);
-        }
+        }    */
     }
 
 

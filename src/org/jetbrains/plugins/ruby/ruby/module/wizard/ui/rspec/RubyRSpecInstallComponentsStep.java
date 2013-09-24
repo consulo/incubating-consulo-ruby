@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ui.UIUtil;
@@ -82,13 +82,13 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep {
             return false;
         }
 
-        final ProjectJdk sdk = myBuilder.getSdk();
+        final Sdk sdk = myBuilder.getSdk();
         //noinspection SimplifiableIfStatement
         return sdk != null;
     }
 
     public boolean validate() throws ConfigurationException {
-        final ProjectJdk sdk = myBuilder.getSdk();
+        final Sdk sdk = myBuilder.getSdk();
         if (!RSpecUtil.checkIfRSpecGemExists(sdk)) {
             final String msg = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.text");
             final String title = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.title");

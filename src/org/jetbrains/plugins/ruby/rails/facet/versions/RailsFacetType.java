@@ -16,19 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.facet.Facet;
-import com.intellij.facet.FacetTypeRegistry;
-import com.intellij.facet.autodetecting.FacetDetector;
-import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileFilter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfigurationImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetTypeRegistry;
+import com.intellij.facet.autodetecting.FacetDetector;
+import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileFilter;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,9 +63,6 @@ class RailsFacetType extends BaseRailsFacetType<RailsFacet> {
         return new RailsFacet(this, module, name, configuration, underlyingFacet);
     }
 
-    public boolean isSuitableModuleType(@NotNull final ModuleType moduleType) {
-        return BaseRailsFacetType.isRailsFacetSuitableModuleType(moduleType);
-    }
 
     protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry,
                                              final VirtualFileFilter railsFacetFilter,

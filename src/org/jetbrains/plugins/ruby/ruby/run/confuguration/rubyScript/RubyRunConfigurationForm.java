@@ -16,23 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import com.intellij.execution.junit2.configuration.EnvironmentVariablesComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.ui.RawCommandLineEditor;
+import java.util.Map;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
-
-import javax.swing.*;
-import java.util.Map;
+import com.intellij.execution.configuration.EnvironmentVariablesComponent;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.ui.RawCommandLineEditor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -130,9 +134,9 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams {
      * @return Selected alternativ sdk
      */
     @Nullable
-    public ProjectJdk getAlternativeSdk(){
+    public Sdk getAlternativeSdk(){
         final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
-        return selectedObject instanceof ProjectJdk ? (ProjectJdk)selectedObject : null;
+        return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
     }
 
 
@@ -145,7 +149,7 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams {
         RubyRunConfigurationUIUtil.setShouldUseAlternSdk(shouldUse, myUseAlternativeSdkCB, myAlternativeSdksComboBox, myModulesComboBox);
     }
 
-    public void setAlternativeSdk(@Nullable final ProjectJdk sdk){
+    public void setAlternativeSdk(@Nullable final Sdk sdk){
         myAlternativeSdksComboBox.setSelectedItem(sdk);
     }
 

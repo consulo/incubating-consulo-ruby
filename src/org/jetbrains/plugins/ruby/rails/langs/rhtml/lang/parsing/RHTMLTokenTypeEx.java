@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLPsiLeafElementType;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +31,6 @@ public interface RHTMLTokenTypeEx extends RHTMLTokenType {
     public IElementType RHTML_INJECTION_IN_HTML = new IRHTMLElementType("RHTML_INJECTION_IN_HTML");
 
     // This token is passed to RHTMLRuby lexer for all not ruby fragments.
-    public IElementType RHTML_INJECTION_IN_RUBY = new IRHTMLPsiLeafElementType("RHTML_INJECTION_IN_RUBY",
+    public IElementType RHTML_INJECTION_IN_RUBY = new IRHTMLElementType("RHTML_INJECTION_IN_RUBY",
                                                                                RBundle.message("parsing.rhtml.injection.in.ruby.title"));
 }

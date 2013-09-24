@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.addins.rspec.rails.facet.ui.wizard.tabs;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.MultiLineLabelUI;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -300,7 +300,7 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
             final RSpecApplicationSettings settings = RSpecApplicationSettings.getInstance();
 
             // Sdk was changed
-            final ProjectJdk sdk = getSdk();
+            final Sdk sdk = getSdk();
 
             setupSVNPathLabel();
 
@@ -386,13 +386,13 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
     }
 
     @Nullable
-    private ProjectJdk getSdk() {
+    private Sdk getSdk() {
         final TabbedSettingsContext tabbedSettingsContext = getContext();
         return tabbedSettingsContext == null ? null : tabbedSettingsContext.getSdk();
     }
 
     private void setupSVNPathLabel() {
-        final ProjectJdk  sdk = getSdk();
+        final Sdk  sdk = getSdk();
         if (sdk != null && !OSUtil.isSVNInExtendedLoadPath(null, sdk)) {
             myLSvnMustBeInPath.setVisible(true);
             final String text = RBundle.message("module.wizard.test.framework.rspec.svn.note");

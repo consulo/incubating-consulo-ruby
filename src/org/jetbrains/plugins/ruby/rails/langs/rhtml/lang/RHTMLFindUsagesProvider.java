@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.Language;
 import com.intellij.lang.cacheBuilder.SimpleWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
+import com.intellij.lang.findUsages.LanguageFindUsages;
 import com.intellij.lang.xml.XmlFindUsagesProvider;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +48,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     if (lang instanceof RHTMLLanguage) {
         return false;
     }
-    final FindUsagesProvider delegateProvider = lang.getFindUsagesProvider();
+    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
     return delegateProvider.canFindUsagesFor(psiElement);
   }
 
@@ -61,7 +62,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     if (lang instanceof RHTMLLanguage) {
         return "";
     }
-    final FindUsagesProvider delegateProvider = lang.getFindUsagesProvider();
+    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
     return delegateProvider != null ? delegateProvider.getType(element)
                                     : "";
   }
@@ -77,7 +78,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     if (lang instanceof RHTMLLanguage) {
         return "";
     }
-    final FindUsagesProvider delegateProvider = lang.getFindUsagesProvider();
+    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
     return delegateProvider != null ? delegateProvider.getDescriptiveName(element)
                                     : "";
   }
@@ -93,7 +94,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     if (lang instanceof RHTMLLanguage) {
         return "";
     }
-    final FindUsagesProvider delegateProvider = lang.getFindUsagesProvider();
+    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
     return delegateProvider != null ? delegateProvider.getNodeText(element, useFullName)
                                     : "";
   }

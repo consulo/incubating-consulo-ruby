@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslaye
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -39,7 +39,7 @@ public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol
 
     public ControllersAndHelpersLayer(@NotNull final Project project,
                            @Nullable final Module module,
-                           @Nullable final ProjectJdk sdk,
+                           @Nullable final Sdk sdk,
                            final boolean isJRubyEnabled) {
         super(FileSymbolType.MODELS_LAYER, project, module, sdk, isJRubyEnabled);
 

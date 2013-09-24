@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.rails.facet.ui.wizard.tabs.RSpecComponentsInstallerTab;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +30,7 @@ import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolde
  * @date: Apr 10, 2008
  */
 public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder {
-    private ProjectJdk mySdk;
+    private Sdk mySdk;
 
     private Generate myGenerateRailsAppWay = Generate.NEW;
     private String myRailsApplicatlionRootRelativePath;
@@ -92,11 +93,11 @@ public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder 
     }
 
     @Nullable
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         return mySdk;
     }
 
-    public void setSdk(@Nullable final ProjectJdk sdk) {
+    public void setSdk(@Nullable final Sdk sdk) {
         mySdk = sdk;
     }
 }

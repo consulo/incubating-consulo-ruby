@@ -16,16 +16,9 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.ActionRunner;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
@@ -35,9 +28,16 @@ import org.jetbrains.plugins.ruby.ruby.module.RubyModuleSettings;
 import org.jetbrains.plugins.ruby.ruby.roots.RModuleContentRootManager;
 import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleContentRootManagerImpl;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.util.ActionRunner;
 
 /**
  * Created by IntelliJ IDEA.
@@ -81,16 +81,16 @@ public class RModuleUtil {
      * @return Ruby Jdk selected for given module or JRuby facet jdk if found
      */
     @Nullable
-    public static ProjectJdk getModuleOrJRubyFacetSdk(@Nullable final Module module){
+    public static Sdk getModuleOrJRubyFacetSdk(@Nullable final Module module){
         if (module == null){
             return null;
         }
         if (JRubyUtil.hasJRubySupport(module)) {
             return JRubyUtil.getJRubyFacetSdk(module);
         }
-        if (RubyUtil.isRubyModuleType(module)) {
+       /* if (RubyUtil.isRubyModuleType(module)) {
             return ModuleRootManager.getInstance(module).getJdk();
-        }
+        } */
         return null;
     }
 

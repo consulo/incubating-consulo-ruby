@@ -48,7 +48,7 @@ public class RHTMLFileType  extends XmlLikeFileType {
     private static final Icon ICON = RailsIcons.RHTML_ICON;
 
     private RHTMLFileType() {
-        super(RHTMLLanguage.RHTML);
+        super(RHTMLLanguage.INSTANCE);
     }
 
     @NotNull

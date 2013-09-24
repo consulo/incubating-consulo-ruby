@@ -21,7 +21,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
@@ -62,7 +62,7 @@ public class RubySymbolContributor extends RubyBaseContributor implements Choose
 
 // Adding sdk`s info if needed
             if (includeNonProjectItems) {
-                final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
                 if (declarationsIndex!=null){
                     names.addAll(declarationsIndex.getAllClassesNames());
@@ -102,7 +102,7 @@ public class RubySymbolContributor extends RubyBaseContributor implements Choose
 
 // Adding sdk`s info if needed
             if (includeNonProjectItems) {
-                final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
                 if (declarationsIndex!=null){
                     addItems(declarationsIndex.getClassesByName(name), project, items);

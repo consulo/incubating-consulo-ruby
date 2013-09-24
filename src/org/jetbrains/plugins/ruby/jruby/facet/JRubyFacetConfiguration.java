@@ -16,14 +16,6 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import com.intellij.facet.FacetConfiguration;
-import com.intellij.facet.ui.FacetEditorContext;
-import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,8 +23,16 @@ import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubyLoadPathChooser;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubyRTestFrameworkChooser;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubySdkEditorTab;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
-import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
+import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
+import com.intellij.facet.FacetConfiguration;
+import com.intellij.facet.ui.FacetEditorContext;
+import com.intellij.facet.ui.FacetEditorTab;
+import com.intellij.facet.ui.FacetValidatorsManager;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.WriteExternalException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,7 +41,7 @@ import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
  */
 
 public class JRubyFacetConfiguration implements FacetConfiguration, RSupportPerModuleSettings {
-    private ProjectJdk mySdk;
+    private Sdk mySdk;
     private boolean changed;
     private boolean shouldUseRSpecTestFramework = true;
     private CheckableDirectoriesContainer myLoadPathDirs;
@@ -78,7 +78,7 @@ public class JRubyFacetConfiguration implements FacetConfiguration, RSupportPerM
         return mySdk!=null ? mySdk.getName() : null;
     }
 
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         return mySdk;
     }
 
@@ -91,10 +91,10 @@ public class JRubyFacetConfiguration implements FacetConfiguration, RSupportPerM
     }
 
     public void setSdkByName(final String name){
-        setSdk(ProjectJdkTable.getInstance().findJdk(name, JRubySdkType.getInstance().getName()));
+        setSdk(SdkTable.getInstance().findSdk(name));
     }
 
-    public void setSdk(@Nullable final ProjectJdk jdk) {
+    public void setSdk(@Nullable final Sdk jdk) {
         final boolean isJRubySDK = JRubySdkType.isJRubySDK(jdk);
         changed = !isJRubySDK || mySdk !=jdk;
         mySdk = isJRubySDK ? jdk : null;

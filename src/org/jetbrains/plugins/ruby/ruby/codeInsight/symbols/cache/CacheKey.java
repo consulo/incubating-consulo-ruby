@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,14 +31,14 @@ public class CacheKey {
 
     private final String url;
     private final Module module;
-    private final ProjectJdk sdk;
+    private final Sdk sdk;
     private FileSymbolType type;
     private boolean isJRubyEnabled;
 
     public CacheKey(@NotNull final FileSymbolType type,
                     @Nullable final String url,
                     @Nullable final Module module,
-                    @Nullable final ProjectJdk sdk,
+                    @Nullable final Sdk sdk,
                     final boolean isJRubyEnabled) {
         this.type = type;
         this.url = url;

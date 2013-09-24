@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.ri;
 
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -116,7 +116,7 @@ class InfoPane {
         myTextField.setEnabled(false);
         myOutputPane.setText(RIUtil.WRONG_JDK_OR_RI_MESSAGE);
 
-        ProjectJdk jdk = myDocPanel.getProjectJdk();
+        Sdk jdk = myDocPanel.getSdk();
         if (RubySdkUtil.isKindOfRubySDK(jdk)) {
             myOutputPane.setText("");
             if (RIUtil.checkIfRiExists(jdk)) {

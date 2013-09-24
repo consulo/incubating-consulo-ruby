@@ -41,7 +41,7 @@ public class RHTMLInRHTMLParserTest extends AbstractRHTMLParserTest {
     protected String dump(RHTMLFile psiFile) {
         final RHTMLFileViewProvider viewProvider = psiFile.getViewProvider();
 
-        return DebugUtil.psiToString(viewProvider.getPsi(RHTMLLanguage.RHTML), false, false);
+        return DebugUtil.psiToString(viewProvider.getPsi(RHTMLLanguage.INSTANCE), false, false);
     }
 
     public static Test suite() {

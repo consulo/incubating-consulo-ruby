@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Map;
+
+import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +34,7 @@ public interface AbstractRubyRunConfigurationParams {
     public String getRubyArgs();
     public String getWorkingDirectory();
     @Nullable
-    public ProjectJdk getAlternativeSdk();
+    public Sdk getAlternativeSdk();
     public Map<String, String> getEnvs();
     public boolean isPassParentEnvs();
     public boolean shouldUseAlternativeSdk();
@@ -42,7 +42,7 @@ public interface AbstractRubyRunConfigurationParams {
     public void setModule(@Nullable final Module module);
     public void setRubyArgs(@Nullable  String myRubyArgs);
     public void setWorkingDirectory(@Nullable String dir);
-    public void setAlternativeSdk(@Nullable final ProjectJdk sdk);
+    public void setAlternativeSdk(@Nullable final Sdk sdk);
     public void setShouldUseAlternativeSdk(boolean shouldUseAlternativeSdk);
     public void setEnvs(Map<String, String> envs);
     public void setPassParentEnvs(boolean passParentEnvs);

@@ -1,9 +1,8 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import com.intellij.openapi.util.Comparing;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPackage;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
@@ -13,9 +12,10 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import com.intellij.openapi.util.Comparing;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiJavaPackage;
 
 /**
  * @author: oleg
@@ -40,8 +40,8 @@ public class JavaModuleType extends RSymbolTypeImpl{
                     messages.add(new MessageImpl(name, 0, true, new JavaSymbol(element, name, null, Type.JAVA_CLASS)));
                 }
             }
-            if (element instanceof PsiPackage){
-                final String name = ((PsiPackage) element).getName();
+            if (element instanceof PsiJavaPackage){
+                final String name = ((PsiJavaPackage) element).getName();
                 if (name!=null){
                     messages.add(new MessageImpl(name, 0, true, new JavaSymbol(element, name, null, Type.JAVA_PACKAGE)));
                 }
@@ -62,8 +62,8 @@ public class JavaModuleType extends RSymbolTypeImpl{
                     messagesForName.add(new MessageImpl(name, 0, true, new JavaSymbol(element, name, null, Type.JAVA_CLASS)));
                 }
             }
-            if (element instanceof PsiPackage){
-                if (Comparing.equal(name, ((PsiPackage) element).getName())){
+            if (element instanceof PsiJavaPackage){
+                if (Comparing.equal(name, ((PsiJavaPackage) element).getName())){
                     messagesForName.add(new MessageImpl(name, 0, true, new JavaSymbol(element, name, null, Type.JAVA_CLASS)));
                 }
             }

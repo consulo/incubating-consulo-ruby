@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -80,7 +80,7 @@ public class RCacheUtil {
                 caches[0] = manager == null ? null : manager.getFilesCache();
             }
             if (scope.isSearchInSDKLibraries()) {
-                final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 if (sdk != null) {
                     caches[1] = sdkCachesManager.getSdkFilesCache(sdk);
                 }
@@ -292,7 +292,7 @@ public class RCacheUtil {
 
 // Adding sdk`s info if needed
             if (scope.isSearchInSDKLibraries()) {
-                final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
                 if (declarationsIndex != null) {
                     final List<RVirtualClass> classes =

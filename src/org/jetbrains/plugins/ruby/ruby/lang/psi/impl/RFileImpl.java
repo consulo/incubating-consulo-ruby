@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.lang.Language;
+import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.application.ex.ApplicationManagerEx;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.tree.IFileElementType;
-import com.intellij.xml.breadcrumbs.BreadcrumbsLoaderComponentImpl;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 
 public class RFileImpl extends RPsiFileBase implements RFile {
     @NotNull private Language myLanguage;
@@ -39,7 +38,7 @@ public class RFileImpl extends RPsiFileBase implements RFile {
         // For debug mode
         // This enables bread crumbs loader for ruby files.
         if (ApplicationManagerEx.getApplicationEx().isInternal()) {
-            putUserData(BreadcrumbsLoaderComponentImpl.BREADCRUMBS_SUITABLE_FILE, new Object());
+          //  putUserData(BreadcrumbsLoaderComponentImpl.BREADCRUMBS_SUITABLE_FILE, new Object());
         }
     }
 
@@ -57,15 +56,13 @@ public class RFileImpl extends RPsiFileBase implements RFile {
         return myLanguage;
     }
 
-    public final Lexer createLexer() {
-        return myParserDefinition.createLexer(getProject());
-    }
+
 
 //////////////////////////// PsiFileBase /////////////////////////////
 
     private void initLanguage(final Language language) {
         myLanguage = language;
-        final ParserDefinition parserDefinition = language.getParserDefinition();
+        final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(language);
         if (parserDefinition == null) {
             throw new RuntimeException("PsiFileBase: language.getParserDefinition() returned null.");
         }
@@ -73,5 +70,4 @@ public class RFileImpl extends RPsiFileBase implements RFile {
         final IFileElementType nodeType = parserDefinition.getFileNodeType();
         init(nodeType, nodeType);
     }
-
 }

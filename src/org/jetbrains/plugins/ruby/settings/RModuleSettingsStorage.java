@@ -16,19 +16,18 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.impl.storage.ClasspathStorage;
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
-
-import java.util.Map;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleServiceManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +39,6 @@ import java.util.Map;
   name = RComponents.RMODULE_SETTINGS_STORAGE,
   storages = {
     @Storage(
-      id = ClasspathStorage.DEFAULT_STORAGE,
       file = "$MODULE_FILE$"
     )
   }
@@ -60,7 +58,7 @@ public class RModuleSettingsStorage extends SettingsExternalizer implements Pers
     private static final String SHOULD_USE_TEST_UNIT_TEST_FRAMEWORK = "SHOULD_USE_TEST_UNIT_TEST_FRAMEWORK";
 
     public static RModuleSettingsStorage getInstance(@NotNull final Module module) {
-        return ServiceManager.getService(module, RModuleSettingsStorage.class);
+        return ModuleServiceManager.getService(module, RModuleSettingsStorage.class);
     }
 
     public Element getState() {

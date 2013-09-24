@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,8 +28,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface RubyWizardSettingsHolder {
     @Nullable
-    public ProjectJdk getSdk();
-    public void setSdk(@Nullable ProjectJdk sdk);
+    public Sdk getSdk();
+    public void setSdk(@Nullable Sdk sdk);
 
     public boolean isRSpecSupportEnabled();
 

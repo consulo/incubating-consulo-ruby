@@ -16,10 +16,8 @@
 
 package org.jetbrains.plugins.ruby.jruby.inspections;
 
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPackage;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
@@ -27,8 +25,10 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.inspections.RubyInspectionVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-
-import java.util.List;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiJavaPackage;
 
 /**
  * @author: oleg
@@ -51,7 +51,7 @@ public class WrongTopLevelPackageInspectionVisitor extends RubyInspectionVisitor
         final List<PsiElement> list = ResolveUtil.multiResolve(leftElement);
         if (list.size()==1){
             final PsiElement element = list.get(0);
-            if (element instanceof PsiPackage && !JavaResolveUtil.isTopLevelPackageOk((PsiPackage) element)){
+            if (element instanceof PsiJavaPackage && !JavaResolveUtil.isTopLevelPackageOk((PsiJavaPackage) element)){
                 registerProblem(leftElement,
                         RBundle.message("inspection.wrong.top.level.package.should.be.one.of", "java, javax, org, com"),
                         new WrongTopLevelPackageFix(leftElement));

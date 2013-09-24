@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import com.intellij.execution.junit2.configuration.EnvironmentVariablesComponent;
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-
-import java.util.Map;
+import com.intellij.execution.configuration.EnvironmentVariablesComponent;
 
 /**
  * Created by IntelliJ IDEA.

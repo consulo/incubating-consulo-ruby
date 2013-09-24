@@ -16,6 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfiguration;
 import com.intellij.execution.configurations.RunConfigurationBase;
@@ -24,20 +34,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
-import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -103,7 +103,7 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
     }
 
     @Nullable
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         if (shouldUseAlternativeSdk()) {
             return getAlternativeSdk();
         }
@@ -157,15 +157,15 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         return mySdkName;
     }
 
-    public ProjectJdk getAlternativeSdk() {
+    public Sdk getAlternativeSdk() {
         if (mySdkName == null) {
             return null;
         }
-        final ProjectJdk sdk = ProjectJdkTable.getInstance().findJdk(mySdkName);
+        final Sdk sdk = SdkTable.getInstance().findSdk(mySdkName);
         return RubySdkUtil.isSDKValid(sdk) ? sdk : null;
     }
 
-    public void setAlternativeSdk(@Nullable final ProjectJdk sdk) {
+    public void setAlternativeSdk(@Nullable final Sdk sdk) {
         setAlternativeSdkName(sdk != null ? sdk.getName() : null);
     }
     public void setAlternativeSdkName(@Nullable  final String sdkName) {

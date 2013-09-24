@@ -16,24 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.runners.JavaProgramRunner;
-import com.intellij.execution.runners.RunnerInfo;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.JDOMExternalizable;
-import com.intellij.openapi.util.WriteExternalException;
+import java.io.File;
+
 import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
-
-import java.io.File;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Executor;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.options.SettingsEditor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.WriteExternalException;
 
 public class RubyRunConfiguration extends AbstractRubyRunConfiguration implements RubyRunConfigurationParams {
     private String myScriptPath = TextUtil.EMPTY_STRING;
@@ -68,34 +69,21 @@ public class RubyRunConfiguration extends AbstractRubyRunConfiguration implement
         return new RubyRunConfigurationEditor(getProject(), this);
     }
 
-    @SuppressWarnings({"deprecation"})
-    @Nullable
-    public JDOMExternalizable createRunnerSettings(ConfigurationInfoProvider provider) {
-        return null;
-    }
-
-    @SuppressWarnings({"deprecation"})
-    @Nullable
-    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(JavaProgramRunner runner) {
-        return null;
-    }
-
-    public RunProfileState getState(DataContext context,
-                                    RunnerInfo runnerInfo,
-                                    RunnerSettings runnerSettings,
-                                    ConfigurationPerRunnerSettings configurationSettings) throws ExecutionException {
-
-        try {
-            validateConfiguration(true);
-        } catch (ExecutionException ee) {
-            throw ee;
-        } catch (Exception e) {
-            throw new ExecutionException(e.getMessage(), e);
-        }
+	@Nullable
+	@Override
+	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
+	{
+		try {
+			validateConfiguration(true);
+		} catch (ExecutionException ee) {
+			throw ee;
+		} catch (Exception e) {
+			throw new ExecutionException(e.getMessage(), e);
+		}
 
 
-        return new RubyRunCommandLineState(this, runnerSettings, configurationSettings);
-    }
+		return new RubyRunCommandLineState(this, executionEnvironment);
+	}
 
     protected void validateConfiguration(final boolean isExecution) throws Exception {
         RubyRunConfigurationUtil.inspectSDK(this, isExecution);

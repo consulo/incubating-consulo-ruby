@@ -1,40 +1,41 @@
 package org.jetbrains.plugins.ruby.jruby;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
+import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
+import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
-import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
 
 /**
  * @author: oleg
  * @date: Jul 28, 2008
  */
 public class JRubySdkTableListener implements ApplicationComponent {
-    private ProjectJdkTable.Listener myJdkTableListener;
+    private SdkTable.Listener myJdkTableListener;
     protected Project myProject;
 
     public JRubySdkTableListener(){
-        myJdkTableListener = new ProjectJdkTable.Listener() {
-            public void jdkAdded(final ProjectJdk sdk) {
+        myJdkTableListener = new SdkTable.Listener() {
+            public void sdkAdded(final Sdk sdk) {
                 if (JRubySdkUtil.isJRubySDK(sdk)) {
                     addLibrary(sdk);
                 }
             }
-            public void jdkRemoved(final ProjectJdk sdk) {
+            public void sdkRemoved(final Sdk sdk) {
                 if (JRubySdkUtil.isJRubySDK(sdk)) {
                     removeLibrary(sdk);
                 }
             }
-            public void jdkNameChanged(final ProjectJdk sdk, final String previousName) {
+            public void sdkNameChanged(final Sdk sdk, final String previousName) {
                 if (JRubySdkUtil.isJRubySDK(sdk)) {
                     renameLibrary(sdk, previousName);
                 }
@@ -42,7 +43,7 @@ public class JRubySdkTableListener implements ApplicationComponent {
         };
     }
 
-    private static void renameLibrary(final ProjectJdk sdk, final String previousName) {
+    private static void renameLibrary(final Sdk sdk, final String previousName) {
         final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
         final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(previousName));
         if (library!=null){
@@ -53,7 +54,7 @@ public class JRubySdkTableListener implements ApplicationComponent {
         libraryTableModel.commit();
     }
 
-    private static void removeLibrary(final ProjectJdk sdk) {
+    private static void removeLibrary(final Sdk sdk) {
         final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
         final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(sdk.getName()));
         if (library!=null){
@@ -62,7 +63,7 @@ public class JRubySdkTableListener implements ApplicationComponent {
         libraryTableModel.commit();
     }
 
-    public static Library addLibrary(final ProjectJdk sdk) {
+    public static Library addLibrary(final Sdk sdk) {
         final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
         final Library library = libraryTableModel.createLibrary(JRubyFacet.getFacetLibraryName(sdk.getName()));
         final Library.ModifiableModel model = library.getModifiableModel();
@@ -101,10 +102,11 @@ public class JRubySdkTableListener implements ApplicationComponent {
     }
 
     public void initComponent() {
-        ProjectJdkTable.getInstance().addListener(myJdkTableListener);
+		ApplicationManager.getApplication().getMessageBus().connect().subscribe(SdkTable.SDK_TABLE_TOPIC, myJdkTableListener);
+       // SdkTable.getInstance().addListener(myJdkTableListener);
     }
 
     public void disposeComponent() {
-        ProjectJdkTable.getInstance().removeListener(myJdkTableListener);
+		//SdkTable.getInstance().removeListener(myJdkTableListener);
     }
 }

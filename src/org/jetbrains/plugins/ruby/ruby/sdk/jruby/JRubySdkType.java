@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.util.SystemInfo;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,8 +26,9 @@ import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
-import javax.swing.*;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.SystemInfo;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +63,7 @@ public class JRubySdkType extends RubySdkType {
         return JRUBY_EXE;
     }
 
-    public static boolean isJRubySDK(@Nullable final ProjectJdk sdk){
+    public static boolean isJRubySDK(@Nullable final Sdk sdk){
         return sdk != null && sdk.getSdkType() instanceof JRubySdkType;
     }
 

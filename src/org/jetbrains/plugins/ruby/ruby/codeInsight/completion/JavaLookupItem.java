@@ -16,19 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
+import java.awt.Color;
+
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
 import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
 import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
 import com.intellij.codeInsight.lookup.PresentableLookupValue;
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.ui.RowIcon;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -77,7 +79,7 @@ public class JavaLookupItem implements RubyLookupItem,
     public Icon getIcon(int flags) {
         final RowIcon icon = new RowIcon(2);
         icon.setIcon(JavaClassPackagePresentationUtil.getJavaIcon(), 0);
-        icon.setIcon(myElement.getIcon(flags), 1);
+        icon.setIcon(IconDescriptorUpdaters.getIcon(myElement, 0), 1);
         return icon;
     }
 

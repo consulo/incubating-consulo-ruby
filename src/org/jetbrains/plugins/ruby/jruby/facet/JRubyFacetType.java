@@ -16,19 +16,10 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import com.intellij.facet.Facet;
-import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeRegistry;
-import com.intellij.facet.autodetecting.FacetDetector;
-import com.intellij.facet.autodetecting.FacetDetectorRegistry;
-import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileFilter;
-import com.intellij.psi.PsiFile;
+import java.util.Collection;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -36,9 +27,18 @@ import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-
-import javax.swing.*;
-import java.util.Collection;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeRegistry;
+import com.intellij.facet.autodetecting.FacetDetector;
+import com.intellij.facet.autodetecting.FacetDetectorRegistry;
+import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileFilter;
+import com.intellij.psi.PsiFile;
 
 public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguration> {
     public static final JRubyFacetType INSTANCE = new JRubyFacetType();
@@ -67,9 +67,6 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
         return JRubyIcons.JRUBY_ICON;
     }
 
-    public boolean isSuitableModuleType(@NotNull final ModuleType moduleType) {
-        return !RubyUtil.isRubyModuleType(moduleType);
-    }
 
 
     public void registerDetectors(@NotNull final FacetDetectorRegistry<JRubyFacetConfiguration> registry) {

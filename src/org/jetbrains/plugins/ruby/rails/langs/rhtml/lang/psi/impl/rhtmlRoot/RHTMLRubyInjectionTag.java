@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot;
 
-import com.intellij.psi.impl.source.jsp.jspJava.JspXmlTagBase;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.xml.XmlElement;
 import com.intellij.psi.xml.XmlTag;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: Oct 2, 2007
  */
-public interface RHTMLRubyInjectionTag extends XmlElement, XmlTag, JspXmlTagBase {
+public interface RHTMLRubyInjectionTag extends XmlElement, XmlTag {
     @NotNull
     public String getTagText();
 

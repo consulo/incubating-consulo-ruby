@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -26,14 +26,14 @@ import org.jetbrains.annotations.Nullable;
  * @date: Apr 5, 2008
  */
 public class TabbedSettingsContextImpl implements TabbedSettingsContext {
-    private final ProjectJdk mySDK;
+    private final Sdk mySDK;
 
-    public TabbedSettingsContextImpl(@Nullable final ProjectJdk sdk) {
+    public TabbedSettingsContextImpl(@Nullable final Sdk sdk) {
         mySDK = sdk;
     }
 
     @Nullable
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         return mySDK;
     }
 }

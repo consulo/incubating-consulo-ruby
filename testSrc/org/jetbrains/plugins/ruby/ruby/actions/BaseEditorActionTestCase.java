@@ -188,7 +188,7 @@ public abstract class BaseEditorActionTestCase extends BaseRubyFileSetTestCase {
         @Nullable
         public Object getData(@NonNls String dataId) {
             if (DataKeys.LANGUAGE.getName().equals(dataId)) {
-                return RHTMLLanguage.RHTML;
+                return RHTMLLanguage.INSTANCE;
             }
             if (DataKeys.PROJECT.getName().equals(dataId)) {
                 return myFile.getProject();

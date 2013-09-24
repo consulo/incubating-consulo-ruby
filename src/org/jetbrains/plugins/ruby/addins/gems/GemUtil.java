@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.addins.gems;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.FileUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,7 +41,7 @@ public class GemUtil {
      * @return path if can be found in gems bin folder, otherwise null
      */
     @Nullable
-    public static String getGemExecutableRubyScriptPath(@Nullable final ProjectJdk sdk,
+    public static String getGemExecutableRubyScriptPath(@Nullable final Sdk sdk,
                                                         @NotNull final String rubyScriptName
     ) {
         if (sdk == null) {
@@ -59,7 +59,7 @@ public class GemUtil {
         return null;
     }
 
-    public static boolean isGemExecutableRubyScriptExists(@Nullable final ProjectJdk sdk,
+    public static boolean isGemExecutableRubyScriptExists(@Nullable final Sdk sdk,
                                                         @NotNull final String rubyScriptName) {
         return getGemExecutableRubyScriptPath(sdk, rubyScriptName) != null;
     }

@@ -16,22 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
-import com.intellij.ProjectTopics;
-import com.intellij.ide.startup.StartupManagerEx;
-import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
-import com.intellij.openapi.roots.ModuleRootEvent;
-import com.intellij.openapi.roots.ModuleRootListener;
-import com.intellij.openapi.roots.impl.DirectoryIndex;
-import com.intellij.openapi.util.Disposer;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.util.messages.MessageBusConnection;
+import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,9 +36,22 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.module.RubyModuleListenerAdapter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import java.io.File;
-import java.util.*;
+import com.intellij.ProjectTopics;
+import com.intellij.ide.startup.StartupManagerEx;
+import com.intellij.openapi.application.PathManager;
+import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
+import com.intellij.openapi.roots.impl.DirectoryIndex;
+import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.util.messages.MessageBusConnection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,14 +64,14 @@ public class RubySdkCachesManager implements ProjectComponent {
     private static final Logger LOG = Logger.getInstance(RubySdkCachesManager.class.getName());
 
     // map with RubyFilesCaches for each sdk
-    private Map<ProjectJdk, RubyFilesCache> sdk2RubyFilesCache = new HashMap<ProjectJdk, RubyFilesCache>();
+    private Map<Sdk, RubyFilesCache> sdk2RubyFilesCache = new HashMap<Sdk, RubyFilesCache>();
 
     @NonNls private static final String RUBY_CACHE_DIR = "ruby_caches";
     @NonNls private static final String RUBY_CACHE_FILE = "sdk";
 
     private RubyModuleListenerAdapter rModuleListener;
     private ModuleRootListener moduleRootListener;
-    private ProjectJdkTable.Listener jdkTableListener;
+    private SdkTable.Listener jdkTableListener;
     private Project myProject;
     private MessageBusConnection myConnection;
 
@@ -94,7 +99,7 @@ public class RubySdkCachesManager implements ProjectComponent {
 
                 // registering listeners
                 myConnection.subscribe(ProjectTopics.MODULES, rModuleListener);
-                ProjectJdkTable.getInstance().addListener(jdkTableListener);
+                //SdkTable.getInstance().addListener(jdkTableListener);
                 myConnection.subscribe(ProjectTopics.PROJECT_ROOTS, moduleRootListener);
             }
         });
@@ -140,16 +145,16 @@ public class RubySdkCachesManager implements ProjectComponent {
             }
         };
 
-        jdkTableListener = new ProjectJdkTable.Listener() {
-            public void jdkAdded(final ProjectJdk sdk) {
+        jdkTableListener = new SdkTable.Listener() {
+            public void sdkAdded(final Sdk sdk) {
                 // Do nothing. (Lazy cache creating).
             }
-            public void jdkRemoved(final ProjectJdk sdk) {
+            public void sdkRemoved(final Sdk sdk) {
                 if (RubySdkUtil.isKindOfRubySDK(sdk)) {
                     removeSDK(sdk, true);
                 }
             }
-            public void jdkNameChanged(final ProjectJdk sdk, final String previousName) {
+            public void sdkNameChanged(final Sdk sdk, final String previousName) {
                 if (RubySdkUtil.isKindOfRubySDK(sdk)) {
                     renameSDK(sdk, previousName);
                 }
@@ -170,7 +175,7 @@ public class RubySdkCachesManager implements ProjectComponent {
      * @return FilesCache for sdk
      */
     @Nullable
-    public RubyFilesCache getSdkFilesCache(@NotNull final ProjectJdk sdk) {
+    public RubyFilesCache getSdkFilesCache(@NotNull final Sdk sdk) {
         return sdk2RubyFilesCache.get(sdk);
     }
 
@@ -179,7 +184,7 @@ public class RubySdkCachesManager implements ProjectComponent {
      * @return WordsIndex for sdk
      */
     @Nullable
-    public DeclarationsIndex getSdkDeclarationsIndex(@Nullable final ProjectJdk sdk) {
+    public DeclarationsIndex getSdkDeclarationsIndex(@Nullable final Sdk sdk) {
         if (sdk == null) {
             return null;
         }
@@ -201,12 +206,12 @@ public class RubySdkCachesManager implements ProjectComponent {
 
     public void projectClosed() {
         // unregistering listeners
-        ProjectJdkTable.getInstance().removeListener(jdkTableListener);
+      //  SdkTable.getInstance().removeListener(jdkTableListener);
 
         myConnection.disconnect();
         
         // dispose all the filesCaches
-        for (ProjectJdk sdk : sdk2RubyFilesCache.keySet()) {
+        for (Sdk sdk : sdk2RubyFilesCache.keySet()) {
             final RubyFilesCache sdkCache = sdk2RubyFilesCache.get(sdk);
             sdkCache.saveCacheToDisk();
         }
@@ -239,11 +244,11 @@ public class RubySdkCachesManager implements ProjectComponent {
     protected void initAndSetupSkdCaches(final Project project,
                                          final boolean doSetup,
                                          final boolean runProcessWithProgressSynchronously) {
-        final Set<ProjectJdk> usedSDKs = collectSDKsUsedInRORModules(project);
+        final Set<Sdk> usedSDKs = collectSDKsUsedInRORModules(project);
         // initially new SDKs - copy of used SDKs
-        final HashSet<ProjectJdk> newSDKs = new HashSet<ProjectJdk>(usedSDKs);
+        final HashSet<Sdk> newSDKs = new HashSet<Sdk>(usedSDKs);
         // removing unused sdks
-        for (ProjectJdk cachedSdk : new HashSet<ProjectJdk>(sdk2RubyFilesCache.keySet())) {
+        for (Sdk cachedSdk : new HashSet<Sdk>(sdk2RubyFilesCache.keySet())) {
             newSDKs.remove(cachedSdk);
             if (usedSDKs.contains(cachedSdk)) {
                 sdk2RubyFilesCache.get(cachedSdk).setCacheRootURLs(RubySdkUtil.getSdkRootsWithAllGems(cachedSdk));
@@ -253,18 +258,18 @@ public class RubySdkCachesManager implements ProjectComponent {
         }
 
         // adding new Skds
-        for (ProjectJdk newSdk : newSDKs) {
+        for (Sdk newSdk : newSDKs) {
             addSDK(newSdk, runProcessWithProgressSynchronously, doSetup);
         }
     }
 
-    private Set<ProjectJdk> collectSDKsUsedInRORModules(final Project project) {
-        final Set<ProjectJdk> usedSDKs = new LinkedHashSet<ProjectJdk>();
+    private Set<Sdk> collectSDKsUsedInRORModules(final Project project) {
+        final Set<Sdk> usedSDKs = new LinkedHashSet<Sdk>();
 
         // Searching for all used sdk
         for (Module module : RModuleUtil.getAllModulesWithRubySupport(project)) {
 // Check module sdk
-            final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+            final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
             if (sdk != null && RubySdkUtil.isKindOfRubySDK(sdk)) {
                 usedSDKs.add(sdk);
             }
@@ -277,7 +282,7 @@ public class RubySdkCachesManager implements ProjectComponent {
      * @param sdk Jdk to get cached info for
      */
     @NotNull
-    private String generateCacheFilePath(@NotNull final ProjectJdk sdk) {
+    private String generateCacheFilePath(@NotNull final Sdk sdk) {
         return generateCacheFilePath(sdk, sdk.getName());
     }
 
@@ -287,11 +292,11 @@ public class RubySdkCachesManager implements ProjectComponent {
      * @param name Sdk name
      */
     @NotNull
-    private String generateCacheFilePath(@NotNull final ProjectJdk sdk, @NotNull final String name) {
+    private String generateCacheFilePath(@NotNull final Sdk sdk, @NotNull final String name) {
         return PathManager.getSystemPath()+"/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" +name + "_" + sdk.getHomePath().hashCode();
     }
 
-    protected void addSDK(@NotNull final ProjectJdk sdk, boolean runProcessWithProgressSynchronously, boolean doSetup) {
+    protected void addSDK(@NotNull final Sdk sdk, boolean runProcessWithProgressSynchronously, boolean doSetup) {
         assert !sdk2RubyFilesCache.containsKey(sdk);
         final RubyFilesCache newSdkCache = new RubyFilesCacheImpl(myProject, sdk.getName());
         newSdkCache.setCacheRootURLs(RubySdkUtil.getSdkRootsWithAllGems(sdk));
@@ -316,7 +321,7 @@ public class RubySdkCachesManager implements ProjectComponent {
         }
     }
 
-    protected void removeSDK(@NotNull final ProjectJdk sdk, final boolean removeCacheFromDisk) {
+    protected void removeSDK(@NotNull final Sdk sdk, final boolean removeCacheFromDisk) {
         final RubyFilesCache cache = sdk2RubyFilesCache.remove(sdk);
         if (cache != null) {
             if (removeCacheFromDisk) {
@@ -330,7 +335,7 @@ public class RubySdkCachesManager implements ProjectComponent {
     }
 
 
-    protected void renameSDK(final ProjectJdk sdk, final String previousName) {
+    protected void renameSDK(final Sdk sdk, final String previousName) {
         final File prevDataFile = new File(generateCacheFilePath(sdk, previousName));
         final File newDataFile = new File(generateCacheFilePath(sdk));
         try {
@@ -365,7 +370,7 @@ public class RubySdkCachesManager implements ProjectComponent {
 
     @Nullable
     public RubyFilesCache getFirstCacheByFile(@NotNull final VirtualFile file){
-        final ProjectJdk sdk = getFirstSdkForFile(file);
+        final Sdk sdk = getFirstSdkForFile(file);
         return sdk!=null ? getSdkFilesCache(sdk) : null;
     }
 
@@ -375,10 +380,10 @@ public class RubySdkCachesManager implements ProjectComponent {
      * @return Sdk or null
      */
     @Nullable
-    public ProjectJdk getFirstSdkForFile(@NotNull final VirtualFile file){
+    public Sdk getFirstSdkForFile(@NotNull final VirtualFile file){
         final String rootUrl = file.getUrl();
         final boolean isDirectory = file.isDirectory();
-        for (ProjectJdk sdk : sdk2RubyFilesCache.keySet()) {
+        for (Sdk sdk : sdk2RubyFilesCache.keySet()) {
             final RubyFilesCache cache = getSdkFilesCache(sdk);
             if (cache!=null){
                 // If we search for directory

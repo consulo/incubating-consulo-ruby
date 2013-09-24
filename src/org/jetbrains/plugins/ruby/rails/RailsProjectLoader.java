@@ -16,14 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails;
 
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.psi.css.CssSupportLoader;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html.HtmlInRHTMLReferenceProvider;
+import com.intellij.openapi.components.ProjectComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +29,7 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html.
  */
 //TODO
 public class RailsProjectLoader implements ProjectComponent {
-    public RailsProjectLoader(final CssSupportLoader loader,
+   /* public RailsProjectLoader(final CssSupportLoader loader,
                               final ReferenceProvidersRegistry referenceProvidersRegistry) {
 
         // this registers standart html ref. provider in rhtml files
@@ -46,7 +42,7 @@ public class RailsProjectLoader implements ProjectComponent {
 
         //this registers CSS support for rhtml files
         loader.registerCssEnabledFileType(RHTMLFileType.RHTML);
-    }
+    }     */
 
     public void projectOpened() {
         // Do nothing

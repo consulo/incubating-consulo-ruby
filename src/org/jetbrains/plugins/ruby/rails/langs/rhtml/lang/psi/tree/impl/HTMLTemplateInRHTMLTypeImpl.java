@@ -16,22 +16,22 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.StdLanguages;
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.jsp.jspJava.OuterLanguageElement;
-import com.intellij.psi.impl.source.tree.TreeElement;
-import com.intellij.psi.impl.source.tree.TreeUtil;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.CharTable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.BlackAndWhiteLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.HTMLCuttingLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.impl.OuterRHTMLElementInHTMLImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.TreePatcher;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.lang.StdLanguages;
+import com.intellij.lexer.Lexer;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.TreeElement;
+import com.intellij.psi.impl.source.tree.TreeUtil;
+import com.intellij.psi.templateLanguages.OuterLanguageElement;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.util.CharTable;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.support.utils;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.SystemInfo;
 import static com.intellij.openapi.util.io.FileUtil.*;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -108,7 +108,7 @@ public class OSUtil {
      * @return true if SVN is in load path
      */
     @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-    public static boolean isSVNInExtendedLoadPath(final @Nullable String svnPath, @NotNull final ProjectJdk sdk) {
+    public static boolean isSVNInExtendedLoadPath(final @Nullable String svnPath, @NotNull final Sdk sdk) {
         //TODO reimplement with parsing PATH environment variable
         final Output output = RubyScriptRunner.runSystemCommand(sdk, svnPath, null, SVN_CMD_ARGS[0], SVN_CMD_ARGS[1]);
         return TextUtil.isEmpty(output.getStderr());

@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NonNls;
+import javax.swing.Icon;
 
-import javax.swing.*;
+import com.intellij.openapi.util.IconLoader;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,13 +27,8 @@ import javax.swing.*;
  * @date: Oct 18, 2007
  */
 public interface RSpecIcons {
-    /**
-     * Please ensure that DATA_PATH corresponds with real resources path
-     */
-    @NonNls
-    final String DATA_PATH = "/org/jetbrains/plugins/ruby/addins/rspec/";
 
-    Icon RUN_CONFIGURATION_ICON =         IconLoader.findIcon(DATA_PATH + "rspec_runConfigurations.png");
-    Icon METHOD_ICON =                    IconLoader.findIcon(DATA_PATH + "rspec_Method.png");
-    Icon TEST_SCRIPT_ICON =               IconLoader.findIcon(DATA_PATH + "rspec_Test.png");
+	Icon RUN_CONFIGURATION_ICON =         IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_runConfigurations.png");
+    Icon METHOD_ICON =                    IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Method.png");
+    Icon TEST_SCRIPT_ICON =               IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Test.png");
 }

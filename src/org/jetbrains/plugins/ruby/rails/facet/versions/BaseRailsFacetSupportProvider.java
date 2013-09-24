@@ -16,47 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.facet.FacetType;
-import com.intellij.facet.impl.ui.FacetErrorPanel;
-import com.intellij.facet.impl.ui.FacetTypeFrameworkSupportProvider;
-import com.intellij.facet.ui.FacetEditorValidator;
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.facet.ui.ValidationResult;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.ui.VerticalFlowLayout;
-import com.intellij.openapi.module.Module;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.addins.rspec.rails.facet.ui.wizard.tabs.RSpecComponentsInstallerTab;
-import org.jetbrains.plugins.ruby.rails.RailsUtil;
-import org.jetbrains.plugins.ruby.rails.facet.BaseRailsFacetBuilder;
-import org.jetbrains.plugins.ruby.rails.facet.RailsWizardSettingsHolderImpl;
-import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfigurationLowLevel;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.TabbedSettingsContext;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.TabbedSettingsContextImpl;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.TabbedSettingsDialog;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.RailsProjectGeneratorTab;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.TabbedSdkDependSettingsEditorTab;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: Roman Chernyatchik
  * @date: Mar 15, 2008
  */
-public abstract class BaseRailsFacetSupportProvider<T extends BaseRailsFacet> extends FacetTypeFrameworkSupportProvider<T> {
-    @Nullable protected RailsWizardSettingsHolder mySettingsHolder;
+public abstract class BaseRailsFacetSupportProvider/*<T extends BaseRailsFacet> extends FacetTypeFrameworkSupportProvider<T> */{
+/*    @Nullable protected RailsWizardSettingsHolder mySettingsHolder;
 
     protected BaseRailsFacetSupportProvider(@NotNull final FacetType<T, ?> baseRailsFacetFacetType) {
         super(baseRailsFacetFacetType);
@@ -68,7 +35,7 @@ public abstract class BaseRailsFacetSupportProvider<T extends BaseRailsFacet> ex
     }
 
     @Nullable
-    protected abstract ProjectJdk getSDKFromMagic(final JComponent component);
+    protected abstract Sdk getSDKFromMagic(final JComponent component);
     protected abstract void registorErrorMsgUpdater(@NotNull final JButton editSettingsButton,
                                                     @NotNull final FacetValidatorsManager validatorsManager,
                                                     @NotNull final FacetEditorValidator sdkValidator);
@@ -106,7 +73,7 @@ public abstract class BaseRailsFacetSupportProvider<T extends BaseRailsFacet> ex
      * @param rootModel  Modules model
      * @param version Facet version
      */
-    protected void onFacetCreated(final T facet,
+  /*  protected void onFacetCreated(final T facet,
                                   final ModifiableRootModel rootModel,
                                   final String version) {
         super.onFacetCreated(facet, rootModel, version);
@@ -144,7 +111,7 @@ public abstract class BaseRailsFacetSupportProvider<T extends BaseRailsFacet> ex
                 final JButton editSettingsButton = new JButton(RBundle.message("rails.facet.wizard.more.button"));
                 editSettingsButton.addActionListener(new ActionListener() {
                     public void actionPerformed(final ActionEvent e) {
-                        final ProjectJdk sdk = getSDKFromMagic(editSettingsButton);
+                        final Sdk sdk = getSDKFromMagic(editSettingsButton);
 
                         assert mySettingsHolder != null;
                         if (mySettingsHolder.getSdk() != sdk) {
@@ -194,7 +161,7 @@ public abstract class BaseRailsFacetSupportProvider<T extends BaseRailsFacet> ex
             return new FacetEditorValidator() {
                 public ValidationResult check() {
                     if (component.isEnabled()) {
-                        final ProjectJdk sdk = getSDKFromMagic(component);
+                        final Sdk sdk = getSDKFromMagic(component);
 
                         //We should save selected SDK if user doestn't press "more button"
                         assert mySettingsHolder != null;
@@ -210,5 +177,5 @@ public abstract class BaseRailsFacetSupportProvider<T extends BaseRailsFacet> ex
                 }
             };
         }
-   }
+   } */
 }

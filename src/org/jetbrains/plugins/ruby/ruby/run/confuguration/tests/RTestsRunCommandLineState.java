@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.RunnerSettings;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.runners.ExecutionEnvironment;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,8 +40,8 @@ public class RTestsRunCommandLineState extends AbstractRTestsCommandLineState {
 
     private final RTestsRunConfiguration myConfig;
 
-    public RTestsRunCommandLineState(RTestsRunConfiguration config, RunnerSettings runnerSettings, ConfigurationPerRunnerSettings configurationSettings) {
-        super(config, runnerSettings, configurationSettings);
+    public RTestsRunCommandLineState(RTestsRunConfiguration config, ExecutionEnvironment executionEnvironment) {
+        super(config, executionEnvironment);
         myConfig = config;
     }
 

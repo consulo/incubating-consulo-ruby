@@ -16,16 +16,10 @@
 
 package org.jetbrains.plugins.ruby;
 
-import com.intellij.ide.IconProvider;
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ui.configuration.IconSet;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,11 +44,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
-
-import javax.swing.*;
-import java.util.List;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.util.Comparing;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,30 +56,10 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: Aug 21, 2007
  */
-public class RubyIconProvider implements ApplicationComponent, IconProvider {
+public class RubyIconProvider implements ApplicationComponent {
     @Nullable
     public Icon getIcon(@NotNull PsiElement element, int flags) {
-        if (element instanceof PsiDirectory) {
-            final boolean expanded = (flags & Iconable.ICON_FLAG_OPEN) != 0;
 
-            final PsiDirectory dir = (PsiDirectory)element;
-            final Project project = dir.getProject();
-            final VirtualFile file = dir.getVirtualFile();
-            final RProjectContentRootManager manager = RProjectContentRootManager.getInstance(project);
-
-            if (manager == null) {
-                return null;
-            }
-
-            final String fileUrl = file.getUrl();
-            if (manager.isUnderTestUnitRoot(fileUrl)) {
-                if (manager.isTestUnitRoot(fileUrl)) {
-                    return IconSet.getSourceRootIcon(true, expanded);
-                } else {
-                    return IconSet.getSourceFolderIcon(true, expanded);
-                }
-            }
-        } else
         if (element instanceof RFile) {
             final RFile rFile = (RFile) element;
             final Module fileModule = rFile.getModule();

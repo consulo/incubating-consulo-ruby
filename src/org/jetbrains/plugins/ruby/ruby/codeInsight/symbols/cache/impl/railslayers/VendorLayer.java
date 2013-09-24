@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslaye
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
@@ -36,7 +36,7 @@ public class VendorLayer extends AbstractRailsLayeredCachedSymbol {
 
     public VendorLayer(@NotNull final Project project,
                        @Nullable final Module module,
-                       @Nullable final ProjectJdk sdk,
+                       @Nullable final Sdk sdk,
                        final boolean isJRubyEnabled) {
         super(FileSymbolType.RAILS_MODULE_LAYER, project, module, sdk, isJRubyEnabled);
     }

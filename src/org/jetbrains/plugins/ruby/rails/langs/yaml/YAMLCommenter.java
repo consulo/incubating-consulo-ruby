@@ -1,7 +1,8 @@
 package org.jetbrains.plugins.ruby.rails.langs.yaml;
 
-import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.Commenter;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,4 +28,18 @@ public class YAMLCommenter implements Commenter {
         // N/A
         return null;
     }
+
+	@Nullable
+	@Override
+	public String getCommentedBlockCommentPrefix()
+	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getCommentedBlockCommentSuffix()
+	{
+		return null;
+	}
 }

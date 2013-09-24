@@ -16,16 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.facet.ui.FacetEditorValidator;
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.util.Function;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
-
-import javax.swing.*;
-
 /**
  * Created by IntelliJ IDEA.
  *
@@ -33,13 +23,13 @@ import javax.swing.*;
  * @date: Mar 13, 2008
  */
 
-public class RailsFacetSupportProvider extends BaseRailsFacetSupportProvider<RailsFacet> {
-    public RailsFacetSupportProvider() {
+public class RailsFacetSupportProvider /*extends BaseRailsFacetSupportProvider<RailsFacet> */{
+  /*  public RailsFacetSupportProvider() {
         super(RailsFacetType.INSTANCE);
     }
 
     @Nullable
-    protected ProjectJdk getSDKFromMagic(final JComponent component) {
+    protected Sdk getSDKFromMagic(final JComponent component) {
         return NiiChAVOUtil.getJRubyFacetSdkMagic(component);
     }
 
@@ -63,5 +53,5 @@ public class RailsFacetSupportProvider extends BaseRailsFacetSupportProvider<Rai
                 return null;
             }
         });
-    }
+    }     */
 }

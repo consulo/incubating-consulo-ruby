@@ -16,11 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing;
 
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.xml.XmlTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLPsiLeafElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,8 +29,8 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLPsiLeafE
  */
 public interface RHTMLTokenType extends XmlTokenType {
 //Outer tokens
-    IElementType TEMPLATE_CHARACTERS_IN_RHTML =    new IRHTMLPsiLeafElementType("TEMPLATE_CHARACTERS_IN_RHTML");//template characters in rhtml lang, i.e. pure html code
-    IElementType RUBY_CODE_CHARACTERS =            new IRHTMLPsiLeafElementType("RUBY_CODE_CHARACTERS"); //ruby characters in rhtml lang
+    IElementType TEMPLATE_CHARACTERS_IN_RHTML =    new IRHTMLElementType("TEMPLATE_CHARACTERS_IN_RHTML");//template characters in rhtml lang, i.e. pure html code
+    IElementType RUBY_CODE_CHARACTERS =            new IRHTMLElementType("RUBY_CODE_CHARACTERS"); //ruby characters in rhtml lang
 
 //Pure RHTML tokens
     //injection modifiers

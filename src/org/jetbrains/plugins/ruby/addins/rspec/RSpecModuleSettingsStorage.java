@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.impl.storage.ClasspathStorage;
-import com.intellij.openapi.diagnostic.Logger;
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-
-import java.util.Map;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleServiceManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,7 +40,6 @@ import java.util.Map;
   name = RComponents.RSPEC_MODULE_SETTINGS_STORAGE,
   storages = {
     @Storage(
-      id = ClasspathStorage.DEFAULT_STORAGE,
       file = "$MODULE_FILE$"
     )
   }
@@ -57,7 +55,7 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
     private static final String RSPEC_MODULE_SETTINGS_STORAGE_ID = "RSPEC_MODULE_SETTINGS_STORAGE_ID";
 
     public static RSpecModuleSettingsStorage getInstance(@NotNull final Module module) {
-        return ServiceManager.getService(module, RSpecModuleSettingsStorage.class);
+        return ModuleServiceManager.getService(module, RSpecModuleSettingsStorage.class);
     }
 
     public Element getState() {

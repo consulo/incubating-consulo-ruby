@@ -91,7 +91,14 @@ public class RubyRunConfigurationType implements LocatableConfigurationType {
         return RubyIcons.RUBY_RUN_CONFIGURATION_FOLDER;
     }
 
-    public ConfigurationFactory[] getConfigurationFactories() {
+	@NotNull
+	@Override
+	public String getId()
+	{
+		return null;
+	}
+
+	public ConfigurationFactory[] getConfigurationFactories() {
         return new ConfigurationFactory[]{myAppFactory, myUnitTestsFactory};
     }
 
@@ -268,7 +275,13 @@ public class RubyRunConfigurationType implements LocatableConfigurationType {
         return settings;
     }
 
-    private RunnerAndConfigurationSettings createRunAllUnitTestsInFolderConf(@NotNull final PsiDirectory psiDirectory) {
+	@Override
+	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
+	{
+		return false;
+	}
+
+	private RunnerAndConfigurationSettings createRunAllUnitTestsInFolderConf(@NotNull final PsiDirectory psiDirectory) {
         final Project project = psiDirectory.getProject();
         final VirtualFile folder = psiDirectory.getVirtualFile();
 

@@ -16,21 +16,20 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view;
 
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.impl.storage.ClasspathStorage;
-import org.jdom.Element;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.jdom.Element;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleServiceManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +43,6 @@ import java.util.Set;
   name = "RailsViewFoldersManager",
   storages = {
     @Storage(
-      id = ClasspathStorage.DEFAULT_STORAGE,
       file = "$MODULE_FILE$"
     )
   }
@@ -60,7 +58,7 @@ public class RailsViewFoldersManager implements PersistentStateComponent<Element
     private Set<String> myViewUserUrls = Collections.synchronizedSet(new HashSet<String>());
 
     public static RailsViewFoldersManager getInstance(@NotNull final Module module) {
-        return ServiceManager.getService(module, RailsViewFoldersManager.class);
+        return ModuleServiceManager.getService(module, RailsViewFoldersManager.class);
     }
 
     @NonNls

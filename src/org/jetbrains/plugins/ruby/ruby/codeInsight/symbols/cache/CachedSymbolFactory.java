@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.ModifiableCachedSymbol;
@@ -42,7 +42,7 @@ public class CachedSymbolFactory {
                                                   @Nullable final String url,
                                                   @NotNull final Project project,
                                                   @Nullable final Module module,
-                                                  @Nullable final ProjectJdk sdk,
+                                                  @Nullable final Sdk sdk,
                                                   final boolean isJRubyEnabled){
 // Modifiable
         if (type == FileSymbolType.MODIFIABLE){

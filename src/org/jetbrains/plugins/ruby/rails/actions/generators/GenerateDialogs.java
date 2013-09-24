@@ -22,7 +22,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.Ref;
 import org.jetbrains.annotations.NotNull;
@@ -210,7 +210,7 @@ public class GenerateDialogs {
                         indicator.setText(RBundle.message("progress.indicator.title.please.wait"));
                     }
 
-            final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(myModule);
+            final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(myModule);
             final String workingDir = RailsFacetUtil.getRailsAppHomeDirPath(myModule);
             assert workingDir != null;
             final String name =  myValidator.getGeneratorAction().getGeneratorName();

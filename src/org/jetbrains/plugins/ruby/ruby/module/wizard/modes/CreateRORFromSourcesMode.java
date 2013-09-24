@@ -16,28 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.modes;
 
-import com.intellij.ide.util.frameworkSupport.FrameworkSupportUtil;
-import com.intellij.ide.util.newProjectWizard.ProjectNameWithTypeStep;
-import com.intellij.ide.util.newProjectWizard.StepSequence;
-import com.intellij.ide.util.newProjectWizard.SupportForFrameworksStep;
-import com.intellij.ide.util.newProjectWizard.modes.WizardMode;
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.WizardContext;
-import com.intellij.openapi.application.ApplicationNamesInfo;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.module.ModuleTypeManager;
-import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
-
-import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import com.intellij.ide.util.newProjectWizard.StepSequence;
+import com.intellij.ide.util.newProjectWizard.modes.WizardMode;
+import com.intellij.ide.util.projectWizard.ModuleBuilder;
+import com.intellij.ide.util.projectWizard.WizardContext;
+import com.intellij.openapi.application.ApplicationNamesInfo;
+import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +57,7 @@ public class CreateRORFromSourcesMode extends WizardMode {
     @Nullable
     protected StepSequence createSteps(final WizardContext context, final ModulesProvider modulesProvider) {
         final StepSequence myStepSequence = new StepSequence(null);
-
+	  /*
         //TODO Patch this step!!!!!
         myStepSequence.addCommonStep(new ProjectNameWithTypeStep(context, myStepSequence, this));
 
@@ -84,7 +78,7 @@ public class CreateRORFromSourcesMode extends WizardMode {
             if (FrameworkSupportUtil.hasProviders(type)) {
                 sequence.addCommonStep(new SupportForFrameworksStep(builder));
             }
-        }
+        }   */
         return myStepSequence;
     }
 

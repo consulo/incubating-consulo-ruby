@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.JRubySDKsComboboxWithBrowseButton;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
@@ -45,9 +45,9 @@ public class SelectJRubySdkPane {
         mySdksComponent.rebuildSdksListAndSelectSdk(configuration.getSdk());
     }
 
-    public ProjectJdk getSelectedSdk(){
+    public Sdk getSelectedSdk(){
         final Object selectedObject = mySdksComponent.getComboBox().getSelectedItem();
-        return selectedObject instanceof ProjectJdk ? (ProjectJdk)selectedObject : null;
+        return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
     }
 
     public JPanel getPanel() {

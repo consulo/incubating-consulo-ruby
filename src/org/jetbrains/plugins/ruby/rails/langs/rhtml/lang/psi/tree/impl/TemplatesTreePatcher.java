@@ -16,11 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl;
 
-import com.intellij.psi.impl.source.jsp.jspJava.OuterLanguageElement;
-import com.intellij.psi.impl.source.tree.*;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.TreePatcher;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.impl.source.tree.Factory;
+import com.intellij.psi.impl.source.tree.LeafElement;
+import com.intellij.psi.impl.source.tree.TreeElement;
+import com.intellij.psi.impl.source.tree.TreeUtil;
+import com.intellij.psi.templateLanguages.OuterLanguageElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.CharTable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.TreePatcher;
 
 /**
  * Created by IntelliJ IDEA.

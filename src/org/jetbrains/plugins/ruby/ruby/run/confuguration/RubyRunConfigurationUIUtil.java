@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -147,14 +147,14 @@ public class RubyRunConfigurationUIUtil {
 // setting modules
         myModulesComboBox.setModel(new DefaultComboBoxModel(myConfiguration.getModules()));
 //setting skds
-        final ArrayList<ProjectJdk> foundSdks = new ArrayList<ProjectJdk>();
-        final ProjectJdk[] allSdk = ProjectJdkTable.getInstance().getAllJdks();
-        for (ProjectJdk sdk : allSdk) {
+        final ArrayList<Sdk> foundSdks = new ArrayList<Sdk>();
+        final Sdk[] allSdk = SdkTable.getInstance().getAllJdks();
+        for (Sdk sdk : allSdk) {
             if (RubySdkUtil.isSDKValid(sdk)) {
                 foundSdks.add(sdk);
             }
         }
-        myAlternativeSdksComboBox.setModel(new DefaultComboBoxModel(foundSdks.toArray(new ProjectJdk[foundSdks.size()])));
+        myAlternativeSdksComboBox.setModel(new DefaultComboBoxModel(foundSdks.toArray(new Sdk[foundSdks.size()])));
     }
 
     public static FileChooserDescriptor addFolderChooser(@NotNull final String title,

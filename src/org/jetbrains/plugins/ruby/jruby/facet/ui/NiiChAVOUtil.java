@@ -16,18 +16,20 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui;
 
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.util.Function;
+import java.awt.Container;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import com.intellij.facet.ui.FacetValidatorsManager;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -76,42 +78,18 @@ public class NiiChAVOUtil {
         });
     }
 
-    /**
-     * Triggers on component enabled / disabled and validates facet validator.
-     * @param component Component to find UI hack
-     * @param manager Validators manager
-     * @param facetPropertiesSetterFun Function thas sets required properties for Rails or JRails Facet to perform UI hacks.
-     */
-    public static void addValidateOnEnabledOrDisabledHandler(@NotNull final JComponent component,
-                                                             @NotNull final FacetValidatorsManager manager,
-                                                             @Nullable final Function<Boolean, Object> facetPropertiesSetterFun) {
-        component.addPropertyChangeListener(new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent evt) {
-                if (SWING_ENABLED_PROPERTY_NAME.equals(evt.getPropertyName())) {
-                    manager.validate();
-
-                    //Puts magic when it is possible. In fact we can't put magic only
-                    //in the beginning of component live, we can ignore it!
-                    if (facetPropertiesSetterFun != null && findJRubyFacetUIMagicStorageContainer(component) != null) {
-                        facetPropertiesSetterFun.fun((Boolean)evt.getNewValue());
-                    }
-                }
-            }
-        });
-    }
-
     @Nullable
     public static JComboBox getJRubyFacetSdkChooserMagic(@NotNull final JComponent target) {
         return getPropertyMagic(target, JRUBY_FACET_SDK_CHOOSER_SETTING);
     }
 
     @Nullable
-    public static ProjectJdk getJRubyFacetSdkMagic(@NotNull final JComponent target) {
+    public static Sdk getJRubyFacetSdkMagic(@NotNull final JComponent target) {
         return getPropertyMagic(target, JRUBY_FACET_SDK_SETTING);
     }
 
     public static void putJRubyFacetSdkMagic(@NotNull final JComponent target,
-                                             @Nullable final ProjectJdk sdk) {
+                                             @Nullable final Sdk sdk) {
         findJRubyFacetUIMagicStorage(target).putClientProperty(JRUBY_FACET_SDK_SETTING, sdk);
     }
     public static void putJRubyFacetUIMagic(@NotNull final JComboBox sdkChooser) {
@@ -140,16 +118,7 @@ public class NiiChAVOUtil {
         return value == null ? false : value;
     }
 
-    /**
-     * For Rails Facet only(not for JRails one)
-     * @param component Component
-     */
-    public static void revalidateRailsFacetSettings(@NotNull final JComponent component) {
-        final FacetValidatorsManager validatorsManger = getRailsFacetValidatorsManagerMagic(component);
-        if (validatorsManger != null) {
-            validatorsManger.validate();
-        }
-    }
+
 
     /**
      * Saves FacetValidators to revalidate component after changinh SDK for [Ruby] module wizard.

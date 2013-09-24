@@ -16,9 +16,10 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.consulo.psi.PsiPackage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -27,9 +28,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiReference;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,9 +74,9 @@ public class JavaReference implements PsiReference {
     @Nullable
     public PsiElement resolve() {
         final PsiElement element = resolveParent();
-        if (element instanceof PsiPackage){
-            final PsiPackage packaggge = (PsiPackage) element;
-            for (PsiPackage subPackage : packaggge.getSubPackages()) {
+        if (element instanceof PsiJavaPackage){
+            final PsiJavaPackage packaggge = (PsiJavaPackage) element;
+            for (PsiJavaPackage subPackage : packaggge.getSubPackages()) {
                 if (myToken.equals(subPackage.getName())){
                     RubyUsageTypeProvider.setType(JavaReference.this, RubyUsageType.UNCLASSIFIED);
                     return subPackage;
@@ -97,7 +103,7 @@ public class JavaReference implements PsiReference {
 
     @Nullable
     public PsiElement resolveParent(){
-        return myJavaReference != null ? myJavaReference.resolve() : psiManager.findPackage("");
+        return myJavaReference != null ? myJavaReference.resolve() : JavaPsiFacade.getInstance(myElement.getProject()).findPackage("");
     }
 
     public String getCanonicalText() {
@@ -126,8 +132,8 @@ public class JavaReference implements PsiReference {
     public Object[] getVariants() {
         final ArrayList<PsiElement> variants = new ArrayList<PsiElement>();
         final PsiElement element = resolveParent();
-        if (element instanceof PsiPackage){
-            final PsiPackage packagggge = (PsiPackage) element;
+        if (element instanceof PsiJavaPackage){
+            final PsiJavaPackage packagggge = (PsiJavaPackage) element;
             variants.addAll(Arrays.asList(packagggge.getSubPackages()));
             variants.addAll(Arrays.asList(packagggge.getClasses()));
         }

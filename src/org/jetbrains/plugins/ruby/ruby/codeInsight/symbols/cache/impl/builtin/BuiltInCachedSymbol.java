@@ -21,7 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,7 +43,7 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol {
 
     public BuiltInCachedSymbol(@NotNull final Project project,
                                @NotNull final String url,
-                               @Nullable final ProjectJdk sdk) {
+                               @Nullable final Sdk sdk) {
         super(project, null, sdk, false);
         myLoadUrl = url;
     }

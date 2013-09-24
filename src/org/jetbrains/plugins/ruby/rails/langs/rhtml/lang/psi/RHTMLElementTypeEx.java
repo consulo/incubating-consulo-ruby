@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
-import com.intellij.psi.tree.IFileElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl.HTMLTemplateInRHTMLTypeImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl.RubyDeclarationsInRHTMLTypeImpl;
+import com.intellij.psi.tree.IFileElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,7 +31,7 @@ public interface RHTMLElementTypeEx {
     //Roots
 
     //RHTML root of rhtml file
-    IFileElementType RHTML_FILE = new IFileElementType("RHTML_FILE", RHTMLLanguage.RHTML);
+    IFileElementType RHTML_FILE = new IFileElementType("RHTML_FILE", RHTMLLanguage.INSTANCE);
 
     //HTML root of rhtml file
     IFileElementType HTML_TEMPLATE_IN_RHTML_ROOT = new HTMLTemplateInRHTMLTypeImpl("HTML_TEMPLATE_IN_RHTML_ROOT");

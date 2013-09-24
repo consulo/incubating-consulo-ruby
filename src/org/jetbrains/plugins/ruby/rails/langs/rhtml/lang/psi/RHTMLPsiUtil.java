@@ -179,6 +179,6 @@ public class RHTMLPsiUtil {
             return false;
         }
         final Language language = psiFile.getViewProvider().getBaseLanguage();
-        return language == RHTMLLanguage.RHTML;
+        return language == RHTMLLanguage.INSTANCE;
     }
 }

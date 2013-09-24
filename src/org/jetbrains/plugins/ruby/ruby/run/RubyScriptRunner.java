@@ -16,15 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.filters.Filter;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.SystemInfo;
+import java.io.File;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,11 +32,15 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.io.File;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.filters.Filter;
+import com.intellij.execution.process.ProcessListener;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.SystemInfo;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,7 +62,7 @@ public class RubyScriptRunner {
      * @param scriptName system script name
      * @return true if script or script.bat or script.sh can be found in ruby sdk bin folder
      */
-    public static boolean isSystemScriptValid(@NotNull final ProjectJdk sdk,
+    public static boolean isSystemScriptValid(@NotNull final Sdk sdk,
                                               @NotNull final String scriptName) {
         return getSystemScriptCommand(sdk, scriptName, false) != null;
     }
@@ -82,7 +82,7 @@ public class RubyScriptRunner {
      *
      */
     @NotNull
-    public static Output runRubyScript(@Nullable final ProjectJdk sdk,
+    public static Output runRubyScript(@Nullable final Sdk sdk,
                                        @Nullable final Project project,
                                        @NotNull final String scriptPath,
                                        @Nullable final String workingDir,
@@ -100,7 +100,7 @@ public class RubyScriptRunner {
         assert sdk != null;
 
         String[] commands = new String[arguments.length + 2];
-        commands[0] = sdk.getVMExecutablePath();
+        commands[0] = RubySdkUtil.getVMExecutablePath(sdk);
         commands[1] = scriptPath;
         System.arraycopy(arguments, 0, commands, 2, arguments.length);
 
@@ -111,7 +111,7 @@ public class RubyScriptRunner {
     }
 
 
-    public static Output runSystemCommand(@NotNull final ProjectJdk sdk,
+    public static Output runSystemCommand(@NotNull final Sdk sdk,
                                           @Nullable final String additionalPath,
                                           @Nullable final String workingDirectory,
                                           @NotNull final String... arguments) {
@@ -121,7 +121,7 @@ public class RubyScriptRunner {
             final String argument = "-e exec '"+ TextUtil.concat(arguments)+"'";
             return Runner.execute(Runner.createAndSetupCmdLine(additionalPath, workingDirectory,
                                                                null, null, true,
-                                                               sdk.getVMExecutablePath(), argument));
+					RubySdkUtil.getVMExecutablePath(sdk), argument));
         } catch (ExecutionException e) {
             return new Output(TextUtil.EMPTY_STRING, e.getMessage());
         }
@@ -149,7 +149,7 @@ public class RubyScriptRunner {
                                              @NotNull final CommandLineArgumentsProvider provider,
                                              @Nullable final RunContentDescriptorFactory descFactory,
                                              @Nullable final String workingDir,
-                                             @Nullable final ProjectJdk sdk,
+                                             @Nullable final Sdk sdk,
                                              @NotNull final Project project) {
 
         try {
@@ -168,12 +168,12 @@ public class RubyScriptRunner {
     }
 
     @NotNull
-    public static String[] getVMDefaultParams(ProjectJdk sdk) {
+    public static String[] getVMDefaultParams(Sdk sdk) {
         final String[] params = (JRubySdkType.isJRubySDK(sdk))
                 ? new String[1]
                 : new String[RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS.length + 1];
         //noinspection ConstantConditions
-        params[0] = sdk.getVMExecutablePath();
+        params[0] = RubySdkUtil.getVMExecutablePath(sdk);
 
         if (!JRubySdkType.isJRubySDK(sdk)) {
             System.arraycopy(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS, 0, params,
@@ -228,7 +228,7 @@ public class RubyScriptRunner {
      * @return Script output
      */
 //    @NotNull
-//    public static Output runSystemScript(final ProjectJdk sdk,
+//    public static Output runSystemScript(final Sdk sdk,
 //                                         final Project project, final String scriptName, final String workingDir,
 //                                         final boolean runWithModalProgress, @Nullable final String progressTitle,
 //                                         final boolean showStdErrErrors, final String errorTitle,
@@ -269,14 +269,14 @@ public class RubyScriptRunner {
      * @return true if script or script.bat or script.sh can be found in ruby sdk bin folder
      */
     @Nullable
-    public static String[] getSystemScriptCommand(@Nullable final ProjectJdk sdk,
+    public static String[] getSystemScriptCommand(@Nullable final Sdk sdk,
                                                   @NotNull final String scriptName,
                                                   final boolean showErrMsg) {
         try {
             validateSDK(sdk);
 
             //noinspection ConstantConditions
-            final String binFolder = sdk.getBinPath() + VirtualFileUtil.VFS_PATH_SEPARATOR;
+            final String binFolder = RubySdkUtil.getBinPath(sdk) + VirtualFileUtil.VFS_PATH_SEPARATOR;
 
 // Try to find script under SDK bin path
             if (checkIfPathExists(binFolder + scriptName)) {
@@ -335,7 +335,7 @@ public class RubyScriptRunner {
         return commands.toArray(new String[commands.size()]);
     }
 
-    public static void validateSDK(@Nullable final ProjectJdk sdk) throws ExecutionException {
+    public static void validateSDK(@Nullable final Sdk sdk) throws ExecutionException {
         if (sdk == null) {
             throw new ExecutionException(RBundle.message("sdk.no.specified"));
         }

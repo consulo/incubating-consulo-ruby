@@ -16,14 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl;
 
-import com.intellij.lexer.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.text.CharArrayCharSequence;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
-
 import java.util.LinkedList;
 import java.util.Queue;
+
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
+import com.intellij.lexer.HtmlHighlightingLexer;
+import com.intellij.lexer.Lexer;
+import com.intellij.lexer.LexerPosition;
+import com.intellij.lexer.LexerState;
+import com.intellij.lexer._HtmlLexer;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.util.text.CharArrayCharSequence;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,7 +36,7 @@ import java.util.Queue;
  * @date: 04.04.2007
  */
 
-public class RHTMLColorsPageHighlightingLexer implements Lexer {
+public class RHTMLColorsPageHighlightingLexer extends Lexer {
     private static final int HTML_MASK = 0x7FE0;
     private static final int RHTML_MASK = 0x1F;
     private static final int QUEUE_MASK = 0x3FFF8000;
@@ -321,7 +325,13 @@ public class RHTMLColorsPageHighlightingLexer implements Lexer {
             return Math.max(rhtmlPos, htmlPos);
         }
 
-        public LexerPosition getHTMLPosition() {
+		@Override
+		public int getState()
+		{
+			return 0;
+		}
+
+		public LexerPosition getHTMLPosition() {
             return myHTMLPosition;
         }
 
@@ -329,7 +339,7 @@ public class RHTMLColorsPageHighlightingLexer implements Lexer {
             return myRhtmlPosition;
         }
 
-        public MyState getState() {
+        public MyState getMyState() {
             return myState;
         }
     }
@@ -347,11 +357,11 @@ public class RHTMLColorsPageHighlightingLexer implements Lexer {
     public void restore(final LexerPosition position) {
         final Position p = (Position)position;
 
-        myCommentTokensQueue = p.getState().queue;
+        myCommentTokensQueue = p.getMyState().queue;
         myTokenType = null;
 
-        myTokenStart = myTokenEnd = p.getState().start;
-        myState = p.getState().state;
+        myTokenStart = myTokenEnd = p.getMyState().start;
+        myState = p.getMyState().state;
 
         myRHTMLRubyLexer.restore(p.getRhtmlPosition());
         final LexerPosition rubyPos = p.getHTMLPosition();
@@ -363,9 +373,6 @@ public class RHTMLColorsPageHighlightingLexer implements Lexer {
         }
     }
 
-    public char[] getBuffer() {
-        return myRHTMLRubyLexer.getBuffer();
-    }
 
     public int getBufferEnd() {
         return myRHTMLRubyLexer.getBufferEnd();

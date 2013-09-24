@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerPosition;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.text.CharArrayCharSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Separates lexems in two sets
  */
-public abstract class BlackAndWhiteLexer implements Lexer {
+public abstract class BlackAndWhiteLexer extends Lexer {
     private Lexer mySeparatorLexer;
     public IElementType myWhiteToken;
     public IElementType myWhiteFragmentEnd;
@@ -117,10 +117,6 @@ public abstract class BlackAndWhiteLexer implements Lexer {
         mySeparatorLexer.restore(position);
     }
 
-    @SuppressWarnings({"deprecation"})
-    public char[] getBuffer() {
-        return mySeparatorLexer.getBuffer();
-    }
 
     public int getBufferEnd() {
         return mySeparatorLexer.getBufferEnd();

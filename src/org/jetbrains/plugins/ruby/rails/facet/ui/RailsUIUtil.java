@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui;
 
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.EvaluatingComponent;
-import org.jetbrains.plugins.ruby.rails.RailsUtil;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.util.Function;
+import javax.swing.JLabel;
 
-import javax.swing.*;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.RailsUtil;
+import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.EvaluatingComponent;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +33,7 @@ import javax.swing.*;
  * @date: Apr 25, 2008
  */
 public class RailsUIUtil {
-    public static void setupRailsVersionEvaluator(final ProjectJdk sdk,
+    public static void setupRailsVersionEvaluator(final Sdk sdk,
                                                final JLabel railsVersionLabel,
                                                final EvaluatingComponent<String> ecRailsVersionLabel,
                                                final RailsVersionComponent componet) {

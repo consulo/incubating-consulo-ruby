@@ -21,7 +21,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.reference.SoftReference;
 import com.intellij.util.containers.HashMap;
@@ -105,7 +105,7 @@ public class SymbolsCache implements ProjectComponent {
 
                 // Here we gather info about sdks and builin cache types required
                 for (Module module : modules) {
-                    final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                    final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                     if (sdk != null){
                         final boolean isJRubyEnabled = JRubyUtil.hasJRubySupport(module);
                         if (RailsFacetUtil.hasRailsSupport(module)) {
@@ -156,7 +156,7 @@ public class SymbolsCache implements ProjectComponent {
     public CachedSymbol getModifiableCachedSymbol(@NotNull final FileSymbolType type,
                                                   @Nullable final String url,
                                                   @Nullable final Module module,
-                                                  @Nullable final ProjectJdk sdk,
+                                                  @Nullable final Sdk sdk,
                                                   final boolean jrubyEnabled) {
         final CacheKey key = new CacheKey(type, url, module, sdk, jrubyEnabled);
         SoftReference<CachedSymbol> reference = mySoftCache.get(key);
@@ -187,7 +187,7 @@ public class SymbolsCache implements ProjectComponent {
     @Nullable
     public CachedSymbol getCachedSymbol(@NotNull final FileSymbolType type,
                                         @Nullable final Module module,
-                                        @Nullable final ProjectJdk sdk,
+                                        @Nullable final Sdk sdk,
                                         final boolean jrubyEnabled) {
         return getModifiableCachedSymbol(type, null, module, sdk, jrubyEnabled);
     }
@@ -201,7 +201,7 @@ public class SymbolsCache implements ProjectComponent {
      */
     @Nullable
     public CachedSymbol getBuiltInCachedSymbol(@NotNull final FileSymbolType type,
-                                               @Nullable final ProjectJdk sdk,
+                                               @Nullable final Sdk sdk,
                                                final boolean jrubyEnabled) {
         final String cacheKeyUrl = SymbolCacheUtil.getStubUrlByType(type, sdk, jrubyEnabled);
         if (cacheKeyUrl == null) {

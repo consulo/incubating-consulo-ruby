@@ -16,18 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import com.intellij.codeInsight.completion.CompletionUtil;
-import com.intellij.codeInsight.editorActions.HtmlQuoteHandler;
-import com.intellij.codeInsight.editorActions.TypedHandler;
-import com.intellij.codeInsight.highlighting.BraceMatchingUtil;
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl;
-import com.intellij.psi.impl.source.tree.Factory;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RHTMLCompletionData;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLBraceMather;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.RHTMLElementFactory;
+import com.intellij.codeInsight.completion.CompletionUtil;
+import com.intellij.codeInsight.editorActions.HtmlQuoteHandler;
+import com.intellij.codeInsight.editorActions.TypedHandler;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,10 +41,10 @@ public class RHTMLApplicationComponent  implements ApplicationComponent {
 
     public static void loadRHTML() {
         //Element Factory for RHTML lang elements
-        Factory.addElementFactory(new RHTMLElementFactory());
+       // Factory.addElementFactory(new RHTMLElementFactory());
 
         //Brace Matcher
-        BraceMatchingUtil.registerBraceMatcher(RHTMLFileType.RHTML, new RHTMLBraceMather());
+        //BraceMatchingUtil.registerBraceMatcher(RHTMLFileType.RHTML, new RHTMLBraceMather());
 
         //Quote Handler
         TypedHandler.registerQuoteHandler(RHTMLFileType.RHTML, new HtmlQuoteHandler());

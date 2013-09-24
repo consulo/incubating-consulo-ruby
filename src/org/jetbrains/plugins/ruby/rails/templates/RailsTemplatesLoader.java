@@ -16,11 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.templates;
 
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.ide.fileTemplates.FileTemplateManager;
-import com.intellij.ide.fileTemplates.impl.FileTemplateImpl;
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.diagnostic.Logger;
+import java.util.HashMap;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -31,8 +28,10 @@ import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.templates.RORTemplatesSettingsUtil;
 import org.jetbrains.plugins.ruby.ruby.templates.RubyTemplatesLoader;
-
-import java.util.HashMap;
+import com.intellij.ide.fileTemplates.FileTemplate;
+import com.intellij.ide.fileTemplates.FileTemplateManager;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.diagnostic.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -96,7 +95,7 @@ public class RailsTemplatesLoader implements ApplicationComponent {
                 fileTemplateManager.addTemplate(RHTML_TEMPLATE_NAME,
                                                 RHTMLFileType.RHTML.getERBExtension());
 // setting template as internal
-        ((FileTemplateImpl)rhtmlTemplate).setInternal(true);
+       // ((FileTemplateImpl)rhtmlTemplate).setInternal(true);
 // setting template text
         rhtmlTemplate.setText(templateId2Text.get(RHTML_TEMPLATE_ID));
     }
@@ -107,7 +106,7 @@ public class RailsTemplatesLoader implements ApplicationComponent {
                 fileTemplateManager.addTemplate(RXML_TEMPLATE_NAME,
                                                 RXMLFileType.RXML.getBuilderExtension());
 // setting template as internal
-        ((FileTemplateImpl)rxmlTemplate).setInternal(true);
+       // ((FileTemplateImpl)rxmlTemplate).setInternal(true);
 // setting template text
         rxmlTemplate.setText(templateId2Text.get(RORTemplatesSettingsUtil.FILE_RUBY_ID));
     }
@@ -118,7 +117,7 @@ public class RailsTemplatesLoader implements ApplicationComponent {
                 fileTemplateManager.addTemplate(RJS_TEMPLATE_NAME,
                                                 RJSFileType.RJS.getDefaultExtension());
 // setting template as internal
-        ((FileTemplateImpl)rjsTemplate).setInternal(true);
+       // ((FileTemplateImpl)rjsTemplate).setInternal(true);
 // setting template text
         rjsTemplate.setText(templateId2Text.get(RORTemplatesSettingsUtil.FILE_RUBY_ID));
     }

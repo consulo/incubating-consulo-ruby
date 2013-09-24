@@ -16,9 +16,23 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import com.intellij.facet.*;
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
+import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
+import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
+import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetRootsProvider;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -28,18 +42,9 @@ import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.ActionRunner;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
-import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetRootsProvider {
+public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetRootsProvider
+{
     public static final FacetTypeId<JRubyFacet> ID = new FacetTypeId<JRubyFacet>("JRubyFacetType");
 
     @NonNls
@@ -77,7 +82,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
                 final ModifiableRootModel model = rootManager.getModifiableModel();
                 boolean modelUsed = false;
                 // Just remove all old facet libraries except one, that is neccessary
-                final ProjectJdk sdk = getSdk();
+                final Sdk sdk = getSdk();
                 final String name = (sdk != null) ? getFacetLibraryName(sdk.getName()) : null;
                 boolean librarySeen = false;
                 for (OrderEntry entry : model.getOrderEntries()) {
@@ -160,7 +165,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
         return FacetManager.getInstance(module).getFacetByType(ID);
     }
 
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         return getConfiguration().getSdk();
     }
 

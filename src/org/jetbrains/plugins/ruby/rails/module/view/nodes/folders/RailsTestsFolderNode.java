@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ui.configuration.IconSet;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,8 +35,8 @@ import javax.swing.*;
  */
 public class RailsTestsFolderNode extends TestsSubFolderNode {
     private static final String TESTS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.tests.presentable");
-    protected static final Icon TEST_ROOT_OPENED = IconSet.getSourceRootIcon(true, true);
-    protected static final Icon TEST_ROOT_CLOSED = IconSet.getSourceRootIcon(true, false);
+    protected static final Icon TEST_ROOT_OPENED = null /*IconSet.getSourceRootIcon(true, true)*/;
+    protected static final Icon TEST_ROOT_CLOSED =  null/*IconSet.getSourceRootIcon(true, false)*/;
 
     public RailsTestsFolderNode(final Module module, final VirtualFile rootDir) {
         super(module, rootDir, null, initPresentationData());

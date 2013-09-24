@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.jruby.search;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.PsiSearchHelper;
 import com.intellij.psi.search.UsageSearchContext;
 import com.intellij.psi.search.searches.MethodReferencesSearch;
 import com.intellij.util.Processor;
 import com.intellij.util.QueryExecutor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,7 +52,7 @@ public class JRubyNamesReferenceSearcher implements QueryExecutor<PsiReference, 
 
         final JRubyOcurrenceProcessor processor = new JRubyOcurrenceProcessor(method, jrubyName, psiReferenceProcessor, true);
         short searchContext = UsageSearchContext.IN_CODE;
-        return PsiManager.getInstance(method.getProject()).getSearchHelper().
+        return PsiSearchHelper.SERVICE.getInstance(method.getProject()).
                 processElementsWithWord(processor, params.getScope(), jrubyName, searchContext, true);
     }
 }

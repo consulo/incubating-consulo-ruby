@@ -16,20 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
-import com.intellij.openapi.projectRoots.ProjectRootType;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkModificator;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ActionRunner;
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
 import org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkConfigurablePanel;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-
-import javax.swing.*;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkModificator;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ActionRunner;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,9 +75,9 @@ public class RubySdkConfigurable  implements AdditionalDataConfigurable {
 
         //Patch source roots according to classpath
         final SdkModificator modificator = mySdk.getSdkModificator();
-        modificator.removeRoots(ProjectRootType.SOURCE);
-        for (VirtualFile file : modificator.getRoots(ProjectRootType.CLASS)) {
-            modificator.addRoot(file, ProjectRootType.SOURCE);
+        modificator.removeRoots(OrderRootType.CLASSES);
+        for (VirtualFile file : modificator.getRoots(OrderRootType.CLASSES)) {
+            modificator.addRoot(file, OrderRootType.SOURCES);
         }
         RubySdkType.findAndSaveGemsRootsBy(modificator);     
 
@@ -86,7 +86,7 @@ public class RubySdkConfigurable  implements AdditionalDataConfigurable {
 // Change libraries facet libraries
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable(){
             public void run() throws Exception {
-                JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(ProjectRootType.CLASS));
+                JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(OrderRootType.CLASSES));
             }
         });
     }

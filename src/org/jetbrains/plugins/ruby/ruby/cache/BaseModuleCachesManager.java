@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
+import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.psi.PsiManager;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,7 +56,7 @@ public abstract class BaseModuleCachesManager implements ModuleComponent {
      */
     @NotNull
     protected String generateCacheFilePath() {
-        return PathManager.getSystemPath()+"/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" + myModule.getProject().getName()+ "/" +myModule.getName() + "_" + myModule.getModuleFilePath().hashCode();
+        return PathManager.getSystemPath()+"/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" + myModule.getProject().getName()+ "/" +myModule.getName() + "_" + myModule.getModuleDirPath().hashCode();
     }
 
     public void projectOpened() {

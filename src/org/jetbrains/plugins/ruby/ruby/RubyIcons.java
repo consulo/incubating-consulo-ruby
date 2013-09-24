@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby;
 
-import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NonNls;
+import javax.swing.Icon;
 
-import javax.swing.*;
+import com.intellij.openapi.util.IconLoader;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,14 +26,9 @@ import javax.swing.*;
  * Date: 20.09.2006
  */
 public interface RubyIcons {
-    /**
-     * Please ensure that DATA_PATH corresponds with real resources path
-     */
-    @NonNls
-    final String DATA_PATH = "/org/jetbrains/plugins/ruby/ruby/";
 
-    final Icon RUBY_ICON =              IconLoader.findIcon(DATA_PATH + "ruby.png");
-    final Icon RUBY_LARGE_ICON =        IconLoader.findIcon(DATA_PATH + "rubylarge.png");
+	final Icon RUBY_ICON =              IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby.png");
+    final Icon RUBY_LARGE_ICON =        IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/rubylarge.png");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// Nodes
@@ -45,16 +39,16 @@ public interface RubyIcons {
     final Icon RUBY_REQUIRE_NODE =      IconLoader.findIcon("/nodes/aspect.png");
     final Icon RUBY_PARAMETER_NODE =    IconLoader.findIcon("/nodes/parameter.png");
     final Icon RUBY_VARIABLE_NODE =     IconLoader.findIcon("/nodes/variable.png");
-    final Icon RUBY_MODULE_NODE =       IconLoader.findIcon(DATA_PATH + "nodes/module.png");
-    final Icon RUBY_CONSTANT_NODE =     IconLoader.findIcon(DATA_PATH + "nodes/constant.png");
-    final Icon RUBY_NOT_DEFINED_NODE =  IconLoader.findIcon(DATA_PATH + "nodes/not_defined.png"); 
+    final Icon RUBY_MODULE_NODE =       IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/module.png");
+    final Icon RUBY_CONSTANT_NODE =     IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/constant.png");
+    final Icon RUBY_NOT_DEFINED_NODE =  IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/not_defined.png"); 
 
-    final Icon RUBY_OBJECT_CLASS_NODE = IconLoader.findIcon(DATA_PATH + "nodes/include.png");
-    final Icon RUBY_GLOBAL_VAR_NODE =   IconLoader.findIcon(DATA_PATH + "nodes/variable$.png");
-    final Icon RUBY_FIELD_NODE =        IconLoader.findIcon(DATA_PATH + "nodes/variable@.png");
+    final Icon RUBY_OBJECT_CLASS_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/include.png");
+    final Icon RUBY_GLOBAL_VAR_NODE =   IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/variable$.png");
+    final Icon RUBY_FIELD_NODE =        IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/variable@.png");
 
-    final Icon RUBY_INCLUDE_NODE =      IconLoader.findIcon(DATA_PATH + "nodes/include.png");
-    final Icon RUBY_ALIAS_NODE =        IconLoader.findIcon(DATA_PATH + "nodes/alias.png");
+    final Icon RUBY_INCLUDE_NODE =      IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/include.png");
+    final Icon RUBY_ALIAS_NODE =        IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/alias.png");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// Node attributes
@@ -66,19 +60,19 @@ public interface RubyIcons {
     final Icon RUBY_ATTR_PROTECTED =    IconLoader.findIcon("/nodes/c_protected.png");
     final Icon RUBY_ATTR_STATIC =       IconLoader.findIcon("/nodes/staticMark.png");
 
-    final Icon RUBY_ATTR_READER =       IconLoader.findIcon(DATA_PATH + "reader.png");
-    final Icon RUBY_ATTR_WRITER =       IconLoader.findIcon(DATA_PATH + "writer.png");
+    final Icon RUBY_ATTR_READER =       IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/reader.png");
+    final Icon RUBY_ATTR_WRITER =       IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/writer.png");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// Module
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    final Icon RUBY_MODULE_BIG =        IconLoader.findIcon(DATA_PATH + "rubymedium.png");
+    final Icon RUBY_MODULE_BIG =        IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/rubymedium.png");
 
-    final Icon RUBY_MODULE_OPENED =     IconLoader.findIcon(DATA_PATH + "ruby_module_opened.png");
-    final Icon RUBY_MODULE_CLOSED =     IconLoader.findIcon(DATA_PATH + "ruby_module_closed.png");
+    final Icon RUBY_MODULE_OPENED =     IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_opened.png");
+    final Icon RUBY_MODULE_CLOSED =     IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_closed.png");
 
-    final Icon RUBY_ADD_MODULE =        IconLoader.findIcon(DATA_PATH + "add_ruby_modulewizard.png");
+    final Icon RUBY_ADD_MODULE =        IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/add_ruby_modulewizard.png");
 
     final Icon RUBY_MODULE_SETTINGS_LOADPATH = IconLoader.findIcon("/modules/classpath.png");
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,9 +91,9 @@ public interface RubyIcons {
 
     final Icon RUBY_RUN_CONFIGURATION_FOLDER =  RUBY_ICON;
 
-    final Icon RUBY_RUN_CONFIGURATION_SCRIPT =  IconLoader.findIcon(DATA_PATH + "configuration/ruby_script.png");
-    final Icon RTEST_RUN_CONFIGURATION =        IconLoader.findIcon(DATA_PATH + "configuration/ruby_test_unit.png");
-    final Icon RAILS_SERVER_RUN_CONFIGURATION = IconLoader.findIcon(DATA_PATH + "configuration/run_conf_server.png");
+    final Icon RUBY_RUN_CONFIGURATION_SCRIPT =  IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_script.png");
+    final Icon RTEST_RUN_CONFIGURATION =        IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_test_unit.png");
+    final Icon RAILS_SERVER_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/run_conf_server.png");
 
 
     final Icon RUBY_RUNNER_SHOW_CMDLINE =       IconLoader.findIcon("/actions/showViewer.png");
@@ -113,6 +107,6 @@ public interface RubyIcons {
     final Icon RUBY_GUTTER_OVERRIDING =     IconLoader.findIcon("/gutter/overridingMethod.png");
     final Icon RUBY_GUTTER_IMPLEMENTING =   IconLoader.findIcon("/gutter/implementingMethod.png");
 
-    final Icon RI_ICON =                    IconLoader.findIcon(DATA_PATH + "ri.png");
+    final Icon RI_ICON =                    IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ri.png");
 }
 

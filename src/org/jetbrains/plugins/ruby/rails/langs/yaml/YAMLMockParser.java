@@ -1,10 +1,11 @@
 package org.jetbrains.plugins.ruby.rails.langs.yaml;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class YAMLMockParser implements PsiParser {
   @NotNull
-  public ASTNode parse(final IElementType root, final PsiBuilder builder) {
+  public ASTNode parse(final IElementType root, final PsiBuilder builder, LanguageVersion languageVersion) {
     final PsiBuilder.Marker marker = builder.mark();
     while (builder.getTokenType()!=null){
       builder.advanceLexer();

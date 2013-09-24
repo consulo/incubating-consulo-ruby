@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs;
 
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.io.FileUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -107,7 +107,7 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
         if (myRailsVersion == null) {
 
             final TabbedSettingsContext tabbedSettingsContext = getContext();
-            final ProjectJdk sdk = tabbedSettingsContext.getSdk();
+            final Sdk sdk = tabbedSettingsContext.getSdk();
             final boolean isRailsSDK = RailsUtil.hasRailsSupportInSDK(sdk);
 
             generateNewRButton.setEnabled(isRailsSDK);

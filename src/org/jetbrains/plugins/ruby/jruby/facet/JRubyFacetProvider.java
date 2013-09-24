@@ -16,35 +16,15 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import com.intellij.facet.FacetManager;
-import com.intellij.facet.FacetType;
-import com.intellij.facet.ModifiableFacetModel;
-import com.intellij.facet.impl.FacetUtil;
-import com.intellij.ide.util.newProjectWizard.FrameworkSupportConfigurable;
-import com.intellij.ide.util.newProjectWizard.FrameworkSupportProvider;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.libraries.Library;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.JRubySDKsComboboxWithBrowseButton;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg, Roman.Chernyatchik
  * @date: Jan 21, 2008
  */
-public class JRubyFacetProvider extends FrameworkSupportProvider {
+public class JRubyFacetProvider /*extends FrameworkSupportProvider */{
 
-    private static final String FACET_SUPPORT_PREFIX = "facet:";
+/*    private static final String FACET_SUPPORT_PREFIX = "facet:";
 
     public JRubyFacetProvider() {
         super(getProviderId(JRubyFacetType.INSTANCE), JRubyFacetType.INSTANCE.getPresentableName());
@@ -75,7 +55,7 @@ public class JRubyFacetProvider extends FrameworkSupportProvider {
     private static class JRubyFrameworkConfigurable extends FrameworkSupportConfigurable {
         private final JRubySDKsComboboxWithBrowseButton mySdksComboBox;
         protected Module myModule;
-        protected ProjectJdk mySelectedSdk;
+        protected Sdk mySelectedSdk;
 
         public JRubyFrameworkConfigurable() {
 //setting skds
@@ -100,9 +80,9 @@ public class JRubyFacetProvider extends FrameworkSupportProvider {
             return mySdksComboBox;
         }
 
-        public ProjectJdk getSelectedSdk() {
+        public Sdk getSelectedSdk() {
             final Object selectedObject = mySdksComboBox.getComboBox().getSelectedItem();
-            return selectedObject instanceof ProjectJdk ? (ProjectJdk) selectedObject : null;
+            return selectedObject instanceof Sdk ? (Sdk) selectedObject : null;
         }
 
         public void addSupport(final Module module, final ModifiableRootModel model, final @Nullable Library library) {
@@ -112,5 +92,5 @@ public class JRubyFacetProvider extends FrameworkSupportProvider {
             facetModel.addFacet(facet);
             facetModel.commit();
         }
-    }
+    }*/
 }

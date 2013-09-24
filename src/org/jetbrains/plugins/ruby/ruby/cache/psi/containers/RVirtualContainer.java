@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.vfs.VirtualFile;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
-
-import java.util.List;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +33,7 @@ import java.util.List;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualContainer extends RVirtualStructuralElement, Iconable {
+public interface RVirtualContainer extends RVirtualStructuralElement {
     /**
      * @return this container access modifier
      */

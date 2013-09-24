@@ -16,15 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RDuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
-import org.apache.commons.collections.CollectionUtils;
-
-import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,7 +72,7 @@ public class RDuckTypeImpl extends RTypeBase implements RDuckType{
       if (o == null || getClass() != o.getClass()) return false;
 
       final RDuckTypeImpl that = (RDuckTypeImpl)o;
-      return CollectionUtils.isEqualCollection(myDuckType.getMessages(), that.myDuckType.getMessages());
+      return myDuckType.getMessages().equals(that.myDuckType.getMessages());
     }
 
     @Override

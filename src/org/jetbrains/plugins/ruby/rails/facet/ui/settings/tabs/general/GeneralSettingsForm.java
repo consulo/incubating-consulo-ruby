@@ -16,12 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.settings.tabs.general;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.ui.RailsUIUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.EvaluatingComponent;
-
-import javax.swing.*;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +47,7 @@ public class GeneralSettingsForm implements RailsUIUtil.RailsVersionComponent{
     }
 
 
-    public void beforeShow(@Nullable final ProjectJdk sdk) {
+    public void beforeShow(@Nullable final Sdk sdk) {
         myIsClosed = false;
 
         if (myRailsVersion == null) {

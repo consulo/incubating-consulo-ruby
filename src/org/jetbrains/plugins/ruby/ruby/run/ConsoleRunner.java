@@ -16,17 +16,34 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
+import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
+import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.execution.ExecutionManager;
-import com.intellij.execution.ExecutionRegistry;
+import com.intellij.execution.Executor;
+import com.intellij.execution.ExecutorRegistry;
+import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessListener;
-import com.intellij.execution.runners.JavaProgramRunner;
-import com.intellij.execution.ui.CloseAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.execution.ui.actions.CloseAction;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonShortcuts;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -36,17 +53,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.io.FileUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
-import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-
-import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -116,7 +122,7 @@ public class ConsoleRunner {
         }
         myConsoleView.attachToProcess(myProcessHandler);
 // Runner creating
-        final JavaProgramRunner defaultRunner = ExecutionRegistry.getInstance().getDefaultRunner();
+        final Executor defaultRunner = ExecutorRegistry.getInstance().getExecutorById(DefaultRunExecutor.EXECUTOR_ID);
         final DefaultActionGroup toolbarActions = new DefaultActionGroup();
         final DefaultActionGroup userActions = new DefaultActionGroup();
 

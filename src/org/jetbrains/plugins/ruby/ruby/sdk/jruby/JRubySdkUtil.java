@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
+import java.util.ArrayList;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
-import java.util.ArrayList;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,7 +36,7 @@ public class JRubySdkUtil {
      * @param sdk sdk to inspect
      * @return true, if sdk is Ruby type
      */
-    public static boolean isJRubySDK(@Nullable final ProjectJdk sdk) {
+    public static boolean isJRubySDK(@Nullable final Sdk sdk) {
         return sdk != null && sdk.getSdkType() instanceof JRubySdkType;
     }
 
@@ -44,7 +44,7 @@ public class JRubySdkUtil {
      * Creates mock sdk
      */
     @SuppressWarnings({"JavaDoc"})
-    public static ProjectJdk getMockSdk(final String versionName) {
+    public static Sdk getMockSdk(final String versionName) {
         return RubySdkUtil.createMockSdk(JRubySdkType.getInstance(), versionName);
     }
 
@@ -52,18 +52,18 @@ public class JRubySdkUtil {
      * Creates mock sdk without stubs
      */
     @SuppressWarnings({"JavaDoc"})
-    public static ProjectJdk getMockSdkWithoutStubs(final String versionName) {
+    public static Sdk getMockSdkWithoutStubs(final String versionName) {
         return RubySdkUtil.createMockSdkWithoutStubs(JRubySdkType.getInstance(), versionName);
     }
 
-    public static ProjectJdk[] getValidSdks() {
-        final ArrayList<ProjectJdk> foundSdks = new ArrayList<ProjectJdk>();
+    public static Sdk[] getValidSdks() {
+        final ArrayList<Sdk> foundSdks = new ArrayList<Sdk>();
         foundSdks.add(null);
-        for (ProjectJdk sdk : ProjectJdkTable.getInstance().getAllJdks()) {
+        for (Sdk sdk : SdkTable.getInstance().getAllSdks()) {
             if (JRubySdkType.isJRubySDK(sdk)) {
                 foundSdks.add(sdk);
             }
         }
-        return foundSdks.toArray(new ProjectJdk[foundSdks.size()]);
+        return foundSdks.toArray(new Sdk[foundSdks.size()]);
     }
 }

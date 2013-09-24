@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
@@ -40,7 +40,7 @@ public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol {
 
     public AbstractLayeredCachedSymbol(@NotNull final Project project,
                                @Nullable final Module module,
-                               @Nullable final ProjectJdk sdk,
+                               @Nullable final Sdk sdk,
                                final boolean jRubyEnabled) {
         super(project, module, sdk);
         isJRubyEnabled = jRubyEnabled;

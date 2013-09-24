@@ -28,7 +28,7 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -106,7 +106,7 @@ public class GeneratorsUtil {
      */
     @NotNull
     public static String[] getInstalledGenerators(@Nullable final Project project,
-                                                  @Nullable final ProjectJdk sdk,
+                                                  @Nullable final Sdk sdk,
                                                   @NotNull final String moduleName,
                                                   @NotNull final String railsApplicHomeDirPath) {
         final List<Exception> exceptions = new LinkedList<Exception>();
@@ -162,7 +162,7 @@ public class GeneratorsUtil {
 
     @Nullable
     public static Output getGenerateScriptOutput(@Nullable final Project project,
-                                                 @Nullable final ProjectJdk sdk,
+                                                 @Nullable final Sdk sdk,
                                                  final String workingDir, List<Exception> exceptions,
                                                  final boolean showStdErrErrors) {
         try {
@@ -186,7 +186,7 @@ public class GeneratorsUtil {
      */
     public static void loadGeneratorsList(final boolean forceRegenerate,
                                           @Nullable final Project project,
-                                          @Nullable final ProjectJdk sdk,
+                                          @Nullable final Sdk sdk,
                                           @NotNull final String moduleName,
                                           @NotNull final BaseRailsFacetConfigurationImpl railsFacetConfiguration) {
         final String title = RBundle.message("module.rails.create.rake.generators.title");
@@ -353,7 +353,7 @@ public class GeneratorsUtil {
                                        final String[] scriptParameters,
                                        @Nullable final RunContentDescriptorFactory descFactory,
                                        @Nullable final ActionRunner.InterruptibleRunnable nextAction,
-                                       @NotNull final ProjectJdk sdk) {
+                                       @NotNull final Sdk sdk) {
         try {
             //Save all opened documents
             FileDocumentManager.getInstance().saveAllDocuments();

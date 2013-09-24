@@ -20,7 +20,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserDialog;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
@@ -176,7 +176,7 @@ class SettingsPane implements CheckBoxListListener {
     }
 
     public void fireJDKChanged() {
-        ProjectJdk jdk = myDocPanel.getProjectJdk();
+        Sdk jdk = myDocPanel.getSdk();
         if (!(RubySdkUtil.isKindOfRubySDK(jdk) && RIUtil.checkIfRiExists(jdk))){
             defaultRadioButton.setEnabled(false);
             selectedRadioButton.setEnabled(false);

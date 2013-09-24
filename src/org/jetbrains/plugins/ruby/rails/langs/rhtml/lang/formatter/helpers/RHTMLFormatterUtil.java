@@ -184,7 +184,7 @@ public class RHTMLFormatterUtil {
      */
     public static PsiElement findRHTMLElementByStartOffset(final FileViewProvider vProvider, final int startOffset,
                                                            final boolean searchHighest) {
-        PsiElement psiElement = vProvider.findElementAt(startOffset, RHTMLLanguage.RHTML);
+        PsiElement psiElement = vProvider.findElementAt(startOffset, RHTMLLanguage.INSTANCE);
         if (searchHighest && psiElement != null) {
             PsiElement psiParent = psiElement.getParent();
             while (psiParent != null

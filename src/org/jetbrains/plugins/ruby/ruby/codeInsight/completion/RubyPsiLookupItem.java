@@ -16,17 +16,24 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
-import com.intellij.codeInsight.lookup.*;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
+import java.awt.Color;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import com.intellij.codeInsight.lookup.DeferredUserLookupValue;
+import com.intellij.codeInsight.lookup.LookupItem;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
+import com.intellij.codeInsight.lookup.LookupValueWithTail;
+import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
+import com.intellij.codeInsight.lookup.PresentableLookupValue;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +45,6 @@ public class RubyPsiLookupItem implements RubyLookupItem,
         PresentableLookupValue,
         DeferredUserLookupValue,
         LookupValueWithUIHint,
-        LookupValueWithUIHint2,
         LookupValueWithPsiElement,
         LookupValueWithTail,
         LookupValueWithPriority,

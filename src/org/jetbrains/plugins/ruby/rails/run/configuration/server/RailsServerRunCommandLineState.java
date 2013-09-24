@@ -16,15 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.RunnerSettings;
-import com.intellij.util.net.NetUtils;
+import java.io.IOException;
+
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
-
-import java.io.IOException;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.util.net.NetUtils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,9 +34,8 @@ import java.io.IOException;
 public class RailsServerRunCommandLineState extends RubyRunCommandLineState {
 
     public RailsServerRunCommandLineState(final RailsServerRunConfiguration config,
-                                          final RunnerSettings runnerSettings,
-                                          final ConfigurationPerRunnerSettings configurationSettings) {
-        super(config, runnerSettings, configurationSettings);
+			ExecutionEnvironment executionEnvironment) {
+        super(config, executionEnvironment);
     }
 
     public GeneralCommandLine createCommandLine() throws ExecutionException {

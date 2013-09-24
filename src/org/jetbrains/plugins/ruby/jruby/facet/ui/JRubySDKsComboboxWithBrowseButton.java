@@ -16,20 +16,15 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui;
 
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.ui.ProjectJdksEditor;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.ui.ComboboxWithBrowseButton;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
-import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
-import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
+import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.ui.ComboboxWithBrowseButton;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,13 +38,13 @@ public class JRubySDKsComboboxWithBrowseButton extends ComboboxWithBrowseButton 
 
         sdkCombobox.setRenderer(new SDKListCellRenderer());
 
-        addActionListener(new ActionListener() {
+       /* addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 final Project defaultProject = ProjectManager.getInstance().getDefaultProject();
-                ProjectJdksEditor editor = new ProjectJdksEditor(null, defaultProject, JRubySDKsComboboxWithBrowseButton.this);
+                SdksEditor editor = new SdksEditor(null, defaultProject, JRubySDKsComboboxWithBrowseButton.this);
                 editor.show();
                 if (editor.isOK()) {
-                    final ProjectJdk selectedJdk = editor.getSelectedJdk();
+                    final Sdk selectedJdk = editor.getSelectedJdk();
                     rebuildSdksListAndSelectSdk(selectedJdk);
                     if (!JRubySdkType.isJRubySDK(selectedJdk)) {
                         final String title = RBundle.message("jruby.select.sdk");
@@ -58,21 +53,21 @@ public class JRubySDKsComboboxWithBrowseButton extends ComboboxWithBrowseButton 
                     }
                 }
             }
-        });
+        }); */
     }
 
     public void addComboboxActionListener(final ActionListener l) {
         getComboBox().addActionListener(l);
     }
 
-    public void rebuildSdksListAndSelectSdk(final ProjectJdk selectedSdk) {
-        final ProjectJdk[] sdks = JRubySdkUtil.getValidSdks();
+    public void rebuildSdksListAndSelectSdk(final Sdk selectedSdk) {
+        final Sdk[] sdks = JRubySdkUtil.getValidSdks();
 
         final JComboBox sdksComboBox = getComboBox();
         sdksComboBox.setModel(new DefaultComboBoxModel(sdks));
 
         if (selectedSdk != null) {
-            for (ProjectJdk candidateSdk : sdks) {
+            for (Sdk candidateSdk : sdks) {
                 if (candidateSdk != null && candidateSdk.getName().equals(selectedSdk.getName())) {
                     sdksComboBox.setSelectedItem(candidateSdk);
                     return;

@@ -16,22 +16,22 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl;
 
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.impl.source.tree.TreeElementFactory;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.CharTable;
 import gnu.trove.THashSet;
+
+import java.util.Arrays;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementTypeEx;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLCommentImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLXMLFileElement;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLXmlDocument;
-
-import java.util.Arrays;
-import java.util.Set;
+import com.intellij.lang.ASTCompositeFactory;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +39,8 @@ import java.util.Set;
  * @author: Roman Chernyatchik
  * @date: 14.04.2007
  */
-public class RHTMLElementFactory implements TreeElementFactory {
+public class RHTMLElementFactory implements ASTCompositeFactory
+{
     private final Set<IElementType> ourTypes = new THashSet<IElementType>(Arrays.asList(
             RHTMLElementTypeEx.RHTML_FILE,
             RHTMLElementTypeEx.HTML_TEMPLATE_IN_RHTML_ROOT,
@@ -50,34 +51,31 @@ public class RHTMLElementFactory implements TreeElementFactory {
             RHTMLElementType.RHTML_COMMENT_ELEMENT //RHTML Comment in RHTML PsiRoot
     ));
 
-    @NotNull
-    public LeafElement createLeafElement(IElementType type, CharSequence buffer, int startOffset, int endOffset, CharTable table) {
 
-        //Shouldn't happen
-        //noinspection ConstantConditions
-        return null;
-    }
+	@NotNull
+	@Override
+	public CompositeElement createComposite(IElementType type)
+	{
+		if (type == RHTMLElementTypeEx.RHTML_FILE) {
+			return new RHTMLXMLFileElement(type);
+		}
+		if (type == RHTMLElementTypeEx.HTML_TEMPLATE_IN_RHTML_ROOT) {
+			return new RHTMLXMLFileElement(type);
+		}
+		if (type == RHTMLElementType.RHTML_COMMENT_ELEMENT) {
+			return new RHTMLCommentImpl();
+		}
 
-    @NotNull
-    public CompositeElement createCompositeElement(IElementType type) {
-        if (type == RHTMLElementTypeEx.RHTML_FILE) {
-            return new RHTMLXMLFileElement(type);
-        }
-        if (type == RHTMLElementTypeEx.HTML_TEMPLATE_IN_RHTML_ROOT) {
-            return new RHTMLXMLFileElement(type);
-        }
-        if (type == RHTMLElementType.RHTML_COMMENT_ELEMENT) {
-            return new RHTMLCommentImpl();
-        }
+		if (type == RHTMLElementType.RHTML_XML_TAG) {
+			return new RHTMLRubyInjectionTagImpl();
+		}
 
-        if (type == RHTMLElementType.RHTML_XML_TAG) {
-            return new RHTMLRubyInjectionTagImpl();
-        }
+		return new RHTMLXmlDocument();
+	}
 
-        return new RHTMLXmlDocument();
-    }
-
-    public boolean isMyElementType(IElementType type) {
-        return ourTypes.contains(type);
-    }
+	@Override
+	public boolean apply(@Nullable IElementType type)
+	{
+		return ourTypes.contains(type);
+	}
 }

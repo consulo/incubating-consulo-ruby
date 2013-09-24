@@ -16,6 +16,17 @@
 
 package org.jetbrains.plugins.ruby.addins.gems;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
+import org.jetbrains.plugins.ruby.ruby.run.ConsoleRunner;
+import org.jetbrains.plugins.ruby.ruby.run.Output;
+import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
+import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
+import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
+import org.jetbrains.plugins.ruby.ruby.run.Runner;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.process.ProcessAdapter;
@@ -23,12 +34,7 @@ import com.intellij.execution.process.ProcessEvent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.run.*;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -55,7 +61,7 @@ public class GemsRunner {
      * @param onDone                Will be executed after gem will have been finished
      */
     public static void runGemScriptInConsoleAndRefreshModule(@NotNull final Module module,
-                                                             @NotNull final ProjectJdk sdk,
+                                                             @NotNull final Sdk sdk,
                                                              @NotNull final String consoleTitle,
                                                              @Nullable final AnAction[] userActions,
                                                              final boolean runInBackgroundThread,
@@ -96,7 +102,7 @@ public class GemsRunner {
      * @return true if gem executable ruby script can be found in gems bin folder
      */
     @Nullable
-    public static String[] getGemExecutableScriptCommand(@Nullable final ProjectJdk sdk,
+    public static String[] getGemExecutableScriptCommand(@Nullable final Sdk sdk,
                                                          @NotNull final String rubyScriptName,
                                                          final boolean showErrMsg) {
         try {
@@ -137,7 +143,7 @@ public class GemsRunner {
      *
      */
     @Nullable
-    public static Output runGemsExecutableScript(@Nullable final ProjectJdk sdk,
+    public static Output runGemsExecutableScript(@Nullable final Sdk sdk,
                                                  @Nullable final Project project,
                                                  @NotNull final String rubyScriptName,
                                                  @Nullable final String workingDir,

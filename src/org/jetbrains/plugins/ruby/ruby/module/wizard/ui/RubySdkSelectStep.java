@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -28,8 +27,10 @@ import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.FacetWizardStep;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkChooserPanel;
-
-import javax.swing.*;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,14 +69,14 @@ public class RubySdkSelectStep extends FacetWizardStep {
 
 
     public void updateDataModel() {
-        final ProjectJdk sdk = getSdk();
+        final Sdk sdk = getSdk();
         mySettingsHolder.setSdk(sdk);
 
         NiiChAVOUtil.putJRubyFacetSdkMagic(myPanel, sdk);
-        NiiChAVOUtil.revalidateRailsFacetSettings(myPanel);
+
     }
 
-    private ProjectJdk getSdk() {
+    private Sdk getSdk() {
         return myPanel.getChosenJdk();
     }
 
@@ -84,7 +85,7 @@ public class RubySdkSelectStep extends FacetWizardStep {
     }
 
     public boolean validate() {
-        ProjectJdk jdk = myPanel.getChosenJdk();
+        Sdk jdk = myPanel.getChosenJdk();
         if (jdk==null){
             int result = Messages.showYesNoDialog(
                     RBundle.message("sdk.error.no.sdk.prompt.messge.confirm.without.sdk"),
@@ -102,14 +103,14 @@ public class RubySdkSelectStep extends FacetWizardStep {
         }
 /* try to set selected SDK as Project default SDK
         final ProjectRootManager projectRootManager = ProjectRootManager.getInstance(myProject);
-        if (!jdk.equals(projectRootManager.getProjectJdk())) {
+        if (!jdk.equals(projectRootManager.getSdk())) {
             int result = Messages.showYesNoDialog(
                     RBundle.message("prompt.confirm.default.sdk.change"),
                     RBundle.message("title.default.sdk.change"),
                     Messages.getQuestionIcon()
             );
             if (result == 1) {
-                projectRootManager.setProjectJdk(jdk);
+                projectRootManager.setSdk(jdk);
             }
         }*/
         return true;

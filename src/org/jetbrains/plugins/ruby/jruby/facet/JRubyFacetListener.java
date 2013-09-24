@@ -16,19 +16,19 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
+import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
+import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
+import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetManagerAdapter;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.messages.MessageBusConnection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.RComponents;
 
 public class JRubyFacetListener extends FacetManagerAdapter implements ModuleComponent {
   private MessageBusConnection myConnection;
@@ -56,10 +56,10 @@ public class JRubyFacetListener extends FacetManagerAdapter implements ModuleCom
           final Project project = myModule.getProject();
           final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
           sdkCachesManager.initAndSetupSkdCaches(project, true);
-          final ProjectJdk projectJdk = JRubyUtil.getJRubyFacetSdk(myModule);
+          final Sdk Sdk = JRubyUtil.getJRubyFacetSdk(myModule);
           //update added facet jdk
-          if (projectJdk != null) {
-              final RubyFilesCache cache = sdkCachesManager.getSdkFilesCache(projectJdk);
+          if (Sdk != null) {
+              final RubyFilesCache cache = sdkCachesManager.getSdkFilesCache(Sdk);
               if (cache != null) {
                   cache.forceUpdate();
               }

@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.facet.configuration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,8 +29,8 @@ import com.intellij.openapi.projectRoots.ProjectJdk;
  */
 public interface BaseRailsFacetConfigurationLowLevel extends BaseRailsFacetConfiguration {
 
-    public void loadGenerators(final boolean forceRegenerate, @Nullable final ProjectJdk sdk);
-    public void loadRakeTasks(final boolean forceRegenerate, final ProjectJdk sdk);
+    public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk);
+    public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk);
 
     public void setRailsApplicationRootPath(@NotNull final String rootPath);
     public void setModule(@NotNull final Module uncommitedModule);
@@ -38,10 +38,10 @@ public interface BaseRailsFacetConfigurationLowLevel extends BaseRailsFacetConfi
     @Nullable
     public String getNullableRailsApplicationRootPath();
 
-    public void setSdk(@Nullable final ProjectJdk sdk);
+    public void setSdk(@Nullable final Sdk sdk);
 
     @Nullable
-    public ProjectJdk getSdk();
+    public Sdk getSdk();
     @Nullable
     public Module getModule();
 

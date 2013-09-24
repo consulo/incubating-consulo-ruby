@@ -16,29 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.facet.Facet;
-import com.intellij.facet.FacetConfiguration;
-import com.intellij.facet.FacetTypeRegistry;
-import com.intellij.facet.autodetecting.FacetDetector;
-import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
-import com.intellij.facet.impl.autodetecting.UnderlyingFacetSelector;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileFilter;
-import com.intellij.patterns.impl.MatchingContext;
-import com.intellij.patterns.impl.Pattern;
-import com.intellij.patterns.impl.TraverseContext;
-import com.intellij.patterns.impl.VirtualFilePattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetType;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfigurationImpl;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-
-import java.util.Collection;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetTypeRegistry;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -74,10 +59,8 @@ class JRailsFacetType extends BaseRailsFacetType<JRailsFacet> {
         return new JRailsFacet(this, module, name, configuration, underlyingFacet);
     }
 
-    public boolean isSuitableModuleType(@NotNull final ModuleType moduleType) {
-        return BaseRailsFacetType.isJRailsFacetSuitableModuleType(moduleType);
-    }
 
+  /*
     protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry, 
                                            final VirtualFileFilter railsFacetFilter,
                                            final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector) {
@@ -102,5 +85,5 @@ class JRailsFacetType extends BaseRailsFacetType<JRailsFacet> {
                         return null;
                     }
                 });
-    }
+    }      */
 }

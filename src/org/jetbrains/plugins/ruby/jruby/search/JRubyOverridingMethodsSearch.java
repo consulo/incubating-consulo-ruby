@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.jruby.search;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.search.PsiSearchHelper;
 import com.intellij.psi.search.UsageSearchContext;
 import com.intellij.psi.search.searches.OverridingMethodsSearch;
 import com.intellij.util.Processor;
@@ -44,7 +44,7 @@ public class JRubyOverridingMethodsSearch implements QueryExecutor<PsiElement, O
         });
 
         final JRubyOverridingMethodsProcessor processor = new JRubyOverridingMethodsProcessor(method, name, consumer);
-        return PsiManager.getInstance(method.getProject()).getSearchHelper().
+        return PsiSearchHelper.SERVICE.getInstance(method.getProject()).
                 processElementsWithWord(processor, params.getScope(), name, UsageSearchContext.IN_CODE, true);
     }
 }

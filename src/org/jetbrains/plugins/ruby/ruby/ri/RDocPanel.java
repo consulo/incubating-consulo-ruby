@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.ri;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import org.jetbrains.annotations.NotNull;
@@ -47,15 +47,15 @@ class RDocPanel {
         createPanel();
 
 // Adding project jdk listener
-        ((ProjectRootManagerEx) myProjectRootManager).addProjectJdkListener(new ProjectRootManagerEx.ProjectJdkListener() {
-            public void projectJdkChanged() {
-                fireProjectJdkChanged();
+        ((ProjectRootManagerEx) myProjectRootManager).addSdkListener(new ProjectRootManagerEx.SdkListener() {
+            public void SdkChanged() {
+                fireSdkChanged();
             }
         });
-        fireProjectJdkChanged();
+        fireSdkChanged();
     }
 
-    private void fireProjectJdkChanged() {
+    private void fireSdkChanged() {
         myInfoPane.fireJDKChanged();
         mySettingPane.fireJDKChanged();
         myAboutPane.fireJDKChanged();
@@ -75,8 +75,8 @@ class RDocPanel {
         return myPane;
     }
 
-    public ProjectJdk getProjectJdk() {
-        return myProjectRootManager.getProjectJdk();
+    public Sdk getSdk() {
+        return myProjectRootManager.getSdk();
     }
 
 
@@ -85,9 +85,9 @@ class RDocPanel {
         int displayWidth = calculateInfoPaneWidth();
         final String item = name.trim();
         if (doUseDefaults) {
-            return RIUtil.lookup(myProject, getProjectJdk(), item, true, new String[]{}, displayWidth);
+            return RIUtil.lookup(myProject, getSdk(), item, true, new String[]{}, displayWidth);
         }
-        return RIUtil.lookup(myProject, getProjectJdk(), item, false, mySettingPane.getSelectedDirs(), displayWidth);
+        return RIUtil.lookup(myProject, getSdk(), item, false, mySettingPane.getSelectedDirs(), displayWidth);
     }
 
     /**

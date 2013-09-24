@@ -16,33 +16,41 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.execution.junit2.configuration.BrowseModuleValueActionListener;
-import com.intellij.execution.junit2.configuration.EnvironmentVariablesComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
 import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
 import static com.intellij.openapi.util.io.FileUtil.toSystemIndependentName;
-import com.intellij.ui.RawCommandLineEditor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestCaseClassBrowser;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestMethodBrowser;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Map;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestCaseClassBrowser;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestMethodBrowser;
+import com.intellij.execution.configuration.BrowseModuleValueActionListener;
+import com.intellij.execution.configuration.EnvironmentVariablesComponent;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.Ref;
+import com.intellij.ui.RawCommandLineEditor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -225,9 +233,9 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         return selectedObject instanceof Module ? (Module)selectedObject : null;
     }
 
-    public ProjectJdk getAlternativeSdk(){
+    public Sdk getAlternativeSdk(){
         final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
-        return selectedObject instanceof ProjectJdk ? (ProjectJdk)selectedObject : null;
+        return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
     }
 
     public boolean shouldUseAlternativeSdk() {
@@ -274,7 +282,7 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         myModulesComboBox.setSelectedItem(module);
     }
 
-    public void setAlternativeSdk(@Nullable final ProjectJdk sdk){
+    public void setAlternativeSdk(@Nullable final Sdk sdk){
         myAlternativeSdksComboBox.setSelectedItem(sdk);
     }
 

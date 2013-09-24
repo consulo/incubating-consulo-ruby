@@ -16,14 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import com.intellij.execution.junit2.configuration.BrowseModuleValueActionListener;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
@@ -38,6 +30,14 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestUnitUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationForm;
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScopeUtil;
+import com.intellij.execution.configuration.BrowseModuleValueActionListener;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,7 +45,8 @@ import org.jetbrains.plugins.ruby.ruby.scope.SearchScopeUtil;
 * @author: Roman Chernyatchik
 * @date: 06.08.2007
 */
-public class TestMethodBrowser extends BrowseModuleValueActionListener {
+public class TestMethodBrowser extends BrowseModuleValueActionListener
+{
     private final RTestsRunConfigurationForm myForm;
     public final SearchScope myScope;
 

@@ -16,22 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectJdksModel;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Pair;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RubyWizardSettingsHolder;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.ide.util.projectWizard.ModuleBuilder;
+import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.Pair;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +39,7 @@ import java.util.List;
  * @date: 18.08.2006
  */
 public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, RubyWizardSettingsHolder {
-    private ProjectJdk mySdk;
+    private Sdk mySdk;
     private boolean myShouldUseRSpec;
     private boolean myShouldUseTestUnit;
     private List<Pair<String, String>> mySourcePaths;
@@ -66,24 +65,24 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePat
     }
 
     @Nullable
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         return mySdk;
     }
 
     public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
-        if (mySdk != null) {
-            rootModel.setJdk(mySdk);
+        /*if (mySdk != null) {
+            rootModel.setSdk(mySdk);
             //HACK. Oterwise for new Project first roots change event have wrong SDK!
             //      Value must be same as key, not clone!
-            ProjectJdksModel.getInstance(rootModel.getModule().getProject()).getProjectJdks().put(mySdk, mySdk);
+            SdksModel.getInstance(rootModel.getModule().getProject()).getSdks().put(mySdk, mySdk);
         } else {
             rootModel.inheritJdk();
         }
-
+          */
         setupContentRoot(rootModel);
     }
 
-    public void setSdk(ProjectJdk jdk) {
+    public void setSdk(Sdk jdk) {
         mySdk = jdk;
     }
 

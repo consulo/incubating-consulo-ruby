@@ -16,19 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.ExternalAnnotator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 6, 2007
  */
-public class RubySlowAnnotator implements ExternalAnnotator {
+public class RubySlowAnnotator /*implements ExternalAnnotator */{
 
     public void annotate(@NotNull final PsiFile file, @NotNull final AnnotationHolder holder) {
         // We hope it`s enough often operation

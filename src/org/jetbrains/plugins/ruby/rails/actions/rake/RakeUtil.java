@@ -26,7 +26,7 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NonNls;
@@ -122,7 +122,7 @@ public class RakeUtil {
      */
 
     @Nullable
-    public static Output getRakeGemAvailableTasksOutput(final ProjectJdk sdk, final Project project,
+    public static Output getRakeGemAvailableTasksOutput(final Sdk sdk, final Project project,
                                                         final String errorTitle,
                                                         final String contentRoot) {
         final Runner.ExecutionMode mode = new Runner.SameThreadMode();
@@ -172,7 +172,7 @@ public class RakeUtil {
      */
     public static void loadRakeTasksTree(final boolean forceRegenerate,
                                          @Nullable final Project project,
-                                         @Nullable final ProjectJdk sdk,
+                                         @Nullable final Sdk sdk,
                                          @NotNull final String moduleName,
                                          @NotNull final BaseRailsFacetConfiguration railsFacetConfiguration) {
         final String title = RBundle.message("module.rails.create.rake.tasks.title");
@@ -238,7 +238,7 @@ public class RakeUtil {
                 new RakeArgumentsProvider(new String[0], new String[]{rakeCmd});
         final Filter[] filters = {new RFileLinksFilter(module, workingDir)};
 
-        final ProjectJdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+        final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
         if (sdk != null) {
             GemsRunner.runGemScriptInConsoleAndRefreshModule(module, sdk, title,
                                                             provider.getActions(),
@@ -264,7 +264,7 @@ public class RakeUtil {
      * @param railsApplicHomeDirPath Rails Application Home Directory
      */
     private static List<RakeCommand> getRakeCommands(@Nullable final Project project,
-                                                     @Nullable final ProjectJdk sdk,
+                                                     @Nullable final Sdk sdk,
                                                      @NotNull final String moduleName,
                                                      @NotNull final String railsApplicHomeDirPath) {
         if (sdk == null) {

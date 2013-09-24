@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +47,7 @@ public class JRubyUtil {
      * @return Jdk selected for given module
      */
     @Nullable
-    public static ProjectJdk getJRubyFacetSdk(@NotNull final Module module){
+    public static Sdk getJRubyFacetSdk(@NotNull final Module module){
         final JRubyFacet facet = JRubyFacet.getInstance(module);
         return facet!=null ? facet.getSdk() : null;
     }

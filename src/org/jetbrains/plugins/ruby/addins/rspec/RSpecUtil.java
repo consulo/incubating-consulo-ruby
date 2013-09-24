@@ -16,11 +16,6 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.Function;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +27,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.Output;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.util.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +63,7 @@ public class RSpecUtil {
 
     private static final String SPEC_TEST_FILE_SUFFIX = "_spec.rb";
 
-    public static boolean checkIfRSpecGemExists(@Nullable final ProjectJdk sdk) {
+    public static boolean checkIfRSpecGemExists(@Nullable final Sdk sdk) {
         return GemUtil.isGemExecutableRubyScriptExists(sdk, RailsConstants.RSPEC_GEM_EXECUTABLE);
     }
 
@@ -92,7 +92,7 @@ public class RSpecUtil {
     }
 
     @Nullable
-    public static String getRSpecGemVersion(@NotNull final ProjectJdk sdk,
+    public static String getRSpecGemVersion(@NotNull final Sdk sdk,
                                             final boolean runWithModalProgress,
                                             @Nullable final Function<Object, Boolean> shouldCancelFun) {
         final Output output;
@@ -137,7 +137,7 @@ public class RSpecUtil {
     }
 
     @Nullable
-    public static String getRSpecGemExecutablePath(@NotNull final ProjectJdk sdk) {
+    public static String getRSpecGemExecutablePath(@NotNull final Sdk sdk) {
         return GemUtil.getGemExecutableRubyScriptPath(sdk, RailsConstants.RSPEC_GEM_EXECUTABLE);
     }
 
@@ -159,7 +159,7 @@ public class RSpecUtil {
  
    /* Requires root privilegies
 
-    public static void installRSpecGem(final Module module, final ProjectJdk sdk) {
+    public static void installRSpecGem(final Module module, final Sdk sdk) {
        final Project project = module.getProject();
 
         try {

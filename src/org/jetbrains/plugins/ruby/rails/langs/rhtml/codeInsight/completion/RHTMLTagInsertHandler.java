@@ -17,9 +17,8 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion;
 
 import com.intellij.codeInsight.completion.BasicInsertHandler;
-import com.intellij.codeInsight.completion.CompletionContext;
-import com.intellij.codeInsight.completion.LookupData;
-import com.intellij.codeInsight.lookup.LookupItem;
+import com.intellij.codeInsight.completion.InsertionContext;
+import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiDocumentManager;
@@ -41,14 +40,10 @@ public class RHTMLTagInsertHandler extends BasicInsertHandler {
         editor.getCaretModel().moveCaretRelatively(-3, 0, false, false, true);
     }
 
-    public void handleInsert(final CompletionContext context,
-                             final int startOffset,
-                             final LookupData data,
-                             final LookupItem item,
-                             final boolean signatureSelected,
-                             final char completionChar) {
-
-        super.handleInsert(context, startOffset, data, item, signatureSelected, completionChar);
-        insertRubyCodeCloseTag(context.editor, completionChar);
-    }
+	@Override
+	public void handleInsert(InsertionContext context, LookupElement item)
+	{
+		super.handleInsert(context, item);
+		insertRubyCodeCloseTag(context.getEditor(), context.getCompletionChar());
+	}
 }

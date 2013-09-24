@@ -16,28 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails;
 
-import com.intellij.execution.RunManagerEx;
-import com.intellij.execution.filters.Filter;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.startup.StartupManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.util.ActionRunner;
-import com.intellij.util.Function;
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -55,16 +38,37 @@ import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-import org.jetbrains.plugins.ruby.ruby.run.*;
+import org.jetbrains.plugins.ruby.ruby.run.Output;
+import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
+import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
+import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
+import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.StringTokenizer;
+import com.intellij.execution.RunManagerEx;
+import com.intellij.execution.filters.Filter;
+import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.startup.StartupManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.util.ActionRunner;
+import com.intellij.util.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -87,7 +91,7 @@ public class RailsUtil {
      * @param onDone  Activity after application will be generated
      */
     public static void generateRailsApp(final Module module,
-                                        @NotNull final ProjectJdk sdk,
+                                        @NotNull final Sdk sdk,
                                         @NotNull final String location,
                                         final boolean overwrite,
                                         @Nullable final String preconfigureForDBName,
@@ -142,7 +146,7 @@ public class RailsUtil {
     }
 
 
-    public static boolean hasRailsSupportInSDK(@Nullable final ProjectJdk sdk) {
+    public static boolean hasRailsSupportInSDK(@Nullable final Sdk sdk) {
         return RubySdkUtil.isKindOfRubySDK(sdk) && GemUtil.isGemExecutableRubyScriptExists(sdk, RailsConstants.RAILS_GEM_EXECUTABLE);
     }
 
@@ -566,12 +570,12 @@ public class RailsUtil {
         return buff.toString();
     }
 
-    public static String getGemExecutablePath(ProjectJdk sdk) {
-        return sdk.getBinPath() + File.separator + RailsConstants.GEM_EXECUTABLE;
+    public static String getGemExecutablePath(Sdk sdk) {
+        return RubySdkUtil.getBinPath(sdk) + File.separator + RailsConstants.GEM_EXECUTABLE;
     }
 
     @Nullable
-    public static String getRailsVersion(@NotNull final ProjectJdk sdk,
+    public static String getRailsVersion(@NotNull final Sdk sdk,
                                          final boolean runWithModalProgress,
                                          @Nullable final Function<Object, Boolean> shouldCancelFun) {
         final Output output;

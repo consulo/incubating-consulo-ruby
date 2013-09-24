@@ -131,7 +131,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.server.dialog.environment"/>
         </properties>
       </component>
-      <component id="6957b" class="com.intellij.execution.junit2.configuration.EnvironmentVariablesComponent" binding="myEnvVariablesComponent1">
+      <component id="6957b" class="com.intellij.execution.configuration.EnvironmentVariablesComponent" binding="myEnvVariablesComponent1">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

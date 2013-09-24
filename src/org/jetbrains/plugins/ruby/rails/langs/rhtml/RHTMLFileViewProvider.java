@@ -16,22 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import com.intellij.lang.Language;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.StdLanguages;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.htmlRoot.HTMLRootInRHTMLFileImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rubyRoot.RHTMLRubyFileImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.intellij.lang.Language;
+import com.intellij.lang.LanguageParserDefinitions;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,59 +40,72 @@ import java.util.Set;
  * @author: Roman Chernyatchik
  * @date: 02.04.2007
  */
-public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider {
-    private Set<Language> myViews = null;
+public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
+{
+	private Set<Language> myViews = null;
 
-    public RHTMLFileViewProvider(final PsiManager manager,
-                                     final VirtualFile virtualFile,
-                                     final boolean physical) {
-        super(manager, virtualFile, physical);
-    }
+	public RHTMLFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	{
+		super(manager, virtualFile, physical);
+	}
 
-    @NotNull
-    public Language getBaseLanguage() {
-        return RHTMLLanguage.RHTML;
-    }
+	@NotNull
+	public Language getBaseLanguage()
+	{
+		return RHTMLLanguage.INSTANCE;
+	}
 
-    @NotNull
-    public Language getTemplateDataLanguage() {
-        return StdLanguages.HTML;
-    }
+	@NotNull
+	public Language getTemplateDataLanguage()
+	{
+		return HTMLLanguage.INSTANCE;
+	}
 
-    @NotNull
-    public Set<Language> getRelevantLanguages() {
-        if (myViews != null) {
-            return myViews;
-        }
-        Set<Language> views = new HashSet<Language>(4);
-        views.add(RHTMLLanguage.RHTML);
-        views.add(RubyLanguage.RUBY);
-        views.add(StdLanguages.HTML);
+	@NotNull
+	@Override
+	public Set<Language> getLanguages()
+	{
+		if(myViews != null)
+		{
+			return myViews;
+		}
+		Set<Language> views = new HashSet<Language>(4);
+		views.add(RHTMLLanguage.INSTANCE);
+		views.add(RubyLanguage.RUBY);
+		views.add(HTMLLanguage.INSTANCE);
 
-        return myViews = views;
-    }
+		return myViews = views;
+	}
 
-    protected FileViewProvider cloneInner(final VirtualFile copy) {
-        return new RHTMLFileViewProvider(getManager(), copy, false);
-    }
+	protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(final VirtualFile copy)
+	{
+		return new RHTMLFileViewProvider(getManager(), copy, false);
+	}
 
-    protected PsiFile createFile(final Language lang) {
-        if (lang == RubyLanguage.RUBY) {
-            // at current moment original file is used
-            // only by RPsiBase.getVirtualFile(). This method can't return null
-            final RHTMLRubyFileImpl ruby = new RHTMLRubyFileImpl(this);
-            ruby.setOriginalFile(getPsi(RHTMLLanguage.RHTML));
-            return ruby;
-        } else if (lang == StdLanguages.HTML) {
-            //If original file ins't null CssPropertyDescriptor.buildContextPath() leds to NPE
-            // in CssShorthandExpandProcessor.processReferences()
-            //htmlInRHTMLFile.setOriginalFile(getPsi(RHTMLLanguage.RHTML));
-            return new HTMLRootInRHTMLFileImpl(this);
-        } else if (lang == RHTMLLanguage.RHTML) {
-            final ParserDefinition def = lang.getParserDefinition();
-            assert def != null; //not null for RHTML Language
-            return def.createFile(this);
-        }
-        return null;
-    }
+
+	protected PsiFile createFile(final Language lang)
+	{
+		if(lang == RubyLanguage.RUBY)
+		{
+			// at current moment original file is used
+			// only by RPsiBase.getVirtualFile(). This method can't return null
+			final RHTMLRubyFileImpl ruby = new RHTMLRubyFileImpl(this);
+			ruby.setOriginalFile(getPsi(RHTMLLanguage.INSTANCE));
+			return ruby;
+		}
+		else if(lang == StdLanguages.HTML)
+		{
+			//If original file ins't null CssPropertyDescriptor.buildContextPath() leds to NPE
+			// in CssShorthandExpandProcessor.processReferences()
+			//htmlInRHTMLFile.setOriginalFile(getPsi(RHTMLLanguage.RHTML));
+			return new HTMLRootInRHTMLFileImpl(this);
+		}
+		else if(lang == RHTMLLanguage.INSTANCE)
+		{
+			final ParserDefinition def = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+			assert def != null; //not null for RHTML Language
+			return def.createFile(this);
+		}
+		return null;
+	}
 }

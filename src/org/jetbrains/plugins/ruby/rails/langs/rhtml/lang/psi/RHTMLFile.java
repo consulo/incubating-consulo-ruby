@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
-import com.intellij.psi.xml.XmlFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -27,7 +26,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public interface RHTMLFile extends XmlFile, RFile {
+public interface RHTMLFile extends RFile {
     @NotNull
     public RHTMLFileViewProvider getViewProvider();
 

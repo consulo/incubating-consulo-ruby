@@ -144,7 +144,7 @@ public class RubyDocManager implements ProjectComponent {
         }
 
 // Check the ability of project jdk to get ri help
-        return RIUtil.checkIfRiExists(myPanel.getProjectJdk());
+        return RIUtil.checkIfRiExists(myPanel.getSdk());
     }
 
     public void addRModule(@NotNull final Module module){

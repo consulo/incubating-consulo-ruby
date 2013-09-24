@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.ri;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Ref;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -80,7 +80,7 @@ class RIUtil {
      * @return Search result
      */
     public static String lookup(@NotNull final Project project,
-                                @Nullable final ProjectJdk jdk,
+                                @Nullable final Sdk jdk,
                                 @NotNull final String item,
                                 final boolean doUseDefaults,
                                 @NotNull final String[] docDirectories,
@@ -250,14 +250,14 @@ class RIUtil {
      * @param arguments     command line arguments @return Output of ri command
      * @return Output
      */
-    public static Output getRiOutput(final ProjectJdk jdk, final Project project,
+    public static Output getRiOutput(final Sdk jdk, final Project project,
                                      final String progressTitle,
                                      final String... arguments) {
         final Runner.ModalProgressMode mode = new Runner.ModalProgressMode(progressTitle);
         return GemsRunner.runGemsExecutableScript(jdk, project, RI, null, mode, false, null, arguments);
     }
 
-    public static boolean checkIfRiExists(ProjectJdk jdk) {
+    public static boolean checkIfRiExists(Sdk jdk) {
         //It seems that RI is located in gems bin directory
         return RubySdkUtil.isKindOfRubySDK(jdk) && GemUtil.isGemExecutableRubyScriptExists(jdk, RI);
     }

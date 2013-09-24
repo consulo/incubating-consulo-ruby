@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.yaml;
 
-import com.intellij.lexer.LexerBase;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.text.CharArrayUtil;
+import java.util.Iterator;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jvaymlb.DefaultYAMLFactory;
 import org.jetbrains.jvaymlb.ScannerImpl;
 import org.jetbrains.jvaymlb.tokens.ScannerExceptionToken;
 import org.jetbrains.jvaymlb.tokens.Token;
 import org.jruby.util.ByteList;
-
-import java.util.Iterator;
+import com.intellij.lexer.LexerBase;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -117,10 +116,11 @@ public class YAMLLexer extends LexerBase {
         }
     }
 
-    @Deprecated
-    public char[] getBuffer() {
-        return CharArrayUtil.fromSequence(myBuffer);
-    }
+	@Override
+	public CharSequence getBufferSequence()
+	{
+		return myBuffer;
+	}
 
     public int getBufferEnd() {
         return myEnd;

@@ -16,14 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.ide.wizard.AbstractWizard;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -161,12 +163,12 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         super.doCancelAction();
     }
 
-    private void updateButtons() {
+   /* private void updateButtons() {
         final boolean isLastStep = isLastStep(getCurrentStep());
         getNextButton().setEnabled(!isLastStep);
         getFinishButton().setEnabled(isLastStep);
         getRootPane().setDefaultButton(isLastStep ? getFinishButton() : getNextButton());
-    }
+    }      */
 
     private boolean isLastStep(int step) {
         return getNextStep(step) == step;

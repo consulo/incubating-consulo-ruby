@@ -1,6 +1,9 @@
 package org.jetbrains.plugins.ruby.rails.langs.yaml;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
@@ -11,8 +14,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author: oleg
@@ -21,12 +22,12 @@ import org.jetbrains.annotations.Nullable;
 public class YAMLParserDefinition implements ParserDefinition, YAMLElementTypes {
 
   @NotNull
-  public Lexer createLexer(final Project project) {
+  public Lexer createLexer(final Project project, LanguageVersion languageVersion) {
     return new YAMLLexer();
   }
 
   @Nullable
-  public PsiParser createParser(final Project project) {
+  public PsiParser createParser(final Project project, LanguageVersion languageVersion) {
     return new YAMLMockParser();
   }
 
@@ -35,17 +36,17 @@ public class YAMLParserDefinition implements ParserDefinition, YAMLElementTypes 
   }
 
   @NotNull
-  public TokenSet getWhitespaceTokens() {
+  public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
     return TokenSet.EMPTY;
   }
 
   @NotNull
-  public TokenSet getCommentTokens() {
+  public TokenSet getCommentTokens(LanguageVersion languageVersion) {
     return TokenSet.create(YAMLTokenTypes.COMMENT_TYPE);
   }
 
   @NotNull
-  public TokenSet getStringLiteralElements() {
+  public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
     return TokenSet.EMPTY;
   }
 

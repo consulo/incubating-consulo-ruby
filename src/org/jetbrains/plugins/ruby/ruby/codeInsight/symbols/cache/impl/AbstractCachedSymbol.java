@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.reference.SoftReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +44,7 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
     protected final Object LOCK = new Object();
 
     protected Module myModule;
-    protected ProjectJdk mySdk;
+    protected Sdk mySdk;
     protected Project myProject;
 
     protected RubyFilesCache[] myCaches;
@@ -54,7 +54,7 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 
     public AbstractCachedSymbol(@NotNull final Project project,
                             @Nullable final Module module,
-                            @Nullable final ProjectJdk sdk) {
+                            @Nullable final Sdk sdk) {
         myProject = project;
         myModule = module;
         mySdk = sdk;

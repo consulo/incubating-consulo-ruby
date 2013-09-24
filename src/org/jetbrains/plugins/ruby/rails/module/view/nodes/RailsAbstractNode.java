@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.treeStructure.SimpleNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.project.Project;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,7 +45,7 @@ public abstract class RailsAbstractNode extends SimpleNode {
         myId = id;
         myEqObjects = new Object[]{id};
         myPresentation = presentation;
-        setIcons(myPresentation.getIcon(false), myPresentation.getIcon(true));
+        setIcon(myPresentation.getIcon(false));
     }
 
     public Object[] getEqualityObjects() {
@@ -64,9 +64,9 @@ public abstract class RailsAbstractNode extends SimpleNode {
 
     protected void doUpdate() {
         myPresentation = updatePresentation(myPresentation);
-        setIcons(myPresentation.getIcon(false), myPresentation.getIcon(true));
+        setIcon(myPresentation.getIcon(false));
         setPlainText(myPresentation.getPresentableText());
-        setIcons(getClosedIcon(), getOpenIcon());
+		setIcon(getIcon());
     }
 
     /**
@@ -87,7 +87,5 @@ public abstract class RailsAbstractNode extends SimpleNode {
         return CHILDREN_EMPTY;
     }
 
-    public ItemPresentation getPresentation() {
-        return myPresentation;
-    }
+
 }

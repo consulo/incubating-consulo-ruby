@@ -46,7 +46,6 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
 public class HTMLRootInRHTMLFileImpl extends XmlFileImpl implements HTMLRootInRHTMLFile {
     public HTMLRootInRHTMLFileImpl(final FileViewProvider provider) {
         super(provider,
-                RHTMLElementTypeEx.HTML_TEMPLATE_IN_RHTML_ROOT,
                 RHTMLElementTypeEx.HTML_TEMPLATE_IN_RHTML_ROOT);
     }
 

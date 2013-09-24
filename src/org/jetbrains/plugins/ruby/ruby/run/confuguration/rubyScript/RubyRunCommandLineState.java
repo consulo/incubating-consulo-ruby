@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.RunnerSettings;
-import com.intellij.execution.filters.TextConsoleBuilder;
-import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.filters.TextConsoleBuilder;
+import com.intellij.execution.filters.TextConsoleBuilderFactory;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,9 +40,8 @@ public class RubyRunCommandLineState extends ColouredCommandLineState {
     final protected RubyRunConfiguration myConfig;
 
     public RubyRunCommandLineState(final @NotNull RubyRunConfiguration config,
-                                   final @NotNull RunnerSettings runnerSettings,
-                                   final @NotNull ConfigurationPerRunnerSettings configurationSettings) {
-        super(runnerSettings, configurationSettings);
+			ExecutionEnvironment executionEnvironment) {
+        super(executionEnvironment);
 
         myConfig = config;
 

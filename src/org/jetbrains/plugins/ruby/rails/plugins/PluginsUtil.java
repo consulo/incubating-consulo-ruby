@@ -21,7 +21,7 @@ import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ActionRunner;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -61,7 +61,7 @@ public class PluginsUtil {
      * @param descFactory     User Factory for creating non default run content descriptors
      * @param nextAction      This action will be invoked after process has terminated or finished
      */
-    public static void installPluginAndUpdateModuleContent(final ProjectJdk sdk, final Module module,
+    public static void installPluginAndUpdateModuleContent(final Sdk sdk, final Module module,
                                                            final String rSpecArgs,
                                                            @Nullable final RunContentDescriptorFactory descFactory,
                                                            @Nullable final ActionRunner.InterruptibleRunnable nextAction) {

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -212,20 +212,20 @@ public class RFileUtil {
 
 
     @Nullable
-    public static ProjectJdk getSdk(@NotNull final Project project, @NotNull VirtualFile file) {
-        ProjectJdk mySdk = getSdkByModule(project, file);
+    public static Sdk getSdk(@NotNull final Project project, @NotNull VirtualFile file) {
+        Sdk mySdk = getSdkByModule(project, file);
         if (mySdk == null) {
             mySdk = tryToFindSdk(project, file);
         }
         return mySdk;
     }
 
-    private static ProjectJdk getSdkByModule(@NotNull final Project project, @NotNull VirtualFile file) {
+    private static Sdk getSdkByModule(@NotNull final Project project, @NotNull VirtualFile file) {
         final Module module = getModule(project, file);
         return module != null ? RModuleUtil.getModuleOrJRubyFacetSdk(module) : null;
     }
 
-    private static ProjectJdk tryToFindSdk(@NotNull final Project project, @NotNull final VirtualFile file) {
+    private static Sdk tryToFindSdk(@NotNull final Project project, @NotNull final VirtualFile file) {
 // in tests cachesManager isn`t loaded
         final RubySdkCachesManager cachesManager = RubySdkCachesManager.getInstance(project);
         if (cachesManager != null) {

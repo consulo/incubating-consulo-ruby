@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -377,7 +377,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile {
     }
 
     @Nullable
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         final VirtualFile file = getVirtualFile();
         return file!=null ? RFileUtil.getSdk(getProject(), file) : null;
     }

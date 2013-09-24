@@ -21,7 +21,7 @@ import com.intellij.execution.RunManagerEx;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -87,7 +87,7 @@ public class RubyRunConfigurationUtil {
     public static void inspectSDK(final AbstractRubyRunConfiguration conf,
                                   final boolean isExecution) throws Exception {
         // SDK inspection
-        final ProjectJdk sdk = conf.getSdk();
+        final Sdk sdk = conf.getSdk();
         if (sdk == null) {
             RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("sdk.no.specified"), isExecution);
         }
@@ -118,7 +118,7 @@ public class RubyRunConfigurationUtil {
 //    public static void inspectAlternativeSdk(@NotNull final AbstractRubyRunConfiguration configuration,
 //                                             final boolean isExecution) throws Exception {
 //        if (configuration.shouldUseAlternativeSdk()) {
-//            final ProjectJdk sdk = configuration.getAlternativeSdk();
+//            final Sdk sdk = configuration.getAlternativeSdk();
 //            if (!RubySdkType.isKindOfRubySDK(sdk)) {
 //                throwExecutionOrRuntimeException(RBundle.message("run.configuration.no.alternative.skd.specified"), isExecution);
 //            }
@@ -131,7 +131,7 @@ public class RubyRunConfigurationUtil {
      * @param rubyArgs New ruby args
      */
     public static void setupRubyArgs(final AbstractRubyRunConfiguration conf, final String rubyArgs) {
-        final ProjectJdk sdk = conf.getSdk();
+        final Sdk sdk = conf.getSdk();
         if ((sdk == null || !JRubySdkType.isJRubySDK(sdk))
             && TextUtil.isEmptyOrWhitespaces(conf.getRubyArgs())) {
             conf.setRubyArgs(rubyArgs);

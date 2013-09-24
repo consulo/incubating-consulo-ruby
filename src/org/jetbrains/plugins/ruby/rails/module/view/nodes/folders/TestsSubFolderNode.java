@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ui.configuration.IconSet;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import javax.swing.*;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,8 +36,8 @@ import java.util.List;
  * @date: 17.10.2006
  */
 public class TestsSubFolderNode extends FolderNode {
-    protected static final Icon TESTS_OPENED = IconSet.getSourceFolderIcon(true, true);
-    protected static final Icon TESTS_CLOSED = IconSet.getSourceFolderIcon(true, false);
+    protected static final Icon TESTS_OPENED =null/* IconSet.getSourceFolderIcon(true, true)*/;
+    protected static final Icon TESTS_CLOSED = null/*IconSet.getSourceFolderIcon(true, false)/*/;
 
     public TestsSubFolderNode(final Module module, final VirtualFile dir,
                               final SimpleNode parent) {

@@ -16,33 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.module;
 
-import com.intellij.ide.util.newProjectWizard.SupportForFrameworksStep;
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.WizardContext;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.module.ModuleTypeManager;
-import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.ui.RubySdkSelectStep;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.ui.SelectTestFrameworkStep;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.ui.TestUnitSourceRootStep;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec.RubyRSpecInstallComponentsStep;
-
-import javax.swing.*;
-import java.util.ArrayList;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.module.ModuleType;
 
 public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements ApplicationComponent {
     @NonNls private static final String RUBY_MODULE = "RUBY_MODULE";
 
     public RubyModuleType() {
-        super(RUBY_MODULE);
+        //super(RUBY_MODULE);
     }
 
     @NotNull
@@ -57,13 +47,13 @@ public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements App
     }
 
     public void initComponent() {
-        ModuleTypeManager.getInstance().registerModuleType(this);
+       // ModuleTypeManager.getInstance().registerModuleType(this);
     }
 
     public void disposeComponent() {
     }
 
-    public ModuleWizardStep[] createWizardSteps(final WizardContext ctx, final RubyModuleBuilder builder,
+   /* public ModuleWizardStep[] createWizardSteps(final WizardContext ctx, final RubyModuleBuilder builder,
                                                 final ModulesProvider provider) {
         ArrayList<ModuleWizardStep> steps = new ArrayList<ModuleWizardStep>();
 
@@ -75,7 +65,7 @@ public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements App
         steps.add(new TestUnitSourceRootStep(builder, RubyIcons.RUBY_ADD_MODULE, null));
 
         return steps.toArray(new ModuleWizardStep[steps.size()]);
-    }
+    }     */
 
 
     public RubyModuleBuilder createModuleBuilder() {

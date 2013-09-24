@@ -18,21 +18,18 @@ package org.jetbrains.plugins.ruby.rails.run;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
-import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
-import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
-import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.execution.filters.Filter;
+import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
+import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
+import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
+import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.filters.Filter;
+import com.intellij.execution.process.ProcessListener;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -76,7 +73,7 @@ public class RailsScriptRunner {
      * @param provider         Arguments provider
      * @param descFactory      Content descriptor provider
      */
-    public static void runRailsScriptInCosole(@Nullable final ProjectJdk sdk, @NotNull final Module uncommitedModule,
+    public static void runRailsScriptInCosole(@Nullable final Sdk sdk, @NotNull final Module uncommitedModule,
                                                @Nullable final ProcessListener processListener,
                                                @Nullable final Filter[] consoleFilters,
                                                @Nullable final AnAction[] userActions,

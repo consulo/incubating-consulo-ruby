@@ -16,11 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.impl.source.jsp.jspJava.OuterLanguageElement;
-import com.intellij.psi.impl.source.tree.CompositeElement;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -30,9 +28,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompou
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.templateLanguages.OuterLanguageElement;
 
 /**
  * Created by IntelliJ IDEA.

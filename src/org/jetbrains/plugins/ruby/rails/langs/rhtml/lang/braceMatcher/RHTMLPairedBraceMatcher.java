@@ -16,12 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.braceMatcher;
 
-import com.intellij.lang.BracePair;
-import com.intellij.lang.PairedBraceMatcher;
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import com.intellij.lang.BracePair;
+import com.intellij.lang.PairedBraceMatcher;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,14 +33,14 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 public class RHTMLPairedBraceMatcher implements PairedBraceMatcher {
     
     private final static BracePair[] BRACE_PAIRS = new BracePair[] {
-            new BracePair('<', RHTMLTokenType.RHTML_EXPRESSION_START,
-                          '>', RHTMLTokenType.RHTML_EXPRESSION_END, false),
+            new BracePair(RHTMLTokenType.RHTML_EXPRESSION_START,
+                         RHTMLTokenType.RHTML_EXPRESSION_END, false),
 
-            new BracePair('<', RHTMLTokenType.RHTML_SCRIPTLET_START,
-                          '>', RHTMLTokenType.RHTML_SCRIPTLET_END, false),
+            new BracePair(RHTMLTokenType.RHTML_SCRIPTLET_START,
+                          RHTMLTokenType.RHTML_SCRIPTLET_END, false),
 
-            new BracePair('<', RHTMLTokenType.RHTML_COMMENT_START,
-                          '>', RHTMLTokenType.RHTML_COMMENT_END, false)
+            new BracePair( RHTMLTokenType.RHTML_COMMENT_START,
+                          RHTMLTokenType.RHTML_COMMENT_END, false)
     };
 
     public BracePair[] getPairs() {
@@ -50,4 +51,10 @@ public class RHTMLPairedBraceMatcher implements PairedBraceMatcher {
     public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1) {
         return true;
     }
+
+	@Override
+	public int getCodeConstructStart(PsiFile psiFile, int i)
+	{
+		return 0;
+	}
 }

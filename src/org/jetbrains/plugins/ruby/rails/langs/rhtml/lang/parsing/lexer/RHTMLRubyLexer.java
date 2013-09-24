@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.lexer.LexerPosition;
-import com.intellij.lexer.LexerState;
-import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.text.CharArrayCharSequence;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
+import com.intellij.lexer.Lexer;
+import com.intellij.lexer.LexerPosition;
+import com.intellij.lexer.MergingLexerAdapter;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.util.text.CharArrayCharSequence;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +49,7 @@ public class RHTMLRubyLexer  extends MergingLexerAdapter {
     }
 }
 
-class _RHTMLRubyLexer implements Lexer {
+class _RHTMLRubyLexer extends Lexer {
     private Lexer myRHTMLLexer = new _RHTMLLexer();
     private RubyLexer myRubyLexer = new RubyLexer();
 
@@ -170,8 +169,8 @@ class _RHTMLRubyLexer implements Lexer {
             return myRhtmlPosition;
         }
 
-        public LexerState getState() {
-            return null;
+        public int getState() {
+            return 0;
         }
     }
 
@@ -194,10 +193,7 @@ class _RHTMLRubyLexer implements Lexer {
         }
     }
 
-    @SuppressWarnings({"deprecation"})
-    public char[] getBuffer() {
-        return myRHTMLLexer.getBuffer();
-    }
+
 
     public int getBufferEnd() {
         return myRHTMLLexer.getBufferEnd();

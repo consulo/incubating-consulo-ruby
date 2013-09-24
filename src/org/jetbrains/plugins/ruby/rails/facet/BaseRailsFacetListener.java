@@ -25,7 +25,6 @@ import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsComponents;
-import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectViewPane;
 import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 

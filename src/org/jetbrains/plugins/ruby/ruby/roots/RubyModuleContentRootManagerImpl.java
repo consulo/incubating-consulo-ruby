@@ -16,20 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.roots;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import org.jdom.Element;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
-import com.intellij.openapi.roots.impl.storage.ClasspathStorage;
 import com.intellij.openapi.util.Disposer;
-import org.jdom.Element;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
-
-import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,7 +44,6 @@ import java.util.*;
   name = "RModuleContentRootManager",
   storages = {
     @Storage(
-      id = ClasspathStorage.DEFAULT_STORAGE,
       file = "$MODULE_FILE$"
     )
   }

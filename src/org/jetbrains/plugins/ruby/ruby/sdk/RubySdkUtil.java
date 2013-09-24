@@ -16,14 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import com.intellij.openapi.projectRoots.*;
-import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import junit.framework.Assert;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,10 +27,17 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkModificator;
+import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.projectRoots.SdkTypeId;
+import com.intellij.openapi.projectRoots.impl.SdkImpl;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import junit.framework.Assert;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,21 +65,21 @@ public class RubySdkUtil {
      * @param sdk sdk to inspect
      * @return true, if sdk is Ruby type
      */
-    public static boolean isKindOfRubySDK(@Nullable final ProjectJdk sdk) {
+    public static boolean isKindOfRubySDK(@Nullable final Sdk sdk) {
         return sdk != null && sdk.getSdkType() instanceof RubySdkType;
     }
 
-    public static boolean isSDKValid(@Nullable final ProjectJdk sdk) {
+    public static boolean isSDKValid(@Nullable final Sdk sdk) {
         return isKindOfRubySDK(sdk) && isSDKHomeExist(sdk);
     }
 
-    public static boolean isSDKHomeExist(@Nullable final ProjectJdk sdk) {
+    public static boolean isSDKHomeExist(@Nullable final Sdk sdk) {
         if (sdk == null) {
             return false;
         }
         final VirtualFile sdkHomeDir = sdk.getHomeDirectory();
         return sdkHomeDir != null
-                && sdk.getSdkType().isValidSdkHome(sdkHomeDir.getPath());
+                && ((SdkType)sdk.getSdkType()).isValidSdkHome(sdkHomeDir.getPath());
     }
 
     /**
@@ -88,7 +91,7 @@ public class RubySdkUtil {
         return RubySdkType.getInstance().getGemsBinDirectory(sdk);
     }
 
-    private static String[] getSdkContentRootUrls(@NotNull final ProjectJdk sdk) {
+    private static String[] getSdkContentRootUrls(@NotNull final Sdk sdk) {
         return sdk.getRootProvider().getUrls(OrderRootType.CLASSES);
     }
 
@@ -98,7 +101,7 @@ public class RubySdkUtil {
      * @param sdk Sdk to get roots for
      * @return array of roots
      */
-    public static String[] getSdkRootsWithAllGems(@NotNull final ProjectJdk sdk) {
+    public static String[] getSdkRootsWithAllGems(@NotNull final Sdk sdk) {
         final ArrayList<String> urls = new ArrayList<String>();
         for (String rootUrl : sdk.getRootProvider().getUrls(OrderRootType.CLASSES)) {
             if (isGemsRootUrl(rootUrl)) {
@@ -115,7 +118,7 @@ public class RubySdkUtil {
     }
 
     @Nullable
-    public static String getRubyStubsDirUrl(@NotNull final ProjectJdk sdk) {
+    public static String getRubyStubsDirUrl(@NotNull final Sdk sdk) {
         for (String url : getSdkContentRootUrls(sdk)) {
             if (isRubystubsDirUrl(url)) {
                 return url;
@@ -144,24 +147,24 @@ public class RubySdkUtil {
      *
      * You can set forced sdk home path with system property "idea.ruby.testingFramework.mockSDK";
      */
-    public static ProjectJdk getMockSdk(final String versionName) {
+    public static Sdk getMockSdk(final String versionName) {
         return createMockSdk(RubySdkType.getInstance(), versionName);
     }
 
-    public static ProjectJdk createMockSdk(final SdkType sdkType,
+    public static Sdk createMockSdk(final SdkType sdkType,
                                            final String versionName) {
         return createMockSdk(sdkType, versionName, true);
     }
 
-    public static ProjectJdk createMockSdkWithoutStubs(final SdkType sdkType,
+    public static Sdk createMockSdkWithoutStubs(final SdkType sdkType,
                                                        final String versionName) {
         return createMockSdk(sdkType, versionName, false);
     }
 
-    public static ProjectJdk createMockSdk(final SdkType sdkType,
+    public static Sdk createMockSdk(final SdkType sdkType,
                                            final String versionName,
                                            final boolean addStubs) {
-        final ProjectJdk sdk = new ProjectJdkImpl(versionName, sdkType);
+        final Sdk sdk = new SdkImpl(versionName, sdkType);
         final SdkModificator sdkModificator = sdk.getSdkModificator();
         final String sdkHome = System.getProperty("idea.ruby.mock.sdk");
         if (sdkHome != null){
@@ -182,8 +185,8 @@ public class RubySdkUtil {
 
     static void addToSourceAndClasses(@NotNull final SdkModificator sdkModificator, @Nullable final VirtualFile vFile) {
         if (vFile != null) {
-            sdkModificator.addRoot(vFile, ProjectRootType.CLASS);
-            sdkModificator.addRoot(vFile, ProjectRootType.SOURCE);
+            sdkModificator.addRoot(vFile, OrderRootType.CLASSES);
+            sdkModificator.addRoot(vFile, OrderRootType.CLASSES);
         }
     }
 
@@ -258,7 +261,7 @@ public class RubySdkUtil {
      * @return String - presentable text
      */
     @Nullable
-    public static String getPresentableLocation(@Nullable final ProjectJdk sdk,
+    public static String getPresentableLocation(@Nullable final Sdk sdk,
                                                 @NotNull final String url) {
         if (sdk != null && RubySdkUtil.isKindOfRubySDK(sdk)) {
             final List<String> gemsRoots = RubySdkType.getGemsRootUrls(sdk);
@@ -275,4 +278,24 @@ public class RubySdkUtil {
         }
         return null;
     }
+
+	public static String getVMExecutablePath(Sdk sdk)
+	{
+		SdkTypeId sdkType = sdk.getSdkType();
+		if(sdkType instanceof RubySdkType)
+		{
+			return ((RubySdkType) sdkType).getVMExecutablePath(sdk);
+		}
+		return null;
+	}
+
+	public static String getBinPath(Sdk sdk)
+	{
+		SdkTypeId sdkType = sdk.getSdkType();
+		if(sdkType instanceof RubySdkType)
+		{
+			return ((RubySdkType) sdkType).getBinPath(sdk);
+		}
+		return null;
+	}
 }

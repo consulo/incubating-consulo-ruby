@@ -16,20 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import com.intellij.execution.CantRunException;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessTerminatedListener;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.roots.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.ruby.run.ColouredProcessHandler;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
+import com.intellij.execution.CantRunException;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.CommandLineState;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
+import com.intellij.execution.process.OSProcessHandler;
+import com.intellij.execution.process.ProcessTerminatedListener;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,13 +40,13 @@ import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
  * @date: Nov 7, 2007
  */
 public abstract class ColouredCommandLineState extends CommandLineState {
-    protected ColouredCommandLineState(final RunnerSettings runnerSettings,
-                                       final ConfigurationPerRunnerSettings configurationSettings) {
-        super(runnerSettings, configurationSettings);
-    }
+	protected ColouredCommandLineState(ExecutionEnvironment environment)
+	{
+		super(environment);
+	}
 
-    protected OSProcessHandler startProcess() throws ExecutionException {
-        final GeneralCommandLine cmdLine = createCommandLine();
+	protected OSProcessHandler startProcess() throws ExecutionException {
+        final GeneralCommandLine cmdLine = new GeneralCommandLine();
         final OSProcessHandler processHandler =
                 createOSProcessHandler(cmdLine.createProcess(),
                                        cmdLine.getCommandLineString());
@@ -62,7 +64,7 @@ public abstract class ColouredCommandLineState extends CommandLineState {
     protected GeneralCommandLine createGeneralDefaultCmdLine(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException {
         checkConfiguration(config);
 
-        final ProjectJdk sdk = config.getSdk();
+        final Sdk sdk = config.getSdk();
         assert (sdk != null);
 
 
@@ -80,7 +82,7 @@ public abstract class ColouredCommandLineState extends CommandLineState {
         if (module == null || !JRubySdkType.isJRubySDK(sdk)) {
             classPath = null;
         } else {
-            final ProjectRootsTraversing.RootTraversePolicy jrubyPolicy = //ProjectRootsTraversing.FULL_CLASS_RECURSIVE_WO_JDK;
+         /*   final ProjectRootsTraversing.RootTraversePolicy jrubyPolicy = //ProjectRootsTraversing.FULL_CLASS_RECURSIVE_WO_JDK;
                     new ProjectRootsTraversing.RootTraversePolicy(
                             ProjectRootsTraversing.RootTraversePolicy.ALL_OUTPUTS,
                             null,
@@ -98,10 +100,11 @@ public abstract class ColouredCommandLineState extends CommandLineState {
                             },
                             ProjectRootsTraversing.RootTraversePolicy.RECURSIVE);
             classPath = ProjectRootsTraversing.collectRoots(module, jrubyPolicy).getPathsString();
-
+               */
+			classPath = null;
         }
 
-        return Runner.createAndSetupCmdLine(null, workingDir, classPath, config.getEnvs(), config.isPassParentEnvs(), sdk.getVMExecutablePath());
+        return Runner.createAndSetupCmdLine(null, workingDir, classPath, config.getEnvs(), config.isPassParentEnvs(), RubySdkUtil.getVMExecutablePath(sdk));
     }
 
     protected void checkConfiguration(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException {
@@ -113,8 +116,8 @@ public abstract class ColouredCommandLineState extends CommandLineState {
     }
 
     protected void attachCompilerForJRuby(final AbstractRubyRunConfiguration config) {
-        if (JRubySdkType.isJRubySDK(config.getSdk())) {
+      /*  if (JRubySdkType.isJRubySDK(config.getSdk())) {
             setModuleToCompile(config.getModule());
-        }
+        }     */
     }
 }

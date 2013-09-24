@@ -22,7 +22,7 @@ import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootEvent;
 import com.intellij.openapi.roots.ModuleRootListener;
@@ -75,7 +75,7 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
          * only for loading of existing module. Doesn't work for new Ruby module.
          * (sdk is unknown)
          */
-         final ProjectJdk sdk;
+         final Sdk sdk;
          if (RubyUtil.isRubyModuleType(module)) {
              //ruby module
              sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
@@ -127,9 +127,9 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
             }
 
             public void rootsChanged(final ModuleRootEvent event) {
-                final ProjectJdk newSDK = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+                final Sdk newSDK = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 final BaseRailsFacetConfigurationLowLevel conf = (BaseRailsFacetConfigurationLowLevel) getConfiguration();
-                final ProjectJdk oldSDK = conf.getSdk();
+                final Sdk oldSDK = conf.getSdk();
                 if (newSDK != oldSDK) {
                     conf.setSdk(newSDK);
 

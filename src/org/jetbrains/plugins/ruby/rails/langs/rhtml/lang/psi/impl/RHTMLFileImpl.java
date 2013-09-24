@@ -16,22 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.impl.source.PsiFileImpl;
-import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
-import com.intellij.psi.impl.source.tree.ChildRole;
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.search.PsiElementProcessor;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.xml.XmlDocument;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
@@ -62,8 +48,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.List;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.impl.source.PsiFileImpl;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,11 +68,6 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
 
     public RHTMLFileImpl(FileViewProvider viewProvider) {
         super(RHTMLElementTypeEx.RHTML_FILE, RHTMLElementTypeEx.RHTML_FILE, viewProvider);
-    }
-
-    public Lexer createLexer() {
-        // lexer is defined in RHTMLParserDefinition
-        return null;
     }
 
     public String toString() {
@@ -101,8 +89,6 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
             ((RHTMLElementTypeVisitor)visitor).visitRHTMLFile(this);
         } else if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRFile(this);
-        } else {
-            visitor.visitXmlFile(this);
         }
     }
 
@@ -110,22 +96,6 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
     public FileType getFileType() {
         return RHTMLFileType.RHTML;
     }
-
-    public XmlDocument getDocument() {
-        CompositeElement treeElement = calcTreeElement();
-        ChameleonTransforming.transformChildren(treeElement);
-        final PsiElement asPsiElement = treeElement.findChildByRoleAsPsiElement(ChildRole.HTML_DOCUMENT);
-        if (asPsiElement instanceof  XmlDocument) {
-            return (XmlDocument)asPsiElement; 
-        }
-        return null;
-    }
-
-    public boolean processElements(PsiElementProcessor processor, PsiElement place) {
-        final XmlDocument document = getDocument();
-        return document == null || document.processElements(processor, place);
-    }
-
 
 ///////////////////// RFile methods ///////////////////////////////
 

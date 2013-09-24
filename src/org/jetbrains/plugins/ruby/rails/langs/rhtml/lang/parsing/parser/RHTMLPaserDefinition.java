@@ -16,10 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer._RHTMLLexer;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementTypeEx;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.RHTMLFileImpl;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageParserDefinitions;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -27,12 +35,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer._RHTMLLexer;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementTypeEx;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.RHTMLFileImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,17 +49,14 @@ public class RHTMLPaserDefinition implements ParserDefinition {
     private ParserDefinition myTemplateParserDefinition;
 
     public RHTMLPaserDefinition() {
-        myTemplateParserDefinition = StdLanguages.HTML.getParserDefinition();
+        myTemplateParserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(HTMLLanguage.INSTANCE);
         assert myTemplateParserDefinition != null;
         
-        myWhitespaceTokens = TokenSet.orSet(
-                RHTMLTokenType.RHTML_WHITE_SPECE_TOKENS,
-                myTemplateParserDefinition.getWhitespaceTokens()
-        );
+
     }
 
     @NotNull
-    public Lexer createLexer(Project project) {
+    public Lexer createLexer(Project project, LanguageVersion languageVersion) {
         return new _RHTMLLexer();
     }
 
@@ -66,12 +65,18 @@ public class RHTMLPaserDefinition implements ParserDefinition {
     }
 
     @NotNull
-    public TokenSet getWhitespaceTokens() {
+    public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
+		if(myWhitespaceTokens == null) {
+			myWhitespaceTokens = TokenSet.orSet(
+					RHTMLTokenType.RHTML_WHITE_SPECE_TOKENS,
+					myTemplateParserDefinition.getWhitespaceTokens(languageVersion)
+			);
+		}
         return myWhitespaceTokens;
     }
 
     @NotNull
-    public TokenSet getCommentTokens() {
+    public TokenSet getCommentTokens(LanguageVersion languageVersion) {
         if (myCommentTokens == null) {
             myCommentTokens = TokenSet.orSet(
                     TokenSet.create(
@@ -80,13 +85,20 @@ public class RHTMLPaserDefinition implements ParserDefinition {
                             RHTMLTokenType.RHTML_COMMENT_START,
                             RHTMLTokenType.RHTML_COMMENT_CHARACTERS,
                             RHTMLTokenType.RHTML_COMMENT_END
-                    ), myTemplateParserDefinition.getCommentTokens());
+                    ), myTemplateParserDefinition.getCommentTokens(languageVersion));
         }
         return myCommentTokens;
     }
 
-    @NotNull
-    public PsiParser createParser(final Project project) {
+	@NotNull
+	@Override
+	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	{
+		return myTemplateParserDefinition.getStringLiteralElements(languageVersion);
+	}
+
+	@NotNull
+    public PsiParser createParser(final Project project, LanguageVersion languageVersion) {
         //We use RHML_FILE instead of this. Shouldn't be invoked!
         //throw new UnsupportedOperationException("Should'n be invoked");
         return new RHTMLParser();

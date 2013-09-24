@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
@@ -65,7 +65,7 @@ public class RVirtualPsiUtil {
 
     public static List<RubyFilesCache> getCaches(@NotNull final Project project,
                                                  @Nullable final Module module,
-                                                 @Nullable final ProjectJdk sdk){
+                                                 @Nullable final Sdk sdk){
         final List<RubyFilesCache> caches = new LinkedList<RubyFilesCache>();
 
         final RubyModuleCachesManager manager =

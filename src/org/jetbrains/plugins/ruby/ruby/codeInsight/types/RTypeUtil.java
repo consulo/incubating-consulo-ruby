@@ -16,9 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.*;
-import org.apache.commons.collections.CollectionUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
@@ -27,7 +32,13 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.*;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.ProxyJavaSymbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilter;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilterFactory;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.*;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.Access;
@@ -35,8 +46,12 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.UsageAnalyzer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.SymbolPresentationUtil;
-
-import java.util.*;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiField;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.PsiMethod;
 
 /**
  * Created by IntelliJ IDEA.
@@ -122,8 +137,8 @@ public class RTypeUtil {
         }
         if (type == Type.JAVA_PACKAGE) {
             final PsiElement element = ((JavaSymbol) symbol).getPsiElement();
-            assert element instanceof PsiPackage;
-            children.addChildren(JRubyDuckTypeUtil.getChildrenByJavaPackage(fileSymbol, (PsiPackage) element));
+            assert element instanceof PsiJavaPackage;
+            children.addChildren(JRubyDuckTypeUtil.getChildrenByJavaPackage(fileSymbol, (PsiJavaPackage) element));
         }
         if (type == Type.JAVA_METHOD) {
             final PsiElement element = ((JavaSymbol) symbol).getPsiElement();
@@ -255,7 +270,7 @@ public class RTypeUtil {
       if (type1empty || type2empty) {
         return type1empty == type2empty;
       }
-      return CollectionUtils.isEqualCollection(type1.getMessages(),  type2.getMessages());
+      return type1.getMessages().equals(type2.getMessages());
     }
 
 

@@ -16,13 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import com.intellij.execution.junit2.configuration.BrowseModuleValueActionListener;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.reference.SoftReference;
+import java.util.HashMap;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -38,8 +33,13 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigur
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScopeUtil;
 import org.jetbrains.plugins.ruby.ruby.ui.TreeRClassChooserDialog;
-
-import java.util.HashMap;
+import com.intellij.execution.configuration.BrowseModuleValueActionListener;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.reference.SoftReference;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +47,8 @@ import java.util.HashMap;
  * @author: Roman Chernyatchik
  * @date: 06.08.2007
  */
-public class TestCaseClassBrowser extends BrowseModuleValueActionListener {
+public class TestCaseClassBrowser extends BrowseModuleValueActionListener
+{
     private final String myTitle;
     public SearchScope mySearchScope;
     public RTestsRunConfigurationForm myForm;

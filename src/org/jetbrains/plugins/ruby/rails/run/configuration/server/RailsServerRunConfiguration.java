@@ -16,16 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.runners.RunnerInfo;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.util.text.StringTokenizer;
+import java.io.IOException;
+import java.net.ServerSocket;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,9 +31,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.io.IOException;
-import java.net.ServerSocket;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Executor;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.options.SettingsEditor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.util.text.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -154,22 +156,22 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
         RailsServerRunConfigurationExternalizer.getInstance().writeExternal(this, element);
     }
 
-    public RunProfileState getState(DataContext context,
-                                    RunnerInfo runnerInfo,
-                                    RunnerSettings runnerSettings,
-                                    ConfigurationPerRunnerSettings configurationSettings) throws ExecutionException {
+	@Nullable
+	@Override
+	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
+	{
+		try {
+			validateConfiguration(true);
+		} catch (ExecutionException ee) {
+			throw ee;
+		} catch (Exception e) {
+			throw new ExecutionException(e.getMessage(), e);
+		}
 
-        try {
-            validateConfiguration(true);
-        } catch (ExecutionException ee) {
-            throw ee;
-        } catch (Exception e) {
-            throw new ExecutionException(e.getMessage(), e);
-        }
 
+		return new RailsServerRunCommandLineState(this, executionEnvironment);
 
-        return new RailsServerRunCommandLineState(this, runnerSettings, configurationSettings);
-    }
+	}
 
     protected void validateConfiguration(final boolean isExecution) throws Exception {
         super.validateConfiguration(isExecution);

@@ -16,14 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPackage;
-import com.intellij.util.containers.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
+import org.consulo.psi.PsiPackage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
@@ -31,7 +29,11 @@ import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.*;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsSymbolUtil;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.CoreTypes;
@@ -39,11 +41,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.containers.HashSet;
 
 /**
  * Created by IntelliJ IDEA.

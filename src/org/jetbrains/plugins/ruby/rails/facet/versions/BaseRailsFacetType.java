@@ -16,18 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeId;
-import com.intellij.facet.autodetecting.FacetDetector;
-import com.intellij.facet.autodetecting.FacetDetectorRegistry;
-import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileFilter;
-import com.intellij.psi.PsiFile;
+import java.util.Collection;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -37,11 +29,18 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfigurationLowLevel;
-import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-
-import javax.swing.*;
-import java.util.Collection;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeId;
+import com.intellij.facet.autodetecting.FacetDetector;
+import com.intellij.facet.autodetecting.FacetDetectorRegistry;
+import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileFilter;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,9 +56,10 @@ public abstract class BaseRailsFacetType<F extends BaseRailsFacet> extends Facet
         JRailsFacetType.load();
     }
 
-    protected abstract void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry, 
+    protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry,
                                            final VirtualFileFilter railsFacetFilter,
-                                           final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector);
+                                           final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector)
+	{};
 
 
     protected BaseRailsFacetType(@NotNull final FacetTypeId<F> baseRailsFacetFacetTypeId,
@@ -68,14 +68,7 @@ public abstract class BaseRailsFacetType<F extends BaseRailsFacet> extends Facet
         super(baseRailsFacetFacetTypeId, stringId, PRESENTABLE_NAME, underlyingFacetType);
     }
 
-    public static boolean isRailsFacetSuitableModuleType(@NotNull final ModuleType moduleType) {
-        return RubyUtil.isRubyModuleType(moduleType);
-    }
 
-    public static boolean isJRailsFacetSuitableModuleType(@NotNull final ModuleType moduleType) {
-        //Not a ruby module, i.e. java like, etc
-        return !RubyUtil.isRubyModuleType(moduleType);
-    }
 
     public Icon getIcon() {
         return RailsIcons.RAILS_SMALL;
@@ -101,7 +94,7 @@ public abstract class BaseRailsFacetType<F extends BaseRailsFacet> extends Facet
                 final Module module = ModuleUtil.findModuleForFile(bootFileCandidate, psiFile.getProject());
                 return  module != null
                         && JRubyUtil.hasJRubySupport(module)
-                        && isSuitableModuleType(module.getModuleType())
+                        //&& isSuitableModuleType(module.getModuleType())
                         && isRailsAppBootFile(bootFileCandidate);
             }
         };

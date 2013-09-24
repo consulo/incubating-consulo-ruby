@@ -16,24 +16,12 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.runners.JavaProgramRunner;
-import com.intellij.execution.runners.RunnerInfo;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.JDOMExternalizable;
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import java.io.File;
+import java.util.List;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -45,9 +33,22 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
-
-import java.io.File;
-import java.util.List;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Executor;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.options.SettingsEditor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -102,32 +103,28 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
         return new RSpecRunConfiguration(getProject(), getFactory(), getName());
     }
 
-    @SuppressWarnings({"deprecation"})
-    public JDOMExternalizable createRunnerSettings(final ConfigurationInfoProvider provider) {
-        return null;
-    }
 
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new RSpecRunConfigurationEditor(getProject(), this);
     }
 
-    @SuppressWarnings({"deprecation"})
-    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(final JavaProgramRunner runner) {
-        return null;
-    }
-
-    public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runnerSettings, final ConfigurationPerRunnerSettings configurationSettings) throws ExecutionException {
-        try {
-            validateConfiguration(true);
-        } catch (ExecutionException ee) {
-            throw ee;
-        } catch (Exception e) {
-            throw new ExecutionException(e.getMessage(), e);
-        }
+	@Nullable
+	@Override
+	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
+	{
+		try {
+			validateConfiguration(true);
+		} catch (ExecutionException ee) {
+			throw ee;
+		} catch (Exception e) {
+			throw new ExecutionException(e.getMessage(), e);
+		}
 
 
-        return new RSpecRunCommandLineState(this, runnerSettings, configurationSettings);
-    }
+		return new RSpecRunCommandLineState(this, executionEnvironment);
+
+	}
+
 
     protected void validateConfiguration(boolean isExecution) throws Exception {
         RubyRunConfigurationUtil.inspectSDK(this, isExecution);
@@ -183,7 +180,7 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
             final Module module = getModule();
             assert module != null;
 
-            final ProjectJdk sdk = getSdk();
+            final Sdk sdk = getSdk();
             assert sdk != null;
 
             if (RailsFacetUtil.hasRailsSupport(module)) {
@@ -212,14 +209,14 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
 
     private void inspectRSpecGemInAlternativeSDK(boolean isExecution) throws Exception {
         if (shouldUseAlternativeSdk() && !shouldUseCustomSpecRunner()) {
-            final ProjectJdk sdk = getAlternativeSdk();
+            final Sdk sdk = getAlternativeSdk();
             assert sdk != null;
 
             assertRSpecGemIsInstalled(isExecution, sdk, true);
         }
     }
 
-    private void assertRSpecGemIsInstalled(boolean isExecution, ProjectJdk sdk, final boolean isAlternativeSDK) throws Exception {
+    private void assertRSpecGemIsInstalled(boolean isExecution, Sdk sdk, final boolean isAlternativeSDK) throws Exception {
         if (!RSpecUtil.checkIfRSpecGemExists(sdk)) {
             final String msg = isAlternativeSDK
                     ? RBundle.message("rspec.run.configuration.test.no.gem.in.alternative.sdk")

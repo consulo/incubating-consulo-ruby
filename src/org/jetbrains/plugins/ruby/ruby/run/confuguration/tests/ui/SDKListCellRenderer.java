@@ -16,11 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import org.jetbrains.plugins.ruby.RBundle;
+import java.awt.Component;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,8 +35,8 @@ public class SDKListCellRenderer extends DefaultListCellRenderer {
     public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         if (value != null) {
-            setText(((ProjectJdk) value).getName());
-            setIcon(((ProjectJdk) value).getSdkType().getIcon());
+            setText(((Sdk) value).getName());
+            setIcon(((SdkType)((Sdk) value).getSdkType()).getIcon());
         } else {
             setText(RBundle.message("run.configuration.messages.none"));
         }

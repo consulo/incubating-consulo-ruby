@@ -16,6 +16,31 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
+import static org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfiguration.RailsEnvironmentType;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.ExternalRailsSettings;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationForm;
+import com.intellij.execution.configuration.EnvironmentVariablesComponent;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
@@ -24,21 +49,6 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.ui.RawCommandLineEditor;
-import com.intellij.execution.junit2.configuration.EnvironmentVariablesComponent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.ExternalRailsSettings;
-import static org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfiguration.RailsEnvironmentType;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationForm;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.

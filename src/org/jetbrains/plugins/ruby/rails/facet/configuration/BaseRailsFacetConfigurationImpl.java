@@ -16,24 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import com.intellij.facet.ui.FacetEditorContext;
-import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.facet.ui.FacetValidatorsManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.ProjectJdk;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.RakeUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
-import org.jetbrains.plugins.ruby.rails.facet.ui.settings.tabs.general.GeneralSettingsEditorTab;
-import org.jetbrains.plugins.ruby.rails.facet.ui.settings.tabs.railsView.RailsViewFoldersEditorTab;
-import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.WriteExternalException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,16 +57,8 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
     private Module myModule;
 
     // Is being used only for RakeTasks, Generators regenerating after SDK changing
-    private ProjectJdk mySdk;
+    private Sdk mySdk;
 
-    public FacetEditorTab[] createEditorTabs(final FacetEditorContext editorContext,
-                                             final FacetValidatorsManager validatorsManager) {
-
-        return new FacetEditorTab[]{
-                new GeneralSettingsEditorTab((BaseRailsFacet)editorContext.getFacet()),
-                new RailsViewFoldersEditorTab(editorContext.getProject(), editorContext.getModifiableRootModel())
-        };
-    }
 
     public boolean shouldUseRSpecPlugin() {
         return myShouldUseRSpecPlugin;
@@ -103,7 +89,7 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
         return myRailsPaths;
     }
 
-    public void loadGenerators(final boolean forceRegenerate, @Nullable final ProjectJdk sdk) {
+    public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk) {
         assert  myModule != null;
         GeneratorsUtil.loadGeneratorsList(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
     }
@@ -117,7 +103,7 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
         myGenerators = generators;
     }
 
-    public void loadRakeTasks(final boolean forceRegenerate, final ProjectJdk sdk) {
+    public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk) {
         RakeUtil.loadRakeTasksTree(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
     }
 
@@ -168,7 +154,7 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
      * Only for BaseRailsFacet internal tasks
      * @param sdk Sdk
      */
-    public void setSdk(@Nullable final ProjectJdk sdk) {
+    public void setSdk(@Nullable final Sdk sdk) {
         mySdk = sdk;
     }
 
@@ -177,7 +163,7 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
      * @return SDK
      */
     @Nullable
-    public ProjectJdk getSdk() {
+    public Sdk getSdk() {
         return mySdk;
     }
 

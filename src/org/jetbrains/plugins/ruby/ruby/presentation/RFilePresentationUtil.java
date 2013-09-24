@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-
-import javax.swing.*;
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +39,7 @@ public class RFilePresentationUtil {
      * @return RubyFile icon
      */
     public static Icon getIconByRFile(final RFile file) {
-        return file.getIcon(Iconable.ICON_FLAG_OPEN);
+        return IconDescriptorUpdaters.getIcon(file, 0);
     }
 
 
