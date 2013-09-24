@@ -22,12 +22,10 @@ import java.util.Collection;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
 import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.facet.Facet;
-import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetRootsProvider;
 import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
@@ -52,7 +50,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
     @NonNls
     public static final String JRUBY_FACET_LIBRARY_NAME_SUFFIX = " facet library";
 
-    private JRubyModuleContentRootManager myModuleRootManager;
+
     private RubyModuleCachesManager myRubyModuleCachesManager;
 
     public JRubyFacet(@NotNull final FacetType facetType,
@@ -62,8 +60,6 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
                       final Facet underlyingFacet) {
         super(facetType, module, name, configuration, underlyingFacet);
 
-        //we should register CacheManager before ROOTS Changed event
-        myModuleRootManager = new JRubyModuleContentRootManager(this);
 
         final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
         final PsiManager psiManager = PsiManager.getInstance(module.getProject());
@@ -162,16 +158,13 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
 
     @Nullable
     public static JRubyFacet getInstance(@NotNull final Module module) {
-        return FacetManager.getInstance(module).getFacetByType(ID);
+        return null;
     }
 
     public Sdk getSdk() {
         return getConfiguration().getSdk();
     }
 
-    public JRubyModuleContentRootManager getRModuleContentManager() {
-        return myModuleRootManager;
-    }
 
     public RubyModuleCachesManager getRubyModuleCachesManager() {
         return myRubyModuleCachesManager;
@@ -179,7 +172,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
 
     public void projectClosed() {
         myRubyModuleCachesManager.projectClosed();
-        myModuleRootManager.projectClosed();
+
 
         myRubyModuleCachesManager.disposeComponent();
     }

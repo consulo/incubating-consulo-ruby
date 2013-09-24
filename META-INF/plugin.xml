@@ -27,7 +27,6 @@
 	<depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
-
 		<fileTypeFactory implementation="org.jetbrains.plugins.ruby.RFileTypesLoader"/>
 		<gotoClassContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubyClassAndModuleContributor"/>
 		<gotoSymbolContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubySymbolContributor"/>
@@ -38,6 +37,11 @@
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings"/>
 		<projectService serviceInterface="org.jetbrains.plugins.ruby.settings.RProjectSettings" serviceImplementation="org.jetbrains.plugins.ruby.settings.RProjectSettings"/>
 		<moduleService serviceInterface="org.jetbrains.plugins.ruby.settings.RModuleSettingsStorage" serviceImplementation="org.jetbrains.plugins.ruby.settings.RModuleSettingsStorage"/>
+
+		<lang.parserDefinition language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition" />
+
+		<lang.syntaxHighlighterFactory key="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighterFactory" />
+
 		<xmlStructureViewElementProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml.RHTMLStructureViewElementProvider"/>
 		<iconProvider implementation="org.jetbrains.plugins.ruby.RubyIconProvider"/>
 
@@ -120,9 +124,6 @@
 		</component>
 
 		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.module.RubyModuleType</implementation-class>
-		</component>
-		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsagesGroupingRuleProvider
 			</implementation-class>
 		</component>
@@ -181,9 +182,6 @@
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line.RubyFastLineHighlightPassFactory</implementation-class>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager</implementation-class>
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage
@@ -284,14 +282,7 @@
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager</implementation-class>
 			<option name="type" value="RUBY_MODULE"/>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.roots.RubyModuleContentRootManagerImpl</implementation-class>
-			<option name="type" value="RUBY_MODULE"/>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.module.RModuleConfigurationEditorProvider</implementation-class>
-			<option name="type" value="RUBY_MODULE"/>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.RIModuleComponent</implementation-class>
 			<option name="type" value="RUBY_MODULE"/>

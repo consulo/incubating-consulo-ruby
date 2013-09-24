@@ -26,9 +26,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvi
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder;
-import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighter;
 import org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor;
 import com.intellij.formatting.FormattingModelBuilder;
@@ -37,7 +35,6 @@ import com.intellij.lang.Commenter;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageCodeInsightActionHandler;
 import com.intellij.lang.PairedBraceMatcher;
-import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.documentation.DocumentationProvider;
@@ -47,10 +44,7 @@ import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.lang.surroundWith.SurroundDescriptor;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NotNullLazyValue;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import rb.implement.ImplementHandler;
 import rb.override.OverrideHandler;
@@ -59,15 +53,13 @@ import rb.override.OverrideHandler;
 public class RubyLanguage extends Language {
     public static final RubyLanguage RUBY = new RubyLanguage();
 
-    private static final String RB_MIME = "application/x-ruby";
 
     private RefactoringSupportProvider rubyRefactoringSupportProvider;
     private OverrideHandler rubyOverrideMethodsHandler;
     private ImplementHandler rubyImplementMethodsHandler;
 
-    protected NotNullLazyValue<ParserDefinition> myParserDefinition;
+
     protected NotNullLazyValue<PairedBraceMatcher> myPairedBraceMatcher;
-    protected NotNullLazyValue<SyntaxHighlighter> mySyntaxHighlighter;
     protected NotNullLazyValue<Commenter> myCommenter;
     protected NotNullLazyValue<FoldingBuilder> myFoldingBuilder;
     protected NotNullLazyValue<FormattingModelBuilder> myFormattingModelBuilder;
@@ -80,25 +72,15 @@ public class RubyLanguage extends Language {
     protected NotNullLazyValue<NamesValidator> myNamesValidator;
 
     private RubyLanguage() {
-        super("Ruby", RB_MIME);
-        myParserDefinition = new NotNullLazyValue<ParserDefinition>(){
-            @NotNull
-            protected ParserDefinition compute() {
-                return new RubyParserDefinition();
-            }
-        };
+        super("RUBY", "application/x-ruby");
+
         myPairedBraceMatcher = new NotNullLazyValue<PairedBraceMatcher>(){
             @NotNull
             protected PairedBraceMatcher compute() {
                 return new RubyPairedBraceMatcher();
             }
         };
-        mySyntaxHighlighter = new NotNullLazyValue<SyntaxHighlighter>(){
-            @NotNull
-            protected SyntaxHighlighter compute() {
-                return new RubySyntaxHighlighter();
-            }
-        };
+
         myCommenter = new NotNullLazyValue<Commenter>(){
             @NotNull
             protected Commenter compute() {
@@ -162,21 +144,11 @@ public class RubyLanguage extends Language {
     }
 
     @NotNull
-    public ParserDefinition getParserDefinition() {
-        return myParserDefinition.getValue();
-    }
-
-    @NotNull
     public PairedBraceMatcher getPairedBraceMatcher() {
         return myPairedBraceMatcher.getValue();
     }
 
-    @NotNull
-    public SyntaxHighlighter getSyntaxHighlighter(Project project, final VirtualFile virtualFile) {
-        return mySyntaxHighlighter.getValue();
-    }
-
-    @NotNull
+	@NotNull
     public Commenter getCommenter() {
         return myCommenter.getValue();
     }

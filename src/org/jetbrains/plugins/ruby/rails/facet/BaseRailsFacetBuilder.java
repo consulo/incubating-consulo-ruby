@@ -34,7 +34,6 @@ import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager;
 import org.jetbrains.plugins.ruby.rails.plugins.PluginsUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.roots.RModuleContentRootManager;
 import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
 import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
@@ -265,12 +264,12 @@ public class BaseRailsFacetBuilder {
         }
 
 //////////////// Test::Unit test folder /////////////////////////////////////////////////////////////
-        final RModuleContentRootManager rootManager = RModuleUtil.getModuleContentManager(uncommitedModule);
+
         final StandardRailsPaths paths = railsFacet.getConfiguration().getPaths();
 
         final List<String> testUnitUrls = new ArrayList<String>(3);
         testUnitUrls.add(paths.getTestsStdUnitRootURL());
-        rootManager.setTestUnitFolderUrls(testUnitUrls);
+     //   rootManager.setTestUnitFolderUrls(testUnitUrls);
 
 ///////////////// Creating rails run configurations ////////////////////////////////////////////////////////////////////
           RailsUtil.createRailsRunConfiguration(uncommitedModule);

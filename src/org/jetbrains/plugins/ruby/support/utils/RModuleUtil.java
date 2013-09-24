@@ -21,12 +21,9 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.module.RubyModuleSettings;
-import org.jetbrains.plugins.ruby.ruby.roots.RModuleContentRootManager;
-import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleContentRootManagerImpl;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
@@ -156,18 +153,6 @@ public class RModuleUtil {
         });
     }
 
-    @NotNull
-    public static RModuleContentRootManager getModuleContentManager(@NotNull final Module module) {
-        if (RubyUtil.isRubyModuleType(module)) {
-            return RubyModuleContentRootManagerImpl.getInstance(module);
-        }
-
-        if (JRubyUtil.hasJRubySupport(module)){
-            return JRubyModuleContentRootManager.getInstance(module);
-        }
-
-        throw new IllegalArgumentException("Module " + module.getName() + "doesn't have Ruby support.");
-    }
 
     /**
      * @param module Some module

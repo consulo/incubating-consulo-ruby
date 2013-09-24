@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.scope;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleRootUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,10 +51,10 @@ public class SearchScopeUtil {
      * In modules, sdk, qualified names
      */
     private static class TestUnitClassSearchScope implements SearchScope {
-        private RProjectContentRootManager myManager;
+		private Project myProject;
 
-        public TestUnitClassSearchScope(@NotNull final Project project) {
-            myManager = RProjectContentRootManager.getInstance(project);
+		public TestUnitClassSearchScope(@NotNull final Project project) {
+			myProject = project;
         }
 
         public boolean isSearchInModuleContent(@NotNull final Module aModule) {
@@ -66,7 +66,7 @@ public class SearchScopeUtil {
         }
 
         public boolean isFileValid(@NotNull final String url) {
-            return myManager.isUnderTestUnitRoot(url);
+            return RubyModuleRootUtil.isUnderTestUnitRoot(myProject, url);
         }
     }
 

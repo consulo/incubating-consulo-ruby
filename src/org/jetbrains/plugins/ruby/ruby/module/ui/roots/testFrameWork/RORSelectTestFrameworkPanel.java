@@ -31,10 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
-import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.roots.RModuleContentRootManager;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.OpenLinkInBrowserHyperlinkListener;
@@ -44,12 +42,16 @@ import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ContentFolderType;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -94,8 +96,16 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
         testUnitRootDirComponent.setVisible(jRubySupport);
         if (jRubySupport) {
             //For JRuby
-            final RModuleContentRootManager manager = RModuleUtil.getModuleContentManager(module);
-            final String testUnitFolderUrl = ((JRubyModuleContentRootManager) manager).getUnitTestsRootUrl();
+			String testUnitFolderUrl = null;
+			for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
+			{
+				for(VirtualFile virtualFile : o.getFolderFiles(ContentFolderType.TEST))
+				{
+					testUnitFolderUrl = virtualFile.getUrl();
+					break;
+				}
+			}
+
             if (testUnitFolderUrl != null) {
                 final String path = FileUtil.toSystemDependentName(VfsUtil.urlToPath(testUnitFolderUrl));
                 testUnitRootDirTextField.setText(path);

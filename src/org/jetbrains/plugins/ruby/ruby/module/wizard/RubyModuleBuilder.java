@@ -16,6 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
+import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.GEM;
+import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.NONE;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jdom.JDOMException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
+import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
+import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
+import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
@@ -26,21 +41,6 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jdom.JDOMException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
-import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.GEM;
-import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.NONE;
-import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
-import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleContentRootManagerImpl;
-import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -67,7 +67,7 @@ public class RubyModuleBuilder extends RRModuleBuilder {
                 VirtualFileUtil.constructLocalUrl(testUnitRootPath);
         testUnitFolderUrls.add(testsUnitFolderUrl);
         if (!RailsFacetUtil.hasRailsSupport(myModule)) {
-            RubyModuleContentRootManagerImpl.getInstance(myModule).setTestUnitFolderUrls(testUnitFolderUrls);
+            //RubyModuleContentRootManagerImpl.getInstance(myModule).setTestUnitFolderUrls(testUnitFolderUrls);
         }
 ///////////////// Module Settings /////////////////////////
         //Test:Unit

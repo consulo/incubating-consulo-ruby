@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
@@ -36,9 +35,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager;
-
-import java.util.List;
+import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleRootUtil;
+import com.intellij.openapi.util.Comparing;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
 
 /**
  * Created by IntelliJ IDEA.
@@ -122,7 +122,7 @@ public class RTestUnitUtil {
 
         // 2. we consider only classes form TEST folder (optimization)
         final String url = rClass.getContainingFileUrl();
-        if (!RProjectContentRootManager.getInstance(rClass.getProject()).isUnderTestUnitRoot(url)) {
+        if (!RubyModuleRootUtil.isUnderTestUnitRoot(rClass.getProject(), url)) {
             return false;
         }
 

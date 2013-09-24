@@ -16,11 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.ui.treeStructure.SimpleNode;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -29,11 +28,19 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.*;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import java.util.ArrayList;
-import java.util.Set;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsApplicationFolderNode;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControllersFolderNode;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsModelFolderNode;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsSharedPatialsFolderNode;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsUserFolderNode;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ContentFolderType;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -102,8 +109,16 @@ public class RailsProjectModuleNode extends RailsNode {
         }
 
         final Set<String> urls = RailsViewFoldersManager.getInstance(module).getRailsViewUserFolderUrls();
-        final Set<String> testUrls = RModuleUtil.getModuleContentManager(module).getTestUnitFolderUrls();
-        for (String url : urls) {
+        final Set<String> testUrls = new HashSet<String>();
+		for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
+		{
+			for(String url : o.getFolderUrls(ContentFolderType.TEST))
+			{
+				testUrls.add(url);
+			}
+		}
+
+		for (String url : urls) {
             final VirtualFile file = fileManager.findFileByUrl(url);
             if (file != null) {
                 nodesList.add(new RailsUserFolderNode(module, file, this, testUrls.contains(url)));

@@ -43,9 +43,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
-import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager;
 import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManagerTestUtil;
-import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleContentRootManagerImpl;
 import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.TestUtil;

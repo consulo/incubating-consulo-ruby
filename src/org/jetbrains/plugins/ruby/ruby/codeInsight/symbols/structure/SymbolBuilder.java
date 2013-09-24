@@ -49,7 +49,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
-import org.jetbrains.plugins.ruby.ruby.roots.RProjectContentRootManager;
+import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleRootUtil;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
@@ -366,13 +366,11 @@ public class SymbolBuilder {
     private void processRequireOrLoad(@NotNull final RVirtualRequire require,
                                       @NotNull final Symbol symbol,
                                       @NotNull final InterpretationMode mode) {
-        final RProjectContentRootManager manager =
-                RProjectContentRootManager.getInstance(symbol.getProject());
 
         for (String name : require.getNames()) {
             for (String url : RFileUtil.findUrlsForName(myFileSymbol, name, myFile)) {
                 if (mode == InterpretationMode.ONLY_TESTS_EXTERNAL) {
-                    if (manager.isUnderTestUnitRoot(url)) {
+                    if (RubyModuleRootUtil.isUnderTestUnitRoot(symbol.getProject(), url)) {
                         myFileSymbol.process(url, mode, false);
                     }
                 } else {

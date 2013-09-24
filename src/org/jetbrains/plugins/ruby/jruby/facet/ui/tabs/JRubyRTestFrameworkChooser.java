@@ -16,25 +16,25 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 
-import com.intellij.facet.ui.FacetEditorContext;
-import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
-import org.jetbrains.plugins.ruby.jruby.JRubyModuleContentRootManager;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
+import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork.RORSelectTestFrameworkPanel;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork.TestFrameworkOptions;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import javax.swing.*;
+import com.intellij.facet.ui.FacetEditorContext;
+import com.intellij.facet.ui.FacetEditorTab;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -92,18 +92,19 @@ public class JRubyRTestFrameworkChooser extends FacetEditorTab {
         assert settings != null;
         final boolean shouldUseTestUnit = settings.shouldUseTestUnitTestFramework();
 
-        final String oldTestUnitRootUrl = JRubyModuleContentRootManager.getInstance(module).getUnitTestsRootUrl();
-        final String newTestUnitRootUrl = myTestFramworkOptions.getTestUnitRootUrl();
+       // final String oldTestUnitRootUrl = JRubyModuleContentRootManager.getInstance(module).getUnitTestsRootUrl();
+      //  final String newTestUnitRootUrl = myTestFramworkOptions.getTestUnitRootUrl();
 
-        return myTestFramworkOptions != null
+       /* return myTestFramworkOptions != null
                && !(shouldUseRSpec == myTestFramworkOptions.shouldUseRSpecFramework()
                     && shouldUseTestUnit == myTestFramworkOptions.shouldUseTestUnitFramework()
                     && ((oldTestUnitRootUrl == null && newTestUnitRootUrl == null)
-                        || (oldTestUnitRootUrl != null && oldTestUnitRootUrl.equals(newTestUnitRootUrl))));
+                        || (oldTestUnitRootUrl != null && oldTestUnitRootUrl.equals(newTestUnitRootUrl)))); */
+		return false;
     }
 
     public void apply() throws ConfigurationException {
-        final Module module = myEditorContext.getModule();
+      /*  final Module module = myEditorContext.getModule();
         assert module != null;
 
         if (isModified()) {
@@ -136,7 +137,7 @@ public class JRubyRTestFrameworkChooser extends FacetEditorTab {
                 rootManager = jRubyFacet.getRModuleContentManager();
             }
             rootManager.setUnitTestsRootUrl(myTestFramworkOptions.getTestUnitRootUrl());
-        }
+        }    */
     }
 
     public void reset() {
