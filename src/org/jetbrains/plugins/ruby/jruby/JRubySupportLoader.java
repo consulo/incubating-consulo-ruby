@@ -16,24 +16,20 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import com.intellij.codeInspection.InspectionToolProvider;
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.ActionRunner;
-import com.intellij.util.PathUtil;
+import java.util.Collections;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetType;
 import org.jetbrains.plugins.ruby.jruby.inspections.JRubyImplementInterfaceInspection;
 import org.jetbrains.plugins.ruby.jruby.inspections.WrongTopLevelPackageInspection;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import org.jruby.Ruby;
 import org.jruby.javasupport.JavaEmbedUtils;
-
-import java.util.Collections;
+import com.intellij.codeInspection.InspectionToolProvider;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.util.ActionRunner;
 
 /**
  * It`s a class to load jruby support
@@ -52,7 +48,7 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
      * Loading plugin components, written in jruby
      */
     private static void loadJRubyPluginComponents() {
-        ClassLoader oldCtxLoad = Thread.currentThread().getContextClassLoader();
+       /* ClassLoader oldCtxLoad = Thread.currentThread().getContextClassLoader();
         try {
             ClassLoader ctxLoader = JRubySupportLoader.class.getClassLoader();
             Thread.currentThread().setContextClassLoader(ctxLoader);
@@ -64,7 +60,7 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
 
                 LOG.assertTrue(jarFile != null, "jar file cannot be null");
                 //noinspection ConstantConditions
-                final VirtualFile mainFile = jarFile.getParent().getParent().findFileByRelativePath("rb/main.rb");
+                final VirtualFile mainFile = jarFile.findFileByRelativePath("rb/main.rb");
                 LOG.assertTrue(mainFile != null, "main.rb file cannot be null");
                 ruby.getLoadService().require(mainFile.getPath());
             } else {
@@ -73,7 +69,7 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
             }
         } finally {
             Thread.currentThread().setContextClassLoader(oldCtxLoad);
-        }
+        } */
     }
 
     public void disposeComponent() {

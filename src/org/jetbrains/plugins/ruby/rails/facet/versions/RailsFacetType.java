@@ -22,7 +22,6 @@ import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfig
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfigurationImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.facet.Facet;
-import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.facet.autodetecting.FacetDetector;
 import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
 import com.intellij.openapi.module.Module;
@@ -43,10 +42,7 @@ class RailsFacetType extends BaseRailsFacetType<RailsFacet> {
     public static final RailsFacetType INSTANCE = new RailsFacetType();
 
     public static void load() {
-        final FacetTypeRegistry registry = FacetTypeRegistry.getInstance();
-        if (registry.findFacetType(RailsFacet.ID.toString()) == null) {
-            registry.registerFacetType(INSTANCE);
-        }
+
     }
 
     public RailsFacetType() {

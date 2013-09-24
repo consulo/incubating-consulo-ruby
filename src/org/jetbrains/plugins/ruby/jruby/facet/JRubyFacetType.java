@@ -29,7 +29,6 @@ import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.facet.autodetecting.FacetDetector;
 import com.intellij.facet.autodetecting.FacetDetectorRegistry;
 import com.intellij.facet.impl.autodetecting.FacetDetectorRegistryEx;
@@ -45,10 +44,7 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
 
 
     public static void load(){
-        final FacetTypeRegistry registry = FacetTypeRegistry.getInstance();
-        if (registry.findFacetType(JRubyFacet.ID.toString())== null){
-            registry.registerFacetType(INSTANCE);
-        }
+
     }
 
     public JRubyFacetType() {
