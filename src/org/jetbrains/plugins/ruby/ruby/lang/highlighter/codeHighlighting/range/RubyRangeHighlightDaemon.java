@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.impl.DocumentMarkupModel;
 import com.intellij.openapi.editor.markup.MarkupModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,7 +38,7 @@ public class RubyRangeHighlightDaemon {
     public static HighlightInfo[] getHighlightInfos(final Document document,
                                                     final Project project) {
         ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = document.getMarkupModel(project);
+        MarkupModel markup =  DocumentMarkupModel.forDocument(document, project, false);
         return markup.getUserData(RUBY_HIGHLIGHT_INFO);
     }
 
@@ -45,7 +46,7 @@ public class RubyRangeHighlightDaemon {
                                          final HighlightInfo[] infos,
                                          final Project project) {
         ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = document.getMarkupModel(project);
+        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
         markup.putUserData(RUBY_HIGHLIGHT_INFO, infos);
     }
 }

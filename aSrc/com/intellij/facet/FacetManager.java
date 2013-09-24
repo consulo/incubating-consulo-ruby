@@ -18,12 +18,12 @@ public class FacetManager
 		return null;
 	}
 
-	public <T extends Facet> T getFacetByType(FacetTypeId<T> id)
+	public <T extends Facet<?>> T getFacetByType(FacetTypeId<T> id)
 	{
 		return null;
 	}
 
-	public <T extends Facet> Set<T> getFacetsByType(FacetTypeId<T> id)
+	public <T extends Facet<?>> Set<T> getFacetsByType(FacetTypeId<T> id)
 	{
 		return null;
 	}

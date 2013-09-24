@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighter;
 
 import javax.swing.*;
@@ -48,7 +48,7 @@ public class RHTMLFileType  extends XmlLikeFileType {
     private static final Icon ICON = RailsIcons.RHTML_ICON;
 
     private RHTMLFileType() {
-        super(RHTMLLanguage.INSTANCE);
+        super(eRubyLanguage.INSTANCE);
     }
 
     @NotNull

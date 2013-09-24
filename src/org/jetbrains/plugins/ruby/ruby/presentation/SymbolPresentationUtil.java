@@ -16,10 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -50,10 +51,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.RCommandArgumentListImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiField;
+import com.intellij.psi.PsiJavaPackage;
+import com.intellij.psi.PsiMethod;
 
 /**
  * Created by IntelliJ IDEA.
@@ -98,7 +104,7 @@ public class SymbolPresentationUtil {
         if (type == Type.JAVA_PACKAGE){
             final JavaSymbol javaSymbol = (JavaSymbol) symbol;
             final PsiElement element = javaSymbol.getPsiElement();
-            assert element instanceof PsiPackage;
+            assert element instanceof PsiJavaPackage;
             return new JavaLookupItem(name, element);
         }
 
@@ -135,7 +141,7 @@ public class SymbolPresentationUtil {
             if (type != Type.INSTANCE_METHOD && type != Type.CLASS_METHOD && type != Type.ALIAS) {
                 priority = LookupValueWithPriority.HIGHER;
             }
-            icon = ((RVirtualContainer) lastPrototype).getIcon(Iconable.ICON_FLAG_VISIBILITY);
+            icon = IconDescriptorUpdaters.getIcon(((PsiElement) lastPrototype), Iconable.ICON_FLAG_VISIBILITY);
         } else
         if (lastPrototype instanceof RVirtualField) {
             final RVirtualField field = (RVirtualField) lastPrototype;

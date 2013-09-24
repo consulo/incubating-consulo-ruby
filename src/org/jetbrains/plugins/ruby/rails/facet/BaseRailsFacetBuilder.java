@@ -56,7 +56,6 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.ModuleAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ContentIterator;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -67,7 +66,6 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.ActionRunner;
 import com.intellij.util.messages.MessageBusConnection;
 
@@ -179,7 +177,7 @@ public class BaseRailsFacetBuilder {
                 final FileChooserDescriptor desc = FileChooserDescriptorFactory.createSingleFolderDescriptor();
                 desc.setTitle(RBundle.message("rails.facet.builder.rails.application.choose.title"));
                 desc.setDescription(RBundle.message("rails.facet.builder.rails.application.choose.relative.path"));
-                desc.setContextModule(uncommitedModule);
+             //   desc.setContextModule(uncommitedModule);
                 desc.setRoot(VirtualFileUtil.findFileByLocalPath(defaultAppHome));
                 desc.setIsTreeRootVisible(true);
                 //Folder Chooser Dialog
@@ -609,7 +607,7 @@ public class BaseRailsFacetBuilder {
 
     private static void addDefaultRailsExcludedFolders(final String railsAppHomeRootURL,
                                                        final ContentEntry contentEntry) {
-        final String componentsUrl = StandardRailsPaths.buildComponentsPath(railsAppHomeRootURL);
+       /* final String componentsUrl = StandardRailsPaths.buildComponentsPath(railsAppHomeRootURL);
         final VirtualFileManager manager = VirtualFileManager.getInstance();
 
         final String tmpUrl = StandardRailsPaths.buildTmpPath(railsAppHomeRootURL);
@@ -621,7 +619,7 @@ public class BaseRailsFacetBuilder {
         final VirtualFile components = manager.findFileByUrl(componentsUrl);
         if (components != null) {
             contentEntry.addExcludeFolder(components);
-        }
+        }  */
     }
     
     private static void addAdditionalRailsViewFolders(@NotNull final String railsAppHomeRootUrl,

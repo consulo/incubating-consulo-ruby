@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementTypeEx;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageVersion;
@@ -48,7 +47,7 @@ public class RHTMLParser implements PsiParser {
         final RHTMLParsing parsing = new RHTMLParsing(builder);
 
         parsing.parseDocument();
-        file.done(RHTMLElementTypeEx.RHTML_FILE);
+        file.done(root);
 
         return builder.getTreeBuilt();
     }

@@ -16,11 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import com.intellij.openapi.module.Module;
-import org.jetbrains.plugins.ruby.RBundle;
+import java.awt.Component;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +36,7 @@ public class ModuleListCellRenderer extends DefaultListCellRenderer {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         if (value != null) {
             setText(((Module) value).getName());
-            setIcon(((Module) value).getModuleType().getNodeIcon(true));
+            setIcon(AllIcons.Nodes.Module);
         } else {
             setText(RBundle.message("run.configuration.messages.none"));
         }

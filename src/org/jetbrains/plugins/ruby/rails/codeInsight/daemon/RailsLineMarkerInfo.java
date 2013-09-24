@@ -16,6 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 
+import java.awt.Color;
+import java.awt.event.MouseEvent;
+
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
@@ -27,15 +37,6 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.reference.SoftReference;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -140,7 +141,19 @@ public class RailsLineMarkerInfo {
         public com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment getAlignment() {
             return type == MarkerType.CONTROLLER_TO_VIEW ? Alignment.LEFT : Alignment.RIGHT;
         }
-    }
+
+		@Override
+		public boolean equals(Object o)
+		{
+			return false;
+		}
+
+		@Override
+		public int hashCode()
+		{
+			return 0;
+		}
+	}
 
     private class MyNavigateAction extends AnAction {
         public void actionPerformed(final AnActionEvent e) {

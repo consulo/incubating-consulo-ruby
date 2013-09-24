@@ -16,15 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork;
 
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextPane;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -39,12 +41,15 @@ import org.jetbrains.plugins.ruby.support.OpenLinkInBrowserHyperlinkListener;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -102,7 +107,7 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
             final String title = RBundle.message("module.settings.dialog.test.framework.test.unit.root.path.chooser.caption");
             final FileChooserDescriptor desc =
                     RubyRunConfigurationUIUtil.addFolderChooser(title, testUnitRootDirTextField, module.getProject());
-            desc.setContextModule(module);
+          //  desc.setContextModule(module);
         }
 
 

@@ -16,17 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,11 +44,29 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-import org.jetbrains.plugins.ruby.ruby.presentation.*;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import org.jetbrains.plugins.ruby.ruby.presentation.RConstantPresentationUtil;
+import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
+import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
+import org.jetbrains.plugins.ruby.ruby.presentation.RFieldPresentationUtil;
+import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
+import org.jetbrains.plugins.ruby.ruby.presentation.RGlobalVariablePresentationUtil;
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -80,7 +92,7 @@ public class RubyPsiUtil {
     @SuppressWarnings({"JavaDoc"})
     public static RFile createFileFromText(final String fileName, final PsiDirectory directory, final String text) throws IncorrectOperationException {
         PsiFile file = directory.createFile(fileName);
-        PsiElementFactory factory = getPsiElementFactory(directory.getProject());
+        PsiFileFactory factory = getPsiElementFactory(directory.getProject());
         PsiFile templateFile = factory.createFileFromText(TEMP_FILE_NAME, text);
         file.addRange(templateFile.getFirstChild(), templateFile.getLastChild());
         return (RFile) file;
@@ -102,8 +114,8 @@ public class RubyPsiUtil {
         return getPsiElementFactory(project).createFileFromText(name, fileType, text);
     }
 
-    private static PsiElementFactory getPsiElementFactory(final Project project) {
-        return PsiManager.getInstance(project).getElementFactory();
+    private static PsiFileFactory getPsiElementFactory(final Project project) {
+        return PsiFileFactory.getInstance(project);
     }
 
     /**
@@ -205,7 +217,7 @@ public class RubyPsiUtil {
         // Commit document before formatting!
         PsiDocumentManager.getInstance(project).commitDocument(document);
         try {
-            element.getManager().getCodeStyleManager().reformat(element);
+           CodeStyleManager.getInstance(project).reformat(element);
         } catch (IncorrectOperationException e) {
             LOG.error(e);
         }
@@ -294,7 +306,7 @@ public class RubyPsiUtil {
         }
 
         if (element instanceof RObjectClass){
-            return element.getIcon(Iconable.ICON_FLAG_VISIBILITY);
+            return IconDescriptorUpdaters.getIcon(element, Iconable.ICON_FLAG_VISIBILITY);
         }
 
         if (element instanceof RContainer){

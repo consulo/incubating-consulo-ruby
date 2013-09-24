@@ -16,13 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 
+import java.awt.Color;
+import java.awt.Font;
+
+import org.jetbrains.annotations.NonNls;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
+import com.intellij.openapi.editor.XmlHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import org.jetbrains.annotations.NonNls;
-
-import java.awt.*;
 
 
 public class RubyHighlighter {
@@ -114,47 +117,47 @@ public class RubyHighlighter {
     public static final String INSPECTION_MULTIPLE_RESOLVE_WARNING_ID = "INSPECTION_MULTIPLE_RESOLVE_WARNING_ID";
 
     // Text default attrs
-    public static final TextAttributes KEYWORD_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes COMMENT_DEFAULT_ATTRS = HighlighterColors.JAVA_LINE_COMMENT.getDefaultAttributes().clone();
-    public static final TextAttributes NUMBER_DEFAULT_ATTRS = HighlighterColors.JAVA_NUMBER.getDefaultAttributes().clone();
-    public static final TextAttributes STRING_DEFAULT_ATTRS = HighlighterColors.JAVA_STRING.getDefaultAttributes().clone();
-    public static final TextAttributes ESCAPE_SEQUENCE_DEFAULT_ATTRS = HighlighterColors.JAVA_VALID_STRING_ESCAPE.getDefaultAttributes().clone();
-    public static final TextAttributes INVALID_ESCAPE_SEQUENCE_DEFAULT_ATTRS = HighlighterColors.JAVA_INVALID_STRING_ESCAPE.getDefaultAttributes().clone();
-    public static final TextAttributes EXPR_SUBST_MARKS_DEFAULT_ATTRS = HighlighterColors.JAVA_DOC_MARKUP.getDefaultAttributes().clone();
+    public static final TextAttributes KEYWORD_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes COMMENT_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.LINE_COMMENT.getDefaultAttributes().clone();
+    public static final TextAttributes NUMBER_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.NUMBER.getDefaultAttributes().clone();
+    public static final TextAttributes STRING_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.STRING.getDefaultAttributes().clone();
+    public static final TextAttributes ESCAPE_SEQUENCE_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE.getDefaultAttributes().clone();
+    public static final TextAttributes INVALID_ESCAPE_SEQUENCE_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.INVALID_STRING_ESCAPE.getDefaultAttributes().clone();
+    public static final TextAttributes EXPR_SUBST_MARKS_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.DOC_COMMENT_MARKUP.getDefaultAttributes().clone();
     public static final TextAttributes BAD_CHARACTER_DEFAULT_ATTRS = HighlighterColors.BAD_CHARACTER.getDefaultAttributes().clone();
-    public static final TextAttributes COMMA_DEFAULT_ATTRS = HighlighterColors.JAVA_COMMA.getDefaultAttributes().clone();
-    public static final TextAttributes SEMICOLON_DEFAULT_ATTRS = HighlighterColors.JAVA_SEMICOLON.getDefaultAttributes().clone();
-    public static final TextAttributes HASH_ASSOC_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes LINE_CONTINUATION_DEFAULT_ATTRS = HighlighterColors.JAVA_SEMICOLON.getDefaultAttributes().clone();
-    public static final TextAttributes REGEXPS_DEFAULT_ATTRS = HighlighterColors.JAVA_STRING.getDefaultAttributes().clone();
-    public static final TextAttributes WORDS_DEFAULT_ATTRS = HighlighterColors.JAVA_STRING.getDefaultAttributes().clone();
-    public static final TextAttributes HEREDOC_ID_DEFAULT_ATTRS = HighlighterColors.JAVA_DOC_TAG.getDefaultAttributes().clone();
-    public static final TextAttributes HEREDOC_CONTENT_DEFAULT_ATTRS = HighlighterColors.HTML_ATTRIBUTE_VALUE.getDefaultAttributes().clone();
-    public static final TextAttributes GVAR_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes CVAR_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes IVAR_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes NTH_REF_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes BACK_REF_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes CONSTANT_DEF_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes LOCAL_VARIABLE_DEFAULT_ATTRS = HighlighterColors.JSP_ATTRIBUTE_NAME.getDefaultAttributes().clone();
-    public static final TextAttributes SYMBOL_DEFAULT_ATTRS = HighlighterColors.HTML_COMMENT.getDefaultAttributes().clone();
-    public static final TextAttributes ATTR_ACCESSOR_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes ATTR_WRITER_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes ATTR_READER_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes RAILS_ATTR_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes COMMA_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.COMMA.getDefaultAttributes().clone();
+    public static final TextAttributes SEMICOLON_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.SEMICOLON.getDefaultAttributes().clone();
+    public static final TextAttributes HASH_ASSOC_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes LINE_CONTINUATION_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.SEMICOLON.getDefaultAttributes().clone();
+    public static final TextAttributes REGEXPS_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.STRING.getDefaultAttributes().clone();
+    public static final TextAttributes WORDS_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.STRING.getDefaultAttributes().clone();
+    public static final TextAttributes HEREDOC_ID_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.DOC_COMMENT_TAG.getDefaultAttributes().clone();
+    public static final TextAttributes HEREDOC_CONTENT_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_ATTRIBUTE.getDefaultAttributes().clone();
+    public static final TextAttributes GVAR_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes CVAR_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes IVAR_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes NTH_REF_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes BACK_REF_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes CONSTANT_DEF_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.KEYWORD.getDefaultAttributes().clone();
+    public static final TextAttributes LOCAL_VARIABLE_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
+    public static final TextAttributes SYMBOL_DEFAULT_ATTRS = XmlHighlighterColors.HTML_COMMENT.getDefaultAttributes().clone();
+    public static final TextAttributes ATTR_ACCESSOR_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes ATTR_WRITER_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes ATTR_READER_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes RAILS_ATTR_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
     public static final TextAttributes REQUIRE_OR_LOAD_CALL_ARG_DEFAULT_ATTRS = HighlighterColors.TEXT.getDefaultAttributes().clone();
-    public static final TextAttributes OPERATION_SIGN_DEFAULT_ATTRS = HighlighterColors.JAVA_OPERATION_SIGN.getDefaultAttributes().clone();
-    public static final TextAttributes BRACKETS_DEFAULT_ATTRS = HighlighterColors.JAVA_BRACES.getDefaultAttributes().clone();
-    public static final TextAttributes PUBLIC_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes PROTECTED_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes PRIVATE_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes INCLUDE_OR_EXTEND_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes REQUIRE_OR_LOAD_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes REGEXP_DEFAULT_ATTRS = HighlighterColors.JAVA_VALID_STRING_ESCAPE.getDefaultAttributes().clone();
+    public static final TextAttributes OPERATION_SIGN_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.OPERATION_SIGN.getDefaultAttributes().clone();
+    public static final TextAttributes BRACKETS_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.BRACES.getDefaultAttributes().clone();
+    public static final TextAttributes PUBLIC_CALL_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes PROTECTED_CALL_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes PRIVATE_CALL_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes INCLUDE_OR_EXTEND_CALL_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
+    public static final TextAttributes REQUIRE_OR_LOAD_CALL_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
+    public static final TextAttributes REGEXP_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE.getDefaultAttributes().clone();
     public static final TextAttributes IDENTIFIER_DEFAULT_ATTRS = HighlighterColors.TEXT.getDefaultAttributes().clone();
     public static final TextAttributes CONSTANT_DEFAULT_ATTRS = HighlighterColors.TEXT.getDefaultAttributes().clone();
-    public static final TextAttributes INCLUDE_JAVA_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
-    public static final TextAttributes REQUIRE_GEM_CALL_DEFAULT_ATTRS = HighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes INCLUDE_JAVA_CALL_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
+    public static final TextAttributes REQUIRE_GEM_CALL_DEFAULT_ATTRS = XmlHighlighterColors.XML_TAG_DATA.getDefaultAttributes().clone();
 
     public static final TextAttributes INSPECTION_MULTIPLE_RESOLVE_WARNING_DEFAULT_ATTRS = new TextAttributes();
 

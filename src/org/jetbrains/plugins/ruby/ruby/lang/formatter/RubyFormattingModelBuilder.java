@@ -16,17 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.formatting.FormattingModelProvider;
 import com.intellij.formatting.Indent;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.impl.source.SourceTreeToPsiMap;
 import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.impl.source.tree.TreeUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,4 +45,11 @@ public class RubyFormattingModelBuilder implements FormattingModelBuilder {
         return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(),
                 new RubyBlock(fileElement, Indent.getAbsoluteNoneIndent(), null, settings), settings);
     }
+
+	@Nullable
+	@Override
+	public TextRange getRangeAffectingIndent(PsiFile psiFile, int i, ASTNode astNode)
+	{
+		return null;
+	}
 }

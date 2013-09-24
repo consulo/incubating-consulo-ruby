@@ -16,12 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 
-import com.intellij.codeInsight.javadoc.JavaDocUtil;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.StdLanguages;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
-import com.intellij.psi.util.PsiTreeUtil;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -55,9 +52,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.SymbolPresentationUtil;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.intellij.codeInsight.documentation.DocumentationManagerUtil;
+import com.intellij.codeInsight.javadoc.JavaDocUtil;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageDocumentation;
+import com.intellij.lang.java.JavaLanguage;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -110,7 +116,7 @@ public class RubyHelpUtil implements MarkupConstants {
         }
         if (Types.JAVA.contains(symbol.getType())){
             //noinspection ConstantConditions
-            return StdLanguages.JAVA.getDocumentationProvider().generateDoc(((JavaSymbol) symbol).getPsiElement(), null);
+            return LanguageDocumentation.INSTANCE.forLanguage(JavaLanguage.INSTANCE).generateDoc(((JavaSymbol) symbol).getPsiElement(), null);
         }
         final StringBuilder builder = new StringBuilder();
         final Project project = symbol.getProject();
@@ -234,7 +240,7 @@ public class RubyHelpUtil implements MarkupConstants {
                 }
                 infoAdded = true;
                 builder.append(SPACE);
-                JavaDocUtil.createHyperlink(builder, ref, label, false);
+				DocumentationManagerUtil.createHyperlink(builder, ref, label, false);
             }
         }
     }
@@ -303,7 +309,7 @@ public class RubyHelpUtil implements MarkupConstants {
             buffer.append(BR);
             final String label = SymbolPresentationUtil.getPresentableNameWithLocation(fileSymbol, symbol);
             if (label!=null){
-                JavaDocUtil.createHyperlink(buffer, SYMBOL + i, label, false);
+				DocumentationManagerUtil.createHyperlink(buffer, SYMBOL + i, label, false);
             }
         }
         return buffer.toString();

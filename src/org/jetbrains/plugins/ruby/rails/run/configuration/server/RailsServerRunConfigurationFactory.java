@@ -16,20 +16,20 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationFactory;
-
-import javax.swing.*;
+import com.intellij.execution.RunnerAndConfigurationSettings;
+import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.SystemInfo;
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,8 +59,8 @@ public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFact
      * @param module Ruby / Java module
      * @return Rails Server Run configuration settings
      */
-    public RunnerAndConfigurationSettingsImpl createRunConfigurationSettings(@NotNull final Module module) {
-        final RunnerAndConfigurationSettingsImpl settings =
+    public RunnerAndConfigurationSettings createRunConfigurationSettings(@NotNull final Module module) {
+        final RunnerAndConfigurationSettings settings =
                 RubyRunConfigurationUtil.create(module.getProject(), this, "");
         final RubyRunConfiguration conf = (RubyRunConfiguration)settings.getConfiguration();
 

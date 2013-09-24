@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
+import java.math.BigInteger;
+
+import javax.swing.JComponent;
+import javax.swing.JTabbedPane;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-
-import javax.swing.*;
-import java.math.BigInteger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,11 +48,11 @@ class RDocPanel {
         createPanel();
 
 // Adding project jdk listener
-        ((ProjectRootManagerEx) myProjectRootManager).addSdkListener(new ProjectRootManagerEx.SdkListener() {
+      /*  ((ProjectRootManagerEx) myProjectRootManager).addSdkListener(new ProjectRootManagerEx.SdkListener() {
             public void SdkChanged() {
                 fireSdkChanged();
             }
-        });
+        });  */
         fireSdkChanged();
     }
 
@@ -76,7 +77,7 @@ class RDocPanel {
     }
 
     public Sdk getSdk() {
-        return myProjectRootManager.getSdk();
+        return null;
     }
 
 

@@ -16,15 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.PsiManagerImpl;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
@@ -46,11 +42,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes.RSuperClassNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.ResolveResult;
+import com.intellij.psi.impl.PsiManagerImpl;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -118,7 +118,7 @@ public class RNamedReference implements RPsiPolyvariantReference {
     public final ResolveResult[] multiResolve(final boolean incompleteCode) {
         final PsiManager manager = getElement().getManager();
         if(manager instanceof PsiManagerImpl){
-            final ResolveCache cache = ((PsiManagerImpl) manager).getResolveCache();
+            final ResolveCache cache = ResolveCache.getInstance(manager.getProject());
             return cache.resolveWithCaching(this, MyResolver.INSTANCE, false, false);
         } else {
           return multiResolveInner(incompleteCode);

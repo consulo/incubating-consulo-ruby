@@ -16,6 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.refactoring.introduceVariable;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.util.EventListener;
+import java.util.Set;
+
+import javax.swing.Action;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.event.EventListenerList;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.openapi.help.HelpManager;
@@ -30,18 +52,6 @@ import com.intellij.ui.EditorComboBoxRenderer;
 import com.intellij.ui.EditorTextField;
 import com.intellij.ui.StringComboboxEditor;
 import com.intellij.util.containers.HashSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
-
-import javax.swing.*;
-import javax.swing.event.EventListenerList;
-import java.awt.event.*;
-import java.util.EventListener;
-import java.util.Set;
 
 public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIntroduceVariableSettings {
 
@@ -118,7 +128,7 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
     }
 
     private void setUpNameComboBox(final String[] possibleNames) {
-        final EditorComboBoxEditor comboEditor = new StringComboboxEditor(myProject, RubyFileType.RUBY);
+        final EditorComboBoxEditor comboEditor = new StringComboboxEditor(myProject, RubyFileType.RUBY, myNameComboBox);
 
         myNameComboBox.setEditor(comboEditor);
         myNameComboBox.setRenderer(new EditorComboBoxRenderer(comboEditor));

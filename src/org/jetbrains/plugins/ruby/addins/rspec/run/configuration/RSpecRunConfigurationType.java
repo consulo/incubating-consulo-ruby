@@ -77,7 +77,14 @@ public class RSpecRunConfigurationType  implements LocatableConfigurationType {
         return RSpecIcons.RUN_CONFIGURATION_ICON;
     }
 
-    public ConfigurationFactory[] getConfigurationFactories() {
+	@NotNull
+	@Override
+	public String getId()
+	{
+		return null;
+	}
+
+	public ConfigurationFactory[] getConfigurationFactories() {
         return new ConfigurationFactory[]{myRSpecTestsFactory};
     }
 
@@ -124,7 +131,13 @@ public class RSpecRunConfigurationType  implements LocatableConfigurationType {
         return null;
     }
 
-    @Nullable
+	@Override
+	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
+	{
+		return false;
+	}
+
+	@Nullable
     private RunnerAndConfigurationSettings createRunRSpecScriptTestsConf(final Project project, final VirtualFile file, final String name) {
         // create corresponding configuration
         final RunnerAndConfigurationSettings settings

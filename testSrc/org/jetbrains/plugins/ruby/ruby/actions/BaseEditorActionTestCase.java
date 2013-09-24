@@ -30,7 +30,7 @@ import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.IntRef;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.testCases.BaseRubyFileSetTestCase;
 import org.jetbrains.plugins.ruby.support.TestUtil;
 
@@ -188,7 +188,7 @@ public abstract class BaseEditorActionTestCase extends BaseRubyFileSetTestCase {
         @Nullable
         public Object getData(@NonNls String dataId) {
             if (DataKeys.LANGUAGE.getName().equals(dataId)) {
-                return RHTMLLanguage.INSTANCE;
+                return eRubyLanguage.INSTANCE;
             }
             if (DataKeys.PROJECT.getName().equals(dataId)) {
                 return myFile.getProject();

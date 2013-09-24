@@ -16,28 +16,31 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.StdLanguages;
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.xml.XmlDocument;
-import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
-import com.intellij.xml.breadcrumbs.BreadcrumbsLoaderComponent;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsComponents;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLFoldingBuilder;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.lang.StdLanguages;
+import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.xml.XmlDocument;
+import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,7 +57,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
     }
 
     public Language[] getLanguages() {
-        return new Language[]{RubyLanguage.RUBY, RHTMLLanguage.INSTANCE};
+        return new Language[]{RubyLanguage.RUBY, eRubyLanguage.INSTANCE};
     }
 
     public boolean acceptElement(@NotNull final PsiElement element) {
@@ -67,12 +70,12 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
             return false;
         }
         
-        if (psiFile.getLanguage() == RHTMLLanguage.INSTANCE) {
+        if (psiFile.getLanguage() == eRubyLanguage.INSTANCE) {
             return true;
         }
 
         final PsiFile origFile = psiFile.getOriginalFile();
-        if (origFile != null && origFile.getLanguage() == RHTMLLanguage.INSTANCE) {
+        if (origFile != null && origFile.getLanguage() == eRubyLanguage.INSTANCE) {
             return true;
         }
 
@@ -109,7 +112,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
     }
 
     public void initComponent() {
-        BreadcrumbsLoaderComponent.registerProvider(myProject, this);
+      //  BreadcrumbsLoaderComponent.registerProvider(myProject, this);
     }
 
     public void disposeComponent() {
@@ -132,7 +135,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         final FileViewProvider provider = psiElement.getContainingFile().getViewProvider();
         final int startOffset = psiElement.getTextRange().getStartOffset();
 
-        if (lang == RHTMLLanguage.INSTANCE) {
+        if (lang == eRubyLanguage.INSTANCE) {
         //Parent is RHTML
             //Omit new Line
             final ASTNode node = psiElement.getNode();
@@ -154,7 +157,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
             }
         } else if (lang == RubyLanguage.RUBY) {
             //RUBY_CODE_CHARACTERS
-            PsiElement parent = provider.findElementAt(startOffset, RHTMLLanguage.INSTANCE);
+            PsiElement parent = provider.findElementAt(startOffset, eRubyLanguage.INSTANCE);
 
 
             //noinspection ConstantConditions
@@ -227,7 +230,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         final Language lang = getLangageForElement(psiElement);        
         if (lang == RubyLanguage.RUBY) {
             return RBundle.message("breadcrumbs.rhtml.presentation.ruby.injection");
-        } else if (lang == RHTMLLanguage.INSTANCE) {
+        } else if (lang == eRubyLanguage.INSTANCE) {
             final ASTNode node;
 
             if (psiElement instanceof RHTMLRubyInjectionTag) {

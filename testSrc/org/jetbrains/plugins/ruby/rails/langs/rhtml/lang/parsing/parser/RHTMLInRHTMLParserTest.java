@@ -20,7 +20,7 @@ import junit.framework.Test;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.support.utils.DebugUtil;
 
@@ -41,7 +41,7 @@ public class RHTMLInRHTMLParserTest extends AbstractRHTMLParserTest {
     protected String dump(RHTMLFile psiFile) {
         final RHTMLFileViewProvider viewProvider = psiFile.getViewProvider();
 
-        return DebugUtil.psiToString(viewProvider.getPsi(RHTMLLanguage.INSTANCE), false, false);
+        return DebugUtil.psiToString(viewProvider.getPsi(eRubyLanguage.INSTANCE), false, false);
     }
 
     public static Test suite() {

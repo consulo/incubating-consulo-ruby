@@ -30,7 +30,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.process.OSProcessHandler;
@@ -228,7 +227,7 @@ public class Runner {
         //User's custom ENV variables
         final JavaParameters params = new JavaParameters();
         params.setPassParentEnvs(passParentEnvs);
-        EnvironmentVariablesComponent.setupEnvs(params, cutstomEnvVariables, passParentEnvs);
+     //   EnvironmentVariablesComponent.setupEnvs(params, cutstomEnvVariables, passParentEnvs);
 
         final Map<String, String> envParams = new HashMap<String, String>();
         if (params.isPassParentEnvs()) {

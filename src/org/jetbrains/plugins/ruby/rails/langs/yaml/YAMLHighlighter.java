@@ -16,12 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.yaml;
 
+import java.awt.Color;
+import java.awt.Font;
+
+import org.jetbrains.annotations.NonNls;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import org.jetbrains.annotations.NonNls;
-
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,10 +50,6 @@ public class YAMLHighlighter {
     static final String COMMENT_ID = "YAML_COMMENT";
     @NonNls
 
-    // Text default attrs
-    public static final TextAttributes SCALAR_KEY_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes VALUE_DEFAULT_ATTRS = HighlighterColors.JAVA_KEYWORD.getDefaultAttributes().clone();
-    public static final TextAttributes COMMENT_DEFAULT_ATTRS = HighlighterColors.JAVA_DOC_COMMENT.getDefaultAttributes().clone();
 
     public static final TextAttributes SCALAR_TEXT_DEFAULT_ATTRS = HighlighterColors.TEXT.getDefaultAttributes().clone();
     public static final TextAttributes SCALAR_STRING_DEFAULT_ATTRS = HighlighterColors.TEXT.getDefaultAttributes().clone();
@@ -72,8 +70,7 @@ public class YAMLHighlighter {
 
     // text attributes keys
     public static final TextAttributesKey SCALAR_KEY = TextAttributesKey.createTextAttributesKey(
-            SCALAR_KEY_ID,
-            SCALAR_KEY_DEFAULT_ATTRS
+            SCALAR_KEY_ID, DefaultLanguageHighlighterColors.KEYWORD
     );
     public static final TextAttributesKey SCALAR_TEXT = TextAttributesKey.createTextAttributesKey(
             SCALAR_TEXT_ID,
@@ -97,10 +94,10 @@ public class YAMLHighlighter {
     );
     public static final TextAttributesKey VALUE = TextAttributesKey.createTextAttributesKey(
             VALUE_ID,
-            VALUE_DEFAULT_ATTRS
+			DefaultLanguageHighlighterColors.KEYWORD
     );
     public static final TextAttributesKey COMMENT = TextAttributesKey.createTextAttributesKey(
             COMMENT_ID,
-            COMMENT_DEFAULT_ATTRS
+			DefaultLanguageHighlighterColors.DOC_COMMENT
     );
 }

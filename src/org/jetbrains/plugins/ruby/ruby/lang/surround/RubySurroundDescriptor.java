@@ -16,17 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround;
 
+import java.util.ArrayList;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBEGINSurrounder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBeginEndSurrounder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBraceSurrounder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyENDSurrounder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyIfSurrounder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyUnlessSurrounder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyWhileSurrounder;
 import com.intellij.lang.surroundWith.SurroundDescriptor;
 import com.intellij.lang.surroundWith.Surrounder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.*;
-
-import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -78,4 +84,10 @@ public class RubySurroundDescriptor implements SurroundDescriptor {
                 new RubyBeginEndSurrounder()
         };
     }
+
+	@Override
+	public boolean isExclusive()
+	{
+		return false;
+	}
 }

@@ -16,11 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.Nullable;
 import com.intellij.ide.IdeView;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.ide.fileTemplates.FileTemplateUtil;
-import com.intellij.ide.util.PackageUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -28,9 +30,6 @@ import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,7 +53,7 @@ public abstract class CreateFromTemplateActionBase extends AnAction {
         }
         Project project = DataKeys.PROJECT.getData(dataContext);
 
-        PsiDirectory dir = PackageUtil.getOrChooseDirectory(view);
+        PsiDirectory dir = null;//PackageUtil.getOrChooseDirectory(view);
         if (dir == null) return;
 
         FileTemplate selectedTemplate = getTemplate(project, dir);

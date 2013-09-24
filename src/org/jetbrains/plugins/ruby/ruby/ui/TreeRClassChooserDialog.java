@@ -16,6 +16,39 @@
 
 package org.jetbrains.plugins.ruby.ruby.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
+import org.jetbrains.plugins.ruby.ruby.projectview.RClassNode;
+import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
 import com.intellij.ide.projectView.impl.AbstractProjectTreeStructure;
 import com.intellij.ide.projectView.impl.ProjectAbstractTreeStructureBase;
 import com.intellij.ide.projectView.impl.ProjectTreeBuilder;
@@ -41,35 +74,6 @@ import com.intellij.ui.TabbedPaneWrapper;
 import com.intellij.ui.TreeSpeedSearch;
 import com.intellij.util.ui.Tree;
 import com.intellij.util.ui.UIUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import org.jetbrains.plugins.ruby.ruby.projectview.RClassNode;
-import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -297,7 +301,7 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         myGotoByNamePanel = new MyChooseByNamePanel(name, dummyPanel);
 //
 //
-        myTabbedPane = new TabbedPaneWrapper();
+        myTabbedPane = new TabbedPaneWrapper(Disposer.newDisposable());
         myTabbedPane.addTab(RBundle.message("tab.chooser.search.by.name"), dummyPanel);
         myTabbedPane.addTab(RBundle.message("tab.chooser.project"), scrollPane);
 

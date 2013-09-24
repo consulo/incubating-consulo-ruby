@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree;
 
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
 import com.intellij.psi.tree.IElementType;
 
@@ -34,7 +34,7 @@ public class IRHTMLElementType extends IElementType implements PresentableElemen
     }
     public IRHTMLElementType(final String debugName,
                              final String presentableName) {
-        super(debugName, RHTMLLanguage.INSTANCE);
+        super(debugName, eRubyLanguage.INSTANCE);
         myName = presentableName;
     }
 

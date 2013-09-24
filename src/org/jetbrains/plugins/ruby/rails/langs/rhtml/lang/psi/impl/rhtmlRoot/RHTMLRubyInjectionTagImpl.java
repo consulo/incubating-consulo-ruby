@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.xml.XmlTagImpl;
-import com.intellij.psi.search.PsiElementProcessor;
-import com.intellij.psi.xml.XmlTag;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.PsiElementProcessor;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.xml.XmlTag;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,12 +35,14 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 21.05.2007
  */
-public class RHTMLRubyInjectionTagImpl extends XmlTagImpl implements RHTMLRubyInjectionTag {
-    public RHTMLRubyInjectionTagImpl() {
-        super(RHTMLElementType.RHTML_XML_TAG);
-    }
+public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements RHTMLRubyInjectionTag {
 
-    @NotNull
+	public RHTMLRubyInjectionTagImpl(@NotNull ASTNode node)
+	{
+		super(node);
+	}
+
+	@NotNull
     public String getTagText() {
         final PsiElement[] elements = getElements();
         final StringBuilder buff = new StringBuilder();
@@ -58,12 +60,15 @@ public class RHTMLRubyInjectionTagImpl extends XmlTagImpl implements RHTMLRubyIn
     //TODO Make it protected in parent
     private PsiElement[] getElements() {
         final List<PsiElement> elements = new ArrayList<PsiElement>();
-        processElements(new PsiElementProcessor() {
-          public boolean execute(PsiElement psiElement) {
-            elements.add(psiElement);
-            return true;
-          }
-        }, this);
+		PsiElementProcessor processor = new PsiElementProcessor()
+		{
+			public boolean execute(PsiElement psiElement)
+			{
+				elements.add(psiElement);
+				return true;
+			}
+		};
+		PsiTreeUtil.processElements(getContainingFile(), processor);
         return elements.toArray(new PsiElement[elements.size()]);
       }
 

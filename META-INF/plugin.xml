@@ -14,27 +14,20 @@
   ~ limitations under the License.
   -->
 
-<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
-<idea-plugin url="http://www.jetbrains.net/confluence/display/RUBYDEV/IntelliJ+IDEA+Ruby+Plugin" version="2">
-    <name>Ruby</name>
+<idea-plugin version="2">
+	<id>org.jetbrains.plugins.ruby</id>
+	<name>Ruby</name>
+    <version>1.0</version>
+	<description>The Ruby plug-in makes IntelliJ IDEA the smart Ruby and Ruby on Rails editor, ideal for the full cycle application development.</description>
+	<vendor>JetBrains</vendor>
+	<resource-bundle xmlns="">org.jetbrains.plugins.ruby.RBundle</resource-bundle>
+	<depends>com.intellij.xml</depends>
+	<depends>org.consulo.java</depends>
 
-    <depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
-    <!--
-    The same id also is defined in org.jetbrains.plugins.ruby.RComponents.PLUGIN_ID
-    -->
-    <id>org.jetbrains.plugins.ruby</id>
-    <version>VERSION</version>
-    <change-notes>http://www.jetbrains.net/confluence/display/RUBYDEV/Ruby+Plugin+1.5+Release+Notes</change-notes>
-    <description>The Ruby plug-in makes IntelliJ IDEA the smart Ruby and Ruby on Rails editor, ideal for the full cycle application development.</description>
-<!--
-    <vendor logo="/general/ijLogo.png" url="www.jetbrains.com">JetBrains</vendor>
--->
-    <vendor logo="/org/jetbrains/plugins/ruby/ruby/ruby.png" url="http://www.jetbrains.com">JetBrains</vendor>
-    <idea-version since-build="7890" until-build="7999"/>
+	<depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
 
-    <resource-bundle xmlns="">org.jetbrains.plugins.ruby.RBundle</resource-bundle>
     <extensions defaultExtensionNs="com.intellij">
-        <errorHandler implementation="org.jetbrains.plugins.ruby.error.RubyErrorReportSubmitter"/>
+
         <fileTypeFactory implementation="org.jetbrains.plugins.ruby.RFileTypesLoader"/>
         <gotoClassContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubyClassAndModuleContributor"/>
         <gotoSymbolContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubySymbolContributor"/>
@@ -96,6 +89,8 @@
         <project.converterFactory implementation="org.jetbrains.plugins.ruby.rails.facet.converting.RailsModule_ConverterFactory"/>
 
 		<lang.parserDefinition language="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition" />
+
+		<declarationRangeHandler implementationClass="org.jetbrains.plugins.ruby.ruby.lang.RubyDeclarationRangeHandler" />
     </extensions>
 
     <application-components>
@@ -113,9 +108,6 @@
         </component>
         <component>
             <implementation-class>org.jetbrains.plugins.ruby.rails.RailsSupportLoader</implementation-class>
-        </component>
-        <component>
-            <implementation-class>org.jetbrains.plugins.ruby.error.RubyErrorReporter</implementation-class>
         </component>
         <component>
             <implementation-class>org.jetbrains.plugins.ruby.settings.RSettings</implementation-class>

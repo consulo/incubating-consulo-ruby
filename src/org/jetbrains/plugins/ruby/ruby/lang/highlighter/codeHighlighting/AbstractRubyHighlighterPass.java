@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
+import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeInsight.CodeInsightUtil;
+import com.intellij.codeInsight.daemon.impl.CollectHighlightsUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
-import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -70,8 +70,8 @@ import java.util.List;
     protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile,
                                                       final int startOffset, final int endOffset) {
         return psiFile instanceof RHTMLFile ?
-                CodeInsightUtil.getElementsInRange(((RHTMLFile) psiFile).getInnerRubyFile(), startOffset, endOffset, false):
-                CodeInsightUtil.getElementsInRange(psiFile, startOffset, endOffset, false);
+				CollectHighlightsUtil.getElementsInRange(((RHTMLFile) psiFile).getInnerRubyFile(), startOffset, endOffset, false):
+				CollectHighlightsUtil.getElementsInRange(psiFile, startOffset, endOffset, false);
     }
 
     protected List<PsiElement> getElementsInRange(){

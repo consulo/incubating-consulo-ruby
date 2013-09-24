@@ -16,22 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.ui;
 
-import com.intellij.ide.util.projectWizard.JdkChooserPanel;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.ui.MultiLineLabelUI;
-import com.intellij.util.ui.UIUtil;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.intellij.ide.util.projectWizard.JdkChooserPanel;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.ui.MultiLineLabelUI;
+import com.intellij.util.ui.UIUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,9 +81,7 @@ public class RubySdkChooserPanel extends JComponent {
         myJdkChooser.setAllowedJdkTypes(new SdkType[]{RubySdkType.getInstance(),
                                                       JRubySdkType.getInstance()});
 
-        final Sdk selectedJdk = project == null
-                ? null
-                : ProjectRootManager.getInstance(project).getSdk();
+        final Sdk selectedJdk = null;
         myJdkChooser.updateList(selectedJdk, null);
     }
 

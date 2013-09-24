@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.module.Module;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +29,7 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
  */
 public class RubyModulePresentationUtil {
     public static ItemPresentation getPresentation(final Module module) {
-        return new PresentationData(module.getName(), module.getModuleFilePath(),
+        return new PresentationData(module.getName(), module.getModuleDirPath(),
                                     RailsIcons.RAILS_MODULE_OPENED,
                                     RailsIcons.RAILS_MODULE_CLOSED,
                                     null);

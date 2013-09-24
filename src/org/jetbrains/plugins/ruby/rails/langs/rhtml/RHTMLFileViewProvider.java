@@ -20,19 +20,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.htmlRoot.HTMLRootInRHTMLFileImpl;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rubyRoot.RHTMLRubyFileImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.StdLanguages;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.impl.source.PsiFileImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,7 +52,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	@NotNull
 	public Language getBaseLanguage()
 	{
-		return RHTMLLanguage.INSTANCE;
+		return eRubyLanguage.INSTANCE;
 	}
 
 	@NotNull
@@ -70,7 +70,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 			return myViews;
 		}
 		Set<Language> views = new HashSet<Language>(4);
-		views.add(RHTMLLanguage.INSTANCE);
+		views.add(eRubyLanguage.INSTANCE);
 		views.add(RubyLanguage.RUBY);
 		views.add(HTMLLanguage.INSTANCE);
 
@@ -82,28 +82,26 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		return new RHTMLFileViewProvider(getManager(), copy, false);
 	}
 
-
 	protected PsiFile createFile(final Language lang)
 	{
 		if(lang == RubyLanguage.RUBY)
 		{
-			// at current moment original file is used
-			// only by RPsiBase.getVirtualFile(). This method can't return null
 			final RHTMLRubyFileImpl ruby = new RHTMLRubyFileImpl(this);
-			ruby.setOriginalFile(getPsi(RHTMLLanguage.INSTANCE));
+			ruby.setOriginalFile(getPsi(eRubyLanguage.INSTANCE));
 			return ruby;
 		}
-		else if(lang == StdLanguages.HTML)
+		else if(lang == HTMLLanguage.INSTANCE)
 		{
-			//If original file ins't null CssPropertyDescriptor.buildContextPath() leds to NPE
-			// in CssShorthandExpandProcessor.processReferences()
-			//htmlInRHTMLFile.setOriginalFile(getPsi(RHTMLLanguage.RHTML));
-			return new HTMLRootInRHTMLFileImpl(this);
+			ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(HTMLLanguage.INSTANCE);
+
+			PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
+			file.setContentElementType(eRubyElementTypes.TEMPLATE_DATA);
+			return file;
 		}
-		else if(lang == RHTMLLanguage.INSTANCE)
+		else if(lang == eRubyLanguage.INSTANCE)
 		{
 			final ParserDefinition def = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
-			assert def != null; //not null for RHTML Language
+
 			return def.createFile(this);
 		}
 		return null;

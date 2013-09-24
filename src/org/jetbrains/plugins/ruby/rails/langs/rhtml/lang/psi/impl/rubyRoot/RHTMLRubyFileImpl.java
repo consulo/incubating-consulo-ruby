@@ -16,15 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rubyRoot;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
-import static org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementTypeEx.RUBY_DECLARATIONS_IN_RHTML_ROOT;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLRubyFile;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiFileBase;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.FileViewProvider;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,11 +33,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiFileBase;
  */
 public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile {
     public RHTMLRubyFileImpl(final FileViewProvider viewProvider) {
-        super(RUBY_DECLARATIONS_IN_RHTML_ROOT, RUBY_DECLARATIONS_IN_RHTML_ROOT, viewProvider);
-    }
-
-    public Lexer createLexer() {
-        return null;
+        super(eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, viewProvider);
     }
 
     @NotNull

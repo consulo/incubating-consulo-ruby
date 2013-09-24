@@ -16,12 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
+import java.awt.Color;
+
+import org.jetbrains.annotations.NonNls;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import org.jetbrains.annotations.NonNls;
-
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,17 +49,17 @@ public class RHTMLHighlighter {
     private static final String FLEX_ERROR_ID = "FLEX_ERROR_ID";
 
     // Text default attrs
-    private static final TextAttributes COMMENT_DEFAULT_ATTRS = HighlighterColors.HTML_COMMENT.getDefaultAttributes().clone();
-    private static final TextAttributes OMIT_NEW_LINE_DEFAULT_ATTRS = HighlighterColors.XML_ATTRIBUTE_NAME.getDefaultAttributes().clone();
+    private static final TextAttributes COMMENT_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.LINE_COMMENT.getDefaultAttributes().clone();
+    private static final TextAttributes OMIT_NEW_LINE_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_ATTRIBUTE.getDefaultAttributes().clone();
 
-    private static final TextAttributes RHTML_SCRIPTLET_START_DEFAULT_ATTRS = HighlighterColors.XML_TAG_NAME.getDefaultAttributes().clone();
-    private static final TextAttributes RHTML_SCRIPTLET_END_DEFAULT_ATTRS = HighlighterColors.XML_TAG_NAME.getDefaultAttributes().clone();
-    private static final TextAttributes RHTML_EXPRESSION_START_DEFAULT_ATTRS = HighlighterColors.XML_TAG_NAME.getDefaultAttributes().clone();
-    private static final TextAttributes RHTML_EXPRESSION_END_DEFAULT_ATTRS = HighlighterColors.XML_TAG_NAME.getDefaultAttributes().clone();
+    private static final TextAttributes RHTML_SCRIPTLET_START_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
+    private static final TextAttributes RHTML_SCRIPTLET_END_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
+    private static final TextAttributes RHTML_EXPRESSION_START_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
+    private static final TextAttributes RHTML_EXPRESSION_END_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().clone();
 
     private static final TextAttributes FLEX_ERROR_DEFAULT_ATTRS = HighlighterColors.BAD_CHARACTER.getDefaultAttributes().clone();
 
-    private static final TextAttributes RHTML_SCRIPTING_BACKGROUND_DEFAULT_ATTRS = HighlighterColors.JSP_SCRIPTING_BACKGROUND.getDefaultAttributes().clone();
+    private static final TextAttributes RHTML_SCRIPTING_BACKGROUND_DEFAULT_ATTRS = DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR.getDefaultAttributes().clone();
 
     // fixes for default attributes
     static {
@@ -68,8 +69,8 @@ public class RHTMLHighlighter {
         RHTML_SCRIPTLET_END_DEFAULT_ATTRS.setBackgroundColor(new Color(242, 232, 228));
         OMIT_NEW_LINE_DEFAULT_ATTRS.setBackgroundColor(new Color(242, 232, 228));
 
-        RHTML_EXPRESSION_START_DEFAULT_ATTRS.setBackgroundColor(HighlighterColors.XML_TAG.getDefaultAttributes().getBackgroundColor());
-        RHTML_EXPRESSION_END_DEFAULT_ATTRS.setBackgroundColor(HighlighterColors.XML_TAG.getDefaultAttributes().getBackgroundColor());
+        RHTML_EXPRESSION_START_DEFAULT_ATTRS.setBackgroundColor(DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().getBackgroundColor());
+        RHTML_EXPRESSION_END_DEFAULT_ATTRS.setBackgroundColor(DefaultLanguageHighlighterColors.MARKUP_TAG.getDefaultAttributes().getBackgroundColor());
 
     }
 

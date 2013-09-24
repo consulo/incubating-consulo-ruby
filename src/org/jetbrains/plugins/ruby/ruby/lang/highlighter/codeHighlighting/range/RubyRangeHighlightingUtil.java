@@ -16,20 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.openapi.editor.markup.HighlighterTargetArea;
-import com.intellij.openapi.editor.markup.MarkupModel;
-import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,7 +44,7 @@ public class RubyRangeHighlightingUtil {
         final ArrayList<HighlightInfo> array = new ArrayList<HighlightInfo>();
         final HighlightInfo[] oldMarkers = RubyRangeHighlightDaemon.getHighlightInfos(document, project);
 
-        final MarkupModel markupModel = document.getMarkupModel(project);
+      /*  final MarkupModel markupModel =  DocumentMarkupModel.forDocument(document, project, false);
         if (oldMarkers != null) {
             for (HighlightInfo info : oldMarkers) {
                 RangeHighlighter highlighter = info.highlighter;
@@ -57,17 +53,17 @@ public class RubyRangeHighlightingUtil {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Removed line markers:" + (oldMarkers.length - array.size()));
             }
-        }
+        }   */
 
         final PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document);
         for (HighlightInfo info : markers) {
-            info.highlighter =
+            /*info.highlighter =
                     markupModel.addRangeHighlighter(
                             info.startOffset,
                             info.endOffset,
                             HighlighterLayer.ADDITIONAL_SYNTAX,
                             info.getTextAttributes(psiFile),
-                            HighlighterTargetArea.EXACT_RANGE);
+                            HighlighterTargetArea.EXACT_RANGE);  */
             array.add(info);
         }
 

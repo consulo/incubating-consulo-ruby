@@ -16,27 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
+import java.io.File;
+
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationFactory;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
+import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.RunManagerEx;
+import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationFactory;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
-import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,7 +51,7 @@ public class RubyRunConfigurationUtil {
      * @param name Name for new run configuration
      * @return Run settings, able to register in RunManagerEx
      */
-    public static RunnerAndConfigurationSettingsImpl create(final Project project,
+    public static RunnerAndConfigurationSettings create(final Project project,
                                                             final RubyRunConfigurationFactory factory,
                                                             final String name){
 

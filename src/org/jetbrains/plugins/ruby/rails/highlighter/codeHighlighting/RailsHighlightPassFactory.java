@@ -16,18 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import com.intellij.codeHighlighting.Pass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.markup.MarkupModel;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +25,19 @@ import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
+import com.intellij.codeHighlighting.Pass;
+import com.intellij.codeHighlighting.TextEditorHighlightingPass;
+import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
+import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.impl.DocumentMarkupModel;
+import com.intellij.openapi.editor.markup.MarkupModel;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -77,7 +78,7 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
         //[HACK] may be it is hack.. Removes all Rails Highlighter if Rails Facet was deleted from module.
         final Document document = editor.getDocument();
         final Project project = psiFile.getProject();
-        final MarkupModel markupModel = document.getMarkupModel(project);
+        final MarkupModel markupModel = DocumentMarkupModel.forDocument(document, project, false);
         final RailsLineMarkerInfo[] markers = DaemonCodeAnalyzerUtil.getLineMarkers(document, project);
         //removes all Rails specific markers
         if (markers != null) {

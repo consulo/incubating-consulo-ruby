@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 
-import com.intellij.lang.documentation.DocumentationProvider;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
@@ -34,8 +33,10 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-
-import java.util.List;
+import com.intellij.lang.documentation.DocumentationProvider;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,14 +46,16 @@ import java.util.List;
  */
 public class RubyDocumentationProvider implements DocumentationProvider {
 
-    @Nullable
-    public String getQuickNavigateInfo(@Nullable final PsiElement element) {
-        return RubyHelpUtil.getShortDescription(element, false);
-    }
+	@Nullable
+	@Override
+	public String getQuickNavigateInfo(PsiElement element, PsiElement element2)
+	{
+		return RubyHelpUtil.getShortDescription(element, false);
+	}
 
-    @Nullable
-    public String getUrlFor(PsiElement element, PsiElement originalElement) {
-        return null;
+	@Nullable
+    public java.util.List<java.lang.String> getUrlFor(PsiElement element, PsiElement originalElement) {
+        return Collections.emptyList();
     }
 
     @Nullable

@@ -16,9 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler;
+import org.jetbrains.plugins.ruby.ruby.lang.annotator.RubyFastAnnotator;
+import org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher;
+import org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter;
+import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider;
+import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider;
+import org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighter;
+import org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition;
+import org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.ide.structureView.StructureViewBuilder;
-import com.intellij.lang.*;
+import com.intellij.lang.Commenter;
+import com.intellij.lang.Language;
+import com.intellij.lang.LanguageCodeInsightActionHandler;
+import com.intellij.lang.PairedBraceMatcher;
+import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.documentation.DocumentationProvider;
@@ -33,22 +52,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler;
-import org.jetbrains.plugins.ruby.ruby.lang.annotator.RubyFastAnnotator;
-import org.jetbrains.plugins.ruby.ruby.lang.annotator.RubySlowAnnotator;
-import org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher;
-import org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter;
-import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider;
-import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider;
-import org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder;
-import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder;
-import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighter;
-import org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition;
-import org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor;
 import rb.implement.ImplementHandler;
 import rb.override.OverrideHandler;
 
@@ -144,12 +147,12 @@ public class RubyLanguage extends Language {
                 return new RubyFastAnnotator();
             }
         };
-        mySlowAnnotator = new NotNullLazyValue<ExternalAnnotator>(){
+      /*  mySlowAnnotator = new NotNullLazyValue<ExternalAnnotator>(){
             @NotNull
             protected ExternalAnnotator compute() {
                 return new RubySlowAnnotator();
             }
-        };
+        }; */
         myNamesValidator = new NotNullLazyValue<NamesValidator>(){
             @NotNull
             protected NamesValidator compute() {

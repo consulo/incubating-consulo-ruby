@@ -16,16 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.peer.PeerFactory;
-import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.tree.IFileElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections.RHTMLRubyParser;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.lang.LanguageVersion;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.lexer.Lexer;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.tree.IFileElementType;
+import com.intellij.util.LanguageVersionUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,13 +41,15 @@ public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType {//extends
     }
 
     public ASTNode parseContents(final ASTNode chameleon) {
-        final PeerFactory factory = PeerFactory.getInstance();
+        final PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
 
         final Lexer lexer = new RHTMLRubyLexer();
 
-        final Project project = chameleon.getTreeParent().getPsi().getProject();
-        final PsiBuilder builder = factory.createBuilder(chameleon, lexer, getLanguage(), ((LeafElement)chameleon).getInternedText(), project);
+		LanguageVersion<Language> defaultVersion = LanguageVersionUtil.findDefaultVersion(getLanguage());
+		final Project project = chameleon.getTreeParent().getPsi().getProject();
 
-        return new RHTMLRubyParser().parse(chameleon.getElementType(), builder);
+		final PsiBuilder builder = factory.createBuilder(project, chameleon, lexer, getLanguage(), defaultVersion, chameleon.getChars());
+
+		return new RHTMLRubyParser().parse(chameleon.getElementType(), builder, defaultVersion);
     }
 }

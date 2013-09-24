@@ -16,12 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import com.intellij.codeInsight.hint.EditorFragmentComponent;
-import com.intellij.codeInspection.InspectionToolProvider;
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.ActionRunner;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
@@ -29,16 +23,10 @@ import org.jetbrains.plugins.ruby.ruby.actions.editor.RubyEditorActionsManager;
 import org.jetbrains.plugins.ruby.ruby.inspections.ducktype.RubyDuckTypeInspection;
 import org.jetbrains.plugins.ruby.ruby.inspections.resolve.RubyResolveInspection;
 import org.jetbrains.plugins.ruby.ruby.inspections.scopes.RubyScopesInspection;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RClassName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
+import com.intellij.codeInspection.InspectionToolProvider;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.util.ActionRunner;
 
 
 public class RubySupportLoader implements ApplicationComponent, InspectionToolProvider {
@@ -49,62 +37,10 @@ public class RubySupportLoader implements ApplicationComponent, InspectionToolPr
 // Registering Ruby editor actions
                 RubyEditorActionsManager.registerRubyEditorActions();
 
-// Register context info handler
-                registerContextInfoHandler();
             }
         });
     }
 
-    private static void registerContextInfoHandler() {
-        EditorFragmentComponent.setDeclarationHandler(
-                RContainer.class, new EditorFragmentComponent.DeclarationRangeHandler() {
-
-            @NotNull
-            public TextRange getDeclarationRange(@NotNull final PsiElement container) {
-                final TextRange containerRange = container.getTextRange();
-                int start = containerRange.getStartOffset();
-                int end = start;
-                TextRange range = null;
-
-                if (container instanceof RClass) {
-
-                    final RSuperClass superClass = ((RClass) container).getPsiSuperClass();
-                    if (superClass != null) {
-                        end = superClass.getTextRange().getEndOffset();
-                    } else {
-                        final RClassName className = ((RClass) container).getClassName();
-                        if (className != null) {
-                            end = className.getTextRange().getEndOffset();
-                        }
-                    }
-                    return new TextRange(start, end);
-                } else if (container instanceof RMethod) {
-                    final RArgumentList argList = ((RMethod) container).getArgumentList();
-                    if (argList != null) {
-                        end = argList.getTextRange().getEndOffset();
-                    } else {
-                        final RMethodName methodName = ((RMethod) container).getMethodName();
-                        if (methodName != null) {
-                            end = methodName.getTextRange().getEndOffset();
-                        }
-                    }
-                    return new TextRange(start, end);
-                } else if (container instanceof RModule) {
-                    final RModuleName moduleName = ((RModule) container).getModuleName();
-                    if (moduleName != null) {
-                        range = moduleName.getTextRange();
-                    }
-                }
-
-                if (range == null) {
-                    range = containerRange;
-                }
-
-                return new TextRange(range.getStartOffset(), range.getEndOffset());
-            }
-        }
-        );
-    }
 
     @NotNull
     @NonNls

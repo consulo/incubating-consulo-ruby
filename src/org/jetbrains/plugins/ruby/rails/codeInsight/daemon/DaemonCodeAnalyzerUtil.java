@@ -16,12 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.impl.DocumentMarkupModel;
 import com.intellij.openapi.editor.markup.MarkupModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,14 +37,14 @@ public class DaemonCodeAnalyzerUtil {
     public static RailsLineMarkerInfo[] getLineMarkers(final Document document,
                                                       final Project project) {
         ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = document.getMarkupModel(project);
+        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
         return markup.getUserData(RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY);
     }
 
     public static void setRubyLineMarkers(final Document document, final RailsLineMarkerInfo[] lineMarkers,
                                           final Project project) {
         ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = document.getMarkupModel(project);
+        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
         markup.putUserData(RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY, lineMarkers);
     }
 }

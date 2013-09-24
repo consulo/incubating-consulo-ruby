@@ -17,6 +17,17 @@
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
 
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
+import com.intellij.ide.util.DefaultPsiElementCellRenderer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
@@ -24,14 +35,6 @@ import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.ui.awt.RelativePoint;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-
-import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,7 +65,7 @@ public class RubyGutterNavigator {
         openTargets(e, info.getMode() == RubyGutterInfo.Mode.OVERRIDE ?
                 RBundle.message("line.marker.override.select.variant") :
                 RBundle.message("line.marker.implement.select.variant"),
-                new GotoSymbolCellRenderer(), navigatable.toArray(new Navigatable[navigatable.size()]));
+                new DefaultPsiElementCellRenderer(), navigatable.toArray(new Navigatable[navigatable.size()]));
     }
 
     public static void openTargets(@NotNull final MouseEvent e,

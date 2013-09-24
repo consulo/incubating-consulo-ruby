@@ -16,6 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.Properties;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import org.apache.velocity.runtime.parser.ParseException;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.CommonBundle;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
@@ -29,17 +42,12 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.wm.ex.IdeFocusTraversalPolicy;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.PsiJavaPackage;
 import com.intellij.util.IncorrectOperationException;
-import org.apache.velocity.runtime.parser.ParseException;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,7 +76,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
         myTemplate = template;
         setTitle(RBundle.message("title.new.from.template", template.getName()));
 
-        PsiPackage aPackage = myDirectory.getPackage();
+        PsiJavaPackage aPackage = null;//myDirectory.getPackage();
         String packageName = aPackage == null ? "" : aPackage.getQualifiedName();
         myDefaultProperties = FileTemplateManager.getInstance().getDefaultProperties();
         myDefaultProperties.setProperty(FileTemplate.ATTRIBUTE_PACKAGE_NAME, packageName);
@@ -81,11 +89,11 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
             showErrorDialog(e);
         }
 
-        if (unsetAttributes != null) {
+       /* if (unsetAttributes != null) {
             myAttrPanel = new CreateFromTemplatePanel(unsetAttributes, true);
             myAttrComponent = myAttrPanel.getComponent();
             init();
-        } else {
+        } else*/ {
             myAttrPanel = null;
             myAttrComponent = null;
         }
@@ -159,7 +167,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
             props = FileTemplateManager.getInstance().getDefaultProperties();
         }
         FileTemplateManager.getInstance().addRecentName(template.getName());
-        FileTemplateUtil.setPackageNameAttribute(props, directory);
+       // FileTemplateUtil.setPackageNameAttribute(props, directory);
 
         if (fileName != null && props.getProperty(FileTemplate.ATTRIBUTE_NAME) == null) {
             props.setProperty(FileTemplate.ATTRIBUTE_NAME, fileName);
@@ -217,7 +225,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
 
         directory.checkCreateFile(realfileName);
 
-        final PsiFile file = PsiManager.getInstance(project).getElementFactory().createFileFromText(realfileName, content);
+        final PsiFile file = PsiFileFactory.getInstance(project).createFileFromText(realfileName, content);
         return (PsiFile) directory.add(file);
     }
 }

@@ -28,7 +28,7 @@ import com.intellij.psi.xml.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationUtil;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagNavigator;
@@ -184,7 +184,7 @@ public class RHTMLFormatterUtil {
      */
     public static PsiElement findRHTMLElementByStartOffset(final FileViewProvider vProvider, final int startOffset,
                                                            final boolean searchHighest) {
-        PsiElement psiElement = vProvider.findElementAt(startOffset, RHTMLLanguage.INSTANCE);
+        PsiElement psiElement = vProvider.findElementAt(startOffset, eRubyLanguage.INSTANCE);
         if (searchHighest && psiElement != null) {
             PsiElement psiParent = psiElement.getParent();
             while (psiParent != null

@@ -22,8 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementTypeEx;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.visitors.RHTMLElementTypeVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
@@ -67,7 +67,7 @@ import com.intellij.psi.tree.TokenSet;
 public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
 
     public RHTMLFileImpl(FileViewProvider viewProvider) {
-        super(RHTMLElementTypeEx.RHTML_FILE, RHTMLElementTypeEx.RHTML_FILE, viewProvider);
+        super(eRubyElementTypes.RHTML_FILE, eRubyElementTypes.RHTML_FILE, viewProvider);
     }
 
     public String toString() {

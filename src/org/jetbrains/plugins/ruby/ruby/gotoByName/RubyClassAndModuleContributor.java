@@ -16,21 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.gotoByName;
 
-import com.intellij.navigation.ChooseByNameContributor;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.navigation.ChooseByNameContributor;
+import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,8 +68,7 @@ public class RubyClassAndModuleContributor extends RubyBaseContributor implement
         return names.toArray(new String[names.size()]);
     }
 
-    public NavigationItem[] getItemsByName(final String name, final Project project,
-                                           final boolean includeNonProjectItems) {
+	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems) {
         //TODO Refactor with RCacheUtils
         final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);
         final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();

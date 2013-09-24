@@ -46,16 +46,11 @@ import com.intellij.psi.templateLanguages.TemplateLanguage;
  * @author: Roman Chernyatchik
  * @date: 02.04.2007
  */
-public class RHTMLLanguage extends Language implements TemplateLanguage{
-    public static final RHTMLLanguage INSTANCE = new RHTMLLanguage();
+public class eRubyLanguage extends Language implements TemplateLanguage{
+    public static final eRubyLanguage INSTANCE = new eRubyLanguage();
 
-    private static final String RB_MIME = "application/x-httpd-eruby";
-
-
-
-    public RHTMLLanguage() {
-        super("RHTML", RB_MIME);
-
+    public eRubyLanguage() {
+        super("RHTML", "application/x-httpd-eruby");
     }
 
     public FileViewProvider createViewProvider(final VirtualFile file,

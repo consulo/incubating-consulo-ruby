@@ -16,18 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.impl.DocumentMarkupModel;
 import com.intellij.openapi.editor.markup.HighlighterLayer;
 import com.intellij.openapi.editor.markup.HighlighterTargetArea;
 import com.intellij.openapi.editor.markup.MarkupModel;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.plugins.ruby.HighlightPassConstants;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +48,7 @@ public class RailsUpdateHighlightersUtil {
         final ArrayList<RailsLineMarkerInfo> array = new ArrayList<RailsLineMarkerInfo>();
         final RailsLineMarkerInfo[] oldMarkers = DaemonCodeAnalyzerUtil.getLineMarkers(document, project);
 
-        final MarkupModel markupModel = document.getMarkupModel(project);
+        final MarkupModel markupModel = DocumentMarkupModel.forDocument(document, project, false);
         if (oldMarkers != null) {
             for (RailsLineMarkerInfo info : oldMarkers) {
                 final RangeHighlighter highlighter = info.highlighter;

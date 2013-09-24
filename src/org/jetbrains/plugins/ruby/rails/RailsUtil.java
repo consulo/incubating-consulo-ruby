@@ -48,8 +48,8 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.execution.RunManagerEx;
+import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.filters.Filter;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
@@ -169,7 +169,7 @@ public class RailsUtil {
                 IdeaInternalUtil.runInsideReadAction(new ActionRunner.InterruptibleRunnable() {
                     public void run() throws Exception {
                         // requires read action
-                        final RunnerAndConfigurationSettingsImpl settings =
+                        final RunnerAndConfigurationSettings settings =
                                 RailsRunConfigurationType.getInstance().getWEBrickFactory().createRunConfigurationSettings(module);
 
                         runManagerEx.addConfiguration(settings, false);

@@ -45,7 +45,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     }
 
     final Language lang = psiElement.getLanguage();
-    if (lang instanceof RHTMLLanguage) {
+    if (lang instanceof eRubyLanguage) {
         return false;
     }
     final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
@@ -59,7 +59,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
         return supertype;
     }
     final Language lang = element.getLanguage();
-    if (lang instanceof RHTMLLanguage) {
+    if (lang instanceof eRubyLanguage) {
         return "";
     }
     final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
@@ -75,7 +75,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     }
 
     final Language lang = element.getLanguage();
-    if (lang instanceof RHTMLLanguage) {
+    if (lang instanceof eRubyLanguage) {
         return "";
     }
     final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
@@ -91,7 +91,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     }
 
     final Language lang = element.getLanguage();
-    if (lang instanceof RHTMLLanguage) {
+    if (lang instanceof eRubyLanguage) {
         return "";
     }
     final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);

@@ -16,6 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.ui.roots.loadPath;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxList;
+import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxListListener;
+import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
+import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoryItem;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserDialog;
@@ -24,17 +39,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
-import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxList;
-import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxListListener;
-import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoryItem;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,7 +73,7 @@ public class RLoadPathCooserPanel implements CheckBoxListListener {
                 dirChooser.setShowFileSystemRoots(true);
                 dirChooser.setHideIgnored(true);
                 dirChooser.setTitle(RBundle.message("module.settings.dialog.load.path.filechooser.add.dialog.title"));
-                dirChooser.setContextModule(module);
+               // dirChooser.setContextModule(module);
                 FileChooserDialog chooser = FileChooserFactory.getInstance().createFileChooser(dirChooser, myContentPane);
                 VirtualFile[] files =  chooser.choose(null, null);
                 for (VirtualFile file : files) {

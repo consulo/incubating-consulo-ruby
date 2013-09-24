@@ -16,6 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
@@ -26,16 +41,6 @@ import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.Ref;
 import com.intellij.ui.RawCommandLineEditor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -86,7 +91,7 @@ public class RubyRunConfigurationUIUtil {
         final RawCommandLineEditor rawEditor = new RawCommandLineEditor();
         rawEditorWrapper.set(rawEditor);
 
-        rawEditor.setDialodCaption(dialogCaption);
+        rawEditor.setDialogCaption(dialogCaption);
 
         LabeledComponent<RawCommandLineEditor> myComponent = new LabeledComponent<RawCommandLineEditor>();
         myComponent.setComponent(rawEditor);
@@ -148,7 +153,7 @@ public class RubyRunConfigurationUIUtil {
         myModulesComboBox.setModel(new DefaultComboBoxModel(myConfiguration.getModules()));
 //setting skds
         final ArrayList<Sdk> foundSdks = new ArrayList<Sdk>();
-        final Sdk[] allSdk = SdkTable.getInstance().getAllJdks();
+        final Sdk[] allSdk = SdkTable.getInstance().getAllSdks();
         for (Sdk sdk : allSdk) {
             if (RubySdkUtil.isSDKValid(sdk)) {
                 foundSdks.add(sdk);

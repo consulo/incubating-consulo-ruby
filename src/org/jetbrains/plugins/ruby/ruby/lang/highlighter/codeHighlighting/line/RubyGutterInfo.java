@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.editor.markup.GutterIconRenderer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiMethod;
+import java.awt.event.MouseEvent;
+import java.util.LinkedHashSet;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -30,11 +31,11 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupConstants;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
-
-import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.util.LinkedHashSet;
-import java.util.List;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.editor.markup.GutterIconRenderer;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiMethod;
 
 /**
  * Created by IntelliJ IDEA.
@@ -139,7 +140,19 @@ public class RubyGutterInfo extends RubyLineMarkerInfo{
         public GutterIconRenderer.Alignment getAlignment() {
             return Alignment.LEFT;
         }
-    }
+
+		@Override
+		public boolean equals(Object o)
+		{
+			return false;
+		}
+
+		@Override
+		public int hashCode()
+		{
+			return 0;
+		}
+	}
 
     private class MyNavigateAction extends AnAction {
         public void actionPerformed(final AnActionEvent e) {

@@ -25,7 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlFile;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -179,6 +179,6 @@ public class RHTMLPsiUtil {
             return false;
         }
         final Language language = psiFile.getViewProvider().getBaseLanguage();
-        return language == RHTMLLanguage.INSTANCE;
+        return language == eRubyLanguage.INSTANCE;
     }
 }

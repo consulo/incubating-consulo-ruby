@@ -16,29 +16,29 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
+import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
+import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
+import org.jetbrains.plugins.ruby.ruby.cache.listeners.RubyPomModelListener;
+import org.jetbrains.plugins.ruby.ruby.module.RubyModuleListenerAdapter;
+import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import com.intellij.ProjectTopics;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleFileIndex;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.pom.PomModel;
 import com.intellij.util.messages.MessageBusConnection;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.listeners.RubyPomModelListener;
-import org.jetbrains.plugins.ruby.ruby.module.RubyModuleListenerAdapter;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
-import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -76,7 +76,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
     protected void registerDisposer() {
         if (JRubyUtil.hasJRubySupport(myModule)) {
             //noinspection ConstantConditions
-            Disposer.register(JRubyFacet.getInstance(myModule), this);
+          //  Disposer.register(JRubyFacet.getInstance(myModule), this);
         } else {
             Disposer.register(myModule, this);
         }
@@ -103,14 +103,14 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
      * Adds pom model listener to files cache
      */
     private void registerPomListener() {
-        final PomModel pomModel = myModule.getPom().getModel();
+       /* final PomModel pomModel = myModule.getPom().getModel();
         myPomModelListener = new RubyPomModelListener(myModule, pomModel) {
             protected synchronized void processEvent(final List<RubyChange> list, final VirtualFile vFile) {
                 ProgressManager.getInstance().checkCanceled();
                 regenerateFileInfo(vFile);
             }
         };
-        pomModel.addModelListener(myPomModelListener, myModule);
+        pomModel.addModelListener(myPomModelListener, myModule);    */
     }
 
     private void registerModuleDeleteListener() {
@@ -127,7 +127,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
     }
 
     private void unregisterPomListener(){
-        myModule.getPom().getModel().removeModelListener(myPomModelListener);
+        //myModule.getPom().getModel().removeModelListener(myPomModelListener);
     }
 
     public boolean containsUrl(@NotNull String url) {
@@ -154,7 +154,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
     }
 
     public String toString() {
-        return super.toString() + " It is Module storage for ("+myModule.toString()+"). Module type = " + myModule.getModuleType();
+        return super.toString() + " It is Module storage for ("+myModule.toString()+").";
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

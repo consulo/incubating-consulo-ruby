@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.commenter;
 
-import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.Commenter;
 
 
 public class RubyCommenter implements Commenter {
@@ -43,4 +43,18 @@ public class RubyCommenter implements Commenter {
     public String getBlockCommentSuffix() {
         return BLOCK_COMMAND_SUFFIX;
     }
+
+	@Nullable
+	@Override
+	public String getCommentedBlockCommentPrefix()
+	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getCommentedBlockCommentSuffix()
+	{
+		return null;
+	}
 }

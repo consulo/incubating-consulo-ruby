@@ -23,18 +23,18 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
  * @date: Dec 21, 2007
  */
 
+import org.jetbrains.annotations.Nullable;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.formatter.xml.AnotherLanguageBlockWrapper;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 
 //TODO separate with AnotherLanguageBlockWrapper after IDEA #7613
 public class ForeignLanguageBlock extends AnotherLanguageBlockWrapper {
-    public ForeignLanguageBlock(final ASTNode node,
-                                final XmlFormattingPolicy policy,
-                                final Block original,
-                                final Indent indent) {
-        super(node, policy, original, indent);
-    }
+	public ForeignLanguageBlock(ASTNode node, XmlFormattingPolicy policy, Block original, Indent indent, int offset, @Nullable TextRange range)
+	{
+		super(node, policy, original, indent, offset, range);
+	}
 }

@@ -16,8 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.openapi.util.Iconable;
-import com.intellij.ui.RowIcon;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -28,9 +30,10 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
-
-import javax.swing.*;
-import java.util.List;
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiElement;
+import com.intellij.ui.RowIcon;
 
 /**
  * Created by IntelliJ IDEA.
@@ -105,7 +108,7 @@ public class RContainerPresentationUtil  implements RubyIcons, RailsIcons, RPres
     public static Icon getIconWithModifiers(final RVirtualContainer container) {
         final AccessModifier modifier = container.getAccessModifier();
         final RowIcon icon = new RowIcon(2);
-        icon.setIcon(container.getIcon(Iconable.ICON_FLAG_OPEN), 0);
+        icon.setIcon(IconDescriptorUpdaters.getIcon((PsiElement) container, Iconable.ICON_FLAG_OPEN), 0);
         icon.setIcon(getIconForAccessModifier(modifier),1);
         return icon;
     }

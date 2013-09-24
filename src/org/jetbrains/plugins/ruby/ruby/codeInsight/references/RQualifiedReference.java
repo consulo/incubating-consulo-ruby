@@ -16,15 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.PsiManagerImpl;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +29,11 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.*;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilter;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilterFactory;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
@@ -53,11 +53,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes.R
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RAssignmentExpressionNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.presentation.SymbolPresentationUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.ResolveResult;
+import com.intellij.psi.impl.PsiManagerImpl;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -122,7 +126,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference {
     public final ResolveResult[] multiResolve(final boolean incompleteCode) {
         final PsiManager manager = getElement().getManager();
         if (manager instanceof PsiManagerImpl) {
-            final ResolveCache cache = ((PsiManagerImpl) manager).getResolveCache();
+            final ResolveCache cache = ResolveCache.getInstance(myProject);
             return cache.resolveWithCaching(this, MyResolver.INSTANCE, false, false);
         } else {
             return multiResolveInner(incompleteCode);

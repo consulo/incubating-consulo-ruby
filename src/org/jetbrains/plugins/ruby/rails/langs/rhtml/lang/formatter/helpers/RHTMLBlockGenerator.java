@@ -16,9 +16,36 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
-import com.intellij.formatting.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.ForeignLanguageBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLCommentBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlTagBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLRubyInjectionBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.NodeInfo;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.RHTMLNodeInfo;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagNavigator;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
+import org.jetbrains.plugins.ruby.support.utils.DebugUtil;
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.FormattingModel;
+import com.intellij.formatting.FormattingModelBuilder;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.lang.LanguageFormatting;
 import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
@@ -30,23 +57,6 @@ import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTag;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.ForeignLanguageBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.*;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.NodeInfo;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.RHTMLNodeInfo;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagNavigator;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import org.jetbrains.plugins.ruby.support.utils.DebugUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -356,12 +366,12 @@ public class RHTMLBlockGenerator {
                                                              final CodeStyleSettings settings
     ) {
         final PsiElement childPsi = child.getPsi();
-        final FormattingModelBuilder builder = childLanguage.getEffectiveFormattingModelBuilder(childPsi);
+        final FormattingModelBuilder builder = LanguageFormatting.INSTANCE.forLanguage(childPsi.getLanguage());
         LOG.assertTrue(builder != null);
         final FormattingModel childModel = builder.createModel(childPsi, settings);
         result.add(new ForeignLanguageBlock(child, policy,
                                             childModel.getRootBlock(),
-                                            indent));
+                                            indent, 0, child.getTextRange()));
     }
 
     private static void createAndAddRHTMLHtml(final boolean isTag,

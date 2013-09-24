@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.rails.RailsComponents;
+import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetManagerAdapter;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;
 import com.intellij.util.messages.MessageBusConnection;
-import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.RailsComponents;
-import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +63,7 @@ public class BaseRailsFacetListener extends FacetManagerAdapter implements Modul
           final Module module = facet.getModule();
           if (module.isLoaded()) {
             performSymbolCacheUpdateCausedByFacet(facet);
-              RailsProjectViewPane.getInstance(module.getProject()).facetAdded();
+           //   RailsProjectViewPane.getInstance(module.getProject()).facetAdded();
           }
       }
 
@@ -85,7 +85,7 @@ public class BaseRailsFacetListener extends FacetManagerAdapter implements Modul
             }
 
             performSymbolCacheUpdateCausedByFacet(facet);
-            RailsProjectViewPane.getInstance(facet.getModule().getProject()).facetAdded();
+          //  RailsProjectViewPane.getInstance(facet.getModule().getProject()).facetAdded();
       }
 
 //        public void facetConfigurationChanged(@NotNull final Facet facet) {

@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight;
 
-import com.intellij.lang.LanguageDialect;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceExpression;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -112,13 +111,13 @@ public class RCodeInsightUtil {
         if (root instanceof PsiFile) {
             final PsiFile file = (PsiFile) root;
 
-            final LanguageDialect dialect = file.getLanguageDialect();
+            /*final LanguageDialect dialect = file.getLanguageDialect();
             if (dialect != null) {
                 final PsiElement element = file.getViewProvider().findElementAt(offset, dialect);
                 if (element != null) {
                     return element;
                 }
-            }
+            }    */
 
             return file.getViewProvider().findElementAt(offset, root.getLanguage());
         }

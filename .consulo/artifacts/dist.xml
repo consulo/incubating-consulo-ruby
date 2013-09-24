@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="dist">
+    <output-path>$PROJECT_DIR$/out/artifacts/dist</output-path>
+    <root id="root">
+      <element id="directory" name="ruby">
+        <element id="directory" name="lib">
+          <element id="zip-archive" name="ruby.jar">
+            <element id="module-output" name="consulo-ruby" />
+            <element id="directory" name="META-INF">
+              <element id="dir-copy" path="$PROJECT_DIR$/META-INF" />
+            </element>
+          </element>
+          <element id="dir-copy" path="$PROJECT_DIR$/jruby" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

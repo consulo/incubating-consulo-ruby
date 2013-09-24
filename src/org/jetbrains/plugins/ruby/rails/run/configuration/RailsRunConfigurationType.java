@@ -62,7 +62,14 @@ public class RailsRunConfigurationType  implements LocatableConfigurationType {
         return RailsIcons.RAILS_RUN_CONFIGURATION_FOLDER;
     }
 
-    public ConfigurationFactory[] getConfigurationFactories() {
+	@NotNull
+	@Override
+	public String getId()
+	{
+		return null;
+	}
+
+	public ConfigurationFactory[] getConfigurationFactories() {
         return new ConfigurationFactory[]{myRailsServerFactory};
     }
 
@@ -86,7 +93,13 @@ public class RailsRunConfigurationType  implements LocatableConfigurationType {
         return null;
     }
 
-    public boolean isConfigurationByElement(@NotNull final RunConfiguration configuration,
+	@Override
+	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
+	{
+		return false;
+	}
+
+	public boolean isConfigurationByElement(@NotNull final RunConfiguration configuration,
                                             @NotNull final Project project,
                                             @NotNull final PsiElement element) {
         return RubyRunConfigurationUtil.isConfigurationByElement(configuration, element);
