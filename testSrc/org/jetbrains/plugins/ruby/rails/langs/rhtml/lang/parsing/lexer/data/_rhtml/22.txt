@@ -1,0 +1,13 @@
+<head>
+<body>
+</body>
+<!--
+pq
+</head>
+-------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 37], {<head>
+<body>
+</body>
+<!--
+pq
+</head>}

@@ -1,0 +1,28 @@
+# tSTAR arg opt_nl
+[*a]
+[*a
+]
+-------
+Ruby file
+  PsiComment(line comment)('# tSTAR arg opt_nl')
+  PsiWhiteSpace('\n')
+  Compound statement
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('a')
+      PsiElement(])(']')
+    PsiElement(end of line)('\n')
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('a')
+        PsiElement(end of line)('\n')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,8 @@
+while true do
+    #comment<caret>
+end
+-----------
+while true do
+    #comment
+    <caret>
+end

@@ -1,0 +1,5 @@
+a.each do<caret>
+---------
+a.each do
+    <caret>
+end

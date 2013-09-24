@@ -1,0 +1,13 @@
+"\##$var"
+------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      PsiElement(string like content)('\#')
+      Expression subtitution
+        PsiElement(#)('#')
+        Global variable
+          PsiElement(global variable)('$var')
+      PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,8 @@
+begin
+    ensure<caret>
+end
+----------
+begin
+ensure
+    <caret>
+end

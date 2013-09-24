@@ -1,0 +1,5 @@
+if true then<caret>
+---------
+if true then
+    <caret>
+end

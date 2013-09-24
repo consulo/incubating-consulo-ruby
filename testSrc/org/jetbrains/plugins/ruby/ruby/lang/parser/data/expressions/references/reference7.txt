@@ -1,0 +1,17 @@
+foo[bar, baz]
+----------
+Ruby file
+  Compound statement
+    Array reference
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiElement(f[)('[')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('bar')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('baz')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

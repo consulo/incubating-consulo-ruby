@@ -1,0 +1,17 @@
+not a
+! b
+---------
+Ruby file
+  Compound statement
+    Boolean negative expression
+      PsiElement(not)('not')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('a')
+    PsiElement(end of line)('\n')
+    Boolean negative expression
+      PsiElement(!)('!')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('b')
+  PsiElement(end of line)('\n')

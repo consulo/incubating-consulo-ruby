@@ -1,0 +1,11 @@
+def A::foo
+end
+-------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] def [2] A.foo
+
+Symbol:
+[0] FILE
+    [1] NOT_DEFINED A
+        [2] CLASS_METHOD foo prototypes:  3

@@ -1,0 +1,19 @@
+eval <<-EOS
+foo
+EOS
+-----------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('eval')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Heredoc id
+          PsiElement(heredoc id)('<<-EOS')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('foo')
+    PsiElement(end of line)('\n')
+    PsiElement(indented heredoc end)('EOS')
+  PsiElement(end of line)('\n')

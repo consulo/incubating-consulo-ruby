@@ -1,0 +1,12 @@
+<html />
+-----
+Html In RHTML File: temp.rhtml
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    HtmlTag:html
+      XmlToken:XML_START_TAG_START('<')
+      XmlToken:XML_NAME('html')
+      PsiWhiteSpace(' ')
+      XmlToken:XML_EMPTY_ELEMENT_END('/>')
+    PsiWhiteSpace('\n')

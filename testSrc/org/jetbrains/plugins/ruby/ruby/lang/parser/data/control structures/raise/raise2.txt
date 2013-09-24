@@ -1,0 +1,12 @@
+raise message_or_exception
+--------------------------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('raise')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('message_or_exception')
+  PsiElement(end of line)('\n')

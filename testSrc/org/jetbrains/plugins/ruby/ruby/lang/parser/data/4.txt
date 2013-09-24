@@ -1,0 +1,27 @@
+Your advertisment might be here!
+-----------
+Ruby file
+  Compound statement
+    Command call
+      Constant
+        PsiElement(constant)('Your')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Command call
+          Identifier
+            PsiElement(identifier)('advertisment')
+          PsiWhiteSpace(' ')
+          List of expressions
+            Command call
+              Identifier
+                PsiElement(identifier)('might')
+              PsiWhiteSpace(' ')
+              List of expressions
+                Command call
+                  Identifier
+                    PsiElement(identifier)('be')
+                  PsiWhiteSpace(' ')
+                  List of expressions
+                    Fid
+                      PsiElement(fid)('here!')
+  PsiElement(end of line)('\n')

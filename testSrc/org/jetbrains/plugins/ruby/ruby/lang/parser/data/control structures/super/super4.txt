@@ -1,0 +1,14 @@
+super -1
+--------
+Ruby file
+  Compound statement
+    Command call
+      Pseudo constant
+        PsiElement(super)('super')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Negative expression
+          PsiElement(u-)('-')
+          Integer
+            PsiElement(integer literal)('1')
+  PsiElement(end of line)('\n')

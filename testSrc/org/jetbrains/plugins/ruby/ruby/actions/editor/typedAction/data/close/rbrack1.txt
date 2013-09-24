@@ -1,0 +1,5 @@
+["something", 777<caret>]
+-----------
+]
+-------
+["something", 777]<caret>

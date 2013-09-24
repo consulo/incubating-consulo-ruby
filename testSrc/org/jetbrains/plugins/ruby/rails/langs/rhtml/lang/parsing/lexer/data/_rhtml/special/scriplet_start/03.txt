@@ -1,0 +1,6 @@
+<html> preved </html><%- k
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 21], {<html> preved </html>}
+<%: [21, 23], {<%}
+OMIT_NEW_LINE: [23, 24], {-}
+RUBY_CODE_CHARACTERS: [24, 26], { k}

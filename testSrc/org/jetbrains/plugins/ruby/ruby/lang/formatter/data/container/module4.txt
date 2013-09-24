@@ -1,0 +1,9 @@
+module Foo
+    def Bar ; print Baz        ; end
+end
+-----------
+module Foo
+    def Bar;
+        print Baz;
+    end
+end

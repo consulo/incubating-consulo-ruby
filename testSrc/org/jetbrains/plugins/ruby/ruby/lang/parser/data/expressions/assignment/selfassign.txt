@@ -1,0 +1,12 @@
+a+=b;
+---------
+Ruby file
+  Compound statement
+    Self assignment expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiElement(+=)('+=')
+      Identifier
+        PsiElement(identifier)('b')
+    PsiElement(;)(';')
+  PsiWhiteSpace('\n')

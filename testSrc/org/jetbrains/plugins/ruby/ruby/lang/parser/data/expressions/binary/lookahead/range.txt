@@ -1,0 +1,17 @@
+1...a = 12
+-------
+Ruby file
+  Compound statement
+    Range expression
+      Integer
+        PsiElement(integer literal)('1')
+      PsiElement(...)('...')
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Integer
+          PsiElement(integer literal)('12')
+  PsiElement(end of line)('\n')

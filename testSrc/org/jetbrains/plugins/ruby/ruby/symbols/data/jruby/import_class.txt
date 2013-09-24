@@ -1,0 +1,8 @@
+import "java.lang.System"
+--------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] import
+
+Symbol:
+[0] FILE

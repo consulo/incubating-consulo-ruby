@@ -1,0 +1,14 @@
+foo &block
+-----
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Block to argument
+          PsiElement(a&)('&')
+          Identifier
+            PsiElement(identifier)('block')
+  PsiElement(end of line)('\n')

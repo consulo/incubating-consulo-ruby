@@ -1,0 +1,14 @@
+{a=>}
+---------
+Ruby file
+  Compound statement
+    Assoc list
+      PsiElement({)('{')
+      Assoc
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(=>)('=>')
+        PsiErrorElement:Expected: expression
+          <empty list>
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

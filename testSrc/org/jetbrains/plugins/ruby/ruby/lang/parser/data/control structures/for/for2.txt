@@ -1,0 +1,43 @@
+for i in [1,3,2] do
+ print "foo"
+end
+-------------------
+Ruby file
+  Compound statement
+    For statement
+      PsiElement(for)('for')
+      PsiWhiteSpace(' ')
+      Block variables
+        Identifier
+          PsiElement(identifier)('i')
+      PsiWhiteSpace(' ')
+      PsiElement(in)('in')
+      PsiWhiteSpace(' ')
+      Array
+        PsiElement([)('[')
+        List of expressions
+          Integer
+            PsiElement(integer literal)('1')
+          PsiElement(,)(',')
+          Integer
+            PsiElement(integer literal)('3')
+          PsiElement(,)(',')
+          Integer
+            PsiElement(integer literal)('2')
+        PsiElement(])(']')
+      PsiWhiteSpace(' ')
+      PsiElement(do_cond)('do')
+      PsiWhiteSpace('\n ')
+      Compound statement
+        Command call
+          Identifier
+            PsiElement(identifier)('print')
+          PsiWhiteSpace(' ')
+          List of expressions
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)('foo')
+              PsiElement(string end)('"')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

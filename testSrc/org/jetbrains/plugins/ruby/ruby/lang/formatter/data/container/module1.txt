@@ -1,0 +1,7 @@
+module Foo
+expr
+end
+-------------
+module Foo
+    expr
+end

@@ -1,0 +1,9 @@
+def foo
+    puts <<FOO<caret>
+end
+-------
+def foo
+    puts <<FOO
+<caret>
+FOO
+end

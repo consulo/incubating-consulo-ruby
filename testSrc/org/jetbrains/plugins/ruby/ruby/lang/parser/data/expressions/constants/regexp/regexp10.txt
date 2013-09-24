@@ -1,0 +1,15 @@
+split(/ /)
+-----------
+Ruby file
+  Compound statement
+    Function call
+      Identifier
+        PsiElement(identifier)('split')
+      PsiElement(f()('(')
+      List of expressions
+        Regular expression
+          PsiElement(regexp beginning)('/')
+          PsiElement(regexp content)(' ')
+          PsiElement(regexp end)('/')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,19 @@
+@@A
+@@a
+@@_A
+@@_a
+-------
+Ruby file
+  Compound statement
+    Class variable
+      PsiElement(class variable)('@@A')
+    PsiElement(end of line)('\n')
+    Class variable
+      PsiElement(class variable)('@@a')
+    PsiElement(end of line)('\n')
+    Class variable
+      PsiElement(class variable)('@@_A')
+    PsiElement(end of line)('\n')
+    Class variable
+      PsiElement(class variable)('@@_a')
+  PsiElement(end of line)('\n')

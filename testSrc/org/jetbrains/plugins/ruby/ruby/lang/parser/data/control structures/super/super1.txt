@@ -1,0 +1,7 @@
+super
+--------
+Ruby file
+  Compound statement
+    Pseudo constant
+      PsiElement(super)('super')
+  PsiElement(end of line)('\n')

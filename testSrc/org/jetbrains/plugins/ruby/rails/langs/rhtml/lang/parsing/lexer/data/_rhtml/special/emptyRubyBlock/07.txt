@@ -1,0 +1,6 @@
+<%=-%> d
+-------
+<%=: [0, 3], {<%=}
+OMIT_NEW_LINE: [3, 4], {-}
+%>: [4, 6], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [6, 8], { d}

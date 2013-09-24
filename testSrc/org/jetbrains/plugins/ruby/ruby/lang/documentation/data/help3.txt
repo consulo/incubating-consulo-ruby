@@ -1,0 +1,5 @@
+# Actions, by default, render a template in the <tt>app/views</tt> directory corresponding to the name of the controller and action
+# after executing code in the action. For example, the +index+ action of the +GuestBookController+  would render the
+# template <tt>app/views/guestbook/index.erb</tt> by default after populating the <tt>@entries</tt> instance variable.
+-----
+&nbsp;Actions,&nbsp;by&nbsp;default,&nbsp;render&nbsp;a&nbsp;template&nbsp;in&nbsp;the&nbsp;&lt;tt&gt;app/views&lt;/tt&gt;&nbsp;directory&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;controller&nbsp;and&nbsp;action<br>&nbsp;after&nbsp;executing&nbsp;code&nbsp;in&nbsp;the&nbsp;action.&nbsp;For&nbsp;example,&nbsp;the&nbsp;<code>index</code>&nbsp;action&nbsp;of&nbsp;the&nbsp;<code>GuestBookController</code>&nbsp;&nbsp;would&nbsp;render&nbsp;the<br>&nbsp;template&nbsp;&lt;tt&gt;app/views/guestbook/index.erb&lt;/tt&gt;&nbsp;by&nbsp;default&nbsp;after&nbsp;populating&nbsp;the&nbsp;&lt;tt&gt;@entries&lt;/tt&gt;&nbsp;instance&nbsp;variable.

@@ -1,0 +1,22 @@
+a,b, = c,d
+------
+Ruby file
+  Compound statement
+    Multi assignment expression
+      List of expressions
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        Identifier
+          PsiElement(identifier)('b')
+        PsiElement(,)(',')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('c')
+        PsiElement(,)(',')
+        Identifier
+          PsiElement(identifier)('d')
+  PsiElement(end of line)('\n')

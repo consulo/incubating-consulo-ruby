@@ -1,0 +1,13 @@
+defined? (foobar)
+------------
+Ruby file
+  Compound statement
+    Defined statement
+      PsiElement(defined?)('defined?')
+      PsiWhiteSpace(' ')
+      Expression in parens
+        PsiElement(a()('(')
+        Identifier
+          PsiElement(identifier)('foobar')
+        PsiElement())(')')
+  PsiElement(end of line)('\n')

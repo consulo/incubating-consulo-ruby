@@ -1,0 +1,50 @@
+Usage: script/generate generator [options] [args]
+
+Rails Info:
+    -v, --version                    Show the Rails version number and quit.
+    -h, --help                       Show this help message and quit.
+
+General Options:
+    -p, --pretend                    Run but do not make any changes.
+    -f, --force                      Overwrite files that already exist.
+    -s, --skip                       Skip files that already exist.
+    -q, --quiet                      Suppress normal output.
+    -t, --backtrace                  Debugging: show backtrace on errors.
+    -c, --svn                        Modify files with subversion. (Note: svn must be in path)
+    -g, --git                        Modify files with git. (Note: git must be in path)
+
+
+Installed Generators
+  Plugins (vendor/plugins): helpers, rspec, rspec_controller, rspec_model, rspec_scaffold
+  Builtin: controller, integration_test, mailer, migration, model, observer, plugin, resource, scaffold, session_migration
+
+More are available at http://wiki.rubyonrails.org/rails/pages/AvailableGenerators
+  1. Download, for example, login_generator.zip
+  2. Unzip to directory /Users/romeo/.rails/generators/login
+     to use the generator with all your Rails apps
+     or to /Users/romeo/IdeaProjects/untitled6/untitled/lib/generators/login
+     to use with this app only.
+  3. Run generate with no arguments for usage information
+       script/generate login
+
+Generator gems are also available:
+  1. gem search -r generator
+  2. gem install login_generator
+  3. script/generate login
+
+-------------
+helpers: [808, 815], {helpers}
+rspec: [817, 822], {rspec}
+rspec_controller: [824, 840], {rspec_controller}
+rspec_model: [842, 853], {rspec_model}
+rspec_scaffold: [855, 869], {rspec_scaffold}
+controller: [881, 891], {controller}
+integration_test: [893, 909], {integration_test}
+mailer: [911, 917], {mailer}
+migration: [919, 928], {migration}
+model: [930, 935], {model}
+observer: [937, 945], {observer}
+plugin: [947, 953], {plugin}
+resource: [955, 963], {resource}
+scaffold: [965, 973], {scaffold}
+session_migration: [975, 992], {session_migration}

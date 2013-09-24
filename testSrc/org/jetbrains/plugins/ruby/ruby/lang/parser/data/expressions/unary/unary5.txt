@@ -1,0 +1,21 @@
+10+ a
+10- a
+-----
+Ruby file
+  Compound statement
+    Math binary expression
+      Integer
+        PsiElement(integer literal)('10')
+      PsiElement(+)('+')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('a')
+    PsiElement(end of line)('\n')
+    Math binary expression
+      Integer
+        PsiElement(integer literal)('10')
+      PsiElement(-)('-')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('a')
+  PsiElement(end of line)('\n')

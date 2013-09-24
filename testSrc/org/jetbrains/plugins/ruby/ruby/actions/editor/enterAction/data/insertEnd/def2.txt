@@ -1,0 +1,9 @@
+def FOO
+    def BOO<caret>
+end
+-------------
+def FOO
+    def BOO
+        <caret>
+    end
+end

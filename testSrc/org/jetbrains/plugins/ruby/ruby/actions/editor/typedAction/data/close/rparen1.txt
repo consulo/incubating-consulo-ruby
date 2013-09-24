@@ -1,0 +1,5 @@
+a = ("something",777<caret>)
+-----------
+)
+-------
+a = ("something",777)<caret>

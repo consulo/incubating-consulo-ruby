@@ -1,0 +1,7 @@
+class C
+    module AA::BB
+        <caret>
+    end
+end
+-----
+AA::C(temp.rb)

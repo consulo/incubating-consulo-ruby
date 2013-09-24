@@ -1,0 +1,13 @@
+yield -1
+---------
+Ruby file
+  Compound statement
+    Yield statement
+      PsiElement(yield)('yield')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Negative expression
+          PsiElement(u-)('-')
+          Integer
+            PsiElement(integer literal)('1')
+  PsiElement(end of line)('\n')

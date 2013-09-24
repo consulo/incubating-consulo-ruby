@@ -1,0 +1,12 @@
+class B<A
+end
+-----
+VirtualFile:
+[1] file [0] temp.rb
+    [4] class [2] B < [3] A
+
+Symbol:
+[0] FILE
+    [1] NOT_DEFINED A prototypes:  3
+    [2] CLASS B prototypes:  4
+        [3] SUPERCLASS [1]

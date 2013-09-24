@@ -1,0 +1,32 @@
+<% if @loser then %> <%='Yout are' %> \n <%='loser!!' %><%else  %><%='Try again'%> <% end %>
+---------
+RHTML_INJECTION_IN_RUBY: [0, 2], {<%}
+white space: [2, 3], { }
+if: [3, 5], {if}
+white space: [5, 6], { }
+instance variable: [6, 12], {@loser}
+white space: [12, 13], { }
+then: [13, 17], {then}
+white space: [17, 18], { }
+RHTML_INJECTION_IN_RUBY: [18, 24], {%> <%=}
+single quoted like string beginning: [24, 25], {'}
+string content: [25, 33], {Yout are}
+string end: [33, 34], {'}
+white space: [34, 35], { }
+RHTML_INJECTION_IN_RUBY: [35, 44], {%> \n <%=}
+single quoted like string beginning: [44, 45], {'}
+string content: [45, 52], {loser!!}
+string end: [52, 53], {'}
+white space: [53, 54], { }
+RHTML_INJECTION_IN_RUBY: [54, 58], {%><%}
+else: [58, 62], {else}
+white space: [62, 64], {  }
+RHTML_INJECTION_IN_RUBY: [64, 69], {%><%=}
+single quoted like string beginning: [69, 70], {'}
+string content: [70, 79], {Try again}
+string end: [79, 80], {'}
+RHTML_INJECTION_IN_RUBY: [80, 85], {%> <%}
+white space: [85, 86], { }
+end: [86, 89], {end}
+white space: [89, 90], { }
+RHTML_INJECTION_IN_RUBY: [90, 92], {%>}

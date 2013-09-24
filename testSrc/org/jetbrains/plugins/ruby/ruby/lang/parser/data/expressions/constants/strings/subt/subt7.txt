@@ -1,0 +1,13 @@
+%((b#{}))
+---------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('%(')
+      PsiElement(string content)('(b')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        PsiElement(})('}')
+      PsiElement(string content)(')')
+      PsiElement(string end)(')')
+  PsiElement(end of line)('\n')

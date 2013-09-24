@@ -1,0 +1,55 @@
+methods += <<-BEGIN + nOE_element_def(element) + <<-END
+def #{element.downcase}(attributes = {})
+BEGIN
+end
+END
+--------
+Ruby file
+  Compound statement
+    Self assignment expression
+      Identifier
+        PsiElement(identifier)('methods')
+      PsiWhiteSpace(' ')
+      PsiElement(+=)('+=')
+      PsiWhiteSpace(' ')
+      Math binary expression
+        Math binary expression
+          Heredoc id
+            PsiElement(heredoc id)('<<-BEGIN')
+          PsiWhiteSpace(' ')
+          PsiElement(+)('+')
+          PsiWhiteSpace(' ')
+          Function call
+            Identifier
+              PsiElement(identifier)('nOE_element_def')
+            PsiElement(f()('(')
+            List of expressions
+              Identifier
+                PsiElement(identifier)('element')
+            PsiElement())(')')
+        PsiWhiteSpace(' ')
+        PsiElement(+)('+')
+        PsiWhiteSpace(' ')
+        Heredoc id
+          PsiElement(heredoc id)('<<-END')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('def ')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Dot reference
+          Identifier
+            PsiElement(identifier)('element')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('downcase')
+        PsiElement(})('}')
+      PsiElement(heredoc content)('(attributes = {})')
+    PsiElement(end of line)('\n')
+    PsiElement(indented heredoc end)('BEGIN')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('end')
+    PsiElement(end of line)('\n')
+    PsiElement(indented heredoc end)('END')
+  PsiElement(end of line)('\n')

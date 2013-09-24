@@ -1,0 +1,5 @@
+foo["something"<caret>]
+-----------
+]
+-------
+foo["something"]<caret>

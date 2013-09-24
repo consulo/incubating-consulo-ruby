@@ -1,0 +1,31 @@
+boo {|(o, *v)| foo}
+-----
+Ruby file
+  Compound statement
+    Block call
+      Identifier
+        PsiElement(identifier)('boo')
+      PsiWhiteSpace(' ')
+      Brace code block
+        PsiElement({)('{')
+        PsiElement(p|)('|')
+        Block variables
+          Multiassigment left part
+            PsiElement(()('(')
+            List of expressions
+              Identifier
+                PsiElement(identifier)('o')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array argument
+                PsiElement(s*)('*')
+                Identifier
+                  PsiElement(identifier)('v')
+            PsiElement())(')')
+        PsiElement(p|)('|')
+        PsiWhiteSpace(' ')
+        Compound statement
+          Identifier
+            PsiElement(identifier)('foo')
+        PsiElement(})('}')
+  PsiElement(end of line)('\n')

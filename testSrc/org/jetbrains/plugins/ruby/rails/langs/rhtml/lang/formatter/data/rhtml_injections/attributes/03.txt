@@ -1,0 +1,7 @@
+<a<%= r %>d vo<%= r %>ice = "x<%= r %>u">
+ffff
+</ad>
+----------
+<a<%= r %>d vo<%= r %>ice="x<%= r %>u">
+    ffff
+</ad>

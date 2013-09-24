@@ -1,0 +1,9 @@
+=begin
+TEST COMMENT
+---------
+Ruby file
+  PsiComment(=begin)('=begin')
+  PsiComment(block comment content)('\n')
+  PsiComment(block comment content)('TEST COMMENT\n')
+  Compound statement
+    <empty list>

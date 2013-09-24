@@ -1,0 +1,41 @@
+a > 0 && b != "." && foo += "."
+-------
+Ruby file
+  Compound statement
+    Boolean binary expression
+      Boolean binary expression
+        Boolean matching expression
+          Identifier
+            PsiElement(identifier)('a')
+          PsiWhiteSpace(' ')
+          PsiElement(>)('>')
+          PsiWhiteSpace(' ')
+          Integer
+            PsiElement(integer literal)('0')
+        PsiWhiteSpace(' ')
+        PsiElement(&&)('&&')
+        PsiWhiteSpace(' ')
+        Boolean matching expression
+          Identifier
+            PsiElement(identifier)('b')
+          PsiWhiteSpace(' ')
+          PsiElement(!=)('!=')
+          PsiWhiteSpace(' ')
+          Double quoted like string
+            PsiElement(double quoted like string beginning)('"')
+            PsiElement(string content)('.')
+            PsiElement(string end)('"')
+      PsiWhiteSpace(' ')
+      PsiElement(&&)('&&')
+      PsiWhiteSpace(' ')
+      Self assignment expression
+        Identifier
+          PsiElement(identifier)('foo')
+        PsiWhiteSpace(' ')
+        PsiElement(+=)('+=')
+        PsiWhiteSpace(' ')
+        Double quoted like string
+          PsiElement(double quoted like string beginning)('"')
+          PsiElement(string content)('.')
+          PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

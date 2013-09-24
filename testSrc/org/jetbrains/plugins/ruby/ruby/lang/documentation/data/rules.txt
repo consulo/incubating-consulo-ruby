@@ -1,0 +1,4 @@
+# Here is a rule: ---
+# And this is not: -- and -
+-----
+&nbsp;Here&nbsp;is&nbsp;a&nbsp;rule:&nbsp;<hr>&nbsp;And&nbsp;this&nbsp;is&nbsp;not:&nbsp;--&nbsp;and&nbsp;-

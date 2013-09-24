@@ -1,0 +1,64 @@
+def foo1
+end
+def foo2()
+end
+
+def bar1 a
+end
+def bar2(a)
+end
+
+def baz1 a,b=12
+end
+def baz2(a,b=12)
+end
+
+def zoo1 a,b=12,*c
+end
+def zoo2(a,b=12,*c)
+end
+
+def zopa1 &block
+end
+def zopa2(&block)
+end
+---------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] def [2] foo1
+    [5] def [4] foo2
+    [7] def [6] bar1 a
+    [9] def [8] bar2 a
+    [11] def [10] baz1 a, b=...
+    [13] def [12] baz2 a, b=...
+    [15] def [14] zoo1 a, b=..., *c
+    [17] def [16] zoo2 a, b=..., *c
+    [19] def [18] zopa1 &block
+    [21] def [20] zopa2 &block
+
+Symbol:
+[0] FILE
+    [1] INSTANCE_METHOD foo1 prototypes:  3
+    [2] INSTANCE_METHOD foo2 prototypes:  5
+    [3] INSTANCE_METHOD bar1 prototypes:  7
+        [4] ARG_SIMPLE a
+    [5] INSTANCE_METHOD bar2 prototypes:  9
+        [6] ARG_SIMPLE a
+    [7] INSTANCE_METHOD baz1 prototypes:  11
+        [8] ARG_SIMPLE a
+        [9] ARG_PREDEFINED b
+    [10] INSTANCE_METHOD baz2 prototypes:  13
+        [11] ARG_SIMPLE a
+        [12] ARG_PREDEFINED b
+    [13] INSTANCE_METHOD zoo1 prototypes:  15
+        [14] ARG_SIMPLE a
+        [15] ARG_PREDEFINED b
+        [16] ARG_ARRAY c
+    [17] INSTANCE_METHOD zoo2 prototypes:  17
+        [18] ARG_SIMPLE a
+        [19] ARG_PREDEFINED b
+        [20] ARG_ARRAY c
+    [21] INSTANCE_METHOD zopa1 prototypes:  19
+        [22] ARG_BLOCK block
+    [23] INSTANCE_METHOD zopa2 prototypes:  21
+        [24] ARG_BLOCK block

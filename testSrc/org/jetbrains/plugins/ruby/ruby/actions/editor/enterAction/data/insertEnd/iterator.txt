@@ -1,0 +1,5 @@
+foo.each do |a,b,c|<caret>
+--------
+foo.each do |a,b,c|
+    <caret>
+end

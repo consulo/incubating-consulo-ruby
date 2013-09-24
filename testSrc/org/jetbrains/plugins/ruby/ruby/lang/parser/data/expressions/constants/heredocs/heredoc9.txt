@@ -1,0 +1,12 @@
+<<FOO
+FOO
+-----
+Ruby file
+  Compound statement
+    Heredoc id
+      PsiElement(heredoc id)('<<FOO')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      <empty list>
+    PsiElement(heredoc end)('FOO')
+  PsiElement(end of line)('\n')

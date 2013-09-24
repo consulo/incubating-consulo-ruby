@@ -1,0 +1,15 @@
+a = -@a
+-------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Negative expression
+        PsiElement(u-)('-')
+        Instance variable
+          PsiElement(instance variable)('@a')
+  PsiElement(end of line)('\n')

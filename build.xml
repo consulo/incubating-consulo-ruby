@@ -1,0 +1,322 @@
+<!--
+  ~ Copyright 2000-2008 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project name="build ruby plugin jar" default="dist">
+    <!--
+    You can set idea.home property here
+    <property name="idea.home" value="c:\Program Files\JetBrains\IntelliJ IDEA 6951"/>
+    -->
+    <property file="build.properties"/>
+
+    <property name="plugin.revision" value="${build.vcs.number.1}"/>
+    <property name="plugin.version" value="${ruby.plugin.version}.${plugin.revision}"/>
+
+    <property name="idea.lib" value="${idea.home}/lib"/>
+    <property name="idea.plugins" value="${idea.home}/plugins"/>
+
+    <property name="build.number" value="snapshot"/>
+    <property name="build.vcs.number.1" value="unknown"/>
+
+    <dirname property="basedir" file="${ant.file}"/>
+    <property name="output" value="${basedir}/dist"/>
+    <property name="test.output.dir" value="${output}/testClasses"/>
+    <property name="reports.dir" location="${output}/report"/>
+    <property name="ruby.mock.sdk" value="${output}/mockSdk"/>
+
+    <property name="zipdir" value="${output}/zip"/>
+    <property name="plugindir" value="${zipdir}/ruby"/>
+    <property name="zipname" value="ruby-${plugin.revision}.zip"/>
+
+    <property name="src.dir" location="${basedir}/src"/>
+    <property name="resources.dir" location="${basedir}/resources"/>
+    <property name="test.src.dir" location="${basedir}/testSrc"/>
+    <property name="artifacts.dir" location="${output}/artifacts"/>
+
+    <property name="rubylexer.dir" location="${src.dir}/org/jetbrains/plugins/ruby/ruby/lang/lexer"/>
+    <property name="rubylexer.build.file" location="${rubylexer.dir}/build.xml"/>
+
+    <property name="rhtmllexer.dir" location="${src.dir}/org/jetbrains/plugins/ruby/rails/langs/rhtml/lang/parsing/lexer"/>
+    <property name="rhtmllexer.build.file" location="${rhtmllexer.dir}/build.xml"/>
+
+    <property name="outputlexer.dir" location="${src.dir}/org/jetbrains/plugins/ruby/rails/actions/generators/lexer"/>
+    <property name="outputlexer.build.file" location="${outputlexer.dir}/build.xml"/>
+
+
+    <property name="classes.dir" value="${basedir}/dist/classes"/>
+    <property name="test.classes.dir" value="${basedir}/dist/test-classes"/>
+
+    <path id="classpath.lib">
+        <fileset dir="${idea.lib}">
+            <include name="?*.jar"/>
+        </fileset>
+        <fileset dir="${idea.plugins}">
+            <include name="**/JavascriptLanguage.jar"/>
+        </fileset>
+        <fileset dir="${basedir}/lib">
+            <include name = "?*.jar"/>
+        </fileset>
+        <fileset dir="${basedir}/jruby">
+            <include name = "?*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="sourcepath">
+        <dirset dir="${basedir}">
+            <include name="resources"/>
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <!-- The task requires the following libraries from IntelliJ IDEA distribution: -->
+    <!--   javac2.jar; jdom.jar; asm.jar; asm-commons.jar -->
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2">
+        <classpath refid="classpath.lib"/>
+    </taskdef>
+
+    <!-- Compiler options -->
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="256m"/>
+
+    <patternset id="sources.pt">
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="*/rb/*"/>
+    </patternset>
+    <patternset id="testsources.pt">
+        <exclude name="**/data/**"/>
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="*/rb/*"/>
+    </patternset>
+    <patternset id="resources.pt">
+        <include name="**/?*.properties"/>
+        <include name="**/?*.template"/>
+        <include name="**/?*.xml"/>
+        <include name="**/?*.gif"/>
+        <include name="**/?*.png"/>
+        <include name="**/?*.txt"/>
+        <include name="**/?*.jpeg"/>
+        <include name="**/?*.jpg"/>
+        <include name="**/?*.html"/>
+        <include name="**/?*.dtd"/>
+        <include name="**/?*.tld"/>
+        <exclude name="*/rubystubs/*"/>
+    </patternset>
+
+
+    <target name="clean" description="Cleanup output">
+        <delete dir="${output}"/>
+    </target>
+
+    <target name="compile" description="Compile module ruby">
+        <mkdir dir="${classes.dir}"/>
+        <!-- compile -->
+        <javac2 destdir="${classes.dir}"
+                debug="${compiler.debug}"
+                nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}"
+                fork="true">
+            <compilerarg line="${compiler.args}"/>
+            <classpath refid="classpath.lib"/>
+            <src refid="sourcepath"/>
+            <patternset refid="sources.pt"/>
+        </javac2>
+
+        <!-- copy resources -->
+        <copy todir="${classes.dir}">
+            <fileset dir="${basedir}/resources">
+                <patternset refid="resources.pt"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${basedir}/src">
+                <patternset refid="resources.pt"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+
+        <!-- copy plugin.xml -->
+        <mkdir dir="${classes.dir}/META-INF"/>
+        <copy todir="${classes.dir}/META-INF">
+            <fileset dir="${basedir}/META-INF"/>
+        </copy>
+        <!-- adding revision version number to plugin version -->
+        <replace file="${classes.dir}/META-INF/plugin.xml" token="VERSION" value="${plugin.version}"/>
+    </target>
+
+    <target name="jar" description="Generate jar file" depends="compile">
+        <jar destfile="${output}/ruby.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Revision" value="${plugin.revision}"/>
+                <attribute name="Build" value="${plugin.version}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="zip" description="Generate zip plugin file" depends="jar">
+        <mkdir dir="${zipdir}"/>
+        <!--copy rubystubs-->
+        <mkdir dir="${plugindir}/rubystubs"/>
+        <copy todir="${plugindir}/rubystubs">
+            <fileset dir="${basedir}/resources/rubystubs"/>
+            <fileset dir="${basedir}/resources/railsstubs"/>
+            <fileset dir="${basedir}/resources/jrubystubs"/>
+        </copy>
+
+        <!--copy jruby code-->
+        <mkdir dir="${plugindir}/rb"/>
+        <copy todir="${plugindir}/rb">
+            <fileset dir="${src.dir}/rb"/>
+        </copy>
+
+
+        <mkdir dir="${plugindir}/lib"/>
+
+        <!--copy plugin jar-->
+        <move todir="${plugindir}/lib" file="${output}/ruby.jar"/>
+
+        <!--copy JRuby jars-->
+        <copy todir="${plugindir}/lib">
+            <fileset dir="${basedir}/jruby" includes="?*.jar"/>
+        </copy>
+        <zip basedir="${zipdir}" destfile="${output}/${zipname}"/>
+    </target>
+
+
+    <target name="jflex" description="Builds lexers from ruby.flex, output.flex, rhtml.flex">
+        <ant antfile="${rubylexer.build.file}">
+            <property name="jflex.dir" location="${basedir}/lib"/>
+            <property name="lexer.dir" location="${rubylexer.dir}"/>
+        </ant>
+        <ant antfile="${outputlexer.build.file}">
+            <property name="jflex.dir" location="${basedir}/lib"/>
+            <property name="lexer.dir" location="${outputlexer.dir}"/>
+        </ant>
+        <ant antfile="${rhtmllexer.build.file}">
+            <property name="jflex.dir" location="${basedir}/lib"/>
+            <property name="lexer.dir" location="${rhtmllexer.dir}"/>
+        </ant>
+    </target>
+
+    <target name="build" depends="clean, jflex, compile"/>
+
+    <target name="dist" depends="build, zip" description="main target"/>
+
+    <!-- Testing section -->
+    <path id="test.sourcepath">
+        <dirset dir="${basedir}">
+            <include name="testSrc"/>
+        </dirset>
+    </path>
+
+    <target name="compile.test">
+        <mkdir dir="${test.output.dir}"/>
+        <!-- compile -->
+        <javac2 destdir="${test.output.dir}"
+                debug="${compiler.debug}"
+                nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}"
+                fork="true">
+            <compilerarg line="${compiler.args}"/>
+            <classpath>
+                <path refid="classpath.lib"/>
+                <path location="${classes.dir}"/>
+            </classpath>
+            <src path="${test.src.dir}"/>
+            <patternset refid="testsources.pt"/>
+        </javac2>
+
+        <!--copy jruby written code to tests-->
+        <mkdir dir="${classes.dir}/rb"/>
+        <copy todir="${classes.dir}/rb">
+            <fileset dir="${src.dir}/rb">
+                <include name="**/*.rb"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="run.test">
+
+        <mkdir dir="${reports.dir}"/>
+        <mkdir dir="${output}/system/log"/>
+        <copy file="${basedir}/lib/log4j.dtd" todir="${output}"/>
+
+        <!--copy rubystubs-->
+        <mkdir dir="${ruby.mock.sdk}/rubystubs"/>
+        <copy todir="${ruby.mock.sdk}/rubystubs">
+            <fileset dir="${basedir}/resources/rubystubs"/>
+            <fileset dir="${basedir}/resources/railsstubs"/>
+            <fileset dir="${basedir}/resources/jrubystubs"/>
+        </copy>
+
+        <junit dir="${output}"
+               tempdir="${output}"
+               fork="yes"
+               failureproperty="tests.failure"
+               printsummary="yes">
+
+            <classpath>
+                <path refid = "classpath.lib"/>
+                <path location="${test.output.dir}"/>
+                <path location="${classes.dir}"/>
+            </classpath>
+
+            <formatter type="plain"/>
+
+            <jvmarg value="-Xbootclasspath/p:${idea.lib}/boot.jar"/>
+            <jvmarg value="-ea"/>
+            <jvmarg value="-Xmx512M"/>
+            <jvmarg value="-Djava.awt.headless=true"/>
+            <jvmarg value="-Didea.config.path=${output}/config"/>
+            <jvmarg value="-Didea.system.path=${output}/system"/>
+            <jvmarg value="-Didea.ruby.mock.sdk=${ruby.mock.sdk}"/>
+
+
+            <jvmarg value="-Didea.load.plugins.id=org.jetbrains.plugins.ruby"/>
+
+            <batchtest todir="${reports.dir}">
+              <fileset dir="${test.src.dir}">
+                  <include name="**/*Test.java"/>
+                  <exclude name = "**/*Abstract*Test.java"/>
+                  <exclude name = "**/*RunOnRubyFilesTest.java"/>
+              </fileset>
+            </batchtest>
+        </junit>
+
+        <fail if="${tests.failure}"/>
+    </target>
+
+
+    <target name="artifacts" depends="dist">
+        <mkdir dir="${artifacts.dir}"/>
+        <move file="${output}/${zipname}" todir="${artifacts.dir}"/>
+    </target>
+
+    <target name="build.artifacts" depends="dist, artifacts"/>
+    <target name="test.build" depends="build, compile.test, run.test"/>
+
+</project>

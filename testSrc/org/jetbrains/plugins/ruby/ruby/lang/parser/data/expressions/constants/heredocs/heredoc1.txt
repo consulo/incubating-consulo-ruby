@@ -1,0 +1,31 @@
+myfunc <<"THIS",<<-'THAT'
+this text
+THIS
+
+that text
+    THAT
+---------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('myfunc')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Heredoc id
+          PsiElement(heredoc id)('<<"THIS"')
+        PsiElement(,)(',')
+        Heredoc id
+          PsiElement(heredoc id)('<<-'THAT'')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('this text')
+    PsiElement(end of line)('\n')
+    PsiElement(heredoc end)('THIS')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('\nthat text')
+    PsiElement(end of line)('\n')
+    PsiWhiteSpace('    ')
+    PsiElement(indented heredoc end)('THAT')
+  PsiElement(end of line)('\n')

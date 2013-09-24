@@ -1,0 +1,38 @@
+if a = defined?(b) ? c : d
+end
+----------
+Ruby file
+  Compound statement
+    If statement
+      PsiElement(if)('if')
+      PsiWhiteSpace(' ')
+      Condition
+        Assignment expression
+          Identifier
+            PsiElement(identifier)('a')
+          PsiWhiteSpace(' ')
+          PsiElement(=)('=')
+          PsiWhiteSpace(' ')
+          Ternary expression
+            Condition
+              Defined statement
+                PsiElement(defined?)('defined?')
+                PsiElement(f()('(')
+                Identifier
+                  PsiElement(identifier)('b')
+                PsiElement())(')')
+            PsiWhiteSpace(' ')
+            PsiElement(?)('?')
+            PsiWhiteSpace(' ')
+            Identifier
+              PsiElement(identifier)('c')
+            PsiWhiteSpace(' ')
+            PsiElement(:)(':')
+            PsiWhiteSpace(' ')
+            Identifier
+              PsiElement(identifier)('d')
+      PsiElement(end of line)('\n')
+      Compound statement
+        <empty list>
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

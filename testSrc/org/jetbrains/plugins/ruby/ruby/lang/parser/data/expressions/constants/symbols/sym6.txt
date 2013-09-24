@@ -1,0 +1,9 @@
+:`
+-----
+Ruby file
+  Compound statement
+    Symbol
+      PsiElement(:)(':')
+      Function name
+        PsiElement(`)('`')
+  PsiElement(end of line)('\n')

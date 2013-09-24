@@ -1,0 +1,11 @@
+return expr1
+------------
+Ruby file
+  Compound statement
+    Return statement
+      PsiElement(return)('return')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('expr1')
+  PsiElement(end of line)('\n')

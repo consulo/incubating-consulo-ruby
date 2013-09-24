@@ -1,0 +1,17 @@
+{a =>
+b}
+--------
+Ruby file
+  Compound statement
+    Assoc list
+      PsiElement({)('{')
+      Assoc
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(=>)('=>')
+        PsiWhiteSpace('\n')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

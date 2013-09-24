@@ -1,0 +1,7 @@
+123
+------
+Ruby file
+  Compound statement
+    Integer
+      PsiElement(integer literal)('123')
+  PsiElement(end of line)('\n')

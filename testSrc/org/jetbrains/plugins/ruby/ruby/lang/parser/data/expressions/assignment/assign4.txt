@@ -1,0 +1,19 @@
+a = b = c
+------------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('b')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('c')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,2021 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2000-2008 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<templateSet group="ruby">
+  <template name="all" value="all? { |$e$| $END$ }" description="all" toReformat="true" toShortenFQNames="true">
+    <variable name="e" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="am" value="alias_method :$NEW_NAME$, :$OLD_NAME$" description="alias method" toReformat="true" toShortenFQNames="true">
+    <variable name="NEW_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OLD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="any" value="any? { |$E$| $END$ }" description="any" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="app" value="if __FILE__ == \$PROGRAM_NAME$&#10;    $END$&#10;end" description="app" toReformat="true" toShortenFQNames="true">
+    <variable name="PROGRAM_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ase" value="assert_equal $VALUE$, @$THING$.$ATTRIBUTE$" description="assert equal" toReformat="true" toShortenFQNames="true">
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="THING" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asid" value="assert_in_delta($EXPECTED_FLOAT$, $ACTUAL$, $EXPRESSION$)" description="assert in delta" toReformat="true" toShortenFQNames="true">
+    <variable name="EXPECTED_FLOAT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asio" value="assert_instance_of($EXPECTED_CLASS$, $ACTUAL_INSTANCE$)" description="assert instance of" toReformat="true" toShortenFQNames="true">
+    <variable name="EXPECTED_CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL_INSTANCE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asko" value="assert_kind_of $CLASS$, @$THING$" description="assert kind of" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="THING" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asm" value="assert_match(/$EXPECTED_PATTERN$/, $ACTUAL_STRING$)" description="assert match" toReformat="true" toShortenFQNames="true">
+    <variable name="EXPECTED_PATTERN" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL_STRING" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asn" value="assert_nil($INSTANCE$)" description="assert nil" toReformat="true" toShortenFQNames="true">
+    <variable name="INSTANCE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asne" value="assert_not_equal($UNEXPECTED$, $ACTUAL$)" description="assert not equal" toReformat="true" toShortenFQNames="true">
+    <variable name="UNEXPECTED" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asnm" value="assert_no_match(/$UNEXPECTED_PATTERN$/, $ACTUAL_STRING$)" description="assert no match" toReformat="true" toShortenFQNames="true">
+    <variable name="UNEXPECTED_PATTERN" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL_STRING" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asnn" value="assert_not_nil $TRUE$" description="assert not nil" toReformat="true" toShortenFQNames="true">
+    <variable name="TRUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asnr" value="assert_nothing_raised($EXCEPTION$) { $END$ }" description="assert nothing raised" toReformat="true" toShortenFQNames="true">
+    <variable name="EXCEPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asns" value="assert_not_same($UNEXPECTED$, $ACTUAL$)" description="assert not same" toReformat="true" toShortenFQNames="true">
+    <variable name="UNEXPECTED" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asnt" value="assert_nothing_thrown { $END$ }" description="assert nothing thrown" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="aso" value="assert_operator($LEFT$, :$OPERATOR$, $RIGHT$)" description="assert operator" toReformat="true" toShortenFQNames="true">
+    <variable name="LEFT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OPERATOR" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="RIGHT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asr" value="assert_raise(ActiveRecord::RecordNotFound) { $CLASS$.find(@$THING$.$ID$) }" description="assert raise" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="THING" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ID" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asrar" value="assert_raise(ActiveRecord::RecordNotFound) { $CLASS$.find(@$THING$.$ID$) }$END$" description="assert raise ActiveRecord::RecordNotFound" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="THING" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ID" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asre" value="assert_response :$SUCCESS$" description="assert response" toReformat="true" toShortenFQNames="true">
+    <variable name="SUCCESS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="asrt" value="assert_redirected_to :action =&gt; &quot;$INDEX$&quot;$END$" description="assert redirected" toReformat="true" toShortenFQNames="true">
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ass" value="assert($TEST$, &quot;$FAILURE_MESSAGE$&quot;)" description="assert" toReformat="true" toShortenFQNames="true">
+    <variable name="TEST" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FAILURE_MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="assm" value="assert_same($EXPECTED$, $ACTUAL$)$END$" description="assert same" toReformat="true" toShortenFQNames="true">
+    <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTUAL" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ast" value="assert_throws(:$EXPECTED$) { $END$ }" description="assert throws" toReformat="true" toShortenFQNames="true">
+    <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="bt" value="belongs_to :$OBJ$, :class_name =&gt; &quot;$CLASS_NAME$&quot;, :foreign_key =&gt; &quot;$FOREIGN_KEY_ID$&quot;$END$" description="belongs to" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY_ID" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="case" value="case $OBJ$&#10;when $CONDITION$&#10;  $END$&#10;end" description="case" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="cl" value="classify { |$E$| $END$ }" description="classify" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="clafn" value="split(&quot;::&quot;).inject(Object) { |par, const| par.const_get(const) }" description="class from name" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="class" value="class $CLASS_NAME$&#10;  $END$&#10;end" description="Create a class" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="col" value="collect { |$E$| $END$ }" description="collect" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="collect" value="collect { |$ELEMENT$| $ELEMENT$.$BLAH$ }$END$" description="collect" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="BLAH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="comp" value="include Comparable&#10;&#10;def &lt;=&gt;(other)&#10;  $END$&#10;end" description="Comparable" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="dee" value="Marshal.load(Marshal.dump($OBJECT_TO_COPY$))" description="Copies an object using Marshal.load and Marshal.dump" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJECT_TO_COPY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="def" value="def $METHOD_NAME$&#10;  $END$&#10;end  " description="Creates a method" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="defd" value="def_delegator :$DEL_OBJECT$, :$DEL_METHOD$, :$NEW_NAME$" description="def delegator" toReformat="true" toShortenFQNames="true">
+    <variable name="DEL_OBJECT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEL_METHOD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="defds" value="def_delegators :$DEL_OBJECT$, :$DEL_METHODS$" description="def_delegators" toReformat="true" toShortenFQNames="true">
+    <variable name="DEL_OBJECT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEL_METHODS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="defs" value="def self.$CLASS_METHOD_NAME$&#10;  $END$&#10;end" description="def self" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_METHOD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="deft" value="def test_$CASE_NAME$&#10;  $END$&#10;end" description="Creates a test method" toReformat="true" toShortenFQNames="true">
+    <variable name="CASE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="det" value="detect { |$E$| $END$ }" description="detect" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="do" value="do&#10;  $END$&#10;end" description="do end block" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="doo" value="do |$OBJ$|&#10;  $END$&#10;end" description="do end block with object" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ea" value="each { |$E$| $END$ }" description="each" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="eab" value="each_byte { |$BYTE$| $END$ }" description="each_byte" toReformat="true" toShortenFQNames="true">
+    <variable name="BYTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="eac" value="each_char { |$CHAR$| $END$ }" description="each char" toReformat="true" toShortenFQNames="true">
+    <variable name="CHAR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="each" value="each { |$ELEMENT$| $ELEMENT$.$end$ }" description="each" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="each_index" value="each_index { |$I$| $END$ }" description="each index" toReformat="true" toShortenFQNames="true">
+    <variable name="I" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="each_key" value="each_key { |$KEY$| $END$ }" description="each_key" toReformat="true" toShortenFQNames="true">
+    <variable name="KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="each_with_index" value="each_with_index { |$ELEMENT$, $INDEX$| $ELEMENT$.$END$ }" description="each with index" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="eal" value="each_line { |$LINE$| $END$ }" description="each_line" toReformat="true" toShortenFQNames="true">
+    <variable name="LINE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="eap" value="each_pair { |$NAME$, $VALUE$| $END$ }" description="each_pair" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="easl" value="each_slice($E$) { |$GROUP$| $END$ }" description="each_slice" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="GROUP" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="eav" value="each_value { |$VALUE$| $END$ }" description="each_value" toReformat="true" toShortenFQNames="true">
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="eawi" value="each_with_index { |$E$, $INDEX$| $END$ }" description="each_with_index" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="enum" value="include Enumerable&#10;&#10;def each(&amp;block)&#10;  $END$&#10;end" description="Creates an Enumerable" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="fin" value="find { |$E$| $END$ }" description="find" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="fina" value="find_all { |$E$| $END$ }" description="find_all" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="fl" value="flunk(&quot;$FAILURE_MESSAGE$&quot;)" description="flunk" toReformat="true" toShortenFQNames="true">
+    <variable name="FAILURE_MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="flao" value="inject(Array.new) { |$ARRAY$, $A$| $ARRAY$.push(*$A$) }" description="inject(Array.new)" toReformat="true" toShortenFQNames="true">
+    <variable name="ARRAY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="A" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="flash" value="flash[:$NOTICE$] = &quot;$MESSAGE$&quot;" description="Creates a flash" toReformat="true" toShortenFQNames="true">
+    <variable name="NOTICE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="forin" value="for $ELEMENT$ in $COLLECTION$&#10;    $ELEMENT$.$E$&#10;end$END$" description="for in collection" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLLECTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="forw" value="extend Forwardable" description="extend Forwardable" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="gre" value="grep(/$PATTERN$/) { |$MATCH$| $END$ }" description="grep" toReformat="true" toShortenFQNames="true">
+    <variable name="PATTERN" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MATCH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="hash" value="Hash.new { |$HASH$, $KEY$| $HASH$[$KEY$] = $END$ }" description="Creates a new Hash" toReformat="true" toShortenFQNames="true">
+    <variable name="HASH" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="hm" value="has_many :$OBJECTS$, :class_name =&gt; &quot;$CLASS_NAME$&quot;, :foreign_key =&gt; &quot;$FOREIGN_KEY$_id&quot;$END$" description="has_many" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJECTS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ho" value="has_one :$OBJ$, :class_name =&gt; &quot;$CLASS_NAME$&quot;, :foreign_key =&gt; &quot;$FOREIGN_KEY$_id&quot;$END$" description="has_one" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FOREIGN_KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="if" value="if $CONDITION$&#10;  $END$&#10;end" description="Creates an if block" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ife" value="if $CONDITION$&#10;  $STATEMENT_ONE$&#10;else&#10;  $STATEMENT_TWO$&#10;end" description="Creates an if-else block" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="STATEMENT_ONE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="STATEMENT_TWO" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="inj" value="inject($INIT$) { |$MEM$, $VAR$| $END$ }" description="inject" toReformat="true" toShortenFQNames="true">
+    <variable name="INIT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MEM" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VAR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="inject" value="inject($OBJ$) { |$INJECTION$, $ELEMENT$| $E$ }$END$" description="inject" toReformat="true" toShortenFQNames="true">
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="INJECTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="logi" value="logger.info &quot;$MESSAGE$&quot;$END$" description="logger info" toReformat="true" toShortenFQNames="true">
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mac" value="add_column :$TABLE_NAME$, :$COLUMN_NAME$, :$STRING$" description="model add column" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="STRING" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mai" value="add_index :$TABLE_NAME$,[:$COLUMN_NAME$], :name =&gt; &quot;$COLUMN_NAME$_index&quot;$END$" description="model add index" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="map" value="map { |$E$|  }" description="map" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mapwi" value="enum_with_index.map { |$E$, $I$| $END$ }" description="enum_with_index.map" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="I" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="max" value="max { |a, b| $END$ }" description="max" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mcc" value="change_column :$TABLE_NAME$, :$COLUMN_NAME$, :$STRING$, $DEFAULT$ =&gt; 1$END$" description="model change column" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="STRING" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEFAULT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mct" value="create_table :$TABLE_NAME$ do |t|&#10;  $END$&#10;end" description="model create table" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="md" value="File.open(&quot;$PATH_TO_FILE$.dump&quot;, &quot;w&quot;) { |$FILE$| Marshal.dump($OBJ$, $FILE$) }" description="Marshal dump" toReformat="true" toShortenFQNames="true">
+    <variable name="PATH_TO_FILE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FILE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mdt" value="drop_table :$TABLE_NAME$" description="model drop table" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mex" value="execute &quot;$EXECUTE_THIS$&quot;" description="execute" toReformat="true" toShortenFQNames="true">
+    <variable name="EXECUTE_THIS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="min" value="min { |a, b| $END$ }" description="min" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mm" value="def method_missing(meth, *args, &amp;block)&#10;  $END$&#10;end" description="method missing" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mnc" value="rename_column :$TABLE_NAME$, :$COLUMN_NAME$, :$NEW_COLUMN_NAME$" description="model rename column" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mrc" value="remove_column :$TABLE_NAME$, :$COLUMN_NAME$" description="model remove column" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mri" value="remove_index :$TABLE_NAME$, :$COLUMN_NAME$" description="model remove index" toReformat="true" toShortenFQNames="true">
+    <variable name="TABLE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="mtc" value="t.column :$COLUMN_NAME$, :$TYPE$" description="model table column" toReformat="true" toShortenFQNames="true">
+    <variable name="COLUMN_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="p" value="params[:$ID$]&#10;" description="params" toReformat="true" toShortenFQNames="true">
+    <variable name="ID" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="par" value="partition { |$E$| $END$ }" description="partition" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="r" value="attr_reader :$ATTRIBUTE_NAMES$" description="attr_reader" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE_NAMES" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ra" value="render :action =&gt; &quot;$ACTION$&quot;$END$&#10;&#10;" description="render with action" toReformat="true" toShortenFQNames="true">
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ral" value="render :action =&gt; &quot;$ACTION$&quot;, :layout =&gt; &quot;$LAYOUT_NAME$&quot;$END$" description="render with action and layout" toReformat="true" toShortenFQNames="true">
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="LAYOUT_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ran" value="sort_by { rand }" description="sort_by" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rassign" value=":$KEY$ =&gt; :&quot;$VALUE$&quot;" description="variable assignment" toReformat="true" toShortenFQNames="true">
+    <variable name="KEY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rcea" value="render_component :action =&gt; &quot;$INDEX$&quot;$END$" description="render component with action" toReformat="true" toShortenFQNames="true">
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rcec" value="render_component :controller =&gt; &quot;$ITEMS$&quot;$END$" description="render component with controller" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rceca" value="render_component :controller =&gt; &quot;$CONTROLLER$&quot;, :action =&gt; &quot;$ACTION$&quot;$END$" description="render component with controller and action" toReformat="true" toShortenFQNames="true">
+    <variable name="CONTROLLER" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rea" value="redirect_to :action =&gt; &quot;$ACTION$&quot;$END$" description="redirect_to with action" toReformat="true" toShortenFQNames="true">
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="reai" value="redirect_to :action =&gt; &quot;$ACTION$&quot;, :id =&gt; $ID$" description="redirect_to with action and id" toReformat="true" toShortenFQNames="true">
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ID" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rec" value="redirect_to :controller =&gt; &quot;$CONTROLLER$&quot;$END$" description="redirect_to with controller" toReformat="true" toShortenFQNames="true">
+    <variable name="CONTROLLER" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="reca" value="redirect_to :controller =&gt; &quot;$CONTROLLER$&quot;, :action =&gt; &quot;$ACTION$&quot;$END$" description="redirect_to with controller and action" toReformat="true" toShortenFQNames="true">
+    <variable name="CONTROLLER" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="recai" value="redirect_to :controller =&gt; &quot;$CONTROLLER$&quot;, :action =&gt; &quot;$ACTION$&quot;, :id =&gt; $ID$" description="redirect_to with controller, action, and id" toReformat="true" toShortenFQNames="true">
+    <variable name="CONTROLLER" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ACTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ID" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rej" value="reject { |$E$| $END$ }" description="reject" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="reject" value="reject { |$ELEMENT$| $ELEMENT$.$END$ }" description="reject element.attribute" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="req" value="require &quot;$E$&quot;" description="require" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rf" value="render :file =&gt; &quot;$FILE_PATH$&quot;" description="render file" toReformat="true" toShortenFQNames="true">
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rfu" value="render :file =&gt; &quot;$FILE_PATH$&quot;, :use_full_path =&gt; $USE_FULL_PATH$" description="render file with use_full_path" toReformat="true" toShortenFQNames="true">
+    <variable name="FILE_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="USE_FULL_PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ri" value="render :inline =&gt; &quot;&lt;%= '$MESSAGE$' %&gt;&quot;" description="render inline" toReformat="true" toShortenFQNames="true">
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ril" value="render :inline =&gt; &quot;&lt;%= '$MESSAGE$' %&gt;&quot;, :locals =&gt; { $NAME$ =&gt; &quot;$VALUE$&quot; }" description="render inline with locals" toReformat="true" toShortenFQNames="true">
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rit" value="render :inline =&gt; &quot;&lt;%= '$MESSAGE$' %&gt;&quot;, :type =&gt; $RXML$" description="render inline with type" toReformat="true" toShortenFQNames="true">
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="RXML" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rl" value="render :layout =&gt; &quot;$LAYOUT_NAME$&quot;$END$" description="render layout" toReformat="true" toShortenFQNames="true">
+    <variable name="LAYOUT_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rn" value="render :nothing =&gt; $TRUE$" description="render with nothing" toReformat="true" toShortenFQNames="true">
+    <variable name="TRUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rns" value="render :nothing =&gt; $TRUE$, :status =&gt; $HTTP_STATUS$" description="render with nothing and status" toReformat="true" toShortenFQNames="true">
+    <variable name="TRUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="HTTP_STATUS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rp" value="render :partial =&gt; &quot;$ITEM$&quot;" description="render partial" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEM" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rpc" value="render :partial =&gt; &quot;$ITEM$&quot;, :collection =&gt; $ITEMS$" description="render partial with collection" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEM" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ITEMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rpl" value="render :partial =&gt; &quot;$ITEM$&quot;, :locals =&gt; { :$NAME$ =&gt; &quot;$VALUE$&quot; }" description="render partial with locals" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEM" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rpo" value="render :partial =&gt; &quot;$ITEM$&quot;, :object =&gt; $OBJ$" description="render partial with object" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEM" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rps" value="render :partial =&gt; &quot;$ITEM$&quot;, :status =&gt; $HTTP_STATUS$" description="render partial with status" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEM" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="HTTP_STATUS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rt" value="render :text =&gt; &quot;$TEXT$&quot;" description="render text" toReformat="true" toShortenFQNames="true">
+    <variable name="TEXT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rtl" value="render :text =&gt; &quot;$TEXT$&quot;, :layout =&gt; &quot;$LAYOUT_NAME$&quot;" description="render text with layout name" toReformat="true" toShortenFQNames="true">
+    <variable name="TEXT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="LAYOUT_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rtlt" value="render :text =&gt; &quot;$TEXT$&quot;, :layout =&gt; $TRUE$" description="render text with layout" toReformat="true" toShortenFQNames="true">
+    <variable name="TEXT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TRUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rts" value="render :text =&gt; &quot;$TEXT$&quot;, :status =&gt; $HTTP_STATUS$" description="render text with status" toReformat="true" toShortenFQNames="true">
+    <variable name="TEXT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="HTTP_STATUS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="rw" value="attr_accessor :$ATTRIBUTE_NAMES$" description="attr_accessor" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE_NAMES" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="s" value="session[:$USER$]$END$" description="session" toReformat="true" toShortenFQNames="true">
+    <variable name="USER" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="scan" value="scan(/$PATTERN$/) { |$MATCH$| $END$ }" description="scan" toReformat="true" toShortenFQNames="true">
+    <variable name="PATTERN" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MATCH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="sortby" value="sort_by { |$E$ | $END$ }" description="sort by" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="unless" value="unless $CONDITION$&#10;  $END$&#10;end" description="unless block" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="until" value="until $CONDITION$&#10;  $END$&#10;end" description="until block" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="va" value="validates_associated :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;" description="validates associated" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vaif" value="validates_associated :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :if =&gt; proc { |obj| $OBJECT_CONDITION$ }" description="validates associated with if" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJECT_CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vc" value="validates_confirmation_of :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;" description="validates confirmation of" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vcif" value="validates_confirmation_of :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;, :if =&gt; proc { |obj| $OBJECT_CONDITION$ }" description="validates confirmation of with if" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJECT_CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ve" value="validates_exclusion_of :$ATTRIBUTE$, :in =&gt; $ENUMERABLE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;" description="validates exclusion of" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ENUMERABLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="veif" value="validates_exclusion_of :$ATTRIBUTE$, :in =&gt; $ENUMERABLE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$IS_NOT_ALLOWED$&quot;, :if =&gt; proc { |obj| $OBJECT_CONDITION$ }" description="validates exclusion of" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ENUMERABLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="IS_NOT_ALLOWED" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJECT_CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="verify" value="verify :only =&gt; [:$E$], :method =&gt; :post, :render =&gt; {:status =&gt; 500, :text =&gt; &quot;use HTTP-POST&quot;}" description="verify post-only" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="verifyr" value="verify :only =&gt; [:$E$], :session =&gt; :user, :params =&gt; :id, :redirect_to =&gt; {:action =&gt; '$INDEX$'}" description="verify user session with redirect" toReformat="true" toShortenFQNames="true">
+    <variable name="E" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vlen" value="validates_length_of $NAME$, :maximum=&gt;$INTEGER$, :message=&gt;&quot;$MESSAGE$&quot;" description="validates length of" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="INTEGER" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vp" value="validates_presence_of :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;" description="validate presence of" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vpif" value="validates_presence_of :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;, :if =&gt; proc { |obj| $OBJECT_CONDITION$} }" description="validates presence of with object condition" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJECT_CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vu" value="validates_uniqueness_of :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;" description="validate uniqueness of" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="vuif" value="validates_uniqueness_of :$ATTRIBUTE$, :on =&gt; &quot;$CREATE$&quot;, :message =&gt; &quot;$MESSAGE$&quot;, :if =&gt; proc { |obj| $OBJECT_CONDITION$ }" description="validates uniqueness of with object condition" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CREATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJECT_CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="w" value="attr_writer :$ATTRIBUTE_NAMES$" description="attribute writer" toReformat="true" toShortenFQNames="true">
+    <variable name="ATTRIBUTE_NAMES" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="when" value="when $CONDITION$&#10;  $END$&#10;  " description="when" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="while" value="while $CONDITION$&#10;  $END$&#10;end" description="while block" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="ydump" value="File.open($PATH_TO_FILE$, &quot;w&quot;) { |$FILE$| YAML.dump($OBJ$, $FILE$) }" description="YAML dump" toReformat="true" toShortenFQNames="true">
+    <variable name="PATH_TO_FILE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FILE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="OBJ" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="yields" value="yields&#10;  :yields: $ARGUMENTS$" description="yields" toReformat="true" toShortenFQNames="true">
+    <variable name="ARGUMENTS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="yload" value="File.open($PATH_TO_FILE$) { |$FILE$| YAML.load($FILE$) }" description="YAML load" toReformat="true" toShortenFQNames="true">
+    <variable name="PATH_TO_FILE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="FILE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="false" />
+      <option name="JAVA_COMMENT" value="false" />
+      <option name="JAVA_STRING" value="false" />
+      <option name="XML" value="false" />
+      <option name="HTML" value="false" />
+      <option name="JSP" value="false" />
+      <option name="COMPLETION" value="false" />
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+</templateSet>

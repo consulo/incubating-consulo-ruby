@@ -1,0 +1,4 @@
+class A; puts "string<caret>"
+-------
+class A; puts "string
+<caret>"

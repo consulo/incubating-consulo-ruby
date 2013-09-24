@@ -1,0 +1,24 @@
+call a,b,
+c=>d
+-------------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('call')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        Identifier
+          PsiElement(identifier)('b')
+        PsiElement(,)(',')
+        PsiWhiteSpace('\n')
+        Assoc
+          Identifier
+            PsiElement(identifier)('c')
+          PsiElement(=>)('=>')
+          Identifier
+            PsiElement(identifier)('d')
+  PsiElement(end of line)('\n')

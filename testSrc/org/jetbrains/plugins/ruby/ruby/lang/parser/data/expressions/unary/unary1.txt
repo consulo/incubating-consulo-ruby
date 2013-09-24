@@ -1,0 +1,15 @@
++a
+-a
+----
+Ruby file
+  Compound statement
+    Unary expression
+      PsiElement(u+)('+')
+      Identifier
+        PsiElement(identifier)('a')
+    PsiElement(end of line)('\n')
+    Negative expression
+      PsiElement(u-)('-')
+      Identifier
+        PsiElement(identifier)('a')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,19 @@
+<a voice = "x<%= r %>u" animal  =
+<% if pig then %>"pig"<%else%>t= "unknown"<%end%> bb  =  "bb"    name= "aluto">
+dddd
+fffff
+fggg
+  ffff
+<% d %>
+</a>
+----------
+<a voice="x<%= r %>u" animal=
+            <% if pig then %>"pig"
+<% else %>t= "unknown"
+<% end %> bb="bb" name="aluto">
+    dddd
+    fffff
+    fggg
+    ffff
+    <% d %>
+</a>

@@ -1,0 +1,19 @@
+alias foo :<
+foo
+------------
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      Symbol
+        PsiElement(:)(':')
+        Function name
+          PsiElement(<)('<')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('foo')
+  PsiElement(end of line)('\n')

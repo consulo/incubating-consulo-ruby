@@ -1,0 +1,12 @@
+=begin
+TEST COMMENT
+=end
+---------
+Ruby file
+  PsiComment(=begin)('=begin')
+  PsiComment(block comment content)('\n')
+  PsiComment(block comment content)('TEST COMMENT\n')
+  PsiComment(=end)('=end')
+  PsiWhiteSpace('\n')
+  Compound statement
+    <empty list>

@@ -1,0 +1,21 @@
+def Moo
+    def Doo
+        test
+        def Moo
+            test2
+            if a>2 then
+                test3
+            end
+            test4
+        end
+------------
+def Moo
+    def Doo
+        test
+        def Moo
+            test2
+            if a>2 then
+                test3
+            end
+            test4
+        end

@@ -1,0 +1,7 @@
+class Foo
+#test comment
+end
+--------
+class Foo
+#test comment
+end

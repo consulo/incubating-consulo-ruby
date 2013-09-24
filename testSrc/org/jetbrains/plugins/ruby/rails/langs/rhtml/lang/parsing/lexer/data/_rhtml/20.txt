@@ -1,0 +1,15 @@
+<head>
+<body>
+</body>
+<%=
+pq
+</head>
+-------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 22], {<head>
+<body>
+</body>
+}
+<%=: [22, 25], {<%=}
+RUBY_CODE_CHARACTERS: [25, 36], {
+pq
+</head>}

@@ -1,0 +1,9 @@
+class A
+    class <<self
+        def foo
+            <caret>
+        end
+    end
+end
+-------
+A::self(temp.rb)

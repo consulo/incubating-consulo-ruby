@@ -1,0 +1,14 @@
+assert_match /regexp/
+--------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('assert_match')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Regular expression
+          PsiElement(regexp beginning)('/')
+          PsiElement(regexp content)('regexp')
+          PsiElement(regexp end)('/')
+  PsiElement(end of line)('\n')

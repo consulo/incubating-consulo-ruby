@@ -1,0 +1,6 @@
+f <%-%>
+-------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 2], {f }
+<%: [2, 4], {<%}
+OMIT_NEW_LINE: [4, 5], {-}
+%>: [5, 7], {%>}

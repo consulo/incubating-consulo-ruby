@@ -1,0 +1,19 @@
+a = b or foo
+-----------
+Ruby file
+  Compound statement
+    Boolean binary expression
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(or)('or')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('foo')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,19 @@
+method_call do
+    expr
+end
+--------------------
+Ruby file
+  Compound statement
+    Block call
+      Identifier
+        PsiElement(identifier)('method_call')
+      PsiWhiteSpace(' ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace('\n    ')
+        Compound statement
+          Identifier
+            PsiElement(identifier)('expr')
+        PsiElement(end of line)('\n')
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

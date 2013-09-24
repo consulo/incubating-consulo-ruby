@@ -1,0 +1,14 @@
+foo +
+23
+------
+Ruby file
+  Compound statement
+    Math binary expression
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      PsiElement(+)('+')
+      PsiWhiteSpace('\n')
+      Integer
+        PsiElement(integer literal)('23')
+  PsiElement(end of line)('\n')

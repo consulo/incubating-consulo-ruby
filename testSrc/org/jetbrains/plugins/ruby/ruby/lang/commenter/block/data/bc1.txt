@@ -1,0 +1,10 @@
+<selection>to comment
+</selection>
+---------
+
+<caret>=begin
+
+to comment
+
+=end
+

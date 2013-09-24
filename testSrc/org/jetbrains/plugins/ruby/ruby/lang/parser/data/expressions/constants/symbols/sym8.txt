@@ -1,0 +1,11 @@
+:'string'
+-----
+Ruby file
+  Compound statement
+    Symbol
+      PsiElement(:)(':')
+      Single quoted like string
+        PsiElement(single quoted like string beginning)(''')
+        PsiElement(string content)('string')
+        PsiElement(string end)(''')
+  PsiElement(end of line)('\n')

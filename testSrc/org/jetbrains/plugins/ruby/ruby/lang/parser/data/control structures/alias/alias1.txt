@@ -1,0 +1,13 @@
+alias method method
+-----------------------
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(identifier)('method')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(identifier)('method')
+  PsiElement(end of line)('\n')

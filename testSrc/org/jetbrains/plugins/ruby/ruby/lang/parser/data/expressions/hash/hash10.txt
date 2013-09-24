@@ -1,0 +1,20 @@
+{a[b]=>c}
+------------
+Ruby file
+  Compound statement
+    Assoc list
+      PsiElement({)('{')
+      Assoc
+        Array reference
+          Identifier
+            PsiElement(identifier)('a')
+          PsiElement(f[)('[')
+          List of expressions
+            Identifier
+              PsiElement(identifier)('b')
+          PsiElement(])(']')
+        PsiElement(=>)('=>')
+        Identifier
+          PsiElement(identifier)('c')
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

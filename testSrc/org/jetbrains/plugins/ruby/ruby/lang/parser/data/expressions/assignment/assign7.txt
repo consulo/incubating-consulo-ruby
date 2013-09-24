@@ -1,0 +1,13 @@
+a = call
+------------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('call')
+  PsiElement(end of line)('\n')

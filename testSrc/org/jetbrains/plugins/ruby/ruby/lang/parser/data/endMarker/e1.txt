@@ -1,0 +1,16 @@
+puts "ROMA"
+__END__
+------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('puts')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Double quoted like string
+          PsiElement(double quoted like string beginning)('"')
+          PsiElement(string content)('ROMA')
+          PsiElement(string end)('"')
+  PsiElement(end of line)('\n')
+  PsiComment(__END__)('__END__\n')

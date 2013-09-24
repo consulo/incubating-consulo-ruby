@@ -1,0 +1,479 @@
+TEXTILE_TAGS =
+
+        [[128, 8364], [129, 0], [130, 8218], [131, 402], [132, 8222], [133, 8230],
+         [134, 8224], [135, 8225], [136, 710], [137, 8240], [138, 352], [139, 8249],
+         [140, 338], [141, 0], [142, 0], [143, 0], [144, 0], [145, 8216], [146, 8217],
+         [147, 8220], [148, 8221], [149, 8226], [150, 8211], [151, 8212], [152, 732],
+         [153, 8482], [154, 353], [155, 8250], [156, 339], [157, 0], [158, 0], [159, 376]].
+
+        collect! do |a, b|
+            [a.chr, ( b.zero? and "" or "&#{ b };" )]
+        end
+-----------
+Ruby file
+  Compound statement
+    Assignment expression
+      Constant
+        PsiElement(constant)('TEXTILE_TAGS')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace('\n\n        ')
+      Block call
+        Dot reference
+          Array
+            PsiElement([)('[')
+            List of expressions
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('128')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8364')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('129')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('130')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8218')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('131')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('402')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('132')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8222')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('133')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8230')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace('\n         ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('134')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8224')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('135')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8225')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('136')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('710')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('137')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8240')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('138')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('352')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('139')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8249')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace('\n         ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('140')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('338')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('141')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('142')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('143')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('144')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('145')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8216')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('146')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8217')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace('\n         ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('147')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8220')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('148')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8221')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('149')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8226')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('150')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8211')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('151')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8212')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('152')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('732')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace('\n         ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('153')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8482')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('154')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('353')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('155')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('8250')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('156')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('339')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('157')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('158')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement(])(']')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Array
+                PsiElement([)('[')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('159')
+                  PsiElement(,)(',')
+                  PsiWhiteSpace(' ')
+                  Integer
+                    PsiElement(integer literal)('376')
+                PsiElement(])(']')
+            PsiElement(])(']')
+          PsiElement(.)('.')
+          PsiWhiteSpace('\n\n        ')
+          Fid
+            PsiElement(fid)('collect!')
+        PsiWhiteSpace(' ')
+        Do code block
+          PsiElement(do)('do')
+          PsiWhiteSpace(' ')
+          PsiElement(p|)('|')
+          Block variables
+            List of expressions
+              Identifier
+                PsiElement(identifier)('a')
+              PsiElement(,)(',')
+              PsiWhiteSpace(' ')
+              Identifier
+                PsiElement(identifier)('b')
+          PsiElement(p|)('|')
+          PsiWhiteSpace('\n            ')
+          Compound statement
+            Array
+              PsiElement([)('[')
+              List of expressions
+                Dot reference
+                  Identifier
+                    PsiElement(identifier)('a')
+                  PsiElement(.)('.')
+                  Identifier
+                    PsiElement(identifier)('chr')
+                PsiElement(,)(',')
+                PsiWhiteSpace(' ')
+                Expression in parens
+                  PsiElement(()('(')
+                  PsiWhiteSpace(' ')
+                  Compound statement
+                    Boolean binary expression
+                      Boolean binary expression
+                        Dot reference
+                          Identifier
+                            PsiElement(identifier)('b')
+                          PsiElement(.)('.')
+                          Fid
+                            PsiElement(fid)('zero?')
+                        PsiWhiteSpace(' ')
+                        PsiElement(and)('and')
+                        PsiWhiteSpace(' ')
+                        Double quoted like string
+                          PsiElement(double quoted like string beginning)('"')
+                          PsiElement(string end)('"')
+                      PsiWhiteSpace(' ')
+                      PsiElement(or)('or')
+                      PsiWhiteSpace(' ')
+                      Double quoted like string
+                        PsiElement(double quoted like string beginning)('"')
+                        PsiElement(string content)('&')
+                        Expression subtitution
+                          PsiElement(#{)('#{')
+                          PsiWhiteSpace(' ')
+                          Identifier
+                            PsiElement(identifier)('b')
+                          PsiWhiteSpace(' ')
+                          PsiElement(})('}')
+                        PsiElement(string content)(';')
+                        PsiElement(string end)('"')
+                  PsiWhiteSpace(' ')
+                  PsiElement())(')')
+              PsiElement(])(']')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('        ')
+          PsiElement(end)('end')
+  PsiElement(end of line)('\n')

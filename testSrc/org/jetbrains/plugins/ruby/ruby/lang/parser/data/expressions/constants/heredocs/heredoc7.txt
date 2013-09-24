@@ -1,0 +1,20 @@
+foo <<FOO;
+heredoc
+FOO
+----------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Heredoc id
+          PsiElement(heredoc id)('<<FOO')
+    PsiElement(;)(';')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('heredoc')
+    PsiElement(end of line)('\n')
+    PsiElement(heredoc end)('FOO')
+  PsiElement(end of line)('\n')

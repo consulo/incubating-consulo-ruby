@@ -1,0 +1,41 @@
+create_table "users", :force => true do |t|
+end
+-----
+Ruby file
+  Compound statement
+    Block call
+      Command call
+        Identifier
+          PsiElement(identifier)('create_table')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Double quoted like string
+            PsiElement(double quoted like string beginning)('"')
+            PsiElement(string content)('users')
+            PsiElement(string end)('"')
+          PsiElement(,)(',')
+          PsiWhiteSpace(' ')
+          Assoc
+            Symbol
+              PsiElement(:)(':')
+              Function name
+                PsiElement(identifier)('force')
+            PsiWhiteSpace(' ')
+            PsiElement(=>)('=>')
+            PsiWhiteSpace(' ')
+            Pseudo constant
+              PsiElement(true)('true')
+      PsiWhiteSpace(' ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace(' ')
+        PsiElement(p|)('|')
+        Block variables
+          Identifier
+            PsiElement(identifier)('t')
+        PsiElement(p|)('|')
+        PsiWhiteSpace('\n')
+        Compound statement
+          <empty list>
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

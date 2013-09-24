@@ -1,0 +1,18 @@
+foo -1, 2
+-----
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Negative expression
+          PsiElement(u-)('-')
+          Integer
+            PsiElement(integer literal)('1')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Integer
+          PsiElement(integer literal)('2')
+  PsiElement(end of line)('\n')

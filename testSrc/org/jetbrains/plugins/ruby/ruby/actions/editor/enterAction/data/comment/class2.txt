@@ -1,0 +1,8 @@
+class Foo
+    foo() #comment<caret> text
+end
+--------
+class Foo
+    foo() #comment
+    #<caret> text
+end

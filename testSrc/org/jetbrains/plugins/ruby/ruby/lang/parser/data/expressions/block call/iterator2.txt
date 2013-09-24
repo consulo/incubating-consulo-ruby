@@ -1,0 +1,33 @@
+foo do |h,(k,v)|
+end
+-------------
+Ruby file
+  Compound statement
+    Block call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace(' ')
+        PsiElement(p|)('|')
+        Block variables
+          List of expressions
+            Identifier
+              PsiElement(identifier)('h')
+            PsiElement(,)(',')
+            Expression in parens
+              PsiElement(()('(')
+              List of expressions
+                Identifier
+                  PsiElement(identifier)('k')
+                PsiElement(,)(',')
+                Identifier
+                  PsiElement(identifier)('v')
+              PsiElement())(')')
+        PsiElement(p|)('|')
+        PsiWhiteSpace('\n')
+        Compound statement
+          <empty list>
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

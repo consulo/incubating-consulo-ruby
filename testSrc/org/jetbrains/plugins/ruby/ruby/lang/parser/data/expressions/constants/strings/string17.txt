@@ -1,0 +1,9 @@
+%q<a <nested> string>
+----
+Ruby file
+  Compound statement
+    Single quoted like string
+      PsiElement(single quoted like string beginning)('%q<')
+      PsiElement(string content)('a <nested> string')
+      PsiElement(string end)('>')
+  PsiElement(end of line)('\n')

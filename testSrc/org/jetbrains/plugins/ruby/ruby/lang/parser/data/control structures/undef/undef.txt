@@ -1,0 +1,11 @@
+undef method
+------------------
+Ruby file
+  Compound statement
+    Undef statement
+      PsiElement(undef)('undef')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Function name
+          PsiElement(identifier)('method')
+  PsiElement(end of line)('\n')

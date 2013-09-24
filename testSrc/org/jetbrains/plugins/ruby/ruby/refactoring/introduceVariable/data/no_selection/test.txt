@@ -1,0 +1,7 @@
+<caret>ProgressManager.getInstance(some_project, foo)
+------
+manager
+------
+replace_this
+------
+manager = ProgressManager.getInstance(some_project, foo)

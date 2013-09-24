@@ -1,0 +1,10 @@
+if true then
+    foo
+    else<caret>
+end
+--------
+if true then
+    foo
+else
+    <caret>
+end

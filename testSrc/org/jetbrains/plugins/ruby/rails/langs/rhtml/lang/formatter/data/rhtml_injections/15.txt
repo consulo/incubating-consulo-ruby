@@ -1,0 +1,17 @@
+<a>
+<title>
+<% 3.times do |a| %>
+<foo>
+<% end %>
+</foo>
+</title>
+</a>
+----------
+<a>
+    <title>
+        <% 3.times do |a| %>
+            <foo>
+        <% end %>
+        </foo>
+    </title>
+</a>

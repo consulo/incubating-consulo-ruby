@@ -1,0 +1,5 @@
+# Simple help text
+ # Line #2
+ # Kernel#Foo
+-----------
+&nbsp;Simple&nbsp;help&nbsp;text<br>&nbsp;#&nbsp;Line&nbsp;#2<br>&nbsp;#&nbsp;Kernel#Foo

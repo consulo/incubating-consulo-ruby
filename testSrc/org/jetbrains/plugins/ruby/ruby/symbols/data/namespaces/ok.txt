@@ -1,0 +1,27 @@
+module A
+end
+
+module B
+    module C
+        include A
+    end
+    include A
+end
+-------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] module [2] A
+    [5] module [4] B
+        [7] module [6] C
+            [9] include
+                [8] A
+        [11] include
+            [10] A
+
+Symbol:
+[0] FILE
+    [1] MODULE A prototypes:  3
+    [2] MODULE B prototypes:  5
+        [3] MODULE C prototypes:  7
+            [4] INCLUDE [1]
+        [5] INCLUDE [1]

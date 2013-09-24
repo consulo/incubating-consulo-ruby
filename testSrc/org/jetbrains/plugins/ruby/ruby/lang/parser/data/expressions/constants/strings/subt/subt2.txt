@@ -1,0 +1,13 @@
+"#{a}"
+--------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(})('}')
+      PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

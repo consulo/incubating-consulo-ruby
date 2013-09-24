@@ -1,0 +1,17 @@
+method_call { expr1 }
+------------------------
+Ruby file
+  Compound statement
+    Block call
+      Identifier
+        PsiElement(identifier)('method_call')
+      PsiWhiteSpace(' ')
+      Brace code block
+        PsiElement({)('{')
+        PsiWhiteSpace(' ')
+        Compound statement
+          Identifier
+            PsiElement(identifier)('expr1')
+        PsiWhiteSpace(' ')
+        PsiElement(})('}')
+  PsiElement(end of line)('\n')

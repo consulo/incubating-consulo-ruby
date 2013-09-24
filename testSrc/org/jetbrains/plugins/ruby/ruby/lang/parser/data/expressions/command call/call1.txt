@@ -1,0 +1,16 @@
+foo.call arg
+----------
+Ruby file
+  Compound statement
+    Command call
+      Dot reference
+        Identifier
+          PsiElement(identifier)('foo')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('call')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('arg')
+  PsiElement(end of line)('\n')

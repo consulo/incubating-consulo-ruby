@@ -1,0 +1,5 @@
+<%-<html> preved </html>
+-------------
+<%: [0, 2], {<%}
+OMIT_NEW_LINE: [2, 3], {-}
+RUBY_CODE_CHARACTERS: [3, 24], {<html> preved </html>}

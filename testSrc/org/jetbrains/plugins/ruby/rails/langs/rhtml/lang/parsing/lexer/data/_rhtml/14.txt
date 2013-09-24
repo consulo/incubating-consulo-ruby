@@ -1,0 +1,12 @@
+<html> pre<%+ved 2.times%> do |i|%><b>It is <%= simple! -%></b></html>
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 10], {<html> pre}
+<%: [10, 12], {<%}
+RUBY_CODE_CHARACTERS: [12, 24], {+ved 2.times}
+%>: [24, 26], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [26, 44], { do |i|%><b>It is }
+<%=: [44, 47], {<%=}
+RUBY_CODE_CHARACTERS: [47, 56], { simple! }
+OMIT_NEW_LINE: [56, 57], {-}
+%>: [57, 59], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [59, 70], {</b></html>}

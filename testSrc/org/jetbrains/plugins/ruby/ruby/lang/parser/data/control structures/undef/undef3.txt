@@ -1,0 +1,28 @@
+undef /,
++,
+-, #comment
+/
+------
+Ruby file
+  Compound statement
+    Undef statement
+      PsiElement(undef)('undef')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Function name
+          PsiElement(/)('/')
+        PsiElement(,)(',')
+        PsiWhiteSpace('\n')
+        Function name
+          PsiElement(+)('+')
+        PsiElement(,)(',')
+        PsiWhiteSpace('\n')
+        Function name
+          PsiElement(-)('-')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        PsiComment(line comment)('#comment')
+        PsiWhiteSpace('\n')
+        Function name
+          PsiElement(/)('/')
+  PsiElement(end of line)('\n')

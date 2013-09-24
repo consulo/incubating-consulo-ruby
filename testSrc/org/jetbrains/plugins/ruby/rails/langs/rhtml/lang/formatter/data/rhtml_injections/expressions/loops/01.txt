@@ -1,0 +1,11 @@
+<a>
+<% 3.times do %>
+dddd
+<% end %>
+</a>
+--------
+<a>
+    <% 3.times do %>
+        dddd
+    <% end %>
+</a>

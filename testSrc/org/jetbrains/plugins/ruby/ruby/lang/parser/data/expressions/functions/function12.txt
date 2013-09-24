@@ -1,0 +1,24 @@
+foo(a,*b, &c)
+--------
+Ruby file
+  Compound statement
+    Function call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiElement(f()('(')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('b')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Block to argument
+          PsiElement(a&)('&')
+          Identifier
+            PsiElement(identifier)('c')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

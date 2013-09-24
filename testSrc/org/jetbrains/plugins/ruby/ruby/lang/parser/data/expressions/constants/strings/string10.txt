@@ -1,0 +1,13 @@
+"#$"
+-------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      Expression subtitution
+        PsiElement(#)('#')
+        Global variable
+          PsiElement(global variable)('$"')
+      PsiElement(string content)('\n')
+      PsiErrorElement:Expected: string end
+        <empty list>

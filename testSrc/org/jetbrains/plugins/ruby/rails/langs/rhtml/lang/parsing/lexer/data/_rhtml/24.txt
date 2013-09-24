@@ -1,0 +1,4 @@
+<%# my_comment
+-------
+RHTML_COMMENT_START: [0, 3], {<%#}
+RHTML_COMMENT_CHARACTERS: [3, 14], { my_comment}

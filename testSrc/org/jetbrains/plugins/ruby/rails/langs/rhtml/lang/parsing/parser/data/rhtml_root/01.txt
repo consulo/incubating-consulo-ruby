@@ -1,0 +1,37 @@
+<a>
+<title>
+<% if 3 %>
+<% a= 3 %>
+<foo>
+<% else %>
+dd
+<% end %>
+</foo>
+</title>
+</a>
+-----------
+RHTMLFile:temp.rhtml
+  PsiElement(HTML_DOCUMENT)
+    PsiElement(XML_PROLOG)
+      <empty list>
+    Outer: TEMPLATE_CHARACTERS_IN_RHTML, characters in RHTML or Ruby lang('<a>\n<title>\n')
+    Ruby injection:if 3
+      PsiElement(<%)('<%')
+      Outer: RUBY_CODE_CHARACTERS, characters in RHTML or Ruby lang(' if 3 ')
+      PsiElement(%>)('%>')
+    Outer: TEMPLATE_CHARACTERS_IN_RHTML, characters in RHTML or Ruby lang('\n')
+    Ruby injection:a= 3
+      PsiElement(<%)('<%')
+      Outer: RUBY_CODE_CHARACTERS, characters in RHTML or Ruby lang(' a= 3 ')
+      PsiElement(%>)('%>')
+    Outer: TEMPLATE_CHARACTERS_IN_RHTML, characters in RHTML or Ruby lang('\n<foo>\n')
+    Ruby injection:else
+      PsiElement(<%)('<%')
+      Outer: RUBY_CODE_CHARACTERS, characters in RHTML or Ruby lang(' else ')
+      PsiElement(%>)('%>')
+    Outer: TEMPLATE_CHARACTERS_IN_RHTML, characters in RHTML or Ruby lang('\ndd\n')
+    Ruby injection:end
+      PsiElement(<%)('<%')
+      Outer: RUBY_CODE_CHARACTERS, characters in RHTML or Ruby lang(' end ')
+      PsiElement(%>)('%>')
+    Outer: TEMPLATE_CHARACTERS_IN_RHTML, characters in RHTML or Ruby lang('\n</foo>\n</title>\n</a>\n')

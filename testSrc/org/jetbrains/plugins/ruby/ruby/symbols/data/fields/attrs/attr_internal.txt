@@ -1,0 +1,31 @@
+class A
+    attr_internal :foo
+    attr_internal :bar
+    attr_internal :baz
+
+    def method
+        @foo
+        @bar
+    end
+end
+------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] class [2] A
+        [6] attr_internal foo
+        [7] attr_internal bar
+        [8] attr_internal baz
+        [10] def [9] method
+        [4] INSTANCE_VARIABLE foo
+        [5] INSTANCE_VARIABLE bar
+
+Symbol:
+[0] FILE
+    [1] CLASS A prototypes:  3
+        [2] INSTANCE_FIELD foo prototypes:  4
+        [3] INSTANCE_FIELD bar prototypes:  5
+        [4] ATTR_INTERNAL foo [2]
+        [5] ATTR_INTERNAL bar [3]
+        [6] NOT_DEFINED baz
+        [7] ATTR_INTERNAL baz [6]
+        [8] INSTANCE_METHOD method prototypes:  10

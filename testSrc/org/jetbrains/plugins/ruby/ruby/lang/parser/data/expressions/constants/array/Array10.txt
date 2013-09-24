@@ -1,0 +1,40 @@
+# args ',' tSTAR arg opt_nl
+[a,b,*c]
+[a,b,*c
+]
+---------
+Ruby file
+  PsiComment(line comment)('# args ',' tSTAR arg opt_nl')
+  PsiWhiteSpace('\n')
+  Compound statement
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        Identifier
+          PsiElement(identifier)('b')
+        PsiElement(,)(',')
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('c')
+      PsiElement(])(']')
+    PsiElement(end of line)('\n')
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        Identifier
+          PsiElement(identifier)('b')
+        PsiElement(,)(',')
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('c')
+        PsiElement(end of line)('\n')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

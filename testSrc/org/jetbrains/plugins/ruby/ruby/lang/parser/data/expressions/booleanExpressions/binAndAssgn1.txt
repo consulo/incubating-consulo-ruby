@@ -1,0 +1,32 @@
+foo ( i0 = StringIO.new || i1)
+-----------------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Expression in parens
+          PsiElement(a()('(')
+          PsiWhiteSpace(' ')
+          Assignment expression
+            Identifier
+              PsiElement(identifier)('i0')
+            PsiWhiteSpace(' ')
+            PsiElement(=)('=')
+            PsiWhiteSpace(' ')
+            Boolean binary expression
+              Dot reference
+                Constant
+                  PsiElement(constant)('StringIO')
+                PsiElement(.)('.')
+                Identifier
+                  PsiElement(identifier)('new')
+              PsiWhiteSpace(' ')
+              PsiElement(||)('||')
+              PsiWhiteSpace(' ')
+              Identifier
+                PsiElement(identifier)('i1')
+          PsiElement())(')')
+  PsiElement(end of line)('\n')

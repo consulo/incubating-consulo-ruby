@@ -1,0 +1,5 @@
+<tr class="node level-<%= level %>qqq<%= children_class %>">
+</tr>
+----------
+<tr class="node level-<%= level %>qqq<%= children_class %>">
+</tr>

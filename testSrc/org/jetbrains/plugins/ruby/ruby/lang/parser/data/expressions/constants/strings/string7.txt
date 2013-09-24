@@ -1,0 +1,9 @@
+`shell.exe`
+-----------
+Ruby file
+  Compound statement
+    Double quoted like x command string
+      PsiElement(shell command like string beginning)('`')
+      PsiElement(string content)('shell.exe')
+      PsiElement(string end)('`')
+  PsiElement(end of line)('\n')

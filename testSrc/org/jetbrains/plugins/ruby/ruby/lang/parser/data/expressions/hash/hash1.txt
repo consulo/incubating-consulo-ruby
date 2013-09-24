@@ -1,0 +1,8 @@
+{}
+----------
+Ruby file
+  Compound statement
+    Assoc list
+      PsiElement({)('{')
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

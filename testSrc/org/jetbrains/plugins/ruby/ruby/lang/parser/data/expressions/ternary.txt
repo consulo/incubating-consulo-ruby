@@ -1,0 +1,31 @@
+@system ? ' ' +@system.inspect : ''
+-----
+Ruby file
+  Compound statement
+    Ternary expression
+      Condition
+        Instance variable
+          PsiElement(instance variable)('@system')
+      PsiWhiteSpace(' ')
+      PsiElement(?)('?')
+      PsiWhiteSpace(' ')
+      Math binary expression
+        Single quoted like string
+          PsiElement(single quoted like string beginning)(''')
+          PsiElement(string content)(' ')
+          PsiElement(string end)(''')
+        PsiWhiteSpace(' ')
+        PsiElement(+)('+')
+        Dot reference
+          Instance variable
+            PsiElement(instance variable)('@system')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('inspect')
+      PsiWhiteSpace(' ')
+      PsiElement(:)(':')
+      PsiWhiteSpace(' ')
+      Single quoted like string
+        PsiElement(single quoted like string beginning)(''')
+        PsiElement(string end)(''')
+  PsiElement(end of line)('\n')

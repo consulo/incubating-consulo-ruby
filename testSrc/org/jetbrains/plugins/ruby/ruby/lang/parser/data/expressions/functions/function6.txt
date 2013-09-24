@@ -1,0 +1,20 @@
+foo(777 bar)
+---------
+Ruby file
+  Compound statement
+    Function call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiElement(f()('(')
+      List of expressions
+        Integer
+          PsiElement(integer literal)('777')
+      PsiErrorElement:Expected: )
+        <empty list>
+    PsiWhiteSpace(' ')
+    Identifier
+      PsiElement(identifier)('bar')
+    PsiErrorElement:Expected: ; or end of line
+      <empty list>
+    PsiElement())(')')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,4 @@
+a = b =<caret>c
+-----
+a = b =
+        <caret>c

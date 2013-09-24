@@ -1,0 +1,12 @@
+/#@Var/
+-------
+Ruby file
+  Compound statement
+    Regular expression
+      PsiElement(regexp beginning)('/')
+      Expression subtitution
+        PsiElement(#)('#')
+        Instance variable
+          PsiElement(instance variable)('@Var')
+      PsiElement(regexp end)('/')
+  PsiElement(end of line)('\n')

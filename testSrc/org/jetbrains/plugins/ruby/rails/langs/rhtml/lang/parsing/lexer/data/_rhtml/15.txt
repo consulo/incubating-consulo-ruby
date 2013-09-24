@@ -1,0 +1,7 @@
+<!--
+<html> preved </html>
+-->
+---------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 30], {<!--
+<html> preved </html>
+-->}

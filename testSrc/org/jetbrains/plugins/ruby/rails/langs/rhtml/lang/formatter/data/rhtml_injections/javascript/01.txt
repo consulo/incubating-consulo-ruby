@@ -1,0 +1,15 @@
+<html>
+<body>
+<script type="text/javascript ">
+$dd.splice1("dd<%= a = 2 %>dd")
+</script>
+</body>
+</html>
+-------
+<html>
+<body>
+<script type="text/javascript ">
+    $dd.splice1("dd<%= a = 2 %>dd")
+</script>
+</body>
+</html>

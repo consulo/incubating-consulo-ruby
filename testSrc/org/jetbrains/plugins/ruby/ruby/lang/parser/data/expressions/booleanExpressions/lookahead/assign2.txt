@@ -1,0 +1,33 @@
+a == 0 && email = e.general_email.to_s
+------
+Ruby file
+  Compound statement
+    Boolean binary expression
+      Boolean matching expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(==)('==')
+        PsiWhiteSpace(' ')
+        Integer
+          PsiElement(integer literal)('0')
+      PsiWhiteSpace(' ')
+      PsiElement(&&)('&&')
+      PsiWhiteSpace(' ')
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('email')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Dot reference
+          Dot reference
+            Identifier
+              PsiElement(identifier)('e')
+            PsiElement(.)('.')
+            Identifier
+              PsiElement(identifier)('general_email')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('to_s')
+  PsiElement(end of line)('\n')

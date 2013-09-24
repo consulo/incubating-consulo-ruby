@@ -1,0 +1,29 @@
+foo, bar, baz = 1, 2    # foo = 1; bar = 2; baz = nil
+---------
+Ruby file
+  Compound statement
+    Multi assignment expression
+      List of expressions
+        Identifier
+          PsiElement(identifier)('foo')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('bar')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('baz')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Integer
+          PsiElement(integer literal)('1')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Integer
+          PsiElement(integer literal)('2')
+  PsiWhiteSpace('    ')
+  PsiComment(line comment)('# foo = 1; bar = 2; baz = nil')
+  PsiElement(end of line)('\n')

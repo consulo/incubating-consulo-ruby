@@ -1,0 +1,17 @@
+begin
+rescue xxx
+expr1
+else
+expr2
+ensure
+expr3
+end
+--------------
+begin
+rescue xxx
+    expr1
+else
+    expr2
+ensure
+    expr3
+end

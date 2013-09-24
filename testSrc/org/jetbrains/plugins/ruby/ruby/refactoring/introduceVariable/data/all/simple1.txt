@@ -1,0 +1,10 @@
+<selection>"Hello world"</selection>
+puts "Hello world"
+------
+var
+------
+replace_this
+------
+var = "Hello world"
+var
+puts "Hello world"

@@ -1,0 +1,43 @@
+@fileops.mkdir_p(dest, :mode => entry.mode, :verbose=>false)
+---------
+Ruby file
+  Compound statement
+    Function call
+      Dot reference
+        Instance variable
+          PsiElement(instance variable)('@fileops')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('mkdir_p')
+      PsiElement(f()('(')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('dest')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Assoc
+          Symbol
+            PsiElement(:)(':')
+            Function name
+              PsiElement(identifier)('mode')
+          PsiWhiteSpace(' ')
+          PsiElement(=>)('=>')
+          PsiWhiteSpace(' ')
+          Dot reference
+            Identifier
+              PsiElement(identifier)('entry')
+            PsiElement(.)('.')
+            Identifier
+              PsiElement(identifier)('mode')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Assoc
+          Symbol
+            PsiElement(:)(':')
+            Function name
+              PsiElement(identifier)('verbose')
+          PsiElement(=>)('=>')
+          Pseudo constant
+            PsiElement(false)('false')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

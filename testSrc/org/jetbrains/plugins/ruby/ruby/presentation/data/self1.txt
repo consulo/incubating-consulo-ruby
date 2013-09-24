@@ -1,0 +1,7 @@
+class <<self
+    def foo
+        <caret>
+    end
+end
+-------
+self(temp.rb)

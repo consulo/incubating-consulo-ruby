@@ -1,0 +1,10 @@
+defined? print
+--------------------
+Ruby file
+  Compound statement
+    Defined statement
+      PsiElement(defined?)('defined?')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('print')
+  PsiElement(end of line)('\n')

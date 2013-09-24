@@ -1,0 +1,13 @@
+super(expr)
+--------
+Ruby file
+  Compound statement
+    Function call
+      Pseudo constant
+        PsiElement(super)('super')
+      PsiElement(f()('(')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('expr')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

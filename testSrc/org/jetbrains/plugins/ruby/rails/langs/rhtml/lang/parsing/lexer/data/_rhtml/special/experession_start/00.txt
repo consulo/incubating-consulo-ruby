@@ -1,0 +1,4 @@
+<html> preved </html><%=
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 21], {<html> preved </html>}
+<%=: [21, 24], {<%=}

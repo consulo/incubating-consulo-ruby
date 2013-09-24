@@ -1,0 +1,11 @@
+END{}
+-------
+Ruby file
+  Compound statement
+    Large end statement
+      PsiElement(END)('END')
+      PsiElement({)('{')
+      Compound statement
+        <empty list>
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

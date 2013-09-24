@@ -1,0 +1,18 @@
+100.times do
+    puts "Hello, world!"
+    200.times do
+        puts <selection>"Hello, world!"</selection>
+    end
+end
+-----
+greet
+-----
+replace_all
+-----
+100.times do
+    greet = "Hello, world!"
+    puts greet
+    200.times do
+        puts greet
+    end
+end

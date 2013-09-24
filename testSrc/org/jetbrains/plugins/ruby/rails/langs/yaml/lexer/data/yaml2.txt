@@ -1,0 +1,459 @@
+default:
+  id: 1
+  base_url: 'http://myblog.net'
+  settings:
+    jabber_pass   word: ""
+    show_extended_on_rss: true
+    itunes_owner: ""
+    blog_name: test blog
+    title_prefix: limit_article_display: 10
+    sp_url_limit: 3
+    use_gravatar: false
+                     itunes_email: ""
+    blog_subtitle: test subtitle
+    limit_rss_display: 10
+    itunes_explicit: false
+    ping_urls: |-
+      http://ping.example.com/ping
+      http://alsoping.example.com/rpc/ping
+    itunes_name: ""
+    geourl_location: ""
+    default_allow_pings: false
+    itunes_author: ""
+    send_outbound_pings: true
+    itunes_copyright: "ffffffffffff"
+    sp_global: true
+    jabber_address: ""
+    default_allow_comments: true
+    itunes_subtitle: ""
+    email_from: scott@sigkill.org
+    theme: azure
+    text_filter: textile
+    sp_article_auto_close: 300
+    link_to_author: false
+    itunes_summary: ""
+    comment_text_filter: markdown
+    sp_allow_non_ajax_comments: true
+second:
+  id: 2
+  base_url: http://otherblog.net
+  settings:
+    jabber_password: "foooo"
+    show_extended_on_rss: true
+    itunes_owner: ""
+    blog_name: second test blog
+    title_prefix: 0
+    limit_article_display: 10
+    sp_url_limit: 0
+    use_gravatar: false
+    itunes_email: ""
+    blog_subtitle: ""
+    limit_rss_display: 10
+    itunes_explicit: false
+    ping_urls: |-
+      http://rpc.technorati.com/rpc/ping
+      http://ping.blo.gs/
+      http://rpc.weblogs.com/RPC2
+    itunes_name: ""
+    geourl_location: ""
+    default_allow_pings: false
+    itunes_author: ""
+    send_outbound_pings: true
+    itunes_copyright: ""
+    sp_global: true
+    jabber_address: ""
+    default_allow_comments: true
+    itunes_subtitle: ""
+    email_from: scott@sigkill.org
+
+
+    theme: azure
+    text_filter: ""
+
+    dddd: dddd
+    sp_article_auto_close: 0
+-----
+scalar key: [0, 7], {default}
+value: [7, 8], {:}
+unknown: [8, 9], {
+}
+unknown: [9, 11], {  }
+scalar key: [11, 13], {id}
+value: [13, 14], {:}
+unknown: [14, 15], { }
+scalar value: [15, 19], {1
+  }
+scalar key: [19, 27], {base_url}
+value: [27, 28], {:}
+unknown: [28, 29], { }
+scalar value \: [29, 48], {'http://myblog.net'}
+unknown: [48, 49], {
+}
+unknown: [49, 51], {  }
+scalar key: [51, 59], {settings}
+value: [59, 60], {:}
+unknown: [60, 61], {
+}
+unknown: [61, 65], {    }
+scalar key: [65, 83], {jabber_pass   word}
+value: [83, 84], {:}
+unknown: [84, 85], { }
+scalar value ": [85, 87], {""}
+unknown: [87, 88], {
+}
+unknown: [88, 92], {    }
+scalar key: [92, 112], {show_extended_on_rss}
+value: [112, 113], {:}
+unknown: [113, 114], { }
+scalar value: [114, 123], {true
+    }
+scalar key: [123, 135], {itunes_owner}
+value: [135, 136], {:}
+unknown: [136, 137], { }
+scalar value ": [137, 139], {""}
+unknown: [139, 140], {
+}
+unknown: [140, 144], {    }
+scalar key: [144, 153], {blog_name}
+value: [153, 154], {:}
+unknown: [154, 155], { }
+scalar value: [155, 169], {test blog
+    }
+scalar key: [169, 181], {title_prefix}
+value: [181, 182], {:}
+unknown: [182, 183], { }
+scalar value: [183, 204], {limit_article_display}
+unknown: [204, 205], {:}
+unknown: [205, 206], { }
+scalar value: [206, 213], {10
+    }
+scalar key: [213, 225], {sp_url_limit}
+value: [225, 226], {:}
+unknown: [226, 227], { }
+scalar value: [227, 233], {3
+    }
+scalar key: [233, 245], {use_gravatar}
+value: [245, 246], {:}
+unknown: [246, 247], { }
+scalar value: [247, 286], {false
+                     itunes_email}
+unknown: [286, 287], {:}
+unknown: [287, 288], { }
+scalar value ": [288, 290], {""}
+unknown: [290, 291], {
+}
+unknown: [291, 295], {    }
+scalar key: [295, 308], {blog_subtitle}
+value: [308, 309], {:}
+unknown: [309, 310], { }
+scalar value: [310, 328], {test subtitle
+    }
+scalar key: [328, 345], {limit_rss_display}
+value: [345, 346], {:}
+unknown: [346, 347], { }
+scalar value: [347, 354], {10
+    }
+scalar key: [354, 369], {itunes_explicit}
+value: [369, 370], {:}
+unknown: [370, 371], { }
+scalar value: [371, 381], {false
+    }
+scalar key: [381, 390], {ping_urls}
+value: [390, 391], {:}
+unknown: [391, 392], { }
+scalar value |: [392, 477], {|-
+      http://ping.example.com/ping
+      http://alsoping.example.com/rpc/ping
+    }
+scalar key: [477, 488], {itunes_name}
+value: [488, 489], {:}
+unknown: [489, 490], { }
+scalar value ": [490, 492], {""}
+unknown: [492, 493], {
+}
+unknown: [493, 497], {    }
+scalar key: [497, 512], {geourl_location}
+value: [512, 513], {:}
+unknown: [513, 514], { }
+scalar value ": [514, 516], {""}
+unknown: [516, 517], {
+}
+unknown: [517, 521], {    }
+scalar key: [521, 540], {default_allow_pings}
+value: [540, 541], {:}
+unknown: [541, 542], { }
+scalar value: [542, 552], {false
+    }
+scalar key: [552, 565], {itunes_author}
+value: [565, 566], {:}
+unknown: [566, 567], { }
+scalar value ": [567, 569], {""}
+unknown: [569, 570], {
+}
+unknown: [570, 574], {    }
+scalar key: [574, 593], {send_outbound_pings}
+value: [593, 594], {:}
+unknown: [594, 595], { }
+scalar value: [595, 604], {true
+    }
+scalar key: [604, 620], {itunes_copyright}
+value: [620, 621], {:}
+unknown: [621, 622], { }
+scalar value ": [622, 636], {"ffffffffffff"}
+unknown: [636, 637], {
+}
+unknown: [637, 641], {    }
+scalar key: [641, 650], {sp_global}
+value: [650, 651], {:}
+unknown: [651, 652], { }
+scalar value: [652, 661], {true
+    }
+scalar key: [661, 675], {jabber_address}
+value: [675, 676], {:}
+unknown: [676, 677], { }
+scalar value ": [677, 679], {""}
+unknown: [679, 680], {
+}
+unknown: [680, 684], {    }
+scalar key: [684, 706], {default_allow_comments}
+value: [706, 707], {:}
+unknown: [707, 708], { }
+scalar value: [708, 717], {true
+    }
+scalar key: [717, 732], {itunes_subtitle}
+value: [732, 733], {:}
+unknown: [733, 734], { }
+scalar value ": [734, 736], {""}
+unknown: [736, 737], {
+}
+unknown: [737, 741], {    }
+scalar key: [741, 751], {email_from}
+value: [751, 752], {:}
+unknown: [752, 753], { }
+scalar value: [753, 775], {scott@sigkill.org
+    }
+scalar key: [775, 780], {theme}
+value: [780, 781], {:}
+unknown: [781, 782], { }
+scalar value: [782, 792], {azure
+    }
+scalar key: [792, 803], {text_filter}
+value: [803, 804], {:}
+unknown: [804, 805], { }
+scalar value: [805, 817], {textile
+    }
+scalar key: [817, 838], {sp_article_auto_close}
+value: [838, 839], {:}
+unknown: [839, 840], { }
+scalar value: [840, 848], {300
+    }
+scalar key: [848, 862], {link_to_author}
+value: [862, 863], {:}
+unknown: [863, 864], { }
+scalar value: [864, 874], {false
+    }
+scalar key: [874, 888], {itunes_summary}
+value: [888, 889], {:}
+unknown: [889, 890], { }
+scalar value ": [890, 892], {""}
+unknown: [892, 893], {
+}
+unknown: [893, 897], {    }
+scalar key: [897, 916], {comment_text_filter}
+value: [916, 917], {:}
+unknown: [917, 918], { }
+scalar value: [918, 931], {markdown
+    }
+scalar key: [931, 957], {sp_allow_non_ajax_comments}
+value: [957, 958], {:}
+unknown: [958, 959], { }
+scalar value: [959, 964], {true
+}
+scalar key: [964, 970], {second}
+value: [970, 971], {:}
+unknown: [971, 972], {
+}
+unknown: [972, 974], {  }
+scalar key: [974, 976], {id}
+value: [976, 977], {:}
+unknown: [977, 978], { }
+scalar value: [978, 982], {2
+  }
+scalar key: [982, 990], {base_url}
+value: [990, 991], {:}
+unknown: [991, 992], { }
+scalar value: [992, 1015], {http://otherblog.net
+  }
+scalar key: [1015, 1023], {settings}
+value: [1023, 1024], {:}
+unknown: [1024, 1025], {
+}
+unknown: [1025, 1029], {    }
+scalar key: [1029, 1044], {jabber_password}
+value: [1044, 1045], {:}
+unknown: [1045, 1046], { }
+scalar value ": [1046, 1053], {"foooo"}
+unknown: [1053, 1054], {
+}
+unknown: [1054, 1058], {    }
+scalar key: [1058, 1078], {show_extended_on_rss}
+value: [1078, 1079], {:}
+unknown: [1079, 1080], { }
+scalar value: [1080, 1089], {true
+    }
+scalar key: [1089, 1101], {itunes_owner}
+value: [1101, 1102], {:}
+unknown: [1102, 1103], { }
+scalar value ": [1103, 1105], {""}
+unknown: [1105, 1106], {
+}
+unknown: [1106, 1110], {    }
+scalar key: [1110, 1119], {blog_name}
+value: [1119, 1120], {:}
+unknown: [1120, 1121], { }
+scalar value: [1121, 1142], {second test blog
+    }
+scalar key: [1142, 1154], {title_prefix}
+value: [1154, 1155], {:}
+unknown: [1155, 1156], { }
+scalar value: [1156, 1162], {0
+    }
+scalar key: [1162, 1183], {limit_article_display}
+value: [1183, 1184], {:}
+unknown: [1184, 1185], { }
+scalar value: [1185, 1192], {10
+    }
+scalar key: [1192, 1204], {sp_url_limit}
+value: [1204, 1205], {:}
+unknown: [1205, 1206], { }
+scalar value: [1206, 1212], {0
+    }
+scalar key: [1212, 1224], {use_gravatar}
+value: [1224, 1225], {:}
+unknown: [1225, 1226], { }
+scalar value: [1226, 1236], {false
+    }
+scalar key: [1236, 1248], {itunes_email}
+value: [1248, 1249], {:}
+unknown: [1249, 1250], { }
+scalar value ": [1250, 1252], {""}
+unknown: [1252, 1253], {
+}
+unknown: [1253, 1257], {    }
+scalar key: [1257, 1270], {blog_subtitle}
+value: [1270, 1271], {:}
+unknown: [1271, 1272], { }
+scalar value ": [1272, 1274], {""}
+unknown: [1274, 1275], {
+}
+unknown: [1275, 1279], {    }
+scalar key: [1279, 1296], {limit_rss_display}
+value: [1296, 1297], {:}
+unknown: [1297, 1298], { }
+scalar value: [1298, 1305], {10
+    }
+scalar key: [1305, 1320], {itunes_explicit}
+value: [1320, 1321], {:}
+unknown: [1321, 1322], { }
+scalar value: [1322, 1332], {false
+    }
+scalar key: [1332, 1341], {ping_urls}
+value: [1341, 1342], {:}
+unknown: [1342, 1343], { }
+scalar value |: [1343, 1451], {|-
+      http://rpc.technorati.com/rpc/ping
+      http://ping.blo.gs/
+      http://rpc.weblogs.com/RPC2
+    }
+scalar key: [1451, 1462], {itunes_name}
+value: [1462, 1463], {:}
+unknown: [1463, 1464], { }
+scalar value ": [1464, 1466], {""}
+unknown: [1466, 1467], {
+}
+unknown: [1467, 1471], {    }
+scalar key: [1471, 1486], {geourl_location}
+value: [1486, 1487], {:}
+unknown: [1487, 1488], { }
+scalar value ": [1488, 1490], {""}
+unknown: [1490, 1491], {
+}
+unknown: [1491, 1495], {    }
+scalar key: [1495, 1514], {default_allow_pings}
+value: [1514, 1515], {:}
+unknown: [1515, 1516], { }
+scalar value: [1516, 1526], {false
+    }
+scalar key: [1526, 1539], {itunes_author}
+value: [1539, 1540], {:}
+unknown: [1540, 1541], { }
+scalar value ": [1541, 1543], {""}
+unknown: [1543, 1544], {
+}
+unknown: [1544, 1548], {    }
+scalar key: [1548, 1567], {send_outbound_pings}
+value: [1567, 1568], {:}
+unknown: [1568, 1569], { }
+scalar value: [1569, 1578], {true
+    }
+scalar key: [1578, 1594], {itunes_copyright}
+value: [1594, 1595], {:}
+unknown: [1595, 1596], { }
+scalar value ": [1596, 1598], {""}
+unknown: [1598, 1599], {
+}
+unknown: [1599, 1603], {    }
+scalar key: [1603, 1612], {sp_global}
+value: [1612, 1613], {:}
+unknown: [1613, 1614], { }
+scalar value: [1614, 1623], {true
+    }
+scalar key: [1623, 1637], {jabber_address}
+value: [1637, 1638], {:}
+unknown: [1638, 1639], { }
+scalar value ": [1639, 1641], {""}
+unknown: [1641, 1642], {
+}
+unknown: [1642, 1646], {    }
+scalar key: [1646, 1668], {default_allow_comments}
+value: [1668, 1669], {:}
+unknown: [1669, 1670], { }
+scalar value: [1670, 1679], {true
+    }
+scalar key: [1679, 1694], {itunes_subtitle}
+value: [1694, 1695], {:}
+unknown: [1695, 1696], { }
+scalar value ": [1696, 1698], {""}
+unknown: [1698, 1699], {
+}
+unknown: [1699, 1703], {    }
+scalar key: [1703, 1713], {email_from}
+value: [1713, 1714], {:}
+unknown: [1714, 1715], { }
+scalar value: [1715, 1739], {scott@sigkill.org
+
+
+    }
+scalar key: [1739, 1744], {theme}
+value: [1744, 1745], {:}
+unknown: [1745, 1746], { }
+scalar value: [1746, 1756], {azure
+    }
+scalar key: [1756, 1767], {text_filter}
+value: [1767, 1768], {:}
+unknown: [1768, 1769], { }
+scalar value ": [1769, 1771], {""}
+unknown: [1771, 1772], {
+}
+unknown: [1772, 1773], {
+}
+unknown: [1773, 1777], {    }
+scalar key: [1777, 1781], {dddd}
+value: [1781, 1782], {:}
+unknown: [1782, 1783], { }
+scalar value: [1783, 1792], {dddd
+    }
+scalar key: [1792, 1813], {sp_article_auto_close}
+value: [1813, 1814], {:}
+unknown: [1814, 1815], { }
+scalar value: [1815, 1816], {0}

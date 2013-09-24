@@ -1,0 +1,22 @@
+alias :foo :doo Error
+-----
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Symbol
+        PsiElement(:)(':')
+        Function name
+          PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      Symbol
+        PsiElement(:)(':')
+        Function name
+          PsiElement(identifier)('doo')
+    PsiErrorElement:Expected: ; or end of line
+      <empty list>
+    PsiWhiteSpace(' ')
+    Constant
+      PsiElement(constant)('Error')
+  PsiElement(end of line)('\n')

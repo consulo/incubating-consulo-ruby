@@ -1,0 +1,7 @@
+1.2e-3
+-------
+Ruby file
+  Compound statement
+    Float
+      PsiElement(float literal)('1.2e-3')
+  PsiElement(end of line)('\n')

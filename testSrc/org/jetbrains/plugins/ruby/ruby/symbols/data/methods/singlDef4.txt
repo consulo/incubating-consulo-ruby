@@ -1,0 +1,18 @@
+module A
+    class B
+        def B.foo
+        end
+    end
+end
+-----
+VirtualFile:
+[1] file [0] temp.rb
+    [3] module [2] A
+        [5] class [4] B
+            [7] def [6] B.foo
+
+Symbol:
+[0] FILE
+    [1] MODULE A prototypes:  3
+        [2] CLASS B prototypes:  5
+            [3] CLASS_METHOD foo prototypes:  7

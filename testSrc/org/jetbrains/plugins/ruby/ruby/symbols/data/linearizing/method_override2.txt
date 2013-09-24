@@ -1,0 +1,28 @@
+module A
+    module B
+        def foo
+        end
+    end
+end
+
+module A
+    module B
+        def foo
+        end
+    end
+end
+---------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] module [2] A
+        [5] module [4] B
+            [7] def [6] foo
+    [9] module [8] A
+        [11] module [10] B
+            [13] def [12] foo
+
+Symbol:
+[0] FILE
+    [1] MODULE A prototypes:  3 9
+        [2] MODULE B prototypes:  5 11
+            [3] INSTANCE_METHOD foo prototypes:  7 13

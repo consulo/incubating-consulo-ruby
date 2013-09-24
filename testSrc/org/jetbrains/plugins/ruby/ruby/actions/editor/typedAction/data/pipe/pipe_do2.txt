@@ -1,0 +1,7 @@
+each do <caret>
+end
+-----------
+|
+-------
+each do |<caret>|
+end

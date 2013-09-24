@@ -1,0 +1,29 @@
+a < b
+a <
+< b
+----------
+Ruby file
+  Compound statement
+    Boolean matching expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(<)('<')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('b')
+    PsiElement(end of line)('\n')
+    Boolean matching expression
+      Boolean matching expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(<)('<')
+        PsiErrorElement:Expected: expression
+          <empty list>
+      PsiWhiteSpace('\n')
+      PsiElement(<)('<')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('b')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,4 @@
+foo a,<caret>b
+------
+foo a,
+        <caret>b

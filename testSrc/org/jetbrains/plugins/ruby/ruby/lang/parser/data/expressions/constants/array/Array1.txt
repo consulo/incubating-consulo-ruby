@@ -1,0 +1,8 @@
+[]
+----------------
+Ruby file
+  Compound statement
+    Array
+      PsiElement([)('[')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

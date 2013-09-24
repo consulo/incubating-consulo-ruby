@@ -1,0 +1,24 @@
+error! unless self.kind_of?(HTTPSuccess)
+----------
+Ruby file
+  Compound statement
+    Unless modifier statement
+      Fid
+        PsiElement(fid)('error!')
+      PsiWhiteSpace(' ')
+      PsiElement(unless modifier)('unless')
+      PsiWhiteSpace(' ')
+      Condition
+        Function call
+          Dot reference
+            Pseudo constant
+              PsiElement(self)('self')
+            PsiElement(.)('.')
+            Fid
+              PsiElement(fid)('kind_of?')
+          PsiElement(f()('(')
+          List of expressions
+            Constant
+              PsiElement(constant)('HTTPSuccess')
+          PsiElement())(')')
+  PsiElement(end of line)('\n')

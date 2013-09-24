@@ -1,0 +1,10 @@
+%Q('This is it.'\n)
+--------------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('%Q(')
+      PsiElement(string content)(''This is it.'')
+      PsiElement(escape sequence)('\n')
+      PsiElement(string end)(')')
+  PsiElement(end of line)('\n')

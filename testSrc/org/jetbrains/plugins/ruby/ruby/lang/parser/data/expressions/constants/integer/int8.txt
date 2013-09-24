@@ -1,0 +1,7 @@
+?\M-a
+----------
+Ruby file
+  Compound statement
+    Integer
+      PsiElement(integer literal)('?\M-a')
+  PsiElement(end of line)('\n')

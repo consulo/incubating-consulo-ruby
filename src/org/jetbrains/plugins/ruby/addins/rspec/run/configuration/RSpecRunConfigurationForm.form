@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecRunConfigurationForm">
+  <grid id="27dc6" binding="myConfigurationPanel" layout-manager="GridLayoutManager" row-count="7" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="525" height="450"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="9d4f6" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="9e99a" class="javax.swing.JRadioButton" binding="myAllInFolderRB">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.rb.allInFolder"/>
+            </properties>
+          </component>
+          <component id="76a5d" class="javax.swing.JLabel" binding="myTestTypeComponent">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.form.testtype.title"/>
+            </properties>
+          </component>
+          <component id="1fd16" class="javax.swing.JRadioButton" binding="myTestScriptRB">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.rb.file"/>
+            </properties>
+          </component>
+          <hspacer id="eefd6">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+        </children>
+      </grid>
+      <grid id="507ca" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="etched" title-resource-bundle="org/jetbrains/plugins/ruby/RBundle" title-key="rspec.run.configuration.tests.form.testtype.title"/>
+        <children>
+          <component id="1dc9e" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsFolderComponent" custom-create="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.components.folder"/>
+            </properties>
+          </component>
+          <component id="cb481" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsScriptComponent" custom-create="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.tests.dialog.components.file"/>
+            </properties>
+          </component>
+          <component id="8dd3b" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsFileMaskComponent" custom-create="true">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.components.search.mask"/>
+            </properties>
+          </component>
+          <component id="df1cb" class="javax.swing.JCheckBox" binding="myCBEnableColouredOutput">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.coloured.output"/>
+            </properties>
+          </component>
+          <component id="4cd13" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsArgsComponent" custom-create="true">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.messages.spec.args"/>
+            </properties>
+          </component>
+          <component id="37427" class="com.intellij.openapi.ui.LabeledComponent" binding="myCustomSpecsRunnerComponent" custom-create="true">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="true"/>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.components.spec.custom.runner"/>
+            </properties>
+          </component>
+          <hspacer id="2e59e">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="30" height="-1"/>
+                <preferred-size width="30" height="-1"/>
+                <maximum-size width="30" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+          <component id="71449" class="javax.swing.JCheckBox" binding="myCBUseCustomSpecRunner">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <selected value="false"/>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.components.spec.custom.use"/>
+            </properties>
+          </component>
+          <component id="ed64e" class="javax.swing.JCheckBox" binding="myCBRunSpecsSeparately">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <selected value="false"/>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.runner.run.separately"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="c4756" class="com.intellij.openapi.ui.LabeledComponent" binding="myWorkingDirComponent" custom-create="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.working.dir"/>
+        </properties>
+      </component>
+      <component id="eeab2" class="com.intellij.openapi.ui.LabeledComponent" binding="myRubyArgsComponent" custom-create="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.ruby.args"/>
+        </properties>
+      </component>
+      <component id="afdbd" class="com.intellij.openapi.ui.LabeledComponent" binding="myModulesComponent" custom-create="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.select.module"/>
+        </properties>
+      </component>
+      <grid id="58c92" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="aa870" class="javax.swing.JCheckBox" binding="myUseAlternativeSdkGemCB">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.use.gem.from.sdk.checkbox"/>
+            </properties>
+          </component>
+          <component id="62390" class="com.intellij.openapi.ui.LabeledComponent" binding="myAlternativeSdksComponent" custom-create="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.dialog.components.sdk"/>
+            </properties>
+          </component>
+          <hspacer id="6e647">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="30" height="-1"/>
+                <preferred-size width="30" height="-1"/>
+                <maximum-size width="30" height="-1"/>
+              </grid>
+            </constraints>
+          </hspacer>
+        </children>
+      </grid>
+      <component id="b7401" class="com.intellij.execution.junit2.configuration.EnvironmentVariablesComponent" binding="myEnvVariablesComponent">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="myTestTypeGroup">
+      <member id="9e99a"/>
+      <member id="1fd16"/>
+      <member id="75c8e"/>
+      <member id="85587"/>
+    </group>
+  </buttonGroups>
+</form>

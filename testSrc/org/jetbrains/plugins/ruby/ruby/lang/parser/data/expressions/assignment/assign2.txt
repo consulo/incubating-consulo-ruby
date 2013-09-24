@@ -1,0 +1,17 @@
+a[b]=c
+-------
+Ruby file
+  Compound statement
+    Assignment expression
+      Array reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(f[)('[')
+        List of expressions
+          Identifier
+            PsiElement(identifier)('b')
+        PsiElement(])(']')
+      PsiElement(=)('=')
+      Identifier
+        PsiElement(identifier)('c')
+  PsiElement(end of line)('\n')

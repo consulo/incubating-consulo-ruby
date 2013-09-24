@@ -1,0 +1,22 @@
+puts(<<-EOF
+block passed to should or should_not change must use {} instead of do/end
+EOF
+)
+--------
+Ruby file
+  Compound statement
+    Function call
+      Identifier
+        PsiElement(identifier)('puts')
+      PsiElement(f()('(')
+      List of expressions
+        Heredoc id
+          PsiElement(heredoc id)('<<-EOF')
+      PsiElement(end of line)('\n')
+      Heredoc value
+        PsiElement(heredoc content)('block passed to should or should_not change must use {} instead of do/end')
+      PsiElement(end of line)('\n')
+      PsiElement(indented heredoc end)('EOF')
+      PsiElement(end of line)('\n')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

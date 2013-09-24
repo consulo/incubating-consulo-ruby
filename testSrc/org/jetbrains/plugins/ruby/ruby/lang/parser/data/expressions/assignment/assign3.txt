@@ -1,0 +1,15 @@
+a.b=c
+-------
+Ruby file
+  Compound statement
+    Assignment expression
+      Dot reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiElement(=)('=')
+      Identifier
+        PsiElement(identifier)('c')
+  PsiElement(end of line)('\n')

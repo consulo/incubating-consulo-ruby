@@ -1,0 +1,9 @@
+    module Foo
+             def Boo
+    end
+end
+--------------
+module Foo
+    def Boo
+    end
+end

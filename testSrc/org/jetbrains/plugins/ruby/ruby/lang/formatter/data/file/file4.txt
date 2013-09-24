@@ -1,0 +1,7 @@
+=begin
+    comment
+=end
+---------------
+=begin
+    comment
+=end

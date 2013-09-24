@@ -1,0 +1,13 @@
+/#{myname}/
+-----------
+Ruby file
+  Compound statement
+    Regular expression
+      PsiElement(regexp beginning)('/')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Identifier
+          PsiElement(identifier)('myname')
+        PsiElement(})('}')
+      PsiElement(regexp end)('/')
+  PsiElement(end of line)('\n')

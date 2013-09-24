@@ -1,0 +1,25 @@
+#sample comment
+module Foo
+print "Module Foo\n"
+
+def print
+print "I print"
+ #comment
+=begin
+    comment
+=end
+end
+end
+-------------
+#sample comment
+module Foo
+    print "Module Foo\n"
+
+    def print
+        print "I print"
+        #comment
+=begin
+    comment
+=end
+    end
+end

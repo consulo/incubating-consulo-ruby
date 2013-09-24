@@ -1,0 +1,5 @@
+def ==<caret>
+-----------
+def ==
+    <caret>
+end

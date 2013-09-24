@@ -1,0 +1,11 @@
+%w(\( \))
+-------
+Ruby file
+  Compound statement
+    Single quoted like words
+      PsiElement(%w)('%w(')
+      PsiElement(escape sequence)('\(')
+      PsiElement(words content)(' ')
+      PsiElement(escape sequence)('\)')
+      PsiElement(words end)(')')
+  PsiElement(end of line)('\n')

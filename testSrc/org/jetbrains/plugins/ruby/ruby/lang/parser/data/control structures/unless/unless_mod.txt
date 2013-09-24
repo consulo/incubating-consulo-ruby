@@ -1,0 +1,14 @@
+expr1 unless expr2
+------------------
+Ruby file
+  Compound statement
+    Unless modifier statement
+      Identifier
+        PsiElement(identifier)('expr1')
+      PsiWhiteSpace(' ')
+      PsiElement(unless modifier)('unless')
+      PsiWhiteSpace(' ')
+      Condition
+        Identifier
+          PsiElement(identifier)('expr2')
+  PsiElement(end of line)('\n')

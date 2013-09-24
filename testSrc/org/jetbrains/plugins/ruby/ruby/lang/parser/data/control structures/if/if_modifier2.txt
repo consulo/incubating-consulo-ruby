@@ -1,0 +1,15 @@
+a if
+b
+-----------
+Ruby file
+  Compound statement
+    If modifier statement
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(if modifier)('if')
+      PsiWhiteSpace('\n')
+      Condition
+        Identifier
+          PsiElement(identifier)('b')
+  PsiElement(end of line)('\n')

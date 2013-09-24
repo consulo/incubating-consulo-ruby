@@ -1,0 +1,15 @@
+class Foo
+#test comment
+    def Foo
+#test comment
+    end
+#test comment
+end
+-----------
+class Foo
+#test comment
+    def Foo
+#test comment
+    end
+#test comment
+end

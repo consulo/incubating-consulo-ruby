@@ -1,0 +1,20 @@
+undef :foo if true
+---------
+Ruby file
+  Compound statement
+    If modifier statement
+      Undef statement
+        PsiElement(undef)('undef')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Symbol
+            PsiElement(:)(':')
+            Function name
+              PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      PsiElement(if modifier)('if')
+      PsiWhiteSpace(' ')
+      Condition
+        Pseudo constant
+          PsiElement(true)('true')
+  PsiElement(end of line)('\n')

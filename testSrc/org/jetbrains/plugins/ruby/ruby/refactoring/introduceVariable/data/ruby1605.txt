@@ -1,0 +1,8 @@
+(<selection>777</selection>)
+------
+number
+------
+replace_this
+------
+number = 777
+(number)

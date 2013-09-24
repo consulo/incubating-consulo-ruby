@@ -1,0 +1,9 @@
+%r(expr
+-------
+Ruby file
+  Compound statement
+    Regular expression
+      PsiElement(regexp beginning)('%r(')
+      PsiElement(regexp content)('expr\n')
+      PsiErrorElement:Expected: regexp end
+        <empty list>

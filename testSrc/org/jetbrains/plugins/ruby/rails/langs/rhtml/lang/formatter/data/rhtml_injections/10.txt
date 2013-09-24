@@ -1,0 +1,15 @@
+<% 3.times do %>
+  <title>
+      <% 3.times do %>
+        </title>
+      <% end %>
+      rrr
+<% end %>
+-------------
+<% 3.times do %>
+    <title>
+        <% 3.times do %>
+            </title>
+        <% end %>
+        rrr
+<% end %>

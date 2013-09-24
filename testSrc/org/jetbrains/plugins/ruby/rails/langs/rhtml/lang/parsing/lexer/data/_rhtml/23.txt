@@ -1,0 +1,9 @@
+<%= link_to 'Destroy'
+ :action => 'destroy'
+ :id =%>
+-------
+<%=: [0, 3], {<%=}
+RUBY_CODE_CHARACTERS: [3, 50], { link_to 'Destroy'
+ :action => 'destroy'
+ :id =}
+%>: [50, 52], {%>}

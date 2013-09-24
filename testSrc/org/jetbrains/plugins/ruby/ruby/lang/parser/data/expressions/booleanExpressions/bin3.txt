@@ -1,0 +1,99 @@
+a and b and c
+a or b or c
+a || b || c
+a && b && c
+a | b | c
+a & b & c
+---------------
+Ruby file
+  Compound statement
+    Boolean binary expression
+      Boolean binary expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(and)('and')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(and)('and')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('c')
+    PsiElement(end of line)('\n')
+    Boolean binary expression
+      Boolean binary expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(or)('or')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(or)('or')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('c')
+    PsiElement(end of line)('\n')
+    Boolean binary expression
+      Boolean binary expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(||)('||')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(||)('||')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('c')
+    PsiElement(end of line)('\n')
+    Boolean binary expression
+      Boolean binary expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(&&)('&&')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(&&)('&&')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('c')
+    PsiElement(end of line)('\n')
+    Bit expression
+      Bit expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(|)('|')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(|)('|')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('c')
+    PsiElement(end of line)('\n')
+    Bit expression
+      Bit expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(&)('&')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(&)('&')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('c')
+  PsiElement(end of line)('\n')

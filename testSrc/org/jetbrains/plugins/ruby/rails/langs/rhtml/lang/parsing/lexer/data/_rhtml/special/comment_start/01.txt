@@ -1,0 +1,5 @@
+<html> preved </html><%# k
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 21], {<html> preved </html>}
+RHTML_COMMENT_START: [21, 24], {<%#}
+RHTML_COMMENT_CHARACTERS: [24, 26], { k}

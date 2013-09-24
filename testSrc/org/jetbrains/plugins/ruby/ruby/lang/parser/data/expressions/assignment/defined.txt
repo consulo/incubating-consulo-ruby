@@ -1,0 +1,16 @@
+$AAA = defined? $BBB
+-----
+Ruby file
+  Compound statement
+    Assignment expression
+      Global variable
+        PsiElement(global variable)('$AAA')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Defined statement
+        PsiElement(defined?)('defined?')
+        PsiWhiteSpace(' ')
+        Global variable
+          PsiElement(global variable)('$BBB')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,16 @@
+=begin
+TEST COMMENT
+=end "foo"
+---------
+Ruby file
+  PsiComment(=begin)('=begin')
+  PsiComment(block comment content)('\n')
+  PsiComment(block comment content)('TEST COMMENT\n')
+  PsiComment(=end)('=end')
+  PsiWhiteSpace(' ')
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      PsiElement(string content)('foo')
+      PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

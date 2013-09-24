@@ -1,0 +1,19 @@
+@A
+@a
+@_A
+@_a
+-----
+Ruby file
+  Compound statement
+    Instance variable
+      PsiElement(instance variable)('@A')
+    PsiElement(end of line)('\n')
+    Instance variable
+      PsiElement(instance variable)('@a')
+    PsiElement(end of line)('\n')
+    Instance variable
+      PsiElement(instance variable)('@_A')
+    PsiElement(end of line)('\n')
+    Instance variable
+      PsiElement(instance variable)('@_a')
+  PsiElement(end of line)('\n')

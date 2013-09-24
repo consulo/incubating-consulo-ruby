@@ -1,0 +1,5 @@
+class BOO<caret>
+--------------
+class BOO
+    <caret>
+end

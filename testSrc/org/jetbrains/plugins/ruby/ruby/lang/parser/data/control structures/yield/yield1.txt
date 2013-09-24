@@ -1,0 +1,12 @@
+yield(expr)
+--------------
+Ruby file
+  Compound statement
+    Yield statement
+      PsiElement(yield)('yield')
+      PsiElement(f()('(')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('expr')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

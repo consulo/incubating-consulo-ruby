@@ -1,0 +1,8 @@
+"aaa <selection>#{aaa.bbb}</selection>"
+------
+manager
+------
+replace_this
+------
+manager = #{aaa.bbb}
+"aaa manager"

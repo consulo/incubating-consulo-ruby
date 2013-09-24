@@ -1,0 +1,14 @@
+def foo
+end
+
+def foo
+end
+-------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] def [2] foo
+    [5] def [4] foo
+
+Symbol:
+[0] FILE
+    [1] INSTANCE_METHOD foo prototypes:  3 5

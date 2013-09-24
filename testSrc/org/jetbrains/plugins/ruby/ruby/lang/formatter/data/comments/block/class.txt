@@ -1,0 +1,11 @@
+class Foo
+=begin
+test
+=end
+end
+-------
+class Foo
+=begin
+test
+=end
+end

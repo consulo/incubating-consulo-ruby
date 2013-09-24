@@ -1,0 +1,7 @@
+<html> preved <%# 2.times do |i|-%></html>
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 14], {<html> preved }
+RHTML_COMMENT_START: [14, 17], {<%#}
+RHTML_COMMENT_CHARACTERS: [17, 33], { 2.times do |i|-}
+RHTML_COMMENT_END: [33, 35], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [35, 42], {</html>}

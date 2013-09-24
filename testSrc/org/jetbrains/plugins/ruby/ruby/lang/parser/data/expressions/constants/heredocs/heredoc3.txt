@@ -1,0 +1,18 @@
+<<EXPR
+#{expr}
+EXPR
+-----------
+Ruby file
+  Compound statement
+    Heredoc id
+      PsiElement(heredoc id)('<<EXPR')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Identifier
+          PsiElement(identifier)('expr')
+        PsiElement(})('}')
+    PsiElement(end of line)('\n')
+    PsiElement(heredoc end)('EXPR')
+  PsiElement(end of line)('\n')

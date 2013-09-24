@@ -1,0 +1,44 @@
+assert_equal ["is too short (minimum is 5 characters)", "can't be blank"], @other_user.errors.on(:password)
+-----------------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('assert_equal')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Array
+          PsiElement([)('[')
+          List of expressions
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)('is too short (minimum is 5 characters)')
+              PsiElement(string end)('"')
+            PsiElement(,)(',')
+            PsiWhiteSpace(' ')
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)('can't be blank')
+              PsiElement(string end)('"')
+          PsiElement(])(']')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Function call
+          Dot reference
+            Dot reference
+              Instance variable
+                PsiElement(instance variable)('@other_user')
+              PsiElement(.)('.')
+              Identifier
+                PsiElement(identifier)('errors')
+            PsiElement(.)('.')
+            Identifier
+              PsiElement(identifier)('on')
+          PsiElement(f()('(')
+          List of expressions
+            Symbol
+              PsiElement(:)(':')
+              Function name
+                PsiElement(identifier)('password')
+          PsiElement())(')')
+  PsiElement(end of line)('\n')

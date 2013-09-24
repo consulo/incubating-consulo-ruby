@@ -1,0 +1,17 @@
+%w(foo)
+%W(foo bar baz)
+
+----------------
+Ruby file
+  Compound statement
+    Single quoted like words
+      PsiElement(%w)('%w(')
+      PsiElement(words content)('foo')
+      PsiElement(words end)(')')
+    PsiElement(end of line)('\n')
+    Double quoted like words
+      PsiElement(%W)('%W(')
+      PsiElement(words content)('foo bar baz')
+      PsiElement(words end)(')')
+  PsiElement(end of line)('\n')
+  PsiWhiteSpace('\n')

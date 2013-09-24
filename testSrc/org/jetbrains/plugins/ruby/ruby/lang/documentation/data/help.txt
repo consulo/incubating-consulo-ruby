@@ -1,0 +1,4 @@
+#Simple help text
+#Line #2
+-----------
+Simple&nbsp;help&nbsp;text<br>Line&nbsp;#2

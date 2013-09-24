@@ -1,0 +1,398 @@
+    case @days
+      # overdue or due very soon! sound the alarm!
+      when -1000..-1
+        "<a title='" + format_date(due) + "'><span class=\"red\">Overdue by " + (@days * -1).to_s + " days</span></a> "
+      when 0
+           "<a title='" + format_date(due) + "'><span class=\"amber\">Due Today</span></a> "
+      when 1
+           "<a title='" + format_date(due) + "'><span class=\"amber\">Due Tomorrow</span></a> "
+      # due 2-7 days away
+      when 2..7
+      if @user.preferences["due_style"] == "1"
+        "<a title='" + format_date(due) + "'><span class=\"orange\">Due on " + due.strftime("%A") + "</span></a> "
+      else
+        "<a title='" + format_date(due) + "'><span class=\"orange\">Due in " + @days.to_s + " days</span></a> "
+      end
+      # more than a week away - relax
+      else
+        "<a title='" + format_date(due) + "'><span class=\"green\">Due in " + @days.to_s + " days</span></a> "
+    end
+-----------------
+Ruby file
+  PsiWhiteSpace('    ')
+  Compound statement
+    Case statement
+      PsiElement(case)('case')
+      PsiWhiteSpace(' ')
+      Instance variable
+        PsiElement(instance variable)('@days')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('      ')
+      PsiComment(line comment)('# overdue or due very soon! sound the alarm!')
+      PsiWhiteSpace('\n      ')
+      When case
+        PsiElement(when)('when')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Range expression
+            Negative expression
+              PsiElement(u-)('-')
+              Integer
+                PsiElement(integer literal)('1000')
+            PsiElement(..)('..')
+            Negative expression
+              PsiElement(u-)('-')
+              Integer
+                PsiElement(integer literal)('1')
+        PsiElement(end of line)('\n')
+        PsiWhiteSpace('        ')
+        Compound statement
+          Math binary expression
+            Math binary expression
+              Math binary expression
+                Math binary expression
+                  Double quoted like string
+                    PsiElement(double quoted like string beginning)('"')
+                    PsiElement(string content)('<a title='')
+                    PsiElement(string end)('"')
+                  PsiWhiteSpace(' ')
+                  PsiElement(+)('+')
+                  PsiWhiteSpace(' ')
+                  Function call
+                    Identifier
+                      PsiElement(identifier)('format_date')
+                    PsiElement(f()('(')
+                    List of expressions
+                      Identifier
+                        PsiElement(identifier)('due')
+                    PsiElement())(')')
+                PsiWhiteSpace(' ')
+                PsiElement(+)('+')
+                PsiWhiteSpace(' ')
+                Double quoted like string
+                  PsiElement(double quoted like string beginning)('"')
+                  PsiElement(string content)(''><span class=')
+                  PsiElement(escape sequence)('\"')
+                  PsiElement(string content)('red')
+                  PsiElement(escape sequence)('\"')
+                  PsiElement(string content)('>Overdue by ')
+                  PsiElement(string end)('"')
+              PsiWhiteSpace(' ')
+              PsiElement(+)('+')
+              PsiWhiteSpace(' ')
+              Dot reference
+                Expression in parens
+                  PsiElement(()('(')
+                  Compound statement
+                    Math binary expression
+                      Instance variable
+                        PsiElement(instance variable)('@days')
+                      PsiWhiteSpace(' ')
+                      PsiElement(*)('*')
+                      PsiWhiteSpace(' ')
+                      Negative expression
+                        PsiElement(u-)('-')
+                        Integer
+                          PsiElement(integer literal)('1')
+                  PsiElement())(')')
+                PsiElement(.)('.')
+                Identifier
+                  PsiElement(identifier)('to_s')
+            PsiWhiteSpace(' ')
+            PsiElement(+)('+')
+            PsiWhiteSpace(' ')
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)(' days</span></a> ')
+              PsiElement(string end)('"')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('      ')
+      When case
+        PsiElement(when)('when')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Integer
+            PsiElement(integer literal)('0')
+        PsiElement(end of line)('\n')
+        PsiWhiteSpace('           ')
+        Compound statement
+          Math binary expression
+            Math binary expression
+              Double quoted like string
+                PsiElement(double quoted like string beginning)('"')
+                PsiElement(string content)('<a title='')
+                PsiElement(string end)('"')
+              PsiWhiteSpace(' ')
+              PsiElement(+)('+')
+              PsiWhiteSpace(' ')
+              Function call
+                Identifier
+                  PsiElement(identifier)('format_date')
+                PsiElement(f()('(')
+                List of expressions
+                  Identifier
+                    PsiElement(identifier)('due')
+                PsiElement())(')')
+            PsiWhiteSpace(' ')
+            PsiElement(+)('+')
+            PsiWhiteSpace(' ')
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)(''><span class=')
+              PsiElement(escape sequence)('\"')
+              PsiElement(string content)('amber')
+              PsiElement(escape sequence)('\"')
+              PsiElement(string content)('>Due Today</span></a> ')
+              PsiElement(string end)('"')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('      ')
+      When case
+        PsiElement(when)('when')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Integer
+            PsiElement(integer literal)('1')
+        PsiElement(end of line)('\n')
+        PsiWhiteSpace('           ')
+        Compound statement
+          Math binary expression
+            Math binary expression
+              Double quoted like string
+                PsiElement(double quoted like string beginning)('"')
+                PsiElement(string content)('<a title='')
+                PsiElement(string end)('"')
+              PsiWhiteSpace(' ')
+              PsiElement(+)('+')
+              PsiWhiteSpace(' ')
+              Function call
+                Identifier
+                  PsiElement(identifier)('format_date')
+                PsiElement(f()('(')
+                List of expressions
+                  Identifier
+                    PsiElement(identifier)('due')
+                PsiElement())(')')
+            PsiWhiteSpace(' ')
+            PsiElement(+)('+')
+            PsiWhiteSpace(' ')
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)(''><span class=')
+              PsiElement(escape sequence)('\"')
+              PsiElement(string content)('amber')
+              PsiElement(escape sequence)('\"')
+              PsiElement(string content)('>Due Tomorrow</span></a> ')
+              PsiElement(string end)('"')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('      ')
+      PsiComment(line comment)('# due 2-7 days away')
+      PsiWhiteSpace('\n      ')
+      When case
+        PsiElement(when)('when')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Range expression
+            Integer
+              PsiElement(integer literal)('2')
+            PsiElement(..)('..')
+            Integer
+              PsiElement(integer literal)('7')
+        PsiElement(end of line)('\n')
+        PsiWhiteSpace('      ')
+        Compound statement
+          If statement
+            PsiElement(if)('if')
+            PsiWhiteSpace(' ')
+            Condition
+              Boolean matching expression
+                Array reference
+                  Dot reference
+                    Instance variable
+                      PsiElement(instance variable)('@user')
+                    PsiElement(.)('.')
+                    Identifier
+                      PsiElement(identifier)('preferences')
+                  PsiElement(f[)('[')
+                  List of expressions
+                    Double quoted like string
+                      PsiElement(double quoted like string beginning)('"')
+                      PsiElement(string content)('due_style')
+                      PsiElement(string end)('"')
+                  PsiElement(])(']')
+                PsiWhiteSpace(' ')
+                PsiElement(==)('==')
+                PsiWhiteSpace(' ')
+                Double quoted like string
+                  PsiElement(double quoted like string beginning)('"')
+                  PsiElement(string content)('1')
+                  PsiElement(string end)('"')
+            PsiElement(end of line)('\n')
+            PsiWhiteSpace('        ')
+            Compound statement
+              Math binary expression
+                Math binary expression
+                  Math binary expression
+                    Math binary expression
+                      Double quoted like string
+                        PsiElement(double quoted like string beginning)('"')
+                        PsiElement(string content)('<a title='')
+                        PsiElement(string end)('"')
+                      PsiWhiteSpace(' ')
+                      PsiElement(+)('+')
+                      PsiWhiteSpace(' ')
+                      Function call
+                        Identifier
+                          PsiElement(identifier)('format_date')
+                        PsiElement(f()('(')
+                        List of expressions
+                          Identifier
+                            PsiElement(identifier)('due')
+                        PsiElement())(')')
+                    PsiWhiteSpace(' ')
+                    PsiElement(+)('+')
+                    PsiWhiteSpace(' ')
+                    Double quoted like string
+                      PsiElement(double quoted like string beginning)('"')
+                      PsiElement(string content)(''><span class=')
+                      PsiElement(escape sequence)('\"')
+                      PsiElement(string content)('orange')
+                      PsiElement(escape sequence)('\"')
+                      PsiElement(string content)('>Due on ')
+                      PsiElement(string end)('"')
+                  PsiWhiteSpace(' ')
+                  PsiElement(+)('+')
+                  PsiWhiteSpace(' ')
+                  Function call
+                    Dot reference
+                      Identifier
+                        PsiElement(identifier)('due')
+                      PsiElement(.)('.')
+                      Identifier
+                        PsiElement(identifier)('strftime')
+                    PsiElement(f()('(')
+                    List of expressions
+                      Double quoted like string
+                        PsiElement(double quoted like string beginning)('"')
+                        PsiElement(string content)('%A')
+                        PsiElement(string end)('"')
+                    PsiElement())(')')
+                PsiWhiteSpace(' ')
+                PsiElement(+)('+')
+                PsiWhiteSpace(' ')
+                Double quoted like string
+                  PsiElement(double quoted like string beginning)('"')
+                  PsiElement(string content)('</span></a> ')
+                  PsiElement(string end)('"')
+            PsiElement(end of line)('\n')
+            PsiWhiteSpace('      ')
+            Else block
+              PsiElement(else)('else')
+              PsiWhiteSpace('\n        ')
+              Compound statement
+                Math binary expression
+                  Math binary expression
+                    Math binary expression
+                      Math binary expression
+                        Double quoted like string
+                          PsiElement(double quoted like string beginning)('"')
+                          PsiElement(string content)('<a title='')
+                          PsiElement(string end)('"')
+                        PsiWhiteSpace(' ')
+                        PsiElement(+)('+')
+                        PsiWhiteSpace(' ')
+                        Function call
+                          Identifier
+                            PsiElement(identifier)('format_date')
+                          PsiElement(f()('(')
+                          List of expressions
+                            Identifier
+                              PsiElement(identifier)('due')
+                          PsiElement())(')')
+                      PsiWhiteSpace(' ')
+                      PsiElement(+)('+')
+                      PsiWhiteSpace(' ')
+                      Double quoted like string
+                        PsiElement(double quoted like string beginning)('"')
+                        PsiElement(string content)(''><span class=')
+                        PsiElement(escape sequence)('\"')
+                        PsiElement(string content)('orange')
+                        PsiElement(escape sequence)('\"')
+                        PsiElement(string content)('>Due in ')
+                        PsiElement(string end)('"')
+                    PsiWhiteSpace(' ')
+                    PsiElement(+)('+')
+                    PsiWhiteSpace(' ')
+                    Dot reference
+                      Instance variable
+                        PsiElement(instance variable)('@days')
+                      PsiElement(.)('.')
+                      Identifier
+                        PsiElement(identifier)('to_s')
+                  PsiWhiteSpace(' ')
+                  PsiElement(+)('+')
+                  PsiWhiteSpace(' ')
+                  Double quoted like string
+                    PsiElement(double quoted like string beginning)('"')
+                    PsiElement(string content)(' days</span></a> ')
+                    PsiElement(string end)('"')
+            PsiElement(end of line)('\n')
+            PsiWhiteSpace('      ')
+            PsiElement(end)('end')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('      ')
+      PsiComment(line comment)('# more than a week away - relax')
+      PsiWhiteSpace('\n      ')
+      Else block
+        PsiElement(else)('else')
+        PsiWhiteSpace('\n        ')
+        Compound statement
+          Math binary expression
+            Math binary expression
+              Math binary expression
+                Math binary expression
+                  Double quoted like string
+                    PsiElement(double quoted like string beginning)('"')
+                    PsiElement(string content)('<a title='')
+                    PsiElement(string end)('"')
+                  PsiWhiteSpace(' ')
+                  PsiElement(+)('+')
+                  PsiWhiteSpace(' ')
+                  Function call
+                    Identifier
+                      PsiElement(identifier)('format_date')
+                    PsiElement(f()('(')
+                    List of expressions
+                      Identifier
+                        PsiElement(identifier)('due')
+                    PsiElement())(')')
+                PsiWhiteSpace(' ')
+                PsiElement(+)('+')
+                PsiWhiteSpace(' ')
+                Double quoted like string
+                  PsiElement(double quoted like string beginning)('"')
+                  PsiElement(string content)(''><span class=')
+                  PsiElement(escape sequence)('\"')
+                  PsiElement(string content)('green')
+                  PsiElement(escape sequence)('\"')
+                  PsiElement(string content)('>Due in ')
+                  PsiElement(string end)('"')
+              PsiWhiteSpace(' ')
+              PsiElement(+)('+')
+              PsiWhiteSpace(' ')
+              Dot reference
+                Instance variable
+                  PsiElement(instance variable)('@days')
+                PsiElement(.)('.')
+                Identifier
+                  PsiElement(identifier)('to_s')
+            PsiWhiteSpace(' ')
+            PsiElement(+)('+')
+            PsiWhiteSpace(' ')
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)(' days</span></a> ')
+              PsiElement(string end)('"')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('    ')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

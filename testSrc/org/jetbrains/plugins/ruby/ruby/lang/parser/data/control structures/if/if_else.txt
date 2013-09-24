@@ -1,0 +1,30 @@
+if expr1 then
+    expr2
+else
+    expr3
+end
+-----------------------
+Ruby file
+  Compound statement
+    If statement
+      PsiElement(if)('if')
+      PsiWhiteSpace(' ')
+      Condition
+        Identifier
+          PsiElement(identifier)('expr1')
+      PsiWhiteSpace(' ')
+      PsiElement(then)('then')
+      PsiWhiteSpace('\n    ')
+      Compound statement
+        Identifier
+          PsiElement(identifier)('expr2')
+      PsiElement(end of line)('\n')
+      Else block
+        PsiElement(else)('else')
+        PsiWhiteSpace('\n    ')
+        Compound statement
+          Identifier
+            PsiElement(identifier)('expr3')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

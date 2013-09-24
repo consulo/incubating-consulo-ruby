@@ -1,0 +1,27 @@
+case expr1
+when expr2
+  expr3
+end
+------------------
+Ruby file
+  Compound statement
+    Case statement
+      PsiElement(case)('case')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('expr1')
+      PsiElement(end of line)('\n')
+      When case
+        PsiElement(when)('when')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Identifier
+            PsiElement(identifier)('expr2')
+        PsiElement(end of line)('\n')
+        PsiWhiteSpace('  ')
+        Compound statement
+          Identifier
+            PsiElement(identifier)('expr3')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

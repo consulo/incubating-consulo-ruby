@@ -1,0 +1,22 @@
+each do |a|
+end
+-----
+Ruby file
+  Compound statement
+    Block call
+      Identifier
+        PsiElement(identifier)('each')
+      PsiWhiteSpace(' ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace(' ')
+        PsiElement(p|)('|')
+        Block variables
+          Identifier
+            PsiElement(identifier)('a')
+        PsiElement(p|)('|')
+        PsiWhiteSpace('\n')
+        Compound statement
+          <empty list>
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,10 @@
+<selection>"Hello world"</selection>
+puts "Hello world"
+------
+var
+------
+replace_all
+------
+var = "Hello world"
+var
+puts var

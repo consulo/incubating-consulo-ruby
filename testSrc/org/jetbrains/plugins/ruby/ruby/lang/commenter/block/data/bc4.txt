@@ -1,0 +1,11 @@
+<selection>test string
+</selection>
+----------
+
+<caret>=begin
+
+test string
+
+=end
+
+

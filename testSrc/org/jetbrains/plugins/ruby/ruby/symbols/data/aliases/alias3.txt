@@ -1,0 +1,31 @@
+def foo
+    "foo1"
+end
+
+alias old_foo foo
+
+
+def foo
+  "foo2" + old_foo
+end
+
+alias old_foo2 foo
+
+def foo
+  "foo3" + old_foo2
+end
+foo # -> "foo3foo2foo1"
+----
+VirtualFile:
+[1] file [0] temp.rb
+    [3] def [2] foo
+    [4] alias 'old_foo' 'foo'
+    [6] def [5] foo
+    [7] alias 'old_foo2' 'foo'
+    [9] def [8] foo
+
+Symbol:
+[0] FILE
+    [1] INSTANCE_METHOD foo prototypes:  3 6 9
+    [2] ALIAS old_foo [1]
+    [4] ALIAS old_foo2 [1]

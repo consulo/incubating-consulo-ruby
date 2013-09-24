@@ -1,0 +1,17 @@
+while true : end
+----------
+Ruby file
+  Compound statement
+    While statement
+      PsiElement(while)('while')
+      PsiWhiteSpace(' ')
+      Condition
+        Pseudo constant
+          PsiElement(true)('true')
+      PsiWhiteSpace(' ')
+      PsiElement(:)(':')
+      PsiWhiteSpace(' ')
+      Compound statement
+        <empty list>
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

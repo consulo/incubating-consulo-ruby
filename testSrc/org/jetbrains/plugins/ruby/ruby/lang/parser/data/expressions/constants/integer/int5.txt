@@ -1,0 +1,7 @@
+0377
+----------
+Ruby file
+  Compound statement
+    Integer
+      PsiElement(integer literal)('0377')
+  PsiElement(end of line)('\n')

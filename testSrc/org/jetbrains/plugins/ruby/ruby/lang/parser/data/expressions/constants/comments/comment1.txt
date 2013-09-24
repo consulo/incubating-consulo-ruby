@@ -1,0 +1,7 @@
+# sample comment
+---------
+Ruby file
+  PsiComment(line comment)('# sample comment')
+  PsiWhiteSpace('\n')
+  Compound statement
+    <empty list>

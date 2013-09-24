@@ -1,0 +1,23 @@
+undef /, %, [], []=
+--------
+Ruby file
+  Compound statement
+    Undef statement
+      PsiElement(undef)('undef')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Function name
+          PsiElement(/)('/')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Function name
+          PsiElement(%)('%')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Function name
+          PsiElement([])('[]')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Function name
+          PsiElement([]=)('[]=')
+  PsiElement(end of line)('\n')

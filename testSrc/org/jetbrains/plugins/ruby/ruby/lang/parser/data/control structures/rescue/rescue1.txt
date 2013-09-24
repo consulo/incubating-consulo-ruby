@@ -1,0 +1,37 @@
+(t = File.mtime(target)) rescue return nil
+----------
+Ruby file
+  Compound statement
+    Rescue modifier statement
+      Expression in parens
+        PsiElement(()('(')
+        Compound statement
+          Assignment expression
+            Identifier
+              PsiElement(identifier)('t')
+            PsiWhiteSpace(' ')
+            PsiElement(=)('=')
+            PsiWhiteSpace(' ')
+            Function call
+              Dot reference
+                Constant
+                  PsiElement(constant)('File')
+                PsiElement(.)('.')
+                Identifier
+                  PsiElement(identifier)('mtime')
+              PsiElement(f()('(')
+              List of expressions
+                Identifier
+                  PsiElement(identifier)('target')
+              PsiElement())(')')
+        PsiElement())(')')
+      PsiWhiteSpace(' ')
+      PsiElement(rescue modifier)('rescue')
+      PsiWhiteSpace(' ')
+      Return statement
+        PsiElement(return)('return')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Pseudo constant
+            PsiElement(nil)('nil')
+  PsiElement(end of line)('\n')

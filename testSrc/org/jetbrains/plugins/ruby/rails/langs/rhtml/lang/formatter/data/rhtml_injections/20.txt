@@ -1,0 +1,27 @@
+<%= 3 %>
+fff
+<% 3.times do %>
+ff
+<% 3.times do %>
+fff
+<%= 3 %>
+ff
+<% end %>
+ff
+<% end %>
+ff
+<%= 3 %>
+----------
+<%= 3 %>
+fff
+<% 3.times do %>
+    ff
+    <% 3.times do %>
+        fff
+        <%= 3 %>
+        ff
+    <% end %>
+    ff
+<% end %>
+ff
+<%= 3 %>

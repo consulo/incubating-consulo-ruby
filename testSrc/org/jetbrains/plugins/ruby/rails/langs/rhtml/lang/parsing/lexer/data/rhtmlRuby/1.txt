@@ -1,0 +1,14 @@
+<html> preved <% 2.times do |i|%></html>
+------------
+RHTML_INJECTION_IN_RUBY: [0, 16], {<html> preved <%}
+white space: [16, 17], { }
+integer literal: [17, 18], {2}
+.: [18, 19], {.}
+identifier: [19, 24], {times}
+white space: [24, 25], { }
+do: [25, 27], {do}
+white space: [27, 28], { }
+p|: [28, 29], {|}
+identifier: [29, 30], {i}
+p|: [30, 31], {|}
+RHTML_INJECTION_IN_RUBY: [31, 40], {%></html>}

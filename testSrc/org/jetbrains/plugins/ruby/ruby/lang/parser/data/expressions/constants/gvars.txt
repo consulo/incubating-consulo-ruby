@@ -1,0 +1,195 @@
+$*      #argv
+$$      #pid
+$?      #last status
+$!      #error string
+$@      #error position
+$/      #input record separator
+$\      #output record separator
+$;      #field separator
+$,      #output field separator
+$.      #last read line number
+$=      #ignorecase
+$:      #load path
+$<      #reading filename
+$>      #default output handle
+$"      #already loaded files
+
+$-0     #The alias to $/.
+$-a     #True if option -a is set. Read-only variable.
+$-d     #The alias to $DEBUG.
+$-F     #The alias to $;.
+$-i     #In in-place-edit mode, this variable holds the extension, otherwise nil.
+$-I     #The alias to $:.
+$-K     #Sets the multibyte coding system for strings and regular expressions.
+$-l     #True if option -l is set. Read-only variable.
+$-p     #True if option -p is set. Read-only variable.
+$-v     #The alias to $VERBOSE.
+$-w     #True if option -w is set.
+
+
+
+$~      #match-data
+$&      #last match
+$`      #string before last match
+$'      #string after last match
+$+      #string matches last paren.
+---------
+Ruby file
+  Compound statement
+    Global variable
+      PsiElement(global variable)('$*')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#argv')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$$')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#pid')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$?')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#last status')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$!')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#error string')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$@')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#error position')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$/')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#input record separator')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$\')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#output record separator')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$;')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#field separator')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$,')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#output field separator')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$.')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#last read line number')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$=')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#ignorecase')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$:')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#load path')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$<')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#reading filename')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$>')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#default output handle')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$"')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#already loaded files')
+    PsiElement(end of line)('\n')
+    PsiWhiteSpace('\n')
+    Global variable
+      PsiElement(global variable)('$-0')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#The alias to $/.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-a')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#True if option -a is set. Read-only variable.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-d')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#The alias to $DEBUG.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-F')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#The alias to $;.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-i')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#In in-place-edit mode, this variable holds the extension, otherwise nil.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-I')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#The alias to $:.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-K')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#Sets the multibyte coding system for strings and regular expressions.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-l')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#True if option -l is set. Read-only variable.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-p')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#True if option -p is set. Read-only variable.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-v')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#The alias to $VERBOSE.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-w')
+    PsiWhiteSpace('     ')
+    PsiComment(line comment)('#True if option -w is set.')
+    PsiElement(end of line)('\n')
+    PsiWhiteSpace('\n\n\n')
+    Back reference
+      PsiElement(back ref)('$~')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#match-data')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$&')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#last match')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$`')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#string before last match')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$'')
+    PsiWhiteSpace('      ')
+    PsiComment(line comment)('#string after last match')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$+')
+  PsiWhiteSpace('      ')
+  PsiComment(line comment)('#string matches last paren.')
+  PsiElement(end of line)('\n')

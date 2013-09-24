@@ -1,0 +1,6 @@
+puts <<FOO<caret>
+FOO
+-----
+puts <<FOO
+<caret>
+FOO

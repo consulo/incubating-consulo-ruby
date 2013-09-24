@@ -1,0 +1,35 @@
+A
+a
+A1
+a1
+_A
+_a
+_A1
+_a1
+--------
+Ruby file
+  Compound statement
+    Constant
+      PsiElement(constant)('A')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('a')
+    PsiElement(end of line)('\n')
+    Constant
+      PsiElement(constant)('A1')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('a1')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('_A')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('_a')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('_A1')
+    PsiElement(end of line)('\n')
+    Identifier
+      PsiElement(identifier)('_a1')
+  PsiElement(end of line)('\n')

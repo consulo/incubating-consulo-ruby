@@ -1,0 +1,34 @@
+class A
+    attr_reader :foo
+    attr_writer :bar
+    attr_accessor :baz
+
+    def method
+        @@foo
+        @@bar
+        @@baz
+    end
+end
+------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] class [2] A
+        [7] attr_reader foo
+        [8] attr_writer bar
+        [9] attr_accessor baz
+        [11] def [10] method
+        [4] CLASS_VARIABLE foo
+        [5] CLASS_VARIABLE bar
+        [6] CLASS_VARIABLE baz
+
+Symbol:
+[0] FILE
+    [1] CLASS A prototypes:  3
+        [2] CLASS_FIELD foo prototypes:  4
+        [3] CLASS_FIELD bar prototypes:  5
+        [4] CLASS_FIELD baz prototypes:  6
+        [5] FIELD_READER foo [2]
+        [6] FIELD_WRITER bar= [3]
+        [7] FIELD_READER baz [4]
+        [8] FIELD_WRITER baz= [4]
+        [9] INSTANCE_METHOD method prototypes:  11

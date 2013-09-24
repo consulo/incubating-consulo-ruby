@@ -1,0 +1,22 @@
+assert !property_defined?('Bogus')
+------------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('assert')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Boolean negative expression
+          PsiElement(!)('!')
+          Function call
+            Fid
+              PsiElement(fid)('property_defined?')
+            PsiElement(f()('(')
+            List of expressions
+              Single quoted like string
+                PsiElement(single quoted like string beginning)(''')
+                PsiElement(string content)('Bogus')
+                PsiElement(string end)(''')
+            PsiElement())(')')
+  PsiElement(end of line)('\n')

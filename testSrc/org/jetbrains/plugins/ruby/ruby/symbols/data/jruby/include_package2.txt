@@ -1,0 +1,8 @@
+include_package 'java.lang'
+--------
+VirtualFile:
+[1] file [0] temp.rb
+    [2] include_package java.lang
+
+Symbol:
+[0] FILE

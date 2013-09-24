@@ -1,0 +1,8 @@
+if
+true then
+print "foo";
+end
+----------
+if true then
+    print "foo";
+end

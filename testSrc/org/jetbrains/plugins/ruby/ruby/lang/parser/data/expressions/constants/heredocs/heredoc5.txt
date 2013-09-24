@@ -1,0 +1,31 @@
+module_eval <<'.,.,', 'parser.y', 19
+  def _reduce_4( val, _values)
+ val[1]
+  end
+.,.,
+-----------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('module_eval')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Heredoc id
+          PsiElement(heredoc id)('<<'.,.,'')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Single quoted like string
+          PsiElement(single quoted like string beginning)(''')
+          PsiElement(string content)('parser.y')
+          PsiElement(string end)(''')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Integer
+          PsiElement(integer literal)('19')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('  def _reduce_4( val, _values)\n val[1]\n  end')
+    PsiElement(end of line)('\n')
+    PsiElement(heredoc end)('.,.,')
+  PsiElement(end of line)('\n')

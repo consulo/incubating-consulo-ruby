@@ -1,0 +1,11 @@
+<html> <title> <%#3.times%> <%= 'Hello' %></title> </html>
+--------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 15], {<html> <title> }
+RHTML_INJECTION_IN_HTML: [15, 18], {<%#}
+RHTML_INJECTION_IN_HTML: [18, 25], {3.times}
+RHTML_INJECTION_IN_HTML: [25, 27], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [27, 28], { }
+RHTML_INJECTION_IN_HTML: [28, 31], {<%=}
+RHTML_INJECTION_IN_HTML: [31, 40], { 'Hello' }
+RHTML_INJECTION_IN_HTML: [40, 42], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [42, 58], {</title> </html>}

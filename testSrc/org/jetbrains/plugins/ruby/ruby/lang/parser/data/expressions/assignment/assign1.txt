@@ -1,0 +1,11 @@
+a=12
+-----------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiElement(=)('=')
+      Integer
+        PsiElement(integer literal)('12')
+  PsiElement(end of line)('\n')

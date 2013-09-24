@@ -1,0 +1,29 @@
+[ 1,
+  2,
+  3,
+  4
+]
+---------
+Ruby file
+  Compound statement
+    Array
+      PsiElement([)('[')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Integer
+          PsiElement(integer literal)('1')
+        PsiElement(,)(',')
+        PsiWhiteSpace('\n  ')
+        Integer
+          PsiElement(integer literal)('2')
+        PsiElement(,)(',')
+        PsiWhiteSpace('\n  ')
+        Integer
+          PsiElement(integer literal)('3')
+        PsiElement(,)(',')
+        PsiWhiteSpace('\n  ')
+        Integer
+          PsiElement(integer literal)('4')
+        PsiElement(end of line)('\n')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,7 @@
+<html> preved </html><% - %> k
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 21], {<html> preved </html>}
+<%: [21, 23], {<%}
+RUBY_CODE_CHARACTERS: [23, 26], { - }
+%>: [26, 28], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [28, 30], { k}

@@ -1,0 +1,13 @@
+alias a a=
+-------
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(aid)('a=')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,13 @@
+return -1
+----
+Ruby file
+  Compound statement
+    Return statement
+      PsiElement(return)('return')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Negative expression
+          PsiElement(u-)('-')
+          Integer
+            PsiElement(integer literal)('1')
+  PsiElement(end of line)('\n')

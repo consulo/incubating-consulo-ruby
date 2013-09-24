@@ -1,0 +1,14 @@
+puts /foo/
+-------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('puts')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Regular expression
+          PsiElement(regexp beginning)('/')
+          PsiElement(regexp content)('foo')
+          PsiElement(regexp end)('/')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,10 @@
+class A
+=begin
+foo<caret>
+=end
+-----
+class A
+=begin
+foo
+<caret>
+=end

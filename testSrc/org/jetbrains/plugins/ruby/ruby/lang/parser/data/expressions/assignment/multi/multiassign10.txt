@@ -1,0 +1,16 @@
+*a = b
+-----
+Ruby file
+  Compound statement
+    Multi assignment expression
+      List of expressions
+        Array argument
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('b')
+  PsiElement(end of line)('\n')

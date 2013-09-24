@@ -1,0 +1,18 @@
+foo(call arg)
+---------
+Ruby file
+  Compound statement
+    Function call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiElement(f()('(')
+      List of expressions
+        Command call
+          Identifier
+            PsiElement(identifier)('call')
+          PsiWhiteSpace(' ')
+          List of expressions
+            Identifier
+              PsiElement(identifier)('arg')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

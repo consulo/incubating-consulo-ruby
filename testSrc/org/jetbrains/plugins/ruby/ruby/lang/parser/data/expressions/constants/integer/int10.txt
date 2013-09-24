@@ -1,0 +1,122 @@
+if char == ?\\
+  if s[i+1] == ?\\
+    char = ?\\
+    i += 1
+  else
+    char = s[i+1..i+3].oct
+    i += 3
+  end
+end
+------
+Ruby file
+  Compound statement
+    If statement
+      PsiElement(if)('if')
+      PsiWhiteSpace(' ')
+      Condition
+        Boolean matching expression
+          Identifier
+            PsiElement(identifier)('char')
+          PsiWhiteSpace(' ')
+          PsiElement(==)('==')
+          PsiWhiteSpace(' ')
+          Integer
+            PsiElement(integer literal)('?\\')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('  ')
+      Compound statement
+        If statement
+          PsiElement(if)('if')
+          PsiWhiteSpace(' ')
+          Condition
+            Boolean matching expression
+              Array reference
+                Identifier
+                  PsiElement(identifier)('s')
+                PsiElement(f[)('[')
+                List of expressions
+                  Math binary expression
+                    Identifier
+                      PsiElement(identifier)('i')
+                    PsiElement(+)('+')
+                    Integer
+                      PsiElement(integer literal)('1')
+                PsiElement(])(']')
+              PsiWhiteSpace(' ')
+              PsiElement(==)('==')
+              PsiWhiteSpace(' ')
+              Integer
+                PsiElement(integer literal)('?\\')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('    ')
+          Compound statement
+            Assignment expression
+              Identifier
+                PsiElement(identifier)('char')
+              PsiWhiteSpace(' ')
+              PsiElement(=)('=')
+              PsiWhiteSpace(' ')
+              Integer
+                PsiElement(integer literal)('?\\')
+            PsiElement(end of line)('\n')
+            PsiWhiteSpace('    ')
+            Self assignment expression
+              Identifier
+                PsiElement(identifier)('i')
+              PsiWhiteSpace(' ')
+              PsiElement(+=)('+=')
+              PsiWhiteSpace(' ')
+              Integer
+                PsiElement(integer literal)('1')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('  ')
+          Else block
+            PsiElement(else)('else')
+            PsiWhiteSpace('\n    ')
+            Compound statement
+              Assignment expression
+                Identifier
+                  PsiElement(identifier)('char')
+                PsiWhiteSpace(' ')
+                PsiElement(=)('=')
+                PsiWhiteSpace(' ')
+                Dot reference
+                  Array reference
+                    Identifier
+                      PsiElement(identifier)('s')
+                    PsiElement(f[)('[')
+                    List of expressions
+                      Range expression
+                        Math binary expression
+                          Identifier
+                            PsiElement(identifier)('i')
+                          PsiElement(+)('+')
+                          Integer
+                            PsiElement(integer literal)('1')
+                        PsiElement(..)('..')
+                        Math binary expression
+                          Identifier
+                            PsiElement(identifier)('i')
+                          PsiElement(+)('+')
+                          Integer
+                            PsiElement(integer literal)('3')
+                    PsiElement(])(']')
+                  PsiElement(.)('.')
+                  Identifier
+                    PsiElement(identifier)('oct')
+              PsiElement(end of line)('\n')
+              PsiWhiteSpace('    ')
+              Self assignment expression
+                Identifier
+                  PsiElement(identifier)('i')
+                PsiWhiteSpace(' ')
+                PsiElement(+=)('+=')
+                PsiWhiteSpace(' ')
+                Integer
+                  PsiElement(integer literal)('3')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('  ')
+          PsiElement(end)('end')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

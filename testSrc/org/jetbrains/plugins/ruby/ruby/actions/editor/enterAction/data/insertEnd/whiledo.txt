@@ -1,0 +1,5 @@
+while true do<caret>
+-------
+while true do
+    <caret>
+end

@@ -1,0 +1,9 @@
+FOO #Test comment
+------------
+Ruby file
+  Compound statement
+    Constant
+      PsiElement(constant)('FOO')
+  PsiWhiteSpace(' ')
+  PsiComment(line comment)('#Test comment')
+  PsiElement(end of line)('\n')

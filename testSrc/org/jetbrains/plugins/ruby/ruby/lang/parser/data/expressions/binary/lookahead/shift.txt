@@ -1,0 +1,19 @@
+a << b = 12
+-------
+Ruby file
+  Compound statement
+    Shift operation
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(<<)('<<')
+      PsiWhiteSpace(' ')
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('b')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Integer
+          PsiElement(integer literal)('12')
+  PsiElement(end of line)('\n')

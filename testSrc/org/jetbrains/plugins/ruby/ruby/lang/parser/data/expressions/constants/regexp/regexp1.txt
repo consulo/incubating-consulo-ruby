@@ -1,0 +1,9 @@
+/expr/
+---------
+Ruby file
+  Compound statement
+    Regular expression
+      PsiElement(regexp beginning)('/')
+      PsiElement(regexp content)('expr')
+      PsiElement(regexp end)('/')
+  PsiElement(end of line)('\n')

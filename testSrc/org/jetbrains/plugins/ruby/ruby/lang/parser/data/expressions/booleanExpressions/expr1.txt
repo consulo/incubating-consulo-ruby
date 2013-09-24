@@ -1,0 +1,33 @@
+h = @header[name.downcase] or return default
+-----------------
+Ruby file
+  Compound statement
+    Boolean binary expression
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('h')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Array reference
+          Instance variable
+            PsiElement(instance variable)('@header')
+          PsiElement(f[)('[')
+          List of expressions
+            Dot reference
+              Identifier
+                PsiElement(identifier)('name')
+              PsiElement(.)('.')
+              Identifier
+                PsiElement(identifier)('downcase')
+          PsiElement(])(']')
+      PsiWhiteSpace(' ')
+      PsiElement(or)('or')
+      PsiWhiteSpace(' ')
+      Return statement
+        PsiElement(return)('return')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Identifier
+            PsiElement(identifier)('default')
+  PsiElement(end of line)('\n')

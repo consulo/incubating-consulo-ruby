@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkConfigurablePanel">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="1aa7" class="com.intellij.openapi.ui.LabeledComponent" binding="myRubyInterpreterComponent" custom-create="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="ruby.configuration.interpreter.path"/>
+        </properties>
+      </component>
+      <component id="f2f72" class="com.intellij.openapi.ui.LabeledComponent" binding="myGemsBinFolderComponent" custom-create="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="ruby.configuration.gems.bin.dir.path"/>
+        </properties>
+      </component>
+      <grid id="125ca" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="2"/>
+            <preferred-size width="-1" height="2"/>
+            <maximum-size width="-1" height="2"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="etched"/>
+        <children/>
+      </grid>
+    </children>
+  </grid>
+</form>

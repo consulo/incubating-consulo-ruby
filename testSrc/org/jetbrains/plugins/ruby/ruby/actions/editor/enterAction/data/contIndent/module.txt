@@ -1,0 +1,6 @@
+module<caret>
+end
+------
+module
+    <caret>
+end

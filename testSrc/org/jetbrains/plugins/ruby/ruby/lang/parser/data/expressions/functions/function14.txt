@@ -1,0 +1,11 @@
+a<<foo
+-------
+Ruby file
+  Compound statement
+    Shift operation
+      Identifier
+        PsiElement(identifier)('a')
+      PsiElement(<<)('<<')
+      Identifier
+        PsiElement(identifier)('foo')
+  PsiElement(end of line)('\n')

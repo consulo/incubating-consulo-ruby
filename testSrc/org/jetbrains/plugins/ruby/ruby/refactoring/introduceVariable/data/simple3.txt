@@ -1,0 +1,8 @@
+"Hello, my<selection> beatiful</selection> world"
+------
+greet
+------
+replace_this
+------
+greet = "Hello, my beatiful world"
+

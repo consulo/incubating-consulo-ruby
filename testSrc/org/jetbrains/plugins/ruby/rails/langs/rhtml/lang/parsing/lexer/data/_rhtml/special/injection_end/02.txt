@@ -1,0 +1,3 @@
+<html> preved </html>%> k
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 25], {<html> preved </html>%> k}

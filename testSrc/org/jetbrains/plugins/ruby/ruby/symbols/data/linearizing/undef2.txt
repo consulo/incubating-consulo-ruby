@@ -1,0 +1,17 @@
+class A::B
+
+end
+
+class A::B
+
+end
+--------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] class [2] A::B
+    [5] class [4] A::B
+
+Symbol:
+[0] FILE
+    [1] NOT_DEFINED A
+        [2] CLASS B prototypes:  3 5

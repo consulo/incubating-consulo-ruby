@@ -1,0 +1,26 @@
+module A
+    module A
+
+    end
+end
+
+
+
+module A
+    class A::B
+
+    end
+end
+--------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] module [2] A
+        [5] module [4] A
+    [7] module [6] A
+        [9] class [8] A::B
+
+Symbol:
+[0] FILE
+    [1] MODULE A prototypes:  3 7
+        [2] MODULE A prototypes:  5
+            [4] CLASS B prototypes:  9

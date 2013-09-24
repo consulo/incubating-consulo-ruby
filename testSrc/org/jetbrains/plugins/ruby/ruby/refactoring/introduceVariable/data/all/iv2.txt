@@ -1,0 +1,19 @@
+while true do
+    puts "Hello, world!"
+    100.times do
+        puts <selection>"Hello, world!"</selection>
+    end
+end
+
+-----
+greet
+-----
+replace_all
+-----
+while true do
+    greet = "Hello, world!"
+    puts greet
+    100.times do
+        puts greet
+    end
+end

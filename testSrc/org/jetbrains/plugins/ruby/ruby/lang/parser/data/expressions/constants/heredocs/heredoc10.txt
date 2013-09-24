@@ -1,0 +1,12 @@
+<<-SQL
+select * from AEG.PCY_BB_USERS where pin like '6%'
+SQ----------
+Ruby file
+  Compound statement
+    Heredoc id
+      PsiElement(heredoc id)('<<-SQL')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('select * from AEG.PCY_BB_USERS where pin like '6%'\nSQ')
+    PsiErrorElement:Expected: heredoc end or indented heredoc end
+      <empty list>

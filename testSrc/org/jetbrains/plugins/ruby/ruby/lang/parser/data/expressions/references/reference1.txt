@@ -1,0 +1,11 @@
+12::foo
+------
+Ruby file
+  Compound statement
+    Colon reference
+      Integer
+        PsiElement(integer literal)('12')
+      PsiElement(::)('::')
+      Identifier
+        PsiElement(identifier)('foo')
+  PsiElement(end of line)('\n')

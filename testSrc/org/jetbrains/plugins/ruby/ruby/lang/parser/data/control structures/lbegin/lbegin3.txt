@@ -1,0 +1,16 @@
+BEGIN{
+foo
+}
+-------
+Ruby file
+  Compound statement
+    Large begin statement
+      PsiElement(BEGIN)('BEGIN')
+      PsiElement({)('{')
+      PsiWhiteSpace('\n')
+      Compound statement
+        Identifier
+          PsiElement(identifier)('foo')
+      PsiElement(end of line)('\n')
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

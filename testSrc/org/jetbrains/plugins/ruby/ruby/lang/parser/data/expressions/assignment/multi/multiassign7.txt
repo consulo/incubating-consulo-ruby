@@ -1,0 +1,30 @@
+s, uniq, type, info = m.to_a
+-----------
+Ruby file
+  Compound statement
+    Multi assignment expression
+      List of expressions
+        Identifier
+          PsiElement(identifier)('s')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('uniq')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('type')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('info')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Dot reference
+        Identifier
+          PsiElement(identifier)('m')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('to_a')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,7 @@
+while true
+#test comment
+end
+--------
+while true
+#test comment
+end

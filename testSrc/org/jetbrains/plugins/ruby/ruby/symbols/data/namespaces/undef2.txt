@@ -1,0 +1,15 @@
+class A
+ include B
+end
+------------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] class [2] A
+        [5] include
+            [4] B
+
+Symbol:
+[0] FILE
+    [1] CLASS A prototypes:  3
+        [2] NOT_DEFINED B prototypes:  5
+        [3] INCLUDE [2]

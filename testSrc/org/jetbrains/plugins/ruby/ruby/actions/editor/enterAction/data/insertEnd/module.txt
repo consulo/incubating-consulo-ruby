@@ -1,0 +1,5 @@
+module FOO<caret>
+-------------
+module FOO
+    <caret>
+end

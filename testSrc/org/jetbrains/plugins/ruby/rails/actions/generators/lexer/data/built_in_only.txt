@@ -1,0 +1,45 @@
+Usage: script/generate generator [options] [args]
+
+Rails Info:
+    -v, --version                    Show the Rails version number and quit.
+    -h, --help                       Show this help message and quit.
+
+General Options:
+    -p, --pretend                    Run but do not make any changes.
+    -f, --force                      Overwrite files that already exist.
+    -s, --skip                       Skip files that already exist.
+    -q, --quiet                      Suppress normal output.
+    -t, --backtrace                  Debugging: show backtrace on errors.
+    -c, --svn                        Modify files with subversion. (Note: svn must be in path)
+
+
+Installed Generators
+  Builtin: controller, integration_test, mailer, migration, model, observer, plugin, resource, scaffold, scaffold_resource, session_migration, web_service
+
+More are available at http://rubyonrails.org/show/Generators
+  1. Download, for example, login_generator.zip
+  2. Unzip to directory /Users/romeo/.rails/generators/login
+     to use the generator with all your Rails apps
+     or to /Users/romeo/IdeaProjects/gentest/generators/login
+     to use with this app only.
+  3. Run generate with no arguments for usage information
+       script/generate login
+
+Generator gems are also available:
+  1. gem search -r generator
+  2. gem install login_generator
+  3. script/generate login
+
+-------------
+controller: [703, 713], {controller}
+integration_test: [715, 731], {integration_test}
+mailer: [733, 739], {mailer}
+migration: [741, 750], {migration}
+model: [752, 757], {model}
+observer: [759, 767], {observer}
+plugin: [769, 775], {plugin}
+resource: [777, 785], {resource}
+scaffold: [787, 795], {scaffold}
+scaffold_resource: [797, 814], {scaffold_resource}
+session_migration: [816, 833], {session_migration}
+web_service: [835, 846], {web_service}

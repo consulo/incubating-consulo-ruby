@@ -1,0 +1,20 @@
+<%# this
+is
+ multiline
+comment
+%>
+------------
+RHTML_COMMENT_START: [0, 3], {<%#}
+RHTML_COMMENT_CHARACTERS: [3, 8], { this}
+RHTML_COMMENT_EOL: [8, 9], {
+}
+RHTML_COMMENT_CHARACTERS: [9, 11], {is}
+RHTML_COMMENT_EOL: [11, 12], {
+}
+RHTML_COMMENT_CHARACTERS: [12, 22], { multiline}
+RHTML_COMMENT_EOL: [22, 23], {
+}
+RHTML_COMMENT_CHARACTERS: [23, 30], {comment}
+RHTML_COMMENT_EOL: [30, 31], {
+}
+RHTML_COMMENT_END: [31, 33], {%>}

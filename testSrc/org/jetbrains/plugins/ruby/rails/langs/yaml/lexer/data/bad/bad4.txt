@@ -1,0 +1,12 @@
+a: foo
+bЫЫЫЫ, ТЫ КТО?: boo
+------
+scalar key: [0, 1], {a}
+value: [1, 2], {:}
+unknown: [2, 3], { }
+scalar value: [3, 7], {foo
+}
+scalar key: [7, 30], {bЫЫЫЫ, ТЫ КТО?}
+value: [30, 31], {:}
+unknown: [31, 32], { }
+scalar value: [32, 35], {boo}

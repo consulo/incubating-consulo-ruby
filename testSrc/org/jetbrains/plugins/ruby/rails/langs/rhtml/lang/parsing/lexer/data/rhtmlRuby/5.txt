@@ -1,0 +1,19 @@
+<% @str = 'very long%> <% string' + '!'%>
+---------
+RHTML_INJECTION_IN_RUBY: [0, 2], {<%}
+white space: [2, 3], { }
+instance variable: [3, 7], {@str}
+white space: [7, 8], { }
+=: [8, 9], {=}
+white space: [9, 10], { }
+single quoted like string beginning: [10, 11], {'}
+string content: [11, 20], {very long}
+RHTML_INJECTION_IN_RUBY: [20, 25], {%> <%}
+white space: [25, 26], { }
+identifier: [26, 32], {string}
+single quoted like string beginning: [32, 33], {'}
+string content: [33, 36], { + }
+string end: [36, 37], {'}
+!: [37, 38], {!}
+single quoted like string beginning: [38, 39], {'}
+RHTML_INJECTION_IN_RUBY: [39, 41], {%>}

@@ -1,0 +1,2 @@
+include_class 'java.lang.System'
+System.out.print "hello!"

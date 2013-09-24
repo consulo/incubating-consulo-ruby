@@ -1,0 +1,14 @@
+expr if expr
+--------------
+Ruby file
+  Compound statement
+    If modifier statement
+      Identifier
+        PsiElement(identifier)('expr')
+      PsiWhiteSpace(' ')
+      PsiElement(if modifier)('if')
+      PsiWhiteSpace(' ')
+      Condition
+        Identifier
+          PsiElement(identifier)('expr')
+  PsiElement(end of line)('\n')

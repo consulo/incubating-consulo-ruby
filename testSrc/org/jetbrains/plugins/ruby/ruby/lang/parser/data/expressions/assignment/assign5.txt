@@ -1,0 +1,33 @@
+Mime::PNG   = Mime::Type.new("image/png")
+-----
+Ruby file
+  Compound statement
+    Assignment expression
+      Colon reference
+        Constant
+          PsiElement(constant)('Mime')
+        PsiElement(::)('::')
+        Constant
+          PsiElement(constant)('PNG')
+      PsiWhiteSpace('   ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Function call
+        Dot reference
+          Colon reference
+            Constant
+              PsiElement(constant)('Mime')
+            PsiElement(::)('::')
+            Constant
+              PsiElement(constant)('Type')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('new')
+        PsiElement(f()('(')
+        List of expressions
+          Double quoted like string
+            PsiElement(double quoted like string beginning)('"')
+            PsiElement(string content)('image/png')
+            PsiElement(string end)('"')
+        PsiElement())(')')
+  PsiElement(end of line)('\n')

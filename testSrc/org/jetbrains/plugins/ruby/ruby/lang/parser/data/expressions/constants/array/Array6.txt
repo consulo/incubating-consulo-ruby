@@ -1,0 +1,18 @@
+[1 2]
+--------
+Ruby file
+  Compound statement
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Integer
+          PsiElement(integer literal)('1')
+      PsiErrorElement:Expected: ]
+        <empty list>
+    PsiWhiteSpace(' ')
+    Integer
+      PsiElement(integer literal)('2')
+    PsiErrorElement:Expected: ; or end of line
+      <empty list>
+    PsiElement(])(']')
+  PsiElement(end of line)('\n')

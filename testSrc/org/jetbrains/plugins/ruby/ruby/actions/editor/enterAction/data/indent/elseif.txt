@@ -1,0 +1,10 @@
+if true then
+    foo
+    elsif true<caret>
+end
+-----------
+if true then
+    foo
+elsif true
+    <caret>
+end

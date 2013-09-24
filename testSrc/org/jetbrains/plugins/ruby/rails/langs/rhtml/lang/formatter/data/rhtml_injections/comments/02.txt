@@ -1,0 +1,9 @@
+        <%# multiline
+               comment
+            aaa
+        %>
+-------------
+<%# multiline
+               comment
+            aaa
+%>

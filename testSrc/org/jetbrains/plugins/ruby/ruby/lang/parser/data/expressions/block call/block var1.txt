@@ -1,0 +1,55 @@
+o.each {|o| pattern[o] = v.fetch(0) {o}}
+---------
+Ruby file
+  Compound statement
+    Block call
+      Dot reference
+        Identifier
+          PsiElement(identifier)('o')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('each')
+      PsiWhiteSpace(' ')
+      Brace code block
+        PsiElement({)('{')
+        PsiElement(p|)('|')
+        Block variables
+          Identifier
+            PsiElement(identifier)('o')
+        PsiElement(p|)('|')
+        PsiWhiteSpace(' ')
+        Compound statement
+          Assignment expression
+            Array reference
+              Identifier
+                PsiElement(identifier)('pattern')
+              PsiElement(f[)('[')
+              List of expressions
+                Identifier
+                  PsiElement(identifier)('o')
+              PsiElement(])(']')
+            PsiWhiteSpace(' ')
+            PsiElement(=)('=')
+            PsiWhiteSpace(' ')
+            Block call
+              Function call
+                Dot reference
+                  Identifier
+                    PsiElement(identifier)('v')
+                  PsiElement(.)('.')
+                  Identifier
+                    PsiElement(identifier)('fetch')
+                PsiElement(f()('(')
+                List of expressions
+                  Integer
+                    PsiElement(integer literal)('0')
+                PsiElement())(')')
+              PsiWhiteSpace(' ')
+              Brace code block
+                PsiElement({)('{')
+                Compound statement
+                  Identifier
+                    PsiElement(identifier)('o')
+                PsiElement(})('}')
+        PsiElement(})('}')
+  PsiElement(end of line)('\n')

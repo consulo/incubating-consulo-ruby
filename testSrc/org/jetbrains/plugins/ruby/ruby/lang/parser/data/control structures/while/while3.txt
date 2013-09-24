@@ -1,0 +1,19 @@
+while true do BOO end
+------
+Ruby file
+  Compound statement
+    While statement
+      PsiElement(while)('while')
+      PsiWhiteSpace(' ')
+      Condition
+        Pseudo constant
+          PsiElement(true)('true')
+      PsiWhiteSpace(' ')
+      PsiElement(do_cond)('do')
+      PsiWhiteSpace(' ')
+      Compound statement
+        Constant
+          PsiElement(constant)('BOO')
+      PsiWhiteSpace(' ')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

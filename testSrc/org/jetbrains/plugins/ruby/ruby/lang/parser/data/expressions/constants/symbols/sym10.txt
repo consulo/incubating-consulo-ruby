@@ -1,0 +1,16 @@
+{:a=>false}
+------
+Ruby file
+  Compound statement
+    Assoc list
+      PsiElement({)('{')
+      Assoc
+        Symbol
+          PsiElement(:)(':')
+          Function name
+            PsiElement(identifier)('a')
+        PsiElement(=>)('=>')
+        Pseudo constant
+          PsiElement(false)('false')
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,16 @@
+foo(,b)
+----------
+Ruby file
+  Compound statement
+    Function call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiElement(f()('(')
+      List of expressions
+        PsiErrorElement:Expected: expression
+          <empty list>
+        PsiElement(,)(',')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,47 @@
+namespace :simple_sc do
+ task :dist => [:create_fake_dirs, :clean] do
+ end
+
+ task :create_fake_dirs do
+   puts "Current dir: #{File.expand_path(".")}"
+   user_block("Fake progress") do
+     30.times do |i|
+       mkdir_p <selection>"dist/dir#{i}"</selection>
+       cp_r "common", "dist/dir#{i}"
+     end
+     user_msg "Fake status message" #File.expand_path(".")
+   end
+ end
+
+ CLEAN_FILES = FileList['dist/**/*']
+ CLEAN_FILES.clear_exclude
+ task :clean do
+   rm CLEAN_FILES
+ end
+end-----
+test
+-----
+replace_all
+-----
+namespace :simple_sc do
+ task :dist => [:create_fake_dirs, :clean] do
+ end
+
+ task :create_fake_dirs do
+   puts "Current dir: #{File.expand_path(".")}"
+   user_block("Fake progress") do
+     30.times do |i|
+       test = "dist/dir#{i}"
+       mkdir_p test
+       cp_r "common", test
+     end
+     user_msg "Fake status message" #File.expand_path(".")
+   end
+ end
+
+ CLEAN_FILES = FileList['dist/**/*']
+ CLEAN_FILES.clear_exclude
+ task :clean do
+   rm CLEAN_FILES
+ end
+end

@@ -1,0 +1,27 @@
+<a>
+<title>
+<% 3.times do %>
+  <b aa="aa"    bb= "bb">
+     dd
+     >
+    ff
+<% end %>
+</foo>
+</title
+<b>
+</>
+</a>
+----------
+<a>
+    <title>
+        <% 3.times do %>
+            <b aa="aa" bb="bb">
+                dd
+                >
+                ff
+        <% end %>
+        </foo>
+    </title
+    <b>
+    </>
+</a>

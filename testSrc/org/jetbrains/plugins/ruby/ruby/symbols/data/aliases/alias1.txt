@@ -1,0 +1,14 @@
+def foo
+end
+
+alias boo foo
+-------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] def [2] foo
+    [4] alias 'boo' 'foo'
+
+Symbol:
+[0] FILE
+    [1] INSTANCE_METHOD foo prototypes:  3
+    [2] ALIAS boo [1]

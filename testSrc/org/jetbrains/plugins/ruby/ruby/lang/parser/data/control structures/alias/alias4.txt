@@ -1,0 +1,13 @@
+alias / quo
+----
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(/)('/')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(identifier)('quo')
+  PsiElement(end of line)('\n')

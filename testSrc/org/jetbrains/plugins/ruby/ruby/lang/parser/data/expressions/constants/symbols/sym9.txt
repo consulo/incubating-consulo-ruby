@@ -1,0 +1,14 @@
+foo :pos=
+----------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Symbol
+          PsiElement(:)(':')
+          Function name
+            PsiElement(aid)('pos=')
+  PsiElement(end of line)('\n')

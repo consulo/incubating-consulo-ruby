@@ -1,0 +1,14 @@
+expr1 while expr2
+-----------------
+Ruby file
+  Compound statement
+    While modifier statement
+      Identifier
+        PsiElement(identifier)('expr1')
+      PsiWhiteSpace(' ')
+      PsiElement(while modifier)('while')
+      PsiWhiteSpace(' ')
+      Condition
+        Identifier
+          PsiElement(identifier)('expr2')
+  PsiElement(end of line)('\n')

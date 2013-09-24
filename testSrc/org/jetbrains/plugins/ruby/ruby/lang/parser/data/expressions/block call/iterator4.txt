@@ -1,0 +1,25 @@
+1.upto 2 do
+end
+-----
+Ruby file
+  Compound statement
+    Block call
+      Command call
+        Dot reference
+          Integer
+            PsiElement(integer literal)('1')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('upto')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Integer
+            PsiElement(integer literal)('2')
+      PsiWhiteSpace(' ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace('\n')
+        Compound statement
+          <empty list>
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

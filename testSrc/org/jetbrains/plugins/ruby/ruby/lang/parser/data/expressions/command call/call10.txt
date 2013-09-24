@@ -1,0 +1,11 @@
+Hash.[]
+------
+Ruby file
+  Compound statement
+    Dot reference
+      Constant
+        PsiElement(constant)('Hash')
+      PsiElement(.)('.')
+      Operation
+        PsiElement([])('[]')
+  PsiElement(end of line)('\n')

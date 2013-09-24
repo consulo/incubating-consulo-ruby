@@ -1,0 +1,11 @@
+class A
+    puts <<-FOO
+BOO
+FOO
+end
+-----------
+class A
+    puts <<-FOO
+BOO
+    FOO
+end

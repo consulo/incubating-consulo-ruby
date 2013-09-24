@@ -1,0 +1,8 @@
+ЫЫЫЫ, ТЫ КТО?
+a: foo
+------
+scalar value: [0, 24], {ЫЫЫЫ, ТЫ КТО?
+a}
+unknown: [24, 25], {:}
+unknown: [25, 26], { }
+scalar value: [26, 29], {foo}

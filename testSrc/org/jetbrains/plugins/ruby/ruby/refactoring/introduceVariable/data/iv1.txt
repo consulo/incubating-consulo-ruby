@@ -1,0 +1,8 @@
+<selection>ProgressManager.getInstance(some_project, foo)</selection>.do_some_job
+------
+manager
+------
+replace_this
+------
+manager = ProgressManager.getInstance(some_project, foo)
+manager.do_some_job

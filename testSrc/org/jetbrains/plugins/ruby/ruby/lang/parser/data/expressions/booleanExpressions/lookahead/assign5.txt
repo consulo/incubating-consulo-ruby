@@ -1,0 +1,21 @@
+var1 ... var2 = 'a string'
+-----
+Ruby file
+  Compound statement
+    Range expression
+      Identifier
+        PsiElement(identifier)('var1')
+      PsiWhiteSpace(' ')
+      PsiElement(...)('...')
+      PsiWhiteSpace(' ')
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('var2')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Single quoted like string
+          PsiElement(single quoted like string beginning)(''')
+          PsiElement(string content)('a string')
+          PsiElement(string end)(''')
+  PsiElement(end of line)('\n')

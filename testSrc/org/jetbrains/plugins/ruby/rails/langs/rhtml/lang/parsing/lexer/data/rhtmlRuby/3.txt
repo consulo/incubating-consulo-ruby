@@ -1,0 +1,41 @@
+<b>
+</b>
+<i>
+  <!--
+  <html> <%# preved %> </html>
+  <head> <% 3.times do |i| %> preved> </head>
+  -->
+  Matrix
+</i>
+<%#
+<!--
+<html> preved <%# Time.now %> medved </html>
+-->
+%>
+-----------
+RHTML_INJECTION_IN_RUBY: [0, 62], {<b>
+</b>
+<i>
+  <!--
+  <html> <%# preved %> </html>
+  <head> <%}
+white space: [62, 63], { }
+integer literal: [63, 64], {3}
+.: [64, 65], {.}
+identifier: [65, 70], {times}
+white space: [70, 71], { }
+do: [71, 73], {do}
+white space: [73, 74], { }
+p|: [74, 75], {|}
+identifier: [75, 76], {i}
+p|: [76, 77], {|}
+white space: [77, 78], { }
+RHTML_INJECTION_IN_RUBY: [78, 177], {%> preved> </head>
+  -->
+  Matrix
+</i>
+<%#
+<!--
+<html> preved <%# Time.now %> medved </html>
+-->
+%>}

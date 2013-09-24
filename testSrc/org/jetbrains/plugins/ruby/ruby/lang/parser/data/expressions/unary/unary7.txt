@@ -1,0 +1,74 @@
+a*b +j
+a.+ +j
+a::doo +j
+a::+ +j
+::CCC +j
+----------
+Ruby file
+  Compound statement
+    Math binary expression
+      Math binary expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(*)('*')
+        Identifier
+          PsiElement(identifier)('b')
+      PsiWhiteSpace(' ')
+      PsiElement(+)('+')
+      Identifier
+        PsiElement(identifier)('j')
+    PsiElement(end of line)('\n')
+    Command call
+      Dot reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(.)('.')
+        Operation
+          PsiElement(+)('+')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Unary expression
+          PsiElement(u+)('+')
+          Identifier
+            PsiElement(identifier)('j')
+    PsiElement(end of line)('\n')
+    Command call
+      Colon reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(::)('::')
+        Identifier
+          PsiElement(identifier)('doo')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Unary expression
+          PsiElement(u+)('+')
+          Identifier
+            PsiElement(identifier)('j')
+    PsiElement(end of line)('\n')
+    Command call
+      Colon reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(::)('::')
+        Operation
+          PsiElement(+)('+')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Unary expression
+          PsiElement(u+)('+')
+          Identifier
+            PsiElement(identifier)('j')
+    PsiElement(end of line)('\n')
+    Command call
+      Colon reference
+        PsiElement(::3)('::')
+        Constant
+          PsiElement(constant)('CCC')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Unary expression
+          PsiElement(u+)('+')
+          Identifier
+            PsiElement(identifier)('j')
+  PsiElement(end of line)('\n')

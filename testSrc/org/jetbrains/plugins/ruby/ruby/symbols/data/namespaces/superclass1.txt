@@ -1,0 +1,40 @@
+module M
+    class A
+        def self.foo
+            puts "foo"
+        end
+    end
+end
+
+include M
+
+class A
+   def self.foo
+       puts "boo"
+   end
+end
+
+class B < A
+end
+-----
+VirtualFile:
+[1] file [0] temp.rb
+    [3] module [2] M
+        [5] class [4] A
+            [7] def [6] self.foo
+    [9] include
+        [8] M
+    [11] class [10] A
+        [13] def [12] self.foo
+    [16] class [14] B < [15] A
+
+Symbol:
+[0] FILE
+    [1] MODULE M prototypes:  3
+        [2] CLASS A prototypes:  5
+            [3] CLASS_METHOD foo prototypes:  7
+    [4] INCLUDE [1]
+    [5] CLASS A prototypes:  11
+        [6] CLASS_METHOD foo prototypes:  13
+    [7] CLASS B prototypes:  16
+        [8] SUPERCLASS [5]

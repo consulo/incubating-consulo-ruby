@@ -1,0 +1,5 @@
+while true do BOO; end
+-----------
+while true do
+    BOO;
+end

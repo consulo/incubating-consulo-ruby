@@ -1,0 +1,34 @@
+# command opt_nl
+[foo a]
+[foo a
+]
+----------
+Ruby file
+  PsiComment(line comment)('# command opt_nl')
+  PsiWhiteSpace('\n')
+  Compound statement
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Command call
+          Identifier
+            PsiElement(identifier)('foo')
+          PsiWhiteSpace(' ')
+          List of expressions
+            Identifier
+              PsiElement(identifier)('a')
+      PsiElement(])(']')
+    PsiElement(end of line)('\n')
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Command call
+          Identifier
+            PsiElement(identifier)('foo')
+          PsiWhiteSpace(' ')
+          List of expressions
+            Identifier
+              PsiElement(identifier)('a')
+      PsiElement(end of line)('\n')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

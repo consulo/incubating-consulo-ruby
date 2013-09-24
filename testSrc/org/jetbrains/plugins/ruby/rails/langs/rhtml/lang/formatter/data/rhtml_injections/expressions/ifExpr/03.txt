@@ -1,0 +1,37 @@
+<a>
+<title>
+<% if 3 then %>
+<a>
+  ddd
+</a>
+<% 2 = 3 %>
+<foo>
+aaa
+<% else %>
+  <b>
+     dd
+     </b>
+    ff
+<% end %>
+</foo>
+</title>
+</a>
+----------
+<a>
+    <title>
+        <% if 3 then %>
+            <a>
+                ddd
+            </a>
+            <% 2 = 3 %>
+            <foo>
+                aaa
+        <% else %>
+            <b>
+                dd
+            </b>
+            ff
+        <% end %>
+        </foo>
+    </title>
+</a>

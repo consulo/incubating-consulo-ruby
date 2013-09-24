@@ -1,0 +1,12 @@
+$0 = 12
+alias $foo $0
+----
+VirtualFile:
+[1] file [0] temp.rb
+    [3] alias '$foo' '$0'
+    [2] $0
+
+Symbol:
+[0] FILE
+    [1] GLOBAL_VARIABLE $0 prototypes:  2
+    [2] ALIAS $foo [1]

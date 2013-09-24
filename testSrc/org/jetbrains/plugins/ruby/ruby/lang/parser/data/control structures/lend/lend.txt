@@ -1,0 +1,15 @@
+END{
+
+
+}
+------------
+Ruby file
+  Compound statement
+    Large end statement
+      PsiElement(END)('END')
+      PsiElement({)('{')
+      PsiWhiteSpace('\n\n\n')
+      Compound statement
+        <empty list>
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')

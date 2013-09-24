@@ -1,0 +1,29 @@
+<title>
+ <%# multiline
+    comment
+ddd
+ ddd
+ff
+ %>
+
+<%#
+multiline
+    comment
+ddd
+ %>
+</title>
+-------------
+<title>
+    <%# multiline
+    comment
+ddd
+ ddd
+ff
+    %>
+
+<%#
+multiline
+    comment
+ddd
+%>
+</title>

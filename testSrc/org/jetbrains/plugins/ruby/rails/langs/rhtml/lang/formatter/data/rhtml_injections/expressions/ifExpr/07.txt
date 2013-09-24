@@ -1,0 +1,60 @@
+<a>
+<title>
+<% if 3 %>
+<a>
+  ddd
+</a>
+<% a = 3 %>
+<foo>
+aaa
+<% elsif 2 == 3 %>
+  <b>
+     dd
+     </b>
+    ff
+<% elsif 3 == 4 %>
+  <b>
+     dd
+     <%= name = 'krevedko' %>
+     </b>
+    ff
+<% else 4 == 5 %>
+  <b>
+     dd
+     </b>
+    ff
+<% end %>
+</foo>
+</title>
+</a>
+----------
+<a>
+    <title>
+        <% if 3 %>
+            <a>
+                ddd
+            </a>
+            <% a = 3 %>
+            <foo>
+                aaa
+        <% elsif 2 == 3 %>
+            <b>
+                dd
+            </b>
+            ff
+        <% elsif 3 == 4 %>
+            <b>
+                dd
+                <%= name = 'krevedko' %>
+            </b>
+            ff
+        <% else
+            4 == 5 %>
+            <b>
+                dd
+            </b>
+            ff
+        <% end %>
+        </foo>
+    </title>
+</a>

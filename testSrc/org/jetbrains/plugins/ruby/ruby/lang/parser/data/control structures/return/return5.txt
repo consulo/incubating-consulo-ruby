@@ -1,0 +1,12 @@
+return(123)
+--------------
+Ruby file
+  Compound statement
+    Return statement
+      PsiElement(return)('return')
+      PsiElement(f()('(')
+      List of expressions
+        Integer
+          PsiElement(integer literal)('123')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

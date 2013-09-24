@@ -1,0 +1,21 @@
+<a>
+<% case line %>
+<% when /title=(.*)/ %>
+ttt
+<% when /artist=(.*)/ %>
+aaaa
+<% else %>
+eeee
+<% end %>
+</a>
+-------
+<a>
+    <% case line %>
+    <% when /title=(.*)/ %>
+        ttt
+    <% when /artist=(.*)/ %>
+        aaaa
+    <% else %>
+        eeee
+    <% end %>
+</a>

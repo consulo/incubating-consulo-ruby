@@ -1,0 +1,33 @@
+if a && b = c then
+    foo
+end
+------
+Ruby file
+  Compound statement
+    If statement
+      PsiElement(if)('if')
+      PsiWhiteSpace(' ')
+      Condition
+        Boolean binary expression
+          Identifier
+            PsiElement(identifier)('a')
+          PsiWhiteSpace(' ')
+          PsiElement(&&)('&&')
+          PsiWhiteSpace(' ')
+          Assignment expression
+            Identifier
+              PsiElement(identifier)('b')
+            PsiWhiteSpace(' ')
+            PsiElement(=)('=')
+            PsiWhiteSpace(' ')
+            Identifier
+              PsiElement(identifier)('c')
+      PsiWhiteSpace(' ')
+      PsiElement(then)('then')
+      PsiWhiteSpace('\n    ')
+      Compound statement
+        Identifier
+          PsiElement(identifier)('foo')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

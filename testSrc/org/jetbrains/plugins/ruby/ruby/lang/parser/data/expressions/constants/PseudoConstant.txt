@@ -1,0 +1,29 @@
+self
+nil
+true
+false
+__FILE__
+__LINE__
+
+----------
+Ruby file
+  Compound statement
+    Pseudo constant
+      PsiElement(self)('self')
+    PsiElement(end of line)('\n')
+    Pseudo constant
+      PsiElement(nil)('nil')
+    PsiElement(end of line)('\n')
+    Pseudo constant
+      PsiElement(true)('true')
+    PsiElement(end of line)('\n')
+    Pseudo constant
+      PsiElement(false)('false')
+    PsiElement(end of line)('\n')
+    Pseudo constant
+      PsiElement(__FILE__)('__FILE__')
+    PsiElement(end of line)('\n')
+    Pseudo constant
+      PsiElement(__LINE__)('__LINE__')
+  PsiElement(end of line)('\n')
+  PsiWhiteSpace('\n')

@@ -1,0 +1,21 @@
+<a>
+<title>
+<% 3.times do |d| %>
+fff
+<b>
+<% 3 %>
+</b>
+<% end %>
+</title>
+</a>
+----------
+<a>
+    <title>
+        <% 3.times do |d| %>
+            fff
+            <b>
+                <% 3 %>
+            </b>
+        <% end %>
+    </title>
+</a>

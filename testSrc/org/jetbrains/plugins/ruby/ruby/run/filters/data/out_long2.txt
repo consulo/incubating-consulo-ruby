@@ -1,0 +1,13 @@
+12:39:30,388] INFO - erver.TEST - Local mock server started: 8442
+junit.framework.ComparisonFailure: Text must contain line generate $TARGET_BLOCK$ WARNING <Click to see difference>
+
+at junit.framework.Assert.assertEquals(Assert.java:81)
+at jetbrains.slow.RunnerTestBase$4.assertMessagesEquals(RunnerTestBase.java:451)
+at jetbrains.slow.RunnerTestBase.checkMessages(RunnerTestBase.java:262)
+at jetbrains.slow.RunnerTestBase$3.runInternal(RunnerTestBase.java:175)
+at jetbrains.buildServer.agent.BuildPostRunnable.run(BuildPostRunnable.java:18)
+at jetbrains.buildServer.agent.ideaRunner.IprRunner.run(IprRunner.java:165)
+at jetbrains.slow.RunnerTestBase.doTest(RunnerTestBase.java:166)
+at jetbrains.slow.RunnerTestBase.doTest(RunnerTestBase.java:109)
+at jetbrains.slow.ipr.IprRunner_EmptyProjectTest.should_fail_build_if_post_script_not_available(IprRunner_EmptyProjectTest.java:189)
+cleanDatabase (drop) 41 tables took 6ms

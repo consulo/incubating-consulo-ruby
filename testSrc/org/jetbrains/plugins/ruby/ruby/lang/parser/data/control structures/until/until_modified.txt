@@ -1,0 +1,14 @@
+expr1 until expr2
+----------------
+Ruby file
+  Compound statement
+    Until modifier statement
+      Identifier
+        PsiElement(identifier)('expr1')
+      PsiWhiteSpace(' ')
+      PsiElement(until modifier)('until')
+      PsiWhiteSpace(' ')
+      Condition
+        Identifier
+          PsiElement(identifier)('expr2')
+  PsiElement(end of line)('\n')

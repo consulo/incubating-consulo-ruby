@@ -1,0 +1,18 @@
+<head>
+<body>
+</body>
+<%#
+pq
+</head>
+-------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 22], {<head>
+<body>
+</body>
+}
+RHTML_COMMENT_START: [22, 25], {<%#}
+RHTML_COMMENT_EOL: [25, 26], {
+}
+RHTML_COMMENT_CHARACTERS: [26, 28], {pq}
+RHTML_COMMENT_EOL: [28, 29], {
+}
+RHTML_COMMENT_CHARACTERS: [29, 36], {</head>}

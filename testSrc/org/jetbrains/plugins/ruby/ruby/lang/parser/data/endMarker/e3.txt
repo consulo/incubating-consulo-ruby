@@ -1,0 +1,20 @@
+puts <<FOO
+    ROMA-KOZEL
+__END__
+FOO
+-----
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('puts')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Heredoc id
+          PsiElement(heredoc id)('<<FOO')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('    ROMA-KOZEL\n__END__')
+    PsiElement(end of line)('\n')
+    PsiElement(heredoc end)('FOO')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,7 @@
+<html> pre<%+ved 2.times do |i|%></html>
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 10], {<html> pre}
+<%: [10, 12], {<%}
+RUBY_CODE_CHARACTERS: [12, 31], {+ved 2.times do |i|}
+%>: [31, 33], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [33, 40], {</html>}

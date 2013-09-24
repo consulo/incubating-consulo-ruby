@@ -1,0 +1,13 @@
+alias eql? ==
+---------------
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(fid)('eql?')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(==)('==')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,18 @@
+def foo a,b,c
+end
+
+def foo x,y,z,pi
+end
+---------
+VirtualFile:
+[1] file [0] temp.rb
+    [3] def [2] foo a, b, c
+    [5] def [4] foo x, y, z, pi
+
+Symbol:
+[0] FILE
+    [1] INSTANCE_METHOD foo prototypes:  3 5
+        [6] ARG_SIMPLE x
+        [7] ARG_SIMPLE y
+        [8] ARG_SIMPLE z
+        [9] ARG_SIMPLE pi

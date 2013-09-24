@@ -1,0 +1,9 @@
+v = foo a,
+b +
+c,
+d
+------
+v = foo a,
+        b +
+                c,
+        d

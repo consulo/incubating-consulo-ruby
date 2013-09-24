@@ -1,0 +1,25 @@
+for expr1 in expr2
+    expr3
+end
+-------------------
+Ruby file
+  Compound statement
+    For statement
+      PsiElement(for)('for')
+      PsiWhiteSpace(' ')
+      Block variables
+        Identifier
+          PsiElement(identifier)('expr1')
+      PsiWhiteSpace(' ')
+      PsiElement(in)('in')
+      PsiWhiteSpace(' ')
+      Identifier
+        PsiElement(identifier)('expr2')
+      PsiElement(end of line)('\n')
+      PsiWhiteSpace('    ')
+      Compound statement
+        Identifier
+          PsiElement(identifier)('expr3')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

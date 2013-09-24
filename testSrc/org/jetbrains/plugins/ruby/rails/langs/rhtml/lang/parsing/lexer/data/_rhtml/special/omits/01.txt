@@ -1,0 +1,77 @@
+<%if 3%>
+    <%# ddd %>
+<%else %>
+dd
+<% end%>
+<%-3.times do-%>
+<%- end -%>
+<%    if 3    %>
+<%    end    %>
+<%-    3.times do    -%>
+<% -  end    -%>
+<%-%>
+<%%>
+----------
+<%: [0, 2], {<%}
+RUBY_CODE_CHARACTERS: [2, 6], {if 3}
+%>: [6, 8], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [8, 13], {
+    }
+RHTML_COMMENT_START: [13, 16], {<%#}
+RHTML_COMMENT_CHARACTERS: [16, 21], { ddd }
+RHTML_COMMENT_END: [21, 23], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [23, 24], {
+}
+<%: [24, 26], {<%}
+RUBY_CODE_CHARACTERS: [26, 31], {else }
+%>: [31, 33], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [33, 37], {
+dd
+}
+<%: [37, 39], {<%}
+RUBY_CODE_CHARACTERS: [39, 43], { end}
+%>: [43, 45], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [45, 46], {
+}
+<%: [46, 48], {<%}
+OMIT_NEW_LINE: [48, 49], {-}
+RUBY_CODE_CHARACTERS: [49, 59], {3.times do}
+OMIT_NEW_LINE: [59, 60], {-}
+%>: [60, 62], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [62, 63], {
+}
+<%: [63, 65], {<%}
+OMIT_NEW_LINE: [65, 66], {-}
+RUBY_CODE_CHARACTERS: [66, 71], { end }
+OMIT_NEW_LINE: [71, 72], {-}
+%>: [72, 74], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [74, 75], {
+}
+<%: [75, 77], {<%}
+RUBY_CODE_CHARACTERS: [77, 89], {    if 3    }
+%>: [89, 91], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [91, 92], {
+}
+<%: [92, 94], {<%}
+RUBY_CODE_CHARACTERS: [94, 105], {    end    }
+%>: [105, 107], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [107, 108], {
+}
+<%: [108, 110], {<%}
+OMIT_NEW_LINE: [110, 111], {-}
+RUBY_CODE_CHARACTERS: [111, 129], {    3.times do    }
+OMIT_NEW_LINE: [129, 130], {-}
+%>: [130, 132], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [132, 133], {
+}
+<%: [133, 135], {<%}
+RUBY_CODE_CHARACTERS: [135, 146], { -  end    }
+OMIT_NEW_LINE: [146, 147], {-}
+%>: [147, 149], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [149, 150], {
+}
+<%: [150, 152], {<%}
+OMIT_NEW_LINE: [152, 153], {-}
+%>: [153, 155], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [155, 160], {
+<%%>}

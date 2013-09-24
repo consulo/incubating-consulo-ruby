@@ -1,0 +1,3 @@
+<%%> d <%%>
+-------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 11], {<%%> d <%%>}

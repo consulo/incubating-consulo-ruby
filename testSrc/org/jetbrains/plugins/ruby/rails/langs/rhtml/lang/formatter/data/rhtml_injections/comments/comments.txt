@@ -1,0 +1,23 @@
+ <%# sample comment %>
+ <title>
+ <%# comment in tag %>
+<% 3.times do %>
+ <%# comment in ruby block %>
+<% end %>
+<%# comment at line start %>
+ <%# multiline
+    comment
+%>
+</title>
+-------------
+<%# sample comment %>
+<title>
+    <%# comment in tag %>
+    <% 3.times do %>
+        <%# comment in ruby block %>
+    <% end %>
+<%# comment at line start %>
+    <%# multiline
+    comment
+    %>
+</title>

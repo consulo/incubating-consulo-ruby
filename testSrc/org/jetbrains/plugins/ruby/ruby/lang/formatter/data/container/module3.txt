@@ -1,0 +1,10 @@
+module Foo def Boo; end
+def Bar; end
+end
+--------------
+module Foo
+    def Boo;
+    end
+    def Bar;
+    end
+end

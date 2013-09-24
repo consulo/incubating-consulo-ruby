@@ -1,0 +1,10 @@
+"string\""
+-----------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      PsiElement(string content)('string')
+      PsiElement(escape sequence)('\"')
+      PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,27 @@
+<a>
+<title>
+<% if 3 %>
+<% elsif 2 == 3 %>
+  <b>
+     dd
+     </b>
+    ff
+<% elsif 3 == 4 %>
+<% else %>
+</foo>
+</title>
+</a>
+----------
+<a>
+    <title>
+        <% if 3 %>
+        <% elsif 2 == 3 %>
+            <b>
+                dd
+            </b>
+            ff
+        <% elsif 3 == 4 %>
+        <% else %>
+            </foo>
+            </title>
+            </a>

@@ -1,0 +1,14 @@
+defined? File.print
+--------------
+Ruby file
+  Compound statement
+    Defined statement
+      PsiElement(defined?)('defined?')
+      PsiWhiteSpace(' ')
+      Dot reference
+        Constant
+          PsiElement(constant)('File')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('print')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,14 @@
+some_staff_here
+if <selection>ProgressManager.getInstance(some_project, foo)</selection>.does_some_job_good
+   puts "all is ok"
+end
+------
+manager_does_good
+------
+replace_this
+------
+some_staff_here
+manager_does_good = ProgressManager.getInstance(some_project, foo)
+if manager_does_good.does_some_job_good
+   puts "all is ok"
+end

@@ -1,0 +1,16 @@
+a.[]= 345
+-------
+Ruby file
+  Compound statement
+    Command call
+      Dot reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(.)('.')
+        Operation
+          PsiElement([]=)('[]=')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Integer
+          PsiElement(integer literal)('345')
+  PsiElement(end of line)('\n')

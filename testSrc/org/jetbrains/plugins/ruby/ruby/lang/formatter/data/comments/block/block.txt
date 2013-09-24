@@ -1,0 +1,11 @@
+begin
+=begin
+test
+=end
+end
+-------
+begin
+=begin
+test
+=end
+end

@@ -1,0 +1,28 @@
+a = addr() or return nil
+-------------
+Ruby file
+  Compound statement
+    Boolean binary expression
+      Assignment expression
+        Identifier
+          PsiElement(identifier)('a')
+        PsiWhiteSpace(' ')
+        PsiElement(=)('=')
+        PsiWhiteSpace(' ')
+        Function call
+          Identifier
+            PsiElement(identifier)('addr')
+          PsiElement(f()('(')
+          List of expressions
+            <empty list>
+          PsiElement())(')')
+      PsiWhiteSpace(' ')
+      PsiElement(or)('or')
+      PsiWhiteSpace(' ')
+      Return statement
+        PsiElement(return)('return')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Pseudo constant
+            PsiElement(nil)('nil')
+  PsiElement(end of line)('\n')

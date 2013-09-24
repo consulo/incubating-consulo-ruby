@@ -1,0 +1,14 @@
+a +b
+------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Unary expression
+          PsiElement(u+)('+')
+          Identifier
+            PsiElement(identifier)('b')
+  PsiElement(end of line)('\n')

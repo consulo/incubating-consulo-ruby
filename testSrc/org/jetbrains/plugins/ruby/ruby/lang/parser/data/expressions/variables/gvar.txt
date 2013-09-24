@@ -1,0 +1,71 @@
+$A
+$a
+$*
+$?
+$!
+$@
+$/
+$\
+$;
+$,
+$.
+$=
+$:
+$<
+$>
+$"
+$-
+--------
+Ruby file
+  Compound statement
+    Global variable
+      PsiElement(global variable)('$A')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$a')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$*')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$?')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$!')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$@')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$/')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$\')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$;')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$,')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$.')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$=')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$:')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$<')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$>')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$"')
+    PsiElement(end of line)('\n')
+    Global variable
+      PsiElement(global variable)('$-')
+  PsiElement(end of line)('\n')

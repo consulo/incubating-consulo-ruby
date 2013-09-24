@@ -1,0 +1,16 @@
+"#{
+#comment
+}"
+------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        PsiWhiteSpace('\n')
+        PsiComment(line comment)('#comment')
+        PsiWhiteSpace('\n')
+        PsiElement(})('}')
+      PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

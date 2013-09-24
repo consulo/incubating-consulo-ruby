@@ -1,0 +1,14 @@
+class A
+    def A.foo
+    end
+end
+-----
+VirtualFile:
+[1] file [0] temp.rb
+    [3] class [2] A
+        [5] def [4] A.foo
+
+Symbol:
+[0] FILE
+    [1] CLASS A prototypes:  3
+        [2] CLASS_METHOD foo prototypes:  5

@@ -1,0 +1,28 @@
+begin
+rescue Error => e
+end
+-----
+Ruby file
+  Compound statement
+    Block statement
+      PsiElement(begin)('begin')
+      PsiWhiteSpace('\n')
+      Body statement
+        Compound statement
+          <empty list>
+        Rescue block
+          PsiElement(rescue)('rescue')
+          PsiWhiteSpace(' ')
+          Constant
+            PsiElement(constant)('Error')
+          PsiWhiteSpace(' ')
+          PsiElement(=>)('=>')
+          PsiWhiteSpace(' ')
+          Block variables
+            Identifier
+              PsiElement(identifier)('e')
+          PsiElement(end of line)('\n')
+          Compound statement
+            <empty list>
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

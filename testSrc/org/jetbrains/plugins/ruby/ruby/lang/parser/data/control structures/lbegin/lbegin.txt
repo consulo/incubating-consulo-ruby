@@ -1,0 +1,18 @@
+BEGIN {
+
+
+}
+
+-----------
+Ruby file
+  Compound statement
+    Large begin statement
+      PsiElement(BEGIN)('BEGIN')
+      PsiWhiteSpace(' ')
+      PsiElement({)('{')
+      PsiWhiteSpace('\n\n\n')
+      Compound statement
+        <empty list>
+      PsiElement(})('}')
+  PsiElement(end of line)('\n')
+  PsiWhiteSpace('\n')

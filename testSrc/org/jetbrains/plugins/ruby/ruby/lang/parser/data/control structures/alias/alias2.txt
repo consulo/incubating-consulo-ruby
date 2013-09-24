@@ -1,0 +1,13 @@
+alias phrase= name=
+--------------
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(aid)('phrase=')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement(aid)('name=')
+  PsiElement(end of line)('\n')

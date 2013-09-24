@@ -1,0 +1,9 @@
+:@@var
+---------
+Ruby file
+  Compound statement
+    Symbol
+      PsiElement(:)(':')
+      Class variable
+        PsiElement(class variable)('@@var')
+  PsiElement(end of line)('\n')

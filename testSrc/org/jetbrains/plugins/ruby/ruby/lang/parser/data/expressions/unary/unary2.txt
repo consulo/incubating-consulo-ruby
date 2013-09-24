@@ -1,0 +1,25 @@
+puts +a
+puts -a
+--------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('puts')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Unary expression
+          PsiElement(u+)('+')
+          Identifier
+            PsiElement(identifier)('a')
+    PsiElement(end of line)('\n')
+    Command call
+      Identifier
+        PsiElement(identifier)('puts')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Negative expression
+          PsiElement(u-)('-')
+          Identifier
+            PsiElement(identifier)('a')
+  PsiElement(end of line)('\n')

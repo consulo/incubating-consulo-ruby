@@ -1,0 +1,10 @@
+alias foo boo
+-------
+VirtualFile:
+[1] file [0] temp.rb
+    [2] alias 'foo' 'boo'
+
+Symbol:
+[0] FILE
+    [1] NOT_DEFINED boo prototypes:  2
+    [2] ALIAS foo [1]

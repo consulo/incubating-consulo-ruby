@@ -1,0 +1,22 @@
+<% 3.times {%> <%='Hello!' %> <%='world!' %>\n<%}%>
+-----------
+RHTML_INJECTION_IN_RUBY: [0, 2], {<%}
+white space: [2, 3], { }
+integer literal: [3, 4], {3}
+.: [4, 5], {.}
+identifier: [5, 10], {times}
+white space: [10, 11], { }
+{: [11, 12], {{}
+RHTML_INJECTION_IN_RUBY: [12, 18], {%> <%=}
+single quoted like string beginning: [18, 19], {'}
+string content: [19, 25], {Hello!}
+string end: [25, 26], {'}
+white space: [26, 27], { }
+RHTML_INJECTION_IN_RUBY: [27, 33], {%> <%=}
+single quoted like string beginning: [33, 34], {'}
+string content: [34, 40], {world!}
+string end: [40, 41], {'}
+white space: [41, 42], { }
+RHTML_INJECTION_IN_RUBY: [42, 48], {%>\n<%}
+}: [48, 49], {}}
+RHTML_INJECTION_IN_RUBY: [49, 51], {%>}

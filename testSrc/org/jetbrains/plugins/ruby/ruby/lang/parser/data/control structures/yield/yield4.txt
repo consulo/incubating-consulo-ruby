@@ -1,0 +1,15 @@
+yield expr1, expr2
+------------------
+Ruby file
+  Compound statement
+    Yield statement
+      PsiElement(yield)('yield')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('expr1')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Identifier
+          PsiElement(identifier)('expr2')
+  PsiElement(end of line)('\n')

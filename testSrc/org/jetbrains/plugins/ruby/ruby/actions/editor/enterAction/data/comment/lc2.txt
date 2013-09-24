@@ -1,0 +1,4 @@
+#fooo<caret>booo
+----------
+#fooo
+#<caret>booo

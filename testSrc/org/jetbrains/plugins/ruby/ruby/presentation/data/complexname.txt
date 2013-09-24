@@ -1,0 +1,5 @@
+class AA::BB
+    <caret>
+end
+-----
+AA(temp.rb)

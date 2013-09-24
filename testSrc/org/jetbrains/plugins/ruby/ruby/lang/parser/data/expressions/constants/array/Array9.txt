@@ -1,0 +1,47 @@
+# assoc trailer
+[a=>b, c=>d]
+[a=>b, c=>d,]
+-----
+Ruby file
+  PsiComment(line comment)('# assoc trailer')
+  PsiWhiteSpace('\n')
+  Compound statement
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Assoc
+          Identifier
+            PsiElement(identifier)('a')
+          PsiElement(=>)('=>')
+          Identifier
+            PsiElement(identifier)('b')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Assoc
+          Identifier
+            PsiElement(identifier)('c')
+          PsiElement(=>)('=>')
+          Identifier
+            PsiElement(identifier)('d')
+      PsiElement(])(']')
+    PsiElement(end of line)('\n')
+    Array
+      PsiElement([)('[')
+      List of expressions
+        Assoc
+          Identifier
+            PsiElement(identifier)('a')
+          PsiElement(=>)('=>')
+          Identifier
+            PsiElement(identifier)('b')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Assoc
+          Identifier
+            PsiElement(identifier)('c')
+          PsiElement(=>)('=>')
+          Identifier
+            PsiElement(identifier)('d')
+        PsiElement(,)(',')
+      PsiElement(])(']')
+  PsiElement(end of line)('\n')

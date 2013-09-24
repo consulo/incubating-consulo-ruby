@@ -1,0 +1,10 @@
+<caret>class AAAA
+end
+--------
+e
+--------
+overwrite
+-------
+e<caret>lass AAAA
+end
+

@@ -1,0 +1,28 @@
+A = 1
+B,C = 2,3
+class D
+   E=4
+end
+module F
+    G=5
+end
+------
+VirtualFile:
+[1] file [0] temp.rb
+    [6] class [5] D
+        [7] E
+    [9] module [8] F
+        [10] G
+    [2] A
+    [3] B
+    [4] C
+
+Symbol:
+[0] FILE
+    [1] CONSTANT A prototypes:  2
+    [2] CONSTANT B prototypes:  3
+    [3] CONSTANT C prototypes:  4
+    [4] CLASS D prototypes:  6
+        [5] CONSTANT E prototypes:  7
+    [6] MODULE F prototypes:  9
+        [7] CONSTANT G prototypes:  10

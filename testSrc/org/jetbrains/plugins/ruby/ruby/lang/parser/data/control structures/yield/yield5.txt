@@ -1,0 +1,20 @@
+yield(*a, &b)
+------
+Ruby file
+  Compound statement
+    Yield statement
+      PsiElement(yield)('yield')
+      PsiElement(f()('(')
+      List of expressions
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Block to argument
+          PsiElement(a&)('&')
+          Identifier
+            PsiElement(identifier)('b')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

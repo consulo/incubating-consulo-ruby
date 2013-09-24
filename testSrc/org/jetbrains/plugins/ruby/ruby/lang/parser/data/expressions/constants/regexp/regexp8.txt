@@ -1,0 +1,61 @@
+string.gsub(/<\/?(?:#{elements.join("|")})(?!\w)(?:.|\n)*?>/ni) do
+    CGI::escapeHTML($&)
+end
+-------------
+Ruby file
+  Compound statement
+    Block call
+      Function call
+        Dot reference
+          Identifier
+            PsiElement(identifier)('string')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('gsub')
+        PsiElement(f()('(')
+        List of expressions
+          Regular expression
+            PsiElement(regexp beginning)('/')
+            PsiElement(regexp content)('<')
+            PsiElement(escape sequence)('\/')
+            PsiElement(regexp content)('?(?:')
+            Expression subtitution
+              PsiElement(#{)('#{')
+              Function call
+                Dot reference
+                  Identifier
+                    PsiElement(identifier)('elements')
+                  PsiElement(.)('.')
+                  Identifier
+                    PsiElement(identifier)('join')
+                PsiElement(f()('(')
+                List of expressions
+                  Double quoted like string
+                    PsiElement(double quoted like string beginning)('"')
+                    PsiElement(string content)('|')
+                    PsiElement(string end)('"')
+                PsiElement())(')')
+              PsiElement(})('}')
+            PsiElement(regexp content)(')(?!\w)(?:.|\n)*?>')
+            PsiElement(regexp end)('/ni')
+        PsiElement())(')')
+      PsiWhiteSpace(' ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace('\n    ')
+        Compound statement
+          Function call
+            Colon reference
+              Constant
+                PsiElement(constant)('CGI')
+              PsiElement(::)('::')
+              Identifier
+                PsiElement(identifier)('escapeHTML')
+            PsiElement(f()('(')
+            List of expressions
+              Back reference
+                PsiElement(back ref)('$&')
+            PsiElement())(')')
+        PsiElement(end of line)('\n')
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

@@ -1,0 +1,11 @@
+foo.bar
+--------
+Ruby file
+  Compound statement
+    Dot reference
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiElement(.)('.')
+      Identifier
+        PsiElement(identifier)('bar')
+  PsiElement(end of line)('\n')

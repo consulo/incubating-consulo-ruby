@@ -1,0 +1,27 @@
+/*
+ *	precedence table from parse.y
+ */
+
+%nonassoc tLOWEST                                                  //
+%nonassoc tLBRACE_ARG                                              //
+                                                                   //
+%nonassoc  kIF_MOD kUNLESS_MOD kWHILE_MOD kUNTIL_MOD               //
+%left  kOR kAND                                                    //
+%right kNOT                                                        //
+%nonassoc kDEFINED                                                 //  DefinedExpression
+%right '=' tOP_ASGN                                                //  AssignmentExpression
+%left kRESCUE_MOD                                                  //  the same
+%right '?' ':'                                                     //  TernaryExpression
+%nonassoc tDOT2 tDOT3                                              //  RangeExpression
+%left  tOROP                                                       //  BooleanExpression
+%left  tANDOP                                                      //  the same
+%nonassoc  tCMP tEQ tEQQ tNEQ tMATCH tNMATCH                       //  MatchingExpression
+%left  '>' tGEQ '<' tLEQ                                           //  the same
+%left  '|' '^'                                                     //  BitExpression
+%left  '&'                                                         //  the same
+%left  tLSHFT tRSHFT                                               //  ShiftExpression
+%left  '+' '-'                                                     //  MathExpression
+%left  '*' '/' '%'                                                 //  the same
+%right tUMINUS_NUM tUMINUS                                         //  the same
+%right tPOW                                                        //  the same
+%right '!' '~' tUPLUS                                              //  the same

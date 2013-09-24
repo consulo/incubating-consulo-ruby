@@ -1,0 +1,29 @@
+a = call do |var| stmt end
+------------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('a')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Block call
+        Identifier
+          PsiElement(identifier)('call')
+        PsiWhiteSpace(' ')
+        Do code block
+          PsiElement(do)('do')
+          PsiWhiteSpace(' ')
+          PsiElement(p|)('|')
+          Block variables
+            Identifier
+              PsiElement(identifier)('var')
+          PsiElement(p|)('|')
+          PsiWhiteSpace(' ')
+          Compound statement
+            Identifier
+              PsiElement(identifier)('stmt')
+          PsiWhiteSpace(' ')
+          PsiElement(end)('end')
+  PsiElement(end of line)('\n')

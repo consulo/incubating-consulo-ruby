@@ -1,0 +1,7 @@
+<<FOO
+----------------------
+Ruby file
+  Compound statement
+    Heredoc id
+      PsiElement(heredoc id)('<<FOO')
+  PsiElement(end of line)('\n')

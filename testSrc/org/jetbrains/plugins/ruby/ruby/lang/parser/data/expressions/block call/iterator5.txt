@@ -1,0 +1,24 @@
+foo "aa"  do
+
+end
+-----
+Ruby file
+  Compound statement
+    Block call
+      Command call
+        Identifier
+          PsiElement(identifier)('foo')
+        PsiWhiteSpace(' ')
+        List of expressions
+          Double quoted like string
+            PsiElement(double quoted like string beginning)('"')
+            PsiElement(string content)('aa')
+            PsiElement(string end)('"')
+      PsiWhiteSpace('  ')
+      Do code block
+        PsiElement(do)('do')
+        PsiWhiteSpace('\n\n')
+        Compound statement
+          <empty list>
+        PsiElement(end)('end')
+  PsiElement(end of line)('\n')

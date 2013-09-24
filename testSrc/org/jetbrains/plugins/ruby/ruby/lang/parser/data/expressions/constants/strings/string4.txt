@@ -1,0 +1,9 @@
+%q!I said, "You said, 'She said it.'"!
+-----------
+Ruby file
+  Compound statement
+    Single quoted like string
+      PsiElement(single quoted like string beginning)('%q!')
+      PsiElement(string content)('I said, "You said, 'She said it.'"')
+      PsiElement(string end)('!')
+  PsiElement(end of line)('\n')

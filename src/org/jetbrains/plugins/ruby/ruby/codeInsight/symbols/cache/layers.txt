@@ -1,0 +1,90 @@
+@author: oleg
+@date: 25 jan 08
+
+FILESYMBOL
+Most of operations if Ruby plugin is made using info recieved from filesymbols.
+Filesymbol is used to describe structure of ruby objects. We support these types of structural elements:
+1. classes
+2. object classes (class <<self; end)
+3. modules
+4. constants
+5. fields
+6. fields access attributes (attr_reader, attr_writer, attr_accessor, attr_internal)
+7. methods
+8. singleton methods
+9. aliases
+10. global variables
+11. require (require "foo")
+12. load (require "foo")
+13. include (include Mixin)
+14. extend (extend Mixin)
+15. include_class
+16. include_package
+17. import
+
+After evaluation of filesymbol we know structures of classes, modules, etc and their relations
+i.e. module A is mixined to class B, class C is superclass of class D, etc.
+
+SYMBOLS CACHE
+We store special symbols cache to store recently evaluated filesymbols.
+Cache is divided into 2 parts: hard cache and soft references cache.
+Hard cache stores builtin layers, i.e. layers that dont depend on module files.
+For example BuiltinLayer is used to store filesymbol for given sdk and RailsBuiltinLayer
+to store filesymbols for given sdk and rails gems.
+
+
+LAYERS
+Layers system is constructed to reduce speed of filesymbol evaluation.
+When you work with file in the editor you work with Modifiable cached symbol.
+It divides the whole filesymbol into 2 parts: outer filesymbol, consisting of
+outer filesymbol and outer requires of given ruby file.
+
+
+BUILTINS
+
+We have 2 builtin layers.
+BuiltinLayer is used as base layer for Ruby modules and java modules with JRuby facet.
+RailsBuiltinLayer is used as base layer for Rails or java modules with JRuby (?) and or JRails facet.
+
+MODULE LAYERS
+This is layers one step higher than builtins and used to add user directories to loadpath
+(patches corresponding fileSymbols) and to add rails specific directories to loadpath.
+
+All Rails layers are based on RailsModuleLayer.
+
+RAILS LAYERS
+
+Rails layers are used to form layers hierarhy for Rails applications.
+
+Contract used when deciding which Rails layer use as base symbol for modifiable symbol:
+
+Controller:             MODELS_LAYER;
+Helper or View:         MODELS_LAYER
+Model or Migration:     LIBS_LAYER
+Tests:                  CONTROLLERS_AND_HELPERS_LAYER
+ActionMailer:           MAILERS_LAYER
+WebService:             WEBSERVICES_LAYER
+
+Rails layers hieararhy:
+1 group
+    CONTROLLERS_AND_HELPERS_LAYER,
+    MODELS_LAYER,
+    LIBS_LAYER,
+    VENDOR_LAYER,
+    RAILS_MODULE_LAYER,
+2 group
+    MAILERS_LAYER,
+    LIBS_LAYER,
+    VENDOR_LAYER,
+    RAILS_MODULE_LAYER,
+3 group
+    WEBSERVICES_LAYER
+    LIBS_LAYER,
+    VENDOR_LAYER,
+    RAILS_MODULE_LAYER,
+
+MODIFIABLE LAYER
+
+Divides the whole fileSymbol into 2 separate parts:
+1. only content of ruby file, ignore outer requires
+2. base layer for this filesymbol and file`s own outer requires.

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="true" type="RUBY_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="jdk" jdkName="Ruby SDK 1.8.6 leo" jdkType="RUBY_SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntryProperties />
+  </component>
+
+  <component name="RModuleSettingsStorage">
+    <RMODULE_SETTINGS_STORAGE_ID NAME="SHOULD_USE_RSPEC_TEST_FRAMEWORK" VALUE="FALSE" />
+    <RMODULE_SETTINGS_STORAGE_ID NAME="NUMBER" VALUE="0" />
+  </component>
+
+  <component name="RModuleContentRootManager">
+    <TEST_URLS url="file://$MODULE_DIR$/test" />
+  </component>
+
+  <component name="RailsViewFoldersManager">
+    <USER_URLS url="file://$MODULE_DIR$/lib" />
+    <USER_URLS url="file://$MODULE_DIR$/vendor/rails" />
+    <USER_URLS url="file://$MODULE_DIR$/public/javascripts" />
+    <USER_URLS url="file://$MODULE_DIR$/vendor/plugins" />
+    <USER_URLS url="file://$MODULE_DIR$/db" />
+    <USER_URLS url="file://$MODULE_DIR$/public/stylesheets" />
+  </component>
+  <component name="FacetManager">
+    <facet type="RailsFacetType" name="Rails">
+      <configuration>
+        <RAILS_FACET_CONFIG_ID NAME="RAILS_FACET_APPLICATION_ROOT" VALUE="$MODULE_DIR$" />
+        <RAILS_FACET_CONFIG_ID NAME="SHOULD_USE_RSPEC_PLUGIN" VALUE="false" />
+      </configuration>
+    </facet>
+  </component>
+</module>

@@ -1,0 +1,2 @@
+import java.lang.System
+System.out.print "hello!"

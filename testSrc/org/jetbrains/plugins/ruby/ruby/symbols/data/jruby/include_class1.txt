@@ -1,0 +1,8 @@
+include_class "java.lang.System"
+--------
+VirtualFile:
+[1] file [0] temp.rb
+    [2] include_class java.lang.System
+
+Symbol:
+[0] FILE

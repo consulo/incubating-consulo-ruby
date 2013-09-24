@@ -1,0 +1,9 @@
+%r|\Amultipart/form-data.*boundary=\"?([^\";,]+)\"?|n
+-------------
+Ruby file
+  Compound statement
+    Regular expression
+      PsiElement(regexp beginning)('%r|')
+      PsiElement(regexp content)('\Amultipart/form-data.*boundary=\"?([^\";,]+)\"?')
+      PsiElement(regexp end)('|n')
+  PsiElement(end of line)('\n')

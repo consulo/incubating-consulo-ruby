@@ -1,0 +1,9 @@
+:class
+---------
+Ruby file
+  Compound statement
+    Symbol
+      PsiElement(:)(':')
+      Function name
+        PsiElement(identifier)('class')
+  PsiElement(end of line)('\n')

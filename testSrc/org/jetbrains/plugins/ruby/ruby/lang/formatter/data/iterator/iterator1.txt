@@ -1,0 +1,9 @@
+open ("") do |io|
+  io.each_line do |line|
+      end
+end
+--------
+open ("") do |io|
+    io.each_line do |line|
+    end
+end

@@ -1,0 +1,11 @@
+<!--
+<html> preved <%# Time.now %> medved </html>
+-->
+---------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 19], {<!--
+<html> preved }
+RHTML_COMMENT_START: [19, 22], {<%#}
+RHTML_COMMENT_CHARACTERS: [22, 32], { Time.now }
+RHTML_COMMENT_END: [32, 34], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [34, 53], { medved </html>
+-->}

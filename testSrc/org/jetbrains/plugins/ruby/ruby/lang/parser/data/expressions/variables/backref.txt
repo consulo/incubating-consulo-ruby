@@ -1,0 +1,23 @@
+$~
+$&
+$`
+$'
+$+
+---------
+Ruby file
+  Compound statement
+    Back reference
+      PsiElement(back ref)('$~')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$&')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$`')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$'')
+    PsiElement(end of line)('\n')
+    Back reference
+      PsiElement(back ref)('$+')
+  PsiElement(end of line)('\n')

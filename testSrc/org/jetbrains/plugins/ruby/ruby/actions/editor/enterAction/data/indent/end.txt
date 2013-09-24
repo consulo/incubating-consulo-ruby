@@ -1,0 +1,6 @@
+def FOO
+    end<caret>
+-------
+def FOO
+end
+<caret>

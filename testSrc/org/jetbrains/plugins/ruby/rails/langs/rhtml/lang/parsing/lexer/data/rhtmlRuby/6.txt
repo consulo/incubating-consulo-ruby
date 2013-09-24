@@ -1,0 +1,28 @@
+<%
+  st = SendTime.new
+  os = OldStatus.new
+%>
+------
+RHTML_INJECTION_IN_RUBY: [0, 2], {<%}
+white space: [2, 5], {
+  }
+identifier: [5, 7], {st}
+white space: [7, 8], { }
+=: [8, 9], {=}
+white space: [9, 10], { }
+constant: [10, 18], {SendTime}
+.: [18, 19], {.}
+identifier: [19, 22], {new}
+end of line: [22, 23], {
+}
+white space: [23, 25], {  }
+identifier: [25, 27], {os}
+white space: [27, 28], { }
+=: [28, 29], {=}
+white space: [29, 30], { }
+constant: [30, 39], {OldStatus}
+.: [39, 40], {.}
+identifier: [40, 43], {new}
+end of line: [43, 44], {
+}
+RHTML_INJECTION_IN_RUBY: [44, 46], {%>}

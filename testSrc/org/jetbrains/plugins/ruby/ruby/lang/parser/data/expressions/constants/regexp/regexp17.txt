@@ -1,0 +1,26 @@
+foo {
+    foo %r%^^^^%
+}
+-----
+Ruby file
+  Compound statement
+    Block call
+      Identifier
+        PsiElement(identifier)('foo')
+      PsiWhiteSpace(' ')
+      Brace code block
+        PsiElement({)('{')
+        PsiWhiteSpace('\n    ')
+        Compound statement
+          Command call
+            Identifier
+              PsiElement(identifier)('foo')
+            PsiWhiteSpace(' ')
+            List of expressions
+              Regular expression
+                PsiElement(regexp beginning)('%r%')
+                PsiElement(regexp content)('^^^^')
+                PsiElement(regexp end)('%')
+        PsiElement(end of line)('\n')
+        PsiElement(})('}')
+  PsiElement(end of line)('\n')

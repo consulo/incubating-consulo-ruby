@@ -1,0 +1,9 @@
+/ruby/i
+--------
+Ruby file
+  Compound statement
+    Regular expression
+      PsiElement(regexp beginning)('/')
+      PsiElement(regexp content)('ruby')
+      PsiElement(regexp end)('/i')
+  PsiElement(end of line)('\n')

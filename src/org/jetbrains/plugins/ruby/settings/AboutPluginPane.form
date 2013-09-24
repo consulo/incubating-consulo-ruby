@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.jetbrains.plugins.ruby.settings.AboutPluginPane">
+  <grid id="27dc6" binding="myContentPane" layout-manager="GridLayoutManager" row-count="11" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="14acf" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.build.label"/>
+        </properties>
+      </component>
+      <vspacer id="7ebe5">
+        <constraints>
+          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="7fa59" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.revision.label"/>
+        </properties>
+      </component>
+      <grid id="7fea2" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="2"/>
+            <preferred-size width="-1" height="2"/>
+            <maximum-size width="-1" height="2"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="etched"/>
+        <children/>
+      </grid>
+      <component id="c4b42" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.recent.changes.label"/>
+        </properties>
+      </component>
+      <component id="9b235" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.issue.tracker.label"/>
+        </properties>
+      </component>
+      <component id="44303" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.home.page.label"/>
+        </properties>
+      </component>
+      <component id="d543c" class="javax.swing.JLabel" binding="myPluginBuildInfo">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="4" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.info.unknown.value"/>
+        </properties>
+      </component>
+      <component id="85eaa" class="javax.swing.JLabel" binding="mySvnRevisionInfo">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.info.unknown.value"/>
+        </properties>
+      </component>
+      <component id="fce70" class="javax.swing.JTextPane" binding="myHomePageInfo">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background swing-color="Panel.background"/>
+          <contentType value="text/html"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="45af5" class="javax.swing.JTextPane" binding="myRecentChangesInfo">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background swing-color="Panel.background"/>
+          <contentType value="text/html"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="d5e21" class="javax.swing.JTextPane" binding="myIssueTrackerInfo">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background swing-color="Panel.background"/>
+          <contentType value="text/html"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="f0e57" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="15" height="-1"/>
+            <preferred-size width="15" height="-1"/>
+            <maximum-size width="15" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=" "/>
+        </properties>
+      </component>
+      <component id="375ba" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="15" height="-1"/>
+            <preferred-size width="15" height="-1"/>
+            <maximum-size width="15" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=" "/>
+        </properties>
+      </component>
+      <component id="be92a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.recent.forum.label"/>
+        </properties>
+      </component>
+      <component id="509b0" class="javax.swing.JTextPane" binding="myForumInfo">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background swing-color="Panel.background"/>
+          <contentType value="text/html"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="1efb8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="plugin.about.issue.plugin.repository.label"/>
+        </properties>
+      </component>
+      <component id="bc461" class="javax.swing.JTextPane" binding="myPluginRepository">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background swing-color="Panel.background"/>
+          <contentType value="text/html"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

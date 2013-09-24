@@ -1,0 +1,9 @@
+:@parameters
+-----------
+Ruby file
+  Compound statement
+    Symbol
+      PsiElement(:)(':')
+      Instance variable
+        PsiElement(instance variable)('@parameters')
+  PsiElement(end of line)('\n')

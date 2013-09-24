@@ -1,0 +1,5 @@
+{"something"=>'nothing'<caret>}
+-----------
+}
+-------
+{"something"=>'nothing'}<caret>

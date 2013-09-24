@@ -1,0 +1,18 @@
+<html>
+<title><% 3.times do |d| %><% 2.times do |d| %>
+ya krevedko!<% end%>fff
+<b> <%= 3 %>
+</b>
+<% end %></title>
+</html>
+----------
+<html>
+<title>
+    <% 3.times do |d| %>
+        <% 2.times do |d| %>
+            ya krevedko!
+        <% end %>fff
+        <b><%= 3 %>
+        </b>
+    <% end %></title>
+</html>

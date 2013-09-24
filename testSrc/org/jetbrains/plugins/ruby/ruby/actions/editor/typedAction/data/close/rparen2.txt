@@ -1,0 +1,5 @@
+foo("something",777<caret>)
+-----------
+)
+-------
+foo("something",777)<caret>

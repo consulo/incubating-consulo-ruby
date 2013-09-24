@@ -1,0 +1,26 @@
+alias_method :old_eqq, :==
+
+foo
+------
+Ruby file
+  Compound statement
+    Command call
+      Identifier
+        PsiElement(identifier)('alias_method')
+      PsiWhiteSpace(' ')
+      List of expressions
+        Symbol
+          PsiElement(:)(':')
+          Function name
+            PsiElement(identifier)('old_eqq')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Symbol
+          PsiElement(:)(':')
+          Function name
+            PsiElement(==)('==')
+    PsiElement(end of line)('\n')
+    PsiWhiteSpace('\n')
+    Identifier
+      PsiElement(identifier)('foo')
+  PsiElement(end of line)('\n')

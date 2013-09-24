@@ -1,0 +1,86 @@
+<%if 3%>
+    <%# ddd %>
+<%else %>
+dd
+<% end%>
+<%-3.times do-%>
+<%- end -%>
+<%    if 3    %>
+<%    end    %>
+<%-    3.times do    -%>
+<% -2;  end    -%>
+----------
+RHTMLRubyFile:temp.rhtml
+  RUBY_DECLARATIONS_IN_RHTML_ROOT
+    Compound statement
+      Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('<%')
+      If statement
+        PsiElement(if)('if')
+        PsiWhiteSpace(' ')
+        Condition
+          Integer
+            PsiElement(integer literal)('3')
+        Compound statement
+          Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('%>\n    <%# ddd %>\n<%')
+        Else block
+          PsiElement(else)('else')
+          PsiWhiteSpace(' ')
+          Compound statement
+            Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('%>\ndd\n<%')
+        PsiWhiteSpace(' ')
+        PsiElement(end)('end')
+      Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('%>\n<%-')
+      Block call
+        Dot reference
+          Integer
+            PsiElement(integer literal)('3')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('times')
+        PsiWhiteSpace(' ')
+        Do code block
+          PsiElement(do)('do')
+          Compound statement
+            Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('-%>\n<%-')
+          PsiWhiteSpace(' ')
+          PsiElement(end)('end')
+      PsiWhiteSpace(' ')
+      Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('-%>\n<%')
+      PsiWhiteSpace('    ')
+      If statement
+        PsiElement(if)('if')
+        PsiWhiteSpace(' ')
+        Condition
+          Integer
+            PsiElement(integer literal)('3')
+        PsiWhiteSpace('    ')
+        Compound statement
+          Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('%>\n<%')
+        PsiWhiteSpace('    ')
+        PsiElement(end)('end')
+      PsiWhiteSpace('    ')
+      Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('%>\n<%-')
+      PsiWhiteSpace('    ')
+      Block call
+        Dot reference
+          Integer
+            PsiElement(integer literal)('3')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('times')
+        PsiWhiteSpace(' ')
+        Do code block
+          PsiElement(do)('do')
+          PsiWhiteSpace('    ')
+          Compound statement
+            Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('-%>\n<%')
+            PsiWhiteSpace(' ')
+            Negative expression
+              PsiElement(u-)('-')
+              Integer
+                PsiElement(integer literal)('2')
+            PsiElement(;)(';')
+          PsiWhiteSpace('  ')
+          PsiElement(end)('end')
+      PsiWhiteSpace('    ')
+      Outer: RHTML_INJECTION_IN_RUBY, characters in RHTML or Ruby lang('-%>\n')

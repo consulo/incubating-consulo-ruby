@@ -1,0 +1,13 @@
+alias [] []=
+----
+Ruby file
+  Compound statement
+    Alias statement
+      PsiElement(alias)('alias')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement([])('[]')
+      PsiWhiteSpace(' ')
+      Function name
+        PsiElement([]=)('[]=')
+  PsiElement(end of line)('\n')

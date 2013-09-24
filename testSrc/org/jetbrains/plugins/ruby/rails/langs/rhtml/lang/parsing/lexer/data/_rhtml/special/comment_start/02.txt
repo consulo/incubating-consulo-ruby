@@ -1,0 +1,4 @@
+<%#<html> preved </html>
+-------------
+RHTML_COMMENT_START: [0, 3], {<%#}
+RHTML_COMMENT_CHARACTERS: [3, 24], {<html> preved </html>}

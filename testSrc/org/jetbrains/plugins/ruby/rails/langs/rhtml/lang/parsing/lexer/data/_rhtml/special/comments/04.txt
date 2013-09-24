@@ -1,0 +1,31 @@
+<%#ffgfgf
+gfgfgfd
+gdfgdfg
+dfsgdsfgd
+fsgdssffgdsfg
+dsffgsd
+%>    r
+dd
+------------
+RHTML_COMMENT_START: [0, 3], {<%#}
+RHTML_COMMENT_CHARACTERS: [3, 9], {ffgfgf}
+RHTML_COMMENT_EOL: [9, 10], {
+}
+RHTML_COMMENT_CHARACTERS: [10, 17], {gfgfgfd}
+RHTML_COMMENT_EOL: [17, 18], {
+}
+RHTML_COMMENT_CHARACTERS: [18, 25], {gdfgdfg}
+RHTML_COMMENT_EOL: [25, 26], {
+}
+RHTML_COMMENT_CHARACTERS: [26, 35], {dfsgdsfgd}
+RHTML_COMMENT_EOL: [35, 36], {
+}
+RHTML_COMMENT_CHARACTERS: [36, 49], {fsgdssffgdsfg}
+RHTML_COMMENT_EOL: [49, 50], {
+}
+RHTML_COMMENT_CHARACTERS: [50, 57], {dsffgsd}
+RHTML_COMMENT_EOL: [57, 58], {
+}
+RHTML_COMMENT_END: [58, 60], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [60, 68], {    r
+dd}

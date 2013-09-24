@@ -1,0 +1,29 @@
+<a voice = "x<%= r %>u">dddd
+ggggg
+ggg
+fggg
+  ffff
+</a>
+<a voice = "x<%= r %>u">dddd
+dggggg
+ dddd
+<%= 3 %>
+ggg
+fggg
+  ffff
+</a>
+----------
+<a voice="x<%= r %>u">dddd
+    ggggg
+    ggg
+    fggg
+    ffff
+</a>
+<a voice="x<%= r %>u">dddd
+    dggggg
+    dddd
+    <%= 3 %>
+    ggg
+    fggg
+    ffff
+</a>

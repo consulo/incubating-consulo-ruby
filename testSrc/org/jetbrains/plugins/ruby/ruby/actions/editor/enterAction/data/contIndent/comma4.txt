@@ -1,0 +1,6 @@
+a =
+   foo b,<caret>
+------
+a =
+   foo b,
+           <caret>

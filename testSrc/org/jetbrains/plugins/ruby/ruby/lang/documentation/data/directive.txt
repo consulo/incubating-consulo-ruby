@@ -1,0 +1,6 @@
+#Some comment here
+#Some rdoc directive here :nodoc:
+#Some rdoc wrong directive here :it`s not a directive:
+# wrong #2 FOO::BOO::DOO
+---------
+Some&nbsp;comment&nbsp;here<br>Some&nbsp;rdoc&nbsp;directive&nbsp;here&nbsp;<font color=#0000FF>nodoc</font><br>Some&nbsp;rdoc&nbsp;wrong&nbsp;directive&nbsp;here&nbsp;:it`s&nbsp;not&nbsp;a&nbsp;directive:<br>&nbsp;wrong&nbsp;#2&nbsp;FOO::BOO::DOO

@@ -1,0 +1,11 @@
+begin
+print FOO;
+    rescue a=>b
+    BOO;
+                end
+---------------------
+begin
+    print FOO;
+rescue a=>b
+    BOO;
+end

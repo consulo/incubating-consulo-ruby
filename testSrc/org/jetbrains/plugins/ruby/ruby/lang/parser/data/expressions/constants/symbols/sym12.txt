@@ -1,0 +1,9 @@
+:nil
+-----
+Ruby file
+  Compound statement
+    Symbol
+      PsiElement(:)(':')
+      Function name
+        PsiElement(nil)('nil')
+  PsiElement(end of line)('\n')

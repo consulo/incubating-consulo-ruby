@@ -1,0 +1,7 @@
+return
+--------------
+Ruby file
+  Compound statement
+    Return statement
+      PsiElement(return)('return')
+  PsiElement(end of line)('\n')

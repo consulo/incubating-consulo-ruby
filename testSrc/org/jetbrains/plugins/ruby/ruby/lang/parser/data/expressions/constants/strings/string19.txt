@@ -1,0 +1,34 @@
+%{
+def #{m}(*args)
+    warn("\#{caller(1)[0]}: #{m} is deprecated; use Base64.#{m} instead")
+    super
+end
+}
+---------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('%{')
+      PsiElement(string content)('\ndef ')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Identifier
+          PsiElement(identifier)('m')
+        PsiElement(})('}')
+      PsiElement(string content)('(*args)\n    warn("')
+      PsiElement(string like content)('\#')
+      PsiElement(string content)('{caller(1)[0]}: ')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Identifier
+          PsiElement(identifier)('m')
+        PsiElement(})('}')
+      PsiElement(string content)(' is deprecated; use Base64.')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Identifier
+          PsiElement(identifier)('m')
+        PsiElement(})('}')
+      PsiElement(string content)(' instead")\n    super\nend\n')
+      PsiElement(string end)('}')
+  PsiElement(end of line)('\n')

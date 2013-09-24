@@ -1,0 +1,23 @@
+self.until(test, &block)
+----------
+Ruby file
+  Compound statement
+    Function call
+      Dot reference
+        Pseudo constant
+          PsiElement(self)('self')
+        PsiElement(.)('.')
+        Identifier
+          PsiElement(identifier)('until')
+      PsiElement(f()('(')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('test')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Block to argument
+          PsiElement(a&)('&')
+          Identifier
+            PsiElement(identifier)('block')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

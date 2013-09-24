@@ -1,0 +1,6 @@
+def A<caret>
+end
+-------
+def A
+    <caret>
+end

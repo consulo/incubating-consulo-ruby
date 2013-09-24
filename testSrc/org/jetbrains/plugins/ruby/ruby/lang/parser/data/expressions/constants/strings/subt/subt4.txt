@@ -1,0 +1,19 @@
+"#{ BEGIN{} }"
+--------------
+Ruby file
+  Compound statement
+    Double quoted like string
+      PsiElement(double quoted like string beginning)('"')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        PsiWhiteSpace(' ')
+        Large begin statement
+          PsiElement(BEGIN)('BEGIN')
+          PsiElement({)('{')
+          Compound statement
+            <empty list>
+          PsiElement(})('}')
+        PsiWhiteSpace(' ')
+        PsiElement(})('}')
+      PsiElement(string end)('"')
+  PsiElement(end of line)('\n')

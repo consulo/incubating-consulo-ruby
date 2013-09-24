@@ -1,0 +1,60 @@
+begin
+    statements
+rescue xxx1
+    expr1
+rescue xxx2
+    expr1
+else
+    expr2
+ensure
+    expr3
+end
+--------------
+Ruby file
+  Compound statement
+    Block statement
+      PsiElement(begin)('begin')
+      PsiWhiteSpace('\n    ')
+      Body statement
+        Compound statement
+          Identifier
+            PsiElement(identifier)('statements')
+        PsiElement(end of line)('\n')
+        Rescue block
+          PsiElement(rescue)('rescue')
+          PsiWhiteSpace(' ')
+          Identifier
+            PsiElement(identifier)('xxx1')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('    ')
+          Compound statement
+            Identifier
+              PsiElement(identifier)('expr1')
+        PsiElement(end of line)('\n')
+        Rescue block
+          PsiElement(rescue)('rescue')
+          PsiWhiteSpace(' ')
+          Identifier
+            PsiElement(identifier)('xxx2')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('    ')
+          Compound statement
+            Identifier
+              PsiElement(identifier)('expr1')
+        PsiElement(end of line)('\n')
+        Else block
+          PsiElement(else)('else')
+          PsiWhiteSpace('\n    ')
+          Compound statement
+            Identifier
+              PsiElement(identifier)('expr2')
+        PsiElement(end of line)('\n')
+        Ensure block
+          PsiElement(ensure)('ensure')
+          PsiWhiteSpace('\n    ')
+          Compound statement
+            Identifier
+              PsiElement(identifier)('expr3')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

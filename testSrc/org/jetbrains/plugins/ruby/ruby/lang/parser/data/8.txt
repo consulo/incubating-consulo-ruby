@@ -1,0 +1,65 @@
+buf = buf.sub(/\A((?:.|\n)*?#{EOL})#{EOL}/n) do
+              head = $1.dup
+              ""
+            end
+------------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('buf')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Block call
+        Function call
+          Dot reference
+            Identifier
+              PsiElement(identifier)('buf')
+            PsiElement(.)('.')
+            Identifier
+              PsiElement(identifier)('sub')
+          PsiElement(f()('(')
+          List of expressions
+            Regular expression
+              PsiElement(regexp beginning)('/')
+              PsiElement(regexp content)('\A((?:.|\n)*?')
+              Expression subtitution
+                PsiElement(#{)('#{')
+                Constant
+                  PsiElement(constant)('EOL')
+                PsiElement(})('}')
+              PsiElement(regexp content)(')')
+              Expression subtitution
+                PsiElement(#{)('#{')
+                Constant
+                  PsiElement(constant)('EOL')
+                PsiElement(})('}')
+              PsiElement(regexp end)('/n')
+          PsiElement())(')')
+        PsiWhiteSpace(' ')
+        Do code block
+          PsiElement(do)('do')
+          PsiWhiteSpace('\n              ')
+          Compound statement
+            Assignment expression
+              Identifier
+                PsiElement(identifier)('head')
+              PsiWhiteSpace(' ')
+              PsiElement(=)('=')
+              PsiWhiteSpace(' ')
+              Dot reference
+                Nth reference
+                  PsiElement(nth ref)('$1')
+                PsiElement(.)('.')
+                Identifier
+                  PsiElement(identifier)('dup')
+            PsiElement(end of line)('\n')
+            PsiWhiteSpace('              ')
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string end)('"')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('            ')
+          PsiElement(end)('end')
+  PsiElement(end of line)('\n')

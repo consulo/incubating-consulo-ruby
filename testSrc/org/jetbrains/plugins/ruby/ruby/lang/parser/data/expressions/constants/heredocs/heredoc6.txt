@@ -1,0 +1,41 @@
+result = execute_in_sandbox(<<-CODE)
+      $:.unshift(File.dirname(__FILE__) + "/../lib/")
+      $KCODE = 'u'
+      require 'jcode'
+      require 'action_mailer/quoting'
+      include ActionMailer::Quoting
+      quoted_printable(#{original.inspect}, "UTF-8")
+CODE
+-------------
+Ruby file
+  Compound statement
+    Assignment expression
+      Identifier
+        PsiElement(identifier)('result')
+      PsiWhiteSpace(' ')
+      PsiElement(=)('=')
+      PsiWhiteSpace(' ')
+      Function call
+        Identifier
+          PsiElement(identifier)('execute_in_sandbox')
+        PsiElement(f()('(')
+        List of expressions
+          Heredoc id
+            PsiElement(heredoc id)('<<-CODE')
+        PsiElement())(')')
+    PsiElement(end of line)('\n')
+    Heredoc value
+      PsiElement(heredoc content)('      $:.unshift(File.dirname(__FILE__) + "/../lib/")\n      $KCODE = 'u'\n      require 'jcode'\n      require 'action_mailer/quoting'\n      include ActionMailer::Quoting\n      quoted_printable(')
+      Expression subtitution
+        PsiElement(#{)('#{')
+        Dot reference
+          Identifier
+            PsiElement(identifier)('original')
+          PsiElement(.)('.')
+          Identifier
+            PsiElement(identifier)('inspect')
+        PsiElement(})('}')
+      PsiElement(heredoc content)(', "UTF-8")')
+    PsiElement(end of line)('\n')
+    PsiElement(indented heredoc end)('CODE')
+  PsiElement(end of line)('\n')

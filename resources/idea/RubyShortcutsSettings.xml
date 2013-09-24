@@ -1,0 +1,594 @@
+<!--
+  ~ Copyright 2000-2008 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<component name="RubyShortcutsSettings">
+  <option name="serializableRakeTask">
+    <RakeTaskSerializableImpl>
+      <option name="id" value="Rake tasks" />
+      <option name="group" value="true" />
+      <option name="children">
+        <collection>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="db" />
+            <option name="fullCmd" value="db" />
+            <option name="id" value="db" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="db:fixtures" />
+                  <option name="fullCmd" value="db:fixtures" />
+                  <option name="id" value="fixtures" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:fixtures:load" />
+                        <option name="fullCmd" value="db:fixtures:load" />
+                        <option name="id" value="load" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="db:migrate" />
+                  <option name="fullCmd" value="db:migrate" />
+                  <option name="id" value="migrate" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="db:schema" />
+                  <option name="fullCmd" value="db:schema" />
+                  <option name="id" value="schema" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:schema:dump" />
+                        <option name="fullCmd" value="db:schema:dump" />
+                        <option name="id" value="dump" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:schema:load" />
+                        <option name="fullCmd" value="db:schema:load" />
+                        <option name="id" value="load" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="db:sessions" />
+                  <option name="fullCmd" value="db:sessions" />
+                  <option name="id" value="sessions" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:sessions:clear" />
+                        <option name="fullCmd" value="db:sessions:clear" />
+                        <option name="id" value="clear" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:sessions:create" />
+                        <option name="fullCmd" value="db:sessions:create" />
+                        <option name="id" value="create" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="db:structure" />
+                  <option name="fullCmd" value="db:structure" />
+                  <option name="id" value="structure" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:structure:dump" />
+                        <option name="fullCmd" value="db:structure:dump" />
+                        <option name="id" value="dump" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="db:test" />
+                  <option name="fullCmd" value="db:test" />
+                  <option name="id" value="test" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:test:clone" />
+                        <option name="fullCmd" value="db:test:clone" />
+                        <option name="id" value="clone" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:test:clone_structure" />
+                        <option name="fullCmd" value="db:test:clone_structure" />
+                        <option name="id" value="clone_structure" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:test:prepare" />
+                        <option name="fullCmd" value="db:test:prepare" />
+                        <option name="id" value="prepare" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="db:test:purge" />
+                        <option name="fullCmd" value="db:test:purge" />
+                        <option name="id" value="purge" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="test" />
+            <option name="fullCmd" value="test" />
+            <option name="id" value="test" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="test:units" />
+                  <option name="fullCmd" value="test:units" />
+                  <option name="id" value="units" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="test:integration" />
+                  <option name="fullCmd" value="test:integration" />
+                  <option name="id" value="integration" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="test:functionals" />
+                  <option name="fullCmd" value="test:functionals" />
+                  <option name="id" value="functionals" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="test:plugins" />
+                  <option name="fullCmd" value="test:plugins" />
+                  <option name="id" value="plugins" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="test:recent" />
+                  <option name="fullCmd" value="test:recent" />
+                  <option name="id" value="recent" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="test:uncommitted" />
+                  <option name="fullCmd" value="test:uncommitted" />
+                  <option name="id" value="uncommitted" />
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="stats" />
+            <option name="fullCmd" value="stats" />
+            <option name="id" value="stats" />
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="doc" />
+            <option name="fullCmd" value="doc" />
+            <option name="id" value="doc" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:rerails" />
+                  <option name="fullCmd" value="doc:rerails" />
+                  <option name="id" value="rerails" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:reapp" />
+                  <option name="fullCmd" value="doc:reapp" />
+                  <option name="id" value="reapp" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:rails" />
+                  <option name="fullCmd" value="doc:rails" />
+                  <option name="id" value="rails" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:plugins" />
+                  <option name="fullCmd" value="doc:plugins" />
+                  <option name="id" value="plugins" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:clobber_rails" />
+                  <option name="fullCmd" value="doc:clobber_rails" />
+                  <option name="id" value="clobber_rails" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:clobber_plugins" />
+                  <option name="fullCmd" value="doc:clobber_plugins" />
+                  <option name="id" value="clobber_plugins" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:clobber_app" />
+                  <option name="fullCmd" value="doc:clobber_app" />
+                  <option name="id" value="clobber_app" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="doc:app" />
+                  <option name="fullCmd" value="doc:app" />
+                  <option name="id" value="app" />
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="log" />
+            <option name="fullCmd" value="log" />
+            <option name="id" value="log" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="log:clear" />
+                  <option name="fullCmd" value="log:clear" />
+                  <option name="id" value="clear" />
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="rails" />
+            <option name="fullCmd" value="rails" />
+            <option name="id" value="rails" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="rails:freeze" />
+                  <option name="fullCmd" value="rails:freeze" />
+                  <option name="id" value="freeze" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="rails:freeze:edge" />
+                        <option name="fullCmd" value="rails:freeze:edge" />
+                        <option name="id" value="edge" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="rails:freeze:gems" />
+                        <option name="fullCmd" value="rails:freeze:gems" />
+                        <option name="id" value="gems" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="rails:unfreeze" />
+                  <option name="fullCmd" value="rails:unfreeze" />
+                  <option name="id" value="unfreeze" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="rails:update" />
+                  <option name="fullCmd" value="rails:update" />
+                  <option name="id" value="update" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="rails:update" />
+                  <option name="fullCmd" value="rails:update" />
+                  <option name="id" value="update" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="rails:update:configs" />
+                        <option name="fullCmd" value="rails:update:configs" />
+                        <option name="id" value="configs" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="rails:update:javascripts" />
+                        <option name="fullCmd" value="rails:update:javascripts" />
+                        <option name="id" value="javascripts" />
+                      </RakeTaskSerializableImpl>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="rails:update:scripts" />
+                        <option name="fullCmd" value="rails:update:scripts" />
+                        <option name="id" value="scripts" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="spec" />
+            <option name="fullCmd" value="spec" />
+            <option name="id" value="spec" />
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="spec" />
+            <option name="fullCmd" value="spec" />
+            <option name="id" value="spec" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:all" />
+                  <option name="fullCmd" value="spec:all" />
+                  <option name="id" value="all" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:app" />
+                  <option name="fullCmd" value="spec:app" />
+                  <option name="id" value="app" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:controllers" />
+                  <option name="fullCmd" value="spec:controllers" />
+                  <option name="id" value="controllers" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:db" />
+                  <option name="fullCmd" value="spec:db" />
+                  <option name="id" value="db" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="spec:db:fixtures" />
+                        <option name="fullCmd" value="spec:db:fixtures" />
+                        <option name="id" value="fixtures" />
+                        <option name="group" value="true" />
+                        <option name="children">
+                          <collection>
+                            <RakeTaskSerializableImpl>
+                              <option name="fullCommand" value="spec:db:fixtures:load" />
+                              <option name="fullCmd" value="spec:db:fixtures:load" />
+                              <option name="id" value="load" />
+                            </RakeTaskSerializableImpl>
+                          </collection>
+                        </option>
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:doc" />
+                  <option name="fullCmd" value="spec:doc" />
+                  <option name="id" value="doc" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:helpers" />
+                  <option name="fullCmd" value="spec:helpers" />
+                  <option name="id" value="helpers" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:models" />
+                  <option name="fullCmd" value="spec:models" />
+                  <option name="id" value="models" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:plugins" />
+                  <option name="fullCmd" value="spec:plugins" />
+                  <option name="id" value="plugins" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:statsetup" />
+                  <option name="fullCmd" value="spec:statsetup" />
+                  <option name="id" value="statsetup" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:views" />
+                  <option name="fullCmd" value="spec:views" />
+                  <option name="id" value="views" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="spec:watir" />
+                  <option name="fullCmd" value="spec:watir" />
+                  <option name="id" value="watir" />
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+          <RakeTaskSerializableImpl>
+            <option name="fullCommand" value="tmp" />
+            <option name="fullCmd" value="tmp" />
+            <option name="id" value="tmp" />
+            <option name="group" value="true" />
+            <option name="children">
+              <collection>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="tmp:clear" />
+                  <option name="fullCmd" value="tmp:clear" />
+                  <option name="id" value="clear" />
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="tmp:cache" />
+                  <option name="fullCmd" value="tmp:cache" />
+                  <option name="id" value="cache" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="tmp:cache:clear" />
+                        <option name="fullCmd" value="tmp:cache:clear" />
+                        <option name="id" value="clear" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="tmp:sessions" />
+                  <option name="fullCmd" value="tmp:sessions" />
+                  <option name="id" value="sessions" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="tmp:sessions:clear" />
+                        <option name="fullCmd" value="tmp:sessions:clear" />
+                        <option name="id" value="clear" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="tmp:sockets" />
+                  <option name="fullCmd" value="tmp:sockets" />
+                  <option name="id" value="sockets" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="tmp:sockets:clear" />
+                        <option name="fullCmd" value="tmp:sockets:clear" />
+                        <option name="id" value="clear" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+                <RakeTaskSerializableImpl>
+                  <option name="fullCommand" value="tmp:pids" />
+                  <option name="fullCmd" value="tmp:pids" />
+                  <option name="id" value="pids" />
+                  <option name="group" value="true" />
+                  <option name="children">
+                    <collection>
+                      <RakeTaskSerializableImpl>
+                        <option name="fullCommand" value="tmp:pids:clear" />
+                        <option name="fullCmd" value="tmp:pids:clear" />
+                        <option name="id" value="clear" />
+                      </RakeTaskSerializableImpl>
+                    </collection>
+                  </option>
+                </RakeTaskSerializableImpl>
+              </collection>
+            </option>
+          </RakeTaskSerializableImpl>
+        </collection>
+      </option>
+    </RakeTaskSerializableImpl>
+  </option>
+  <option name="serializableGenerators">
+    <SerializableGenerator>
+      <option name="group" value="true" />
+      <option name="name" value="Generators" />
+      <option name="children">
+        <collection>
+          <SerializableGenerator>
+            <option name="group" value="true" />
+            <option name="name" value="Built-In" />
+            <option name="children">
+              <collection>
+                <SerializableGenerator>
+                  <option name="name" value="controller" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="model" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="migration" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="integration_test" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="mailer" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="observer" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="plugin" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="resource" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="scaffold" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="scaffold_resource" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="session_migration" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="web_service" />
+                </SerializableGenerator>
+              </collection>
+            </option>
+          </SerializableGenerator>
+          <SerializableGenerator>
+            <option name="group" value="true" />
+            <option name="name" value="Rubygems" />
+            <option name="children">
+              <collection>
+                <SerializableGenerator>
+                  <option name="name" value="site" />
+                </SerializableGenerator>
+              </collection>
+            </option>
+          </SerializableGenerator>
+          <SerializableGenerator>
+            <option name="group" value="true" />
+            <option name="name" value="Hobo" />
+            <option name="children">
+              <collection>
+                <SerializableGenerator>
+                  <option name="name" value="hobo" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="hobo_front_controller" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="hobo_model" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="hobo_model_controller" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="hobo_rapid" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="hobo_user_model" />
+                </SerializableGenerator>
+              </collection>
+            </option>
+          </SerializableGenerator>
+          <SerializableGenerator>
+            <option name="group" value="true" />
+            <option name="name" value="RSpec" />
+            <option name="children">
+              <collection>
+                <SerializableGenerator>
+                  <option name="name" value="rspec" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="rspec_controller" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="rspec_model" />
+                </SerializableGenerator>
+                <SerializableGenerator>
+                  <option name="name" value="rspec_resource" />
+                </SerializableGenerator>
+              </collection>
+            </option>
+          </SerializableGenerator>
+        </collection>
+      </option>
+    </SerializableGenerator>
+  </option>
+</component>

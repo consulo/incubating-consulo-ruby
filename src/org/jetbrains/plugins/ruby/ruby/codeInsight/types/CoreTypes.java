@@ -1,0 +1,96 @@
+/*
+ * Copyright 2000-2008 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
+
+/**
+ * Created by IntelliJ IDEA.
+ *
+ * @author: oleg
+ * @date: May 23, 2007
+ */
+public interface CoreTypes {
+    public String Object =      "Object";
+    public String Class =       "Class";
+    public String Module =      "Module";
+
+    public String Integer =     "Integer";
+    public String Numeric =     "Numeric";
+    public String Fixnum =      "Fixnum";
+    public String Float =       "Float";
+    public String String =      "String";
+    public String Regexp =      "Regexp";
+    public String Array =       "Array";
+    public String Range =       "Range";
+    public String Hash =        "Hash";
+    public String Symbol =      "Symbol";
+    public String IO =          "IO";
+    public String Proc =        "Proc";
+
+    public String FalseClass =  "FalseClass";
+    public String NilClass =    "NilClass";
+    public String TrueClass =   "TrueClass";
+
+    public String Time =        "Time";
+
+    public String AllValues[] = new String[]{
+            Object,
+            Class,
+            Module,
+
+            Numeric,
+            Integer,
+            Fixnum,
+            Float,
+            String,
+            Regexp,
+            Array,
+            Range,
+            Hash,
+            Symbol,
+            IO,
+            Proc,
+
+            FalseClass,
+            NilClass,
+            TrueClass,
+
+            Time
+    };
+}
+
+//public enum CoreTypes {
+//    Object,
+//    Class,
+//    Module,
+//
+//    Numeric,
+//    Integer,
+//    Fixnum,
+//    Float,
+//    String,
+//    Regexp,
+//    Array,
+//    Range,
+//    Hash,
+//    Symbol,
+//    IO,
+//    Proc,
+//
+//    FalseClass,
+//    NilClass,
+//    TrueClass
+//}

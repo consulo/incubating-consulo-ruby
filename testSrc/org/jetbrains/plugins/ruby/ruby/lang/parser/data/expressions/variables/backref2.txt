@@ -1,0 +1,11 @@
+$1
+$11
+-----
+Ruby file
+  Compound statement
+    Nth reference
+      PsiElement(nth ref)('$1')
+    PsiElement(end of line)('\n')
+    Nth reference
+      PsiElement(nth ref)('$11')
+  PsiElement(end of line)('\n')

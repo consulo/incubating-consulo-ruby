@@ -1,0 +1,37 @@
+begin
+  puts "hello"
+rescue
+  return false
+end
+-----
+Ruby file
+  Compound statement
+    Block statement
+      PsiElement(begin)('begin')
+      PsiWhiteSpace('\n  ')
+      Body statement
+        Compound statement
+          Command call
+            Identifier
+              PsiElement(identifier)('puts')
+            PsiWhiteSpace(' ')
+            List of expressions
+              Double quoted like string
+                PsiElement(double quoted like string beginning)('"')
+                PsiElement(string content)('hello')
+                PsiElement(string end)('"')
+        PsiElement(end of line)('\n')
+        Rescue block
+          PsiElement(rescue)('rescue')
+          PsiElement(end of line)('\n')
+          PsiWhiteSpace('  ')
+          Compound statement
+            Return statement
+              PsiElement(return)('return')
+              PsiWhiteSpace(' ')
+              List of expressions
+                Pseudo constant
+                  PsiElement(false)('false')
+      PsiElement(end of line)('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

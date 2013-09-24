@@ -1,0 +1,20 @@
+"string" "block" 'test'
+--------------------
+Ruby file
+  Compound statement
+    Strings
+      Double quoted like string
+        PsiElement(double quoted like string beginning)('"')
+        PsiElement(string content)('string')
+        PsiElement(string end)('"')
+      PsiWhiteSpace(' ')
+      Double quoted like string
+        PsiElement(double quoted like string beginning)('"')
+        PsiElement(string content)('block')
+        PsiElement(string end)('"')
+      PsiWhiteSpace(' ')
+      Single quoted like string
+        PsiElement(single quoted like string beginning)(''')
+        PsiElement(string content)('test')
+        PsiElement(string end)(''')
+  PsiElement(end of line)('\n')

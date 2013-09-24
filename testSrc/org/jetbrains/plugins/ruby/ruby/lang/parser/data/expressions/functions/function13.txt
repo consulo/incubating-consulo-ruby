@@ -1,0 +1,45 @@
+a.<<(a, b=c, d=>f, *g, &e)
+--------
+Ruby file
+  Compound statement
+    Function call
+      Dot reference
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(.)('.')
+        Operation
+          PsiElement(<<)('<<')
+      PsiElement(f()('(')
+      List of expressions
+        Identifier
+          PsiElement(identifier)('a')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Assignment expression
+          Identifier
+            PsiElement(identifier)('b')
+          PsiElement(=)('=')
+          Identifier
+            PsiElement(identifier)('c')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Assoc
+          Identifier
+            PsiElement(identifier)('d')
+          PsiElement(=>)('=>')
+          Identifier
+            PsiElement(identifier)('f')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Array to arguments
+          PsiElement(s*)('*')
+          Identifier
+            PsiElement(identifier)('g')
+        PsiElement(,)(',')
+        PsiWhiteSpace(' ')
+        Block to argument
+          PsiElement(a&)('&')
+          Identifier
+            PsiElement(identifier)('e')
+      PsiElement())(')')
+  PsiElement(end of line)('\n')

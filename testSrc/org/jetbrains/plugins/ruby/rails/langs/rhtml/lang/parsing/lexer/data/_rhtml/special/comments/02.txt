@@ -1,0 +1,28 @@
+ <%#
+ multiline
+    comment
+ddd
+ ddd
+ff
+  %>
+----------
+RHTML_COMMENT_START: [0, 3], {<%#}
+RHTML_COMMENT_EOL: [3, 4], {
+}
+RHTML_COMMENT_CHARACTERS: [4, 14], { multiline}
+RHTML_COMMENT_EOL: [14, 15], {
+}
+RHTML_COMMENT_CHARACTERS: [15, 26], {    comment}
+RHTML_COMMENT_EOL: [26, 27], {
+}
+RHTML_COMMENT_CHARACTERS: [27, 30], {ddd}
+RHTML_COMMENT_EOL: [30, 31], {
+}
+RHTML_COMMENT_CHARACTERS: [31, 35], { ddd}
+RHTML_COMMENT_EOL: [35, 36], {
+}
+RHTML_COMMENT_CHARACTERS: [36, 38], {ff}
+RHTML_COMMENT_EOL: [38, 39], {
+}
+RHTML_COMMENT_WSL: [39, 41], {  }
+RHTML_COMMENT_END: [41, 43], {%>}

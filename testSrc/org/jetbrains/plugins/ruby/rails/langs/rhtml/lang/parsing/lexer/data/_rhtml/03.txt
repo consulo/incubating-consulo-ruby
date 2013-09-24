@@ -1,0 +1,8 @@
+<html> preved <%= 2.times do |i|-%></html>
+-------------
+TEMPLATE_CHARACTERS_IN_RHTML: [0, 14], {<html> preved }
+<%=: [14, 17], {<%=}
+RUBY_CODE_CHARACTERS: [17, 32], { 2.times do |i|}
+OMIT_NEW_LINE: [32, 33], {-}
+%>: [33, 35], {%>}
+TEMPLATE_CHARACTERS_IN_RHTML: [35, 42], {</html>}

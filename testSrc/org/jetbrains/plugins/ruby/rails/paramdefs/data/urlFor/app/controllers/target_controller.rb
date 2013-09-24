@@ -1,0 +1,3 @@
+class TargetController
+#<target>    
+end

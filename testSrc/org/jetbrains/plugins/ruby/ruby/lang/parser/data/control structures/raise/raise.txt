@@ -1,0 +1,7 @@
+raise
+----------------------------
+Ruby file
+  Compound statement
+    Identifier
+      PsiElement(identifier)('raise')
+  PsiElement(end of line)('\n')

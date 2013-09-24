@@ -1,0 +1,31 @@
+if
+true
+then
+print "foo";
+end
+----------
+Ruby file
+  Compound statement
+    If statement
+      PsiElement(if)('if')
+      PsiWhiteSpace('\n')
+      Condition
+        Pseudo constant
+          PsiElement(true)('true')
+      PsiElement(end of line)('\n')
+      PsiElement(then)('then')
+      PsiWhiteSpace('\n')
+      Compound statement
+        Command call
+          Identifier
+            PsiElement(identifier)('print')
+          PsiWhiteSpace(' ')
+          List of expressions
+            Double quoted like string
+              PsiElement(double quoted like string beginning)('"')
+              PsiElement(string content)('foo')
+              PsiElement(string end)('"')
+        PsiElement(;)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(end)('end')
+  PsiElement(end of line)('\n')

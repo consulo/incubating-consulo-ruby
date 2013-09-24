@@ -1,0 +1,5 @@
+aa<caret>bb
+--------
+"
+--------
+aa"<caret>bb
