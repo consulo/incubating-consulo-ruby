@@ -117,7 +117,7 @@ public class RHTMLFormatterUtil {
     public static RCompoundStatement getRCmpStNodeStartOffset(@NotNull final FileViewProvider provider,
                                                               @NotNull final ASTNode node) {
         final int boundsStart = node.getStartOffset();
-        final PsiElement rubyPsi = provider.findElementAt(boundsStart, RubyLanguage.RUBY);
+        final PsiElement rubyPsi = provider.findElementAt(boundsStart, RubyLanguage.INSTANCE);
 
         if (rubyPsi == null) {
             return null;

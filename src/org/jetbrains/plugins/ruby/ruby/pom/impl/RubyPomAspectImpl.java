@@ -96,7 +96,7 @@ public class RubyPomAspectImpl implements RubyPomAspect {
             final PsiElement psiElement = changedASTNode.getPsi();
             assert psiElement!=null;
 // We use RubyAspectVisitor only for Ruby changes
-            if (psiElement.getLanguage() == RubyLanguage.RUBY){
+            if (psiElement.getLanguage() == RubyLanguage.INSTANCE){
                 if (!visitor.isChangeFound()){
                     psiElement.accept(visitor);
                 }

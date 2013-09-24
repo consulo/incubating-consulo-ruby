@@ -37,7 +37,7 @@ import com.intellij.util.LanguageVersionUtil;
  */
 public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType {//extends TemplateWithOuterFragmentsTypeImpl {
     public RubyDeclarationsInRHTMLTypeImpl(final String debugName) {
-        super(debugName, RubyLanguage.RUBY);
+        super(debugName, RubyLanguage.INSTANCE);
     }
 
     public ASTNode parseContents(final ASTNode chameleon) {

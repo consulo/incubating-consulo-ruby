@@ -57,7 +57,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
     }
 
     public Language[] getLanguages() {
-        return new Language[]{RubyLanguage.RUBY, eRubyLanguage.INSTANCE};
+        return new Language[]{RubyLanguage.INSTANCE, eRubyLanguage.INSTANCE};
     }
 
     public boolean acceptElement(@NotNull final PsiElement element) {
@@ -155,7 +155,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
                 }
                 return parent;
             }
-        } else if (lang == RubyLanguage.RUBY) {
+        } else if (lang == RubyLanguage.INSTANCE) {
             //RUBY_CODE_CHARACTERS
             PsiElement parent = provider.findElementAt(startOffset, eRubyLanguage.INSTANCE);
 
@@ -228,7 +228,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         }
 
         final Language lang = getLangageForElement(psiElement);        
-        if (lang == RubyLanguage.RUBY) {
+        if (lang == RubyLanguage.INSTANCE) {
             return RBundle.message("breadcrumbs.rhtml.presentation.ruby.injection");
         } else if (lang == eRubyLanguage.INSTANCE) {
             final ASTNode node;

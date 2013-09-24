@@ -88,7 +88,7 @@ public class RubyImplementVariantsTest extends AbstractJRubyModuleTest {
 
     private void doTest(@NotNull final String name) throws Exception {
         init(name);
-        final ImplementHandler handler = (ImplementHandler) RubyLanguage.RUBY.getImplementMethodsHandler();
+        final ImplementHandler handler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
         assertNotNull(handler);
         //noinspection ConstantConditions
         final List<ClassMember> list = handler.create_implement_members(SymbolUtil.getTopLevelClassByName(myFileSymbol, myName));

@@ -36,7 +36,7 @@ public class RubyFileType extends LanguageFileType {
     public static final String RUBY_EXTENTIONS = "rb;rbw;rake;";
 
     private RubyFileType() {
-        super(RubyLanguage.RUBY);
+        super(RubyLanguage.INSTANCE);
     }
     
     @NotNull

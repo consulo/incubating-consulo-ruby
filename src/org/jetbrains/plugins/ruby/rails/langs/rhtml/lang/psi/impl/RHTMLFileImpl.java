@@ -101,7 +101,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
 
     @NotNull
     public RFile getInnerRubyFile() {
-        return (RFile)getViewProvider().getPsi(RubyLanguage.RUBY);
+        return (RFile)getViewProvider().getPsi(RubyLanguage.INSTANCE);
     }
 
     @NotNull

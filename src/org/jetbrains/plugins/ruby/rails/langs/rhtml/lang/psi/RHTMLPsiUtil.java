@@ -53,7 +53,7 @@ public class RHTMLPsiUtil {
         if (containingFile == null) return null;
 
         final FileViewProvider viewProvider = containingFile.getViewProvider();
-        final PsiFile psiFile = viewProvider.getPsi(RubyLanguage.RUBY);
+        final PsiFile psiFile = viewProvider.getPsi(RubyLanguage.INSTANCE);
         return psiFile instanceof RFile ? (RFile)psiFile : null;
     }
 

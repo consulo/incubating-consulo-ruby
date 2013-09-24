@@ -130,7 +130,7 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock {
         }
 
         final Language language = htmlChild.getElementType().getLanguage();
-        if (language == RubyLanguage.RUBY
+        if (language == RubyLanguage.INSTANCE
                 || htmlChild.getElementType() instanceof IRHTMLElement
                 || htmlChild instanceof XmlTag || htmlChild instanceof XmlText
                 || htmlChild instanceof CompositeElement) {

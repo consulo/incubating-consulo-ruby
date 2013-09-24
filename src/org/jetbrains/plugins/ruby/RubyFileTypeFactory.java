@@ -31,7 +31,7 @@ import com.intellij.openapi.fileTypes.FileTypeFactory;
  * @author: oleg
  * @date: Feb 4, 2008
  */
-public class RFileTypesLoader extends FileTypeFactory {
+public class RubyFileTypeFactory extends FileTypeFactory {
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer)
 	{

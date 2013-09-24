@@ -96,7 +96,7 @@ public class RubyOverrideVariantsTest extends AbstractJRubyModuleTest {
 
     private void runAbstractFile(@NotNull final String name) throws Exception {
         init(name);
-        final OverrideHandler handler = (OverrideHandler) RubyLanguage.RUBY.getOverrideMethodsHandler();
+        final OverrideHandler handler = (OverrideHandler) RubyLanguage.INSTANCE.getOverrideMethodsHandler();
         assertNotNull(handler);
         //noinspection ConstantConditions
         final List<ClassMember> list = handler.create_override_members(myProject, SymbolUtil.getTopLevelClassByName(myFileSymbol, myName));

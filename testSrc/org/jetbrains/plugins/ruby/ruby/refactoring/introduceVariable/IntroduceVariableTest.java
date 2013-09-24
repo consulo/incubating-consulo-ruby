@@ -52,7 +52,7 @@ public class IntroduceVariableTest extends BaseEditorActionTestCase{
 
     private void performIntroduceVariableAction() {
         final RefactoringActionHandler handlerWrapper =
-                RubyLanguage.RUBY.getRefactoringSupportProvider().getIntroduceVariableHandler();
+                RubyLanguage.INSTANCE.getRefactoringSupportProvider().getIntroduceVariableHandler();
         final RubyIntroduceVariableHandler jrubyHandler = ((RubyIntroduceVariableHandlerWrapper) handlerWrapper).getJRubyHandler();
         jrubyHandler.introduceVariable(myProject, myEditor, myFile, new RubyDataContext(), myData.get(1), "replace_all".equals(myData.get(2).trim()));
     }

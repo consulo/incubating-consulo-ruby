@@ -57,7 +57,7 @@ public class JRubyImplementInterfaceFix implements LocalQuickFix {
     }
 
     public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
-        final ImplementHandler handler = (ImplementHandler) RubyLanguage.RUBY.getImplementMethodsHandler();
+        final ImplementHandler handler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
         if (handler != null) {
             // Looking for editor
             Editor editor = null;

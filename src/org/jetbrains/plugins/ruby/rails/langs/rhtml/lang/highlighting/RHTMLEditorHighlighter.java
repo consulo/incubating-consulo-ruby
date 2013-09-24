@@ -54,7 +54,7 @@ public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter {
         myProject = project;
         myFile = file;
 
-		final SyntaxHighlighter rubyHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(RubyLanguage.RUBY, project, file);
+		final SyntaxHighlighter rubyHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(RubyLanguage.INSTANCE, project, file);
 
         // "\n" separates lexems if there is no separator
         // <%i = 3%><%a = 6>

@@ -43,7 +43,7 @@ public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile {
      protected boolean isPsiUpToDate(VirtualFile vFile) {
          final FileViewProvider viewProvider = myManager.findViewProvider(vFile);
          assert viewProvider != null;
-         return viewProvider.getPsi(RubyLanguage.RUBY) == this;
+         return viewProvider.getPsi(RubyLanguage.INSTANCE) == this;
      }
 
     public String toString() {

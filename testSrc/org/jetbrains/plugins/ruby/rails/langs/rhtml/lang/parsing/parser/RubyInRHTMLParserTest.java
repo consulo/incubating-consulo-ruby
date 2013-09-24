@@ -41,7 +41,7 @@ public class RubyInRHTMLParserTest extends AbstractRHTMLParserTest {
     protected String dump(final RHTMLFile psiFile) {
         final RHTMLFileViewProvider viewProvider = psiFile.getViewProvider();
 
-        return DebugUtil.psiToString(viewProvider.getPsi(RubyLanguage.RUBY), false, false);
+        return DebugUtil.psiToString(viewProvider.getPsi(RubyLanguage.INSTANCE), false, false);
     }
 
     public static Test suite() {

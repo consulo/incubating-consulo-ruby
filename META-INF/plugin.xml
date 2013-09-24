@@ -27,7 +27,7 @@
 	<depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<fileTypeFactory implementation="org.jetbrains.plugins.ruby.RFileTypesLoader"/>
+		<fileTypeFactory implementation="org.jetbrains.plugins.ruby.RubyFileTypeFactory"/>
 		<gotoClassContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubyClassAndModuleContributor"/>
 		<gotoSymbolContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubySymbolContributor"/>
 		<colorSettingsPage implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyColorsPage"/>
@@ -39,11 +39,16 @@
 		<moduleService serviceInterface="org.jetbrains.plugins.ruby.settings.RModuleSettingsStorage" serviceImplementation="org.jetbrains.plugins.ruby.settings.RModuleSettingsStorage"/>
 
 		<lang.parserDefinition language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition" />
-
+		<lang.braceMatcher language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher" />
+		<lang.commenter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter" />
+		<lang.foldingBuilder language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder" />
+		<lang.documentationProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider" />
 		<lang.syntaxHighlighterFactory key="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighterFactory" />
 
-		<xmlStructureViewElementProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml.RHTMLStructureViewElementProvider"/>
 		<iconProvider implementation="org.jetbrains.plugins.ruby.RubyIconProvider"/>
+
+		<lang.fileViewProviderFactory language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.eRubyFileViewProviderFactory" />
+		<lang.parserDefinition language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition"/>
 
 		<consoleFilterProvider implementation="org.jetbrains.plugins.ruby.ruby.run.filters.RConsoleFiltersProvider"/>
 		<createFromTemplateActionReplacer implementation="org.jetbrains.plugins.ruby.rails.actions.templates.RailsCreateFromTemplateActionReplacer"/>
@@ -51,21 +56,17 @@
 
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager" serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"/>
 
-		<!--TODO: Uncomment when IDEA API will be fixed -->
-		<!--<wizardMode implementation="org.jetbrains.plugins.ruby.ruby.module.wizard.modes.CreateRORFromSourcesMode"/>-->
-
-		<frameworkSupport implementation="org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetProvider"/>
-		<frameworkSupport implementation="org.jetbrains.plugins.ruby.rails.facet.versions.JRailsFacetSupportProvider"/>
-		<frameworkSupport implementation="org.jetbrains.plugins.ruby.rails.facet.versions.RailsFacetSupportProvider"/>
-
 		<referencesSearch implementation="org.jetbrains.plugins.ruby.ruby.lang.search.RubyTextReferenceSearch"/>
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
 
+		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
+		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType" />
+
 		<!--<overridingMethodsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyOverridingMethodsSearch"/>-->
 		<!--<definitionsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyImplementingMethodsSearch"/>-->
 
-		<!-- Run Configurationls: -->
+		<!-- Run Configurations: -->
 		<!-- Common Ruby -->
 		<configurationProducer implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RubyRunConfigurationProducer"/>
 		<!-- Rails -->
@@ -80,12 +81,12 @@
 		<moduleService serviceInterface="org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager" serviceImplementation="org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager"/>
 		<moduleService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettingsStorage" serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettingsStorage"/>
 
-		<!--Converting-->
-		<project.converterFactory implementation="org.jetbrains.plugins.ruby.rails.facet.converting.RailsModule_ConverterFactory"/>
-
-		<lang.parserDefinition language="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition"/>
 
 		<declarationRangeHandler implementationClass="org.jetbrains.plugins.ruby.ruby.lang.RubyDeclarationRangeHandler"/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij.xml">
+		<structureViewElementProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml.RHTMLStructureViewElementProvider"/>
 	</extensions>
 
 	<application-components>
@@ -95,9 +96,7 @@
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html.RHTMLFileNSInfoProviderImpl</implementation-class>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType</implementation-class>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.templates.RubyTemplatesLoader</implementation-class>
 		</component>
@@ -113,9 +112,7 @@
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.RubyIconProvider</implementation-class>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType</implementation-class>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.templates.RailsTemplatesLoader</implementation-class>
 		</component>

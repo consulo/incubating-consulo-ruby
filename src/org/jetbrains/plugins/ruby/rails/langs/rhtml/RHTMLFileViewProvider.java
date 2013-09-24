@@ -71,7 +71,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		}
 		Set<Language> views = new HashSet<Language>(4);
 		views.add(eRubyLanguage.INSTANCE);
-		views.add(RubyLanguage.RUBY);
+		views.add(RubyLanguage.INSTANCE);
 		views.add(HTMLLanguage.INSTANCE);
 
 		return myViews = views;
@@ -84,7 +84,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 
 	protected PsiFile createFile(final Language lang)
 	{
-		if(lang == RubyLanguage.RUBY)
+		if(lang == RubyLanguage.INSTANCE)
 		{
 			final RHTMLRubyFileImpl ruby = new RHTMLRubyFileImpl(this);
 			ruby.setOriginalFile(getPsi(eRubyLanguage.INSTANCE));

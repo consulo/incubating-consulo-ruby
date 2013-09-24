@@ -20,26 +20,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler;
 import org.jetbrains.plugins.ruby.ruby.lang.annotator.RubyFastAnnotator;
-import org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher;
-import org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider;
-import org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator;
 import org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.ide.structureView.StructureViewBuilder;
-import com.intellij.lang.Commenter;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageCodeInsightActionHandler;
-import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.lang.folding.FoldingBuilder;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
@@ -51,7 +45,7 @@ import rb.override.OverrideHandler;
 
 
 public class RubyLanguage extends Language {
-    public static final RubyLanguage RUBY = new RubyLanguage();
+    public static final RubyLanguage INSTANCE = new RubyLanguage();
 
 
     private RefactoringSupportProvider rubyRefactoringSupportProvider;
@@ -59,9 +53,7 @@ public class RubyLanguage extends Language {
     private ImplementHandler rubyImplementMethodsHandler;
 
 
-    protected NotNullLazyValue<PairedBraceMatcher> myPairedBraceMatcher;
-    protected NotNullLazyValue<Commenter> myCommenter;
-    protected NotNullLazyValue<FoldingBuilder> myFoldingBuilder;
+
     protected NotNullLazyValue<FormattingModelBuilder> myFormattingModelBuilder;
     protected NotNullLazyValue<FindUsagesProvider> myFindUsagesProvider;
     protected NotNullLazyValue<DocumentationProvider> myRubyDocumentationProvider;
@@ -74,25 +66,9 @@ public class RubyLanguage extends Language {
     private RubyLanguage() {
         super("RUBY", "application/x-ruby");
 
-        myPairedBraceMatcher = new NotNullLazyValue<PairedBraceMatcher>(){
-            @NotNull
-            protected PairedBraceMatcher compute() {
-                return new RubyPairedBraceMatcher();
-            }
-        };
 
-        myCommenter = new NotNullLazyValue<Commenter>(){
-            @NotNull
-            protected Commenter compute() {
-                return new RubyCommenter();
-            }
-        };
-        myFoldingBuilder = new NotNullLazyValue<FoldingBuilder>(){
-            @NotNull
-            protected FoldingBuilder compute() {
-                return new RubyFoldingBuilder();
-            }
-        };
+
+
         myFormattingModelBuilder = new NotNullLazyValue<FormattingModelBuilder>(){
             @NotNull
             protected FormattingModelBuilder compute() {
@@ -143,19 +119,6 @@ public class RubyLanguage extends Language {
         };
     }
 
-    @NotNull
-    public PairedBraceMatcher getPairedBraceMatcher() {
-        return myPairedBraceMatcher.getValue();
-    }
-
-	@NotNull
-    public Commenter getCommenter() {
-        return myCommenter.getValue();
-    }
-
-    public FoldingBuilder getFoldingBuilder() {
-        return myFoldingBuilder.getValue();
-    }
 
     @NotNull
     public StructureViewBuilder getStructureViewBuilder(@NotNull final PsiFile psiFile) {

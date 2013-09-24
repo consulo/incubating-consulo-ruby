@@ -44,7 +44,7 @@ public class JRubyImplementInterfaceVisitor extends RubyInspectionVisitor {
 
     public JRubyImplementInterfaceVisitor(final ProblemsHolder holder) {
         super(holder);
-        myHandler = (ImplementHandler) RubyLanguage.RUBY.getImplementMethodsHandler();
+        myHandler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
     }
 
     public void visitRClass(final RClass rClass) {

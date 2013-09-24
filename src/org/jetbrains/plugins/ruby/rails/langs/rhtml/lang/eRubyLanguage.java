@@ -29,10 +29,8 @@ import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.HtmlPolicy;
 import com.intellij.psi.formatter.xml.ReadOnlyBlock;
@@ -50,13 +48,7 @@ public class eRubyLanguage extends Language implements TemplateLanguage{
     public static final eRubyLanguage INSTANCE = new eRubyLanguage();
 
     public eRubyLanguage() {
-        super("RHTML", "application/x-httpd-eruby");
-    }
-
-    public FileViewProvider createViewProvider(final VirtualFile file,
-                                               final PsiManager manager,
-                                               final boolean physical) {
-        return new RHTMLFileViewProvider(manager, file, physical);
+        super("E-RUBY", "application/x-httpd-eruby");
     }
 
 
