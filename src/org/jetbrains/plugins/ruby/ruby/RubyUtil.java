@@ -19,7 +19,6 @@ package org.jetbrains.plugins.ruby.ruby;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.util.SystemInfo;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,12 +39,12 @@ public class RubyUtil {
     @NonNls
     protected static String RUN_IN_CONSOLE_HACK = "STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)";
     @NonNls
-    public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS =
-            SystemInfo.isWindows
+    public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS = {}
+            /*SystemInfo.isWindows
                 ? new String[]{"-e", "\"" + RUN_IN_CONSOLE_HACK + "\""}
-                : new String[]{"-e", RUN_IN_CONSOLE_HACK};
+                : new String[]{"-e", RUN_IN_CONSOLE_HACK}*/;
     public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS_NO_SHIFT
-            = new String[]{"-e", "STDOUT.sync=true;STDERR.sync=true"};
+            = {}/*new String[]{"-e", "STDOUT.sync=true;STDERR.sync=true"}*/;
 
     /**
      * Check if module is Ruby module

@@ -67,6 +67,7 @@ public class RubyRunCommandLineState extends ColouredCommandLineState {
         }
     }
 
+	@Override
     public GeneralCommandLine createCommandLine() throws ExecutionException {
         final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(myConfig);
 

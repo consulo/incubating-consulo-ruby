@@ -49,13 +49,18 @@ public abstract class ColouredCommandLineState extends CommandLineState {
 
 	@Override
 	protected OSProcessHandler startProcess() throws ExecutionException {
-        final GeneralCommandLine cmdLine = createGeneralDefaultCmdLine((AbstractRubyRunConfiguration) getEnvironment().getRunProfile());
+        final GeneralCommandLine cmdLine = createCommandLine();
         final OSProcessHandler processHandler =
                 createOSProcessHandler(cmdLine.createProcess(),
                                        cmdLine.getCommandLineString());
         ProcessTerminatedListener.attach(processHandler);
         return processHandler;
    }
+
+	public GeneralCommandLine createCommandLine() throws ExecutionException
+	{
+		return createGeneralDefaultCmdLine((AbstractRubyRunConfiguration) getEnvironment().getRunProfile());
+	}
 
     public static OSProcessHandler createOSProcessHandler(final Process process,
                                                           final String commandLine) {
@@ -89,25 +94,7 @@ public abstract class ColouredCommandLineState extends CommandLineState {
 
 			OrderEnumerator orderEnumerator = moduleRootManager.orderEntries();
 			orderEnumerator = orderEnumerator.withoutSdk().recursively();
-         /*   final ProjectRootsTraversing.RootTraversePolicy jrubyPolicy = //ProjectRootsTraversing.FULL_CLASS_RECURSIVE_WO_JDK;
-                    new ProjectRootsTraversing.RootTraversePolicy(
-                            ProjectRootsTraversing.RootTraversePolicy.ALL_OUTPUTS,
-                            null,
-                            new ProjectRootsTraversing.RootTraversePolicy.Visit<OrderEntry>() {
-                                public void visit(final OrderEntry entry, final ProjectRootsTraversing.TraverseState state, final RootPolicy<ProjectRootsTraversing.TraverseState> policy) {
-                                    if (entry instanceof LibraryOrderEntry) {
-                                        // lib name can be null if lib isn't valid
-                                        final String libName = ((LibraryOrderEntry) entry).getLibraryName();
-                                        if (libName != null && libName.endsWith(JRubyFacet.JRUBY_FACET_LIBRARY_NAME_SUFFIX)) {
-                                            return;
-                                        }
-                                    }
-                                    state.addAllUrls(entry.getUrls(OrderRootType.CLASSES));
-                                }
-                            },
-                            ProjectRootsTraversing.RootTraversePolicy.RECURSIVE);
-            classPath = ProjectRootsTraversing.collectRoots(module, jrubyPolicy).getPathsString();
-               */
+
 			classPath = orderEnumerator.getSourcePathsList().getPathsString();
         }
 

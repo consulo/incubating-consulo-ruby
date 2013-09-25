@@ -7,7 +7,7 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<moduleExtensionProvider key="jruby-on-rails" parent-key="jruby"
-								 implementationClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtensionProvider" />
+								 implementationClass="org.consulo.jruby.rails.module.extension.JRubyOnRailsModuleExtensionProvider" />
 
 	</extensions>
 </idea-plugin>
