@@ -29,7 +29,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.lang.Language;
-import com.intellij.lang.LanguageCodeInsightActionHandler;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.documentation.DocumentationProvider;
@@ -40,8 +39,6 @@ import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.lang.surroundWith.SurroundDescriptor;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.psi.PsiFile;
-import rb.implement.ImplementHandler;
-import rb.override.OverrideHandler;
 
 
 public class RubyLanguage extends Language {
@@ -49,10 +46,6 @@ public class RubyLanguage extends Language {
 
 
     private RefactoringSupportProvider rubyRefactoringSupportProvider;
-    private OverrideHandler rubyOverrideMethodsHandler;
-    private ImplementHandler rubyImplementMethodsHandler;
-
-
 
     protected NotNullLazyValue<FormattingModelBuilder> myFormattingModelBuilder;
     protected NotNullLazyValue<FindUsagesProvider> myFindUsagesProvider;
@@ -184,30 +177,5 @@ public class RubyLanguage extends Language {
         rubyRefactoringSupportProvider = provider;
     }
 
-    @Nullable
-    public LanguageCodeInsightActionHandler getOverrideMethodsHandler() {
-        return rubyOverrideMethodsHandler;
-    }
-
-    /**
-     * Method to set JRuby handler
-     * @param handler JRuby override handler
-     */
-    public void setRubyOverrideMethodsHandler(@NotNull final OverrideHandler handler) {
-        rubyOverrideMethodsHandler = handler;
-    }
-
-    @Nullable
-    public LanguageCodeInsightActionHandler getImplementMethodsHandler() {
-        return rubyImplementMethodsHandler;
-    }
-
-    /**
-     * Method to set JRuby handler
-     * @param handler JRuby implement handler
-     */
-    public void setRubyImplementMethodsHandler(@NotNull final ImplementHandler handler) {
-        rubyImplementMethodsHandler = handler;
-    }
 }
 

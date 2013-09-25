@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
@@ -264,18 +265,16 @@ public class RubySdkUtil {
     public static String getPresentableLocation(@Nullable final Sdk sdk,
                                                 @NotNull final String url) {
         if (sdk != null && RubySdkUtil.isKindOfRubySDK(sdk)) {
-            final List<String> gemsRoots = RubySdkType.getGemsRootUrls(sdk);
-            if (gemsRoots != null) {
-                for (String gemsRoot : gemsRoots) {
-                    if (url.startsWith(gemsRoot)) {
-                        final String gemName = GemInfo.getGemNameByUrl(gemsRoot, url);
-                        if (gemName != null) {
-                            return ".../" + gemName + "/.../" + VirtualFileUtil.getFileName(url);
-                        }
-                    }
-                }
-            }
-        }
+			final String[] gemsRoots = sdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
+			for (String gemsRoot : gemsRoots) {
+				if (url.startsWith(gemsRoot)) {
+					final String gemName = GemInfo.getGemNameByUrl(gemsRoot, url);
+					if (gemName != null) {
+						return ".../" + gemName + "/.../" + VirtualFileUtil.getFileName(url);
+					}
+				}
+			}
+		}
         return null;
     }
 

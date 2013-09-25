@@ -18,9 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.sdk;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +27,6 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkAdditionalData;
 import com.intellij.openapi.projectRoots.SdkModel;
-import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.util.SystemInfo;
 
 /**
@@ -40,12 +36,9 @@ import com.intellij.openapi.util.SystemInfo;
  * @date: Nov 30, 2007
  */
 public class RubySdkAdditionalData implements SdkAdditionalData {
-    private String myGemsBinDirectory;
-    private List<String> myGemsRootsUrls;
+	private static final String GEMS_BIN_DIR_PATH = "GEMS_BIN_DIR_PATH";
 
-    private static final String GEMS_BIN_DIR_PATH = "GEMS_BIN_DIR_PATH";
-    private static final String GEMS_ROOTS_URLS_ROOT = "GEMS_ROOTS_URLS_ROOT";
-    private static final String GEMS_ROOTS_URL = "GEMS_ROOTS_URL";
+    private String myGemsBinDirectory;
 
     @NotNull
     public String getGemsBinDirectory() {
@@ -56,20 +49,12 @@ public class RubySdkAdditionalData implements SdkAdditionalData {
         myGemsBinDirectory = path;
     }
 
-    public void setGemsRootUrls(@NotNull final List<String> urls) {
-        myGemsRootsUrls = Collections.unmodifiableList(urls);
-    }
-
-    public List<String> getGemsRootUrls() {
-        return myGemsRootsUrls;
-    }
 
     @Override
 	public Object clone() throws CloneNotSupportedException {
         try {
             final RubySdkAdditionalData copy = (RubySdkAdditionalData) super.clone();
             copy.setGemsBinDirectory(myGemsBinDirectory);
-            copy.setGemsRootUrls(myGemsRootsUrls);
             return copy;
         }
         catch (CloneNotSupportedException e) {
@@ -90,12 +75,6 @@ public class RubySdkAdditionalData implements SdkAdditionalData {
 
     public void save(@NotNull final Element rootElement) {
         rootElement.setAttribute(GEMS_BIN_DIR_PATH, getGemsBinDirectory());
-        for (String url : myGemsRootsUrls) {
-            final Element child = new Element(GEMS_ROOTS_URLS_ROOT);
-            child.setAttribute(GEMS_ROOTS_URL, url);
-
-            rootElement.addContent(child);
-        }
     }
 
     @NotNull
@@ -112,21 +91,6 @@ public class RubySdkAdditionalData implements SdkAdditionalData {
             data.setGemsBinDirectory(value);
         }
 
-        //gems roots
-        final List<String> gemsRoots = new ArrayList<String>();
-        if (additional != null) {
-            final List list = additional.getChildren(GEMS_ROOTS_URLS_ROOT);
-            if (list == null || list.isEmpty()) {
-                if (sdk instanceof SdkModificator) {
-                    gemsRoots.addAll(RubySdkType.findGemsRoots((SdkModificator)sdk));
-                }
-            } else {
-                for (Object o : list) {
-                    gemsRoots.add(((Element) o).getAttribute(GEMS_ROOTS_URL).getValue());
-                }
-            }
-        }
-        data.setGemsRootUrls(gemsRoots);
         return data;
     }
 

@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
 import java.io.File;
-import java.util.List;
 
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
+import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
@@ -159,22 +158,20 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
         if (shouldUseColoredOutput()
                 || (args != null && args.contains(RSpecUtil.COLOURED_COMMAND_LINE_ARG))) {
             if (SystemInfo.isWindows) {
-                final List<String> gemsRootUrls = RubySdkType.getGemsRootUrls(getSdk());
-                if (gemsRootUrls != null) {
-                    for (String gemsRootUrl : gemsRootUrls) {
-                        final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(gemsRootUrl);
-                        if (gemsRoot != null) {
-                            final VirtualFile[] files = gemsRoot.getChildren();
-                            for (VirtualFile file : files) {
-                                if (file.isDirectory() && file.getName().startsWith(RSpecUtil.WIN_32_CONSOLE_GEM)) {
-                                    final String msg = RBundle.message("rspec.run.configuration.test.plugin.doesnt.support.win32console.gem");
-                                    RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+				final String[] gemsRootUrls = getSdk().getRootProvider().getUrls(GemOrderRootType.getInstance());
+				for (String gemsRootUrl : gemsRootUrls) {
+					final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(gemsRootUrl);
+					if (gemsRoot != null) {
+						final VirtualFile[] files = gemsRoot.getChildren();
+						for (VirtualFile file : files) {
+							if (file.isDirectory() && file.getName().startsWith(RSpecUtil.WIN_32_CONSOLE_GEM)) {
+								final String msg = RBundle.message("rspec.run.configuration.test.plugin.doesnt.support.win32console.gem");
+								RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
+							}
+						}
+					}
+				}
+			}
         }
     }
 

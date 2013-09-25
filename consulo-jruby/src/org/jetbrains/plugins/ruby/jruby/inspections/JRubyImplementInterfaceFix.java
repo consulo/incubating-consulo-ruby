@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.jruby.inspections;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.editor.Editor;
@@ -26,9 +28,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import rb.implement.ImplementHandler;
 
 /**
@@ -60,7 +59,7 @@ public class JRubyImplementInterfaceFix implements LocalQuickFix {
 
     @Override
 	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
-        final ImplementHandler handler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
+        final ImplementHandler handler = null; //(ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
         if (handler != null) {
             // Looking for editor
             Editor editor = null;

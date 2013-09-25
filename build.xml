@@ -181,15 +181,15 @@
         <!--copy rubystubs-->
         <mkdir dir="${plugindir}/rubystubs"/>
         <copy todir="${plugindir}/rubystubs">
-            <fileset dir="${basedir}/resources/rubystubs"/>
-            <fileset dir="${basedir}/resources/railsstubs"/>
-            <fileset dir="${basedir}/resources/jrubystubs"/>
+            <fileset dir="/dist/rubystubs"/>
+            <fileset dir="/dist/railsstubs"/>
+            <fileset dir="/dist/jrubystubs"/>
         </copy>
 
         <!--copy jruby code-->
         <mkdir dir="${plugindir}/rb"/>
         <copy todir="${plugindir}/rb">
-            <fileset dir="${src.dir}/rb"/>
+            <fileset dir="/dist/rb"/>
         </copy>
 
 
@@ -252,7 +252,7 @@
         <!--copy jruby written code to tests-->
         <mkdir dir="${classes.dir}/rb"/>
         <copy todir="${classes.dir}/rb">
-            <fileset dir="${src.dir}/rb">
+            <fileset dir="/dist/rb">
                 <include name="**/*.rb"/>
             </fileset>
         </copy>
@@ -268,9 +268,9 @@
         <!--copy rubystubs-->
         <mkdir dir="${ruby.mock.sdk}/rubystubs"/>
         <copy todir="${ruby.mock.sdk}/rubystubs">
-            <fileset dir="${basedir}/resources/rubystubs"/>
-            <fileset dir="${basedir}/resources/railsstubs"/>
-            <fileset dir="${basedir}/resources/jrubystubs"/>
+            <fileset dir="/dist/rubystubs"/>
+            <fileset dir="/dist/railsstubs"/>
+            <fileset dir="/dist/jrubystubs"/>
         </copy>
 
         <junit dir="${output}"

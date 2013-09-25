@@ -115,7 +115,7 @@ public class RunParserOnRubyFiles {
             ArrayList<String> correctInDir = new ArrayList<String>();
 
             for(File file: f.listFiles()){
-                if (file.isDirectory() || file.getAbsolutePath().toLowerCase().endsWith("rb")){
+                if (file.isDirectory() || file.getAbsolutePath().toLowerCase().endsWith("dist/rb")){
                     TestResult result = runRecTests(file);
                     if (result== TestResult.CORRECT){
                         correctInDir.add(file.getAbsolutePath());

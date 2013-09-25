@@ -16,16 +16,16 @@
 
 package rb.implement;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import com.intellij.codeInsight.generation.ClassMember;
 import com.intellij.lang.LanguageCodeInsightActionHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

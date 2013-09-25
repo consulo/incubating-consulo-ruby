@@ -48,159 +48,161 @@ import com.intellij.ui.RawCommandLineEditor;
  * @author: Roman Chernyatchik
  * @date: Oct 20, 2007
  */
-public class RubyRunConfigurationUIUtil {
-    public static LabeledComponent createAlternativeSdksComponent(final Ref<JComboBox> alternativeSdksComboBoxWrapper) {
-        JComboBox alternativeSdksComboBox = new ComboBox();
-        alternativeSdksComboBox.setBorder(BorderFactory.createEtchedBorder());
-        alternativeSdksComboBox.setRenderer(new SDKListCellRenderer());
+public class RubyRunConfigurationUIUtil
+{
+	public static LabeledComponent createAlternativeSdksComponent(final Ref<JComboBox> alternativeSdksComboBoxWrapper)
+	{
+		JComboBox alternativeSdksComboBox = new ComboBox();
+		alternativeSdksComboBox.setBorder(BorderFactory.createEtchedBorder());
+		alternativeSdksComboBox.setRenderer(new SDKListCellRenderer());
 
-        LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
-        myComponent.setComponent(alternativeSdksComboBox);
-        myComponent.setLabelLocation(BorderLayout.WEST);
-        myComponent.setText(RBundle.message("run.configuration.dialog.components.sdk"));
+		LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
+		myComponent.setComponent(alternativeSdksComboBox);
+		myComponent.setLabelLocation(BorderLayout.WEST);
+		myComponent.setText(RBundle.message("run.configuration.dialog.components.sdk"));
 
-        alternativeSdksComboBoxWrapper.set(alternativeSdksComboBox);
-        return myComponent;
-    }
+		alternativeSdksComboBoxWrapper.set(alternativeSdksComboBox);
+		return myComponent;
+	}
 
-    public static LabeledComponent createDirChooserComponent(final Ref<TextFieldWithBrowseButton> dirTFWrapper,
-                                                             final String text) {
-        final TextFieldWithBrowseButton dirTextField = new TextFieldWithBrowseButton();
-        dirTFWrapper.set(dirTextField);
+	public static LabeledComponent createDirChooserComponent(final Ref<TextFieldWithBrowseButton> dirTFWrapper, final String text)
+	{
+		final TextFieldWithBrowseButton dirTextField = new TextFieldWithBrowseButton();
+		dirTFWrapper.set(dirTextField);
 
-        LabeledComponent<TextFieldWithBrowseButton> myComponent = new LabeledComponent<TextFieldWithBrowseButton>();
-        myComponent.setComponent(dirTextField);
-        myComponent.setText(text);
+		LabeledComponent<TextFieldWithBrowseButton> myComponent = new LabeledComponent<TextFieldWithBrowseButton>();
+		myComponent.setComponent(dirTextField);
+		myComponent.setText(text);
 
-        return myComponent;
-    }
+		return myComponent;
+	}
 
-    public static LabeledComponent createWorkDirComponent(final Ref<TextFieldWithBrowseButton> workDirTFWrapper) {
-        return createDirChooserComponent(workDirTFWrapper, RBundle.message("run.configuration.messages.working.dir"));
-    }
+	public static LabeledComponent createWorkDirComponent(final Ref<TextFieldWithBrowseButton> workDirTFWrapper)
+	{
+		return createDirChooserComponent(workDirTFWrapper, RBundle.message("run.configuration.messages.working.dir"));
+	}
 
-    public static LabeledComponent createRubyArgsComponent(final Ref<RawCommandLineEditor> rubyArgsEditorWrapper) {
-        final String dialogCaption = RBundle.message("run.configuration.messages.edit.ruby.args");
-        final String text = RBundle.message("run.configuration.messages.ruby.args");
-        return createRawEditorComponent(rubyArgsEditorWrapper, dialogCaption, text);
-    }
+	public static LabeledComponent createRubyArgsComponent(final Ref<RawCommandLineEditor> rubyArgsEditorWrapper)
+	{
+		final String dialogCaption = RBundle.message("run.configuration.messages.edit.ruby.args");
+		final String text = RBundle.message("run.configuration.messages.ruby.args");
+		return createRawEditorComponent(rubyArgsEditorWrapper, dialogCaption, text);
+	}
 
-    public static LabeledComponent<RawCommandLineEditor> createRawEditorComponent(final Ref<RawCommandLineEditor> rawEditorWrapper,
-                                                            final String dialogCaption,
-                                                            final String labelTextWithMnemonic) {
-        final RawCommandLineEditor rawEditor = new RawCommandLineEditor();
-        rawEditorWrapper.set(rawEditor);
+	public static LabeledComponent<RawCommandLineEditor> createRawEditorComponent(final Ref<RawCommandLineEditor> rawEditorWrapper, final String dialogCaption, final String labelTextWithMnemonic)
+	{
+		final RawCommandLineEditor rawEditor = new RawCommandLineEditor();
+		rawEditorWrapper.set(rawEditor);
 
-        rawEditor.setDialogCaption(dialogCaption);
+		rawEditor.setDialogCaption(dialogCaption);
 
-        LabeledComponent<RawCommandLineEditor> myComponent = new LabeledComponent<RawCommandLineEditor>();
-        myComponent.setComponent(rawEditor);
-        myComponent.setText(labelTextWithMnemonic);
+		LabeledComponent<RawCommandLineEditor> myComponent = new LabeledComponent<RawCommandLineEditor>();
+		myComponent.setComponent(rawEditor);
+		myComponent.setText(labelTextWithMnemonic);
 
-        return myComponent;
-    }
+		return myComponent;
+	}
 
-    public static LabeledComponent createModulesComponent(final Ref<JComboBox> modulesComboBoxWrapper) {
-        final JComboBox modulesComboBox = new ComboBox();
-        modulesComboBoxWrapper.set(modulesComboBox);
+	public static LabeledComponent createModulesComponent(final Ref<JComboBox> modulesComboBoxWrapper)
+	{
+		final JComboBox modulesComboBox = new ComboBox();
+		modulesComboBoxWrapper.set(modulesComboBox);
 
-        modulesComboBox.setRenderer(new ModuleListCellRenderer());
+		modulesComboBox.setRenderer(new ModuleListCellRenderer());
 
-        LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
-        myComponent.setComponent(modulesComboBox);
-        myComponent.setText(RBundle.message("run.configuration.messages.select.module"));
-        return myComponent;
-    }
+		LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
+		myComponent.setComponent(modulesComboBox);
+		myComponent.setText(RBundle.message("run.configuration.messages.select.module"));
+		return myComponent;
+	}
 
-    public static LabeledComponent createTestFileMaskComponent(final Ref<JTextField> testFileMaskTFWrapper, final String text) {
-        final JTextField testFileMaskTextField = new JTextField();
-        testFileMaskTFWrapper.set(testFileMaskTextField);
+	public static LabeledComponent createTestFileMaskComponent(final Ref<JTextField> testFileMaskTFWrapper, final String text)
+	{
+		final JTextField testFileMaskTextField = new JTextField();
+		testFileMaskTFWrapper.set(testFileMaskTextField);
 
-        LabeledComponent<JTextField> myComponent = new LabeledComponent<JTextField>();
-        myComponent.setComponent(testFileMaskTextField);
-        myComponent.setText(text);
+		LabeledComponent<JTextField> myComponent = new LabeledComponent<JTextField>();
+		myComponent.setComponent(testFileMaskTextField);
+		myComponent.setText(text);
 
-        return myComponent;
-    }
+		return myComponent;
+	}
 
-    public static LabeledComponent<TextFieldWithBrowseButton> createScriptPathComponent(final Ref<TextFieldWithBrowseButton> testScriptTextFieldWrapper,
-                                                                                        final String text) {
-        final TextFieldWithBrowseButton testScriptTextField = new TextFieldWithBrowseButton();
-        testScriptTextFieldWrapper.set(testScriptTextField);
+	public static LabeledComponent<TextFieldWithBrowseButton> createScriptPathComponent(final Ref<TextFieldWithBrowseButton> testScriptTextFieldWrapper, final String text)
+	{
+		final TextFieldWithBrowseButton testScriptTextField = new TextFieldWithBrowseButton();
+		testScriptTextFieldWrapper.set(testScriptTextField);
 
-        LabeledComponent<TextFieldWithBrowseButton> myComponent = new LabeledComponent<TextFieldWithBrowseButton>();
-        myComponent.setComponent(testScriptTextField);
-        myComponent.setText(text);
+		LabeledComponent<TextFieldWithBrowseButton> myComponent = new LabeledComponent<TextFieldWithBrowseButton>();
+		myComponent.setComponent(testScriptTextField);
+		myComponent.setText(text);
 
-        return myComponent;
-    }
+		return myComponent;
+	}
 
-    public static LabeledComponent createTestFolderComponent(final Ref<TextFieldWithBrowseButton> testsFolderTextFieldWrapper) {
-        final TextFieldWithBrowseButton testsFolderTextField = new TextFieldWithBrowseButton();
-        testsFolderTextFieldWrapper.set(testsFolderTextField);
+	public static LabeledComponent createTestFolderComponent(final Ref<TextFieldWithBrowseButton> testsFolderTextFieldWrapper)
+	{
+		final TextFieldWithBrowseButton testsFolderTextField = new TextFieldWithBrowseButton();
+		testsFolderTextFieldWrapper.set(testsFolderTextField);
 
-        LabeledComponent<TextFieldWithBrowseButton> myComponent = new LabeledComponent<TextFieldWithBrowseButton>();
-        myComponent.setComponent(testsFolderTextField);
-        myComponent.setText(RBundle.message("run.configuration.messages.folder.path"));
+		LabeledComponent<TextFieldWithBrowseButton> myComponent = new LabeledComponent<TextFieldWithBrowseButton>();
+		myComponent.setComponent(testsFolderTextField);
+		myComponent.setText(RBundle.message("run.configuration.messages.folder.path"));
 
-        return myComponent;
-    }
+		return myComponent;
+	}
 
-    public static void initCommonComponents(final AbstractRubyRunConfiguration myConfiguration,
-                                            final JComboBox myModulesComboBox,
-                                            final JComboBox myAlternativeSdksComboBox) {
-// setting modules
-        myModulesComboBox.setModel(new DefaultComboBoxModel(myConfiguration.getModules()));
-//setting skds
-        final ArrayList<Sdk> foundSdks = new ArrayList<Sdk>();
-        final Sdk[] allSdk = SdkTable.getInstance().getAllSdks();
-        for (Sdk sdk : allSdk) {
-            if (RubySdkUtil.isSDKValid(sdk)) {
-                foundSdks.add(sdk);
-            }
-        }
-        myAlternativeSdksComboBox.setModel(new DefaultComboBoxModel(foundSdks.toArray(new Sdk[foundSdks.size()])));
-    }
+	public static void initCommonComponents(final AbstractRubyRunConfiguration myConfiguration, final JComboBox myModulesComboBox, final JComboBox myAlternativeSdksComboBox)
+	{
+		// setting modules
+		myModulesComboBox.setModel(new DefaultComboBoxModel(myConfiguration.getModules()));
+		//setting skds
+		final ArrayList<Sdk> foundSdks = new ArrayList<Sdk>();
+		final Sdk[] allSdk = SdkTable.getInstance().getAllSdks();
+		for(Sdk sdk : allSdk)
+		{
+			if(RubySdkUtil.isSDKValid(sdk))
+			{
+				foundSdks.add(sdk);
+			}
+		}
+		myAlternativeSdksComboBox.setModel(new DefaultComboBoxModel(foundSdks.toArray(new Sdk[foundSdks.size()])));
+	}
 
-    public static FileChooserDescriptor addFolderChooser(@NotNull final String title,
-                                        @NotNull final TextFieldWithBrowseButton textField,
-                                        final Project project) {
-        final FileChooserDescriptor folderChooserDescriptor =
-                FileChooserDescriptorFactory.createSingleFolderDescriptor();
-        folderChooserDescriptor.setTitle(title);
-        textField.addBrowseFolderListener(title, null, project, folderChooserDescriptor);
-        return folderChooserDescriptor;
-    }
+	public static FileChooserDescriptor addFolderChooser(@NotNull final String title, @NotNull final TextFieldWithBrowseButton textField, final Project project)
+	{
+		final FileChooserDescriptor folderChooserDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+		folderChooserDescriptor.setTitle(title);
+		textField.addBrowseFolderListener(title, null, project, folderChooserDescriptor);
+		return folderChooserDescriptor;
+	}
 
-    public static FileChooserDescriptor addFileChooser(final String title,
-                                                       final TextFieldWithBrowseButton textField,
-                                                       final Project project) {
-        final FileChooserDescriptor fileChooserDescriptor =
-                FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor();
-        fileChooserDescriptor.setTitle(title);
-        textField.addBrowseFolderListener(title, null, project, fileChooserDescriptor);
-        return fileChooserDescriptor;
-    }
+	public static FileChooserDescriptor addFileChooser(@NotNull final String title, @NotNull final TextFieldWithBrowseButton textField, @NotNull final Project project)
+	{
+		final FileChooserDescriptor fileChooserDescriptor = FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor();
+		fileChooserDescriptor.setTitle(title);
+		textField.addBrowseFolderListener(title, null, project, fileChooserDescriptor);
+		return fileChooserDescriptor;
+	}
 
-    public static void addAlternativeSDKActionListener(final JCheckBox useAlternativeSdkCB,
-                                                       final LabeledComponent alternativeSdksComponent,
-                                                       final JComboBox modulesComboBox) {
-        useAlternativeSdkCB.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                final boolean useAlternativeSDK = useAlternativeSdkCB.isSelected();
-                alternativeSdksComponent.setEnabled(useAlternativeSDK);
-                modulesComboBox.setEnabled(!useAlternativeSDK);
-            }
-        });
-    }
+	public static void addAlternativeSDKActionListener(final JCheckBox useAlternativeSdkCB, final LabeledComponent alternativeSdksComponent, final JComboBox modulesComboBox)
+	{
+		useAlternativeSdkCB.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				final boolean useAlternativeSDK = useAlternativeSdkCB.isSelected();
+				alternativeSdksComponent.setEnabled(useAlternativeSDK);
+				modulesComboBox.setEnabled(!useAlternativeSDK);
+			}
+		});
+	}
 
-    public static void setShouldUseAlternSdk(boolean shouldUse,
-                                             final JCheckBox useAlternativeSdkCB,
-                                             final JComboBox alternativeSdksComboBox,
-                                             final JComboBox myModulesComboBox) {
-        useAlternativeSdkCB.setSelected(shouldUse);
-        myModulesComboBox.setEnabled(!shouldUse);
-        alternativeSdksComboBox.setEnabled(shouldUse);
-    }
+	public static void setShouldUseAlternSdk(boolean shouldUse, final JCheckBox useAlternativeSdkCB, final JComboBox alternativeSdksComboBox, final JComboBox myModulesComboBox)
+	{
+		useAlternativeSdkCB.setSelected(shouldUse);
+		myModulesComboBox.setEnabled(!shouldUse);
+		alternativeSdksComboBox.setEnabled(shouldUse);
+	}
 }

@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.ide.fileTemplates.CreateFromTemplateActionReplacer;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.templates.RailsTemplatesLoader;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,11 +32,15 @@ import org.jetbrains.plugins.ruby.rails.templates.RailsTemplatesLoader;
  * @date: Oct 6, 2007
  */
 public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplateActionReplacer {
-    @Override
+	public static final String RHTML_TEMPLATE_NAME = RBundle.message("template.rhtml.script.name");
+
+	public static final String RXML_TEMPLATE_NAME = RBundle.message("template.rxml.script.name");
+
+	@Override
 	@Nullable
     public AnAction replaceCreateFromFileTemplateAction(@NotNull final FileTemplate fileTemplate) {
         final String templateName = fileTemplate.getName();
-        if (templateName.equals(RailsTemplatesLoader.RHTML_TEMPLATE_NAME)) {
+        if (templateName.equals(RHTML_TEMPLATE_NAME)) {
             return new RailsCreateFromTemplateAction(fileTemplate) {
                 @Override
 				@NotNull
@@ -45,7 +49,7 @@ public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplate
                     return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
                 }
             };
-        } else if (templateName.equals(RailsTemplatesLoader.RXML_TEMPLATE_NAME)) {
+        } else if (templateName.equals(RXML_TEMPLATE_NAME)) {
             return new RailsCreateFromTemplateAction(fileTemplate) {
                 @Override
 				@NotNull

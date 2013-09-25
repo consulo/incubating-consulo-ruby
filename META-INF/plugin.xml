@@ -63,8 +63,15 @@
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
 
-		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
 		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType" />
+
+		<internalFileTemplate name="Erb(rhtml) Template" />
+		<internalFileTemplate name="RSpec test Template" />
+		<internalFileTemplate name="Ruby Script" />
+		<internalFileTemplate name="TestUnit test Template" />
+
+		<orderRootType implementation="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType" />
+		<orderRootTypeEditor key="GEM" implementationClass="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootTypeUIFactory" />
 
 		<!--<overridingMethodsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyOverridingMethodsSearch"/>-->
 		<!--<definitionsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyImplementingMethodsSearch"/>-->
@@ -102,9 +109,7 @@
 			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html.RHTMLFileNSInfoProviderImpl</implementation-class>
 		</component>
 
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.templates.RubyTemplatesLoader</implementation-class>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.RailsSupportLoader</implementation-class>
 		</component>
@@ -113,13 +118,6 @@
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLApplicationComponent</implementation-class>
-		</component>
-
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.rails.templates.RailsTemplatesLoader</implementation-class>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.jruby.JRubySupportLoader</implementation-class>
 		</component>
 
 		<component>

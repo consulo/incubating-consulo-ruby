@@ -6,7 +6,15 @@
 	<depends>org.consulo.ruby</depends>
 	<depends>org.consulo.java</depends>
 
+	<!--<project-components>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.jruby.JRubySupportLoader</implementation-class>
+		</component>
+	</project-components>  -->
+
 	<extensions defaultExtensionNs="com.intellij">
+		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
+
 		<moduleExtensionProvider key="jruby" parent-key="java" implementationClass="org.consulo.jruby.module.extension.JRubyModuleExtensionProvider" />
 	</extensions>
 </idea-plugin>

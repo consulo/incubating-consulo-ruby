@@ -38,7 +38,7 @@
             <SOURCES />
           </library>
         </orderEntry>
-        <orderEntry type="module-library">
+        <orderEntry type="module-library" exported="">
           <library>
             <CLASSES>
               <root url="jar://$MODULE_DIR$/jruby/jruby-complete.jar!/" />
@@ -85,6 +85,18 @@
           </library>
         </orderEntry>
         <orderEntry type="module" module-name="consulo-ruby" exported="" />
+        <orderEntry type="module-library">
+          <library name="consulo:Java Platform">
+            <CLASSES>
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-compiler-artifact-impl.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-platform.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-rt.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/jdk-annotations.jar!/" />
+            </CLASSES>
+            <DOCUMENTATION />
+            <SOURCES />
+          </library>
+        </orderEntry>
       </module>
       <module name="consulo-yaml" dirurl="file://$PROJECT_DIR$/consulo-yaml">
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />

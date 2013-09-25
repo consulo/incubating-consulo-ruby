@@ -16,17 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.ui;
 
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import static com.intellij.openapi.util.io.FileUtil.*;
+import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.border.EtchedBorder;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import javax.swing.*;
-import javax.swing.border.EtchedBorder;
+import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.Ref;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,8 +49,7 @@ public class RubySdkConfigurablePanel{
     protected TextFieldWithBrowseButton myGemsBinFolderTF;
 
     public RubySdkConfigurablePanel() {
-        String title = RBundle.message("ruby.configuration.gems.bin.dir.select.path");
-        RubyRunConfigurationUIUtil.addFileChooser(title, myGemsBinFolderTF, null);
+
     }
 
     private void createUIComponents() {
@@ -64,7 +66,9 @@ public class RubySdkConfigurablePanel{
         myGemsBinFolderComponent = RubyRunConfigurationUIUtil.createDirChooserComponent(gemsBinDirComponentWrapper, gemsBinDirChooserTitle);
         myGemsBinFolderTF = gemsBinDirComponentWrapper.get();
         myGemsBinFolderComponent.setToolTipText(RBundle.message("ruby.configuration.gems.bin.dir.path.tooltip"));
-    }
+
+		RubyRunConfigurationUIUtil.addFileChooser(RBundle.message("ruby.configuration.gems.bin.dir.select.path"), myGemsBinFolderTF, null);
+	}
 
     public JComponent getPanel() {
         return mainPanel;

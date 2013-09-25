@@ -36,8 +36,6 @@ import com.intellij.openapi.util.SystemInfo;
 public class JRubySdkType extends RubySdkType
 {
 	@NonNls
-	private static final String JRUBY_SDK_NAME = "JRUBY_SDK";
-	@NonNls
 	private static final String JRUBY_WIN_EXE = "jruby.bat";
 	@NonNls
 	private static final String JRUBY_UNIX_EXE = "jruby";
@@ -67,7 +65,7 @@ public class JRubySdkType extends RubySdkType
 
 	public JRubySdkType()
 	{
-		super(JRUBY_SDK_NAME);
+		super("JRUBY_SDK");
 	}
 
 	public static JRubySdkType getInstance()

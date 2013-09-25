@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin;
 
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.nameConventions.MailersConventions;
@@ -27,9 +24,10 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.StubsUrls;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
-
-import java.util.List;
+import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,16 +50,14 @@ public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol {
             return;
         }
         // We recreate cache if something added to gems
-        final List<String> gemsRootUrls = RubySdkType.getGemsRootUrls(mySdk);
-        if (gemsRootUrls != null) {
-            for (String gemsRootUrl : gemsRootUrls) {
-                if (url.startsWith(gemsRootUrl)){
-                    myFileSymbol = null;
-                    return;
-                }
-            }
-        }
-    }
+		final String[] gemsRootUrls = mySdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
+		for (String gemsRootUrl : gemsRootUrls) {
+			if (url.startsWith(gemsRootUrl)){
+				myFileSymbol = null;
+				return;
+			}
+		}
+	}
 
     @Override
 	protected void addAdditionalData() {

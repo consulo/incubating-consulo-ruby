@@ -16,21 +16,20 @@
 
 package org.jetbrains.plugins.ruby.jruby.inspections;
 
-import com.intellij.codeInsight.generation.ClassMember;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.progress.ProcessCanceledException;
-import com.intellij.openapi.progress.ProgressManager;
+import java.util.List;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.inspections.RubyInspectionVisitor;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+import com.intellij.codeInsight.generation.ClassMember;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.openapi.progress.ProgressManager;
 import rb.implement.ImplementHandler;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +43,7 @@ public class JRubyImplementInterfaceVisitor extends RubyInspectionVisitor {
 
     public JRubyImplementInterfaceVisitor(final ProblemsHolder holder) {
         super(holder);
-        myHandler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
+       // myHandler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
     }
 
     @Override

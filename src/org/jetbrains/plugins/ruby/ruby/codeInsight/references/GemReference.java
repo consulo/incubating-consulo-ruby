@@ -16,15 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -39,11 +33,17 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.sdk.GemInfo;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -143,20 +143,18 @@ public class GemReference implements RPsiPolyvariantReference{
             assert rFile!=null;
             final Sdk sdk = rFile.getSdk();
             if (sdk!=null && RubySdkUtil.isKindOfRubySDK(sdk)){
-                final List<String> rootUrls = RubySdkType.getGemsRootUrls(sdk);
-                if (rootUrls != null) {
-                    final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
-                    for (String rootUrl : rootUrls) {
-                        final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(rootUrl);
-                        if (gemsRoot != null) {
-                            for (GemInfo gemInfo : RubySdkUtil.getAllGems(gemsRoot)) {
-                                variants.add(new RubySimpleLookupItem(gemInfo.getName(), gemInfo.getVersion(), LookupValueWithPriority.NORMAL, true, RubyIcons.RUBY_ICON));
-                            }
-                        }
-                    }
-                    return variants.toArray();
-                }
-            }
+				final String[] rootUrls = sdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
+				final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
+				for (String rootUrl : rootUrls) {
+					final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(rootUrl);
+					if (gemsRoot != null) {
+						for (GemInfo gemInfo : RubySdkUtil.getAllGems(gemsRoot)) {
+							variants.add(new RubySimpleLookupItem(gemInfo.getName(), gemInfo.getVersion(), LookupValueWithPriority.NORMAL, true, RubyIcons.RUBY_ICON));
+						}
+					}
+				}
+				return variants.toArray();
+			}
         }
         return PsiReference.EMPTY_ARRAY;
     }

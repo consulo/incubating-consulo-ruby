@@ -29,7 +29,7 @@ import javax.swing.*;
 public class RubyFileType extends LanguageFileType {
     public static final RubyFileType RUBY = new RubyFileType();
     @NonNls private static final String DESCRIPTION = RBundle.message("filetype.description.rb");
-    @NonNls private static final String DEFAULT_EXTENSION = "rb";
+    @NonNls private static final String DEFAULT_EXTENSION = "dist/rb";
     @NonNls private static final String NAME = "Ruby";
     public static final Icon ICON = RubyIcons.RUBY_ICON;
 

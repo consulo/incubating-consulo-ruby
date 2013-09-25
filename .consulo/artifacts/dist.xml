@@ -12,6 +12,7 @@
           </element>
           <element id="dir-copy" path="$PROJECT_DIR$/jruby" />
         </element>
+        <element id="dir-copy" path="$PROJECT_DIR$/dist" />
       </element>
       <element id="directory" name="yaml">
         <element id="directory" name="lib">
@@ -26,8 +27,8 @@
           <element id="zip-archive" name="jruby.jar">
             <element id="module-output" name="consulo-jruby" />
           </element>
-          <element id="dir-copy" path="$PROJECT_DIR$/lib" />
         </element>
+        <element id="dir-copy" path="$PROJECT_DIR$/consulo-jruby/dist" />
       </element>
       <element id="directory" name="ruby-on-rails">
         <element id="directory" name="lib">
