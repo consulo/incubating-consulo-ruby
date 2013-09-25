@@ -28,7 +28,7 @@ import org.jetbrains.plugins.ruby.addins.gems.GemUtil;
 import org.jetbrains.plugins.ruby.addins.gems.GemsRunner;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
-import org.jetbrains.plugins.ruby.rails.langs.YAMLFileType;
+import org.consulo.yaml.lang.fileType.YAMLFileType;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.NamingConventions;

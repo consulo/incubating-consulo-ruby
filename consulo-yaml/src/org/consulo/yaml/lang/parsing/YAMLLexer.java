@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang.parsing;
 
 import java.util.Iterator;
 
+import org.consulo.yaml.lang.psi.YAMLTokenTypeFactory;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jvaymlb.DefaultYAMLFactory;
 import org.jetbrains.jvaymlb.ScannerImpl;
@@ -68,7 +69,7 @@ public class YAMLLexer extends LexerBase {
 
     @Deprecated
     public void start(final char[] buffer, final int startOffset, final int endOffset, final int initialState) {
-        throw new UnsupportedOperationException("Method start is not implemented in org.jetbrains.plugins.ruby.rails.langs.yaml.YAMLLexer");
+        throw new UnsupportedOperationException("Method start is not implemented in org.consulo.yaml.lang.parsing.YAMLLexer");
     }
 
     public int getState() {

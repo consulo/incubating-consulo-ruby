@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs;
+package org.consulo.yaml.lang.fileType;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.Icon;
+
+import org.consulo.yaml.YAMLBundle;
+import org.consulo.yaml.lang.YAMLLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.rails.langs.yaml.YAMLLanguage;
-
-import javax.swing.*;
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,10 +33,10 @@ import javax.swing.*;
  * @date: 17.10.2006
  */
 public class YAMLFileType extends LanguageFileType {
-    public static final YAMLFileType YML = new YAMLFileType();
+    public static final YAMLFileType INSTANCE = new YAMLFileType();
     @NonNls private static final String DEFAULT_EXTENSION = "yml";
     @NonNls private static final String NAME = "YAML";
-    @NonNls private static final String DESCRIPTION = RBundle.message("filetype.description.yml");
+    @NonNls private static final String DESCRIPTION = YAMLBundle.message("filetype.description.yml");
 
     private YAMLFileType() {
         super(YAMLLanguage.INSTANCE);
@@ -59,7 +59,7 @@ public class YAMLFileType extends LanguageFileType {
 
     @Nullable
     public Icon getIcon() {
-        return RailsIcons.YAML_ICON;
+        return AllIcons.Nodes.DataTables;
     }
 }
 

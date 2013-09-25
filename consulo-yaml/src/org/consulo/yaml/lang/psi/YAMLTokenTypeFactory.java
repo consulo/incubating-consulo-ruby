@@ -1,12 +1,20 @@
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang.psi;
 
+import org.consulo.yaml.lang.psi.YAMLTokenTypes;
+import org.jetbrains.jvaymlb.tokens.AliasToken;
+import org.jetbrains.jvaymlb.tokens.AnchorToken;
+import org.jetbrains.jvaymlb.tokens.CommentToken;
+import org.jetbrains.jvaymlb.tokens.KeyToken;
+import org.jetbrains.jvaymlb.tokens.ScalarToken;
+import org.jetbrains.jvaymlb.tokens.Token;
+import org.jetbrains.jvaymlb.tokens.ValueToken;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.jvaymlb.tokens.*;
 
 /**
  * @author oleg
  */
-public class YAMLTokenTypeFactory implements YAMLTokenTypes {
+public class YAMLTokenTypeFactory implements YAMLTokenTypes
+{
 
   public static IElementType getTypeForToken(final Token previousToken, final Token token) {
     if (token instanceof AliasToken) {

@@ -23,6 +23,7 @@
 	<resource-bundle xmlns="">org.jetbrains.plugins.ruby.RBundle</resource-bundle>
 	<depends>com.intellij.xml</depends>
 	<depends>org.consulo.java</depends>
+	<depends>org.consulo.yaml</depends>
 
 	<depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
 
@@ -73,8 +74,6 @@
 		<configurationProducer implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationProducer"/>
 		<!-- RSpec -->
 		<configurationProducer implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecConfigurationProducer"/>
-		<!-- YAML -->
-		<colorSettingsPage implementation="org.jetbrains.plugins.ruby.rails.langs.yaml.YAMLColorsPage"/>
 
 		<!-- RSpec Support -->
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings"/>

@@ -27,10 +27,10 @@
  ***** END LICENSE BLOCK *****/
 package org.jetbrains.jvaymlb;
 
+import java.io.InputStream;
+
 import org.jruby.util.ByteList;
 import org.jvyamlb.YAMLFactory;
-
-import java.io.InputStream;
 
 /**
  * @author <a href="mailto:ola.bini@ki.se">Ola Bini</a>

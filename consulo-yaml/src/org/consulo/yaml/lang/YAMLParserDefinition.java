@@ -1,7 +1,13 @@
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang;
 
+import org.consulo.yaml.lang.parsing.YAMLLexer;
+import org.consulo.yaml.lang.psi.YAMLTokenTypes;
+import org.consulo.yaml.lang.parsing.YAMLMockParser;
+import org.consulo.yaml.lang.psi.YAMLElementTypes;
+import org.consulo.yaml.lang.psi.impl.YAMLFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
@@ -13,13 +19,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiUtil;
 
 /**
  * @author: oleg
  * @date: Jun 17, 2008
  */
-public class YAMLParserDefinition implements ParserDefinition, YAMLElementTypes {
+public class YAMLParserDefinition implements ParserDefinition, YAMLElementTypes
+{
 
   @NotNull
   public Lexer createLexer(final Project project, LanguageVersion languageVersion) {
@@ -52,7 +58,7 @@ public class YAMLParserDefinition implements ParserDefinition, YAMLElementTypes 
 
   @NotNull
   public PsiElement createElement(final ASTNode node) {
-    return PsiUtil.NULL_PSI_ELEMENT;
+    return new ASTWrapperPsiElement(node);
   }
 
   public PsiFile createFile(final FileViewProvider viewProvider) {

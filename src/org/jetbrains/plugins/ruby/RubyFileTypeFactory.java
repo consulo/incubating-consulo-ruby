@@ -19,7 +19,6 @@ package org.jetbrains.plugins.ruby;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.RJSFileType;
 import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
-import org.jetbrains.plugins.ruby.rails.langs.YAMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
@@ -38,7 +37,7 @@ public class RubyFileTypeFactory extends FileTypeFactory {
 		// Loading Ruby file type
 		consumer.consume(RubyFileType.RUBY, RubyFileType.RUBY_EXTENTIONS);
 		// Loading rails related types
-		consumer.consume(YAMLFileType.YML, YAMLFileType.YML.getDefaultExtension());
+
 		consumer.consume(RJSFileType.RJS, RJSFileType.RJS.getDefaultExtension());
 		consumer.consume(RHTMLFileType.RHTML, RHTMLFileType.VALID_EXTENTIONS);
 		consumer.consume(RXMLFileType.RXML, RXMLFileType.VALID_EXTENTIONS);

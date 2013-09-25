@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.ide;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.consulo.yaml.lang.parsing.YAMLLexer;
+import org.consulo.yaml.lang.psi.YAMLTokenTypes;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,7 +33,8 @@ import java.util.Map;
  * @author: oleg
  * @date: Feb 11, 2008
  */
-public class YAMLSyntaxHighlighter extends SyntaxHighlighterBase implements YAMLTokenTypes {
+public class YAMLSyntaxHighlighter extends SyntaxHighlighterBase implements YAMLTokenTypes
+{
 
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 

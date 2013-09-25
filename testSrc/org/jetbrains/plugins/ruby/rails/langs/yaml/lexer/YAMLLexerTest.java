@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.langs.yaml.lexer;
 import junit.framework.Test;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.PathUtil;
-import org.jetbrains.plugins.ruby.rails.langs.yaml.YAMLLexer;
+import org.consulo.yaml.lang.parsing.YAMLLexer;
 import org.jetbrains.plugins.ruby.ruby.testCases.LexerTestCase;
 
 /**

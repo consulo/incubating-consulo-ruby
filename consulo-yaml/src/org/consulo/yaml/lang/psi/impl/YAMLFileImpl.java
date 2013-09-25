@@ -1,10 +1,11 @@
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang.psi.impl;
 
+import org.consulo.yaml.lang.fileType.YAMLFileType;
+import org.consulo.yaml.lang.YAMLLanguage;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.YAMLFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,12 +14,12 @@ import org.jetbrains.plugins.ruby.rails.langs.YAMLFileType;
  * @date: Jun 17, 2008
  */
 public class YAMLFileImpl extends PsiFileBase {
-  protected YAMLFileImpl(FileViewProvider viewProvider) {
+	public YAMLFileImpl(FileViewProvider viewProvider) {
     super(viewProvider, YAMLLanguage.INSTANCE);
   }
 
   @NotNull
   public FileType getFileType() {
-    return YAMLFileType.YML;
+    return YAMLFileType.INSTANCE;
   }
 }

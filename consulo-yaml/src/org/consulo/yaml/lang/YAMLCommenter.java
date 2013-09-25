@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;

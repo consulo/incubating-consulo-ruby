@@ -1,5 +1,6 @@
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang.parsing;
 
+import org.consulo.yaml.lang.psi.YAMLElementTypes;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageVersion;

@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.ide;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.Icon;
+
+import org.consulo.yaml.YAMLBundle;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-
-import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -53,12 +54,12 @@ public class YAMLColorsPage implements ColorSettingsPage {
         "  type: > some_type_here";
 
     private static final AttributesDescriptor[] ATTRS = new AttributesDescriptor[]{
-            new AttributesDescriptor(RBundle.message("color.settings.yaml.key"), YAMLHighlighter.SCALAR_KEY),
-            new AttributesDescriptor(RBundle.message("color.settings.yaml.text"), YAMLHighlighter.SCALAR_TEXT),
-            new AttributesDescriptor(RBundle.message("color.settings.yaml.string"), YAMLHighlighter.SCALAR_STRING),
-            new AttributesDescriptor(RBundle.message("color.settings.yaml.dstring"), YAMLHighlighter.SCALAR_DSTRING),
-            new AttributesDescriptor(RBundle.message("color.settings.yaml.block"), YAMLHighlighter.SCALAR_LIST),
-            new AttributesDescriptor(RBundle.message("color.settings.yaml.block2"), YAMLHighlighter.SCALAR_VALUE),
+            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.key"), YAMLHighlighter.SCALAR_KEY),
+            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.text"), YAMLHighlighter.SCALAR_TEXT),
+            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.string"), YAMLHighlighter.SCALAR_STRING),
+            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.dstring"), YAMLHighlighter.SCALAR_DSTRING),
+            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.block"), YAMLHighlighter.SCALAR_LIST),
+            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.block2"), YAMLHighlighter.SCALAR_VALUE),
     };
 
     // Empty still
@@ -73,12 +74,12 @@ public class YAMLColorsPage implements ColorSettingsPage {
 
     @NotNull
     public String getDisplayName() {
-        return RBundle.message("color.settings.yaml.name");
+        return YAMLBundle.message("color.settings.yaml.name");
     }
 
     @NotNull
     public Icon getIcon() {
-        return RailsIcons.YAML_ICON;
+        return AllIcons.Nodes.DataTables;
     }
 
     @NotNull

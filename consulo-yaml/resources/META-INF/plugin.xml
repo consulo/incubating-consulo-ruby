@@ -1,0 +1,12 @@
+<idea-plugin version="2">
+	<id>org.consulo.yaml</id>
+	<name>YAML</name>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<colorSettingsPage implementation="org.consulo.yaml.ide.YAMLColorsPage"/>
+		<fileTypeFactory implementation="org.consulo.yaml.lang.fileType.YAMLFileTypeFactory" />
+		<lang.commenter language="YAML" implementationClass="org.consulo.yaml.lang.YAMLCommenter" />
+		<lang.parserDefinition language="YAML" implementationClass="org.consulo.yaml.lang.YAMLParserDefinition" />
+		<lang.syntaxHighlighterFactory key="YAML" implementationClass="org.consulo.yaml.ide.YAMLSyntaxHighlighterFactory" />
+	</extensions>
+</idea-plugin>

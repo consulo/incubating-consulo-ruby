@@ -60,6 +60,7 @@
           </library>
         </orderEntry>
         <orderEntry type="module" module-name="consulo-jruby" />
+        <orderEntry type="module" module-name="consulo-yaml" />
       </module>
       <module name="consulo-jruby" dirurl="file://$PROJECT_DIR$/consulo-jruby">
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
@@ -85,6 +86,26 @@
           </library>
         </orderEntry>
         <orderEntry type="module" module-name="consulo-ruby" />
+      </module>
+      <module name="consulo-yaml" dirurl="file://$PROJECT_DIR$/consulo-yaml">
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
+        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <content url="file://$MODULE_DIR$">
+          <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
+          <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
+        </content>
+        <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
+        <orderEntry type="module-extension-sdk" extension-id="java" />
+        <orderEntry type="sourceFolder" forTests="false" />
+        <orderEntry type="module-library">
+          <library>
+            <CLASSES>
+              <root url="jar://$MODULE_DIR$/../jruby/jruby-complete.jar!/" />
+            </CLASSES>
+            <DOCUMENTATION />
+            <SOURCES />
+          </library>
+        </orderEntry>
       </module>
     </modules>
   </component>

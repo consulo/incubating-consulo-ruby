@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang;
 
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.plugins.ruby.rails.langs.YAMLFileType;
+import com.intellij.lang.Language;
 
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
- * @date: Feb 21, 2008
+ * @date: Feb 11, 2008
  */
-public class YAMLElementType extends IElementType{
-    public YAMLElementType(String debugName) {
-        super(debugName, YAMLFileType.YML.getLanguage());
+public class YAMLLanguage extends Language {
+    public static final YAMLLanguage INSTANCE = new YAMLLanguage();
+
+    private YAMLLanguage() {
+        super("YAML", "yaml");
     }
 }

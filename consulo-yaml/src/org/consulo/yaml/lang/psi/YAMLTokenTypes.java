@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang.psi;
 
 /**
  * Created by IntelliJ IDEA.

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.ide;
 
 import java.awt.Color;
 import java.awt.Font;

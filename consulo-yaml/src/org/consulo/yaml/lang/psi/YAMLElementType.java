@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.rails.langs.yaml;
+package org.consulo.yaml.lang.psi;
 
-import com.intellij.psi.tree.IFileElementType;
+import org.consulo.yaml.lang.fileType.YAMLFileType;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +25,8 @@ import com.intellij.psi.tree.IFileElementType;
  * @author: oleg
  * @date: Feb 21, 2008
  */
-public interface YAMLElementTypes {
-    IFileElementType FILE = new IFileElementType(YAMLLanguage.INSTANCE);
+public class YAMLElementType extends IElementType{
+    public YAMLElementType(String debugName) {
+        super(debugName, YAMLFileType.INSTANCE.getLanguage());
+    }
 }
