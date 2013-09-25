@@ -39,7 +39,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
 import com.intellij.psi.PsiFile;
 
-public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguration> {
+public class JRubyFacetType extends FacetType<JRubyFacet, RSupportPerModuleSettingsImpl> {
     public static final JRubyFacetType INSTANCE = new JRubyFacetType();
 
 
@@ -52,11 +52,11 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
     }
 
     @Override
-	public JRubyFacetConfiguration createDefaultConfiguration() {
-        return new JRubyFacetConfiguration();
+	public RSupportPerModuleSettingsImpl createDefaultConfiguration() {
+        return new RSupportPerModuleSettingsImpl();
     }
 
-    public JRubyFacet createFacet(@NotNull Module module, String name, @NotNull JRubyFacetConfiguration configuration, @Nullable Facet underlyingFacet) {
+    public JRubyFacet createFacet(@NotNull Module module, String name, @NotNull RSupportPerModuleSettingsImpl configuration, @Nullable Facet underlyingFacet) {
         return new JRubyFacet(this, module, name, configuration, underlyingFacet);
     }
 
@@ -66,8 +66,8 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
 
 
 
-    public void registerDetectors(@NotNull final FacetDetectorRegistry<JRubyFacetConfiguration> registry) {
-        final FacetDetectorRegistryEx<JRubyFacetConfiguration> detectorRegistry = (FacetDetectorRegistryEx<JRubyFacetConfiguration>) registry;
+    public void registerDetectors(@NotNull final FacetDetectorRegistry<RSupportPerModuleSettingsImpl> registry) {
+        final FacetDetectorRegistryEx<RSupportPerModuleSettingsImpl> detectorRegistry = (FacetDetectorRegistryEx<RSupportPerModuleSettingsImpl>) registry;
 
         final VirtualFileFilter jrubyFacetFilter = new VirtualFileFilter(){
             @Override
@@ -90,20 +90,20 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
                         && JRubyFacetStructure.isValidForJRubyFacet(vFile);
             }
         };
-        detectorRegistry.registerOnTheFlyDetector(RubyFileType.RUBY, jrubyFacetFilter, condition, new FacetDetector<PsiFile, JRubyFacetConfiguration>() {
-            public JRubyFacetConfiguration detectFacet(PsiFile source, Collection<JRubyFacetConfiguration> existentFacetConfigurations) {
+        detectorRegistry.registerOnTheFlyDetector(RubyFileType.RUBY, jrubyFacetFilter, condition, new FacetDetector<PsiFile, RSupportPerModuleSettingsImpl>() {
+            public RSupportPerModuleSettingsImpl detectFacet(PsiFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations) {
                 return JRubyFacetType.this.detectFacet(existentFacetConfigurations);
             }
         });
 
-        detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, jrubyFacetFilter, new FacetDetector<VirtualFile, JRubyFacetConfiguration>() {
-            public JRubyFacetConfiguration detectFacet(VirtualFile source, Collection<JRubyFacetConfiguration> existentFacetConfigurations) {
+        detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, jrubyFacetFilter, new FacetDetector<VirtualFile, RSupportPerModuleSettingsImpl>() {
+            public RSupportPerModuleSettingsImpl detectFacet(VirtualFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations) {
                 return JRubyFacetType.this.detectFacet(existentFacetConfigurations);
             }
         });
     }
 
-    private JRubyFacetConfiguration detectFacet(Collection<JRubyFacetConfiguration> existentFacetConfigurations) {
+    private RSupportPerModuleSettingsImpl detectFacet(Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations) {
         if (!existentFacetConfigurations.isEmpty()) {
             return existentFacetConfigurations.iterator().next();
         }

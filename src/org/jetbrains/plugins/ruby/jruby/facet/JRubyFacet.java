@@ -22,7 +22,6 @@ import java.util.Collection;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.facet.Facet;
@@ -30,18 +29,16 @@ import com.intellij.facet.FacetRootsProvider;
 import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderEntry;
 import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.ActionRunner;
 
-public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetRootsProvider
+public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl> implements FacetRootsProvider
 {
     public static final FacetTypeId<JRubyFacet> ID = new FacetTypeId<JRubyFacet>("JRubyFacetType");
 
@@ -56,7 +53,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
     public JRubyFacet(@NotNull final FacetType facetType,
                       @NotNull final Module module,
                       final String name,
-                      @NotNull JRubyFacetConfiguration configuration,
+                      @NotNull RSupportPerModuleSettingsImpl configuration,
                       final Facet underlyingFacet) {
         super(facetType, module, name, configuration, underlyingFacet);
 
@@ -71,7 +68,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
      * Here we try to add JRuby SDK as library invisible to user to module
      */
     public void updateSdkLibrary() {
-        IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
+       /* IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
             @Override
 			public void run() throws Exception {
                 final Module module = getModule();
@@ -121,7 +118,7 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
                     model.dispose();
                 }
             }
-        });
+        });  */
     }
 
     public void removeSdkLibrary() {
@@ -162,10 +159,6 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
     @Nullable
     public static JRubyFacet getInstance(@NotNull final Module module) {
         return null;
-    }
-
-    public Sdk getSdk() {
-        return getConfiguration().getSdk();
     }
 
 

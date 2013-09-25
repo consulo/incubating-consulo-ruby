@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,18 +37,18 @@ public class JRubyFacetExternalizer extends SettingsExternalizer {
     @NonNls private static final String USE_TEST_UNIT_FRAMEWORK = "USE_TEST_UNIT_FRAMEWORK";
     @NonNls private static final String TEST_UNIT_FRAMEWORK_ROOT_URL = "TEST_UNIT_FRAMEWORK_ROOT_URL";
 
-    public void writeExternal(@NotNull final JRubyFacetConfiguration config, @NotNull final Element elem) {
-        writeOption(JRUBY_SDK_NAME,  config.getSdkName(), elem);
+    public void writeExternal(@NotNull final RSupportPerModuleSettingsImpl config, @NotNull final Element elem) {
+
         writeOption(USE_TEST_UNIT_FRAMEWORK, Boolean.toString(config.shouldUseTestUnitTestFramework()), elem);
         config.getLoadPathDirs().writeCheckableDirectores(elem, this);
         writeOption(TEST_UNIT_FRAMEWORK_ROOT_URL, config.getUnitTestsRootUrl(), elem);
     }
 
-    public void readExternal(@NotNull final JRubyFacetConfiguration config,
+    public void readExternal(@NotNull final RSupportPerModuleSettingsImpl config,
                              @NotNull final Element elem) {
         //noinspection unchecked
         final Map<String, String> optionsByName = buildOptionsByElement(elem);
-        config.setSdkByName(optionsByName.get(JRUBY_SDK_NAME));
+        //config.setSdkByName(optionsByName.get(JRUBY_SDK_NAME));
         config.getLoadPathDirs().loadCheckableDirectores(optionsByName);
 
         final String shouldUseTestFrStr = optionsByName.get(USE_TEST_UNIT_FRAMEWORK);

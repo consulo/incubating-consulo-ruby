@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
+import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 
@@ -48,8 +48,7 @@ public class JRubyUtil {
      */
     @Nullable
     public static Sdk getJRubyFacetSdk(@NotNull final Module module){
-        final JRubyFacet facet = JRubyFacet.getInstance(module);
-        return facet!=null ? facet.getSdk() : null;
+        return null;
     }
 
     /**
@@ -57,7 +56,7 @@ public class JRubyUtil {
      * @return JRuby Configuration if jruby facet is enabled for module
      */
     @Nullable
-    public static JRubyFacetConfiguration getJRubyFacetConfiguration(@NotNull final Module module){
+    public static RSupportPerModuleSettingsImpl getJRubyFacetConfiguration(@NotNull final Module module){
         final JRubyFacet facet = JRubyFacet.getInstance(module);
         return facet!=null ? facet.getConfiguration() : null;
     }

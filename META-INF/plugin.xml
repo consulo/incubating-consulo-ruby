@@ -37,7 +37,6 @@
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.settings.RApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.settings.RApplicationSettings"/>
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings"/>
 		<projectService serviceInterface="org.jetbrains.plugins.ruby.settings.RProjectSettings" serviceImplementation="org.jetbrains.plugins.ruby.settings.RProjectSettings"/>
-		<moduleService serviceInterface="org.jetbrains.plugins.ruby.settings.RModuleSettingsStorage" serviceImplementation="org.jetbrains.plugins.ruby.settings.RModuleSettingsStorage"/>
 
 		<lang.parserDefinition language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition" />
 		<lang.braceMatcher language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher" />
@@ -260,10 +259,7 @@
 	</actions>
 	<module-components>
 		<!--Ruby Module-->
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.module.RubyModuleSettings</implementation-class>
-			<option name="type" value="RUBY_MODULE"/>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager</implementation-class>
 			<option name="type" value="RUBY_MODULE"/>

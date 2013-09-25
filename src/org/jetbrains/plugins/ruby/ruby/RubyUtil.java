@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby;
 
+import org.consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 
 /**
  * Created by IntelliJ IDEA.
@@ -53,7 +55,7 @@ public class RubyUtil {
      * @return true if is ruby module.
      */
     public static boolean isRubyModuleType(@Nullable final Module module) {
-        return false;
+        return module != null && ModuleUtilCore.getExtension(module, RubyModuleExtension.class) != null;
     }
 
 }

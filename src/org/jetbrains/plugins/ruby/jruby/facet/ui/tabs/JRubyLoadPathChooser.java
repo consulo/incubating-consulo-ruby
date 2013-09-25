@@ -25,8 +25,8 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.loadPath.RLoadPathChooserUtil;
@@ -42,13 +42,13 @@ import javax.swing.*;
 public class JRubyLoadPathChooser extends FacetEditorTab {
     private Ref<CheckableDirectoriesContainer> myLoadPathDirsCopyRef = new Ref<CheckableDirectoriesContainer>();
 
-    public JRubyLoadPathChooser(@NotNull final JRubyFacetConfiguration jRubyFacetConfiguration,
+    public JRubyLoadPathChooser(@NotNull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration,
                                 @NotNull final FacetEditorContext editorContext) {
         myJRubyFacetConfiguration = jRubyFacetConfiguration;
         myEditorContext = editorContext;
     }
 
-    private JRubyFacetConfiguration myJRubyFacetConfiguration;
+    private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
     private FacetEditorContext myEditorContext;
 
     @Nls

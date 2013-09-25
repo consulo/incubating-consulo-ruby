@@ -16,14 +16,17 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.UnnamedConfigurable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RegisteredActionNamesPanel;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RegisteredActionNamesPanel;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.UnnamedConfigurable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,8 +49,7 @@ class RSettingsPane {
                                   generalTab.getContentPanel());
         settingsTabbedPane.addTab(RBundle.message("settings.register.shortcut.tab.title"),
                                   new RegisteredActionNamesPanel().getContentPanel());
-        settingsTabbedPane.addTab(RBundle.message("settings.plugin.about.tab.title"),
-                                  new AboutPluginPane().getContentPanel());
+
         return generatedPanel;
     }
 

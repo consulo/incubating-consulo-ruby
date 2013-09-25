@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
+import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork.RORSelectTestFrameworkPanel;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork.TestFrameworkOptions;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
@@ -44,13 +44,13 @@ import com.intellij.openapi.options.ConfigurationException;
  */
 
 public class JRubyRTestFrameworkChooser extends FacetEditorTab {
-    public JRubyRTestFrameworkChooser(@NotNull final JRubyFacetConfiguration myJRubyFacetConfiguration,
+    public JRubyRTestFrameworkChooser(@NotNull final RSupportPerModuleSettingsImpl myJRubyFacetConfiguration,
                                       @NotNull final FacetEditorContext myEditorContext) {
         this.myJRubyFacetConfiguration = myJRubyFacetConfiguration;
         this.myEditorContext = myEditorContext;
     }
 
-    private JRubyFacetConfiguration myJRubyFacetConfiguration;
+    private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
     private FacetEditorContext myEditorContext;
 
     private TestFrameworkOptions myTestFramworkOptions;

@@ -22,7 +22,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
+import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.SelectJRubySdkPane;
 
 import javax.swing.*;
@@ -35,10 +35,10 @@ import javax.swing.*;
 */
 public class JRubySdkEditorTab extends FacetEditorTab {
     private SelectJRubySdkPane mySdkPaneSelect;
-    private JRubyFacetConfiguration myJRubyFacetConfiguration;
+    private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
     protected FacetEditorContext myEditorContext;
 
-    public JRubySdkEditorTab(@NotNull final JRubyFacetConfiguration jRubyFacetConfiguration,
+    public JRubySdkEditorTab(@NotNull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration,
                              @NotNull final FacetEditorContext editorContext) {
         myJRubyFacetConfiguration = jRubyFacetConfiguration;
         myEditorContext = editorContext;

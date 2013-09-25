@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui;
 
-import com.intellij.openapi.projectRoots.Sdk;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.JRubySDKsComboboxWithBrowseButton;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetConfiguration;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,16 +34,16 @@ public class SelectJRubySdkPane {
     private JPanel myPanel;
     private JRubySDKsComboboxWithBrowseButton mySdksComponent;
 
-    public SelectJRubySdkPane(@NotNull final JRubyFacetConfiguration configuration) {
+    public SelectJRubySdkPane(@NotNull final RSupportPerModuleSettingsImpl configuration) {
 
         mySdksComponent.addComboboxActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(final ActionEvent e) {
-                configuration.setSdk(getSelectedSdk());
+                //configuration.setSdk(getSelectedSdk());
             }
         });
 
-        mySdksComponent.rebuildSdksListAndSelectSdk(configuration.getSdk());
+      //  mySdksComponent.rebuildSdksListAndSelectSdk(configuration.getSdk());
     }
 
     public Sdk getSelectedSdk(){

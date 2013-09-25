@@ -16,20 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import com.intellij.ProjectTopics;
-import com.intellij.facet.Facet;
-import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeId;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootEvent;
-import com.intellij.openapi.roots.ModuleRootListener;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.startup.StartupManager;
-import com.intellij.util.messages.MessageBusConnection;
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
@@ -41,8 +29,20 @@ import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import java.util.Collection;
+import com.intellij.ProjectTopics;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeId;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.startup.StartupManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.messages.MessageBusConnection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -82,7 +82,8 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
          } else {
              //jruby facet
              assert (underlyingFacet instanceof JRubyFacet);
-             sdk = ((JRubyFacet)underlyingFacet).getConfiguration().getSdk();
+			 sdk = null;
+            // sdk = ((JRubyFacet)underlyingFacet).getConfiguration().getSdk();
          }
         final BaseRailsFacetConfigurationLowLevel facetConfiguration = (BaseRailsFacetConfigurationLowLevel)this.getConfiguration();
         facetConfiguration.setSdk(sdk);
