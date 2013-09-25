@@ -16,20 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 
-import com.intellij.codeFormatting.general.FormatterUtil;
-import com.intellij.formatting.*;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.formatter.xml.XmlBlock;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
-import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.xml.XmlAttributeValue;
-import com.intellij.psi.xml.XmlElementType;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLBlockGenerator;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
@@ -38,9 +27,24 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.spaci
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Spacing;
+import com.intellij.formatting.Wrap;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.formatter.FormatterUtil;
+import com.intellij.psi.formatter.xml.XmlBlock;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.xml.XmlAttributeValue;
+import com.intellij.psi.xml.XmlElementType;
 
 /**
  * Created by IntelliJ IDEA.

@@ -72,11 +72,6 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass {
         super.accept(visitor);
     }
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RClassPresentationUtil.getIcon(this, flags);
-    }
-
     @Override
 	@NotNull
     public ItemPresentation getPresentation() {

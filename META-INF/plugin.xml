@@ -53,7 +53,7 @@
 		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler" />
 		<moduleExtensionProvider key="ruby" implementationClass="org.consulo.ruby.module.extension.BaseRubyModuleExtensionProvider" />
 
-		<iconProvider implementation="org.jetbrains.plugins.ruby.RubyIconProvider"/>
+		<iconDescriptorUpdater implementation="org.jetbrains.plugins.ruby.RubyIconDescriptorUpdater"/>
 
 		<lang.fileViewProviderFactory language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.eRubyFileViewProviderFactory" />
 		<lang.parserDefinition language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition"/>

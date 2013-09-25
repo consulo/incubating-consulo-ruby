@@ -16,22 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-
-import java.util.List;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.08.2006
  */
-public interface RPsiElement extends PsiElement, RVirtualElement {
+public interface RPsiElement extends PsiElement, RVirtualElement
+{
     /**
      * Returns child elements in the psi tree
      * @param filter Types of expected child

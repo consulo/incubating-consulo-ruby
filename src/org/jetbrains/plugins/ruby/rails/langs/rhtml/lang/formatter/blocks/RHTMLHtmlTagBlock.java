@@ -33,7 +33,6 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterElementI
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElement;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import com.intellij.codeFormatting.general.FormatterUtil;
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.ChildAttributes;
@@ -46,6 +45,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.formatter.xml.AbstractSyntheticBlock;
 import com.intellij.psi.formatter.xml.SyntheticBlock;
