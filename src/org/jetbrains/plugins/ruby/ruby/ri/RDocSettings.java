@@ -16,15 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
-import com.intellij.openapi.components.ProjectComponent;
+import org.consulo.lombok.annotations.ApplicationService;
+import org.jdom.Element;
+import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
-import org.jdom.Element;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.RubyComponents;
-import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,31 +29,16 @@ import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesCo
  * @author: oleg
  * @date: Nov 8, 2006
  */
-public class RDocSettings implements ProjectComponent, JDOMExternalizable {
-    @Override
-	public void projectOpened() {}
-    @Override
-	public void projectClosed() {}
-    @Override
-	public void initComponent() {}
-    @Override
-	public void disposeComponent() {}
-
+@ApplicationService
+public class RDocSettings implements JDOMExternalizable {
     private boolean doUseDefaults;
+
     private final CheckableDirectoriesContainer docDirs;
 
     public RDocSettings(){
         doUseDefaults = true;
         docDirs = new CheckableDirectoriesContainer();
     }
-    
-    @Override
-	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RubyComponents.RUBY_DOC_SETTINGS;
-    }
-
 
     @Override
 	public void readExternal(Element element) throws InvalidDataException {

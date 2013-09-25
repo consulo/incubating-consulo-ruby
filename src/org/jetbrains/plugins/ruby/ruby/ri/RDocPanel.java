@@ -32,7 +32,7 @@ import com.intellij.openapi.roots.ProjectRootManager;
  * User: oleg
  * Date: 09.09.2006
  */
-class RDocPanel {
+public class RDocPanel {
     private JTabbedPane myPane;
     private ProjectRootManager myProjectRootManager;
     private SettingsPane mySettingPane;

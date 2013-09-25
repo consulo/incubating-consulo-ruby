@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -33,7 +34,7 @@ public class RFileImpl extends RPsiFileBase implements RFile {
 
     public RFileImpl(final FileViewProvider viewProvider) {
         super(viewProvider);
-        initLanguage(RubyFileType.RUBY.getLanguage());
+        initLanguage(RubyLanguage.INSTANCE);
 
         // For debug mode
         // This enables bread crumbs loader for ruby files.

@@ -44,7 +44,13 @@
 		<lang.foldingBuilder language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder" />
 		<lang.documentationProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider" />
 		<lang.syntaxHighlighterFactory key="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighterFactory" />
+		<lang.findUsagesProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider" />
+		<lang.formatter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder" />
+		<lang.namesValidator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator" />
+		<lang.psiStructureViewFactory language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilderFactory"/>
+		<lang.surroundDescriptor language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor" />
 
+		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler" />
 		<moduleExtensionProvider key="ruby" implementationClass="org.consulo.ruby.module.extension.BaseRubyModuleExtensionProvider" />
 
 		<iconProvider implementation="org.jetbrains.plugins.ruby.RubyIconProvider"/>
@@ -63,6 +69,9 @@
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
 
 		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType" />
+
+		<annotator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.annotator.RubyFastAnnotator" />
+		<externalAnnotator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.annotator.RubySlowAnnotator" />
 
 		<internalFileTemplate name="Erb(rhtml) Template" />
 		<internalFileTemplate name="RSpec test Template" />
@@ -92,8 +101,16 @@
 		<moduleService serviceInterface="org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager" serviceImplementation="org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager"/>
 		<moduleService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettingsStorage" serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettingsStorage"/>
 
-
 		<declarationRangeHandler implementationClass="org.jetbrains.plugins.ruby.ruby.lang.RubyDeclarationRangeHandler"/>
+
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.ri.RDocSettings"
+							serviceImplementation="org.jetbrains.plugins.ruby.ruby.ri.RDocSettings" />
+		<toolWindow id="RDoc"
+					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
+					anchor="right"
+					secondary="true"
+					requireModuleExtensions="ruby, jruby"
+					factoryClass="org.consulo.ruby.toolWindow.RDocToolWindowFactory" />
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij.xml">
@@ -141,14 +158,6 @@
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.actions.intention.RubyIntentionActionsManager</implementation-class>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.ri.RubyDocManager</implementation-class>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.ri.RDocSettings</implementation-class>
-			<option name="workspace" value="true"/>
-			<skipForDummyProject/>
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager</implementation-class>
@@ -262,11 +271,6 @@
 
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager</implementation-class>
-			<option name="type" value="RUBY_MODULE"/>
-		</component>
-
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.RIModuleComponent</implementation-class>
 			<option name="type" value="RUBY_MODULE"/>
 		</component>
 

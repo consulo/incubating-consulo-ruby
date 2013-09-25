@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
+import org.consulo.jruby.module.extension.JRubyModuleExtension;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
-import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
 
 /**
@@ -29,35 +29,32 @@ import com.intellij.openapi.projectRoots.Sdk;
  * User: oleg
  * Date: Sep 12, 2007
  */
-public class JRubyUtil {
-    @NonNls
-    public static final String JAVA = "java";
+public class JRubyUtil
+{
+	@NonNls
+	public static final String JAVA = "java";
 
+	/**
+	 * @param module some module
+	 * @return true if module is Java module with JRuby facet
+	 */
+	public static boolean hasJRubySupport(@NotNull final Module module)
+	{
+		return ModuleUtilCore.getExtension(module, JRubyModuleExtension.class) != null;
+	}
 
-    /**
-     * @param module some module
-     * @return true if module is Java module with JRuby facet
-     */
-    public static boolean hasJRubySupport(@NotNull final Module module) {
-        return JRubyFacet.getInstance(module) != null;
-    }
-
-    /**
-     * @param module Module to get JDK for
-     * @return Jdk selected for given module
-     */
-    @Nullable
-    public static Sdk getJRubyFacetSdk(@NotNull final Module module){
-        return null;
-    }
-
-    /**
-     * @param module Some module
-     * @return JRuby Configuration if jruby facet is enabled for module
-     */
-    @Nullable
-    public static RSupportPerModuleSettingsImpl getJRubyFacetConfiguration(@NotNull final Module module){
-        final JRubyFacet facet = JRubyFacet.getInstance(module);
-        return facet!=null ? facet.getConfiguration() : null;
-    }
+	/**
+	 * @param module Module to get JDK for
+	 * @return Jdk selected for given module
+	 */
+	@Nullable
+	public static Sdk getJRubyFacetSdk(@NotNull final Module module)
+	{
+		JRubyModuleExtension extension = ModuleUtilCore.getExtension(module, JRubyModuleExtension.class);
+		if(extension == null)
+		{
+			return null;
+		}
+		return extension.getSdk();
+	}
 }

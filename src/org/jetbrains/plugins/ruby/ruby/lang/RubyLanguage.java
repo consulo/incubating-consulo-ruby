@@ -17,165 +17,36 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler;
-import org.jetbrains.plugins.ruby.ruby.lang.annotator.RubyFastAnnotator;
-import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider;
-import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider;
-import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder;
-import org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator;
-import org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor;
-import com.intellij.formatting.FormattingModelBuilder;
-import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.lang.Language;
-import com.intellij.lang.annotation.Annotator;
-import com.intellij.lang.annotation.ExternalAnnotator;
-import com.intellij.lang.documentation.DocumentationProvider;
-import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.lang.parameterInfo.ParameterInfoHandler;
-import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
-import com.intellij.lang.surroundWith.SurroundDescriptor;
-import com.intellij.openapi.util.NotNullLazyValue;
-import com.intellij.psi.PsiFile;
 
 
-public class RubyLanguage extends Language {
-    public static final RubyLanguage INSTANCE = new RubyLanguage();
+public class RubyLanguage extends Language
+{
+	public static final RubyLanguage INSTANCE = new RubyLanguage();
+	private RefactoringSupportProvider rubyRefactoringSupportProvider;
 
 
-    private RefactoringSupportProvider rubyRefactoringSupportProvider;
+	private RubyLanguage()
+	{
+		super("RUBY", "application/x-ruby");
+	}
 
-    protected NotNullLazyValue<FormattingModelBuilder> myFormattingModelBuilder;
-    protected NotNullLazyValue<FindUsagesProvider> myFindUsagesProvider;
-    protected NotNullLazyValue<DocumentationProvider> myRubyDocumentationProvider;
-    protected NotNullLazyValue<ParameterInfoHandler[]> myParameterInfoHandlers;
-    protected NotNullLazyValue<SurroundDescriptor[]> mySurroundWithDescriptor;
-    protected NotNullLazyValue<Annotator> myFastAnnotator;
-    protected NotNullLazyValue<ExternalAnnotator> mySlowAnnotator;
-    protected NotNullLazyValue<NamesValidator> myNamesValidator;
+	@NotNull
+	public RefactoringSupportProvider getRefactoringSupportProvider()
+	{
+		return rubyRefactoringSupportProvider;
+	}
 
-    private RubyLanguage() {
-        super("RUBY", "application/x-ruby");
-
-
-
-
-        myFormattingModelBuilder = new NotNullLazyValue<FormattingModelBuilder>(){
-            @Override
-			@NotNull
-            protected FormattingModelBuilder compute() {
-                return new RubyFormattingModelBuilder();
-            }
-        };
-        myFindUsagesProvider = new NotNullLazyValue<FindUsagesProvider>(){
-            @Override
-			@NotNull
-            protected FindUsagesProvider compute() {
-                return new RubyFindUsagesProvider();
-            }
-        };
-        myRubyDocumentationProvider = new NotNullLazyValue<DocumentationProvider>(){
-            @Override
-			@NotNull
-            protected DocumentationProvider compute() {
-                return new RubyDocumentationProvider();
-            }
-        };
-        myParameterInfoHandlers = new NotNullLazyValue<ParameterInfoHandler[]>(){
-            @Override
-			@NotNull
-            protected ParameterInfoHandler[] compute() {
-                return new ParameterInfoHandler[]{new RubyParameterInfoHandler()};
-            }
-        };
-        mySurroundWithDescriptor = new NotNullLazyValue<SurroundDescriptor[]>(){
-            @Override
-			@NotNull
-            protected SurroundDescriptor[] compute() {
-                return new SurroundDescriptor[]{new RubySurroundDescriptor()};
-            }
-        };
-        myFastAnnotator = new NotNullLazyValue<Annotator>(){
-            @Override
-			@NotNull
-            protected Annotator compute() {
-                return new RubyFastAnnotator();
-            }
-        };
-      /*  mySlowAnnotator = new NotNullLazyValue<ExternalAnnotator>(){
-            @NotNull
-            protected ExternalAnnotator compute() {
-                return new RubySlowAnnotator();
-            }
-        }; */
-        myNamesValidator = new NotNullLazyValue<NamesValidator>(){
-            @Override
-			@NotNull
-            protected NamesValidator compute() {
-                return new RubyNamesValidator();
-            }
-        };
-    }
-
-
-    @NotNull
-    public StructureViewBuilder getStructureViewBuilder(@NotNull final PsiFile psiFile) {
-        return new RubyStructureViewBuilder(psiFile);
-    }
-
-   @Nullable
-   public FormattingModelBuilder getFormattingModelBuilder() {
-       return myFormattingModelBuilder.getValue();
-    }
-
-    @NotNull
-    public FindUsagesProvider getFindUsagesProvider() {
-        return myFindUsagesProvider.getValue();
-    }
-
-    @Nullable
-    public DocumentationProvider getDocumentationProvider() {
-        return myRubyDocumentationProvider.getValue();
-    }
-
-    @Nullable
-    public ParameterInfoHandler[] getParameterInfoHandlers() {
-        return myParameterInfoHandlers.getValue();
-    }
-
-    @NotNull
-    public SurroundDescriptor[] getSurroundDescriptors() {
-        return mySurroundWithDescriptor.getValue();
-    }
-
-    public Annotator getAnnotator(){
-        return myFastAnnotator.getValue();
-    }
-
-    @Nullable
-    public ExternalAnnotator getExternalAnnotator() {
-        return mySlowAnnotator.getValue();
-    }
-
-    @NotNull
-    public NamesValidator getNamesValidator() {
-        return myNamesValidator.getValue();
-    }
-
-    @NotNull
-    public RefactoringSupportProvider getRefactoringSupportProvider() {
-        return rubyRefactoringSupportProvider;
-    }
-
-    /**
-     * Method to set JRuby refactoringSupportProvider
-     * @param provider refactoring support provider
-     */
-    public void setRubyRefactoringSupportProvider(@NotNull final RefactoringSupportProvider provider) {
-        rubyRefactoringSupportProvider = provider;
-    }
+	/**
+	 * Method to set JRuby refactoringSupportProvider
+	 *
+	 * @param provider refactoring support provider
+	 */
+	public void setRubyRefactoringSupportProvider(@NotNull final RefactoringSupportProvider provider)
+	{
+		rubyRefactoringSupportProvider = provider;
+	}
 
 }
 
