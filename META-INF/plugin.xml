@@ -114,9 +114,6 @@
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLApplicationComponent</implementation-class>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.RubyIconProvider</implementation-class>
-		</component>
 
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.templates.RailsTemplatesLoader</implementation-class>

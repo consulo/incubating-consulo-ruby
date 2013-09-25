@@ -1,0 +1,13 @@
+<idea-plugin version="2">
+	<id>org.consulo.jruby.rails</id>
+	<name>JRuby on Rails</name>
+	<version>1.0</version>
+
+	<depends>org.consulo.ruby.rails</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<moduleExtensionProvider key="jruby-on-rails" parent-key="jruby"
+								 implementationClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtensionProvider" />
+
+	</extensions>
+</idea-plugin>

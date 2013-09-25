@@ -84,7 +84,7 @@
             <SOURCES />
           </library>
         </orderEntry>
-        <orderEntry type="module" module-name="consulo-ruby" />
+        <orderEntry type="module" module-name="consulo-ruby" exported="" />
       </module>
       <module name="consulo-yaml" dirurl="file://$PROJECT_DIR$/consulo-yaml">
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
@@ -105,6 +105,44 @@
             <SOURCES />
           </library>
         </orderEntry>
+      </module>
+      <module name="consulo-jruby-on-rails" dirurl="file://$PROJECT_DIR$/consulo-jruby-on-rails">
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
+        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <content url="file://$MODULE_DIR$">
+          <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
+          <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
+        </content>
+        <orderEntry type="module-extension-sdk" extension-id="java" />
+        <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
+        <orderEntry type="sourceFolder" forTests="false" />
+        <orderEntry type="module-library">
+          <library name="consulo:Java">
+            <CLASSES>
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-copyright.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-debugger-api.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-debugger-impl.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-intellilang.jar!/" />
+              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java.jar!/" />
+            </CLASSES>
+            <DOCUMENTATION />
+            <SOURCES />
+          </library>
+        </orderEntry>
+        <orderEntry type="module" module-name="consulo-jruby" />
+        <orderEntry type="module" module-name="consulo-ruby-on-rails" />
+      </module>
+      <module name="consulo-ruby-on-rails" dirurl="file://$PROJECT_DIR$/consulo-ruby-on-rails">
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
+        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <content url="file://$MODULE_DIR$">
+          <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
+          <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
+        </content>
+        <orderEntry type="module-extension-sdk" extension-id="java" />
+        <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
+        <orderEntry type="sourceFolder" forTests="false" />
+        <orderEntry type="module" module-name="consulo-ruby" />
       </module>
     </modules>
   </component>

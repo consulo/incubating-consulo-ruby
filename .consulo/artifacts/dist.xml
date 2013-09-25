@@ -29,6 +29,20 @@
           <element id="dir-copy" path="$PROJECT_DIR$/lib" />
         </element>
       </element>
+      <element id="directory" name="ruby-on-rails">
+        <element id="directory" name="lib">
+          <element id="zip-archive" name="ruby-on-rails.jar">
+            <element id="module-output" name="consulo-ruby-on-rails" />
+          </element>
+        </element>
+      </element>
+      <element id="directory" name="jruby-on-rails">
+        <element id="directory" name="lib">
+          <element id="zip-archive" name="jruby-on-rails.jar">
+            <element id="module-output" name="consulo-jruby-on-rails" />
+          </element>
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

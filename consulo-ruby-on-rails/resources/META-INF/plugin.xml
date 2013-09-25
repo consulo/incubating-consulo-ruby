@@ -1,0 +1,12 @@
+<idea-plugin version="2">
+	<id>org.consulo.ruby.rails</id>
+	<name>Ruby on Rails</name>
+	<version>1.0</version>
+
+	<depends>org.consulo.ruby</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<moduleExtensionProvider key="ruby-on-rails" parent-key="ruby"
+								 implementationClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtensionProvider" />
+	</extensions>
+</idea-plugin>
