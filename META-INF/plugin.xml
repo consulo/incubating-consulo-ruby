@@ -15,7 +15,7 @@
   -->
 
 <idea-plugin version="2">
-	<id>org.jetbrains.plugins.ruby</id>
+	<id>org.consulo.ruby</id>
 	<name>Ruby</name>
 	<version>1.0</version>
 	<description>The Ruby plug-in makes IntelliJ IDEA the smart Ruby and Ruby on Rails editor, ideal for the full cycle application development.</description>
@@ -46,6 +46,8 @@
 		<lang.documentationProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider" />
 		<lang.syntaxHighlighterFactory key="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighterFactory" />
 
+		<moduleExtensionProvider key="ruby" implementationClass="org.consulo.ruby.module.extension.BaseRubyModuleExtensionProvider" />
+
 		<iconProvider implementation="org.jetbrains.plugins.ruby.RubyIconProvider"/>
 
 		<lang.fileViewProviderFactory language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.eRubyFileViewProviderFactory" />
@@ -74,6 +76,10 @@
 		<configurationProducer implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationProducer"/>
 		<!-- RSpec -->
 		<configurationProducer implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecConfigurationProducer"/>
+
+		<configurationType implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType" />
+		<configurationType implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationType" />
+		<configurationType implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecRunConfigurationType" />
 
 		<!-- RSpec Support -->
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings"/>
@@ -124,22 +130,11 @@
 			</implementation-class>
 		</component>
 
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType</implementation-class>
-		</component>
-
-		<!-- Rails Support -->
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationType</implementation-class>
-		</component>
-
 		<!-- RSpec Support -->
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.addins.rspec.RSpecSupportLoader</implementation-class>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecRunConfigurationType</implementation-class>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener</implementation-class>
 		</component>

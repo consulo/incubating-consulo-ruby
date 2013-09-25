@@ -54,7 +54,7 @@ public class RubyUtil {
      * @return true if is ruby module.
      */
     public static boolean isRubyModuleType(@Nullable final Module module) {
-        return true;
+        return false;
     }
 
 }

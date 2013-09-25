@@ -1,0 +1,12 @@
+<idea-plugin version="2">
+	<id>org.consulo.jruby</id>
+	<name>JRuby</name>
+	<version>1.0</version>
+
+	<depends>org.consulo.ruby</depends>
+	<depends>org.consulo.java</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<moduleExtensionProvider key="jruby" parent-key="java" implementationClass="org.consulo.jruby.module.extension.JRubyModuleExtensionProvider" />
+	</extensions>
+</idea-plugin>

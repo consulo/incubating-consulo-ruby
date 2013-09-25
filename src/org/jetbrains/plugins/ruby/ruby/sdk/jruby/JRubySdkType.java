@@ -19,14 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.SystemInfo;
 
@@ -36,69 +33,72 @@ import com.intellij.openapi.util.SystemInfo;
  * @author: Roman Chernyatchik
  * @date: Aug 22, 2007
  */
-public class JRubySdkType extends RubySdkType {
-    @NonNls private static final String JRUBY_SDK_NAME =    "JRUBY_SDK";
-    @NonNls private static final String JRUBY_WIN_EXE =     "jruby.bat";
-    @NonNls private static final String JRUBY_UNIX_EXE =    "jruby";
+public class JRubySdkType extends RubySdkType
+{
+	@NonNls
+	private static final String JRUBY_SDK_NAME = "JRUBY_SDK";
+	@NonNls
+	private static final String JRUBY_WIN_EXE = "jruby.bat";
+	@NonNls
+	private static final String JRUBY_UNIX_EXE = "jruby";
+	/**
+	 * @deprecated Don't use direct this constant(you can affect JRubySdkType), use getRubyExecutable()
+	 */
+	@NonNls
+	private static String JRUBY_EXE;
 
-    /**
-     * @deprecated Don't use direct this constant(you can affect JRubySdkType), use getRubyExecutable()
-     */
-    @NonNls private static String JRUBY_EXE;
-    static {
-        if (SystemInfo.isWindows){
-            //noinspection deprecation
-            JRUBY_EXE = JRUBY_WIN_EXE;
-        } else
-        if (SystemInfo.isUnix){
-            //noinspection deprecation
-            JRUBY_EXE = JRUBY_UNIX_EXE;
-        } else {
-            LOG.error(RBundle.message("os.not.supported"));
-        }
-    }
+	static
+	{
+		if(SystemInfo.isWindows)
+		{
+			//noinspection deprecation
+			JRUBY_EXE = JRUBY_WIN_EXE;
+		}
+		else if(SystemInfo.isUnix)
+		{
+			//noinspection deprecation
+			JRUBY_EXE = JRUBY_UNIX_EXE;
+		}
+		else
+		{
+			LOG.error(RBundle.message("os.not.supported"));
+		}
+	}
 
-    public String getRubyExecutable() {
-        //noinspection deprecation
-        return JRUBY_EXE;
-    }
+	public JRubySdkType()
+	{
+		super(JRUBY_SDK_NAME);
+	}
 
-    public static boolean isJRubySDK(@Nullable final Sdk sdk){
-        return sdk != null && sdk.getSdkType() instanceof JRubySdkType;
-    }
+	public static JRubySdkType getInstance()
+	{
+		return EP_NAME.findExtension(JRubySdkType.class);
+	}
 
-    public JRubySdkType() {
-        super(JRUBY_SDK_NAME);
-    }
+	public static boolean isJRubySDK(@Nullable final Sdk sdk)
+	{
+		return sdk != null && sdk.getSdkType() instanceof JRubySdkType;
+	}
 
-    public String getPresentableName() {
-           return RBundle.message("sdk.jruby.title");
-       }
+	public String getRubyExecutable()
+	{
+		//noinspection deprecation
+		return JRUBY_EXE;
+	}
 
-    @NotNull
-    public String getComponentName() {
-        return RComponents.JRUBY_SDK_TYPE;
-    }
+	public String getPresentableName()
+	{
+		return RBundle.message("sdk.jruby.title");
+	}
 
-    public String suggestHomePath() {
-        return RubySdkUtil.suggestJRubyHomePath();
-    }
+	public String suggestHomePath()
+	{
+		return RubySdkUtil.suggestJRubyHomePath();
+	}
 
-    public Icon getIconForAddAction() {
-        return JRubyIcons.JRUBY_SDK_ADD_ICON;
-    }
-
-    @Override
-    public Icon getIcon() {
-      return JRubyIcons.JRUBY_SDK_ICON_CLOSED;
-    }
-
-    @Override
-    public Icon getIconForExpandedTreeNode() {
-      return JRubyIcons.JRUBY_SDK_ICON_OPEN;
-    }
-
-    public static JRubySdkType getInstance(){
-        return ApplicationManager.getApplication().getComponent(JRubySdkType.class);
-    }
+	@Override
+	public Icon getIcon()
+	{
+		return JRubyIcons.JRUBY_SDK_ICON_CLOSED;
+	}
 }

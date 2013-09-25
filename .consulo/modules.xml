@@ -59,7 +59,6 @@
             <SOURCES />
           </library>
         </orderEntry>
-        <orderEntry type="module" module-name="consulo-jruby" />
         <orderEntry type="module" module-name="consulo-yaml" />
       </module>
       <module name="consulo-jruby" dirurl="file://$PROJECT_DIR$/consulo-jruby">

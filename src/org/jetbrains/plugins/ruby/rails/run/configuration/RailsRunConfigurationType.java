@@ -16,22 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
+import org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfigurationFactory;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import com.intellij.execution.LocatableConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsComponents;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfigurationFactory;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,70 +35,62 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
-public class RailsRunConfigurationType  implements LocatableConfigurationType {
-    private final RailsServerRunConfigurationFactory myRailsServerFactory;
+public class RailsRunConfigurationType implements LocatableConfigurationType
+{
+	private final RailsServerRunConfigurationFactory myRailsServerFactory;
 
-    public static RailsRunConfigurationType getInstance() {
-        return ApplicationManager.getApplication().getComponent(RailsRunConfigurationType.class);
-    }
+	public RailsRunConfigurationType()
+	{
+		myRailsServerFactory = new RailsServerRunConfigurationFactory(this);
+	}
 
-    public RailsRunConfigurationType() {
-        myRailsServerFactory = new RailsServerRunConfigurationFactory(this);
-    }
+	public static RailsRunConfigurationType getInstance()
+	{
+		return CONFIGURATION_TYPE_EP.findExtension(RailsRunConfigurationType.class);
+	}
 
-    public String getDisplayName() {
-        return RBundle.message("rails.run.configuration.type.name");
-    }
+	public String getDisplayName()
+	{
+		return RBundle.message("rails.run.configuration.type.name");
+	}
 
-    public String getConfigurationTypeDescription() {
-        return RBundle.message("rails.run.configuration.type.description");
-    }
+	public String getConfigurationTypeDescription()
+	{
+		return RBundle.message("rails.run.configuration.type.description");
+	}
 
-    public Icon getIcon() {
-        return RailsIcons.RAILS_RUN_CONFIGURATION_FOLDER;
-    }
+	public Icon getIcon()
+	{
+		return RailsIcons.RAILS_RUN_CONFIGURATION_FOLDER;
+	}
 
 	@NotNull
 	@Override
 	public String getId()
 	{
-		return null;
+		return "RailsRunConfigurationType";
 	}
 
-	public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{myRailsServerFactory};
-    }
+	public ConfigurationFactory[] getConfigurationFactories()
+	{
+		return new ConfigurationFactory[]{myRailsServerFactory};
+	}
 
-    @NotNull
-    public String getComponentName() {
-        return RailsComponents.RAILS_RUN_CONFIGURATION_TYPE;
-    }
+	@NotNull
+	public RailsServerRunConfigurationFactory getWEBrickFactory()
+	{
+		return myRailsServerFactory;
+	}
 
-    public void initComponent() {
-    }
-
-    public void disposeComponent() {
-    }
-
-    @NotNull
-    public RailsServerRunConfigurationFactory getWEBrickFactory() {
-        return myRailsServerFactory;
-    }
-    
-    public RunnerAndConfigurationSettings createConfigurationByLocation(final Location location) {
-        return null;
-    }
+	public RunnerAndConfigurationSettings createConfigurationByLocation(final Location location)
+	{
+		return null;
+	}
 
 	@Override
 	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
 	{
-		return false;
+		return RubyRunConfigurationUtil.isConfigurationByElement(runConfiguration, location.getPsiElement());
+
 	}
-
-	public boolean isConfigurationByElement(@NotNull final RunConfiguration configuration,
-                                            @NotNull final Project project,
-                                            @NotNull final PsiElement element) {
-        return RubyRunConfigurationUtil.isConfigurationByElement(configuration, element);
-
-    }
 }

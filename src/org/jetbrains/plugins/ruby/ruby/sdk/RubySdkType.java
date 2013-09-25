@@ -29,15 +29,12 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.Output;
 import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
@@ -61,7 +58,7 @@ import com.intellij.util.PathUtil;
  * Date: 17.07.2006
  */
 
-public class RubySdkType extends SdkType implements ApplicationComponent {
+public class RubySdkType extends SdkType {
 
     protected static final Logger LOG = Logger.getInstance(RubySdkType.class.getName());
 
@@ -255,36 +252,12 @@ public class RubySdkType extends SdkType implements ApplicationComponent {
         return sdk.getHomePath() + getExePath();
     }
 
-    @Nullable
-    public String getRtLibraryPath(final Sdk sdk) {
-        return null;
-    }
-
     public String getPresentableName() {
         return RBundle.message("sdk.ruby.title");
     }
 
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RUBY_SDK_TYPE;
-    }
-
-    public void initComponent() {
-    }
-
-    public void disposeComponent() {
-    }
-
     public Icon getIcon() {
       return RubyIcons.RUBY_SDK;
-    }
-
-    public Icon getIconForExpandedTreeNode() {
-        return RubyIcons.RUBY_SDK_EXPANDED;
-    }
-
-    public Icon getIconForAddAction() {
-        return RubyIcons.RUBY_SDK_ADD_ICON;
     }
 
     private RubySdkAdditionalData getSdkAdditionalData(@NotNull final Sdk sdk) {
@@ -326,7 +299,7 @@ public class RubySdkType extends SdkType implements ApplicationComponent {
     }
 
     public static RubySdkType getInstance(){
-        return ApplicationManager.getApplication().getComponent(RubySdkType.class);
+        return EP_NAME.findExtension(RubySdkType.class);
     }
 
     public static void findAndSaveGemsRootsBy(final SdkModificator sdkModificator) {
