@@ -32,6 +32,8 @@ import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.OrderEnumerator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +49,7 @@ public abstract class ColouredCommandLineState extends CommandLineState {
 
 	@Override
 	protected OSProcessHandler startProcess() throws ExecutionException {
-        final GeneralCommandLine cmdLine = new GeneralCommandLine();
+        final GeneralCommandLine cmdLine = createGeneralDefaultCmdLine((AbstractRubyRunConfiguration) getEnvironment().getRunProfile());
         final OSProcessHandler processHandler =
                 createOSProcessHandler(cmdLine.createProcess(),
                                        cmdLine.getCommandLineString());
@@ -83,6 +85,10 @@ public abstract class ColouredCommandLineState extends CommandLineState {
         if (module == null || !JRubySdkType.isJRubySDK(sdk)) {
             classPath = null;
         } else {
+			ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+
+			OrderEnumerator orderEnumerator = moduleRootManager.orderEntries();
+			orderEnumerator = orderEnumerator.withoutSdk().recursively();
          /*   final ProjectRootsTraversing.RootTraversePolicy jrubyPolicy = //ProjectRootsTraversing.FULL_CLASS_RECURSIVE_WO_JDK;
                     new ProjectRootsTraversing.RootTraversePolicy(
                             ProjectRootsTraversing.RootTraversePolicy.ALL_OUTPUTS,
@@ -102,7 +108,7 @@ public abstract class ColouredCommandLineState extends CommandLineState {
                             ProjectRootsTraversing.RootTraversePolicy.RECURSIVE);
             classPath = ProjectRootsTraversing.collectRoots(module, jrubyPolicy).getPathsString();
                */
-			classPath = null;
+			classPath = orderEnumerator.getSourcePathsList().getPathsString();
         }
 
         return Runner.createAndSetupCmdLine(null, workingDir, classPath, config.getEnvs(), config.isPassParentEnvs(), RubySdkUtil.getVMExecutablePath(sdk));

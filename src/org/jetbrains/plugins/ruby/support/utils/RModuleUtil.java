@@ -19,15 +19,15 @@ package org.jetbrains.plugins.ruby.support.utils;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
-import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.module.RubyModuleSettings;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -67,10 +67,7 @@ public class RModuleUtil {
      * @return True if module has Ruby(including JRuby) support
      */
     public static boolean hasRubySupport(@Nullable final Module module) {
-        return module != null && (
-                RubyUtil.isRubyModuleType(module) ||
-                JRubyUtil.hasJRubySupport(module)
-               );
+        return module != null && ModuleUtilCore.getExtension(module, RubyModuleExtension.class) != null;
     }
 
     /**
@@ -82,13 +79,8 @@ public class RModuleUtil {
         if (module == null){
             return null;
         }
-        if (JRubyUtil.hasJRubySupport(module)) {
-            return JRubyUtil.getJRubyFacetSdk(module);
-        }
-       /* if (RubyUtil.isRubyModuleType(module)) {
-            return ModuleRootManager.getInstance(module).getJdk();
-        } */
-        return null;
+		RubyModuleExtension extension = ModuleUtilCore.getExtension(module, RubyModuleExtension.class);
+		return extension != null ? extension.getSdk() : null;
     }
 
 
@@ -164,10 +156,11 @@ public class RModuleUtil {
      */
     @Nullable
     public static RSupportPerModuleSettings getRubySupportSettings(@NotNull final Module module) {
-        if (RubyUtil.isRubyModuleType(module)) {
+        /*if (RubyUtil.isRubyModuleType(module)) {
             return RubyModuleSettings.getInstance(module);
         }
 
-        return JRubyUtil.getJRubyFacetConfiguration(module);
+        return JRubyUtil.getJRubyFacetConfiguration(module);     */
+		return new RubyModuleSettings(null, null);
     }
 }
