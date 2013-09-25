@@ -59,7 +59,8 @@ public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoCon
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRPseudoConstant(this);
             return;
@@ -67,16 +68,19 @@ public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoCon
         super.accept(visitor);
     }
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         return new RPseudoConstantReference(this);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String getPrefix() {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final String text = getText();
 // kSELF or kSUPER
@@ -96,7 +100,8 @@ public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoCon
         return RType.NOT_TYPED;
     }
 
-    protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
         if (!TextUtil.isCID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }

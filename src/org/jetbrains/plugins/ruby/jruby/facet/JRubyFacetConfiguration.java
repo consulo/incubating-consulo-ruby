@@ -68,7 +68,8 @@ public class JRubyFacetConfiguration implements FacetConfiguration, RSupportPerM
         JRubyFacetExternalizer.getInstance().writeExternal(this, element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public CheckableDirectoriesContainer getLoadPathDirs() {
         return myLoadPathDirs;
     }
@@ -100,15 +101,18 @@ public class JRubyFacetConfiguration implements FacetConfiguration, RSupportPerM
         mySdk = isJRubySDK ? jdk : null;
     }
 
-    public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs) {
+    @Override
+	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs) {
         myLoadPathDirs = loadPathDirs;
     }
 
-    public boolean shouldUseTestUnitTestFramework() {
+    @Override
+	public boolean shouldUseTestUnitTestFramework() {
         return shouldUseRSpecTestFramework;
     }
 
-    public void setShouldUseTestUnitTestFramework(final boolean shouldUse) {
+    @Override
+	public void setShouldUseTestUnitTestFramework(final boolean shouldUse) {
         shouldUseRSpecTestFramework = shouldUse;
     }
 

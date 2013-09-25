@@ -19,6 +19,7 @@ public class FieldWriteAccessImpl extends AbstractReferenceAccess implements Fie
     myValue = value;
   }
 
+  @Override
   @NotNull
   public RPsiElement getField() {
     return myValue;

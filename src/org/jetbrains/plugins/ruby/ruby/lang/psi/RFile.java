@@ -40,13 +40,16 @@ public interface RFile extends RVirtualFile, RFieldConstantContainer, RGlobalVar
     @NotNull
     public RCompoundStatement getCompoundStatement();
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @NotNull RFileInfo fileInfo);
 
-    @Nullable
+    @Override
+	@Nullable
     public RContainer getParentContainer();
 
-    @Nullable
+    @Override
+	@Nullable
     public RFileInfo getContainingFileInfo();
 
     @Nullable

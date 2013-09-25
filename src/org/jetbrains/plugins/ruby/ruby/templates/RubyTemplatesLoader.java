@@ -91,7 +91,8 @@ public class RubyTemplatesLoader implements ApplicationComponent {
         myTemplateSettings = templateSettings;
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RUBY_SCRIPT_TEMPLATE_LOADER;
@@ -122,7 +123,8 @@ public class RubyTemplatesLoader implements ApplicationComponent {
         pattern.setText(text); */
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         final HashMap<String, String> templateId2Text = RORTemplatesSettingsUtil.loadDefaultSettings();
 
         initFileTemplate(templateId2Text);
@@ -231,6 +233,7 @@ public class RubyTemplatesLoader implements ApplicationComponent {
                 templateId2Text.get(FILE_TEST_UNIT_TEMPLATE_ID));
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 }

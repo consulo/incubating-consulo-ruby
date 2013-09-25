@@ -39,7 +39,8 @@ public class RIfModStatementImpl extends RConditionalStatementImpl implements RI
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRIfModStatement(this);
             return;
@@ -47,11 +48,13 @@ public class RIfModStatementImpl extends RConditionalStatementImpl implements RI
         super.accept(visitor);
     }
 
-    public RPsiElement getCommand() {
+    @Override
+	public RPsiElement getCommand() {
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RPsiElement command = getCommand();
         return command instanceof RExpression ? ((RExpression) command).getType(fileSymbol) : RType.NOT_TYPED;

@@ -12,7 +12,8 @@ public class Type {
     private String myDebugName;
     private int myId;
     private final SymbolFilter myFilter = new SymbolFilter() {
-        public boolean accept(@NotNull final Symbol symbol) {
+        @Override
+		public boolean accept(@NotNull final Symbol symbol) {
             return symbol.getType() == Type.this;
         }
     };

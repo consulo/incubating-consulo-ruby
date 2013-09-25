@@ -20,15 +20,18 @@ class PostCallInstructionImpl extends InstructionImpl implements AfterCallInstru
     return super.toString() + "AFTER CALL " + myCall.num();
   }
 
-    public Iterable<? extends Instruction> pred(CallEnvironment env) {
+    @Override
+	public Iterable<? extends Instruction> pred(CallEnvironment env) {
       getStack(env, myReturnInsn).push(myCall);
       return Collections.singletonList(myReturnInsn);
     }
 
+  @Override
   public Iterable<? extends Instruction> allPred() {
     return Collections.singletonList(myReturnInsn);
   }
 
+  @Override
   protected String getElementPresentation() { return "";
   }
 

@@ -64,44 +64,53 @@ public class RNamedReference implements RPsiPolyvariantReference {
         myElement = element;
     }
 
-    public final PsiElement getElement() {
+    @Override
+	public final PsiElement getElement() {
         return myElement;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final PsiElement getRefValue() {
         return myElement;
     }
 
-    public final TextRange getRangeInElement() {
+    @Override
+	public final TextRange getRangeInElement() {
         return new TextRange(0, myElement.getTextLength());
     }
 
-    public final String getCanonicalText() {
+    @Override
+	public final String getCanonicalText() {
         return myElement.getText();
     }
 
-    public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
         return myElement.setName(newElementName);
     }
 
     // IDEA calls bindToElement if we rename/move Java class
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
         if (element instanceof PsiClass){
             return handleElementRename(((PsiClass) element).getName());
         }
         return null;
     }
 
-    public boolean isReferenceTo(final PsiElement element) {
+    @Override
+	public boolean isReferenceTo(final PsiElement element) {
         return ResolveUtil.isReferenceTo(this, element);
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return true;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolve() {
         return ResolveUtil.resolvePolyVarReference(this);
     }
@@ -109,12 +118,14 @@ public class RNamedReference implements RPsiPolyvariantReference {
     private static class MyResolver implements ResolveCache.PolyVariantResolver<RNamedReference> {
         public static MyResolver INSTANCE = new MyResolver();
 
-        public ResolveResult[] resolve(RNamedReference ref, boolean incompleteCode) {
+        @Override
+		public ResolveResult[] resolve(RNamedReference ref, boolean incompleteCode) {
             return ref.multiResolveInner(incompleteCode);
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final ResolveResult[] multiResolve(final boolean incompleteCode) {
         final PsiManager manager = getElement().getManager();
         if(manager instanceof PsiManagerImpl){
@@ -130,13 +141,15 @@ public class RNamedReference implements RPsiPolyvariantReference {
     protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
         if (((RPsiElementBase) myElement).isClassOrModuleName()){
             return new ResolveResult[]{new ResolveResult(){
-                @Nullable
+                @Override
+				@Nullable
                 public PsiElement getElement() {
                     RubyUsageTypeProvider.setType(RNamedReference.this, RubyUsageType.DECLARATION);
                     return myElement.getParentContainer();
                 }
 
-                public boolean isValidResult() {
+                @Override
+				public boolean isValidResult() {
                     return true;
                 }
             }};
@@ -151,7 +164,8 @@ public class RNamedReference implements RPsiPolyvariantReference {
     }
 
 
-    public final Object[] getVariants() {
+    @Override
+	public final Object[] getVariants() {
         final FileSymbol fileSymbol = ((RPsiElementBase) myElement).forceFileSymbolUpdate();
         if (fileSymbol == null){
             return EMPTY_ARRAY;
@@ -172,7 +186,8 @@ public class RNamedReference implements RPsiPolyvariantReference {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         if (((RPsiElementBase) myElement).isClassOrModuleName()){
             return Collections.emptyList();

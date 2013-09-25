@@ -40,16 +40,19 @@ public class RVirtualRequireImpl extends  RVirtualStructuralElementBase implemen
         myRequires = requires;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getNames() {
         return myRequires;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_REQUIRE;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualRequire(this);
     }
 

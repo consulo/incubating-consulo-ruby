@@ -45,7 +45,8 @@ public class RailsModelFolderNode extends ModelSubFolderNode {
         super(module, rootDir, null, initPresentationData());
     }
 
-    public void accept(final SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(final SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitModelNode();
             return;
@@ -61,12 +62,14 @@ public class RailsModelFolderNode extends ModelSubFolderNode {
 
     }
     
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final ArrayList<SimpleNode> children = new ArrayList<SimpleNode>();
         //adds migrations
         final Module module = getModule();

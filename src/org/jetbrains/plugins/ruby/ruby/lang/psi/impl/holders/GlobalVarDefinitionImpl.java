@@ -33,21 +33,25 @@ public class GlobalVarDefinitionImpl implements GlobalVarDefinition {
         myFirstDefinition  = globalVariable;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RGlobalVariable getFirstDefinition() {
         return myFirstDefinition;
     }
 
-    public void process(@NotNull final RGlobalVariable globalVariable) {
+    @Override
+	public void process(@NotNull final RGlobalVariable globalVariable) {
         // do nothing
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getText() {
         return myFirstDefinition.getText();
     }
 
-    public boolean isFor(@NotNull final RVirtualGlobalVar virtualGlobalVar) {
+    @Override
+	public boolean isFor(@NotNull final RVirtualGlobalVar virtualGlobalVar) {
         return getText().equals(virtualGlobalVar.getText());
     }
 }

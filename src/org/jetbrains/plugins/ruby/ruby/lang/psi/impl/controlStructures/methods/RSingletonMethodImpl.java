@@ -43,13 +43,15 @@ public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMetho
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RClassObject getClassObject(){
         PsiElement result =  getChildByFilter(RubyElementTypes.CLASS_OBJECT,0);
         return result instanceof RClassObject ?  (RClassObject) result : null;
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRSingletonMethod(this);
             return;
@@ -57,7 +59,8 @@ public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMetho
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualSingletonMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
                                                @NotNull RFileInfo info) {
         final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
@@ -72,11 +75,13 @@ public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMetho
         return singletonMethod;
     }
 
-    public boolean isConstructor() {
+    @Override
+	public boolean isConstructor() {
         return false;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.SINGLETON_METHOD;
     }
 }

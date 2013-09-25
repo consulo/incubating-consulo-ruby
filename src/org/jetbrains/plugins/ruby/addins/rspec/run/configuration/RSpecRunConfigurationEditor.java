@@ -37,20 +37,24 @@ public class RSpecRunConfigurationEditor extends SettingsEditor<RSpecRunConfigur
         myForm = new RSpecRunConfigurationForm(project, configuration);
     }
 
-    protected void resetEditorFrom(final RSpecRunConfiguration config) {
+    @Override
+	protected void resetEditorFrom(final RSpecRunConfiguration config) {
         RSpecRunConfiguration.copyParams(config, myForm);
     }
 
-    protected void applyEditorTo(final RSpecRunConfiguration config) throws ConfigurationException {
+    @Override
+	protected void applyEditorTo(final RSpecRunConfiguration config) throws ConfigurationException {
         RSpecRunConfiguration.copyParams(myForm, config);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected JComponent createEditor() {
         return myForm.getPanel();
     }
 
-    protected void disposeEditor() {
+    @Override
+	protected void disposeEditor() {
         myForm = null;
     }
 }

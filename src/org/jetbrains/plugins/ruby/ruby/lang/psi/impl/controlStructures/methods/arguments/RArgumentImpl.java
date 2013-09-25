@@ -36,18 +36,21 @@ public class RArgumentImpl extends RPsiElementBase implements RArgument {
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName(){
         final RIdentifier identifier = getIdentifier();
         //noinspection ConstantConditions
         return identifier!=null ? identifier.getName() : "";
     }
 
-    public RIdentifier getIdentifier(){
+    @Override
+	public RIdentifier getIdentifier(){
         return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRParameter(this);
             return;
@@ -55,7 +58,8 @@ public class RArgumentImpl extends RPsiElementBase implements RArgument {
         super.accept(visitor);
     }
 
-    public ArgumentInfo.Type getType() {
+    @Override
+	public ArgumentInfo.Type getType() {
         return ArgumentInfo.Type.SIMPLE;
     }
 

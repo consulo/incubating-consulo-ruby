@@ -143,7 +143,8 @@ public class ConsoleRunner {
         }
         //rerun
         final Runnable rerun = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 //Remove obsolete listener
                 if (myProcessListener != null) {
                     myProcessHandler.removeProcessListener(myProcessListener);
@@ -204,7 +205,8 @@ public class ConsoleRunner {
                            @Nullable final RunContentDescriptorFactory descriptorFactory) {
 // create runner
         IdeaInternalUtil.runInEventDispatchThread(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 // Must be executed in EDT
                 final ConsoleRunner runner = new ConsoleRunner(project, processListener, consoleFilters,
                                                                 userActions, consoleTitle,
@@ -222,7 +224,8 @@ public class ConsoleRunner {
         final String title = RBundle.message("progress.title.console.runner.modaldialog.running",
                                              myConsoleTitle);
         final Task task = new Task.Backgroundable(myProject, title, true) {
-            public void run(ProgressIndicator indicator) {
+            @Override
+			public void run(ProgressIndicator indicator) {
                 if (indicator != null) {
                     indicator.setText(RBundle.message("progress.backgnd.indicator.title.please.wait", getTitle()));
                 }
@@ -231,9 +234,11 @@ public class ConsoleRunner {
                 myProcessHandler.waitFor();
             }
 
-            public void onSuccess() {
+            @Override
+			public void onSuccess() {
                 final Runnable runnable = new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         FileDocumentManager.getInstance().saveAllDocuments();
                     }
                 };
@@ -269,11 +274,13 @@ public class ConsoleRunner {
             myRerunTask = rerun;
         }
 
-      public void update(AnActionEvent e) {
+      @Override
+	  public void update(AnActionEvent e) {
           e.getPresentation().setEnabled(getProcessHandler().isProcessTerminated());
       }
 
-      public void actionPerformed(AnActionEvent e) {
+      @Override
+	  public void actionPerformed(AnActionEvent e) {
           myRerunTask.run();
       }
     }
@@ -286,11 +293,13 @@ public class ConsoleRunner {
                   RubyIcons.RUBY_RUNNER_SHOW_CMDLINE);
         }
 
-      public void update(final AnActionEvent e) {
+      @Override
+	  public void update(final AnActionEvent e) {
           e.getPresentation().setEnabled(getProcessHandler().isProcessTerminated());
       }
 
-      public void actionPerformed(final AnActionEvent e) {
+      @Override
+	  public void actionPerformed(final AnActionEvent e) {
           // Conversts args array to cmdline
           final String[] args = myArgumentsProvider.getArguments();
           final StringBuilder buff = new StringBuilder();

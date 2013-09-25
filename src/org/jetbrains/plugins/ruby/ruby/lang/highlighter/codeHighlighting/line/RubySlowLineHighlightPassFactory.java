@@ -40,7 +40,8 @@ public class RubySlowLineHighlightPassFactory implements TextEditorHighlightingP
         myRegistrar = passRegistrar;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile,
                                                              @NotNull final Editor editor) {
         if (psiFile instanceof RFile){
@@ -49,22 +50,27 @@ public class RubySlowLineHighlightPassFactory implements TextEditorHighlightingP
         return null;
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RubyComponents.RUBY_SLOW_HIGHLIGHT_LINE_FACTORY;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST, 0, true, true);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 }

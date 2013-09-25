@@ -78,7 +78,8 @@ public class GemsRunner {
         }
 
         final ProcessAdapter processListener = new ProcessAdapter() {
-            public void processTerminated(ProcessEvent event) {
+            @Override
+			public void processTerminated(ProcessEvent event) {
                 RModuleUtil.refreshRubyModuleTypeContent(module);
                 if (onDone != null) {
                     onDone.run();

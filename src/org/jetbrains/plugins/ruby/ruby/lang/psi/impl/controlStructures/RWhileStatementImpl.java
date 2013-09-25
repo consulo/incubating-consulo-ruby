@@ -34,7 +34,8 @@ public class RWhileStatementImpl extends RConditionalStatementImpl implements RW
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRWhileStatement(this);
             return;
@@ -42,7 +43,8 @@ public class RWhileStatementImpl extends RConditionalStatementImpl implements RW
         super.accept(visitor);
     }
 
-    public RCompoundStatement getLoopBody() {
+    @Override
+	public RCompoundStatement getLoopBody() {
         return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
     }
 }

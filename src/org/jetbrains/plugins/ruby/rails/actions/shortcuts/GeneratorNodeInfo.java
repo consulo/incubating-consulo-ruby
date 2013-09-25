@@ -52,7 +52,8 @@ public class GeneratorNodeInfo extends NodeInfo<SerializableGenerator>{
         return new GeneratorNodeInfo(RailsIcons.GENERATOR_ICON, generator, false);
     }
 
-    public String getActionId() {
+    @Override
+	public String getActionId() {
         return getActionId(this.getData().getName());
     }
 

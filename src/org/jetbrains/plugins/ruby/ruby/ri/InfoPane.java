@@ -68,7 +68,8 @@ class InfoPane {
         myOutputPane.setContentType(CONTENT_TYPE);
 
         myOutputPane.addHyperlinkListener(new HyperlinkListener() {
-            public void hyperlinkUpdate(HyperlinkEvent e) {
+            @Override
+			public void hyperlinkUpdate(HyperlinkEvent e) {
                 if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                     createAndExecuteCmd(e.getDescription().trim());
                 }
@@ -77,21 +78,24 @@ class InfoPane {
 
         backButton.setEnabled(false);
         backButton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            @Override
+			public void mouseClicked(MouseEvent e) {
                 undo();
             }
         });
 
         forwardButton.setEnabled(false);
         forwardButton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            @Override
+			public void mouseClicked(MouseEvent e) {
                 redo();
             }
         });
 
         clearButton.setEnabled(true);
         clearButton.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e) {
+            @Override
+			public void mouseClicked(MouseEvent e) {
                 clear();
             }
         });
@@ -145,7 +149,8 @@ class InfoPane {
         myNameComp.setText(RBundle.message("ruby.ri.name"));
 
         myTextField.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
+            @Override
+			public void keyTyped(KeyEvent e) {
                 char keyChar = e.getKeyChar();
                 if (TextUtil.isEol(keyChar)) {
                     final String text = myTextField.getText().trim();

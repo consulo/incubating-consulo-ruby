@@ -55,36 +55,44 @@ public class RubySimpleLookupItem implements RubyLookupItem,
         myIcon = icon;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myLookupString;
     }
 
-    public String getPresentation() {
+    @Override
+	public String getPresentation() {
         return myLookupString;
     }
 
-    public boolean handleUserSelection(LookupItem item, Project project) {
+    @Override
+	public boolean handleUserSelection(LookupItem item, Project project) {
         return true;
     }
 
-    public String getTypeHint() {
+    @Override
+	public String getTypeHint() {
         return myTypeText != null ? myTypeText : "";
     }
 
-    public Color getColorHint() {
+    @Override
+	public Color getColorHint() {
         return null;
     }
 
-    public boolean isBold() {
+    @Override
+	public boolean isBold() {
         return isBold;
     }
 
-    public Icon getIcon(int flags) {
+    @Override
+	public Icon getIcon(int flags) {
         return myIcon;
     }
 
-    public int getPriority() {
+    @Override
+	public int getPriority() {
         return myPriority;
     }
 }

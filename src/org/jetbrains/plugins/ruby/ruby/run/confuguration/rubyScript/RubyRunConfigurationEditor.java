@@ -35,20 +35,24 @@ public class RubyRunConfigurationEditor extends SettingsEditor<RubyRunConfigurat
         return myForm;
     }
 
-    protected void resetEditorFrom(RubyRunConfiguration config) {
+    @Override
+	protected void resetEditorFrom(RubyRunConfiguration config) {
         RubyRunConfiguration.copyParams(config, myForm);
     }
 
-    protected void applyEditorTo(RubyRunConfiguration config) throws ConfigurationException {
+    @Override
+	protected void applyEditorTo(RubyRunConfiguration config) throws ConfigurationException {
         RubyRunConfiguration.copyParams(myForm, config);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected JComponent createEditor() {
         return myForm.getPanel();
     }
 
-    protected void disposeEditor() {
+    @Override
+	protected void disposeEditor() {
     }
 }
 

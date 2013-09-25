@@ -118,7 +118,8 @@ public class RailsFacetUtil {
 
         if (homeDirPath != null) {
             IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                public void run() throws Exception {
+                @Override
+				public void run() throws Exception {
                     final VirtualFile moduleRoot = VirtualFileUtil.refreshAndFindFileByLocalPath(homeDirPath);
                     if (moduleRoot != null) {
                         moduleRoot.refresh(false, true);

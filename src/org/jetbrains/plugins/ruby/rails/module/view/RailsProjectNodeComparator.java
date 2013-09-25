@@ -31,7 +31,8 @@ public class RailsProjectNodeComparator implements Comparator<NodeDescriptor> {
     protected static final int HIGHER = -1;
     protected static final int LOWER = 1;
 
-    public int compare(final NodeDescriptor node1, final NodeDescriptor node2) {
+    @Override
+	public int compare(final NodeDescriptor node1, final NodeDescriptor node2) {
         if (node1 instanceof RailsAbstractNode) {
             if (node2 instanceof RailsAbstractNode) {
                 final RailsAbstractNode rFirstNode = (RailsAbstractNode)node1;

@@ -87,7 +87,8 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
 
         myCBUseTestUnit.setSelected(useTestUnit);
         myCBUseTestUnit.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 testUnitRootDirComponent.setEnabled(myCBUseTestUnit.isSelected());
             }
         });
@@ -135,7 +136,8 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
         myRBUseRspecGem.setEnabled(useRSpecFramework);
 
         myCBUseRSpec.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 final boolean useRSpecFramework = shouldUseRSpecFramework();
                 myRBUseRSpecPlugin.setEnabled(useRSpecFramework);
                 myRBUseRspecGem.setEnabled(useRSpecFramework);
@@ -144,7 +146,8 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
 
 
         myBGetRSpecGemVersion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 if (sdk == null || !RubySdkUtil.isSDKValid(sdk)) {
                     final String msg = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.messages");
@@ -173,19 +176,23 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
          return myContentPane;
      }
 
-     public boolean shouldUseRSpecFramework() {
+     @Override
+	 public boolean shouldUseRSpecFramework() {
          return myCBUseRSpec.isSelected();
      }
 
-    public boolean shouldUseTestUnitFramework() {
+    @Override
+	public boolean shouldUseTestUnitFramework() {
         return myCBUseTestUnit.isSelected();
     }
 
-    public boolean shouldPreferRSpecPlugin() {
+    @Override
+	public boolean shouldPreferRSpecPlugin() {
         return myRBUseRSpecPlugin.isSelected();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getTestUnitRootUrl(){
         final String path = FileUtil.toSystemIndependentName(testUnitRootDirTextField.getText().trim());
         return TextUtil.isEmpty(path)

@@ -71,7 +71,8 @@ public class RubyPomAspectImpl implements RubyPomAspect {
     }
 
 
-    public void update(PomModelEvent event) {
+    @Override
+	public void update(PomModelEvent event) {
         // we hope it`s enough often operation
         ProgressManager.getInstance().checkCanceled();
 

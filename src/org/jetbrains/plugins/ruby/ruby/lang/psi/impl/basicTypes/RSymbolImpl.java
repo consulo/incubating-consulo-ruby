@@ -49,13 +49,15 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol {
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getObject() {
         //noinspection ConstantConditions
         return getLastChild();
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRSymbol(this);
             return;
@@ -63,7 +65,8 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol {
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiReference[] getReferences() {
         final PsiElement content = getObject();
         final RFile rFile = RubyPsiUtil.getRFile(content);
@@ -78,7 +81,8 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol {
         return PsiReference.EMPTY_ARRAY;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Symbol), Context.INSTANCE, true);
     }

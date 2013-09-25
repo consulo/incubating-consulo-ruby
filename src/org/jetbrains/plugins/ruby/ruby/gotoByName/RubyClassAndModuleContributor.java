@@ -41,7 +41,8 @@ import com.intellij.openapi.projectRoots.Sdk;
 
 public class RubyClassAndModuleContributor extends RubyBaseContributor implements ChooseByNameContributor{
 
-    public String[] getNames(final Project project, boolean includeNonProjectItems) {
+    @Override
+	public String[] getNames(final Project project, boolean includeNonProjectItems) {
         final ArrayList<String> names = new ArrayList<String>();
         final Module[] modules = ModuleManager.getInstance(project).getModules();
         final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
@@ -68,6 +69,7 @@ public class RubyClassAndModuleContributor extends RubyBaseContributor implement
         return names.toArray(new String[names.size()]);
     }
 
+	@Override
 	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems) {
         //TODO Refactor with RCacheUtils
         final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);

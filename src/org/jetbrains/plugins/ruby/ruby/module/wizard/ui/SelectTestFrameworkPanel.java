@@ -59,20 +59,24 @@ public class SelectTestFrameworkPanel implements TestFrameworkOptions {
          return myContentPane;
      }
 
-     public boolean shouldUseRSpecFramework() {
+     @Override
+	 public boolean shouldUseRSpecFramework() {
          return myCBUseRSpec.isSelected();
      }
 
-    public boolean shouldUseTestUnitFramework() {
+    @Override
+	public boolean shouldUseTestUnitFramework() {
         return myCBUseStdTestUnit.isSelected();
     }
 
-    public boolean shouldPreferRSpecPlugin() {
+    @Override
+	public boolean shouldPreferRSpecPlugin() {
         //N/A
         return false;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getTestUnitRootUrl() {
         return null;
     }

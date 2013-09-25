@@ -65,12 +65,14 @@ public class RailsProjectModuleNode extends RailsNode {
         return NodeIdUtil.createForDirectory(url, false);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.RMODULE;
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final ArrayList<RailsNode> nodesList = new ArrayList<RailsNode>();
         final Module module = getModule();
 

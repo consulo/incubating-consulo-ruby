@@ -33,18 +33,21 @@ public class RubyRunConfigurationFactory extends ConfigurationFactory {
         super(type);
     }
 
-    public RunConfiguration createTemplateConfiguration(final Project project) {
+    @Override
+	public RunConfiguration createTemplateConfiguration(final Project project) {
         final RubyRunConfiguration conf = new RubyRunConfiguration(project, this, "");
         initDefaultParams(conf);
 
         return conf;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
          return RBundle.message("run.configuration.script.name");
     }
 
-    public Icon getIcon() {
+    @Override
+	public Icon getIcon() {
         return RubyIcons.RUBY_RUN_CONFIGURATION_SCRIPT;
     }
 

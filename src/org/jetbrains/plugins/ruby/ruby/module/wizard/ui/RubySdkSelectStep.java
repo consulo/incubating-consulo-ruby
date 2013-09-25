@@ -55,20 +55,24 @@ public class RubySdkSelectStep extends FacetWizardStep {
         myHelp = helpId;
     }
 
-    public String getHelpId() {
+    @Override
+	public String getHelpId() {
         return myHelp;
     }
 
-    public JComponent getPreferredFocusedComponent() {
+    @Override
+	public JComponent getPreferredFocusedComponent() {
         return myPanel.getPreferredFocusedComponent();
     }
 
-    public JComponent getComponent() {
+    @Override
+	public JComponent getComponent() {
         return myPanel;
     }
 
 
-    public void updateDataModel() {
+    @Override
+	public void updateDataModel() {
         final Sdk sdk = getSdk();
         mySettingsHolder.setSdk(sdk);
 
@@ -80,11 +84,13 @@ public class RubySdkSelectStep extends FacetWizardStep {
         return myPanel.getChosenJdk();
     }
 
-    public Icon getIcon() {
+    @Override
+	public Icon getIcon() {
         return myIcon;
     }
 
-    public boolean validate() {
+    @Override
+	public boolean validate() {
         Sdk jdk = myPanel.getChosenJdk();
         if (jdk==null){
             int result = Messages.showYesNoDialog(

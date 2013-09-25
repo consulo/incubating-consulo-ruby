@@ -41,11 +41,13 @@ public class MultiMessage extends MessageImpl implements Message{
         return myMessages;
     }
 
-    public int getArgumentsNumber() {
+    @Override
+	public int getArgumentsNumber() {
         return 0;
     }
 
-    public boolean matchesMessage(@NotNull final Message patternMessage) {
+    @Override
+	public boolean matchesMessage(@NotNull final Message patternMessage) {
         for (Message message : myMessages) {
             if (!message.matchesMessage(patternMessage)){
                 return false;

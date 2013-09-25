@@ -50,7 +50,8 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public List<ConstantDefinitions> getConstantDefinitions() {
         if (myConstantDefinitions == null) {
             myConstantDefinitions = RConstantHolderUtil.gatherConstantDefinitions(this);
@@ -58,12 +59,14 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
         return myConstantDefinitions;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant) {
         return RConstantHolderUtil.getDefinition(this, constant);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<FieldDefinition> getFieldsDefinitions() {
         if (myFieldDefinitions == null) {
             myFieldDefinitions = RFieldHolderUtil.gatherFieldDescriptions(this);
@@ -71,12 +74,14 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
         return myFieldDefinitions;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public FieldDefinition getDefinition(@NotNull final RVirtualField field) {
         return RFieldHolderUtil.getDefinition(this, field);
     }
 
-    public synchronized void subtreeChanged() {
+    @Override
+	public synchronized void subtreeChanged() {
         clearMyCaches();
         super.subtreeChanged();
     }
@@ -86,17 +91,20 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
         myConstantDefinitions = null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualConstant> getVirtualConstants() {
         return RVirtualUtil.getVirtualConstants(this, this);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualField> getVirtualFields() {
         return RVirtualUtil.getVirtualFields(this, this);
     }
 
-    public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
         // TODO: to be honest, we must add another 2 check!
         // RVPsiUtuils.areConstantHoldersEqual and RVPsiUtuils.areFieldHoldersEqual
         return super.equalsToVirtual(element);

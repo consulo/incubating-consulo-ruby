@@ -33,7 +33,8 @@ public class RClassVariableImpl extends RFieldBase implements RClassVariable {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRClassVariable(this);
             return;
@@ -41,12 +42,14 @@ public class RClassVariableImpl extends RFieldBase implements RClassVariable {
         super.accept(visitor);
     }
 
-    public FieldType getType() {
+    @Override
+	public FieldType getType() {
         return FieldType.CLASS_VARIABLE;
     }
 
 
-    public String getPrefix() {
+    @Override
+	public String getPrefix() {
         return PREFIX;
     }
 }

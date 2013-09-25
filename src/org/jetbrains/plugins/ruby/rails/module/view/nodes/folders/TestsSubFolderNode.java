@@ -49,7 +49,8 @@ public class TestsSubFolderNode extends FolderNode {
         super(module, dir, parent, data);
     }
 
-    protected void processNotDirectoryFile(final List<RailsNode> nodes,
+    @Override
+	protected void processNotDirectoryFile(final List<RailsNode> nodes,
                                            final VirtualFile file, final String url) {
         if (RubyVirtualFileScanner.isRubyFile(file)) {
             super.processNotDirectoryFile(nodes, file, url);

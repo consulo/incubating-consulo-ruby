@@ -55,7 +55,8 @@ class RailsFacet extends BaseRailsFacet {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel) {
         final VirtualFile contentRoot = RModuleUtil.getModulesFirstContentRoot(rootModel);
         assert contentRoot != null; //Can't be null for Rails facet in Ruby module

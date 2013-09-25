@@ -38,16 +38,19 @@ public class RootScopeImpl extends ScopeImpl implements RootScope {
         super(holder);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Scope getChildScope(@NotNull final PseudoScopeHolder holder) {
         return mySubScopes.get(holder);
     }
 
-    public void registerSubScope(@NotNull final PseudoScopeHolder scopeHolder, @NotNull final Scope childScope) {
+    @Override
+	public void registerSubScope(@NotNull final PseudoScopeHolder scopeHolder, @NotNull final Scope childScope) {
         mySubScopes.put(scopeHolder, childScope);
     }
 
-    public Collection<Scope> getAllChildScopes(){
+    @Override
+	public Collection<Scope> getAllChildScopes(){
         return mySubScopes.values();
     }
 

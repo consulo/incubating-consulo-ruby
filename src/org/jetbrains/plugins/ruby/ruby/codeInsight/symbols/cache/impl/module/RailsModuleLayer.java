@@ -49,7 +49,8 @@ public class RailsModuleLayer extends ModuleLayer {
         myLayerRootUrl = railsPaths.getVendorRootURL();
     }
 
-    public void fileAdded(@NotNull final String url) {
+    @Override
+	public void fileAdded(@NotNull final String url) {
         if (url.startsWith(myLayerRootUrl)) {
             myFileSymbol = null;
             return;
@@ -63,14 +64,16 @@ public class RailsModuleLayer extends ModuleLayer {
         }
     }
 
-    @SuppressWarnings({"StringEquality"})
+    @Override
+	@SuppressWarnings({"StringEquality"})
     @Nullable
     protected CachedSymbol getBaseSymbol() {
         final SymbolsCache cache = SymbolsCache.getInstance(myProject);
         return cache.getBuiltInCachedSymbol(FileSymbolType.RAILS_BUILT_IN, mySdk, isJRubyEnabled);
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         super.addAdditionalData();
 
         // add default rails loadpath

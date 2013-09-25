@@ -59,15 +59,18 @@ public class RFieldHolderUtil {
 
         final RubyElementVisitor fieldVisitor = new RubyElementVisitor() {
 
-            public void visitRClassVariable(final RClassVariable rClassVariable) {
+            @Override
+			public void visitRClassVariable(final RClassVariable rClassVariable) {
                 addField(list, rClassVariable);
             }
 
-            public void visitRInstanceVariable(final RInstanceVariable rInstanceVariable) {
+            @Override
+			public void visitRInstanceVariable(final RInstanceVariable rInstanceVariable) {
                 addField(list, rInstanceVariable);
             }
 
-            public void visitElement(final PsiElement element) {
+            @Override
+			public void visitElement(final PsiElement element) {
                 if (element instanceof RFieldHolder) {
                     return;
                 }

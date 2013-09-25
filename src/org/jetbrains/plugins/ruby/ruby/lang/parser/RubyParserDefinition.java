@@ -35,28 +35,33 @@ import com.intellij.psi.tree.TokenSet;
 
 public class RubyParserDefinition implements ParserDefinition, RubyElementTypes {
 
-    @NotNull
+    @Override
+	@NotNull
     public Lexer createLexer(Project project, LanguageVersion languageVersion) {
         return new RubyLexer();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiParser createParser(Project project, LanguageVersion languageVersion) {
         return new RubyParser();
 //        return new RubyMockParser();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public IFileElementType getFileNodeType() {
         return RubyElementTypes.FILE;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
         return BNF.tWHITESPACES;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public TokenSet getCommentTokens(LanguageVersion languageVersion) {
         return BNF.tCOMMENTS;
     }
@@ -68,16 +73,19 @@ public class RubyParserDefinition implements ParserDefinition, RubyElementTypes 
 		return BNF.tSTRING_TOKENS;
 	}
 
+	@Override
 	@NotNull
     public PsiElement createElement(@NotNull ASTNode node) {
         return RubyPsiCreator.create(node);
     }
 
-    public PsiFile createFile(FileViewProvider viewProvider) {
+    @Override
+	public PsiFile createFile(FileViewProvider viewProvider) {
         return new RFileImpl(viewProvider);
     }
 
-    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+    @Override
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
         return SpaceRequirements.MAY;
     }
 

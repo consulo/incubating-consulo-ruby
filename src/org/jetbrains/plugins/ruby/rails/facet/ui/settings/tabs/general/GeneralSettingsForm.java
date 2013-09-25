@@ -64,11 +64,13 @@ public class GeneralSettingsForm implements RailsUIUtil.RailsVersionComponent{
         myECRailsVersionLabel = new EvaluatingComponent<String>(myRailsVersionLabel);
     }
 
-    public boolean isCloosed() {
+    @Override
+	public boolean isCloosed() {
         return myIsClosed;
     }
 
-    public void setRailsVersion(@Nullable final String railsVersion) {
+    @Override
+	public void setRailsVersion(@Nullable final String railsVersion) {
         myRailsVersion = railsVersion;
     }
 

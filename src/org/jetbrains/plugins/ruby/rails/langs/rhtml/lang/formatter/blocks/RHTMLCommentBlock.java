@@ -47,7 +47,8 @@ public class RHTMLCommentBlock extends RHTMLBlock {
         myChildrenIndent = Indent.getSpaceIndent(4);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected List<Block> buildChildren() {
         ChameleonTransforming.transformChildren(myNode);
 
@@ -73,7 +74,8 @@ public class RHTMLCommentBlock extends RHTMLBlock {
         return result;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ChildAttributes getChildAttributes(int newChildIndex) {
         return new ChildAttributes(myChildrenIndent, null);
     }

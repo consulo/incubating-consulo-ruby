@@ -32,7 +32,8 @@ public class RCommandCallImpl extends RCallBase implements RCommandCall {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRCommandCall(this);
             return;

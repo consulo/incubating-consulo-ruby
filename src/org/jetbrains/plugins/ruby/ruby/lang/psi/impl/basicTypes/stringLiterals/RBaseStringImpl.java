@@ -33,11 +33,13 @@ public class RBaseStringImpl extends RStringLiteralBase implements RBaseString {
         super(astNode);
     }
 
-    public void replaceByRSymbol(@NotNull final RSymbol rSymbol) {
+    @Override
+	public void replaceByRSymbol(@NotNull final RSymbol rSymbol) {
         super.replace(rSymbol);
     }
 
-    public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr) {
+    @Override
+	public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr) {
         super.replace(mathExpr);
     }
 

@@ -49,7 +49,8 @@ public class ActionNode extends MethodNode {
         myControllerName = controllerName;
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final List<RailsNode> childNodes = new ArrayList<RailsNode>();
         final Module module = getModule();
 
@@ -63,7 +64,8 @@ public class ActionNode extends MethodNode {
         return childNodes.toArray(new RailsNode[childNodes.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.ACTION;
     }

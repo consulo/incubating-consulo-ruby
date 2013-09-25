@@ -69,7 +69,8 @@ public class RHTMLHtmlBlock extends XmlBlock {
         myNodeCmpSt = RHTMLFormatterUtil.getParentRCmpStByRHTMLOrHTMLChildNode(myViewProvider, myNode);
     }
 
-    public Spacing getSpacing(Block child1, Block child2) {
+    @Override
+	public Spacing getSpacing(Block child1, Block child2) {
         final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child1);
         final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child2);
 
@@ -79,7 +80,8 @@ public class RHTMLHtmlBlock extends XmlBlock {
                 : super.getSpacing(child1, child2);
     }
 
-    protected List<Block> buildChildren() {
+    @Override
+	protected List<Block> buildChildren() {
         if (myNode.getElementType() == XmlElementType.XML_ATTRIBUTE_VALUE) {
             if (myNode instanceof CompositeElement) {
                 final ArrayList<Block> result = new ArrayList<Block>(5);
@@ -102,7 +104,8 @@ public class RHTMLHtmlBlock extends XmlBlock {
         return super.buildChildren();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
-    protected
+    @Override
+	protected
     @Nullable
     ASTNode processChild(List<Block> result, ASTNode child, Wrap wrap, Alignment alignment, Indent indent) {
         final TextRange childTRange = child.getTextRange();

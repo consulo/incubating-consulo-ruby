@@ -179,7 +179,8 @@ public class RakeUtil {
         final String railsApplicHomeDirPath = railsFacetConfiguration.getRailsApplicationRootPath();
 
         final Task task = new Task.Backgroundable(project, title, true) {
-            public void run(final ProgressIndicator indicator) {
+            @Override
+			public void run(final ProgressIndicator indicator) {
 
                 final RakeTasksExternalizer rakeTasksExt = new RakeTasksExternalizer();
                 RakeTask rakeTask = rakeTasksExt.loadRakeTasksTree(railsApplicHomeDirPath);
@@ -194,12 +195,14 @@ public class RakeUtil {
                 ((BaseRailsFacetConfigurationImpl)railsFacetConfiguration).setRakeTasks(rakeTask);
             }
 
-            public boolean shouldStartInBackground() {
+            @Override
+			public boolean shouldStartInBackground() {
                 return true;
             }
         };
         IdeaInternalUtil.runInEventDispatchThread(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 // Must be executed in EDT
                 ProgressManager.getInstance().run(task);
             }

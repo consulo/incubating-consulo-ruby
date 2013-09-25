@@ -45,7 +45,8 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
         isGlobal = global;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         if (myName==null){
             final int size = myFullPath.size();
@@ -54,12 +55,14 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
         return myName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getPath() {
         return myFullPath;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFullName() {
         if (myFullName ==null){
             final StringBuilder buffer = new StringBuilder();
@@ -79,7 +82,8 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
         return myFullName;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitElement(this); 
     }
 
@@ -87,7 +91,8 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
         return getFullName();
     }
 
-    public boolean isGlobal() {
+    @Override
+	public boolean isGlobal() {
         return isGlobal;
     }
 

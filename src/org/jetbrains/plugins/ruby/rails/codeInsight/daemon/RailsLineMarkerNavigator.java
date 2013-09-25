@@ -53,19 +53,23 @@ public class RailsLineMarkerNavigator {
         }
 
         element.accept(new RubyElementVisitor() {
-            public void visitRMethod(final RMethod rMethod) {
+            @Override
+			public void visitRMethod(final RMethod rMethod) {
                 browseRMethodOrClass(info, module, rMethod, e);
             }
 
-            public void visitRClass(final RClass rClass) {
+            @Override
+			public void visitRClass(final RClass rClass) {
                 browseRMethodOrClass(info, module, rClass, e);
             }
 
-            public void visitRFile(final RFile rFile) {
+            @Override
+			public void visitRFile(final RFile rFile) {
                 visitFile(rFile);
             }
 
-            public void visitFile(final PsiFile file) {
+            @Override
+			public void visitFile(final PsiFile file) {
                 browsePsiFile(info, module, file);
             }
         });
@@ -112,7 +116,8 @@ public class RailsLineMarkerNavigator {
         list.setCellRenderer(listRenderer);
         new PopupChooserBuilder(list).setTitle(title).setMovable(true)
                 .setItemChoosenCallback(new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         int[] ids = list.getSelectedIndices();
                         if (ids == null || ids.length == 0) return;
                         Object[] selectedElements = list.getSelectedValues();

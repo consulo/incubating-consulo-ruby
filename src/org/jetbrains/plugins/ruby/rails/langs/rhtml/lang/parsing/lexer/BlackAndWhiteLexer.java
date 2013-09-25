@@ -71,20 +71,24 @@ public abstract class BlackAndWhiteLexer extends Lexer {
         start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
     }
 
-    public void start(final CharSequence buffer,
+    @Override
+	public void start(final CharSequence buffer,
                       final int startOffset, final int endOffset, final int initialState) {
         mySeparatorLexer.start(buffer, startOffset, endOffset, initialState);
     }
 
-    public CharSequence getBufferSequence() {
+    @Override
+	public CharSequence getBufferSequence() {
         return mySeparatorLexer.getBufferSequence();
     }
 
-    public int getState() {
+    @Override
+	public int getState() {
         return mySeparatorLexer.getState();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public IElementType getTokenType() {
         IElementType tokenType = mySeparatorLexer.getTokenType();
         if (tokenType == null) {
@@ -97,28 +101,34 @@ public abstract class BlackAndWhiteLexer extends Lexer {
         return mySeparatorLexer.getTokenType() == myWhiteFragmentEnd;
     }
 
-    public int getTokenStart() {
+    @Override
+	public int getTokenStart() {
         return mySeparatorLexer.getTokenStart();
     }
 
-    public int getTokenEnd() {
+    @Override
+	public int getTokenEnd() {
         return mySeparatorLexer.getTokenEnd();
     }
 
-    public void advance() {
+    @Override
+	public void advance() {
         mySeparatorLexer.advance();
     }
 
-    public LexerPosition getCurrentPosition() {
+    @Override
+	public LexerPosition getCurrentPosition() {
         return mySeparatorLexer.getCurrentPosition();
     }
 
-    public void restore(final LexerPosition position) {
+    @Override
+	public void restore(final LexerPosition position) {
         mySeparatorLexer.restore(position);
     }
 
 
-    public int getBufferEnd() {
+    @Override
+	public int getBufferEnd() {
         return mySeparatorLexer.getBufferEnd();
     }
 }

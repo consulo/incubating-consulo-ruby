@@ -52,7 +52,8 @@ public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol
         myHelpersRootUrl = railsPaths.getHelpersRootURL();
     }
 
-    public void fileAdded(@NotNull String url) {
+    @Override
+	public void fileAdded(@NotNull String url) {
         if (url.startsWith(myControllersRootUrl)) {
             myFileSymbol = null;
             return;
@@ -71,7 +72,8 @@ public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol
         }
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         RailsRequireUtil.loadAllControllersAndHelpers(myFileSymbol, myModule);
     }
 }

@@ -64,7 +64,8 @@ public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter {
         registerLayer(RHTMLTokenType.RUBY_CODE_CHARACTERS, rubyLayer);
     }
 
-    protected boolean updateLayers() {
+    @Override
+	protected boolean updateLayers() {
         Language templateLanguage = getCurrentTemplateLanguageAndPrefixes();
 
         //register template language layer (e.g. HTML or maybe Text(for general ERB template))

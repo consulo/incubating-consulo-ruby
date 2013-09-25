@@ -60,41 +60,49 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
     private Sdk mySdk;
 
 
-    public boolean shouldUseRSpecPlugin() {
+    @Override
+	public boolean shouldUseRSpecPlugin() {
         return myShouldUseRSpecPlugin;
     }
 
-    public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin) {
+    @Override
+	public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin) {
         myShouldUseRSpecPlugin = useRSpecPlugin;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getRailsApplicationRootPath() {
         return myRailsRootDirPath;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getRailsApplicationRootPathUrl() {
         return myRailsRootDirPathUrl;
     }
 
-    public void setRailsApplicationRootPath(@NotNull final String railsRootDirPath) {
+    @Override
+	public void setRailsApplicationRootPath(@NotNull final String railsRootDirPath) {
         myRailsRootDirPath = railsRootDirPath;
         myRailsRootDirPathUrl = VirtualFileUtil.constructLocalUrl(railsRootDirPath);
         myRailsPaths = new StandardRailsPaths(railsRootDirPath);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public StandardRailsPaths getPaths() {
         return myRailsPaths;
     }
 
-    public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk) {
+    @Override
+	public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk) {
         assert  myModule != null;
         GeneratorsUtil.loadGeneratorsList(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
     }
 
-    public String[] getGenerators() {
+    @Override
+	public String[] getGenerators() {
         return myGenerators;
     }
 
@@ -103,11 +111,13 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
         myGenerators = generators;
     }
 
-    public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk) {
+    @Override
+	public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk) {
         RakeUtil.loadRakeTasksTree(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
     }
 
-    public RakeTask getRakeTasks() {
+    @Override
+	public RakeTask getRakeTasks() {
         return myRootRakeTask;
     }
 
@@ -115,7 +125,8 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
         myRootRakeTask = rootTask;
     }
 
-    public void setModule(@NotNull final Module uncommitedModule) {
+    @Override
+	public void setModule(@NotNull final Module uncommitedModule) {
         myModule = uncommitedModule;
 
         final String path = BaseRailsFacetConfigurationExternalizer.getInstance().expandPathIfPossible(this, getNullableRailsApplicationRootPath());
@@ -124,15 +135,18 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
         }
     }
 
-    public Module getModule() {
+    @Override
+	public Module getModule() {
         return myModule;
     }
 
-    public void reloadGenerators() {
+    @Override
+	public void reloadGenerators() {
         loadGenerators(true, RModuleUtil.getModuleOrJRubyFacetSdk(myModule));
     }
 
-    public void reloadRakeTasks() {
+    @Override
+	public void reloadRakeTasks() {
         loadRakeTasks(true, RModuleUtil.getModuleOrJRubyFacetSdk(myModule));
     }
 
@@ -145,7 +159,8 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
         BaseRailsFacetConfigurationExternalizer.getInstance().writeExternal(this, element);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getNullableRailsApplicationRootPath() {
         return myRailsRootDirPath;
     }
@@ -154,7 +169,8 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
      * Only for BaseRailsFacet internal tasks
      * @param sdk Sdk
      */
-    public void setSdk(@Nullable final Sdk sdk) {
+    @Override
+	public void setSdk(@Nullable final Sdk sdk) {
         mySdk = sdk;
     }
 
@@ -162,16 +178,19 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
      * Only for BaseRailsFacet internal tasks
      * @return SDK
      */
-    @Nullable
+    @Override
+	@Nullable
     public Sdk getSdk() {
         return mySdk;
     }
 
-    public void setInitialized() {
+    @Override
+	public void setInitialized() {
         isInitialized = true;
     }
 
-    public boolean isInitialized() {
+    @Override
+	public boolean isInitialized() {
         return isInitialized;
     }
 }

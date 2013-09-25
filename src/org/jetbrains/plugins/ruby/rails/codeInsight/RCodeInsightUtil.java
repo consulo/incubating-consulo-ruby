@@ -141,11 +141,13 @@ public class RCodeInsightUtil {
             myOffset = currentOffset;
         }
 
-        public void visitReferenceExpression(PsiReferenceExpression expression) {
+        @Override
+		public void visitReferenceExpression(PsiReferenceExpression expression) {
             visitElement(expression);
         }
 
-        public void visitElement(PsiElement element) {
+        @Override
+		public void visitElement(PsiElement element) {
             processElement(element);
         }
 

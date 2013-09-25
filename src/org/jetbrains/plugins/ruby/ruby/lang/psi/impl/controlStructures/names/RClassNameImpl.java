@@ -33,7 +33,8 @@ public class RClassNameImpl extends RPsiElementBase implements RClassName {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRClassName(this);
             return;

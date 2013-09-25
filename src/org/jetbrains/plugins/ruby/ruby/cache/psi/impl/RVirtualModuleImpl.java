@@ -45,7 +45,8 @@ public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implem
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RModulePresentationUtil.getPresentation(this);
     }
@@ -55,7 +56,8 @@ public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implem
         return RModulePresentationUtil.getIcon(this, flags);
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualModule(this);
     }
 
@@ -63,7 +65,8 @@ public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implem
         return "module [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName();
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.MODULE;
     }
 }

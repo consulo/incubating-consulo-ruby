@@ -35,18 +35,21 @@ public class RArrayArgumentImpl extends RPsiElementBase implements RArrayArgumen
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName(){
         final RIdentifier identifier = getIdentifier();
         //noinspection ConstantConditions
         return identifier!=null ? identifier.getName() : "";
     }
 
-    public RIdentifier getIdentifier(){
+    @Override
+	public RIdentifier getIdentifier(){
         return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
     }
 
-    public ArgumentInfo.Type getType() {
+    @Override
+	public ArgumentInfo.Type getType() {
         return ArgumentInfo.Type.ARRAY;
     }
 

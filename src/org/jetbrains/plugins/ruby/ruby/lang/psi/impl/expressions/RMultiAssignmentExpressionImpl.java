@@ -37,15 +37,18 @@ public class RMultiAssignmentExpressionImpl extends RAssignmentExpressionImpl im
         super(astNode);
     }
 
-    public boolean isMultiObject() {
+    @Override
+	public boolean isMultiObject() {
         return getObject() instanceof RListOfExpressions;
     }
 
-    public boolean isMultiValue() {
+    @Override
+	public boolean isMultiValue() {
         return getValue() instanceof RListOfExpressions;
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRMultiAssignmentExpression(this);
             return;
@@ -53,7 +56,8 @@ public class RMultiAssignmentExpressionImpl extends RAssignmentExpressionImpl im
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return isMultiValue() ? RType.NOT_TYPED : super.getType(fileSymbol);
     }

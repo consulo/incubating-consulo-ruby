@@ -43,6 +43,7 @@ public class BaseRailsFacetListener extends FacetManagerAdapter implements Modul
     myModule = module;
   }
 
+  @Override
   public void initComponent() {
     myConnection = myModule.getMessageBus().connect();
     myConnection.subscribe(FacetManager.FACETS_TOPIC, new FacetManagerAdapter() {
@@ -112,19 +113,23 @@ public class BaseRailsFacetListener extends FacetManagerAdapter implements Modul
         DaemonCodeAnalyzer.getInstance(facetModule.getProject()).restart();
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     myConnection.disconnect();
   }
 
+  @Override
   @NotNull
   public String getComponentName() {
     return RailsComponents.BASE_RAILS_FACET_LISTENER;
   }
 
+  @Override
   public void projectOpened() {
     // called when project is opened
   }
 
+  @Override
   public void projectClosed() {
       // called when project is being closed
       if (RailsFacetUtil.hasRailsSupport(myModule)) {
@@ -134,6 +139,7 @@ public class BaseRailsFacetListener extends FacetManagerAdapter implements Modul
       }
   }
 
+  @Override
   public void moduleAdded() {
     // Invoked when the module corresponding to this component instance has been completely
     // loaded and added to the project.

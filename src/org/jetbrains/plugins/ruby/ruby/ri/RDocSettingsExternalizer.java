@@ -69,7 +69,8 @@ class RDocSettingsExternalizer extends SettingsExternalizer {
         return myInstance;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RDOC_SETTINGS_ID;
     }
 }

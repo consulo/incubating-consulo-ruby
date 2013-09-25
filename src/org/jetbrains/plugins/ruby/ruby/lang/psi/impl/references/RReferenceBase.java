@@ -60,7 +60,8 @@ public abstract class RReferenceBase extends RPsiElementBase implements RReferen
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRReference(this);
             return;
@@ -68,18 +69,21 @@ public abstract class RReferenceBase extends RPsiElementBase implements RReferen
         super.accept(visitor);
     }
 
-    public RPsiElement getValue() {
+    @Override
+	public RPsiElement getValue() {
         return PsiTreeUtil.getNextSiblingOfType(getDelimiter(), RPsiElement.class);
     }
 
-    public RPsiElement getReciever() {
+    @Override
+	public RPsiElement getReciever() {
         return PsiTreeUtil.getPrevSiblingOfType(getDelimiter(), RPsiElement.class);
     }
 
     @NotNull
     public abstract PsiElement getDelimiter();
 
-    @Nullable
+    @Override
+	@Nullable
     public RQualifiedReference getReference() {
         final RPsiElement reciever = getReciever();
         final RPsiElement value = getValue();
@@ -95,7 +99,8 @@ public abstract class RReferenceBase extends RPsiElementBase implements RReferen
         return new RQualifiedReference(getProject(), this, reciever, value, getType());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         if (isConstructorLike()){
             final RPsiElement reciever = getReciever();

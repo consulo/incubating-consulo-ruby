@@ -48,7 +48,8 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRBinaryExpression(this);
             return;
@@ -56,7 +57,8 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public IElementType getOperationType() {
         final PsiElement op = getOperation();
         //noinspection ConstantConditions
@@ -69,19 +71,22 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
         return getChildByFilter(BNF.tBINARY_OPS, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RPsiElement getLeftOperand() {
         //noinspection ConstantConditions
         return PsiTreeUtil.getPrevSiblingOfType(getOperation(), RPsiElement.class);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getRightOperand() {
         //noinspection ConstantConditions
         return PsiTreeUtil.getNextSiblingOfType(getOperation(), RPsiElement.class);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiReference getReference() {
         if (getOperation().getText().equals(RubyTokenTypes.tNEQ.toString())){
             return new RQualifiedReference(getProject(), this, getLeftOperand(), getOperation(), RReference.Type.COLON_REF, RubyTokenTypes.tEQ.toString());
@@ -92,7 +97,8 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
         return new RQualifiedReference(getProject(), this, getLeftOperand(), getOperation(), RReference.Type.COLON_REF);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final TypeInferenceHelper helper = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper();
         helper.testAndSet(fileSymbol);

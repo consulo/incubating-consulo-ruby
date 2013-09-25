@@ -38,7 +38,8 @@ public class RSpecRunConfigurationFactory extends RubyRunConfigurationFactory {
         super(type);
     }
 
-    public RunConfiguration createTemplateConfiguration(final Project project) {
+    @Override
+	public RunConfiguration createTemplateConfiguration(final Project project) {
         final RSpecRunConfiguration conf = new RSpecRunConfiguration(project, this, "");
 
         conf.setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
@@ -49,10 +50,12 @@ public class RSpecRunConfigurationFactory extends RubyRunConfigurationFactory {
         return conf;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
         return RBundle.message("rspec.run.configuration.rspec.name");
    }
 
+   @Override
    public Icon getIcon() {
        return RSpecIcons.RUN_CONFIGURATION_ICON;
    }

@@ -58,7 +58,8 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRGlobalVariable(this);
             return;
@@ -66,7 +67,8 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
         super.accept(visitor);
     }
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         return new RGlobalVariableReference(this);
     }
 
@@ -75,15 +77,18 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
         return RGlobalVariablePresentationUtil.getIcon();
     }
 
-    public ItemPresentation getPresentation() {
+    @Override
+	public ItemPresentation getPresentation() {
         return RGlobalVariablePresentationUtil.getPresentation(this);
     }
 
-    public boolean isInDefinition() {
+    @Override
+	public boolean isInDefinition() {
         return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this)!=null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualGlobalVarHolder getHolder() {
         if (myHolder == null){
             myHolder = PsiTreeUtil.getParentOfType(this, RGlobalVarHolder.class);
@@ -92,17 +97,20 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
         return myHolder;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String getPrefix() {
         return DOLLAR;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
     }
 
-    protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
         if (!TextUtil.isCID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }

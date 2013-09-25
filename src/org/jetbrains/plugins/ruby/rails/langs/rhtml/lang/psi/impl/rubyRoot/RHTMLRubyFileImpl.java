@@ -36,11 +36,13 @@ public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile {
         super(eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, viewProvider);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RHTMLFileViewProvider getViewProvider() {
         return (RHTMLFileViewProvider)super.getViewProvider();
     }
-     protected boolean isPsiUpToDate(VirtualFile vFile) {
+     @Override
+	 protected boolean isPsiUpToDate(VirtualFile vFile) {
          final FileViewProvider viewProvider = myManager.findViewProvider(vFile);
          assert viewProvider != null;
          return viewProvider.getPsi(RubyLanguage.INSTANCE) == this;

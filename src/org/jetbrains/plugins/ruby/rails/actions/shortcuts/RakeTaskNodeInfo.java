@@ -59,7 +59,8 @@ public class RakeTaskNodeInfo extends NodeInfo<RakeTaskSerializableImpl> {
         return new RakeTaskNodeInfo(RailsIcons.RAKE_TASK_ICON, task, false);
     }
 
-    public String getActionId() {
+    @Override
+	public String getActionId() {
         return getActionId(getData().getFullCommand());
     }
 

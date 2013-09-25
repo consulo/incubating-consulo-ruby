@@ -27,44 +27,53 @@ import com.intellij.psi.tree.TokenSet;
 public class YAMLParserDefinition implements ParserDefinition, YAMLElementTypes
 {
 
+  @Override
   @NotNull
   public Lexer createLexer(final Project project, LanguageVersion languageVersion) {
     return new YAMLLexer();
   }
 
+  @Override
   @Nullable
   public PsiParser createParser(final Project project, LanguageVersion languageVersion) {
     return new YAMLMockParser();
   }
 
+  @Override
   public IFileElementType getFileNodeType() {
     return FILE;
   }
 
+  @Override
   @NotNull
   public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
     return TokenSet.EMPTY;
   }
 
+  @Override
   @NotNull
   public TokenSet getCommentTokens(LanguageVersion languageVersion) {
     return TokenSet.create(YAMLTokenTypes.COMMENT_TYPE);
   }
 
+  @Override
   @NotNull
   public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
     return TokenSet.EMPTY;
   }
 
+  @Override
   @NotNull
   public PsiElement createElement(final ASTNode node) {
     return new ASTWrapperPsiElement(node);
   }
 
+  @Override
   public PsiFile createFile(final FileViewProvider viewProvider) {
     return new YAMLFileImpl(viewProvider);
   }
 
+  @Override
   public SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
     return SpaceRequirements.MAY;
   }

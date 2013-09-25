@@ -36,7 +36,8 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
  * @date: Jan 17, 2008
  */
 public class ReloadRakeTasksAction extends AnAction {
-    public void actionPerformed(@NotNull final AnActionEvent event) {
+    @Override
+	public void actionPerformed(@NotNull final AnActionEvent event) {
         final Module module = DataContextUtil.getModule(event.getDataContext());
         assert module != null;
 
@@ -56,7 +57,8 @@ public class ReloadRakeTasksAction extends AnAction {
         conf.reloadRakeTasks();
     }
 
-    public void update(@NotNull final AnActionEvent event) {
+    @Override
+	public void update(@NotNull final AnActionEvent event) {
         final Module module = DataContextUtil.getModule(event.getDataContext());
 
         // show only on RailsModuleType and valid Ruby SDK with rails installed

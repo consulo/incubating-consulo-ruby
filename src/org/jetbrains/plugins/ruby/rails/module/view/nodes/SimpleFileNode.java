@@ -85,12 +85,14 @@ public class SimpleFileNode extends RailsNode {
         return FileTypeManager.getInstance().getFileTypeByFile(file).getIcon();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.UNKNOWN;
     }
 
-    public VirtualFile getVirtualFile() {
+    @Override
+	public VirtualFile getVirtualFile() {
         return myFile;
     }
 }

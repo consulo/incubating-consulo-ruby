@@ -45,6 +45,7 @@ public abstract class ColouredCommandLineState extends CommandLineState {
 		super(environment);
 	}
 
+	@Override
 	protected OSProcessHandler startProcess() throws ExecutionException {
         final GeneralCommandLine cmdLine = new GeneralCommandLine();
         final OSProcessHandler processHandler =

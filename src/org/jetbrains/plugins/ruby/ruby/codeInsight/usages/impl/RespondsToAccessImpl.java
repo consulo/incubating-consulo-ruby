@@ -19,11 +19,13 @@ public class RespondsToAccessImpl extends AbstractReferenceAccess implements Res
     myName = name;
   }
 
+  @Override
   @NotNull
   public RPsiElement getCall() {
     return myCall;
   }
 
+  @Override
   @NotNull
   public String getName() {
     return myName;

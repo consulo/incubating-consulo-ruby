@@ -41,11 +41,13 @@ public class RailsRunConfigurationProducer  extends RuntimeConfigurationProducer
         super(RailsRunConfigurationType.getInstance());
     }
 
-    public PsiElement getSourceElement() {
+    @Override
+	public PsiElement getSourceElement() {
         return mySourceElement;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context) {
         final PsiElement element = location.getPsiElement();
 
@@ -64,7 +66,8 @@ public class RailsRunConfigurationProducer  extends RuntimeConfigurationProducer
         return (RunnerAndConfigurationSettingsImpl)RailsRunConfigurationType.getInstance().createConfigurationByLocation(location);
     }
 
-    public int compareTo(Object o) {
+    @Override
+	public int compareTo(Object o) {
         return PREFERED;
     }
 }

@@ -48,56 +48,68 @@ public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder 
         return settings;
     }
 
-    public Generate getAppGenerateWay() {
+    @Override
+	public Generate getAppGenerateWay() {
         return myGenerateRailsAppWay;
     }
 
-    public void setAppGenerateWay(@NotNull final Generate generateWay) {
+    @Override
+	public void setAppGenerateWay(@NotNull final Generate generateWay) {
         myGenerateRailsAppWay = generateWay;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getDBNameToPreconfigure() {
         return myDbNameToPreconfigure;
     }
 
-    public void setDBNameToPreconfigure(@Nullable final String dbName) {
+    @Override
+	public void setDBNameToPreconfigure(@Nullable final String dbName) {
         myDbNameToPreconfigure = dbName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RSpecConfiguration getRSpecConf() {
         return myRSpecConf;
     }
 
-    public void setRSpecConf(@NotNull final RSpecConfiguration rSpecConf) {
+    @Override
+	public void setRSpecConf(@NotNull final RSpecConfiguration rSpecConf) {
         myRSpecConf = rSpecConf;
     }
 
-    public boolean isRSpecSupportEnabled() {
+    @Override
+	public boolean isRSpecSupportEnabled() {
         final RSpecConfiguration conf = getRSpecConf();
         return conf.enableRSpecSupport() || conf.enableRSpecRailsSupport();
     }
 
-    public void setTestsUnitRootPath(@NotNull final String contentRootPath) {
+    @Override
+	public void setTestsUnitRootPath(@NotNull final String contentRootPath) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getRailsApplicationHomeDirRelativePath() {
         return myRailsApplicatlionRootRelativePath;
     }
 
-    public void setRailsApplicationHomeDirRelativePath(@Nullable final String relativePath) {
+    @Override
+	public void setRailsApplicationHomeDirRelativePath(@Nullable final String relativePath) {
         myRailsApplicatlionRootRelativePath = relativePath;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Sdk getSdk() {
         return mySdk;
     }
 
-    public void setSdk(@Nullable final Sdk sdk) {
+    @Override
+	public void setSdk(@Nullable final Sdk sdk) {
         mySdk = sdk;
     }
 }

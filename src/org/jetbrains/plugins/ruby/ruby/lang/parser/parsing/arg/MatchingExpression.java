@@ -64,7 +64,8 @@ class MatchingExpression implements RubyTokenTypes {
      @NotNull
     private static IElementType parseLowPriorityWithLeadHigh(final RBuilder builder, final RMarker marker, final IElementType result){
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return parseHighPriority(builder);
             }
@@ -99,7 +100,8 @@ class MatchingExpression implements RubyTokenTypes {
     @NotNull
     private static IElementType parseHighPriorityWithLeadBitExpr(final RBuilder builder, final RMarker marker, final IElementType result){
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return BitExpression.parse(builder);
             }

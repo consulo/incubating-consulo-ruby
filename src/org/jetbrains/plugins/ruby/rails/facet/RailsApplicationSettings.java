@@ -46,11 +46,13 @@ public class RailsApplicationSettings implements PersistentStateComponent<RailsA
         return ServiceManager.getService(RailsApplicationSettings.class);
     }
 
-    public RailsApplicationSettings getState() {
+    @Override
+	public RailsApplicationSettings getState() {
         return this;
     }
 
-    public void loadState(@NotNull final RailsApplicationSettings settings) {
+    @Override
+	public void loadState(@NotNull final RailsApplicationSettings settings) {
         wizardRailsFacetPreconfigureDBName = settings.wizardRailsFacetPreconfigureDBName;
     }
 }

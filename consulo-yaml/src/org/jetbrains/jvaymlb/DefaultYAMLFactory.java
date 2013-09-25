@@ -36,10 +36,12 @@ import org.jvyamlb.YAMLFactory;
  * @author <a href="mailto:ola.bini@ki.se">Ola Bini</a>
  */
 public class DefaultYAMLFactory extends org.jvyamlb.DefaultYAMLFactory implements YAMLFactory {
-    public ScannerImpl createScanner(final ByteList io) {
+    @Override
+	public ScannerImpl createScanner(final ByteList io) {
         return new ScannerImpl(io);
     }
-    public ScannerImpl createScanner(final InputStream io) {
+    @Override
+	public ScannerImpl createScanner(final InputStream io) {
         return new ScannerImpl(io);
     }
 }

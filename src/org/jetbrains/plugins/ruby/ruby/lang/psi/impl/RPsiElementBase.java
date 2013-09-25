@@ -50,12 +50,14 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Language getLanguage() {
         return RubyFileType.RUBY.getLanguage();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName(){
         return getText();
     }
@@ -64,38 +66,45 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
         return getNode().getElementType().toString();
     }
 
-    public PsiElement replace(@NotNull PsiElement element){
+    @Override
+	public PsiElement replace(@NotNull PsiElement element){
         RubyPsiUtil.replaceInParent(this, element);
         return element;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<PsiElement> getChildrenByFilter(IElementType filter) {
         return RubyPsiUtil.getChildrenByFilter(this, filter);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getChildByFilter(TokenSet filter, int number) {
         return RubyPsiUtil.getChildByFilter(this, filter, number);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getChildByFilter(IElementType filter, int number) {
         return RubyPsiUtil.getChildByFilter(this, filter, number);
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public <T extends PsiElement> List<T> getChildrenByType(Class<T> c) {
         return RubyPsiUtil.getChildrenByType(this, c);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public <T extends PsiElement> T getChildByType(Class<T> c, int number) {
         return RubyPsiUtil.getChildByType(this, c, number);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RContainer getParentContainer() {
         return PsiTreeUtil.getParentOfType(this, RContainer.class);
     }
@@ -105,7 +114,8 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
         return getParentContainer();
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitElement(this);
     }
 

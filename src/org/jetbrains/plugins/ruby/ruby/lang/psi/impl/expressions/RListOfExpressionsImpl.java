@@ -40,7 +40,8 @@ public class RListOfExpressionsImpl extends RPsiElementBase implements RListOfEx
       super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RPsiElement> getElements() {
       LinkedList<RPsiElement> elements = new LinkedList<RPsiElement>();
       for (PsiElement child : getChildren()){
@@ -53,12 +54,14 @@ public class RListOfExpressionsImpl extends RPsiElementBase implements RListOfEx
       return elements;
     }
 
-    public RPsiElement getElement(final int number) {
+    @Override
+	public RPsiElement getElement(final int number) {
       final List<RPsiElement> elementList = getElements();
       return elementList.size()>number ? elementList.get(number) : null;
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
       if (visitor instanceof RubyElementVisitor){
         ((RubyElementVisitor) visitor).visitRListOfExpressions(this);
         return;

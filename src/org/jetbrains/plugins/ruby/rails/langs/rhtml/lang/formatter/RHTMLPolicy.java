@@ -35,41 +35,49 @@ public class RHTMLPolicy extends HtmlPolicy {
         super(settings, documentModel);
     }
 
-    public WrapType getWrappingTypeForTagEnd(@Nullable final XmlTag xmlTag) {
+    @Override
+	public WrapType getWrappingTypeForTagEnd(@Nullable final XmlTag xmlTag) {
         if (xmlTag == null) {
             return WrapType.NORMAL;
         }
         return super.getWrappingTypeForTagEnd(xmlTag);
     }
 
-    public WrapType getWrappingTypeForTagBegin(@Nullable final XmlTag xmlTag) {
+    @Override
+	public WrapType getWrappingTypeForTagBegin(@Nullable final XmlTag xmlTag) {
         if (xmlTag == null) {
             return WrapType.NORMAL;
         }
         return super.getWrappingTypeForTagBegin(xmlTag);
     }
 
-    public boolean insertLineBreakBeforeTag(@Nullable final XmlTag xmlTag) {
+    @Override
+	public boolean insertLineBreakBeforeTag(@Nullable final XmlTag xmlTag) {
         return xmlTag != null && super.insertLineBreakBeforeTag(xmlTag);
     }
 
-    public boolean removeLineBreakBeforeTag(@Nullable final XmlTag xmlTag) {
+    @Override
+	public boolean removeLineBreakBeforeTag(@Nullable final XmlTag xmlTag) {
         return xmlTag != null && super.removeLineBreakBeforeTag(xmlTag);
     }
 
+   @Override
    public boolean keepWhiteSpacesInsideTag(@Nullable final XmlTag xmlTag) {
        return  xmlTag != null && super.keepWhiteSpacesInsideTag(xmlTag);
    }
 
+   @Override
    public boolean indentChildrenOf(@Nullable final XmlTag xmlTag) {
        return xmlTag == null || super.indentChildrenOf(xmlTag);
    }
 
+   @Override
    public boolean isTextElement(@Nullable final XmlTag xmlTag) {
        return xmlTag == null || super.isTextElement(xmlTag);
    }
 
 
+   @Override
    public int getTextWrap(@Nullable final XmlTag xmlTag) {
        if (xmlTag != null && xmlTag.getContainingFile() instanceof RHTMLFile) {
            return CodeStyleSettings.DO_NOT_WRAP;

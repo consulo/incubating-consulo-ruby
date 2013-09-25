@@ -37,7 +37,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 public class RColonReferenceImpl extends RReferenceBase implements RColonReference {
     private static final TokenSet TS_COLONS = TokenSet.create(RubyTokenTypes.tCOLON2, RubyTokenTypes.tCOLON3);
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRColonReference(this);
             return;
@@ -49,19 +50,22 @@ public class RColonReferenceImpl extends RReferenceBase implements RColonReferen
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getDelimiter() {
         PsiElement colon = getChildByFilter(TS_COLONS, 0);
         assert colon!=null;
         return colon;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Type getType() {
         return Type.COLON_REF;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RQualifiedReference getReference() {
         if (isColon3Reference()){
             final RPsiElement value = getValue();
@@ -72,7 +76,8 @@ public class RColonReferenceImpl extends RReferenceBase implements RColonReferen
         return super.getReference();
     }
 
-    public boolean isColon3Reference() {
+    @Override
+	public boolean isColon3Reference() {
         return getChildByFilter(RubyTokenTypes.tCOLON3, 0)!=null;
     }
 }

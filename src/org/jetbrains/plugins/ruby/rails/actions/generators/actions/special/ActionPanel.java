@@ -58,7 +58,8 @@ public class ActionPanel implements GeneratorPanel {
 
          myActionName.getDocument().addDocumentListener(new DocumentAdapter() {
             final StringBuffer myBuff = new StringBuffer();
-            public void textChanged(DocumentEvent event) {
+            @Override
+			public void textChanged(DocumentEvent event) {
                 myBuff.delete(0, myBuff.length());
                 if (!TextUtil.isEmpty(myPath)) {
                     myBuff.append(ControllersConventions.getControllerClassName(myPath));
@@ -79,7 +80,8 @@ public class ActionPanel implements GeneratorPanel {
         myContentPanel.doLayout();
     }
 
-    public void initPanel(final GeneratorOptions options) {
+    @Override
+	public void initPanel(final GeneratorOptions options) {
         myOptions = options;
         GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox,
                                               mySkipCheckBox, myBacktraceCheckBox,
@@ -87,16 +89,19 @@ public class ActionPanel implements GeneratorPanel {
     }
 
 
-     @NotNull
+     @Override
+	 @NotNull
      public JPanel getContent() {
         return myContentPanel;
     }
 
-    public String getMainArgument() {
+    @Override
+	public String getMainArgument() {
         return myActionName.getText().trim();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getGeneratorArgs() {
         final StringBuffer buff = new StringBuffer();
         buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox,
@@ -114,12 +119,14 @@ public class ActionPanel implements GeneratorPanel {
         return buff.toString();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public JComponent getPreferredFocusedComponent() {
         return myActionName;
     }
 
-    public void saveSettings(final Project project) {
+    @Override
+	public void saveSettings(final Project project) {
         GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox,
                                      mySkipCheckBox, myBacktraceCheckBox,
                                      mySVNCheckBox,

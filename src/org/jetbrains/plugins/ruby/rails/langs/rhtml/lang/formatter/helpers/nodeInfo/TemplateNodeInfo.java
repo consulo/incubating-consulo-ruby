@@ -41,7 +41,8 @@ public class TemplateNodeInfo extends NodeInfo {
         this.nextTemplateNode = nextTemplateNode;
     }
 
-    public NodeType getType() {
+    @Override
+	public NodeType getType() {
         return NodeType.TEMPLATE_NODE;
     }
 
@@ -55,7 +56,8 @@ public class TemplateNodeInfo extends NodeInfo {
         return templateDataNode;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public TextRange getNextNodeTRange() {
         return nextNodeTRange;
     }

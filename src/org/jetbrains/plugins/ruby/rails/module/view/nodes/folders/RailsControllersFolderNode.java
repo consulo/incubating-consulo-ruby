@@ -46,7 +46,8 @@ public class RailsControllersFolderNode extends ControllerSubFolderNode {
                                     null);
     }
 
-     public void accept(final SimpleNodeVisitor visitor) {
+     @Override
+	 public void accept(final SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitControllerNode();
             return;
@@ -55,7 +56,8 @@ public class RailsControllersFolderNode extends ControllerSubFolderNode {
 
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
     }

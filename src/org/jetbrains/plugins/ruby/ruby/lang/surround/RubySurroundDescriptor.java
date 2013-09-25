@@ -40,7 +40,8 @@ import com.intellij.psi.util.PsiTreeUtil;
  * Date: Sep 4, 2007
  */
 public class RubySurroundDescriptor implements SurroundDescriptor {
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement[] getElementsToSurround(@NotNull final PsiFile file, final int startOffset, final int endOffset) {
         final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
         PsiElement first = file.getViewProvider().findElementAt(startOffset);
@@ -72,7 +73,8 @@ public class RubySurroundDescriptor implements SurroundDescriptor {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Surrounder[] getSurrounders() {
         return new Surrounder[]{
                 new RubyBraceSurrounder(),

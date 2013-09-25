@@ -53,22 +53,26 @@ public class RubyDocumentationProvider implements DocumentationProvider {
 		return RubyHelpUtil.getShortDescription(element, false);
 	}
 
+	@Override
 	@Nullable
     public java.util.List<java.lang.String> getUrlFor(PsiElement element, PsiElement originalElement) {
         return Collections.emptyList();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String generateDoc(@Nullable final PsiElement element, @Nullable final PsiElement originalElement) {
         return element instanceof RPsiElement ? RubyHelpUtil.getHelpByElement((RPsiElement) element) : null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
         return null;
     }
 
-    @SuppressWarnings({"ConstantConditions"})
+    @Override
+	@SuppressWarnings({"ConstantConditions"})
     @Nullable
     public PsiElement getDocumentationElementForLink(@NotNull final PsiManager psiManager,
                                                      @NotNull final String link,

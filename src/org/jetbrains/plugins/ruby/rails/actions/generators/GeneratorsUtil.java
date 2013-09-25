@@ -194,7 +194,8 @@ public class GeneratorsUtil {
         final String railsApplicHomeDirPath = railsFacetConfiguration.getRailsApplicationRootPath();
         
         final Task task = new Task.Backgroundable(project, title, true) {
-            public void run(final ProgressIndicator indicator) {
+            @Override
+			public void run(final ProgressIndicator indicator) {
                 final GeneratorsExternalizer generatorsExt = new GeneratorsExternalizer();
                 String[] generators = generatorsExt.loadGeneratorList(railsApplicHomeDirPath);
                 if (generators == null || forceRegenerate) {
@@ -208,12 +209,14 @@ public class GeneratorsUtil {
                 railsFacetConfiguration.setGenerators(generators);
             }
 
-            public boolean shouldStartInBackground() {
+            @Override
+			public boolean shouldStartInBackground() {
                 return true;
             }
         };
         IdeaInternalUtil.runInEventDispatchThread(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 // Must be executed in EDT
                 ProgressManager.getInstance().run(task);
             }
@@ -230,7 +233,8 @@ public class GeneratorsUtil {
         final Ref<VirtualFile> file = new Ref<VirtualFile>();
 
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
                 file.set(LocalFileSystem.getInstance().refreshAndFindFileByPath(generateScriptPath));
             }
         });
@@ -359,7 +363,8 @@ public class GeneratorsUtil {
             FileDocumentManager.getInstance().saveAllDocuments();
 
             final ProcessListener listener = new ProcessAdapter() {
-                public void processTerminated(final ProcessEvent event) {
+                @Override
+				public void processTerminated(final ProcessEvent event) {
                     // Synchronize files
                     RailsFacetUtil.refreshRailsAppHomeContent(uncommitedModule);
                     if (nextAction != null) {

@@ -53,11 +53,13 @@ public class RSpecApplicationSettings  implements PersistentStateComponent<RSpec
         return ServiceManager.getService(RSpecApplicationSettings.class);
     }
 
-    public RSpecApplicationSettings getState() {
+    @Override
+	public RSpecApplicationSettings getState() {
         return this;
     }
 
-    public void loadState(@NotNull final RSpecApplicationSettings settings) {
+    @Override
+	public void loadState(@NotNull final RSpecApplicationSettings settings) {
         //tests
         wizardRubyShouldUseRSpecFramework = settings.wizardRubyShouldUseRSpecFramework;
         wizardRubyShouldUseTestUnitFramework = settings.wizardRubyShouldUseTestUnitFramework;

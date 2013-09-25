@@ -34,7 +34,8 @@ public class RClassMember extends PsiElementMemberChooserObject implements Class
         super(psiElement, RubyPsiUtil.getPresentableName(psiElement), RubyPsiUtil.getIcon(psiElement));
     }
 
-    public MemberChooserObject getParentNodeDelegate() {
+    @Override
+	public MemberChooserObject getParentNodeDelegate() {
         final RPsiElement element = (RPsiElement) getPsiElement();
         final PsiElement parent = element.getParentContainer();
         //noinspection ConstantConditions

@@ -57,7 +57,8 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
         myScope = SearchScopeUtil.getTestUnitClassSearchScope(project);
     }
 
-    protected String showDialog() {
+    @Override
+	protected String showDialog() {
         //check script
         final VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myForm.getTestScriptPath());
         if (file == null) {
@@ -107,7 +108,8 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
          * @param method must belong to class defined in constructor
          * @return true if is test method
          */
-        public boolean value(final RVirtualMethod method) {
+        @Override
+		public boolean value(final RVirtualMethod method) {
             return RTestUnitUtil.hasValidTestNameAndNotSingleton(method);
         }
     }
@@ -123,7 +125,8 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
             this.fSWrapper = fSWrapper;
         }
 
-        public RVirtualMethod[] getAllMethods() {
+        @Override
+		public RVirtualMethod[] getAllMethods() {
             final Pair<Symbol, FileSymbol> fileSymbolPair = SymbolUtil.getSymbolByContainerRubyTestMode(testClass, fSWrapper);
             if (fileSymbolPair == null) {
                 return EMPTY_VIRT_METHODS;

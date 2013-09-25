@@ -49,7 +49,8 @@ public class YAMLLexer extends LexerBase {
     private int myTokenEnd;
     protected boolean initialStateRead;
 
-    public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
+    @Override
+	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
         myBuffer = buffer;
 
         myStart = startOffset;
@@ -72,7 +73,8 @@ public class YAMLLexer extends LexerBase {
         throw new UnsupportedOperationException("Method start is not implemented in org.consulo.yaml.lang.parsing.YAMLLexer");
     }
 
-    public int getState() {
+    @Override
+	public int getState() {
         if (initialStateRead){
             return 1;
         } else {
@@ -81,20 +83,24 @@ public class YAMLLexer extends LexerBase {
         }
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public IElementType getTokenType() {
         return myToken!=null ? YAMLTokenTypeFactory.getTypeForToken(myPrevToken, myToken) : null;
     }
 
-    public int getTokenStart() {
+    @Override
+	public int getTokenStart() {
         return myTokenStart;
     }
 
-    public int getTokenEnd() {
+    @Override
+	public int getTokenEnd() {
         return myTokenEnd;
     }
 
-    public void advance() {
+    @Override
+	public void advance() {
         try {
             myTokenStart = myTokenEnd;
 
@@ -123,7 +129,8 @@ public class YAMLLexer extends LexerBase {
 		return myBuffer;
 	}
 
-    public int getBufferEnd() {
+    @Override
+	public int getBufferEnd() {
         return myEnd;
     }
 }

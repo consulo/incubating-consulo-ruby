@@ -55,7 +55,8 @@ class JRailsFacet extends BaseRailsFacet {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel) {
             //TODO - think what can we do for module with several content roots?
             //TODO or getSourceRoots()?

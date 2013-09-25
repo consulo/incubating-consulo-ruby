@@ -95,12 +95,14 @@ public class ResolveUtil {
     private static void add(@NotNull final List<ResolveResult> list, final PsiElement psiElement) {
         if (psiElement!=null){
             list.add(new ResolveResult(){
-                @Nullable
+                @Override
+				@Nullable
                 public PsiElement getElement() {
                     return psiElement;
                 }
 
-                public boolean isValidResult() {
+                @Override
+				public boolean isValidResult() {
                     return true;
                 }
             });

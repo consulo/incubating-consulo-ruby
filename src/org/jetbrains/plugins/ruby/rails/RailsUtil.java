@@ -159,7 +159,8 @@ public class RailsUtil {
 
         final  String title = RBundle.message("rails.facet.builder.run.configuration.server.creating");
         final Task task = new Task.Backgroundable(project, title, true) {
-            public void run(ProgressIndicator indicator) {
+            @Override
+			public void run(ProgressIndicator indicator) {
                 if (indicator != null) {
                     indicator.setText(RBundle.message("progress.backgnd.indicator.title.please.wait", getTitle()));
                 }
@@ -167,7 +168,8 @@ public class RailsUtil {
                 final RunManagerEx runManagerEx = RunManagerEx.getInstanceEx(project);
 
                 IdeaInternalUtil.runInsideReadAction(new ActionRunner.InterruptibleRunnable() {
-                    public void run() throws Exception {
+                    @Override
+					public void run() throws Exception {
                         // requires read action
                         final RunnerAndConfigurationSettings settings =
                                 RailsRunConfigurationType.getInstance().getWEBrickFactory().createRunConfigurationSettings(module);
@@ -180,7 +182,8 @@ public class RailsUtil {
         };
 
         final Runnable taskRunner = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 ProgressManager.getInstance().run(task);
             }
         };

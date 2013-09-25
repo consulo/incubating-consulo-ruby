@@ -47,7 +47,8 @@ public class RubySyntaxHighlighter extends SyntaxHighlighterBase implements Ruby
 
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
-    @NotNull
+    @Override
+	@NotNull
     public Lexer getHighlightingLexer() {
         return new RubyLexer();
     }
@@ -97,7 +98,8 @@ public class RubySyntaxHighlighter extends SyntaxHighlighterBase implements Ruby
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
         return pack(ATTRIBUTES.get(tokenType));
     }

@@ -58,16 +58,19 @@ public class RubyModuleCachesManager extends BaseModuleCachesManager{
         return module.getComponent(RubyModuleCachesManager.class);
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
 
         final Project project = myModule.getProject();
         final Runnable initAction = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 myModuleFilesCache.initFileCacheAndRegisterListeners();
             }
         };
         final Runnable setupAction = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 registerDeclarationsIndesAndInitFilesCache(myModule, myModuleFilesCache);
             }
         };
@@ -111,13 +114,15 @@ public class RubyModuleCachesManager extends BaseModuleCachesManager{
         //This code runs Action immediatly if project is initialized, otherwise registers post startup activiti
         //if we add new module to existing project, action will run immediatly
         StartupManager.getInstance(project).runWhenProjectIsInitialized(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 myModuleFilesCache.setupFileCache(true);
             }
         });
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RUBY_MODULE_CACHES_MANAGER;

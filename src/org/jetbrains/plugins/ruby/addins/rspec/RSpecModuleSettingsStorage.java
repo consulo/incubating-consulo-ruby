@@ -58,7 +58,8 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
         return ModuleServiceManager.getService(module, RSpecModuleSettingsStorage.class);
     }
 
-    public Element getState() {
+    @Override
+	public Element getState() {
         final Element element = new Element(getID());
 
         //writeExternal
@@ -69,7 +70,8 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
         return element;
     }
 
-    public void loadState(@NotNull final Element elem) {
+    @Override
+	public void loadState(@NotNull final Element elem) {
 //readExternal
         final Map<String, String> optionsByName = buildOptionsByElement(elem);
 
@@ -87,7 +89,8 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
         }
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RSPEC_MODULE_SETTINGS_STORAGE_ID;
     }
 }

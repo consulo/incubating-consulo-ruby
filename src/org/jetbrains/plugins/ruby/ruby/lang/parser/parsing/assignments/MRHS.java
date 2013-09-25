@@ -45,7 +45,8 @@ public class MRHS implements RubyTokenTypes {
     public static IElementType parse(final RBuilder builder) {
         final Ref<Boolean> starSeen = new Ref<Boolean>(false);
         ParsingMethod parsignMethod = new ParsingMethod() {
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parse(final RBuilder builder) {
 
                 if (starSeen.get()) {

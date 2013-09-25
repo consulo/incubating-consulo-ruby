@@ -56,13 +56,15 @@ public class RConstantHolderUtil {
         final ArrayList<ConstantDefinitions> list = new ArrayList<ConstantDefinitions>();
         RubyElementVisitor myVisitor = new RubyElementVisitor() {
 
-            public void visitRConstant(RConstant rConstant){
+            @Override
+			public void visitRConstant(RConstant rConstant){
                 if (rConstant.isInDefinition()){
                     addDefinition(list, rConstant);
                 }
             }
 
-            public void visitElement(PsiElement element) {
+            @Override
+			public void visitElement(PsiElement element) {
                 if (element instanceof RConstantHolder){
                     return;
                 }

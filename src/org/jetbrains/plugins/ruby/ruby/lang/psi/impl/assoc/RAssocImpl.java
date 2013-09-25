@@ -32,12 +32,14 @@ public class RAssocImpl extends RPsiElementBase implements RAssoc {
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getKey() {
         return getChildByType(RPsiElement.class, 0);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getValue() {
         return getChildByType(RPsiElement.class, 1);
     }

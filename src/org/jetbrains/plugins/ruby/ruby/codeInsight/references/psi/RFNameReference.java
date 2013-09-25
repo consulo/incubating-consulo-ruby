@@ -38,17 +38,20 @@ public class RFNameReference extends RNamedReference{
         super(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
         if (((RFNameImpl) myElement).isClassOrModuleName()){
             return new ResolveResult[]{new ResolveResult(){
-                @Nullable
+                @Override
+				@Nullable
                 public PsiElement getElement() {
                     RubyUsageTypeProvider.setType(RFNameReference.this, RubyUsageType.DECLARATION);
                     return myElement.getParentContainer();
                 }
 
-                public boolean isValidResult() {
+                @Override
+				public boolean isValidResult() {
                     return true;
                 }
             }};

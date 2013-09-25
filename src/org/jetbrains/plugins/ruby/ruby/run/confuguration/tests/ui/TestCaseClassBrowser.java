@@ -63,7 +63,8 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
         myClassCachingFilter = new TestCachingFilter();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String showDialog() {
         final TreeRClassChooserDialog dialog =
                 new TreeRClassChooserDialog(getProject(), myTitle, mySearchScope, null, myClassCachingFilter);
@@ -171,7 +172,8 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
         private HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>> processedElements =
                 new HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>>();
 
-        public boolean isAccepted(@NotNull final RVirtualClass rVClass) {
+        @Override
+		public boolean isAccepted(@NotNull final RVirtualClass rVClass) {
             final VirtualFile virtualFile = rVClass.getVirtualFile();
             if (virtualFile == null) {
                 return false;

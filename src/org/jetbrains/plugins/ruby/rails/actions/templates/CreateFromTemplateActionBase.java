@@ -44,7 +44,8 @@ public abstract class CreateFromTemplateActionBase extends AnAction {
     }
 
 
-    public final void actionPerformed(AnActionEvent e) {
+    @Override
+	public final void actionPerformed(AnActionEvent e) {
         DataContext dataContext = e.getDataContext();
 
         IdeView view = DataKeys.IDE_VIEW.getData(dataContext);

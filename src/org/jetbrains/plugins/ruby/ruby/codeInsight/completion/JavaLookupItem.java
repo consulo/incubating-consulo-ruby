@@ -47,7 +47,8 @@ public class JavaLookupItem implements RubyLookupItem,
     private String myLookupString;
     private PsiElement myElement;
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myLookupString;
     }
@@ -67,35 +68,42 @@ public class JavaLookupItem implements RubyLookupItem,
         myElement = element;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentation() {
         return myLookupString;
     }
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myElement;
     }
 
-    public Icon getIcon(int flags) {
+    @Override
+	public Icon getIcon(int flags) {
         final RowIcon icon = new RowIcon(2);
         icon.setIcon(JavaClassPackagePresentationUtil.getJavaIcon(), 0);
         icon.setIcon(IconDescriptorUpdaters.getIcon(myElement, 0), 1);
         return icon;
     }
 
-    public String getTypeHint() {
+    @Override
+	public String getTypeHint() {
         return "";
     }
 
-    public Color getColorHint() {
+    @Override
+	public Color getColorHint() {
         return null;
     }
 
-    public boolean isBold() {
+    @Override
+	public boolean isBold() {
         return true;
     }
 
-    public int getPriority() {
+    @Override
+	public int getPriority() {
         return HIGH;
     }
 }

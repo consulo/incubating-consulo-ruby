@@ -45,7 +45,8 @@ class JRailsFacetType extends BaseRailsFacetType<JRailsFacet> {
         super(JRailsFacet.ID, JRailsFacet.ID.toString(), JRubyFacetType.INSTANCE.getId());
     }
 
-    public BaseRailsFacetConfiguration createDefaultConfiguration() {
+    @Override
+	public BaseRailsFacetConfiguration createDefaultConfiguration() {
         return new BaseRailsFacetConfigurationImpl();
     }
 

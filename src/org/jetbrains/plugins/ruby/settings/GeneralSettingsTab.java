@@ -51,12 +51,14 @@ public class GeneralSettingsTab implements UnnamedConfigurable {
         return myContentPane;
     }
 
-    public JComponent createComponent() {
+    @Override
+	public JComponent createComponent() {
         //N/A
         return null;
     }
 
-    public boolean isModified() {
+    @Override
+	public boolean isModified() {
         final RApplicationSettings settings = RApplicationSettings.getInstance();
         return settings.useConsoleOutputOtherFilters != otherFiltersCheckBox.isSelected()
                || settings.useConsoleOutputRubyStacktraceFilter != rubyStacktraceFilterCheckBox.isSelected()
@@ -70,7 +72,8 @@ public class GeneralSettingsTab implements UnnamedConfigurable {
         return settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected();
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         final RApplicationSettings settings = RApplicationSettings.getInstance();
         settings.useConsoleOutputOtherFilters = otherFiltersCheckBox.isSelected();
         settings.useConsoleOutputRubyStacktraceFilter = rubyStacktraceFilterCheckBox.isSelected();
@@ -86,7 +89,8 @@ public class GeneralSettingsTab implements UnnamedConfigurable {
                     Messages.getQuestionIcon());
             if (result == DialogWrapper.OK_EXIT_CODE){
                 ApplicationManager.getApplication().invokeLater(new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         // reload all projects
                         for (Project project : ProjectManager.getInstance().getOpenProjects()) {
                             ProjectManager.getInstance().reloadProject(project);
@@ -97,7 +101,8 @@ public class GeneralSettingsTab implements UnnamedConfigurable {
         }
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         final RApplicationSettings settings = RApplicationSettings.getInstance();
         rubyStacktraceFilterCheckBox.setSelected(settings.useConsoleOutputRubyStacktraceFilter);
         otherFiltersCheckBox.setSelected(settings.useConsoleOutputOtherFilters);
@@ -108,7 +113,8 @@ public class GeneralSettingsTab implements UnnamedConfigurable {
         myTPIdeaPath.setText(System.getenv(OSUtil.getPATHenvVariableName()));
     }
 
-    public void disposeUIResources() {
+    @Override
+	public void disposeUIResources() {
         //Do nothing
     }
 }

@@ -48,47 +48,56 @@ public class IndexEntryImpl implements IndexEntry {
     private List<RVirtualAlias> myAliases = new ArrayList<RVirtualAlias>();
     private List<RVirtualFieldAttr> myFieldAttrs = new ArrayList<RVirtualFieldAttr>();
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualClass> getClasses() {
         return myClasses;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualModule> getModules() {
         return myModules;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualMethod> getMethods() {
         return myMethods;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualField> getFields() {
         return myFields;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualConstant> getConstants() {
         return myConstants;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualGlobalVar> getGlobalVars() {
         return myGlobalVars;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualAlias> getAliases() {
         return myAliases;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualFieldAttr> getFieldAttrs() {
         return myFieldAttrs;
     }
 
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
         return myClasses.isEmpty() &&
                 myModules.isEmpty() &&
                 myMethods.isEmpty() &&

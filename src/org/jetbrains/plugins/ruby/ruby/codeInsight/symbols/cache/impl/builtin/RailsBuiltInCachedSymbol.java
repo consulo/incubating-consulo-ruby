@@ -45,7 +45,8 @@ public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol {
         super(project, url, sdk);
     }
 
-    public void fileAdded(@NotNull final String url) {
+    @Override
+	public void fileAdded(@NotNull final String url) {
         super.fileAdded(url);
         if (mySdk == null){
             return;
@@ -62,7 +63,8 @@ public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol {
         }
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         super.addAdditionalData();
 
 // Core extensions

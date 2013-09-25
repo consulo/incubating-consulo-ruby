@@ -64,7 +64,8 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
         super(project, factory, name);
     }
 
-    protected RailsServerRunConfiguration createInstance() {
+    @Override
+	protected RailsServerRunConfiguration createInstance() {
         return new RailsServerRunConfiguration(getProject(), getFactory(), getName());
     }
 
@@ -101,37 +102,45 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
         return VirtualFileUtil.buildSystemIndependentPath(homeDir, RailsConstants.SERVER_SCRIPT);
     }
 
-    public boolean isChoosePortManually() {
+    @Override
+	public boolean isChoosePortManually() {
         return myChoosePortManually;
     }
 
-    public void setChoosePortManually(final boolean choosePortManually) {
+    @Override
+	public void setChoosePortManually(final boolean choosePortManually) {
         myChoosePortManually = choosePortManually;
     }
 
-    public String getPort() {
+    @Override
+	public String getPort() {
         return myPort;
     }
 
-    public void setPort(final String port) {
+    @Override
+	public void setPort(final String port) {
         myPort = (port == null ? "0" : port);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getIPAddr() {
         return myIP;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getServerType() {
         return myServerType;
     }
 
-    public void setServerType(@NotNull final String type) {
+    @Override
+	public void setServerType(@NotNull final String type) {
         myServerType = type;
     }
 
-    public void setIPAddr(final String ip) {
+    @Override
+	public void setIPAddr(final String ip) {
         myIP = TextUtil.getAsNotNull(ip);
     }
 
@@ -139,20 +148,24 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
      * Valid Modules for Rails Server configuration should contain Rails/JRails facet
      * @return  valid rails modules
      */
-    @NotNull
+    @Override
+	@NotNull
     public Module[] getModules() {
         return RailsUtil.getAllModulesWithRailsSupport(getProject());
     }
 
-    public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+    @Override
+	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new RailsServerRunConfigurationEditor(getProject(), this);
     }
 
-    public void readExternal(Element element) throws InvalidDataException {
+    @Override
+	public void readExternal(Element element) throws InvalidDataException {
         RailsServerRunConfigurationExternalizer.getInstance().readExternal(this, element);
     }
 
-    public void writeExternal(Element element) throws WriteExternalException {
+    @Override
+	public void writeExternal(Element element) throws WriteExternalException {
         RailsServerRunConfigurationExternalizer.getInstance().writeExternal(this, element);
     }
 
@@ -173,7 +186,8 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 
 	}
 
-    protected void validateConfiguration(final boolean isExecution) throws Exception {
+    @Override
+	protected void validateConfiguration(final boolean isExecution) throws Exception {
         super.validateConfiguration(isExecution);
 
         RailsRunConfigurationUtil.inspectRailsSDK(this, isExecution);
@@ -239,11 +253,13 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
         RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.ip.bad.format"), isExecution);
     }
 
-    public RailsEnvironmentType getRailsEnvironmentType() {
+    @Override
+	public RailsEnvironmentType getRailsEnvironmentType() {
         return myEnvironmentType;
     }
 
-    public void setRailsEnvironmentType(final RailsEnvironmentType railsEnvironmentType) {
+    @Override
+	public void setRailsEnvironmentType(final RailsEnvironmentType railsEnvironmentType) {
         myEnvironmentType = railsEnvironmentType;
     }
 

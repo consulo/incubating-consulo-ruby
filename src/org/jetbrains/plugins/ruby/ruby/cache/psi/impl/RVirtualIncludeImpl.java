@@ -41,7 +41,8 @@ public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implement
         myNames = includes;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_INCLUDE;
     }
 
@@ -49,7 +50,8 @@ public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implement
         return RCall.INCLUDE_COMMAND;
     }
 
-    public void dump(@NotNull StringBuilder buffer, int indent) {
+    @Override
+	public void dump(@NotNull StringBuilder buffer, int indent) {
         super.dump(buffer, indent);
         for (RVirtualName myInclude : myNames) {
             buffer.append("\n");
@@ -57,11 +59,13 @@ public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implement
         }
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualInclude(this);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualName> getNames() {
         return myNames;
     }

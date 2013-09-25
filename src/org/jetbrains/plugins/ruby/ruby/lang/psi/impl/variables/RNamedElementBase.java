@@ -45,14 +45,16 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
         super(astNode);
     }
 
-    public PsiReference getReference() {
+    @Override
+	public PsiReference getReference() {
         final RReference ref = RReferenceNavigator.getReferenceByRightPart(this);
         return ref!=null ? null : createReference();
     }
 
     protected abstract PsiReference createReference();
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         final String text = getText();
         final String prefix = getPrefix();
@@ -64,7 +66,8 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
 
     protected abstract void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException;
 
-    public PsiElement setName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
+    @Override
+	public PsiElement setName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
         // We shouldn`t do anything if name is the same
         if (newName.equals(getName())){
             return null;
@@ -78,7 +81,8 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
         return element;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
     }

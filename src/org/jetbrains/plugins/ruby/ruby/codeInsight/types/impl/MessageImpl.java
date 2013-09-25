@@ -42,21 +42,25 @@ public class MessageImpl implements Message {
         isImportant = important;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myName;
     }
 
-    public int getArgumentsNumber() {
+    @Override
+	public int getArgumentsNumber() {
         return myNumber;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Symbol getSymbol() {
         return mySymbol;
     }
 
-    public boolean matchesMessage(@NotNull final Message patternMessage) {
+    @Override
+	public boolean matchesMessage(@NotNull final Message patternMessage) {
         if (patternMessage instanceof MessageWithVariousArgsNumber){
             return false;
         }
@@ -67,7 +71,8 @@ public class MessageImpl implements Message {
         return getArgumentsNumber() == patternMessage.getArgumentsNumber();
     }
 
-    public boolean isImportant() {
+    @Override
+	public boolean isImportant() {
         return isImportant;
     }
 

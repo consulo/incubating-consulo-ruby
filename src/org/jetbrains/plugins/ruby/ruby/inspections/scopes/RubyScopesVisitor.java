@@ -41,7 +41,8 @@ public class RubyScopesVisitor extends RubyInspectionVisitor {
         super(holder);
     }
 
-    public void visitElement(@NotNull final PsiElement element) {
+    @Override
+	public void visitElement(@NotNull final PsiElement element) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 

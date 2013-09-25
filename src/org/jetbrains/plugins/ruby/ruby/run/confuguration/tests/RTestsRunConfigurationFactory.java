@@ -38,17 +38,20 @@ public class RTestsRunConfigurationFactory extends RubyRunConfigurationFactory {
         super(type);
     }
 
-    public RunConfiguration createTemplateConfiguration(final Project project) {
+    @Override
+	public RunConfiguration createTemplateConfiguration(final Project project) {
         final RTestsRunConfiguration conf = new RTestsRunConfiguration(project, this, "");
 
         conf.setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
         return conf;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
         return RBundle.message("run.configuration.test.name");
    }
 
+   @Override
    public Icon getIcon() {
        return RubyIcons.RTEST_RUN_CONFIGURATION;
    }

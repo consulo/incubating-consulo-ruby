@@ -68,7 +68,8 @@ public class RLoadPathCooserPanel implements CheckBoxListListener {
 
         // listeners
         myAddButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 final FileChooserDescriptor dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
                 dirChooser.setShowFileSystemRoots(true);
                 dirChooser.setHideIgnored(true);
@@ -91,7 +92,8 @@ public class RLoadPathCooserPanel implements CheckBoxListListener {
         });
 
         myRemoveButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 int selected = myList.getSelectedIndex();
                 if (selected!=-1){
 // removing index
@@ -107,7 +109,8 @@ public class RLoadPathCooserPanel implements CheckBoxListListener {
         return myContentPane;
     }
 
-    public void checkBoxSelectionChanged(int index, boolean value) {
+    @Override
+	public void checkBoxSelectionChanged(int index, boolean value) {
         final JCheckBox checkBox = (JCheckBox) myListModel.getElementAt(index);
         myDirsContainer.stateChanged(getPath(checkBox), value);
     }

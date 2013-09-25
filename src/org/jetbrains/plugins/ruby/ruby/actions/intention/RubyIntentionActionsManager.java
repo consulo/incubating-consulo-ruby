@@ -32,25 +32,30 @@ import org.jetbrains.plugins.ruby.RComponents;
 class RubyIntentionActionsManager implements ProjectComponent {
     private static final String RUBY_INTENTIONS = RBundle.message("ruby.intentions");
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         IntentionManager.getInstance().registerIntentionAndMetaData(new RelativePathToAbsolutePathIntention(),
                                                                     RUBY_INTENTIONS);
         IntentionManager.getInstance().registerIntentionAndMetaData(new AppendCurrentDirToPathIntention(),
                                                                     RUBY_INTENTIONS);
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RUBY_INTENTION_ACTIONS_MANAGER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 }

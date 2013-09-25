@@ -37,7 +37,8 @@ import java.io.IOException;
 @SuppressWarnings({"ComponentNotRegistered"})
 public class ShowFileSymbolAction extends AnAction {
 
-    public void actionPerformed(AnActionEvent e) {
+    @Override
+	public void actionPerformed(AnActionEvent e) {
         final Project project = e.getData(DataKeys.PROJECT);
         if (project == null){
             return;

@@ -34,7 +34,8 @@ public class RBoolBinExpressionImpl extends RBinaryExpressionBase implements RBo
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.getBooleanType(fileSymbol);
     }

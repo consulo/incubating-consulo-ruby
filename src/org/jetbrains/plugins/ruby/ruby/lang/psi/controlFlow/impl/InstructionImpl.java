@@ -18,7 +18,8 @@ class InstructionImpl implements Instruction, Cloneable {
     final PsiElement myPsiElement;
     private final int myNumber;
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getElement() {
         return myPsiElement;
     }
@@ -28,11 +29,13 @@ class InstructionImpl implements Instruction, Cloneable {
         myNumber = num;
     }
 
-    public Iterable<? extends Instruction> allSucc() {
+    @Override
+	public Iterable<? extends Instruction> allSucc() {
         return mySucc;
     }
 
-    public Iterable<? extends Instruction> allPred() {
+    @Override
+	public Iterable<? extends Instruction> allPred() {
         return myPred;
     }
 
@@ -40,7 +43,8 @@ class InstructionImpl implements Instruction, Cloneable {
       return env.callStack(instruction);
     }
 
-    public Iterable<? extends Instruction> succ(CallEnvironment env) {
+    @Override
+	public Iterable<? extends Instruction> succ(CallEnvironment env) {
       final Stack<CallInstruction> stack = getStack(env, this);
       for (InstructionImpl instruction : mySucc) {
         env.update(stack, instruction);
@@ -49,7 +53,8 @@ class InstructionImpl implements Instruction, Cloneable {
       return mySucc;
     }
 
-    public Iterable<? extends Instruction> pred(CallEnvironment env) {
+    @Override
+	public Iterable<? extends Instruction> pred(CallEnvironment env) {
       final Stack<CallInstruction> stack = getStack(env, this);
       for (InstructionImpl instruction : myPred) {
         env.update(stack, instruction);
@@ -79,7 +84,8 @@ class InstructionImpl implements Instruction, Cloneable {
         return  buffer.toString();
     }
 
-    public int num() {
+    @Override
+	public int num() {
         return myNumber;
     }
 }

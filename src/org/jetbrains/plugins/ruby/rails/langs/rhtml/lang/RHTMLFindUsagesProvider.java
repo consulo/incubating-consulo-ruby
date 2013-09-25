@@ -34,11 +34,13 @@ import com.intellij.psi.PsiElement;
  */
 public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
 
+  @Override
   @Nullable
   public WordsScanner getWordsScanner() {
     return new SimpleWordsScanner();
   }
 
+  @Override
   public boolean canFindUsagesFor(final @NotNull PsiElement psiElement) {
     if (super.canFindUsagesFor(psiElement)) {
         return true;
@@ -52,6 +54,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
     return delegateProvider.canFindUsagesFor(psiElement);
   }
 
+  @Override
   @NotNull
   public String getType(@NotNull PsiElement element) {
     final String supertype = super.getType(element);
@@ -67,6 +70,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
                                     : "";
   }
 
+  @Override
   @NotNull
   public String getDescriptiveName(@NotNull PsiElement element) {
     final String supertext = super.getDescriptiveName(element);
@@ -83,6 +87,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
                                     : "";
   }
 
+  @Override
   @NotNull
   public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
     final String supertext = super.getNodeText(element, useFullName);

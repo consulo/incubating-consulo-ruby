@@ -49,7 +49,8 @@ public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol {
     @Nullable
     protected abstract CachedSymbol getBaseSymbol();
 
-    protected final void fileChanged(@NotNull String url) {
+    @Override
+	protected final void fileChanged(@NotNull String url) {
         if (myFileSymbol == null) {
             return;
         }
@@ -58,7 +59,8 @@ public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol {
         }
     }
 
-    protected void updateFileSymbol() {
+    @Override
+	protected void updateFileSymbol() {
         myFileSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled, myCaches);
         addAdditionalData();
         myAllExternalUrls = FileSymbolUtil.getUrls(myFileSymbol);

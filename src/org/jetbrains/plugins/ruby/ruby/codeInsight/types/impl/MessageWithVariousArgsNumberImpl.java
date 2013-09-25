@@ -38,14 +38,17 @@ public class MessageWithVariousArgsNumberImpl extends MessageImpl implements Mes
         myMaxNumber = maxNumber;
     }
 
-    public int getMinArgsNumber() {
+    @Override
+	public int getMinArgsNumber() {
         return myMinNumber;
     }
 
-    public int getMaxArgsNumber() {
+    @Override
+	public int getMaxArgsNumber() {
         return myMaxNumber;
     }
-    public boolean matchesMessage(@NotNull final Message patternMessage) {
+    @Override
+	public boolean matchesMessage(@NotNull final Message patternMessage) {
         if (!getName().equals(patternMessage.getName())){
             return false;
         }

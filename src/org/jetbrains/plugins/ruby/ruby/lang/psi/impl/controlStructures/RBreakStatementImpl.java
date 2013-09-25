@@ -35,7 +35,8 @@ public class RBreakStatementImpl extends RPsiElementBase implements RBreakStatem
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRBreakStatement(this);
             return;
@@ -43,7 +44,8 @@ public class RBreakStatementImpl extends RPsiElementBase implements RBreakStatem
         super.accept(visitor);
     }
 
-    public RLoopStatement getBreakedLoop() {
+    @Override
+	public RLoopStatement getBreakedLoop() {
         return PsiTreeUtil.getParentOfType(this, RLoopStatement.class);
     }
 }

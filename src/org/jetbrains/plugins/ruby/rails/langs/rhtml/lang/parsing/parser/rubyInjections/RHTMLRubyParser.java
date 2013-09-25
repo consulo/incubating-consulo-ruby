@@ -29,7 +29,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
  */
 public class RHTMLRubyParser extends RubyParser implements PsiParser {
 
-    protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder) {
+    @Override
+	protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder) {
         return new RHTMLRubyBuilder(builder);
     }
 

@@ -77,7 +77,8 @@ public class GenerateControllerPanel implements GeneratorPanel {
         myListModel = new DefaultListModel();
         myActionsList.setModel(myListModel);
         myActionsList.setCellRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(final JList list,
+            @Override
+			public Component getListCellRendererComponent(final JList list,
                                                           final Object value,
                                                           final int index,
                                                           final boolean isSelected,
@@ -91,7 +92,8 @@ public class GenerateControllerPanel implements GeneratorPanel {
 
         final MyActionInputValidator validator = new MyActionInputValidator();
         myAddButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 final String text = Messages.showInputDialog(
                         RBundle.message("dialog.generate.controller.actions.promt"),
                         RBundle.message("dialog.generate.controller.actions.promt.title"),
@@ -109,7 +111,8 @@ public class GenerateControllerPanel implements GeneratorPanel {
         });
 
         myRemoveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 final Object[] selection = myActionsList.getSelectedValues();
                 int selectedIndex = -2;
                 for (Object obj : selection) {
@@ -130,13 +133,15 @@ public class GenerateControllerPanel implements GeneratorPanel {
         });
 
         myControllerName.getDocument().addDocumentListener(new DocumentAdapter() {
-            public void textChanged(DocumentEvent event) {
+            @Override
+			public void textChanged(DocumentEvent event) {
                 updateLocation();
             }
 
         });
         myControllerDir.getDocument().addDocumentListener(new DocumentAdapter() {
-            public void textChanged(DocumentEvent event) {
+            @Override
+			public void textChanged(DocumentEvent event) {
                 updateLocation();
             }
 
@@ -148,19 +153,22 @@ public class GenerateControllerPanel implements GeneratorPanel {
         myContentPanel.doLayout();
     }
 
-    public void initPanel(final GeneratorOptions options) {
+    @Override
+	public void initPanel(final GeneratorOptions options) {
         myOptions = options;
         GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox,
                                               mySkipCheckBox, myBacktraceCheckBox,
                                               mySVNCheckBox, myOptions);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public JPanel getContent() {
         return myContentPanel;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getGeneratorArgs() {
         final StringBuffer buff = new StringBuffer();
         buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox,
@@ -184,16 +192,19 @@ public class GenerateControllerPanel implements GeneratorPanel {
         return buff.toString();
     }
 
-    public String getMainArgument() {
+    @Override
+	public String getMainArgument() {
         return myControllerName.getText().trim();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public JComponent getPreferredFocusedComponent() {
         return myControllerName;
     }
 
-    public void saveSettings(final Project project) {
+    @Override
+	public void saveSettings(final Project project) {
         GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox,
                                      mySkipCheckBox, myBacktraceCheckBox,
                                      mySVNCheckBox, myOptions, project);
@@ -221,7 +232,8 @@ public class GenerateControllerPanel implements GeneratorPanel {
 
     private class MyActionInputValidator implements InputValidator {
 
-        public boolean canClose(final String inputString) {
+        @Override
+		public boolean canClose(final String inputString) {
             if (TextUtil.isEmpty(inputString)
                 || !ControllersConventions.isValidActionName(inputString)) {
                 showIncorrectNameError(inputString);
@@ -230,7 +242,8 @@ public class GenerateControllerPanel implements GeneratorPanel {
             return true;
         }
 
-        public boolean checkInput(final String inputString) {
+        @Override
+		public boolean checkInput(final String inputString) {
             return true;
         }
 

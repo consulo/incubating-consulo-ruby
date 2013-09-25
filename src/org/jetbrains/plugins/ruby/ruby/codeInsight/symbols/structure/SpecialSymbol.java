@@ -48,12 +48,14 @@ public class SpecialSymbol extends Symbol{
         this(fileSymbol, null, parent, symbol, type);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Symbol getLinkedSymbol() {
         return myLinkedSymbol;
     }
 
-    @SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
+    @Override
+	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
     public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml) {
         final StringBuilder builder = new StringBuilder();
         builder.append("[" + getId() + "] " + getType() +  " ");

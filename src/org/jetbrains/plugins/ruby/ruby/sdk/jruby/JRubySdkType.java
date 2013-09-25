@@ -80,17 +80,20 @@ public class JRubySdkType extends RubySdkType
 		return sdk != null && sdk.getSdkType() instanceof JRubySdkType;
 	}
 
+	@Override
 	public String getRubyExecutable()
 	{
 		//noinspection deprecation
 		return JRUBY_EXE;
 	}
 
+	@Override
 	public String getPresentableName()
 	{
 		return RBundle.message("sdk.jruby.title");
 	}
 
+	@Override
 	public String suggestHomePath()
 	{
 		return RubySdkUtil.suggestJRubyHomePath();

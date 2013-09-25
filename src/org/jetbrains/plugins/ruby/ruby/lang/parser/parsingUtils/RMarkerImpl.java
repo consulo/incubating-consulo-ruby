@@ -35,25 +35,30 @@ public class RMarkerImpl implements RMarker {
         myOriginalMarker = marker;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RMarker precede() {
         return new RMarkerImpl(myBuilder, myOriginalMarker.precede());
     }
 
-    public void drop() {
+    @Override
+	public void drop() {
         myOriginalMarker.drop();
     }
 
-    public void rollbackTo() {
+    @Override
+	public void rollbackTo() {
         myOriginalMarker.rollbackTo();
         myBuilder.initNextTokens();
     }
 
-    public void done(final IElementType type) {
+    @Override
+	public void done(final IElementType type) {
         myOriginalMarker.done(type);
     }
 
-    public void error(final String message) {
+    @Override
+	public void error(final String message) {
         myOriginalMarker.error(message);
     }
 }

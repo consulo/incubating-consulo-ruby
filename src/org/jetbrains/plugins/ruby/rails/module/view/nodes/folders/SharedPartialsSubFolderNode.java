@@ -44,7 +44,8 @@ public class SharedPartialsSubFolderNode extends FolderNode {
         super(module, dir, parent, data);
     }
 
-    protected void processNotDirectoryFile(List<RailsNode> nodes, VirtualFile file, String url) {
+    @Override
+	protected void processNotDirectoryFile(List<RailsNode> nodes, VirtualFile file, String url) {
         if (ViewsConventions.isValidPartialViewFile(file)) {
             nodes.add(new SimpleFileNode(getModule(), file));
         }

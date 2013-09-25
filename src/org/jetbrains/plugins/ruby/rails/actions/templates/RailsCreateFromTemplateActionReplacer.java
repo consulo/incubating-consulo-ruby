@@ -32,12 +32,14 @@ import org.jetbrains.plugins.ruby.rails.templates.RailsTemplatesLoader;
  * @date: Oct 6, 2007
  */
 public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplateActionReplacer {
-    @Nullable
+    @Override
+	@Nullable
     public AnAction replaceCreateFromFileTemplateAction(@NotNull final FileTemplate fileTemplate) {
         final String templateName = fileTemplate.getName();
         if (templateName.equals(RailsTemplatesLoader.RHTML_TEMPLATE_NAME)) {
             return new RailsCreateFromTemplateAction(fileTemplate) {
-                @NotNull
+                @Override
+				@NotNull
                 protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir,
                                                                    final FileTemplate selectedTemplate) {
                     return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
@@ -45,7 +47,8 @@ public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplate
             };
         } else if (templateName.equals(RailsTemplatesLoader.RXML_TEMPLATE_NAME)) {
             return new RailsCreateFromTemplateAction(fileTemplate) {
-                @NotNull
+                @Override
+				@NotNull
                 protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir,
                                                                    final FileTemplate selectedTemplate) {
                     return new RXMLCreateViewFromTemplateDialog(project, dir, fileTemplate);

@@ -32,12 +32,14 @@ public class ListParamDef extends ParamDef {
         myBaseParamDef = baseParamDef;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Collection<RubyLookupItem> getVariants(final ParamContext context) {
         return myBaseParamDef.getVariants(context);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolveReference(final ParamContext context) {
         return myBaseParamDef.resolveReference(context);
     }

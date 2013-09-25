@@ -37,7 +37,8 @@ public class RailsSharedPatialsFolderNode extends SharedPartialsSubFolderNode {
         super(module, folder, null, initPresentationData());
     }
 
-    public void accept(SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitSharedPartialsNode();
             return;

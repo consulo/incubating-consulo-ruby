@@ -32,7 +32,8 @@ import java.util.Map;
 public class HashParamDef extends ParamDef {
     private Map<String, ParamDef> myParams = new HashMap<String, ParamDef>();
 
-    @Nullable
+    @Override
+	@Nullable
     public List<RubyLookupItem> getVariants(ParamContext context) {
         List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
         for(String key: myParams.keySet()) {

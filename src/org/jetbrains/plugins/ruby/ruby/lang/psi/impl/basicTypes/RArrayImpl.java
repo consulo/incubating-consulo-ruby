@@ -38,7 +38,8 @@ public class RArrayImpl extends RPsiElementBase implements RArray {
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Array), Context.INSTANCE, true);
     }

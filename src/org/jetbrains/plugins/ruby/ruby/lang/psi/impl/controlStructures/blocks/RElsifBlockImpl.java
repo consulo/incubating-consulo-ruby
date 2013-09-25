@@ -35,7 +35,8 @@ public class RElsifBlockImpl extends RConditionalStatementImpl implements RElsif
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRElsifBlock(this);
             return;
@@ -43,7 +44,8 @@ public class RElsifBlockImpl extends RConditionalStatementImpl implements RElsif
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RCompoundStatement getBody() {
         return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
     }

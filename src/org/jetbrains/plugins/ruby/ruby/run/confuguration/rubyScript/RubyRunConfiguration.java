@@ -45,7 +45,8 @@ public class RubyRunConfiguration extends AbstractRubyRunConfiguration implement
         super(project, factory, name);
     }
 
-    protected RubyRunConfiguration createInstance() {
+    @Override
+	protected RubyRunConfiguration createInstance() {
         return new RubyRunConfiguration(getProject(), getFactory(), getName());
     }
 
@@ -57,15 +58,18 @@ public class RubyRunConfiguration extends AbstractRubyRunConfiguration implement
         toParams.setScriptArgs(fromParams.getScriptArgs());
     }
 
-    public String getScriptPath() {
+    @Override
+	public String getScriptPath() {
         return myScriptPath;
     }
 
-    public void setScriptPath(final String scriptPath) {
+    @Override
+	public void setScriptPath(final String scriptPath) {
         myScriptPath = TextUtil.getAsNotNull(scriptPath);
     }
 
-    public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+    @Override
+	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new RubyRunConfigurationEditor(getProject(), this);
     }
 
@@ -85,7 +89,8 @@ public class RubyRunConfiguration extends AbstractRubyRunConfiguration implement
 		return new RubyRunCommandLineState(this, executionEnvironment);
 	}
 
-    protected void validateConfiguration(final boolean isExecution) throws Exception {
+    @Override
+	protected void validateConfiguration(final boolean isExecution) throws Exception {
         RubyRunConfigurationUtil.inspectSDK(this, isExecution);
 
         // Script inspection
@@ -104,20 +109,24 @@ public class RubyRunConfiguration extends AbstractRubyRunConfiguration implement
         RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
     }
 
-    public String getScriptArgs() {
+    @Override
+	public String getScriptArgs() {
         return myScriptArgs;
     }
 
-    public void setScriptArgs(String myScriptArgs) {
+    @Override
+	public void setScriptArgs(String myScriptArgs) {
         this.myScriptArgs = TextUtil.getAsNotNull(myScriptArgs);
     }
 
 
-    public void readExternal(Element element) throws InvalidDataException {
+    @Override
+	public void readExternal(Element element) throws InvalidDataException {
         RubyRunConfigurationExternalizer.getInstance().readExternal(this, element);
     }
 
-    public void writeExternal(Element element) throws WriteExternalException {
+    @Override
+	public void writeExternal(Element element) throws WriteExternalException {
         RubyRunConfigurationExternalizer.getInstance().writeExternal(this, element);
     }
 }

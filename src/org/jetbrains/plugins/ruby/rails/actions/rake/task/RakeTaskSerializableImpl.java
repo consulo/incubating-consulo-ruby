@@ -54,29 +54,35 @@ public class RakeTaskSerializableImpl implements RakeTask, Serializable {
         this.parent = parent;
     }
 
-    public String getId() {
+    @Override
+	public String getId() {
         return id;
     }
 
-    public String getDescription() {
+    @Override
+	public String getDescription() {
         return description;
     }
 
-    public boolean isGroup() {
+    @Override
+	public boolean isGroup() {
         return group;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<? extends RakeTask> getSubTasks() {
         return children;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getFullCommand() {
         return fullCmd;
     }
 
-    public void addSubTask(final RakeTask task) {
+    @Override
+	public void addSubTask(final RakeTask task) {
         if (task instanceof RakeTaskSerializableImpl) {
             children.add((RakeTaskSerializableImpl)task);
         }

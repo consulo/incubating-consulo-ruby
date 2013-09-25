@@ -43,17 +43,20 @@ public class AppendCurrentDirToPathIntention extends RequirePathIntention {
     private static final String NAME = "AppendCurrentDirToPath";
     private static final String TEXT = RBundle.message("ruby.intentions.append.cur.dir.to.path");
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFamilyName() {
         return NAME;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getText(){
         return TEXT;
     }
 
-    public void invoke(@NotNull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException {
+    @Override
+	public void invoke(@NotNull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException {
         final RBaseString myString = RBaseStringNavigator.getByPsiElement(getElementAt(psiFile, editor));
         if (myString == null){
             return;
@@ -69,7 +72,8 @@ public class AppendCurrentDirToPathIntention extends RequirePathIntention {
         myString.replaceByRMathBinExpression((RMathBinExpressionImpl)rPsiElement);
     }
 
-    public boolean isAvailable(@NotNull final Project project,
+    @Override
+	public boolean isAvailable(@NotNull final Project project,
                                @NotNull final Editor editor,
                                @NotNull final PsiFile psiFile) {
         if (!RubyIntentionUtil.isAvailable(editor, psiFile)){

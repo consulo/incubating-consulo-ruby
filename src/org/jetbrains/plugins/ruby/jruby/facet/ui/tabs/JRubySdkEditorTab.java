@@ -59,10 +59,12 @@ public class JRubySdkEditorTab extends FacetEditorTab {
         return myJRubyFacetConfiguration.isChanged();
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         myJRubyFacetConfiguration.setChanged(false);
     }
 

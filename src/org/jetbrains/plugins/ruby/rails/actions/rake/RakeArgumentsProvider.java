@@ -50,7 +50,8 @@ class RakeArgumentsProvider implements CommandLineArgumentsProvider {
         };
     }
 
-    public String[] getArguments() {
+    @Override
+	public String[] getArguments() {
         ArrayList<String> argsList = new ArrayList<String>();
         argsList.addAll(Arrays.asList(myBeforeArgs));
 
@@ -60,7 +61,8 @@ class RakeArgumentsProvider implements CommandLineArgumentsProvider {
         return argsList.toArray(new String[argsList.size()]);
     }
 
-    public void disableParametersActions() {
+    @Override
+	public void disableParametersActions() {
         for (AnAction action : myActions) {
             if (action instanceof RakeCmdParamAction) {
                 ((RakeCmdParamAction)action).disableAction();

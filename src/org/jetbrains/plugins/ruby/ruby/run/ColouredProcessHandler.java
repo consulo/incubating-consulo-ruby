@@ -40,7 +40,8 @@ public class ColouredProcessHandler extends OSProcessHandler {
     }
 
 
-    public void notifyTextAvailable(String text, Key outputType) {
+    @Override
+	public void notifyTextAvailable(String text, Key outputType) {
         if (outputType != ProcessOutputTypes.STDOUT
                 || text.indexOf(TEXT_ATTRS_PREFIX_CH) == -1) {
             super.notifyTextAvailable(text, outputType);

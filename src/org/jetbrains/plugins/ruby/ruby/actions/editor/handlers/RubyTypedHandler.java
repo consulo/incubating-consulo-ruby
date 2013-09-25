@@ -265,7 +265,8 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes {
     }
 
 
-    public void execute(final Editor editor, final char charTyped, final DataContext dataContext) {
+    @Override
+	public void execute(final Editor editor, final char charTyped, final DataContext dataContext) {
         if (!handleTyping(editor, charTyped, dataContext) && myOriginalHandler != null) {
             myOriginalHandler.execute(editor, charTyped, dataContext);
         }

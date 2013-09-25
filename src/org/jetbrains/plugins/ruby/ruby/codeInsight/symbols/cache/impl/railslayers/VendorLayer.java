@@ -41,7 +41,8 @@ public class VendorLayer extends AbstractRailsLayeredCachedSymbol {
         super(FileSymbolType.RAILS_MODULE_LAYER, project, module, sdk, isJRubyEnabled);
     }
 
-    public void fileAdded(@NotNull String url) {
+    @Override
+	public void fileAdded(@NotNull String url) {
         final CachedSymbol baseCachedSymbol = getBaseSymbol();
         if (baseCachedSymbol != null) {
             ((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
@@ -51,7 +52,8 @@ public class VendorLayer extends AbstractRailsLayeredCachedSymbol {
         }
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         RailsRequireUtil.loadAllVendorsLibsWithoutEdgeRails(myFileSymbol, myModule);
     }
 

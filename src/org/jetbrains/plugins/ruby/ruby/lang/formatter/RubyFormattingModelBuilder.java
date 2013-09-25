@@ -38,7 +38,8 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
  * Date: 01.08.2006
  */
 public class RubyFormattingModelBuilder implements FormattingModelBuilder {
-    @NotNull
+    @Override
+	@NotNull
     public FormattingModel createModel(final PsiElement element, final CodeStyleSettings settings) {
         // TODO: why do we need to use fileElement except element.getNode?
         final FileElement fileElement = TreeUtil.getFileElement((TreeElement) SourceTreeToPsiMap.psiElementToTree(element));

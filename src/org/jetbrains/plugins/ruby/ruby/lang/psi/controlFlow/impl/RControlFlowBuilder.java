@@ -211,7 +211,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 ///// Here we override visitors methods to implement functionality
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void visitElement(@NotNull final PsiElement element) {
+    @Override
+	public void visitElement(@NotNull final PsiElement element) {
         if (element == myStartElementInScope) isInScope = true;
         else if (element == myEndElementInScope) isInScope = false;
 
@@ -231,7 +232,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
     }
 
     /// return statement handling
-    public void visitRReturnStatement(final RReturnStatement rReturnStatement) {
+    @Override
+	public void visitRReturnStatement(final RReturnStatement rReturnStatement) {
         final InstructionImpl instruction = startNode(rReturnStatement);
         for (RPsiElement element : rReturnStatement.getReturnValues()) {
             element.accept(this);
@@ -244,14 +246,16 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 ///// Function and command calls
 
-    public void visitRFunctionCall(final RFunctionCall rFunctionCall) {
+    @Override
+	public void visitRFunctionCall(final RFunctionCall rFunctionCall) {
         final InstructionImpl instruction = startNode(rFunctionCall);
         rFunctionCall.getCallArguments().accept(this);
         rFunctionCall.getPsiCommand().accept(this);
         finishNode(instruction);
     }
 
-    public void visitRCommandCall(final RCommandCall rCommandCall) {
+    @Override
+	public void visitRCommandCall(final RCommandCall rCommandCall) {
         final InstructionImpl instruction = startNode(rCommandCall);
         rCommandCall.getCallArguments().accept(this);
         rCommandCall.getPsiCommand().accept(this);
@@ -260,7 +264,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 /////// visit assignments
 
-    public void visitRAssignmentExpression(final RAssignmentExpression assignmentExpression) {
+    @Override
+	public void visitRAssignmentExpression(final RAssignmentExpression assignmentExpression) {
         final InstructionImpl instruction = startNode(assignmentExpression);
         final RPsiElement value = assignmentExpression.getValue();
         if (value != null) {
@@ -271,13 +276,15 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         finishNode(instruction);
     }
 
-    public void visitRMultiAssignmentExpression(final RMultiAssignmentExpression multiAssignmentExpression) {
+    @Override
+	public void visitRMultiAssignmentExpression(final RMultiAssignmentExpression multiAssignmentExpression) {
         // the same logic here
         visitRAssignmentExpression(multiAssignmentExpression);
     }
 
     /// Visit identifier
-    public void visitRIdentifier(final RIdentifier rIdentifier) {
+    @Override
+	public void visitRIdentifier(final RIdentifier rIdentifier) {
         // we should handle it only if its a parameter or local variable
         if (rIdentifier.isParameter() || rIdentifier.isLocalVariable()) {
             ReadWriteInstructionImpl instruction =
@@ -293,7 +300,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 ///// If and If modifier statements
 
-    public void visitRIfStatement(final RIfStatement ifStatement) {
+    @Override
+	public void visitRIfStatement(final RIfStatement ifStatement) {
         InstructionImpl ifInstruction = startNode(ifStatement);
         final RCondition condition = ifStatement.getCondition();
         if (condition != null) {
@@ -337,7 +345,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         finishNode(ifInstruction);
     }
 
-    public void visitRIfModStatement(final RIfModStatement ifStatement) {
+    @Override
+	public void visitRIfModStatement(final RIfModStatement ifStatement) {
         InstructionImpl ifInstruction = startNode(ifStatement);
         final RCondition condition = ifStatement.getCondition();
         if (condition != null) {
@@ -357,7 +366,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 ///// Unless and Unless modifier statements
 
-    public void visitRUnlessStatement(final RUnlessStatement rUnlessStatement) {
+    @Override
+	public void visitRUnlessStatement(final RUnlessStatement rUnlessStatement) {
         InstructionImpl unlessInstruction = startNode(rUnlessStatement);
         final RCondition condition = rUnlessStatement.getCondition();
         if (condition != null) {
@@ -386,7 +396,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         finishNode(unlessInstruction);
     }
 
-    public void visitRUnlessModStatement(final RUnlessModStatement rUnlessModStatement) {
+    @Override
+	public void visitRUnlessModStatement(final RUnlessModStatement rUnlessModStatement) {
         InstructionImpl unlessModInstruction = startNode(rUnlessModStatement);
         final RCondition condition = rUnlessModStatement.getCondition();
         if (condition != null) {
@@ -406,7 +417,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 ///// While and While modifier statements
 
-    public void visitRWhileStatement(final RWhileStatement rWhileStatement) {
+    @Override
+	public void visitRWhileStatement(final RWhileStatement rWhileStatement) {
         final InstructionImpl instruction = startNode(rWhileStatement);
         final RCondition condition = rWhileStatement.getCondition();
         if (condition != null) {
@@ -429,7 +441,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         finishNode(instruction);
     }
 
-    public void visitRWhileModStatement(final RWhileModStatement rWhileModStatement) {
+    @Override
+	public void visitRWhileModStatement(final RWhileModStatement rWhileModStatement) {
         final InstructionImpl instruction = startNode(rWhileModStatement);
         final RCondition condition = rWhileModStatement.getCondition();
         if (condition != null) {
@@ -453,7 +466,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 ///// While and While modifier statements
 
-    public void visitRUntilStatement(final RUntilStatement rUntilStatement) {
+    @Override
+	public void visitRUntilStatement(final RUntilStatement rUntilStatement) {
         final InstructionImpl instruction = startNode(rUntilStatement);
         final RCondition condition = rUntilStatement.getCondition();
         if (condition != null) {
@@ -476,7 +490,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         finishNode(instruction);
     }
 
-    public void visitRUntilModStatement(final RUntilModStatement rUntilModStatement) {
+    @Override
+	public void visitRUntilModStatement(final RUntilModStatement rUntilModStatement) {
         final InstructionImpl instruction = startNode(rUntilModStatement);
         final RCondition condition = rUntilModStatement.getCondition();
         if (condition != null) {
@@ -499,7 +514,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
     }
 
     /// Case
-    public void visitRCaseStatement(final RCaseStatement rCaseStatement) {
+    @Override
+	public void visitRCaseStatement(final RCaseStatement rCaseStatement) {
         final InstructionImpl instruction = startNode(rCaseStatement);
         final RPsiElement expression = rCaseStatement.getExpression();
         if (expression != null) {
@@ -539,7 +555,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
     }
 
     /// For
-    public void visitRForStatement(final RForStatement rForStatement) {
+    @Override
+	public void visitRForStatement(final RForStatement rForStatement) {
         InstructionImpl instruction = startNode(rForStatement);
         final RPsiElement expr = rForStatement.getExpression();
         if (expr != null) {
@@ -567,7 +584,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
 
 ///// Loop statements handling
 
-    public void visitRBreakStatement(final RBreakStatement breakStatement) {
+    @Override
+	public void visitRBreakStatement(final RBreakStatement breakStatement) {
         addNode(new InstructionImpl(breakStatement, myInstructionNumber++));
         final RLoopStatement loop = breakStatement.getBreakedLoop();
         if (loop != null) {
@@ -576,7 +594,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         flowAbrupted();
     }
 
-    public void visitRNextStatement(final RNextStatement rNextStatement) {
+    @Override
+	public void visitRNextStatement(final RNextStatement rNextStatement) {
         addNode(new InstructionImpl(rNextStatement, myInstructionNumber++));
         final RLoopStatement loop = rNextStatement.getLoop();
         // case doesn`t support next
@@ -589,7 +608,8 @@ public class RControlFlowBuilder extends RubySystemCallVisitor {
         }
     }
 
-    public void visitRRedoStatement(final RRedoStatement rRedoStatement) {
+    @Override
+	public void visitRRedoStatement(final RRedoStatement rRedoStatement) {
         addNode(new InstructionImpl(rRedoStatement, myInstructionNumber++));
         final RLoopStatement loop = rRedoStatement.getLoop();
         // case doesn`t support redo

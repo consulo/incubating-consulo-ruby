@@ -41,7 +41,8 @@ public class ProxyJavaSymbol extends Symbol {
         myPsiJavaElement = element;
     }
 
-    @SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
+    @Override
+	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
     public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml) {
         final StringBuilder builder = new StringBuilder();
         builder.append("[" + getId() + "] " + getType() +  " ");

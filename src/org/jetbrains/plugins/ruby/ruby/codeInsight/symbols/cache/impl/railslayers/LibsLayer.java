@@ -50,7 +50,8 @@ public class LibsLayer extends AbstractRailsLayeredCachedSymbol {
         myLayerRootUrl = railsPaths.getLibsRootURL();
     }
 
-    public void fileAdded(@NotNull String url) {
+    @Override
+	public void fileAdded(@NotNull String url) {
         if (url.startsWith(myLayerRootUrl)) {
             myFileSymbol = null;
             return;
@@ -65,7 +66,8 @@ public class LibsLayer extends AbstractRailsLayeredCachedSymbol {
         }
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         RailsRequireUtil.loadAllLibs(myFileSymbol, myModule);
     }
 }

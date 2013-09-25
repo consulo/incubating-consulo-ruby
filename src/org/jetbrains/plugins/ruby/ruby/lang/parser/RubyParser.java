@@ -36,7 +36,8 @@ import com.intellij.psi.tree.IElementType;
 public class RubyParser implements PsiParser {
     private static final Logger LOG = Logger.getInstance(RubyParser.class.getName());
 
-    @NotNull
+    @Override
+	@NotNull
     public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion) {
 
         final RBuilder rBuilder = createBuilder(builder);

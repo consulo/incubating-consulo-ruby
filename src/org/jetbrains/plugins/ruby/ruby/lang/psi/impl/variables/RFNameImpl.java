@@ -53,11 +53,13 @@ public class RFNameImpl extends RNamedElementBase implements RFName {
         super(astNode);
     }
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         throw new UnsupportedOperationException("Method createReference is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RFNameImpl");
     }
 
-    public PsiReference getReference() {
+    @Override
+	public PsiReference getReference() {
         // We shouldn`t return this reference if we have RFieldAttrReference, overriding this reference
         final RSymbol symbol = RSymbolNavigator.getSymbolByObject(this);
         if (symbol!=null){
@@ -74,7 +76,8 @@ public class RFNameImpl extends RNamedElementBase implements RFName {
         return new RFNameReference(this);
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRFName(this);
             return;
@@ -82,18 +85,21 @@ public class RFNameImpl extends RNamedElementBase implements RFName {
         super.accept(visitor);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String getPrefix() {
         return null;
     }
 
-    protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
         if (!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }
     }
 
-    public PsiElement setName(@NotNull String newElementName) throws IncorrectOperationException {
+    @Override
+	public PsiElement setName(@NotNull String newElementName) throws IncorrectOperationException {
         // We shouldn`t do anything if name is the same
         if (newElementName.equals(getName())){
             return null;
@@ -106,7 +112,8 @@ public class RFNameImpl extends RNamedElementBase implements RFName {
         return element;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
     }

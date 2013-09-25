@@ -53,7 +53,8 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         }
     }
 
-    protected void updateStep() {
+    @Override
+	protected void updateStep() {
         final FacetWizardStep currentStep = getCurrentStepObject();
         currentStep.updateStep();
 
@@ -66,7 +67,8 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         final boolean isLastStep = isLastStep(getCurrentStep());
 
         SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 if (!isShowing()) {
                     return;
                 }
@@ -85,14 +87,16 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         });
     }
 
-    protected void dispose() {
+    @Override
+	protected void dispose() {
         for (FacetWizardStep step : mySteps) {
             step.disposeUIResources();
         }
         super.dispose();
     }
 
-    protected final void doOKAction() {
+    @Override
+	protected final void doOKAction() {
         int idx = getCurrentStep();
         try {
             do {
@@ -142,7 +146,8 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         return true;
     }
 
-    protected void doNextAction() {
+    @Override
+	protected void doNextAction() {
         final FacetWizardStep step = getCurrentStepObject();
         if (!commitStepData(step)) {
             return;
@@ -151,13 +156,15 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         super.doNextAction();
     }
 
-    protected void doPreviousAction() {
+    @Override
+	protected void doPreviousAction() {
         final FacetWizardStep step = getCurrentStepObject();
         step.onStepLeaving();
         super.doPreviousAction();
     }
 
-    public void doCancelAction() {
+    @Override
+	public void doCancelAction() {
         final FacetWizardStep step = getCurrentStepObject();
         step.onStepLeaving();
         super.doCancelAction();
@@ -175,7 +182,8 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
     }
 
 
-    protected String getHelpID() {
+    @Override
+	protected String getHelpID() {
         FacetWizardStep step = getCurrentStepObject();
         if (step != null) {
             return step.getHelpId();
@@ -183,7 +191,8 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         return null;
     }
 
-    protected final int getNextStep(final int step) {
+    @Override
+	protected final int getNextStep(final int step) {
         final int stepCount = mySteps.size();
 
         int nextStepNumber = step + 1;
@@ -193,7 +202,8 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep> {
         return nextStepNumber >= stepCount ? step : nextStepNumber;
     }
 
-    protected final int getPreviousStep(final int step) {
+    @Override
+	protected final int getPreviousStep(final int step) {
         int prevStepNumber = step - 1;
         while (prevStepNumber >= 0 && !mySteps.get(prevStepNumber).isStepVisible()) {
             prevStepNumber--;

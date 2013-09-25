@@ -63,7 +63,8 @@ public class CALL_ARGS  implements RubyTokenTypes {
         final Ref<Boolean> starSeen = new Ref<Boolean>(false);
         final Ref<Boolean> amperSeen = new Ref<Boolean>(false);
         ParsingMethod parsingMethod = new ParsingMethod(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parse(final RBuilder builder){
                 if(amperSeen.get()){
                     return RubyElementTypes.EMPTY_INPUT;

@@ -57,7 +57,8 @@ class BitExpression implements RubyTokenTypes {
     @NotNull
     private static IElementType parseBitOrWithLeadBitAnd(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return parseBitAnd(builder);
             }
@@ -90,7 +91,8 @@ class BitExpression implements RubyTokenTypes {
     @NotNull
     private static IElementType parseBitAndWithLeadShift(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return ShiftExpression.parse(builder);
             }

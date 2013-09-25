@@ -27,7 +27,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @date: 03.04.2007
  */
 public interface RHTMLFile extends RFile {
-    @NotNull
+    @Override
+	@NotNull
     public RHTMLFileViewProvider getViewProvider();
 
     @NotNull

@@ -32,21 +32,24 @@ public class RubyFilesCacheSoftReferenceAdapter implements RubyFilesCacheListene
         myReference = new SoftReference<RubyFilesCacheListener>(listener);
     }
 
-    public void fileAdded(@NotNull String url) {
+    @Override
+	public void fileAdded(@NotNull String url) {
         final RubyFilesCacheListener listener = myReference.get();
         if (listener!=null){
             listener.fileAdded(url);
         }
     }
 
-    public void fileRemoved(@NotNull String url) {
+    @Override
+	public void fileRemoved(@NotNull String url) {
         final RubyFilesCacheListener listener = myReference.get();
         if (listener!=null){
             listener.fileRemoved(url);
         }
     }
 
-    public void fileUpdated(@NotNull String url) {
+    @Override
+	public void fileUpdated(@NotNull String url) {
         final RubyFilesCacheListener listener = myReference.get();
         if (listener!=null){
             listener.fileUpdated(url);

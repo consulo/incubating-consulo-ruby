@@ -33,7 +33,8 @@ public class RVirtualIncludeJavaPackageImpl extends RVirtualIncludeJavaClassImpl
         super(container, qualifiedName);
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_INCLUDE_PACKAGE;
     }
 

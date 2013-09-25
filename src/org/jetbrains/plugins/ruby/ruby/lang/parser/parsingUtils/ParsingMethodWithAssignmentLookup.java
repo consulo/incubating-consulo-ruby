@@ -32,7 +32,8 @@ public abstract class ParsingMethodWithAssignmentLookup implements ParsingMethod
     @NotNull
     public abstract IElementType parseInner(final RBuilder builder);
 
-    public final IElementType parse(final RBuilder builder) {
+    @Override
+	public final IElementType parse(final RBuilder builder) {
         final RMarker assignMarker = builder.mark();
         final IElementType type = parseInner(builder);
 // Lookahead

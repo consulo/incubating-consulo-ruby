@@ -99,12 +99,14 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
         toParams.setShouldUseColoredOutput(fromParams.shouldUseColoredOutput());
     }
 
-    protected RSpecRunConfiguration createInstance() {
+    @Override
+	protected RSpecRunConfiguration createInstance() {
         return new RSpecRunConfiguration(getProject(), getFactory(), getName());
     }
 
 
-    public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+    @Override
+	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new RSpecRunConfigurationEditor(getProject(), this);
     }
 
@@ -126,7 +128,8 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
 	}
 
 
-    protected void validateConfiguration(boolean isExecution) throws Exception {
+    @Override
+	protected void validateConfiguration(boolean isExecution) throws Exception {
         RubyRunConfigurationUtil.inspectSDK(this, isExecution);
         RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
 
@@ -268,19 +271,23 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
         }
     }
 
-    public String getTestsFolderPath() {
+    @Override
+	public String getTestsFolderPath() {
         return myTestsFolderPath;
     }
 
-    public String getTestScriptPath() {
+    @Override
+	public String getTestScriptPath() {
         return myTestScriptPath;
     }
 
-    public TestType getTestType() {
+    @Override
+	public TestType getTestType() {
         return myTestType;
     }
 
-    public String getTestFileMask() {
+    @Override
+	public String getTestFileMask() {
         return myTestFileMask;
     }
 
@@ -289,67 +296,83 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
      *
      * @param path Path should contains only ruby style path separator: "/"
      */
-    public void setTestsFolderPath(final String path) {
+    @Override
+	public void setTestsFolderPath(final String path) {
         myTestsFolderPath = TextUtil.getAsNotNull(path);
     }
 
-    public void setTestScriptPath(final String pathOrMask) {
+    @Override
+	public void setTestScriptPath(final String pathOrMask) {
         myTestScriptPath = TextUtil.getAsNotNull(pathOrMask);
     }
 
-    public void setTestType(@NotNull final TestType testType) {
+    @Override
+	public void setTestType(@NotNull final TestType testType) {
         myTestType = testType;
     }
 
-    public void setTestFileMask(final String testFileMask) {
+    @Override
+	public void setTestFileMask(final String testFileMask) {
         myTestFileMask = TextUtil.getAsNotNull(testFileMask);
     }
 
-    public void readExternal(final Element element) throws InvalidDataException {
+    @Override
+	public void readExternal(final Element element) throws InvalidDataException {
         RSpecRunConfigurationExternalizer.getInstance().readExternal(this, element);
     }
 
-    public void writeExternal(final Element element) throws WriteExternalException {
+    @Override
+	public void writeExternal(final Element element) throws WriteExternalException {
         RSpecRunConfigurationExternalizer.getInstance().writeExternal(this, element);
     }
 
-    public boolean shouldUseColoredOutput() {
+    @Override
+	public boolean shouldUseColoredOutput() {
         return myUseColoredOutput;
     }
 
-    public void setShouldUseColoredOutput(final boolean enabled) {
+    @Override
+	public void setShouldUseColoredOutput(final boolean enabled) {
         myUseColoredOutput = enabled;
     }
 
-    public String getSpecArgs() {
+    @Override
+	public String getSpecArgs() {
         return mySpecArgs;
     }
 
-    public void setSpecArgs(final String specArgs) {
+    @Override
+	public void setSpecArgs(final String specArgs) {
         mySpecArgs = TextUtil.getAsNotNull(specArgs);
     }
 
-    public String getCustomSpecsRunnerPath() {
+    @Override
+	public String getCustomSpecsRunnerPath() {
         return TextUtil.getAsNotNull(myCustomSpecsRunnerPath).trim();
     }
 
-    public void setCustomSpecsRunnerPath(final String specsRunnerPath) {
+    @Override
+	public void setCustomSpecsRunnerPath(final String specsRunnerPath) {
         myCustomSpecsRunnerPath = TextUtil.getAsNotNull(specsRunnerPath);
     }
 
-    public void setShouldUseCustomSpecRunner(boolean useCustomSpecRunner) {
+    @Override
+	public void setShouldUseCustomSpecRunner(boolean useCustomSpecRunner) {
         myUseCustomSpecRunner = useCustomSpecRunner;
     }
 
-    public boolean shouldUseCustomSpecRunner() {
+    @Override
+	public boolean shouldUseCustomSpecRunner() {
         return myUseCustomSpecRunner;
     }
 
-    public boolean shouldRunSpecSeparately() {
+    @Override
+	public boolean shouldRunSpecSeparately() {
         return myShouldRunSpecSeparately;
     }
 
-    public void setShouldRunSpecSeparately(final boolean shouldRunSpecSeparately) {
+    @Override
+	public void setShouldRunSpecSeparately(final boolean shouldRunSpecSeparately) {
         myShouldRunSpecSeparately = shouldRunSpecSeparately;
     }
 }

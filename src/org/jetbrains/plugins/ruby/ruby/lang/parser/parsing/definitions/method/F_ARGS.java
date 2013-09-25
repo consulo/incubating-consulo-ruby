@@ -78,7 +78,8 @@ f_norm_arg	: tCONSTANT
             boolean afterRestArgs = false;
             boolean afterBlockArg = false;
 
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parse(final RBuilder builder){
 
                 if (afterBlockArg) {

@@ -102,7 +102,8 @@ public class BaseRailsFacetBuilder {
                 if (conf.getNullableRailsApplicationRootPath() != null) {
                     // created by Facet Detector from existing sources wizard
                     final Runnable runnable = new Runnable() {
-                        public void run() {
+                        @Override
+						public void run() {
                             //////////////// Load rake tasks and generators
                             regenerateRakeTasksAndGeneratorsSettings(railsFacet, conf.getSdk());
 
@@ -159,7 +160,8 @@ public class BaseRailsFacetBuilder {
         } else {
             //search rails under module content
             ProgressManager.getInstance().run(new Task.Modal(project, RBundle.message("rails.facet.builder.rails.application.searching"), true) {
-                public void run(final ProgressIndicator indicator) {
+                @Override
+				public void run(final ProgressIndicator indicator) {
                     indicator.setText(RBundle.message("progress.indicator.title.directories.scanning"));
                     indicator.setText2(RBundle.message("progress.indicator.title.please.wait"));
                     railsFacetHomePathRef.set(searchRailsAppInUnderDirectory(uncommitedModule, indicator));
@@ -335,14 +337,16 @@ public class BaseRailsFacetBuilder {
                                                       final Project project,
                                                       final String moduleName) {
       return new Runnable() {
-        public void run() {
+        @Override
+		public void run() {
             // Load rake tasks and generators
             regenerateRakeTasksAndGeneratorsSettings(railsFacet, sdk);
 
                 // Update uncommitedModule content and rails uncommitedModule settings
                 // will be invoked later
                 final ActionRunner.InterruptibleRunnable updateModuleAndSettings = new ActionRunner.InterruptibleRunnable() {
-                    public void run() throws Exception {
+                    @Override
+					public void run() throws Exception {
                         //now we can unmark content
                         descFactory.unpinAll();
 
@@ -369,7 +373,8 @@ public class BaseRailsFacetBuilder {
                     final String errorTitle = RBundle.message("new.generate.common.error.title");
 
                     final ActionRunner.InterruptibleRunnable generateRSpecStubIfNecessary = new ActionRunner.InterruptibleRunnable() {
-                        public void run() throws Exception {
+                        @Override
+						public void run() throws Exception {
                             // Generates RSpec Stub
                             RailsFacetUtil.refreshRailsAppHomeContent(uncommitedModule);
 
@@ -403,7 +408,8 @@ public class BaseRailsFacetBuilder {
         final Project project = uncommitedModule.getProject();
 
         final Runnable runnable = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 //marks that all tabs are pined, i.e. set-up processes in different tabs
                 final RunContentDescriptorFactory.PinTabsFactory descFactory = new RunContentDescriptorFactory.PinTabsFactory();
 
@@ -445,7 +451,8 @@ public class BaseRailsFacetBuilder {
                                             @NotNull final Sdk sdk) {
 
         final ActionRunner.InterruptibleRunnable installRSpecRails = new ActionRunner.InterruptibleRunnable() {
-            public void run() {
+            @Override
+			public void run() {
                 if (rSpecConf.enableRSpecRailsSupport() && rSpecConf.shouldInstallRSpecRailsPlugin()) {
                     PluginsUtil.installPluginAndUpdateModuleContent(
                             sdk,
@@ -516,7 +523,8 @@ public class BaseRailsFacetBuilder {
     private static Runnable loadRakeTasksAndGeneratorsIfArentLoadedRunnalbe(@Nullable final Sdk sdk,
                                                                             final Facet facet) {
         return new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 loadRakeTasksAndGeneratorsSettings((BaseRailsFacet)facet, sdk);
             }
         };
@@ -528,7 +536,8 @@ public class BaseRailsFacetBuilder {
         final Ref<String> railsRootPathRef = new Ref<String>();
         final ModuleFileIndex moduleFileIndex = ModuleRootManager.getInstance(module).getFileIndex();
         moduleFileIndex.iterateContent(new ContentIterator() {
-            public boolean processFile(final VirtualFile fileOrDir) {
+            @Override
+			public boolean processFile(final VirtualFile fileOrDir) {
                 if (indicator.isCanceled()) {
                     //has been canceled
                     return false;
@@ -558,9 +567,11 @@ public class BaseRailsFacetBuilder {
 
          // excluded folders use Root model and it should be commited
          final Runnable addExcludedFolders = new Runnable() {
-           public void run() {
+           @Override
+		   public void run() {
              IdeaInternalUtil.runInEDThreadInWriteAction(new ActionRunner.InterruptibleRunnable() {
-               public void run() {
+               @Override
+			   public void run() {
                  @NotNull final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
 
                    final ContentEntry[] entries = modifiableModel.getContentEntries();

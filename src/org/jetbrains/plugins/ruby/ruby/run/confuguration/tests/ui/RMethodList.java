@@ -93,13 +93,15 @@ public class RMethodList extends JPanel {
   }
 
     private static class RMethodComparator implements Comparator<RVirtualMethod> {
-        public int compare(final RVirtualMethod rMethod1, final RVirtualMethod rMethod2) {
+        @Override
+		public int compare(final RVirtualMethod rMethod1, final RVirtualMethod rMethod2) {
             return rMethod1.getName().compareToIgnoreCase(rMethod2.getName());
         }
     }
 
     private class MyMethodsListCellRenderer extends ColoredListCellRenderer {
-        protected void customizeCellRenderer(final JList list, final Object value,
+        @Override
+		protected void customizeCellRenderer(final JList list, final Object value,
                                              final int index, final boolean selected,
                                              final boolean hasFocus) {
 

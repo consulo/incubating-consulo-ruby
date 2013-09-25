@@ -93,7 +93,8 @@ public class RFileReference implements RPsiPolyvariantReference {
         return new TextRange(relativeStartOffset, relativeStartOffset + element.getTextLength());
     }
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myOwner;
     }
 
@@ -101,29 +102,35 @@ public class RFileReference implements RPsiPolyvariantReference {
         return myFullReference;
     }
 
-    public TextRange getRangeInElement() {
+    @Override
+	public TextRange getRangeInElement() {
         return myTextRange;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolve() {
         return ResolveUtil.resolvePolyVarReference(this);
     }
 
 
-    public String getCanonicalText() {
+    @Override
+	public String getCanonicalText() {
         return null;
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
         return null;
     }
 
-    public boolean isReferenceTo(final PsiElement element) {
+    @Override
+	public boolean isReferenceTo(final PsiElement element) {
         return resolve() == element;
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         final FileSymbol fileSymbol = LastSymbolStorage.getInstance(myElement.getProject()).getSymbol();
         return getVariants(fileSymbol);
     }
@@ -158,11 +165,13 @@ public class RFileReference implements RPsiPolyvariantReference {
         return PsiReference.EMPTY_ARRAY;
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return true;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getRefValue() {
         return myFullReference;
     }
@@ -171,16 +180,19 @@ public class RFileReference implements RPsiPolyvariantReference {
         return true;
     }
 
-    public PsiElement handleElementRename(@NotNull final String newElementName) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(@NotNull final String newElementName) throws IncorrectOperationException {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         throw new UnsupportedOperationException("multiResolveToSymbols is not implemented in org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFileReference");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         final FileSymbol fileSymbol = LastSymbolStorage.getInstance(myElement.getProject()).getSymbol();
         return multiResolve(fileSymbol);
@@ -205,12 +217,14 @@ public class RFileReference implements RPsiPolyvariantReference {
             if (file!=null && !foundFiles.contains(file)){
                 foundFiles.add(file);
                 list.add(new ResolveResult(){
-                    @Nullable
+                    @Override
+					@Nullable
                     public PsiElement getElement() {
                         return file;
                     }
 
-                    public boolean isValidResult() {
+                    @Override
+					public boolean isValidResult() {
                         return true;
                     }
                 });

@@ -42,7 +42,8 @@ public class RFileImpl extends RPsiFileBase implements RFile {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public FileType getFileType() {
         return RubyFileType.RUBY;
     }
@@ -51,7 +52,8 @@ public class RFileImpl extends RPsiFileBase implements RFile {
         return "Ruby file";
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final Language getLanguage() {
         return myLanguage;
     }

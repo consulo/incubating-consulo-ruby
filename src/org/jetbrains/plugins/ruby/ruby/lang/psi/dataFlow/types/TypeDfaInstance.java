@@ -55,7 +55,8 @@ public class TypeDfaInstance implements DfaInstance<Map<String, RType>> {
         localVariablesMap = map;
     }
 
-    public void fun(final Map<String, RType> map, final Instruction instruction) {
+    @Override
+	public void fun(final Map<String, RType> map, final Instruction instruction) {
         ProgressManager.getInstance().checkCanceled();
 
 // we process only instructions with our local variables
@@ -194,12 +195,14 @@ public class TypeDfaInstance implements DfaInstance<Map<String, RType>> {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Map<String, RType> initial() {
         return new HashMap<String, RType>();
     }
 
-    public boolean isForward() {
+    @Override
+	public boolean isForward() {
         return true;
     }
 }

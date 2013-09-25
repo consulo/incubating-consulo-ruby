@@ -21,12 +21,14 @@ public class AssignAccessImpl implements AssignAccess {
         myUsage = usage;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getValue() {
         return myAssign.getValue();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RPsiElement getElement() {
         return myUsage;
     }

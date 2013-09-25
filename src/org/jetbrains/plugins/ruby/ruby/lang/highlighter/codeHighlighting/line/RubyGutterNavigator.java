@@ -85,7 +85,8 @@ public class RubyGutterNavigator {
         list.setCellRenderer(listRenderer);
         new PopupChooserBuilder(list).setTitle(title).setMovable(true)
                 .setItemChoosenCallback(new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         int[] ids = list.getSelectedIndices();
                         if (ids == null || ids.length == 0) return;
                         Object[] selectedElements = list.getSelectedValues();

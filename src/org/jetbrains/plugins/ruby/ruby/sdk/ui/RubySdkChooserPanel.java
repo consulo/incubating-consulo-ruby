@@ -73,7 +73,8 @@ public class RubySdkChooserPanel extends JComponent {
 
 
         configureButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 myJdkChooser.editJdkTable();
             }
         });

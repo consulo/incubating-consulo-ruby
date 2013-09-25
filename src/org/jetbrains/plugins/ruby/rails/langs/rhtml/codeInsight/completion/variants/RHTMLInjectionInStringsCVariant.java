@@ -39,12 +39,14 @@ public class RHTMLInjectionInStringsCVariant extends CompletionVariant {
     }
 
     private static class MyRTHMLInjectionStartFilter implements ElementFilter {
-        public boolean isAcceptable(final Object element, final PsiElement context) {
+        @Override
+		public boolean isAcceptable(final Object element, final PsiElement context) {
             final ASTNode node = context.getNode();
             return ifInStringTokenAfterInjectionStartChar(node);
         }
 
-        public boolean isClassAcceptable(final Class hintClass) {
+        @Override
+		public boolean isClassAcceptable(final Class hintClass) {
             return true;
         }
     }

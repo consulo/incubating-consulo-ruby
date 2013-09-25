@@ -63,17 +63,20 @@ public class RConstantImpl extends RNamedElementBase implements RConstant {
         super(astNode);
     }
 
-    public boolean isInDefinition() {
+    @Override
+	public boolean isInDefinition() {
         return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this)!=null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ConstantDefinitions getConstantDefinitions() {
         return getHolder().getDefinition(this);
     }
 
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRConstant(this);
             return;
@@ -81,7 +84,8 @@ public class RConstantImpl extends RNamedElementBase implements RConstant {
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RConstantHolder getHolder() {
         if (myHolder == null){
             myHolder = PsiTreeUtil.getParentOfType(this, RConstantHolder.class);
@@ -95,12 +99,14 @@ public class RConstantImpl extends RNamedElementBase implements RConstant {
         return RConstantPresentationUtil.getIcon();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ItemPresentation getPresentation() {
         return RConstantPresentationUtil.getPresentation(this);
     }
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         String s = getText();
         if (s.equals(INTELLIJ_IDEA_RULEZZZ)) {
             ParamContext paramContext = ParamDefUtil.getParamContext(this);
@@ -114,7 +120,8 @@ public class RConstantImpl extends RNamedElementBase implements RConstant {
         return new RConstantReference(this);
     }
 
-    public boolean isRealConstant() {
+    @Override
+	public boolean isRealConstant() {
         if (isInDefinition()){
             return true;
         }
@@ -124,18 +131,21 @@ public class RConstantImpl extends RNamedElementBase implements RConstant {
         return symbol!=null && (symbol.getType() == Type.CONSTANT || symbol.getType() == Type.JAVA_FIELD);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String getPrefix() {
         return null;
     }
 
-    protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
         if (!Character.isUpperCase(newName.charAt(0)) || !TextUtil.isCID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.CLASS, true);
     }

@@ -41,7 +41,8 @@ public class PartialsFolder extends FolderNode {
         super(module, folder, parent, initPresentationData());
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final List<SimpleFileNode> children = new ArrayList<SimpleFileNode>();
 
         final Module module = getModule();

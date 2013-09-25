@@ -33,7 +33,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
  * Date: Sep 5, 2007
  */
 public abstract class RubySurrounderBase implements Surrounder {
-    public boolean isApplicable(@NotNull final PsiElement[] elements) {
+    @Override
+	public boolean isApplicable(@NotNull final PsiElement[] elements) {
         return elements.length > 0;
     }
 
@@ -45,7 +46,8 @@ public abstract class RubySurrounderBase implements Surrounder {
         return buffer.toString();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public TextRange surroundElements(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiElement[] elements) throws IncorrectOperationException {
         RPsiElement element = RubyPsiUtil.getTopLevelElements(project, getText(elements)).get(0);
 

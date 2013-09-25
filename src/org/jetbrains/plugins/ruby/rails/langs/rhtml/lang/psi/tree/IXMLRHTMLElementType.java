@@ -38,7 +38,8 @@ public class IXMLRHTMLElementType extends IXmlElementType implements Presentable
     }
 
 
-    public String getPresentableName() {
+    @Override
+	public String getPresentableName() {
         return myName;
     }
 }

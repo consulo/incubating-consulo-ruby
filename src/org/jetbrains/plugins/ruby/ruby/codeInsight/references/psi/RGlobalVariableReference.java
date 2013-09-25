@@ -42,23 +42,27 @@ public class RGlobalVariableReference extends RNamedReference{
         super(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         return multiresolveToSymbols(fileSymbol, myElement.getText(), true, new TypeSet(Type.GLOBAL_VARIABLE, Type.ALIAS));
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
         if (((RGlobalVariable) myElement).isInDefinition()){
             return  new ResolveResult[]{
                     new ResolveResult(){
-                        @Nullable
+                        @Override
+						@Nullable
                         public PsiElement getElement() {
                             RubyUsageTypeProvider.setType(RGlobalVariableReference.this, RubyUsageType.DECLARATION);
                             return myElement;
                         }
 
-                        public boolean isValidResult() {
+                        @Override
+						public boolean isValidResult() {
                             return true;
                         }
                     }

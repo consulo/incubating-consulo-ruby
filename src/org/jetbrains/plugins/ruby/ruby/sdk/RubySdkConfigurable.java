@@ -56,19 +56,23 @@ public class RubySdkConfigurable  implements AdditionalDataConfigurable {
         myRubyConfigurablePanel = new RubySdkConfigurablePanel();
     }
 
-    public void setSdk(@NotNull final Sdk sdk) {
+    @Override
+	public void setSdk(@NotNull final Sdk sdk) {
         mySdk = sdk;
     }
 
-    public JComponent createComponent() {
+    @Override
+	public JComponent createComponent() {
         return myRubyConfigurablePanel.getPanel();
     }
 
-    public boolean isModified() {
+    @Override
+	public boolean isModified() {
         return !RubySdkUtil.getGemsBinFolderPath(mySdk).equals(myRubyConfigurablePanel.getGemsBinFolder());
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         //Gems bin folder
         final String newGemsBinFolder = myRubyConfigurablePanel.getGemsBinFolder();
         ((RubySdkType) mySdk.getSdkType()).setGemsBinDirectory(mySdk, newGemsBinFolder);
@@ -85,20 +89,23 @@ public class RubySdkConfigurable  implements AdditionalDataConfigurable {
 
 // Change libraries facet libraries
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable(){
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
                 JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(OrderRootType.CLASSES));
             }
         });
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         final RubySdkType type = (RubySdkType)mySdk.getSdkType();
         myRubyConfigurablePanel.setRubyText(type.getVMExecutablePath(mySdk));
         myRubyConfigurablePanel.setGemsBinFolder(RubySdkUtil.getGemsBinFolderPath(mySdk));
         myRubyConfigurablePanel.getPanel().repaint();
     }
 
-    public void disposeUIResources() {
+    @Override
+	public void disposeUIResources() {
         // do nothing. we don`t have them
     }
 

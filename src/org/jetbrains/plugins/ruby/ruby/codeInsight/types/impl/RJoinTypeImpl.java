@@ -41,7 +41,8 @@ public class RJoinTypeImpl extends RTypeBase implements RJoinType {
         myType2 = type2;
     }
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     @NotNull
     public Collection<Message> getMessages() {
         ProgressManager.getInstance().checkCanceled();
@@ -49,14 +50,16 @@ public class RJoinTypeImpl extends RTypeBase implements RJoinType {
         return RTypeUtil.intersection(myType1.getMessages(), myType2.getMessages());
     }
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public Collection<Message> getMessagesForName(@Nullable final String name) {
         ProgressManager.getInstance().checkCanceled();
 
         return RTypeUtil.intersection(myType1.getMessagesForName(name), myType2.getMessagesForName(name));
     }
 
-    public boolean isTyped() {
+    @Override
+	public boolean isTyped() {
         return myType1.isTyped() || myType2.isTyped();
     }
 

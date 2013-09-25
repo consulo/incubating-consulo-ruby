@@ -51,27 +51,31 @@ public class RubyFastAnnotatorVisitor extends RubyElementVisitor {
         myHolder = holder;
     }
 
-    public void visitRAliasStatement(RAliasStatement rAliasStatement) {
+    @Override
+	public void visitRAliasStatement(RAliasStatement rAliasStatement) {
         if (rAliasStatement.getPsiNewName() instanceof RNthRefImpl) {
             myHolder.createErrorAnnotation(rAliasStatement, RBundle.message("annotation.error.cannot.make.alias.for.nth.variable"));
         }
     }
 
     // parse.y line 486
-    public void visitRLBeginStatement(RLBeginStatementImpl rlBeginStatement) {
+    @Override
+	public void visitRLBeginStatement(RLBeginStatementImpl rlBeginStatement) {
         if (rlBeginStatement.getParentContainer() instanceof RMethod) {
             myHolder.createErrorAnnotation(rlBeginStatement, RBundle.message("annotation.error.begin.in.method"));
         }
     }
 
     // parse.y line 882
-    public void visitRIdentifier(RIdentifier rIdentifier) {
+    @Override
+	public void visitRIdentifier(RIdentifier rIdentifier) {
         if (RNameNavigator.getRName(rIdentifier) != null) {
             myHolder.createErrorAnnotation(rIdentifier, RBundle.message("annotation.error.class.module.name.must.be.constant"));
         }
     }
 
-    public void visitRConstant(RConstant rConstant) {
+    @Override
+	public void visitRConstant(RConstant rConstant) {
         final PsiElement parent = rConstant.getParent();
         if (parent instanceof RColonReference &&
                 ((RColonReference) parent).getValue() == rConstant){
@@ -94,21 +98,24 @@ public class RubyFastAnnotatorVisitor extends RubyElementVisitor {
     }
 
     // parse.y line 1624
-    public void visitRClass(RClass rClass) {
+    @Override
+	public void visitRClass(RClass rClass) {
         if (rClass.getParentContainer() instanceof RMethod){
             myHolder.createErrorAnnotation(rClass.getFirstChild(), RBundle.message("annotation.error.class.in.method"));
         }
     }
 
     // parse.y line 1662
-    public void visitRModule(RModule rModule) {
+    @Override
+	public void visitRModule(RModule rModule) {
         if (rModule.getParentContainer() instanceof RMethod){
             myHolder.createErrorAnnotation(rModule.getFirstChild(), RBundle.message("annotation.error.module.in.method"));
         }
     }
 
     // parse.y line 2281, 2285, 2289, 2293
-    public void visitRParameter(RArgument rArgument) {
+    @Override
+	public void visitRParameter(RArgument rArgument) {
         final PsiElement firstChild = rArgument.getFirstChild();
         if (firstChild instanceof RConstant){
             myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.constant"));

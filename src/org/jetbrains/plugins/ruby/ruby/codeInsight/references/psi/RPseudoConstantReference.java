@@ -42,7 +42,8 @@ public class RPseudoConstantReference extends RNamedReference{
         super(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
 // kSUPER
         if (RubyTokenTypes.kSUPER.toString().equals(myElement.getText())){

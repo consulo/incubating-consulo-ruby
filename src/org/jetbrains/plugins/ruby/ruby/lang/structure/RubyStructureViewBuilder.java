@@ -33,7 +33,8 @@ public class RubyStructureViewBuilder extends TreeBasedStructureViewBuilder {
     public RubyStructureViewBuilder(@NotNull final PsiFile psiFile){
         myPsiFile = psiFile;
     }
-    @NotNull
+    @Override
+	@NotNull
     public StructureViewModel createStructureViewModel() {
         return new RubyStructureViewModel((RPsiElement) myPsiFile);
     }

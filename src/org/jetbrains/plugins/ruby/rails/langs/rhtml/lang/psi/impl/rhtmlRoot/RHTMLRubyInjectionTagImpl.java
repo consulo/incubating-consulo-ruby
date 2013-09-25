@@ -42,6 +42,7 @@ public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements R
 		super(node);
 	}
 
+	@Override
 	@NotNull
     public String getTagText() {
         final PsiElement[] elements = getElements();
@@ -62,6 +63,7 @@ public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements R
         final List<PsiElement> elements = new ArrayList<PsiElement>();
 		PsiElementProcessor processor = new PsiElementProcessor()
 		{
+			@Override
 			public boolean execute(PsiElement psiElement)
 			{
 				elements.add(psiElement);
@@ -72,7 +74,8 @@ public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements R
         return elements.toArray(new PsiElement[elements.size()]);
       }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return getTagText().trim();
     }

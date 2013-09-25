@@ -51,17 +51,20 @@ public class RHTMLFileType  extends XmlLikeFileType {
         super(eRubyLanguage.INSTANCE);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return NAME;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDescription() {
         return DESCRIPTION;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDefaultExtension() {
         return DEFAULT_EXTENSION;
     }
@@ -71,7 +74,8 @@ public class RHTMLFileType  extends XmlLikeFileType {
         return ERB_EXTENSION;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Icon getIcon() {
         return ICON;
     }

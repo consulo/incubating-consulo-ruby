@@ -63,7 +63,8 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRClass(this);
             return;
@@ -76,23 +77,27 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass {
         return RClassPresentationUtil.getIcon(this, flags);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RClassPresentationUtil.getPresentation(this);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RClassName getClassName() {
         return RubyPsiUtil.getChildByType(this, RClassName.class, 0);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RSuperClass getPsiSuperClass() {
         PsiElement superClass = getChildByFilter(RubyElementTypes.SUPER_CLASS, 0);
         return superClass != null ? (RSuperClass) superClass : null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
                                            @NotNull final RFileInfo info) {
         final RVirtualName virtualClassName = new RVirtualNameImpl(getFullPath(), isGlobal());
@@ -110,30 +115,36 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass {
         return rVirtualClass;
     }
 
-    public int getTextOffset() {
+    @Override
+	public int getTextOffset() {
         final RClassName className = getClassName();
         return className!=null ? className.getTextOffset() : super.getTextOffset();
     }
 
-    public PsiElement setName(@NonNls @NotNull final String name) throws IncorrectOperationException {
+    @Override
+	public PsiElement setName(@NonNls @NotNull final String name) throws IncorrectOperationException {
         return null;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CLASS;
     }
 
-    protected RPsiElement getNameElement() {
+    @Override
+	protected RPsiElement getNameElement() {
         return getClassName();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RVirtualName getVirtualSuperClass() {
         final RSuperClass superClass = getPsiSuperClass();
         return superClass!=null ? new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass)) : null;
     }
 
-    public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
         if (!super.equalsToVirtual(element)) {
             return false;
         }
@@ -163,7 +174,8 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass {
         return true;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RClass> getSuperClass(@NotNull final FileSymbol fileSymbol) {
         final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, this);
         if (symbol == null){

@@ -48,7 +48,8 @@ public class RailsProjectRootNode extends RailsAbstractNode {
         return NodeIdUtil.createForRoot();
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final Map<Module, RailsProjectModuleNode> newNodes =
                 new HashMap<Module, RailsProjectModuleNode>();
         final Module[] allRailsModules = RailsUtil.getAllModulesWithRailsSupport(myProject);
@@ -64,7 +65,8 @@ public class RailsProjectRootNode extends RailsAbstractNode {
         return moduleNodes.toArray(new SimpleNode[moduleNodes.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.ROOT;
     }

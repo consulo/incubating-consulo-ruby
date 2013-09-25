@@ -33,7 +33,8 @@ public class RVMethodName extends RVirtualNameImpl implements RVirtualName {
         super(fullPath, global);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFullName() {
         if (myFullName ==null){
             final StringBuilder buffer = new StringBuilder();

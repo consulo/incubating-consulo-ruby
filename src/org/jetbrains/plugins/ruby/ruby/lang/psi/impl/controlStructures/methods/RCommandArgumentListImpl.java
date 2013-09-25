@@ -35,12 +35,14 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RArgument> getArguments() {
         return RubyPsiUtil.getChildrenByType(this, RArgument.class);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<ArgumentInfo> getArgumentInfos(final boolean includeDefaultArgs) {
         List<ArgumentInfo> myInfos = new ArrayList<ArgumentInfo>();
         for (RArgument argument : getArguments()) {
@@ -49,7 +51,8 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
         return myInfos;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<ArgumentInfo> getArgumentInfos() {
         return getArgumentInfos(false);
     }
@@ -64,7 +67,8 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
         return new ArgumentInfo(argument.getName(), argument.getType());
     }
 
-    public int getArgNumber(@NotNull final RArgument arg) {
+    @Override
+	public int getArgNumber(@NotNull final RArgument arg) {
         for (int i = 0; i < getArguments().size(); i++) {
             final RArgument argument = getArguments().get(i);
             if (argument == arg){
@@ -74,7 +78,8 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
         return -1;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName(boolean includeDefaultArgs) {
         return getPresentableName(getArgumentInfos(includeDefaultArgs));
     }

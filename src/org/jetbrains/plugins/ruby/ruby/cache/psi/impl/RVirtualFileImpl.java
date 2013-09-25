@@ -51,12 +51,14 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
         myLocation = location;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public synchronized List<RVirtualRequire> getRequires() {
         if (myRequires == null){
             myRequires = new ArrayList<RVirtualRequire>();
             final RubyVirtualElementVisitor visitor = new RubyVirtualElementVisitor(){
-                public void visitElement(RVirtualElement element) {
+                @Override
+				public void visitElement(RVirtualElement element) {
                     if (element instanceof RVirtualContainer){
                         for (RVirtualStructuralElement child : ((RVirtualContainer) element).getVirtualStructureElements()) {
                             child.accept(this);
@@ -64,11 +66,13 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
                     }
                 }
 
-                public void visitRVirtualRequire(@NotNull final RVirtualRequire virtualRequire) {
+                @Override
+				public void visitRVirtualRequire(@NotNull final RVirtualRequire virtualRequire) {
                     myRequires.add(virtualRequire);
                 }
 
-                public void visitRVirtualLoad(RVirtualLoad rVirtualLoad) {
+                @Override
+				public void visitRVirtualLoad(RVirtualLoad rVirtualLoad) {
                     myRequires.add(rVirtualLoad);
                 }
             };
@@ -78,7 +82,8 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RFilePresentationUtil.getPresentation(this);
     }
@@ -88,11 +93,13 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
     }
 
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualFile(this);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getPresentableLocation() {
         return myLocation;
     }
@@ -101,7 +108,8 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
         return "file [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName();
     }
 
-    public void dump(@NotNull StringBuilder buffer, int indent) {
+    @Override
+	public void dump(@NotNull StringBuilder buffer, int indent) {
         super.dump(buffer, indent);
         for (RVirtualGlobalVar var : myGlobalVars) {
             buffer.append(NEW_LINE);
@@ -109,7 +117,8 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
         }
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.FILE;
     }
 
@@ -118,7 +127,8 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
         myGlobalVars = vars;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualGlobalVar> getVirtualGlobalVars() {
         return myGlobalVars;
     }

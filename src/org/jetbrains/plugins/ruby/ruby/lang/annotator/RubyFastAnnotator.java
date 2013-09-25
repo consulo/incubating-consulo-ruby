@@ -29,7 +29,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class RubyFastAnnotator implements Annotator {
 
-    public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder) {
+    @Override
+	public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder) {
         // We hope it`s enough often operation
         ProgressManager.getInstance().checkCanceled();
 

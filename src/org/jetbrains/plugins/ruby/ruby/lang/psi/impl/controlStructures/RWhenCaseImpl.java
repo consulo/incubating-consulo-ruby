@@ -36,7 +36,8 @@ public class RWhenCaseImpl extends RPsiElementBase implements RWhenCase {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRWhenCase(this);
             return;
@@ -44,11 +45,13 @@ public class RWhenCaseImpl extends RPsiElementBase implements RWhenCase {
         super.accept(visitor);
     }
 
-    public RListOfExpressions getCaseExpression() {
+    @Override
+	public RListOfExpressions getCaseExpression() {
         return RubyPsiUtil.getChildByType(this, RListOfExpressions.class, 0);
     }
 
-    public RCompoundStatement getCaseBody() {
+    @Override
+	public RCompoundStatement getCaseBody() {
         return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
     }
 }

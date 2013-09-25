@@ -39,7 +39,8 @@ public class OuterRHTMLElementInHTMLImpl extends LeafPsiElement implements Outer
         return "Outer: " + getElementType() + ", RHTML characters in HTML lang";
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor) {
         visitor.visitOuterLanguageElement(this);
     }
 }

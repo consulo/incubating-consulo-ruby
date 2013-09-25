@@ -18,6 +18,7 @@ public class YAMLFileImpl extends PsiFileBase {
     super(viewProvider, YAMLLanguage.INSTANCE);
   }
 
+  @Override
   @NotNull
   public FileType getFileType() {
     return YAMLFileType.INSTANCE;

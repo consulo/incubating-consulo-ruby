@@ -33,11 +33,13 @@ import com.intellij.util.QueryExecutor;
  * @date: Mar 17, 2008
  */
 public class JRubyImplementingMethodsSearch implements QueryExecutor<PsiElement, PsiElement> {
-    public boolean execute(final PsiElement sourceElement, final Processor<PsiElement> consumer) {
+    @Override
+	public boolean execute(final PsiElement sourceElement, final Processor<PsiElement> consumer) {
         if (sourceElement instanceof PsiMethod) {
             final PsiMethod method = ((PsiMethod) sourceElement);
             final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-                public String compute() {
+                @Override
+				public String compute() {
                     return method.getName();
                 }
             });

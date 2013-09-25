@@ -133,23 +133,27 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams {
     /**
      * @return Selected alternativ sdk
      */
-    @Nullable
+    @Override
+	@Nullable
     public Sdk getAlternativeSdk(){
         final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
         return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
     }
 
 
-    public boolean shouldUseAlternativeSdk() {
+    @Override
+	public boolean shouldUseAlternativeSdk() {
         return myUseAlternativeSdkCB.isSelected();
     }
 
 
-    public void setShouldUseAlternativeSdk(final boolean shouldUse) {
+    @Override
+	public void setShouldUseAlternativeSdk(final boolean shouldUse) {
         RubyRunConfigurationUIUtil.setShouldUseAlternSdk(shouldUse, myUseAlternativeSdkCB, myAlternativeSdksComboBox, myModulesComboBox);
     }
 
-    public void setAlternativeSdk(@Nullable final Sdk sdk){
+    @Override
+	public void setAlternativeSdk(@Nullable final Sdk sdk){
         myAlternativeSdksComboBox.setSelectedItem(sdk);
     }
 
@@ -157,44 +161,54 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams {
         return generatedPanel;
     }
 
-    public String getScriptPath(){
+    @Override
+	public String getScriptPath(){
         return FileUtil.toSystemIndependentName(scriptPathTextField.getText().trim());
     }
 
-    public String getScriptArgs(){
+    @Override
+	public String getScriptArgs(){
         return scriptArgsEditor.getText().trim();
     }
 
-    public String getRubyArgs(){
+    @Override
+	public String getRubyArgs(){
         return rubyArgsEditor.getText().trim();
     }
 
-    public String getWorkingDirectory(){
+    @Override
+	public String getWorkingDirectory(){
         return FileUtil.toSystemIndependentName(workDirTextField.getText().trim());
     }
 
-    public Module getModule(){
+    @Override
+	public Module getModule(){
         final Object selectedObject = myModulesComboBox.getSelectedItem();
         return selectedObject instanceof Module ? (Module)selectedObject : null;
     }
 
-    public void setScriptPath(final String value){
+    @Override
+	public void setScriptPath(final String value){
         scriptPathTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
     }
 
-    public void setScriptArgs(final String value){
+    @Override
+	public void setScriptArgs(final String value){
         scriptArgsEditor.setText(value);
     }
 
-    public void setRubyArgs(final String value){
+    @Override
+	public void setRubyArgs(final String value){
         rubyArgsEditor.setText(value);
     }
 
-    public void setWorkingDirectory(final String value){
+    @Override
+	public void setWorkingDirectory(final String value){
         workDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
     }
 
-    public void setModule(@Nullable final Module module){
+    @Override
+	public void setModule(@Nullable final Module module){
         myModulesComboBox.setSelectedItem(module);
     }
 
@@ -202,19 +216,23 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams {
         return myConfiguration;
     }
 
-    public void setEnvs(final Map<String, String> envs) {
+    @Override
+	public void setEnvs(final Map<String, String> envs) {
         myEnvVariablesComponent.setEnvs(envs);
     }
 
-    public void setPassParentEnvs(final boolean passParentEnvs) {
+    @Override
+	public void setPassParentEnvs(final boolean passParentEnvs) {
         myEnvVariablesComponent.setPassParentEnvs(passParentEnvs);
     }
 
-    public Map<String, String> getEnvs() {
+    @Override
+	public Map<String, String> getEnvs() {
         return myEnvVariablesComponent.getEnvs();
     }
 
-    public boolean isPassParentEnvs() {
+    @Override
+	public boolean isPassParentEnvs() {
         return myEnvVariablesComponent.isPassParentEnvs();
     }
 }

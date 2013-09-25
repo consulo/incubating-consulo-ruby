@@ -43,11 +43,13 @@ public class RVirtualSingletonMethodImpl extends RVirtualMethodImpl implements R
         super(parentContainer, virtualName, argumentInfos, defaultChildAccessModifier, containingFileInfo);
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualSingletonMethod(this);
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.SINGLETON_METHOD;
     }
 }

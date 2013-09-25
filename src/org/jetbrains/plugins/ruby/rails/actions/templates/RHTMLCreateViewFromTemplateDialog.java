@@ -40,7 +40,8 @@ public class RHTMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDia
         super(project, directory, template);
     }
 
-    protected PsiFile createPsiFile(final FileTemplate template, 
+    @Override
+	protected PsiFile createPsiFile(final FileTemplate template,
                                     final Project project,
                                     final PsiDirectory directory,
                                     final String templateText,

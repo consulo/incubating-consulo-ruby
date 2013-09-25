@@ -76,7 +76,8 @@ public class JRubyLoadPathChooser extends FacetEditorTab {
         return module;
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         if (isModified() && myLoadPathDirsCopyRef.get() != null) {
             myJRubyFacetConfiguration.setLoadPathDirs(myLoadPathDirsCopyRef.get());
 
@@ -91,7 +92,8 @@ public class JRubyLoadPathChooser extends FacetEditorTab {
         return RubyIcons.RUBY_MODULE_SETTINGS_LOADPATH;
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
     }
 
     public void disposeUIResources() {

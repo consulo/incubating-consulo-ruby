@@ -80,7 +80,8 @@ public class RSpecSupportLoader implements ApplicationComponent {
         }
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         ConsoleViewContentType.registerNewConsoleViewType(RED_TEXT, RSPEC_RED_TEXT_TYPE);
         ConsoleViewContentType.registerNewConsoleViewType(GREEN_TEXT, RSPEC_GREEN_TEXT_TYPE);
         ConsoleViewContentType.registerNewConsoleViewType(MAGENTA_TEXT, RSPEC_MAGENTA_TEXT_TYPE);
@@ -88,11 +89,13 @@ public class RSpecSupportLoader implements ApplicationComponent {
         ConsoleViewContentType.registerNewConsoleViewType(YELLOW_TEXT, RSPEC_YELLOW_TEXT_TYPE);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // Do nothing
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.RSPEC_SUPPORT_LOADER;
     }

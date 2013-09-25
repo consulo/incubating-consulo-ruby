@@ -72,7 +72,8 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
      */
     public void updateSdkLibrary() {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
                 final Module module = getModule();
                 final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
                 final ModifiableRootModel model = rootManager.getModifiableModel();
@@ -125,7 +126,8 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
 
     public void removeSdkLibrary() {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
                 final Module module = getModule();
                 final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
                 final ModifiableRootModel model = rootManager.getModifiableModel();
@@ -151,7 +153,8 @@ public class JRubyFacet extends Facet<JRubyFacetConfiguration> implements FacetR
         return sdkName + JRUBY_FACET_LIBRARY_NAME_SUFFIX;
     }
 
-    public void initFacet() {
+    @Override
+	public void initFacet() {
         super.initFacet();
         updateSdkLibrary();
     }

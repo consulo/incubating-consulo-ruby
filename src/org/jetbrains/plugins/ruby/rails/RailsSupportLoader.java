@@ -31,22 +31,26 @@ import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
  */
 public class RailsSupportLoader implements ApplicationComponent {
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.RAILS_SUPPORT_LOADER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
        loadRails();
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
 
     public static void loadRails() {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                public void run() throws Exception {
+                @Override
+				public void run() throws Exception {
                     RailsEditorActionsManager.registerEditorActions();
 
                     BaseRailsFacetType.load();

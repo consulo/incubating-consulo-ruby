@@ -57,11 +57,13 @@ public class GeneralSettingsEditorTab extends FacetEditorTab {
         return false;
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         //Do nothing
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         //Do nothing
     }
 

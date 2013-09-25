@@ -50,12 +50,14 @@ public class RHTMLFileHighlighterImpl extends SyntaxHighlighterBase {
         ATTRIBUTES.put(RHTMLTokenType.FLEX_ERROR, RHTMLHighlighter.FLEX_ERROR);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Lexer getHighlightingLexer() {
         return new _RHTMLLexer();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
         return pack(ATTRIBUTES.get(tokenType));
     }

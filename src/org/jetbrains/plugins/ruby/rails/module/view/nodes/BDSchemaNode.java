@@ -33,7 +33,8 @@ public class BDSchemaNode extends SimpleFileNode {
         super(module, file, RailsIcons.RAILS_SCHEMA_FILE);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.BD_SCHEMA;
     }

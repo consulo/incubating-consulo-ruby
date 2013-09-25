@@ -35,7 +35,8 @@ public class RUntilModStatementImpl extends RConditionalStatementImpl implements
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRUntilModStatement(this);
             return;
@@ -43,7 +44,8 @@ public class RUntilModStatementImpl extends RConditionalStatementImpl implements
         super.accept(visitor);
     }
 
-    public RPsiElement getLoopBody() {
+    @Override
+	public RPsiElement getLoopBody() {
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
     }
 }

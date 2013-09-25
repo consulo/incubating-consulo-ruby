@@ -53,7 +53,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
     }
 
 
-    public void visitRConstant(@NotNull final RConstant rConstant) {
+    @Override
+	public void visitRConstant(@NotNull final RConstant rConstant) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -66,7 +67,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
         }
     }
 
-    public void visitRFid(@NotNull final RFid rFid) {
+    @Override
+	public void visitRFid(@NotNull final RFid rFid) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -75,7 +77,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
         }
     }
 
-    public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
+    @Override
+	public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -93,7 +96,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
         }
     }
 
-    public void visitRGlobalVariable(@NotNull final RGlobalVariable globalVariable) {
+    @Override
+	public void visitRGlobalVariable(@NotNull final RGlobalVariable globalVariable) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -103,7 +107,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
     }
 
 
-    public void visitRReference(@NotNull final RReference rReference) {
+    @Override
+	public void visitRReference(@NotNull final RReference rReference) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -129,7 +134,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
         }
     }
 
-    public void visitRBinaryExpression(@NotNull final RBinaryExpression rBinaryExpression) {
+    @Override
+	public void visitRBinaryExpression(@NotNull final RBinaryExpression rBinaryExpression) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -157,7 +163,8 @@ public class RubyResolveVisitor extends RubyInspectionVisitor {
         }
     }
 
-    public void visitRUnaryExpression(@NotNull final RUnaryExpression rUnaryExpression) {
+    @Override
+	public void visitRUnaryExpression(@NotNull final RUnaryExpression rUnaryExpression) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 

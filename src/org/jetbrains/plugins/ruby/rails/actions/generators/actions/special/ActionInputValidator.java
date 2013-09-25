@@ -50,7 +50,8 @@ public class ActionInputValidator  extends SimpleGeneratorInputValidator {
         myFile = file;
     }
 
-    public boolean checkInput(@NotNull final String actionName) {
+    @Override
+	public boolean checkInput(@NotNull final String actionName) {
         if (ControllersConventions.isValidActionName(actionName)) {
             return true;
         }
@@ -69,7 +70,8 @@ public class ActionInputValidator  extends SimpleGeneratorInputValidator {
     }
 
 
-    public void invokeAction(final String scriptArguments, final String mainArgument) {
+    @Override
+	public void invokeAction(final String scriptArguments, final String mainArgument) {
         ((GenerateActionAction)myGeneratorAction).invokeAction(scriptArguments,
                                                                mainArgument,
                                                                myModule,

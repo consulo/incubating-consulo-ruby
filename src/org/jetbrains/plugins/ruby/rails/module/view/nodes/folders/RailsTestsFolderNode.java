@@ -42,7 +42,8 @@ public class RailsTestsFolderNode extends TestsSubFolderNode {
         super(module, rootDir, null, initPresentationData());
     }
 
-    public void accept(final SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(final SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitTestNode();
             return;

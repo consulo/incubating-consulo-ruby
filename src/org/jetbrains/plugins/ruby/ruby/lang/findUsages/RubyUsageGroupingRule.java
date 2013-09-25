@@ -31,7 +31,8 @@ import com.intellij.usages.rules.PsiElementUsage;
 public class RubyUsageGroupingRule implements OrderableUsageGroupingRule {
     private RubyTextMatchedGroup TEXT_MATCHED = new RubyTextMatchedGroup();
 
-    public UsageGroup groupUsage(Usage usage) {
+    @Override
+	public UsageGroup groupUsage(Usage usage) {
         if (usage instanceof PsiElementUsage) {
             final PsiElement element = ((PsiElementUsage) usage).getElement();
             if (element!=null){
@@ -43,7 +44,8 @@ public class RubyUsageGroupingRule implements OrderableUsageGroupingRule {
         return null;
     }
 
-    public int getRank() {
+    @Override
+	public int getRank() {
         return 0;
     }
 }

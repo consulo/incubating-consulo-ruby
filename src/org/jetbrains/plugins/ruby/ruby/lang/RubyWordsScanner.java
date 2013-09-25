@@ -42,7 +42,8 @@ public class RubyWordsScanner implements WordsScanner {
     );
 
 
-    public void processWords(@NotNull final CharSequence fileText,
+    @Override
+	public void processWords(@NotNull final CharSequence fileText,
                              @NotNull final Processor<WordOccurrence> processor) {
         final RubyLexer lexer = new RubyLexer();
         lexer.start(fileText, 0, fileText.length(), 0);

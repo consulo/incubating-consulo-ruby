@@ -32,7 +32,8 @@ public class RStructureChange implements RubyChange {
         myMessage = message;
     }
 
-    public void accept(final RubyChangeVisitor visitor) {
+    @Override
+	public void accept(final RubyChangeVisitor visitor) {
         visitor.structureChanged();
     }
 

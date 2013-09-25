@@ -64,7 +64,8 @@ public abstract class AbstractScriptAction extends AnAction {
     protected abstract PsiElement[] invokeDialog(@NotNull final Module module,
                                                  @Nullable final PsiDirectory directory);
 
-    public void actionPerformed(final AnActionEvent e) {
+    @Override
+	public void actionPerformed(final AnActionEvent e) {
         final DataContext dataContext = e.getDataContext();
 
         final IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
@@ -95,7 +96,8 @@ public abstract class AbstractScriptAction extends AnAction {
         }
     }
 
-    public void update(@NotNull final AnActionEvent e) {
+    @Override
+	public void update(@NotNull final AnActionEvent e) {
         final DataContext dataContext = e.getDataContext();
         final Presentation presentation = e.getPresentation();
 

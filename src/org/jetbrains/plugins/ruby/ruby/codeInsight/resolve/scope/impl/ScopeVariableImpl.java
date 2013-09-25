@@ -48,23 +48,27 @@ public class ScopeVariableImpl implements ScopeVariable {
         this.isParameter = isParameter;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RIdentifier getPrototype() {
         return myPrototype;
     }
 
 
-    public boolean isParameter() {
+    @Override
+	public boolean isParameter() {
         return isParameter;
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public Symbol createSymbol() {
         if (mySymbol == null) {
             mySymbol = new PsiElementSymbol(myPrototype, getName(), Type.LOCAL_VARIABLE);
@@ -72,7 +76,8 @@ public class ScopeVariableImpl implements ScopeVariable {
         return mySymbol;
     }
 
-    public RType getType(@Nullable final FileSymbol fileSymbol,
+    @Override
+	public RType getType(@Nullable final FileSymbol fileSymbol,
                          @NotNull final RIdentifier usage) {
         final RControlFlowOwner controlFlowOwner = PsiTreeUtil.getParentOfType(myPrototype, RControlFlowOwner.class);
         assert controlFlowOwner!=null;

@@ -120,12 +120,14 @@ public class UsageAnalyzer {
 // Block Parameter
             if (identifier.isBlockParameter()){
                 return new BlockParameterAccess() {
-                    @NotNull
+                    @Override
+					@NotNull
                     public RPsiElement getElement() {
                         return identifier;
                     }
 
-                    @NotNull
+                    @Override
+					@NotNull
                     public RBlockVariables getBlockVariables() {
                         return RBlockVariableNavigator.getByIdentifier(identifier);
                     }
@@ -135,12 +137,14 @@ public class UsageAnalyzer {
 // Method Parameter
             if (identifier.isMethodParameter()) {
                 return new MethodParameterAccess() {
-                    @NotNull
+                    @Override
+					@NotNull
                     public RPsiElement getElement() {
                         return identifier;
                     }
 
-                    @NotNull
+                    @Override
+					@NotNull
                     public RArgument getArgument() {
                         //noinspection ConstantConditions
                         return RArgumentNavigator.getByRIdentifier(identifier);
@@ -189,7 +193,8 @@ public class UsageAnalyzer {
         }
 
         return new ReadAccess() {
-            @NotNull
+            @Override
+			@NotNull
             public RPsiElement getElement() {
                 return usage;
             }

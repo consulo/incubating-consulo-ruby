@@ -49,20 +49,24 @@ public class GenerateControllerAction extends SimpleGeneratorAction {
               RControllerPresentationUtil.getIcon());
     }
 
-    protected String getGenerateDialogTitle() {
+    @Override
+	protected String getGenerateDialogTitle() {
         return RBundle.message("new.generate.controller.action.prompt.title");
     }
 
-    protected String getErrorTitle() {
+    @Override
+	protected String getErrorTitle() {
         return RBundle.message("new.generate.controller.error.title");
     }
 
-    protected ControllerInputValidator createValidator(@NotNull final Module module,
+    @Override
+	protected ControllerInputValidator createValidator(@NotNull final Module module,
                                                        @Nullable final PsiDirectory directory) {
         return new ControllerInputValidator(this, module, directory);
     }
 
-    protected PsiElement[] invokeDialog(@NotNull final Module module,
+    @Override
+	protected PsiElement[] invokeDialog(@NotNull final Module module,
                                         @Nullable final PsiDirectory directory) {
         final ControllerInputValidator validator = createValidator(module, directory);
         GenerateDialogs.showGenerateControllerDialog(module,

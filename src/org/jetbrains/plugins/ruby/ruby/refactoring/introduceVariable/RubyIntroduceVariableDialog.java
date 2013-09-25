@@ -91,12 +91,14 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
         updateOkStatus();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected JComponent createCenterPanel() {
         return myContentPane;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getName() {
         final Object s = myNameComboBox.getEditor().getItem();
         if (s instanceof String && ((String) s).length() > 0) {
@@ -106,7 +108,8 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
         }
     }
 
-    public boolean doReplaceAllOccurrences() {
+    @Override
+	public boolean doReplaceAllOccurrences() {
         return myCheckBox.isSelected();
     }
 
@@ -138,24 +141,28 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
 
         myNameComboBox.addItemListener(
                 new ItemListener() {
-                    public void itemStateChanged(ItemEvent e) {
+                    @Override
+					public void itemStateChanged(ItemEvent e) {
                         fireNameDataChanged();
                     }
                 }
         );
 
         ((EditorTextField) myNameComboBox.getEditor().getEditorComponent()).addDocumentListener(new DocumentListener() {
-            public void beforeDocumentChange(DocumentEvent event) {
+            @Override
+			public void beforeDocumentChange(DocumentEvent event) {
             }
 
-            public void documentChanged(DocumentEvent event) {
+            @Override
+			public void documentChanged(DocumentEvent event) {
                 fireNameDataChanged();
             }
         }
         );
 
         myContentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 myNameComboBox.requestFocus();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.ALT_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -165,11 +172,13 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
         }
     }
 
-    public JComponent getPreferredFocusedComponent() {
+    @Override
+	public JComponent getPreferredFocusedComponent() {
         return myNameComboBox;
     }
 
-    protected Action[] createActions() {
+    @Override
+	protected Action[] createActions() {
         return new Action[]{
                 getOKAction(),
                 getCancelAction(),
@@ -177,7 +186,8 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
         };
     }
 
-    protected void doOKAction() {
+    @Override
+	protected void doOKAction() {
         final String result = myValidator.check(this);
         if (result!=null){
             Messages.showErrorDialog(myContentPane, result, RBundle.message("refactoring.introduce.variable.dialog.title"));
@@ -187,7 +197,8 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
         super.doOKAction();
     }
 
-    protected void doHelpAction() {
+    @Override
+	protected void doHelpAction() {
         HelpManager.getInstance().invokeHelp(HelpID.INTRODUCE_VARIABLE);
     }
 

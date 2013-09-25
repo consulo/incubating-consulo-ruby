@@ -47,21 +47,25 @@ public class RSymbolTypeImpl extends RTypeBase implements RSymbolType {
         return mySymbol;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<Message> getMessages() {
         return myDuckType.getMessages();
     }
 
-    public Collection<Message> getMessagesForName(@Nullable final String name) {
+    @Override
+	public Collection<Message> getMessagesForName(@Nullable final String name) {
         return myDuckType.getMessagesForName(name);
     }
 
-    public boolean isTyped() {
+    @Override
+	public boolean isTyped() {
         // handle nil value correctly
         return !CoreTypes.NilClass.equals(getName());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getName() {
         return mySymbol.getName();
     }

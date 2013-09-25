@@ -33,7 +33,8 @@ public class RDefinedStatementImpl extends RPsiElementBase implements RDefinedSt
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRDefinedStatement(this);
             return;

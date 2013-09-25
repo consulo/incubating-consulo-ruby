@@ -34,7 +34,8 @@ public class RBoolMatchingImpl extends RBinaryExpressionBase implements RBinaryE
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.getBooleanType(fileSymbol);
     }

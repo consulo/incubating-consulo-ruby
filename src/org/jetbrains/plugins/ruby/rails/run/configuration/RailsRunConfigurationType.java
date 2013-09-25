@@ -49,16 +49,19 @@ public class RailsRunConfigurationType implements LocatableConfigurationType
 		return CONFIGURATION_TYPE_EP.findExtension(RailsRunConfigurationType.class);
 	}
 
+	@Override
 	public String getDisplayName()
 	{
 		return RBundle.message("rails.run.configuration.type.name");
 	}
 
+	@Override
 	public String getConfigurationTypeDescription()
 	{
 		return RBundle.message("rails.run.configuration.type.description");
 	}
 
+	@Override
 	public Icon getIcon()
 	{
 		return RailsIcons.RAILS_RUN_CONFIGURATION_FOLDER;
@@ -71,6 +74,7 @@ public class RailsRunConfigurationType implements LocatableConfigurationType
 		return "RailsRunConfigurationType";
 	}
 
+	@Override
 	public ConfigurationFactory[] getConfigurationFactories()
 	{
 		return new ConfigurationFactory[]{myRailsServerFactory};
@@ -82,6 +86,7 @@ public class RailsRunConfigurationType implements LocatableConfigurationType
 		return myRailsServerFactory;
 	}
 
+	@Override
 	public RunnerAndConfigurationSettings createConfigurationByLocation(final Location location)
 	{
 		return null;

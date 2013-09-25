@@ -70,7 +70,8 @@ public class SymbolsCache implements ProjectComponent {
         //before next activity.
         //So constructor of RubySdkCachesManager must be invoked before this constructor!
         StartupManager.getInstance(myProject).registerPostStartupActivity(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 recreateAllBuiltInCaches();
             }
         });
@@ -95,7 +96,8 @@ public class SymbolsCache implements ProjectComponent {
         clearCaches();
 
         final Runnable runnable = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
 
                 // Here we build required caches
                 final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
@@ -122,25 +124,30 @@ public class SymbolsCache implements ProjectComponent {
         ProgressManager.getInstance().runProcessWithProgressSynchronously(runnable, title, false, myProject);
   }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         // N/A
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         mySoftCache.clear();
         myBuiltInCache.clear();
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RubyComponents.RUBY_SYMBOL_CACHE;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
     /**

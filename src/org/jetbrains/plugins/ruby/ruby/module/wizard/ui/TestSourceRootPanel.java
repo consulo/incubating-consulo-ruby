@@ -108,14 +108,16 @@ public class TestSourceRootPanel { //TODO rename to TestUnitSourceRootPanel
         chooseTestsRootGroup.add(myRbCreateTestDir);
 
         myTFRelativeTestsPath.getDocument().addDocumentListener(new DocumentAdapter() {
-            public void textChanged(DocumentEvent event) {
+            @Override
+			public void textChanged(DocumentEvent event) {
                 updateFullPathField();
             }
         });
 
 
         myRbCreateTestDir.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 final boolean enabled = e.getStateChange() == ItemEvent.SELECTED;
 
                 testPathLabel.setEnabled(enabled);
@@ -200,7 +202,8 @@ public class TestSourceRootPanel { //TODO rename to TestUnitSourceRootPanel
             final String contentEntryPath = getContentRootPath();
             if (contentEntryPath != null) {
                 return ApplicationManager.getApplication().runWriteAction(new Computable<VirtualFile>() {
-                    public VirtualFile compute() {
+                    @Override
+					public VirtualFile compute() {
                         return LocalFileSystem.getInstance().refreshAndFindFileByPath(contentEntryPath);
                     }
                 });
@@ -208,7 +211,8 @@ public class TestSourceRootPanel { //TODO rename to TestUnitSourceRootPanel
             return null;
         }
 
-        public void actionPerformed(ActionEvent e) {
+        @Override
+		public void actionPerformed(ActionEvent e) {
             final VirtualFile contentEntryDir = getContentEntryDir();
             if (contentEntryDir != null) {
                 myChooserDescriptor.setRoot(contentEntryDir);

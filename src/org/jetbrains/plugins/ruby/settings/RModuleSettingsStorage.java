@@ -61,7 +61,8 @@ public class RModuleSettingsStorage extends SettingsExternalizer implements Pers
         return ModuleServiceManager.getService(module, RModuleSettingsStorage.class);
     }
 
-    public Element getState() {
+    @Override
+	public Element getState() {
         final Element element = new Element(getID());
 
 //writeExternal
@@ -76,7 +77,8 @@ public class RModuleSettingsStorage extends SettingsExternalizer implements Pers
         return element;
     }
 
-    public void loadState(@NotNull final Element elem) {
+    @Override
+	public void loadState(@NotNull final Element elem) {
 //readExternal
         final Map<String, String> optionsByName = buildOptionsByElement(elem);
 
@@ -89,7 +91,8 @@ public class RModuleSettingsStorage extends SettingsExternalizer implements Pers
         loadPathDirs.loadCheckableDirectores(optionsByName);
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RMODULE_SETTINGS_STORAGE_ID;
     }
 }

@@ -58,7 +58,8 @@ public class SimpleGeneratorInputValidator implements InputValidator {
         return new PsiElement[0];
     }
 
-    public boolean canClose(final String inputString) {
+    @Override
+	public boolean canClose(final String inputString) {
         /**
          * Check if input string is valid
          */
@@ -72,7 +73,8 @@ public class SimpleGeneratorInputValidator implements InputValidator {
         return true;
     }
 
-    public boolean checkInput(final String inputString) {
+    @Override
+	public boolean checkInput(final String inputString) {
         //e.g. for rspec stub generator input can be empty
         return true;
     }

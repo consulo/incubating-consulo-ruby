@@ -50,7 +50,8 @@ public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl impleme
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RClassPresentationUtil.getPresentation(this);
     }
@@ -60,12 +61,14 @@ public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl impleme
         return RClassPresentationUtil.getIcon(this, flags);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RVirtualName getVirtualSuperClass() {
         return myVirtualSuperClass;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualClass(this);
     }
 
@@ -74,7 +77,8 @@ public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl impleme
                 (myVirtualSuperClass!=null ? " < [" + ((RVirtualElementBase) myVirtualSuperClass).getId()  + "] "+ myVirtualSuperClass.getFullName() : "");
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CLASS;
     }
 }

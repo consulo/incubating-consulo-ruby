@@ -47,11 +47,13 @@ public abstract class RubyPomModelListener implements PomModelListener {
         myFileIndex = ProjectRootManager.getInstance(myModule.getProject()).getFileIndex();
     }
 
-    public boolean isAspectChangeInteresting(PomModelAspect aspect) {
+    @Override
+	public boolean isAspectChangeInteresting(PomModelAspect aspect) {
         return aspect instanceof RubyPomAspect;
     }
 
-    public void modelChanged(final PomModelEvent event) {
+    @Override
+	public void modelChanged(final PomModelEvent event) {
         final PomChangeSet changeSet = event.getChangeSet(myPomModel.getModelAspect(RubyPomAspect.class));
         if (changeSet != null) {
             final List<RubyChange> list = ((RubyChangeSet) changeSet).getChanges();

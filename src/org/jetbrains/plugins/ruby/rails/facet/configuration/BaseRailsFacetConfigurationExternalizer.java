@@ -89,7 +89,8 @@ public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalize
         return INSTANCE;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RAILS_FACET_CONFIG_ID;
     }
 }

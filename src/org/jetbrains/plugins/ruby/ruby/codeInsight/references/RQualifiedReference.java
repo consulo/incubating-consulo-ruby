@@ -117,12 +117,14 @@ public class RQualifiedReference implements RPsiPolyvariantReference {
     private static class MyResolver implements ResolveCache.PolyVariantResolver<RQualifiedReference> {
         public static MyResolver INSTANCE = new MyResolver();
 
-        public ResolveResult[] resolve(RQualifiedReference ref, boolean incompleteCode) {
+        @Override
+		public ResolveResult[] resolve(RQualifiedReference ref, boolean incompleteCode) {
             return ref.multiResolveInner(incompleteCode);
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final ResolveResult[] multiResolve(final boolean incompleteCode) {
         final PsiManager manager = getElement().getManager();
         if (manager instanceof PsiManagerImpl) {
@@ -138,13 +140,15 @@ public class RQualifiedReference implements RPsiPolyvariantReference {
         if (myRefValue instanceof RPsiElementBase && ((RPsiElementBase) myRefValue).isClassOrModuleName()) {
             return new ResolveResult[]{
                     new ResolveResult() {
-                        @Nullable
+                        @Override
+						@Nullable
                         public PsiElement getElement() {
                             RubyUsageTypeProvider.setType(RQualifiedReference.this, RubyUsageType.DECLARATION);
                             return myWholeReference.getParentContainer();
                         }
 
-                        public boolean isValidResult() {
+                        @Override
+						public boolean isValidResult() {
                             return true;
                         }
                     }
@@ -167,30 +171,36 @@ public class RQualifiedReference implements RPsiPolyvariantReference {
     }
 
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myWholeReference;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getRefValue() {
         return myRefValue;
     }
 
-    public PsiElement resolve() {
+    @Override
+	public PsiElement resolve() {
         final ResolveResult[] resolveResults = multiResolve(true);
         return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
     }
 
-    public TextRange getRangeInElement() {
+    @Override
+	public TextRange getRangeInElement() {
         final int relativeStartOffset = myRefValue.getTextOffset() - myWholeReference.getTextOffset();
         return new TextRange(relativeStartOffset, relativeStartOffset + myRefValue.getTextLength());
     }
 
-    public String getCanonicalText() {
+    @Override
+	public String getCanonicalText() {
         return myName;
     }
 
-    public PsiElement handleElementRename(String newName) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(String newName) throws IncorrectOperationException {
         // We shouldn`t rename if same name
         if (newName.equals(myName)) {
             return null;
@@ -208,22 +218,26 @@ public class RQualifiedReference implements RPsiPolyvariantReference {
     }
 
     // IDEA calls bindToElement if we rename/move Java class
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
         if (element instanceof PsiClass) {
             return handleElementRename(((PsiClass) element).getName());
         }
         return null;
     }
 
-    public boolean isReferenceTo(PsiElement element) {
+    @Override
+	public boolean isReferenceTo(PsiElement element) {
         return ResolveUtil.isReferenceTo(this, element);
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return true;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         return multiResolveToSymbols(fileSymbol, getRefObjectType(fileSymbol));
     }
@@ -258,7 +272,8 @@ public class RQualifiedReference implements RPsiPolyvariantReference {
         return variants;
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         final FileSymbol fileSymbol = ((RPsiElementBase) myWholeReference).forceFileSymbolUpdate();
         if (fileSymbol == null) {
             return EMPTY_ARRAY;

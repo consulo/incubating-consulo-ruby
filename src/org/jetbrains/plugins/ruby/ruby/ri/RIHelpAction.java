@@ -46,7 +46,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 public class RIHelpAction extends AnAction {
     public static final TokenSet TOKENS_TO_SEARCH = TokenSet.orSet(BNF.kRESWORDS, BNF.tCID);
 
-    public void actionPerformed(@NotNull final AnActionEvent e) {
+    @Override
+	public void actionPerformed(@NotNull final AnActionEvent e) {
         assert canHelp(e);
 
         final DataContext dataContext = e.getDataContext();
@@ -67,7 +68,8 @@ public class RIHelpAction extends AnAction {
         ToolWindowManager.getInstance(project).getToolWindow(RubyDocManager.getName()).show(null);
     }
 
-    public void update(final AnActionEvent e) {
+    @Override
+	public void update(final AnActionEvent e) {
         final Presentation presentation = e.getPresentation();
         presentation.setIcon(RubyIcons.RUBY_ICON);
 // visible only on ruby files

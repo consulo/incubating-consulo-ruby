@@ -55,38 +55,46 @@ public class SelectTestFrameworkStep extends FacetWizardStep {
 
 
         myForm = new SelectTestFrameworkPanel(new ItemListener() {
-            public void itemStateChanged(final ItemEvent e) {
+            @Override
+			public void itemStateChanged(final ItemEvent e) {
                 fireStateChanged();
             }
         }, shouldUseTestUnit, shouldUseRSpecFramework);
     }
 
-    public Icon getIcon() {
+    @Override
+	public Icon getIcon() {
         return myIcon;
     }
 
-    public String getHelpId() {
+    @Override
+	public String getHelpId() {
         return myHelp;
     }
 
-    public JComponent getComponent() {
+    @Override
+	public JComponent getComponent() {
         return myForm.getContentPane();
     }
 
-    public void updateStep() {
+    @Override
+	public void updateStep() {
         updateDataModel();
     }
 
-    public void onStepLeaving() {
+    @Override
+	public void onStepLeaving() {
         RSpecApplicationSettings.getInstance().wizardRubyShouldUseRSpecFramework = myForm.shouldUseRSpecFramework();
     }
 
-    public void updateDataModel() {
+    @Override
+	public void updateDataModel() {
         mySettingsHolder.enableRSpecSupport(myForm.shouldUseRSpecFramework());
         mySettingsHolder.enableTestUnitSupport(myForm.shouldUseTestUnitFramework());
     }
 
-    public boolean isStepVisible() {
+    @Override
+	public boolean isStepVisible() {
         return super.isStepVisible() && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
     }
 }

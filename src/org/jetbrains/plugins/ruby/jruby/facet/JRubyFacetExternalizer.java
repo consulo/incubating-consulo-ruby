@@ -62,7 +62,8 @@ public class JRubyFacetExternalizer extends SettingsExternalizer {
         return myInstance;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return JRUBY_FACET_CONFIG_ID;
     }
 }

@@ -120,7 +120,8 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         RubyRunConfigurationUIUtil.addFolderChooser(title, myWorkDirTextField, myProject);
 
         final ActionListener testTypeListener = new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 setTestType(getTestType());
             }
         };
@@ -134,7 +135,8 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         setShouldUseAlternativeSdk(false);
 
         myRBDisableInheritanceCheck.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 myTestScriptComponent.setEnabled(e.getStateChange() == ItemEvent.SELECTED);
             }
         });
@@ -220,49 +222,60 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         return toSystemIndependentName(myTestFolderTextField.getText().trim());
     }
 
-    public String getRubyArgs(){
+    @Override
+	public String getRubyArgs(){
         return myRubyArgsEditor.getText().trim();
     }
 
-    public String getWorkingDirectory(){
+    @Override
+	public String getWorkingDirectory(){
         return toSystemIndependentName(myWorkDirTextField.getText().trim());
     }
 
-    public Module getModule(){
+    @Override
+	public Module getModule(){
         final Object selectedObject = myModulesComboBox.getSelectedItem();
         return selectedObject instanceof Module ? (Module)selectedObject : null;
     }
 
-    public Sdk getAlternativeSdk(){
+    @Override
+	public Sdk getAlternativeSdk(){
         final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
         return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
     }
 
-    public boolean shouldUseAlternativeSdk() {
+    @Override
+	public boolean shouldUseAlternativeSdk() {
         return myUseAlternativeSdkCB.isSelected();
     }
 
-    public void setShouldUseAlternativeSdk(final boolean shouldUse) {
+    @Override
+	public void setShouldUseAlternativeSdk(final boolean shouldUse) {
         RubyRunConfigurationUIUtil.setShouldUseAlternSdk(shouldUse, myUseAlternativeSdkCB, myAlternativeSdksComboBox, myModulesComboBox);
     }
 
-    public String getTestsFolderPath() {
+    @Override
+	public String getTestsFolderPath() {
         return toSystemIndependentName(myTestFolderTextField.getText().trim());
     }
 
-    public String getTestScriptPath() {
+    @Override
+	public String getTestScriptPath() {
         return toSystemIndependentName(myTestScriptTextField.getText().trim());
     }
 
-    public String getTestQualifiedClassName() {
+    @Override
+	public String getTestQualifiedClassName() {
         return myTestClassField.getText().trim();
     }
 
-    public String getTestFileMask() {
+    @Override
+	public String getTestFileMask() {
         return myTestFileMaskTextField.getText();
     }
 
-    public String getTestMethodName() {
+    @Override
+	public String getTestMethodName() {
         return myTestMethodTextField.getText().trim();
     }
 
@@ -270,43 +283,53 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         myTestFolderTextField.setText(toSystemDependentName(TextUtil.getAsNotNull(value)));
     }
 
-    public void setRubyArgs(final String value){
+    @Override
+	public void setRubyArgs(final String value){
         myRubyArgsEditor.setText(value);
     }
 
-    public void setWorkingDirectory(final String value){
+    @Override
+	public void setWorkingDirectory(final String value){
         myWorkDirTextField.setText(toSystemDependentName(TextUtil.getAsNotNull(value)));
     }
 
-    public void setModule(@Nullable final Module module){
+    @Override
+	public void setModule(@Nullable final Module module){
         myModulesComboBox.setSelectedItem(module);
     }
 
-    public void setAlternativeSdk(@Nullable final Sdk sdk){
+    @Override
+	public void setAlternativeSdk(@Nullable final Sdk sdk){
         myAlternativeSdksComboBox.setSelectedItem(sdk);
     }
 
-    public void setTestsFolderPath(final String path) {
+    @Override
+	public void setTestsFolderPath(final String path) {
         myTestFolderTextField.setText(toSystemDependentName(TextUtil.getAsNotNull(path)));
     }
 
-    public void setTestScriptPath(final String path) {
+    @Override
+	public void setTestScriptPath(final String path) {
         myTestScriptTextField.setText(toSystemDependentName(TextUtil.getAsNotNull(path)));
     }
 
-    public void setTestQualifiedClassName(final String name) {
+    @Override
+	public void setTestQualifiedClassName(final String name) {
         myTestClassField.setText(TextUtil.getAsNotNull(name));
     }
 
-    public void setTestFileMask(final String name) {
+    @Override
+	public void setTestFileMask(final String name) {
         myTestFileMaskTextField.setText(TextUtil.getAsNotNull(name));
     }
 
-    public void setTestMethodName(final String name) {
+    @Override
+	public void setTestMethodName(final String name) {
         myTestMethodTextField.setText(TextUtil.getAsNotNull(name));
     }
 
-    public RTestsRunConfiguration.TestType getTestType() {
+    @Override
+	public RTestsRunConfiguration.TestType getTestType() {
         if (myAllInFolderRB.isSelected()) {
             return AbstractRubyRunConfiguration.TestType.ALL_IN_FOLDER;
         } else if (myTestScriptRB.isSelected()) {
@@ -318,15 +341,18 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
         }
     }
 
-    public boolean isInheritanceCheckDisabled() {
+    @Override
+	public boolean isInheritanceCheckDisabled() {
         return myRBDisableInheritanceCheck.isSelected();
     }
 
-    public void setInheritanceCheckDisabled(final boolean disabled) {
+    @Override
+	public void setInheritanceCheckDisabled(final boolean disabled) {
         myRBDisableInheritanceCheck.setSelected(disabled);
     }
 
-    public void setTestType(@NotNull final TestType testType) {
+    @Override
+	public void setTestType(@NotNull final TestType testType) {
         clearTestTypeSettings(testType);
 
         myRBDisableInheritanceCheck.setSelected(false);
@@ -385,19 +411,23 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams {
 
     }
 
-    public void setEnvs(final Map<String, String> envs) {
+    @Override
+	public void setEnvs(final Map<String, String> envs) {
         myEnvVariablesComponent.setEnvs(envs);
     }
 
-    public void setPassParentEnvs(final boolean passParentEnvs) {
+    @Override
+	public void setPassParentEnvs(final boolean passParentEnvs) {
         myEnvVariablesComponent.setPassParentEnvs(passParentEnvs);
     }
 
-    public Map<String, String> getEnvs() {
+    @Override
+	public Map<String, String> getEnvs() {
         return myEnvVariablesComponent.getEnvs();
     }
 
-    public boolean isPassParentEnvs() {
+    @Override
+	public boolean isPassParentEnvs() {
         return myEnvVariablesComponent.isPassParentEnvs();
     }
 

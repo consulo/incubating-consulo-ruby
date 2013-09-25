@@ -37,7 +37,8 @@ public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariab
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRBlockVariables(this);
             return;
@@ -45,7 +46,8 @@ public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariab
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RIdentifier> getVariables() {
         RListOfExpressions list = getChildByType(RListOfExpressions.class, 0);
         if (list !=null){

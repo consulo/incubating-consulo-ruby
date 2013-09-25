@@ -61,37 +61,44 @@ public class RHTMLColorsPage implements ColorSettingsPage {
 
     private static final ColorDescriptor[] COLORS = new ColorDescriptor[0];
 
-    @Nullable
+    @Override
+	@Nullable
     public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDisplayName() {
         return RBundle.message("color.settings.rhtml.name");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Icon getIcon() {
         return RailsIcons.RHTML_ICON;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AttributesDescriptor[] getAttributeDescriptors() {
         return ATTRS;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ColorDescriptor[] getColorDescriptors() {
         return COLORS;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public SyntaxHighlighter getHighlighter() {
         return new MyRHTMLFileHighlighterImpl();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDemoText() {
         return DEMO_TEXT;
     }
@@ -105,12 +112,14 @@ public class RHTMLColorsPage implements ColorSettingsPage {
             myHTMLHighlighter = new HtmlFileHighlighter();
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public Lexer getHighlightingLexer() {
             return new RHTMLColorsPageHighlightingLexer();
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
             final TextAttributesKey[] keys = super.getTokenHighlights(tokenType);
             if (keys.length != 0) {

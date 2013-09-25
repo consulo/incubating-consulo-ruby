@@ -40,7 +40,8 @@ import com.intellij.openapi.projectRoots.Sdk;
  */
 public class RubySymbolContributor extends RubyBaseContributor implements ChooseByNameContributor{
 
-    public String[] getNames(final Project project, boolean includeNonProjectItems) {
+    @Override
+	public String[] getNames(final Project project, boolean includeNonProjectItems) {
         final ArrayList<String> names = new ArrayList<String>();
         final Module[] modules = ModuleManager.getInstance(project).getModules();
         final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
@@ -80,6 +81,7 @@ public class RubySymbolContributor extends RubyBaseContributor implements Choose
     }
 
 
+	@Override
 	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems) {
         final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);
         final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();

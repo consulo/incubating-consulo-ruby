@@ -61,7 +61,8 @@ public class ExecutionHelper {
             throw new RuntimeException(exceptionList.get(0));
         }
         ApplicationManager.getApplication().invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 if (myProject.isDisposed()) return;
                 if (exceptionList.isEmpty()) {
                     removeContents(null, myProject, tabDisplayName);
@@ -99,7 +100,8 @@ public class ExecutionHelper {
                                          @NotNull final String tabDisplayName) {
         CommandProcessor commandProcessor = CommandProcessor.getInstance();
         commandProcessor.executeCommand(myProject, new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 final MessageView messageView = myProject.getComponent(MessageView.class);
                 final Content content =
                         PeerFactory.getInstance().getContentFactory().createContent(errorTreeView, tabDisplayName, true);
@@ -135,7 +137,8 @@ public class ExecutionHelper {
             super(project, null);
         }
 
-        protected boolean canHideWarnings() {
+        @Override
+		protected boolean canHideWarnings() {
             return false;
         }
     }
@@ -155,7 +158,8 @@ public class ExecutionHelper {
         } else {
             if (mode.getTimeout() <= 0) {
                 process = new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         processHandler.waitFor();
                     }
                 };
@@ -167,7 +171,8 @@ public class ExecutionHelper {
             ProgressManager.getInstance().runProcessWithProgressSynchronously(process, title, mode.cancelable(), myProject);
         } else if (mode.inBackGround()) {
             final Task task = new Task.Backgroundable(myProject, title, mode.cancelable()) {
-                public void run(final ProgressIndicator indicator) {
+                @Override
+				public void run(final ProgressIndicator indicator) {
                     process.run();
                 }
             };
@@ -189,14 +194,16 @@ public class ExecutionHelper {
             private Semaphore mySemaphore = new Semaphore();
 
             private Runnable myWaitThread = new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     processHandler.waitFor();
                     mySemaphore.up();
                 }
             };
 
             private Runnable myCancelListener = new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     for (; ;) {
                         if (myProgressIndicator != null
                                 && (myProgressIndicator.isCanceled()
@@ -221,7 +228,8 @@ public class ExecutionHelper {
                 }
             };
 
-            public void run() {
+            @Override
+			public void run() {
                 myProgressIndicator = ProgressManager.getInstance().getProgressIndicator();
                 if (myProgressIndicator != null) {
                     myProgressIndicator.setText(RBundle.message("progress.indicator.title.please.wait"));
@@ -244,7 +252,8 @@ public class ExecutionHelper {
             private Boolean processedFinished = Boolean.FALSE;
 
             private Runnable myProcessThread = new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     processHandler.waitFor();
                     synchronized (LOCK) {
                         processedFinished = Boolean.TRUE;
@@ -254,7 +263,8 @@ public class ExecutionHelper {
             };
 
             private Runnable myTimeoutListener = new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     try {
                         synchronized (this) {
                             wait(1000 * timeout);
@@ -273,7 +283,8 @@ public class ExecutionHelper {
                 }
             };
 
-            public void run() {
+            @Override
+			public void run() {
                 ApplicationManager.getApplication().executeOnPooledThread(myProcessThread);
                 ApplicationManager.getApplication().executeOnPooledThread(myTimeoutListener);
 

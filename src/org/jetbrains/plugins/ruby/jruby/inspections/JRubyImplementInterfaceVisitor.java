@@ -47,7 +47,8 @@ public class JRubyImplementInterfaceVisitor extends RubyInspectionVisitor {
         myHandler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
     }
 
-    public void visitRClass(final RClass rClass) {
+    @Override
+	public void visitRClass(final RClass rClass) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 

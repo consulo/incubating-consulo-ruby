@@ -52,7 +52,8 @@ public class HelperNode extends RailsNode {
         return NodeIdUtil.createForVirtualContainer(rModule);
     }
 
-    public RailsNode[] getChildren() {
+    @Override
+	public RailsNode[] getChildren() {
         final List<RailsNode> children = new ArrayList<RailsNode>();
 
         for (RVirtualStructuralElement element :
@@ -64,7 +65,8 @@ public class HelperNode extends RailsNode {
         return children.toArray(new RailsNode[children.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.HELPER;
     }

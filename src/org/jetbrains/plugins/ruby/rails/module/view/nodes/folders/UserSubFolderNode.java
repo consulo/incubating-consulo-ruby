@@ -63,7 +63,8 @@ public class UserSubFolderNode extends FolderNode {
     }
 
 
-    public void accept(SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitUserNode(myIsUnderTestsRoot);
             return;
@@ -78,12 +79,14 @@ public class UserSubFolderNode extends FolderNode {
         myIsUnderTestsRoot = isUnderTestsFolder;
     }
 
-    protected void processNotDirectoryFile(final List<RailsNode> nodes,
+    @Override
+	protected void processNotDirectoryFile(final List<RailsNode> nodes,
                                            final VirtualFile file, final String url) {
         nodes.add(new SimpleFileNode(getModule(), file));
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.USER_FOLDERS_ROOT;
     }

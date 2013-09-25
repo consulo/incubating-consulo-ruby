@@ -39,7 +39,8 @@ import com.intellij.psi.xml.XmlElementType;
  * @date: 03.04.2007
  */
 public class RHTMLParser implements PsiParser {
-    @NotNull
+    @Override
+	@NotNull
     public ASTNode parse(final IElementType root, final PsiBuilder builder, LanguageVersion languageVersion) {
         builder.enforceCommentTokens(TokenSet.EMPTY);
 
@@ -61,7 +62,8 @@ public class RHTMLParser implements PsiParser {
             myPsiBuilder = builder;
         }
 
-        protected void parseComment() {
+        @Override
+		protected void parseComment() {
             final PsiBuilder.Marker comment = mark();
             advance();
             while (!eof()) {
@@ -80,11 +82,13 @@ public class RHTMLParser implements PsiParser {
         }
 
         //is comment start token
-        protected boolean isCommentToken(final IElementType tt) {
+        @Override
+		protected boolean isCommentToken(final IElementType tt) {
             return tt == RHTMLTokenType.RHTML_COMMENT_START;
         }
 
-        public void parseTagContent() {
+        @Override
+		public void parseTagContent() {
             while (!RHTMLPsiUtil.isRubyCodeInjectionEnd(token()) && !eof()) {
                 final IElementType tt = token();
                 if (RHTMLPsiUtil.isRubyCodeInjectionStart(tt)
@@ -105,7 +109,8 @@ public class RHTMLParser implements PsiParser {
             }
         }
 
-        public void parseDocument() {
+        @Override
+		public void parseDocument() {
             final PsiBuilder.Marker doc = mark();
 
             mark().done(XmlElementType.XML_PROLOG);

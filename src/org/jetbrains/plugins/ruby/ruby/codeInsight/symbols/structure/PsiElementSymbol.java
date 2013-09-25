@@ -37,7 +37,8 @@ public class PsiElementSymbol extends Symbol{
         myPsiElement = element;
     }
 
-    @SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
+    @Override
+	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
     public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml) {
         final StringBuilder builder = new StringBuilder();
         builder.append("[" + getId() + "] " + getType() +  " ");

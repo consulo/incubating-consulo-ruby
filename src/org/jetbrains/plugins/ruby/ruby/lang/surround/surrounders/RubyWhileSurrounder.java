@@ -30,17 +30,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RWhileStatemen
  */
 public class RubyWhileSurrounder extends RubySurrounderBase{
 
-    protected TextRange getTextRange(@NotNull final RPsiElement element) {
+    @Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element) {
         assert element instanceof RWhileStatement;
         final RCondition condition = ((RWhileStatement) element).getCondition();
         return condition!=null ? condition.getTextRange() : null;
     }
 
-    protected String getText(PsiElement[] elements) {
+    @Override
+	protected String getText(PsiElement[] elements) {
         return "while condition do\n" + gatherText(elements) + "\nend";
     }
 
-    public String getTemplateDescription() {
+    @Override
+	public String getTemplateDescription() {
         return "while ... do ... end";
     }
 }

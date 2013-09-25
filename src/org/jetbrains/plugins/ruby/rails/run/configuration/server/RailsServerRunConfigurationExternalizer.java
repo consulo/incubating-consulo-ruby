@@ -46,7 +46,8 @@ public class RailsServerRunConfigurationExternalizer extends RubyRunConfiguratio
     @NonNls
     public static final String ENVIRONMENT_TYPE = "ENVIRONMENT_TYPE";
 
-    public void writeExternal(final RubyRunConfiguration config, final Element elem) {
+    @Override
+	public void writeExternal(final RubyRunConfiguration config, final Element elem) {
         super.writeExternal(config, elem);
 
         final RailsServerRunConfiguration conf = (RailsServerRunConfiguration)config;
@@ -57,7 +58,8 @@ public class RailsServerRunConfigurationExternalizer extends RubyRunConfiguratio
         writeOption(ENVIRONMENT_TYPE,  conf.getRailsEnvironmentType().toString(), elem);
     }
 
-    public void readExternal(final RubyRunConfiguration config, final Element elem) {
+    @Override
+	public void readExternal(final RubyRunConfiguration config, final Element elem) {
         super.readExternal(config, elem);
 
         final RailsServerRunConfiguration conf = (RailsServerRunConfiguration)config;
@@ -84,7 +86,8 @@ public class RailsServerRunConfigurationExternalizer extends RubyRunConfiguratio
         return myInstance;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RAILS_SERVER_CONFIG_SETTINGS_ID;
     }
 }

@@ -111,7 +111,8 @@ public class SimpleGeneratorAction extends AbstractScriptAction {
                                         null, null, RModuleUtil.getModuleOrJRubyFacetSdk(module));
     }
 
-    public void update(@NotNull final AnActionEvent e) {
+    @Override
+	public void update(@NotNull final AnActionEvent e) {
         super.update(e);
 
         final Presentation presentation = e.getPresentation();
@@ -136,13 +137,15 @@ public class SimpleGeneratorAction extends AbstractScriptAction {
         return new SimpleGeneratorInputValidator(this, module, directory);
     }
 
-    protected void checkBeforeCreate(@NotNull final String newName,
+    @Override
+	protected void checkBeforeCreate(@NotNull final String newName,
                                      @Nullable final PsiDirectory directory)
             throws IncorrectOperationException {
         // Do nothing
     }
 
-    protected String[] createScriptParameters(final String inputString,
+    @Override
+	protected String[] createScriptParameters(final String inputString,
                                               @NotNull final String railsAppHomePath) {
         final List<String> parameters = new ArrayList<String>();
         parameters.add(VirtualFileUtil.buildSystemIndependentPath(railsAppHomePath, GeneratorsUtil.GENERATE_SCRIPT));
@@ -153,16 +156,19 @@ public class SimpleGeneratorAction extends AbstractScriptAction {
         return parameters.toArray(new String[parameters.size()]);
     }
 
-    protected String getGenerateDialogTitle() {
+    @Override
+	protected String getGenerateDialogTitle() {
         return RBundle.message("new.generate.common.action.prompt.title",
                 myGeneratorName);
     }
 
-    protected String getErrorTitle() {
+    @Override
+	protected String getErrorTitle() {
         return RBundle.message("new.generate.common.error.title");
     }
 
-    protected PsiElement[] invokeDialog(@NotNull final Module module,
+    @Override
+	protected PsiElement[] invokeDialog(@NotNull final Module module,
                                         @Nullable final PsiDirectory directory) {
         final SimpleGeneratorInputValidator validator = createValidator(module, directory);
         GenerateDialogs.showGenerateDialog(module, getGenerateDialogTitle(),
@@ -170,7 +176,8 @@ public class SimpleGeneratorAction extends AbstractScriptAction {
         return validator.getCreatedElements();
     }
 
-    protected boolean validateBeforeInvokeDialog(final Module module) {
+    @Override
+	protected boolean validateBeforeInvokeDialog(final Module module) {
         if (!RailsUtil.hasRailsSupportInSDK(RModuleUtil.getModuleOrJRubyFacetSdk(module))) {
             Messages.showErrorDialog(module.getProject(),
                                      RBundle.message("new.generate.common.error.no.rails"),

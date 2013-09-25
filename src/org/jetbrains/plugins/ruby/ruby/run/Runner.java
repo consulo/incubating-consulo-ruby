@@ -265,7 +265,8 @@ public class Runner {
             this.err = err;
         }
 
-        public void onTextAvailable(ProcessEvent event, Key outputType) {
+        @Override
+		public void onTextAvailable(ProcessEvent event, Key outputType) {
             if (outputType == ProcessOutputTypes.STDOUT) {
                 out.append(event.getText());
             }
@@ -403,7 +404,8 @@ public class Runner {
             this(true);
         }
 
-        public int getTimeout() {
+        @Override
+		public int getTimeout() {
             return myTimeout;
         }
     }

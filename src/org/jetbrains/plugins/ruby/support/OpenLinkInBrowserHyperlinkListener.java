@@ -36,7 +36,8 @@ public class OpenLinkInBrowserHyperlinkListener implements HyperlinkListener {
         myComponent = component;
     }
 
-    public void hyperlinkUpdate(HyperlinkEvent e) {
+    @Override
+	public void hyperlinkUpdate(HyperlinkEvent e) {
         final HyperlinkEvent.EventType eventType = e.getEventType();
         if (eventType.equals(HyperlinkEvent.EventType.ACTIVATED)) {
             BrowserUtil.launchBrowser(e.getURL().toExternalForm());

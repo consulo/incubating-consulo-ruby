@@ -60,14 +60,16 @@ public class RubySlowLineHighlightPass extends AbstractRubyHighlighterPass {
         ((RFile) myFile).getFileSymbol();
     }
 
-    public void doCollectInformation(final ProgressIndicator progress) {
+    @Override
+	public void doCollectInformation(final ProgressIndicator progress) {
         ApplicationManager.getApplication().assertReadAccessAllowed();
 
         myLineMarkers = new ArrayList<RubyLineMarkerInfo>();
         setOverrideAndImplementMarkers();
     }
 
-    public void doApplyInformationToEditor() {
+    @Override
+	public void doApplyInformationToEditor() {
         RubyLineHighlightingUtil.setLineMarkersToEditor(myProject, myDocument, myLineMarkers, true);
     }
 

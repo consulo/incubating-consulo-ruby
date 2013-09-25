@@ -36,7 +36,8 @@ public class EnumParam extends ParamDef {
         myVariants = variants;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public List<RubyLookupItem> getVariants(ParamContext context) {
         List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
         for(Object variant: myVariants) {

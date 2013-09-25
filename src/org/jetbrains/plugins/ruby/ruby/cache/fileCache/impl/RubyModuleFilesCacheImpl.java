@@ -59,7 +59,8 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
         myModule = module;
         myModuleRootManager = manager;
         registerScanForFilesProvider(new CacheScannerFilesProvider() {
-            public void scanAndAdd(final String[] rootUrls,
+            @Override
+			public void scanAndAdd(final String[] rootUrls,
                                    final Collection<VirtualFile> files,
                                    final ModuleRootManager moduleRootManager) {
                 RubyVirtualFileScanner.searchRubyFileCacheFiles(moduleRootManager, files);
@@ -67,13 +68,15 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
         });
     }
 
-    public void initFileCacheAndRegisterListeners() {
+    @Override
+	public void initFileCacheAndRegisterListeners() {
         super.initFileCacheAndRegisterListeners();
         registerPomListener();
         registerModuleDeleteListener();
     }
 
-    protected void registerDisposer() {
+    @Override
+	protected void registerDisposer() {
         if (JRubyUtil.hasJRubySupport(myModule)) {
             //noinspection ConstantConditions
           //  Disposer.register(JRubyFacet.getInstance(myModule), this);
@@ -82,12 +85,14 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
         }
     }
 
-    public void onClose() {
+    @Override
+	public void onClose() {
         unregisterPomListener();
         super.onClose();
     }
 
-    public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory,
+    @Override
+	public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory,
                                                        final boolean onlyDirectoryFiles) {
         if (directory == null){
             return Collections.emptyList();
@@ -117,7 +122,8 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
         final MessageBusConnection messageBusConnection =
                 myModule.getMessageBus().connect(this);
         messageBusConnection.subscribe(ProjectTopics.MODULES, new RubyModuleListenerAdapter() {
-            public void beforeModuleRemoved(final Project project,
+            @Override
+			public void beforeModuleRemoved(final Project project,
                                             final Module module) {
                 if (module == myModule) {
                     onClose();
@@ -130,7 +136,8 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
         //myModule.getPom().getModel().removeModelListener(myPomModelListener);
     }
 
-    public boolean containsUrl(@NotNull String url) {
+    @Override
+	public boolean containsUrl(@NotNull String url) {
         return isInContent(VirtualFileManager.getInstance().findFileByUrl(url));
     }
 
@@ -138,7 +145,8 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
 // Internal functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     protected Collection<VirtualFile> scanForFiles(@NotNull final String[] rootUrls) {
         final List<VirtualFile> files = new LinkedList<VirtualFile>();
 
@@ -148,7 +156,8 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
         return files;
     }
 
-    protected boolean isInContent(@Nullable final VirtualFile file) {
+    @Override
+	protected boolean isInContent(@Nullable final VirtualFile file) {
         final ModuleFileIndex moduleFileIndex = RubyVirtualFileScanner.getFileIndex(myModuleRootManager);
         return file != null && moduleFileIndex != null && moduleFileIndex.isInContent(file);
     }
@@ -160,11 +169,13 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Valid Files providers
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void registerScanForFilesProvider(final CacheScannerFilesProvider provider) {
+    @Override
+	public void registerScanForFilesProvider(final CacheScannerFilesProvider provider) {
         myScanProvidersList.add(provider);
     }
 
-    public void unregisterScanForFilesProvider(final CacheScannerFilesProvider provider) {
+    @Override
+	public void unregisterScanForFilesProvider(final CacheScannerFilesProvider provider) {
         myScanProvidersList.remove(provider);
     }
 }

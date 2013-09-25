@@ -59,17 +59,21 @@ public abstract class BaseModuleCachesManager implements ModuleComponent {
         return PathManager.getSystemPath()+"/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" + myModule.getProject().getName()+ "/" +myModule.getName() + "_" + myModule.getModuleDirPath().hashCode();
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         myModuleFilesCache.saveCacheToDisk();
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
     @NotNull
@@ -82,7 +86,8 @@ public abstract class BaseModuleCachesManager implements ModuleComponent {
         return myModuleFilesCache.getDeclarationsIndex();
     }
 
-    public void moduleAdded() {
+    @Override
+	public void moduleAdded() {
         //do nothing
     }
 }

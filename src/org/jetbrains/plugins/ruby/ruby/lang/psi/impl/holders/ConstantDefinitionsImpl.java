@@ -33,21 +33,25 @@ public class ConstantDefinitionsImpl implements ConstantDefinitions {
         myFirstDefinition  = constant;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RConstant getFirstDefinition() {
         return myFirstDefinition;
     }
 
-    public void process(@NotNull final RConstant constant) {
+    @Override
+	public void process(@NotNull final RConstant constant) {
         // do nothing
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myFirstDefinition.getName();
     }
 
-    public boolean isFor(@NotNull final RVirtualConstant constant) {
+    @Override
+	public boolean isFor(@NotNull final RVirtualConstant constant) {
         return getName().equals(constant.getName());
     }
 }

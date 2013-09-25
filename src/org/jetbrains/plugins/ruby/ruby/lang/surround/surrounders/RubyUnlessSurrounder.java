@@ -30,17 +30,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RUnlessStateme
  */
 public class RubyUnlessSurrounder extends RubySurrounderBase{
 
-    protected TextRange getTextRange(@NotNull final RPsiElement element) {
+    @Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element) {
         assert element instanceof RUnlessStatement;
         final RCondition condition = ((RUnlessStatement) element).getCondition();
         return condition!=null ? condition.getTextRange() : null;
     }
 
-    protected String getText(PsiElement[] elements) {
+    @Override
+	protected String getText(PsiElement[] elements) {
         return "unless condition then\n" + gatherText(elements) + "\nend";
     }
 
-    public String getTemplateDescription() {
+    @Override
+	public String getTemplateDescription() {
         return "unless ... then ... end";
     }
 }

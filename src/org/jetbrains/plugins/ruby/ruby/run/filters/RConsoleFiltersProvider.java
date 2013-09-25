@@ -28,7 +28,8 @@ import org.jetbrains.annotations.NotNull;
  * @date: Sep 4, 2007
  */
 public class RConsoleFiltersProvider implements ConsoleFilterProvider {
-    @NotNull
+    @Override
+	@NotNull
     public Filter[] getDefaultFilters(@NotNull final Project project) {
         return new Filter[]{new RStackTraceFilter(project)};
     }

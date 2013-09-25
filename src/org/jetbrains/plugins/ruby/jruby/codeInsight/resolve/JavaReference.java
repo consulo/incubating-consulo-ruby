@@ -63,15 +63,18 @@ public class JavaReference implements PsiReference {
         myToken = token;
     }
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myElement;
     }
 
-    public TextRange getRangeInElement() {
+    @Override
+	public TextRange getRangeInElement() {
         return myTextRange;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolve() {
         final PsiElement element = resolveParent();
         if (element instanceof PsiJavaPackage){
@@ -106,16 +109,19 @@ public class JavaReference implements PsiReference {
         return myJavaReference != null ? myJavaReference.resolve() : JavaPsiFacade.getInstance(myElement.getProject()).findPackage("");
     }
 
-    public String getCanonicalText() {
+    @Override
+	public String getCanonicalText() {
         return myJavaReference!=null ? myJavaReference.getCanonicalText() + '.' + myToken : myToken;
     }
 
-    public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
         return null;
     }
 
     // IDEA calls bindToElement if we rename/move Java class
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
         if (element instanceof PsiClass){
             final String name = ((PsiClass) element).getQualifiedName();
             final RPsiElement new_element = RubyPsiUtil.getTopLevelElements(myElement.getProject(), "\"" + name + "\"").get(0);
@@ -125,11 +131,13 @@ public class JavaReference implements PsiReference {
         return null;
     }
 
-    public boolean isReferenceTo(PsiElement element) {
+    @Override
+	public boolean isReferenceTo(PsiElement element) {
         return ResolveUtil.isReferenceTo(this, element);
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         final ArrayList<PsiElement> variants = new ArrayList<PsiElement>();
         final PsiElement element = resolveParent();
         if (element instanceof PsiJavaPackage){
@@ -144,7 +152,8 @@ public class JavaReference implements PsiReference {
         return variants.toArray(new Object[variants.size()]);
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return true;
     }
 

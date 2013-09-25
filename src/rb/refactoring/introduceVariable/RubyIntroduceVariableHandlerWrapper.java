@@ -42,11 +42,13 @@ public class RubyIntroduceVariableHandlerWrapper implements RefactoringActionHan
         return myJRubyHandler;
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext) {
+    @Override
+	public void invoke(@NotNull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext) {
         myJRubyHandler.invoke(project, editor, file, dataContext);
     }
 
-    public void invoke(@NotNull Project project, @NotNull PsiElement[] elements, @Nullable DataContext dataContext) {
+    @Override
+	public void invoke(@NotNull Project project, @NotNull PsiElement[] elements, @Nullable DataContext dataContext) {
         myJRubyHandler.invokeOutter(project, elements, dataContext);
     }
 }

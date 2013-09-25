@@ -48,7 +48,8 @@ public class ControllerSubFolderNode extends FolderNode {
     }
 
 
-    protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file,
+    @Override
+	protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file,
                                            final String url) {
         if (ControllersConventions.isApplicationControllerFile(file, getModule())) {
             return;
@@ -56,7 +57,8 @@ public class ControllerSubFolderNode extends FolderNode {
         super.processNotDirectoryFile(nodes, file, url);
     }
 
-    protected ClassNode createClassNode(final RVirtualClass rClass,
+    @Override
+	protected ClassNode createClassNode(final RVirtualClass rClass,
                                        final RFileInfo rFileInfo) {
         final Module module = getModule();
 

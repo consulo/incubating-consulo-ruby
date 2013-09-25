@@ -32,7 +32,8 @@ import com.intellij.openapi.module.Module;
 * @date: 04.08.2007
 */
 public class ModuleListCellRenderer extends DefaultListCellRenderer {
-    public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    @Override
+	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         if (value != null) {
             setText(((Module) value).getName());

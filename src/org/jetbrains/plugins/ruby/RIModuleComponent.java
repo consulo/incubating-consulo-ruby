@@ -40,22 +40,28 @@ public class RIModuleComponent implements ModuleComponent {
         myModule = module;
     }
 
-    public void projectOpened() {}
+    @Override
+	public void projectOpened() {}
 
-    public void projectClosed() {}
+    @Override
+	public void projectClosed() {}
 
-    public void moduleAdded() {
+    @Override
+	public void moduleAdded() {
         RubyDocManager.getInstance(myModule.getProject()).addRModule(myModule);
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RI_MODULE_COMPONENT;
     }
 
-    public void initComponent() {}
-    public void disposeComponent() {
+    @Override
+	public void initComponent() {}
+    @Override
+	public void disposeComponent() {
         RubyDocManager.getInstance(myModule.getProject()).removeRModule(myModule);
     }
 }

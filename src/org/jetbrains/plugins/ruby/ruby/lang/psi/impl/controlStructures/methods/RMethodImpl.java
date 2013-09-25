@@ -81,7 +81,8 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getAccessModifier() {
         updateIfIsConstructor();
         if (isClassConstructor) {
@@ -91,7 +92,8 @@ public class RMethodImpl extends RContainerBase implements RMethod{
     }
 
 
-    public void setAccessModifier(final AccessModifier modifier) {
+    @Override
+	public void setAccessModifier(final AccessModifier modifier) {
         updateIfIsConstructor();
         if (isClassConstructor) {
             return;
@@ -99,13 +101,15 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         super.setAccessModifier(modifier);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RArgumentList getArgumentList() {
         PsiElement argList = getChildByFilter(TS_ARGUMENT_LISTS,0);
         return argList!=null ? (RArgumentList) argList : null;
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRMethod(this);
             return;
@@ -113,7 +117,8 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RMethodPresentationUtil.getPresentation(this);
     }
@@ -123,12 +128,14 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         return RMethodPresentationUtil.getIcon(this, flags);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RMethodName getMethodName() {
         return getChildByType(RMethodName.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
                                                @NotNull final RFileInfo info) {
         final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
@@ -141,7 +148,8 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         return vMethod;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<ArgumentInfo> getArgumentInfos() {
         final RArgumentList argumentList = getArgumentList();
         if (argumentList==null){
@@ -150,12 +158,14 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         return argumentList.getArgumentInfos();
     }
 
-    public boolean isConstructor() {
+    @Override
+	public boolean isConstructor() {
         updateIfIsConstructor();
         return isClassConstructor;
     }
 
-    public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
         return element instanceof RVirtualMethod &&
                 getArgumentInfos().equals(((RVirtualMethod) element).getArgumentInfos()) &&
                 super.equalsToVirtual(element);
@@ -166,17 +176,20 @@ public class RMethodImpl extends RContainerBase implements RMethod{
      * @param otherMethod other method (virtual or psi)
      * @return true if methods equals.
      */
-    public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod) {
+    @Override
+	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod) {
         return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName() {
         final int options = RPresentationConstants.SHOW_NAME | RPresentationConstants.SHOW_PARAMETERS;
         return RMethodPresentationUtil.formatName(this, options);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName(final boolean includeDefaultArgs) {
         int options = RPresentationConstants.SHOW_NAME
                             | RPresentationConstants.SHOW_PARAMETERS;
@@ -186,24 +199,29 @@ public class RMethodImpl extends RContainerBase implements RMethod{
         return RMethodPresentationUtil.formatName(this, options);
     }
 
-    public int getTextOffset() {
+    @Override
+	public int getTextOffset() {
         final RMethodName methodName = getMethodName();
         return methodName!=null ? methodName.getTextOffset() : super.getTextOffset();
     }
 
-    public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    @Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
         return null;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.METHOD;
     }
 
-    protected RPsiElement getNameElement() {
+    @Override
+	protected RPsiElement getNameElement() {
         return getMethodName();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RCompoundStatement getCompoundStatement() {
       final RBodyStatement body = RubyPsiUtil.getChildByType(this, RBodyStatement.class, 0);
       assert body!=null;

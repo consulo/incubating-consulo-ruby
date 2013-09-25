@@ -33,7 +33,8 @@ public class RStringLiteralImpl extends RBaseStringImpl implements RBaseString {
         super(astNode);
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRStringLiteral(this);
             return;

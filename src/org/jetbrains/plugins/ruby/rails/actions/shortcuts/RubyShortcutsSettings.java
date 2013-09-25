@@ -48,11 +48,13 @@ public class RubyShortcutsSettings implements PersistentStateComponent<RubyShort
         return ServiceManager.getService(RubyShortcutsSettings.class);
     }
 
-    public RubyShortcutsSettings getState() {
+    @Override
+	public RubyShortcutsSettings getState() {
         return this;
     }
 
-    public void loadState(RubyShortcutsSettings shortcutsSettings) {
+    @Override
+	public void loadState(RubyShortcutsSettings shortcutsSettings) {
         serializableRakeTask = shortcutsSettings.serializableRakeTask;
         serializableGenerators = shortcutsSettings.serializableGenerators;
 

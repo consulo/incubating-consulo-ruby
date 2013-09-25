@@ -19,6 +19,7 @@ import com.intellij.psi.PsiElement;
  */
 public class RubyDeclarationRangeHandler implements DeclarationRangeHandler
 {
+	@Override
 	@NotNull
 	public TextRange getDeclarationRange(@NotNull final PsiElement container)
 	{

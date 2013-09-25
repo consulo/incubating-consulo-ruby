@@ -27,7 +27,8 @@ import java.util.Map;
  */
 public class TypesSemilattice implements Semilattice<Map<String, RType>> {
 
-    public Map<String, RType> join(final ArrayList<Map<String, RType>> ins) {
+    @Override
+	public Map<String, RType> join(final ArrayList<Map<String, RType>> ins) {
         if (ins.size() == 0) return new HashMap<String, RType>();
 
         Map<String, RType> result = new HashMap<String, RType>(ins.get(0));
@@ -54,7 +55,8 @@ public class TypesSemilattice implements Semilattice<Map<String, RType>> {
         return result;
     }
 
-    public boolean eq(final Map<String, RType> e1, final Map<String, RType> e2) {
+    @Override
+	public boolean eq(final Map<String, RType> e1, final Map<String, RType> e2) {
         if (e1.size() != e2.size()) {
             return false;
         }

@@ -19,15 +19,18 @@ class CallInstructionImpl extends InstructionImpl implements CallInstruction {
     return super.toString() + " CALL " + myCallee.num();
   }
 
-    public Iterable<? extends Instruction> succ(CallEnvironment env) {
+    @Override
+	public Iterable<? extends Instruction> succ(CallEnvironment env) {
       getStack(env, myCallee).push(this);
       return Collections.singletonList(myCallee);
     }
 
+  @Override
   public Iterable<? extends Instruction> allSucc() {
     return Collections.singletonList(myCallee);
   }
 
+  @Override
   protected String getElementPresentation() { return ""; }
 
   CallInstructionImpl(int num, InstructionImpl callee) {

@@ -38,11 +38,13 @@ public class RSpecConfigurationProducer extends RuntimeConfigurationProducer imp
         super(RSpecRunConfigurationType.getInstance());
     }
 
-    public PsiElement getSourceElement() {
+    @Override
+	public PsiElement getSourceElement() {
         return mySourceElement;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context) {
         final PsiElement element = location.getPsiElement();
 
@@ -55,7 +57,8 @@ public class RSpecConfigurationProducer extends RuntimeConfigurationProducer imp
         return (RunnerAndConfigurationSettingsImpl)RSpecRunConfigurationType.getInstance().createConfigurationByLocation(location);
     }
 
-    public int compareTo(Object o) {
+    @Override
+	public int compareTo(Object o) {
         return PREFERED;
     }
 }

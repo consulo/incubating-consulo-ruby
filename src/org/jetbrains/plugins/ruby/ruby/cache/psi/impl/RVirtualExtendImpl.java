@@ -35,7 +35,8 @@ public class RVirtualExtendImpl extends RVirtualIncludeImpl implements RVirtualE
     public RVirtualExtendImpl(RVirtualContainer container, @NotNull List<RVirtualName> names) {
         super(container, names);
     }
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_EXTEND;
     }
 
@@ -43,7 +44,8 @@ public class RVirtualExtendImpl extends RVirtualIncludeImpl implements RVirtualE
         return RCall.EXTEND_COMMAND;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualExtend(this);
     }
 }

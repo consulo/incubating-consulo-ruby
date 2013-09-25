@@ -32,7 +32,8 @@ public interface RubyChangeSet extends PomChangeSet {
 
     List<RubyChange> getChanges();
 
-    PomModelAspect getAspect();
+    @Override
+	PomModelAspect getAspect();
 
     void add(RubyChange xmlChange);
 

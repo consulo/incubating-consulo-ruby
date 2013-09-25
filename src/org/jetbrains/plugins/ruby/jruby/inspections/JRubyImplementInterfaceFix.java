@@ -46,17 +46,20 @@ public class JRubyImplementInterfaceFix implements LocalQuickFix {
         mySymbol = symbol;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return "Implement methods";
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFamilyName() {
         return "JRuby";
     }
 
-    public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
+    @Override
+	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
         final ImplementHandler handler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
         if (handler != null) {
             // Looking for editor

@@ -35,12 +35,14 @@ public class RailsServerRunConfigurationEditor extends RubyRunConfigurationEdito
         myForm = new RailsServerConfigurationForm(project, runConfiguration);
     }
 
-    protected void resetEditorFrom(final RubyRunConfiguration config) {
+    @Override
+	protected void resetEditorFrom(final RubyRunConfiguration config) {
         RailsServerRunConfiguration.copyParams((RailsServerRunConfiguration)config,
                                                (RailsServerConfigurationForm)myForm);
     }
 
-    protected void applyEditorTo(final RubyRunConfiguration config) throws ConfigurationException {
+    @Override
+	protected void applyEditorTo(final RubyRunConfiguration config) throws ConfigurationException {
         RailsServerRunConfiguration.copyParams((RailsServerConfigurationForm)myForm,
                                                (RailsServerRunConfiguration)config);
     }

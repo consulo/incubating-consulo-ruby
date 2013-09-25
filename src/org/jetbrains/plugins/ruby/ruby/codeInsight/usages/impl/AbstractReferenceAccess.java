@@ -20,12 +20,14 @@ abstract class AbstractReferenceAccess implements ReferenceAccess {
         myUsage = usage;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final RPsiElement getFullReference() {
         return myReference;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final RPsiElement getElement() {
         return myUsage;
     }

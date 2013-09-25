@@ -34,11 +34,13 @@ public class RVirtualLoadImpl extends RVirtualRequireImpl implements RVirtualLoa
     public RVirtualLoadImpl(RVirtualContainer container, @NotNull List<String> requires) {
         super(container, requires);
     }
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_LOAD;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualLoad(this);
     }
 

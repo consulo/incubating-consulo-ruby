@@ -92,7 +92,8 @@ expr	: command_call
     @NotNull
     private static IElementType parseOrWithLeadAnd(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethod() {
-            public IElementType parse(final RBuilder builder) {
+            @Override
+			public IElementType parse(final RBuilder builder) {
                 return parseAnd(builder);
             }
         };
@@ -126,7 +127,8 @@ expr	: command_call
     @NotNull
     private static IElementType parseAndWithLeadNot(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethod() {
-            public IElementType parse(final RBuilder builder) {
+            @Override
+			public IElementType parse(final RBuilder builder) {
                 return parseNot(builder);
             }
         };

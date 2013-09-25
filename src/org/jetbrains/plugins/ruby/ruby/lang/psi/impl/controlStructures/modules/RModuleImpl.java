@@ -51,7 +51,8 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule 
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRModule(this);
             return;
@@ -59,7 +60,8 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule 
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RModulePresentationUtil.getPresentation(this);
     }
@@ -69,16 +71,19 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule 
         return RModulePresentationUtil.getIcon(this, flags);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RModuleName getModuleName() {
         return getChildByType(RModuleName.class, 0);
     }
     
-    public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    @Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualModule createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
                                                @NotNull final RFileInfo info) {
         final RVirtualName virtualModuleName = new RVirtualNameImpl(getFullPath(), isGlobal());
@@ -90,16 +95,19 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule 
         return vModule;
     }
 
-    public int getTextOffset() {
+    @Override
+	public int getTextOffset() {
         final RModuleName moduleName = getModuleName();
         return moduleName!=null ? moduleName.getTextOffset() : super.getTextOffset();
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.MODULE;
     }
 
-    protected RPsiElement getNameElement() {
+    @Override
+	protected RPsiElement getNameElement() {
         return getModuleName();
     }
 }

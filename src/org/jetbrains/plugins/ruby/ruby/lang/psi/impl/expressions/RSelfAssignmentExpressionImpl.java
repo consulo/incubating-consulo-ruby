@@ -35,7 +35,8 @@ public class RSelfAssignmentExpressionImpl extends RAssignmentExpressionImpl imp
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RPsiElement object = getObject();
         return object instanceof RExpression ? ((RExpression) object).getType(fileSymbol) : RType.NOT_TYPED;

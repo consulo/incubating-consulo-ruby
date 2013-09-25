@@ -110,7 +110,8 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
         return myCreatedElement;
     }
 
-    protected void doOKAction() {
+    @Override
+	protected void doOKAction() {
         String fileName = myAttrPanel.getFileName();
         if (fileName != null && fileName.length() == 0) {
             Messages.showErrorDialog(myAttrComponent, RBundle.message("error.please.enter.a.file.name"), CommonBundle.getErrorTitle());
@@ -147,14 +148,16 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
         return RBundle.message("error.unable.to.parse.template.message", myTemplate.getName(), message);
     }
 
-    protected JComponent createCenterPanel() {
+    @Override
+	protected JComponent createCenterPanel() {
         myAttrPanel.ensureFitToScreen(200, 200);
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.add(myAttrComponent, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
         return centerPanel;
     }
 
-    public JComponent getPreferredFocusedComponent() {
+    @Override
+	public JComponent getPreferredFocusedComponent() {
         return IdeFocusTraversalPolicy.getPreferredFocusedComponent(myAttrComponent);
     }
 
@@ -188,9 +191,11 @@ public class CreateFileFromTemplateDialog extends DialogWrapper {
         final Ref<PsiElement> psiFileWrapper = new Ref<PsiElement>();
 
         CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 final Runnable run = new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         try {
                             psiFileWrapper.set(createPsiFile(template, project, directory, templateText, fileName));
                         }

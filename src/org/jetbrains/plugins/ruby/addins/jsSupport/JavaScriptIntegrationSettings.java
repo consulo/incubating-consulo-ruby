@@ -34,15 +34,18 @@ public class JavaScriptIntegrationSettings implements ApplicationComponent {
     public JavaScriptIntegrationSettings(final RApplicationSettings applicationSettings) {
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         RApplicationSettings.getInstance().setJsSupportEnabled(true);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         //Do nothing
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return "RubyJavaScriptIntegrationSettings";
     }

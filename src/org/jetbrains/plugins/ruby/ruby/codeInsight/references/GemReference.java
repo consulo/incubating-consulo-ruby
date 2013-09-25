@@ -82,51 +82,62 @@ public class GemReference implements RPsiPolyvariantReference{
         return new TextRange(relativeStartOffset, relativeStartOffset + element.getTextLength());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getRefValue() {
         return myElement;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         throw new UnsupportedOperationException("method multiResolveToSymbols is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         return ResolveResult.EMPTY_ARRAY;
     }
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myOwner;
     }
 
-    public TextRange getRangeInElement() {
+    @Override
+	public TextRange getRangeInElement() {
         return myTextRange;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolve() {
         return null;
     }
 
-    public String getCanonicalText() {
+    @Override
+	public String getCanonicalText() {
         return null;
     }
 
-    public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
         throw new UnsupportedOperationException("method handleElementRename is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
         return null;
     }
 
-    public boolean isReferenceTo(PsiElement element) {
+    @Override
+	public boolean isReferenceTo(PsiElement element) {
         return false;
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         if (myElement instanceof RBaseString) {
             final RFile rFile = RubyPsiUtil.getRFile(myOwner);
             assert rFile!=null;
@@ -150,7 +161,8 @@ public class GemReference implements RPsiPolyvariantReference{
         return PsiReference.EMPTY_ARRAY;
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return true;
     }
 }

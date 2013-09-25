@@ -29,17 +29,20 @@ public class RubyCommenter implements Commenter {
     @NonNls
     private static final String BLOCK_COMMAND_SUFFIX = "\n=end\n";
 
-    @Nullable
+    @Override
+	@Nullable
     public String getLineCommentPrefix() {
         return LINE_COMMENT_PREFIX;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getBlockCommentPrefix() {
         return BLOCK_COMMENT_PREFIX;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getBlockCommentSuffix() {
         return BLOCK_COMMAND_SUFFIX;
     }

@@ -41,11 +41,13 @@ public class CallSymbol extends Symbol{
         myPrototypes.add(myElement);
     }
 
-    public RVirtualElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol) {
+    @Override
+	public RVirtualElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol) {
         return myElement;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Prototypes getVirtualPrototypes(@Nullable final FileSymbol fileSymbol) {
         return myPrototypes;
     }

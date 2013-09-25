@@ -105,20 +105,24 @@ public class RailsLineMarkerInfo {
     }
 
     private class MyGutterIconRenderer extends GutterIconRenderer {
-        @NotNull
+        @Override
+		@NotNull
         public Icon getIcon() {
             return myIcon;
         }
 
-        public AnAction getClickAction() {
+        @Override
+		public AnAction getClickAction() {
             return new MyNavigateAction();
         }
 
-        public boolean isNavigateAction() {
+        @Override
+		public boolean isNavigateAction() {
             return true;
         }
 
-        public String getTooltipText() {
+        @Override
+		public String getTooltipText() {
             final PsiElement element = elementRef.get();
             if (element == null || !element.isValid()) {
                 return null;
@@ -127,18 +131,21 @@ public class RailsLineMarkerInfo {
             final Ref<String> toolTip = new Ref<String>();
             element.accept(new RubyElementVisitor() {
 
-                public void visitRMethod(final RMethod rMethod) {
+                @Override
+				public void visitRMethod(final RMethod rMethod) {
                     toolTip.set(getMethodTooltip(rMethod));
                 }
 
-                public void visitFile(final PsiFile psiFile) {
+                @Override
+				public void visitFile(final PsiFile psiFile) {
                     toolTip.set(getPsiFileTooltip(psiFile));
                 }
             });
             return toolTip.get();
         }
 
-        public com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment getAlignment() {
+        @Override
+		public com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment getAlignment() {
             return type == MarkerType.CONTROLLER_TO_VIEW ? Alignment.LEFT : Alignment.RIGHT;
         }
 
@@ -156,7 +163,8 @@ public class RailsLineMarkerInfo {
 	}
 
     private class MyNavigateAction extends AnAction {
-        public void actionPerformed(final AnActionEvent e) {
+        @Override
+		public void actionPerformed(final AnActionEvent e) {
             MouseEvent mouseEvent = (MouseEvent)e.getInputEvent();
             RailsLineMarkerNavigator.browse(mouseEvent, RailsLineMarkerInfo.this, myModule);
         }

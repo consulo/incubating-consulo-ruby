@@ -53,12 +53,14 @@ public class DuckTypeImpl implements DuckType {
         messages.add(message);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<Message> getMessages() {
         return getMessagesForName(null);
     }
 
-    public Collection<Message> contains(@NotNull final DuckType type) {
+    @Override
+	public Collection<Message> contains(@NotNull final DuckType type) {
         final List<Message> messages = new ArrayList<Message>();
         for (Message typeMessage : type.getMessages()) {
             boolean found = false;
@@ -72,7 +74,8 @@ public class DuckTypeImpl implements DuckType {
         return messages;
     }
 
-    public Collection<Message> getMessagesForName(@Nullable String name) {
+    @Override
+	public Collection<Message> getMessagesForName(@Nullable String name) {
         final Collection<Message> messages = myMessages.get(name);
         return messages!=null ? messages : Collections.<Message>emptyList();
     }

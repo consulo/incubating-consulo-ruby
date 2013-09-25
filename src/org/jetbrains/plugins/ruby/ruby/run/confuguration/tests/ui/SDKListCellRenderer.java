@@ -32,7 +32,8 @@ import com.intellij.openapi.projectRoots.SdkType;
  * @date: 12.08.2007
  */
 public class SDKListCellRenderer extends DefaultListCellRenderer {
-    public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    @Override
+	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         if (value != null) {
             setText(((Sdk) value).getName());

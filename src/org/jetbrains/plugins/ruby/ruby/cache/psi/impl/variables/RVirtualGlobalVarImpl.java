@@ -38,17 +38,20 @@ public class RVirtualGlobalVarImpl extends RVirtualElementBase implements RVirtu
         myHolder = holder;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getText() {
         return myText;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualGlobalVarHolder getHolder() {
         return myHolder;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitElement(this);
     }
 

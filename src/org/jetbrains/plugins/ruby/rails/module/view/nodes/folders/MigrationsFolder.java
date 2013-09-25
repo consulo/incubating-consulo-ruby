@@ -52,7 +52,8 @@ public class MigrationsFolder extends FolderNode {
                                     null);
    }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final VirtualFile migrDir = getVirtualFile();
         assert migrDir != null;
         final Module module = getModule();
@@ -74,7 +75,8 @@ public class MigrationsFolder extends FolderNode {
         return children.toArray(new SimpleNode[children.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.MIGRATION;
     }

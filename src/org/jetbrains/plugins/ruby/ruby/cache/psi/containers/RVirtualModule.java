@@ -26,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
  * @date: Oct 2, 2006
  */
 public interface RVirtualModule extends RVirtualFieldContantContainer {
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation();
 }

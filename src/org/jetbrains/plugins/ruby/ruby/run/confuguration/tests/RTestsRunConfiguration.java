@@ -96,15 +96,18 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
         toParams.setInheritanceCheckDisabled(fromParams.isInheritanceCheckDisabled());
     }
 
-    protected RTestsRunConfiguration createInstance() {
+    @Override
+	protected RTestsRunConfiguration createInstance() {
         return new RTestsRunConfiguration(getProject(), getFactory(), getName());
     }
 
 
-    public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+    @Override
+	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new RTestsRunConfigurationEditor(getProject(), this);
     }
 
+	@Override
 	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
 		try {
@@ -119,7 +122,8 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
         return new RTestsRunCommandLineState(this, executionEnvironment);
     }
 
-    protected void validateConfiguration(boolean isExecution) throws Exception {
+    @Override
+	protected void validateConfiguration(boolean isExecution) throws Exception {
         RubyRunConfigurationUtil.inspectSDK(this, isExecution);
         RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
 
@@ -253,27 +257,33 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
         }
     }
 
-    public String getTestsFolderPath() {
+    @Override
+	public String getTestsFolderPath() {
         return myTestsFolderPath;
     }
 
-    public String getTestScriptPath() {
+    @Override
+	public String getTestScriptPath() {
         return myTestScriptPath;
     }
 
-    public String getTestMethodName() {
+    @Override
+	public String getTestMethodName() {
         return myTestMethodName;
     }
 
-    public TestType getTestType() {
+    @Override
+	public TestType getTestType() {
         return myTestType;
     }
 
-    public String getTestQualifiedClassName() {
+    @Override
+	public String getTestQualifiedClassName() {
         return myTestClassName;
     }
 
-    public String getTestFileMask() {
+    @Override
+	public String getTestFileMask() {
         return myTestFileMask;
     }
 
@@ -281,43 +291,53 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
      * Path to folder
      * @param path Path should contains only ruby style path separator: "/"
      */
-    public void setTestsFolderPath(final String path) {
+    @Override
+	public void setTestsFolderPath(final String path) {
         myTestsFolderPath = TextUtil.getAsNotNull(path);
     }
 
-    public void setTestScriptPath(final String pathOrMask) {
+    @Override
+	public void setTestScriptPath(final String pathOrMask) {
         myTestScriptPath = TextUtil.getAsNotNull(pathOrMask);
     }
 
-    public void setTestMethodName(@Nullable final String name) {
+    @Override
+	public void setTestMethodName(@Nullable final String name) {
         myTestMethodName = TextUtil.getAsNotNull(name);
     }
 
-    public void setTestType(@NotNull final TestType testType) {
+    @Override
+	public void setTestType(@NotNull final TestType testType) {
         myTestType = testType;
     }
 
-    public void setTestQualifiedClassName(@Nullable final String testClassName) {
+    @Override
+	public void setTestQualifiedClassName(@Nullable final String testClassName) {
         myTestClassName = TextUtil.getAsNotNull(testClassName);
     }
 
-    public void setTestFileMask(final String testFileMask) {
+    @Override
+	public void setTestFileMask(final String testFileMask) {
         myTestFileMask = TextUtil.getAsNotNull(testFileMask);
     }
 
+   @Override
    public void readExternal(Element element) throws InvalidDataException {
        RTestRunConfigurationExternalizer.getInstance().readExternal(this, element);
    }
 
-    public void writeExternal(Element element) throws WriteExternalException {
+    @Override
+	public void writeExternal(Element element) throws WriteExternalException {
         RTestRunConfigurationExternalizer.getInstance().writeExternal(this, element);
     }
 
-    public boolean isInheritanceCheckDisabled() {
+    @Override
+	public boolean isInheritanceCheckDisabled() {
         return myInheritanceCheckDisabled;
     }
 
-    public void setInheritanceCheckDisabled(final boolean disabled) {
+    @Override
+	public void setInheritanceCheckDisabled(final boolean disabled) {
         myInheritanceCheckDisabled = disabled;
     }
 }

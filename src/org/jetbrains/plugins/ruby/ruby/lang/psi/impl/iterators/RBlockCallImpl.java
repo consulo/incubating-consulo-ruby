@@ -37,13 +37,15 @@ public class RBlockCallImpl extends RPsiElementBase implements RBlockCall {
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RPsiElement call = getCall();
         return call instanceof RExpression ? ((RExpression) call).getType(fileSymbol) : RType.NOT_TYPED;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RPsiElement getCall() {
         //noinspection ConstantConditions
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);

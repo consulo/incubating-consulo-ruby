@@ -64,7 +64,8 @@ public class AREF_ARGS implements RubyTokenTypes {
         final Ref<Boolean> starSeen = new Ref<Boolean>(false);
         final Ref<Boolean> assocSeen = new Ref<Boolean>(false);
         ParsingMethod parsingMethod = new ParsingMethod() {
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parse(final RBuilder builder) {
                 if (starSeen.get()) {
                     return RubyElementTypes.EMPTY_INPUT;

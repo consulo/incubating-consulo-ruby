@@ -40,7 +40,8 @@ public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType {//extends
         super(debugName, RubyLanguage.INSTANCE);
     }
 
-    public ASTNode parseContents(final ASTNode chameleon) {
+    @Override
+	public ASTNode parseContents(final ASTNode chameleon) {
         final PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
 
         final Lexer lexer = new RHTMLRubyLexer();

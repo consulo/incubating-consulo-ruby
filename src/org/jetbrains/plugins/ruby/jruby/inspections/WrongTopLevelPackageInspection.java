@@ -16,34 +16,40 @@ public class WrongTopLevelPackageInspection extends LocalInspectionTool {
     @NonNls
     private static final String SHORT_NAME = "WrongTopLevelPackage";
 
-    @NotNull
+    @Override
+	@NotNull
     @Nls
     public String getGroupDisplayName() {
         return RBundle.message("inspection.group.name");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     @Nls
     public String getDisplayName() {
         return RBundle.message("inspection.wrong.top.level.package");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     @NonNls
     public String getShortName() {
         return SHORT_NAME;
     }
 
-    public boolean isEnabledByDefault() {
+    @Override
+	public boolean isEnabledByDefault() {
         return true;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
         return new WrongTopLevelPackageInspectionVisitor(holder);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public HighlightDisplayLevel getDefaultLevel() {
         return HighlightDisplayLevel.ERROR;
     }

@@ -44,21 +44,25 @@ public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualFi
         myType = type;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualFieldHolder getHolder() {
         return myHolder;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myName;
     }
 
-    public FieldType getType() {
+    @Override
+	public FieldType getType() {
         return myType;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitElement(this);
     }
 
@@ -66,7 +70,8 @@ public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualFi
         return myType + " " + myName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getText() {
         return getPrefix() + myName;
     }

@@ -42,18 +42,21 @@ public class RConstantReference extends RNamedReference{
         super(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
         if (((RConstantImpl) myElement).isInDefinition()){
             return  new ResolveResult[]{
                     new ResolveResult(){
-                        @Nullable
+                        @Override
+						@Nullable
                         public PsiElement getElement() {
                             RubyUsageTypeProvider.setType(RConstantReference.this, RubyUsageType.DECLARATION);
                             return myElement;
                         }
 
-                        public boolean isValidResult() {
+                        @Override
+						public boolean isValidResult() {
                             return true;
                         }
                     }
@@ -62,13 +65,15 @@ public class RConstantReference extends RNamedReference{
         if (((RConstantImpl) myElement).isClassOrModuleName()){
             return  new ResolveResult[]{
                     new ResolveResult(){
-                        @Nullable
+                        @Override
+						@Nullable
                         public PsiElement getElement() {
                             RubyUsageTypeProvider.setType(RConstantReference.this, RubyUsageType.DECLARATION);
                             return myElement.getParentContainer();
                         }
 
-                        public boolean isValidResult() {
+                        @Override
+						public boolean isValidResult() {
                             return true;
                         }
                     }
@@ -77,7 +82,8 @@ public class RConstantReference extends RNamedReference{
         return super.multiResolveInner(incompleteCode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         if (((RConstantImpl) myElement).isInDefinition() || ((RConstantImpl) myElement).isClassOrModuleName()){
             return Collections.emptyList();

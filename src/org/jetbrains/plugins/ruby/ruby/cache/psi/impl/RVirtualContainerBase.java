@@ -64,26 +64,31 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
         return myName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myName.getName();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getFullPath() {
         return myName.getPath();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFullName() {
         return myName.getFullName();
     }
 
-    public boolean isGlobal() {
+    @Override
+	public boolean isGlobal() {
         return myName.isGlobal();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     final public List<RVirtualStructuralElement> getVirtualStructureElements() {
         return myStructureElements;
     }
@@ -92,32 +97,38 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
         myStructureElements = elements;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getDefaultChildAccessModifier() {
         return AccessModifier.PUBLIC;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getAccessModifier() {
         return myAccessModifier;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RFileInfo getContainingFileInfo() {
         return myContainingFileInfo;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getContainingFileUrl() {
         return myContainingFileInfo.getUrl();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public VirtualFile getVirtualFile() {
         return getContainingFileInfo().getVirtualFile();
     }
 
-    public void dump(@NotNull StringBuilder buffer, final int indent) {
+    @Override
+	public void dump(@NotNull StringBuilder buffer, final int indent) {
         super.dump(buffer, indent);
         for (RVirtualStructuralElement mySubContainer : myStructureElements) {
             buffer.append(NEW_LINE);
@@ -125,7 +136,8 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
         }
     }
 
-    public int getIndexOf(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public int getIndexOf(@NotNull RVirtualStructuralElement element) {
         for (int i=0; i < myStructureElements.size();i++){
             if (element == myStructureElements.get(i)){
                 return i;
@@ -134,7 +146,8 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
         return -1;
     }
 
-    public Project getProject() {
+    @Override
+	public Project getProject() {
         return getContainingFileInfo().getProject();
     }
 }

@@ -39,7 +39,8 @@ public class RubyUsageTypeProvider implements UsageTypeProvider{
     private static final UsageType EXPLICITLY_TYPED = new UsageType(RBundle.message("find.usages.explicitly.typed.group"));
     private static final UsageType DECLARATION = new UsageType(RBundle.message("find.usages.ruby.declarations.group"));
 
-    @Nullable
+    @Override
+	@Nullable
     public UsageType getUsageType(@NotNull final PsiElement element) {
         final RubyUsageType type = getType(element);
         if (type == RubyUsageType.DECLARATION){

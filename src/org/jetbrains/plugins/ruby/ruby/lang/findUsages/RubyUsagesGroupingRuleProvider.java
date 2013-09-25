@@ -32,12 +32,14 @@ import org.jetbrains.plugins.ruby.RComponents;
  * @date: Nov 2, 2007
  */
 public class RubyUsagesGroupingRuleProvider implements UsageGroupingRuleProvider {
-    @NotNull
+    @Override
+	@NotNull
     public UsageGroupingRule[] getActiveRules(Project project) {
         return new UsageGroupingRule[]{new RubyUsageGroupingRule()};
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AnAction[] createGroupingActions(UsageView usageView) {
         return AnAction.EMPTY_ARRAY;
     }

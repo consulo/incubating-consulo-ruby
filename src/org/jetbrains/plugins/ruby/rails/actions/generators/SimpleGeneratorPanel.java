@@ -38,23 +38,27 @@ public class SimpleGeneratorPanel implements GeneratorPanel {
     private JCheckBox mySVNCheckBox;
     public GeneratorOptions myOptions;
 
-    public void initPanel(final GeneratorOptions options) {
+    @Override
+	public void initPanel(final GeneratorOptions options) {
         myOptions = options;
         GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox,
                                               mySkipCheckBox, myBacktraceCheckBox,
                                               mySVNCheckBox, myOptions);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public JPanel getContent() {
         return myContentPanel;
     }
 
-    public String getMainArgument() {
+    @Override
+	public String getMainArgument() {
         return myGeneratorArgsLabelTextField.getText().trim();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getGeneratorArgs() {
         final StringBuilder buff = new StringBuilder();
         buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox,
@@ -67,11 +71,13 @@ public class SimpleGeneratorPanel implements GeneratorPanel {
         return buff.toString();
     }
 
-    public JComponent getPreferredFocusedComponent() {
+    @Override
+	public JComponent getPreferredFocusedComponent() {
         return myGeneratorArgsLabelTextField;
     }
 
-    public void saveSettings(final Project project) {
+    @Override
+	public void saveSettings(final Project project) {
         GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox,
                                      mySkipCheckBox, myBacktraceCheckBox,
                                      mySVNCheckBox, myOptions, project);

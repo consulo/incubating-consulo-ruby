@@ -75,36 +75,43 @@ public class RClassNode extends ProjectViewNode<RVirtualClass> {
         myIcon = RClassPresentationUtil.getIcon();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public VirtualFile getVirtualFile() {
         return myVirtualFile;
     }
 
-    public boolean contains(@NotNull VirtualFile file) {
+    @Override
+	public boolean contains(@NotNull VirtualFile file) {
         return false;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<AbstractTreeNode> getChildren() {
         return Collections.emptyList();
     }
 
-    protected void update(PresentationData data) {
+    @Override
+	protected void update(PresentationData data) {
         final RVirtualClass aClass = getValue();
         data.setIcons(myIcon);
         data.setLocationString(RClassPresentationUtil.getLocation(aClass));
         data.setPresentableText(RClassPresentationUtil.formatName(aClass, RPresentationConstants.SHOW_NAME));
     }
 
-    public void navigate(boolean requestFocus) {
+    @Override
+	public void navigate(boolean requestFocus) {
         ((Navigatable)getPsiElement()).navigate(requestFocus);
     }
 
-    public boolean canNavigate() {
+    @Override
+	public boolean canNavigate() {
         return canNavigateToSource();
     }
 
-    public boolean canNavigateToSource() {
+    @Override
+	public boolean canNavigateToSource() {
         return getPsiElement() instanceof Navigatable;
     }
 
@@ -113,7 +120,8 @@ public class RClassNode extends ProjectViewNode<RVirtualClass> {
         return RVirtualPsiUtil.findInPsi(myProject, element);
     }
 
-    public boolean canRepresent(Object element) {
+    @Override
+	public boolean canRepresent(Object element) {
         final RStructuralElement psiElement = getPsiElement();
         return psiElement!=null && RubyPsiUtil.getRFile(psiElement)  == element;
     }

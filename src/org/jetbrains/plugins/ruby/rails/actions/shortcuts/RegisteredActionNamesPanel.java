@@ -75,31 +75,36 @@ public class RegisteredActionNamesPanel {
         loadRegisteredData();
 
         myNamesTree.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged(final TreeSelectionEvent e) {
+            @Override
+			public void valueChanged(final TreeSelectionEvent e) {
                 updateOnSelectionChanged();
             }
         });
 
         addNameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 addNode(false);
             }
         });
 
         addGroupButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 addNode(true);
             }
         });
 
         removeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 removeSelectedNode();
             }
         });
 
         openKeymapButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 openKeyMap();
             }
         });
@@ -379,7 +384,8 @@ public class RegisteredActionNamesPanel {
     }
 
     private class NamesTreeRenderer extends DefaultTreeCellRenderer {
-        public Component getTreeCellRendererComponent(final JTree tree, final Object value,
+        @Override
+		public Component getTreeCellRendererComponent(final JTree tree, final Object value,
                                                       boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
             final MySortableTreeNode node = (MySortableTreeNode)value;
@@ -397,7 +403,8 @@ public class RegisteredActionNamesPanel {
     }
 
     private static final class ShortcutListRenderer extends DefaultListCellRenderer {
-      public Component getListCellRendererComponent(final JList list, final Object value,
+      @Override
+	  public Component getListCellRendererComponent(final JList list, final Object value,
                                                     final int index, final boolean isSelected,
                                                     final boolean cellHasFocus) {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -418,7 +425,8 @@ public class RegisteredActionNamesPanel {
          * For comparison uses <code>childNode.getUserObject().toString()</code>
          * @param newChild new child node
          */
-        public void add(@NotNull final MutableTreeNode newChild) {
+        @Override
+		public void add(@NotNull final MutableTreeNode newChild) {
             final String newObjStr = ((MySortableTreeNode)newChild).getUserObject().toString();
 
             final int childCount = getChildCount();

@@ -43,7 +43,8 @@ public class RVirtualObjectClassImpl extends RVirtualFieldContantContainerImpl i
         super(parentContainer, name, accessModifier, containingFileInfo);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RObjectClassPresentationUtil.getPresentation(this);
     }
@@ -52,12 +53,14 @@ public class RVirtualObjectClassImpl extends RVirtualFieldContantContainerImpl i
         return RObjectClassPresentationUtil.getIcon();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName() {
         return "<<" + getFullName();
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualObjectClass(this);
     }
 
@@ -65,7 +68,8 @@ public class RVirtualObjectClassImpl extends RVirtualFieldContantContainerImpl i
         return "class [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getPresentableName();
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.OBJECT_CLASS;
     }
 }

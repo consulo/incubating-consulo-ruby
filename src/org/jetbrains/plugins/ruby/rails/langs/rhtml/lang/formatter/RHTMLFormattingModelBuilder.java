@@ -52,7 +52,8 @@ import com.intellij.psi.xml.XmlElementType;
 public class RHTMLFormattingModelBuilder implements FormattingModelBuilder {
     private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class.getName());
 
-    @NotNull
+    @Override
+	@NotNull
     public FormattingModel createModel(@NotNull final PsiElement element,
                                        final CodeStyleSettings settings) {
         final PsiFile psiFile = element.getContainingFile();

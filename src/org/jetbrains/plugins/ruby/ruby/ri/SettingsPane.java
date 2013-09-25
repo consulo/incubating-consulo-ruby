@@ -63,7 +63,8 @@ class SettingsPane implements CheckBoxListListener {
 
         addButton.setText(RBundle.message("ruby.ri.settings.pane.add"));
         addButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 FileChooserDescriptor dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
                 dirChooser.setShowFileSystemRoots(true);
                 dirChooser.setHideIgnored(true);
@@ -81,7 +82,8 @@ class SettingsPane implements CheckBoxListListener {
 
         removeButton.setText(RBundle.message("ruby.ri.settings.pane.remove"));
         removeButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 int selected = myList.getSelectedIndex();
                 if (selected!=-1){
 // removing index
@@ -92,13 +94,15 @@ class SettingsPane implements CheckBoxListListener {
             }
         });
         defaultRadioButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 mySettings.setUseDefaults(defaultRadioButton.isSelected());
                 updateUI();
             }
         });
         selectedRadioButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
                 mySettings.setUseDefaults(defaultRadioButton.isSelected());
                 updateUI();
             }
@@ -159,7 +163,8 @@ class SettingsPane implements CheckBoxListListener {
         return myDocDirs.getCheckableDirectories();
     }
 
-    public void checkBoxSelectionChanged(int index, boolean value) {
+    @Override
+	public void checkBoxSelectionChanged(int index, boolean value) {
         final JCheckBox checkBox = (JCheckBox) myListModel.getElementAt(index);
         myDocDirs.stateChanged(checkBox.getText(), value);
         checkIfSomethingSelected();

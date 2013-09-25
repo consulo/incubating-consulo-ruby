@@ -47,21 +47,25 @@ public class RJavaTypeImpl extends RTypeBase implements RJavaType {
         myJavaType = RTypeUtil.createDuckTypeByChildren(fileSymbol, children, Collections.emptySet(), RTypeUtil.createFilter(false));
     }
 
-    public boolean isTyped() {
+    @Override
+	public boolean isTyped() {
         return true;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getName() {
         return myPsiType.getPresentableText();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<Message> getMessages() {
         return myJavaType.getMessages();
     }
 
-    public Collection<Message> getMessagesForName(@Nullable final String name) {
+    @Override
+	public Collection<Message> getMessagesForName(@Nullable final String name) {
         return myJavaType.getMessagesForName(name);
     }
 

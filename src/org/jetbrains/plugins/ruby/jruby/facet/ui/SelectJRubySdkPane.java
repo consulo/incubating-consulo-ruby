@@ -37,7 +37,8 @@ public class SelectJRubySdkPane {
     public SelectJRubySdkPane(@NotNull final JRubyFacetConfiguration configuration) {
 
         mySdksComponent.addComboboxActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 configuration.setSdk(getSelectedSdk());
             }
         });

@@ -61,17 +61,20 @@ public class RHTMLApplicationComponent  implements ApplicationComponent {
         CompletionUtil.registerCompletionData(RHTMLFileType.RHTML, new RHTMLCompletionData());
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
           return getClass().getName();
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         //Do nothing
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         //Do nothing
     }
 }

@@ -43,7 +43,8 @@ import java.util.List;
  */
 public class Colon3Reference extends RQualifiedReference implements RPsiPolyvariantReference {
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         if (fileSymbol == null){
             return Collections.emptyList();
@@ -61,7 +62,8 @@ public class Colon3Reference extends RQualifiedReference implements RPsiPolyvari
         return multiResolveToSymbols(fileSymbol);
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         final FileSymbol fileSymbol = ((RPsiElementBase) myWholeReference).forceFileSymbolUpdate();
         if (fileSymbol == null){
             return EMPTY_ARRAY;

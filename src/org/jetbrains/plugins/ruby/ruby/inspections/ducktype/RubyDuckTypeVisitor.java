@@ -56,7 +56,8 @@ public class RubyDuckTypeVisitor extends RubyInspectionVisitor {
         super(holder);
     }
 
-    public void visitRCall(@NotNull final RCall call) {
+    @Override
+	public void visitRCall(@NotNull final RCall call) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -71,7 +72,8 @@ public class RubyDuckTypeVisitor extends RubyInspectionVisitor {
         matchCallAndMethod(elements.get(0), call, call.getArguments(), fileSymbol);
     }
 
-    public void visitRIdentifier(final RIdentifier rIdentifier) {
+    @Override
+	public void visitRIdentifier(final RIdentifier rIdentifier) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 

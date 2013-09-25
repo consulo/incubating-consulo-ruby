@@ -41,12 +41,14 @@ class RakeAction extends AnAction {
         myTask = task;
     }
 
-    public void actionPerformed(final AnActionEvent e) {
+    @Override
+	public void actionPerformed(final AnActionEvent e) {
         RakeUtil.runRakeTask(e.getDataContext(), myTask);
     }
 
 
-    public void update(final AnActionEvent e) {
+    @Override
+	public void update(final AnActionEvent e) {
         final Module module = DataContextUtil.getModule(e.getDataContext());
         final boolean show = RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
         AnActionUtil.updatePresentation(e.getPresentation(), true, show);

@@ -58,19 +58,23 @@ public class GeneratorHelpPanel {
         }
 
         myScrollPane.addComponentListener(new ComponentListener() {
-            public void componentResized(ComponentEvent e) {
+            @Override
+			public void componentResized(ComponentEvent e) {
                 myScrollPane.getViewport().scrollRectToVisible(new Rectangle(0, -myScrollPane.getHeight(), 0, 0));
             }
 
-            public void componentMoved(ComponentEvent e) {
+            @Override
+			public void componentMoved(ComponentEvent e) {
                 //Do nothing
             }
 
-            public void componentShown(ComponentEvent e) {
+            @Override
+			public void componentShown(ComponentEvent e) {
                 //Do nothing
             }
 
-            public void componentHidden(ComponentEvent e) {
+            @Override
+			public void componentHidden(ComponentEvent e) {
                 //Do nothing
             }
         });

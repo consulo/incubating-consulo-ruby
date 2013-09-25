@@ -39,19 +39,22 @@ public class RRescueBlockImpl extends RPsiElementBase implements RRescueBlock {
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RBlockVariables getBlockVariables() {
         final PsiElement result = getChildByFilter(RubyElementTypes.BLOCK_VARIABLES, 0);
         return result!=null? (RBlockVariables) result : null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getException() {
         final RBlockVariables vars = getBlockVariables();
         return vars!=null ? RubyPsiUtil.getElementToLeftWithSameParent(vars, RPsiElement.class) : null;
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRRescueBlock(this);
             return;

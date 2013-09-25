@@ -65,13 +65,15 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol {
         isJRubyEnabled = jRubyEnabled;
     }
 
-    public void fileAdded(@NotNull final String url) {
+    @Override
+	public void fileAdded(@NotNull final String url) {
         // In common case, we clear cache if file is added
         myOuterSymbol = null;
         myFileSymbol = null;
     }
 
-    protected void fileChanged(@NotNull final String url) {
+    @Override
+	protected void fileChanged(@NotNull final String url) {
         if (myOuterSymbol == null) {
             return;
         }
@@ -109,7 +111,8 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol {
         }
     }
 
-    protected void updateFileSymbol() {
+    @Override
+	protected void updateFileSymbol() {
         final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
         final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
         if (file == null) {

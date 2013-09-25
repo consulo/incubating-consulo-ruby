@@ -79,17 +79,20 @@ public class RHTMLBlock extends AbstractBlock {
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public TextRange getTextRange() {
         return myTextRange;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Indent getIndent() {
         return myIndent;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Spacing getSpacing(Block child1, Block child2) {
         final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child1);
         final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child2);
@@ -97,7 +100,8 @@ public class RHTMLBlock extends AbstractBlock {
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public ChildAttributes getChildAttributes(int newChildIndex) {
         Indent indent = Indent.getNoneIndent();
         final List<Block> subBlocks = getSubBlocks();
@@ -118,7 +122,8 @@ public class RHTMLBlock extends AbstractBlock {
         return new ChildAttributes(indent, null);
     }
 
-    public boolean isIncomplete() {
+    @Override
+	public boolean isIncomplete() {
         return isIncomplete(myNode);
     }
 
@@ -143,7 +148,8 @@ public class RHTMLBlock extends AbstractBlock {
         return isIncomplete(lastChild);
     }
 
-    public boolean isLeaf() {
+    @Override
+	public boolean isLeaf() {
         return myNode.getFirstChildNode() == null;
     }
 
@@ -151,7 +157,8 @@ public class RHTMLBlock extends AbstractBlock {
         return "Block at: " + myNode.toString();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected List<Block> buildChildren() {
         return RHTMLBlockGenerator.createRHTMLSubBlocks(myNode, myXmlFormattingPolicy, this, myViewProvider);
     }

@@ -52,7 +52,8 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
         myRegistrar = passRegistrar;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile,
                                                              @NotNull final Editor editor) {
         if (psiFile==null){
@@ -89,24 +90,29 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
         return null;
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RailsComponents.RAILS_HIGHLIGHT_PASS_FACTORY;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST,
                 Pass.UPDATE_ALL, true, true);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 }
 

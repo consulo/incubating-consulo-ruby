@@ -56,11 +56,13 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         myProject = project;
     }
 
-    public Language[] getLanguages() {
+    @Override
+	public Language[] getLanguages() {
         return new Language[]{RubyLanguage.INSTANCE, eRubyLanguage.INSTANCE};
     }
 
-    public boolean acceptElement(@NotNull final PsiElement element) {
+    @Override
+	public boolean acceptElement(@NotNull final PsiElement element) {
         if (isInRubyDebugMode(element)) {
             return true;
         }
@@ -88,38 +90,46 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
         return false;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getElementInfo(@NotNull final PsiElement psiElement) {
         return getPresentation(psiElement, true);
     }
-    @Nullable
+    @Override
+	@Nullable
     public String getElementTooltip(@NotNull final PsiElement psiElement) {
         return getPresentation(psiElement, false);
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         // Do nothing
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         // Do nothing
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RailsComponents.RHTML_AND_RUBY_BREADCRUMBS_INFO_PROVIDER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
       //  BreadcrumbsLoaderComponent.registerProvider(myProject, this);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // Do nothing
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getParent(@NotNull final PsiElement psiElement) {
         if (isInRubyDebugMode(psiElement)) {
             return super.getParent(psiElement);

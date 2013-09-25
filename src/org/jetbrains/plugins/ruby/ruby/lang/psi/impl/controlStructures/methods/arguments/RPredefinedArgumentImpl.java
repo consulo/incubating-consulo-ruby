@@ -20,28 +20,33 @@ public class RPredefinedArgumentImpl extends RPsiElementBase implements RPredefi
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName(){
         final RIdentifier identifier = getIdentifier();
         //noinspection ConstantConditions
         return identifier!=null ? identifier.getName() : "";
     }
 
-    public RIdentifier getIdentifier(){
+    @Override
+	public RIdentifier getIdentifier(){
         return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
     }
 
-    public ArgumentInfo.Type getType() {
+    @Override
+	public ArgumentInfo.Type getType() {
         return ArgumentInfo.Type.PREDEFINED;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getValueText() {
         final RPsiElement value = getValue();
         return value!=null ? value.getText() : null;
     }
 
-    public RPsiElement getValue() {
+    @Override
+	public RPsiElement getValue() {
         return getChildByType(RPsiElement.class, 1);
     }
 }

@@ -67,37 +67,44 @@ public class YAMLColorsPage implements ColorSettingsPage {
 
     private static final ColorDescriptor[] COLORS = new ColorDescriptor[0];
 
-    @Nullable
+    @Override
+	@Nullable
     public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
         return ADDITIONAL_HIGHLIGHT_DESCRIPTORS;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDisplayName() {
         return YAMLBundle.message("color.settings.yaml.name");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Icon getIcon() {
         return AllIcons.Nodes.DataTables;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AttributesDescriptor[] getAttributeDescriptors() {
         return ATTRS;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ColorDescriptor[] getColorDescriptors() {
         return COLORS;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public SyntaxHighlighter getHighlighter() {
         return new YAMLSyntaxHighlighter();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDemoText() {
         return DEMO_TEXT;
     }

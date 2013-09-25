@@ -44,22 +44,26 @@ public class RJSFileType extends LanguageFileType {
             super(RubyFileType.RUBY.getLanguage());
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public String getName() {
             return NAME;
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public String getDescription() {
             return DESCRIPTION;
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public String getDefaultExtension() {
             return DEFAULT_EXTENSION;
         }
 
-        @Nullable
+        @Override
+		@Nullable
         public Icon getIcon() {
             return ICON;
         }

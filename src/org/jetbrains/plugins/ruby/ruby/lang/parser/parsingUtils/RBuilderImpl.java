@@ -61,49 +61,58 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 /////////// Engine core functions //////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void advanceLexer() {
+    @Override
+	public void advanceLexer() {
         myBuilder.getTokenType();
         myBuilder.advanceLexer();
         initNextTokens();
     }
 
-    public void error(@NotNull final String error) {
+    @Override
+	public void error(@NotNull final String error) {
         myBuilder.getTokenType();
         myBuilder.error(error);
     }
 
-    public RMarker mark() {
+    @Override
+	public RMarker mark() {
         return mark(true);
     }
 
 
-    public RMarker mark(boolean passWhiteSpacesAndComments) {
+    @Override
+	public RMarker mark(boolean passWhiteSpacesAndComments) {
         if (passWhiteSpacesAndComments) {
             myBuilder.getTokenType();
         }
         return new RMarkerImpl(this, myBuilder.mark());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public IElementType getTokenType() {
         return myNextToken;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public IElementType getNotEolTokenType() {
         return myNextNotEolToken;
     }
 
-    public boolean eof() {
+    @Override
+	public boolean eof() {
         return myNextToken == null;
     }
 
-    public boolean eofIgnoreEOL() {
+    @Override
+	public boolean eofIgnoreEOL() {
         return myNextNotEolToken == null;
     }
 
 
-    public void initNextTokens() {
+    @Override
+	public void initNextTokens() {
         final PsiBuilder.Marker rollBackMarker = myBuilder.mark();
         myNextToken = myBuilder.getTokenType();
         while (myBuilder.getTokenType() == tEOL) {
@@ -117,7 +126,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 /////// Compare Token //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean compare(final IElementType type) {
+    @Override
+	public boolean compare(final IElementType type) {
         boolean found = type == myNextToken;
         if (found) {
 // move to the token
@@ -126,7 +136,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return found;
     }
 
-    public boolean compare(final TokenSet types) {
+    @Override
+	public boolean compare(final TokenSet types) {
         boolean found = types.contains(myNextToken);
         if (found) {
 // move to the token
@@ -139,7 +150,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 /////////// CompareToken with ignore tokens/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean compareIgnoreEOL(final IElementType type) {
+    @Override
+	public boolean compareIgnoreEOL(final IElementType type) {
         boolean found = type == myNextNotEolToken;
         if (found) {
 // move to the token
@@ -149,7 +161,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return found;
     }
 
-    public boolean compareIgnoreEOL(final TokenSet types) {
+    @Override
+	public boolean compareIgnoreEOL(final TokenSet types) {
         boolean found = types.contains(myNextNotEolToken);
         if (found) {
 // move to the token
@@ -163,7 +176,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 //////// Check and Eat /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean compareAndEat(final IElementType type) {
+    @Override
+	public boolean compareAndEat(final IElementType type) {
         boolean found = compare(type);
         if (found) {
             advanceLexer();
@@ -171,7 +185,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return found;
     }
 
-    public boolean compareAndEat(final TokenSet types) {
+    @Override
+	public boolean compareAndEat(final TokenSet types) {
         boolean found = compare(types);
         if (found) {
             advanceLexer();
@@ -179,7 +194,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return found;
     }
 
-    public boolean compareAndEatIgnoreEOL(final IElementType type) {
+    @Override
+	public boolean compareAndEatIgnoreEOL(final IElementType type) {
         boolean found = compareIgnoreEOL(type);
         if (found) {
             advanceLexer();
@@ -187,7 +203,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return found;
     }
 
-    public boolean compareAndEatIgnoreEOL(final TokenSet types) {
+    @Override
+	public boolean compareAndEatIgnoreEOL(final TokenSet types) {
         boolean found = compareIgnoreEOL(types);
         if (found) {
             advanceLexer();
@@ -199,21 +216,25 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 /////// Check Matches //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void match(final IElementType token) {
+    @Override
+	public void match(final IElementType token) {
         match(token, ErrorMsg.expected(token));
     }
 
-    public void match(final IElementType token, final String errorMessage) {
+    @Override
+	public void match(final IElementType token, final String errorMessage) {
         if (!compareAndEat(token)) {
             error(errorMessage);
         }
     }
 
-    public void match(final TokenSet tokens) {
+    @Override
+	public void match(final TokenSet tokens) {
         match(tokens, ErrorMsg.expected(tokens, this));
     }
 
-    public void match(final TokenSet tokens, final String errorMessage) {
+    @Override
+	public void match(final TokenSet tokens, final String errorMessage) {
         if (!compareAndEat(tokens)) {
             error(errorMessage);
         }
@@ -223,11 +244,13 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 ///////// checkMatches ignoring EOL ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void matchIgnoreEOL(final IElementType token) {
+    @Override
+	public void matchIgnoreEOL(final IElementType token) {
         matchIgnoreEOL(token, ErrorMsg.expected(token));
     }
 
-    public void matchIgnoreEOL(final IElementType token, final String errorMessage) {
+    @Override
+	public void matchIgnoreEOL(final IElementType token, final String errorMessage) {
         passHeredocs();
         boolean found = compareAndEatIgnoreEOL(token);
         if (!found) {
@@ -235,11 +258,13 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         }
     }
 
-    public void matchIgnoreEOL(final TokenSet tokens) {
+    @Override
+	public void matchIgnoreEOL(final TokenSet tokens) {
         matchIgnoreEOL(tokens, ErrorMsg.expected(tokens, this));
     }
 
-    public void matchIgnoreEOL(final TokenSet tokens, final String errorMessage) {
+    @Override
+	public void matchIgnoreEOL(final TokenSet tokens, final String errorMessage) {
         passHeredocs();
         boolean found = compareAndEatIgnoreEOL(tokens);
         if (!found) {
@@ -252,7 +277,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public boolean passHeredocs() {
+    @Override
+	public boolean passHeredocs() {
         if (!isInHeredoc && BNF.tHEREDOC_VALUE_BEGINNINGS.contains(myNextNotEolToken)){
             isInHeredoc = true;
             passEOLs();
@@ -264,7 +290,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return false;
     }
 
-    public boolean passEOLs() {
+    @Override
+	public boolean passEOLs() {
         boolean seen = false;
         while (compareAndEat(tEOL)) {
             seen = true;
@@ -272,7 +299,8 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         return seen;
     }
 
-    public void passJunks() {
+    @Override
+	public void passJunks() {
         myBuilder.getTokenType();
     }
 
@@ -280,29 +308,34 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
 ///////// Parse Single Token ///////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public IElementType parseSingleToken(final IElementType type, final IElementType statementType) {
+    @Override
+	public IElementType parseSingleToken(final IElementType type, final IElementType statementType) {
         return parseSingleToken(type, statementType, ErrorMsg.expected(type));
     }
 
-    public IElementType parseSingleToken(final IElementType type, final IElementType statementType, final String errorMessage) {
+    @Override
+	public IElementType parseSingleToken(final IElementType type, final IElementType statementType, final String errorMessage) {
         final RMarker statementMarker = mark();
         match(type, errorMessage);
         statementMarker.done(statementType);
         return statementType;
     }
 
-    public IElementType parseSingleToken(final TokenSet types, final IElementType statementType) {
+    @Override
+	public IElementType parseSingleToken(final TokenSet types, final IElementType statementType) {
         return parseSingleToken(types, statementType, ErrorMsg.expected(types, this));
     }
 
-    public IElementType parseSingleToken(final TokenSet types, final IElementType statementType, final String errorMessage) {
+    @Override
+	public IElementType parseSingleToken(final TokenSet types, final IElementType statementType, final String errorMessage) {
         final RMarker statementMarker = mark();
         match(types, errorMessage);
         statementMarker.done(statementType);
         return statementType;
     }
 
-    public ASTNode getTreeBuilt() {
+    @Override
+	public ASTNode getTreeBuilt() {
         return myBuilder.getTreeBuilt();
     }
 
@@ -315,27 +348,33 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
     private int ARG = 0;
     private int PRIMARY = 0;
 
-    public boolean isDEBUG() {
+    @Override
+	public boolean isDEBUG() {
         return Logger.getInstance(RBuilderImpl.class.getName()).isDebugEnabled();
     }
 
-    public void STMT() {
+    @Override
+	public void STMT() {
         STMT++;
     }
 
-    public void EXPR() {
+    @Override
+	public void EXPR() {
         EXPR++;
     }
 
-    public void ARG() {
+    @Override
+	public void ARG() {
         ARG++;
     }
 
-    public void PRIMARY() {
+    @Override
+	public void PRIMARY() {
         PRIMARY++;
     }
 
-    public void printDebugStats() {
+    @Override
+	public void printDebugStats() {
         System.err.println("TIME " + (System.currentTimeMillis() - startTime) + "\n");
         System.err.println("STMT " + STMT);
         System.err.println("EXPR " + EXPR);
@@ -343,11 +382,13 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder {
         System.err.println("PRIMARY " + PRIMARY);
     }
 
-    public boolean isAcceptibleErrorToken(IElementType myToken) {
+    @Override
+	public boolean isAcceptibleErrorToken(IElementType myToken) {
         return myToken instanceof RubyElementType;
     }
 
-    public Map<TokenSet, String> getErrorCache() {
+    @Override
+	public Map<TokenSet, String> getErrorCache() {
         return myErrorCache;
     }
 }

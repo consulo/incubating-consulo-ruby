@@ -54,18 +54,21 @@ public class RailsTemplatesLoader implements ApplicationComponent {
         //Do nothing
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RAILS_TEMPLATES_LOADER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         final HashMap<String, String> templateId2Text = RORTemplatesSettingsUtil.loadDefaultSettings();
         initFileTemplate(templateId2Text);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // Do nothing
     }
 

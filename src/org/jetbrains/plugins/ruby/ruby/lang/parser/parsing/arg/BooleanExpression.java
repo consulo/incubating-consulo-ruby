@@ -56,7 +56,8 @@ class BooleanExpression implements RubyTokenTypes {
     @NotNull
     private static IElementType parseOrWithLeadAND(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return parseAnd(builder);
             }
@@ -92,7 +93,8 @@ class BooleanExpression implements RubyTokenTypes {
     @NotNull
     private static IElementType parseAndWithLeadMatch(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return MatchingExpression.parse(builder);
             }

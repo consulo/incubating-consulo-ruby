@@ -35,12 +35,14 @@ public class REmptyType extends RTypeBase implements RType {
 
     private REmptyType(){}
 
-    @NotNull
+    @Override
+	@NotNull
     public Set<Message> getMessages() {
         return Collections.emptySet();
     }
 
-    public Set<Message> getMessagesForName(@Nullable final String name) {
+    @Override
+	public Set<Message> getMessagesForName(@Nullable final String name) {
         return Collections.emptySet();
     }
 

@@ -114,30 +114,36 @@ public class RubyGutterInfo extends RubyLineMarkerInfo{
         return myProject;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public GutterIconRenderer createGutterRenderer() {
         return new MyGutterIconRenderer();
     }
 
     private class MyGutterIconRenderer extends GutterIconRenderer {
-        @NotNull
+        @Override
+		@NotNull
         public Icon getIcon() {
             return myMode == Mode.OVERRIDE ? RubyIcons.RUBY_GUTTER_OVERRIDING : RubyIcons.RUBY_GUTTER_IMPLEMENTING;
         }
 
-        public AnAction getClickAction() {
+        @Override
+		public AnAction getClickAction() {
             return new MyNavigateAction();
         }
 
-        public boolean isNavigateAction() {
+        @Override
+		public boolean isNavigateAction() {
             return true;
         }
 
-        public String getTooltipText() {
+        @Override
+		public String getTooltipText() {
             return myToolTip;
         }
 
-        public GutterIconRenderer.Alignment getAlignment() {
+        @Override
+		public GutterIconRenderer.Alignment getAlignment() {
             return Alignment.LEFT;
         }
 
@@ -155,7 +161,8 @@ public class RubyGutterInfo extends RubyLineMarkerInfo{
 	}
 
     private class MyNavigateAction extends AnAction {
-        public void actionPerformed(final AnActionEvent e) {
+        @Override
+		public void actionPerformed(final AnActionEvent e) {
             MouseEvent mouseEvent = (MouseEvent)e.getInputEvent();
             RubyGutterNavigator.browse(mouseEvent, RubyGutterInfo.this);
         }

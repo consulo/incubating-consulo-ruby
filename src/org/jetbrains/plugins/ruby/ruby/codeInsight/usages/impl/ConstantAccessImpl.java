@@ -20,6 +20,7 @@ public class ConstantAccessImpl extends AbstractReferenceAccess implements Const
     myValue = value;
   }
 
+  @Override
   @NotNull
   public RConstant getConstant() {
     return (RConstant) myValue;

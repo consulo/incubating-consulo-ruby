@@ -57,7 +57,8 @@ public class SwitchToController extends EditorAction {
     }
 
     protected static class Handler extends EditorActionHandler {
-        public void execute(Editor editor, DataContext dataContext) {
+        @Override
+		public void execute(Editor editor, DataContext dataContext) {
 
             // must be in rails module
             final Module module = DataKeys.MODULE.getData(dataContext);

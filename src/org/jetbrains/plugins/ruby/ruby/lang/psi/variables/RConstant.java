@@ -37,6 +37,7 @@ public interface RConstant extends RVirtualConstant, RNamedElement, PsiNamedElem
     @Nullable
     public ConstantDefinitions getConstantDefinitions();
 
-    @NotNull
+    @Override
+	@NotNull
     public RConstantHolder getHolder();
 }

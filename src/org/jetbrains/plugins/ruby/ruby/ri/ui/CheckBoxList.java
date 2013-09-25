@@ -40,7 +40,8 @@ public class CheckBoxList extends JList {
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setBorder(BorderFactory.createEtchedBorder());
         addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            @Override
+			public void mouseClicked(MouseEvent e) {
                 if (isEnabled()) {
                     int index = locationToIndex(e.getPoint());
 
@@ -66,7 +67,8 @@ public class CheckBoxList extends JList {
 
 
     private class CellRenderer implements ListCellRenderer {
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        @Override
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             JCheckBox checkbox = (JCheckBox) value;
             checkbox.setBackground(isSelected ? getSelectionBackground() : getBackground());
             checkbox.setForeground(isSelected ? getSelectionForeground() : getForeground());

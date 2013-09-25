@@ -33,7 +33,8 @@ public class LayoutNode extends SimpleFileNode {
         super(module, myFile);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.LAYOUT;
     }

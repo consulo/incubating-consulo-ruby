@@ -43,7 +43,8 @@ public class RIdentifierReference extends RNamedReference {
         super(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         final RIdentifier identifier = (RIdentifier) myElement;
         final ScopeVariable scopeVariable = identifier.getScopeVariable();

@@ -55,7 +55,8 @@ public class GeneratorsActionGroup extends ActionGroup {
         init();
     }
 
-    public AnAction[] getChildren(@Nullable final AnActionEvent event) {
+    @Override
+	public AnAction[] getChildren(@Nullable final AnActionEvent event) {
         if (event == null){
             return AnActionUtil.NO_ACTIONS;
         }
@@ -83,7 +84,8 @@ public class GeneratorsActionGroup extends ActionGroup {
         return myActions.toArray(new AnAction[myActions.size()]);
     }
 
-    public void update(@Nullable final AnActionEvent event) {
+    @Override
+	public void update(@Nullable final AnActionEvent event) {
         if (event == null){ //TODO any sense?
             return;
         }

@@ -32,31 +32,38 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
  */
 public abstract class RubyStructureVisitor extends RubyElementVisitor {
 
-    public void visitElement(PsiElement psiElement){
+    @Override
+	public void visitElement(PsiElement psiElement){
         psiElement.acceptChildren(this);
     }
 
-    public void visitRFile(RFile file){
+    @Override
+	public void visitRFile(RFile file){
         visitContainer(file);
     }
 
-    public void visitRModule(RModule rModule){
+    @Override
+	public void visitRModule(RModule rModule){
         visitContainer(rModule);
     }
 
-    public void visitRClass(RClass rClass){
+    @Override
+	public void visitRClass(RClass rClass){
         visitContainer(rClass);
     }
 
-    public void visitRObjectClass(RObjectClass rMetaClass){
+    @Override
+	public void visitRObjectClass(RObjectClass rMetaClass){
         visitContainer(rMetaClass);
     }
 
-    public void visitRMethod(RMethod rMethod){
+    @Override
+	public void visitRMethod(RMethod rMethod){
         visitContainer(rMethod);
     }
 
-    public void visitRSingletonMethod(RSingletonMethod rSingletonMethod){
+    @Override
+	public void visitRSingletonMethod(RSingletonMethod rSingletonMethod){
         visitContainer(rSingletonMethod);
     }
 

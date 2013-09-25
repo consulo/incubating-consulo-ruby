@@ -37,20 +37,24 @@ public class RTestsRunConfigurationEditor extends SettingsEditor<RTestsRunConfig
         myForm = new RTestsRunConfigurationForm(project, configuration);
     }
 
-    protected void resetEditorFrom(final RTestsRunConfiguration config) {
+    @Override
+	protected void resetEditorFrom(final RTestsRunConfiguration config) {
         RTestsRunConfiguration.copyParams(config, myForm);
     }
 
-    protected void applyEditorTo(final RTestsRunConfiguration config) throws ConfigurationException {
+    @Override
+	protected void applyEditorTo(final RTestsRunConfiguration config) throws ConfigurationException {
         RTestsRunConfiguration.copyParams(myForm, config);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected JComponent createEditor() {
         return myForm.getPanel();
     }
 
-    protected void disposeEditor() {
+    @Override
+	protected void disposeEditor() {
         myForm = null;
     }
 }

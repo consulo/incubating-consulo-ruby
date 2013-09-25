@@ -39,17 +39,20 @@ public class RelativePathToAbsolutePathIntention extends RequirePathIntention {
     private static final String NAME = "RelativePathToAbsolute";
     private static final String TEXT = RBundle.message("ruby.intentions.relative.path.to.absolute");
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFamilyName() {
         return NAME;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getText(){
         return TEXT;
     }
 
-    public boolean isAvailable(@NotNull final Project project,
+    @Override
+	public boolean isAvailable(@NotNull final Project project,
                                @NotNull final Editor editor,
                                @NotNull final PsiFile psiFile) {
         if (!RubyIntentionUtil.isAvailable(editor, psiFile)){
@@ -66,7 +69,8 @@ public class RelativePathToAbsolutePathIntention extends RequirePathIntention {
     }
 
 
-    public void invoke(@NotNull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException {
+    @Override
+	public void invoke(@NotNull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException {
         final PsiElement element = findRequireRoot(getElementAt(psiFile, editor));
         if (element == null) {
             return;

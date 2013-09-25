@@ -44,21 +44,25 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
         myNewName = newName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getOldName() {
         return myOldName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getNewName() {
         return myNewName;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.ALIAS;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualAlias(this);
     }
 
@@ -66,12 +70,14 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
         return getPresentableText();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableText() {
         return RubyTokenTypes.kALIAS.toString() + " '" + getNewName() + "' '"  + getOldName() + "'";
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Icon getIcon(final int flags) {
         return RAliasPresentationUtil.getIcon();
     }

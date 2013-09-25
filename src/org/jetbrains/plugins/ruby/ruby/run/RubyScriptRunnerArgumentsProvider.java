@@ -76,7 +76,8 @@ public class RubyScriptRunnerArgumentsProvider implements CommandLineArgumentsPr
         return params;
     }
 
-    public String[] getArguments() {
+    @Override
+	public String[] getArguments() {
         final ArrayList<String> argsList = new ArrayList<String>();
         appendToList(argsList, myArgsBeforeProvider);
         final String[] pArgs = myProvider == null ? null : myProvider.getArguments();
@@ -85,7 +86,8 @@ public class RubyScriptRunnerArgumentsProvider implements CommandLineArgumentsPr
         return argsList.toArray(new String[argsList.size()]);
     }
 
-    public void disableParametersActions() {
+    @Override
+	public void disableParametersActions() {
         if (myProvider != null) {
             myProvider.disableParametersActions();
         }

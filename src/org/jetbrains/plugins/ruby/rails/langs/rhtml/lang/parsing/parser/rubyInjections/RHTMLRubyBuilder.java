@@ -33,11 +33,13 @@ public class RHTMLRubyBuilder extends RBuilderImpl {
         super(psiBuilder);
     }
 
-    public void error(@NotNull String error) {
+    @Override
+	public void error(@NotNull String error) {
         super.error("[RUBY] "+ error);
     }
 
-    public boolean isAcceptibleErrorToken(IElementType myToken) {
+    @Override
+	public boolean isAcceptibleErrorToken(IElementType myToken) {
         return myToken instanceof RubyElementType || myToken instanceof IRHTMLElement;
     }
 }

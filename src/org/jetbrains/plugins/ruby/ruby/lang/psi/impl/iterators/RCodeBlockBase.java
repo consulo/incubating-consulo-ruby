@@ -39,12 +39,14 @@ public abstract class RCodeBlockBase extends RPsiElementBase implements RCodeBlo
         super(astNode);
     }
 
-    public RBlockVariables getBlockVariables() {
+    @Override
+	public RBlockVariables getBlockVariables() {
         final PsiElement result = getChildByFilter(RubyElementTypes.BLOCK_VARIABLES, 0);
         return result!=null? (RBlockVariables) result : null;
     }
 
-    public void subtreeChanged() {
+    @Override
+	public void subtreeChanged() {
         super.subtreeChanged();
 
         // Clear control flow and inference info
@@ -55,7 +57,8 @@ public abstract class RCodeBlockBase extends RPsiElementBase implements RCodeBlo
         myControlFlow = null;
     }
 
-    public Instruction[] getControlFlow() {
+    @Override
+	public Instruction[] getControlFlow() {
         if (myControlFlow == null){
             myControlFlow = new RControlFlowBuilder().buildControlFlow(null, this, null, null);
         }

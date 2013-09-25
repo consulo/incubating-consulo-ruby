@@ -31,7 +31,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
  * Ruby system commands visitor
  */
 public abstract class RubySystemCallVisitor extends RubyElementVisitor {
-    public void visitRCall(@NotNull final RCall rCall) {
+    @Override
+	public void visitRCall(@NotNull final RCall rCall) {
 // require command
         if (rCall.getCallType() == RubyCallType.RAISE_CALL) {
             visitRaiseCall(rCall);
@@ -196,7 +197,8 @@ public abstract class RubySystemCallVisitor extends RubyElementVisitor {
         visitElement(rCall);
     }
 
-    public void visitElement(@NotNull final PsiElement element) {
+    @Override
+	public void visitElement(@NotNull final PsiElement element) {
         element.acceptChildren(this);
     }
 }

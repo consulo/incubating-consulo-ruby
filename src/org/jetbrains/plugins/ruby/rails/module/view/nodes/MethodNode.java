@@ -50,7 +50,8 @@ public class MethodNode extends RailsNode {
         return NodeIdUtil.createForVirtualContainer(method);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.METHOD;
     }

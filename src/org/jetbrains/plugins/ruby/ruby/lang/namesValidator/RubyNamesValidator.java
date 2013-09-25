@@ -29,7 +29,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
  * @date: Dec 3, 2007
  */
 public class RubyNamesValidator implements NamesValidator {
-    public boolean isKeyword(String name, Project project) {
+    @Override
+	public boolean isKeyword(String name, Project project) {
         final IElementType keywords[]= BNF.kRESWORDS.getTypes();
         for (IElementType type : keywords) {
             if (type.toString().equals(name)) {
@@ -39,7 +40,8 @@ public class RubyNamesValidator implements NamesValidator {
         return false;
     }
 
-    public boolean isIdentifier(String name, Project project) {
+    @Override
+	public boolean isIdentifier(String name, Project project) {
         return TextUtil.isCID(name) || TextUtil.isFID(name) || TextUtil.isAID(name);
     }
 }

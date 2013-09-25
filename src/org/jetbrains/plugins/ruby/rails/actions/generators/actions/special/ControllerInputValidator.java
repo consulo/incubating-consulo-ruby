@@ -40,7 +40,8 @@ public class ControllerInputValidator extends SimpleGeneratorInputValidator {
     }
 
 
-    public boolean checkInput(@NotNull final String inputString) {
+    @Override
+	public boolean checkInput(@NotNull final String inputString) {
         if (RailsUtil.isValidRailsFSPath(inputString)) {
             return true;
         }

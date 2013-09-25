@@ -44,19 +44,23 @@ import java.util.List;
 public class RSettings implements ApplicationComponent, Configurable {
     private RSettingsPane form;
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         loadRegisteredData();
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.RSETTINGS;
     }
 
-    public String getDisplayName() {
+    @Override
+	public String getDisplayName() {
         return RBundle.message("settings.title");
     }
 
@@ -64,36 +68,42 @@ public class RSettings implements ApplicationComponent, Configurable {
         return RubyIcons.RUBY_LARGE_ICON;
     }
 
-    public String getHelpTopic() {
+    @Override
+	public String getHelpTopic() {
         return null;
     }
 
-    public JComponent createComponent() {
+    @Override
+	public JComponent createComponent() {
         if (form == null) {
             form = new RSettingsPane();
         }
         return form.getPanel();
     }
 
-    public boolean isModified() {
+    @Override
+	public boolean isModified() {
         return form == null || form.isModified();
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         if (form != null) {
             // Get data from form to component
             form.apply();
         }
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         if (form != null) {
             // Reset form data from component
             form.reset();
         }
     }
 
-    public void disposeUIResources() {
+    @Override
+	public void disposeUIResources() {
         form = null;
     }
 

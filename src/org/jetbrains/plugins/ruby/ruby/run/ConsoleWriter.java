@@ -49,7 +49,8 @@ public class ConsoleWriter {
                              @NotNull final Output out,
                              final Filter ... filters) {
         Runnable myRunnable = new Runnable(){
-            public void run(){
+            @Override
+			public void run(){
                 ConsoleView consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
                 for (Filter filter : filters) {
                     consoleView.addMessageFilter(filter);

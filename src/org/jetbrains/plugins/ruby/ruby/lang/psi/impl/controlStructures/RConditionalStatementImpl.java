@@ -35,7 +35,8 @@ public abstract class RConditionalStatementImpl extends RPsiElementBase implemen
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RCondition getCondition() {
         PsiElement cond = RubyPsiUtil.getChildByFilter(this, RubyElementTypes.CONDITION, 0);
         return cond!=null? (RCondition) cond : null;

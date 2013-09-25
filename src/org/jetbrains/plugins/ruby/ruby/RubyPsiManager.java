@@ -23,27 +23,33 @@ public class RubyPsiManager implements ProjectComponent {
         myTypeInferenceHelper = new TypeInferenceHelper();
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.RUBY_PSI_MANAGER;
 
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         ((PsiManagerEx) PsiManager.getInstance(myProject)).registerRunnableToRunOnAnyChange(new Runnable() {
-          public void run() {
+          @Override
+		  public void run() {
             myTypeInferenceHelper.clearContext();
           }
         });
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
     public TypeInferenceHelper getTypeInferenceHelper() {

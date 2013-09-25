@@ -33,10 +33,14 @@ import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesCo
  * @date: Nov 8, 2006
  */
 public class RDocSettings implements ProjectComponent, JDOMExternalizable {
-    public void projectOpened() {}
-    public void projectClosed() {}
-    public void initComponent() {}
-    public void disposeComponent() {}
+    @Override
+	public void projectOpened() {}
+    @Override
+	public void projectClosed() {}
+    @Override
+	public void initComponent() {}
+    @Override
+	public void disposeComponent() {}
 
     private boolean doUseDefaults;
     private final CheckableDirectoriesContainer docDirs;
@@ -46,18 +50,21 @@ public class RDocSettings implements ProjectComponent, JDOMExternalizable {
         docDirs = new CheckableDirectoriesContainer();
     }
     
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RubyComponents.RUBY_DOC_SETTINGS;
     }
 
 
-    public void readExternal(Element element) throws InvalidDataException {
+    @Override
+	public void readExternal(Element element) throws InvalidDataException {
         RDocSettingsExternalizer.getInstance().readExternal(this, element);
     }
 
-    public void writeExternal(Element element) throws WriteExternalException {
+    @Override
+	public void writeExternal(Element element) throws WriteExternalException {
         RDocSettingsExternalizer.getInstance().writeExternal(this, element);
     }
 

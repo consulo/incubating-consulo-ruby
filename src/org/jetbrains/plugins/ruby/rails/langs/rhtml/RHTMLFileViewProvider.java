@@ -49,6 +49,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		super(manager, virtualFile, physical);
 	}
 
+	@Override
 	@NotNull
 	public Language getBaseLanguage()
 	{
@@ -77,11 +78,13 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		return myViews = views;
 	}
 
+	@Override
 	protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(final VirtualFile copy)
 	{
 		return new RHTMLFileViewProvider(getManager(), copy, false);
 	}
 
+	@Override
 	protected PsiFile createFile(final Language lang)
 	{
 		if(lang == RubyLanguage.INSTANCE)

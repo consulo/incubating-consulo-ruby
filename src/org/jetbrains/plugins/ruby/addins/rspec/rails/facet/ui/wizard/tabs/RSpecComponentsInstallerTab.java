@@ -113,7 +113,8 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 
         //if rpsec gem then we should install specific rspec_rails release
         myRBUseRSpecGem.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 final boolean use_gem = e.getStateChange() == ItemEvent.SELECTED;
 
                 rspecSetupOnChanged(use_gem);
@@ -124,20 +125,23 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
         addRSpecRailsPluginSrcTypeListeners();
 
         myTFRSpecArgs.getDocument().addDocumentListener(new DocumentAdapter() {
-            protected void textChanged(final DocumentEvent e) {
+            @Override
+			protected void textChanged(final DocumentEvent e) {
                 setRSpecRailsPluginTextByRSpecPluginText();
             }
         });
 
         myCBInstallOrUseRSpec.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
 
                 updateUI();
             }
         });
 
         myCBInstallRSpecRails.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
 
                 updateUI();
             }
@@ -162,7 +166,8 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
         return true;
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         final RailsWizardSettingsHolder.RSpecConfiguration config = getConf();
 
         mySettingsHolder.setRSpecConf(config);
@@ -179,7 +184,8 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
         myIsClosed = true;
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         final RailsWizardSettingsHolder.RSpecConfiguration conf = mySettingsHolder.getRSpecConf();
         myCBInstallOrUseRSpec.setSelected(conf.enableRSpecSupport());
         myCBInstallRSpecRails.setSelected(conf.enableRSpecRailsSupport());
@@ -208,21 +214,24 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 
     private void addRSpecPluginSrcTypeListeners() {
         myRBRSpecPluginLastest.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     rspecPluginSetupOnChanged(RSpecApplicationSettings.SrcType.LATEST, true);
                 }
             }
         });
         myRBRSpecPluginTrunk.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     rspecPluginSetupOnChanged(RSpecApplicationSettings.SrcType.TRUNK, true);
                 }
             }
         });
         myRBRSpecPluginAny.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     rspecPluginSetupOnChanged(RSpecApplicationSettings.SrcType.SPECIFIC, true);
                 }
@@ -233,21 +242,24 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 
     private void addRSpecRailsPluginSrcTypeListeners() {
         myRBRSpecRailsLastest.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     myTFRSpecRailsArgs.setText(addForceParameter(RSpecUtil.getRSpecRailsPluginCurrentUrl()));
                 }
             }
         });
         myRBRSpecRailsPluginTrunk.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     myTFRSpecRailsArgs.setText(addForceParameter(RSpecUtil.getRSpecRailsPluginTrunkUrl()));
                 }
             }
         });
         myRBRSpecRailsPluginAny.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
+            @Override
+			public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     myTFRSpecRailsArgs.setText(addForceParameter(RSpecUtil.getRSpecRailsPluginXYZUrl()));
                 }
@@ -289,11 +301,13 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 
     }
 
-    public void resetSdkSettings() {
+    @Override
+	public void resetSdkSettings() {
         myRSpecGemVersion = null;
     }
 
-    public void beforeShow() {
+    @Override
+	public void beforeShow() {
         myIsClosed = false;
 
         if (myRSpecGemVersion == null) {
@@ -320,15 +334,18 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
                 myECInstallRSpecGem.setHanlders(
                         // Sets loading message instead of label
                         new Runnable() {
-                            public void run() {
+                            @Override
+							public void run() {
                                 myRBUseRSpecGem.setText(RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem", ""));
                             }
                         },
                         // Evaluates RSpec Gem version
                         new Function<Object, String>() {
-                            public String fun(final Object o) {
+                            @Override
+							public String fun(final Object o) {
                                 return RSpecUtil.getRSpecGemVersion(sdk, false, new Function<Object, Boolean>() {
-                                    public Boolean fun(final Object o) {
+                                    @Override
+									public Boolean fun(final Object o) {
                                         // Cancel process if form was closed
                                         return myIsClosed;
                                     }
@@ -337,7 +354,8 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
                         },
                         // Sets found RSpec gem version, enables controls
                         new Function<String, Object>() {
-                            public Object fun(final String vers) {
+                            @Override
+							public Object fun(final String vers) {
                                 myRSpecGemVersion = vers;
                                 myUseGemAllowed = !TextUtil.isEmpty(vers);
 
@@ -490,33 +508,40 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
     @NotNull
     public RailsWizardSettingsHolder.RSpecConfiguration getConf() {
         return new RailsWizardSettingsHolder.RSpecConfiguration() {
-            public boolean enableRSpecSupport() {
+            @Override
+			public boolean enableRSpecSupport() {
                 return myCBInstallOrUseRSpec.isSelected();
             }
 
-            public boolean enableRSpecRailsSupport() {
+            @Override
+			public boolean enableRSpecRailsSupport() {
                 return myCBInstallRSpecRails.isSelected();
             }
 
-            public boolean shouldInstallRSpecPlugin() {
+            @Override
+			public boolean shouldInstallRSpecPlugin() {
                 return myRBInstallRSpecPlugin.isSelected();
             }
 
-            public boolean shouldInstallRSpecRailsPlugin() {
+            @Override
+			public boolean shouldInstallRSpecRailsPlugin() {
                 return enableRSpecRailsSupport();
             }
 
-            @NotNull
+            @Override
+			@NotNull
             public String getRSpecArgs() {
                 return myTFRSpecArgs.getText().trim();
             }
 
-            @NotNull
+            @Override
+			@NotNull
             public String getRSpecRailsArgs() {
                 return myTFRSpecRailsArgs.getText().trim();
             }
 
-            public String getSvnPath() {
+            @Override
+			public String getSvnPath() {
                 return FileUtil.toSystemIndependentName(mySvnPathTextField.getText().trim());
             }
         };
@@ -540,33 +565,40 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
         final String rSpecRailsArgs = RSpecApplicationSettings.getInstance().wizardRailsFacetRSpecRailsArgs;
 
         return new RailsWizardSettingsHolder.RSpecConfiguration() {
-            public boolean enableRSpecSupport() {
+            @Override
+			public boolean enableRSpecSupport() {
                 return enableRSpecSupport;
             }
 
-            public boolean enableRSpecRailsSupport() {
+            @Override
+			public boolean enableRSpecRailsSupport() {
                 return enableRSpecRailsSupport;
             }
 
-            public boolean shouldInstallRSpecPlugin() {
+            @Override
+			public boolean shouldInstallRSpecPlugin() {
                 return true;
             }
 
-            public boolean shouldInstallRSpecRailsPlugin() {
+            @Override
+			public boolean shouldInstallRSpecRailsPlugin() {
                 return enableRSpecRailsSupport();
             }
 
-            @NotNull
+            @Override
+			@NotNull
             public String getRSpecArgs() {
                 return rSpecArgs;
             }
 
-            @NotNull
+            @Override
+			@NotNull
             public String getRSpecRailsArgs() {
                 return rSpecRailsArgs;
             }
 
-            @Nullable
+            @Override
+			@Nullable
             public String getSvnPath() {
                 return null;
             }

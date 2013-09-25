@@ -33,7 +33,8 @@ public class ResolvingParamDependency implements ParamDependency<PsiElement> {
         myKey = key;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getValue(final ParamContext context) {
         RListOfExpressions args = context.getCall().getCallArguments();
         for(RPsiElement element: args.getElements()) {

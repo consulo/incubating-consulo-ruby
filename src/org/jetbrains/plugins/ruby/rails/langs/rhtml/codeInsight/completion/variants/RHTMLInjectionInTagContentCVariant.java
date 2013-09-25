@@ -36,7 +36,8 @@ public class RHTMLInjectionInTagContentCVariant extends CompletionVariant {
 
     private static class MyRTHMLInjectionStartFilter implements ElementFilter {
 
-        public boolean isAcceptable(final Object element, final PsiElement context) {
+        @Override
+		public boolean isAcceptable(final Object element, final PsiElement context) {
             //noinspection SimplifiableIfStatement
             if (!(element instanceof TreeElement)
                     || !CompletionUtil.DUMMY_IDENTIFIER.trim().equals(((TreeElement) element).getText())) {
@@ -45,7 +46,8 @@ public class RHTMLInjectionInTagContentCVariant extends CompletionVariant {
             return context instanceof XmlTag;
         }
 
-        public boolean isClassAcceptable(final Class hintClass) {
+        @Override
+		public boolean isClassAcceptable(final Class hintClass) {
             return true;
         }
     }

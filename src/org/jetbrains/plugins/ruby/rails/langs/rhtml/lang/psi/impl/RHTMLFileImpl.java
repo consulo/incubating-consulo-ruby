@@ -74,17 +74,20 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
         return "RHTMLFile:" + getName();
     }
 
-    public int getTextLength() {
+    @Override
+	public int getTextLength() {
         //For prevent DirtyScope exception in ExternalToolPassFactory.calculateRangeToProcessForSyntaxPass()
         return getViewProvider().getContents().length();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RHTMLFileViewProvider getViewProvider() {
       return (RHTMLFileViewProvider)super.getViewProvider();
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RHTMLElementTypeVisitor) {
             ((RHTMLElementTypeVisitor)visitor).visitRHTMLFile(this);
         } else if (visitor instanceof RubyElementVisitor) {
@@ -92,203 +95,244 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public FileType getFileType() {
         return RHTMLFileType.RHTML;
     }
 
 ///////////////////// RFile methods ///////////////////////////////
 
-    @NotNull
+    @Override
+	@NotNull
     public RFile getInnerRubyFile() {
         return (RFile)getViewProvider().getPsi(RubyLanguage.INSTANCE);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RCompoundStatement getCompoundStatement() {
         return getInnerRubyFile().getCompoundStatement();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @NotNull RFileInfo fileInfo) {
         return getInnerRubyFile().createVirtualCopy(virtualParent, fileInfo);
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return getInnerRubyFile().getType();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RContainer getParentContainer() {
         return getInnerRubyFile().getParentContainer();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RFileInfo getContainingFileInfo() {
         return getInnerRubyFile().getContainingFileInfo();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Module getModule() {
         return getInnerRubyFile().getModule();
     }
 
-    public boolean isJRubyEnabled() {
+    @Override
+	public boolean isJRubyEnabled() {
         return false;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Sdk getSdk() {
         return getInnerRubyFile().getSdk();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getPresentableLocation() {
         return getInnerRubyFile().getPresentableLocation();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getAccessModifier() {
         return getInnerRubyFile().getAccessModifier();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getDefaultChildAccessModifier() {
         return getInnerRubyFile().getDefaultChildAccessModifier();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getContainingFileUrl() {
         return getInnerRubyFile().getContainingFileUrl();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RVirtualContainer getVirtualParentContainer() {
         return getInnerRubyFile().getVirtualParentContainer();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualStructuralElement> getVirtualStructureElements() {
         return getInnerRubyFile().getVirtualStructureElements();
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         getInnerRubyFile().accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualField> getVirtualFields() {
         return getInnerRubyFile().getVirtualFields();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualConstant> getVirtualConstants() {
         return getInnerRubyFile().getVirtualConstants();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualGlobalVar> getVirtualGlobalVars() {
         return getInnerRubyFile().getVirtualGlobalVars();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RStructuralElement> getStructureElements() {
         return getInnerRubyFile().getStructureElements();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualRequire> getRequires() {
         return getInnerRubyFile().getRequires();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<PsiElement> getChildrenByFilter(IElementType filter) {
         return getInnerRubyFile().getChildrenByFilter(filter);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getChildByFilter(TokenSet filter, int number) {
         return getInnerRubyFile().getChildByFilter(filter, number);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement getChildByFilter(IElementType filter, int number) {
         return getInnerRubyFile().getChildByFilter(filter,  number);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public <T extends PsiElement> List<T> getChildrenByType(Class<T> c) {
         return getInnerRubyFile().getChildrenByType(c);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public <T extends PsiElement> T getChildByType(Class<T> c, int number) {
         return getInnerRubyFile().getChildByType(c, number);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<FieldDefinition> getFieldsDefinitions() {
         return getInnerRubyFile().getFieldsDefinitions();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public FieldDefinition getDefinition(@NotNull RVirtualField field) {
         return getInnerRubyFile().getDefinition(field);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<ConstantDefinitions> getConstantDefinitions() {
         return getInnerRubyFile().getConstantDefinitions();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ConstantDefinitions getDefinition(@NotNull RVirtualConstant constant) {
         return getInnerRubyFile().getDefinition(constant);
     }
 
-    public int getIndexOf(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public int getIndexOf(@NotNull RVirtualStructuralElement element) {
         return getInnerRubyFile().getIndexOf(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<GlobalVarDefinition> getGlobalVarDefinitions() {
         return getInnerRubyFile().getGlobalVarDefinitions();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public GlobalVarDefinition getDefinition(@NotNull RVirtualGlobalVar globalVar) {
         return getInnerRubyFile().getDefinition(globalVar);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public FileSymbol getFileSymbol() {
         return getInnerRubyFile().getFileSymbol();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RootScope getScope() {
         return getInnerRubyFile().getScope();
     }
 
-    public Instruction[] getControlFlow() {
+    @Override
+	public Instruction[] getControlFlow() {
         return getInnerRubyFile().getControlFlow();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getFullPath() {
         return getInnerRubyFile().getFullPath();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFullName() {
         return getInnerRubyFile().getFullName();
     }
 
-    public boolean isGlobal() {
+    @Override
+	public boolean isGlobal() {
         return getInnerRubyFile().isGlobal();
     }
 
-    public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
         return getInnerRubyFile().equalsToVirtual(element);
     }
 }

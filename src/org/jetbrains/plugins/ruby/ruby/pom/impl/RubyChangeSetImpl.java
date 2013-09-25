@@ -46,27 +46,33 @@ public class RubyChangeSetImpl implements RubyChangeSet {
       mySubjectToChange = fileChanged;
     }
 
-    public List<RubyChange> getChanges() {
+    @Override
+	public List<RubyChange> getChanges() {
         return Collections.unmodifiableList(myChanges);
     }
 
-    public void add(RubyChange rubyChange) {
+    @Override
+	public void add(RubyChange rubyChange) {
         myChanges.add(rubyChange);
     }
 
-    public void clear() {
+    @Override
+	public void clear() {
         myChanges.clear();
     }
 
-    public RFile getChangedFile() {
+    @Override
+	public RFile getChangedFile() {
         return mySubjectToChange;
     }
 
-    public PomModelAspect getAspect() {
+    @Override
+	public PomModelAspect getAspect() {
         return myModel.getModelAspect(RubyPomAspect.class);
     }
 
-    public void merge(PomChangeSet blocked) {
+    @Override
+	public void merge(PomChangeSet blocked) {
         final List<RubyChange> changes = ((RubyChangeSetImpl)blocked).myChanges;
         for (RubyChange rubyChange : changes) {
           add(rubyChange);

@@ -39,7 +39,8 @@ public class IRHTMLElementType extends IElementType implements PresentableElemen
     }
 
 
-    public String getPresentableName() {
+    @Override
+	public String getPresentableName() {
         return myName;
     }
 }

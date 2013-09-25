@@ -44,7 +44,8 @@ public abstract class RVirtualFieldContantContainerImpl extends RVirtualContaine
         myConstants = containerConstants;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualConstant> getVirtualConstants() {
         return myConstants;
     }
@@ -54,7 +55,8 @@ public abstract class RVirtualFieldContantContainerImpl extends RVirtualContaine
         myFields = fields;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualField> getVirtualFields() {
         return myFields;
     }
@@ -66,7 +68,8 @@ public abstract class RVirtualFieldContantContainerImpl extends RVirtualContaine
         super(container, name, accessModifier, containingFileInfo);
     }
 
-    public void dump(@NotNull StringBuilder buffer, final int indent) {
+    @Override
+	public void dump(@NotNull StringBuilder buffer, final int indent) {
         super.dump(buffer, indent);
         for (RVirtualConstant constant : myConstants) {
             buffer.append(NEW_LINE);

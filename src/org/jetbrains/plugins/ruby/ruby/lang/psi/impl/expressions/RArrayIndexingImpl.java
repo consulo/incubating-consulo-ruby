@@ -42,7 +42,8 @@ public class RArrayIndexingImpl extends RPsiElementBase implements RArrayIndexin
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getReciever() {
         PsiElement object = getFirstChild();
         return object instanceof RPsiElement ? (RPsiElement) object : null;
@@ -52,7 +53,8 @@ public class RArrayIndexingImpl extends RPsiElementBase implements RArrayIndexin
          return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this)!=null;
      }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiReference[] getReferences() {
         final PsiElement lBracket = getChildByFilter(RubyTokenTypes.tfLBRACK, 0);
         final PsiElement rBracket = getChildByFilter(RubyTokenTypes.tRBRACK, 0);
@@ -67,7 +69,8 @@ public class RArrayIndexingImpl extends RPsiElementBase implements RArrayIndexin
         return refs.toArray(new PsiReference[refs.size()]);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RListOfExpressions getValue() {
         PsiElement list = getChildByFilter(RubyElementTypes.LIST_OF_EXPRESSIONS,0);
         return list instanceof RListOfExpressions ? (RListOfExpressions) list : null;

@@ -55,7 +55,8 @@ public class RailsViewToControllerMarkersPass extends ElementsStartsAtRangeHighl
         assert RailsFacetUtil.hasRailsSupport(module);
     }
 
-    public void doCollectInformation(final ProgressIndicator progress) {
+    @Override
+	public void doCollectInformation(final ProgressIndicator progress) {
         // We call this often enough
         ProgressManager.getInstance().checkCanceled();
 
@@ -76,7 +77,8 @@ public class RailsViewToControllerMarkersPass extends ElementsStartsAtRangeHighl
         myViewToControllerMarkers.add(info);
     }
 
-    public void doApplyInformationToEditor() {
+    @Override
+	public void doApplyInformationToEditor() {
         RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument,
                                                       myViewToControllerMarkers,
                                                       HighlightPassConstants.VIEW_TO_CONTROLLER_MARKERS_GROUP);

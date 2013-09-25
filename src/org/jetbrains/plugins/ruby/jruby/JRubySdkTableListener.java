@@ -25,17 +25,20 @@ public class JRubySdkTableListener implements ApplicationComponent {
 
     public JRubySdkTableListener(){
         myJdkTableListener = new SdkTable.Listener() {
-            public void sdkAdded(final Sdk sdk) {
+            @Override
+			public void sdkAdded(final Sdk sdk) {
                 if (JRubySdkUtil.isJRubySDK(sdk)) {
                     addLibrary(sdk);
                 }
             }
-            public void sdkRemoved(final Sdk sdk) {
+            @Override
+			public void sdkRemoved(final Sdk sdk) {
                 if (JRubySdkUtil.isJRubySDK(sdk)) {
                     removeLibrary(sdk);
                 }
             }
-            public void sdkNameChanged(final Sdk sdk, final String previousName) {
+            @Override
+			public void sdkNameChanged(final Sdk sdk, final String previousName) {
                 if (JRubySdkUtil.isJRubySDK(sdk)) {
                     renameLibrary(sdk, previousName);
                 }
@@ -96,17 +99,20 @@ public class JRubySdkTableListener implements ApplicationComponent {
         libraryTableModel.commit();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.JRUBY_SDK_TABLE_LISTENER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
 		ApplicationManager.getApplication().getMessageBus().connect().subscribe(SdkTable.SDK_TABLE_TOPIC, myJdkTableListener);
        // SdkTable.getInstance().addListener(myJdkTableListener);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
 		//SdkTable.getInstance().removeListener(myJdkTableListener);
     }
 }

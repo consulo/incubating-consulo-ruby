@@ -39,17 +39,20 @@ public class RVirtualConstantImpl extends RVirtualElementBase implements RVirtua
         myHolder = holder;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return myName;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualConstantHolder getHolder() {
         return myHolder;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitElement(this);
     }
 

@@ -94,7 +94,8 @@ public class RubySdkCachesManager implements ProjectComponent {
 
         //Initialize cahe. Cache should be signed on StartupFileSystemSynchronizer
         startupManagerEx.registerPreStartupActivity(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 initSkdCaches(myProject);
 
                 // registering listeners
@@ -105,7 +106,8 @@ public class RubySdkCachesManager implements ProjectComponent {
         });
         //SetupCache. Create words index.
         startupManagerEx.registerPostStartupActivity(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 setupAllCaches(false);
             }
         });
@@ -117,13 +119,15 @@ public class RubySdkCachesManager implements ProjectComponent {
 
     private void createListeners() {
         rModuleListener = new RubyModuleListenerAdapter() {
-            public void moduleAdded(final Project project, final Module module) {
+            @Override
+			public void moduleAdded(final Project project, final Module module) {
                 //rebuild caches for this module
                 modulesChanged(project, module);
                 rebuildCachesForModules(module);
             }
 
-            public void moduleRemoved(final Project project, final Module module) {
+            @Override
+			public void moduleRemoved(final Project project, final Module module) {
                 //delete caches for this module
                 modulesChanged(project, module);
                 deleteBuildInCachesForModules(module);
@@ -131,11 +135,13 @@ public class RubySdkCachesManager implements ProjectComponent {
         };
 
         moduleRootListener = new ModuleRootListener() {
-            public void beforeRootsChange(final ModuleRootEvent event) {
+            @Override
+			public void beforeRootsChange(final ModuleRootEvent event) {
                 // Do nothing
             }
 
-            public void rootsChanged(final ModuleRootEvent event) {
+            @Override
+			public void rootsChanged(final ModuleRootEvent event) {
                 final Project project = (Project)event.getSource();
                 if (project != myProject) {
                     return;
@@ -146,15 +152,18 @@ public class RubySdkCachesManager implements ProjectComponent {
         };
 
         jdkTableListener = new SdkTable.Listener() {
-            public void sdkAdded(final Sdk sdk) {
+            @Override
+			public void sdkAdded(final Sdk sdk) {
                 // Do nothing. (Lazy cache creating).
             }
-            public void sdkRemoved(final Sdk sdk) {
+            @Override
+			public void sdkRemoved(final Sdk sdk) {
                 if (RubySdkUtil.isKindOfRubySDK(sdk)) {
                     removeSDK(sdk, true);
                 }
             }
-            public void sdkNameChanged(final Sdk sdk, final String previousName) {
+            @Override
+			public void sdkNameChanged(final Sdk sdk, final String previousName) {
                 if (RubySdkUtil.isKindOfRubySDK(sdk)) {
                     renameSDK(sdk, previousName);
                 }
@@ -194,7 +203,8 @@ public class RubySdkCachesManager implements ProjectComponent {
         return cache != null? cache.getDeclarationsIndex() : null;
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         // Do nothing
     }
 
@@ -204,7 +214,8 @@ public class RubySdkCachesManager implements ProjectComponent {
         }
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         // unregistering listeners
       //  SdkTable.getInstance().removeListener(jdkTableListener);
 
@@ -217,18 +228,21 @@ public class RubySdkCachesManager implements ProjectComponent {
         }
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RUBY_SDK_CACHE_MANAGER;
     }
 
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         //Do nothing
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         sdk2RubyFilesCache.clear();
     }
 

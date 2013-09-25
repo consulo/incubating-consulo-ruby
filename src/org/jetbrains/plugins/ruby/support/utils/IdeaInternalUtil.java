@@ -62,7 +62,8 @@ public class IdeaInternalUtil {
     public static void runInEDThreadInWriteAction(@NotNull final ActionRunner.InterruptibleRunnable runnable,
                                                   final ModalityState state) {
         runInEventDispatchThread(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 runInsideWriteAction(runnable);
             }
         }, state);
@@ -71,7 +72,8 @@ public class IdeaInternalUtil {
     public static void runInsideReadAction(@NotNull final ActionRunner.InterruptibleRunnable runnable) {
         if (ApplicationManager.getApplication().isUnitTestMode()) {
           ApplicationManager.getApplication().runReadAction(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
               try {
                 runnable.run();
               }

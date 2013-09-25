@@ -33,7 +33,8 @@ public class RClassObjectImpl extends RPsiElementBase implements RClassObject {
     }
 
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getExpression() {
         return getChildByType(RPsiElement.class, 0);
     }

@@ -51,7 +51,8 @@ class RangeExpression {
     @NotNull
     public static IElementType parseWithLeadBool(final RBuilder builder, final RMarker marker, final IElementType result){
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return BooleanExpression.parse(builder);
             }

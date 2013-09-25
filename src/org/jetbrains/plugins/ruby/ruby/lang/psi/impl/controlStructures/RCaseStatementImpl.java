@@ -39,7 +39,8 @@ public class RCaseStatementImpl extends RPsiElementBase implements RCaseStatemen
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRCaseStatement(this);
             return;
@@ -47,19 +48,23 @@ public class RCaseStatementImpl extends RPsiElementBase implements RCaseStatemen
         super.accept(visitor);
     }
 
-    public RPsiElement getExpression() {
+    @Override
+	public RPsiElement getExpression() {
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
     }
 
-    public List<RWhenCase> getCases() {
+    @Override
+	public List<RWhenCase> getCases() {
         return RubyPsiUtil.getChildrenByType(this, RWhenCase.class);
     }
 
-    public RElseBlock getElseCase() {
+    @Override
+	public RElseBlock getElseCase() {
         return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
     }
 
-    public RPsiElement getLoopBody() {
+    @Override
+	public RPsiElement getLoopBody() {
         throw new UnsupportedOperationException("getLoopBody is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RCaseStatementImpl");
     }
 }

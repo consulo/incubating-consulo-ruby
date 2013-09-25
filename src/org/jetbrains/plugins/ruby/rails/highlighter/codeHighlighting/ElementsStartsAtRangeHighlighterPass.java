@@ -38,7 +38,8 @@ public abstract class ElementsStartsAtRangeHighlighterPass extends AbstractRubyH
         super(project, psiFile, editor, updateVisible, passId);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile,
                                                       final int startOffset, final  int endOffset) {
         final PsiFile file =  psiFile instanceof RHTMLFile

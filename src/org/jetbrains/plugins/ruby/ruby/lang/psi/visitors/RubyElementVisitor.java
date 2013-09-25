@@ -58,7 +58,8 @@ public abstract class RubyElementVisitor extends PsiElementVisitor {
         visitElement(expression);
     }
 
-    public void visitElement(PsiElement element) {
+    @Override
+	public void visitElement(PsiElement element) {
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

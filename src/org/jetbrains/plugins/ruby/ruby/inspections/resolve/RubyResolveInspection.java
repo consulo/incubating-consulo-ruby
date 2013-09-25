@@ -35,34 +35,40 @@ public class RubyResolveInspection extends LocalInspectionTool {
     @NonNls
     private static final String SHORT_NAME = "RubyResolve";
 
-    @NotNull
+    @Override
+	@NotNull
         @Nls
         public String getGroupDisplayName() {
             return RBundle.message("inspection.group.name");
         }
 
-        @NotNull
+        @Override
+		@NotNull
         @Nls
         public String getDisplayName() {
             return RBundle.message("inspection.resolve.name");
         }
 
-        @NotNull
+        @Override
+		@NotNull
         @NonNls
         public String getShortName() {
             return SHORT_NAME;
         }
 
-        public boolean isEnabledByDefault() {
+        @Override
+		public boolean isEnabledByDefault() {
             return false;
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
             return new RubyResolveVisitor(holder);
         }
 
-        @NotNull
+        @Override
+		@NotNull
         public HighlightDisplayLevel getDefaultLevel() {
             return HighlightDisplayLevel.WARNING;
         }

@@ -78,7 +78,8 @@ public class RTestRunConfigurationExternalizer extends AbstractRubyRunConfigurat
         return myInstance;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RTEST_RUN_CONFIG_SETTINGS_ID;
     }
 }

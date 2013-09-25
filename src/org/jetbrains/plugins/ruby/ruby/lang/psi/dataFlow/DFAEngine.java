@@ -51,11 +51,13 @@ public class DFAEngine<E> {
             }
         }
 
-        public Stack<CallInstruction> callStack(Instruction instruction) {
+        @Override
+		public Stack<CallInstruction> callStack(Instruction instruction) {
             return myEnv.get(instruction.num());
         }
 
-        public void update(Stack<CallInstruction> callStack, Instruction instruction) {
+        @Override
+		public void update(Stack<CallInstruction> callStack, Instruction instruction) {
             myEnv.set(instruction.num(), callStack);
         }
     }

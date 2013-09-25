@@ -47,7 +47,8 @@ public class JRubyOcurrenceProcessor implements TextOccurenceProcessor{
         myShouldResolve = shouldResolve;
     }
 
-    public boolean execute(PsiElement element, int offsetInElement) {
+    @Override
+	public boolean execute(PsiElement element, int offsetInElement) {
         final PsiReference ref = element.getReference();
         if (ref instanceof RPsiPolyvariantReference) {
             if (myShouldResolve && ref.isReferenceTo(myMethod) || !myShouldResolve && !ref.isReferenceTo(myMethod)) {

@@ -40,7 +40,8 @@ public class RubyRangeHighlightPassFactory implements TextEditorHighlightingPass
         myRegistrar = passRegistrar;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile,
                                                              @NotNull final Editor editor) {
         if (psiFile instanceof RFile){
@@ -49,22 +50,27 @@ public class RubyRangeHighlightPassFactory implements TextEditorHighlightingPass
         return null;
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RubyComponents.RUBY_HIGHLIGHT_RANGE_FACTORY;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         myRegistrar.registerTextEditorHighlightingPass(this, null, null, true, -1);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 }

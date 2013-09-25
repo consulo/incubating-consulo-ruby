@@ -31,37 +31,46 @@ import javax.swing.*;
  */
 class RubyTextMatchedGroup implements UsageGroup {
 
-    public Icon getIcon(boolean isOpen) {
+    @Override
+	public Icon getIcon(boolean isOpen) {
         return null;
     }
 
-    public String getText(UsageView view) {
+    @Override
+	public String getText(UsageView view) {
         return RBundle.message("find.usages.text.matched.group");
     }
 
-    public FileStatus getFileStatus() {
+    @Override
+	public FileStatus getFileStatus() {
         return null;
     }
 
-    public boolean isValid() {
+    @Override
+	public boolean isValid() {
         return true;
     }
 
-    public void update() {
+    @Override
+	public void update() {
     }
 
-    public int compareTo(UsageGroup usageGroup) {
+    @Override
+	public int compareTo(UsageGroup usageGroup) {
         return getText(null).compareTo(usageGroup.getText(null));
     }
 
-    public void navigate(boolean b) {
+    @Override
+	public void navigate(boolean b) {
     }
 
-    public boolean canNavigate() {
+    @Override
+	public boolean canNavigate() {
         return false;
     }
 
-    public boolean canNavigateToSource() {
+    @Override
+	public boolean canNavigateToSource() {
         return false;
     }
 }

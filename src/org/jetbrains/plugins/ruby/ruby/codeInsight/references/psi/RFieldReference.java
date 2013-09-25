@@ -36,7 +36,8 @@ public class RFieldReference extends RNamedReference{
         super(element);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         //noinspection ConstantConditions
         return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.FIELDS);

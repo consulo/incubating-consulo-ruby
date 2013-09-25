@@ -106,7 +106,8 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public TextRange getTextRange() {
         return myTextRange;
     }
@@ -119,7 +120,8 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock {
         if (htmlChild.getElementType() == XmlElementType.XML_DOCTYPE) {
             result.add(
                     new XmlBlock(htmlChild, wrap, alignment, myXmlFormattingPolicy, rhtmlIndent, null) {
-                        protected Wrap getDefaultWrap(final ASTNode node) {
+                        @Override
+						protected Wrap getDefaultWrap(final ASTNode node) {
                             final IElementType type = node.getElementType();
                             final Wrap wrap = RHTMLWrapProcessor.createTagAttributesWrap(getWrapType(RHTMLHtmlTagBlock.this.myXmlFormattingPolicy.getAttributesWrap()));
                             return type == XmlElementType.XML_ATTRIBUTE_VALUE_TOKEN ? wrap : null;
@@ -162,13 +164,15 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock {
         }
     }
 
-    @SuppressWarnings({"EmptyMethod"})
+    @Override
+	@SuppressWarnings({"EmptyMethod"})
     @Nullable
     protected XmlTag getTag() {
         return super.getTag();
     }
 
-    protected List<Block> buildChildren() {
+    @Override
+	protected List<Block> buildChildren() {
         ChameleonTransforming.transformChildren(myNode);
 
         ASTNode child = myNode.getFirstChildNode();
@@ -336,7 +340,8 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock {
         return Indent.getNormalIndent();
     }
 
-    public Spacing getSpacing(Block child1, Block child2) {
+    @Override
+	public Spacing getSpacing(Block child1, Block child2) {
         final XmlTag tag = getTag();
         if (tag == null) {
             return createDefaultSpace(true, true);

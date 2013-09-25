@@ -52,7 +52,8 @@ public class JRubyOverridingMethodsProcessor implements TextOccurenceProcessor{
         myConsumer = consumer;
     }
 
-    public boolean execute(final PsiElement element, final int offsetInElement) {
+    @Override
+	public boolean execute(final PsiElement element, final int offsetInElement) {
         if (element instanceof RPsiElement && RNameNavigator.getRName(element) instanceof RMethodName){
             final RFile rFile = RubyPsiUtil.getRFile(element);
             if (rFile == null){

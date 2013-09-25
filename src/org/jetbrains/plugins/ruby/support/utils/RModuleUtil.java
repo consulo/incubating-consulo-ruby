@@ -119,7 +119,8 @@ public class RModuleUtil {
      */
     public static void refreshRubyModuleTypeContent(final Module module) {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
                 final VirtualFile moduleRoot = RModuleUtil.getRubyModuleTypeRoot(module);
                 if (moduleRoot != null) {
                     moduleRoot.refresh(false, true);
@@ -131,9 +132,11 @@ public class RModuleUtil {
 
     public static Runnable createWriteAction(final Runnable action) {
         return new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                    public void run() throws Exception {
+                    @Override
+					public void run() throws Exception {
                         action.run();
                     }
                 });
@@ -147,7 +150,8 @@ public class RModuleUtil {
      */
     public static void synchronizeFSChanged() {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
                 VirtualFileManager.getInstance().refresh(true);
             }
         });

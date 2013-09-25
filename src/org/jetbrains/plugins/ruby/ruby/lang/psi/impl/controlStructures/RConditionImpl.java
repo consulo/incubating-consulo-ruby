@@ -33,7 +33,8 @@ public class RConditionImpl extends RPsiElementBase implements RCondition {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRCondition(this);
             return;

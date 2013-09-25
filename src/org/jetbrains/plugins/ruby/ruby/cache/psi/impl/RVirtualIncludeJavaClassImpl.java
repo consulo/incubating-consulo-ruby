@@ -39,7 +39,8 @@ public class RVirtualIncludeJavaClassImpl extends RVirtualStructuralElementBase 
         myQualifiedName = qualifiedName;
     }
 
-    public void accept(@NotNull final RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull final RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualIncludeJavaClass(this);
     }
 
@@ -47,11 +48,13 @@ public class RVirtualIncludeJavaClassImpl extends RVirtualStructuralElementBase 
         return RCall.INCLUDE_CLASS_COMMAND + " " + myQualifiedName;
     }
 
-    public String getQualifiedName() {
+    @Override
+	public String getQualifiedName() {
         return myQualifiedName;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_INCLUDE_CLASS;
     }
 }

@@ -47,7 +47,8 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
     }
 
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRCompoundStatement(this);
             return;
@@ -55,7 +56,8 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RPsiElement> getStatements() {
         if (myStatements == null){
             myStatements = getMyStatements();
@@ -71,7 +73,8 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
         return statements;
     }
 
-    public void subtreeChanged(){
+    @Override
+	public void subtreeChanged(){
         super.subtreeChanged();
         clearCaches();
     }
@@ -80,6 +83,7 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
         myStatements = null;
     }
 
+   @Override
    @NotNull
   public PsiElement[] getChildren() {
     PsiElement psiChild = getFirstChild();
@@ -97,7 +101,8 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
     return result.toArray(new PsiElement[result.size()]);
   }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final List<RExpression> expressions = getChildrenByType(RExpression.class);
         final int size = expressions.size();

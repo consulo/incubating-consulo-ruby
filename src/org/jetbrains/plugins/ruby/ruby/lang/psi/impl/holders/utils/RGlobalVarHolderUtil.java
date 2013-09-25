@@ -56,13 +56,15 @@ public class RGlobalVarHolderUtil {
         final ArrayList<GlobalVarDefinition> list = new ArrayList<GlobalVarDefinition>();
         RubyElementVisitor myVisitor = new RubyElementVisitor() {
 
-            public void visitRGlobalVariable(RGlobalVariable rGlobalVariable) {
+            @Override
+			public void visitRGlobalVariable(RGlobalVariable rGlobalVariable) {
                 if (rGlobalVariable.isInDefinition()){
                     addDefinition(list, rGlobalVariable);
                 }
             }
 
-            public void visitElement(PsiElement element) {
+            @Override
+			public void visitElement(PsiElement element) {
                 if (element instanceof RGlobalVarHolder){
                     return;
                 }

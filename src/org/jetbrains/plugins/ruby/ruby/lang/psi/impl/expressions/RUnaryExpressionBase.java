@@ -47,7 +47,8 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRUnaryExpression(this);
             return;
@@ -55,19 +56,22 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
         super.accept(visitor);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getElement() {
         return getChildByType(RPsiElement.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getOperation() {
         final PsiElement operation = getChildByFilter(TokenBNF.tUNARY_OPS, 0);
         assert operation!=null;
         return operation;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiReference getReference() {
         final String opName = getOperationName();
         if (!opName.equals("!")) {
@@ -76,7 +80,8 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getOperationName() {
         //noinspection ConstantConditions
         final IElementType type = getOperation().getNode().getElementType();
@@ -92,7 +97,8 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
         return getOperation().getText();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final TypeInferenceHelper helper = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper();
         helper.testAndSet(fileSymbol);

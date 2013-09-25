@@ -59,11 +59,13 @@ public class RubyHighlightInfoType implements HighlightInfoType {
         myTextAttributesKey = textAttributesKey;
     }
 
-    public HighlightSeverity getSeverity(PsiElement element) {
+    @Override
+	public HighlightSeverity getSeverity(PsiElement element) {
         return new HighlightSeverity(myText, SEVERITY);
     }
 
-    public TextAttributesKey getAttributesKey() {
+    @Override
+	public TextAttributesKey getAttributesKey() {
         return myTextAttributesKey;
     }
 }

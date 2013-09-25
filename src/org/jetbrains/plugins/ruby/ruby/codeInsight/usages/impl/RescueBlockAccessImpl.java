@@ -28,12 +28,14 @@ public class RescueBlockAccessImpl implements RescueBlockAccess {
         myUsage = usage;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getTypeElement() {
         return myRescueBlock.getException();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RPsiElement getElement() {
         return myUsage;
     }

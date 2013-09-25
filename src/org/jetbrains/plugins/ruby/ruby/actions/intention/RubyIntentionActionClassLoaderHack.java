@@ -36,26 +36,31 @@ public class RubyIntentionActionClassLoaderHack implements IntentionAction{
         myOriginalIntentionAction = originalIntentionAction;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getText() {
         return myOriginalIntentionAction.getText();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFamilyName() {
         return myOriginalIntentionAction.getFamilyName();
     }
 
-    public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
+    @Override
+	public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
         return RubyIntentionUtil.isAvailable(editor, file) &&
                 myOriginalIntentionAction.isAvailable(project, editor, file);
     }
 
-    public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+    @Override
+	public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
         myOriginalIntentionAction.invoke(project, editor, file);
     }
 
-    public boolean startInWriteAction() {
+    @Override
+	public boolean startInWriteAction() {
         return myOriginalIntentionAction.startInWriteAction();
     }
 }

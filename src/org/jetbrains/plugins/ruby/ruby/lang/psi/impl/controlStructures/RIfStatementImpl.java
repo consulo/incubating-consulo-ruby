@@ -42,7 +42,8 @@ public class RIfStatementImpl extends RConditionalStatementImpl implements RIfSt
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRIfStatement(this);
             return;
@@ -50,23 +51,27 @@ public class RIfStatementImpl extends RConditionalStatementImpl implements RIfSt
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RCompoundStatement getThenBlock() {
         //noinspection ConstantConditions
         return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RElsifBlock> getElsifBlocks() {
         return RubyPsiUtil.getChildrenByType(this, RElsifBlock.class);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RElseBlock getElseBlock() {
         return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RCompoundStatement thenBlock = getThenBlock();
         final List<RElsifBlock> elsifBlocks = getElsifBlocks();

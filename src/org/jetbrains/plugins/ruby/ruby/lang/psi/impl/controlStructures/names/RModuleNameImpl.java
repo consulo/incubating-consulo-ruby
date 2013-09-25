@@ -34,7 +34,8 @@ public class RModuleNameImpl extends RPsiElementBase implements RModuleName {
     }
 
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRModuleName(this);
             return;

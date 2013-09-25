@@ -42,11 +42,13 @@ class RakeCmdParamAction extends ToggleAction {
         myCmdArgument = cmdArgument;
     }
 
-    public boolean isSelected(final AnActionEvent e) {
+    @Override
+	public boolean isSelected(final AnActionEvent e) {
         return myIsSelected;
     }
 
-    public void setSelected(final AnActionEvent e, final boolean state) {
+    @Override
+	public void setSelected(final AnActionEvent e, final boolean state) {
         this.myIsSelected = state;
     }
 
@@ -60,7 +62,8 @@ class RakeCmdParamAction extends ToggleAction {
         myIsDisabled = true;
     }
 
-    public void update(final AnActionEvent e) {
+    @Override
+	public void update(final AnActionEvent e) {
         super.update(e);
         e.getPresentation().setEnabled(!myIsDisabled);
     }

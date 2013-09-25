@@ -33,12 +33,14 @@ import com.intellij.util.QueryExecutor;
  * @date: Mar 17, 2008
  */
 public class JRubyOverridingMethodsSearch implements QueryExecutor<PsiElement, OverridingMethodsSearch.SearchParameters> {
-    public boolean execute(final OverridingMethodsSearch.SearchParameters params,
+    @Override
+	public boolean execute(final OverridingMethodsSearch.SearchParameters params,
                            final Processor<PsiElement> consumer) {
         final PsiMethod method = params.getMethod();
 
         final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-            public String compute() {
+            @Override
+			public String compute() {
                 return method.getName();
             }
         });

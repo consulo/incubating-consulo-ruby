@@ -49,18 +49,22 @@ public class GenerateModelAction extends SimpleGeneratorAction {
               RailsIcons.RAILS_MODEL_NODE);
     }
 
-    protected String getGenerateDialogTitle() {
+    @Override
+	protected String getGenerateDialogTitle() {
         return RBundle.message("new.generate.model.action.prompt.title");
     }
 
-    protected String getErrorTitle() {
+    @Override
+	protected String getErrorTitle() {
         return RBundle.message("new.generate.model.error.title");
     }
 
-    protected SimpleGeneratorInputValidator createValidator(@NotNull final Module module,
+    @Override
+	protected SimpleGeneratorInputValidator createValidator(@NotNull final Module module,
                                                             @Nullable final PsiDirectory directory) {
         return new SimpleGeneratorInputValidator(this, module, directory) {
-            public boolean checkInput(String inputString) {
+            @Override
+			public boolean checkInput(String inputString) {
                 if (TextUtil.isEmpty(inputString)) {
                     showErrorDialog(RBundle.message("new.generate.common.error.script.arguments.should.be.specified"));
                     return false;

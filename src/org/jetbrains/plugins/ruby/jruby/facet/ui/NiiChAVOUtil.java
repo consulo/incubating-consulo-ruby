@@ -64,7 +64,8 @@ public class NiiChAVOUtil {
         component.addPropertyChangeListener(new PropertyChangeListener() {
             private boolean firstInvocationFlag = true;
 
-            public void propertyChange(final PropertyChangeEvent evt) {
+            @Override
+			public void propertyChange(final PropertyChangeEvent evt) {
                 if (firstInvocationFlag
                         && NiiChAVOUtil.SWING_ENABLED_PROPERTY_NAME.equals(evt.getPropertyName())
                         && (Boolean)evt.getNewValue()) {

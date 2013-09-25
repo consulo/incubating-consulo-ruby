@@ -60,21 +60,25 @@ import java.util.List;
 public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleCall, Symbol> {
     public static final String DEFAULT_PARAMETER_CLOSE_CHARS = "{},);\n";
 
-    public boolean couldShowInLookup() {
+    @Override
+	public boolean couldShowInLookup() {
         return true;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Object[] getParametersForLookup(LookupElement item, ParameterInfoContext context) {
         return null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Object[] getParametersForDocumentation(Symbol symbol, ParameterInfoContext context) {
         return null;
     }
 
-    public RPossibleCall findElementForParameterInfo(@NotNull final CreateParameterInfoContext context) {
+    @Override
+	public RPossibleCall findElementForParameterInfo(@NotNull final CreateParameterInfoContext context) {
         return findCall(context);
     }
 
@@ -94,23 +98,28 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
         return null;
     }
 
-    public void showParameterInfo(@NotNull final RPossibleCall element, @NotNull final CreateParameterInfoContext context) {
+    @Override
+	public void showParameterInfo(@NotNull final RPossibleCall element, @NotNull final CreateParameterInfoContext context) {
         context.showHint(element, element.getTextRange().getStartOffset(), this);
     }
 
-    public RPossibleCall findElementForUpdatingParameterInfo(@NotNull final UpdateParameterInfoContext context) {
+    @Override
+	public RPossibleCall findElementForUpdatingParameterInfo(@NotNull final UpdateParameterInfoContext context) {
         return findCall(context.getFile(), context.getOffset());
     }
 
-    public String getParameterCloseChars() {
+    @Override
+	public String getParameterCloseChars() {
         return DEFAULT_PARAMETER_CLOSE_CHARS;
     }
 
-    public boolean tracksParameterIndex() {
+    @Override
+	public boolean tracksParameterIndex() {
         return true;
     }
 
-    public void updateUI(@NotNull final Symbol symbol, @NotNull final ParameterInfoUIContext context) {
+    @Override
+	public void updateUI(@NotNull final Symbol symbol, @NotNull final ParameterInfoUIContext context) {
         if (symbol.getType() == Type.JAVA_METHOD){
             final PsiElement element = ((JavaSymbol) symbol).getPsiElement();
             assert element instanceof PsiMethod;
@@ -245,7 +254,8 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
         }
     }
 
-    public void updateParameterInfo(@NotNull final RPossibleCall element, @NotNull final UpdateParameterInfoContext context) {
+    @Override
+	public void updateParameterInfo(@NotNull final RPossibleCall element, @NotNull final UpdateParameterInfoContext context) {
         int index = -1;
         final int carret = context.getOffset();
         if (element instanceof RCall) {

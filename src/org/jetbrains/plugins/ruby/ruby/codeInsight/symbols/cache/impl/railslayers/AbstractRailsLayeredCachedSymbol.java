@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractLayeredCachedSymbol;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,7 +43,8 @@ abstract class AbstractRailsLayeredCachedSymbol extends AbstractLayeredCachedSym
         myNextLayerType = nextLayerType;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected CachedSymbol getBaseSymbol() {
         final SymbolsCache cache = SymbolsCache.getInstance(myProject);
         return cache.getCachedSymbol(myNextLayerType, myModule, mySdk, isJRubyEnabled);

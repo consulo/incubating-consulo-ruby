@@ -44,32 +44,39 @@ public class TestUnitSourceRootStep extends FacetWizardStep {
         myHelp = help;
     }
 
-    public Icon getIcon() {
+    @Override
+	public Icon getIcon() {
         return myIcon;
     }
 
-    public JComponent getPreferredFocusedComponent() {
+    @Override
+	public JComponent getPreferredFocusedComponent() {
         return myForm.getPreferredFocusedComponent();
     }
 
-    public String getHelpId() {
+    @Override
+	public String getHelpId() {
         return myHelp;
     }
 
-    public JComponent getComponent() {
+    @Override
+	public JComponent getComponent() {
         return myForm.getContentPane();
     }
 
-    public void updateStep() {
+    @Override
+	public void updateStep() {
         myForm.update();
     }
 
-    public boolean isStepVisible() {
+    @Override
+	public boolean isStepVisible() {
         return mySettingsHolder.isTestUnitSupportEnabled()
                 && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
     }
 
-    public void updateDataModel() {
+    @Override
+	public void updateDataModel() {
         if (!myForm.shouldSearchInWholeModule()) {
             mySettingsHolder.setTestsUnitRootPath(myForm.getAbsoluteTestsPath());
         }

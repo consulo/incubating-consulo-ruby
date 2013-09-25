@@ -33,7 +33,8 @@ public class RubySupportLoader implements ApplicationComponent, InspectionToolPr
 
     public static void loadRuby() {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
 // Registering Ruby editor actions
                 RubyEditorActionsManager.registerRubyEditorActions();
 
@@ -42,22 +43,26 @@ public class RubySupportLoader implements ApplicationComponent, InspectionToolPr
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     @NonNls
     public String getComponentName() {
         return RComponents.RUBY_SUPPORT_LOADER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         loadRuby();
     }
 
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // do nothing
     }
 
-    public Class[] getInspectionClasses() {
+    @Override
+	public Class[] getInspectionClasses() {
         return new Class[]{
                 RubyDuckTypeInspection.class,
                 RubyResolveInspection.class,

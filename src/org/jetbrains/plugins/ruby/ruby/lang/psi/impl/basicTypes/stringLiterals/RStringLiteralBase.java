@@ -51,7 +51,8 @@ public class RStringLiteralBase extends RPsiElementBase implements RStringLitera
         super(astNode);
     }
 
-    public String getContent() {
+    @Override
+	public String getContent() {
         String content = "";
         List<PsiElement> list = getPsiContent();
         for (PsiElement e : list){
@@ -60,11 +61,13 @@ public class RStringLiteralBase extends RPsiElementBase implements RStringLitera
         return content;
     }
 
-    public boolean hasExpressionSubstitutions() {
+    @Override
+	public boolean hasExpressionSubstitutions() {
         return getExpressionSubstitutions().size()!=0;
     }
 
-    public List<RExpressionSubstitution> getExpressionSubstitutions() {
+    @Override
+	public List<RExpressionSubstitution> getExpressionSubstitutions() {
         List<PsiElement> list = RubyPsiUtil.getChildrenByFilter(this, RubyElementTypes.EXPR_SUBTITUTION);
         ArrayList<RExpressionSubstitution> exprList = new ArrayList<RExpressionSubstitution>();
         for (PsiElement e : list){
@@ -73,16 +76,19 @@ public class RStringLiteralBase extends RPsiElementBase implements RStringLitera
         return exprList;
     }
 
-    public List<PsiElement> getPsiContent() {
+    @Override
+	public List<PsiElement> getPsiContent() {
         return RubyPsiUtil.getChildrenByFilter(this, BNF.tSTRING_LIKE_CONTENTS);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.String), Context.INSTANCE, true);
     }
 
-    public PsiReference getReference() {
+    @Override
+	public PsiReference getReference() {
         ParamContext paramContext = ParamDefUtil.getParamContext(this);
         if (paramContext == null) return null;
         ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);

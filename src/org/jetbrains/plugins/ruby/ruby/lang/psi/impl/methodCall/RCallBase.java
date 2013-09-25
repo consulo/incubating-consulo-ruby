@@ -68,19 +68,22 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public RubyCallType getCallType() {
         return RCallBaseUtil.getCallType(this);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getPsiCommand() {
         final PsiElement command = getFirstChild();
         assert command!=null :  "Cannot find command";
         return command;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiReference[] getReferences() {
         final RubyCallType callType = getCallType();
 
@@ -141,24 +144,28 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
         return PsiReference.EMPTY_ARRAY;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RListOfExpressions getCallArguments() {
         //noinspection ConstantConditions
         return getChildByType(RListOfExpressions.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getCommand() {
         return getPsiCommand().getText();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RPsiElement> getArguments() {
         return getCallArguments().getElements();
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualStructuralElement createVirtualCopy(@Nullable RVirtualContainer container, @Nullable RFileInfo info) {
         final StructureType type = getType();
 // require
@@ -207,7 +214,8 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
     }
 
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return RCallBaseUtil.getType(this);
     }
 
@@ -215,7 +223,8 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
         return RCallBaseUtil.getFieldAttrType(this);
     }
 
-    public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
         final StructureType myType = getType();
         if (myType == StructureType.FAKE){
             return false;
@@ -297,7 +306,8 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
         return null;
     }
 
-    public ItemPresentation getPresentation() {
+    @Override
+	public ItemPresentation getPresentation() {
         final StructureType type = getType();
         if (type == StructureType.FIELD_ATTR_CALL){
             return RFieldAttrPresentationUtil.getPresentation(this);
@@ -310,7 +320,8 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final TypeInferenceHelper helper = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper();
         helper.testAndSet(fileSymbol);

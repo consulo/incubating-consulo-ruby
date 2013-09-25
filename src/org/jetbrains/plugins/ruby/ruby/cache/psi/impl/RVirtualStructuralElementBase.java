@@ -36,7 +36,8 @@ public abstract class RVirtualStructuralElementBase extends RVirtualElementBase 
         myContainer = container;
     }
 
-    public final RVirtualContainer getVirtualParentContainer() {
+    @Override
+	public final RVirtualContainer getVirtualParentContainer() {
         return myContainer;
     }
 }

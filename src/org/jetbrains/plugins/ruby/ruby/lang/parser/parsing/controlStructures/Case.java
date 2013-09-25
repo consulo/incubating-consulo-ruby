@@ -99,7 +99,8 @@ public class Case implements RubyTokenTypes {
         ParsingMethod parsingMethod = new ParsingMethod() {
             boolean afterStar = false;
 
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parse(final RBuilder builder) {
                 if (afterStar) {
                     return RubyElementTypes.EMPTY_INPUT;

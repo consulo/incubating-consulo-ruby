@@ -75,7 +75,8 @@ public class PluginsUtil {
                     new RubyScriptRunnerArgumentsProvider(params, null, null);
 
             final ProcessAdapter processListener = new ProcessAdapter() {
-                public void processTerminated(ProcessEvent event) {
+                @Override
+				public void processTerminated(ProcessEvent event) {
                     if (nextAction != null) {
                         IdeaInternalUtil.runInsideWriteAction(nextAction);
                     }

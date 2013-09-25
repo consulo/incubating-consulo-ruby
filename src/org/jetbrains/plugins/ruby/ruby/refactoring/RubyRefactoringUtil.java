@@ -43,7 +43,8 @@ public class RubyRefactoringUtil {
                                                  @NotNull final RPsiElement context){
         final ArrayList<PsiElement> occurences = new ArrayList<PsiElement>();
         final RubyElementVisitor visitor = new RubyElementVisitor() {
-            public void visitElement(@NotNull final PsiElement element) {
+            @Override
+			public void visitElement(@NotNull final PsiElement element) {
                 if (PsiEquivalenceUtil.areElementsEquivalent(pattern, element)){
                     occurences.add(element);
                 }

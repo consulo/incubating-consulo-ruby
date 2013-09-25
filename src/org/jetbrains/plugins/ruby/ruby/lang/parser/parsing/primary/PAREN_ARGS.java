@@ -70,7 +70,8 @@ CALL_ARGS	: ARGS
         final Ref<Boolean> amperSeen = new Ref<Boolean>(false);
         final Ref<Boolean> blockCallSeen = new Ref<Boolean>(false);
         final ParsingMethod parsignMethod = new ParsingMethod() {
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parse(final RBuilder builder) {
                 if (blockCallSeen.get()) {
                     return RubyElementTypes.EMPTY_INPUT;

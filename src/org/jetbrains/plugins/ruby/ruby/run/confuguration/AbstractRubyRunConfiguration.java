@@ -88,7 +88,8 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         return RModuleUtil.getAllModulesWithRubySupport(getProject());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Module getModule() {
         return findModuleByName(myModuleName);
     }
@@ -98,7 +99,8 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         return myModuleName;
     }
 
-    public String getRubyArgs() {
+    @Override
+	public String getRubyArgs() {
         return myRubyArgs;
     }
 
@@ -114,16 +116,19 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         return null;
       }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getWorkingDirectory() {
         return myWorkingDirectory;
     }
 
-    public boolean isGeneratedName() {
+    @Override
+	public boolean isGeneratedName() {
         return getName().equals(SUGGESTED_NAME);
     }
 
-    public void setModule(@Nullable final Module module) {
+    @Override
+	public void setModule(@Nullable final Module module) {
         setModuleName(module != null ? module.getName() : null);
     }
 
@@ -131,15 +136,18 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         myModuleName = TextUtil.getAsNotNull(moduleName);
     }
 
-    public void setRubyArgs(@Nullable  String myRubyArgs) {
+    @Override
+	public void setRubyArgs(@Nullable  String myRubyArgs) {
         this.myRubyArgs = TextUtil.getAsNotNull(myRubyArgs);
     }
 
-    public void setWorkingDirectory(@Nullable final String dir) {
+    @Override
+	public void setWorkingDirectory(@Nullable final String dir) {
         this.myWorkingDirectory = TextUtil.getAsNotNull(dir);
     }
 
-    public String suggestedName() {
+    @Override
+	public String suggestedName() {
         return SUGGESTED_NAME;
     }
 
@@ -157,7 +165,8 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         return mySdkName;
     }
 
-    public Sdk getAlternativeSdk() {
+    @Override
+	public Sdk getAlternativeSdk() {
         if (mySdkName == null) {
             return null;
         }
@@ -165,7 +174,8 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         return RubySdkUtil.isSDKValid(sdk) ? sdk : null;
     }
 
-    public void setAlternativeSdk(@Nullable final Sdk sdk) {
+    @Override
+	public void setAlternativeSdk(@Nullable final Sdk sdk) {
         setAlternativeSdkName(sdk != null ? sdk.getName() : null);
     }
     public void setAlternativeSdkName(@Nullable  final String sdkName) {
@@ -174,7 +184,8 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
 
      protected abstract void validateConfiguration(final boolean isExecution) throws Exception;
 
-     public void checkConfiguration() throws RuntimeConfigurationException {
+     @Override
+	 public void checkConfiguration() throws RuntimeConfigurationException {
         try {
             validateConfiguration(false);
         } catch (RuntimeConfigurationException ee) {
@@ -184,31 +195,38 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
         }
     }
 
-    public boolean shouldUseAlternativeSdk() {
+    @Override
+	public boolean shouldUseAlternativeSdk() {
         return myShouldUseAlternativeSdk;
     }
 
-    public void setShouldUseAlternativeSdk(final boolean shouldUseAlternativeSdk) {
+    @Override
+	public void setShouldUseAlternativeSdk(final boolean shouldUseAlternativeSdk) {
         myShouldUseAlternativeSdk = shouldUseAlternativeSdk;
     }
 
-    public Map<String, String> getEnvs() {
+    @Override
+	public Map<String, String> getEnvs() {
         return myEnvs;
     }
 
-    public void setEnvs(@NotNull final Map<String, String> envs) {
+    @Override
+	public void setEnvs(@NotNull final Map<String, String> envs) {
         myEnvs = envs;
     }
 
-    public boolean isPassParentEnvs() {
+    @Override
+	public boolean isPassParentEnvs() {
         return myPassParentEnvs;
     }
 
-    public void setPassParentEnvs(final boolean passParentEnvs) {
+    @Override
+	public void setPassParentEnvs(final boolean passParentEnvs) {
         this.myPassParentEnvs = passParentEnvs;
     }
 
-    public AbstractRubyRunConfiguration clone() {
+    @Override
+	public AbstractRubyRunConfiguration clone() {
       final Element element = new Element(TO_CLONE_ELEMENT_NAME);
       try {
         writeExternal(element);

@@ -38,12 +38,14 @@ import com.intellij.util.QueryExecutor;
  */
 public class RubyTextReferenceSearch implements QueryExecutor<PsiReference, ReferencesSearch.SearchParameters> {
 
-    public boolean execute(@NotNull final ReferencesSearch.SearchParameters params,
+    @Override
+	public boolean execute(@NotNull final ReferencesSearch.SearchParameters params,
                            @NotNull final Processor<PsiReference> consumer) {
         final PsiElement element2Search = params.getElementToSearch();
         if (element2Search instanceof PsiNamedElement && element2Search instanceof RPsiElement) {
             final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-                public String compute() {
+                @Override
+				public String compute() {
                     return ((PsiNamedElement) element2Search).getName();
                 }
             });

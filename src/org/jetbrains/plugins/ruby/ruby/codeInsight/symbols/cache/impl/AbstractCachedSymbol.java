@@ -77,23 +77,28 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
         }
     }
 
-    public final void fileRemoved(@NotNull String url) {
+    @Override
+	public final void fileRemoved(@NotNull String url) {
         fileChanged(url);
     }
 
-    public final void fileUpdated(@NotNull String url) {
+    @Override
+	public final void fileUpdated(@NotNull String url) {
         fileChanged(url);
     }
 
-    public abstract void fileAdded(@NotNull String url);
+    @Override
+	public abstract void fileAdded(@NotNull String url);
 
     protected abstract void fileChanged(@NotNull String url);
 
-    public final boolean isUp2Date() {
+    @Override
+	public final boolean isUp2Date() {
         return myFileSymbol!=null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public final FileSymbol getUp2DateSymbol(){
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
@@ -110,7 +115,8 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
      * Unregisters as cacheUpdater
      * @throws Throwable
      */
-    public final void finalize() throws Throwable {
+    @Override
+	public final void finalize() throws Throwable {
         // unregistering for cache updates
         unregisterAsCacheListener();
         myCache.remove(myKey);

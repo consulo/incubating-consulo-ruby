@@ -42,7 +42,8 @@ public interface RContainer extends RVirtualContainer, RPsiElement, ScopeHolder,
     /**
      * Container always have only one copy
      */
-    @SuppressWarnings({"JavaDoc"})
+    @Override
+	@SuppressWarnings({"JavaDoc"})
     @NotNull
     public abstract RVirtualContainer createVirtualCopy(@Nullable final RVirtualContainer container,
                                                         @NotNull final RFileInfo info);

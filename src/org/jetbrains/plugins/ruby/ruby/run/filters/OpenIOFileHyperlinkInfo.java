@@ -59,12 +59,14 @@ public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo {
         this(project, file, line, 0);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public OpenFileDescriptor getDescriptor() {
         if (!isLazyInitialized) {
             final Ref<VirtualFile> virtualFileRef = new Ref<VirtualFile>(null);
             IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                public void run() throws Exception {
+                @Override
+				public void run() throws Exception {
                     virtualFileRef.set(LocalFileSystem.getInstance().refreshAndFindFileByIoFile(myFile));
                 }
             });
@@ -90,9 +92,11 @@ public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo {
         return myColumn;
     }
 
-    public void navigate(final Project project) {
+    @Override
+	public void navigate(final Project project) {
         ApplicationManager.getApplication().runReadAction(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 final OpenFileDescriptor fileDesc = getDescriptor();
                 if (fileDesc == null) {
                     return;

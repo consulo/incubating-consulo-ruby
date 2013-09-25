@@ -56,28 +56,34 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep {
         myProject = project;
     }
 
-    public String getHelpId() {
+    @Override
+	public String getHelpId() {
         return myHelp;
     }
 
-    public JComponent getComponent() {
+    @Override
+	public JComponent getComponent() {
         return myPanel.getContentPane();
     }
 
 
-    public void updateDataModel() {
+    @Override
+	public void updateDataModel() {
         // Do nothing
     }
 
-    public Icon getIcon() {
+    @Override
+	public Icon getIcon() {
         return myIcon;
     }
 
-    public void updateStep() {
+    @Override
+	public void updateStep() {
         myPanel.initBeforeShow();
     }
 
-    public boolean isStepVisible() {
+    @Override
+	public boolean isStepVisible() {
         if (!myBuilder.isRSpecSupportEnabled() || !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent())) {
             return false;
         }
@@ -87,7 +93,8 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep {
         return sdk != null;
     }
 
-    public boolean validate() throws ConfigurationException {
+    @Override
+	public boolean validate() throws ConfigurationException {
         final Sdk sdk = myBuilder.getSdk();
         if (!RSpecUtil.checkIfRSpecGemExists(sdk)) {
             final String msg = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.text");

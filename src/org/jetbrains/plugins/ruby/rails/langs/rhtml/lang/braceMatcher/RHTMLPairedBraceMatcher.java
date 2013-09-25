@@ -43,11 +43,13 @@ public class RHTMLPairedBraceMatcher implements PairedBraceMatcher {
                           RHTMLTokenType.RHTML_COMMENT_END, false)
     };
 
-    public BracePair[] getPairs() {
+    @Override
+	public BracePair[] getPairs() {
         return BRACE_PAIRS;
     }
 
-    @SuppressWarnings({"UnusedParameters"})
+    @Override
+	@SuppressWarnings({"UnusedParameters"})
     public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1) {
         return true;
     }

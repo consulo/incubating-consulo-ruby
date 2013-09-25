@@ -45,10 +45,12 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePat
     private List<Pair<String, String>> mySourcePaths;
     private String myContentRootPath;
 
-    public abstract void setTestsUnitRootPath(@NotNull final String contentRootPath);
+    @Override
+	public abstract void setTestsUnitRootPath(@NotNull final String contentRootPath);
     protected abstract void setupContentRoot(final ModifiableRootModel rootModel);
 
-    public boolean isRSpecSupportEnabled() {
+    @Override
+	public boolean isRSpecSupportEnabled() {
         return myShouldUseRSpec;
     }
 
@@ -64,12 +66,14 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePat
         myShouldUseRSpec = shouldUseRSpec;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Sdk getSdk() {
         return mySdk;
     }
 
-    public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
+    @Override
+	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
         /*if (mySdk != null) {
             rootModel.setSdk(mySdk);
             //HACK. Oterwise for new Project first roots change event have wrong SDK!
@@ -82,28 +86,34 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePat
         setupContentRoot(rootModel);
     }
 
-    public void setSdk(Sdk jdk) {
+    @Override
+	public void setSdk(Sdk jdk) {
         mySdk = jdk;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getContentEntryPath() {
       return myContentRootPath;
     }
 
-    public void setContentEntryPath(final String moduleRootPath) {
+    @Override
+	public void setContentEntryPath(final String moduleRootPath) {
         myContentRootPath = moduleRootPath;
     }
 
-    public void setSourcePaths(final List<Pair<String, String>> paths) {
+    @Override
+	public void setSourcePaths(final List<Pair<String, String>> paths) {
         mySourcePaths = paths;
     }
 
-    public List<Pair<String, String>> getSourcePaths() {
+    @Override
+	public List<Pair<String, String>> getSourcePaths() {
         return mySourcePaths;
     }
 
-    public void addSourcePath(final Pair<String,String> sourcePathInfo) {
+    @Override
+	public void addSourcePath(final Pair<String,String> sourcePathInfo) {
       if (mySourcePaths == null) {
         mySourcePaths = new ArrayList<Pair<String, String>>();
       }

@@ -49,7 +49,8 @@ public class RubyRunConfigurationExternalizer extends AbstractRubyRunConfigurati
         return myInstance;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RUBY_RUN_CONFIG_SETTINGS_ID;
     }
 }

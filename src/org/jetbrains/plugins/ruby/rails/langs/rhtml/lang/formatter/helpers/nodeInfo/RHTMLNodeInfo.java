@@ -45,7 +45,8 @@ public class RHTMLNodeInfo extends NodeInfo {
         this.nextNodeRange = nextNodeRange;
     }
 
-    public NodeType getType() {
+    @Override
+	public NodeType getType() {
         return NodeType.RHTML_NODE;
     }
 
@@ -64,7 +65,8 @@ public class RHTMLNodeInfo extends NodeInfo {
         return nextNode;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public TextRange getNextNodeTRange() {
         return nextNodeRange;
     }

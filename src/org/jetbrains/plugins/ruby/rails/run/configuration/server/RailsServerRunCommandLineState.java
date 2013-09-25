@@ -38,7 +38,8 @@ public class RailsServerRunCommandLineState extends RubyRunCommandLineState {
         super(config, executionEnvironment);
     }
 
-    public GeneralCommandLine createCommandLine() throws ExecutionException {
+    @Override
+	public GeneralCommandLine createCommandLine() throws ExecutionException {
         final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(myConfig);
         final RailsServerRunConfiguration config = (RailsServerRunConfiguration)myConfig;
 

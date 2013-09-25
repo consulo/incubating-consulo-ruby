@@ -59,14 +59,16 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
     }
 
     // required files annotating
-    public void visitRequireCall(@NotNull final RCall rCall) {
+    @Override
+	public void visitRequireCall(@NotNull final RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitRequireOrLoad(rCall);
     }
 
-    public void visitLoadCall(@NotNull RCall rCall) {
+    @Override
+	public void visitLoadCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -103,14 +105,16 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
         }
     }
 
-    public void visitIncludeCall(@NotNull RCall rCall) {
+    @Override
+	public void visitIncludeCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitIncludeOrExtend(rCall);
     }
 
-    public void visitExtendCall(@NotNull RCall rCall) {
+    @Override
+	public void visitExtendCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -131,35 +135,40 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
         }
     }
 
-    public void visitAttrAccessorCall(@NotNull RCall rCall) {
+    @Override
+	public void visitAttrAccessorCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitAttrCall(rCall);
     }
 
-    public void visitAttrWriterCall(@NotNull RCall rCall) {
+    @Override
+	public void visitAttrWriterCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitAttrCall(rCall);
     }
 
-    public void visitAttrReaderCall(@NotNull RCall rCall) {
+    @Override
+	public void visitAttrReaderCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitAttrCall(rCall);
     }
 
-    public void visitAttrInternalCall(@NotNull RCall rCall) {
+    @Override
+	public void visitAttrInternalCall(@NotNull RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitAttrCall(rCall);
     }
 
-    public void visitCAttrAccessorCall(@NotNull final RCall rCall) {
+    @Override
+	public void visitCAttrAccessorCall(@NotNull final RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -186,7 +195,8 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
         }
     }
 
-    public void visitImportClassCall(@NotNull final RCall rCall) {
+    @Override
+	public void visitImportClassCall(@NotNull final RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -203,14 +213,16 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
         }
     }
 
-    public void visitIncludeClassCall(@NotNull final RCall rCall) {
+    @Override
+	public void visitIncludeClassCall(@NotNull final RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
         visitIncludeJava(rCall, PsiClass.class, RBundle.message("annotation.error.should.be.java.class"));
     }
 
-    public void visitIncludePackageCall(@NotNull final RCall rCall) {
+    @Override
+	public void visitIncludePackageCall(@NotNull final RCall rCall) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 
@@ -233,7 +245,8 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
         }
     }
 
-    public void visitRSymbol(RSymbol rSymbol) {
+    @Override
+	public void visitRSymbol(RSymbol rSymbol) {
         // It`s often operation
         ProgressManager.getInstance().checkCanceled();
 

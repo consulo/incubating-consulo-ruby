@@ -55,7 +55,8 @@ public class RubyDocManager implements ProjectComponent {
         return project.getComponent(RubyDocManager.class);
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
     private void addIfNeed() {
@@ -66,14 +67,16 @@ public class RubyDocManager implements ProjectComponent {
         }
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         destroyToolWindow();
     }
 
 
     private void addToolWindow() {
         final Runnable myRunnable = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 createToolWindow();
             }
         };
@@ -84,15 +87,18 @@ public class RubyDocManager implements ProjectComponent {
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.RUBY_DOC_MANAGER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
     private void createToolWindow() {

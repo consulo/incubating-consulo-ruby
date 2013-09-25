@@ -85,7 +85,8 @@ public class RSpecRunConfigurationExternalizer extends AbstractRubyRunConfigurat
         return myInstance;
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return RSPEC_RUN_CONFIG_SETTINGS_ID;
     }
 }

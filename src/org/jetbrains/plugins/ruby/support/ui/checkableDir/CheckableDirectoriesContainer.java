@@ -139,7 +139,8 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable {
         return null;
     }
 
-    @SuppressWarnings({"CloneDoesntCallSuperClone"})
+    @Override
+	@SuppressWarnings({"CloneDoesntCallSuperClone"})
     @NotNull
     public CheckableDirectoriesContainer clone() throws CloneNotSupportedException {
         final CheckableDirectoriesContainer copy = new CheckableDirectoriesContainer();

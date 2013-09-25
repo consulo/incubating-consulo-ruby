@@ -33,7 +33,8 @@ public class RMethodNameImpl extends RPsiElementBase implements RMethodName {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRMethodName(this);
             return;

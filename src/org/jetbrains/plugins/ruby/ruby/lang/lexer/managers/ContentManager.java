@@ -44,7 +44,8 @@ public class ContentManager extends ReadingManager{
         stateManager = lexer.getStatesManager();
     }
 
-    public void reset(final int zzStart, final int zzEnd){
+    @Override
+	public void reset(final int zzStart, final int zzEnd){
         super.reset(zzStart, zzEnd);
     }
 

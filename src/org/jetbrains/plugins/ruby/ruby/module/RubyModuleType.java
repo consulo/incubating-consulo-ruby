@@ -40,17 +40,20 @@ public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements App
         return ApplicationManager.getApplication().getComponent(RubyModuleType.class);
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RUBY_MODULE_TYPE;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
        // ModuleTypeManager.getInstance().registerModuleType(this);
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
    /* public ModuleWizardStep[] createWizardSteps(final WizardContext ctx, final RubyModuleBuilder builder,

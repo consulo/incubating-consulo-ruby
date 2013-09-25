@@ -57,7 +57,8 @@ import java.util.List;
 public class RunRailsScriptAction extends AnAction {
     private static Logger LOG = Logger.getInstance(RunRailsScriptAction.class.getName());
 
-    public void actionPerformed(@NotNull final AnActionEvent event) {
+    @Override
+	public void actionPerformed(@NotNull final AnActionEvent event) {
         final Module module = DataContextUtil.getModule(event.getDataContext());
         assert module != null;
 
@@ -110,7 +111,8 @@ public class RunRailsScriptAction extends AnAction {
                 new RubyScriptRunnerArgumentsProvider(params, null, null);
 
         final ProcessAdapter processListener = new ProcessAdapter() {
-            public void processTerminated(ProcessEvent event) {
+            @Override
+			public void processTerminated(ProcessEvent event) {
                 RailsFacetUtil.refreshRailsAppHomeContent(module);
             }
         };
@@ -118,7 +120,8 @@ public class RunRailsScriptAction extends AnAction {
         RailsScriptRunner.runRailsScriptInCosole(module, processListener, filters, null, true, title, provider, null);
     }
 
-    public void update(@NotNull final AnActionEvent event) {
+    @Override
+	public void update(@NotNull final AnActionEvent event) {
         final Module module = DataContextUtil.getModule(event.getDataContext());
 
         // show only on RailsModuleType and valid Ruby SDK with rails installed
@@ -173,7 +176,8 @@ public class RunRailsScriptAction extends AnAction {
             return myScriptNameComponent.getText().trim();
         }
 
-        @Nullable
+        @Override
+		@Nullable
         protected JComponent createCenterPanel() {
             final RunRailsScriptForm  myRunRailsScriptForm =
                     new RunRailsScriptForm(myProject, myModuleName, myModuleScriptFolder);
@@ -183,7 +187,8 @@ public class RunRailsScriptAction extends AnAction {
             return myRunRailsScriptForm.getContentPane();
         }
 
-        protected Action[] createActions() {
+        @Override
+		protected Action[] createActions() {
             setOKButtonText(RBundle.message("rails.actions.execution.run.rails.script.dialog.button.ok.caption"));
             return new Action[]{getOKAction(), getCancelAction()};
         }

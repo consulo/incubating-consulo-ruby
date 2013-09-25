@@ -34,7 +34,8 @@ public class HTMLCuttingLexer extends BlackAndWhiteLexer {
               RHTMLTokenTypeEx.RHTML_INJECTION_IN_HTML);
     }
 
-    protected boolean isWhiteData(final IElementType tokenType) {
+    @Override
+	protected boolean isWhiteData(final IElementType tokenType) {
         return tokenType == RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML;
     }
 }

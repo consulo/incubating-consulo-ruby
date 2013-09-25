@@ -411,7 +411,8 @@ public class ScannerImpl implements Scanner {
         }
     }
 
-    public boolean checkToken(final Class[] choices) {
+    @Override
+	public boolean checkToken(final Class[] choices) {
         while(needMoreTokens()) {
             fetchMoreTokens();
         }
@@ -429,18 +430,21 @@ public class ScannerImpl implements Scanner {
         return false;
     }
 
-    public Token peekToken(int index) {
+    @Override
+	public Token peekToken(int index) {
         while(needMoreTokens(index+1)) {
             fetchMoreTokens();
         }
         return (Token)(this.tokens.size() < (index+1) ? null : this.tokens.get(index));
     }
 
-    public Token peekToken() {
+    @Override
+	public Token peekToken() {
         return peekToken(0);
     }
 
-    public Token getToken() {
+    @Override
+	public Token getToken() {
         while(needMoreTokens()) {
             fetchMoreTokens();
         }
@@ -452,23 +456,28 @@ public class ScannerImpl implements Scanner {
     }
     
     private class TokenIterator implements Iterator<Token> {
-        public boolean hasNext() {
+        @Override
+		public boolean hasNext() {
             return null != peekToken();
         }
 
-        public Token next() {
+        @Override
+		public Token next() {
             return getToken();
         }
 
-        public void remove() {
+        @Override
+		public void remove() {
         }
     }
 
-    public Iterator<Token> eachToken() {
+    @Override
+	public Iterator<Token> eachToken() {
         return new TokenIterator();
     }
 
-    public Iterator<Token> iterator() {
+    @Override
+	public Iterator<Token> iterator() {
         return eachToken();
     }
 

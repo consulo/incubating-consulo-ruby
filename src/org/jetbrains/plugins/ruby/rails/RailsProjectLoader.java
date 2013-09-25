@@ -44,25 +44,30 @@ public class RailsProjectLoader implements ProjectComponent {
         loader.registerCssEnabledFileType(RHTMLFileType.RHTML);
     }     */
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         // Do nothing
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         // Do nothing
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RAILS_PROJECT_LOADER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         // Do nothing
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // Do nothing
     }
 }

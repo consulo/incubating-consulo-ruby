@@ -122,7 +122,8 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
 
 
 
-    public void start(final CharSequence buffer,
+    @Override
+	public void start(final CharSequence buffer,
                       final int startOffset, final int endOffset, final int initialState) {
         myRHTMLRubyLexer.start(buffer, startOffset, endOffset, unpackRhtmlState(initialState));
 
@@ -135,11 +136,13 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
         setupHTMLLexer();
     }
 
-    public CharSequence getBufferSequence() {
+    @Override
+	public CharSequence getBufferSequence() {
         return myRHTMLRubyLexer.getBufferSequence();
     }
 
-    public int getState() {
+    @Override
+	public int getState() {
         locateToken();
         return myState | ((myCommentTokensQueue.size() << QUEUE_SHIFT) & QUEUE_MASK);  //myHtmlLexer.getState()
     }
@@ -234,22 +237,26 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
         myState = prevState;
     }
 
-    public IElementType getTokenType() {
+    @Override
+	public IElementType getTokenType() {
         locateToken();
         return myTokenType;
     }
 
-    public int getTokenStart() {
+    @Override
+	public int getTokenStart() {
         locateToken();
         return myTokenStart;
     }
 
-    public int getTokenEnd() {
+    @Override
+	public int getTokenEnd() {
         locateToken();
         return myTokenEnd;
     }
 
-    public void advance() {
+    @Override
+	public void advance() {
         myTokenType = null;
         if (myCommentTokensQueue.poll() == null) {
             advanceWithoutCommentQueue();
@@ -301,7 +308,8 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
             this.start = start;
         }
 
-        public short intern() {
+        @Override
+		public short intern() {
             return 0;
         }
     }
@@ -319,7 +327,8 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
             myHTMLPosition = htmlPosition;
         }
 
-        public int getOffset() {
+        @Override
+		public int getOffset() {
             final int rhtmlPos = myRhtmlPosition != null ? myRhtmlPosition.getOffset() : 0;
             final int htmlPos = myHTMLPosition == null ? 0 : myHTMLPosition.getOffset();
             return Math.max(rhtmlPos, htmlPos);
@@ -344,7 +353,8 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
         }
     }
 
-    public LexerPosition getCurrentPosition() {
+    @Override
+	public LexerPosition getCurrentPosition() {
         final LinkedList<Token> queue = new LinkedList<Token>(myCommentTokensQueue);
         final MyState state = new MyState(queue, myState,
                                           myRHTMLRubyLexer.getTokenStart());
@@ -354,7 +364,8 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
                             myRHTMLRubyLexer.getCurrentPosition(), state);
     }
 
-    public void restore(final LexerPosition position) {
+    @Override
+	public void restore(final LexerPosition position) {
         final Position p = (Position)position;
 
         myCommentTokensQueue = p.getMyState().queue;
@@ -374,7 +385,8 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
     }
 
 
-    public int getBufferEnd() {
+    @Override
+	public int getBufferEnd() {
         return myRHTMLRubyLexer.getBufferEnd();
     }
 

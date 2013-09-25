@@ -34,7 +34,8 @@ public class RSuperClassImpl extends RPsiElementBase implements RSuperClass {
     }
 
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRSuperClass(this);
             return;

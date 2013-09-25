@@ -36,11 +36,13 @@ import com.intellij.util.QueryExecutor;
  */
 public class JRubyNamesReferenceSearcher implements QueryExecutor<PsiReference, MethodReferencesSearch.SearchParameters> {
 
-    public boolean execute(@NotNull final MethodReferencesSearch.SearchParameters params,
+    @Override
+	public boolean execute(@NotNull final MethodReferencesSearch.SearchParameters params,
                            @NotNull final Processor<PsiReference> psiReferenceProcessor) {
         final PsiMethod method = params.getMethod();
         final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-            public String compute() {
+            @Override
+			public String compute() {
                 return method.getName();
             }
         });

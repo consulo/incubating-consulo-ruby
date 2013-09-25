@@ -65,7 +65,8 @@ public class NamesSuggestor {
             NameSuggestorUtil.addNamesByType(names, typeName);
         }
 
-        public void visitElement(PsiElement element) {
+        @Override
+		public void visitElement(PsiElement element) {
             if (element instanceof RExpression){
                 final FileSymbol fileSymbol = LastSymbolStorage.getInstance(element.getProject()).getSymbol();
                 final RType RType = ((RExpression) element).getType(fileSymbol);
@@ -75,39 +76,46 @@ public class NamesSuggestor {
                 }
             }
         }
-        public void visitRListOfExpressions(RListOfExpressions rListOfExpressions) {
+        @Override
+		public void visitRListOfExpressions(RListOfExpressions rListOfExpressions) {
             generateNamesBy("list");
             generateNamesBy("items");
             super.visitRListOfExpressions(rListOfExpressions);
         }
 
-        public void visitRConstant(RConstant rConstant) {
+        @Override
+		public void visitRConstant(RConstant rConstant) {
             generateNamesBy(rConstant.getName());
             super.visitRConstant(rConstant);
         }
 
-        public void visitRIdentifier(RIdentifier rIdentifier) {
+        @Override
+		public void visitRIdentifier(RIdentifier rIdentifier) {
             //noinspection ConstantConditions
             generateNamesBy(rIdentifier.getName());
             super.visitRIdentifier(rIdentifier);
         }
 
-        public void visitRInstanceVariable(RInstanceVariable rInstanceVariable) {
+        @Override
+		public void visitRInstanceVariable(RInstanceVariable rInstanceVariable) {
             generateNamesBy(rInstanceVariable.getName());
             super.visitRInstanceVariable(rInstanceVariable);
         }
 
-        public void visitRClassVariable(RClassVariable rClassVariable) {
+        @Override
+		public void visitRClassVariable(RClassVariable rClassVariable) {
             generateNamesBy(rClassVariable.getName());
             super.visitRClassVariable(rClassVariable);
         }
 
-        public void visitRCall(RCall rCall) {
+        @Override
+		public void visitRCall(RCall rCall) {
             generateNamesBy(rCall.getCommand());
             super.visitRCall(rCall);
         }
 
-        public void visitRReference(RReference rReference) {
+        @Override
+		public void visitRReference(RReference rReference) {
             final RPsiElement value = rReference.getValue();
             if (value!=null){
                 generateNamesBy(value.getText());
@@ -115,7 +123,8 @@ public class NamesSuggestor {
             super.visitRReference(rReference);
         }
 
-        public void visitRPseudoConstant(RPseudoConstant rPseudoConstant) {
+        @Override
+		public void visitRPseudoConstant(RPseudoConstant rPseudoConstant) {
             if (RubyTokenTypes.kSELF.toString().equals(rPseudoConstant.getText())){
                 names.add("instance");
             }

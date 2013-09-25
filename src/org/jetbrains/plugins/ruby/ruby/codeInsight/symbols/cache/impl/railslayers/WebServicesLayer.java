@@ -49,7 +49,8 @@ public class WebServicesLayer extends AbstractRailsLayeredCachedSymbol {
         myLayerRootUrl = railsPaths.getApisRootURL();
     }
 
-    public void fileAdded(@NotNull String url) {
+    @Override
+	public void fileAdded(@NotNull String url) {
         if (url.startsWith(myLayerRootUrl)) {
             myFileSymbol = null;
             return;
@@ -64,7 +65,8 @@ public class WebServicesLayer extends AbstractRailsLayeredCachedSymbol {
         }
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         // do nothing
     }
 }

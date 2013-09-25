@@ -13,15 +13,18 @@ class ReadWriteInstructionImpl extends InstructionImpl implements ReadWriteInstr
         myAccess = access;
     }
 
-    public String getVariableName() {
+    @Override
+	public String getVariableName() {
         return myName;
     }
 
-    public Access getAccess() {
+    @Override
+	public Access getAccess() {
         return myAccess;
     }
 
-    protected String getElementPresentation() {
+    @Override
+	protected String getElementPresentation() {
         if (myAccess instanceof MethodParameterAccess){
             return "METHOD PARAMETER " + myName;
         }

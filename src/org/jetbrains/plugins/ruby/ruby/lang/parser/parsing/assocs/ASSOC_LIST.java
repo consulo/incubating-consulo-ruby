@@ -49,7 +49,8 @@ assoc_list	: none
         ParsingMethod parsingMethod = new ParsingMethod(){
                 boolean assocSeen = false;
 
-                @NotNull
+                @Override
+				@NotNull
                 public IElementType parse(final RBuilder builder){
                     IElementType result =  ASSOC_OR_ARG.parse(builder);
 

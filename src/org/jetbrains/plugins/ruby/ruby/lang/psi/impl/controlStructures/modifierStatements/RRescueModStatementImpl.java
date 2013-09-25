@@ -33,7 +33,8 @@ public class RRescueModStatementImpl extends RConditionalStatementImpl implement
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRRescueModStatement(this);
             return;

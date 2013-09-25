@@ -46,7 +46,8 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRAliasStatement(this);
             return;
@@ -54,37 +55,44 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
         super.accept(visitor);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getPsiOldName() {
         return getChildByType(RPsiElement.class, 1);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getPsiNewName() {
         return getChildByType(RPsiElement.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getOldName() {
         return getName(getPsiOldName());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getNewName() {
         return getName(getPsiNewName());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container,
                                                        @NotNull final RFileInfo info) {
         return new RVirtualAliasImpl(container, getOldName(), getNewName());
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.ALIAS;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableText() {
         return getText();
     }
@@ -100,7 +108,8 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
         return "";
     }
 
-    public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
         if (!(element instanceof RVirtualAlias)){
             return false;
         }
@@ -108,12 +117,14 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
         return getNewName().equals(alias.getNewName()) && getOldName().equals(alias.getOldName());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Icon getIcon(final int flags) {
         return RAliasPresentationUtil.getIcon();
     }
 
-    public ItemPresentation getPresentation() {
+    @Override
+	public ItemPresentation getPresentation() {
         return RAliasPresentationUtil.getPresentation(this);
     }
 }

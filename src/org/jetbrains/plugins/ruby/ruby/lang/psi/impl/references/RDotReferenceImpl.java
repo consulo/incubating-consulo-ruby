@@ -33,7 +33,8 @@ public class RDotReferenceImpl extends RReferenceBase implements RDotReference {
     public RDotReferenceImpl(ASTNode astNode) {
         super(astNode);
     }
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRDotReference(this);
             return;
@@ -42,14 +43,16 @@ public class RDotReferenceImpl extends RReferenceBase implements RDotReference {
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getDelimiter() {
         PsiElement dot = getChildByFilter(RubyTokenTypes.tDOT,0);
         assert dot!=null;
         return dot;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Type getType() {
         return Type.DOT_REF;
     }

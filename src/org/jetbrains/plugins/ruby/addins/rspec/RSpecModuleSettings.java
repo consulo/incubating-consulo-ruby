@@ -43,17 +43,20 @@ public class RSpecModuleSettings implements ModuleComponent {
         return module.getComponent(RSpecModuleSettings.class);
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RSPEC_MODULE_SETTINGS;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         // Do nothing
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // Do nothing
     }
 
@@ -69,15 +72,18 @@ public class RSpecModuleSettings implements ModuleComponent {
         myStorage.rSpecSupportType = supportType ;
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         //Do nothing
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         //Do nothing
     }
 
-    public void moduleAdded() {
+    @Override
+	public void moduleAdded() {
         //Do nothing
     }
 

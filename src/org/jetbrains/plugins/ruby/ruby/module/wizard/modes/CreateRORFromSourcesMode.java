@@ -43,18 +43,21 @@ public class CreateRORFromSourcesMode extends WizardMode {
     @NonNls
     private Map<String, ModuleBuilder> myBuildersMap = new HashMap<String, ModuleBuilder>();
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDisplayName(WizardContext context) {
         return RBundle.message("project.new.wizard.from.existent.sources.title", context.getPresentationName());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getDescription(final WizardContext context) {
         return RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("project.new.wizard.from.existent.sources.description",
                 ApplicationNamesInfo.getInstance().getProductName(), context.getPresentationName()));
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected StepSequence createSteps(final WizardContext context, final ModulesProvider modulesProvider) {
         final StepSequence myStepSequence = new StepSequence(null);
 	  /*
@@ -82,11 +85,13 @@ public class CreateRORFromSourcesMode extends WizardMode {
         return myStepSequence;
     }
 
-    public boolean isAvailable(WizardContext context) {
+    @Override
+	public boolean isAvailable(WizardContext context) {
         return context.getProject() == null;
     }
 
-    public ModuleBuilder getModuleBuilder() {
+    @Override
+	public ModuleBuilder getModuleBuilder() {
         return myBuildersMap.get(getSelectedType());
     }
 
@@ -95,11 +100,13 @@ public class CreateRORFromSourcesMode extends WizardMode {
         return null;
     }
 
-    public void onChosen(final boolean enabled) {
+    @Override
+	public void onChosen(final boolean enabled) {
 
     }
 
-    public void dispose() {
+    @Override
+	public void dispose() {
         super.dispose();
         myBuildersMap.clear();
     }

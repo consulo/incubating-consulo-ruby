@@ -22,12 +22,14 @@ public class JavaTypedAccessImpl implements JavaTypedAccess {
         myUsage = usage;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiType getType() {
         return myParams[myNumber].getTypeElement().getType();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RPsiElement getElement() {
         return myUsage;
     }

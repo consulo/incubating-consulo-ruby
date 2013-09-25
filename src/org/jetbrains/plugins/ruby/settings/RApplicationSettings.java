@@ -58,11 +58,13 @@ public class RApplicationSettings implements PersistentStateComponent<RApplicati
         return ServiceManager.getService(RApplicationSettings.class);
     }
 
-    public RApplicationSettings getState() {
+    @Override
+	public RApplicationSettings getState() {
         return this;
     }
 
-    public void loadState(@NotNull final RApplicationSettings settings) {
+    @Override
+	public void loadState(@NotNull final RApplicationSettings settings) {
         additionalEnvPATH = settings.additionalEnvPATH;
 
         //console filters

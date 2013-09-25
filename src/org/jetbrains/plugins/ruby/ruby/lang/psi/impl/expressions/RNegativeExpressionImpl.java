@@ -35,7 +35,8 @@ public class RNegativeExpressionImpl extends RUnaryExpressionBase implements RUn
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.getBooleanType(fileSymbol);
     }

@@ -96,7 +96,8 @@ public class RFieldAttrReference implements RPsiPolyvariantReference {
         return new TextRange(start, end);
     }
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myCall;
     }
 
@@ -104,21 +105,25 @@ public class RFieldAttrReference implements RPsiPolyvariantReference {
         return myElement;
     }
 
-    public TextRange getRangeInElement() {
+    @Override
+	public TextRange getRangeInElement() {
         return myTextRange;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolve() {
         return ResolveUtil.resolvePolyVarReference(this);
     }
 
 
-    public String getCanonicalText() {
+    @Override
+	public String getCanonicalText() {
         return myName;
     }
 
-    public PsiElement handleElementRename(String newName) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(String newName) throws IncorrectOperationException {
         if (!TextUtil.isCID(newName)){
             throw new IncorrectOperationException("Wrong name");
         }
@@ -162,46 +167,55 @@ public class RFieldAttrReference implements RPsiPolyvariantReference {
         return null;
     }
 
-    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
         return null;
     }
 
-    public boolean isReferenceTo(PsiElement element) {
+    @Override
+	public boolean isReferenceTo(PsiElement element) {
         return resolve() == element;
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();
         return RFieldResolveUtil.getVariants(fileSymbol, myHolder);
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return true;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement getRefValue() {
         return myElement;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         throw new UnsupportedOperationException("multiResolveToSymbols is not implemented in org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFieldAttrReference");
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();
         final ArrayList<ResolveResult> list = new ArrayList<ResolveResult>();
         for (final PsiElement element : RFieldResolveUtil.resolve(fileSymbol, myHolder, myName, Types.FIELDS)) {
             list.add(new ResolveResult(){
-                    @Nullable
+                    @Override
+					@Nullable
                     public PsiElement getElement() {
                         RubyUsageTypeProvider.setType(RFieldAttrReference.this, RubyUsageType.UNCLASSIFIED);
                         return element;
                     }
 
-                    public boolean isValidResult() {
+                    @Override
+					public boolean isValidResult() {
                         return true;
                     }
                 });

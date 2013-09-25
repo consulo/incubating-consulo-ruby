@@ -57,7 +57,8 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode {
         return NodeIdUtil.createForDirectory(appControllersRootUrl, true);
     }
     
-    public void accept(final SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(final SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitControllerNode();
             return;
@@ -65,7 +66,8 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode {
         super.accept(visitor);
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         List<RailsNode> children = new ArrayList<RailsNode>();
         final Module module = getModule();
 
@@ -91,7 +93,8 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode {
                                      null);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
     }

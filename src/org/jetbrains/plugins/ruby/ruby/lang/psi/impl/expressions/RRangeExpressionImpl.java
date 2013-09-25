@@ -37,7 +37,8 @@ public class RRangeExpressionImpl extends RBinaryExpressionBase implements RRang
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Range), Context.INSTANCE, true);
     }

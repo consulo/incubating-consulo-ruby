@@ -34,7 +34,8 @@ public class RLBeginStatementImpl extends RPsiElementBase implements RLBeginStat
         super(astNode);
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRLBeginStatement(this);
             return;

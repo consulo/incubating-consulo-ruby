@@ -31,22 +31,27 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
  * @date: Aug 18, 2007
  */
 public class LastSymbolStorage implements ProjectComponent {
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RLAST_SYMBOL_STORAGE;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
     private FileSymbol lastEvaluatedSymbol;

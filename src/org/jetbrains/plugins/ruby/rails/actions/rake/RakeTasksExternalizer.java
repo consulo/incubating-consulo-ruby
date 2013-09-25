@@ -90,7 +90,8 @@ public class RakeTasksExternalizer extends SettingsExternalizer {
         return new File(railsApplicHomeDirPath + File.separator + RAKE_TASKS_FILE_NAME);
     }
 
-    public String getID() {
+    @Override
+	public String getID() {
         return TextUtil.EMPTY_STRING;
     }
 

@@ -39,19 +39,23 @@ public class RTernaryExpressionImpl extends RPsiElementBase implements RTernaryE
         super(astNode);
     }
 
-    public RPsiElement getTrueCommand() {
+    @Override
+	public RPsiElement getTrueCommand() {
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 1);
     }
 
-    public RPsiElement getFalseCommand() {
+    @Override
+	public RPsiElement getFalseCommand() {
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 2);
     }
 
-    public RCondition getCondition() {
+    @Override
+	public RCondition getCondition() {
         return RubyPsiUtil.getChildByType(this, RCondition.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RPsiElement trueCommand = getTrueCommand();
         final RPsiElement falseCommand = getFalseCommand();

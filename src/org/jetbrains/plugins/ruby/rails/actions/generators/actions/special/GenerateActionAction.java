@@ -76,7 +76,8 @@ public class  GenerateActionAction extends SimpleGeneratorAction {
             myMethodName = methodName;
         }
 
-        public void run() {
+        @Override
+		public void run() {
             final Editor editor = DataKeys.EDITOR.getData(myDataContext);
             final PsiFile psiFile = DataKeys.PSI_FILE.getData(myDataContext);
             if (psiFile == null || editor == null) {
@@ -100,17 +101,20 @@ public class  GenerateActionAction extends SimpleGeneratorAction {
 
             CommandProcessor.getInstance().executeCommand(project,
                     new Runnable() {
-                        public void run() {
+                        @Override
+						public void run() {
                             try {
                                 ActionRunner.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                                    public void run() throws Exception {
+                                    @Override
+									public void run() throws Exception {
                                         // insert method stub
                                         EditorModificationUtil.insertStringAtCaret(editor, text);
                                         PsiDocumentManager.getInstance(project).commitDocument(document);
                                     }
                                 });
                                 ActionRunner.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                                    public void run() throws Exception {
+                                    @Override
+									public void run() throws Exception {
                                         // insert method stub
                                         editor.getCaretModel().moveCaretRelatively(0, -1, false, false, true);
 
@@ -182,7 +186,8 @@ public class  GenerateActionAction extends SimpleGeneratorAction {
               actionName, description, icon);
     }
 
-     public void actionPerformed(final AnActionEvent e) {
+     @Override
+	 public void actionPerformed(final AnActionEvent e) {
          final Module module = DataKeys.MODULE.getData(e.getDataContext());
          
          invokeDialog(module, e.getDataContext());
@@ -208,7 +213,8 @@ public class  GenerateActionAction extends SimpleGeneratorAction {
     }
 
 
-    public void update(@NotNull final AnActionEvent event) {
+    @Override
+	public void update(@NotNull final AnActionEvent event) {
         final DataContext dataContext = event.getDataContext();
         final Presentation presentation = event.getPresentation();
 
@@ -256,11 +262,13 @@ public class  GenerateActionAction extends SimpleGeneratorAction {
         return new ActionInputValidator(this, module, file, dataContext);
     }
 
-     protected String getGenerateDialogTitle() {
+     @Override
+	 protected String getGenerateDialogTitle() {
         return RBundle.message("popup.generate.action.prompt.title");
     }
 
-    protected String getErrorTitle() {
+    @Override
+	protected String getErrorTitle() {
         return RBundle.message("popup.generate.action.error.title");
     }
 

@@ -33,7 +33,8 @@ public class RBeginEndBlockStatementImpl extends RPsiElementBase implements RBeg
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRBeginEndBlockStatement(this);
             return;

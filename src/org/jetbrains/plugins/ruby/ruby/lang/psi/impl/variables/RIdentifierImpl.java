@@ -52,7 +52,8 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRIdentifier(this);
             return;
@@ -61,11 +62,13 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier {
     }
 
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         return new RIdentifierReference(this);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ScopeVariable getScopeVariable() {
         if (isParameter() || isLocalVariable()){
             final Scope scope = ScopeUtil.findScopeByIdentifier(this);
@@ -78,7 +81,8 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier {
     }
 
 
-    public boolean isLocalVariable() {
+    @Override
+	public boolean isLocalVariable() {
         if (isParameter()){
             return false;
         }
@@ -98,30 +102,36 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier {
         return ScopeUtil.findScopeByIdentifier(this)!=null;
     }
 
-    protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
         if (Character.isUpperCase(newName.charAt(0)) || !TextUtil.isCID(newName) && !TextUtil.isFID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }
     }
 
-    public boolean isParameter() {
+    @Override
+	public boolean isParameter() {
         return isMethodParameter() || isBlockParameter();
     }
 
-    public boolean isMethodParameter() {
+    @Override
+	public boolean isMethodParameter() {
         return RArgumentNavigator.getByRIdentifier(this)!=null;
     }
 
-    public boolean isBlockParameter() {
+    @Override
+	public boolean isBlockParameter() {
         return RBlockVariableNavigator.getByIdentifier(this)!=null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String getPrefix() {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final ScopeVariable scopeVariable = getScopeVariable();
         if (scopeVariable!=null){
@@ -130,7 +140,8 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier {
         return super.getType(fileSymbol);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public SearchScope getUseScope() {
         if (isParameter() || isLocalVariable()){
             return new LocalSearchScope(getContainingFile());

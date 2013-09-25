@@ -40,12 +40,14 @@ public class RVirtualImportJavaClassImpl extends RVirtualStructuralElementBase i
         myNames = names;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualName> getNames() {
         return myNames;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.CALL_IMPORT;
     }
 
@@ -53,7 +55,8 @@ public class RVirtualImportJavaClassImpl extends RVirtualStructuralElementBase i
         return RCall.IMPORT_COMMAND;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualImportJavaClass(this);
     }
 }

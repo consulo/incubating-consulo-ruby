@@ -36,7 +36,8 @@ public class RForStatementImpl extends RPsiElementBase implements RForStatement 
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRForStatement(this);
             return;
@@ -44,16 +45,19 @@ public class RForStatementImpl extends RPsiElementBase implements RForStatement 
         super.accept(visitor);
     }
 
-    public RPsiElement getVariable() {
+    @Override
+	public RPsiElement getVariable() {
         return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
     }
 
-    public RPsiElement getExpression() {
+    @Override
+	public RPsiElement getExpression() {
         final RPsiElement expr = RubyPsiUtil.getChildByType(this, RPsiElement.class, 1);
         return !(expr instanceof RCompoundStatement) ? expr : null;
     }
 
-    public RCompoundStatement getBody() {
+    @Override
+	public RCompoundStatement getBody() {
         return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
     }
 }

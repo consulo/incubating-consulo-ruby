@@ -68,7 +68,8 @@ public class ClassNode extends RailsNode {
         return NodeIdUtil.createForVirtualContainer(rVClass);
     }
 
-     public void accept(final SimpleNodeVisitor visitor) {
+     @Override
+	 public void accept(final SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitClassNode();
             return;
@@ -77,12 +78,14 @@ public class ClassNode extends RailsNode {
 
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public VirtualFile getVirtualFile() {
         return myRubyClass.getVirtualFile();
     }
 
-    public RailsNode[] getChildren() {
+    @Override
+	public RailsNode[] getChildren() {
         final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
         final Module module = getModule();
 
@@ -92,7 +95,8 @@ public class ClassNode extends RailsNode {
             assert element instanceof RVirtualMethod;
             final RVirtualMethod method = (RVirtualMethod) element;
             accept(new RailsNodeVisitorAdapter() {
-                public void visitControllerNode() {
+                @Override
+				public void visitControllerNode() {
                     final String controllerName
                             = ControllersConventions.getControllerNameByClassName(myRubyClass);
                     children.add(new ActionNode(module, method, parentDirFileUrl,
@@ -100,7 +104,8 @@ public class ClassNode extends RailsNode {
                                                 controllerName));
                 }
 
-                public void visitClassNode() {
+                @Override
+				public void visitClassNode() {
                     children.add(new MethodNode(module, method, getVirtualFileUrl()));
                 }
             });
@@ -112,7 +117,8 @@ public class ClassNode extends RailsNode {
         return children.toArray(new RailsNode[children.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.CLASS;
     }

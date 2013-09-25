@@ -90,29 +90,35 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         myName = name;
     }
 
-    public void setCacheFilePath(@NotNull final String dataFilePath) {
+    @Override
+	public void setCacheFilePath(@NotNull final String dataFilePath) {
         this.myCacheDataFilePath = dataFilePath;
     }
 
-    public void registerDeaclarationsIndex(@NotNull final DeclarationsIndex wordsIndex){
+    @Override
+	public void registerDeaclarationsIndex(@NotNull final DeclarationsIndex wordsIndex){
         myIndex = wordsIndex;
         myIndex.setFileCache(this);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public DeclarationsIndex getDeclarationsIndex() {
         return myIndex;
     }
 
-    public void setCacheRootURLs(@NotNull String[] newRoots) {
+    @Override
+	public void setCacheRootURLs(@NotNull String[] newRoots) {
         myCacheRootURLs = newRoots;
     }
 
-    public String[] getCacheRootURLs() {
+    @Override
+	public String[] getCacheRootURLs() {
         return myCacheRootURLs;
     }
 
-    public void setupFileCache(final boolean runProcessWithProgressSynchronously) {
+    @Override
+	public void setupFileCache(final boolean runProcessWithProgressSynchronously) {
         if (myIndex != null){
             myIndex.build(runProcessWithProgressSynchronously);
         }
@@ -122,7 +128,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         return myName;
     }
 
-    public void initFileCacheAndRegisterListeners() {
+    @Override
+	public void initFileCacheAndRegisterListeners() {
         final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
         if (indicator != null) {
             indicator.setText(RBundle.message("progress.indicator.title.cache.loading", getName()));
@@ -145,7 +152,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         Disposer.register(myProject, this);
     }
 
-    public void dispose(){
+    @Override
+	public void dispose(){
         synchronized(LOCK) {
             if (wasClosed) {
                 return;
@@ -178,7 +186,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
      * @param file VirtualFile to get cache for
      * @return RFileInfo info by the file
      */
-    @Nullable
+    @Override
+	@Nullable
     public RFileInfo getUp2DateFileInfo(@NotNull final VirtualFile file) {
         if (myRFilesStorage == null){
             LOG.error("FilesStorage cannot be null. Maybe cache wasn't initialized. Cache: " + toString() + ", file: " + file);
@@ -296,7 +305,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
     /**
      * Saves serialized cache data to dataFile
      */
-    public void saveCacheToDisk() {
+    @Override
+	public void saveCacheToDisk() {
         final File dataFile = new File(myCacheDataFilePath);
         try {
             if (!dataFile.exists()) {
@@ -329,7 +339,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         }
     }
 
-    public void removeCacheFile(){
+    @Override
+	public void removeCacheFile(){
         final File dataFile = new File(myCacheDataFilePath);
         try {
             if (dataFile.exists()) {
@@ -343,7 +354,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         }
     }
 
-    public boolean containsUrl(@NotNull final String url) {
+    @Override
+	public boolean containsUrl(@NotNull final String url) {
         return myRFilesStorage.containsUrl(url);
     }
 
@@ -351,7 +363,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
 // Internal functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory) {
         if (directory == null){
             return Collections.emptyList();
@@ -360,7 +373,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         return RubyVirtualFileScanner.getRelativeUrls(directory);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Set<String> getAllUrls() {
         if (myRFilesStorage != null) {
             return myRFilesStorage.getAllUrls();
@@ -401,7 +415,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
 // CacheUpdaterFunctionality
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public VirtualFile[] queryNeededFiles(ProgressIndicator progressIndicator) {
+    @Override
+	public VirtualFile[] queryNeededFiles(ProgressIndicator progressIndicator) {
         final Set<String> urls2Remove = new HashSet<String>(myRFilesStorage.getAllUrls());
         final Collection<VirtualFile> foundFiles = scanForFiles(myCacheRootURLs);
         final Set<VirtualFile> neededFiles = new HashSet<VirtualFile>();
@@ -434,10 +449,12 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
         regenerateFileInfo(fileContent.getVirtualFile());
     }
 
-    public void updatingDone() {
+    @Override
+	public void updatingDone() {
     }
 
-    public void canceled() {
+    @Override
+	public void canceled() {
     }
 
     protected void processFileDeleted(@NotNull final String url) {
@@ -449,7 +466,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
     private void addVirtualFileListener() {
         VirtualFileListener listener =  new VirtualFileAdapter() {
 
-            @SuppressWarnings({"ConstantConditions"})
+            @Override
+			@SuppressWarnings({"ConstantConditions"})
             public void propertyChanged(final VirtualFilePropertyEvent event) {
                 if (VirtualFile.PROP_NAME.equals(event.getPropertyName())) {
                     final VirtualFile file = event.getFile();
@@ -463,7 +481,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
                 }
             }
 
-            public void contentsChanged(final VirtualFileEvent event) {
+            @Override
+			public void contentsChanged(final VirtualFileEvent event) {
                 final VirtualFile file = event.getFile();
                 if (processDir(file, event.getParent())) {
                     return;
@@ -471,7 +490,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
                 processFileAdded(file);
             }
 
-            public void fileCreated(final VirtualFileEvent event) {
+            @Override
+			public void fileCreated(final VirtualFileEvent event) {
                 final VirtualFile file = event.getFile();
                 if (processDir(file, event.getParent())) {
                     return;
@@ -479,7 +499,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
                 processFileAdded(file);
             }
 
-            public void fileDeleted(final VirtualFileEvent event) {
+            @Override
+			public void fileDeleted(final VirtualFileEvent event) {
                 final VirtualFile file = event.getFile();
                 final VirtualFile parent = event.getParent();
                 if (processDir(file, parent)) {
@@ -493,7 +514,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
                 }
             }
 
-            public void fileMoved(final VirtualFileMoveEvent event) {
+            @Override
+			public void fileMoved(final VirtualFileMoveEvent event) {
                 final VirtualFile file = event.getFile();
                 if (processDir(file, event.getParent())) {
                     return;
@@ -537,7 +559,8 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
     /**
      * Used in debug puproses
      */
-    public void forceUpdate(){
+    @Override
+	public void forceUpdate(){
        /* final FileSystemSynchronizer synchronizer = new FileSystemSynchronizer();
         synchronizer.registerCacheUpdater(this);
         if (!ApplicationManager.getApplication().isUnitTestMode() && myProject.isOpen()) {
@@ -556,19 +579,22 @@ public class RubyFilesCacheImpl implements RubyFilesCache {
 // Listeners
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void addCacheChangedListener(@NotNull final RubyFilesCacheListener listener,
+    @Override
+	public void addCacheChangedListener(@NotNull final RubyFilesCacheListener listener,
                                         @NotNull final Disposable parentDisposable) {
         synchronized(LOCK) {                  
             myCacheChangedListeners.add(listener);
         }
         Disposer.register(parentDisposable, new Disposable() {
-            public void dispose() {
+            @Override
+			public void dispose() {
                 removeCacheChangedListener(listener);
             }
         });
     }
 
-    public void removeCacheChangedListener(@NotNull final RubyFilesCacheListener listener) {
+    @Override
+	public void removeCacheChangedListener(@NotNull final RubyFilesCacheListener listener) {
         synchronized(LOCK) {
             myCacheChangedListeners.remove(listener);
         }

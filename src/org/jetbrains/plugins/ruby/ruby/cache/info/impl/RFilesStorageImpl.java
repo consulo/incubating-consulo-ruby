@@ -44,11 +44,13 @@ public class RFilesStorageImpl implements RFilesStorage {
     // Info about all the files.
     private final Map<String, RFileInfo> myUrl2FileInfoMap = new HashMap<String, RFileInfo>();
 
-    public synchronized void addRInfo(@NotNull final RFileInfo rInfo) {
+    @Override
+	public synchronized void addRInfo(@NotNull final RFileInfo rInfo) {
         myUrl2FileInfoMap.put(rInfo.getUrl(), rInfo);
     }
 
-    public synchronized void init(@NotNull final Project project) {
+    @Override
+	public synchronized void init(@NotNull final Project project) {
         final Collection<RFileInfo> infos = myUrl2FileInfoMap.values();
         for (RFileInfo info : infos) {
             if (info!=null){
@@ -57,21 +59,25 @@ public class RFilesStorageImpl implements RFilesStorage {
         }
     }
 
-    public synchronized RFileInfo getInfoByUrl(@NotNull final String url) {
+    @Override
+	public synchronized RFileInfo getInfoByUrl(@NotNull final String url) {
         return myUrl2FileInfoMap.get(url);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public synchronized Set<String> getAllUrls() {
         return new HashSet<String>(myUrl2FileInfoMap.keySet());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public synchronized RFileInfo removeInfoByUrl(@NotNull final String url) {
         return myUrl2FileInfoMap.remove(url);
     }
 
-    public FileStatus getFileStatus(@NotNull final VirtualFile file) {
+    @Override
+	public FileStatus getFileStatus(@NotNull final VirtualFile file) {
         final RFileInfo fileInfo = getInfoByUrl(file.getUrl());
         if (fileInfo==null){
             return FileStatus.NOT_FOUND;
@@ -83,11 +89,13 @@ public class RFilesStorageImpl implements RFilesStorage {
     }
 
 
-    public synchronized boolean containsUrl(@NotNull final String url) {
+    @Override
+	public synchronized boolean containsUrl(@NotNull final String url) {
         return myUrl2FileInfoMap.containsKey(url);
     }
 
-    public synchronized void addUrl(@NotNull String url) {
+    @Override
+	public synchronized void addUrl(@NotNull String url) {
         if (!containsUrl(url)){
             myUrl2FileInfoMap.put(url, null);
         }

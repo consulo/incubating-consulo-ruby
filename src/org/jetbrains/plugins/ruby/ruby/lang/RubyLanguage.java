@@ -70,37 +70,43 @@ public class RubyLanguage extends Language {
 
 
         myFormattingModelBuilder = new NotNullLazyValue<FormattingModelBuilder>(){
-            @NotNull
+            @Override
+			@NotNull
             protected FormattingModelBuilder compute() {
                 return new RubyFormattingModelBuilder();
             }
         };
         myFindUsagesProvider = new NotNullLazyValue<FindUsagesProvider>(){
-            @NotNull
+            @Override
+			@NotNull
             protected FindUsagesProvider compute() {
                 return new RubyFindUsagesProvider();
             }
         };
         myRubyDocumentationProvider = new NotNullLazyValue<DocumentationProvider>(){
-            @NotNull
+            @Override
+			@NotNull
             protected DocumentationProvider compute() {
                 return new RubyDocumentationProvider();
             }
         };
         myParameterInfoHandlers = new NotNullLazyValue<ParameterInfoHandler[]>(){
-            @NotNull
+            @Override
+			@NotNull
             protected ParameterInfoHandler[] compute() {
                 return new ParameterInfoHandler[]{new RubyParameterInfoHandler()};
             }
         };
         mySurroundWithDescriptor = new NotNullLazyValue<SurroundDescriptor[]>(){
-            @NotNull
+            @Override
+			@NotNull
             protected SurroundDescriptor[] compute() {
                 return new SurroundDescriptor[]{new RubySurroundDescriptor()};
             }
         };
         myFastAnnotator = new NotNullLazyValue<Annotator>(){
-            @NotNull
+            @Override
+			@NotNull
             protected Annotator compute() {
                 return new RubyFastAnnotator();
             }
@@ -112,7 +118,8 @@ public class RubyLanguage extends Language {
             }
         }; */
         myNamesValidator = new NotNullLazyValue<NamesValidator>(){
-            @NotNull
+            @Override
+			@NotNull
             protected NamesValidator compute() {
                 return new RubyNamesValidator();
             }

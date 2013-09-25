@@ -49,7 +49,8 @@ class RailsFacetType extends BaseRailsFacetType<RailsFacet> {
         super(RailsFacet.ID, RailsFacet.ID.toString(), null);
     }
 
-    public BaseRailsFacetConfiguration createDefaultConfiguration() {
+    @Override
+	public BaseRailsFacetConfiguration createDefaultConfiguration() {
         return new BaseRailsFacetConfigurationImpl();
     }
 
@@ -60,7 +61,8 @@ class RailsFacetType extends BaseRailsFacetType<RailsFacet> {
     }
 
 
-    protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry,
+    @Override
+	protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry,
                                              final VirtualFileFilter railsFacetFilter,
                                              final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector) {
         detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, railsFacetFilter, facetDetector);

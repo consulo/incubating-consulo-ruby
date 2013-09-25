@@ -65,7 +65,8 @@ public class RunRailsScriptForm extends JDialog {
         return scriptPathTextField;
     }
 
-    public JPanel getContentPane() {
+    @Override
+	public JPanel getContentPane() {
         return myContentPane;
     }
 

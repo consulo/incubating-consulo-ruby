@@ -38,7 +38,8 @@ public class RRegexpLiteralImpl extends RStringLiteralBase implements RRegexpLit
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Regexp), Context.INSTANCE, true);
     }

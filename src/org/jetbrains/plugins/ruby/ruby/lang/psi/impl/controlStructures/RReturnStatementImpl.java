@@ -47,7 +47,8 @@ public class RReturnStatementImpl extends RPsiElementBase implements RReturnStat
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRReturnStatement(this);
             return;
@@ -55,17 +56,20 @@ public class RReturnStatementImpl extends RPsiElementBase implements RReturnStat
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RPsiElement> getReturnValues() {
         final RListOfExpressions list = getReturnList();
         return list!=null ? list.getElements() : Collections.<RPsiElement>emptyList();
     }
 
-    public RListOfExpressions getReturnList() {
+    @Override
+	public RListOfExpressions getReturnList() {
         return RubyPsiUtil.getChildByType(this, RListOfExpressions.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final List<RPsiElement> values = getReturnValues();
         if (values.isEmpty()){

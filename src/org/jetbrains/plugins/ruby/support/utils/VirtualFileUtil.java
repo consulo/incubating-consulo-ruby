@@ -209,7 +209,8 @@ public class VirtualFileUtil {
     }
 
     public static class VirtualFilesComparator implements Comparator<VirtualFile> {
-        public int compare(VirtualFile file1, VirtualFile file2) {
+        @Override
+		public int compare(VirtualFile file1, VirtualFile file2) {
             return compareVirtualFiles(file1, file2);
         }
     }

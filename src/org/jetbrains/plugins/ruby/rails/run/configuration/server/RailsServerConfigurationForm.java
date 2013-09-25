@@ -102,7 +102,8 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
         portBG.add(myUseAnyFreePortRadioButton);
 
         myModulesComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 final Module module = getModule();
                 if (module == null) {
                     scriptPathTextField.setText("");
@@ -119,12 +120,14 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
         workDirTextField.setEnabled(false);
 
         myChoosePortManuallyRB.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 myPort.setEnabled(isChoosePortManually());
             }
         });
         myUseAnyFreePortRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 myPort.setEnabled(isChoosePortManually());
             }
         });
@@ -184,7 +187,8 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
     private LabeledComponent createServersComponent() {
         myRailsServerComboBox = new ComboBox();
         myRailsServerComboBox.setRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            @Override
+			public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (value != null) {
                     setText(ExternalRailsSettings.getRailsServersTitlesByType((String)value));
@@ -202,7 +206,8 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
     private LabeledComponent createEnvornmentsComponent() {
         myRailsEnvironmentComboBox = new ComboBox();
         myRailsEnvironmentComboBox.setRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+            @Override
+			public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (value != null) {
                     setText(((RailsEnvironmentType)value).getParamName());
@@ -217,34 +222,41 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
         return myComponent;
     }
 
-    protected LabeledComponent createScriptArgsComponent() {
+    @Override
+	protected LabeledComponent createScriptArgsComponent() {
         final LabeledComponent myComponent = super.createScriptArgsComponent();
         myComponent.setText(RBundle.message("run.configuration.server.args"));        
         return myComponent;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getIPAddr() {
         return myIPAddrField.getText().trim();
     }
 
-    public void setIPAddr(final String ip) {
+    @Override
+	public void setIPAddr(final String ip) {
         myIPAddrField.setText(ip);
     }
 
-    public String getPort() {
+    @Override
+	public String getPort() {
         return myPortField.getText().trim();
     }
 
-    public void setPort(final String port) {
+    @Override
+	public void setPort(final String port) {
         myPortField.setText(port);
     }
 
-    public boolean isChoosePortManually() {
+    @Override
+	public boolean isChoosePortManually() {
         return myChoosePortManuallyRB.isSelected();
     }
 
-    public void setChoosePortManually(final boolean choosePortManually) {
+    @Override
+	public void setChoosePortManually(final boolean choosePortManually) {
         if (choosePortManually) {
             myChoosePortManuallyRB.doClick();
         } else {
@@ -252,30 +264,36 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getServerType() {
         return (String) myRailsServerComboBox.getSelectedItem();
     }
 
-    public void setServerType(final String type) {
+    @Override
+	public void setServerType(final String type) {
         myRailsServerComboBox.setSelectedItem(type);
     }
 
-    public void setRailsEnvironmentType(@NotNull final RailsServerRunConfiguration.RailsEnvironmentType type) {
+    @Override
+	public void setRailsEnvironmentType(@NotNull final RailsServerRunConfiguration.RailsEnvironmentType type) {
         myRailsEnvironmentComboBox.setSelectedItem(type);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType() {
         final Object selectedObject = myRailsEnvironmentComboBox.getSelectedItem();
         return ((RailsServerRunConfiguration.RailsEnvironmentType) selectedObject);
     }
 
-    public Map<String, String> getEnvs() {
+    @Override
+	public Map<String, String> getEnvs() {
         return myEnvVariablesComponent1.getEnvs();
     }
 
-    public void setEnvs(@NotNull final Map<String, String> envs) {
+    @Override
+	public void setEnvs(@NotNull final Map<String, String> envs) {
         myEnvVariablesComponent1.setEnvs(envs);
     }
 }

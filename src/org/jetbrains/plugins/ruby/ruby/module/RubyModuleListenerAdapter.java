@@ -28,18 +28,23 @@ import java.util.List;
  */
 public abstract class RubyModuleListenerAdapter implements RubyModuleListener {
 
-    public void moduleAdded(Project project, Module module) {
+    @Override
+	public void moduleAdded(Project project, Module module) {
     }
 
-    public void beforeModuleRemoved(Project project, Module module) {
+    @Override
+	public void beforeModuleRemoved(Project project, Module module) {
     }
 
-    public void moduleRemoved(Project project, Module module) {
+    @Override
+	public void moduleRemoved(Project project, Module module) {
     }
 
-    public void modulesRenamed(Project project, List<Module> modules) {
+    @Override
+	public void modulesRenamed(Project project, List<Module> modules) {
     }
 
-    public void moduleChanged() {
+    @Override
+	public void moduleChanged() {
     }
 }

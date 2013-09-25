@@ -44,7 +44,8 @@ public class RDuckTypeImpl extends RTypeBase implements RDuckType{
         isTyped = typed;
     }
 
-    public boolean isTyped() {
+    @Override
+	public boolean isTyped() {
         return isTyped;
     }
 
@@ -52,16 +53,19 @@ public class RDuckTypeImpl extends RTypeBase implements RDuckType{
         return myDuckType;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<Message> getMessages() {
         return myDuckType.getMessages();
     }
 
-    public Collection<Message> getMessagesForName(@Nullable final String name) {
+    @Override
+	public Collection<Message> getMessagesForName(@Nullable final String name) {
         return myDuckType.getMessagesForName(name);
     }
 
-    public RType addMessage(@NotNull final Message message) {
+    @Override
+	public RType addMessage(@NotNull final Message message) {
         ((DuckTypeImpl) myDuckType).addMessage(message);
         return this;
     }

@@ -40,18 +40,21 @@ public class RUnionTypeImpl extends RTypeBase implements RUnionType {
     }
 
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     @NotNull
     public Collection<Message> getMessages() {
         return RTypeUtil.union(myType1.getMessages(), myType2.getMessages());
     }
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public Collection<Message> getMessagesForName(@Nullable final String name) {
         return RTypeUtil.union(myType1.getMessagesForName(name), myType2.getMessagesForName(name));
     }
 
-    public boolean isTyped() {
+    @Override
+	public boolean isTyped() {
         return myType1.isTyped() || myType2.isTyped();
     }
 
@@ -59,7 +62,8 @@ public class RUnionTypeImpl extends RTypeBase implements RUnionType {
         return "Union type";
     }
 
-    public RType addMessage(@NotNull final Message message) {
+    @Override
+	public RType addMessage(@NotNull final Message message) {
         if (myType2 instanceof RDuckTypeImpl) {
             myType2.addMessage(message);
             return this;

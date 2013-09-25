@@ -61,7 +61,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
         myRubyChangeSet = rubyChangeSet;
     }
 
-    public void visitElement(@NotNull final PsiElement element) {
+    @Override
+	public void visitElement(@NotNull final PsiElement element) {
         // if in name
         final RName rName = PsiTreeUtil.getParentOfType(element, RName.class);
         if (rName != null) {
@@ -85,7 +86,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
         checkContainingContainer(element);
     }
 
-    public void visitRName(@NotNull final RName name) {
+    @Override
+	public void visitRName(@NotNull final RName name) {
         createStructureChange("Changes withing the name");
     }
 
@@ -93,11 +95,13 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
 ////// Class or instance fields
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void visitRClassVariable(@NotNull final RClassVariable rClassVariable) {
+    @Override
+	public void visitRClassVariable(@NotNull final RClassVariable rClassVariable) {
         checkForFieldsChanges(rClassVariable);
     }
 
-    public void visitRInstanceVariable(@NotNull final RInstanceVariable rInstanceVariable) {
+    @Override
+	public void visitRInstanceVariable(@NotNull final RInstanceVariable rInstanceVariable) {
         checkForFieldsChanges(rInstanceVariable);
     }
 
@@ -105,14 +109,16 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
 //////  Constant or identifier
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void visitRConstant(@NotNull final RConstant rConstant) {
+    @Override
+	public void visitRConstant(@NotNull final RConstant rConstant) {
         if (checkForConstantsChanges(rConstant)){
             return;
         }
         visitElement(rConstant);
     }
 
-    public void visitRGlobalVariable(@NotNull final RGlobalVariable rGlobalVariable) {
+    @Override
+	public void visitRGlobalVariable(@NotNull final RGlobalVariable rGlobalVariable) {
         if (checkForGlobalVariablesChanges(rGlobalVariable)){
             return;
         }
@@ -120,7 +126,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
         visitElement(rGlobalVariable);
     }
 
-    public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
+    @Override
+	public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
         if (RArgumentNavigator.getByRIdentifier(rIdentifier) != null) {
             createStructureChange("parameter name changed");
             return;
@@ -129,7 +136,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
         visitElement(rIdentifier);
     }
 
-    public void visitRFunctionArgumentList(@NotNull final RFunctionArgumentList list) {
+    @Override
+	public void visitRFunctionArgumentList(@NotNull final RFunctionArgumentList list) {
         createStructureChange("argument list changed");
     }
 
@@ -205,27 +213,33 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
         return false;
     }
 
-    public void visitRFile(@NotNull final RFile rFile) {
+    @Override
+	public void visitRFile(@NotNull final RFile rFile) {
         visitRContainer(rFile);
     }
 
-    public void visitRClass(@NotNull final RClass rClass) {
+    @Override
+	public void visitRClass(@NotNull final RClass rClass) {
         visitRContainer(rClass);
     }
 
-    public void visitRModule(@NotNull final RModule module) {
+    @Override
+	public void visitRModule(@NotNull final RModule module) {
         visitRContainer(module);
     }
 
-    public void visitRMethod(@NotNull final RMethod rMethod) {
+    @Override
+	public void visitRMethod(@NotNull final RMethod rMethod) {
         visitRContainer(rMethod);
     }
 
-    public void visitRSingletonMethod(@NotNull final RSingletonMethod rsMethod) {
+    @Override
+	public void visitRSingletonMethod(@NotNull final RSingletonMethod rsMethod) {
         visitRContainer(rsMethod);
     }
 
-    public void visitRObjectClass(@NotNull final RObjectClass rsClass) {
+    @Override
+	public void visitRObjectClass(@NotNull final RObjectClass rsClass) {
         visitRContainer(rsClass);
     }
 
@@ -234,7 +248,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor {
 ///// Important calls
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void visitRCall(@NotNull RCall rCall) {
+    @Override
+	public void visitRCall(@NotNull RCall rCall) {
         checkContainingContainer(rCall);
     }
 

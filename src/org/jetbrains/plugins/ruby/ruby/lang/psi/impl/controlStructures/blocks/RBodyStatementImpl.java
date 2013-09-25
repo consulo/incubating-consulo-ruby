@@ -37,7 +37,8 @@ public class RBodyStatementImpl extends RPsiElementBase implements RBodyStatemen
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitRBodyStatement(this);
             return;
@@ -46,21 +47,25 @@ public class RBodyStatementImpl extends RPsiElementBase implements RBodyStatemen
     }
 
 
-    @Nullable
+    @Override
+	@Nullable
     public RCompoundStatement getBlock() {
         return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
     }
 
-    public List<RRescueBlock> getRescueBlocks() {
+    @Override
+	public List<RRescueBlock> getRescueBlocks() {
         return RubyPsiUtil.getChildrenByType(this, RRescueBlock.class);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public REnsureBlock getEnsureBlock() {
         return RubyPsiUtil.getChildByType(this, REnsureBlock.class, 0);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RElseBlock getElseBlock() {
         return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
     }

@@ -50,25 +50,30 @@ public class RVirtualFieldAttrImpl extends RVirtualStructuralElementBase impleme
         myNames = names;
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualFieldAttr(this);
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.FIELD_ATTR_CALL;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getNames() {
         return myNames;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public FieldAttrType getFieldAttrType() {
         return myType;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableText() {
         final StringBuffer buffer = new StringBuffer();
         buffer.append(RFieldAttrPresentationUtil.getFieldAttrText(myType));

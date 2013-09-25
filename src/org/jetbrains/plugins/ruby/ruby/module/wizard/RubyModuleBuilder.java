@@ -52,7 +52,8 @@ public class RubyModuleBuilder extends RRModuleBuilder {
 
     private String myTestUtinRootPath;
 
-    @NotNull
+    @Override
+	@NotNull
     public Module createModule(ModifiableModuleModel moduleModel) throws InvalidDataException, IOException, ModuleWithNameAlreadyExists, JDOMException, ConfigurationException {
         final Module myModule = super.createModule(moduleModel);
 
@@ -100,7 +101,8 @@ public class RubyModuleBuilder extends RRModuleBuilder {
         return RubyModuleType.getInstance();
     }
 
-    public void setTestsUnitRootPath(@NotNull final String path) {
+    @Override
+	public void setTestsUnitRootPath(@NotNull final String path) {
         myTestUtinRootPath = path;
     }
 
@@ -108,7 +110,8 @@ public class RubyModuleBuilder extends RRModuleBuilder {
         return myTestUtinRootPath == null ? getContentEntryPath() : myTestUtinRootPath;
     }
 
-    protected void setupContentRoot(ModifiableRootModel rootModel) {
+    @Override
+	protected void setupContentRoot(ModifiableRootModel rootModel) {
         String moduleRootPath = getContentEntryPath();
         if (moduleRootPath != null) {
             LocalFileSystem lfs = LocalFileSystem.getInstance();

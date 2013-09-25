@@ -19,7 +19,8 @@ class RetInstruction extends InstructionImpl {
         super(null, num);
     }
 
-    public Iterable<? extends Instruction> succ(CallEnvironment env) {
+    @Override
+	public Iterable<? extends Instruction> succ(CallEnvironment env) {
       final Stack<CallInstruction> callStack = getStack(env, this);
       if (callStack.isEmpty()) return Collections.emptyList();
 
@@ -38,7 +39,8 @@ class RetInstruction extends InstructionImpl {
         return super.toString() + " RETURN";
     }
 
-    protected String getElementPresentation() {
+    @Override
+	protected String getElementPresentation() {
         return "";
     }
 }

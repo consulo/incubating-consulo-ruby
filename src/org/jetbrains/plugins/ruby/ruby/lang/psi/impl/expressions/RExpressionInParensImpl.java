@@ -36,12 +36,14 @@ public class RExpressionInParensImpl extends RPsiElementBase implements RExpress
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getExpression() {
         return getChildByType(RPsiElement.class, 0);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RPsiElement expression = getExpression();
         return expression instanceof RExpression ? ((RExpression) expression).getType(fileSymbol) : RType.NOT_TYPED;

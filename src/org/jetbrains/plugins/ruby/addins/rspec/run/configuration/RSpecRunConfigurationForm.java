@@ -117,7 +117,8 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams {
         RubyRunConfigurationUIUtil.addFolderChooser(title, myWorkDirTextField, myProject);
 
         final ActionListener testTypeListener = new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 setTestType(getTestType());
             }
         };
@@ -127,7 +128,8 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams {
 
         RubyRunConfigurationUIUtil.addAlternativeSDKActionListener(myUseAlternativeSdkGemCB, myAlternativeSdksComponent, myModulesComboBox);
         myCBUseCustomSpecRunner.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 final boolean useCustomRunner = shouldUseCustomSpecRunner();
                 myCustomSpecsRunnerComponent.setEnabled(useCustomRunner);
             }
@@ -198,54 +200,66 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams {
         return FileUtil.toSystemIndependentName(mySpecsFolderTextField.getText().trim());
     }
 
-    public String getRubyArgs() {
+    @Override
+	public String getRubyArgs() {
         return myRubyArgsEditor.getText().trim();
     }
 
-    public String getWorkingDirectory() {
+    @Override
+	public String getWorkingDirectory() {
         return FileUtil.toSystemIndependentName(myWorkDirTextField.getText().trim());
     }
 
-    public Module getModule() {
+    @Override
+	public Module getModule() {
         final Object selectedObject = myModulesComboBox.getSelectedItem();
         return selectedObject instanceof Module ? (Module) selectedObject : null;
     }
 
-    public Sdk getAlternativeSdk() {
+    @Override
+	public Sdk getAlternativeSdk() {
         final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
         return selectedObject instanceof Sdk ? (Sdk) selectedObject : null;
     }
 
-    public boolean shouldUseAlternativeSdk() {
+    @Override
+	public boolean shouldUseAlternativeSdk() {
         return myUseAlternativeSdkGemCB.isSelected();
     }
 
-    public void setShouldUseAlternativeSdk(final boolean shouldUse) {
+    @Override
+	public void setShouldUseAlternativeSdk(final boolean shouldUse) {
         RubyRunConfigurationUIUtil.setShouldUseAlternSdk(shouldUse, myUseAlternativeSdkGemCB, myAlternativeSdksComboBox, myModulesComboBox);
     }
 
-    public boolean shouldUseCustomSpecRunner() {
+    @Override
+	public boolean shouldUseCustomSpecRunner() {
         return myCBUseCustomSpecRunner.isSelected();
     }
 
-    public void setShouldUseCustomSpecRunner(final boolean shouldUse) {
+    @Override
+	public void setShouldUseCustomSpecRunner(final boolean shouldUse) {
         myCBUseCustomSpecRunner.setSelected(shouldUse);
         myCustomSpecsRunnerComponent.setEnabled(shouldUse);
     }
 
-    public String getTestsFolderPath() {
+    @Override
+	public String getTestsFolderPath() {
         return FileUtil.toSystemIndependentName(mySpecsFolderTextField.getText().trim());
     }
 
-    public String getTestScriptPath() {
+    @Override
+	public String getTestScriptPath() {
         return FileUtil.toSystemIndependentName(mySpecsScriptTextField.getText().trim());
     }
 
-    public String getCustomSpecsRunnerPath() {
+    @Override
+	public String getCustomSpecsRunnerPath() {
         return FileUtil.toSystemIndependentName(myCustomSpecsRunnerTextField.getText().trim());
     }
 
-    public String getTestFileMask() {
+    @Override
+	public String getTestFileMask() {
         return mySpecsFileMaskTextField.getText();
     }
 
@@ -253,40 +267,49 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams {
         mySpecsFolderTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
     }
 
-    public void setRubyArgs(final String value) {
+    @Override
+	public void setRubyArgs(final String value) {
         myRubyArgsEditor.setText(value);
     }
 
-    public void setWorkingDirectory(final String value) {
+    @Override
+	public void setWorkingDirectory(final String value) {
         myWorkDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
     }
 
-    public void setModule(@Nullable final Module module) {
+    @Override
+	public void setModule(@Nullable final Module module) {
         myModulesComboBox.setSelectedItem(module);
     }
 
-    public void setAlternativeSdk(@Nullable final Sdk sdk) {
+    @Override
+	public void setAlternativeSdk(@Nullable final Sdk sdk) {
         myAlternativeSdksComboBox.setSelectedItem(sdk);
     }
 
-    public void setTestsFolderPath(final String path) {
+    @Override
+	public void setTestsFolderPath(final String path) {
         mySpecsFolderTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(path)));
     }
 
-    public void setTestScriptPath(final String path) {
+    @Override
+	public void setTestScriptPath(final String path) {
         mySpecsScriptTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(path)));
     }
 
-    public void setCustomSpecsRunnerPath(final String path) {
+    @Override
+	public void setCustomSpecsRunnerPath(final String path) {
         myCustomSpecsRunnerTextField.setText(FileUtil.toSystemDependentName((TextUtil.getAsNotNull(path))));
     }
 
 
-    public void setTestFileMask(final String name) {
+    @Override
+	public void setTestFileMask(final String name) {
         mySpecsFileMaskTextField.setText(name);
     }
 
-    public TestType getTestType() {
+    @Override
+	public TestType getTestType() {
         if (myAllInFolderRB.isSelected()) {
             return TestType.ALL_IN_FOLDER;
         } else {
@@ -294,23 +317,28 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams {
         }
     }
 
-    public boolean shouldUseColoredOutput() {
+    @Override
+	public boolean shouldUseColoredOutput() {
         return myCBEnableColouredOutput.isSelected();
     }
 
-    public void setShouldUseColoredOutput(final boolean disabled) {
+    @Override
+	public void setShouldUseColoredOutput(final boolean disabled) {
         myCBEnableColouredOutput.setSelected(disabled);
     }
 
-    public boolean shouldRunSpecSeparately() {
+    @Override
+	public boolean shouldRunSpecSeparately() {
         return myCBRunSpecsSeparately.isSelected();
     }
 
-    public void setShouldRunSpecSeparately(final boolean disabled) {
+    @Override
+	public void setShouldRunSpecSeparately(final boolean disabled) {
         myCBRunSpecsSeparately.setSelected(disabled);
     }
 
-    public void setTestType(@NotNull final TestType testType) {
+    @Override
+	public void setTestType(@NotNull final TestType testType) {
         clearTestTypeSettings(testType);
 
         mySpecsScriptComponent.setEnabled(true);
@@ -346,27 +374,33 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams {
         setTestFileMask(value);
     }
 
-    public void setSpecArgs(final String specArgs) {
+    @Override
+	public void setSpecArgs(final String specArgs) {
         mySpecsArgsEditor.setText(specArgs);
     }
 
-    public String getSpecArgs() {
+    @Override
+	public String getSpecArgs() {
        return mySpecsArgsEditor.getText().trim();
     }
 
-    public void setEnvs(final Map<String, String> envs) {
+    @Override
+	public void setEnvs(final Map<String, String> envs) {
         myEnvVariablesComponent.setEnvs(envs);
     }
 
-    public void setPassParentEnvs(final boolean passParentEnvs) {
+    @Override
+	public void setPassParentEnvs(final boolean passParentEnvs) {
         myEnvVariablesComponent.setPassParentEnvs(passParentEnvs);
     }
 
-    public Map<String, String> getEnvs() {
+    @Override
+	public Map<String, String> getEnvs() {
         return myEnvVariablesComponent.getEnvs();
     }
 
-    public boolean isPassParentEnvs() {
+    @Override
+	public boolean isPassParentEnvs() {
         return myEnvVariablesComponent.isPassParentEnvs();
     }
 }

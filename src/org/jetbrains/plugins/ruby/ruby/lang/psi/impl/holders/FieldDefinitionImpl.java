@@ -36,22 +36,26 @@ public class FieldDefinitionImpl implements FieldDefinition {
         myFirstUsage = field;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RField getFirstUsage() {
         return myFirstUsage;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         //noinspection ConstantConditions
         return myFirstUsage.getName();
     }
 
-    public FieldType getType() {
+    @Override
+	public FieldType getType() {
         return getFirstUsage().getType();
     }
 
-    public boolean isFor(@Nullable final RVirtualField field) {
+    @Override
+	public boolean isFor(@Nullable final RVirtualField field) {
         return field!=null && getType() == field.getType() && getName().equals(field.getName());
     }
 }

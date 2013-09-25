@@ -28,15 +28,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  */
 public class RubyBraceSurrounder extends RubySurrounderBase {
 
-    public String getTemplateDescription() {
+    @Override
+	public String getTemplateDescription() {
         return "(...)";
     }
 
-    protected String getText(PsiElement[] elements) {
+    @Override
+	protected String getText(PsiElement[] elements) {
         return "(" + gatherText(elements)+ ")";
     }
 
-    protected TextRange getTextRange(@NotNull final RPsiElement element) {
+    @Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element) {
         return element.getTextRange();
     }
 }

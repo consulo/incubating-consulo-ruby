@@ -48,16 +48,19 @@ public abstract class RFieldBase extends RNamedElementBase implements RField {
         super(astNode);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public FieldDefinition getDescription() {
         return getHolder().getDefinition(this);
     }
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         return new RFieldReference(this);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RFieldHolder getHolder() {
         if (myHolder==null){
             myHolder = PsiTreeUtil.getParentOfType(this, RFieldHolder.class);
@@ -71,12 +74,14 @@ public abstract class RFieldBase extends RNamedElementBase implements RField {
         return RFieldPresentationUtil.getIcon(this, flags);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ItemPresentation getPresentation() {
         return RFieldPresentationUtil.getPresentation(this);
     }
 
-    protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
         if (!TextUtil.isCID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }

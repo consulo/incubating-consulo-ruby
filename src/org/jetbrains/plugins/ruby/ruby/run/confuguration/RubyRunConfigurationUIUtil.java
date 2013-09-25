@@ -186,7 +186,8 @@ public class RubyRunConfigurationUIUtil {
                                                        final LabeledComponent alternativeSdksComponent,
                                                        final JComboBox modulesComboBox) {
         useAlternativeSdkCB.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 final boolean useAlternativeSDK = useAlternativeSdkCB.isSelected();
                 alternativeSdksComponent.setEnabled(useAlternativeSDK);
                 modulesComboBox.setEnabled(!useAlternativeSDK);

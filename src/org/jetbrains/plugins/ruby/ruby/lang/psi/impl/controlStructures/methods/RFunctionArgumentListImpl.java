@@ -32,7 +32,8 @@ public class RFunctionArgumentListImpl extends RCommandArgumentListImpl implemen
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
            if (visitor instanceof RubyElementVisitor) {
                ((RubyElementVisitor)visitor).visitRFunctionArgumentList(this);
                return;
@@ -40,7 +41,8 @@ public class RFunctionArgumentListImpl extends RCommandArgumentListImpl implemen
            super.accept(visitor);
        }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName(boolean includeDefaultArgs) {
         return "(" + super.getPresentableName(includeDefaultArgs) + ")";
     }

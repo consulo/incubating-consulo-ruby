@@ -15,16 +15,19 @@ public class YAMLCommenter implements Commenter {
     @NonNls
     private static final String LINE_COMMENT_PREFIX = "#";
 
-    public String getLineCommentPrefix() {
+    @Override
+	public String getLineCommentPrefix() {
         return LINE_COMMENT_PREFIX;
     }
 
-    public String getBlockCommentPrefix() {
+    @Override
+	public String getBlockCommentPrefix() {
         // N/A
         return null;
     }
 
-    public String getBlockCommentSuffix() {
+    @Override
+	public String getBlockCommentSuffix() {
         // N/A
         return null;
     }

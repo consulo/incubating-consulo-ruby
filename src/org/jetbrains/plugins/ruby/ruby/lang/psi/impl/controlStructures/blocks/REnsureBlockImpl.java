@@ -33,7 +33,8 @@ public class REnsureBlockImpl extends RPsiElementBase implements REnsureBlock {
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor) {
         if (visitor instanceof RubyElementVisitor) {
             ((RubyElementVisitor)visitor).visitREnsureBlock(this);
             return;

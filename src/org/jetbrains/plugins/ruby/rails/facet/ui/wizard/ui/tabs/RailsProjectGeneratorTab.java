@@ -64,7 +64,8 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
         mySettingsHolder = settingsHolder;
 
         myCBPreconfigureForSelectedDB.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
+            @Override
+			public void actionPerformed(final ActionEvent e) {
                 final boolean preconfigureDB = myCBPreconfigureForSelectedDB.isSelected();
                 myCBoxDBName.setEnabled(preconfigureDB);
             }
@@ -92,7 +93,8 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
         return TITLE;
     }
 
-    public void setContext(@NotNull final TabbedSettingsContext context) {
+    @Override
+	public void setContext(@NotNull final TabbedSettingsContext context) {
         final TabbedSettingsContext oldContext = getContext();
         super.setContext(context);
 
@@ -101,7 +103,8 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
         }
     }
 
-    public void beforeShow() {
+    @Override
+	public void beforeShow() {
         myIsClosed = false;
 
         if (myRailsVersion == null) {
@@ -132,7 +135,8 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
         return true;
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
         if (generateNewRButton.isSelected()) {
             mySettingsHolder.setAppGenerateWay(Generate.NEW);
         } else if (useExistingRButton.isSelected()) {
@@ -158,11 +162,13 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
     /**
      * Resets cached sdk version
      */
-    public void resetSdkSettings() {
+    @Override
+	public void resetSdkSettings() {
         myRailsVersion = null;
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
         final RailsWizardSettingsHolder.Generate appGenerateWay = mySettingsHolder.getAppGenerateWay();
         generateNewRButton.setSelected(appGenerateWay == Generate.NEW);
         useExistingRButton.setSelected(appGenerateWay != Generate.NEW);
@@ -182,11 +188,13 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
         myECRailsVersionLabel = new EvaluatingComponent<String>(myRailsVersionLabel);   
     }
 
-    public boolean isCloosed() {
+    @Override
+	public boolean isCloosed() {
         return myIsClosed;
     }
 
-    public void setRailsVersion(@Nullable final String railsVersion) {
+    @Override
+	public void setRailsVersion(@Nullable final String railsVersion) {
         myRailsVersion = railsVersion;
     }
 }

@@ -66,16 +66,19 @@ public class RSpecRunConfigurationType implements LocatableConfigurationType
 		return CONFIGURATION_TYPE_EP.findExtension(RSpecRunConfigurationType.class);
 	}
 
+	@Override
 	public String getDisplayName()
 	{
 		return RBundle.message("rspec.run.configuration.type.name");
 	}
 
+	@Override
 	public String getConfigurationTypeDescription()
 	{
 		return RBundle.message("rspec.run.configuration.type.description");
 	}
 
+	@Override
 	public Icon getIcon()
 	{
 		return RSpecIcons.RUN_CONFIGURATION_ICON;
@@ -88,11 +91,13 @@ public class RSpecRunConfigurationType implements LocatableConfigurationType
 		return "RSpecRunConfigurationType";
 	}
 
+	@Override
 	public ConfigurationFactory[] getConfigurationFactories()
 	{
 		return new ConfigurationFactory[]{myRSpecTestsFactory};
 	}
 
+	@Override
 	@Nullable
 	public RunnerAndConfigurationSettings createConfigurationByLocation(final @NotNull Location location)
 	{

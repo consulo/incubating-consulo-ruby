@@ -46,31 +46,37 @@ public class RubyStructureViewModel extends TextEditorBasedStructureViewModel {
         myRoot = root;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public StructureViewTreeElement getRoot() {
         return new RubyStructureViewElement(myRoot);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Grouper[] getGroupers() {
         return Grouper.EMPTY_ARRAY;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Sorter[] getSorters() {
         return new Sorter[]{Sorter.ALPHA_SORTER};
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Filter[] getFilters() {
         return Filter.EMPTY_ARRAY;
     }
 
-    protected PsiFile getPsiFile() {
+    @Override
+	protected PsiFile getPsiFile() {
         return myRoot.getContainingFile();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected Class[] getSuitableClasses() {
         return SUITABLE_CLASSES;
     }

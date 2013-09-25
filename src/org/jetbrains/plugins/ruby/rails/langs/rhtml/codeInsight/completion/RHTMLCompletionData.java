@@ -60,7 +60,8 @@ public class RHTMLCompletionData extends HtmlCompletionData {
         registerVariant(variant);
     }
 
-    public String findPrefix(final PsiElement insertedElement, final int offset) {
+    @Override
+	public String findPrefix(final PsiElement insertedElement, final int offset) {
         return RHTMLInjectionInStringsCVariant.ifInStringTokenAfterInjectionStartChar(insertedElement.getNode())
                 ? INECTION_START_PREFIX
                 : super.findPrefix(insertedElement, offset);

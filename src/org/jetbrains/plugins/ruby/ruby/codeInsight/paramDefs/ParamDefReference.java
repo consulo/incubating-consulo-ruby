@@ -44,11 +44,13 @@ public class ParamDefReference implements PsiReference {
         myContext = context;
     }
 
-    public PsiElement getElement() {
+    @Override
+	public PsiElement getElement() {
         return myElement;
     }
 
-    public TextRange getRangeInElement() {
+    @Override
+	public TextRange getRangeInElement() {
         if (myElement instanceof RStringLiteral) {
             return new TextRange(1, myElement.getTextLength()-1);
         }
@@ -58,16 +60,19 @@ public class ParamDefReference implements PsiReference {
         return new TextRange(0, myElement.getTextLength());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public PsiElement resolve() {
         return myParamDef.resolveReference(myContext);
     }
 
-    public String getCanonicalText() {
+    @Override
+	public String getCanonicalText() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public PsiElement handleElementRename(final String s) throws IncorrectOperationException {
+    @Override
+	public PsiElement handleElementRename(final String s) throws IncorrectOperationException {
         if (myElement instanceof RStringLiteral) {
             String text = "'" + s + "'";
             final RPsiElement newElement = RubyPsiUtil.getTopLevelElements(myElement.getProject(), text).get(0);
@@ -77,16 +82,19 @@ public class ParamDefReference implements PsiReference {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public PsiElement bindToElement(@NotNull final PsiElement psiElement) throws IncorrectOperationException {
+    @Override
+	public PsiElement bindToElement(@NotNull final PsiElement psiElement) throws IncorrectOperationException {
         throw new IncorrectOperationException();
     }
 
-    public boolean isReferenceTo(final PsiElement psiElement) {
+    @Override
+	public boolean isReferenceTo(final PsiElement psiElement) {
         PsiElement resolveResult = resolve();
         return psiElement.getManager().areElementsEquivalent(resolveResult, psiElement);
     }
 
-    public Object[] getVariants() {
+    @Override
+	public Object[] getVariants() {
         Collection<RubyLookupItem> rubyLookupItemList = myParamDef.getVariants(myContext);
         if (rubyLookupItemList != null) {
             return rubyLookupItemList.toArray(new Object[rubyLookupItemList.size()]);
@@ -94,7 +102,8 @@ public class ParamDefReference implements PsiReference {
         return new Object[0];
     }
 
-    public boolean isSoft() {
+    @Override
+	public boolean isSoft() {
         return false;
     }
 }

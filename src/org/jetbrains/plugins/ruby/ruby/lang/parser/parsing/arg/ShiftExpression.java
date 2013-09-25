@@ -52,7 +52,8 @@ class ShiftExpression implements RubyTokenTypes {
     @NotNull
     public static IElementType parseWithLeadMathExpr(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder){
                 return MathExpression.parse(builder);
             }

@@ -51,12 +51,14 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol {
     /**
      * Rebuilds FileSymbol with ProgressBar
      */
-    protected final void updateFileSymbol() {
+    @Override
+	protected final void updateFileSymbol() {
         if (myFileSymbol == null) {
             final ProgressManager manager = ProgressManager.getInstance();
 
             final Runnable runnable = new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     final ProgressIndicator indicator = manager.getProgressIndicator();
                     if (indicator != null && mySdk!=null) {
                         indicator.setText(mySdk.getName());
@@ -73,12 +75,14 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol {
         }
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected CachedSymbol getBaseSymbol() {
         return null;
     }
 
-    public void fileAdded(@NotNull String url) {
+    @Override
+	public void fileAdded(@NotNull String url) {
         if (mySdk!=null){
             if (url.startsWith(RubySdkUtil.getRubyStubsDirUrl(mySdk))){
                 myFileSymbol = null;
@@ -99,7 +103,8 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol {
         }
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         addSdkLoadPath();
         if (!ApplicationManager.getApplication().isUnitTestMode()){
             LOG.assertTrue(VirtualFileManager.getInstance().findFileByUrl(myLoadUrl) != null, "Stubs are corrupted. Cannot find file: " + myLoadUrl);

@@ -58,7 +58,8 @@ public class GenerateDialogs {
             super(module, title, validator);
         }
 
-        protected void initDialog(final String title) {
+        @Override
+		protected void initDialog(final String title) {
             setTitle(title);
             setButtonsAlignment(SwingUtilities.RIGHT);
             init();
@@ -68,7 +69,8 @@ public class GenerateDialogs {
          * Creates panel with all necessary ui elements
          * @return GeneratorPanel
          */
-        @NotNull
+        @Override
+		@NotNull
         protected GeneratorPanel createGeneratorContent() {
             return new ActionPanel(((ActionInputValidator)myValidator).getRelativePath());
         }
@@ -81,7 +83,8 @@ public class GenerateDialogs {
             super(module, title, validator);
         }
 
-        protected void initDialog(final String title) {
+        @Override
+		protected void initDialog(final String title) {
             setTitle(title);
             setButtonsAlignment(SwingUtilities.RIGHT);
             init();
@@ -91,7 +94,8 @@ public class GenerateDialogs {
          * Creates panel with all necessary ui elements
          * @return GeneratorPanel
          */
-        @NotNull
+        @Override
+		@NotNull
         protected GeneratorPanel createGeneratorContent() {
             final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(myModule);
             assert configuration != null;
@@ -127,11 +131,13 @@ public class GenerateDialogs {
             }
         }
 
-        protected Action[] createActions() {
+        @Override
+		protected Action[] createActions() {
             return new Action[]{getOKAction(), getCancelAction(), getHelpAction()};
         }
 
-        protected JComponent createCenterPanel() {
+        @Override
+		protected JComponent createCenterPanel() {
             final GeneratorOptions options =
                     RProjectUtil.getGeneratorsOptions(myModule.getProject());
             myGenerateDialogContent = createGeneratorContent();
@@ -149,7 +155,8 @@ public class GenerateDialogs {
             return new SimpleGeneratorPanel();
         }
 
-        protected void doOKAction() {
+        @Override
+		protected void doOKAction() {
             final String generatorArgs = getGeneratorArgs();
             final String mainArgument = getMainArgument();
 
@@ -166,7 +173,8 @@ public class GenerateDialogs {
             }
         }
 
-        protected void doHelpAction() {
+        @Override
+		protected void doHelpAction() {
             if (helpData.get() == null) {
                 readHelpData();
             }
@@ -179,7 +187,8 @@ public class GenerateDialogs {
                                     helpData.get());
         }
 
-        public JComponent getPreferredFocusedComponent() {
+        @Override
+		public JComponent getPreferredFocusedComponent() {
             return myGenerateDialogContent.getPreferredFocusedComponent();
         }
 
@@ -236,11 +245,13 @@ public class GenerateDialogs {
             initDialog(title);
         }
 
-        protected Action[] createActions() {
+        @Override
+		protected Action[] createActions() {
             return new Action[]{getOKAction()};
         }
 
-        protected JComponent createCenterPanel() {
+        @Override
+		protected JComponent createCenterPanel() {
             return new GeneratorHelpPanel(myOutput).getContent();
         }
 

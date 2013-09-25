@@ -102,7 +102,8 @@ public class EvaluatingComponent<T> extends JPanel {
         final Ref<T> returnValue = new Ref<T>(null);
 
         final Thread evalThread = new Thread(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 myIsRunning = true;
                 // run data
                 if (myEvaluatingFun != null) {
@@ -110,7 +111,8 @@ public class EvaluatingComponent<T> extends JPanel {
                         returnValue.set(myEvaluatingFun.fun(null));
                     } finally {
                         SwingUtilities.invokeLater(new Runnable() {
-                            public void run() {
+                            @Override
+							public void run() {
                                 setProgressComponentVisibility(false, oldCursor);
                             }
                         });
@@ -119,7 +121,8 @@ public class EvaluatingComponent<T> extends JPanel {
 
                 // apply data
                 SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         setProgressComponentVisibility(false, oldCursor);
 
                         if (myAfterHandler != null) {

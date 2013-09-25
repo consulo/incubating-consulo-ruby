@@ -51,7 +51,8 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
         super(JRubyFacet.ID, JRubyFacet.ID.toString(), RBundle.message("jruby.facet"));
     }
 
-    public JRubyFacetConfiguration createDefaultConfiguration() {
+    @Override
+	public JRubyFacetConfiguration createDefaultConfiguration() {
         return new JRubyFacetConfiguration();
     }
 
@@ -69,13 +70,15 @@ public class JRubyFacetType extends FacetType<JRubyFacet, JRubyFacetConfiguratio
         final FacetDetectorRegistryEx<JRubyFacetConfiguration> detectorRegistry = (FacetDetectorRegistryEx<JRubyFacetConfiguration>) registry;
 
         final VirtualFileFilter jrubyFacetFilter = new VirtualFileFilter(){
-            public boolean accept(VirtualFile virtualFile) {
+            @Override
+			public boolean accept(VirtualFile virtualFile) {
                 return JRubyFacetStructure.isValidForJRubyFacet(virtualFile);
             }
         };
 
         final Condition<PsiFile> condition = new Condition<PsiFile>() {
-            public boolean value(PsiFile psiFile) {
+            @Override
+			public boolean value(PsiFile psiFile) {
                 final VirtualFile vFile = psiFile.getVirtualFile();
                 if (vFile == null) {
                     return false;

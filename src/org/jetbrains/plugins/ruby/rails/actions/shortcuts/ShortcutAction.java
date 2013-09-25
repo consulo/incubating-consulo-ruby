@@ -66,7 +66,8 @@ public class ShortcutAction extends AnAction {
         ActionManager.getInstance().unregisterAction(actionId);
     }
 
-    public void actionPerformed(final AnActionEvent e) {
+    @Override
+	public void actionPerformed(final AnActionEvent e) {
         final DataContext dataContext = e.getDataContext();
 
         final Module module = DataKeys.MODULE.getData(dataContext);

@@ -119,17 +119,20 @@ public class RubyIconProvider implements ApplicationComponent {
         return null;
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RComponents.RUBY_ICON_PROVIDER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         // Do nothing
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
          //Do nothing
     }
 }

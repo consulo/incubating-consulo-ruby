@@ -41,23 +41,27 @@ public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateAc
         myTemplate = template;
     }
 
-    protected PsiElement invokeDialogAndCreate(Project project, PsiDirectory dir, FileTemplate selectedTemplate) {
+    @Override
+	protected PsiElement invokeDialogAndCreate(Project project, PsiDirectory dir, FileTemplate selectedTemplate) {
         return createDilog(project, dir, selectedTemplate).create();
     }
 
     @NotNull
     protected abstract CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
 
-    @Nullable
+    @Override
+	@Nullable
     protected AnAction getReplacedAction(final FileTemplate template) {
         return null;
     }
 
-    protected FileTemplate getTemplate(final Project project, final PsiDirectory dir) {
+    @Override
+	protected FileTemplate getTemplate(final Project project, final PsiDirectory dir) {
         return myTemplate;
     }
 
-    public void update(AnActionEvent e) {
+    @Override
+	public void update(AnActionEvent e) {
         super.update(e);
         Presentation presentation = e.getPresentation();
         boolean isEnabled = canCreateFromTemplate(e, myTemplate);

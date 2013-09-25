@@ -44,12 +44,14 @@ public class ScopeImpl implements Scope {
         myHolder = holder;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PseudoScopeHolder getHolder() {
         return myHolder;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<Scope> getSubScopes() {
         return mySubScopes;
     }
@@ -58,14 +60,16 @@ public class ScopeImpl implements Scope {
         mySubScopes.add(scope);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<ScopeVariable> getVariables() {
         synchronized (LOCK) {
             return myVariables.values();
         }
     }
 
-    public void processIdentifier(@NotNull final RIdentifier identifier) {
+    @Override
+	public void processIdentifier(@NotNull final RIdentifier identifier) {
         final String name = identifier.getText();
         synchronized (LOCK) {
             if (getVariableByName(name) == null){
@@ -74,14 +78,16 @@ public class ScopeImpl implements Scope {
         }
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public ScopeVariable getVariableByName(@NotNull final String name) {
         synchronized (LOCK) {
             return myVariables.get(name);
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Set<String> getScopeNames() {
         return myVariables.keySet();
     }

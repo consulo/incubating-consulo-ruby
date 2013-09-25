@@ -48,7 +48,8 @@ public class JavaClassReference extends RQualifiedReference {
         super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.JAVA_CLASS);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected ResolveResult[] multiResolveInner(final boolean incompleteCode) {
         if (((RPsiElementBase) myWholeReference).isClassOrModuleName()){
             return ResolveResult.EMPTY_ARRAY;
@@ -70,12 +71,14 @@ public class JavaClassReference extends RQualifiedReference {
             if (element !=null){
                 return  new ResolveResult[]{
                         new ResolveResult(){
-                            @Nullable
+                            @Override
+							@Nullable
                             public PsiElement getElement() {
                                 return element;
                             }
 
-                            public boolean isValidResult() {
+                            @Override
+							public boolean isValidResult() {
                                 return true;
                             }
                         }

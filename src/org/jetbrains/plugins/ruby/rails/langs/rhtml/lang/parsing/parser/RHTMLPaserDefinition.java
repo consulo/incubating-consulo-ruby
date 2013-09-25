@@ -55,16 +55,19 @@ public class RHTMLPaserDefinition implements ParserDefinition {
 
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Lexer createLexer(Project project, LanguageVersion languageVersion) {
         return new _RHTMLLexer();
     }
 
-    public IFileElementType getFileNodeType() {
+    @Override
+	public IFileElementType getFileNodeType() {
         return eRubyElementTypes.RHTML_FILE;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
 		if(myWhitespaceTokens == null) {
 			myWhitespaceTokens = TokenSet.orSet(
@@ -75,7 +78,8 @@ public class RHTMLPaserDefinition implements ParserDefinition {
         return myWhitespaceTokens;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public TokenSet getCommentTokens(LanguageVersion languageVersion) {
         if (myCommentTokens == null) {
             myCommentTokens = TokenSet.orSet(
@@ -97,6 +101,7 @@ public class RHTMLPaserDefinition implements ParserDefinition {
 		return myTemplateParserDefinition.getStringLiteralElements(languageVersion);
 	}
 
+	@Override
 	@NotNull
     public PsiParser createParser(final Project project, LanguageVersion languageVersion) {
         //We use RHML_FILE instead of this. Shouldn't be invoked!
@@ -104,11 +109,13 @@ public class RHTMLPaserDefinition implements ParserDefinition {
         return new RHTMLParser();
     }
 
-    public PsiFile createFile(final FileViewProvider viewProvider) {
+    @Override
+	public PsiFile createFile(final FileViewProvider viewProvider) {
         return new RHTMLFileImpl(viewProvider);
     }
 
-    public SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
+    @Override
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
         if (RHTMLTokenType.RHTML_SEPARATORS.contains(left.getElementType()) ||
                 RHTMLTokenType.RHTML_SEPARATORS.contains(right.getElementType())) {
             return SpaceRequirements.MUST_LINE_BREAK;
@@ -116,7 +123,8 @@ public class RHTMLPaserDefinition implements ParserDefinition {
         return SpaceRequirements.MAY;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public PsiElement createElement(final ASTNode node) {
         return RHTMLPsiCreator.createElement(node);
     }

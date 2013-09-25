@@ -57,7 +57,8 @@ public class RHTMLFoldingBuilder implements FoldingBuilder {
                       RHTMLElementType.RHTML_XML_TAG,
                       RHTMLElementType.RHTML_COMMENT_ELEMENT);
 
-    @NotNull
+    @Override
+	@NotNull
     public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document) {
         List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
         gatherDescriptors(astNode, descriptors, document);
@@ -87,7 +88,8 @@ public class RHTMLFoldingBuilder implements FoldingBuilder {
         }
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getPlaceholderText(@NotNull final ASTNode node) {
         final IElementType nodeType = node.getElementType();
         if (nodeType == RHTMLElementType.RHTML_XML_TAG) {
@@ -115,7 +117,8 @@ public class RHTMLFoldingBuilder implements FoldingBuilder {
         return null;
     }
 
-    public boolean isCollapsedByDefault(@NotNull ASTNode node) {
+    @Override
+	public boolean isCollapsedByDefault(@NotNull ASTNode node) {
         return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
     }
 }

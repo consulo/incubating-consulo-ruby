@@ -40,6 +40,7 @@ public interface RVirtualClass extends RVirtualFieldContantContainer {
     @Nullable
     public RVirtualName getVirtualSuperClass();
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation();
 }

@@ -62,24 +62,29 @@ public abstract class AbstractRTestsCommandLineState extends ColouredCommandLine
     }
 
 
+	@Override
 	public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException
 	{
 		final ExecutionResult result = super.execute(executor, runner);
         if (result != null) {
             result.getProcessHandler().addProcessListener(new ProcessListener() {
-                public void startNotified(final ProcessEvent event) {
+                @Override
+				public void startNotified(final ProcessEvent event) {
                 }
 
-                public void processTerminated(final ProcessEvent event) {
+                @Override
+				public void processTerminated(final ProcessEvent event) {
                     if (tempFile != null) {
                         tempFile.delete();
                     }
                 }
 
-                public void processWillTerminate(final ProcessEvent event, final boolean willBeDestroyed) {
+                @Override
+				public void processWillTerminate(final ProcessEvent event, final boolean willBeDestroyed) {
                 }
 
-                public void onTextAvailable(final ProcessEvent event, final Key outputType) {
+                @Override
+				public void onTextAvailable(final ProcessEvent event, final Key outputType) {
                 }
             });
         }

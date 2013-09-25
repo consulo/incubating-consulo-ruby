@@ -78,7 +78,8 @@ public abstract class BaseRailsFacetType<F extends BaseRailsFacet> extends Facet
         final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry = (FacetDetectorRegistryEx<BaseRailsFacetConfiguration>) registry;
 
         final VirtualFileFilter railsFacetFilter = new VirtualFileFilter(){
-            public boolean accept(final VirtualFile virtualFile) {
+            @Override
+			public boolean accept(final VirtualFile virtualFile) {
 
                 return isRailsAppBootFile(virtualFile);
             }
@@ -86,7 +87,8 @@ public abstract class BaseRailsFacetType<F extends BaseRailsFacet> extends Facet
 
         //checks if file is boot.rb of Rails application and module has JRuby support
         final Condition<PsiFile> condition = new Condition<PsiFile>() {
-            public boolean value(PsiFile psiFile) {
+            @Override
+			public boolean value(PsiFile psiFile) {
                 final VirtualFile bootFileCandidate = psiFile.getVirtualFile();
                 if (bootFileCandidate == null) {
                     return false;

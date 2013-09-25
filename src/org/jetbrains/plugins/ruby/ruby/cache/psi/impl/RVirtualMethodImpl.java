@@ -54,7 +54,8 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RMethodPresentationUtil.getPresentation(this);
     }
@@ -64,16 +65,19 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
         return RMethodPresentationUtil.getIcon(this, flags);
     }
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor) {
+    @Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
         visitor.visitRVirtualMethod(this);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<ArgumentInfo> getArgumentInfos() {
         return myArgumentInfos;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName() {
         final int options = RPresentationConstants.SHOW_FULL_NAME | RPresentationConstants.SHOW_PARAMETERS;
         return RMethodPresentationUtil.formatName(this, options);
@@ -84,7 +88,8 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
      * @param otherMethod other method (virtual or psi)
      * @return true if methods equals.
      */
-    public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod) {
+    @Override
+	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod) {
         return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
     }
 
@@ -92,7 +97,8 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
         return "def [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getPresentableName();
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.METHOD;
     }
 

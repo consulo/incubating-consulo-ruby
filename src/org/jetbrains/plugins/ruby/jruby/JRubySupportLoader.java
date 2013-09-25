@@ -37,7 +37,8 @@ import com.intellij.util.ActionRunner;
 public class JRubySupportLoader implements ApplicationComponent, InspectionToolProvider {
     private static final Logger LOG = Logger.getInstance(JRubySupportLoader.class.getName());
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         loadJRuby();
     }
 
@@ -72,17 +73,20 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
         } */
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return JRubyComponents.JRUBY_SUPPORT_LOADER;
     }
 
     public static void loadJRuby() {
         IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            public void run() throws Exception {
+            @Override
+			public void run() throws Exception {
 // registering ruby facet
                 JRubyFacetType.load();
 
@@ -104,7 +108,8 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
         }
     }
 
-    public Class[] getInspectionClasses() {
+    @Override
+	public Class[] getInspectionClasses() {
         return new Class[]{
                 JRubyImplementInterfaceInspection.class,
                 WrongTopLevelPackageInspection.class

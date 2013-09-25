@@ -41,14 +41,16 @@ public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssig
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RPsiElement getObject() {
         final RPsiElement object = getChildByType(RPsiElement.class, 0);
         assert object!=null;
         return object;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RPsiElement getValue() {
         PsiElement ASSGN = getASSGN();
         return ASSGN != null ? PsiTreeUtil.getNextSiblingOfType(ASSGN, RPsiElement.class) : null;
@@ -58,7 +60,8 @@ public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssig
         return getChildByFilter(BNF.tASSGNS, 0);
     }
 
-    public void accept(@NotNull final PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull final PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRAssignmentExpression(this);
             return;
@@ -66,7 +69,8 @@ public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssig
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         final RPsiElement value = getValue();
         return value instanceof RExpression ? ((RExpression) value).getType(fileSymbol) : RType.NOT_TYPED;

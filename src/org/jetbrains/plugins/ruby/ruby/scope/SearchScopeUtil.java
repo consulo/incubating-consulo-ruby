@@ -57,15 +57,18 @@ public class SearchScopeUtil {
 			myProject = project;
         }
 
-        public boolean isSearchInModuleContent(@NotNull final Module aModule) {
+        @Override
+		public boolean isSearchInModuleContent(@NotNull final Module aModule) {
             return true;
         }
 
-        public boolean isSearchInSDKLibraries() {
+        @Override
+		public boolean isSearchInSDKLibraries() {
             return false;
         }
 
-        public boolean isFileValid(@NotNull final String url) {
+        @Override
+		public boolean isFileValid(@NotNull final String url) {
             return RubyModuleRootUtil.isUnderTestUnitRoot(myProject, url);
         }
     }
@@ -74,15 +77,18 @@ public class SearchScopeUtil {
      * In modules, sdk, not qualified names
      */
     private static class AllClassSearchScope implements SearchScope {
-        public boolean isSearchInModuleContent(@NotNull final Module aModule) {
+        @Override
+		public boolean isSearchInModuleContent(@NotNull final Module aModule) {
             return true;
         }
 
-        public boolean isSearchInSDKLibraries() {
+        @Override
+		public boolean isSearchInSDKLibraries() {
             return true;
         }
 
-        public boolean isFileValid(@NotNull String url) {
+        @Override
+		public boolean isFileValid(@NotNull String url) {
             return true;
         }
     }

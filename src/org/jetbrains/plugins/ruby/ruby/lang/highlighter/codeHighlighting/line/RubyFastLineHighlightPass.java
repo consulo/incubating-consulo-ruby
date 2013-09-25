@@ -60,7 +60,8 @@ public class RubyFastLineHighlightPass extends AbstractRubyHighlighterPass {
         super(project, psiFile, editor, false, HighlightPassConstants.RUBY_LINE_MARKERS_GROUP);
     }
 
-    public void doCollectInformation(final ProgressIndicator progress) {
+    @Override
+	public void doCollectInformation(final ProgressIndicator progress) {
         ApplicationManager.getApplication().assertReadAccessAllowed();
 
         myLineMarkers = new ArrayList<RubyLineMarkerInfo>();
@@ -69,7 +70,8 @@ public class RubyFastLineHighlightPass extends AbstractRubyHighlighterPass {
         }
     }
 
-    public void doApplyInformationToEditor() {
+    @Override
+	public void doApplyInformationToEditor() {
         RubyLineHighlightingUtil.setLineMarkersToEditor(myProject, myDocument, myLineMarkers, false);
     }
 

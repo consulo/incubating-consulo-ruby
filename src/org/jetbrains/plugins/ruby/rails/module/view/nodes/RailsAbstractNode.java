@@ -48,7 +48,8 @@ public abstract class RailsAbstractNode extends SimpleNode {
         setIcon(myPresentation.getIcon(false));
     }
 
-    public Object[] getEqualityObjects() {
+    @Override
+	public Object[] getEqualityObjects() {
         return myEqObjects;
     }
 
@@ -58,11 +59,13 @@ public abstract class RailsAbstractNode extends SimpleNode {
     @NotNull
     public abstract RailsProjectNodeComparator.NodeType getType();
 
-    public NodeId getElement() {
+    @Override
+	public NodeId getElement() {
         return myId;
     }
 
-    protected void doUpdate() {
+    @Override
+	protected void doUpdate() {
         myPresentation = updatePresentation(myPresentation);
         setIcon(myPresentation.getIcon(false));
         setPlainText(myPresentation.getPresentableText());
@@ -79,11 +82,13 @@ public abstract class RailsAbstractNode extends SimpleNode {
     }
 
 
-    public boolean expandOnDoubleClick() {
+    @Override
+	public boolean expandOnDoubleClick() {
         return false;
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         return CHILDREN_EMPTY;
     }
 

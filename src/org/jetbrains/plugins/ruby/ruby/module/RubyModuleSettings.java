@@ -43,28 +43,34 @@ public class RubyModuleSettings implements RSupportPerModuleSettings, ModuleComp
         myRModuleSettingsStorage = RModuleSettingsStorage.getInstance(module);
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
         // Do nothing
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
         // Do nothing
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public CheckableDirectoriesContainer getLoadPathDirs() {
         return myRModuleSettingsStorage.loadPathDirs;
     }
 
-    public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs) {
+    @Override
+	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs) {
         myRModuleSettingsStorage.loadPathDirs = loadPathDirs;
     }
 
-    public boolean shouldUseTestUnitTestFramework() {
+    @Override
+	public boolean shouldUseTestUnitTestFramework() {
         return myRModuleSettingsStorage.shouldUseTestUnitFramework;
     }
 
-    public void setShouldUseTestUnitTestFramework(final boolean shouldUse) {
+    @Override
+	public void setShouldUseTestUnitTestFramework(final boolean shouldUse) {
         myRModuleSettingsStorage.shouldUseTestUnitFramework = shouldUse;
     }
 
@@ -72,19 +78,23 @@ public class RubyModuleSettings implements RSupportPerModuleSettings, ModuleComp
         return module.getComponent(RubyModuleSettings.class);
     }
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
         //Do nothing
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
         //Do nothing
     }
 
-    public void moduleAdded() {
+    @Override
+	public void moduleAdded() {
         //Do nothing
     }
 
-    @NonNls
+    @Override
+	@NonNls
     @NotNull
     public String getComponentName() {
         return RubyComponents.RUBY_MODULE_SETTINGS;

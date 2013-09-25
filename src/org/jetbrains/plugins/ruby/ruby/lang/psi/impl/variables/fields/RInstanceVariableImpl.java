@@ -33,7 +33,8 @@ public class RInstanceVariableImpl extends RFieldBase implements RInstanceVariab
         super(astNode);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRInstanceVariable(this);
             return;
@@ -41,11 +42,13 @@ public class RInstanceVariableImpl extends RFieldBase implements RInstanceVariab
         super.accept(visitor);
     }
 
-    public FieldType getType() {
+    @Override
+	public FieldType getType() {
         return FieldType.INSTANCE_VARIABLE;
     }
 
-    public String getPrefix() {
+    @Override
+	public String getPrefix() {
         return PREFIX;
     }
 }

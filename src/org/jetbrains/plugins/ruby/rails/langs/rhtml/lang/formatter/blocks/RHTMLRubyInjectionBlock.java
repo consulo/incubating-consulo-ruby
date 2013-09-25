@@ -62,7 +62,8 @@ public class RHTMLRubyInjectionBlock extends RHTMLBlock {
         myParentNode = parentNode;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     protected List<Block> buildChildren() {
         ChameleonTransforming.transformChildren(myNode);
 
@@ -115,7 +116,8 @@ public class RHTMLRubyInjectionBlock extends RHTMLBlock {
         return indent;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ChildAttributes getChildAttributes(int newChildIndex) {
         return new ChildAttributes(myCodeIndent, null);
     }

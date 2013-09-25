@@ -59,7 +59,8 @@ public class RProjectSettings implements PersistentStateComponent<RProjectSettin
         return ServiceManager.getService(project, RProjectSettings.class);
     }
 
-    public RProjectSettings getState() {
+    @Override
+	public RProjectSettings getState() {
         myOptions.clear();
         if (generatorsOptions != null) {
             final HashSet<Option> set = generatorsOptions.getOptions();
@@ -70,7 +71,8 @@ public class RProjectSettings implements PersistentStateComponent<RProjectSettin
         return this;
     }
 
-    public void loadState(final RProjectSettings state) {
+    @Override
+	public void loadState(final RProjectSettings state) {
         generatorsOptions.clear();
         for (String option : state.myOptions) {
             try {

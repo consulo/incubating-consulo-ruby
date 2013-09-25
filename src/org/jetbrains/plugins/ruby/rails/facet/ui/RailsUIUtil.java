@@ -46,15 +46,18 @@ public class RailsUIUtil {
         ecRailsVersionLabel.setHanlders(
                 // Hides original lable text
                 new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         railsVersionLabel.setText("");
                     }
                 },
                 // Evaluates Rails SDK version
                 new Function<Object, String>() {
-                    public String fun(final Object o) {
+                    @Override
+					public String fun(final Object o) {
                         return RailsUtil.getRailsVersion(sdk, false, new Function<Object, Boolean>() {
-                            public Boolean fun(final Object o) {
+                            @Override
+							public Boolean fun(final Object o) {
                                 // Cancel process if form was closed
                                 return componet.isCloosed();
                             }
@@ -63,7 +66,8 @@ public class RailsUIUtil {
                 },
                 // Sets found SDK version
                 new Function<String, Object>() {
-                    public Object fun(final String vers) {
+                    @Override
+					public Object fun(final String vers) {
                         componet.setRailsVersion(vers);
                         railsVersionLabel.setText(TextUtil.isEmpty(vers)
                                 ? RBundle.message("sdk.error.rails.unknown.verson")

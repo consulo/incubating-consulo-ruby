@@ -51,7 +51,8 @@ public class NewReference extends RQualifiedReference {
         super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.INITIALIZE);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
         if (((RPsiElementBase) myWholeReference).isClassOrModuleName()){
             return Collections.emptyList();

@@ -41,7 +41,8 @@ public abstract class RunContentDescriptorFactory {
                                                     final String consoleTitle);
 
     private static class DefaultFactory extends RunContentDescriptorFactory {
-        public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle) {
+        @Override
+		public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle) {
             return new RunContentDescriptor(consoleView, processHandler, consolePanel, consoleTitle);
         }
     }
@@ -49,7 +50,8 @@ public abstract class RunContentDescriptorFactory {
     public static class PinTabsFactory extends RunContentDescriptorFactory {
         final List<Content> myContentList = new ArrayList<Content>();
 
-        public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle) {
+        @Override
+		public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle) {
             return new MyDescriptor(consoleView, processHandler, consolePanel, consoleTitle);
         }
 
@@ -68,7 +70,8 @@ public abstract class RunContentDescriptorFactory {
                 super(executionConsole, processHandler, component, displayName);
             }
 
-            public void setAttachedContent(Content content) {
+            @Override
+			public void setAttachedContent(Content content) {
                 super.setAttachedContent(content);
                 content.setPinned(true);
                 myContentList.add(content);

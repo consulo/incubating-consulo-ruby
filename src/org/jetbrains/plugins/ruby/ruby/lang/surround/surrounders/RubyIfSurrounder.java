@@ -30,17 +30,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RIfStatement;
  */
 public class RubyIfSurrounder extends RubySurrounderBase{
 
-    protected TextRange getTextRange(@NotNull final RPsiElement element) {
+    @Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element) {
         assert element instanceof RIfStatement;
         final RCondition condition = ((RIfStatement) element).getCondition();
         return condition!=null ? condition.getTextRange() : null;
     }
 
-    protected String getText(PsiElement[] elements) {
+    @Override
+	protected String getText(PsiElement[] elements) {
         return "if condition then\n" + gatherText(elements) + "\nend";
     }
 
-    public String getTemplateDescription() {
+    @Override
+	public String getTemplateDescription() {
         return "if ... then ... end";
     }
 }

@@ -38,7 +38,8 @@ public class RHeredocIdImpl extends RPsiElementBase implements RHeredocId {
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.String), Context.INSTANCE, true);
     }

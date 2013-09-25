@@ -82,11 +82,13 @@ public abstract class FolderNode extends SimpleFileNode {
         return new ClassNode(getModule(), rClass, rFileInfo);
     }
 
-    public void accept(SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(SimpleNodeVisitor visitor) {
         myParentNode.accept(visitor);
     }
 
-    public SimpleNode[] getChildren() {
+    @Override
+	public SimpleNode[] getChildren() {
         final List<RailsNode> children = new ArrayList<RailsNode>();
         final Module module = getModule();
 
@@ -109,23 +111,28 @@ public abstract class FolderNode extends SimpleFileNode {
              * Create sub folder with corresponding type
              */
             accept(new RailsNodeVisitorAdapter() {
-                public void visitModelNode() {
+                @Override
+				public void visitModelNode() {
                     children.add(new ModelSubFolderNode(module, file, FolderNode.this));
                 }
 
-                public void visitControllerNode() {
+                @Override
+				public void visitControllerNode() {
                     children.add(new ControllerSubFolderNode(module, file, FolderNode.this));
                 }
 
-                public void visitTestNode() {
+                @Override
+				public void visitTestNode() {
                     children.add(new TestsSubFolderNode(module, file, FolderNode.this));
                 }
 
-                public void visitUserNode(final boolean isUnderTestsRoot) {
+                @Override
+				public void visitUserNode(final boolean isUnderTestsRoot) {
                     children.add(new UserSubFolderNode(module, file, FolderNode.this, isUnderTestsRoot));
                 }
 
-                public void visitSharedPartialsNode() {
+                @Override
+				public void visitSharedPartialsNode() {
                     children.add(new SharedPartialsSubFolderNode(module, file, FolderNode.this));
                 }
             });
@@ -133,12 +140,14 @@ public abstract class FolderNode extends SimpleFileNode {
         return children.toArray(new RailsNode[children.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.FOLDER;
     }
 
-    public boolean expandOnDoubleClick() {
+    @Override
+	public boolean expandOnDoubleClick() {
         return true;
     }
 

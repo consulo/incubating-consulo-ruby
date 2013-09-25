@@ -80,16 +80,19 @@ public class RubyRunConfigurationType implements LocatableConfigurationType
 		return CONFIGURATION_TYPE_EP.findExtension(RubyRunConfigurationType.class);
 	}
 
+	@Override
 	public String getDisplayName()
 	{
 		return RBundle.message("run.configuration.type.name");
 	}
 
+	@Override
 	public String getConfigurationTypeDescription()
 	{
 		return RBundle.message("run.configuration.type.description");
 	}
 
+	@Override
 	public Icon getIcon()
 	{
 		return RubyIcons.RUBY_RUN_CONFIGURATION_FOLDER;
@@ -102,6 +105,7 @@ public class RubyRunConfigurationType implements LocatableConfigurationType
 		return "RubyRunConfigurationType";
 	}
 
+	@Override
 	public ConfigurationFactory[] getConfigurationFactories()
 	{
 		return new ConfigurationFactory[]{
@@ -110,6 +114,7 @@ public class RubyRunConfigurationType implements LocatableConfigurationType
 		};
 	}
 
+	@Override
 	@Nullable
 	public RunnerAndConfigurationSettings createConfigurationByLocation(final @NotNull Location location)
 	{

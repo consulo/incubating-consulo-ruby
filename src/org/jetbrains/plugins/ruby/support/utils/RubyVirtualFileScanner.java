@@ -98,7 +98,8 @@ public class RubyVirtualFileScanner {
             return;
         }
         moduleFileIndex.iterateContent(new ContentIterator() {
-            public boolean processFile(VirtualFile fileOrDir) {
+            @Override
+			public boolean processFile(VirtualFile fileOrDir) {
                 if (isRubyFile(fileOrDir)) {
                     files.add(fileOrDir);
                 }
@@ -120,7 +121,8 @@ public class RubyVirtualFileScanner {
             return;
         }
         moduleFileIndex.iterateContent(new ContentIterator() {
-            public boolean processFile(VirtualFile fileOrDir) {
+            @Override
+			public boolean processFile(VirtualFile fileOrDir) {
                 if (ViewsConventions.isViewFile(fileOrDir)) {
                     files.add(fileOrDir);
                 }

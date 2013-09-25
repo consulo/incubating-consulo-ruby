@@ -92,13 +92,15 @@ public class RailsViewFoldersManager implements PersistentStateComponent<Element
         }
     }
 
-    public Element getState() {
+    @Override
+	public Element getState() {
         final Element e = new Element("state");
         writeExternal(e);
         return e;
     }
 
-    public void loadState(final Element element) {
+    @Override
+	public void loadState(final Element element) {
         readExternal(element);
     }
 }

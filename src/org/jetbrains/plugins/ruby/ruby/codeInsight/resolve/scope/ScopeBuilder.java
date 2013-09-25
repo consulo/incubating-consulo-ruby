@@ -72,7 +72,8 @@ public class ScopeBuilder {
         private List<PseudoScopeHolder> subHolders = new ArrayList<PseudoScopeHolder>();
         private List<RIdentifier> candidates = new ArrayList<RIdentifier>();
 
-        public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
+        @Override
+		public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
             if (rIdentifier.isParameter() ||
                     RAssignmentExpressionNavigator.getAssignmentByLeftPart(rIdentifier)!=null ||
                     RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rIdentifier)!=null){
@@ -80,13 +81,15 @@ public class ScopeBuilder {
             }
         }
 
-        public void visitRBlockVariables(@NotNull final RBlockVariables blockVariables) {
+        @Override
+		public void visitRBlockVariables(@NotNull final RBlockVariables blockVariables) {
             for (RIdentifier identifier : blockVariables.getVariables()) {
                 candidates.add(identifier);
             }
         }
 
-        public void visitElement(@NotNull final PsiElement element) {
+        @Override
+		public void visitElement(@NotNull final PsiElement element) {
             if (element instanceof PseudoScopeHolder){
                 subHolders.add((PseudoScopeHolder) element);
                 return;

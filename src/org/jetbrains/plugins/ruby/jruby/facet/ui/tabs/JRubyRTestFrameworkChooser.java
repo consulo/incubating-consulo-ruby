@@ -103,7 +103,8 @@ public class JRubyRTestFrameworkChooser extends FacetEditorTab {
 		return false;
     }
 
-    public void apply() throws ConfigurationException {
+    @Override
+	public void apply() throws ConfigurationException {
       /*  final Module module = myEditorContext.getModule();
         assert module != null;
 
@@ -140,7 +141,8 @@ public class JRubyRTestFrameworkChooser extends FacetEditorTab {
         }    */
     }
 
-    public void reset() {
+    @Override
+	public void reset() {
     }
 
     public void disposeUIResources() {

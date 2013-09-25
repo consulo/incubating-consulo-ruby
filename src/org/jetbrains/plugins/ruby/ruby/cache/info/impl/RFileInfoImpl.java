@@ -44,30 +44,36 @@ public class RFileInfoImpl implements RFileInfo {
         myProject = project;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Project getProject() {
         return myProject;
     }
 
-    public void setProject(@NotNull Project project) {
+    @Override
+	public void setProject(@NotNull Project project) {
         myProject = project;
     }
 
-    public long getTimestamp() {
+    @Override
+	public long getTimestamp() {
         return myTimestamp;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getUrl() {
         return myUrl;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getFileDirectoryUrl() {
         return VirtualFileUtil.getParentDir(myUrl);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualFile getRVirtualFile() {
         return myVirtualFile;
     }
@@ -80,7 +86,8 @@ public class RFileInfoImpl implements RFileInfo {
         return getUrl() + " [" + myTimestamp + "]";
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public VirtualFile getVirtualFile() {
         VirtualFile file;
         if (myFileRef == null || (file = myFileRef.get()) == null) {

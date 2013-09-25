@@ -40,7 +40,8 @@ public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider {
     private static String[][] NAMESPACES =
             new String[][]{new String[]{TextUtil.EMPTY_STRING, XmlUtil.XHTML_URI}};
 
-    @Nullable
+    @Override
+	@Nullable
     public String[][] getDefaultNamespaces(final @NotNull XmlFile file) {
         if (RHTMLFileType.RHTML.equals(file.getFileType())) {
             return NAMESPACES;

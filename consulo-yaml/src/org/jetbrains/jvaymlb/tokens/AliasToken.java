@@ -42,7 +42,8 @@ public class AliasToken extends Token {
         this.value = value;
     }
 
-    public void setValue(final Object value) {
+    @Override
+	public void setValue(final Object value) {
         this.value = (String)value;
     }
 

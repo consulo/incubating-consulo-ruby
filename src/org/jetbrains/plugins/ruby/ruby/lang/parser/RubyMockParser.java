@@ -33,7 +33,8 @@ import com.intellij.psi.tree.IElementType;
  * @date: Mar 20, 2007
  */
 public class RubyMockParser implements PsiParser {
-    @NotNull
+    @Override
+	@NotNull
     public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion) {
         List<IElementType> lexems = new ArrayList<IElementType>();
         final PsiBuilder.Marker marker = builder.mark();

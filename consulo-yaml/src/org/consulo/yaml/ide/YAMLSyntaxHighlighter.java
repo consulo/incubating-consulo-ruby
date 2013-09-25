@@ -50,12 +50,14 @@ public class YAMLSyntaxHighlighter extends SyntaxHighlighterBase implements YAML
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
         return pack(ATTRIBUTES.get(tokenType));
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Lexer getHighlightingLexer() {
         return new YAMLLexer();
     }

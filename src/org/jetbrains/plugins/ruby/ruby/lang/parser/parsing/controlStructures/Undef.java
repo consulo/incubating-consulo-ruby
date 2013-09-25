@@ -66,7 +66,8 @@ public class Undef implements RubyTokenTypes {
         RMarker statementMarker = builder.mark();
 
         ParsingMethod parsingMethod =new ParsingMethod(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType  parse(final RBuilder builder){
                 IElementType result = FNAME.parse(builder);
                 if (result!=RubyElementTypes.EMPTY_INPUT){

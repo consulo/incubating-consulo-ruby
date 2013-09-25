@@ -47,13 +47,15 @@ public class ModuleLayer extends AbstractLayeredCachedSymbol{
         super(project, module, sdk, jRubyEnabled);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected CachedSymbol getBaseSymbol() {
         final SymbolsCache cache = SymbolsCache.getInstance(myProject);
         return cache.getBuiltInCachedSymbol(FileSymbolType.BUILT_IN, mySdk, isJRubyEnabled);
     }
 
-    protected void addAdditionalData() {
+    @Override
+	protected void addAdditionalData() {
         // Extend loadpath with user directories
         if (myModule!=null){
             CheckableDirectoriesContainer checkDirectories = null;
@@ -80,7 +82,8 @@ public class ModuleLayer extends AbstractLayeredCachedSymbol{
         }
     }
 
-    public void fileAdded(@NotNull final String url) {
+    @Override
+	public void fileAdded(@NotNull final String url) {
         // do nothing
     }
 }

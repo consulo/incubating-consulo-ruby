@@ -90,7 +90,8 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
 
 ///////////////// Setup Cache Manager /////////////////////////////////////////////////
         myRailsAdditionalScannerProvider = new CacheScannerFilesProvider() {
-            public void scanAndAdd(final String[] rootUrls,
+            @Override
+			public void scanAndAdd(final String[] rootUrls,
                                    final Collection<VirtualFile> files,
                                    final ModuleRootManager moduleRootManager) {
                 RubyVirtualFileScanner.searchAdditionalRailsFileCacheFiles(moduleRootManager, files);
@@ -122,11 +123,13 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
          * If SDK was really changed this code will load Generators and RakeTasks for new SDK
          */
         final ModuleRootListener moduleRootListener = new ModuleRootListener() {
-            public void beforeRootsChange(final ModuleRootEvent event) {
+            @Override
+			public void beforeRootsChange(final ModuleRootEvent event) {
                 // Do nothing
             }
 
-            public void rootsChanged(final ModuleRootEvent event) {
+            @Override
+			public void rootsChanged(final ModuleRootEvent event) {
                 final Sdk newSDK = RModuleUtil.getModuleOrJRubyFacetSdk(module);
                 final BaseRailsFacetConfigurationLowLevel conf = (BaseRailsFacetConfigurationLowLevel) getConfiguration();
                 final Sdk oldSDK = conf.getSdk();
@@ -134,7 +137,8 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
                     conf.setSdk(newSDK);
 
                     final Runnable runnable = new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                             BaseRailsFacetBuilder.regenerateRakeTasksAndGeneratorsSettings(BaseRailsFacet.this, newSDK);
                         }
                     };
@@ -151,7 +155,8 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> 
         myConnection.subscribe(ProjectTopics.PROJECT_ROOTS, moduleRootListener);
     }
 
-    public void disposeFacet() {
+    @Override
+	public void disposeFacet() {
         myConnection.disconnect();
         
         final Module module = getModule();

@@ -109,7 +109,8 @@ public class RStackTraceFilter implements Filter {
         return isWindows ? WIN_CPATTERN : UNIX_CPATTERN;
     }
 
-    public Result applyFilter(final String line, final int entireLength) {
+    @Override
+	public Result applyFilter(final String line, final int entireLength) {
         //if filter is disabled
         if (!appSettings.useConsoleOutputRubyStacktraceFilter) {
             return null;

@@ -85,22 +85,26 @@ public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFact
         conf.setModule(module);
     }
 
-    public RunConfiguration createTemplateConfiguration(final Project project) {
+    @Override
+	public RunConfiguration createTemplateConfiguration(final Project project) {
         final RubyRunConfiguration conf = new RailsServerRunConfiguration(project, this, "");
         initDefaultParams(conf);
 
         return conf;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
         return SERVER_TITLE;
    }
 
+   @Override
    public Icon getIcon() {
        return RubyIcons.RAILS_SERVER_RUN_CONFIGURATION;
    }
 
-    protected void initDefaultParams(final RubyRunConfiguration conf) {
+    @Override
+	protected void initDefaultParams(final RubyRunConfiguration conf) {
         super.initDefaultParams(conf);
 
         final RailsServerRunConfiguration config = (RailsServerRunConfiguration)conf;

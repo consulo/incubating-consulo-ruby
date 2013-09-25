@@ -117,7 +117,8 @@ public class RubySdkType extends SdkType {
         super(type);
     }
 
-    public String suggestHomePath() {
+    @Override
+	public String suggestHomePath() {
         return RubySdkUtil.suggestRubyHomePath();
     }
 
@@ -135,16 +136,19 @@ public class RubySdkType extends SdkType {
         getSdkAdditionalData(sdk).setGemsBinDirectory(path);
     }
 
-    public boolean isValidSdkHome(final String path) {
+    @Override
+	public boolean isValidSdkHome(final String path) {
         return (new File(path + getExePath())).exists();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getVersionString(final String sdkHome) {
         return getFullVersion(sdkHome);
     }
 
-    public String suggestSdkName(final String currentSdkName, final String sdkHome) {
+    @Override
+	public String suggestSdkName(final String currentSdkName, final String sdkHome) {
         final String version = getShortVersion(sdkHome);
         return getPresentableName()
                + (TextUtil.isEmpty(version) ? TextUtil.EMPTY_STRING : " " + version);
@@ -154,9 +158,11 @@ public class RubySdkType extends SdkType {
      * Adds pathes from $LOAD_PATH into classpath
      * @param sdk current SDK
      */
-    public void setupSdkPaths(final Sdk sdk) {
+    @Override
+	public void setupSdkPaths(final Sdk sdk) {
         final Runnable setupSdkPathsRunnable = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 final VirtualFileManager virtualFileManager = VirtualFileManager.getInstance();
                 final String rubyInterpreterExecutable = getVMExecutablePath(sdk);
 
@@ -207,7 +213,8 @@ public class RubySdkType extends SdkType {
 
         final String title = RBundle.message("sdk.setup.progress.title");
         ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
                 indicator.setText(RBundle.message("sdk.setup.progress.setup.pathes"));
                 setupSdkPathsRunnable.run();
@@ -215,22 +222,26 @@ public class RubySdkType extends SdkType {
         }, title, false, null);
     }
 
-    public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator) {
+    @Override
+	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator) {
       return new RubySdkConfigurable();
     }
 
-    public void saveAdditionalData(SdkAdditionalData additionalData, Element additional) {
+    @Override
+	public void saveAdditionalData(SdkAdditionalData additionalData, Element additional) {
         if (additionalData instanceof RubySdkAdditionalData) {
             ((RubySdkAdditionalData)additionalData).save(additional);
         }
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public SdkAdditionalData loadAdditionalData(@NotNull final Sdk sdk, @Nullable Element additional) {
       return RubySdkAdditionalData.load(sdk, additional);
     }
 
-    public SdkAdditionalData loadAdditionalData(Element additional) {
+    @Override
+	public SdkAdditionalData loadAdditionalData(Element additional) {
         //N/A
         return null;
     }
@@ -252,11 +263,13 @@ public class RubySdkType extends SdkType {
         return sdk.getHomePath() + getExePath();
     }
 
-    public String getPresentableName() {
+    @Override
+	public String getPresentableName() {
         return RBundle.message("sdk.ruby.title");
     }
 
-    public Icon getIcon() {
+    @Override
+	public Icon getIcon() {
       return RubyIcons.RUBY_SDK;
     }
 

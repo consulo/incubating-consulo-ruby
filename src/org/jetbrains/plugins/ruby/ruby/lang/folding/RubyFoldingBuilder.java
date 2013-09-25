@@ -90,7 +90,8 @@ public class RubyFoldingBuilder implements FoldingBuilder {
             RubyElementTypes.LEND_STATEMENT
     );
 
-    @NotNull
+    @Override
+	@NotNull
     public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document) {
         List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
         gatherDescriptors(astNode, descriptors);
@@ -162,7 +163,8 @@ public class RubyFoldingBuilder implements FoldingBuilder {
         return element.getTextRange().getStartOffset() + element.getText().trim().length();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public String getPlaceholderText(@NotNull final ASTNode node) {
         final IElementType type = node.getElementType();
         final PsiElement psiElement = node.getPsi();
@@ -208,7 +210,8 @@ public class RubyFoldingBuilder implements FoldingBuilder {
         return null;
     }
 
-    public boolean isCollapsedByDefault(@NotNull ASTNode node) {
+    @Override
+	public boolean isCollapsedByDefault(@NotNull ASTNode node) {
         return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
     }
 }

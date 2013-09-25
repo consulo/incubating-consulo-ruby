@@ -36,17 +36,20 @@ public class WrongTopLevelPackageFix implements LocalQuickFix {
         myElement = element;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return "Add Java:: to package";
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFamilyName() {
         return "JRuby";
     }
 
-    public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
+    @Override
+	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
         final String text = myElement.getText();
         final RPsiElement element = RubyPsiUtil.getTopLevelElements(project, JAVA + text).get(0);
         RubyPsiUtil.replaceInParent(myElement, element);

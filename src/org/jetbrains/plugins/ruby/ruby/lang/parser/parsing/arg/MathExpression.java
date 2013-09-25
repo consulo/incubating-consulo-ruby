@@ -60,7 +60,8 @@ class MathExpression implements RubyTokenTypes{
     @NotNull
     private static IElementType parseSumWithLeadMult(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @NotNull
+            @Override
+			@NotNull
             public IElementType parseInner(final RBuilder builder) {
                 return parseMult(builder);
             }
@@ -95,7 +96,8 @@ class MathExpression implements RubyTokenTypes{
     @NotNull
     private static IElementType parseMultWithLeadPow(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethod(){
-            public IElementType parse(final RBuilder builder){
+            @Override
+			public IElementType parse(final RBuilder builder){
                 return parsePower(builder);
             }
         };
@@ -130,7 +132,8 @@ class MathExpression implements RubyTokenTypes{
     @NotNull
     private static IElementType parsePowerWithLeadMathTerm(final RBuilder builder, final RMarker marker, final IElementType result) {
         ParsingMethod parsingMethod = new ParsingMethod(){
-            public IElementType parse(final RBuilder builder){
+            @Override
+			public IElementType parse(final RBuilder builder){
                 return MathTerm.parse(builder);
             }
         };

@@ -193,22 +193,26 @@ public abstract class RContainerUtil {
 // Adding all the subcontainers with default scope access modifiers
         RubyStructureVisitor myVisitor = new RubyStructureVisitor() {
 
-            public void visitRCall(RCall rCall) {
+            @Override
+			public void visitRCall(RCall rCall) {
                 if (rCall.getType().isStructureCall()){
                     elements.add(rCall);
                 }
             }
 
-            public void visitRAliasStatement(RAliasStatement rAliasStatement) {
+            @Override
+			public void visitRAliasStatement(RAliasStatement rAliasStatement) {
                 elements.add(rAliasStatement);
             }
 
-            public void visitContainer(RContainer rContainer) {
+            @Override
+			public void visitContainer(RContainer rContainer) {
                 ((RContainerBase) rContainer).setAccessModifier(scopeAccessModifier.get());
                 elements.add(rContainer);
             }
 
-            public void visitRIdentifier(RIdentifier rIdentifier){
+            @Override
+			public void visitRIdentifier(RIdentifier rIdentifier){
 // Processing single command statements like private, public, protected, that changes the default container access_attributes
                 if (RCompoundStatementNavigator.getByPsiElement(rIdentifier) != null) {
                     AccessModifier mod = AccessModifiersUtil.getModifierByName(rIdentifier.getText());
@@ -222,15 +226,18 @@ public abstract class RContainerUtil {
         container.acceptChildren(myVisitor);
 
         RubySystemCallVisitor callVisitor = new RubySystemCallVisitor(){
-            public void visitPublicCall(@NotNull RCall rCall) {
+            @Override
+			public void visitPublicCall(@NotNull RCall rCall) {
                 setAccessModifiers(elements, rCall.getArguments(), AccessModifier.PUBLIC);
             }
 
-            public void visitProtectedCall(@NotNull RCall rCall) {
+            @Override
+			public void visitProtectedCall(@NotNull RCall rCall) {
                 setAccessModifiers(elements, rCall.getArguments(), AccessModifier.PROTECTED);
             }
 
-            public void visitPrivateCall(@NotNull RCall rCall) {
+            @Override
+			public void visitPrivateCall(@NotNull RCall rCall) {
                 setAccessModifiers(elements, rCall.getArguments(), AccessModifier.PRIVATE);
             }
 

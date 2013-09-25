@@ -82,12 +82,14 @@ public class RubyPairedBraceMatcher implements PairedBraceMatcher, RubyTokenType
 
     };
 
-    @NotNull
+    @Override
+	@NotNull
     public BracePair[] getPairs() {
         return PAIRS;
     }
 
-    @SuppressWarnings({"UnusedParameters"})
+    @Override
+	@SuppressWarnings({"UnusedParameters"})
     public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1) {
         return true;
     }

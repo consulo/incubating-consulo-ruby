@@ -34,7 +34,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubySystemCallVisitor;
  * @date: 16.07.2007
  */
 public abstract class RequirePathIntention  implements IntentionAction {
-    public boolean startInWriteAction() {
+    @Override
+	public boolean startInWriteAction() {
         return true;
     }
 
@@ -48,7 +49,8 @@ public abstract class RequirePathIntention  implements IntentionAction {
             final Ref<Boolean> result = new Ref<Boolean>(false);
             
             final RubySystemCallVisitor callVisitor = new RubySystemCallVisitor() {
-                public void visitRequireCall(@NotNull final RCall rCall) {
+                @Override
+				public void visitRequireCall(@NotNull final RCall rCall) {
                     result.set(true);
                 }
             };

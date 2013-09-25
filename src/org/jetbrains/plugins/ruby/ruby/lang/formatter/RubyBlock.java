@@ -102,12 +102,14 @@ public class RubyBlock implements Block, RubyTokenTypes {
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public TextRange getTextRange() {
         return myTextRange;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<Block> getSubBlocks() {
         if (mySubBlocks==null){
             mySubBlocks = generateSubBlocks();
@@ -115,24 +117,28 @@ public class RubyBlock implements Block, RubyTokenTypes {
         return mySubBlocks;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Wrap getWrap() {
         return myWrap;
     }
 
 
-    @Nullable
+    @Override
+	@Nullable
     public Indent getIndent() {
         return myIndent;
     }
 
 
-    @Nullable
+    @Override
+	@Nullable
     public Alignment getAlignment() {
         return myAlignment;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Spacing getSpacing(@NotNull final Block child1, @NotNull final Block child2) {
         final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child1);
         final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child2);
@@ -140,7 +146,8 @@ public class RubyBlock implements Block, RubyTokenTypes {
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public ChildAttributes getChildAttributes(final int newChildIndex) {
         final PsiElement psiParent = getNode().getPsi();
 
@@ -166,12 +173,14 @@ public class RubyBlock implements Block, RubyTokenTypes {
         return new ChildAttributes(Indent.getNoneIndent(), null);
     }
 
-    public boolean isIncomplete() {
+    @Override
+	public boolean isIncomplete() {
         return isIncomplete(myNode);
     }
 
 
-    public boolean isLeaf() {
+    @Override
+	public boolean isLeaf() {
         return isLeaf(myNode);
     }
 

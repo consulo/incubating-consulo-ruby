@@ -28,15 +28,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  */
 public class RubyBEGINSurrounder extends RubySurrounderBase{
 
-    protected TextRange getTextRange(@NotNull final RPsiElement element) {
+    @Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element) {
         return element.getTextRange();
     }
 
-    protected String getText(PsiElement[] elements) {
+    @Override
+	protected String getText(PsiElement[] elements) {
         return "BEGIN {\n" + gatherText(elements) + "\n}";
     }
 
-    public String getTemplateDescription() {
+    @Override
+	public String getTemplateDescription() {
         return "BEGIN {...}";
     }
 }

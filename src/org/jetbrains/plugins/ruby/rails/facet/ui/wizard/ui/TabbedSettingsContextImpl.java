@@ -32,7 +32,8 @@ public class TabbedSettingsContextImpl implements TabbedSettingsContext {
         mySDK = sdk;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public Sdk getSdk() {
         return mySDK;
     }

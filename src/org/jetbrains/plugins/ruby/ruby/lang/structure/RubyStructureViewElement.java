@@ -39,19 +39,23 @@ class RubyStructureViewElement implements StructureViewTreeElement {
         myElement = element;
     }
 
-    public StructureViewTreeElement[] getChildren() {
+    @Override
+	public StructureViewTreeElement[] getChildren() {
         final List<RPsiElement> childrenElements = new ArrayList<RPsiElement>();
 
         RubyStructureVisitor myVisitor = new RubyStructureVisitor() {
-            public void visitRCall(RCall rCall) {
+            @Override
+			public void visitRCall(RCall rCall) {
                 // do nothing
             }
 
-            public void visitRAliasStatement(RAliasStatement rAliasStatement) {
+            @Override
+			public void visitRAliasStatement(RAliasStatement rAliasStatement) {
                 // do nothing
             }
 
-            public void visitContainer(RContainer rContainer){
+            @Override
+			public void visitContainer(RContainer rContainer){
                childrenElements.addAll(rContainer.getStructureElements());
 
 
@@ -92,15 +96,18 @@ class RubyStructureViewElement implements StructureViewTreeElement {
     }
 
 
-    public ItemPresentation getPresentation() {
+    @Override
+	public ItemPresentation getPresentation() {
 
         return new ItemPresentation() {
-            @Nullable
+            @Override
+			@Nullable
             public String getPresentableText() {
                 return RubyPsiUtil.getPresentableName(myElement);
             }
 
-            public Icon getIcon(boolean open) {
+            @Override
+			public Icon getIcon(boolean open) {
                 return RubyPsiUtil.getIcon(myElement);
             }
 
@@ -108,25 +115,30 @@ class RubyStructureViewElement implements StructureViewTreeElement {
                 return null;
             }
 
-            public String getLocationString() {
+            @Override
+			public String getLocationString() {
                 return null;
             }
         };
     }
 
-    public RPsiElement getValue() {
+    @Override
+	public RPsiElement getValue() {
         return myElement;
     }
 
-    public void navigate(boolean requestFocus) {
+    @Override
+	public void navigate(boolean requestFocus) {
         ((NavigationItem) myElement).navigate(requestFocus);
     }
 
-    public boolean canNavigate() {
+    @Override
+	public boolean canNavigate() {
         return ((NavigationItem) myElement).canNavigate();
     }
 
-    public boolean canNavigateToSource() {
+    @Override
+	public boolean canNavigateToSource() {
         return ((NavigationItem) myElement).canNavigateToSource();
     }
 }

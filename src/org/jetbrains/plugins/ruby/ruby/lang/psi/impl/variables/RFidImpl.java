@@ -39,11 +39,13 @@ public class RFidImpl extends RNamedElementBase implements RFid {
         super(astNode);
     }
 
-    protected PsiReference createReference() {
+    @Override
+	protected PsiReference createReference() {
         return new RNamedReference(this);
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRFid(this);
             return;
@@ -51,12 +53,14 @@ public class RFidImpl extends RNamedElementBase implements RFid {
         super.accept(visitor);
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected String getPrefix() {
         return null;
     }
 
-    protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
+    @Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
         if (!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName)){
             throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
         }

@@ -22,11 +22,13 @@ public class CallAccessImpl extends AbstractReferenceAccess implements CallAcces
     myCommandCall = commandCall;
   }
 
+  @Override
   @NotNull
   public RPsiElement getCall() {
     return myValue;
   }
 
+  @Override
   public int getNumberOfArgs() {
     return myCommandCall != null ? myCommandCall.getArguments().size() : 0;
   }

@@ -40,17 +40,20 @@ public class RHTMLScriptNode extends PsiTreeElementBase<RHTMLRubyInjectionTag> {
         super(element);
     }
 
-    @NonNls
+    @Override
+	@NonNls
     public String getPresentableText() {
         return RHTML_PREFIX;
     }
 
-    public String getLocationString() {
+    @Override
+	public String getLocationString() {
         final RHTMLRubyInjectionTag element = getElement();
         return element != null ? element.getTagText().trim() : TextUtil.EMPTY_STRING;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public Collection<StructureViewTreeElement> getChildrenBase() {
         return Collections.emptyList();
     }

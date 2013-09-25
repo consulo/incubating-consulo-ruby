@@ -53,7 +53,8 @@ public class ControllerClassNode extends ClassNode {
         init(getElement(), RControllerPresentationUtil.getPresentation(getRubyClass()));
     }
 
-    public void accept(final SimpleNodeVisitor visitor) {
+    @Override
+	public void accept(final SimpleNodeVisitor visitor) {
         if (visitor instanceof RailsNodeVisitor) {
             ((RailsNodeVisitor)visitor).visitControllerNode();
             return;
@@ -61,7 +62,8 @@ public class ControllerClassNode extends ClassNode {
         super.accept(visitor);
     }
 
-    public RailsNode[] getChildren() {
+    @Override
+	public RailsNode[] getChildren() {
         final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
         final String className = getRubyClass().getName();
 
@@ -116,7 +118,8 @@ public class ControllerClassNode extends ClassNode {
         return children.toArray(new RailsNode[children.size()]);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RailsProjectNodeComparator.NodeType getType() {
         return RailsProjectNodeComparator.NodeType.CONTROLLER;
     }

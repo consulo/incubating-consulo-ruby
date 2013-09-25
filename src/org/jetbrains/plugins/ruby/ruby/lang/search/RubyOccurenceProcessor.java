@@ -46,7 +46,8 @@ class RubyOccurenceProcessor implements TextOccurenceProcessor {
         myConsumer = consumer;
     }
 
-    public boolean execute(final PsiElement element, final int offsetInElement) {
+    @Override
+	public boolean execute(final PsiElement element, final int offsetInElement) {
         final PsiReference ref = element.getReference();
         if (ref instanceof RPsiPolyvariantReference && !ref.isReferenceTo(myElement2Search)) {
             final PsiElement refValue = ((RPsiPolyvariantReference) ref).getRefValue();

@@ -129,7 +129,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         }
     }
 
-    public JComponent getPreferredFocusedComponent() {
+    @Override
+	public JComponent getPreferredFocusedComponent() {
         return myGotoByNamePanel.getPreferredFocusedComponent();
     }
 
@@ -144,7 +145,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         return myResult;
     }
 
-    public void dispose() {
+    @Override
+	public void dispose() {
         if (myBuilder != null) {
             Disposer.dispose(myBuilder);
             myBuilder = null;
@@ -210,7 +212,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
     //select element in project view
     private void selectElementInTree(@NotNull final PsiElement element) {
       ApplicationManager.getApplication().invokeLater(new Runnable() {
-        public void run() {
+        @Override
+		public void run() {
           if (myBuilder == null) {
               return;
           }
@@ -220,7 +223,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
       }, getModalityState());
     }
 
-    @Nullable
+    @Override
+	@Nullable
     protected JComponent createCenterPanel() {
         final DefaultTreeModel model = new DefaultTreeModel(new DefaultMutableTreeNode());
         myTree = new Tree(model);
@@ -229,28 +233,34 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         ProjectAbstractTreeStructureBase treeStructure = new AbstractProjectTreeStructure(
                 myProject) {
 
-            public boolean isFlattenPackages() {
+            @Override
+			public boolean isFlattenPackages() {
                 return false;
             }
 
-            public boolean isShowMembers() {
+            @Override
+			public boolean isShowMembers() {
                 return false;
             }
 
-            public boolean isHideEmptyMiddlePackages() {
+            @Override
+			public boolean isHideEmptyMiddlePackages() {
                 return true;
             }
 
 
-            public boolean isAbbreviatePackageNames() {
+            @Override
+			public boolean isAbbreviatePackageNames() {
                 return false;
             }
 
-            public boolean isShowLibraryContents() {
+            @Override
+			public boolean isShowLibraryContents() {
                 return true;
             }
 
-            public boolean isShowModules() {
+            @Override
+			public boolean isShowModules() {
                 return false;
             }
         };
@@ -268,7 +278,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         scrollPane.setPreferredSize(new Dimension(500, 300));
 
         myTree.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
+            @Override
+			public void keyPressed(KeyEvent e) {
                 if (KeyEvent.VK_ENTER == e.getKeyCode()) {
                     doOKAction();
                 }
@@ -276,7 +287,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         });
 
         myTree.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            @Override
+			public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     TreePath path = myTree.getPathForLocation(e.getX(), e.getY());
                     if (path != null && myTree.isPathSelected(path)) {
@@ -288,7 +300,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
 
         myTree.addTreeSelectionListener(
                 new TreeSelectionListener() {
-                    public void valueChanged(TreeSelectionEvent e) {
+                    @Override
+					public void valueChanged(TreeSelectionEvent e) {
                         handleSelectionChanged();
                     }
                 }
@@ -309,7 +322,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
 
         myTabbedPane.addChangeListener(
                 new ChangeListener() {
-                    public void stateChanged(ChangeEvent e) {
+                    @Override
+					public void stateChanged(ChangeEvent e) {
                         handleSelectionChanged();
                     }
                 }
@@ -322,7 +336,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         return new MyGotoClassModel(myProject);
     }
 
-    protected void doOKAction() {
+    @Override
+	protected void doOKAction() {
         myResult = true;
         mySelectedClass = calcSelectedClass();
         if (mySelectedClass == null) {
@@ -331,7 +346,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
         super.doOKAction();
     }
 
-    protected String getDimensionServiceKey() {
+    @Override
+	protected String getDimensionServiceKey() {
         return "#com.intellij.ide.util.TreeClassChooserDialog";
     }
 
@@ -367,7 +383,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
 //    }
 
     private class MyCallback extends ChooseByNamePopupComponent.Callback {
-        public void elementChosen(Object element) {
+        @Override
+		public void elementChosen(Object element) {
             mySelectedClass = (RClass)element;
             close(OK_EXIT_CODE);
         }
@@ -385,10 +402,12 @@ public class TreeRClassChooserDialog extends DialogWrapper {
             this.dummyPanel = dummyPanel;
         }
 
-        protected void showTextFieldPanel() {
+        @Override
+		protected void showTextFieldPanel() {
         }
 
-        protected void close(boolean isOk) {
+        @Override
+		protected void close(boolean isOk) {
             super.close(isOk);
 
             if (isOk) {
@@ -398,13 +417,15 @@ public class TreeRClassChooserDialog extends DialogWrapper {
             }
         }
 
-        protected void initUI(ChooseByNamePopupComponent.Callback callback, ModalityState modalityState, boolean allowMultipleSelection) {
+        @Override
+		protected void initUI(ChooseByNamePopupComponent.Callback callback, ModalityState modalityState, boolean allowMultipleSelection) {
             super.initUI(callback, modalityState, allowMultipleSelection);
             dummyPanel.add(myGotoByNamePanel.getPanel(), BorderLayout.CENTER);
             IdeFocusTraversalPolicy.getPreferredFocusedComponent(myGotoByNamePanel.getPanel()).requestFocus();
         }
 
-        protected void showList() {
+        @Override
+		protected void showList() {
             super.showList();
             if (myInitialClass != null && myList.getModel().getSize() > 0) {
                 myList.setSelectedValue(myInitialClass, true);
@@ -434,7 +455,8 @@ public class TreeRClassChooserDialog extends DialogWrapper {
             return list.toArray(new RClass[list.size()]);
         }
 
-        @Nullable
+        @Override
+		@Nullable
         public String getPromptText() {
             return null;
         }

@@ -63,7 +63,8 @@ public class RubyTreeStructureProvider implements TreeStructureProvider, Project
         myProject = project;
     }
 
-    public Collection<AbstractTreeNode> modify(AbstractTreeNode parent, Collection<AbstractTreeNode> children, ViewSettings settings) {
+    @Override
+	public Collection<AbstractTreeNode> modify(AbstractTreeNode parent, Collection<AbstractTreeNode> children, ViewSettings settings) {
 // We should just return all the children if we don`t want to use useRubySpecific Project view
         if (!RApplicationSettings.getInstance().useRubySpecificProjectView){
             return children;
@@ -145,25 +146,31 @@ public class RubyTreeStructureProvider implements TreeStructureProvider, Project
         return result;
     }
 
-    public Object getData(Collection<AbstractTreeNode> selected, String dataName) {
+    @Override
+	public Object getData(Collection<AbstractTreeNode> selected, String dataName) {
         return null;
     }
 
 
-    public void projectOpened() {
+    @Override
+	public void projectOpened() {
     }
 
-    public void projectClosed() {
+    @Override
+	public void projectClosed() {
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getComponentName() {
         return RComponents.RUBY_TREE_STRUCTURE_PROVIDER;
     }
 
-    public void initComponent() {
+    @Override
+	public void initComponent() {
     }
 
-    public void disposeComponent() {
+    @Override
+	public void disposeComponent() {
     }
 }

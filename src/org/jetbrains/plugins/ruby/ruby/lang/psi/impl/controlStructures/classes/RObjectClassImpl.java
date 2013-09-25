@@ -50,7 +50,8 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public ItemPresentation getPresentation() {
         return RObjectClassPresentationUtil.getPresentation(this);
     }
@@ -59,18 +60,21 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
         return RObjectClassPresentationUtil.getIcon();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getPresentableName() {
         return "<<" + getFullName();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RClassObject getObject(){
         PsiElement result =  RubyPsiUtil.getChildByFilter(this, RubyElementTypes.CLASS_OBJECT,0);
         return result!=null ?  (RClassObjectImpl) result : null;
     }
 
-    public void accept(@NotNull PsiElementVisitor visitor){
+    @Override
+	public void accept(@NotNull PsiElementVisitor visitor){
         if (visitor instanceof RubyElementVisitor){
             ((RubyElementVisitor) visitor).visitRObjectClass(this);
             return;
@@ -78,7 +82,8 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
         super.accept(visitor);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RVirtualObjectClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
                                                @NotNull RFileInfo info) {
         assert virtualParent != null;
@@ -88,12 +93,14 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
         return vObjectClass;
     }
 
-    public StructureType getType() {
+    @Override
+	public StructureType getType() {
         return StructureType.OBJECT_CLASS;
     }
 
 
-    protected RPsiElement getNameElement() {
+    @Override
+	protected RPsiElement getNameElement() {
         return getObject();
     }
 }

@@ -52,7 +52,8 @@ public class RakeActionGroup extends ActionGroup {
         }
     }
 
-    public void update(@NotNull AnActionEvent event) {
+    @Override
+	public void update(@NotNull AnActionEvent event) {
         final Module module = DataContextUtil.getModule(event.getDataContext());
 
         // show only on module with enabled Rails support and valid Ruby SDK with rails installed
@@ -72,7 +73,8 @@ public class RakeActionGroup extends ActionGroup {
     }
 
 
-    public AnAction[] getChildren(@Nullable final AnActionEvent event) {
+    @Override
+	public AnAction[] getChildren(@Nullable final AnActionEvent event) {
         if (event == null) {   //TODO any sense?
             return AnActionUtil.NO_ACTIONS;
         }

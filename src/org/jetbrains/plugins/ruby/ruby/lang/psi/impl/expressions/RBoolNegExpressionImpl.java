@@ -34,7 +34,8 @@ public class RBoolNegExpressionImpl extends RUnaryExpressionBase implements RBoo
         super(astNode);
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public RType getType(@Nullable final FileSymbol fileSymbol) {
         return RTypeUtil.getBooleanType(fileSymbol);
     }

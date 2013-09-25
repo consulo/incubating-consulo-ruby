@@ -15,6 +15,7 @@ import com.intellij.psi.tree.IElementType;
  * @date: Jun 17, 2008
  */
 public class YAMLMockParser implements PsiParser {
+  @Override
   @NotNull
   public ASTNode parse(final IElementType root, final PsiBuilder builder, LanguageVersion languageVersion) {
     final PsiBuilder.Marker marker = builder.mark();

@@ -80,7 +80,8 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
         myOriginalHandler = originalHandler;
     }
 
-    public void executeWriteAction(Editor editor, DataContext dataContext) {
+    @Override
+	public void executeWriteAction(Editor editor, DataContext dataContext) {
         if (!handleEnter(editor, dataContext) && myOriginalHandler != null) {
             if (myOriginalHandler.isEnabled(editor, dataContext)){
                 myOriginalHandler.execute(editor, dataContext);
@@ -216,7 +217,8 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
     }
 
 
-    public boolean isEnabled(Editor editor, DataContext dataContext) {
+    @Override
+	public boolean isEnabled(Editor editor, DataContext dataContext) {
         return DataContextUtil.isEnabled(editor, dataContext, myOriginalHandler);
     }
 

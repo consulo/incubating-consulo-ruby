@@ -61,12 +61,14 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
     }
 
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getDefaultChildAccessModifier() {
         return AccessModifier.PUBLIC;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public AccessModifier getAccessModifier() {
 // getSubContainers of parentContainer will set correct access modifiers to all of it`s children
         final RContainer parentContainer = getParentContainer();
@@ -80,7 +82,8 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
         myAccessModifier = modifier;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public final List<RStructuralElement> getStructureElements() {
         if (myStructureElements == null) {
             myStructureElements = RContainerUtil.getStructureElements(this);
@@ -88,7 +91,8 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
         return myStructureElements;
     }
 
-    public synchronized void subtreeChanged() {
+    @Override
+	public synchronized void subtreeChanged() {
         clearMyCaches();
         super.subtreeChanged();
     }
@@ -105,18 +109,21 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
         myControlFlow = null;
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public RFileInfo getContainingFileInfo() {
         return null;
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getContainingFileUrl() {
         //noinspection ConstantConditions
         return getContainingFile().getVirtualFile().getUrl();
     }
 
-    @Nullable
+    @Override
+	@Nullable
     public VirtualFile getVirtualFile() {
         return getContainingFile().getVirtualFile();
     }
@@ -140,12 +147,14 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
     }
 
 
-    @Nullable
+    @Override
+	@Nullable
     public RVirtualContainer getVirtualParentContainer() {
         return getParentContainer();
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<RVirtualStructuralElement> getVirtualStructureElements() {
         final ArrayList<RVirtualStructuralElement> elements = new ArrayList<RVirtualStructuralElement>();
         for (RStructuralElement element : getStructureElements()) {
@@ -154,7 +163,8 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
         return elements;
     }
 
-    public int getIndexOf(@NotNull RVirtualStructuralElement element) {
+    @Override
+	public int getIndexOf(@NotNull RVirtualStructuralElement element) {
         final List<RStructuralElement> structuralElements = getStructureElements();
         for (int i=0; i < structuralElements.size();i++){
             if (element == structuralElements.get(i)){
@@ -170,7 +180,8 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
     // scope for scopeHolder
     private RootScope myScope;
 
-    @NotNull
+    @Override
+	@NotNull
     public synchronized RootScope getScope() {
         if (myScope == null){
             myScope = ScopeBuilder.buildScope(this);
@@ -183,28 +194,33 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    @NotNull
+    @Override
+	@NotNull
     public String getName() {
         return RNameUtil.getName(getFullPath());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public List<String> getFullPath() {
         return RNameUtil.getPath(getNameElement());
     }
 
-    @NotNull
+    @Override
+	@NotNull
     public String getFullName() {
         return RNameUtil.getPresentableName(getNameElement().getText());
     }
 
-    public boolean isGlobal() {
+    @Override
+	public boolean isGlobal() {
         return RNameUtil.isGlobal(getNameElement());
     }
 
     protected abstract RPsiElement getNameElement();
 
-    public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
+    @Override
+	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
         if (!(element instanceof RVirtualContainer)){
             return false;
         }
@@ -238,7 +254,8 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 ///// ControlFlowOwner
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Instruction[] getControlFlow() {
+    @Override
+	public Instruction[] getControlFlow() {
         if (myControlFlow == null){
             myControlFlow = new RControlFlowBuilder().buildControlFlow(null, this, null, null);
         }
