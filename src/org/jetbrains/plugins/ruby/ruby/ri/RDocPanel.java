@@ -32,76 +32,87 @@ import com.intellij.openapi.roots.ProjectRootManager;
  * User: oleg
  * Date: 09.09.2006
  */
-public class RDocPanel {
-    private JTabbedPane myPane;
-    private ProjectRootManager myProjectRootManager;
-    private SettingsPane mySettingPane;
-    private InfoPane myInfoPane;
-    private AboutPane myAboutPane;
-    private RDocSettings mySettings;
-    private Project myProject;
+public class RDocPanel
+{
+	private JTabbedPane myPane;
+	private ProjectRootManager myProjectRootManager;
+	private SettingsPane mySettingPane;
+	private InfoPane myInfoPane;
+	private AboutPane myAboutPane;
+	private RDocSettings mySettings;
+	private Project myProject;
 
-    public RDocPanel(final Project project, final RDocSettings settings) {
-        myProject = project;
-        myProjectRootManager = ProjectRootManager.getInstance(project);
-        mySettings = settings;
-        createPanel();
+	public RDocPanel(final Project project, final RDocSettings settings)
+	{
+		myProject = project;
+		myProjectRootManager = ProjectRootManager.getInstance(project);
+		mySettings = settings;
+		createPanel();
 
-// Adding project jdk listener
-      /*  ((ProjectRootManagerEx) myProjectRootManager).addSdkListener(new ProjectRootManagerEx.SdkListener() {
+		// Adding project jdk listener
+	  /*  ((ProjectRootManagerEx) myProjectRootManager).addSdkListener(new ProjectRootManagerEx.SdkListener() {
             public void SdkChanged() {
                 fireSdkChanged();
             }
         });  */
-        fireSdkChanged();
-    }
+		fireSdkChanged();
+	}
 
-    private void fireSdkChanged() {
-        myInfoPane.fireJDKChanged();
-        mySettingPane.fireJDKChanged();
-        myAboutPane.fireJDKChanged();
-    }
+	private void fireSdkChanged()
+	{
+		myInfoPane.fireJDKChanged();
+		mySettingPane.fireJDKChanged();
+		myAboutPane.fireJDKChanged();
+	}
 
-    private void createPanel() {
-        myPane = new JTabbedPane();
-        myInfoPane = new InfoPane(this);
-        myPane.add(RBundle.message("ruby.ri.info.pane"), myInfoPane.getPanel());
-        mySettingPane = new SettingsPane(this, mySettings);
-        myPane.add(RBundle.message("ruby.ri.settings.pane"), mySettingPane.getPanel());
-        myAboutPane = new AboutPane(this, myProject);
-        myPane.add(RBundle.message("ruby.ri.about.pane"), myAboutPane.getPanel());
-    }
+	private void createPanel()
+	{
+		myPane = new JTabbedPane();
+		myInfoPane = new InfoPane(this);
+		myPane.add(RBundle.message("ruby.ri.info.pane"), myInfoPane.getPanel());
+		mySettingPane = new SettingsPane(this, mySettings);
+		myPane.add(RBundle.message("ruby.ri.settings.pane"), mySettingPane.getPanel());
+		myAboutPane = new AboutPane(this, myProject);
+		myPane.add(RBundle.message("ruby.ri.about.pane"), myAboutPane.getPanel());
+	}
 
-    public JComponent getPanel() {
-        return myPane;
-    }
+	public JComponent getPanel()
+	{
+		return myPane;
+	}
 
-    public Sdk getSdk() {
-        return null;
-    }
+	public Sdk getSdk()
+	{
+		return null;
+	}
 
 
-    public String lookup(@NotNull final String name) {
-        boolean doUseDefaults = mySettingPane.doUseDefaults();
-        int displayWidth = calculateInfoPaneWidth();
-        final String item = name.trim();
-        if (doUseDefaults) {
-            return RIUtil.lookup(myProject, getSdk(), item, true, new String[]{}, displayWidth);
-        }
-        return RIUtil.lookup(myProject, getSdk(), item, false, mySettingPane.getSelectedDirs(), displayWidth);
-    }
+	public String lookup(@NotNull final String name)
+	{
+		boolean doUseDefaults = mySettingPane.doUseDefaults();
+		int displayWidth = calculateInfoPaneWidth();
+		final String item = name.trim();
+		if(doUseDefaults)
+		{
+			return RIUtil.lookup(myProject, getSdk(), item, true, new String[]{}, displayWidth);
+		}
+		return RIUtil.lookup(myProject, getSdk(), item, false, mySettingPane.getSelectedDirs(), displayWidth);
+	}
 
-    /**
-     * Calculates an approximate width of the InfoPane by dividing by ten
-     * @return approximate width of the InfoPane
-     */
-    private int calculateInfoPaneWidth() {
-        BigInteger width = BigInteger.valueOf(myInfoPane.getPanel().getWidth()).divide(BigInteger.TEN);
-        return width.intValue();
-    }
+	/**
+	 * Calculates an approximate width of the InfoPane by dividing by ten
+	 *
+	 * @return approximate width of the InfoPane
+	 */
+	private int calculateInfoPaneWidth()
+	{
+		BigInteger width = BigInteger.valueOf(myInfoPane.getPanel().getWidth()).divide(BigInteger.TEN);
+		return width.intValue();
+	}
 
-    public void showHelp(@NotNull final String name) {
-        myPane.getModel().setSelectedIndex(0);
-        myInfoPane.showHelp(name);
-    }
+	public void showHelp(@NotNull final String name)
+	{
+		myPane.getModel().setSelectedIndex(0);
+		myInfoPane.showHelp(name);
+	}
 }

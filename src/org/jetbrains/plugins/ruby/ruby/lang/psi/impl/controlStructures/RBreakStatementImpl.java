@@ -16,36 +16,41 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RBreakStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RLoopStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RBreakStatementImpl extends RPsiElementBase implements RBreakStatement{
-    public RBreakStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBreakStatementImpl extends RPsiElementBase implements RBreakStatement
+{
+	public RBreakStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRBreakStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRBreakStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RLoopStatement getBreakedLoop() {
-        return PsiTreeUtil.getParentOfType(this, RLoopStatement.class);
-    }
+	@Override
+	public RLoopStatement getBreakedLoop()
+	{
+		return PsiTreeUtil.getParentOfType(this, RLoopStatement.class);
+	}
 }

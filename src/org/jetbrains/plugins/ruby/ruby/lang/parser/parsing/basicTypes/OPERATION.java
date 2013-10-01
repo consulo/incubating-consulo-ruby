@@ -17,20 +17,21 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-public class OPERATION  implements RubyTokenTypes {
-    /*
+public class OPERATION implements RubyTokenTypes
+{
+	/*
         operation	: tIDENTIFIER
                 | tCONSTANT
                 | tFID
@@ -38,45 +39,52 @@ public class OPERATION  implements RubyTokenTypes {
     */
 
 
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(!builder.compare(BNF.tOPERATION))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if (!builder.compare(BNF.tOPERATION)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+		if(builder.compare(tFID))
+		{
+			return builder.parseSingleToken(tFID, RubyElementTypes.FID);
+		}
 
-        if (builder.compare(tFID)) {
-            return builder.parseSingleToken(tFID, RubyElementTypes.FID);
-        }
+		if(builder.compare(tCONSTANT))
+		{
+			return builder.parseSingleToken(tCONSTANT, RubyElementTypes.CONSTANT);
+		}
 
-        if (builder.compare(tCONSTANT)) {
-            return builder.parseSingleToken(tCONSTANT, RubyElementTypes.CONSTANT);
-        }
+		if(builder.compare(tIDENTIFIER))
+		{
+			return builder.parseSingleToken(tIDENTIFIER, RubyElementTypes.IDENTIFIER);
+		}
 
-        if (builder.compare(tIDENTIFIER)) {
-            return builder.parseSingleToken(tIDENTIFIER, RubyElementTypes.IDENTIFIER);
-        }
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
-        return RubyElementTypes.EMPTY_INPUT;
-    }
-
-    /*
-        operation2	: operation
-                | op
-                ;
-    */
-    @NotNull
-    public static IElementType parse2(final RBuilder builder) {
-        if (!builder.compare(BNF.tOPERATION2)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	/*
+		operation2	: operation
+				| op
+				;
+	*/
+	@NotNull
+	public static IElementType parse2(final RBuilder builder)
+	{
+		if(!builder.compare(BNF.tOPERATION2))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
 
-        IElementType result = parse(builder);
-        if (result != RubyElementTypes.EMPTY_INPUT) {
-            return result;
-        }
-        return builder.parseSingleToken(BNF.tOPS, RubyElementTypes.OP);
-    }
+		IElementType result = parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			return result;
+		}
+		return builder.parseSingleToken(BNF.tOPS, RubyElementTypes.OP);
+	}
 
 }

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,8 +25,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
  * @author: oleg
  * @date: Nov 9, 2006
  */
-public class RBlockToArgumentImpl extends RPsiElementBase {
-    public RBlockToArgumentImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBlockToArgumentImpl extends RPsiElementBase
+{
+	public RBlockToArgumentImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

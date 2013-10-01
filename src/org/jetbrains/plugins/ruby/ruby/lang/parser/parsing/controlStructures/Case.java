@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
@@ -30,91 +29,102 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class Case implements RubyTokenTypes {
-    /*
-            | kCASE expr_value opt_terms
-              case_body
-              kEND
-            | kCASE opt_terms case_body kEND
-            | kCASE opt_terms kELSE compstmt kEND
+public class Case implements RubyTokenTypes
+{
+	/*
+			| kCASE expr_value opt_terms
+			  case_body
+			  kEND
+			| kCASE opt_terms case_body kEND
+			| kCASE opt_terms kELSE compstmt kEND
 
-    case_body	: kWHEN when_args then
-              compstmt
-              cases
-            ;
+	case_body	: kWHEN when_args then
+			  compstmt
+			  cases
+			;
 
-    cases		: opt_else
-            | case_body
-            ;
-    */
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if (!builder.compare(kCASE)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	cases		: opt_else
+			| case_body
+			;
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(!builder.compare(kCASE))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        RMarker statementMarker = builder.mark();
-        builder.match(kCASE);
+		RMarker statementMarker = builder.mark();
+		builder.match(kCASE);
 
-        EXPR.parse(builder);
+		EXPR.parse(builder);
 
-        TERMS.parseOpt(builder);
+		TERMS.parseOpt(builder);
 
-// when
-        while (builder.compareIgnoreEOL(kWHEN)) {
-            RMarker whenMarker = builder.mark();
-            builder.match(kWHEN);
+		// when
+		while(builder.compareIgnoreEOL(kWHEN))
+		{
+			RMarker whenMarker = builder.mark();
+			builder.match(kWHEN);
 
-            parseWhenArgs(builder);
+			parseWhenArgs(builder);
 
-            THEN.parse(builder);
+			THEN.parse(builder);
 
-            COMPSTMT.parse(builder, kWHEN, kELSE, kEND);
-            whenMarker.done(RubyElementTypes.WHEN_CASE);
-        }
+			COMPSTMT.parse(builder, kWHEN, kELSE, kEND);
+			whenMarker.done(RubyElementTypes.WHEN_CASE);
+		}
 
-        if (builder.compareIgnoreEOL(kELSE)){
-            OPT_ELSE.parse(builder);
-        }
+		if(builder.compareIgnoreEOL(kELSE))
+		{
+			OPT_ELSE.parse(builder);
+		}
 
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(RubyElementTypes.CASE_STATEMENT);
-        return RubyElementTypes.CASE_STATEMENT;
-    }
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(RubyElementTypes.CASE_STATEMENT);
+		return RubyElementTypes.CASE_STATEMENT;
+	}
 
-    /*
-        when_args	: args
-                | args ',' tSTAR arg_value
-                | tSTAR arg_value
-                ;
-    */
-    private static void parseWhenArgs(final RBuilder builder) {
-        RMarker statementMarker = builder.mark();
-        ParsingMethod parsingMethod = new ParsingMethod() {
-            boolean afterStar = false;
+	/*
+		when_args	: args
+				| args ',' tSTAR arg_value
+				| tSTAR arg_value
+				;
+	*/
+	private static void parseWhenArgs(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		ParsingMethod parsingMethod = new ParsingMethod()
+		{
+			boolean afterStar = false;
 
-            @Override
+			@Override
 			@NotNull
-            public IElementType parse(final RBuilder builder) {
-                if (afterStar) {
-                    return RubyElementTypes.EMPTY_INPUT;
-                }
-                if (builder.compare(tSTAR)) {
-                    afterStar = true;
-                    return CALL_ARGS.parseArrayToArguments(builder);
-                }
-                return ARG.parse(builder);
-            }
-        };
-        ListParsingUtil.parseCommaDelimitedExpressions(builder, parsingMethod);
-        statementMarker.done(RubyElementTypes.LIST_OF_EXPRESSIONS);
-    }
+			public IElementType parse(final RBuilder builder)
+			{
+				if(afterStar)
+				{
+					return RubyElementTypes.EMPTY_INPUT;
+				}
+				if(builder.compare(tSTAR))
+				{
+					afterStar = true;
+					return CALL_ARGS.parseArrayToArguments(builder);
+				}
+				return ARG.parse(builder);
+			}
+		};
+		ListParsingUtil.parseCommaDelimitedExpressions(builder, parsingMethod);
+		statementMarker.done(RubyElementTypes.LIST_OF_EXPRESSIONS);
+	}
 
 
 }

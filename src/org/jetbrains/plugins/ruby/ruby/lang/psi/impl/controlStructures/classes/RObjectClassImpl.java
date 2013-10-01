@@ -16,10 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -37,70 +35,82 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RObjectClassPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RObjectClassImpl extends RFieldConstantContainerImpl implements RObjectClass {
-    public RObjectClassImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RObjectClassImpl extends RFieldConstantContainerImpl implements RObjectClass
+{
+	public RObjectClassImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RObjectClassPresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RObjectClassPresentationUtil.getPresentation(this);
+	}
 
-    public Icon getIcon(int flags) {
-        return RObjectClassPresentationUtil.getIcon();
-    }
+	public Icon getIcon(int flags)
+	{
+		return RObjectClassPresentationUtil.getIcon();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableName() {
-        return "<<" + getFullName();
-    }
+	public String getPresentableName()
+	{
+		return "<<" + getFullName();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RClassObject getObject(){
-        PsiElement result =  RubyPsiUtil.getChildByFilter(this, RubyElementTypes.CLASS_OBJECT,0);
-        return result!=null ?  (RClassObjectImpl) result : null;
-    }
+	public RClassObject getObject()
+	{
+		PsiElement result = RubyPsiUtil.getChildByFilter(this, RubyElementTypes.CLASS_OBJECT, 0);
+		return result != null ? (RClassObjectImpl) result : null;
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRObjectClass(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRObjectClass(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualObjectClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
-                                               @NotNull RFileInfo info) {
-        assert virtualParent != null;
-        final RVirtualName name = new RVirtualNameImpl(getFullPath(), isGlobal());
-        final RVirtualObjectClassImpl vObjectClass = new RVirtualObjectClassImpl(virtualParent, name, getAccessModifier(), info);
-        addVirtualData(vObjectClass, info);
-        return vObjectClass;
-    }
+	public RVirtualObjectClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull RFileInfo info)
+	{
+		assert virtualParent != null;
+		final RVirtualName name = new RVirtualNameImpl(getFullPath(), isGlobal());
+		final RVirtualObjectClassImpl vObjectClass = new RVirtualObjectClassImpl(virtualParent, name, getAccessModifier(), info);
+		addVirtualData(vObjectClass, info);
+		return vObjectClass;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.OBJECT_CLASS;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.OBJECT_CLASS;
+	}
 
 
-    @Override
-	protected RPsiElement getNameElement() {
-        return getObject();
-    }
+	@Override
+	protected RPsiElement getNameElement()
+	{
+		return getObject();
+	}
 }

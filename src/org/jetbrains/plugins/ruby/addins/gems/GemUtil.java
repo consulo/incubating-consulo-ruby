@@ -30,37 +30,41 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: Dec 1, 2007
  */
-public class GemUtil {
+public class GemUtil
+{
 
-    /**
-     * Determinates existing path to gem executable script:
-     *    {gems_bin}/{rubyScriptName}
-     *    {gems_bin}/{rubyScriptName}.rb
-     * @param sdk Ruby SDK. If null method will also return null
-     * @param rubyScriptName Executable ruby script name(e.g. "rails", "spec", "rake", etc.)
-     * @return path if can be found in gems bin folder, otherwise null
-     */
-    @Nullable
-    public static String getGemExecutableRubyScriptPath(@Nullable final Sdk sdk,
-                                                        @NotNull final String rubyScriptName
-    ) {
-        if (sdk == null) {
-            return null;
-        }
-        String path = RubySdkUtil.getGemsBinFolderPath(sdk) + VirtualFileUtil.VFS_PATH_SEPARATOR + rubyScriptName;
-        if (FileUtil.checkIfIsExistingFile(path)) {
-            return path;
-        }
-        path += "." + RubyFileType.RUBY.getDefaultExtension();
+	/**
+	 * Determinates existing path to gem executable script:
+	 * {gems_bin}/{rubyScriptName}
+	 * {gems_bin}/{rubyScriptName}.rb
+	 *
+	 * @param sdk            Ruby SDK. If null method will also return null
+	 * @param rubyScriptName Executable ruby script name(e.g. "rails", "spec", "rake", etc.)
+	 * @return path if can be found in gems bin folder, otherwise null
+	 */
+	@Nullable
+	public static String getGemExecutableRubyScriptPath(@Nullable final Sdk sdk, @NotNull final String rubyScriptName)
+	{
+		if(sdk == null)
+		{
+			return null;
+		}
+		String path = RubySdkUtil.getGemsBinFolderPath(sdk) + VirtualFileUtil.VFS_PATH_SEPARATOR + rubyScriptName;
+		if(FileUtil.checkIfIsExistingFile(path))
+		{
+			return path;
+		}
+		path += "." + RubyFileType.RUBY.getDefaultExtension();
 
-        if (FileUtil.checkIfIsExistingFile(path)) {
-            return path;
-        }
-        return null;
-    }
+		if(FileUtil.checkIfIsExistingFile(path))
+		{
+			return path;
+		}
+		return null;
+	}
 
-    public static boolean isGemExecutableRubyScriptExists(@Nullable final Sdk sdk,
-                                                        @NotNull final String rubyScriptName) {
-        return getGemExecutableRubyScriptPath(sdk, rubyScriptName) != null;
-    }
+	public static boolean isGemExecutableRubyScriptExists(@Nullable final Sdk sdk, @NotNull final String rubyScriptName)
+	{
+		return getGemExecutableRubyScriptPath(sdk, rubyScriptName) != null;
+	}
 }

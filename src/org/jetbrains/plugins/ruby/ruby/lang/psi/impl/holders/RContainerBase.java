@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.vfs.VirtualFile;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.RubyPsiManager;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
@@ -29,6 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualContainerBase;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeBuilder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceContext;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
@@ -42,223 +43,260 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RNameUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.07.2006
  */
-public abstract class RContainerBase extends RPsiElementBase implements RContainer {
-    private AccessModifier myAccessModifier = AccessModifier.PUBLIC;
-    protected List<RStructuralElement> myStructureElements;
-    private Instruction[] myControlFlow;
+public abstract class RContainerBase extends RPsiElementBase implements RContainer
+{
+	private AccessModifier myAccessModifier = AccessModifier.PUBLIC;
+	protected List<RStructuralElement> myStructureElements;
+	private Instruction[] myControlFlow;
 
-    public RContainerBase(final ASTNode astNode) {
-        super(astNode);
-    }
+	public RContainerBase(final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public AccessModifier getDefaultChildAccessModifier() {
-        return AccessModifier.PUBLIC;
-    }
+	public AccessModifier getDefaultChildAccessModifier()
+	{
+		return AccessModifier.PUBLIC;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public AccessModifier getAccessModifier() {
-// getSubContainers of parentContainer will set correct access modifiers to all of it`s children
-        final RContainer parentContainer = getParentContainer();
-        if (parentContainer!=null){
-            parentContainer.getStructureElements();
-        }
-        return myAccessModifier;
-    }
+	public AccessModifier getAccessModifier()
+	{
+		// getSubContainers of parentContainer will set correct access modifiers to all of it`s children
+		final RContainer parentContainer = getParentContainer();
+		if(parentContainer != null)
+		{
+			parentContainer.getStructureElements();
+		}
+		return myAccessModifier;
+	}
 
-    public void setAccessModifier(final AccessModifier modifier) {
-        myAccessModifier = modifier;
-    }
+	public void setAccessModifier(final AccessModifier modifier)
+	{
+		myAccessModifier = modifier;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public final List<RStructuralElement> getStructureElements() {
-        if (myStructureElements == null) {
-            myStructureElements = RContainerUtil.getStructureElements(this);
-        }
-        return myStructureElements;
-    }
+	public final List<RStructuralElement> getStructureElements()
+	{
+		if(myStructureElements == null)
+		{
+			myStructureElements = RContainerUtil.getStructureElements(this);
+		}
+		return myStructureElements;
+	}
 
-    @Override
-	public synchronized void subtreeChanged() {
-        clearMyCaches();
-        super.subtreeChanged();
-    }
+	@Override
+	public synchronized void subtreeChanged()
+	{
+		clearMyCaches();
+		super.subtreeChanged();
+	}
 
-    private void clearMyCaches(){
-        myStructureElements = null;
-        myScope = null;
+	private void clearMyCaches()
+	{
+		myStructureElements = null;
+		myScope = null;
 
-        // Clear control flow and inference info
-        final TypeInferenceContext context = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper().getContext();
-        if (context!=null){
-            context.localVariablesTypesCache.remove(this);
-        }
-        myControlFlow = null;
-    }
+		// Clear control flow and inference info
+		final TypeInferenceContext context = TypeInferenceHelper.getInstance(getProject()).getContext();
+		if(context != null)
+		{
+			context.localVariablesTypesCache.remove(this);
+		}
+		myControlFlow = null;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RFileInfo getContainingFileInfo() {
-        return null;
-    }
+	public RFileInfo getContainingFileInfo()
+	{
+		return null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getContainingFileUrl() {
-        //noinspection ConstantConditions
-        return getContainingFile().getVirtualFile().getUrl();
-    }
+	public String getContainingFileUrl()
+	{
+		//noinspection ConstantConditions
+		return getContainingFile().getVirtualFile().getUrl();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public VirtualFile getVirtualFile() {
-        return getContainingFile().getVirtualFile();
-    }
+	public VirtualFile getVirtualFile()
+	{
+		return getContainingFile().getVirtualFile();
+	}
 
-    protected void addVirtualData(@NotNull final RVirtualContainer virtualCopy,
-                                  @NotNull final RFileInfo fileInfo) {
-        if (this instanceof RFieldHolder){
-            RVirtualUtil.addVirtualFields(virtualCopy, (RFieldHolder)this);
-        }
-        if (this instanceof RConstantHolder){
-            RVirtualUtil.addVirtualConstants(virtualCopy, (RConstantHolder)this);
-        }
+	protected void addVirtualData(@NotNull final RVirtualContainer virtualCopy, @NotNull final RFileInfo fileInfo)
+	{
+		if(this instanceof RFieldHolder)
+		{
+			RVirtualUtil.addVirtualFields(virtualCopy, (RFieldHolder) this);
+		}
+		if(this instanceof RConstantHolder)
+		{
+			RVirtualUtil.addVirtualConstants(virtualCopy, (RConstantHolder) this);
+		}
 
-        final List<RVirtualStructuralElement> elements = new ArrayList<RVirtualStructuralElement>();
+		final List<RVirtualStructuralElement> elements = new ArrayList<RVirtualStructuralElement>();
 
-// recursive generate all the info about all the children
-        for (RStructuralElement structuralElement : getStructureElements()){
-            elements.add(structuralElement.createVirtualCopy(virtualCopy, fileInfo));
-        }
-        ((RVirtualContainerBase)virtualCopy).setStructureElements(elements);
-    }
+		// recursive generate all the info about all the children
+		for(RStructuralElement structuralElement : getStructureElements())
+		{
+			elements.add(structuralElement.createVirtualCopy(virtualCopy, fileInfo));
+		}
+		((RVirtualContainerBase) virtualCopy).setStructureElements(elements);
+	}
 
 
-    @Override
+	@Override
 	@Nullable
-    public RVirtualContainer getVirtualParentContainer() {
-        return getParentContainer();
-    }
+	public RVirtualContainer getVirtualParentContainer()
+	{
+		return getParentContainer();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualStructuralElement> getVirtualStructureElements() {
-        final ArrayList<RVirtualStructuralElement> elements = new ArrayList<RVirtualStructuralElement>();
-        for (RStructuralElement element : getStructureElements()) {
-            elements.add(element);
-        }
-        return elements;
-    }
+	public List<RVirtualStructuralElement> getVirtualStructureElements()
+	{
+		final ArrayList<RVirtualStructuralElement> elements = new ArrayList<RVirtualStructuralElement>();
+		for(RStructuralElement element : getStructureElements())
+		{
+			elements.add(element);
+		}
+		return elements;
+	}
 
-    @Override
-	public int getIndexOf(@NotNull RVirtualStructuralElement element) {
-        final List<RStructuralElement> structuralElements = getStructureElements();
-        for (int i=0; i < structuralElements.size();i++){
-            if (element == structuralElements.get(i)){
-                return i;
-            }
-        }
-        return -1;
-    }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///// ScopeHolder
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public int getIndexOf(@NotNull RVirtualStructuralElement element)
+	{
+		final List<RStructuralElement> structuralElements = getStructureElements();
+		for(int i = 0; i < structuralElements.size(); i++)
+		{
+			if(element == structuralElements.get(i))
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///// ScopeHolder
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // scope for scopeHolder
-    private RootScope myScope;
+	// scope for scopeHolder
+	private RootScope myScope;
 
-    @Override
+	@Override
 	@NotNull
-    public synchronized RootScope getScope() {
-        if (myScope == null){
-            myScope = ScopeBuilder.buildScope(this);
-        }
-        return myScope;
-    }
+	public synchronized RootScope getScope()
+	{
+		if(myScope == null)
+		{
+			myScope = ScopeBuilder.buildScope(this);
+		}
+		return myScope;
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// Name related methods
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// Name related methods
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return RNameUtil.getName(getFullPath());
-    }
+	public String getName()
+	{
+		return RNameUtil.getName(getFullPath());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<String> getFullPath() {
-        return RNameUtil.getPath(getNameElement());
-    }
+	public List<String> getFullPath()
+	{
+		return RNameUtil.getPath(getNameElement());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getFullName() {
-        return RNameUtil.getPresentableName(getNameElement().getText());
-    }
+	public String getFullName()
+	{
+		return RNameUtil.getPresentableName(getNameElement().getText());
+	}
 
-    @Override
-	public boolean isGlobal() {
-        return RNameUtil.isGlobal(getNameElement());
-    }
+	@Override
+	public boolean isGlobal()
+	{
+		return RNameUtil.isGlobal(getNameElement());
+	}
 
-    protected abstract RPsiElement getNameElement();
+	protected abstract RPsiElement getNameElement();
 
-    @Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
-        if (!(element instanceof RVirtualContainer)){
-            return false;
-        }
-        final RVirtualContainer container = (RVirtualContainer) element;
-        // Container changes
-        if (getType()!=container.getType()){
-            return false;
-        }
-        if (getAccessModifier()!=container.getAccessModifier()){
-            return false;
-        }
-        if (!getFullName().equals(container.getFullName())){
-            return false;
-        }
-        //noinspection SimplifiableIfStatement
-        if (isGlobal()!=container.isGlobal()){
-            return false;
-        }
+	@Override
+	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	{
+		if(!(element instanceof RVirtualContainer))
+		{
+			return false;
+		}
+		final RVirtualContainer container = (RVirtualContainer) element;
+		// Container changes
+		if(getType() != container.getType())
+		{
+			return false;
+		}
+		if(getAccessModifier() != container.getAccessModifier())
+		{
+			return false;
+		}
+		if(!getFullName().equals(container.getFullName()))
+		{
+			return false;
+		}
+		//noinspection SimplifiableIfStatement
+		if(isGlobal() != container.isGlobal())
+		{
+			return false;
+		}
 
-        return RVirtualPsiUtil.areSubStructureEqual(this, container);
-    }
+		return RVirtualPsiUtil.areSubStructureEqual(this, container);
+	}
 
-    @NotNull
-    public RBodyStatement getBody() {
-        final List<RBodyStatement> list = getChildrenByType(RBodyStatement.class);
-        assert list.size() == 1;
-        return list.get(0);
-    }
+	@NotNull
+	public RBodyStatement getBody()
+	{
+		final List<RBodyStatement> list = getChildrenByType(RBodyStatement.class);
+		assert list.size() == 1;
+		return list.get(0);
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///// ControlFlowOwner
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///// ControlFlowOwner
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
-	public Instruction[] getControlFlow() {
-        if (myControlFlow == null){
-            myControlFlow = new RControlFlowBuilder().buildControlFlow(null, this, null, null);
-        }
-        return myControlFlow;
-    }
+	@Override
+	public Instruction[] getControlFlow()
+	{
+		if(myControlFlow == null)
+		{
+			myControlFlow = new RControlFlowBuilder().buildControlFlow(null, this, null, null);
+		}
+		return myControlFlow;
+	}
 }

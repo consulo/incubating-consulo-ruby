@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: Feb 5, 2007
  */
-public interface RDefinedStatement extends RPsiElement{
+public interface RDefinedStatement extends RPsiElement
+{
 }

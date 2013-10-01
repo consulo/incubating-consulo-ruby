@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,11 +28,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompou
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public class RFileNavigator {
-    @Nullable
-    public static RFile getByRCompoundStatement(@NotNull final RCompoundStatement statement) {
-        final PsiElement parent = statement.getParent();
-        return (parent instanceof RFile) ? (RFile)parent
-                                         : null;
-    }
+public class RFileNavigator
+{
+	@Nullable
+	public static RFile getByRCompoundStatement(@NotNull final RCompoundStatement statement)
+	{
+		final PsiElement parent = statement.getParent();
+		return (parent instanceof RFile) ? (RFile) parent : null;
+	}
 }

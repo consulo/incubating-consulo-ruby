@@ -24,37 +24,38 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: 07.10.2006
  */
-public interface RubyChangeVisitor {
-    @SuppressWarnings({"UnusedParameters"})
-    public void anythingChanged(final PsiElement element);
+public interface RubyChangeVisitor
+{
+	@SuppressWarnings({"UnusedParameters"})
+	public void anythingChanged(final PsiElement element);
 
-//    public void rSuperChanged(final RSuperClass rSuperClass);
+	//    public void rSuperChanged(final RSuperClass rSuperClass);
 
-//    public void rClassAdded(final RClass rClass);
-//    public void rClassReplaced(final RClass rClass);
-//    public void rClassDeleted(final RClassName myRClassName);
-//    public void rClassRemoved(final RClass rClass);
-//    public void rClassRenamed(final RClassName rClassName, RClass rClass);
-//    public void rClassContentChanged(final RClass rClass);
+	//    public void rClassAdded(final RClass rClass);
+	//    public void rClassReplaced(final RClass rClass);
+	//    public void rClassDeleted(final RClassName myRClassName);
+	//    public void rClassRemoved(final RClass rClass);
+	//    public void rClassRenamed(final RClassName rClassName, RClass rClass);
+	//    public void rClassContentChanged(final RClass rClass);
 
-//    public void rMethodAdded(final RMethod rMethod);
-//    public void rMethodReplaced(final RMethod rMethod);
-//    public void rMethodRemoved(final RMethod rMethod);
-//    public void rMethodDeleted(final RMethodName myRMethodName);
-//    public void rMethodRenamed(final RMethodName rMethodName, RMethod rMethod);
-//    public void rMethodContentChanged(final RMethod rMethod);
+	//    public void rMethodAdded(final RMethod rMethod);
+	//    public void rMethodReplaced(final RMethod rMethod);
+	//    public void rMethodRemoved(final RMethod rMethod);
+	//    public void rMethodDeleted(final RMethodName myRMethodName);
+	//    public void rMethodRenamed(final RMethodName rMethodName, RMethod rMethod);
+	//    public void rMethodContentChanged(final RMethod rMethod);
 
-//    public void rModuleAdded(final RModule rModule);
-//    public void rModuleReplaced(final RModule rModule);
-//    public void rModuleRemoved(final RModule rModule);
-//    public void rModuleRenamed(final RModuleName rModuleName, RModule rModule);
-//    public void rModuleDeleted(final RModuleName rModuleName);
-//    public void rModuleContentChanged(final RModule rModule);
+	//    public void rModuleAdded(final RModule rModule);
+	//    public void rModuleReplaced(final RModule rModule);
+	//    public void rModuleRemoved(final RModule rModule);
+	//    public void rModuleRenamed(final RModuleName rModuleName, RModule rModule);
+	//    public void rModuleDeleted(final RModuleName rModuleName);
+	//    public void rModuleContentChanged(final RModule rModule);
 
-//    public void rBodyAdded(final RBodyStatement myRBodyStatment);
-//    public void rBodyRemoved(final RBodyStatement myRBodyStatment);
-//    public void rBodyReplaced(final RBodyStatement myRBodyStatment);
-//    public void rBodyContentChanged(final RBodyStatement myRBodyStatment);
+	//    public void rBodyAdded(final RBodyStatement myRBodyStatment);
+	//    public void rBodyRemoved(final RBodyStatement myRBodyStatment);
+	//    public void rBodyReplaced(final RBodyStatement myRBodyStatment);
+	//    public void rBodyContentChanged(final RBodyStatement myRBodyStatment);
 
-    public void structureChanged();
+	public void structureChanged();
 }

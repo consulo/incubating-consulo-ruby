@@ -16,12 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
-import com.intellij.ide.util.treeView.smartTree.Filter;
-import com.intellij.ide.util.treeView.smartTree.Grouper;
-import com.intellij.ide.util.treeView.smartTree.Sorter;
-import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -30,54 +24,71 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjec
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
+import com.intellij.ide.util.treeView.smartTree.Filter;
+import com.intellij.ide.util.treeView.smartTree.Grouper;
+import com.intellij.ide.util.treeView.smartTree.Sorter;
+import com.intellij.psi.PsiFile;
 
-public class RubyStructureViewModel extends TextEditorBasedStructureViewModel {
-    private static final Class SUITABLE_CLASSES[] = new Class[]{
-                RFile.class, RModule.class,
-                RClass.class, RObjectClass.class,
-                RMethod.class, RSingletonMethod.class
-        };
+public class RubyStructureViewModel extends TextEditorBasedStructureViewModel
+{
+	private static final Class SUITABLE_CLASSES[] = new Class[]{
+			RFile.class,
+			RModule.class,
+			RClass.class,
+			RObjectClass.class,
+			RMethod.class,
+			RSingletonMethod.class
+	};
 
 
-    private RPsiElement myRoot;
+	private RPsiElement myRoot;
 
-    public RubyStructureViewModel(final RPsiElement root) {
-        super(root.getContainingFile());
-        myRoot = root;
-    }
+	public RubyStructureViewModel(final RPsiElement root)
+	{
+		super(root.getContainingFile());
+		myRoot = root;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public StructureViewTreeElement getRoot() {
-        return new RubyStructureViewElement(myRoot);
-    }
+	public StructureViewTreeElement getRoot()
+	{
+		return new RubyStructureViewElement(myRoot);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Grouper[] getGroupers() {
-        return Grouper.EMPTY_ARRAY;
-    }
+	public Grouper[] getGroupers()
+	{
+		return Grouper.EMPTY_ARRAY;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Sorter[] getSorters() {
-        return new Sorter[]{Sorter.ALPHA_SORTER};
-    }
+	public Sorter[] getSorters()
+	{
+		return new Sorter[]{Sorter.ALPHA_SORTER};
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Filter[] getFilters() {
-        return Filter.EMPTY_ARRAY;
-    }
+	public Filter[] getFilters()
+	{
+		return Filter.EMPTY_ARRAY;
+	}
 
-    @Override
-	protected PsiFile getPsiFile() {
-        return myRoot.getContainingFile();
-    }
+	@Override
+	protected PsiFile getPsiFile()
+	{
+		return myRoot.getContainingFile();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected Class[] getSuitableClasses() {
-        return SUITABLE_CLASSES;
-    }
+	protected Class[] getSuitableClasses()
+	{
+		return SUITABLE_CLASSES;
+	}
 }

@@ -16,6 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.ide.errorTreeView.NewErrorTreeViewPanel;
@@ -38,11 +43,6 @@ import com.intellij.util.Function;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.ui.ErrorTreeView;
 import com.intellij.util.ui.MessageCategory;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,247 +50,304 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: Oct 4, 2007
  */
-public class ExecutionHelper {
-    private static Logger LOG = Logger.getInstance(ExecutionHelper.class.getName());
+public class ExecutionHelper
+{
+	private static Logger LOG = Logger.getInstance(ExecutionHelper.class.getName());
 
-    public static void showErrors(@NotNull final Project myProject,
-                                  @NotNull final List<Exception> exceptionList,
-                                  @NotNull final String tabDisplayName,
-                                  @Nullable final VirtualFile file) {
-        if (ApplicationManager.getApplication().isUnitTestMode() && !exceptionList.isEmpty()) {
-            throw new RuntimeException(exceptionList.get(0));
-        }
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-            @Override
-			public void run() {
-                if (myProject.isDisposed()) return;
-                if (exceptionList.isEmpty()) {
-                    removeContents(null, myProject, tabDisplayName);
-                    return;
-                }
+	public static void showErrors(@NotNull final Project myProject, @NotNull final List<Exception> exceptionList, @NotNull final String tabDisplayName, @Nullable final VirtualFile file)
+	{
+		if(ApplicationManager.getApplication().isUnitTestMode() && !exceptionList.isEmpty())
+		{
+			throw new RuntimeException(exceptionList.get(0));
+		}
+		ApplicationManager.getApplication().invokeLater(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if(myProject.isDisposed())
+				{
+					return;
+				}
+				if(exceptionList.isEmpty())
+				{
+					removeContents(null, myProject, tabDisplayName);
+					return;
+				}
 
-                final RailsErrorViewPanel errorTreeView = new RailsErrorViewPanel(myProject);
-                try {
-                    openMessagesView(errorTreeView, myProject, tabDisplayName);
-                } catch (NullPointerException e) {
-                    final StringBuilder builder = new StringBuilder();
-                    builder.append("Exceptions occured:");
-                    for (final Exception exception : exceptionList) {
-                        builder.append("\n");
-                        builder.append(exception.getMessage());
-                    }
-                    Messages.showErrorDialog(builder.toString(),
-                                             RBundle.message("execution.error.title"));
-                    return;
-                }
-                for (final Exception exception : exceptionList) {
-                    String[] messages = new String[]{exception.getMessage()};
-                    if (messages.length == 0)
-                        messages = new String[]{RBundle.message("exception.text.unknown.error")};
-                    errorTreeView.addMessage(MessageCategory.ERROR, messages, file, -1, -1, null);
-                }
+				final RailsErrorViewPanel errorTreeView = new RailsErrorViewPanel(myProject);
+				try
+				{
+					openMessagesView(errorTreeView, myProject, tabDisplayName);
+				}
+				catch(NullPointerException e)
+				{
+					final StringBuilder builder = new StringBuilder();
+					builder.append("Exceptions occured:");
+					for(final Exception exception : exceptionList)
+					{
+						builder.append("\n");
+						builder.append(exception.getMessage());
+					}
+					Messages.showErrorDialog(builder.toString(), RBundle.message("execution.error.title"));
+					return;
+				}
+				for(final Exception exception : exceptionList)
+				{
+					String[] messages = new String[]{exception.getMessage()};
+					if(messages.length == 0)
+					{
+						messages = new String[]{RBundle.message("exception.text.unknown.error")};
+					}
+					errorTreeView.addMessage(MessageCategory.ERROR, messages, file, -1, -1, null);
+				}
 
-                ToolWindowManager.getInstance(myProject).getToolWindow(ToolWindowId.MESSAGES_WINDOW).activate(null);
-            }
-        });
-    }
+				ToolWindowManager.getInstance(myProject).getToolWindow(ToolWindowId.MESSAGES_WINDOW).activate(null);
+			}
+		});
+	}
 
-    private static void openMessagesView(@NotNull final RailsErrorViewPanel errorTreeView,
-                                         @NotNull final Project myProject,
-                                         @NotNull final String tabDisplayName) {
-        CommandProcessor commandProcessor = CommandProcessor.getInstance();
-        commandProcessor.executeCommand(myProject, new Runnable() {
-            @Override
-			public void run() {
-                final MessageView messageView = myProject.getComponent(MessageView.class);
-                final Content content =
-                        PeerFactory.getInstance().getContentFactory().createContent(errorTreeView, tabDisplayName, true);
-                messageView.getContentManager().addContent(content);
-                Disposer.register(content, errorTreeView);
-                messageView.getContentManager().setSelectedContent(content);
-                removeContents(content, myProject, tabDisplayName);
-            }
-        }, RBundle.message("command.name.open.error.message.view"), null);
-    }
+	private static void openMessagesView(@NotNull final RailsErrorViewPanel errorTreeView, @NotNull final Project myProject, @NotNull final String tabDisplayName)
+	{
+		CommandProcessor commandProcessor = CommandProcessor.getInstance();
+		commandProcessor.executeCommand(myProject, new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				final MessageView messageView = myProject.getComponent(MessageView.class);
+				final Content content = PeerFactory.getInstance().getContentFactory().createContent(errorTreeView, tabDisplayName, true);
+				messageView.getContentManager().addContent(content);
+				Disposer.register(content, errorTreeView);
+				messageView.getContentManager().setSelectedContent(content);
+				removeContents(content, myProject, tabDisplayName);
+			}
+		}, RBundle.message("command.name.open.error.message.view"), null);
+	}
 
-    private static void removeContents(@Nullable final Content notToRemove,
-                                       @NotNull final Project myProject,
-                                       @NotNull final String tabDisplayName) {
-        MessageView messageView = myProject.getComponent(MessageView.class);
-        Content[] contents = messageView.getContentManager().getContents();
-        for (Content content : contents) {
-            LOG.assertTrue(content != null);
-            if (content.isPinned()) continue;
-            if (tabDisplayName.equals(content.getDisplayName()) && content != notToRemove) {
-                ErrorTreeView listErrorView = (ErrorTreeView) content.getComponent();
-                if (listErrorView != null) {
-                    if (messageView.getContentManager().removeContent(content, true)) {
-                        content.release();
-                    }
-                }
-            }
-        }
-    }
+	private static void removeContents(@Nullable final Content notToRemove, @NotNull final Project myProject, @NotNull final String tabDisplayName)
+	{
+		MessageView messageView = myProject.getComponent(MessageView.class);
+		Content[] contents = messageView.getContentManager().getContents();
+		for(Content content : contents)
+		{
+			LOG.assertTrue(content != null);
+			if(content.isPinned())
+			{
+				continue;
+			}
+			if(tabDisplayName.equals(content.getDisplayName()) && content != notToRemove)
+			{
+				ErrorTreeView listErrorView = (ErrorTreeView) content.getComponent();
+				if(listErrorView != null)
+				{
+					if(messageView.getContentManager().removeContent(content, true))
+					{
+						content.release();
+					}
+				}
+			}
+		}
+	}
 
-    public static class RailsErrorViewPanel extends NewErrorTreeViewPanel {
-        public RailsErrorViewPanel(final Project project) {
-            super(project, null);
-        }
+	public static class RailsErrorViewPanel extends NewErrorTreeViewPanel
+	{
+		public RailsErrorViewPanel(final Project project)
+		{
+			super(project, null);
+		}
 
-        @Override
-		protected boolean canHideWarnings() {
-            return false;
-        }
-    }
+		@Override
+		protected boolean canHideWarnings()
+		{
+			return false;
+		}
+	}
 
 
-    public static void executeExternalProcess(@Nullable final Project myProject,
-                                              @NotNull final OSProcessHandler processHandler,
-                                              @NotNull final Runner.ExecutionMode mode) {
-        final String title = mode.getTitle() != null
-                ? mode.getTitle()
-                : RBundle.message("progress.indicator.title.running.please.wait");
-        assert title != null;
-        
-        final Runnable process;
-        if (mode.cancelable()) {
-            process = createCancableExecutionProcess(processHandler, mode.shouldCancelFun());
-        } else {
-            if (mode.getTimeout() <= 0) {
-                process = new Runnable() {
-                    @Override
-					public void run() {
-                        processHandler.waitFor();
-                    }
-                };
-            } else {
-                process = createTimelimitedExecutionProcess(processHandler, mode.getTimeout());
-            }
-        }
-        if (mode.withModalProgress()) {
-            ProgressManager.getInstance().runProcessWithProgressSynchronously(process, title, mode.cancelable(), myProject);
-        } else if (mode.inBackGround()) {
-            final Task task = new Task.Backgroundable(myProject, title, mode.cancelable()) {
-                @Override
-				public void run(final ProgressIndicator indicator) {
-                    process.run();
-                }
-            };
-            ProgressManager.getInstance().run(task);
-        } else {
-            final String title2 = mode.getTitle2();
-            final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
-            if (indicator != null && title2 != null) {
-                indicator.setText2(title2);
-            }
-            process.run();
-        }
-    }
+	public static void executeExternalProcess(@Nullable final Project myProject, @NotNull final OSProcessHandler processHandler, @NotNull final Runner.ExecutionMode mode)
+	{
+		final String title = mode.getTitle() != null ? mode.getTitle() : RBundle.message("progress.indicator.title.running.please.wait");
+		assert title != null;
 
-    private static Runnable createCancableExecutionProcess(final ProcessHandler processHandler,
-                                                           final Function<Object, Boolean> cancelableFun) {
-        return new Runnable() {
-            private ProgressIndicator myProgressIndicator;
-            private Semaphore mySemaphore = new Semaphore();
+		final Runnable process;
+		if(mode.cancelable())
+		{
+			process = createCancableExecutionProcess(processHandler, mode.shouldCancelFun());
+		}
+		else
+		{
+			if(mode.getTimeout() <= 0)
+			{
+				process = new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						processHandler.waitFor();
+					}
+				};
+			}
+			else
+			{
+				process = createTimelimitedExecutionProcess(processHandler, mode.getTimeout());
+			}
+		}
+		if(mode.withModalProgress())
+		{
+			ProgressManager.getInstance().runProcessWithProgressSynchronously(process, title, mode.cancelable(), myProject);
+		}
+		else if(mode.inBackGround())
+		{
+			final Task task = new Task.Backgroundable(myProject, title, mode.cancelable())
+			{
+				@Override
+				public void run(final ProgressIndicator indicator)
+				{
+					process.run();
+				}
+			};
+			ProgressManager.getInstance().run(task);
+		}
+		else
+		{
+			final String title2 = mode.getTitle2();
+			final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
+			if(indicator != null && title2 != null)
+			{
+				indicator.setText2(title2);
+			}
+			process.run();
+		}
+	}
 
-            private Runnable myWaitThread = new Runnable() {
-                @Override
-				public void run() {
-                    processHandler.waitFor();
-                    mySemaphore.up();
-                }
-            };
+	private static Runnable createCancableExecutionProcess(final ProcessHandler processHandler, final Function<Object, Boolean> cancelableFun)
+	{
+		return new Runnable()
+		{
+			private ProgressIndicator myProgressIndicator;
+			private Semaphore mySemaphore = new Semaphore();
 
-            private Runnable myCancelListener = new Runnable() {
-                @Override
-				public void run() {
-                    for (; ;) {
-                        if (myProgressIndicator != null
-                                && (myProgressIndicator.isCanceled()
-                                    || !myProgressIndicator.isRunning())
-                                    || (cancelableFun != null && cancelableFun.fun(null))) {
+			private Runnable myWaitThread = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					processHandler.waitFor();
+					mySemaphore.up();
+				}
+			};
 
-                            processHandler.destroyProcess();
-                            mySemaphore.up();
-                            break;
-                        } else if (myProgressIndicator == null) {
-                            return;
-                        }
-                        try {
-                            synchronized (this) {
-                                wait(1000);
-                            }
-                        }
-                        catch (InterruptedException e) {
-                            //Do nothing
-                        }
-                    }
-                }
-            };
+			private Runnable myCancelListener = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					for(; ; )
+					{
+						if(myProgressIndicator != null && (myProgressIndicator.isCanceled() || !myProgressIndicator.isRunning()) || (cancelableFun != null && cancelableFun.fun(null)))
+						{
 
-            @Override
-			public void run() {
-                myProgressIndicator = ProgressManager.getInstance().getProgressIndicator();
-                if (myProgressIndicator != null) {
-                    myProgressIndicator.setText(RBundle.message("progress.indicator.title.please.wait"));
-                }
+							processHandler.destroyProcess();
+							mySemaphore.up();
+							break;
+						}
+						else if(myProgressIndicator == null)
+						{
+							return;
+						}
+						try
+						{
+							synchronized(this)
+							{
+								wait(1000);
+							}
+						}
+						catch(InterruptedException e)
+						{
+							//Do nothing
+						}
+					}
+				}
+			};
 
-                ApplicationManager.getApplication().executeOnPooledThread(myWaitThread);
-                ApplicationManager.getApplication().executeOnPooledThread(myCancelListener);
+			@Override
+			public void run()
+			{
+				myProgressIndicator = ProgressManager.getInstance().getProgressIndicator();
+				if(myProgressIndicator != null)
+				{
+					myProgressIndicator.setText(RBundle.message("progress.indicator.title.please.wait"));
+				}
 
-                mySemaphore.down();
-                mySemaphore.waitFor();
-            }
-        };
-    }
+				ApplicationManager.getApplication().executeOnPooledThread(myWaitThread);
+				ApplicationManager.getApplication().executeOnPooledThread(myCancelListener);
 
-    private static Runnable createTimelimitedExecutionProcess(final OSProcessHandler processHandler,
-                                                              final int timeout) {
-        return new Runnable() {
-            private Semaphore mySemaphore = new Semaphore();
-            private final Object LOCK = new Object();
-            private Boolean processedFinished = Boolean.FALSE;
+				mySemaphore.down();
+				mySemaphore.waitFor();
+			}
+		};
+	}
 
-            private Runnable myProcessThread = new Runnable() {
-                @Override
-				public void run() {
-                    processHandler.waitFor();
-                    synchronized (LOCK) {
-                        processedFinished = Boolean.TRUE;
-                    }
-                    mySemaphore.up();
-                }
-            };
+	private static Runnable createTimelimitedExecutionProcess(final OSProcessHandler processHandler, final int timeout)
+	{
+		return new Runnable()
+		{
+			private Semaphore mySemaphore = new Semaphore();
+			private final Object LOCK = new Object();
+			private Boolean processedFinished = Boolean.FALSE;
 
-            private Runnable myTimeoutListener = new Runnable() {
-                @Override
-				public void run() {
-                    try {
-                        synchronized (this) {
-                            wait(1000 * timeout);
-                            synchronized (LOCK) {
-                                if (!processedFinished) {
-                                    LOG.error("Timeout (" + timeout + " sec) on executing: " + processHandler.getCommandLine());
-                                    processHandler.destroyProcess();
-                                }
-                            }
-                            mySemaphore.up();
-                        }
-                    }
-                    catch (InterruptedException e) {
-                        //Do nothing
-                    }
-                }
-            };
+			private Runnable myProcessThread = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					processHandler.waitFor();
+					synchronized(LOCK)
+					{
+						processedFinished = Boolean.TRUE;
+					}
+					mySemaphore.up();
+				}
+			};
 
-            @Override
-			public void run() {
-                ApplicationManager.getApplication().executeOnPooledThread(myProcessThread);
-                ApplicationManager.getApplication().executeOnPooledThread(myTimeoutListener);
+			private Runnable myTimeoutListener = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					try
+					{
+						synchronized(this)
+						{
+							wait(1000 * timeout);
+							synchronized(LOCK)
+							{
+								if(!processedFinished)
+								{
+									LOG.error("Timeout (" + timeout + " sec) on executing: " + processHandler.getCommandLine());
+									processHandler.destroyProcess();
+								}
+							}
+							mySemaphore.up();
+						}
+					}
+					catch(InterruptedException e)
+					{
+						//Do nothing
+					}
+				}
+			};
 
-                mySemaphore.down();
-                mySemaphore.waitFor();
-            }
-        };
-    }
+			@Override
+			public void run()
+			{
+				ApplicationManager.getApplication().executeOnPooledThread(myProcessThread);
+				ApplicationManager.getApplication().executeOnPooledThread(myTimeoutListener);
+
+				mySemaphore.down();
+				mySemaphore.waitFor();
+			}
+		};
+	}
 }

@@ -16,27 +16,28 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NonNls;
+import javax.swing.Icon;
 
-import javax.swing.*;
+import org.jetbrains.annotations.NonNls;
+import com.intellij.openapi.util.IconLoader;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 11, 2007
  */
-public interface JRubyIcons {
-    /**
-     * Please ensure that DATA_PATH corresponds with real resources path
-     */
-    @NonNls
-    final String DATA_PATH = "/org/jetbrains/plugins/ruby/jruby/";
+public interface JRubyIcons
+{
+	/**
+	 * Please ensure that DATA_PATH corresponds with real resources path
+	 */
+	@NonNls
+	final String DATA_PATH = "/org/jetbrains/plugins/ruby/jruby/";
 
-    final Icon JRUBY_ICON =             IconLoader.findIcon(DATA_PATH + "jruby.png");
-    final Icon JRUBY_SDK_ADD_ICON =     JRUBY_ICON;
-    final Icon JAVA_ICON =              IconLoader.findIcon("/general/addJdk.png");
+	final Icon JRUBY_ICON = IconLoader.findIcon(DATA_PATH + "jruby.png");
+	final Icon JRUBY_SDK_ADD_ICON = JRUBY_ICON;
+	final Icon JAVA_ICON = IconLoader.findIcon("/general/addJdk.png");
 
-    Icon JRUBY_SDK_ICON_OPEN = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_open.png");
-    Icon JRUBY_SDK_ICON_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_closed.png");
+	Icon JRUBY_SDK_ICON_OPEN = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_open.png");
+	Icon JRUBY_SDK_ICON_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_closed.png");
 }

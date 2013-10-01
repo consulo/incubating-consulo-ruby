@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.util.ui.UIUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,22 +25,25 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: Dec 8, 2007
  */
-public class RubyUIUtil {
+public class RubyUIUtil
+{
 
-    /**
-     * Returns Html string with current Label Font and in <body/> tag.
-     * Method isn't injective-safe.
-     * @param text Plain or Html tex
-     * @return html
-     */
-    public static String wrapToHtmlWithLabelFont(@NotNull final String text) {
-        final StringBuilder buff = new StringBuilder();
-        buff.append("<html><head>");
-        buff.append(UIUtil.getCssFontDeclaration(UIUtil.getLabelFont()));
-        buff.append("</head><body>");
-        buff.append(text);
-        buff.append("</body></html>");
+	/**
+	 * Returns Html string with current Label Font and in <body/> tag.
+	 * Method isn't injective-safe.
+	 *
+	 * @param text Plain or Html tex
+	 * @return html
+	 */
+	public static String wrapToHtmlWithLabelFont(@NotNull final String text)
+	{
+		final StringBuilder buff = new StringBuilder();
+		buff.append("<html><head>");
+		buff.append(UIUtil.getCssFontDeclaration(UIUtil.getLabelFont()));
+		buff.append("</head><body>");
+		buff.append(text);
+		buff.append("</body></html>");
 
-        return buff.toString();
-    }
+		return buff.toString();
+	}
 }

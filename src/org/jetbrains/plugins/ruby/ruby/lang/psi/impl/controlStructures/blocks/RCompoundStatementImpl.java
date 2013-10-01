@@ -39,73 +39,89 @@ import com.intellij.psi.templateLanguages.OuterLanguageElement;
  * User: oleg
  * Date: 13.07.2006
  */
-public class RCompoundStatementImpl extends RPsiElementBase implements RCompoundStatement {
-    private List<RPsiElement> myStatements = null;
+public class RCompoundStatementImpl extends RPsiElementBase implements RCompoundStatement
+{
+	private List<RPsiElement> myStatements = null;
 
-    public RCompoundStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RCompoundStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRCompoundStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRCompoundStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RPsiElement> getStatements() {
-        if (myStatements == null){
-            myStatements = getMyStatements();
-        }
-        return myStatements;
-    }
+	public List<RPsiElement> getStatements()
+	{
+		if(myStatements == null)
+		{
+			myStatements = getMyStatements();
+		}
+		return myStatements;
+	}
 
-    private List<RPsiElement> getMyStatements() {
-        List <RPsiElement> statements = new ArrayList<RPsiElement>();
-        for (RPsiElement element : getChildrenByType(RPsiElement.class)){
-            statements.add(element);
-        }
-        return statements;
-    }
+	private List<RPsiElement> getMyStatements()
+	{
+		List<RPsiElement> statements = new ArrayList<RPsiElement>();
+		for(RPsiElement element : getChildrenByType(RPsiElement.class))
+		{
+			statements.add(element);
+		}
+		return statements;
+	}
 
-    @Override
-	public void subtreeChanged(){
-        super.subtreeChanged();
-        clearCaches();
-    }
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+		clearCaches();
+	}
 
-    private void clearCaches() {
-        myStatements = null;
-    }
+	private void clearCaches()
+	{
+		myStatements = null;
+	}
 
-   @Override
-   @NotNull
-  public PsiElement[] getChildren() {
-    PsiElement psiChild = getFirstChild();
-    if (psiChild == null) return PsiElement.EMPTY_ARRAY;
-
-    List<PsiElement> result = new ArrayList<PsiElement>();
-    while (psiChild != null) {
-        final ASTNode node = psiChild.getNode();
-        if (node instanceof CompositeElement
-          || node instanceof OuterLanguageElement) {
-        result.add(psiChild);
-      }
-      psiChild = psiChild.getNextSibling();
-    }
-    return result.toArray(new PsiElement[result.size()]);
-  }
-
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final List<RExpression> expressions = getChildrenByType(RExpression.class);
-        final int size = expressions.size();
-        return size>0 ? expressions.get(size-1).getType(fileSymbol) : RType.NOT_TYPED;
-    }
+	public PsiElement[] getChildren()
+	{
+		PsiElement psiChild = getFirstChild();
+		if(psiChild == null)
+		{
+			return PsiElement.EMPTY_ARRAY;
+		}
+
+		List<PsiElement> result = new ArrayList<PsiElement>();
+		while(psiChild != null)
+		{
+			final ASTNode node = psiChild.getNode();
+			if(node instanceof CompositeElement || node instanceof OuterLanguageElement)
+			{
+				result.add(psiChild);
+			}
+			psiChild = psiChild.getNextSibling();
+		}
+		return result.toArray(new PsiElement[result.size()]);
+	}
+
+	@Override
+	@NotNull
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final List<RExpression> expressions = getChildrenByType(RExpression.class);
+		final int size = expressions.size();
+		return size > 0 ? expressions.get(size - 1).getType(fileSymbol) : RType.NOT_TYPED;
+	}
 }

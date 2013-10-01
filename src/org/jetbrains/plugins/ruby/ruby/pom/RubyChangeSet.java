@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom;
 
+import java.util.List;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.pom.PomModelAspect;
 import com.intellij.pom.event.PomChangeSet;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,17 +28,18 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 03.10.2006
  */
-public interface RubyChangeSet extends PomChangeSet {
+public interface RubyChangeSet extends PomChangeSet
+{
 
-    List<RubyChange> getChanges();
+	List<RubyChange> getChanges();
 
-    @Override
+	@Override
 	PomModelAspect getAspect();
 
-    void add(RubyChange xmlChange);
+	void add(RubyChange xmlChange);
 
-    void clear();
+	void clear();
 
-    RFile getChangedFile();
+	RFile getChangedFile();
 
 }

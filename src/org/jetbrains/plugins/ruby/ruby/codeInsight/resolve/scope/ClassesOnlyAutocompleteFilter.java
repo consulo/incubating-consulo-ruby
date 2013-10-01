@@ -26,36 +26,43 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilte
  * @author: oleg
  * @date: Mar 3, 2008
  */
-public class ClassesOnlyAutocompleteFilter implements ScopeAutocompleteFilter {
+public class ClassesOnlyAutocompleteFilter implements ScopeAutocompleteFilter
+{
 
-    @Override
-	public boolean allowJRuby() {
-        return false;
-    }
+	@Override
+	public boolean allowJRuby()
+	{
+		return false;
+	}
 
-    @Override
-	public boolean allowOutterMembers() {
-        return true;
-    }
+	@Override
+	public boolean allowOutterMembers()
+	{
+		return true;
+	}
 
-    @Override
-	public boolean allowOwnMembers() {
-        return true;
-    }
+	@Override
+	public boolean allowOwnMembers()
+	{
+		return true;
+	}
 
-    @Override
-	public boolean allowLocalVariablesAndParameters() {
-        return false;
-    }
+	@Override
+	public boolean allowLocalVariablesAndParameters()
+	{
+		return false;
+	}
 
-    @Override
-	public boolean allowReswords() {
-        return false;
-    }
+	@Override
+	public boolean allowReswords()
+	{
+		return false;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public SymbolFilter getSymbolFilter() {
-        return SymbolFilterFactory.CLASSES_ONLY_FILTER;
-    }
+	public SymbolFilter getSymbolFilter()
+	{
+		return SymbolFilterFactory.CLASSES_ONLY_FILTER;
+	}
 }

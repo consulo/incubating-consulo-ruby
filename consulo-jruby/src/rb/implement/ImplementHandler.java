@@ -33,12 +33,13 @@ import com.intellij.psi.PsiElement;
  * @author: oleg
  * @date: Jan 30, 2008
  */
-public interface ImplementHandler extends LanguageCodeInsightActionHandler {
+public interface ImplementHandler extends LanguageCodeInsightActionHandler
+{
 
-    /*
-     * Creates list of classMembers to implement
-     */
-    public List<ClassMember> create_implement_members(@NotNull final Symbol class_symbol);
+	/*
+	 * Creates list of classMembers to implement
+	 */
+	public List<ClassMember> create_implement_members(@NotNull final Symbol class_symbol);
 
-    public void execute(@Nullable Editor editor, @NotNull Project project, @Nullable PsiElement element, @Nullable Symbol symbol);
+	public void execute(@Nullable Editor editor, @NotNull Project project, @Nullable PsiElement element, @Nullable Symbol symbol);
 }

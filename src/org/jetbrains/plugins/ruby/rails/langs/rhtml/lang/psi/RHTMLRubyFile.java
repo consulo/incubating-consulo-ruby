@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public interface RHTMLRubyFile extends RFile {
+public interface RHTMLRubyFile extends RFile
+{
 }

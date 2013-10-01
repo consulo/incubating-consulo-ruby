@@ -56,102 +56,110 @@ import com.intellij.psi.xml.XmlElementType;
 /**
  * Use this Block only for html psi elements without Ruby injections
  */
-public class RHTMLHtmlBlock extends XmlBlock {
-    private static final Logger LOG = Logger.getInstance(RHTMLHtmlBlock.class.getName());
+public class RHTMLHtmlBlock extends XmlBlock
+{
+	private static final Logger LOG = Logger.getInstance(RHTMLHtmlBlock.class.getName());
 
-    private FileViewProvider myViewProvider;
-    private RCompoundStatement myNodeCmpSt;
+	private FileViewProvider myViewProvider;
+	private RCompoundStatement myNodeCmpSt;
 
-    public RHTMLHtmlBlock(final ASTNode node,
-                          final Wrap wrap, Alignment alignment,
-                          final XmlFormattingPolicy policy,
-                          final Indent indent,
-                          final FileViewProvider provider,
-                          final TextRange textRange) {
-        super(node, wrap, alignment, policy, indent, textRange);
-        myViewProvider = provider;
-        myNodeCmpSt = RHTMLFormatterUtil.getParentRCmpStByRHTMLOrHTMLChildNode(myViewProvider, myNode);
-    }
+	public RHTMLHtmlBlock(final ASTNode node, final Wrap wrap, Alignment alignment, final XmlFormattingPolicy policy, final Indent indent, final FileViewProvider provider, final TextRange textRange)
+	{
+		super(node, wrap, alignment, policy, indent, textRange);
+		myViewProvider = provider;
+		myNodeCmpSt = RHTMLFormatterUtil.getParentRCmpStByRHTMLOrHTMLChildNode(myViewProvider, myNode);
+	}
 
-    @Override
-	public Spacing getSpacing(Block child1, Block child2) {
-        final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child1);
-        final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child2);
+	@Override
+	public Spacing getSpacing(Block child1, Block child2)
+	{
+		final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child1);
+		final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRHTMLFormatter(child2);
 
-        final Spacing spacing = RHTMLSpacingProcessor.getSpacing(this, getNode(), childNode1, childNode2, myXmlFormattingPolicy.getSettings());
-        return spacing != null
-                ? spacing
-                : super.getSpacing(child1, child2);
-    }
+		final Spacing spacing = RHTMLSpacingProcessor.getSpacing(this, getNode(), childNode1, childNode2, myXmlFormattingPolicy.getSettings());
+		return spacing != null ? spacing : super.getSpacing(child1, child2);
+	}
 
-    @Override
-	protected List<Block> buildChildren() {
-        if (myNode.getElementType() == XmlElementType.XML_ATTRIBUTE_VALUE) {
-            if (myNode instanceof CompositeElement) {
-                final ArrayList<Block> result = new ArrayList<Block>(5);
-                ChameleonTransforming.transformChildren(myNode);
-                ASTNode child = myNode.getFirstChildNode();
-                while (child != null) {
-                    if (!FormatterUtil.containsWhiteSpacesOnly(child) && child.getTextLength() > 0) {
-                        //child is html element or RHTML injectiontag
-                        child = processChild(result, child, null, null, Indent.getNoneIndent());
-                    }
-                    if (child != null) {
-                        child = child.getTreeNext();
-                    }
-                }
-                return result;
-            } else {
-                return EMPTY;
-            }
-        }
-        return super.buildChildren();    //To change body of overridden methods use File | Settings | File Templates.
-    }
+	@Override
+	protected List<Block> buildChildren()
+	{
+		if(myNode.getElementType() == XmlElementType.XML_ATTRIBUTE_VALUE)
+		{
+			if(myNode instanceof CompositeElement)
+			{
+				final ArrayList<Block> result = new ArrayList<Block>(5);
+				ChameleonTransforming.transformChildren(myNode);
+				ASTNode child = myNode.getFirstChildNode();
+				while(child != null)
+				{
+					if(!FormatterUtil.containsWhiteSpacesOnly(child) && child.getTextLength() > 0)
+					{
+						//child is html element or RHTML injectiontag
+						child = processChild(result, child, null, null, Indent.getNoneIndent());
+					}
+					if(child != null)
+					{
+						child = child.getTreeNext();
+					}
+				}
+				return result;
+			}
+			else
+			{
+				return EMPTY;
+			}
+		}
+		return super.buildChildren();    //To change body of overridden methods use File | Settings | File Templates.
+	}
 
-    @Override
+	@Override
 	protected
-    @Nullable
-    ASTNode processChild(List<Block> result, ASTNode child, Wrap wrap, Alignment alignment, Indent indent) {
-        final TextRange childTRange = child.getTextRange();
-        if (childTRange == null) {
-            return null;
-        }
-        final TextRange nodeTRange = getTextRange();
-        if (!RHTMLFormatterUtil.containsTextRange(nodeTRange, childTRange)) {
-            final TextRange boundsTRange = nodeTRange.intersection(childTRange);
-            if (boundsTRange != null) {
-                //fake block for incomplete element
-                result.add(new RHTMLBlock(child, indent,  wrap, myXmlFormattingPolicy, boundsTRange, alignment));
-            }
-            return null;
-        }
+	@Nullable
+	ASTNode processChild(List<Block> result, ASTNode child, Wrap wrap, Alignment alignment, Indent indent)
+	{
+		final TextRange childTRange = child.getTextRange();
+		if(childTRange == null)
+		{
+			return null;
+		}
+		final TextRange nodeTRange = getTextRange();
+		if(!RHTMLFormatterUtil.containsTextRange(nodeTRange, childTRange))
+		{
+			final TextRange boundsTRange = nodeTRange.intersection(childTRange);
+			if(boundsTRange != null)
+			{
+				//fake block for incomplete element
+				result.add(new RHTMLBlock(child, indent, wrap, myXmlFormattingPolicy, boundsTRange, alignment));
+			}
+			return null;
+		}
 
-        final IElementType childNodeType = child.getElementType();
-        if (childNodeType instanceof IRHTMLElement) {
+		final IElementType childNodeType = child.getElementType();
+		if(childNodeType instanceof IRHTMLElement)
+		{
 
-            final int childStartOffset = child.getStartOffset();
-            final PsiElement rhtmlProjection =
-                    RHTMLFormatterUtil.findRHTMLElementByStartOffset(myViewProvider, childStartOffset, true);
-            LOG.assertTrue(rhtmlProjection != null);
-            final ASTNode rhtmlNode = rhtmlProjection.getNode();
+			final int childStartOffset = child.getStartOffset();
+			final PsiElement rhtmlProjection = RHTMLFormatterUtil.findRHTMLElementByStartOffset(myViewProvider, childStartOffset, true);
+			LOG.assertTrue(rhtmlProjection != null);
+			final ASTNode rhtmlNode = rhtmlProjection.getNode();
 
-            //noinspection ConstantConditions
-            final int rhtmlEnd = rhtmlNode.getTextRange().getEndOffset();
-            final NodeInfo info = (rhtmlNode.getElementType() == RHTMLElementType.RHTML_XML_TAG)
-                    ? NodeInfo.createRHTMLInfo(myNode, null, rhtmlNode)
-                    : NodeInfo.createTemplateInfo(myNode, rhtmlNode, rhtmlNode, new TextRange(childStartOffset, rhtmlEnd));
+			//noinspection ConstantConditions
+			final int rhtmlEnd = rhtmlNode.getTextRange().getEndOffset();
+			final NodeInfo info = (rhtmlNode.getElementType() == RHTMLElementType.RHTML_XML_TAG) ? NodeInfo.createRHTMLInfo(myNode, null, rhtmlNode) : NodeInfo.createTemplateInfo(myNode, rhtmlNode, rhtmlNode, new TextRange(childStartOffset, rhtmlEnd));
 
-            final NodeInfo nextNodeInfo = RHTMLBlockGenerator.processContentChildNode(rhtmlNode, info, myNode, result, myNodeCmpSt, myXmlFormattingPolicy, myViewProvider, nodeTRange, alignment, null);
-            final ASTNode nextChild = RHTMLHtmlTagBlock.getNextHtmlChild(nextNodeInfo, nodeTRange);
-            return nextChild != null
-                    ? nextChild.getTreePrev()
-                    : null;
-        } else if (child instanceof XmlAttributeValue) {
-            result.add(new RHTMLHtmlBlock(child, wrap, alignment, myXmlFormattingPolicy, indent, myViewProvider, childTRange));
-        } else {
-            result.add(new XmlBlock(child, wrap, alignment, myXmlFormattingPolicy, indent, childTRange));
-        }
+			final NodeInfo nextNodeInfo = RHTMLBlockGenerator.processContentChildNode(rhtmlNode, info, myNode, result, myNodeCmpSt, myXmlFormattingPolicy, myViewProvider, nodeTRange, alignment, null);
+			final ASTNode nextChild = RHTMLHtmlTagBlock.getNextHtmlChild(nextNodeInfo, nodeTRange);
+			return nextChild != null ? nextChild.getTreePrev() : null;
+		}
+		else if(child instanceof XmlAttributeValue)
+		{
+			result.add(new RHTMLHtmlBlock(child, wrap, alignment, myXmlFormattingPolicy, indent, myViewProvider, childTRange));
+		}
+		else
+		{
+			result.add(new XmlBlock(child, wrap, alignment, myXmlFormattingPolicy, indent, childTRange));
+		}
 
-        return child;
-    }
+		return child;
+	}
 }

@@ -32,22 +32,26 @@ import com.intellij.psi.tree.IElementType;
  * @author: oleg
  * @date: Mar 20, 2007
  */
-public class RubyMockParser implements PsiParser {
-    @Override
+public class RubyMockParser implements PsiParser
+{
+	@Override
 	@NotNull
-    public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion) {
-        List<IElementType> lexems = new ArrayList<IElementType>();
-        final PsiBuilder.Marker marker = builder.mark();
-        while (builder.getTokenType()!=null){
-            lexems.add(builder.getTokenType());
-            builder.advanceLexer();
-        }
-        marker.done(root);
-        System.out.println("----------------------------------");
-        for (IElementType lexem : lexems) {
-            System.out.println(lexem);
-        }
-        return builder.getTreeBuilt();
-    }
+	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion)
+	{
+		List<IElementType> lexems = new ArrayList<IElementType>();
+		final PsiBuilder.Marker marker = builder.mark();
+		while(builder.getTokenType() != null)
+		{
+			lexems.add(builder.getTokenType());
+			builder.advanceLexer();
+		}
+		marker.done(root);
+		System.out.println("----------------------------------");
+		for(IElementType lexem : lexems)
+		{
+			System.out.println(lexem);
+		}
+		return builder.getTreeBuilt();
+	}
 
 }

@@ -16,26 +16,30 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 01.08.2006
  */
-public class RubyStructureViewBuilder extends TreeBasedStructureViewBuilder {
-    private PsiFile myPsiFile;
+public class RubyStructureViewBuilder extends TreeBasedStructureViewBuilder
+{
+	private PsiFile myPsiFile;
 
-    public RubyStructureViewBuilder(@NotNull final PsiFile psiFile){
-        myPsiFile = psiFile;
-    }
-    @Override
+	public RubyStructureViewBuilder(@NotNull final PsiFile psiFile)
+	{
+		myPsiFile = psiFile;
+	}
+
+	@Override
 	@NotNull
-    public StructureViewModel createStructureViewModel() {
-        return new RubyStructureViewModel((RPsiElement) myPsiFile);
-    }
+	public StructureViewModel createStructureViewModel()
+	{
+		return new RubyStructureViewModel((RPsiElement) myPsiFile);
+	}
 }

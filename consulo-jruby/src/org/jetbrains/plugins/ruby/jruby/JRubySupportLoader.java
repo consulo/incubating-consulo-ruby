@@ -39,86 +39,104 @@ import com.intellij.util.PathUtil;
 /**
  * It`s a class to load jruby support
  */
-public class JRubySupportLoader implements ApplicationComponent, InspectionToolProvider {
-    private static final Logger LOG = Logger.getInstance(JRubySupportLoader.class.getName());
+public class JRubySupportLoader implements ApplicationComponent, InspectionToolProvider
+{
+	private static final Logger LOG = Logger.getInstance(JRubySupportLoader.class.getName());
 
-    @Override
-	public void initComponent() {
-        loadJRuby();
-    }
+	@Override
+	public void initComponent()
+	{
+		loadJRuby();
+	}
 
-    @NonNls
-    private static final String JAR = ".jar";
+	@NonNls
+	private static final String JAR = ".jar";
 
-    /**
-     * Loading plugin components, written in jruby
-     */
-	private static void loadJRubyPluginComponents() {
+	/**
+	 * Loading plugin components, written in jruby
+	 */
+	private static void loadJRubyPluginComponents()
+	{
 		ClassLoader oldCtxLoad = Thread.currentThread().getContextClassLoader();
-		try {
+		try
+		{
 			ClassLoader ctxLoader = JRubySupportLoader.class.getClassLoader();
 			Thread.currentThread().setContextClassLoader(ctxLoader);
 			Ruby ruby = JavaEmbedUtils.initialize(Collections.emptyList());
 			final String jarPath = PathUtil.getJarPathForClass(RubySdkType.class);
-			if (jarPath != null && jarPath.endsWith(JAR)) {
-				final VirtualFile jarFile =
-						VirtualFileManager.getInstance().findFileByUrl(VirtualFileUtil.constructLocalUrl(jarPath));
+			if(jarPath != null && jarPath.endsWith(JAR))
+			{
+				final VirtualFile jarFile = VirtualFileManager.getInstance().findFileByUrl(VirtualFileUtil.constructLocalUrl(jarPath));
 
 				LOG.assertTrue(jarFile != null, "jar file cannot be null");
 				//noinspection ConstantConditions
 				final VirtualFile mainFile = jarFile.getParent().getParent().findFileByRelativePath("rb/main.rb");
 				LOG.assertTrue(mainFile != null, "main.rb file cannot be null");
 				ruby.getLoadService().require(mainFile.getPath());
-			} else {
+			}
+			else
+			{
 				ruby.getLoadService().require(PathUtil.getJarPathForClass(JRubySupportLoader.class) + "/rb/main");
 				//                ruby.getLoadService().require("/home/oleg/work/ruby/src/rb/main");
 			}
-		} finally {
+		}
+		finally
+		{
 			Thread.currentThread().setContextClassLoader(oldCtxLoad);
 		}
 	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getComponentName() {
-        return JRubyComponents.JRUBY_SUPPORT_LOADER;
-    }
+	public String getComponentName()
+	{
+		return JRubyComponents.JRUBY_SUPPORT_LOADER;
+	}
 
-    public static void loadJRuby() {
-        IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            @Override
-			public void run() throws Exception {
-// registering ruby facet
-                JRubyFacetType.load();
+	public static void loadJRuby()
+	{
+		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		{
+			@Override
+			public void run() throws Exception
+			{
+				// registering ruby facet
+				JRubyFacetType.load();
 
-// load jruby written components
-                loadJRubyPluginComponents();
-            }
-        });
-    }
+				// load jruby written components
+				loadJRubyPluginComponents();
+			}
+		});
+	}
 
-    public static void loadJRubyTestComponents(@NotNull final String path) {
-        ClassLoader oldCtxLoad = Thread.currentThread().getContextClassLoader();
-        try {
-            ClassLoader ctxLoader = JRubySupportLoader.class.getClassLoader();
-            Thread.currentThread().setContextClassLoader(ctxLoader);
-            Ruby ruby = JavaEmbedUtils.initialize(Collections.emptyList());
-            ruby.getLoadService().require(path);
-        } finally {
-            Thread.currentThread().setContextClassLoader(oldCtxLoad);
-        }
-    }
+	public static void loadJRubyTestComponents(@NotNull final String path)
+	{
+		ClassLoader oldCtxLoad = Thread.currentThread().getContextClassLoader();
+		try
+		{
+			ClassLoader ctxLoader = JRubySupportLoader.class.getClassLoader();
+			Thread.currentThread().setContextClassLoader(ctxLoader);
+			Ruby ruby = JavaEmbedUtils.initialize(Collections.emptyList());
+			ruby.getLoadService().require(path);
+		}
+		finally
+		{
+			Thread.currentThread().setContextClassLoader(oldCtxLoad);
+		}
+	}
 
-    @Override
-	public Class[] getInspectionClasses() {
-        return new Class[]{
-                JRubyImplementInterfaceInspection.class,
-                WrongTopLevelPackageInspection.class
-        };
-    }
+	@Override
+	public Class[] getInspectionClasses()
+	{
+		return new Class[]{
+				JRubyImplementInterfaceInspection.class,
+				WrongTopLevelPackageInspection.class
+		};
+	}
 }
 

@@ -16,11 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import com.intellij.ide.highlighter.XmlLikeFileType;
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,8 +25,11 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighter;
-
-import javax.swing.*;
+import com.intellij.ide.highlighter.XmlLikeFileType;
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.highlighter.EditorHighlighter;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,50 +37,62 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 17.10.2006
  */
-public class RHTMLFileType  extends XmlLikeFileType {
-    public static final String VALID_EXTENTIONS = "rhtml;erb;";
-    public static final RHTMLFileType RHTML = new RHTMLFileType();
+public class RHTMLFileType extends XmlLikeFileType
+{
+	public static final String VALID_EXTENTIONS = "rhtml;erb;";
+	public static final RHTMLFileType RHTML = new RHTMLFileType();
 
-    @NonNls private static final String NAME = "RHTML";
-    @NonNls private static final String DEFAULT_EXTENSION = "rhtml";
-    @NonNls private static final String ERB_EXTENSION = "erb";
-    @NonNls private static final String DESCRIPTION = RBundle.message("filetype.description.rhtml");
-    private static final Icon ICON = RailsIcons.RHTML_ICON;
+	@NonNls
+	private static final String NAME = "RHTML";
+	@NonNls
+	private static final String DEFAULT_EXTENSION = "rhtml";
+	@NonNls
+	private static final String ERB_EXTENSION = "erb";
+	@NonNls
+	private static final String DESCRIPTION = RBundle.message("filetype.description.rhtml");
+	private static final Icon ICON = RailsIcons.RHTML_ICON;
 
-    private RHTMLFileType() {
-        super(eRubyLanguage.INSTANCE);
-    }
+	private RHTMLFileType()
+	{
+		super(eRubyLanguage.INSTANCE);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return NAME;
-    }
+	public String getName()
+	{
+		return NAME;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDescription() {
-        return DESCRIPTION;
-    }
+	public String getDescription()
+	{
+		return DESCRIPTION;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDefaultExtension() {
-        return DEFAULT_EXTENSION;
-    }
+	public String getDefaultExtension()
+	{
+		return DEFAULT_EXTENSION;
+	}
 
-    @NotNull
-    public String getERBExtension() {
-        return ERB_EXTENSION;
-    }
+	@NotNull
+	public String getERBExtension()
+	{
+		return ERB_EXTENSION;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Icon getIcon() {
-        return ICON;
-    }
+	public Icon getIcon()
+	{
+		return ICON;
+	}
 
-    public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors) {
-        return new RHTMLEditorHighlighter(colors, project, virtualFile);
-    }
+	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors)
+	{
+		return new RHTMLEditorHighlighter(colors, project, virtualFile);
+	}
 }

@@ -16,37 +16,40 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 11.09.2006
  */
-class ConsolePanel extends JPanel {
-    public ConsolePanel(@NotNull final ExecutionConsole consoleView,
-                        @NotNull final ActionGroup toolbarActions) {
-        this(consoleView, toolbarActions, null);
-    }
-    
-    public ConsolePanel(@NotNull final ExecutionConsole consoleView,
-                        @NotNull final ActionGroup toolbarActions,
-                        @Nullable final ActionGroup userActions) {
-        super(new BorderLayout());
-        JPanel toolbarPanel = new JPanel(new BorderLayout());
-        toolbarPanel.add(ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, toolbarActions, false).getComponent());
-        if (userActions != null) {
-            toolbarPanel.add(ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, userActions, false).getComponent(), BorderLayout.EAST);
-        }
-        add(toolbarPanel, BorderLayout.WEST);
-        add(consoleView.getComponent(), BorderLayout.CENTER);
-    }
+class ConsolePanel extends JPanel
+{
+	public ConsolePanel(@NotNull final ExecutionConsole consoleView, @NotNull final ActionGroup toolbarActions)
+	{
+		this(consoleView, toolbarActions, null);
+	}
+
+	public ConsolePanel(@NotNull final ExecutionConsole consoleView, @NotNull final ActionGroup toolbarActions, @Nullable final ActionGroup userActions)
+	{
+		super(new BorderLayout());
+		JPanel toolbarPanel = new JPanel(new BorderLayout());
+		toolbarPanel.add(ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, toolbarActions, false).getComponent());
+		if(userActions != null)
+		{
+			toolbarPanel.add(ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, userActions, false).getComponent(), BorderLayout.EAST);
+		}
+		add(toolbarPanel, BorderLayout.WEST);
+		add(consoleView.getComponent(), BorderLayout.CENTER);
+	}
 }

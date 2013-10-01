@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -25,39 +23,48 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RForStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RForStatementImpl extends RPsiElementBase implements RForStatement {
-    public RForStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RForStatementImpl extends RPsiElementBase implements RForStatement
+{
+	public RForStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRForStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRForStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RPsiElement getVariable() {
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
-    }
+	@Override
+	public RPsiElement getVariable()
+	{
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
+	}
 
-    @Override
-	public RPsiElement getExpression() {
-        final RPsiElement expr = RubyPsiUtil.getChildByType(this, RPsiElement.class, 1);
-        return !(expr instanceof RCompoundStatement) ? expr : null;
-    }
+	@Override
+	public RPsiElement getExpression()
+	{
+		final RPsiElement expr = RubyPsiUtil.getChildByType(this, RPsiElement.class, 1);
+		return !(expr instanceof RCompoundStatement) ? expr : null;
+	}
 
-    @Override
-	public RCompoundStatement getBody() {
-        return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
-    }
+	@Override
+	public RCompoundStatement getBody()
+	{
+		return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
+	}
 }

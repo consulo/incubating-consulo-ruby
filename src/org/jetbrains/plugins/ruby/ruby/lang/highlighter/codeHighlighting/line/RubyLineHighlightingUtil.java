@@ -35,55 +35,57 @@ import com.intellij.openapi.project.Project;
  * @author: oleg
  * @date: Jun 25, 2007
  */
-public class RubyLineHighlightingUtil {
-    private static final Logger LOG = Logger.getInstance(RubyLineHighlightingUtil.class.getName());
+public class RubyLineHighlightingUtil
+{
+	private static final Logger LOG = Logger.getInstance(RubyLineHighlightingUtil.class.getName());
 
-    public static void setLineMarkersToEditor(final Project project,
-                                              final Document document,
-                                              final Collection<RubyLineMarkerInfo> markers,
-                                              final boolean slow) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
+	public static void setLineMarkersToEditor(final Project project, final Document document, final Collection<RubyLineMarkerInfo> markers, final boolean slow)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
 
-        final ArrayList<RubyLineMarkerInfo> array = new ArrayList<RubyLineMarkerInfo>();
-        final RubyLineMarkerInfo[] oldMarkers = RubyLineHighlightDaemon.getLineMarkers(document, project);
+		final ArrayList<RubyLineMarkerInfo> array = new ArrayList<RubyLineMarkerInfo>();
+		final RubyLineMarkerInfo[] oldMarkers = RubyLineHighlightDaemon.getLineMarkers(document, project);
 
-        final MarkupModel markupModel = DocumentMarkupModel.forDocument(document, project, false);
-        if (oldMarkers != null) {
-            for (RubyLineMarkerInfo info : oldMarkers) {
-                final RangeHighlighter highlighter = info.highlighter;
-                final boolean toRemove = !highlighter.isValid() || info.isSlow == slow;
-                if (toRemove){
-                    markupModel.removeHighlighter(highlighter);
-                } else {
-                    array.add(info);
-                }
-            }
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Removed line markers:" + (oldMarkers.length - array.size()));
-            }
-        }
+		final MarkupModel markupModel = DocumentMarkupModel.forDocument(document, project, false);
+		if(oldMarkers != null)
+		{
+			for(RubyLineMarkerInfo info : oldMarkers)
+			{
+				final RangeHighlighter highlighter = info.highlighter;
+				final boolean toRemove = !highlighter.isValid() || info.isSlow == slow;
+				if(toRemove)
+				{
+					markupModel.removeHighlighter(highlighter);
+				}
+				else
+				{
+					array.add(info);
+				}
+			}
+			if(LOG.isDebugEnabled())
+			{
+				LOG.debug("Removed line markers:" + (oldMarkers.length - array.size()));
+			}
+		}
 
-        for (RubyLineMarkerInfo info : markers) {
-            assert info.isSlow == slow;
-            RangeHighlighter marker = markupModel.addRangeHighlighter(
-                    info.startOffset,
-                    info.startOffset,
-                    HighlighterLayer.ADDITIONAL_SYNTAX,
-                    info.attributes,
-                    HighlighterTargetArea.LINES_IN_RANGE);
-            marker.setGutterIconRenderer(info.createGutterRenderer());
-            marker.setLineSeparatorColor(info.separatorColor);
-            marker.setLineSeparatorPlacement(info.separatorPlacement);
-            info.highlighter = marker;
-            array.add(info);
-        }
+		for(RubyLineMarkerInfo info : markers)
+		{
+			assert info.isSlow == slow;
+			RangeHighlighter marker = markupModel.addRangeHighlighter(info.startOffset, info.startOffset, HighlighterLayer.ADDITIONAL_SYNTAX, info.attributes, HighlighterTargetArea.LINES_IN_RANGE);
+			marker.setGutterIconRenderer(info.createGutterRenderer());
+			marker.setLineSeparatorColor(info.separatorColor);
+			marker.setLineSeparatorPlacement(info.separatorPlacement);
+			info.highlighter = marker;
+			array.add(info);
+		}
 
-        RubyLineMarkerInfo[] newMarkers = array.toArray(new RubyLineMarkerInfo[array.size()]);
-        RubyLineHighlightDaemon.setRubyLineMarkers(document, newMarkers, project);
+		RubyLineMarkerInfo[] newMarkers = array.toArray(new RubyLineMarkerInfo[array.size()]);
+		RubyLineHighlightDaemon.setRubyLineMarkers(document, newMarkers, project);
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Added line markers:" + markers.size());
-        }
-    }
+		if(LOG.isDebugEnabled())
+		{
+			LOG.debug("Added line markers:" + markers.size());
+		}
+	}
 }
 

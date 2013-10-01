@@ -105,6 +105,11 @@
 
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.ri.RDocSettings"
 							serviceImplementation="org.jetbrains.plugins.ruby.ruby.ri.RDocSettings" />
+
+		<treeStructureProvider implementation="org.jetbrains.plugins.ruby.ruby.projectview.RubyTreeStructureProvider" />
+		<projectService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper"
+						serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper" />
+
 		<toolWindow id="RDoc"
 					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
 					anchor="right"
@@ -186,12 +191,6 @@
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation.RHTMLAndRubyBreadcrumbsInfoProvider</implementation-class>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.projectview.RubyTreeStructureProvider</implementation-class>
-		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.RubyPsiManager</implementation-class>
 		</component>
 	</project-components>
 

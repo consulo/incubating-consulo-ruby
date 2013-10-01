@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modules;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,11 +27,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModul
  * @author: Roman Chernyatchik
  * @date: 12.03.2007
  */
-public class RModuleNavigator {
-    @Nullable
-    public static RModule getByRBodyStatement(final RBodyStatement statement) {
-        final PsiElement parent = statement.getParent();
-        return (parent instanceof RModule) ? (RModule)parent
-                                           : null;
-    }
+public class RModuleNavigator
+{
+	@Nullable
+	public static RModule getByRBodyStatement(final RBodyStatement statement)
+	{
+		final PsiElement parent = statement.getParent();
+		return (parent instanceof RModule) ? (RModule) parent : null;
+	}
 }

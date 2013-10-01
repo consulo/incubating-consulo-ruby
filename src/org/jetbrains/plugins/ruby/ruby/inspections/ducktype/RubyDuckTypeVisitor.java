@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiElement;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -39,9 +38,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references.RReferenceNaviga
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RArrayToArguments;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-
-import java.util.Collections;
-import java.util.List;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,121 +49,139 @@ import java.util.List;
  * @author: oleg
  * @date: May 24, 2007
  */
-public class RubyDuckTypeVisitor extends RubyInspectionVisitor {
-    private static final Logger LOG = Logger.getInstance(RubyDuckTypeVisitor.class.getName());
+public class RubyDuckTypeVisitor extends RubyInspectionVisitor
+{
+	private static final Logger LOG = Logger.getInstance(RubyDuckTypeVisitor.class.getName());
 
-    public RubyDuckTypeVisitor(@NotNull final ProblemsHolder holder) {
-        super(holder);
-    }
+	public RubyDuckTypeVisitor(@NotNull final ProblemsHolder holder)
+	{
+		super(holder);
+	}
 
-    @Override
-	public void visitRCall(@NotNull final RCall call) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitRCall(@NotNull final RCall call)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        final PsiElement command = call.getPsiCommand();
-        final List<PsiElement> elements = ResolveUtil.multiResolve(command);
-// no inspection for more than 1 posibility
-        if (elements.size()!=1){
-            return;
-        }
+		final PsiElement command = call.getPsiCommand();
+		final List<PsiElement> elements = ResolveUtil.multiResolve(command);
+		// no inspection for more than 1 posibility
+		if(elements.size() != 1)
+		{
+			return;
+		}
 
-        final FileSymbol fileSymbol = LastSymbolStorage.getInstance(call.getProject()).getSymbol();
-        matchCallAndMethod(elements.get(0), call, call.getArguments(), fileSymbol);
-    }
+		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(call.getProject()).getSymbol();
+		matchCallAndMethod(elements.get(0), call, call.getArguments(), fileSymbol);
+	}
 
-    @Override
-	public void visitRIdentifier(final RIdentifier rIdentifier) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitRIdentifier(final RIdentifier rIdentifier)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        if (RCallNavigator.getByCommand(rIdentifier)!=null ||
-                RReferenceNavigator.getReferenceByLeftPart(rIdentifier)!=null ||
-                RReferenceNavigator.getReferenceByRightPart(rIdentifier)!=null){
-            return;
-        }
+		if(RCallNavigator.getByCommand(rIdentifier) != null ||
+				RReferenceNavigator.getReferenceByLeftPart(rIdentifier) != null ||
+				RReferenceNavigator.getReferenceByRightPart(rIdentifier) != null)
+		{
+			return;
+		}
 
-        if (rIdentifier.isParameter() || rIdentifier.isLocalVariable()){
-            return;
-        }
+		if(rIdentifier.isParameter() || rIdentifier.isLocalVariable())
+		{
+			return;
+		}
 
-        final List<PsiElement> elements = ResolveUtil.multiResolve(rIdentifier);
-// no inspection for more than 1 posibility
-        if (elements.size()!=1){
-            return;
-        }
+		final List<PsiElement> elements = ResolveUtil.multiResolve(rIdentifier);
+		// no inspection for more than 1 posibility
+		if(elements.size() != 1)
+		{
+			return;
+		}
 
-        final FileSymbol fileSymbol = LastSymbolStorage.getInstance(rIdentifier.getProject()).getSymbol();
-        matchCallAndMethod(elements.get(0), rIdentifier, Collections.<RPsiElement>emptyList(), fileSymbol);
-    }
+		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(rIdentifier.getProject()).getSymbol();
+		matchCallAndMethod(elements.get(0), rIdentifier, Collections.<RPsiElement>emptyList(), fileSymbol);
+	}
 
-    public void matchCallAndMethod(@NotNull final PsiElement element,
-                                   final RPsiElement call,
-                                   @NotNull List<RPsiElement> callArgs,
-                                   @Nullable final FileSymbol fileSymbol){
-        // TODO[oleg] PsiMethod support
-        if (!(element instanceof RMethod)){
-            return;
-        }
-        final RMethod method = (RMethod) element;
+	public void matchCallAndMethod(@NotNull final PsiElement element, final RPsiElement call, @NotNull List<RPsiElement> callArgs, @Nullable final FileSymbol fileSymbol)
+	{
+		// TODO[oleg] PsiMethod support
+		if(!(element instanceof RMethod))
+		{
+			return;
+		}
+		final RMethod method = (RMethod) element;
 
-        final int number = callArgs.size();
-// We process arrayToArguments and assoc to Hash notation!
-        int arrayToArgIndex = -1;
-        int hashIndex = -1;
-        for (int i = 0; i < callArgs.size(); i++) {
-            final RPsiElement arg = callArgs.get(i);
-            if (arg instanceof RArrayToArguments) {
-                arrayToArgIndex = i;
-                break;
-            }
-            if (arg instanceof RAssoc){
-                hashIndex = i;
-                break;
-            }
-        }
-        final int min = RMethodTypeUtil.getMinNumberOfArguments(method);
-        final int max = RMethodTypeUtil.getMaxNumberOfArguments(method);
+		final int number = callArgs.size();
+		// We process arrayToArguments and assoc to Hash notation!
+		int arrayToArgIndex = -1;
+		int hashIndex = -1;
+		for(int i = 0; i < callArgs.size(); i++)
+		{
+			final RPsiElement arg = callArgs.get(i);
+			if(arg instanceof RArrayToArguments)
+			{
+				arrayToArgIndex = i;
+				break;
+			}
+			if(arg instanceof RAssoc)
+			{
+				hashIndex = i;
+				break;
+			}
+		}
+		final int min = RMethodTypeUtil.getMinNumberOfArguments(method);
+		final int max = RMethodTypeUtil.getMaxNumberOfArguments(method);
 
-        LOG.assertTrue(max == -1 || min <= max, "Wrong number of arguments found!");
+		LOG.assertTrue(max == -1 || min <= max, "Wrong number of arguments found!");
 
-        if (number < min && arrayToArgIndex == -1 ||
-            number > max && max != -1) {
-          if (min == max) {
-            registerProblem(call, RBundle.message("inspection.duck.typing.number.of.arguments.error", min, number));
-          }
-          else if (number < min) {
-            registerProblem(call, RBundle.message("inspection.duck.typing.number.of.arguments.at.least.error", min, number));
-          }
-          else if (number > max && (hashIndex == -1 || hashIndex >= max)) {
-            registerProblem(call, RBundle.message("inspection.duck.typing.number.of.arguments.max.error", max, number));
-          }
-        }
+		if(number < min && arrayToArgIndex == -1 || number > max && max != -1)
+		{
+			if(min == max)
+			{
+				registerProblem(call, RBundle.message("inspection.duck.typing.number.of.arguments.error", min, number));
+			}
+			else if(number < min)
+			{
+				registerProblem(call, RBundle.message("inspection.duck.typing.number.of.arguments.at.least.error", min, number));
+			}
+			else if(number > max && (hashIndex == -1 || hashIndex >= max))
+			{
+				registerProblem(call, RBundle.message("inspection.duck.typing.number.of.arguments.max.error", max, number));
+			}
+		}
 
-        final List<ExpectedMessages> requiredTypes = RubyDuckTypeUtil.getMethodRequiredTypes((RMethod) element);
+		final List<ExpectedMessages> requiredTypes = RubyDuckTypeUtil.getMethodRequiredTypes((RMethod) element);
 
-        int numberToInspect = Math.min(requiredTypes.size(), callArgs.size());
-        if (arrayToArgIndex!=-1){
-            numberToInspect = Math.min(arrayToArgIndex, numberToInspect);
-        }
-        if (hashIndex!=-1){
-            numberToInspect = Math.min(hashIndex, numberToInspect);
-        }
+		int numberToInspect = Math.min(requiredTypes.size(), callArgs.size());
+		if(arrayToArgIndex != -1)
+		{
+			numberToInspect = Math.min(arrayToArgIndex, numberToInspect);
+		}
+		if(hashIndex != -1)
+		{
+			numberToInspect = Math.min(hashIndex, numberToInspect);
+		}
 
-// iterating over the arguments
-        for (int i = 0; i < numberToInspect; i++) {
-            final RPsiElement callArg = callArgs.get(i);
-            final ExpectedMessages requiredType = requiredTypes.get(i);
-            final RType callArgType = callArg instanceof RExpression ? ((RExpression) callArg).getType(fileSymbol) : RType.NOT_TYPED;
-            if (callArgType.isTyped()){
-                for (Message message : requiredType.getExpectedMessages()) {
-                    if (!callArgType.matchesMessage(message)){
-                        final String errorMessage =
-                                RBundle.message("inspection.duck.typing.cannot.find.method", callArg.getText(), message.getName(), message.getArgumentsNumber());
-                        registerProblem(callArg, errorMessage);
-                    }
-                }
-            }
-        }
-    }
+		// iterating over the arguments
+		for(int i = 0; i < numberToInspect; i++)
+		{
+			final RPsiElement callArg = callArgs.get(i);
+			final ExpectedMessages requiredType = requiredTypes.get(i);
+			final RType callArgType = callArg instanceof RExpression ? ((RExpression) callArg).getType(fileSymbol) : RType.NOT_TYPED;
+			if(callArgType.isTyped())
+			{
+				for(Message message : requiredType.getExpectedMessages())
+				{
+					if(!callArgType.matchesMessage(message))
+					{
+						final String errorMessage = RBundle.message("inspection.duck.typing.cannot.find.method", callArg.getText(), message.getName(), message.getArgumentsNumber());
+						registerProblem(callArg, errorMessage);
+					}
+				}
+			}
+		}
+	}
 }

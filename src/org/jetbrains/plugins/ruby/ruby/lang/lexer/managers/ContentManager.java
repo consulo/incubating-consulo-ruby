@@ -30,148 +30,179 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
  * Class used for advanced reading operations from lexers zzBuffer.
  * One instance per each _RubyLexer instance.
  */
-public class ContentManager extends ReadingManager{
-    public static final int END_SEEN =              0;
-    public static final int SIMPLE_ESCAPE_SEEN =    -1;
-    public static final int BACKSLASH_SEEN =        -2;
-    public static final int EXPR_SUBT_SEEN =        -3;
+public class ContentManager extends ReadingManager
+{
+	public static final int END_SEEN = 0;
+	public static final int SIMPLE_ESCAPE_SEEN = -1;
+	public static final int BACKSLASH_SEEN = -2;
+	public static final int EXPR_SUBT_SEEN = -3;
 
 
-    private StatesManager stateManager;
-    
-    public ContentManager(@NotNull final _RubyLexer lexer) {
-        super(lexer);
-        stateManager = lexer.getStatesManager();
-    }
+	private StatesManager stateManager;
 
-    @Override
-	public void reset(final int zzStart, final int zzEnd){
-        super.reset(zzStart, zzEnd);
-    }
+	public ContentManager(@NotNull final _RubyLexer lexer)
+	{
+		super(lexer);
+		stateManager = lexer.getStatesManager();
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////// ReadAccess string like content ////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public void reset(final int zzStart, final int zzEnd)
+	{
+		super.reset(zzStart, zzEnd);
+	}
 
-    /**
-     * checks for expression subtitution at the offset pos
-     * @return true if expression subtitution begin found at offset
-     * @param pos position to check
-     */
-    public boolean checkForExprSubtitution(final int pos){
-        if (safeReadAt(pos-1)=='\\'){
-            return false;
-        }
-        String s = safeReadStringAt(pos, 2);
-        return (s.equals("#{") || s.equals("#@") || s.equals("#$"));
-    }
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////// ReadAccess string like content ////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * Checks for end delimiter at the offset pos
-     * @param pos position to check
-     * @return true if endDelimiter can be find
-     * @param endDelim expected end delimiter
-     * @param beginDelim begin delimiter
-     */
-    private boolean checkForEndDelimiter(final int pos, final char beginDelim, final char endDelim){
-        char c = safeReadAt(pos);
-        if (c==endDelim){
-            stateManager.processCloseBrace();
-            return stateManager.wasEndBraceSeen();
-        }
-        if (c==beginDelim && TextUtil.isBraceLikeDelim(beginDelim)){
-            stateManager.processOpenBrace();
-        }
-        return false;
-    }
+	/**
+	 * checks for expression subtitution at the offset pos
+	 *
+	 * @param pos position to check
+	 * @return true if expression subtitution begin found at offset
+	 */
+	public boolean checkForExprSubtitution(final int pos)
+	{
+		if(safeReadAt(pos - 1) == '\\')
+		{
+			return false;
+		}
+		String s = safeReadStringAt(pos, 2);
+		return (s.equals("#{") || s.equals("#@") || s.equals("#$"));
+	}
 
-    /**
-     * Checks for simple escape sequence, i.e. Backslash and end delimiter,
-     * backslash and begin delimiter (if begin delimiter is brace like) or two backslashes at the offset pos
-     * @param pos position to check
-     * @return true if simple esc was found
-     * @param endDelim end Delimiter
-     * @param beginDelim beginDelimiter
-     */
-    private boolean checkForSimpleEsc(final int pos, final char beginDelim, final char endDelim){
-        char c0 = safeReadAt(pos);
-        char c1 = safeReadAt(pos+1);
-// \\ or \( or \)
-        return c0=='\\' && (c1=='\\' ||
-                c1==endDelim || (c1==beginDelim && TextUtil.isBraceLikeDelim(beginDelim)));
-    }
+	/**
+	 * Checks for end delimiter at the offset pos
+	 *
+	 * @param pos        position to check
+	 * @param endDelim   expected end delimiter
+	 * @param beginDelim begin delimiter
+	 * @return true if endDelimiter can be find
+	 */
+	private boolean checkForEndDelimiter(final int pos, final char beginDelim, final char endDelim)
+	{
+		char c = safeReadAt(pos);
+		if(c == endDelim)
+		{
+			stateManager.processCloseBrace();
+			return stateManager.wasEndBraceSeen();
+		}
+		if(c == beginDelim && TextUtil.isBraceLikeDelim(beginDelim))
+		{
+			stateManager.processOpenBrace();
+		}
+		return false;
+	}
 
-    /**
-     * Reads string like content. No expression subtitutions, no escape sequences
-     * @return length, if>0, or END_SEEN or SIMPLE_ESCAPE_SEEN otherwise
-     * @param beginDelim begin delimiter
-     * @param endDelim Current state end delimiter
-     */
-    public int eatNoExprNoEsc(final char beginDelim, final char endDelim){
-        int pos=0;
-        while (true){
-// end seen
-            if (!canReadAt(pos) || checkForEndDelimiter(pos, beginDelim, endDelim)){
-                return pos>0 ? pos : END_SEEN;
-            }
-// simple escape sequence
-            if (checkForSimpleEsc(pos, beginDelim, endDelim)){
-                return pos>0 ? pos : SIMPLE_ESCAPE_SEEN;
-            }
-            pos++;
-        }
-    }
-    /**
-     *  Reads string like content. Expression subtitutions permitted, no escape sequences
-     * @param beginDelim begin delimiter
-     * @param endDelim Current state end delimiter
-     * @return length, if>0, or END_SEEN or SIMPLE_ESCAPE_SEEN or EXPR_SUBT_SEEN otherwise
-     */
-    public int eatExprNoEsc(final char beginDelim, final char endDelim){
-        int pos=0;
-        while (true){
-// end seen
-            if (!canReadAt(pos) || checkForEndDelimiter(pos, beginDelim, endDelim)){
-                return pos>0 ? pos : END_SEEN;
-            }
-// simple escape sequence
-            if (checkForSimpleEsc(pos, beginDelim, endDelim)){
-                return pos>0 ? pos : SIMPLE_ESCAPE_SEEN;
-            }
-// expr subtitution
-            if (checkForExprSubtitution(pos)){
-                return pos>0? pos : EXPR_SUBT_SEEN;
-            }
-            pos++;
-        }
-    }
+	/**
+	 * Checks for simple escape sequence, i.e. Backslash and end delimiter,
+	 * backslash and begin delimiter (if begin delimiter is brace like) or two backslashes at the offset pos
+	 *
+	 * @param pos        position to check
+	 * @param endDelim   end Delimiter
+	 * @param beginDelim beginDelimiter
+	 * @return true if simple esc was found
+	 */
+	private boolean checkForSimpleEsc(final int pos, final char beginDelim, final char endDelim)
+	{
+		char c0 = safeReadAt(pos);
+		char c1 = safeReadAt(pos + 1);
+		// \\ or \( or \)
+		return c0 == '\\' && (c1 == '\\' ||
+				c1 == endDelim || (c1 == beginDelim && TextUtil.isBraceLikeDelim(beginDelim)));
+	}
 
-    /**
-     *  Reads string like content. Expression subtitutions permitted, escape sequences permitted
-     * @param beginDelim begin delimiter
-     * @param endDelim Current state end delimiter
-     * @return length, if>0, or END_SEEN or SIMPLE_ESCAPE_SEEN or BACKSLASH_SEEN or EXPR_SUBT_SEEN otherwise
-     */
-    public int eatExprEsc(final char beginDelim, final char endDelim){
-        int pos=0;
-        while (true){
-// end seen
-            if (!canReadAt(pos) || checkForEndDelimiter(pos, beginDelim, endDelim)){
-                return pos>0 ? pos : END_SEEN;
-            }
-// simple escape sequence
-            if (checkForSimpleEsc(pos, beginDelim, endDelim)){
-                return pos>0 ? pos : SIMPLE_ESCAPE_SEEN;
-            }
-// backslash
-            if (safeReadAt(pos)=='\\'){
-                return pos>0 ? pos : BACKSLASH_SEEN;
-            }
-// expr subtitution
-            if (checkForExprSubtitution(pos)){
-                return pos>0? pos : EXPR_SUBT_SEEN;
-            }
-            pos++;
-        }
-    }
+	/**
+	 * Reads string like content. No expression subtitutions, no escape sequences
+	 *
+	 * @param beginDelim begin delimiter
+	 * @param endDelim   Current state end delimiter
+	 * @return length, if>0, or END_SEEN or SIMPLE_ESCAPE_SEEN otherwise
+	 */
+	public int eatNoExprNoEsc(final char beginDelim, final char endDelim)
+	{
+		int pos = 0;
+		while(true)
+		{
+			// end seen
+			if(!canReadAt(pos) || checkForEndDelimiter(pos, beginDelim, endDelim))
+			{
+				return pos > 0 ? pos : END_SEEN;
+			}
+			// simple escape sequence
+			if(checkForSimpleEsc(pos, beginDelim, endDelim))
+			{
+				return pos > 0 ? pos : SIMPLE_ESCAPE_SEEN;
+			}
+			pos++;
+		}
+	}
+
+	/**
+	 * Reads string like content. Expression subtitutions permitted, no escape sequences
+	 *
+	 * @param beginDelim begin delimiter
+	 * @param endDelim   Current state end delimiter
+	 * @return length, if>0, or END_SEEN or SIMPLE_ESCAPE_SEEN or EXPR_SUBT_SEEN otherwise
+	 */
+	public int eatExprNoEsc(final char beginDelim, final char endDelim)
+	{
+		int pos = 0;
+		while(true)
+		{
+			// end seen
+			if(!canReadAt(pos) || checkForEndDelimiter(pos, beginDelim, endDelim))
+			{
+				return pos > 0 ? pos : END_SEEN;
+			}
+			// simple escape sequence
+			if(checkForSimpleEsc(pos, beginDelim, endDelim))
+			{
+				return pos > 0 ? pos : SIMPLE_ESCAPE_SEEN;
+			}
+			// expr subtitution
+			if(checkForExprSubtitution(pos))
+			{
+				return pos > 0 ? pos : EXPR_SUBT_SEEN;
+			}
+			pos++;
+		}
+	}
+
+	/**
+	 * Reads string like content. Expression subtitutions permitted, escape sequences permitted
+	 *
+	 * @param beginDelim begin delimiter
+	 * @param endDelim   Current state end delimiter
+	 * @return length, if>0, or END_SEEN or SIMPLE_ESCAPE_SEEN or BACKSLASH_SEEN or EXPR_SUBT_SEEN otherwise
+	 */
+	public int eatExprEsc(final char beginDelim, final char endDelim)
+	{
+		int pos = 0;
+		while(true)
+		{
+			// end seen
+			if(!canReadAt(pos) || checkForEndDelimiter(pos, beginDelim, endDelim))
+			{
+				return pos > 0 ? pos : END_SEEN;
+			}
+			// simple escape sequence
+			if(checkForSimpleEsc(pos, beginDelim, endDelim))
+			{
+				return pos > 0 ? pos : SIMPLE_ESCAPE_SEEN;
+			}
+			// backslash
+			if(safeReadAt(pos) == '\\')
+			{
+				return pos > 0 ? pos : BACKSLASH_SEEN;
+			}
+			// expr subtitution
+			if(checkForExprSubtitution(pos))
+			{
+				return pos > 0 ? pos : EXPR_SUBT_SEEN;
+			}
+			pos++;
+		}
+	}
 }

@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants;
 
+import org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationUtil;
+import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 import com.intellij.codeInsight.completion.CompletionUtil;
 import com.intellij.codeInsight.completion.CompletionVariant;
 import com.intellij.lang.ASTNode;
@@ -23,8 +25,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.filters.ElementFilter;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
-import org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationUtil;
-import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,40 +32,48 @@ import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
  * @author: Roman Chernyatchik
  * @date: Oct 2, 2007
  */
-public class RHTMLInjectionInStringsCVariant extends CompletionVariant {
-    public RHTMLInjectionInStringsCVariant() {
+public class RHTMLInjectionInStringsCVariant extends CompletionVariant
+{
+	public RHTMLInjectionInStringsCVariant()
+	{
 
-        super(PsiElement.class, new MyRTHMLInjectionStartFilter());
-    }
+		super(PsiElement.class, new MyRTHMLInjectionStartFilter());
+	}
 
-    private static class MyRTHMLInjectionStartFilter implements ElementFilter {
-        @Override
-		public boolean isAcceptable(final Object element, final PsiElement context) {
-            final ASTNode node = context.getNode();
-            return ifInStringTokenAfterInjectionStartChar(node);
-        }
+	private static class MyRTHMLInjectionStartFilter implements ElementFilter
+	{
+		@Override
+		public boolean isAcceptable(final Object element, final PsiElement context)
+		{
+			final ASTNode node = context.getNode();
+			return ifInStringTokenAfterInjectionStartChar(node);
+		}
 
-        @Override
-		public boolean isClassAcceptable(final Class hintClass) {
-            return true;
-        }
-    }
-    public static boolean ifInStringTokenAfterInjectionStartChar(final ASTNode node) {
-        final IElementType nodeType = node != null ? node.getElementType() : null;
-        final String nodeText = node != null ? node.getText() : null;
-        if ((isJSStringContentNode(nodeType) || nodeType == XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN)
-                && nodeText != null) {
-            final int index = nodeText.indexOf(CompletionUtil.DUMMY_IDENTIFIER);
-            if (index != -1 && index > 0) {
-                return nodeText.charAt(index -1) == '<';
-            }
-        }
-        return false;
-    }
+		@Override
+		public boolean isClassAcceptable(final Class hintClass)
+		{
+			return true;
+		}
+	}
 
-    public static boolean isJSStringContentNode(final IElementType nodeType) {
-        return RApplicationSettings.getInstance().isJsSupportEnabled()
-                && JavaScriptIntegrationUtil.isJSStringContentNode(nodeType);
-    }
+	public static boolean ifInStringTokenAfterInjectionStartChar(final ASTNode node)
+	{
+		final IElementType nodeType = node != null ? node.getElementType() : null;
+		final String nodeText = node != null ? node.getText() : null;
+		if((isJSStringContentNode(nodeType) || nodeType == XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN) && nodeText != null)
+		{
+			final int index = nodeText.indexOf(CompletionUtil.DUMMY_IDENTIFIER);
+			if(index != -1 && index > 0)
+			{
+				return nodeText.charAt(index - 1) == '<';
+			}
+		}
+		return false;
+	}
+
+	public static boolean isJSStringContentNode(final IElementType nodeType)
+	{
+		return RApplicationSettings.getInstance().isJsSupportEnabled() && JavaScriptIntegrationUtil.isJSStringContentNode(nodeType);
+	}
 
 }

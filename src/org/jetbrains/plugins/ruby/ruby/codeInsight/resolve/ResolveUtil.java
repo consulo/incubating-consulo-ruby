@@ -16,15 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaPackage;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -38,10 +41,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.presentation.SymbolPresentationUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,134 +53,163 @@ import java.util.List;
  * @author: oleg
  * @date: Apr 20, 2007
  */
-public class ResolveUtil {
-    /**
-     * Adds set of virtualPrototypes to resolve list
-     * @param fileSymbol FileSymbol
-     * @param project Current project
-     * @param list resolve list to add to
-     * @param symbol Symbol to add to Resolveresults
-     */
-    public static void addVariants(@Nullable final FileSymbol fileSymbol,
-                                   @NotNull final Project project,
-                                   @NotNull final List<ResolveResult> list,
-                                   @NotNull final Symbol symbol) {
+public class ResolveUtil
+{
+	/**
+	 * Adds set of virtualPrototypes to resolve list
+	 *
+	 * @param fileSymbol FileSymbol
+	 * @param project    Current project
+	 * @param list       resolve list to add to
+	 * @param symbol     Symbol to add to Resolveresults
+	 */
+	public static void addVariants(@Nullable final FileSymbol fileSymbol, @NotNull final Project project, @NotNull final List<ResolveResult> list, @NotNull final Symbol symbol)
+	{
 
-// Java Symbol
-        if (Types.JAVA.contains(symbol.getType())){
-            add(list, ((JavaSymbol) symbol).getPsiElement());
-        }
-// Local variable
-        if (Type.LOCAL_VARIABLE.asSet().contains(symbol.getType())){
-            add(list, ((PsiElementSymbol) symbol).getPsiElement());
-        }
+		// Java Symbol
+		if(Types.JAVA.contains(symbol.getType()))
+		{
+			add(list, ((JavaSymbol) symbol).getPsiElement());
+		}
+		// Local variable
+		if(Type.LOCAL_VARIABLE.asSet().contains(symbol.getType()))
+		{
+			add(list, ((PsiElementSymbol) symbol).getPsiElement());
+		}
 
-        for (RVirtualElement element : SymbolPresentationUtil.getPrototypesToShow(fileSymbol, symbol)) {
-// JRuby Specific!
-            if (element instanceof RVirtualImportJavaClass){
-                for (RVirtualName name : ((RVirtualImportJavaClass) element).getNames()) {
-                    add(list, JavaResolveUtil.getPackageOrClass(project, name.getPath()));
-                }
-            }
-            if (element instanceof RVirtualIncludeJavaClass){
-                String qualifiedName = ((RVirtualIncludeJavaClass) element).getQualifiedName();
-                if (qualifiedName!=null){
-                // Hack for RVirtualIncludePackage
-                    if (element instanceof RVirtualIncludeJavaPackage){
-                        qualifiedName += '.' + symbol.getName();
-                    }
-                    add(list, JavaResolveUtil.getPackageOrClass(project, qualifiedName));
-                }
-            }
-            add(list, RVirtualPsiUtil.findPsiByVirtualElement(element, project));
-        }
-    }
+		for(RVirtualElement element : SymbolPresentationUtil.getPrototypesToShow(fileSymbol, symbol))
+		{
+			// JRuby Specific!
+			if(element instanceof RVirtualImportJavaClass)
+			{
+				for(RVirtualName name : ((RVirtualImportJavaClass) element).getNames())
+				{
+					add(list, JavaResolveUtil.getPackageOrClass(project, name.getPath()));
+				}
+			}
+			if(element instanceof RVirtualIncludeJavaClass)
+			{
+				String qualifiedName = ((RVirtualIncludeJavaClass) element).getQualifiedName();
+				if(qualifiedName != null)
+				{
+					// Hack for RVirtualIncludePackage
+					if(element instanceof RVirtualIncludeJavaPackage)
+					{
+						qualifiedName += '.' + symbol.getName();
+					}
+					add(list, JavaResolveUtil.getPackageOrClass(project, qualifiedName));
+				}
+			}
+			add(list, RVirtualPsiUtil.findPsiByVirtualElement(element, project));
+		}
+	}
 
-    private static void add(@NotNull final List<ResolveResult> list, final PsiElement psiElement) {
-        if (psiElement!=null){
-            list.add(new ResolveResult(){
-                @Override
+	private static void add(@NotNull final List<ResolveResult> list, final PsiElement psiElement)
+	{
+		if(psiElement != null)
+		{
+			list.add(new ResolveResult()
+			{
+				@Override
 				@Nullable
-                public PsiElement getElement() {
-                    return psiElement;
-                }
+				public PsiElement getElement()
+				{
+					return psiElement;
+				}
 
-                @Override
-				public boolean isValidResult() {
-                    return true;
-                }
-            });
-        }
-    }
+				@Override
+				public boolean isValidResult()
+				{
+					return true;
+				}
+			});
+		}
+	}
 
-    /**
-     * Resolves element to the set of symbols
-     * @param element Element to resolve
-     * @return The list of symbols
-     */
-    public static List<Symbol> resolveToSymbols(@Nullable final PsiElement element) {
-        if (element == null) {
-            return Collections.emptyList();
-        }
-        final PsiReference ref = element.getReference();
-        if (ref instanceof RPsiPolyvariantReference){
-            FileSymbol fileSymbol = null;
-            if (element instanceof RFile){
-                fileSymbol = ((RFile) element).getFileSymbol();
-            } else
-            if (element instanceof RPsiElementBase){
-                fileSymbol = ((RPsiElementBase) element).forceFileSymbolUpdate();
-            }
-             return ((RPsiPolyvariantReference) ref).multiResolveToSymbols(fileSymbol);
-        }
-        return Collections.emptyList();
-    }
+	/**
+	 * Resolves element to the set of symbols
+	 *
+	 * @param element Element to resolve
+	 * @return The list of symbols
+	 */
+	public static List<Symbol> resolveToSymbols(@Nullable final PsiElement element)
+	{
+		if(element == null)
+		{
+			return Collections.emptyList();
+		}
+		final PsiReference ref = element.getReference();
+		if(ref instanceof RPsiPolyvariantReference)
+		{
+			FileSymbol fileSymbol = null;
+			if(element instanceof RFile)
+			{
+				fileSymbol = ((RFile) element).getFileSymbol();
+			}
+			else if(element instanceof RPsiElementBase)
+			{
+				fileSymbol = ((RPsiElementBase) element).forceFileSymbolUpdate();
+			}
+			return ((RPsiPolyvariantReference) ref).multiResolveToSymbols(fileSymbol);
+		}
+		return Collections.emptyList();
+	}
 
 
-    @Nullable
-    public static PsiElement resolvePolyVarReference(@NotNull final RPsiPolyvariantReference ref){
-        final ResolveResult[] results = ref.multiResolve(false);
-        return results.length==1 ? results[0].getElement() : null;
-    }
+	@Nullable
+	public static PsiElement resolvePolyVarReference(@NotNull final RPsiPolyvariantReference ref)
+	{
+		final ResolveResult[] results = ref.multiResolve(false);
+		return results.length == 1 ? results[0].getElement() : null;
+	}
 
-    @Nullable
-    public static Symbol resolveToSymbol(@Nullable final FileSymbol fileSymbol,
-                                         @Nullable final PsiReference ref){
-        if (ref instanceof RPsiPolyvariantReference){
-            final List<Symbol> symbols = ((RPsiPolyvariantReference) ref).multiResolveToSymbols(fileSymbol);
-            return symbols.size() == 1 ? symbols.get(0) : null;
-        }
-        return null;
-    }
+	@Nullable
+	public static Symbol resolveToSymbol(@Nullable final FileSymbol fileSymbol, @Nullable final PsiReference ref)
+	{
+		if(ref instanceof RPsiPolyvariantReference)
+		{
+			final List<Symbol> symbols = ((RPsiPolyvariantReference) ref).multiResolveToSymbols(fileSymbol);
+			return symbols.size() == 1 ? symbols.get(0) : null;
+		}
+		return null;
+	}
 
-    public static boolean isReferenceTo(@NotNull final PsiReference reference, final PsiElement element){
-        if (reference instanceof PsiPolyVariantReference){
-            for (ResolveResult result : ((PsiPolyVariantReference) reference).multiResolve(true)) {
-                if (result.getElement() == element){
-                    return true;
-                }
-            }
-        } else
-        if (reference.resolve() == element){
-            return true;
-        }
-        RubyUsageTypeProvider.setType(reference, RubyUsageType.TEXT_MATCHED);
-        return false;
-    }
+	public static boolean isReferenceTo(@NotNull final PsiReference reference, final PsiElement element)
+	{
+		if(reference instanceof PsiPolyVariantReference)
+		{
+			for(ResolveResult result : ((PsiPolyVariantReference) reference).multiResolve(true))
+			{
+				if(result.getElement() == element)
+				{
+					return true;
+				}
+			}
+		}
+		else if(reference.resolve() == element)
+		{
+			return true;
+		}
+		RubyUsageTypeProvider.setType(reference, RubyUsageType.TEXT_MATCHED);
+		return false;
+	}
 
-    @NotNull
-    public static List<PsiElement> multiResolve(@NotNull final PsiElement element) {
-        final PsiReference ref = element.getReference();
-        if (ref instanceof PsiPolyVariantReference){
-            final ResolveResult[] results = ((PsiPolyVariantReference) ref).multiResolve(false);
-            final ArrayList<PsiElement> result = new ArrayList<PsiElement>(results.length);
-            for (ResolveResult resolveResult : results) {
-                result.add(resolveResult.getElement());
-            }
-            return result;
-        }
+	@NotNull
+	public static List<PsiElement> multiResolve(@NotNull final PsiElement element)
+	{
+		final PsiReference ref = element.getReference();
+		if(ref instanceof PsiPolyVariantReference)
+		{
+			final ResolveResult[] results = ((PsiPolyVariantReference) ref).multiResolve(false);
+			final ArrayList<PsiElement> result = new ArrayList<PsiElement>(results.length);
+			for(ResolveResult resolveResult : results)
+			{
+				result.add(resolveResult.getElement());
+			}
+			return result;
+		}
 
-        final PsiElement res = ref!=null ? ref.resolve() : null;
-        return res!=null ? Collections.singletonList(res) : Collections.<PsiElement>emptyList();
-    }
+		final PsiElement res = ref != null ? ref.resolve() : null;
+		return res != null ? Collections.singletonList(res) : Collections.<PsiElement>emptyList();
+	}
 }

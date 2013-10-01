@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -23,23 +25,24 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Dec 21, 2007
  */
-public class RFieldReference extends RNamedReference{
-    public RFieldReference(@NotNull RNamedElement element) {
-        super(element);
-    }
+public class RFieldReference extends RNamedReference
+{
+	public RFieldReference(@NotNull RNamedElement element)
+	{
+		super(element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        //noinspection ConstantConditions
-        return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.FIELDS);
-    }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		//noinspection ConstantConditions
+		return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.FIELDS);
+	}
 }

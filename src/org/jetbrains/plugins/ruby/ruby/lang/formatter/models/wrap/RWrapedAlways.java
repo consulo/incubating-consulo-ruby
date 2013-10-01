@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap;
 /**
  * If class implements this, it will be always wrapped
  */
-public interface RWrapedAlways {
+public interface RWrapedAlways
+{
 }

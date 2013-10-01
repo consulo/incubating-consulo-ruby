@@ -17,8 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -26,17 +24,21 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.ARG;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 31.07.2006
  */
-public class COMMAND_CALL_OR_ARG  implements RubyTokenTypes {
-    private static final TokenSet TS_COMMAND_TOKENS = TokenSet.create(kRETURN, kBREAK, kNEXT, kYIELD);
+public class COMMAND_CALL_OR_ARG implements RubyTokenTypes
+{
+	private static final TokenSet TS_COMMAND_TOKENS = TokenSet.create(kRETURN, kBREAK, kNEXT, kYIELD);
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
 
 /*
 command_call	: command
@@ -46,28 +48,32 @@ command_call	: command
                 | kNEXT call_args
                 ;
 */
-        IElementType result;
-        if (builder.compare(TS_COMMAND_TOKENS)){
-            result = COMMAND_CALL.parse(builder);
-            if (result!=RubyElementTypes.EMPTY_INPUT){
-                return result;
-            }
-        }
+		IElementType result;
+		if(builder.compare(TS_COMMAND_TOKENS))
+		{
+			result = COMMAND_CALL.parse(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return result;
+			}
+		}
 
-        return parseWithLeadARG(builder, builder.mark(), ARG.parse(builder));
-    }
+		return parseWithLeadARG(builder, builder.mark(), ARG.parse(builder));
+	}
 
-    private static IElementType parseWithLeadARG(final RBuilder builder, final RMarker marker, final IElementType result){
-        if (!BNF.COMMAND_OBJECTS.contains(result) || !builder.compare(BNF.tCALL_ARG_FIRST_TOKEN)){
-            marker.drop();
-            return result;
-        }
-// else ARG can be the first element in command
-        return COMMAND_CALL.parseWithLeadARG(builder, marker, result);
-    }
-    
-    public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result) {
-        return parseWithLeadARG(builder, marker.precede(),
-                ARG.parseWithLeadPRIMARY(builder, marker, result));
-    }
+	private static IElementType parseWithLeadARG(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		if(!BNF.COMMAND_OBJECTS.contains(result) || !builder.compare(BNF.tCALL_ARG_FIRST_TOKEN))
+		{
+			marker.drop();
+			return result;
+		}
+		// else ARG can be the first element in command
+		return COMMAND_CALL.parseWithLeadARG(builder, marker, result);
+	}
+
+	public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result)
+	{
+		return parseWithLeadARG(builder, marker.precede(), ARG.parseWithLeadPRIMARY(builder, marker, result));
+	}
 }

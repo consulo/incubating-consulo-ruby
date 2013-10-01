@@ -26,5 +26,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 /**
  * This a common interface for basic module without name
  */
-public interface RFieldConstantContainer extends RContainer, RFieldHolder, RConstantHolder{
+public interface RFieldConstantContainer extends RContainer, RFieldHolder, RConstantHolder
+{
 }

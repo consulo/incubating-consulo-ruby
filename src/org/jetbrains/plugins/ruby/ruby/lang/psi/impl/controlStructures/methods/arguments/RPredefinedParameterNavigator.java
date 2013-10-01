@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.arguments;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RPredefinedArgument;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,15 +27,19 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RPrede
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public class RPredefinedParameterNavigator {
-    @Nullable
-    public static RPredefinedArgument getByExp(@NotNull final PsiElement element) {
-        final PsiElement parent = element.getParent();
-        if (parent instanceof RPredefinedArgument) {
-            if (((RPredefinedArgument) parent).getValue() == element) {
-                return (RPredefinedArgument) parent;
-            }
-        }
-        return null;
-    }
+public class RPredefinedParameterNavigator
+{
+	@Nullable
+	public static RPredefinedArgument getByExp(@NotNull final PsiElement element)
+	{
+		final PsiElement parent = element.getParent();
+		if(parent instanceof RPredefinedArgument)
+		{
+			if(((RPredefinedArgument) parent).getValue() == element)
+			{
+				return (RPredefinedArgument) parent;
+			}
+		}
+		return null;
+	}
 }

@@ -31,16 +31,21 @@ import com.intellij.openapi.projectRoots.SdkType;
  * @author: Roman Chernyatchik
  * @date: 12.08.2007
  */
-public class SDKListCellRenderer extends DefaultListCellRenderer {
-    @Override
-	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        if (value != null) {
-            setText(((Sdk) value).getName());
-            setIcon(((SdkType)((Sdk) value).getSdkType()).getIcon());
-        } else {
-            setText(RBundle.message("run.configuration.messages.none"));
-        }
-        return this;
-    }
+public class SDKListCellRenderer extends DefaultListCellRenderer
+{
+	@Override
+	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus)
+	{
+		super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+		if(value != null)
+		{
+			setText(((Sdk) value).getName());
+			setIcon(((SdkType) ((Sdk) value).getSdkType()).getIcon());
+		}
+		else
+		{
+			setText(RBundle.message("run.configuration.messages.none"));
+		}
+		return this;
+	}
 }

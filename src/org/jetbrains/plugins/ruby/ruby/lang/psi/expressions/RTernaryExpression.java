@@ -24,8 +24,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RConditionalSt
  * User: oleg
  * Date: 17.01.2007
  */
-public interface RTernaryExpression extends RConditionalStatement, RExpression{
-    public RPsiElement getTrueCommand();
-    public RPsiElement getFalseCommand();
+public interface RTernaryExpression extends RConditionalStatement, RExpression
+{
+	public RPsiElement getTrueCommand();
+
+	public RPsiElement getFalseCommand();
 
 }

@@ -30,22 +30,22 @@ import com.intellij.openapi.util.Key;
  * @author: oleg
  * @date: Jun 25, 2007
  */
-public class RubyLineHighlightDaemon {
-    private static final Key<RubyLineMarkerInfo[]> RUBY_LINE_MARKERS_IN_EDITOR = Key.create("RUBY_LINE_MARKERS_IN_EDITOR");
+public class RubyLineHighlightDaemon
+{
+	private static final Key<RubyLineMarkerInfo[]> RUBY_LINE_MARKERS_IN_EDITOR = Key.create("RUBY_LINE_MARKERS_IN_EDITOR");
 
-    @Nullable
-    public static RubyLineMarkerInfo[] getLineMarkers(final Document document,
-                                                  final Project project) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
-        return markup.getUserData(RUBY_LINE_MARKERS_IN_EDITOR);
-    }
+	@Nullable
+	public static RubyLineMarkerInfo[] getLineMarkers(final Document document, final Project project)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
+		MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
+		return markup.getUserData(RUBY_LINE_MARKERS_IN_EDITOR);
+	}
 
-    public static void setRubyLineMarkers(final Document document,
-                                          final RubyLineMarkerInfo[] lineMarkers,
-                                          final Project project) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
-        markup.putUserData(RUBY_LINE_MARKERS_IN_EDITOR, lineMarkers);
-    }
+	public static void setRubyLineMarkers(final Document document, final RubyLineMarkerInfo[] lineMarkers, final Project project)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
+		MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
+		markup.putUserData(RUBY_LINE_MARKERS_IN_EDITOR, lineMarkers);
+	}
 }

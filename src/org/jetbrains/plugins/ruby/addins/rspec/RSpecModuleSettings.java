@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleComponent;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,68 +28,81 @@ import org.jetbrains.plugins.ruby.RComponents;
  * @author: Roman Chernyatchik
  * @date: Apr 19, 2008
  */
-public class RSpecModuleSettings implements ModuleComponent {
-    protected final Module myModule;
+public class RSpecModuleSettings implements ModuleComponent
+{
+	protected final Module myModule;
 
-    private RSpecModuleSettingsStorage myStorage;
+	private RSpecModuleSettingsStorage myStorage;
 
-    public RSpecModuleSettings(final Module module) {
-        myModule = module;
+	public RSpecModuleSettings(final Module module)
+	{
+		myModule = module;
 
-        myStorage = RSpecModuleSettingsStorage.getInstance(module);
-    }
+		myStorage = RSpecModuleSettingsStorage.getInstance(module);
+	}
 
-    public static RSpecModuleSettings getInstance(@NotNull final Module module) {
-        return module.getComponent(RSpecModuleSettings.class);
-    }
+	public static RSpecModuleSettings getInstance(@NotNull final Module module)
+	{
+		return module.getComponent(RSpecModuleSettings.class);
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RSPEC_MODULE_SETTINGS;
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RSPEC_MODULE_SETTINGS;
+	}
 
-    @Override
-	public void initComponent() {
-        // Do nothing
-    }
+	@Override
+	public void initComponent()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void disposeComponent() {
-        // Do nothing
-    }
+	@Override
+	public void disposeComponent()
+	{
+		// Do nothing
+	}
 
-    public boolean shouldUseRSpecTestFramework() {
-        return getRSpecSupportType() != RSpecSupportType.NONE;
-    }
+	public boolean shouldUseRSpecTestFramework()
+	{
+		return getRSpecSupportType() != RSpecSupportType.NONE;
+	}
 
-    public RSpecSupportType getRSpecSupportType() {
-        return myStorage.rSpecSupportType;
-    }
+	public RSpecSupportType getRSpecSupportType()
+	{
+		return myStorage.rSpecSupportType;
+	}
 
-    public void setRSpecSupportType(final RSpecSupportType supportType) {
-        myStorage.rSpecSupportType = supportType ;
-    }
+	public void setRSpecSupportType(final RSpecSupportType supportType)
+	{
+		myStorage.rSpecSupportType = supportType;
+	}
 
-    @Override
-	public void projectOpened() {
-        //Do nothing
-    }
+	@Override
+	public void projectOpened()
+	{
+		//Do nothing
+	}
 
-    @Override
-	public void projectClosed() {
-        //Do nothing
-    }
+	@Override
+	public void projectClosed()
+	{
+		//Do nothing
+	}
 
-    @Override
-	public void moduleAdded() {
-        //Do nothing
-    }
+	@Override
+	public void moduleAdded()
+	{
+		//Do nothing
+	}
 
-    public enum RSpecSupportType {
-        NONE,
-        GEM,
-        RAILS_PLUGIN
-    }
+	public enum RSpecSupportType
+	{
+		NONE,
+		GEM,
+		RAILS_PLUGIN
+	}
 }

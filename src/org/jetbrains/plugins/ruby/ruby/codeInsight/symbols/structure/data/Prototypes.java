@@ -16,61 +16,70 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 16, 2007
  */
-public class Prototypes {
-    public static Prototypes EMPTY_PROTOTYPES = new Prototypes(null);
+public class Prototypes
+{
+	public static Prototypes EMPTY_PROTOTYPES = new Prototypes(null);
 
-    private final List<RVirtualElement> myList = new ArrayList<RVirtualElement>();
-    private final Object LOCK = new Object();
+	private final List<RVirtualElement> myList = new ArrayList<RVirtualElement>();
+	private final Object LOCK = new Object();
 
-    private final Prototypes myBasePrototypes;
+	private final Prototypes myBasePrototypes;
 
-    private RVirtualElement myLastPrototype;
+	private RVirtualElement myLastPrototype;
 
-    public Prototypes(@Nullable final Prototypes prototypes) {
-        myBasePrototypes = prototypes;
-    }
+	public Prototypes(@Nullable final Prototypes prototypes)
+	{
+		myBasePrototypes = prototypes;
+	}
 
-    @NotNull
-    public List<RVirtualElement> getAll() {
-        final ArrayList<RVirtualElement> all = new ArrayList<RVirtualElement>();
-        addAll(all);
-        return all;
-    }
-    
-    protected void addAll(@NotNull final List<RVirtualElement> list){
-        if (myBasePrototypes != null) {
-            myBasePrototypes.addAll(list);
-        }
-        synchronized (LOCK) {
-            list.addAll(myList);
-        }
-    }
+	@NotNull
+	public List<RVirtualElement> getAll()
+	{
+		final ArrayList<RVirtualElement> all = new ArrayList<RVirtualElement>();
+		addAll(all);
+		return all;
+	}
 
-    public void add(@NotNull final RVirtualElement prototype) {
-        myLastPrototype = prototype;
-        synchronized (LOCK) {
-            myList.add(prototype);
-        }
-    }
+	protected void addAll(@NotNull final List<RVirtualElement> list)
+	{
+		if(myBasePrototypes != null)
+		{
+			myBasePrototypes.addAll(list);
+		}
+		synchronized(LOCK)
+		{
+			list.addAll(myList);
+		}
+	}
 
-    public RVirtualElement getLast() {
-        return myLastPrototype != null ? myLastPrototype :
-                myBasePrototypes != null ? myBasePrototypes.getLast() : null;
-    }
+	public void add(@NotNull final RVirtualElement prototype)
+	{
+		myLastPrototype = prototype;
+		synchronized(LOCK)
+		{
+			myList.add(prototype);
+		}
+	}
 
-    public boolean hasElements() {
-        return getLast() != null;
-    }
+	public RVirtualElement getLast()
+	{
+		return myLastPrototype != null ? myLastPrototype : myBasePrototypes != null ? myBasePrototypes.getLast() : null;
+	}
+
+	public boolean hasElements()
+	{
+		return getLast() != null;
+	}
 }

@@ -23,5 +23,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RPseudoConstant extends RPossibleCall, RNamedElement {
+public interface RPseudoConstant extends RPossibleCall, RNamedElement
+{
 }

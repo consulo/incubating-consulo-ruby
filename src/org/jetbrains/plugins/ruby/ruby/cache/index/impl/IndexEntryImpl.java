@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.index.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.index.IndexEntry;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
@@ -29,179 +32,210 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Feb 13, 2007
  */
-public class IndexEntryImpl implements IndexEntry {
-    private List<RVirtualClass> myClasses = new ArrayList<RVirtualClass>();
-    private List<RVirtualModule> myModules = new ArrayList<RVirtualModule>();
-    private List<RVirtualMethod> myMethods = new ArrayList<RVirtualMethod>();
-    private List<RVirtualField> myFields = new ArrayList<RVirtualField>();
-    private List<RVirtualConstant> myConstants = new ArrayList<RVirtualConstant>();
-    private List<RVirtualGlobalVar> myGlobalVars = new ArrayList<RVirtualGlobalVar>();
-    private List<RVirtualAlias> myAliases = new ArrayList<RVirtualAlias>();
-    private List<RVirtualFieldAttr> myFieldAttrs = new ArrayList<RVirtualFieldAttr>();
+public class IndexEntryImpl implements IndexEntry
+{
+	private List<RVirtualClass> myClasses = new ArrayList<RVirtualClass>();
+	private List<RVirtualModule> myModules = new ArrayList<RVirtualModule>();
+	private List<RVirtualMethod> myMethods = new ArrayList<RVirtualMethod>();
+	private List<RVirtualField> myFields = new ArrayList<RVirtualField>();
+	private List<RVirtualConstant> myConstants = new ArrayList<RVirtualConstant>();
+	private List<RVirtualGlobalVar> myGlobalVars = new ArrayList<RVirtualGlobalVar>();
+	private List<RVirtualAlias> myAliases = new ArrayList<RVirtualAlias>();
+	private List<RVirtualFieldAttr> myFieldAttrs = new ArrayList<RVirtualFieldAttr>();
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualClass> getClasses() {
-        return myClasses;
-    }
+	public List<RVirtualClass> getClasses()
+	{
+		return myClasses;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualModule> getModules() {
-        return myModules;
-    }
+	public List<RVirtualModule> getModules()
+	{
+		return myModules;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualMethod> getMethods() {
-        return myMethods;
-    }
+	public List<RVirtualMethod> getMethods()
+	{
+		return myMethods;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualField> getFields() {
-        return myFields;
-    }
+	public List<RVirtualField> getFields()
+	{
+		return myFields;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualConstant> getConstants() {
-        return myConstants;
-    }
+	public List<RVirtualConstant> getConstants()
+	{
+		return myConstants;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualGlobalVar> getGlobalVars() {
-        return myGlobalVars;
-    }
+	public List<RVirtualGlobalVar> getGlobalVars()
+	{
+		return myGlobalVars;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualAlias> getAliases() {
-        return myAliases;
-    }
+	public List<RVirtualAlias> getAliases()
+	{
+		return myAliases;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualFieldAttr> getFieldAttrs() {
-        return myFieldAttrs;
-    }
+	public List<RVirtualFieldAttr> getFieldAttrs()
+	{
+		return myFieldAttrs;
+	}
 
-    @Override
-	public boolean isEmpty() {
-        return myClasses.isEmpty() &&
-                myModules.isEmpty() &&
-                myMethods.isEmpty() &&
-                myConstants.isEmpty() &&
-                myGlobalVars.isEmpty() &&
-                myFields.isEmpty() &&
-                myAliases.isEmpty() &&
-                myFieldAttrs.isEmpty();
-    }
-
-
-    public void addContainer(@NotNull final RVirtualContainer container) {
-        final StructureType type = container.getType();
-        if (type.isMethod()) {
-            addMethod((RVirtualMethod) container);
-            return;
-        }
-        if (type == StructureType.CLASS) {
-            addClass((RVirtualClass) container);
-            return;
-        }
-        if (type == StructureType.MODULE) {
-            addModule((RVirtualModule) container);
-        }
-    }
-
-    private void addClass(@NotNull final RVirtualClass vClass) {
-        myClasses.add(vClass);
-    }
-
-    private void addModule(@NotNull final RVirtualModule vModule) {
-        myModules.add(vModule);
-    }
-
-    private void addMethod(@NotNull final RVirtualMethod vMethod) {
-        myMethods.add(vMethod);
-    }
-
-    public void addConstant(@NotNull final RVirtualConstant constant) {
-        myConstants.add(constant);
-    }
-
-    public void addGlobalVar(@NotNull final RVirtualGlobalVar globalVar) {
-        myGlobalVars.add(globalVar);
-    }
-
-    public void addAlias(@NotNull final RVirtualAlias rVirtualAlias) {
-        myAliases.add(rVirtualAlias);
-    }
-
-    public void addFieldAttr(@NotNull final RVirtualFieldAttr rVirtualFieldAttr) {
-        myFieldAttrs.add(rVirtualFieldAttr);
-    }
-
-    public void addField(@NotNull final RVirtualField field) {
-        myFields.add(field);
-    }
+	@Override
+	public boolean isEmpty()
+	{
+		return myClasses.isEmpty() &&
+				myModules.isEmpty() &&
+				myMethods.isEmpty() &&
+				myConstants.isEmpty() &&
+				myGlobalVars.isEmpty() &&
+				myFields.isEmpty() &&
+				myAliases.isEmpty() &&
+				myFieldAttrs.isEmpty();
+	}
 
 
-    public void removeContainer(@NotNull final RVirtualContainer container) {
-        final StructureType type = container.getType();
-        if (type.isMethod()) {
-            removeMethod((RVirtualMethod) container);
-            return;
-        }
-        if (type == StructureType.CLASS) {
-            removeClass((RVirtualClass) container);
-            return;
-        }
-        if (type == StructureType.MODULE) {
-            removeModule((RVirtualModule) container);
-        }
-    }
+	public void addContainer(@NotNull final RVirtualContainer container)
+	{
+		final StructureType type = container.getType();
+		if(type.isMethod())
+		{
+			addMethod((RVirtualMethod) container);
+			return;
+		}
+		if(type == StructureType.CLASS)
+		{
+			addClass((RVirtualClass) container);
+			return;
+		}
+		if(type == StructureType.MODULE)
+		{
+			addModule((RVirtualModule) container);
+		}
+	}
 
-    private void removeModule(@NotNull final RVirtualModule rVirtualModule) {
-        myModules.remove(rVirtualModule);
-    }
+	private void addClass(@NotNull final RVirtualClass vClass)
+	{
+		myClasses.add(vClass);
+	}
 
-    private void removeClass(@NotNull final RVirtualClass rVirtualClass) {
-        myClasses.remove(rVirtualClass);
-    }
+	private void addModule(@NotNull final RVirtualModule vModule)
+	{
+		myModules.add(vModule);
+	}
 
-    private void removeMethod(@NotNull final RVirtualMethod rVirtualMethod) {
-        myMethods.remove(rVirtualMethod);
-    }
+	private void addMethod(@NotNull final RVirtualMethod vMethod)
+	{
+		myMethods.add(vMethod);
+	}
 
-    public void removeField(@NotNull final RVirtualField field) {
-        myFields.remove(field);
-    }
+	public void addConstant(@NotNull final RVirtualConstant constant)
+	{
+		myConstants.add(constant);
+	}
 
-    public void removeConstant(@NotNull final RVirtualConstant constant) {
-        myConstants.remove(constant);
-    }
+	public void addGlobalVar(@NotNull final RVirtualGlobalVar globalVar)
+	{
+		myGlobalVars.add(globalVar);
+	}
 
-    public void removeGlobalVar(@NotNull final RVirtualGlobalVar globalVar) {
-        myGlobalVars.remove(globalVar);
-    }
+	public void addAlias(@NotNull final RVirtualAlias rVirtualAlias)
+	{
+		myAliases.add(rVirtualAlias);
+	}
 
-    public void removeAlias(@NotNull final RVirtualAlias rVirtualAlias) {
-        myAliases.remove(rVirtualAlias);
-    }
+	public void addFieldAttr(@NotNull final RVirtualFieldAttr rVirtualFieldAttr)
+	{
+		myFieldAttrs.add(rVirtualFieldAttr);
+	}
 
-    public void removeFieldAttr(@NotNull final RVirtualFieldAttr rVirtualFieldAttr) {
-        myFieldAttrs.remove(rVirtualFieldAttr);
-    }
+	public void addField(@NotNull final RVirtualField field)
+	{
+		myFields.add(field);
+	}
+
+
+	public void removeContainer(@NotNull final RVirtualContainer container)
+	{
+		final StructureType type = container.getType();
+		if(type.isMethod())
+		{
+			removeMethod((RVirtualMethod) container);
+			return;
+		}
+		if(type == StructureType.CLASS)
+		{
+			removeClass((RVirtualClass) container);
+			return;
+		}
+		if(type == StructureType.MODULE)
+		{
+			removeModule((RVirtualModule) container);
+		}
+	}
+
+	private void removeModule(@NotNull final RVirtualModule rVirtualModule)
+	{
+		myModules.remove(rVirtualModule);
+	}
+
+	private void removeClass(@NotNull final RVirtualClass rVirtualClass)
+	{
+		myClasses.remove(rVirtualClass);
+	}
+
+	private void removeMethod(@NotNull final RVirtualMethod rVirtualMethod)
+	{
+		myMethods.remove(rVirtualMethod);
+	}
+
+	public void removeField(@NotNull final RVirtualField field)
+	{
+		myFields.remove(field);
+	}
+
+	public void removeConstant(@NotNull final RVirtualConstant constant)
+	{
+		myConstants.remove(constant);
+	}
+
+	public void removeGlobalVar(@NotNull final RVirtualGlobalVar globalVar)
+	{
+		myGlobalVars.remove(globalVar);
+	}
+
+	public void removeAlias(@NotNull final RVirtualAlias rVirtualAlias)
+	{
+		myAliases.remove(rVirtualAlias);
+	}
+
+	public void removeFieldAttr(@NotNull final RVirtualFieldAttr rVirtualFieldAttr)
+	{
+		myFieldAttrs.remove(rVirtualFieldAttr);
+	}
 
 }

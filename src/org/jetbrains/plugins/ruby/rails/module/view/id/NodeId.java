@@ -26,74 +26,85 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
  * @author: Roman Chernyatchik
  * @date: 01.03.2007
  */
-public class NodeId {
+public class NodeId
+{
 
-    private final String myFileUrl;
-    private final Object myParams;
-    private RVirtualContainer myRContainer;
+	private final String myFileUrl;
+	private final Object myParams;
+	private RVirtualContainer myRContainer;
 
-    private int hash; // Default cached hash code equals to 0
-    private String myString;
+	private int hash; // Default cached hash code equals to 0
+	private String myString;
 
-    NodeId(@NotNull final String fileUrl) {
-        this(fileUrl, null, null);
-    }
+	NodeId(@NotNull final String fileUrl)
+	{
+		this(fileUrl, null, null);
+	}
 
-    public NodeId(@NotNull final String fileUrl,
-                  @Nullable final RVirtualContainer container,
-                  @Nullable Object params) {
-        myFileUrl = fileUrl;
-        myRContainer = container;
-        myParams = params;
-    }
+	public NodeId(@NotNull final String fileUrl, @Nullable final RVirtualContainer container, @Nullable Object params)
+	{
+		myFileUrl = fileUrl;
+		myRContainer = container;
+		myParams = params;
+	}
 
-    @NotNull
-    public String getFileUrl() {
-        return myFileUrl;
-    }
+	@NotNull
+	public String getFileUrl()
+	{
+		return myFileUrl;
+	}
 
-    @Nullable
-    public Object getParams() {
-        return myParams;
-    }
+	@Nullable
+	public Object getParams()
+	{
+		return myParams;
+	}
 
-    @Nullable
-    public RVirtualContainer getRContainer() {
-        return myRContainer;
-    }
+	@Nullable
+	public RVirtualContainer getRContainer()
+	{
+		return myRContainer;
+	}
 
-    public String toString() {
-        if (myString == null) {
-            final StringBuilder buff = new StringBuilder();
-            buff.append("[url = ");
-            buff.append(getFileUrl());
-            buff.append(", rContainer= ");
-            buff.append(getRContainer());
-            buff.append(", params = (");
-            buff.append(getParams());
-            buff.append(")]");
-            myString = buff.toString();
-        }
-        return myString;
-    }
-
-
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        //noinspection SimplifiableIfStatement
-        if (obj == null || !(obj instanceof NodeId)) {
-            return false;
-        }
-        return toString().equals(obj.toString());
-    }
+	public String toString()
+	{
+		if(myString == null)
+		{
+			final StringBuilder buff = new StringBuilder();
+			buff.append("[url = ");
+			buff.append(getFileUrl());
+			buff.append(", rContainer= ");
+			buff.append(getRContainer());
+			buff.append(", params = (");
+			buff.append(getParams());
+			buff.append(")]");
+			myString = buff.toString();
+		}
+		return myString;
+	}
 
 
-    public int hashCode() {
-        if (hash == 0) {
-            hash = toString().hashCode();
-        }
-        return hash; 
-    }
+	public boolean equals(Object obj)
+	{
+		if(obj == this)
+		{
+			return true;
+		}
+		//noinspection SimplifiableIfStatement
+		if(obj == null || !(obj instanceof NodeId))
+		{
+			return false;
+		}
+		return toString().equals(obj.toString());
+	}
+
+
+	public int hashCode()
+	{
+		if(hash == 0)
+		{
+			hash = toString().hashCode();
+		}
+		return hash;
+	}
 }

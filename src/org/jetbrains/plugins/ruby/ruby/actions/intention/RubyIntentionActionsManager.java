@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import com.intellij.codeInsight.intention.IntentionManager;
-import com.intellij.openapi.components.ProjectComponent;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.RComponents;
+import com.intellij.codeInsight.intention.IntentionManager;
+import com.intellij.openapi.components.ProjectComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,33 +29,37 @@ import org.jetbrains.plugins.ruby.RComponents;
  * @author: oleg
  * @date: Oct 25, 2006
  */
-class RubyIntentionActionsManager implements ProjectComponent {
-    private static final String RUBY_INTENTIONS = RBundle.message("ruby.intentions");
+class RubyIntentionActionsManager implements ProjectComponent
+{
+	private static final String RUBY_INTENTIONS = RBundle.message("ruby.intentions");
 
-    @Override
-	public void projectOpened() {
-        IntentionManager.getInstance().registerIntentionAndMetaData(new RelativePathToAbsolutePathIntention(),
-                                                                    RUBY_INTENTIONS);
-        IntentionManager.getInstance().registerIntentionAndMetaData(new AppendCurrentDirToPathIntention(),
-                                                                    RUBY_INTENTIONS);
-    }
+	@Override
+	public void projectOpened()
+	{
+		IntentionManager.getInstance().registerIntentionAndMetaData(new RelativePathToAbsolutePathIntention(), RUBY_INTENTIONS);
+		IntentionManager.getInstance().registerIntentionAndMetaData(new AppendCurrentDirToPathIntention(), RUBY_INTENTIONS);
+	}
 
-    @Override
-	public void projectClosed() {
-    }
+	@Override
+	public void projectClosed()
+	{
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RUBY_INTENTION_ACTIONS_MANAGER;
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RUBY_INTENTION_ACTIONS_MANAGER;
+	}
 
-    @Override
-	public void initComponent() {
-    }
+	@Override
+	public void initComponent()
+	{
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 }

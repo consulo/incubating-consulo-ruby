@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,53 +29,59 @@ import org.jetbrains.annotations.NotNull;
  * @date: Apr 12, 2008
  */
 @State(
-        name = "RSpecApplicationSettings",
-        storages = {
-        @Storage(
-                id = "main",
-                file = "$APP_CONFIG$/rubysettings.xml"
-        )}
+		name = "RSpecApplicationSettings",
+		storages = {
+				@Storage(
+						id = "main",
+						file = "$APP_CONFIG$/rubysettings.xml"
+				)
+		}
 )
-public class RSpecApplicationSettings  implements PersistentStateComponent<RSpecApplicationSettings> {
-    public boolean wizardRubyShouldUseRSpecFramework = false;
-    public boolean wizardRubyShouldUseTestUnitFramework = true;
+public class RSpecApplicationSettings implements PersistentStateComponent<RSpecApplicationSettings>
+{
+	public boolean wizardRubyShouldUseRSpecFramework = false;
+	public boolean wizardRubyShouldUseTestUnitFramework = true;
 
-    public boolean wizardRailsFacetIsRSpecEnabled = false;
-    public boolean wizardRailsFacetIsRSpecRailsEnabled = false;
-    public SrcType wizardRailsFacetRSpecPluginSrcType = SrcType.LATEST;
-    @NotNull
-    public String wizardRailsFacetRSpecArgs = "";
-    @NotNull
-    public String wizardRailsFacetRSpecRailsArgs = "";
+	public boolean wizardRailsFacetIsRSpecEnabled = false;
+	public boolean wizardRailsFacetIsRSpecRailsEnabled = false;
+	public SrcType wizardRailsFacetRSpecPluginSrcType = SrcType.LATEST;
+	@NotNull
+	public String wizardRailsFacetRSpecArgs = "";
+	@NotNull
+	public String wizardRailsFacetRSpecRailsArgs = "";
 
 
-    public static RSpecApplicationSettings getInstance() {
-        return ServiceManager.getService(RSpecApplicationSettings.class);
-    }
+	public static RSpecApplicationSettings getInstance()
+	{
+		return ServiceManager.getService(RSpecApplicationSettings.class);
+	}
 
-    @Override
-	public RSpecApplicationSettings getState() {
-        return this;
-    }
+	@Override
+	public RSpecApplicationSettings getState()
+	{
+		return this;
+	}
 
-    @Override
-	public void loadState(@NotNull final RSpecApplicationSettings settings) {
-        //tests
-        wizardRubyShouldUseRSpecFramework = settings.wizardRubyShouldUseRSpecFramework;
-        wizardRubyShouldUseTestUnitFramework = settings.wizardRubyShouldUseTestUnitFramework;
+	@Override
+	public void loadState(@NotNull final RSpecApplicationSettings settings)
+	{
+		//tests
+		wizardRubyShouldUseRSpecFramework = settings.wizardRubyShouldUseRSpecFramework;
+		wizardRubyShouldUseTestUnitFramework = settings.wizardRubyShouldUseTestUnitFramework;
 
-        wizardRailsFacetIsRSpecEnabled = settings.wizardRailsFacetIsRSpecEnabled;
-        wizardRailsFacetIsRSpecRailsEnabled = settings.wizardRailsFacetIsRSpecRailsEnabled;
+		wizardRailsFacetIsRSpecEnabled = settings.wizardRailsFacetIsRSpecEnabled;
+		wizardRailsFacetIsRSpecRailsEnabled = settings.wizardRailsFacetIsRSpecRailsEnabled;
 
-        wizardRailsFacetRSpecPluginSrcType = settings.wizardRailsFacetRSpecPluginSrcType;
+		wizardRailsFacetRSpecPluginSrcType = settings.wizardRailsFacetRSpecPluginSrcType;
 
-        wizardRailsFacetRSpecArgs = settings.wizardRailsFacetRSpecArgs;
-        wizardRailsFacetRSpecRailsArgs = settings.wizardRailsFacetRSpecRailsArgs;
-    }
+		wizardRailsFacetRSpecArgs = settings.wizardRailsFacetRSpecArgs;
+		wizardRailsFacetRSpecRailsArgs = settings.wizardRailsFacetRSpecRailsArgs;
+	}
 
-    public enum SrcType {
-        TRUNK,
-        LATEST,
-        SPECIFIC
-    }
+	public enum SrcType
+	{
+		TRUNK,
+		LATEST,
+		SPECIFIC
+	}
 }

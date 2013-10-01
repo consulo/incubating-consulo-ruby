@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom.impl;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
@@ -47,220 +45,257 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariab
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubySystemCallVisitor;
 import org.jetbrains.plugins.ruby.ruby.pom.impl.events.RStructureChange;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Jul 20, 2007
  */
-class RubyAspectVisitor extends RubySystemCallVisitor {
-    private RubyChangeSetImpl myRubyChangeSet;
-    private boolean changeFound;
+class RubyAspectVisitor extends RubySystemCallVisitor
+{
+	private RubyChangeSetImpl myRubyChangeSet;
+	private boolean changeFound;
 
-    public RubyAspectVisitor(@NotNull final RubyChangeSetImpl rubyChangeSet) {
-        myRubyChangeSet = rubyChangeSet;
-    }
+	public RubyAspectVisitor(@NotNull final RubyChangeSetImpl rubyChangeSet)
+	{
+		myRubyChangeSet = rubyChangeSet;
+	}
 
-    @Override
-	public void visitElement(@NotNull final PsiElement element) {
-        // if in name
-        final RName rName = PsiTreeUtil.getParentOfType(element, RName.class);
-        if (rName != null) {
-            visitRName(rName);
-            return;
-        }
-        // if in alias
-        final RAliasStatement alias = PsiTreeUtil.getParentOfType(element, RAliasStatement.class);
-        if (alias != null) {
-            visitRAliasStatement(alias);
-            return;
-        }
-        // if in important call
-        final RCall call = PsiTreeUtil.getParentOfType(element, RCall.class);
-        if (call != null){
-            visitRCall(call);
-            return;
-        }
+	@Override
+	public void visitElement(@NotNull final PsiElement element)
+	{
+		// if in name
+		final RName rName = PsiTreeUtil.getParentOfType(element, RName.class);
+		if(rName != null)
+		{
+			visitRName(rName);
+			return;
+		}
+		// if in alias
+		final RAliasStatement alias = PsiTreeUtil.getParentOfType(element, RAliasStatement.class);
+		if(alias != null)
+		{
+			visitRAliasStatement(alias);
+			return;
+		}
+		// if in important call
+		final RCall call = PsiTreeUtil.getParentOfType(element, RCall.class);
+		if(call != null)
+		{
+			visitRCall(call);
+			return;
+		}
 
-        // check if parent container hasn`t changed
-        checkContainingContainer(element);
-    }
+		// check if parent container hasn`t changed
+		checkContainingContainer(element);
+	}
 
-    @Override
-	public void visitRName(@NotNull final RName name) {
-        createStructureChange("Changes withing the name");
-    }
+	@Override
+	public void visitRName(@NotNull final RName name)
+	{
+		createStructureChange("Changes withing the name");
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////// Class or instance fields
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////// Class or instance fields
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
-	public void visitRClassVariable(@NotNull final RClassVariable rClassVariable) {
-        checkForFieldsChanges(rClassVariable);
-    }
+	@Override
+	public void visitRClassVariable(@NotNull final RClassVariable rClassVariable)
+	{
+		checkForFieldsChanges(rClassVariable);
+	}
 
-    @Override
-	public void visitRInstanceVariable(@NotNull final RInstanceVariable rInstanceVariable) {
-        checkForFieldsChanges(rInstanceVariable);
-    }
+	@Override
+	public void visitRInstanceVariable(@NotNull final RInstanceVariable rInstanceVariable)
+	{
+		checkForFieldsChanges(rInstanceVariable);
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////  Constant or identifier
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////  Constant or identifier
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
-	public void visitRConstant(@NotNull final RConstant rConstant) {
-        if (checkForConstantsChanges(rConstant)){
-            return;
-        }
-        visitElement(rConstant);
-    }
+	@Override
+	public void visitRConstant(@NotNull final RConstant rConstant)
+	{
+		if(checkForConstantsChanges(rConstant))
+		{
+			return;
+		}
+		visitElement(rConstant);
+	}
 
-    @Override
-	public void visitRGlobalVariable(@NotNull final RGlobalVariable rGlobalVariable) {
-        if (checkForGlobalVariablesChanges(rGlobalVariable)){
-            return;
-        }
+	@Override
+	public void visitRGlobalVariable(@NotNull final RGlobalVariable rGlobalVariable)
+	{
+		if(checkForGlobalVariablesChanges(rGlobalVariable))
+		{
+			return;
+		}
 
-        visitElement(rGlobalVariable);
-    }
+		visitElement(rGlobalVariable);
+	}
 
-    @Override
-	public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
-        if (RArgumentNavigator.getByRIdentifier(rIdentifier) != null) {
-            createStructureChange("parameter name changed");
-            return;
-        }
+	@Override
+	public void visitRIdentifier(@NotNull final RIdentifier rIdentifier)
+	{
+		if(RArgumentNavigator.getByRIdentifier(rIdentifier) != null)
+		{
+			createStructureChange("parameter name changed");
+			return;
+		}
 
-        visitElement(rIdentifier);
-    }
+		visitElement(rIdentifier);
+	}
 
-    @Override
-	public void visitRFunctionArgumentList(@NotNull final RFunctionArgumentList list) {
-        createStructureChange("argument list changed");
-    }
+	@Override
+	public void visitRFunctionArgumentList(@NotNull final RFunctionArgumentList list)
+	{
+		createStructureChange("argument list changed");
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///// Classes / modules / methods
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///// Classes / modules / methods
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void checkContainingContainer(@NotNull final PsiElement element) {
-        final RContainer container = PsiTreeUtil.getParentOfType(element, RContainer.class);
-        if (container!=null){
-            visitRContainer(container);
-        }
-    }
+	private void checkContainingContainer(@NotNull final PsiElement element)
+	{
+		final RContainer container = PsiTreeUtil.getParentOfType(element, RContainer.class);
+		if(container != null)
+		{
+			visitRContainer(container);
+		}
+	}
 
-    private void visitRContainer(@NotNull final RContainer container) {
-        if (!(container instanceof RFile) && container.getParent() == null) {
-            createStructureChange("container was deleted!!!");
-            return;
-        }
-        RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(container);
-        if (vContainer == null || !container.equalsToVirtual(vContainer)){
-            createStructureChange("container structural elements changed!!!");
-        }
+	private void visitRContainer(@NotNull final RContainer container)
+	{
+		if(!(container instanceof RFile) && container.getParent() == null)
+		{
+			createStructureChange("container was deleted!!!");
+			return;
+		}
+		RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(container);
+		if(vContainer == null || !container.equalsToVirtual(vContainer))
+		{
+			createStructureChange("container structural elements changed!!!");
+		}
 
-        if (checkForConstantsChanges(container)) {
-            return;
-        }
+		if(checkForConstantsChanges(container))
+		{
+			return;
+		}
 
-        if (checkForGlobalVariablesChanges(container)){
-            return;
-        }
+		if(checkForGlobalVariablesChanges(container))
+		{
+			return;
+		}
 
-        checkForFieldsChanges(container);
-    }
+		checkForFieldsChanges(container);
+	}
 
-    private void checkForFieldsChanges(@NotNull final RPsiElement element) {
-        final RFieldHolder fHolder = element instanceof RFieldHolder ?
-                (RFieldHolder) element : PsiTreeUtil.getParentOfType(element, RFieldHolder.class);
-        if (fHolder!=null){
-            final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(fHolder);
-            if (!(vContainer instanceof RVirtualFieldHolder &&
-                    RVirtualPsiUtil.areFieldHoldersEqual(fHolder, (RVirtualFieldHolder) vContainer))){
-                createStructureChange("fields changed!!!");
-            }
-        }
-    }
+	private void checkForFieldsChanges(@NotNull final RPsiElement element)
+	{
+		final RFieldHolder fHolder = element instanceof RFieldHolder ? (RFieldHolder) element : PsiTreeUtil.getParentOfType(element, RFieldHolder.class);
+		if(fHolder != null)
+		{
+			final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(fHolder);
+			if(!(vContainer instanceof RVirtualFieldHolder && RVirtualPsiUtil.areFieldHoldersEqual(fHolder, (RVirtualFieldHolder) vContainer)))
+			{
+				createStructureChange("fields changed!!!");
+			}
+		}
+	}
 
-    private boolean checkForConstantsChanges(@NotNull final RPsiElement element) {
-        final RConstantHolder cHolder = element instanceof RConstantHolder ?
-                (RConstantHolder) element : PsiTreeUtil.getParentOfType(element, RConstantHolder.class);
-        if (cHolder!=null){
-            final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(cHolder);
-            if (!(vContainer instanceof RVirtualConstantHolder &&
-                    RVirtualPsiUtil.areConstantHoldersEqual(cHolder, (RVirtualConstantHolder) vContainer))){
-                createStructureChange("constants changed!!!");
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean checkForConstantsChanges(@NotNull final RPsiElement element)
+	{
+		final RConstantHolder cHolder = element instanceof RConstantHolder ? (RConstantHolder) element : PsiTreeUtil.getParentOfType(element, RConstantHolder.class);
+		if(cHolder != null)
+		{
+			final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(cHolder);
+			if(!(vContainer instanceof RVirtualConstantHolder && RVirtualPsiUtil.areConstantHoldersEqual(cHolder, (RVirtualConstantHolder) vContainer)))
+			{
+				createStructureChange("constants changed!!!");
+				return true;
+			}
+		}
+		return false;
+	}
 
-    private boolean checkForGlobalVariablesChanges(@NotNull final RPsiElement element) {
-        final RGlobalVarHolder vHolder = element instanceof RGlobalVarHolder ?
-                (RGlobalVarHolder) element : PsiTreeUtil.getParentOfType(element, RGlobalVarHolder.class);
-        if (vHolder!=null){
-            final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(vHolder);
-            if (!(vContainer instanceof RVirtualGlobalVarHolder &&
-                    RVirtualPsiUtil.areGlobalVariableHoldersEqual(vHolder, (RVirtualGlobalVarHolder) vContainer))){
-                createStructureChange("global variables changed!!!");
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean checkForGlobalVariablesChanges(@NotNull final RPsiElement element)
+	{
+		final RGlobalVarHolder vHolder = element instanceof RGlobalVarHolder ? (RGlobalVarHolder) element : PsiTreeUtil.getParentOfType(element, RGlobalVarHolder.class);
+		if(vHolder != null)
+		{
+			final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(vHolder);
+			if(!(vContainer instanceof RVirtualGlobalVarHolder && RVirtualPsiUtil.areGlobalVariableHoldersEqual(vHolder, (RVirtualGlobalVarHolder) vContainer)))
+			{
+				createStructureChange("global variables changed!!!");
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @Override
-	public void visitRFile(@NotNull final RFile rFile) {
-        visitRContainer(rFile);
-    }
+	@Override
+	public void visitRFile(@NotNull final RFile rFile)
+	{
+		visitRContainer(rFile);
+	}
 
-    @Override
-	public void visitRClass(@NotNull final RClass rClass) {
-        visitRContainer(rClass);
-    }
+	@Override
+	public void visitRClass(@NotNull final RClass rClass)
+	{
+		visitRContainer(rClass);
+	}
 
-    @Override
-	public void visitRModule(@NotNull final RModule module) {
-        visitRContainer(module);
-    }
+	@Override
+	public void visitRModule(@NotNull final RModule module)
+	{
+		visitRContainer(module);
+	}
 
-    @Override
-	public void visitRMethod(@NotNull final RMethod rMethod) {
-        visitRContainer(rMethod);
-    }
+	@Override
+	public void visitRMethod(@NotNull final RMethod rMethod)
+	{
+		visitRContainer(rMethod);
+	}
 
-    @Override
-	public void visitRSingletonMethod(@NotNull final RSingletonMethod rsMethod) {
-        visitRContainer(rsMethod);
-    }
+	@Override
+	public void visitRSingletonMethod(@NotNull final RSingletonMethod rsMethod)
+	{
+		visitRContainer(rsMethod);
+	}
 
-    @Override
-	public void visitRObjectClass(@NotNull final RObjectClass rsClass) {
-        visitRContainer(rsClass);
-    }
+	@Override
+	public void visitRObjectClass(@NotNull final RObjectClass rsClass)
+	{
+		visitRContainer(rsClass);
+	}
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///// Important calls
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///// Important calls
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
-	public void visitRCall(@NotNull RCall rCall) {
-        checkContainingContainer(rCall);
-    }
+	@Override
+	public void visitRCall(@NotNull RCall rCall)
+	{
+		checkContainingContainer(rCall);
+	}
 
-    private void createStructureChange(String message) {
-//        System.err.println(String.valueOf(number++) + ": " + message);
-        myRubyChangeSet.add(new RStructureChange(message));
-        changeFound = true;
-    }
+	private void createStructureChange(String message)
+	{
+		//        System.err.println(String.valueOf(number++) + ": " + message);
+		myRubyChangeSet.add(new RStructureChange(message));
+		changeFound = true;
+	}
 
-    @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-    public boolean isChangeFound() {
-        return changeFound;
-    }
+	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
+	public boolean isChangeFound()
+	{
+		return changeFound;
+	}
 }

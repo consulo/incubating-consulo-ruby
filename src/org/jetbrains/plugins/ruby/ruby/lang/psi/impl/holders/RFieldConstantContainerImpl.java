@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
-import com.intellij.lang.ASTNode;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -28,8 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RConstantHolderUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFieldHolderUtil;
-
-import java.util.List;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,76 +37,89 @@ import java.util.List;
  * @author: oleg
  * @date: Mar 13, 2007
  */
-public abstract class RFieldConstantContainerImpl extends RContainerBase implements RFieldConstantContainer {
+public abstract class RFieldConstantContainerImpl extends RContainerBase implements RFieldConstantContainer
+{
 
-    // Cached information for ConstantUsages
-    private List<ConstantDefinitions> myConstantDefinitions;
+	// Cached information for ConstantUsages
+	private List<ConstantDefinitions> myConstantDefinitions;
 
-    // Cached information for FieldUsages
-    private List<FieldDefinition> myFieldDefinitions;
+	// Cached information for FieldUsages
+	private List<FieldDefinition> myFieldDefinitions;
 
-    public RFieldConstantContainerImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RFieldConstantContainerImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public List<ConstantDefinitions> getConstantDefinitions() {
-        if (myConstantDefinitions == null) {
-            myConstantDefinitions = RConstantHolderUtil.gatherConstantDefinitions(this);
-        }
-        return myConstantDefinitions;
-    }
+	public List<ConstantDefinitions> getConstantDefinitions()
+	{
+		if(myConstantDefinitions == null)
+		{
+			myConstantDefinitions = RConstantHolderUtil.gatherConstantDefinitions(this);
+		}
+		return myConstantDefinitions;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant) {
-        return RConstantHolderUtil.getDefinition(this, constant);
-    }
+	public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant)
+	{
+		return RConstantHolderUtil.getDefinition(this, constant);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<FieldDefinition> getFieldsDefinitions() {
-        if (myFieldDefinitions == null) {
-            myFieldDefinitions = RFieldHolderUtil.gatherFieldDescriptions(this);
-        }
-        return myFieldDefinitions;
-    }
+	public List<FieldDefinition> getFieldsDefinitions()
+	{
+		if(myFieldDefinitions == null)
+		{
+			myFieldDefinitions = RFieldHolderUtil.gatherFieldDescriptions(this);
+		}
+		return myFieldDefinitions;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public FieldDefinition getDefinition(@NotNull final RVirtualField field) {
-        return RFieldHolderUtil.getDefinition(this, field);
-    }
+	public FieldDefinition getDefinition(@NotNull final RVirtualField field)
+	{
+		return RFieldHolderUtil.getDefinition(this, field);
+	}
 
-    @Override
-	public synchronized void subtreeChanged() {
-        clearMyCaches();
-        super.subtreeChanged();
-    }
+	@Override
+	public synchronized void subtreeChanged()
+	{
+		clearMyCaches();
+		super.subtreeChanged();
+	}
 
-    private void clearMyCaches() {
-        myFieldDefinitions = null;
-        myConstantDefinitions = null;
-    }
+	private void clearMyCaches()
+	{
+		myFieldDefinitions = null;
+		myConstantDefinitions = null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualConstant> getVirtualConstants() {
-        return RVirtualUtil.getVirtualConstants(this, this);
-    }
+	public List<RVirtualConstant> getVirtualConstants()
+	{
+		return RVirtualUtil.getVirtualConstants(this, this);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualField> getVirtualFields() {
-        return RVirtualUtil.getVirtualFields(this, this);
-    }
+	public List<RVirtualField> getVirtualFields()
+	{
+		return RVirtualUtil.getVirtualFields(this, this);
+	}
 
-    @Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
-        // TODO: to be honest, we must add another 2 check!
-        // RVPsiUtuils.areConstantHoldersEqual and RVPsiUtuils.areFieldHoldersEqual
-        return super.equalsToVirtual(element);
-    }
+	@Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	{
+		// TODO: to be honest, we must add another 2 check!
+		// RVPsiUtuils.areConstantHoldersEqual and RVPsiUtuils.areFieldHoldersEqual
+		return super.equalsToVirtual(element);
+	}
 }

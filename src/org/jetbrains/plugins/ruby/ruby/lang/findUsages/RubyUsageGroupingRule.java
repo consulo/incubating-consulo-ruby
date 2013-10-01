@@ -28,24 +28,30 @@ import com.intellij.usages.rules.PsiElementUsage;
  * @author: oleg
  * @date: Nov 2, 2007
  */
-public class RubyUsageGroupingRule implements OrderableUsageGroupingRule {
-    private RubyTextMatchedGroup TEXT_MATCHED = new RubyTextMatchedGroup();
+public class RubyUsageGroupingRule implements OrderableUsageGroupingRule
+{
+	private RubyTextMatchedGroup TEXT_MATCHED = new RubyTextMatchedGroup();
 
-    @Override
-	public UsageGroup groupUsage(Usage usage) {
-        if (usage instanceof PsiElementUsage) {
-            final PsiElement element = ((PsiElementUsage) usage).getElement();
-            if (element!=null){
-                if (RubyUsageTypeProvider.getType(element) == RubyUsageType.TEXT_MATCHED){
-                    return TEXT_MATCHED;
-                }
-            }
-        }
-        return null;
-    }
+	@Override
+	public UsageGroup groupUsage(Usage usage)
+	{
+		if(usage instanceof PsiElementUsage)
+		{
+			final PsiElement element = ((PsiElementUsage) usage).getElement();
+			if(element != null)
+			{
+				if(RubyUsageTypeProvider.getType(element) == RubyUsageType.TEXT_MATCHED)
+				{
+					return TEXT_MATCHED;
+				}
+			}
+		}
+		return null;
+	}
 
-    @Override
-	public int getRank() {
-        return 0;
-    }
+	@Override
+	public int getRank()
+	{
+		return 0;
+	}
 }

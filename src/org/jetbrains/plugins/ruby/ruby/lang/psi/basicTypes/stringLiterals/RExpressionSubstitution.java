@@ -23,5 +23,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 14.08.2006
  */
-public interface RExpressionSubstitution extends RPsiElement {
+public interface RExpressionSubstitution extends RPsiElement
+{
 }

@@ -16,23 +16,24 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.variables;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 28, 2007
  */
-public interface RVirtualFieldAttr extends RVirtualStructuralElement {
-    @NotNull
-    public List<String> getNames();
+public interface RVirtualFieldAttr extends RVirtualStructuralElement
+{
+	@NotNull
+	public List<String> getNames();
 
-    @NotNull
-    public FieldAttrType getFieldAttrType();
+	@NotNull
+	public FieldAttrType getFieldAttrType();
 
-    @NotNull
-    public String getPresentableText();
+	@NotNull
+	public String getPresentableText();
 }

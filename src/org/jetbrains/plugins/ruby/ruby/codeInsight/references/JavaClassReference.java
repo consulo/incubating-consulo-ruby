@@ -16,10 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -31,8 +29,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
-
-import java.util.List;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,51 +40,59 @@ import java.util.List;
  * @author: oleg
  * @date: Feb 14, 2008
  */
-public class JavaClassReference extends RQualifiedReference {
-    public JavaClassReference(@NotNull final Project project,
-                              @NotNull final RPsiElement wholeReference,
-                              @Nullable final RPsiElement refObject,
-                              @NotNull final PsiElement refValue) {
-        super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.JAVA_CLASS);
-    }
+public class JavaClassReference extends RQualifiedReference
+{
+	public JavaClassReference(@NotNull final Project project, @NotNull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @NotNull final PsiElement refValue)
+	{
+		super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.JAVA_CLASS);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected ResolveResult[] multiResolveInner(final boolean incompleteCode) {
-        if (((RPsiElementBase) myWholeReference).isClassOrModuleName()){
-            return ResolveResult.EMPTY_ARRAY;
-        }
+	protected ResolveResult[] multiResolveInner(final boolean incompleteCode)
+	{
+		if(((RPsiElementBase) myWholeReference).isClassOrModuleName())
+		{
+			return ResolveResult.EMPTY_ARRAY;
+		}
 
-        // We process only JAVA_CLASS here
-        final List<Symbol> symbols = ResolveUtil.resolveToSymbols(myRefObject);
-        if (symbols.size()==1){
-            final Ref<PsiElement> ref = new Ref<PsiElement>(null);
-            final Symbol symbol = symbols.get(0);
-            if (symbol.getType() == Type.JAVA_CLASS){
-                ref.set(((JavaSymbol) symbol).getPsiElement());
-            }
-            if (symbol.getType() == Type.JAVA_PROXY_CLASS){
-                //noinspection ConstantConditions
-                ref.set(((ProxyJavaSymbol) symbol).getPsiElement());
-            }
-            final PsiElement element = ref.get();
-            if (element !=null){
-                return  new ResolveResult[]{
-                        new ResolveResult(){
-                            @Override
+		// We process only JAVA_CLASS here
+		final List<Symbol> symbols = ResolveUtil.resolveToSymbols(myRefObject);
+		if(symbols.size() == 1)
+		{
+			final Ref<PsiElement> ref = new Ref<PsiElement>(null);
+			final Symbol symbol = symbols.get(0);
+			if(symbol.getType() == Type.JAVA_CLASS)
+			{
+				ref.set(((JavaSymbol) symbol).getPsiElement());
+			}
+			if(symbol.getType() == Type.JAVA_PROXY_CLASS)
+			{
+				//noinspection ConstantConditions
+				ref.set(((ProxyJavaSymbol) symbol).getPsiElement());
+			}
+			final PsiElement element = ref.get();
+			if(element != null)
+			{
+				return new ResolveResult[]{
+						new ResolveResult()
+						{
+							@Override
 							@Nullable
-                            public PsiElement getElement() {
-                                return element;
-                            }
+							public PsiElement getElement()
+							{
+								return element;
+							}
 
-                            @Override
-							public boolean isValidResult() {
-                                return true;
-                            }
-                        }
-                };
-            }
-        }
-        return ResolveResult.EMPTY_ARRAY;
-    }
+							@Override
+							public boolean isValidResult()
+							{
+								return true;
+							}
+						}
+				};
+			}
+		}
+		return ResolveResult.EMPTY_ARRAY;
+	}
 }

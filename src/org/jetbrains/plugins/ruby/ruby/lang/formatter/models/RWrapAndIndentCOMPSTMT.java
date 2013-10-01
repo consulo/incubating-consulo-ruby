@@ -28,5 +28,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapCOMPSTMT;
 /**
  * If class implement this, than formatter will wrap and indent RCompoundStatement child
  */
-public interface RWrapAndIndentCOMPSTMT extends RWrapCOMPSTMT, RIndentCOMPSTMT {
+public interface RWrapAndIndentCOMPSTMT extends RWrapCOMPSTMT, RIndentCOMPSTMT
+{
 }

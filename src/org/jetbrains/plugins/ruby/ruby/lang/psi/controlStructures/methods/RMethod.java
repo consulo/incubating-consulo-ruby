@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,32 +25,37 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructu
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RMethod extends RVirtualMethod,
-        RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer {
+public interface RMethod extends RVirtualMethod, RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer
+{
 
-    @NonNls String INITIALIZE = "initialize";
-    @NonNls String NEW = "new";
-    @NonNls String JAVA_CLASS = "java_class";
-    @NonNls String RESPONDS_TO = "responds_to?";
+	@NonNls
+	String INITIALIZE = "initialize";
+	@NonNls
+	String NEW = "new";
+	@NonNls
+	String JAVA_CLASS = "java_class";
+	@NonNls
+	String RESPONDS_TO = "responds_to?";
 
 
-    @SuppressWarnings({"NullableProblems"})
-    @Nullable
-    public RMethodName getMethodName();
+	@SuppressWarnings({"NullableProblems"})
+	@Nullable
+	public RMethodName getMethodName();
 
-    @Nullable
-    public RArgumentList getArgumentList();
+	@Nullable
+	public RArgumentList getArgumentList();
 
-    public boolean isConstructor();
+	public boolean isConstructor();
 
-    @NotNull
-    public String getPresentableName(final boolean includeDefaultArgs);
+	@NotNull
+	public String getPresentableName(final boolean includeDefaultArgs);
 
-    RCompoundStatement getCompoundStatement();
+	RCompoundStatement getCompoundStatement();
 }

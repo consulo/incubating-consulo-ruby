@@ -27,17 +27,18 @@ import com.intellij.ui.treeStructure.SimpleNode;
  * @author: Roman Chernyatchik
  * @date: 17.10.2006
  */
-public class ModelSubFolderNode extends FolderNode {
-    public ModelSubFolderNode(final Module module, final VirtualFile dir,
-                              final SimpleNode parent) {
-        super(module, dir, parent);
-    }
+public class ModelSubFolderNode extends FolderNode
+{
+	public ModelSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent)
+	{
+		super(module, dir, parent);
+	}
 
 
-    public ModelSubFolderNode(final Module module, final VirtualFile dir,
-                              final SimpleNode parent, final PresentationData data) {
-        super(module, dir, parent, data);
-    }
+	public ModelSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data)
+	{
+		super(module, dir, parent, data);
+	}
 }
 
 

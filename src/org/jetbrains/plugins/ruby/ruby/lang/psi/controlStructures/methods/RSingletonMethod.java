@@ -26,9 +26,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructu
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RSingletonMethod extends RVirtualSingletonMethod, RMethod,
-        RFormatStructureElement, RWrapLastChild {
-    
-    @Nullable
-    public RClassObject getClassObject();
+public interface RSingletonMethod extends RVirtualSingletonMethod, RMethod, RFormatStructureElement, RWrapLastChild
+{
+
+	@Nullable
+	public RClassObject getClassObject();
 }

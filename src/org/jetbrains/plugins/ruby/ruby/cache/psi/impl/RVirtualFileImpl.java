@@ -16,21 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import com.intellij.navigation.ItemPresentation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,99 +44,116 @@ import java.util.List;
  * @author: oleg, Roman Chernyatchik
  * @date: Oct 2, 2006
  */
-public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implements RVirtualFile {
-    private String myLocation;
-    private List<RVirtualRequire> myRequires;
-    private List<RVirtualGlobalVar> myGlobalVars;
+public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implements RVirtualFile
+{
+	private String myLocation;
+	private List<RVirtualRequire> myRequires;
+	private List<RVirtualGlobalVar> myGlobalVars;
 
-    public RVirtualFileImpl(final String name, final String location,
-                            final RVirtualContainer parentContainer,
-                            final AccessModifier defaultChildAccessModifier,
-                            @NotNull final RFileInfo containingFileInfo) {
-        super(parentContainer, new RVirtualNameImpl(Arrays.asList(name), false), defaultChildAccessModifier, containingFileInfo);
-        myLocation = location;
-    }
+	public RVirtualFileImpl(final String name, final String location, final RVirtualContainer parentContainer, final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	{
+		super(parentContainer, new RVirtualNameImpl(Arrays.asList(name), false), defaultChildAccessModifier, containingFileInfo);
+		myLocation = location;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public synchronized List<RVirtualRequire> getRequires() {
-        if (myRequires == null){
-            myRequires = new ArrayList<RVirtualRequire>();
-            final RubyVirtualElementVisitor visitor = new RubyVirtualElementVisitor(){
-                @Override
-				public void visitElement(RVirtualElement element) {
-                    if (element instanceof RVirtualContainer){
-                        for (RVirtualStructuralElement child : ((RVirtualContainer) element).getVirtualStructureElements()) {
-                            child.accept(this);
-                        }
-                    }
-                }
+	public synchronized List<RVirtualRequire> getRequires()
+	{
+		if(myRequires == null)
+		{
+			myRequires = new ArrayList<RVirtualRequire>();
+			final RubyVirtualElementVisitor visitor = new RubyVirtualElementVisitor()
+			{
+				@Override
+				public void visitElement(RVirtualElement element)
+				{
+					if(element instanceof RVirtualContainer)
+					{
+						for(RVirtualStructuralElement child : ((RVirtualContainer) element).getVirtualStructureElements())
+						{
+							child.accept(this);
+						}
+					}
+				}
 
-                @Override
-				public void visitRVirtualRequire(@NotNull final RVirtualRequire virtualRequire) {
-                    myRequires.add(virtualRequire);
-                }
+				@Override
+				public void visitRVirtualRequire(@NotNull final RVirtualRequire virtualRequire)
+				{
+					myRequires.add(virtualRequire);
+				}
 
-                @Override
-				public void visitRVirtualLoad(RVirtualLoad rVirtualLoad) {
-                    myRequires.add(rVirtualLoad);
-                }
-            };
-            accept(visitor);
-        }
-        return myRequires;
-    }
+				@Override
+				public void visitRVirtualLoad(RVirtualLoad rVirtualLoad)
+				{
+					myRequires.add(rVirtualLoad);
+				}
+			};
+			accept(visitor);
+		}
+		return myRequires;
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RFilePresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RFilePresentationUtil.getPresentation(this);
+	}
 
-    public Icon getIcon(final int flags) {
-        return RFilePresentationUtil.getIcon();
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RFilePresentationUtil.getIcon();
+	}
 
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualFile(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualFile(this);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getPresentableLocation() {
-        return myLocation;
-    }
+	public String getPresentableLocation()
+	{
+		return myLocation;
+	}
 
-    public String toString() {
-        return "file [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName();
-    }
+	public String toString()
+	{
+		return "file [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName();
+	}
 
-    @Override
-	public void dump(@NotNull StringBuilder buffer, int indent) {
-        super.dump(buffer, indent);
-        for (RVirtualGlobalVar var : myGlobalVars) {
-            buffer.append(NEW_LINE);
-            ((RVirtualElementBase) var).dump(buffer, indent+1);
-        }
-    }
+	@Override
+	public void dump(@NotNull StringBuilder buffer, int indent)
+	{
+		super.dump(buffer, indent);
+		for(RVirtualGlobalVar var : myGlobalVars)
+		{
+			buffer.append(NEW_LINE);
+			((RVirtualElementBase) var).dump(buffer, indent + 1);
+		}
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.FILE;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.FILE;
+	}
 
-    // RVirtualGlobalVarsHolder methods
-    public void setVirtualGlobalVars(List<RVirtualGlobalVar> vars) {
-        myGlobalVars = vars;
-    }
+	// RVirtualGlobalVarsHolder methods
+	public void setVirtualGlobalVars(List<RVirtualGlobalVar> vars)
+	{
+		myGlobalVars = vars;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualGlobalVar> getVirtualGlobalVars() {
-        return myGlobalVars;
-    }
+	public List<RVirtualGlobalVar> getVirtualGlobalVars()
+	{
+		return myGlobalVars;
+	}
 
 }

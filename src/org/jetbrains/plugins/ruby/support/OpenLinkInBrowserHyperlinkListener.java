@@ -16,35 +16,45 @@
 
 package org.jetbrains.plugins.ruby.support;
 
-import com.intellij.ide.BrowserUtil;
-import org.jetbrains.annotations.NotNull;
+import java.awt.Component;
+import java.awt.Cursor;
 
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import java.awt.*;
+
+import org.jetbrains.annotations.NotNull;
+import com.intellij.ide.BrowserUtil;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: Oct 14, 2007
-*/
-public class OpenLinkInBrowserHyperlinkListener implements HyperlinkListener {
-    private final Component myComponent;
+ *
+ * @author: Roman Chernyatchik
+ * @date: Oct 14, 2007
+ */
+public class OpenLinkInBrowserHyperlinkListener implements HyperlinkListener
+{
+	private final Component myComponent;
 
-    public OpenLinkInBrowserHyperlinkListener(@NotNull final Component component) {
-        myComponent = component;
-    }
+	public OpenLinkInBrowserHyperlinkListener(@NotNull final Component component)
+	{
+		myComponent = component;
+	}
 
-    @Override
-	public void hyperlinkUpdate(HyperlinkEvent e) {
-        final HyperlinkEvent.EventType eventType = e.getEventType();
-        if (eventType.equals(HyperlinkEvent.EventType.ACTIVATED)) {
-            BrowserUtil.launchBrowser(e.getURL().toExternalForm());
-        } else if (eventType.equals(HyperlinkEvent.EventType.ENTERED)) {
-            myComponent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        } else if (eventType.equals(HyperlinkEvent.EventType.EXITED)) {
-            myComponent.setCursor(Cursor.getDefaultCursor());
-        }
-    }
+	@Override
+	public void hyperlinkUpdate(HyperlinkEvent e)
+	{
+		final HyperlinkEvent.EventType eventType = e.getEventType();
+		if(eventType.equals(HyperlinkEvent.EventType.ACTIVATED))
+		{
+			BrowserUtil.launchBrowser(e.getURL().toExternalForm());
+		}
+		else if(eventType.equals(HyperlinkEvent.EventType.ENTERED))
+		{
+			myComponent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
+		else if(eventType.equals(HyperlinkEvent.EventType.EXITED))
+		{
+			myComponent.setCursor(Cursor.getDefaultCursor());
+		}
+	}
 }

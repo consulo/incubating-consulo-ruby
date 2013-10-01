@@ -57,164 +57,199 @@ import com.intellij.util.IncorrectOperationException;
  * User: oleg
  * Date: Aug 31, 2007
  */
-public class RNamedReference implements RPsiPolyvariantReference {
-    protected RNamedElement myElement;
+public class RNamedReference implements RPsiPolyvariantReference
+{
+	protected RNamedElement myElement;
 
-    public RNamedReference(@NotNull final RNamedElement element) {
-        myElement = element;
-    }
+	public RNamedReference(@NotNull final RNamedElement element)
+	{
+		myElement = element;
+	}
 
-    @Override
-	public final PsiElement getElement() {
-        return myElement;
-    }
+	@Override
+	public final PsiElement getElement()
+	{
+		return myElement;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public final PsiElement getRefValue() {
-        return myElement;
-    }
+	public final PsiElement getRefValue()
+	{
+		return myElement;
+	}
 
-    @Override
-	public final TextRange getRangeInElement() {
-        return new TextRange(0, myElement.getTextLength());
-    }
+	@Override
+	public final TextRange getRangeInElement()
+	{
+		return new TextRange(0, myElement.getTextLength());
+	}
 
-    @Override
-	public final String getCanonicalText() {
-        return myElement.getText();
-    }
+	@Override
+	public final String getCanonicalText()
+	{
+		return myElement.getText();
+	}
 
-    @Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-        return myElement.setName(newElementName);
-    }
+	@Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	{
+		return myElement.setName(newElementName);
+	}
 
-    // IDEA calls bindToElement if we rename/move Java class
-    @Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-        if (element instanceof PsiClass){
-            return handleElementRename(((PsiClass) element).getName());
-        }
-        return null;
-    }
+	// IDEA calls bindToElement if we rename/move Java class
+	@Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	{
+		if(element instanceof PsiClass)
+		{
+			return handleElementRename(((PsiClass) element).getName());
+		}
+		return null;
+	}
 
-    @Override
-	public boolean isReferenceTo(final PsiElement element) {
-        return ResolveUtil.isReferenceTo(this, element);
-    }
+	@Override
+	public boolean isReferenceTo(final PsiElement element)
+	{
+		return ResolveUtil.isReferenceTo(this, element);
+	}
 
-    @Override
-	public boolean isSoft() {
-        return true;
-    }
+	@Override
+	public boolean isSoft()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement resolve() {
-        return ResolveUtil.resolvePolyVarReference(this);
-    }
+	public PsiElement resolve()
+	{
+		return ResolveUtil.resolvePolyVarReference(this);
+	}
 
-    private static class MyResolver implements ResolveCache.PolyVariantResolver<RNamedReference> {
-        public static MyResolver INSTANCE = new MyResolver();
+	private static class MyResolver implements ResolveCache.PolyVariantResolver<RNamedReference>
+	{
+		public static MyResolver INSTANCE = new MyResolver();
 
-        @Override
-		public ResolveResult[] resolve(RNamedReference ref, boolean incompleteCode) {
-            return ref.multiResolveInner(incompleteCode);
-        }
-    }
+		@Override
+		public ResolveResult[] resolve(RNamedReference ref, boolean incompleteCode)
+		{
+			return ref.multiResolveInner(incompleteCode);
+		}
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public final ResolveResult[] multiResolve(final boolean incompleteCode) {
-        final PsiManager manager = getElement().getManager();
-        if(manager instanceof PsiManagerImpl){
-            final ResolveCache cache = ResolveCache.getInstance(manager.getProject());
-            return cache.resolveWithCaching(this, MyResolver.INSTANCE, false, false);
-        } else {
-          return multiResolveInner(incompleteCode);
-        }
-    }
+	public final ResolveResult[] multiResolve(final boolean incompleteCode)
+	{
+		final PsiManager manager = getElement().getManager();
+		if(manager instanceof PsiManagerImpl)
+		{
+			final ResolveCache cache = ResolveCache.getInstance(manager.getProject());
+			return cache.resolveWithCaching(this, MyResolver.INSTANCE, false, false);
+		}
+		else
+		{
+			return multiResolveInner(incompleteCode);
+		}
+	}
 
-    @SuppressWarnings({"UnusedDeclaration"})
-    @NotNull
-    protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
-        if (((RPsiElementBase) myElement).isClassOrModuleName()){
-            return new ResolveResult[]{new ResolveResult(){
-                @Override
-				@Nullable
-                public PsiElement getElement() {
-                    RubyUsageTypeProvider.setType(RNamedReference.this, RubyUsageType.DECLARATION);
-                    return myElement.getParentContainer();
-                }
-
-                @Override
-				public boolean isValidResult() {
-                    return true;
-                }
-            }};
-        }
-        final List<ResolveResult> list = new ArrayList<ResolveResult>();
-        RubyUsageTypeProvider.setType(RNamedReference.this, RubyUsageType.UNCLASSIFIED);
-        final FileSymbol fileSymbol = ((RPsiElementBase) myElement).forceFileSymbolUpdate();
-        for (Symbol symbol : multiResolveToSymbols(fileSymbol)) {
-                ResolveUtil.addVariants(fileSymbol, myElement.getProject(), list, symbol);
-        }
-        return list.toArray(new ResolveResult[list.size()]);
-    }
-
-
-    @Override
-	public final Object[] getVariants() {
-        final FileSymbol fileSymbol = ((RPsiElementBase) myElement).forceFileSymbolUpdate();
-        if (fileSymbol == null){
-            return EMPTY_ARRAY;
-        }
-
-        myElement.putCopyableUserData(REFERENCE_BEING_COMPLETED, Boolean.TRUE);
-        try{
-            // RUBY-1363. Completion after "class Name <" should show only class names
-            final RSuperClass superClass = RSuperClassNavigator.getByPsiElement(myElement);
-            final ScopeAutocompleteFilter filter = superClass!=null ?
-                    new ClassesOnlyAutocompleteFilter() :
-                    new EmptyAutocompleteFilter();
-
-            final List<RubyLookupItem> variants = ScopeSymbolsUtil.getScopeSymbolsAndKeywordsLookupItems(fileSymbol, myElement, filter);
-            return variants.toArray(new Object[variants.size()]);
-        } finally {
-            myElement.putCopyableUserData(REFERENCE_BEING_COMPLETED, null);
-        }
-    }
-
-    @Override
+	@SuppressWarnings({"UnusedDeclaration"})
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        if (((RPsiElementBase) myElement).isClassOrModuleName()){
-            return Collections.emptyList();
-        }
-        //noinspection ConstantConditions
-        return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.EMPTY_CONTEXT_RESOLVE_TYPES);
-    }
+	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
+	{
+		if(((RPsiElementBase) myElement).isClassOrModuleName())
+		{
+			return new ResolveResult[]{
+					new ResolveResult()
+					{
+						@Override
+						@Nullable
+						public PsiElement getElement()
+						{
+							RubyUsageTypeProvider.setType(RNamedReference.this, RubyUsageType.DECLARATION);
+							return myElement.getParentContainer();
+						}
 
-    @NotNull
-    protected List<Symbol> multiresolveToSymbols(@Nullable final FileSymbol fileSymbol, @NotNull final String name, final boolean global, final TypeSet acceptableTypeSet) {
-        RContainer container = myElement.getParentContainer();
-        assert container!=null;
+						@Override
+						public boolean isValidResult()
+						{
+							return true;
+						}
+					}
+			};
+		}
+		final List<ResolveResult> list = new ArrayList<ResolveResult>();
+		RubyUsageTypeProvider.setType(RNamedReference.this, RubyUsageType.UNCLASSIFIED);
+		final FileSymbol fileSymbol = ((RPsiElementBase) myElement).forceFileSymbolUpdate();
+		for(Symbol symbol : multiResolveToSymbols(fileSymbol))
+		{
+			ResolveUtil.addVariants(fileSymbol, myElement.getProject(), list, symbol);
+		}
+		return list.toArray(new ResolveResult[list.size()]);
+	}
 
-        // We should find look for symbol in parent of given class if we`re inside the superclass
-        if (PsiTreeUtil.getParentOfType(myElement, RSuperClass.class)!=null){
-            container = container.getParentContainer();
-            assert container!=null;
-        }
 
-        final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, container);
-        if (symbol==null){
-            return Collections.emptyList();
-        }
-        final Symbol res = SymbolUtil.findSymbol(fileSymbol, symbol, name, global, acceptableTypeSet);
-        if (res != null) {
-            return Arrays.asList(res);
-        }
-        return Collections.emptyList();
-    }
+	@Override
+	public final Object[] getVariants()
+	{
+		final FileSymbol fileSymbol = ((RPsiElementBase) myElement).forceFileSymbolUpdate();
+		if(fileSymbol == null)
+		{
+			return EMPTY_ARRAY;
+		}
+
+		myElement.putCopyableUserData(REFERENCE_BEING_COMPLETED, Boolean.TRUE);
+		try
+		{
+			// RUBY-1363. Completion after "class Name <" should show only class names
+			final RSuperClass superClass = RSuperClassNavigator.getByPsiElement(myElement);
+			final ScopeAutocompleteFilter filter = superClass != null ? new ClassesOnlyAutocompleteFilter() : new EmptyAutocompleteFilter();
+
+			final List<RubyLookupItem> variants = ScopeSymbolsUtil.getScopeSymbolsAndKeywordsLookupItems(fileSymbol, myElement, filter);
+			return variants.toArray(new Object[variants.size()]);
+		}
+		finally
+		{
+			myElement.putCopyableUserData(REFERENCE_BEING_COMPLETED, null);
+		}
+	}
+
+	@Override
+	@NotNull
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		if(((RPsiElementBase) myElement).isClassOrModuleName())
+		{
+			return Collections.emptyList();
+		}
+		//noinspection ConstantConditions
+		return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.EMPTY_CONTEXT_RESOLVE_TYPES);
+	}
+
+	@NotNull
+	protected List<Symbol> multiresolveToSymbols(@Nullable final FileSymbol fileSymbol, @NotNull final String name, final boolean global, final TypeSet acceptableTypeSet)
+	{
+		RContainer container = myElement.getParentContainer();
+		assert container != null;
+
+		// We should find look for symbol in parent of given class if we`re inside the superclass
+		if(PsiTreeUtil.getParentOfType(myElement, RSuperClass.class) != null)
+		{
+			container = container.getParentContainer();
+			assert container != null;
+		}
+
+		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, container);
+		if(symbol == null)
+		{
+			return Collections.emptyList();
+		}
+		final Symbol res = SymbolUtil.findSymbol(fileSymbol, symbol, name, global, acceptableTypeSet);
+		if(res != null)
+		{
+			return Arrays.asList(res);
+		}
+		return Collections.emptyList();
+	}
 }

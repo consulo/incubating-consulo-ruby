@@ -24,6 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild
  * User: oleg
  * Date: 21.01.2007
  */
-public interface RDoCodeBlock extends RCodeBlock,
-        RWrapAndIndentCOMPSTMT, RWrapLastChild {
+public interface RDoCodeBlock extends RCodeBlock, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
 }

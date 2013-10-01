@@ -35,162 +35,189 @@ import com.intellij.openapi.util.WriteExternalException;
  * @author: Roman Chernyatchik
  * @date: Mar 13, 2008
  */
-public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurationLowLevel {
+public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurationLowLevel
+{
 
-// Serializable in BaseRailsFacetConfigurationExternalizer
-    public boolean myShouldUseRSpecPlugin;
+	// Serializable in BaseRailsFacetConfigurationExternalizer
+	public boolean myShouldUseRSpecPlugin;
 
-    private String myRailsRootDirPath;
+	private String myRailsRootDirPath;
 
-    private boolean isInitialized;
+	private boolean isInitialized;
 
-// Transient, we shouldn't serialize it!
-    private String myRailsRootDirPathUrl;
+	// Transient, we shouldn't serialize it!
+	private String myRailsRootDirPathUrl;
 
-    private StandardRailsPaths myRailsPaths;
+	private StandardRailsPaths myRailsPaths;
 
-    // This object is build on every RakeCommands changes. Represents logical structure of Rake commands.
-    private RakeTask myRootRakeTask;
+	// This object is build on every RakeCommands changes. Represents logical structure of Rake commands.
+	private RakeTask myRootRakeTask;
 
-    // Generators
-    private String[] myGenerators;
-    private Module myModule;
+	// Generators
+	private String[] myGenerators;
+	private Module myModule;
 
-    // Is being used only for RakeTasks, Generators regenerating after SDK changing
-    private Sdk mySdk;
+	// Is being used only for RakeTasks, Generators regenerating after SDK changing
+	private Sdk mySdk;
 
 
-    @Override
-	public boolean shouldUseRSpecPlugin() {
-        return myShouldUseRSpecPlugin;
-    }
+	@Override
+	public boolean shouldUseRSpecPlugin()
+	{
+		return myShouldUseRSpecPlugin;
+	}
 
-    @Override
-	public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin) {
-        myShouldUseRSpecPlugin = useRSpecPlugin;
-    }
+	@Override
+	public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin)
+	{
+		myShouldUseRSpecPlugin = useRSpecPlugin;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getRailsApplicationRootPath() {
-        return myRailsRootDirPath;
-    }
+	public String getRailsApplicationRootPath()
+	{
+		return myRailsRootDirPath;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getRailsApplicationRootPathUrl() {
-        return myRailsRootDirPathUrl;
-    }
+	public String getRailsApplicationRootPathUrl()
+	{
+		return myRailsRootDirPathUrl;
+	}
 
-    @Override
-	public void setRailsApplicationRootPath(@NotNull final String railsRootDirPath) {
-        myRailsRootDirPath = railsRootDirPath;
-        myRailsRootDirPathUrl = VirtualFileUtil.constructLocalUrl(railsRootDirPath);
-        myRailsPaths = new StandardRailsPaths(railsRootDirPath);
-    }
+	@Override
+	public void setRailsApplicationRootPath(@NotNull final String railsRootDirPath)
+	{
+		myRailsRootDirPath = railsRootDirPath;
+		myRailsRootDirPathUrl = VirtualFileUtil.constructLocalUrl(railsRootDirPath);
+		myRailsPaths = new StandardRailsPaths(railsRootDirPath);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public StandardRailsPaths getPaths() {
-        return myRailsPaths;
-    }
+	public StandardRailsPaths getPaths()
+	{
+		return myRailsPaths;
+	}
 
-    @Override
-	public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk) {
-        assert  myModule != null;
-        GeneratorsUtil.loadGeneratorsList(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
-    }
+	@Override
+	public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk)
+	{
+		assert myModule != null;
+		GeneratorsUtil.loadGeneratorsList(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
+	}
 
-    @Override
-	public String[] getGenerators() {
-        return myGenerators;
-    }
+	@Override
+	public String[] getGenerators()
+	{
+		return myGenerators;
+	}
 
 
-    public void setGenerators(final String[] generators) {
-        myGenerators = generators;
-    }
+	public void setGenerators(final String[] generators)
+	{
+		myGenerators = generators;
+	}
 
-    @Override
-	public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk) {
-        RakeUtil.loadRakeTasksTree(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
-    }
+	@Override
+	public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk)
+	{
+		RakeUtil.loadRakeTasksTree(forceRegenerate, myModule.getProject(), sdk, myModule.getName(), this);
+	}
 
-    @Override
-	public RakeTask getRakeTasks() {
-        return myRootRakeTask;
-    }
+	@Override
+	public RakeTask getRakeTasks()
+	{
+		return myRootRakeTask;
+	}
 
-    public void setRakeTasks(final RakeTask rootTask) {
-        myRootRakeTask = rootTask;
-    }
+	public void setRakeTasks(final RakeTask rootTask)
+	{
+		myRootRakeTask = rootTask;
+	}
 
-    @Override
-	public void setModule(@NotNull final Module uncommitedModule) {
-        myModule = uncommitedModule;
+	@Override
+	public void setModule(@NotNull final Module uncommitedModule)
+	{
+		myModule = uncommitedModule;
 
-        final String path = BaseRailsFacetConfigurationExternalizer.getInstance().expandPathIfPossible(this, getNullableRailsApplicationRootPath());
-        if (path != null) {
-            setRailsApplicationRootPath(path);
-        }
-    }
+		final String path = BaseRailsFacetConfigurationExternalizer.getInstance().expandPathIfPossible(this, getNullableRailsApplicationRootPath());
+		if(path != null)
+		{
+			setRailsApplicationRootPath(path);
+		}
+	}
 
-    @Override
-	public Module getModule() {
-        return myModule;
-    }
+	@Override
+	public Module getModule()
+	{
+		return myModule;
+	}
 
-    @Override
-	public void reloadGenerators() {
-        loadGenerators(true, RModuleUtil.getModuleOrJRubyFacetSdk(myModule));
-    }
+	@Override
+	public void reloadGenerators()
+	{
+		loadGenerators(true, RModuleUtil.getModuleOrJRubyFacetSdk(myModule));
+	}
 
-    @Override
-	public void reloadRakeTasks() {
-        loadRakeTasks(true, RModuleUtil.getModuleOrJRubyFacetSdk(myModule));
-    }
+	@Override
+	public void reloadRakeTasks()
+	{
+		loadRakeTasks(true, RModuleUtil.getModuleOrJRubyFacetSdk(myModule));
+	}
 
-    // Externalizing
-    public void readExternal(final Element element) throws InvalidDataException {
-        BaseRailsFacetConfigurationExternalizer.getInstance().readExternal(this, element);
-    }
+	// Externalizing
+	public void readExternal(final Element element) throws InvalidDataException
+	{
+		BaseRailsFacetConfigurationExternalizer.getInstance().readExternal(this, element);
+	}
 
-    public void writeExternal(final Element element) throws WriteExternalException {
-        BaseRailsFacetConfigurationExternalizer.getInstance().writeExternal(this, element);
-    }
+	public void writeExternal(final Element element) throws WriteExternalException
+	{
+		BaseRailsFacetConfigurationExternalizer.getInstance().writeExternal(this, element);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getNullableRailsApplicationRootPath() {
-        return myRailsRootDirPath;
-    }
+	public String getNullableRailsApplicationRootPath()
+	{
+		return myRailsRootDirPath;
+	}
 
-    /**
-     * Only for BaseRailsFacet internal tasks
-     * @param sdk Sdk
-     */
-    @Override
-	public void setSdk(@Nullable final Sdk sdk) {
-        mySdk = sdk;
-    }
+	/**
+	 * Only for BaseRailsFacet internal tasks
+	 *
+	 * @param sdk Sdk
+	 */
+	@Override
+	public void setSdk(@Nullable final Sdk sdk)
+	{
+		mySdk = sdk;
+	}
 
-    /**
-     * Only for BaseRailsFacet internal tasks
-     * @return SDK
-     */
-    @Override
+	/**
+	 * Only for BaseRailsFacet internal tasks
+	 *
+	 * @return SDK
+	 */
+	@Override
 	@Nullable
-    public Sdk getSdk() {
-        return mySdk;
-    }
+	public Sdk getSdk()
+	{
+		return mySdk;
+	}
 
-    @Override
-	public void setInitialized() {
-        isInitialized = true;
-    }
+	@Override
+	public void setInitialized()
+	{
+		isInitialized = true;
+	}
 
-    @Override
-	public boolean isInitialized() {
-        return isInitialized;
-    }
+	@Override
+	public boolean isInitialized()
+	{
+		return isInitialized;
+	}
 }

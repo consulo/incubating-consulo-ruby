@@ -16,11 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Separator;
-import com.intellij.openapi.module.Module;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -31,10 +30,11 @@ import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.Separator;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,97 +42,111 @@ import java.util.Map;
  * @author: Roman Chernyatchik
  * @date: 02.12.2006
  */
-public class GeneratorsActionGroup extends ActionGroup {
-    protected Map<String, SimpleGeneratorAction> name2Action;
+public class GeneratorsActionGroup extends ActionGroup
+{
+	protected Map<String, SimpleGeneratorAction> name2Action;
 
-    public GeneratorsActionGroup() {
-        super();
-        init();
-    }
+	public GeneratorsActionGroup()
+	{
+		super();
+		init();
+	}
 
-    public GeneratorsActionGroup(String shortName, boolean popup) {
-        super(shortName, popup);
-        init();
-    }
+	public GeneratorsActionGroup(String shortName, boolean popup)
+	{
+		super(shortName, popup);
+		init();
+	}
 
-    @Override
-	public AnAction[] getChildren(@Nullable final AnActionEvent event) {
-        if (event == null){
-            return AnActionUtil.NO_ACTIONS;
-        }
-        final Module module = DataContextUtil.getModule(event.getDataContext());
-        if (module == null || !RailsFacetUtil.hasRailsSupport(module)){
-            return AnActionUtil.NO_ACTIONS;
-        }
-        final ArrayList<AnAction> myActions = new ArrayList<AnAction>();
+	@Override
+	public AnAction[] getChildren(@Nullable final AnActionEvent event)
+	{
+		if(event == null)
+		{
+			return AnActionUtil.NO_ACTIONS;
+		}
+		final Module module = DataContextUtil.getModule(event.getDataContext());
+		if(module == null || !RailsFacetUtil.hasRailsSupport(module))
+		{
+			return AnActionUtil.NO_ACTIONS;
+		}
+		final ArrayList<AnAction> myActions = new ArrayList<AnAction>();
 
-        final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(module);
-        assert configuration != null;
-        final String[] generators = configuration.getGenerators();
-        if (generators == null) {
-            return AnActionUtil.NO_ACTIONS;
-        }
+		final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(module);
+		assert configuration != null;
+		final String[] generators = configuration.getGenerators();
+		if(generators == null)
+		{
+			return AnActionUtil.NO_ACTIONS;
+		}
 
-        for (String generator : generators) {
-            if (TextUtil.isEmpty(generator)) {
-                continue;
-            }
-            myActions.add(createGeneratorAction(name2Action, generator));
-        }
-        myActions.add(Separator.getInstance());
+		for(String generator : generators)
+		{
+			if(TextUtil.isEmpty(generator))
+			{
+				continue;
+			}
+			myActions.add(createGeneratorAction(name2Action, generator));
+		}
+		myActions.add(Separator.getInstance());
 
-        return myActions.toArray(new AnAction[myActions.size()]);
-    }
+		return myActions.toArray(new AnAction[myActions.size()]);
+	}
 
-    @Override
-	public void update(@Nullable final AnActionEvent event) {
-        if (event == null){ //TODO any sense?
-            return;
-        }
-        final Module module = DataContextUtil.getModule(event.getDataContext());
+	@Override
+	public void update(@Nullable final AnActionEvent event)
+	{
+		if(event == null)
+		{ //TODO any sense?
+			return;
+		}
+		final Module module = DataContextUtil.getModule(event.getDataContext());
 
-        // show only on RailsModuleType and valid Ruby SDK with rails installed
-        final boolean isVisible = module != null
-                                  && RailsFacetUtil.hasRailsSupport(module);
-        final boolean isEnabled;
-        if (isVisible) {
-            final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(module);
-            assert configuration != null; //has been already checked above
+		// show only on RailsModuleType and valid Ruby SDK with rails installed
+		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
+		final boolean isEnabled;
+		if(isVisible)
+		{
+			final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(module);
+			assert configuration != null; //has been already checked above
 
-            isEnabled = (configuration.getGenerators() != null);
-        } else {
-            isEnabled = false;
-        }
+			isEnabled = (configuration.getGenerators() != null);
+		}
+		else
+		{
+			isEnabled = false;
+		}
 
-        AnActionUtil.updatePresentation(event.getPresentation(),
-                                         isVisible, isEnabled);
-    }
+		AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isEnabled);
+	}
 
-    protected void init() {
-        name2Action = createSpecialGeneratorActionsMap();
-    }
+	protected void init()
+	{
+		name2Action = createSpecialGeneratorActionsMap();
+	}
 
-    public static Map<String, SimpleGeneratorAction> createSpecialGeneratorActionsMap() {
-        final Map<String, SimpleGeneratorAction> name2Action = new HashMap<String, SimpleGeneratorAction>();
-        name2Action.put(GenerateControllerAction.GENERATOR_CONTROLLER, new GenerateControllerAction());
-        name2Action.put(RSpecSpecialGeneratorsNames.GENERATOR_CONTROLLER, new GenerateControllerAction(RBundle.message("new.generate.rspec.controller.text"), RSpecSpecialGeneratorsNames.GENERATOR_CONTROLLER));
-        name2Action.put(GenerateModelAction.GENERATOR_MODEL, new GenerateModelAction());
-        name2Action.put(RSpecSpecialGeneratorsNames.GENERATOR_MODEL, new GenerateModelAction(RBundle.message("new.generate.rspec.model.text")));
-        return name2Action;
-    }
+	public static Map<String, SimpleGeneratorAction> createSpecialGeneratorActionsMap()
+	{
+		final Map<String, SimpleGeneratorAction> name2Action = new HashMap<String, SimpleGeneratorAction>();
+		name2Action.put(GenerateControllerAction.GENERATOR_CONTROLLER, new GenerateControllerAction());
+		name2Action.put(RSpecSpecialGeneratorsNames.GENERATOR_CONTROLLER, new GenerateControllerAction(RBundle.message("new.generate.rspec.controller.text"), RSpecSpecialGeneratorsNames.GENERATOR_CONTROLLER));
+		name2Action.put(GenerateModelAction.GENERATOR_MODEL, new GenerateModelAction());
+		name2Action.put(RSpecSpecialGeneratorsNames.GENERATOR_MODEL, new GenerateModelAction(RBundle.message("new.generate.rspec.model.text")));
+		return name2Action;
+	}
 
-    /**
-     * @param name2Action Special registered names and actions
-     * @param generator Generator name
-     * @return If generator is registered as special then method returns corresponding action otherwise common action.
-     */
-    public static SimpleGeneratorAction createGeneratorAction(@Nullable final Map<String, SimpleGeneratorAction> name2Action,
-                                                              @NotNull final String generator) {
-        final SimpleGeneratorAction action = name2Action != null ? name2Action.get(generator)
-                                                                 : null;
-        if (action != null) {
-            return action;
-        }
-        return new SimpleGeneratorAction(generator);
-    }
+	/**
+	 * @param name2Action Special registered names and actions
+	 * @param generator   Generator name
+	 * @return If generator is registered as special then method returns corresponding action otherwise common action.
+	 */
+	public static SimpleGeneratorAction createGeneratorAction(@Nullable final Map<String, SimpleGeneratorAction> name2Action, @NotNull final String generator)
+	{
+		final SimpleGeneratorAction action = name2Action != null ? name2Action.get(generator) : null;
+		if(action != null)
+		{
+			return action;
+		}
+		return new SimpleGeneratorAction(generator);
+	}
 }

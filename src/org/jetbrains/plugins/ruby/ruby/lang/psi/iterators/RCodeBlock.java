@@ -26,7 +26,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
  * User: oleg
  * Date: 31.07.2006
  */
-public interface RCodeBlock extends RPsiElement, RControlFlowOwner, PseudoScopeHolder {
-    @Nullable
-    public RBlockVariables getBlockVariables();
+public interface RCodeBlock extends RPsiElement, RControlFlowOwner, PseudoScopeHolder
+{
+	@Nullable
+	public RBlockVariables getBlockVariables();
 }

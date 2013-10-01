@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import com.intellij.navigation.ItemPresentation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,20 +27,22 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualClass extends RVirtualFieldContantContainer {
+public interface RVirtualClass extends RVirtualFieldContantContainer
+{
 
-    /**
-     * Is used only by pure virtual elements. For PsiElements it is null;
-     * TODO
-     *   it is strange... the idea of Virtual Interface for Psi elements was
-     *   similar virtual behavior on this interface... maybe we should separate
-     *   virtual and psi interfeces 
-     * @return name
-     */
-    @Nullable
-    public RVirtualName getVirtualSuperClass();
+	/**
+	 * Is used only by pure virtual elements. For PsiElements it is null;
+	 * TODO
+	 * it is strange... the idea of Virtual Interface for Psi elements was
+	 * similar virtual behavior on this interface... maybe we should separate
+	 * virtual and psi interfeces
+	 *
+	 * @return name
+	 */
+	@Nullable
+	public RVirtualName getVirtualSuperClass();
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation();
+	public ItemPresentation getPresentation();
 }

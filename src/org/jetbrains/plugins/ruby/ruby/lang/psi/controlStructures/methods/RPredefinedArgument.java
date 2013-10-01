@@ -25,10 +25,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public interface RPredefinedArgument extends RArgument {
+public interface RPredefinedArgument extends RArgument
+{
 
-    @Nullable
-    String getValueText();
+	@Nullable
+	String getValueText();
 
-    RPsiElement getValue();
+	RPsiElement getValue();
 }

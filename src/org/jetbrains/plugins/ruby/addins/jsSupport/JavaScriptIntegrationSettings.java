@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.addins.jsSupport;
 
-import com.intellij.openapi.components.ApplicationComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
+import com.intellij.openapi.components.ApplicationComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,26 +27,34 @@ import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
  * @date: Nov 6, 2007
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class JavaScriptIntegrationSettings implements ApplicationComponent {
+public class JavaScriptIntegrationSettings implements ApplicationComponent
+{
 
-    //We need dependency
-    @SuppressWarnings({"UnusedDeclaration", "UnusedParameters"})
-    public JavaScriptIntegrationSettings(final RApplicationSettings applicationSettings) {
-    }
+	//We need dependency
+	@SuppressWarnings({
+			"UnusedDeclaration",
+			"UnusedParameters"
+	})
+	public JavaScriptIntegrationSettings(final RApplicationSettings applicationSettings)
+	{
+	}
 
-    @Override
-	public void initComponent() {
-        RApplicationSettings.getInstance().setJsSupportEnabled(true);
-    }
+	@Override
+	public void initComponent()
+	{
+		RApplicationSettings.getInstance().setJsSupportEnabled(true);
+	}
 
-    @Override
-	public void disposeComponent() {
-        //Do nothing
-    }
+	@Override
+	public void disposeComponent()
+	{
+		//Do nothing
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getComponentName() {
-        return "RubyJavaScriptIntegrationSettings";
-    }
+	public String getComponentName()
+	{
+		return "RubyJavaScriptIntegrationSettings";
+	}
 }

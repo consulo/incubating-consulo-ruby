@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RWhenCase;
@@ -25,33 +23,41 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompou
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RWhenCaseImpl extends RPsiElementBase implements RWhenCase {
-    public RWhenCaseImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RWhenCaseImpl extends RPsiElementBase implements RWhenCase
+{
+	public RWhenCaseImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRWhenCase(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRWhenCase(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RListOfExpressions getCaseExpression() {
-        return RubyPsiUtil.getChildByType(this, RListOfExpressions.class, 0);
-    }
+	@Override
+	public RListOfExpressions getCaseExpression()
+	{
+		return RubyPsiUtil.getChildByType(this, RListOfExpressions.class, 0);
+	}
 
-    @Override
-	public RCompoundStatement getCaseBody() {
-        return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
-    }
+	@Override
+	public RCompoundStatement getCaseBody()
+	{
+		return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
+	}
 }

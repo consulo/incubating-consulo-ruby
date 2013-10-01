@@ -25,14 +25,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable
  * User: oleg
  * Date: Aug 22, 2007
  */
-public interface GlobalVarDefinition {
-    @NotNull
-    public RGlobalVariable getFirstDefinition();
+public interface GlobalVarDefinition
+{
+	@NotNull
+	public RGlobalVariable getFirstDefinition();
 
-    public void process(@NotNull RGlobalVariable constant);
+	public void process(@NotNull RGlobalVariable constant);
 
-    @NotNull
-    public String getText();
+	@NotNull
+	public String getText();
 
-    public boolean isFor(@NotNull RVirtualGlobalVar constant);
+	public boolean isFor(@NotNull RVirtualGlobalVar constant);
 }

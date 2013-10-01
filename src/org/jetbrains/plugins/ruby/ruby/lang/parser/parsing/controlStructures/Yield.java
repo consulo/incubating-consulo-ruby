@@ -17,57 +17,63 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class Yield implements RubyTokenTypes {
+public class Yield implements RubyTokenTypes
+{
 
-    @NotNull
-    public static IElementType parseWithCommandArgs(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(kYIELD);
-        final boolean braceSeen = builder.compareAndEat(tfLPAREN);
-// In this case we have only kYIELD keyword
-        if (CALL_ARGS.parse(builder) == RubyElementTypes.EMPTY_INPUT && !braceSeen) {
-            statementMarker.rollbackTo();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        if (braceSeen){
-            builder.match(tRPAREN);
-        }
-        statementMarker.done(RubyElementTypes.YIELD_STATEMENT);
-        return RubyElementTypes.YIELD_STATEMENT;
+	@NotNull
+	public static IElementType parseWithCommandArgs(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(kYIELD);
+		final boolean braceSeen = builder.compareAndEat(tfLPAREN);
+		// In this case we have only kYIELD keyword
+		if(CALL_ARGS.parse(builder) == RubyElementTypes.EMPTY_INPUT && !braceSeen)
+		{
+			statementMarker.rollbackTo();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		if(braceSeen)
+		{
+			builder.match(tRPAREN);
+		}
+		statementMarker.done(RubyElementTypes.YIELD_STATEMENT);
+		return RubyElementTypes.YIELD_STATEMENT;
 
-    }
+	}
 
 /*
-        | kYIELD '(' call_args ')'
+		| kYIELD '(' call_args ')'
         | kYIELD '(' ')'
         | kYIELD
 */
 
-    @NotNull
-    public static IElementType parseWithParenthes(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(kYIELD);
+	@NotNull
+	public static IElementType parseWithParenthes(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(kYIELD);
 
-        if (builder.compareAndEat(tfLPAREN)){
-            CALL_ARGS.parse(builder);
-            builder.match(tRPAREN);
-        }
+		if(builder.compareAndEat(tfLPAREN))
+		{
+			CALL_ARGS.parse(builder);
+			builder.match(tRPAREN);
+		}
 
-        statementMarker.done(RubyElementTypes.YIELD_STATEMENT);
-        return RubyElementTypes.YIELD_STATEMENT;
-    }
+		statementMarker.done(RubyElementTypes.YIELD_STATEMENT);
+		return RubyElementTypes.YIELD_STATEMENT;
+	}
 
 }

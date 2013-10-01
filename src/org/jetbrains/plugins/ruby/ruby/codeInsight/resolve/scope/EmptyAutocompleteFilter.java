@@ -22,39 +22,46 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilte
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Mar 3, 2008
-*/
-public class EmptyAutocompleteFilter implements ScopeAutocompleteFilter {
-    @Override
-	public boolean allowJRuby() {
-        return true;
-    }
+ *
+ * @author: oleg
+ * @date: Mar 3, 2008
+ */
+public class EmptyAutocompleteFilter implements ScopeAutocompleteFilter
+{
+	@Override
+	public boolean allowJRuby()
+	{
+		return true;
+	}
 
-    @Override
-	public boolean allowOutterMembers() {
-        return true;
-    }
+	@Override
+	public boolean allowOutterMembers()
+	{
+		return true;
+	}
 
-    @Override
-	public boolean allowOwnMembers() {
-        return true;
-    }
+	@Override
+	public boolean allowOwnMembers()
+	{
+		return true;
+	}
 
-    @Override
-	public boolean allowLocalVariablesAndParameters() {
-        return true;
-    }
+	@Override
+	public boolean allowLocalVariablesAndParameters()
+	{
+		return true;
+	}
 
-    @Override
-	public boolean allowReswords() {
-        return true;
-    }
+	@Override
+	public boolean allowReswords()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public SymbolFilter getSymbolFilter() {
-        return SymbolFilterFactory.EMPTY_FILTER;
-    }
+	public SymbolFilter getSymbolFilter()
+	{
+		return SymbolFilterFactory.EMPTY_FILTER;
+	}
 }

@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global;
  * User: oleg
  * Date: Aug 27, 2007
  */
-public interface RBackRef extends RGlobalVariable{
+public interface RBackRef extends RGlobalVariable
+{
 }

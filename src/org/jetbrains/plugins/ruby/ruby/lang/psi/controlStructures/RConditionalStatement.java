@@ -24,7 +24,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RConditionalStatement extends RPsiElement {
-    @Nullable
-    RCondition getCondition();
+public interface RConditionalStatement extends RPsiElement
+{
+	@Nullable
+	RCondition getCondition();
 }

@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.actions;
 
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,15 +29,18 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
  * Date: Oct 22, 2007
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class ClearSymbolCachesAction extends AnAction {
+public class ClearSymbolCachesAction extends AnAction
+{
 
-    @Override
-	public void actionPerformed(AnActionEvent e) {
-        final Project project = e.getData(DataKeys.PROJECT);
-        if (project == null){
-            return;
-        }
-        SymbolsCache.getInstance(project).clearCaches();
-        Messages.showInfoMessage(project, "Symbol caches have been cleared", "Debug Tools");
-    }
+	@Override
+	public void actionPerformed(AnActionEvent e)
+	{
+		final Project project = e.getData(DataKeys.PROJECT);
+		if(project == null)
+		{
+			return;
+		}
+		SymbolsCache.getInstance(project).clearCaches();
+		Messages.showInfoMessage(project, "Symbol caches have been cleared", "Debug Tools");
+	}
 }

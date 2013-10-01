@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
  * User: oleg
  * Date: 17.01.2007
  */
-public interface RSelfAssignmentExpression extends RAssignmentExpression{
+public interface RSelfAssignmentExpression extends RAssignmentExpression
+{
 }

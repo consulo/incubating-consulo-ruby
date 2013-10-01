@@ -16,30 +16,30 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks;
 
+import java.util.List;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.RWrapAndIndentCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructureElement;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 01.08.2006
  */
-public interface RBodyStatement extends RPsiElement,
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT {
+public interface RBodyStatement extends RPsiElement, RFormatStructureElement, RWrapAndIndentCOMPSTMT
+{
 
-    @Nullable
-    RCompoundStatement getBlock();
+	@Nullable
+	RCompoundStatement getBlock();
 
-    List<RRescueBlock> getRescueBlocks();
+	List<RRescueBlock> getRescueBlocks();
 
-    @Nullable
-    REnsureBlock getEnsureBlock();
+	@Nullable
+	REnsureBlock getEnsureBlock();
 
-    @Nullable
-    RElseBlock getElseBlock();
+	@Nullable
+	RElseBlock getElseBlock();
 
 }

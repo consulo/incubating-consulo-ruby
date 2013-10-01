@@ -16,14 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
+import java.awt.Color;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,56 +35,67 @@ import java.awt.*;
  * @author: oleg
  * @date: Nov 8, 2006
  */
-class AboutPane {
-    private JPanel mainPanel;
-    private LabeledComponent<JTextField> myJDKComp;
-    private LabeledComponent<JTextField> myRIComp;
-    private JLabel myLabel;
-    private JTextField myJdkField;
-    private JTextField myRiVersionField;
-    private RDocPanel myDocPanel;
-    private Project myProject;
+class AboutPane
+{
+	private JPanel mainPanel;
+	private LabeledComponent<JTextField> myJDKComp;
+	private LabeledComponent<JTextField> myRIComp;
+	private JLabel myLabel;
+	private JTextField myJdkField;
+	private JTextField myRiVersionField;
+	private RDocPanel myDocPanel;
+	private Project myProject;
 
-    public AboutPane(final RDocPanel docPanel, final Project project){
-        myDocPanel = docPanel;
-        myProject = project;
-        myLabel.setText(RBundle.message("ruby.ri.about.message"));
-    }
+	public AboutPane(final RDocPanel docPanel, final Project project)
+	{
+		myDocPanel = docPanel;
+		myProject = project;
+		myLabel.setText(RBundle.message("ruby.ri.about.message"));
+	}
 
-    private void createUIComponents() {
-        myJDKComp = new LabeledComponent<JTextField>();
-        myJdkField = new JTextField();
-        myJdkField.setEditable(false);
-        myJDKComp.setComponent(myJdkField);
-        myJDKComp.setText(RBundle.message("ruby.sdk.used"));
+	private void createUIComponents()
+	{
+		myJDKComp = new LabeledComponent<JTextField>();
+		myJdkField = new JTextField();
+		myJdkField.setEditable(false);
+		myJDKComp.setComponent(myJdkField);
+		myJDKComp.setText(RBundle.message("ruby.sdk.used"));
 
-        myRIComp = new LabeledComponent<JTextField>();
-        myRiVersionField = new JTextField();
-        myRiVersionField.setEditable(false);
-        myRIComp.setComponent(myRiVersionField);
-        myRIComp.setText(RBundle.message("ruby.ri.ri.used"));
+		myRIComp = new LabeledComponent<JTextField>();
+		myRiVersionField = new JTextField();
+		myRiVersionField.setEditable(false);
+		myRIComp.setComponent(myRiVersionField);
+		myRIComp.setText(RBundle.message("ruby.ri.ri.used"));
 
-    }
+	}
 
-    public void fireJDKChanged() {
-        Sdk jdk = myDocPanel.getSdk();
-        if (RubySdkUtil.isKindOfRubySDK(jdk)){
-            myJdkField.setForeground(Color.BLACK);
-            myJdkField.setText(jdk.getName());
-            if (RIUtil.checkIfRiExists(jdk)){
-                final String progressTitle = RBundle.message("ruby.ri.update.title");
-                myRiVersionField.setText(RIUtil.getRiOutput(jdk, myProject, progressTitle, RIUtil.VERSION).getStdout());
-            } else {
-                myRiVersionField.setText(RBundle.message("ruby.ri.no.ri.found"));
-            }
-        } else {
-            myJdkField.setForeground(Color.RED);
-            myJdkField.setText(RBundle.message("ruby.ri.wrong.project.jdk"));
-            myRiVersionField.setText(RBundle.message("ruby.ri.ri.unknown.version"));
-        }
-    }
+	public void fireJDKChanged()
+	{
+		Sdk jdk = myDocPanel.getSdk();
+		if(RubySdkUtil.isKindOfRubySDK(jdk))
+		{
+			myJdkField.setForeground(Color.BLACK);
+			myJdkField.setText(jdk.getName());
+			if(RIUtil.checkIfRiExists(jdk))
+			{
+				final String progressTitle = RBundle.message("ruby.ri.update.title");
+				myRiVersionField.setText(RIUtil.getRiOutput(jdk, myProject, progressTitle, RIUtil.VERSION).getStdout());
+			}
+			else
+			{
+				myRiVersionField.setText(RBundle.message("ruby.ri.no.ri.found"));
+			}
+		}
+		else
+		{
+			myJdkField.setForeground(Color.RED);
+			myJdkField.setText(RBundle.message("ruby.ri.wrong.project.jdk"));
+			myRiVersionField.setText(RBundle.message("ruby.ri.ri.unknown.version"));
+		}
+	}
 
-    public JComponent getPanel() {
-        return mainPanel;
-    }
+	public JComponent getPanel()
+	{
+		return mainPanel;
+	}
 }

@@ -32,62 +32,75 @@ import com.intellij.psi.PsiManager;
  * @author: Roman Chernyatchik, oleg
  * @date: 29.04.2007
  */
-public abstract class BaseModuleCachesManager implements ModuleComponent {
+public abstract class BaseModuleCachesManager implements ModuleComponent
+{
 
-    @NonNls private static final String RUBY_CACHE_DIR = "ruby_caches";
-    @NonNls private static final String RUBY_CACHE_FILE = "module";
+	@NonNls
+	private static final String RUBY_CACHE_DIR = "ruby_caches";
+	@NonNls
+	private static final String RUBY_CACHE_FILE = "module";
 
-    protected Module myModule;
-    protected RubyModuleFilesCache myModuleFilesCache;
-    protected ModuleRootManager myModuleRootManager;
+	protected Module myModule;
+	protected RubyModuleFilesCache myModuleFilesCache;
+	protected ModuleRootManager myModuleRootManager;
 
-    //PsiManager should build caches thus register prestarup activity thus create it's instance
-    //  before ruby cache manager
-    @SuppressWarnings({"UnusedDeclaration", "UnusedParameters"})
-    public BaseModuleCachesManager(@NotNull final Module module,
-                                   @NotNull final ModuleRootManager manager,
-                                   @NotNull final PsiManager psiManger) {
-        myModule = module;
-        myModuleRootManager = manager;
-    }
+	//PsiManager should build caches thus register prestarup activity thus create it's instance
+	//  before ruby cache manager
+	@SuppressWarnings({
+			"UnusedDeclaration",
+			"UnusedParameters"
+	})
+	public BaseModuleCachesManager(@NotNull final Module module, @NotNull final ModuleRootManager manager, @NotNull final PsiManager psiManger)
+	{
+		myModule = module;
+		myModuleRootManager = manager;
+	}
 
-    /**
-     * @return Path to file where cached information is saved.
-     */
-    @NotNull
-    protected String generateCacheFilePath() {
-        return PathManager.getSystemPath()+"/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" + myModule.getProject().getName()+ "/" +myModule.getName() + "_" + myModule.getModuleDirPath().hashCode();
-    }
+	/**
+	 * @return Path to file where cached information is saved.
+	 */
+	@NotNull
+	protected String generateCacheFilePath()
+	{
+		return PathManager.getSystemPath() + "/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" + myModule.getProject().getName() + "/" + myModule.getName() + "_" + myModule.getModuleDirPath().hashCode();
+	}
 
-    @Override
-	public void projectOpened() {
-    }
+	@Override
+	public void projectOpened()
+	{
+	}
 
-    @Override
-	public void projectClosed() {
-        myModuleFilesCache.saveCacheToDisk();
-    }
+	@Override
+	public void projectClosed()
+	{
+		myModuleFilesCache.saveCacheToDisk();
+	}
 
-    @Override
-	public void initComponent() {
-    }
+	@Override
+	public void initComponent()
+	{
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 
-    @NotNull
-    public RubyModuleFilesCache getFilesCache() {
-        return myModuleFilesCache;
-    }
+	@NotNull
+	public RubyModuleFilesCache getFilesCache()
+	{
+		return myModuleFilesCache;
+	}
 
-    @NotNull
-    public DeclarationsIndex getDeclarationsIndex() {
-        return myModuleFilesCache.getDeclarationsIndex();
-    }
+	@NotNull
+	public DeclarationsIndex getDeclarationsIndex()
+	{
+		return myModuleFilesCache.getDeclarationsIndex();
+	}
 
-    @Override
-	public void moduleAdded() {
-        //do nothing
-    }
+	@Override
+	public void moduleAdded()
+	{
+		//do nothing
+	}
 }

@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -25,40 +23,49 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RMultiAssignmentExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 03.07.2006
  */
-public class RMultiAssignmentExpressionImpl extends RAssignmentExpressionImpl implements RMultiAssignmentExpression {
+public class RMultiAssignmentExpressionImpl extends RAssignmentExpressionImpl implements RMultiAssignmentExpression
+{
 
-    public RMultiAssignmentExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RMultiAssignmentExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public boolean isMultiObject() {
-        return getObject() instanceof RListOfExpressions;
-    }
+	@Override
+	public boolean isMultiObject()
+	{
+		return getObject() instanceof RListOfExpressions;
+	}
 
-    @Override
-	public boolean isMultiValue() {
-        return getValue() instanceof RListOfExpressions;
-    }
+	@Override
+	public boolean isMultiValue()
+	{
+		return getValue() instanceof RListOfExpressions;
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRMultiAssignmentExpression(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRMultiAssignmentExpression(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return isMultiValue() ? RType.NOT_TYPED : super.getType(fileSymbol);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return isMultiValue() ? RType.NOT_TYPED : super.getType(fileSymbol);
+	}
 }

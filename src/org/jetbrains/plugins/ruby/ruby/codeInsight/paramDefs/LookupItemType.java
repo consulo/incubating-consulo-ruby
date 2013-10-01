@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 /**
  * @author yole
  */
-public enum LookupItemType {
-    Symbol, String, None
+public enum LookupItemType
+{
+	Symbol, String, None
 }

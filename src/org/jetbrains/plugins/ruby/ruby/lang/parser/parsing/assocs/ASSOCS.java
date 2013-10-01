@@ -17,38 +17,42 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assocs;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class ASSOCS implements RubyTokenTypes {
+public class ASSOCS implements RubyTokenTypes
+{
 /*
 		| tLBRACE assoc_list RCURLY
 */
-    /**
-     * Hash element parsing
-     * @param builder Current builder
-     * @return result of parsing
-     */
-@NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
 
-        builder.match(tLBRACE);
+	/**
+	 * Hash element parsing
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        ASSOC_LIST.parse(builder);
+		builder.match(tLBRACE);
 
-        builder.matchIgnoreEOL(tRBRACE);
+		ASSOC_LIST.parse(builder);
 
-        statementMarker.done(RubyElementTypes.ASSOC_LIST);
-        return RubyElementTypes.ASSOC_LIST;
-    }
+		builder.matchIgnoreEOL(tRBRACE);
+
+		statementMarker.done(RubyElementTypes.ASSOC_LIST);
+		return RubyElementTypes.ASSOC_LIST;
+	}
 }

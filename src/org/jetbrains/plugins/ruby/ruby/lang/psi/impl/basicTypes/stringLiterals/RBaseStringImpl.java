@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpressionImpl;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,19 +28,23 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpress
  * @author: oleg
  * @date: Oct 25, 2006
  */
-public class RBaseStringImpl extends RStringLiteralBase implements RBaseString {
-    public RBaseStringImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBaseStringImpl extends RStringLiteralBase implements RBaseString
+{
+	public RBaseStringImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void replaceByRSymbol(@NotNull final RSymbol rSymbol) {
-        super.replace(rSymbol);
-    }
+	@Override
+	public void replaceByRSymbol(@NotNull final RSymbol rSymbol)
+	{
+		super.replace(rSymbol);
+	}
 
-    @Override
-	public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr) {
-        super.replace(mathExpr);
-    }
+	@Override
+	public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr)
+	{
+		super.replace(mathExpr);
+	}
 
 }

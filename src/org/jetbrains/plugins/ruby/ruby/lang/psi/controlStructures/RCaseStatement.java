@@ -16,21 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
+import java.util.List;
+
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.RWrapAndIndentCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBlock;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RCaseStatement extends RPsiElement, RLoopStatement, 
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild {
-    RPsiElement getExpression();
-    List<RWhenCase> getCases();
-    RElseBlock getElseCase();
+public interface RCaseStatement extends RPsiElement, RLoopStatement, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
+	RPsiElement getExpression();
+
+	List<RWhenCase> getCases();
+
+	RElseBlock getElseCase();
 }

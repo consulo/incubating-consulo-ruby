@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.xString;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.RStringLiteralBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class RDXStringLiteralImpl extends RStringLiteralBase implements RStringLiteral {
-    public RDXStringLiteralImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RDXStringLiteralImpl extends RStringLiteralBase implements RStringLiteral
+{
+	public RDXStringLiteralImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -25,30 +24,34 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.EXPR;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.06.2006
  */
-public class Defined implements RubyTokenTypes {
+public class Defined implements RubyTokenTypes
+{
 /*
-        | kDEFINED opt_nl '('  expr ')'
+		| kDEFINED opt_nl '('  expr ')'
 */
 
-    @NotNull
-    public static IElementType parseWithParenthes(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(kDEFINED);
-        builder.matchIgnoreEOL(tfLPAREN);
+	@NotNull
+	public static IElementType parseWithParenthes(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(kDEFINED);
+		builder.matchIgnoreEOL(tfLPAREN);
 
-        if(EXPR.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-            builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-        }
+		if(EXPR.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+		{
+			builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+		}
 
-        builder.match(tRPAREN);
-        statementMarker.done(RubyElementTypes.DEFINED_STATEMENT);
-        return RubyElementTypes.DEFINED_STATEMENT;
-    }
+		builder.match(tRPAREN);
+		statementMarker.done(RubyElementTypes.DEFINED_STATEMENT);
+		return RubyElementTypes.DEFINED_STATEMENT;
+	}
 
 }

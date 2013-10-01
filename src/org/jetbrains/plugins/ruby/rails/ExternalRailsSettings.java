@@ -24,38 +24,46 @@ package org.jetbrains.plugins.ruby.rails;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ExternalRailsSettings {
-    private static ExternalRailsSettings ourInstance = new ExternalRailsSettings();
-    private ExternalRailsSettingsDelegate myRailsSettingsDelegate;
+public class ExternalRailsSettings
+{
+	private static ExternalRailsSettings ourInstance = new ExternalRailsSettings();
+	private ExternalRailsSettingsDelegate myRailsSettingsDelegate;
 
-    public static ExternalRailsSettings getInstance() {
-        return ourInstance;
-    }
+	public static ExternalRailsSettings getInstance()
+	{
+		return ourInstance;
+	}
 
-    private ExternalRailsSettings() {
-    }
+	private ExternalRailsSettings()
+	{
+	}
 
-    @NotNull
-    public static String[] getRailsScriptDataBaseTypes() {
-        return getInstance().getRailsSettingsDelegate().getRailsScriptDataBaseTypes();
-    }
+	@NotNull
+	public static String[] getRailsScriptDataBaseTypes()
+	{
+		return getInstance().getRailsSettingsDelegate().getRailsScriptDataBaseTypes();
+	}
 
-    @NotNull
-    public static String[] getRailsServersTypes() {
-        return getInstance().getRailsSettingsDelegate().getRailsServersTypes();
-    }
+	@NotNull
+	public static String[] getRailsServersTypes()
+	{
+		return getInstance().getRailsSettingsDelegate().getRailsServersTypes();
+	}
 
-    @NotNull
-    public static String getRailsServersTitlesByType(@NotNull final String serverType) {
-        return getInstance().getRailsSettingsDelegate().getRailsServersTitlesByType(serverType);
-    }
+	@NotNull
+	public static String getRailsServersTitlesByType(@NotNull final String serverType)
+	{
+		return getInstance().getRailsSettingsDelegate().getRailsServersTitlesByType(serverType);
+	}
 
-    @NotNull
-    public ExternalRailsSettingsDelegate getRailsSettingsDelegate() {
-        return myRailsSettingsDelegate;
-    }
+	@NotNull
+	public ExternalRailsSettingsDelegate getRailsSettingsDelegate()
+	{
+		return myRailsSettingsDelegate;
+	}
 
-    public void setExternalRailsSettingsDelegate(@NotNull final ExternalRailsSettingsDelegate delegate) {
-        myRailsSettingsDelegate = delegate;
-    }
+	public void setExternalRailsSettingsDelegate(@NotNull final ExternalRailsSettingsDelegate delegate)
+	{
+		myRailsSettingsDelegate = delegate;
+	}
 }

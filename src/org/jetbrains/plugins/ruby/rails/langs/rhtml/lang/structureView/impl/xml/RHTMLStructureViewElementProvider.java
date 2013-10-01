@@ -32,12 +32,14 @@ import com.intellij.psi.xml.XmlTag;
  */
 public class RHTMLStructureViewElementProvider implements XmlStructureViewElementProvider
 {
-  @Override
-  @Nullable
-  public StructureViewTreeElement createCustomXmlTagTreeElement(@NotNull final XmlTag tag) {
-      if (tag instanceof RHTMLRubyInjectionTag) {
-         return new RHTMLScriptNode((RHTMLRubyInjectionTagImpl)tag);
-      }
-      return null;
-  }
+	@Override
+	@Nullable
+	public StructureViewTreeElement createCustomXmlTagTreeElement(@NotNull final XmlTag tag)
+	{
+		if(tag instanceof RHTMLRubyInjectionTag)
+		{
+			return new RHTMLScriptNode((RHTMLRubyInjectionTagImpl) tag);
+		}
+		return null;
+	}
 }

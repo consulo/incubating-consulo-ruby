@@ -27,18 +27,19 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
  * @author: oleg
  * @date: Nov 22, 2006
  */
-public interface RVirtualField extends RVirtualElement {
-    @NotNull
-    public String getName();
+public interface RVirtualField extends RVirtualElement
+{
+	@NotNull
+	public String getName();
 
-    @NotNull
-    public RVirtualFieldHolder getHolder();
+	@NotNull
+	public RVirtualFieldHolder getHolder();
 
-    /**
-     * @return Field type, FieldType.CLASS_VARIABLE or FieldType.INSTANCE_VARIABLE
-     */
-    public FieldType getType();
+	/**
+	 * @return Field type, FieldType.CLASS_VARIABLE or FieldType.INSTANCE_VARIABLE
+	 */
+	public FieldType getType();
 
-    @NotNull
-    public String getText();
+	@NotNull
+	public String getText();
 }

@@ -21,31 +21,35 @@ import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.Commenter;
 
 
-public class RubyCommenter implements Commenter {
-    @NonNls
-    private static final String LINE_COMMENT_PREFIX = "#";
-    @NonNls
-    private static final String BLOCK_COMMENT_PREFIX = "\n=begin\n";
-    @NonNls
-    private static final String BLOCK_COMMAND_SUFFIX = "\n=end\n";
+public class RubyCommenter implements Commenter
+{
+	@NonNls
+	private static final String LINE_COMMENT_PREFIX = "#";
+	@NonNls
+	private static final String BLOCK_COMMENT_PREFIX = "\n=begin\n";
+	@NonNls
+	private static final String BLOCK_COMMAND_SUFFIX = "\n=end\n";
 
-    @Override
+	@Override
 	@Nullable
-    public String getLineCommentPrefix() {
-        return LINE_COMMENT_PREFIX;
-    }
+	public String getLineCommentPrefix()
+	{
+		return LINE_COMMENT_PREFIX;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getBlockCommentPrefix() {
-        return BLOCK_COMMENT_PREFIX;
-    }
+	public String getBlockCommentPrefix()
+	{
+		return BLOCK_COMMENT_PREFIX;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getBlockCommentSuffix() {
-        return BLOCK_COMMAND_SUFFIX;
-    }
+	public String getBlockCommentSuffix()
+	{
+		return BLOCK_COMMAND_SUFFIX;
+	}
 
 	@Nullable
 	@Override

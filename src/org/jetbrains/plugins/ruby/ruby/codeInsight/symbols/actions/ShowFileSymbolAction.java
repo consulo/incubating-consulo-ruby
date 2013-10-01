@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.actions;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
+import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
-import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,27 +35,34 @@ import java.io.IOException;
  * Date: Aug 27, 2007
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class ShowFileSymbolAction extends AnAction {
+public class ShowFileSymbolAction extends AnAction
+{
 
-    @Override
-	public void actionPerformed(AnActionEvent e) {
-        final Project project = e.getData(DataKeys.PROJECT);
-        if (project == null){
-            return;
-        }
-        final FileSymbol fileSymbol = LastSymbolStorage.getInstance(project).getSymbol();
-        if (fileSymbol != null) {
-            final String string = fileSymbol.dumpHTML();
-            try {
-                final File file = File.createTempFile("dump", ".html");
-                final FileWriter writer = new FileWriter(file);
-                writer.append(string);
-                writer.close();
-                BrowserUtil.launchBrowser(VirtualFileUtil.constructLocalUrl(file.getPath()));
-            } catch (IOException e1) {
-                // ignore
-            }
+	@Override
+	public void actionPerformed(AnActionEvent e)
+	{
+		final Project project = e.getData(DataKeys.PROJECT);
+		if(project == null)
+		{
+			return;
+		}
+		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(project).getSymbol();
+		if(fileSymbol != null)
+		{
+			final String string = fileSymbol.dumpHTML();
+			try
+			{
+				final File file = File.createTempFile("dump", ".html");
+				final FileWriter writer = new FileWriter(file);
+				writer.append(string);
+				writer.close();
+				BrowserUtil.launchBrowser(VirtualFileUtil.constructLocalUrl(file.getPath()));
+			}
+			catch(IOException e1)
+			{
+				// ignore
+			}
 
-        }
-    }
+		}
+	}
 }

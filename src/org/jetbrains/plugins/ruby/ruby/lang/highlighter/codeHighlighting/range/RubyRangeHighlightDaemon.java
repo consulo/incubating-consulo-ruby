@@ -31,22 +31,22 @@ import com.intellij.openapi.util.Key;
  * @author: oleg
  * @date: Jun 26, 2007
  */
-public class RubyRangeHighlightDaemon {
-    private static final Key<HighlightInfo[]> RUBY_HIGHLIGHT_INFO = Key.create("RUBY_HIGHLIGHT_INFO");
+public class RubyRangeHighlightDaemon
+{
+	private static final Key<HighlightInfo[]> RUBY_HIGHLIGHT_INFO = Key.create("RUBY_HIGHLIGHT_INFO");
 
-    @Nullable
-    public static HighlightInfo[] getHighlightInfos(final Document document,
-                                                    final Project project) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup =  DocumentMarkupModel.forDocument(document, project, false);
-        return markup.getUserData(RUBY_HIGHLIGHT_INFO);
-    }
+	@Nullable
+	public static HighlightInfo[] getHighlightInfos(final Document document, final Project project)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
+		MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
+		return markup.getUserData(RUBY_HIGHLIGHT_INFO);
+	}
 
-    public static void setHighligthInfos(final Document document,
-                                         final HighlightInfo[] infos,
-                                         final Project project) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
-        markup.putUserData(RUBY_HIGHLIGHT_INFO, infos);
-    }
+	public static void setHighligthInfos(final Document document, final HighlightInfo[] infos, final Project project)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
+		MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
+		markup.putUserData(RUBY_HIGHLIGHT_INFO, infos);
+	}
 }

@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.io.Serializable;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
@@ -25,61 +29,67 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
 
-import javax.swing.*;
-import java.io.Serializable;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Jun 20, 2007
  */
-public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements RVirtualAlias, Serializable {
-    private String myOldName;
-    private String myNewName;
+public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements RVirtualAlias, Serializable
+{
+	private String myOldName;
+	private String myNewName;
 
-    public RVirtualAliasImpl(final RVirtualContainer container, @NotNull final String oldName, @NotNull final String newName) {
-        super(container);
-        myOldName = oldName;
-        myNewName = newName;
-    }
+	public RVirtualAliasImpl(final RVirtualContainer container, @NotNull final String oldName, @NotNull final String newName)
+	{
+		super(container);
+		myOldName = oldName;
+		myNewName = newName;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getOldName() {
-        return myOldName;
-    }
+	public String getOldName()
+	{
+		return myOldName;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getNewName() {
-        return myNewName;
-    }
+	public String getNewName()
+	{
+		return myNewName;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.ALIAS;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.ALIAS;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualAlias(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualAlias(this);
+	}
 
-    public String toString() {
-        return getPresentableText();
-    }
+	public String toString()
+	{
+		return getPresentableText();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableText() {
-        return RubyTokenTypes.kALIAS.toString() + " '" + getNewName() + "' '"  + getOldName() + "'";
-    }
+	public String getPresentableText()
+	{
+		return RubyTokenTypes.kALIAS.toString() + " '" + getNewName() + "' '" + getOldName() + "'";
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Icon getIcon(final int flags) {
-        return RAliasPresentationUtil.getIcon();
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RAliasPresentationUtil.getIcon();
+	}
 
 }

@@ -26,20 +26,21 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface Message {
-    @NotNull
-    public String getName();
+public interface Message
+{
+	@NotNull
+	public String getName();
 
-    public int getArgumentsNumber();
+	public int getArgumentsNumber();
 
-    /**
-     * @param patternMessage Patern message
-     * @return true, if this can be matched by patterMessage
-     */
-    public boolean matchesMessage(@NotNull final Message patternMessage);
+	/**
+	 * @param patternMessage Patern message
+	 * @return true, if this can be matched by patterMessage
+	 */
+	public boolean matchesMessage(@NotNull final Message patternMessage);
 
-    @Nullable
-    public Symbol getSymbol();
+	@Nullable
+	public Symbol getSymbol();
 
-    public boolean isImportant();
+	public boolean isImportant();
 }

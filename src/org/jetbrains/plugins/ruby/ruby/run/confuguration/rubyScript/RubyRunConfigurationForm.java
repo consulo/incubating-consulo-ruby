@@ -44,195 +44,223 @@ import com.intellij.ui.RawCommandLineEditor;
  * @author: oleg
  * @date: Nov 27, 2006
  */
-@SuppressWarnings({"UnusedDeclaration", "FieldCanBeLocal"})
-public class RubyRunConfigurationForm implements RubyRunConfigurationParams {
-    protected JPanel generatedPanel;
+@SuppressWarnings({
+		"UnusedDeclaration",
+		"FieldCanBeLocal"
+})
+public class RubyRunConfigurationForm implements RubyRunConfigurationParams
+{
+	protected JPanel generatedPanel;
 
-    protected TextFieldWithBrowseButton scriptPathTextField;
-    protected LabeledComponent scriptComponent;
+	protected TextFieldWithBrowseButton scriptPathTextField;
+	protected LabeledComponent scriptComponent;
 
-    private RawCommandLineEditor scriptArgsEditor;
-    protected LabeledComponent scriptArgsComponent;
+	private RawCommandLineEditor scriptArgsEditor;
+	protected LabeledComponent scriptArgsComponent;
 
-    protected TextFieldWithBrowseButton workDirTextField;
-    protected LabeledComponent workingDirComponent;
+	protected TextFieldWithBrowseButton workDirTextField;
+	protected LabeledComponent workingDirComponent;
 
-    protected RawCommandLineEditor rubyArgsEditor;
-    protected LabeledComponent rubyArgsComponent;
+	protected RawCommandLineEditor rubyArgsEditor;
+	protected LabeledComponent rubyArgsComponent;
 
-    protected JComboBox myModulesComboBox;
-    protected LabeledComponent modulesComponent;
+	protected JComboBox myModulesComboBox;
+	protected LabeledComponent modulesComponent;
 
-    private JComboBox myAlternativeSdksComboBox;
-    private LabeledComponent myAlternativeSdksComponent;
-    private JCheckBox myUseAlternativeSdkCB;
+	private JComboBox myAlternativeSdksComboBox;
+	private LabeledComponent myAlternativeSdksComponent;
+	private JCheckBox myUseAlternativeSdkCB;
 
-    //System Environment
-    protected EnvironmentVariablesComponent myEnvVariablesComponent;
+	//System Environment
+	protected EnvironmentVariablesComponent myEnvVariablesComponent;
 
 
-    private final Project myProject;
-    private final RubyRunConfiguration myConfiguration;
+	private final Project myProject;
+	private final RubyRunConfiguration myConfiguration;
 
-    public RubyRunConfigurationForm(@NotNull final Project project, @NotNull final RubyRunConfiguration configuration){
-        myProject = project;
-        myConfiguration = configuration;
-        initComponents();
-    }
+	public RubyRunConfigurationForm(@NotNull final Project project, @NotNull final RubyRunConfiguration configuration)
+	{
+		myProject = project;
+		myConfiguration = configuration;
+		initComponents();
+	}
 
-    protected void initComponents() {
-        RubyRunConfigurationUIUtil.initCommonComponents(myConfiguration, myModulesComboBox, myAlternativeSdksComboBox);
+	protected void initComponents()
+	{
+		RubyRunConfigurationUIUtil.initCommonComponents(myConfiguration, myModulesComboBox, myAlternativeSdksComboBox);
 
-// adding browse action to script chooser
-        String title = RBundle.message("run.configuration.messages.select.ruby.scipt.path");
-        RubyRunConfigurationUIUtil.addFileChooser(title, scriptPathTextField, myProject);
+		// adding browse action to script chooser
+		String title = RBundle.message("run.configuration.messages.select.ruby.scipt.path");
+		RubyRunConfigurationUIUtil.addFileChooser(title, scriptPathTextField, myProject);
 
-// adding browse action to working dir chooser
-        title = RBundle.message("run.configuration.messages.select.working.dir");
-        RubyRunConfigurationUIUtil.addFileChooser(title, workDirTextField, myProject);
+		// adding browse action to working dir chooser
+		title = RBundle.message("run.configuration.messages.select.working.dir");
+		RubyRunConfigurationUIUtil.addFileChooser(title, workDirTextField, myProject);
 
-        RubyRunConfigurationUIUtil.addAlternativeSDKActionListener(myUseAlternativeSdkCB, myAlternativeSdksComponent, myModulesComboBox);
-        setShouldUseAlternativeSdk(false);
-    }
+		RubyRunConfigurationUIUtil.addAlternativeSDKActionListener(myUseAlternativeSdkCB, myAlternativeSdksComponent, myModulesComboBox);
+		setShouldUseAlternativeSdk(false);
+	}
 
-    protected LabeledComponent createScriptArgsComponent() {
-        final String dialogCaption = RBundle.message("run.configuration.messages.edit.script.args");
-        final String text = RBundle.message("run.configuration.messages.script.args");
+	protected LabeledComponent createScriptArgsComponent()
+	{
+		final String dialogCaption = RBundle.message("run.configuration.messages.edit.script.args");
+		final String text = RBundle.message("run.configuration.messages.script.args");
 
-        final Ref<RawCommandLineEditor> scriptArgsEditorWrapper = new Ref<RawCommandLineEditor>();
-        LabeledComponent<RawCommandLineEditor> myComponent = RubyRunConfigurationUIUtil.createRawEditorComponent(scriptArgsEditorWrapper, dialogCaption, text);
-        scriptArgsEditor = scriptArgsEditorWrapper.get();
+		final Ref<RawCommandLineEditor> scriptArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		LabeledComponent<RawCommandLineEditor> myComponent = RubyRunConfigurationUIUtil.createRawEditorComponent(scriptArgsEditorWrapper, dialogCaption, text);
+		scriptArgsEditor = scriptArgsEditorWrapper.get();
 
-        return myComponent;
-    }
+		return myComponent;
+	}
 
-    private void createUIComponents() {
-        scriptArgsComponent = createScriptArgsComponent();
+	private void createUIComponents()
+	{
+		scriptArgsComponent = createScriptArgsComponent();
 
-        final Ref<TextFieldWithBrowseButton> scriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
-        scriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptTextFieldWrapper, RBundle.message("run.configuration.messages.script.path"));
-        scriptPathTextField = scriptTextFieldWrapper.get();
+		final Ref<TextFieldWithBrowseButton> scriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		scriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptTextFieldWrapper, RBundle.message("run.configuration.messages.script.path"));
+		scriptPathTextField = scriptTextFieldWrapper.get();
 
-        final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
-        workingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
-        workDirTextField = wordDirComponentWrapper.get();
+		final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		workingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
+		workDirTextField = wordDirComponentWrapper.get();
 
-        final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
-        rubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
-        rubyArgsEditor = rubyArgsEditorWrapper.get();
+		final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		rubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
+		rubyArgsEditor = rubyArgsEditorWrapper.get();
 
-        final Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
-        modulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
-        myModulesComboBox = modulesComboBoxWrapper.get();
+		final Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
+		modulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
+		myModulesComboBox = modulesComboBoxWrapper.get();
 
-        final Ref<JComboBox> altSdksComboBoxWrapper = new Ref<JComboBox>();
-        myAlternativeSdksComponent = RubyRunConfigurationUIUtil.createAlternativeSdksComponent(altSdksComboBoxWrapper);
-        myAlternativeSdksComboBox = altSdksComboBoxWrapper.get();
-    }
+		final Ref<JComboBox> altSdksComboBoxWrapper = new Ref<JComboBox>();
+		myAlternativeSdksComponent = RubyRunConfigurationUIUtil.createAlternativeSdksComponent(altSdksComboBoxWrapper);
+		myAlternativeSdksComboBox = altSdksComboBoxWrapper.get();
+	}
 
-    /**
-     * @return Selected alternativ sdk
-     */
-    @Override
+	/**
+	 * @return Selected alternativ sdk
+	 */
+	@Override
 	@Nullable
-    public Sdk getAlternativeSdk(){
-        final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
-        return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
-    }
+	public Sdk getAlternativeSdk()
+	{
+		final Object selectedObject = myAlternativeSdksComboBox.getSelectedItem();
+		return selectedObject instanceof Sdk ? (Sdk) selectedObject : null;
+	}
 
 
-    @Override
-	public boolean shouldUseAlternativeSdk() {
-        return myUseAlternativeSdkCB.isSelected();
-    }
+	@Override
+	public boolean shouldUseAlternativeSdk()
+	{
+		return myUseAlternativeSdkCB.isSelected();
+	}
 
 
-    @Override
-	public void setShouldUseAlternativeSdk(final boolean shouldUse) {
-        RubyRunConfigurationUIUtil.setShouldUseAlternSdk(shouldUse, myUseAlternativeSdkCB, myAlternativeSdksComboBox, myModulesComboBox);
-    }
+	@Override
+	public void setShouldUseAlternativeSdk(final boolean shouldUse)
+	{
+		RubyRunConfigurationUIUtil.setShouldUseAlternSdk(shouldUse, myUseAlternativeSdkCB, myAlternativeSdksComboBox, myModulesComboBox);
+	}
 
-    @Override
-	public void setAlternativeSdk(@Nullable final Sdk sdk){
-        myAlternativeSdksComboBox.setSelectedItem(sdk);
-    }
+	@Override
+	public void setAlternativeSdk(@Nullable final Sdk sdk)
+	{
+		myAlternativeSdksComboBox.setSelectedItem(sdk);
+	}
 
-    public JComponent getPanel(){
-        return generatedPanel;
-    }
+	public JComponent getPanel()
+	{
+		return generatedPanel;
+	}
 
-    @Override
-	public String getScriptPath(){
-        return FileUtil.toSystemIndependentName(scriptPathTextField.getText().trim());
-    }
+	@Override
+	public String getScriptPath()
+	{
+		return FileUtil.toSystemIndependentName(scriptPathTextField.getText().trim());
+	}
 
-    @Override
-	public String getScriptArgs(){
-        return scriptArgsEditor.getText().trim();
-    }
+	@Override
+	public String getScriptArgs()
+	{
+		return scriptArgsEditor.getText().trim();
+	}
 
-    @Override
-	public String getRubyArgs(){
-        return rubyArgsEditor.getText().trim();
-    }
+	@Override
+	public String getRubyArgs()
+	{
+		return rubyArgsEditor.getText().trim();
+	}
 
-    @Override
-	public String getWorkingDirectory(){
-        return FileUtil.toSystemIndependentName(workDirTextField.getText().trim());
-    }
+	@Override
+	public String getWorkingDirectory()
+	{
+		return FileUtil.toSystemIndependentName(workDirTextField.getText().trim());
+	}
 
-    @Override
-	public Module getModule(){
-        final Object selectedObject = myModulesComboBox.getSelectedItem();
-        return selectedObject instanceof Module ? (Module)selectedObject : null;
-    }
+	@Override
+	public Module getModule()
+	{
+		final Object selectedObject = myModulesComboBox.getSelectedItem();
+		return selectedObject instanceof Module ? (Module) selectedObject : null;
+	}
 
-    @Override
-	public void setScriptPath(final String value){
-        scriptPathTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
-    }
+	@Override
+	public void setScriptPath(final String value)
+	{
+		scriptPathTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
+	}
 
-    @Override
-	public void setScriptArgs(final String value){
-        scriptArgsEditor.setText(value);
-    }
+	@Override
+	public void setScriptArgs(final String value)
+	{
+		scriptArgsEditor.setText(value);
+	}
 
-    @Override
-	public void setRubyArgs(final String value){
-        rubyArgsEditor.setText(value);
-    }
+	@Override
+	public void setRubyArgs(final String value)
+	{
+		rubyArgsEditor.setText(value);
+	}
 
-    @Override
-	public void setWorkingDirectory(final String value){
-        workDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
-    }
+	@Override
+	public void setWorkingDirectory(final String value)
+	{
+		workDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(value)));
+	}
 
-    @Override
-	public void setModule(@Nullable final Module module){
-        myModulesComboBox.setSelectedItem(module);
-    }
+	@Override
+	public void setModule(@Nullable final Module module)
+	{
+		myModulesComboBox.setSelectedItem(module);
+	}
 
-    protected RubyRunConfiguration getConfiguration() {
-        return myConfiguration;
-    }
+	protected RubyRunConfiguration getConfiguration()
+	{
+		return myConfiguration;
+	}
 
-    @Override
-	public void setEnvs(final Map<String, String> envs) {
-        myEnvVariablesComponent.setEnvs(envs);
-    }
+	@Override
+	public void setEnvs(final Map<String, String> envs)
+	{
+		myEnvVariablesComponent.setEnvs(envs);
+	}
 
-    @Override
-	public void setPassParentEnvs(final boolean passParentEnvs) {
-        myEnvVariablesComponent.setPassParentEnvs(passParentEnvs);
-    }
+	@Override
+	public void setPassParentEnvs(final boolean passParentEnvs)
+	{
+		myEnvVariablesComponent.setPassParentEnvs(passParentEnvs);
+	}
 
-    @Override
-	public Map<String, String> getEnvs() {
-        return myEnvVariablesComponent.getEnvs();
-    }
+	@Override
+	public Map<String, String> getEnvs()
+	{
+		return myEnvVariablesComponent.getEnvs();
+	}
 
-    @Override
-	public boolean isPassParentEnvs() {
-        return myEnvVariablesComponent.isPassParentEnvs();
-    }
+	@Override
+	public boolean isPassParentEnvs()
+	{
+		return myEnvVariablesComponent.isPassParentEnvs();
+	}
 }

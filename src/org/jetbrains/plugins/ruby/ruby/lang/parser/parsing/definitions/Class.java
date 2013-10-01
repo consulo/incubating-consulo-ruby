@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -28,73 +27,79 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method.BO
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class Class implements RubyTokenTypes {
-/*
-        | kCLASS tLSHFT expr
-          term
-          bodystmt
-          kEND
-        | kCLASS cpath superclass
-          bodystmt
-          kEND
+public class Class implements RubyTokenTypes
+{
+	/*
+			| kCLASS tLSHFT expr
+			  term
+			  bodystmt
+			  kEND
+			| kCLASS cpath superclass
+			  bodystmt
+			  kEND
 
-superclass	: term
-		| '<' expr_value term
-		| error term
-
-
-*/
-@NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        IElementType classType = RubyElementTypes.CLASS;
-
-        builder.match(kCLASS);
+	superclass	: term
+			| '<' expr_value term
+			| error term
 
 
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		IElementType classType = RubyElementTypes.CLASS;
 
-// objectClass
-        if (builder.compareAndEat(tLSHFT)){
-            RMarker singletonMarker = builder.mark();
-
-            if (EXPR.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
-            singletonMarker.done(RubyElementTypes.CLASS_OBJECT);
-            classType = RubyElementTypes.OBJECT_CLASS;
-        } else {
-            final RMarker nameMarker = builder.mark();
-            if (CPATH.parse(builder)==RubyElementTypes.EMPTY_INPUT) {
-                builder.error(ErrorMsg.expected(RBundle.message("parsing.class.name")));
-            }
-            nameMarker.done(RubyElementTypes.CLASS_NAME);
-// superclass
-            if (builder.compareAndEat(tLT)) {
-                RMarker superClassMarker = builder.mark();
-                if (EXPR.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                    builder.error(ErrorMsg.expected(RBundle.message("parsing.singleton")));
-                }
-                superClassMarker.done(RubyElementTypes.SUPER_CLASS);
-            }
-        }
-
-        TERM.parse(builder);
-
-        BODYSTMT.parse(builder);
-
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(classType);
-        return classType;
-    }
+		builder.match(kCLASS);
 
 
+		// objectClass
+		if(builder.compareAndEat(tLSHFT))
+		{
+			RMarker singletonMarker = builder.mark();
 
+			if(EXPR.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
+			singletonMarker.done(RubyElementTypes.CLASS_OBJECT);
+			classType = RubyElementTypes.OBJECT_CLASS;
+		}
+		else
+		{
+			final RMarker nameMarker = builder.mark();
+			if(CPATH.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.expected(RBundle.message("parsing.class.name")));
+			}
+			nameMarker.done(RubyElementTypes.CLASS_NAME);
+			// superclass
+			if(builder.compareAndEat(tLT))
+			{
+				RMarker superClassMarker = builder.mark();
+				if(EXPR.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+				{
+					builder.error(ErrorMsg.expected(RBundle.message("parsing.singleton")));
+				}
+				superClassMarker.done(RubyElementTypes.SUPER_CLASS);
+			}
+		}
+
+		TERM.parse(builder);
+
+		BODYSTMT.parse(builder);
+
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(classType);
+		return classType;
+	}
 
 
 }

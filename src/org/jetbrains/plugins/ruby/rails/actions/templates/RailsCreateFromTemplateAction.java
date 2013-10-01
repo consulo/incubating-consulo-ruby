@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -24,48 +26,52 @@ import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: Oct 6, 2007
-*/
-public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateActionBase {
-    private FileTemplate myTemplate;
+ *
+ * @author: Roman Chernyatchik
+ * @date: Oct 6, 2007
+ */
+public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateActionBase
+{
+	private FileTemplate myTemplate;
 
-    public RailsCreateFromTemplateAction(@NotNull final FileTemplate template) {
-        super(template.getName(), null, FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon());
-        myTemplate = template;
-    }
+	public RailsCreateFromTemplateAction(@NotNull final FileTemplate template)
+	{
+		super(template.getName(), null, FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon());
+		myTemplate = template;
+	}
 
-    @Override
-	protected PsiElement invokeDialogAndCreate(Project project, PsiDirectory dir, FileTemplate selectedTemplate) {
-        return createDilog(project, dir, selectedTemplate).create();
-    }
+	@Override
+	protected PsiElement invokeDialogAndCreate(Project project, PsiDirectory dir, FileTemplate selectedTemplate)
+	{
+		return createDilog(project, dir, selectedTemplate).create();
+	}
 
-    @NotNull
-    protected abstract CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
+	@NotNull
+	protected abstract CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
 
-    @Override
+	@Override
 	@Nullable
-    protected AnAction getReplacedAction(final FileTemplate template) {
-        return null;
-    }
+	protected AnAction getReplacedAction(final FileTemplate template)
+	{
+		return null;
+	}
 
-    @Override
-	protected FileTemplate getTemplate(final Project project, final PsiDirectory dir) {
-        return myTemplate;
-    }
+	@Override
+	protected FileTemplate getTemplate(final Project project, final PsiDirectory dir)
+	{
+		return myTemplate;
+	}
 
-    @Override
-	public void update(AnActionEvent e) {
-        super.update(e);
-        Presentation presentation = e.getPresentation();
-        boolean isEnabled = canCreateFromTemplate(e, myTemplate);
-        presentation.setEnabled(isEnabled);
-        presentation.setVisible(isEnabled);
-    }
+	@Override
+	public void update(AnActionEvent e)
+	{
+		super.update(e);
+		Presentation presentation = e.getPresentation();
+		boolean isEnabled = canCreateFromTemplate(e, myTemplate);
+		presentation.setEnabled(isEnabled);
+		presentation.setVisible(isEnabled);
+	}
 }

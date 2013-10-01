@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -25,36 +24,40 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.TERM;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-class F_ARGLIST  implements RubyTokenTypes {
+class F_ARGLIST implements RubyTokenTypes
+{
 /*
 f_arglist   : '(' f_args opt_nl ')'
 		    | f_args term
 		    ;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
 
-        if (builder.compareAndEat(BNF.tLPARENS)){
-            RMarker funcArgsMarker = builder.mark();
-            F_ARGS.parse(builder);
-            funcArgsMarker.done(RubyElementTypes.FUNCTION_ARGUMENT_LIST);
-            builder.passEOLs();
-            builder.match(tRPAREN);
-            return RubyElementTypes.FUNCTION_ARGUMENT_LIST;
-        }
+		if(builder.compareAndEat(BNF.tLPARENS))
+		{
+			RMarker funcArgsMarker = builder.mark();
+			F_ARGS.parse(builder);
+			funcArgsMarker.done(RubyElementTypes.FUNCTION_ARGUMENT_LIST);
+			builder.passEOLs();
+			builder.match(tRPAREN);
+			return RubyElementTypes.FUNCTION_ARGUMENT_LIST;
+		}
 
-        RMarker commandArgsMarker = builder.mark();
-        F_ARGS.parse(builder);
-        commandArgsMarker.done(RubyElementTypes.COMMAND_ARGUMENT_LIST);
-        TERM.parse(builder);
-        return RubyElementTypes.COMMAND_ARGUMENT_LIST;
-    }
+		RMarker commandArgsMarker = builder.mark();
+		F_ARGS.parse(builder);
+		commandArgsMarker.done(RubyElementTypes.COMMAND_ARGUMENT_LIST);
+		TERM.parse(builder);
+		return RubyElementTypes.COMMAND_ARGUMENT_LIST;
+	}
 
 }

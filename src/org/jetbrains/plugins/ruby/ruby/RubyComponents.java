@@ -23,31 +23,54 @@ import org.jetbrains.annotations.NonNls;
  * User: oleg
  * Date: 20.09.2006
  */
-public interface RubyComponents {
-    @NonNls final String RUBY_MODULE_SETTINGS =                     "RubyModuleSettings";
-    @NonNls final String RUBY_SUPPORT_LOADER =                      "RubySupportLoader";
-    @NonNls final String RUBY_MODULE_TYPE =                         "RubyModuleType";
-    @NonNls final String RUBY_SDK_TYPE =                            "RubySdkType";
-    @NonNls final String RUBY_RUN_CONFIGURATION_TYPE =              "RubyRunConfigurationType";
-    @NonNls final String RUBY_SCRIPT_TEMPLATE_LOADER =              "RubyScriptTemplateLoader";
-    @NonNls final String RUBY_MODULE_LOCATION_EDITOR_PROVIDER =     "RubyModuleLocationEditorProvider";
-    @NonNls final String RUBY_MODULE_CACHES_MANAGER =               "RubyModuleCachesManager";
-    @NonNls final String RUBY_SDK_CACHE_MANAGER =                   "RubySdkCachesManager";
-    @NonNls final String RUBY_SYMBOL_CACHE =                        "RubySymbolCache";
-    @NonNls final String RUBY_PROJECT_VIRTUAL_FILE_MANAGER =        "RubyProjectVirtualFileManager";
-    @NonNls final String RUBY_ASPECT =                              "RubyAspect";
-    @NonNls final String RUBY_INTENTION_ACTIONS_MANAGER =           "RubyIntentionActrionsManager";
+public interface RubyComponents
+{
+	@NonNls
+	final String RUBY_MODULE_SETTINGS = "RubyModuleSettings";
+	@NonNls
+	final String RUBY_SUPPORT_LOADER = "RubySupportLoader";
+	@NonNls
+	final String RUBY_MODULE_TYPE = "RubyModuleType";
+	@NonNls
+	final String RUBY_SDK_TYPE = "RubySdkType";
+	@NonNls
+	final String RUBY_RUN_CONFIGURATION_TYPE = "RubyRunConfigurationType";
+	@NonNls
+	final String RUBY_SCRIPT_TEMPLATE_LOADER = "RubyScriptTemplateLoader";
+	@NonNls
+	final String RUBY_MODULE_LOCATION_EDITOR_PROVIDER = "RubyModuleLocationEditorProvider";
+	@NonNls
+	final String RUBY_MODULE_CACHES_MANAGER = "RubyModuleCachesManager";
+	@NonNls
+	final String RUBY_SDK_CACHE_MANAGER = "RubySdkCachesManager";
+	@NonNls
+	final String RUBY_SYMBOL_CACHE = "RubySymbolCache";
+	@NonNls
+	final String RUBY_PROJECT_VIRTUAL_FILE_MANAGER = "RubyProjectVirtualFileManager";
+	@NonNls
+	final String RUBY_ASPECT = "RubyAspect";
+	@NonNls
+	final String RUBY_INTENTION_ACTIONS_MANAGER = "RubyIntentionActrionsManager";
 
-    @NonNls final String RUBY_DOC_MANAGER =                         "RubyDocManager";
-    @NonNls final String RUBY_DOC_SETTINGS =                        "RubyDocSettings";
+	@NonNls
+	final String RUBY_DOC_MANAGER = "RubyDocManager";
+	@NonNls
+	final String RUBY_DOC_SETTINGS = "RubyDocSettings";
 
-    @NonNls final String RUBY_HIGHLIGHT_RANGE_FACTORY =             "RubyHighlightRangeFactory";
-    @NonNls final String RUBY_SLOW_HIGHLIGHT_LINE_FACTORY =         "RubySlowHighlightLineFactory";
-    @NonNls final String RUBY_FAST_HIGHLIGHT_LINE_FACTORY =         "RubyFastHighlightLineFactory";
-    @NonNls final String RUBY_MODULE_ROOT_MANAGER =                 "RubyModuleRootManager";
-    @NonNls final String RUBY_REFERENCE_PROVIDER_LOADER =           "RubyReferenceProviderLoader";
-//    @NonNls final String RUBY_MODULE_SETTINGS_STORAGE =     "RUBY_MODULE_SETTINGS_STORAGE";
+	@NonNls
+	final String RUBY_HIGHLIGHT_RANGE_FACTORY = "RubyHighlightRangeFactory";
+	@NonNls
+	final String RUBY_SLOW_HIGHLIGHT_LINE_FACTORY = "RubySlowHighlightLineFactory";
+	@NonNls
+	final String RUBY_FAST_HIGHLIGHT_LINE_FACTORY = "RubyFastHighlightLineFactory";
+	@NonNls
+	final String RUBY_MODULE_ROOT_MANAGER = "RubyModuleRootManager";
+	@NonNls
+	final String RUBY_REFERENCE_PROVIDER_LOADER = "RubyReferenceProviderLoader";
+	//    @NonNls final String RUBY_MODULE_SETTINGS_STORAGE =     "RUBY_MODULE_SETTINGS_STORAGE";
 
-    @NonNls final String JRUBY_SDK_TYPE =                           "JRubySdkType";
-    @NonNls final String JRUBY_FACET_LISTENER =                "JRubyFacetListener";
+	@NonNls
+	final String JRUBY_SDK_TYPE = "JRubySdkType";
+	@NonNls
+	final String JRUBY_FACET_LISTENER = "JRubyFacetListener";
 }

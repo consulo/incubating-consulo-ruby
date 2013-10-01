@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -24,39 +26,43 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Jan 9, 2008
  */
-public class RVirtualImportJavaClassImpl extends RVirtualStructuralElementBase implements RVirtualImportJavaClass {
-    private final List<RVirtualName> myNames;
+public class RVirtualImportJavaClassImpl extends RVirtualStructuralElementBase implements RVirtualImportJavaClass
+{
+	private final List<RVirtualName> myNames;
 
-    public RVirtualImportJavaClassImpl(final RVirtualContainer container, @NotNull final List<RVirtualName> names) {
-        super(container);
-        myNames = names;
-    }
+	public RVirtualImportJavaClassImpl(final RVirtualContainer container, @NotNull final List<RVirtualName> names)
+	{
+		super(container);
+		myNames = names;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualName> getNames() {
-        return myNames;
-    }
+	public List<RVirtualName> getNames()
+	{
+		return myNames;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_IMPORT;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_IMPORT;
+	}
 
-    public String toString() {
-        return RCall.IMPORT_COMMAND;
-    }
+	public String toString()
+	{
+		return RCall.IMPORT_COMMAND;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualImportJavaClass(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualImportJavaClass(this);
+	}
 }

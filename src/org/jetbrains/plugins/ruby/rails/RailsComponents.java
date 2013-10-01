@@ -20,22 +20,34 @@ import org.jetbrains.annotations.NonNls;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 20.09.2006
  */
-public interface RailsComponents {
-    @NonNls final String BASE_RAILS_FACET_LISTENER =                "BaseRailsFacetListener";
+public interface RailsComponents
+{
+	@NonNls
+	final String BASE_RAILS_FACET_LISTENER = "BaseRailsFacetListener";
 
-    @NonNls final String RAILS_SUPPORT_LOADER =                     "RailsSupportLoader";
-    @NonNls final String RAILS_PROJECT_LOADER =                     "RailsProjectLoader";
-    @NonNls final String RAILS_PROJECT_VIEW_PANE =                  "RailsProjectViewPane";
-    @NonNls final String RAILS_HIGHLIGHT_PASS_FACTORY =             "RailsHighlighPassFactory";
-    @NonNls final String RAILS_VIEW_FOLDERS_MANAGER =               "RailsViewFoldersManager";
-    @NonNls final String RAILS_TEMPLATES_LOADER =                   "RailsTemplatesLoader";
-    @NonNls final String RHTML_AND_RUBY_BREADCRUMBS_INFO_PROVIDER = "RhtmlAndRubyBreadcrumbsInfoProvider";
+	@NonNls
+	final String RAILS_SUPPORT_LOADER = "RailsSupportLoader";
+	@NonNls
+	final String RAILS_PROJECT_LOADER = "RailsProjectLoader";
+	@NonNls
+	final String RAILS_PROJECT_VIEW_PANE = "RailsProjectViewPane";
+	@NonNls
+	final String RAILS_HIGHLIGHT_PASS_FACTORY = "RailsHighlighPassFactory";
+	@NonNls
+	final String RAILS_VIEW_FOLDERS_MANAGER = "RailsViewFoldersManager";
+	@NonNls
+	final String RAILS_TEMPLATES_LOADER = "RailsTemplatesLoader";
+	@NonNls
+	final String RHTML_AND_RUBY_BREADCRUMBS_INFO_PROVIDER = "RhtmlAndRubyBreadcrumbsInfoProvider";
 
-    @SuppressWarnings({"UnusedDeclaration"}) //is used in @Storage definition
-    @NonNls final String RAILS_MODULE_SETTINGS_STORAGE =            "RailsModuleSettingsStorage";
+	@SuppressWarnings({"UnusedDeclaration"}) //is used in @Storage definition
+	@NonNls
+	final String RAILS_MODULE_SETTINGS_STORAGE = "RailsModuleSettingsStorage";
 
-    @NonNls final String RAILS_RUN_CONFIGURATION_TYPE =              "RailsRunConfigurationType";
+	@NonNls
+	final String RAILS_RUN_CONFIGURATION_TYPE = "RailsRunConfigurationType";
 }

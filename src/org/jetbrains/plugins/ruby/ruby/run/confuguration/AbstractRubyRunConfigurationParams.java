@@ -28,22 +28,35 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: May 22, 2008
  */
-public interface AbstractRubyRunConfigurationParams {
-    @Nullable
-    public Module getModule();
-    public String getRubyArgs();
-    public String getWorkingDirectory();
-    @Nullable
-    public Sdk getAlternativeSdk();
-    public Map<String, String> getEnvs();
-    public boolean isPassParentEnvs();
-    public boolean shouldUseAlternativeSdk();
+public interface AbstractRubyRunConfigurationParams
+{
+	@Nullable
+	public Module getModule();
 
-    public void setModule(@Nullable final Module module);
-    public void setRubyArgs(@Nullable  String myRubyArgs);
-    public void setWorkingDirectory(@Nullable String dir);
-    public void setAlternativeSdk(@Nullable final Sdk sdk);
-    public void setShouldUseAlternativeSdk(boolean shouldUseAlternativeSdk);
-    public void setEnvs(Map<String, String> envs);
-    public void setPassParentEnvs(boolean passParentEnvs);
+	public String getRubyArgs();
+
+	public String getWorkingDirectory();
+
+	@Nullable
+	public Sdk getAlternativeSdk();
+
+	public Map<String, String> getEnvs();
+
+	public boolean isPassParentEnvs();
+
+	public boolean shouldUseAlternativeSdk();
+
+	public void setModule(@Nullable final Module module);
+
+	public void setRubyArgs(@Nullable String myRubyArgs);
+
+	public void setWorkingDirectory(@Nullable String dir);
+
+	public void setAlternativeSdk(@Nullable final Sdk sdk);
+
+	public void setShouldUseAlternativeSdk(boolean shouldUseAlternativeSdk);
+
+	public void setEnvs(Map<String, String> envs);
+
+	public void setPassParentEnvs(boolean passParentEnvs);
 }

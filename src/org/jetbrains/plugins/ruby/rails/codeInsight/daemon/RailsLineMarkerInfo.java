@@ -44,110 +44,128 @@ import com.intellij.reference.SoftReference;
  * @author: Roman Chernyatchik
  * @date: 04.02.2007
  */
-public class RailsLineMarkerInfo {
-    public static final RailsLineMarkerInfo[] EMPTY_ARRAY = new RailsLineMarkerInfo[0];
+public class RailsLineMarkerInfo
+{
+	public static final RailsLineMarkerInfo[] EMPTY_ARRAY = new RailsLineMarkerInfo[0];
 
-    public final int startOffset;
-    public TextAttributes attributes;
-    public Color separatorColor;
-    public SeparatorPlacement separatorPlacement;
-    public RangeHighlighter highlighter;
-    public final MarkerType type;
+	public final int startOffset;
+	public TextAttributes attributes;
+	public Color separatorColor;
+	public SeparatorPlacement separatorPlacement;
+	public RangeHighlighter highlighter;
+	public final MarkerType type;
 
-    private final SoftReference<PsiElement> elementRef;
-    private Icon myIcon;
-    private final Module myModule;
+	private final SoftReference<PsiElement> elementRef;
+	private Icon myIcon;
+	private final Module myModule;
 
-    public RailsLineMarkerInfo(@NotNull final Module module,
-                              @NotNull final MarkerType type, final PsiElement element,
-                              final int startOffset, final Icon icon) {
-        this.type = type;
-        myIcon = icon;
-        elementRef = new SoftReference<PsiElement>(element);
-        this.startOffset = startOffset;
-        myModule = module;
-    }
+	public RailsLineMarkerInfo(@NotNull final Module module, @NotNull final MarkerType type, final PsiElement element, final int startOffset, final Icon icon)
+	{
+		this.type = type;
+		myIcon = icon;
+		elementRef = new SoftReference<PsiElement>(element);
+		this.startOffset = startOffset;
+		myModule = module;
+	}
 
-    @Nullable
-    public GutterIconRenderer createGutterRenderer() {
-        if (myIcon == null) {
-            return null;
-        }
-        return new MyGutterIconRenderer();
-    }
+	@Nullable
+	public GutterIconRenderer createGutterRenderer()
+	{
+		if(myIcon == null)
+		{
+			return null;
+		}
+		return new MyGutterIconRenderer();
+	}
 
-    public SoftReference<PsiElement> getElementRef() {
-        return elementRef;
-    }
+	public SoftReference<PsiElement> getElementRef()
+	{
+		return elementRef;
+	}
 
-    private String getMethodTooltip(final RMethod method) {
-        switch (type) {
-            case CONTROLLER_TO_VIEW:
-                return RBundle.message("codeInsight.rails.action_to_view.tooltip", method.getName());
-            default:
-                return null;
-        }
-    }
+	private String getMethodTooltip(final RMethod method)
+	{
+		switch(type)
+		{
+			case CONTROLLER_TO_VIEW:
+				return RBundle.message("codeInsight.rails.action_to_view.tooltip", method.getName());
+			default:
+				return null;
+		}
+	}
 
-    private String getPsiFileTooltip(final PsiFile psiFile) {
-        switch (type) {
-            case VIEW_TO_ACTION:
-                return RBundle.message("codeInsight.rails.view_to_action.tooltip", psiFile.getName());
-            default:
-                return null;
-        }
-    }
+	private String getPsiFileTooltip(final PsiFile psiFile)
+	{
+		switch(type)
+		{
+			case VIEW_TO_ACTION:
+				return RBundle.message("codeInsight.rails.view_to_action.tooltip", psiFile.getName());
+			default:
+				return null;
+		}
+	}
 
-    public enum MarkerType {
-        CONTROLLER_TO_VIEW,
-        VIEW_TO_ACTION,
-        VIEW_TO_CONTROLLER
-    }
+	public enum MarkerType
+	{
+		CONTROLLER_TO_VIEW,
+		VIEW_TO_ACTION,
+		VIEW_TO_CONTROLLER
+	}
 
-    private class MyGutterIconRenderer extends GutterIconRenderer {
-        @Override
+	private class MyGutterIconRenderer extends GutterIconRenderer
+	{
+		@Override
 		@NotNull
-        public Icon getIcon() {
-            return myIcon;
-        }
+		public Icon getIcon()
+		{
+			return myIcon;
+		}
 
-        @Override
-		public AnAction getClickAction() {
-            return new MyNavigateAction();
-        }
+		@Override
+		public AnAction getClickAction()
+		{
+			return new MyNavigateAction();
+		}
 
-        @Override
-		public boolean isNavigateAction() {
-            return true;
-        }
+		@Override
+		public boolean isNavigateAction()
+		{
+			return true;
+		}
 
-        @Override
-		public String getTooltipText() {
-            final PsiElement element = elementRef.get();
-            if (element == null || !element.isValid()) {
-                return null;
-            }
+		@Override
+		public String getTooltipText()
+		{
+			final PsiElement element = elementRef.get();
+			if(element == null || !element.isValid())
+			{
+				return null;
+			}
 
-            final Ref<String> toolTip = new Ref<String>();
-            element.accept(new RubyElementVisitor() {
+			final Ref<String> toolTip = new Ref<String>();
+			element.accept(new RubyElementVisitor()
+			{
 
-                @Override
-				public void visitRMethod(final RMethod rMethod) {
-                    toolTip.set(getMethodTooltip(rMethod));
-                }
+				@Override
+				public void visitRMethod(final RMethod rMethod)
+				{
+					toolTip.set(getMethodTooltip(rMethod));
+				}
 
-                @Override
-				public void visitFile(final PsiFile psiFile) {
-                    toolTip.set(getPsiFileTooltip(psiFile));
-                }
-            });
-            return toolTip.get();
-        }
+				@Override
+				public void visitFile(final PsiFile psiFile)
+				{
+					toolTip.set(getPsiFileTooltip(psiFile));
+				}
+			});
+			return toolTip.get();
+		}
 
-        @Override
-		public com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment getAlignment() {
-            return type == MarkerType.CONTROLLER_TO_VIEW ? Alignment.LEFT : Alignment.RIGHT;
-        }
+		@Override
+		public com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment getAlignment()
+		{
+			return type == MarkerType.CONTROLLER_TO_VIEW ? Alignment.LEFT : Alignment.RIGHT;
+		}
 
 		@Override
 		public boolean equals(Object o)
@@ -162,11 +180,13 @@ public class RailsLineMarkerInfo {
 		}
 	}
 
-    private class MyNavigateAction extends AnAction {
-        @Override
-		public void actionPerformed(final AnActionEvent e) {
-            MouseEvent mouseEvent = (MouseEvent)e.getInputEvent();
-            RailsLineMarkerNavigator.browse(mouseEvent, RailsLineMarkerInfo.this, myModule);
-        }
-    }
+	private class MyNavigateAction extends AnAction
+	{
+		@Override
+		public void actionPerformed(final AnActionEvent e)
+		{
+			MouseEvent mouseEvent = (MouseEvent) e.getInputEvent();
+			RailsLineMarkerNavigator.browse(mouseEvent, RailsLineMarkerInfo.this, myModule);
+		}
+	}
 }

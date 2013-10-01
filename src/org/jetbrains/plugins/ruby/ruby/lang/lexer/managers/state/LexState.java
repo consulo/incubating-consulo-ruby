@@ -23,95 +23,111 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
  * @date: Nov 13, 2006
  */
 
-public class LexState implements StateComponent{
-// after kDEF
-    private boolean inDef = false;                      // EXPR_FNAME
+public class LexState implements StateComponent
+{
+	// after kDEF
+	private boolean inDef = false;                      // EXPR_FNAME
 
-// after kALIAS, upto semicolon or eol
-    private boolean inAlias = false;                    // EXPR_FNAME
+	// after kALIAS, upto semicolon or eol
+	private boolean inAlias = false;                    // EXPR_FNAME
 
-// after kUNDEF, upto semicolon or eol
-    private boolean inUndef = false;                    // EXPR_FNAME
+	// after kUNDEF, upto semicolon or eol
+	private boolean inUndef = false;                    // EXPR_FNAME
 
-// after tSYMBEG
-    private boolean afterSymBeg = false;                // EXPR_FNAME
+	// after tSYMBEG
+	private boolean afterSymBeg = false;                // EXPR_FNAME
 
-// in line after tHEREDOC
-    private boolean afterHeredoc = false;
+	// in line after tHEREDOC
+	private boolean afterHeredoc = false;
 
-// in line after kFOR, kUNTIL, kWHILE
-    private boolean doCondExpected = false;
+	// in line after kFOR, kUNTIL, kWHILE
+	private boolean doCondExpected = false;
 
-    private Expr expr = Expr.BEG;
+	private Expr expr = Expr.BEG;
 
-//////// Getters ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////// Getters ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean isInDef() {
-        return inDef;
-    }
+	public boolean isInDef()
+	{
+		return inDef;
+	}
 
-    public boolean isInAlias() {
-        return inAlias;
-    }
+	public boolean isInAlias()
+	{
+		return inAlias;
+	}
 
-    public boolean isInUndef() {
-        return inUndef;
-    }
+	public boolean isInUndef()
+	{
+		return inUndef;
+	}
 
-    public boolean isAfterHeredoc() {
-        return afterHeredoc;
-    }
+	public boolean isAfterHeredoc()
+	{
+		return afterHeredoc;
+	}
 
-    public boolean isAfterSymBeg() {
-        return afterSymBeg;
-    }
+	public boolean isAfterSymBeg()
+	{
+		return afterSymBeg;
+	}
 
-    public boolean isDoCondExpected() {
-        return doCondExpected;
-    }
+	public boolean isDoCondExpected()
+	{
+		return doCondExpected;
+	}
 
-    public Expr getExpr() {
-        return expr;
-    }
+	public Expr getExpr()
+	{
+		return expr;
+	}
 
-//////// Setters ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////// Setters ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setInDef(boolean inDef) {
-        this.inDef = inDef;
-    }
+	public void setInDef(boolean inDef)
+	{
+		this.inDef = inDef;
+	}
 
-    public void setInAlias(boolean inAlias) {
-        this.inAlias = inAlias;
-    }
+	public void setInAlias(boolean inAlias)
+	{
+		this.inAlias = inAlias;
+	}
 
-    public void setInUndef(boolean inUndef) {
-        this.inUndef = inUndef;
-    }
+	public void setInUndef(boolean inUndef)
+	{
+		this.inUndef = inUndef;
+	}
 
-    public void setAfterHeredoc(boolean afterHereDoc) {
-        this.afterHeredoc = afterHereDoc;
-    }
+	public void setAfterHeredoc(boolean afterHereDoc)
+	{
+		this.afterHeredoc = afterHereDoc;
+	}
 
-    public void setAfterSymBeg(boolean afterSymBeg) {
-        this.afterSymBeg = afterSymBeg;
-    }
+	public void setAfterSymBeg(boolean afterSymBeg)
+	{
+		this.afterSymBeg = afterSymBeg;
+	}
 
-    public void setDoCondExpected(boolean doCondExpected) {
-        this.doCondExpected = doCondExpected;
-    }
+	public void setDoCondExpected(boolean doCondExpected)
+	{
+		this.doCondExpected = doCondExpected;
+	}
 
-    public void setExpr(Expr expr) {
-        this.expr = expr;
-    }
+	public void setExpr(Expr expr)
+	{
+		this.expr = expr;
+	}
 
-    /**
-     * @return true if it`s a special state
-     */
-    public boolean isSpecialState(){
-        return isAfterHeredoc() ||
-                isAfterSymBeg() ||
-                isInDef() || isInAlias() || isInUndef() || isDoCondExpected() ||  
-                getExpr()!= Expr.BEG;
-    }
+	/**
+	 * @return true if it`s a special state
+	 */
+	public boolean isSpecialState()
+	{
+		return isAfterHeredoc() ||
+				isAfterSymBeg() ||
+				isInDef() || isInAlias() || isInUndef() || isDoCondExpected() ||
+				getExpr() != Expr.BEG;
+	}
 }
 

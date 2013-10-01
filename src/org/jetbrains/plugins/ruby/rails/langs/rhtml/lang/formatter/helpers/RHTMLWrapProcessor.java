@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
 import com.intellij.formatting.Wrap;
 import com.intellij.formatting.WrapType;
 import com.intellij.lang.ASTNode;
@@ -23,10 +27,6 @@ import com.intellij.lang.StdLanguages;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,62 +34,70 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
  * @author: Roman Chernyatchik
  * @date: Oct 1, 2007
  */
-public class RHTMLWrapProcessor {
-    public static Wrap getWrapForNode(final ASTNode node, 
-                                      @Nullable final FileViewProvider fileViewProvider) {
-        if (node == null) {
-            return Wrap.createWrap(Wrap.NONE, true);
-        }
+public class RHTMLWrapProcessor
+{
+	public static Wrap getWrapForNode(final ASTNode node, @Nullable final FileViewProvider fileViewProvider)
+	{
+		if(node == null)
+		{
+			return Wrap.createWrap(Wrap.NONE, true);
+		}
 
-        final IElementType nodeType = node.getElementType();
+		final IElementType nodeType = node.getElementType();
 
-        if ((nodeType == RHTMLElementType.RHTML_XML_TAG
-             || nodeType == RHTMLTokenTypeEx.RHTML_INJECTION_IN_HTML )
-            && fileViewProvider != null
-            && RHTMLFormatterUtil.isScripletRHTMLXmlTagNode(node)) {
+		if((nodeType == RHTMLElementType.RHTML_XML_TAG || nodeType == RHTMLTokenTypeEx.RHTML_INJECTION_IN_HTML) && fileViewProvider != null && RHTMLFormatterUtil.isScripletRHTMLXmlTagNode(node))
+		{
 
-            final PsiElement psiElement = fileViewProvider.findElementAt(node.getStartOffset() - 1, StdLanguages.HTML);
-            final String text = trimEndSpaces(psiElement != null ? psiElement.getText() : null);
-            //for html comments
-            final boolean shouldIgnoreIndent = text != null && text. endsWith("\n");
-            return Wrap.createWrap(shouldIgnoreIndent ? Wrap.NONE : Wrap.ALWAYS, true);
-        }
+			final PsiElement psiElement = fileViewProvider.findElementAt(node.getStartOffset() - 1, StdLanguages.HTML);
+			final String text = trimEndSpaces(psiElement != null ? psiElement.getText() : null);
+			//for html comments
+			final boolean shouldIgnoreIndent = text != null && text.endsWith("\n");
+			return Wrap.createWrap(shouldIgnoreIndent ? Wrap.NONE : Wrap.ALWAYS, true);
+		}
 
-        if (nodeType instanceof RubyElementType) {
-            Wrap.createWrap(Wrap.NORMAL, true);
-        }
+		if(nodeType instanceof RubyElementType)
+		{
+			Wrap.createWrap(Wrap.NORMAL, true);
+		}
 
-        //RHTMLTokenType.RHTML_SEPARATORS.contains(childNodeType)
-        //RHTMLTokenType.OMIT_NEW_LINE
-        //HTML elements in some cases (in RHTMLBlockGenerator.createAndAddRHTMLHtml)
-        //RHTMLElementType.RHTML_XML_TAG:scriplet
-        //RHTMLElementType.RHTML_COMMENT_ELEMENT
-        //RHTMLFormatterUtil.isHTMLDocomentRootOrProlog(node)
-        return Wrap.createWrap(Wrap.NONE, true);
-    }
+		//RHTMLTokenType.RHTML_SEPARATORS.contains(childNodeType)
+		//RHTMLTokenType.OMIT_NEW_LINE
+		//HTML elements in some cases (in RHTMLBlockGenerator.createAndAddRHTMLHtml)
+		//RHTMLElementType.RHTML_XML_TAG:scriplet
+		//RHTMLElementType.RHTML_COMMENT_ELEMENT
+		//RHTMLFormatterUtil.isHTMLDocomentRootOrProlog(node)
+		return Wrap.createWrap(Wrap.NONE, true);
+	}
 
-    @Nullable
-    private static String trimEndSpaces(@Nullable String text) {
-        if (text == null) {
-            return text;
-        }
-        int i = text.length() - 1;
-        for (;i >=0; i--) {
-            if (text.charAt(i) != ' ') {
-                break;
-            }
-        }
-        if (i >= 0) {
-            text = text.substring(0, i+1);
-        }
-        return text;
-    }
+	@Nullable
+	private static String trimEndSpaces(@Nullable String text)
+	{
+		if(text == null)
+		{
+			return text;
+		}
+		int i = text.length() - 1;
+		for(; i >= 0; i--)
+		{
+			if(text.charAt(i) != ' ')
+			{
+				break;
+			}
+		}
+		if(i >= 0)
+		{
+			text = text.substring(0, i + 1);
+		}
+		return text;
+	}
 
-    public static Wrap createTagAttributesWrap(final WrapType wrapType) {
-        return Wrap.createWrap(wrapType, false);
-    }
+	public static Wrap createTagAttributesWrap(final WrapType wrapType)
+	{
+		return Wrap.createWrap(wrapType, false);
+	}
 
-    public static Wrap createTagTextWrap(final WrapType wrapType) {
-        return Wrap.createWrap(wrapType, true);
-    }
+	public static Wrap createTagTextWrap(final WrapType wrapType)
+	{
+		return Wrap.createWrap(wrapType, true);
+	}
 }

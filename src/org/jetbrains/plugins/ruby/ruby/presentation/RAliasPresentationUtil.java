@@ -16,34 +16,36 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 29, 2007
  */
-public class RAliasPresentationUtil {
+public class RAliasPresentationUtil
+{
 
-    public static Icon getIcon() {
-        return RubyIcons.RUBY_ALIAS_NODE;
-    }
+	public static Icon getIcon()
+	{
+		return RubyIcons.RUBY_ALIAS_NODE;
+	}
 
-    public static ItemPresentation getPresentation(RVirtualAlias alias) {
-        final Icon icon = getIcon();
-        return new PresentationData(alias.getNewName(),
-                TextUtil.wrapInParens(getLocation(alias)),
-                icon, icon, null);
-    }
+	public static ItemPresentation getPresentation(RVirtualAlias alias)
+	{
+		final Icon icon = getIcon();
+		return new PresentationData(alias.getNewName(), TextUtil.wrapInParens(getLocation(alias)), icon, icon, null);
+	}
 
-    public static String getLocation(@NotNull final RVirtualAlias alias){
-        return RContainerPresentationUtil.getLocation(alias);
-    }
+	public static String getLocation(@NotNull final RVirtualAlias alias)
+	{
+		return RContainerPresentationUtil.getLocation(alias);
+	}
 }

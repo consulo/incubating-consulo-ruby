@@ -16,47 +16,53 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 8, 2007
  */
-public class SymbolCacheUtil {
+public class SymbolCacheUtil
+{
 
-    @Nullable
-    public static String getStubUrlByType(@NotNull final FileSymbolType type,
-                                          @Nullable final Sdk sdk,
-                                          final boolean jrubyEnabled) {
-        if (type == FileSymbolType.BUILT_IN){
-            return getStubUrl(sdk, jrubyEnabled ? StubsUrls.JRUBY_BUILT_IN_RB : StubsUrls.BUILT_IN_RB);
-        } else
-        if (type == FileSymbolType.RAILS_BUILT_IN){
-            return getStubUrl(sdk, jrubyEnabled ? StubsUrls.JRUBY_FULL_RAILS_RB : StubsUrls.FULL_RAILS_RB);
-        }
-        return null;
-    }
+	@Nullable
+	public static String getStubUrlByType(@NotNull final FileSymbolType type, @Nullable final Sdk sdk, final boolean jrubyEnabled)
+	{
+		if(type == FileSymbolType.BUILT_IN)
+		{
+			return getStubUrl(sdk, jrubyEnabled ? StubsUrls.JRUBY_BUILT_IN_RB : StubsUrls.BUILT_IN_RB);
+		}
+		else if(type == FileSymbolType.RAILS_BUILT_IN)
+		{
+			return getStubUrl(sdk, jrubyEnabled ? StubsUrls.JRUBY_FULL_RAILS_RB : StubsUrls.FULL_RAILS_RB);
+		}
+		return null;
+	}
 
-    @Nullable
-    public static String getStubUrl(@Nullable final Sdk sdk, @NotNull final String name){
-        if (RubySdkUtil.isKindOfRubySDK(sdk)) {
-            //noinspection ConstantConditions
-            final String rubyStubsDirUrl = RubySdkUtil.getRubyStubsDirUrl(sdk);
-            if (rubyStubsDirUrl != null) {
-                return rubyStubsDirUrl + name;
-            }
-        }
-        return null;
-    }
+	@Nullable
+	public static String getStubUrl(@Nullable final Sdk sdk, @NotNull final String name)
+	{
+		if(RubySdkUtil.isKindOfRubySDK(sdk))
+		{
+			//noinspection ConstantConditions
+			final String rubyStubsDirUrl = RubySdkUtil.getRubyStubsDirUrl(sdk);
+			if(rubyStubsDirUrl != null)
+			{
+				return rubyStubsDirUrl + name;
+			}
+		}
+		return null;
+	}
 
-    @Nullable
-    public static FileSymbol getFileSymbol(@Nullable final CachedSymbol cachedSymbol) {
-        return cachedSymbol != null ? cachedSymbol.getUp2DateSymbol() : null;
-    }
+	@Nullable
+	public static FileSymbol getFileSymbol(@Nullable final CachedSymbol cachedSymbol)
+	{
+		return cachedSymbol != null ? cachedSymbol.getUp2DateSymbol() : null;
+	}
 
 }

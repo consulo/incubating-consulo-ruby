@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgument;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,14 +28,17 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgum
  * @author: oleg
  * @date: Feb 4, 2008
  */
-public class RArgumentListNavigator {
-    @Nullable
-    public static RArgumentList getByArgument(@NotNull final RArgument argument){
-        final RArgumentList argList = PsiTreeUtil.getParentOfType(argument, RArgumentList.class);
-        if (argList == null){
-            return null;
-        }
-        final int num = argList.getArgNumber(argument);
-        return num!= -1 ? argList : null;
-    }
+public class RArgumentListNavigator
+{
+	@Nullable
+	public static RArgumentList getByArgument(@NotNull final RArgument argument)
+	{
+		final RArgumentList argList = PsiTreeUtil.getParentOfType(argument, RArgumentList.class);
+		if(argList == null)
+		{
+			return null;
+		}
+		final int num = argList.getArgNumber(argument);
+		return num != -1 ? argList : null;
+	}
 }

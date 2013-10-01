@@ -16,10 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamContext;
@@ -37,53 +33,66 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 13.06.2006
  */
-public class RSymbolImpl extends RPsiElementBase implements RSymbol {
+public class RSymbolImpl extends RPsiElementBase implements RSymbol
+{
 
-    public RSymbolImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RSymbolImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getObject() {
-        //noinspection ConstantConditions
-        return getLastChild();
-    }
+	public PsiElement getObject()
+	{
+		//noinspection ConstantConditions
+		return getLastChild();
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRSymbol(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRSymbol(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiReference[] getReferences() {
-        final PsiElement content = getObject();
-        final RFile rFile = RubyPsiUtil.getRFile(content);
-        assert rFile!=null;
-        ParamContext paramContext = ParamDefUtil.getParamContext(this);
-        if (paramContext != null) {
-            ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);
-            if (paramDef != null) {
-                return new PsiReference[] { new ParamDefReference(this, paramDef, paramContext) };
-            }
-        }
-        return PsiReference.EMPTY_ARRAY;
-    }
+	public PsiReference[] getReferences()
+	{
+		final PsiElement content = getObject();
+		final RFile rFile = RubyPsiUtil.getRFile(content);
+		assert rFile != null;
+		ParamContext paramContext = ParamDefUtil.getParamContext(this);
+		if(paramContext != null)
+		{
+			ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);
+			if(paramDef != null)
+			{
+				return new PsiReference[]{new ParamDefReference(this, paramDef, paramContext)};
+			}
+		}
+		return PsiReference.EMPTY_ARRAY;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Symbol), Context.INSTANCE, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Symbol), Context.INSTANCE, true);
+	}
 }

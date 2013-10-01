@@ -33,33 +33,37 @@ import com.intellij.navigation.ItemPresentation;
  * @author: Roman Chernyatchik
  * @date: 29.10.2006
  */
-public class RFilePresentationUtil {
-    /**
-     * @param file Ruby File
-     * @return RubyFile icon
-     */
-    public static Icon getIconByRFile(final RFile file) {
-        return IconDescriptorUpdaters.getIcon(file, 0);
-    }
+public class RFilePresentationUtil
+{
+	/**
+	 * @param file Ruby File
+	 * @return RubyFile icon
+	 */
+	public static Icon getIconByRFile(final RFile file)
+	{
+		return IconDescriptorUpdaters.getIcon(file, 0);
+	}
 
 
-    /**
-     * Computes icon for RVirtualFile.
-     * @return Icon
-     */
-    public static Icon getIcon() {
-        return RubyFileType.RUBY.getIcon();
-    }
+	/**
+	 * Computes icon for RVirtualFile.
+	 *
+	 * @return Icon
+	 */
+	public static Icon getIcon()
+	{
+		return RubyFileType.RUBY.getIcon();
+	}
 
-    @NotNull
-    public static ItemPresentation getPresentation(final RVirtualFile rFile) {
-        final Icon icon = getIcon();
-        return new PresentationData(rFile.getName(),
-                TextUtil.wrapInParens(getLocation(rFile)),
-                icon, icon, null);
-    }
+	@NotNull
+	public static ItemPresentation getPresentation(final RVirtualFile rFile)
+	{
+		final Icon icon = getIcon();
+		return new PresentationData(rFile.getName(), TextUtil.wrapInParens(getLocation(rFile)), icon, icon, null);
+	}
 
-    private static String getLocation(@NotNull final RVirtualFile rFile) {
-        return RContainerPresentationUtil.getLocation(rFile);
-    }
+	private static String getLocation(@NotNull final RVirtualFile rFile)
+	{
+		return RContainerPresentationUtil.getLocation(rFile);
+	}
 }

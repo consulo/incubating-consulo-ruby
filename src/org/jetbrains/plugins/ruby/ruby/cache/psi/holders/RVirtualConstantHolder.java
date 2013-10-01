@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.holders;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,7 +28,8 @@ import java.util.List;
  * @author: oleg
  * @date: Nov 20, 2006
  */
-public interface RVirtualConstantHolder extends RVirtualContainer {
-    @NotNull
-    public List<RVirtualConstant> getVirtualConstants();
+public interface RVirtualConstantHolder extends RVirtualContainer
+{
+	@NotNull
+	public List<RVirtualConstant> getVirtualConstants();
 }

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,10 +25,11 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: Apr 5, 2008
  */
-public interface TabbedSettingsContext {
-    /**
-     * @return Module's content Root. Is used for Generating Rails app, tests folders, etc
-     */
-    @Nullable
-    public Sdk getSdk();
+public interface TabbedSettingsContext
+{
+	/**
+	 * @return Module's content Root. Is used for Generating Rails app, tests folders, etc
+	 */
+	@Nullable
+	public Sdk getSdk();
 }

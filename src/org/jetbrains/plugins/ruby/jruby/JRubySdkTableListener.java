@@ -19,100 +19,125 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @author: oleg
  * @date: Jul 28, 2008
  */
-public class JRubySdkTableListener implements ApplicationComponent {
-    private SdkTable.Listener myJdkTableListener;
-    protected Project myProject;
+public class JRubySdkTableListener implements ApplicationComponent
+{
+	private SdkTable.Listener myJdkTableListener;
+	protected Project myProject;
 
-    public JRubySdkTableListener(){
-        myJdkTableListener = new SdkTable.Listener() {
-            @Override
-			public void sdkAdded(final Sdk sdk) {
-                if (JRubySdkUtil.isJRubySDK(sdk)) {
-                    addLibrary(sdk);
-                }
-            }
-            @Override
-			public void sdkRemoved(final Sdk sdk) {
-                if (JRubySdkUtil.isJRubySDK(sdk)) {
-                    removeLibrary(sdk);
-                }
-            }
-            @Override
-			public void sdkNameChanged(final Sdk sdk, final String previousName) {
-                if (JRubySdkUtil.isJRubySDK(sdk)) {
-                    renameLibrary(sdk, previousName);
-                }
-            }
-        };
-    }
+	public JRubySdkTableListener()
+	{
+		myJdkTableListener = new SdkTable.Listener()
+		{
+			@Override
+			public void sdkAdded(final Sdk sdk)
+			{
+				if(JRubySdkUtil.isJRubySDK(sdk))
+				{
+					addLibrary(sdk);
+				}
+			}
 
-    private static void renameLibrary(final Sdk sdk, final String previousName) {
-        final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
-        final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(previousName));
-        if (library!=null){
-            final Library.ModifiableModel model = library.getModifiableModel();
-            model.setName(JRubyFacet.getFacetLibraryName(sdk.getName()));
-            model.commit();
-        }
-        libraryTableModel.commit();
-    }
+			@Override
+			public void sdkRemoved(final Sdk sdk)
+			{
+				if(JRubySdkUtil.isJRubySDK(sdk))
+				{
+					removeLibrary(sdk);
+				}
+			}
 
-    private static void removeLibrary(final Sdk sdk) {
-        final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
-        final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(sdk.getName()));
-        if (library!=null){
-            libraryTableModel.removeLibrary(library);
-        }
-        libraryTableModel.commit();
-    }
+			@Override
+			public void sdkNameChanged(final Sdk sdk, final String previousName)
+			{
+				if(JRubySdkUtil.isJRubySDK(sdk))
+				{
+					renameLibrary(sdk, previousName);
+				}
+			}
+		};
+	}
 
-    public static Library addLibrary(final Sdk sdk) {
-        final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
-        final Library library = libraryTableModel.createLibrary(JRubyFacet.getFacetLibraryName(sdk.getName()));
-        final Library.ModifiableModel model = library.getModifiableModel();
-        for (String url : sdk.getRootProvider().getUrls(OrderRootType.CLASSES)) {
-            model.addRoot(url, OrderRootType.CLASSES);
-            model.addRoot(url, OrderRootType.SOURCES);
-        }
-        model.commit();
-        libraryTableModel.commit();
-        return library;
-    }
+	private static void renameLibrary(final Sdk sdk, final String previousName)
+	{
+		final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
+		final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(previousName));
+		if(library != null)
+		{
+			final Library.ModifiableModel model = library.getModifiableModel();
+			model.setName(JRubyFacet.getFacetLibraryName(sdk.getName()));
+			model.commit();
+		}
+		libraryTableModel.commit();
+	}
 
-    public static void updateLibrary(final String name, final VirtualFile[] roots) {
-        final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
-        final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(name));
-        if (library!=null){
-            final Library.ModifiableModel model = library.getModifiableModel();
-            for (String url : model.getUrls(OrderRootType.CLASSES)) {
-                model.removeRoot(url, OrderRootType.CLASSES);
-            }
-            for (String url : model.getUrls(OrderRootType.SOURCES)) {
-                model.removeRoot(url, OrderRootType.SOURCES);
-            }
-            for (VirtualFile root : roots) {
-                model.addRoot(root, OrderRootType.CLASSES);
-                model.addRoot(root, OrderRootType.SOURCES);
-            }
-            model.commit();
-        }
-        libraryTableModel.commit();
-    }
+	private static void removeLibrary(final Sdk sdk)
+	{
+		final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
+		final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(sdk.getName()));
+		if(library != null)
+		{
+			libraryTableModel.removeLibrary(library);
+		}
+		libraryTableModel.commit();
+	}
 
-    @Override
+	public static Library addLibrary(final Sdk sdk)
+	{
+		final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
+		final Library library = libraryTableModel.createLibrary(JRubyFacet.getFacetLibraryName(sdk.getName()));
+		final Library.ModifiableModel model = library.getModifiableModel();
+		for(String url : sdk.getRootProvider().getUrls(OrderRootType.CLASSES))
+		{
+			model.addRoot(url, OrderRootType.CLASSES);
+			model.addRoot(url, OrderRootType.SOURCES);
+		}
+		model.commit();
+		libraryTableModel.commit();
+		return library;
+	}
+
+	public static void updateLibrary(final String name, final VirtualFile[] roots)
+	{
+		final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
+		final Library library = libraryTableModel.getLibraryByName(JRubyFacet.getFacetLibraryName(name));
+		if(library != null)
+		{
+			final Library.ModifiableModel model = library.getModifiableModel();
+			for(String url : model.getUrls(OrderRootType.CLASSES))
+			{
+				model.removeRoot(url, OrderRootType.CLASSES);
+			}
+			for(String url : model.getUrls(OrderRootType.SOURCES))
+			{
+				model.removeRoot(url, OrderRootType.SOURCES);
+			}
+			for(VirtualFile root : roots)
+			{
+				model.addRoot(root, OrderRootType.CLASSES);
+				model.addRoot(root, OrderRootType.SOURCES);
+			}
+			model.commit();
+		}
+		libraryTableModel.commit();
+	}
+
+	@Override
 	@NotNull
-    public String getComponentName() {
-        return RComponents.JRUBY_SDK_TABLE_LISTENER;
-    }
+	public String getComponentName()
+	{
+		return RComponents.JRUBY_SDK_TABLE_LISTENER;
+	}
 
-    @Override
-	public void initComponent() {
+	@Override
+	public void initComponent()
+	{
 		ApplicationManager.getApplication().getMessageBus().connect().subscribe(SdkTable.SDK_TABLE_TOPIC, myJdkTableListener);
-       // SdkTable.getInstance().addListener(myJdkTableListener);
-    }
+		// SdkTable.getInstance().addListener(myJdkTableListener);
+	}
 
-    @Override
-	public void disposeComponent() {
+	@Override
+	public void disposeComponent()
+	{
 		//SdkTable.getInstance().removeListener(myJdkTableListener);
-    }
+	}
 }

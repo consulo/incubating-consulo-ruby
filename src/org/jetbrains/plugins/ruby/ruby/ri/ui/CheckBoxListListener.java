@@ -22,6 +22,7 @@ package org.jetbrains.plugins.ruby.ruby.ri.ui;
  * @author: oleg
  * @date: Nov 8, 2006
  */
-public interface CheckBoxListListener {
-    public void checkBoxSelectionChanged(int index, boolean value);
+public interface CheckBoxListListener
+{
+	public void checkBoxSelectionChanged(int index, boolean value);
 }

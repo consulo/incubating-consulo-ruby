@@ -26,8 +26,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RElseBlock extends RPsiElement,
-        RWrapAndIndentCOMPSTMT, RWrapedAlways {
-    @NotNull
-    RCompoundStatement getBody();
+public interface RElseBlock extends RPsiElement, RWrapAndIndentCOMPSTMT, RWrapedAlways
+{
+	@NotNull
+	RCompoundStatement getBody();
 }

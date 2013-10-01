@@ -24,10 +24,12 @@ import com.intellij.lang.Language;
  * @author: oleg
  * @date: Feb 11, 2008
  */
-public class YAMLLanguage extends Language {
-    public static final YAMLLanguage INSTANCE = new YAMLLanguage();
+public class YAMLLanguage extends Language
+{
+	public static final YAMLLanguage INSTANCE = new YAMLLanguage();
 
-    private YAMLLanguage() {
-        super("YAML", "yaml");
-    }
+	private YAMLLanguage()
+	{
+		super("YAML", "yaml");
+	}
 }

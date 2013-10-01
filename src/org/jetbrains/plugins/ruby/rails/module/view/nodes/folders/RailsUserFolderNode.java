@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import javax.swing.Icon;
+
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNode;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,25 +30,29 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Aug 25, 2007
  */
-public class RailsUserFolderNode extends UserSubFolderNode {
-    public RailsUserFolderNode(final Module module, final VirtualFile dir,
-                             final SimpleNode parent,
-                             final boolean isTestFolder) {
-        super(module, dir, parent, initPresentationData(dir, isTestFolder), isTestFolder);
-    }
+public class RailsUserFolderNode extends UserSubFolderNode
+{
+	public RailsUserFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final boolean isTestFolder)
+	{
+		super(module, dir, parent, initPresentationData(dir, isTestFolder), isTestFolder);
+	}
 
-    private static PresentationData initPresentationData(final VirtualFile dir, final boolean testFolder) {
-        final Icon iconOpened;
-        final Icon iconClosed;
-        if (testFolder) {
-            iconOpened = RailsTestsFolderNode.TEST_ROOT_OPENED;
-            iconClosed = RailsTestsFolderNode.TEST_ROOT_CLOSED;
-        } else {
-            iconOpened = RailsIcons.RAILS_FOLDER_OPENED;
-            iconClosed = RailsIcons.RAILS_FOLDER_CLOSED;
+	private static PresentationData initPresentationData(final VirtualFile dir, final boolean testFolder)
+	{
+		final Icon iconOpened;
+		final Icon iconClosed;
+		if(testFolder)
+		{
+			iconOpened = RailsTestsFolderNode.TEST_ROOT_OPENED;
+			iconClosed = RailsTestsFolderNode.TEST_ROOT_CLOSED;
+		}
+		else
+		{
+			iconOpened = RailsIcons.RAILS_FOLDER_OPENED;
+			iconClosed = RailsIcons.RAILS_FOLDER_CLOSED;
 
-        }
-        final String name = dir.getName();
-        return new PresentationData(name, name, iconOpened, iconClosed, null);
-    }
+		}
+		final String name = dir.getName();
+		return new PresentationData(name, name, iconOpened, iconClosed, null);
+	}
 }

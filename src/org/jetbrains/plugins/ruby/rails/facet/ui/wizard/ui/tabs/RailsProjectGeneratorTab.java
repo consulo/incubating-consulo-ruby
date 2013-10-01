@@ -16,9 +16,20 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.io.FileUtil;
+import static org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder.Generate;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,12 +39,10 @@ import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings;
 import org.jetbrains.plugins.ruby.rails.facet.ui.RailsUIUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder;
-import static org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder.Generate;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.TabbedSettingsContext;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.io.FileUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,160 +50,187 @@ import java.awt.event.ActionListener;
  * @author: Roman Chernyatchik
  * @date: Apr 5, 2008
  */
-public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab implements RailsUIUtil.RailsVersionComponent {
-    private static final String TITLE = RBundle.message("rails.facet.wizard.tab.rails.project.generator.title");
+public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab implements RailsUIUtil.RailsVersionComponent
+{
+	private static final String TITLE = RBundle.message("rails.facet.wizard.tab.rails.project.generator.title");
 
-    private JRadioButton generateNewRButton;
-    private JRadioButton useExistingRButton;
-    private JLabel myRailsVersionLabel;
-    private JPanel myContentPane;
-    private EvaluatingComponent<String> myECRailsVersionLabel;
-    private JCheckBox myCBPreconfigureForSelectedDB;
-    private JComboBox myCBoxDBName;
-    private JTextField myRailsRootPath;
+	private JRadioButton generateNewRButton;
+	private JRadioButton useExistingRButton;
+	private JLabel myRailsVersionLabel;
+	private JPanel myContentPane;
+	private EvaluatingComponent<String> myECRailsVersionLabel;
+	private JCheckBox myCBPreconfigureForSelectedDB;
+	private JComboBox myCBoxDBName;
+	private JTextField myRailsRootPath;
 
-    private String myRailsVersion;
-    private final RailsWizardSettingsHolder mySettingsHolder;
-    /**
-     * Form is closed state
-     */
-    private volatile boolean myIsClosed;
+	private String myRailsVersion;
+	private final RailsWizardSettingsHolder mySettingsHolder;
+	/**
+	 * Form is closed state
+	 */
+	private volatile boolean myIsClosed;
 
-    public RailsProjectGeneratorTab(final RailsWizardSettingsHolder settingsHolder) {
-        mySettingsHolder = settingsHolder;
+	public RailsProjectGeneratorTab(final RailsWizardSettingsHolder settingsHolder)
+	{
+		mySettingsHolder = settingsHolder;
 
-        myCBPreconfigureForSelectedDB.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                final boolean preconfigureDB = myCBPreconfigureForSelectedDB.isSelected();
-                myCBoxDBName.setEnabled(preconfigureDB);
-            }
-        });
+		myCBPreconfigureForSelectedDB.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				final boolean preconfigureDB = myCBPreconfigureForSelectedDB.isSelected();
+				myCBoxDBName.setEnabled(preconfigureDB);
+			}
+		});
 
-        myCBoxDBName.setModel(new DefaultComboBoxModel(ExternalRailsSettings.getRailsScriptDataBaseTypes()));
-        
-        setUpDBFromSavedSettings();
-    }
+		myCBoxDBName.setModel(new DefaultComboBoxModel(ExternalRailsSettings.getRailsScriptDataBaseTypes()));
 
-    private void setUpDBFromSavedSettings() {
-        final String preconfigureDBName = RailsApplicationSettings.getInstance().wizardRailsFacetPreconfigureDBName;
+		setUpDBFromSavedSettings();
+	}
 
-        myCBPreconfigureForSelectedDB.setSelected(preconfigureDBName != null);
-        myCBoxDBName.setEnabled(preconfigureDBName != null);
+	private void setUpDBFromSavedSettings()
+	{
+		final String preconfigureDBName = RailsApplicationSettings.getInstance().wizardRailsFacetPreconfigureDBName;
 
-        myCBoxDBName.setSelectedItem(preconfigureDBName);
-        if (myCBoxDBName.getSelectedItem() == null) {
-            myCBoxDBName.setSelectedIndex(0);
-        }
-    }
+		myCBPreconfigureForSelectedDB.setSelected(preconfigureDBName != null);
+		myCBoxDBName.setEnabled(preconfigureDBName != null);
 
-    @Nls
-    public String getDisplayName() {
-        return TITLE;
-    }
+		myCBoxDBName.setSelectedItem(preconfigureDBName);
+		if(myCBoxDBName.getSelectedItem() == null)
+		{
+			myCBoxDBName.setSelectedIndex(0);
+		}
+	}
 
-    @Override
-	public void setContext(@NotNull final TabbedSettingsContext context) {
-        final TabbedSettingsContext oldContext = getContext();
-        super.setContext(context);
+	@Nls
+	public String getDisplayName()
+	{
+		return TITLE;
+	}
 
-        if (oldContext == null || context.getSdk() != oldContext.getSdk()) {
-            myRailsVersion = null;
-        }
-    }
+	@Override
+	public void setContext(@NotNull final TabbedSettingsContext context)
+	{
+		final TabbedSettingsContext oldContext = getContext();
+		super.setContext(context);
 
-    @Override
-	public void beforeShow() {
-        myIsClosed = false;
+		if(oldContext == null || context.getSdk() != oldContext.getSdk())
+		{
+			myRailsVersion = null;
+		}
+	}
 
-        if (myRailsVersion == null) {
+	@Override
+	public void beforeShow()
+	{
+		myIsClosed = false;
 
-            final TabbedSettingsContext tabbedSettingsContext = getContext();
-            final Sdk sdk = tabbedSettingsContext.getSdk();
-            final boolean isRailsSDK = RailsUtil.hasRailsSupportInSDK(sdk);
+		if(myRailsVersion == null)
+		{
 
-            generateNewRButton.setEnabled(isRailsSDK);
-            useExistingRButton.setEnabled(true);
+			final TabbedSettingsContext tabbedSettingsContext = getContext();
+			final Sdk sdk = tabbedSettingsContext.getSdk();
+			final boolean isRailsSDK = RailsUtil.hasRailsSupportInSDK(sdk);
 
-            generateNewRButton.setSelected(isRailsSDK);
-            useExistingRButton.setSelected(!isRailsSDK);
+			generateNewRButton.setEnabled(isRailsSDK);
+			useExistingRButton.setEnabled(true);
 
-            RailsUIUtil.setupRailsVersionEvaluator(sdk, myRailsVersionLabel, myECRailsVersionLabel, this);
-        }
-    }
+			generateNewRButton.setSelected(isRailsSDK);
+			useExistingRButton.setSelected(!isRailsSDK);
 
-    public JComponent createComponent() {
-        return myContentPane;
-    }
+			RailsUIUtil.setupRailsVersionEvaluator(sdk, myRailsVersionLabel, myECRailsVersionLabel, this);
+		}
+	}
 
-    /**
-     * N/A
-     * @return true
-     */
-    public boolean isModified() {
-        return true;
-    }
+	public JComponent createComponent()
+	{
+		return myContentPane;
+	}
 
-    @Override
-	public void apply() throws ConfigurationException {
-        if (generateNewRButton.isSelected()) {
-            mySettingsHolder.setAppGenerateWay(Generate.NEW);
-        } else if (useExistingRButton.isSelected()) {
-            mySettingsHolder.setAppGenerateWay(Generate.NOT);
-        }
+	/**
+	 * N/A
+	 *
+	 * @return true
+	 */
+	public boolean isModified()
+	{
+		return true;
+	}
 
-        final String relativePath = FileUtil.toSystemIndependentName(myRailsRootPath.getText().trim());
-        mySettingsHolder.setRailsApplicationHomeDirRelativePath(relativePath);
+	@Override
+	public void apply() throws ConfigurationException
+	{
+		if(generateNewRButton.isSelected())
+		{
+			mySettingsHolder.setAppGenerateWay(Generate.NEW);
+		}
+		else if(useExistingRButton.isSelected())
+		{
+			mySettingsHolder.setAppGenerateWay(Generate.NOT);
+		}
 
-        if (myCBPreconfigureForSelectedDB.isSelected()) {
-            mySettingsHolder.setDBNameToPreconfigure((String)myCBoxDBName.getSelectedItem());
-        } else {
-            mySettingsHolder.setDBNameToPreconfigure(null);
-        }
+		final String relativePath = FileUtil.toSystemIndependentName(myRailsRootPath.getText().trim());
+		mySettingsHolder.setRailsApplicationHomeDirRelativePath(relativePath);
 
-        //save wizard settings
-        RailsApplicationSettings.getInstance().wizardRailsFacetPreconfigureDBName = mySettingsHolder.getDBNameToPreconfigure();
+		if(myCBPreconfigureForSelectedDB.isSelected())
+		{
+			mySettingsHolder.setDBNameToPreconfigure((String) myCBoxDBName.getSelectedItem());
+		}
+		else
+		{
+			mySettingsHolder.setDBNameToPreconfigure(null);
+		}
 
-        myIsClosed = true;
-    }
+		//save wizard settings
+		RailsApplicationSettings.getInstance().wizardRailsFacetPreconfigureDBName = mySettingsHolder.getDBNameToPreconfigure();
+
+		myIsClosed = true;
+	}
 
 
-    /**
-     * Resets cached sdk version
-     */
-    @Override
-	public void resetSdkSettings() {
-        myRailsVersion = null;
-    }
+	/**
+	 * Resets cached sdk version
+	 */
+	@Override
+	public void resetSdkSettings()
+	{
+		myRailsVersion = null;
+	}
 
-    @Override
-	public void reset() {
-        final RailsWizardSettingsHolder.Generate appGenerateWay = mySettingsHolder.getAppGenerateWay();
-        generateNewRButton.setSelected(appGenerateWay == Generate.NEW);
-        useExistingRButton.setSelected(appGenerateWay != Generate.NEW);
+	@Override
+	public void reset()
+	{
+		final RailsWizardSettingsHolder.Generate appGenerateWay = mySettingsHolder.getAppGenerateWay();
+		generateNewRButton.setSelected(appGenerateWay == Generate.NEW);
+		useExistingRButton.setSelected(appGenerateWay != Generate.NEW);
 
-        final String homeDirRelativePath = mySettingsHolder.getRailsApplicationHomeDirRelativePath();
-        myRailsRootPath.setText(FileUtil.toSystemDependentName(homeDirRelativePath == null ? "" : homeDirRelativePath));
+		final String homeDirRelativePath = mySettingsHolder.getRailsApplicationHomeDirRelativePath();
+		myRailsRootPath.setText(FileUtil.toSystemDependentName(homeDirRelativePath == null ? "" : homeDirRelativePath));
 
-        setUpDBFromSavedSettings();
-    }
+		setUpDBFromSavedSettings();
+	}
 
-    public void disposeUIResources() {
-        // Do nothing
-    }
+	public void disposeUIResources()
+	{
+		// Do nothing
+	}
 
-    private void createUIComponents() {
-        myRailsVersionLabel = new JLabel("");
-        myECRailsVersionLabel = new EvaluatingComponent<String>(myRailsVersionLabel);   
-    }
+	private void createUIComponents()
+	{
+		myRailsVersionLabel = new JLabel("");
+		myECRailsVersionLabel = new EvaluatingComponent<String>(myRailsVersionLabel);
+	}
 
-    @Override
-	public boolean isCloosed() {
-        return myIsClosed;
-    }
+	@Override
+	public boolean isCloosed()
+	{
+		return myIsClosed;
+	}
 
-    @Override
-	public void setRailsVersion(@Nullable final String railsVersion) {
-        myRailsVersion = railsVersion;
-    }
+	@Override
+	public void setRailsVersion(@Nullable final String railsVersion)
+	{
+		myRailsVersion = railsVersion;
+	}
 }

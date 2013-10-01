@@ -22,8 +22,10 @@ package org.jetbrains.plugins.ruby.rails.actions;
  * @author: Roman Chernyatchik
  * @date: Sep 4, 2007
  */
-public class RailsEditorActionsManager {
-     public static void registerEditorActions(){
-         //Do nothing
-    }
+public class RailsEditorActionsManager
+{
+	public static void registerEditorActions()
+	{
+		//Do nothing
+	}
 }

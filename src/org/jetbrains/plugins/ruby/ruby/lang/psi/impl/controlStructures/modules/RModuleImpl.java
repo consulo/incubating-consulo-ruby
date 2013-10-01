@@ -16,11 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modules;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.util.IncorrectOperationException;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,77 +34,90 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleN
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RModuleImpl extends RFieldConstantContainerImpl implements RModule {
+public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
+{
 
-    public RModuleImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RModuleImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRModule(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRModule(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RModulePresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RModulePresentationUtil.getPresentation(this);
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RModulePresentationUtil.getIcon(this, flags);
-    }
-
-    @Override
 	@Nullable
-    public RModuleName getModuleName() {
-        return getChildByType(RModuleName.class, 0);
-    }
-    
-    @Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-        return null;
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RModulePresentationUtil.getIcon(this, flags);
+	}
 
-    @Override
+	@Override
+	@Nullable
+	public RModuleName getModuleName()
+	{
+		return getChildByType(RModuleName.class, 0);
+	}
+
+	@Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	{
+		return null;
+	}
+
+	@Override
 	@NotNull
-    public RVirtualModule createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
-                                               @NotNull final RFileInfo info) {
-        final RVirtualName virtualModuleName = new RVirtualNameImpl(getFullPath(), isGlobal());
-        assert virtualParent != null;
+	public RVirtualModule createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo info)
+	{
+		final RVirtualName virtualModuleName = new RVirtualNameImpl(getFullPath(), isGlobal());
+		assert virtualParent != null;
 
-        final RVirtualModuleImpl vModule = new RVirtualModuleImpl(virtualParent, virtualModuleName,
-                                       getAccessModifier(), info);
-        addVirtualData(vModule, info);
-        return vModule;
-    }
+		final RVirtualModuleImpl vModule = new RVirtualModuleImpl(virtualParent, virtualModuleName, getAccessModifier(), info);
+		addVirtualData(vModule, info);
+		return vModule;
+	}
 
-    @Override
-	public int getTextOffset() {
-        final RModuleName moduleName = getModuleName();
-        return moduleName!=null ? moduleName.getTextOffset() : super.getTextOffset();
-    }
+	@Override
+	public int getTextOffset()
+	{
+		final RModuleName moduleName = getModuleName();
+		return moduleName != null ? moduleName.getTextOffset() : super.getTextOffset();
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.MODULE;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.MODULE;
+	}
 
-    @Override
-	protected RPsiElement getNameElement() {
-        return getModuleName();
-    }
+	@Override
+	protected RPsiElement getNameElement()
+	{
+		return getModuleName();
+	}
 }

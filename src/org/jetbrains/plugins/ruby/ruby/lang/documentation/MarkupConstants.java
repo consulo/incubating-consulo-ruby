@@ -24,45 +24,46 @@ import org.jetbrains.annotations.NonNls;
  * @author: oleg
  * @date: Dec 11, 2007
  */
-public interface MarkupConstants {
-    @NonNls
-    public final String ELEMENT = "ELEMENT";
-    @NonNls
-    public final String SYMBOL = "SYMBOL";
-    @NonNls
-    public final String COMMA = ",";
+public interface MarkupConstants
+{
+	@NonNls
+	public final String ELEMENT = "ELEMENT";
+	@NonNls
+	public final String SYMBOL = "SYMBOL";
+	@NonNls
+	public final String COMMA = ",";
 
-    @NonNls
-    public final String LT = "&lt;";
-    @NonNls
-    public final String GT = "&gt;";
-    @NonNls
-    public final String PRIME = "&Prime;";
-    @NonNls
-    public final String BR = "<br>";
-    @NonNls
-    public final String HR = "<hr>";
-    @NonNls
-    public final String SPACE = "&nbsp;";
+	@NonNls
+	public final String LT = "&lt;";
+	@NonNls
+	public final String GT = "&gt;";
+	@NonNls
+	public final String PRIME = "&Prime;";
+	@NonNls
+	public final String BR = "<br>";
+	@NonNls
+	public final String HR = "<hr>";
+	@NonNls
+	public final String SPACE = "&nbsp;";
 
-    @NonNls
-    final String DIRECTIVE_PREFIX = "<font color=#0000FF>";
-    @NonNls
-    final String DIRECTIVE_SUFFIX = "</font>";
-    @NonNls
-    final String TODO_PREFIX = "<b><em><font color=#0000FF>";
-    @NonNls
-    final String TODO_SUFFIX = "</font></em></b>";
-    @NonNls
-    final String BOLD_PREFIX = "<b>";
-    @NonNls
-    final String BOLD_SUFFIX = "</b>";
-    @NonNls
-    final String ITALIC_PREFIX = "<em>";
-    @NonNls
-    final String ITALIC_SUFFIX = "</em>";
-    @NonNls
-    final String CODE_PREFIX = "<code>";
-    @NonNls
-    final String CODE_SUFFIX = "</code>";
+	@NonNls
+	final String DIRECTIVE_PREFIX = "<font color=#0000FF>";
+	@NonNls
+	final String DIRECTIVE_SUFFIX = "</font>";
+	@NonNls
+	final String TODO_PREFIX = "<b><em><font color=#0000FF>";
+	@NonNls
+	final String TODO_SUFFIX = "</font></em></b>";
+	@NonNls
+	final String BOLD_PREFIX = "<b>";
+	@NonNls
+	final String BOLD_SUFFIX = "</b>";
+	@NonNls
+	final String ITALIC_PREFIX = "<em>";
+	@NonNls
+	final String ITALIC_SUFFIX = "</em>";
+	@NonNls
+	final String CODE_PREFIX = "<code>";
+	@NonNls
+	final String CODE_SUFFIX = "</code>";
 }

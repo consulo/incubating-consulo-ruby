@@ -16,15 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
+import java.awt.event.ItemListener;
+
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork.TestFrameworkOptions;
 import org.jetbrains.plugins.ruby.support.OpenLinkInBrowserHyperlinkListener;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
-
-import javax.swing.*;
-import java.awt.event.ItemListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,51 +36,57 @@ import java.awt.event.ItemListener;
  * @date: Oct 14, 2007
  */
 
-public class SelectTestFrameworkPanel implements TestFrameworkOptions {
-    private JTextPane myTPRSpecHomePageLink;
-    private JPanel myContentPane;
-    private JCheckBox myCBUseStdTestUnit;
-    private JCheckBox myCBUseRSpec;
+public class SelectTestFrameworkPanel implements TestFrameworkOptions
+{
+	private JTextPane myTPRSpecHomePageLink;
+	private JPanel myContentPane;
+	private JCheckBox myCBUseStdTestUnit;
+	private JCheckBox myCBUseRSpec;
 
-    public SelectTestFrameworkPanel(@Nullable final ItemListener changedListener,
-                                    final boolean shouldUseTestUnit,
-                                    final boolean shouldUseRSpecFramework) {
-        myTPRSpecHomePageLink.addHyperlinkListener(new OpenLinkInBrowserHyperlinkListener(myContentPane));
-        myTPRSpecHomePageLink.setText(RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.framework.choose.rspec.html.link", RSpecUtil.RSPEC_HOME_PAGE_URL)));
-        myTPRSpecHomePageLink.setBackground(myContentPane.getBackground());
+	public SelectTestFrameworkPanel(@Nullable final ItemListener changedListener, final boolean shouldUseTestUnit, final boolean shouldUseRSpecFramework)
+	{
+		myTPRSpecHomePageLink.addHyperlinkListener(new OpenLinkInBrowserHyperlinkListener(myContentPane));
+		myTPRSpecHomePageLink.setText(RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.framework.choose.rspec.html.link", RSpecUtil.RSPEC_HOME_PAGE_URL)));
+		myTPRSpecHomePageLink.setBackground(myContentPane.getBackground());
 
-        myCBUseRSpec.setSelected(shouldUseRSpecFramework);
-        myCBUseStdTestUnit.setSelected(shouldUseTestUnit);
+		myCBUseRSpec.setSelected(shouldUseRSpecFramework);
+		myCBUseStdTestUnit.setSelected(shouldUseTestUnit);
 
-        if (changedListener != null) {
-            myCBUseStdTestUnit.addItemListener(changedListener);
-            myCBUseRSpec.addItemListener(changedListener);
-        }
-    }
+		if(changedListener != null)
+		{
+			myCBUseStdTestUnit.addItemListener(changedListener);
+			myCBUseRSpec.addItemListener(changedListener);
+		}
+	}
 
-    public JPanel getContentPane() {
-         return myContentPane;
-     }
+	public JPanel getContentPane()
+	{
+		return myContentPane;
+	}
 
-     @Override
-	 public boolean shouldUseRSpecFramework() {
-         return myCBUseRSpec.isSelected();
-     }
+	@Override
+	public boolean shouldUseRSpecFramework()
+	{
+		return myCBUseRSpec.isSelected();
+	}
 
-    @Override
-	public boolean shouldUseTestUnitFramework() {
-        return myCBUseStdTestUnit.isSelected();
-    }
+	@Override
+	public boolean shouldUseTestUnitFramework()
+	{
+		return myCBUseStdTestUnit.isSelected();
+	}
 
-    @Override
-	public boolean shouldPreferRSpecPlugin() {
-        //N/A
-        return false;
-    }
+	@Override
+	public boolean shouldPreferRSpecPlugin()
+	{
+		//N/A
+		return false;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getTestUnitRootUrl() {
-        return null;
-    }
+	public String getTestUnitRootUrl()
+	{
+		return null;
+	}
 }

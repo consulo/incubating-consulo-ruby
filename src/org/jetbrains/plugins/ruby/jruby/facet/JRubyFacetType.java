@@ -39,74 +39,88 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
 import com.intellij.psi.PsiFile;
 
-public class JRubyFacetType extends FacetType<JRubyFacet, RSupportPerModuleSettingsImpl> {
-    public static final JRubyFacetType INSTANCE = new JRubyFacetType();
+public class JRubyFacetType extends FacetType<JRubyFacet, RSupportPerModuleSettingsImpl>
+{
+	public static final JRubyFacetType INSTANCE = new JRubyFacetType();
 
 
-    public static void load(){
+	public static void load()
+	{
 
-    }
+	}
 
-    public JRubyFacetType() {
-        super(JRubyFacet.ID, JRubyFacet.ID.toString(), RBundle.message("jruby.facet"));
-    }
+	public JRubyFacetType()
+	{
+		super(JRubyFacet.ID, JRubyFacet.ID.toString(), RBundle.message("jruby.facet"));
+	}
 
-    @Override
-	public RSupportPerModuleSettingsImpl createDefaultConfiguration() {
-        return new RSupportPerModuleSettingsImpl();
-    }
+	@Override
+	public RSupportPerModuleSettingsImpl createDefaultConfiguration()
+	{
+		return new RSupportPerModuleSettingsImpl();
+	}
 
-    public JRubyFacet createFacet(@NotNull Module module, String name, @NotNull RSupportPerModuleSettingsImpl configuration, @Nullable Facet underlyingFacet) {
-        return new JRubyFacet(this, module, name, configuration, underlyingFacet);
-    }
+	public JRubyFacet createFacet(@NotNull Module module, String name, @NotNull RSupportPerModuleSettingsImpl configuration, @Nullable Facet underlyingFacet)
+	{
+		return new JRubyFacet(this, module, name, configuration, underlyingFacet);
+	}
 
-    public Icon getIcon() {
-        return JRubyIcons.JRUBY_ICON;
-    }
+	public Icon getIcon()
+	{
+		return JRubyIcons.JRUBY_ICON;
+	}
 
 
+	public void registerDetectors(@NotNull final FacetDetectorRegistry<RSupportPerModuleSettingsImpl> registry)
+	{
+		final FacetDetectorRegistryEx<RSupportPerModuleSettingsImpl> detectorRegistry = (FacetDetectorRegistryEx<RSupportPerModuleSettingsImpl>) registry;
 
-    public void registerDetectors(@NotNull final FacetDetectorRegistry<RSupportPerModuleSettingsImpl> registry) {
-        final FacetDetectorRegistryEx<RSupportPerModuleSettingsImpl> detectorRegistry = (FacetDetectorRegistryEx<RSupportPerModuleSettingsImpl>) registry;
+		final VirtualFileFilter jrubyFacetFilter = new VirtualFileFilter()
+		{
+			@Override
+			public boolean accept(VirtualFile virtualFile)
+			{
+				return JRubyFacetStructure.isValidForJRubyFacet(virtualFile);
+			}
+		};
 
-        final VirtualFileFilter jrubyFacetFilter = new VirtualFileFilter(){
-            @Override
-			public boolean accept(VirtualFile virtualFile) {
-                return JRubyFacetStructure.isValidForJRubyFacet(virtualFile);
-            }
-        };
+		final Condition<PsiFile> condition = new Condition<PsiFile>()
+		{
+			@Override
+			public boolean value(PsiFile psiFile)
+			{
+				final VirtualFile vFile = psiFile.getVirtualFile();
+				if(vFile == null)
+				{
+					return false;
+				}
+				final Module module = ModuleUtil.findModuleForFile(vFile, psiFile.getProject());
+				return module != null && !RubyUtil.isRubyModuleType(module) && !JRubyUtil.hasJRubySupport(module) && JRubyFacetStructure.isValidForJRubyFacet(vFile);
+			}
+		};
+		detectorRegistry.registerOnTheFlyDetector(RubyFileType.RUBY, jrubyFacetFilter, condition, new FacetDetector<PsiFile, RSupportPerModuleSettingsImpl>()
+		{
+			public RSupportPerModuleSettingsImpl detectFacet(PsiFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations)
+			{
+				return JRubyFacetType.this.detectFacet(existentFacetConfigurations);
+			}
+		});
 
-        final Condition<PsiFile> condition = new Condition<PsiFile>() {
-            @Override
-			public boolean value(PsiFile psiFile) {
-                final VirtualFile vFile = psiFile.getVirtualFile();
-                if (vFile == null) {
-                    return false;
-                }
-                final Module module = ModuleUtil.findModuleForFile(vFile, psiFile.getProject());
-                return  module != null
-                        && !RubyUtil.isRubyModuleType(module)
-                        && !JRubyUtil.hasJRubySupport(module)
-                        && JRubyFacetStructure.isValidForJRubyFacet(vFile);
-            }
-        };
-        detectorRegistry.registerOnTheFlyDetector(RubyFileType.RUBY, jrubyFacetFilter, condition, new FacetDetector<PsiFile, RSupportPerModuleSettingsImpl>() {
-            public RSupportPerModuleSettingsImpl detectFacet(PsiFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations) {
-                return JRubyFacetType.this.detectFacet(existentFacetConfigurations);
-            }
-        });
+		detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, jrubyFacetFilter, new FacetDetector<VirtualFile, RSupportPerModuleSettingsImpl>()
+		{
+			public RSupportPerModuleSettingsImpl detectFacet(VirtualFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations)
+			{
+				return JRubyFacetType.this.detectFacet(existentFacetConfigurations);
+			}
+		});
+	}
 
-        detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, jrubyFacetFilter, new FacetDetector<VirtualFile, RSupportPerModuleSettingsImpl>() {
-            public RSupportPerModuleSettingsImpl detectFacet(VirtualFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations) {
-                return JRubyFacetType.this.detectFacet(existentFacetConfigurations);
-            }
-        });
-    }
-
-    private RSupportPerModuleSettingsImpl detectFacet(Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations) {
-        if (!existentFacetConfigurations.isEmpty()) {
-            return existentFacetConfigurations.iterator().next();
-        }
-        return createDefaultConfiguration();
-    }
+	private RSupportPerModuleSettingsImpl detectFacet(Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations)
+	{
+		if(!existentFacetConfigurations.isEmpty())
+		{
+			return existentFacetConfigurations.iterator().next();
+		}
+		return createDefaultConfiguration();
+	}
 }

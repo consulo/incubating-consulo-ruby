@@ -16,20 +16,21 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
-
-import javax.swing.*;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,58 +38,64 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: Aug 25, 2007
  */
-public class UserSubFolderNode extends FolderNode {
-    private boolean myIsUnderTestsRoot;
+public class UserSubFolderNode extends FolderNode
+{
+	private boolean myIsUnderTestsRoot;
 
-    public UserSubFolderNode(final Module module, final VirtualFile dir,
-                             final SimpleNode parent,
-                             final boolean isUnderTestsFolder) {
-        super(module, dir, parent, initPresentationData(dir, isUnderTestsFolder));
-        myIsUnderTestsRoot = isUnderTestsFolder;
-    }
+	public UserSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final boolean isUnderTestsFolder)
+	{
+		super(module, dir, parent, initPresentationData(dir, isUnderTestsFolder));
+		myIsUnderTestsRoot = isUnderTestsFolder;
+	}
 
-    private static PresentationData initPresentationData(final VirtualFile dir, final boolean testFolder) {
-        final Icon iconOpened;
-        final Icon iconClosed;
-        if (testFolder) {
-            iconOpened = TestsSubFolderNode.TESTS_OPENED;
-            iconClosed = TestsSubFolderNode.TESTS_CLOSED;
-        } else {
-            iconOpened = RailsIcons.RAILS_FOLDER_OPENED;
-            iconClosed = RailsIcons.RAILS_FOLDER_CLOSED;
+	private static PresentationData initPresentationData(final VirtualFile dir, final boolean testFolder)
+	{
+		final Icon iconOpened;
+		final Icon iconClosed;
+		if(testFolder)
+		{
+			iconOpened = TestsSubFolderNode.TESTS_OPENED;
+			iconClosed = TestsSubFolderNode.TESTS_CLOSED;
+		}
+		else
+		{
+			iconOpened = RailsIcons.RAILS_FOLDER_OPENED;
+			iconClosed = RailsIcons.RAILS_FOLDER_CLOSED;
 
-        }
-        final String name = dir.getName();
-        return new PresentationData(name, name, iconOpened, iconClosed, null);
-    }
+		}
+		final String name = dir.getName();
+		return new PresentationData(name, name, iconOpened, iconClosed, null);
+	}
 
 
-    @Override
-	public void accept(SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitUserNode(myIsUnderTestsRoot);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitUserNode(myIsUnderTestsRoot);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    public UserSubFolderNode(final Module module, final VirtualFile dir,
-                             final SimpleNode parent, final PresentationData data,
-                             final boolean isUnderTestsFolder) {
-        super(module, dir, parent, data);
-        myIsUnderTestsRoot = isUnderTestsFolder;
-    }
+	public UserSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data, final boolean isUnderTestsFolder)
+	{
+		super(module, dir, parent, data);
+		myIsUnderTestsRoot = isUnderTestsFolder;
+	}
 
-    @Override
-	protected void processNotDirectoryFile(final List<RailsNode> nodes,
-                                           final VirtualFile file, final String url) {
-        nodes.add(new SimpleFileNode(getModule(), file));
-    }
+	@Override
+	protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file, final String url)
+	{
+		nodes.add(new SimpleFileNode(getModule(), file));
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.USER_FOLDERS_ROOT;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.USER_FOLDERS_ROOT;
+	}
 }
 

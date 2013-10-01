@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import com.intellij.openapi.project.Project;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
@@ -27,162 +28,182 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Protot
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
-
-import java.util.List;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 15, 2007
  */
-public class Symbol {
-    private static long currentID = 0;
-    private long myId = 0;
+public class Symbol
+{
+	private static long currentID = 0;
+	private long myId = 0;
 
-    protected final String myName;
-    protected Type myType;
+	protected final String myName;
+	protected Type myType;
 
-    private Symbol myParentSymbol;
-    private Project myProject;
-    private Symbol myRootSymbol;
-
-
-    public Symbol(@NotNull final Project project,
-                  @Nullable final String name,
-                  @NotNull final Type type,
-                  @Nullable final Symbol parent,
-                  @Nullable final RVirtualElement prototype) {
-        this(project, null, name, type, parent, prototype);
-    }
-
-    public Symbol(@NotNull final FileSymbol fileSymbol,
-                  @Nullable final String name,
-                  @NotNull final Type type,
-                  @Nullable final Symbol parent,
-                  @Nullable final RVirtualElement prototype) {
-        this(fileSymbol.getProject(), fileSymbol, name, type, parent, prototype);
-    }
-
-    private Symbol(@NotNull final Project project,
-                  @Nullable final FileSymbol fileSymbol,
-                  @Nullable final String name,
-                  @NotNull final Type type,
-                  @Nullable final Symbol parent,
-                  @Nullable final RVirtualElement prototype) {
-        myId = currentID++;
-        myProject = project;
-        myName = name;
-        myType = type;
-        myParentSymbol = parent;
-        if (fileSymbol != null) {
-            myRootSymbol = fileSymbol.getRootSymbol(); 
-            if (prototype != null) {
-                fileSymbol.addPrototype(this, prototype);
-            }
-        }
-    }
-
-    @Nullable
-    public String getName() {
-        return myName;
-    }
-
-    @NotNull
-    public Type getType() {
-        return myType;
-    }
-
-    public void setType(@NotNull final Type type) {
-        myType = type;
-    }
-
-    public static void resetIdCounter() {
-        currentID = 0;
-    }
-
-    public long getId() {
-        return myId;
-    }
-
-    @NotNull
-    public Symbol getLinkedSymbol() {
-        return this;
-    }
+	private Symbol myParentSymbol;
+	private Project myProject;
+	private Symbol myRootSymbol;
 
 
-    @NotNull
-    public Project getProject() {
-        return myProject;
-    }
+	public Symbol(@NotNull final Project project, @Nullable final String name, @NotNull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	{
+		this(project, null, name, type, parent, prototype);
+	}
 
-    @Nullable
-    public Symbol getParentSymbol() {
-        return myParentSymbol;
-    }
+	public Symbol(@NotNull final FileSymbol fileSymbol, @Nullable final String name, @NotNull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	{
+		this(fileSymbol.getProject(), fileSymbol, name, type, parent, prototype);
+	}
 
-    @Nullable
-    public Symbol getRootSymbol() {
-        return myRootSymbol;
-    }
+	private Symbol(@NotNull final Project project, @Nullable final FileSymbol fileSymbol, @Nullable final String name, @NotNull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	{
+		myId = currentID++;
+		myProject = project;
+		myName = name;
+		myType = type;
+		myParentSymbol = parent;
+		if(fileSymbol != null)
+		{
+			myRootSymbol = fileSymbol.getRootSymbol();
+			if(prototype != null)
+			{
+				fileSymbol.addPrototype(this, prototype);
+			}
+		}
+	}
 
-    public void setRootSymbol(@NotNull final Symbol rootSymbol) {
-        assert myType == Type.FILE;
-        myRootSymbol = rootSymbol;
-    }
+	@Nullable
+	public String getName()
+	{
+		return myName;
+	}
+
+	@NotNull
+	public Type getType()
+	{
+		return myType;
+	}
+
+	public void setType(@NotNull final Type type)
+	{
+		myType = type;
+	}
+
+	public static void resetIdCounter()
+	{
+		currentID = 0;
+	}
+
+	public long getId()
+	{
+		return myId;
+	}
+
+	@NotNull
+	public Symbol getLinkedSymbol()
+	{
+		return this;
+	}
 
 
-    @Nullable
-    public RVirtualElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol) {
-        return fileSymbol!=null ? fileSymbol.getLastVirualPrototype(this) : null;
-    }
+	@NotNull
+	public Project getProject()
+	{
+		return myProject;
+	}
 
-    @NotNull
-    public Prototypes getVirtualPrototypes(@Nullable final FileSymbol fileSymbol){
-        return fileSymbol!=null ? fileSymbol.getVirtualPrototypes(this) : Prototypes.EMPTY_PROTOTYPES;
-    }
+	@Nullable
+	public Symbol getParentSymbol()
+	{
+		return myParentSymbol;
+	}
 
-    @NotNull
-    public Children getChildren(@Nullable final FileSymbol fileSymbol){
-        return fileSymbol!=null ? fileSymbol.getChildren(this) : Children.EMPTY_CHILDREN;
-    }
+	@Nullable
+	public Symbol getRootSymbol()
+	{
+		return myRootSymbol;
+	}
 
-    public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("[").append(myId).append("] ");
-        builder.append(myType);
-        if (myName!=null){
-            builder.append(" ");
-            if (useHtml){
-                MarkupUtil.appendBold(builder, myName);
-            } else {
-                builder.append(myName);
-            }
-        }
-        final Prototypes prototypes = fileSymbol.getVirtualPrototypes(this);
-        if (myType!= Type.FILE && prototypes.hasElements()) {
-            final List<RVirtualElement> prototypesList = prototypes.getAll();
-                builder.append(" prototypes: ");
+	public void setRootSymbol(@NotNull final Symbol rootSymbol)
+	{
+		assert myType == Type.FILE;
+		myRootSymbol = rootSymbol;
+	}
 
-            if (useHtml){
-                builder.append(prototypesList.size());
-            } else {
-                for (RVirtualElement element : prototypesList) {
-                    if (element instanceof RVirtualElementBase){
-                        builder.append(" ").append(((RVirtualElementBase) element).getId());
-                    } else
-                    if (element instanceof RPsiElement) {
-                        builder.append(" ").append(RubyPsiUtil.getPresentableName((RPsiElement) element));
-                    } else {
-                        assert false:"wrong prototype" + element;
-                    }
-                }
-            }
-        }
-        return builder.toString();
-    }
 
-    public String toString() {
-        return myType + " : " + myName;
-    }
+	@Nullable
+	public RVirtualElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol)
+	{
+		return fileSymbol != null ? fileSymbol.getLastVirualPrototype(this) : null;
+	}
+
+	@NotNull
+	public Prototypes getVirtualPrototypes(@Nullable final FileSymbol fileSymbol)
+	{
+		return fileSymbol != null ? fileSymbol.getVirtualPrototypes(this) : Prototypes.EMPTY_PROTOTYPES;
+	}
+
+	@NotNull
+	public Children getChildren(@Nullable final FileSymbol fileSymbol)
+	{
+		return fileSymbol != null ? fileSymbol.getChildren(this) : Children.EMPTY_CHILDREN;
+	}
+
+	public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml)
+	{
+		final StringBuilder builder = new StringBuilder();
+		builder.append("[").append(myId).append("] ");
+		builder.append(myType);
+		if(myName != null)
+		{
+			builder.append(" ");
+			if(useHtml)
+			{
+				MarkupUtil.appendBold(builder, myName);
+			}
+			else
+			{
+				builder.append(myName);
+			}
+		}
+		final Prototypes prototypes = fileSymbol.getVirtualPrototypes(this);
+		if(myType != Type.FILE && prototypes.hasElements())
+		{
+			final List<RVirtualElement> prototypesList = prototypes.getAll();
+			builder.append(" prototypes: ");
+
+			if(useHtml)
+			{
+				builder.append(prototypesList.size());
+			}
+			else
+			{
+				for(RVirtualElement element : prototypesList)
+				{
+					if(element instanceof RVirtualElementBase)
+					{
+						builder.append(" ").append(((RVirtualElementBase) element).getId());
+					}
+					else if(element instanceof RPsiElement)
+					{
+						builder.append(" ").append(RubyPsiUtil.getPresentableName((RPsiElement) element));
+					}
+					else
+					{
+						assert false : "wrong prototype" + element;
+					}
+				}
+			}
+		}
+		return builder.toString();
+	}
+
+	public String toString()
+	{
+		return myType + " : " + myName;
+	}
 
 }

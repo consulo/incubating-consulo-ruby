@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,33 +32,36 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
  * @author: Roman Chernyatchik
  * @date: 29.09.2006
  */
-public class RailsControllersFolderNode extends ControllerSubFolderNode {
-    private static final String CONTROLLERS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.controllers.presentable");
+public class RailsControllersFolderNode extends ControllerSubFolderNode
+{
+	private static final String CONTROLLERS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.controllers.presentable");
 
-    public RailsControllersFolderNode(final Module module,
-                                       final VirtualFile controllersRoot) {
-        super(module, controllersRoot, null, initPresentationData());
-    }
+	public RailsControllersFolderNode(final Module module, final VirtualFile controllersRoot)
+	{
+		super(module, controllersRoot, null, initPresentationData());
+	}
 
-    private static PresentationData initPresentationData() {
-        return new PresentationData(CONTROLLERS_VIEW_NAME, CONTROLLERS_VIEW_NAME,
-                                    RailsIcons.RAILS_CONTROLERS_NODES, RailsIcons.RAILS_CONTROLERS_NODES,
-                                    null);
-    }
+	private static PresentationData initPresentationData()
+	{
+		return new PresentationData(CONTROLLERS_VIEW_NAME, CONTROLLERS_VIEW_NAME, RailsIcons.RAILS_CONTROLERS_NODES, RailsIcons.RAILS_CONTROLERS_NODES, null);
+	}
 
-     @Override
-	 public void accept(final SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitControllerNode();
-            return;
-        }
-        super.accept(visitor);
+	@Override
+	public void accept(final SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitControllerNode();
+			return;
+		}
+		super.accept(visitor);
 
-    }
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+	}
 }

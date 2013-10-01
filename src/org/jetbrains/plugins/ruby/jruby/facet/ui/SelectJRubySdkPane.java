@@ -30,29 +30,35 @@ import com.intellij.openapi.projectRoots.Sdk;
  * User: oleg, Roman.Chernyatchik
  * Date: Sep 11, 2007
  */
-public class SelectJRubySdkPane {
-    private JPanel myPanel;
-    private JRubySDKsComboboxWithBrowseButton mySdksComponent;
+public class SelectJRubySdkPane
+{
+	private JPanel myPanel;
+	private JRubySDKsComboboxWithBrowseButton mySdksComponent;
 
-    public SelectJRubySdkPane(@NotNull final RSupportPerModuleSettingsImpl configuration) {
+	public SelectJRubySdkPane(@NotNull final RSupportPerModuleSettingsImpl configuration)
+	{
 
-        mySdksComponent.addComboboxActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                //configuration.setSdk(getSelectedSdk());
-            }
-        });
+		mySdksComponent.addComboboxActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				//configuration.setSdk(getSelectedSdk());
+			}
+		});
 
-      //  mySdksComponent.rebuildSdksListAndSelectSdk(configuration.getSdk());
-    }
+		//  mySdksComponent.rebuildSdksListAndSelectSdk(configuration.getSdk());
+	}
 
-    public Sdk getSelectedSdk(){
-        final Object selectedObject = mySdksComponent.getComboBox().getSelectedItem();
-        return selectedObject instanceof Sdk ? (Sdk)selectedObject : null;
-    }
+	public Sdk getSelectedSdk()
+	{
+		final Object selectedObject = mySdksComponent.getComboBox().getSelectedItem();
+		return selectedObject instanceof Sdk ? (Sdk) selectedObject : null;
+	}
 
-    public JPanel getPanel() {
-        return myPanel;
-    }
+	public JPanel getPanel()
+	{
+		return myPanel;
+	}
 
 }

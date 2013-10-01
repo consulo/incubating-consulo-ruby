@@ -18,13 +18,14 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Jun 21, 2007
-*/
-public enum InterpretationMode {
-    FULL,
-    IGNORE_EXTERNAL,
-    EXTERNAL,
-    ONLY_TESTS_EXTERNAL
+ *
+ * @author: oleg
+ * @date: Jun 21, 2007
+ */
+public enum InterpretationMode
+{
+	FULL,
+	IGNORE_EXTERNAL,
+	EXTERNAL,
+	ONLY_TESTS_EXTERNAL
 }

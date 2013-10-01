@@ -26,9 +26,10 @@ import com.intellij.openapi.util.IconLoader;
  * @author: Roman Chernyatchik
  * @date: Oct 18, 2007
  */
-public interface RSpecIcons {
+public interface RSpecIcons
+{
 
-	Icon RUN_CONFIGURATION_ICON =         IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_runConfigurations.png");
-    Icon METHOD_ICON =                    IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Method.png");
-    Icon TEST_SCRIPT_ICON =               IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Test.png");
+	Icon RUN_CONFIGURATION_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_runConfigurations.png");
+	Icon METHOD_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Method.png");
+	Icon TEST_SCRIPT_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Test.png");
 }

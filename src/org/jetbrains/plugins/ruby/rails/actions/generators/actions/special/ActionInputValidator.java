@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.PsiManagerImpl;
-import com.intellij.psi.impl.file.PsiDirectoryImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.impl.PsiManagerImpl;
+import com.intellij.psi.impl.file.PsiDirectoryImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,46 +35,43 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
  * @author: Roman Chernyatchik
  * @date: 27.12.2006
  */
-public class ActionInputValidator  extends SimpleGeneratorInputValidator {
-    public DataContext myDataContext;
-    public VirtualFile myFile;
+public class ActionInputValidator extends SimpleGeneratorInputValidator
+{
+	public DataContext myDataContext;
+	public VirtualFile myFile;
 
-    public ActionInputValidator(@NotNull final GenerateActionAction generatorAction,
-                                @NotNull final Module module,
-                                @Nullable final VirtualFile file,
-                                @Nullable final DataContext dataContext) {
-        super(generatorAction, module,
-              new PsiDirectoryImpl((PsiManagerImpl)PsiManager.getInstance(module.getProject()),
-                                   file));        
-        myDataContext = dataContext;
-        myFile = file;
-    }
+	public ActionInputValidator(@NotNull final GenerateActionAction generatorAction, @NotNull final Module module, @Nullable final VirtualFile file, @Nullable final DataContext dataContext)
+	{
+		super(generatorAction, module, new PsiDirectoryImpl((PsiManagerImpl) PsiManager.getInstance(module.getProject()), file));
+		myDataContext = dataContext;
+		myFile = file;
+	}
 
-    @Override
-	public boolean checkInput(@NotNull final String actionName) {
-        if (ControllersConventions.isValidActionName(actionName)) {
-            return true;
-        }
-        showErrorDialog(RBundle.message("popup.generate.action.error.script.argument.is.not.valid",
-                        actionName,
-                        ControllersConventions.toValidActionName(actionName)));
-        return false;
-    }
+	@Override
+	public boolean checkInput(@NotNull final String actionName)
+	{
+		if(ControllersConventions.isValidActionName(actionName))
+		{
+			return true;
+		}
+		showErrorDialog(RBundle.message("popup.generate.action.error.script.argument.is.not.valid", actionName, ControllersConventions.toValidActionName(actionName)));
+		return false;
+	}
 
-    @Nullable
-    public String getRelativePath() {
-        if (myFile == null) {
-            return TextUtil.EMPTY_STRING;
-        }
-        return ControllersConventions.getControllerFullName(myModule, myFile);
-    }
+	@Nullable
+	public String getRelativePath()
+	{
+		if(myFile == null)
+		{
+			return TextUtil.EMPTY_STRING;
+		}
+		return ControllersConventions.getControllerFullName(myModule, myFile);
+	}
 
 
-    @Override
-	public void invokeAction(final String scriptArguments, final String mainArgument) {
-        ((GenerateActionAction)myGeneratorAction).invokeAction(scriptArguments,
-                                                               mainArgument,
-                                                               myModule,
-                                                               myDataContext);
-    }
+	@Override
+	public void invokeAction(final String scriptArguments, final String mainArgument)
+	{
+		((GenerateActionAction) myGeneratorAction).invokeAction(scriptArguments, mainArgument, myModule, myDataContext);
+	}
 }

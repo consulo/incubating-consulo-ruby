@@ -16,25 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 09.06.2006
  */
-public class RubyFastAnnotator implements Annotator {
+public class RubyFastAnnotator implements Annotator
+{
 
-    @Override
-	public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder) {
-        // We hope it`s enough often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder)
+	{
+		// We hope it`s enough often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        final RubyFastAnnotatorVisitor fastAnnotatorVisitor = new RubyFastAnnotatorVisitor(holder);
-        psiElement.accept(fastAnnotatorVisitor);
-    }
+		final RubyFastAnnotatorVisitor fastAnnotatorVisitor = new RubyFastAnnotatorVisitor(holder);
+		psiElement.accept(fastAnnotatorVisitor);
+	}
 }

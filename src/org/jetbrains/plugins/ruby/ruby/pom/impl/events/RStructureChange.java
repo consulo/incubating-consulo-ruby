@@ -25,19 +25,23 @@ import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeVisitor;
  * @author: Roman Chernyatchik
  * @date: 21.10.2006
  */
-public class RStructureChange implements RubyChange {
-    private String myMessage;
+public class RStructureChange implements RubyChange
+{
+	private String myMessage;
 
-    public RStructureChange(String message) {
-        myMessage = message;
-    }
+	public RStructureChange(String message)
+	{
+		myMessage = message;
+	}
 
-    @Override
-	public void accept(final RubyChangeVisitor visitor) {
-        visitor.structureChanged();
-    }
+	@Override
+	public void accept(final RubyChangeVisitor visitor)
+	{
+		visitor.structureChanged();
+	}
 
-    public String toString() {
-        return myMessage;
-    }
+	public String toString()
+	{
+		return myMessage;
+	}
 }

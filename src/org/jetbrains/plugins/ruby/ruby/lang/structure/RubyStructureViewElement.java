@@ -16,130 +16,161 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.*;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyStructureVisitor;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+class RubyStructureViewElement implements StructureViewTreeElement
+{
+	private RPsiElement myElement;
 
-class RubyStructureViewElement implements StructureViewTreeElement {
-    private RPsiElement myElement;
+	public RubyStructureViewElement(final RPsiElement element)
+	{
+		myElement = element;
+	}
 
-    public RubyStructureViewElement(final RPsiElement element) {
-        myElement = element;
-    }
+	@Override
+	public StructureViewTreeElement[] getChildren()
+	{
+		final List<RPsiElement> childrenElements = new ArrayList<RPsiElement>();
 
-    @Override
-	public StructureViewTreeElement[] getChildren() {
-        final List<RPsiElement> childrenElements = new ArrayList<RPsiElement>();
+		RubyStructureVisitor myVisitor = new RubyStructureVisitor()
+		{
+			@Override
+			public void visitRCall(RCall rCall)
+			{
+				// do nothing
+			}
 
-        RubyStructureVisitor myVisitor = new RubyStructureVisitor() {
-            @Override
-			public void visitRCall(RCall rCall) {
-                // do nothing
-            }
+			@Override
+			public void visitRAliasStatement(RAliasStatement rAliasStatement)
+			{
+				// do nothing
+			}
 
-            @Override
-			public void visitRAliasStatement(RAliasStatement rAliasStatement) {
-                // do nothing
-            }
-
-            @Override
-			public void visitContainer(RContainer rContainer){
-               childrenElements.addAll(rContainer.getStructureElements());
-
-
-// fields
-                if (rContainer instanceof RFieldHolder){
-                    List<FieldDefinition> definitions = ((RFieldHolder)rContainer).getFieldsDefinitions();
-                    for (FieldDefinition definition : definitions){
-                        childrenElements.add(definition.getFirstUsage());
-                    }
-                }
-
-// constants
-                if (rContainer instanceof RConstantHolder){
-                    List<ConstantDefinitions> definitions = ((RConstantHolder)rContainer).getConstantDefinitions();
-                    for (ConstantDefinitions definition: definitions){
-                        childrenElements.add(definition.getFirstDefinition());
-                    }
-                }
-
-// global variables
-                if (rContainer instanceof RGlobalVarHolder){
-                    List<GlobalVarDefinition> definitions = ((RGlobalVarHolder)rContainer).getGlobalVarDefinitions();
-                    for (GlobalVarDefinition definition: definitions){
-                        childrenElements.add(definition.getFirstDefinition());
-                    }
-                }
-
-            }
-        };
-
-        myElement.accept(myVisitor);
-        StructureViewTreeElement[] children = new StructureViewTreeElement[childrenElements.size()];
-        for (int i = 0; i < children.length; i++) {
-            children[i] = new RubyStructureViewElement(childrenElements.get(i));
-        }
-
-        return children;
-    }
+			@Override
+			public void visitContainer(RContainer rContainer)
+			{
+				childrenElements.addAll(rContainer.getStructureElements());
 
 
-    @Override
-	public ItemPresentation getPresentation() {
+				// fields
+				if(rContainer instanceof RFieldHolder)
+				{
+					List<FieldDefinition> definitions = ((RFieldHolder) rContainer).getFieldsDefinitions();
+					for(FieldDefinition definition : definitions)
+					{
+						childrenElements.add(definition.getFirstUsage());
+					}
+				}
 
-        return new ItemPresentation() {
-            @Override
+				// constants
+				if(rContainer instanceof RConstantHolder)
+				{
+					List<ConstantDefinitions> definitions = ((RConstantHolder) rContainer).getConstantDefinitions();
+					for(ConstantDefinitions definition : definitions)
+					{
+						childrenElements.add(definition.getFirstDefinition());
+					}
+				}
+
+				// global variables
+				if(rContainer instanceof RGlobalVarHolder)
+				{
+					List<GlobalVarDefinition> definitions = ((RGlobalVarHolder) rContainer).getGlobalVarDefinitions();
+					for(GlobalVarDefinition definition : definitions)
+					{
+						childrenElements.add(definition.getFirstDefinition());
+					}
+				}
+
+			}
+		};
+
+		myElement.accept(myVisitor);
+		StructureViewTreeElement[] children = new StructureViewTreeElement[childrenElements.size()];
+		for(int i = 0; i < children.length; i++)
+		{
+			children[i] = new RubyStructureViewElement(childrenElements.get(i));
+		}
+
+		return children;
+	}
+
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+
+		return new ItemPresentation()
+		{
+			@Override
 			@Nullable
-            public String getPresentableText() {
-                return RubyPsiUtil.getPresentableName(myElement);
-            }
+			public String getPresentableText()
+			{
+				return RubyPsiUtil.getPresentableName(myElement);
+			}
 
-            @Override
-			public Icon getIcon(boolean open) {
-                return RubyPsiUtil.getIcon(myElement);
-            }
+			@Override
+			public Icon getIcon(boolean open)
+			{
+				return RubyPsiUtil.getIcon(myElement);
+			}
 
-            public TextAttributesKey getTextAttributesKey() {
-                return null;
-            }
+			public TextAttributesKey getTextAttributesKey()
+			{
+				return null;
+			}
 
-            @Override
-			public String getLocationString() {
-                return null;
-            }
-        };
-    }
+			@Override
+			public String getLocationString()
+			{
+				return null;
+			}
+		};
+	}
 
-    @Override
-	public RPsiElement getValue() {
-        return myElement;
-    }
+	@Override
+	public RPsiElement getValue()
+	{
+		return myElement;
+	}
 
-    @Override
-	public void navigate(boolean requestFocus) {
-        ((NavigationItem) myElement).navigate(requestFocus);
-    }
+	@Override
+	public void navigate(boolean requestFocus)
+	{
+		((NavigationItem) myElement).navigate(requestFocus);
+	}
 
-    @Override
-	public boolean canNavigate() {
-        return ((NavigationItem) myElement).canNavigate();
-    }
+	@Override
+	public boolean canNavigate()
+	{
+		return ((NavigationItem) myElement).canNavigate();
+	}
 
-    @Override
-	public boolean canNavigateToSource() {
-        return ((NavigationItem) myElement).canNavigateToSource();
-    }
+	@Override
+	public boolean canNavigateToSource()
+	{
+		return ((NavigationItem) myElement).canNavigateToSource();
+	}
 }
 

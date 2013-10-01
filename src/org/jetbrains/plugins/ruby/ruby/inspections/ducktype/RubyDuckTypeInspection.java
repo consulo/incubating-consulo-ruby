@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
+import com.intellij.codeHighlighting.HighlightDisplayLevel;
+import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,46 +31,53 @@ import org.jetbrains.plugins.ruby.RBundle;
  * @author: oleg
  * @date: Jun 25, 2007
  */
-public class RubyDuckTypeInspection extends LocalInspectionTool {
-    @NonNls
-    private static final String SHORT_NAME = "RubyDuckType";
+public class RubyDuckTypeInspection extends LocalInspectionTool
+{
+	@NonNls
+	private static final String SHORT_NAME = "RubyDuckType";
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getGroupDisplayName() {
-        return RBundle.message("inspection.group.name");
-    }
+	@Nls
+	public String getGroupDisplayName()
+	{
+		return RBundle.message("inspection.group.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("inspection.duck.type.name");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("inspection.duck.type.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @NonNls
-    public String getShortName() {
-        return SHORT_NAME;
-    }
+	@NonNls
+	public String getShortName()
+	{
+		return SHORT_NAME;
+	}
 
-    @Override
-	public boolean isEnabledByDefault() {
-        return false;
-    }
+	@Override
+	public boolean isEnabledByDefault()
+	{
+		return false;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-        return new RubyDuckTypeVisitor(holder);
-    }
+	public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+	{
+		return new RubyDuckTypeVisitor(holder);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public HighlightDisplayLevel getDefaultLevel() {
-        return HighlightDisplayLevel.WARNING;
-    }
+	public HighlightDisplayLevel getDefaultLevel()
+	{
+		return HighlightDisplayLevel.WARNING;
+	}
 
 }

@@ -16,7 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 
-import com.intellij.psi.PsiElement;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
@@ -27,74 +29,87 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.08.2006
  */
-public class RFieldHolderUtil {
+public class RFieldHolderUtil
+{
 
-    /**
-     * Adds a new field to the list of Rfields
-     * @param list      List of RFields, already found
-     * @param rField   Field expression to add
-     */
-    private static void addField(final List<FieldDefinition> list, final RField rField) {
-        for (FieldDefinition f: list){
-            if (f.isFor(rField)){
-                return;
-            }
-        }
+	/**
+	 * Adds a new field to the list of Rfields
+	 *
+	 * @param list   List of RFields, already found
+	 * @param rField Field expression to add
+	 */
+	private static void addField(final List<FieldDefinition> list, final RField rField)
+	{
+		for(FieldDefinition f : list)
+		{
+			if(f.isFor(rField))
+			{
+				return;
+			}
+		}
 
-        list.add(new FieldDefinitionImpl(rField));
-    }
+		list.add(new FieldDefinitionImpl(rField));
+	}
 
-    @NotNull
-    public static List<FieldDefinition> gatherFieldDescriptions(final RFieldHolder holder) {
-        final ArrayList<FieldDefinition> list = new ArrayList<FieldDefinition>();
+	@NotNull
+	public static List<FieldDefinition> gatherFieldDescriptions(final RFieldHolder holder)
+	{
+		final ArrayList<FieldDefinition> list = new ArrayList<FieldDefinition>();
 
-        final RubyElementVisitor fieldVisitor = new RubyElementVisitor() {
+		final RubyElementVisitor fieldVisitor = new RubyElementVisitor()
+		{
 
-            @Override
-			public void visitRClassVariable(final RClassVariable rClassVariable) {
-                addField(list, rClassVariable);
-            }
+			@Override
+			public void visitRClassVariable(final RClassVariable rClassVariable)
+			{
+				addField(list, rClassVariable);
+			}
 
-            @Override
-			public void visitRInstanceVariable(final RInstanceVariable rInstanceVariable) {
-                addField(list, rInstanceVariable);
-            }
+			@Override
+			public void visitRInstanceVariable(final RInstanceVariable rInstanceVariable)
+			{
+				addField(list, rInstanceVariable);
+			}
 
-            @Override
-			public void visitElement(final PsiElement element) {
-                if (element instanceof RFieldHolder) {
-                    return;
-                }
-                element.acceptChildren(this);
-            }
+			@Override
+			public void visitElement(final PsiElement element)
+			{
+				if(element instanceof RFieldHolder)
+				{
+					return;
+				}
+				element.acceptChildren(this);
+			}
 
-        };
-        holder.acceptChildren(fieldVisitor);
-        return list;
-    }
+		};
+		holder.acceptChildren(fieldVisitor);
+		return list;
+	}
 
 
-    public static FieldDefinition getDefinition(RFieldHolder holder, RVirtualField field) {
-        return getDefinition(holder.getFieldsDefinitions(), field);
-    }
+	public static FieldDefinition getDefinition(RFieldHolder holder, RVirtualField field)
+	{
+		return getDefinition(holder.getFieldsDefinitions(), field);
+	}
 
-    @Nullable
-    public static FieldDefinition getDefinition(@NotNull final List<FieldDefinition> list, @NotNull final RVirtualField field){
-        for (FieldDefinition definition : list) {
-            if (definition.isFor(field)) {
-                return definition;
-            }
-        }
-        return null;
-    }
+	@Nullable
+	public static FieldDefinition getDefinition(@NotNull final List<FieldDefinition> list, @NotNull final RVirtualField field)
+	{
+		for(FieldDefinition definition : list)
+		{
+			if(definition.isFor(field))
+			{
+				return definition;
+			}
+		}
+		return null;
+	}
 
 }

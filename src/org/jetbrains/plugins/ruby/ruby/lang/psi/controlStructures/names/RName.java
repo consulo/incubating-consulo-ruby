@@ -23,5 +23,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: Jul 6, 2007
  */
-public interface RName extends RPsiElement {
+public interface RName extends RPsiElement
+{
 }

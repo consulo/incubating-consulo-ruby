@@ -25,10 +25,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: Dec 26, 2007
  */
-public interface RAssoc extends RPsiElement {
-    @Nullable
-    public RPsiElement getKey();
+public interface RAssoc extends RPsiElement
+{
+	@Nullable
+	public RPsiElement getKey();
 
-    @Nullable
-    public RPsiElement getValue();
+	@Nullable
+	public RPsiElement getValue();
 }

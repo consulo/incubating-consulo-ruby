@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,18 +29,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
  * @author: oleg
  * @date: Jan 14, 2008
  */
-public class PseudoScopeHolderNavigator {
-    /**
-     * @param element context
-     * @return Returns the root scope for the given context
-     */
-    @Nullable
-    public static PseudoScopeHolder getScopeHolder(@NotNull PsiElement element) {
-        if (element.getParent() instanceof RClassObject){
-            //noinspection ConstantConditions
-            element = PsiTreeUtil.getParentOfType(element, RContainer.class).getParent();
-        }
-        return element instanceof PseudoScopeHolder ?
-                (PseudoScopeHolder) element : PsiTreeUtil.getParentOfType(element, PseudoScopeHolder.class);
-    }
+public class PseudoScopeHolderNavigator
+{
+	/**
+	 * @param element context
+	 * @return Returns the root scope for the given context
+	 */
+	@Nullable
+	public static PseudoScopeHolder getScopeHolder(@NotNull PsiElement element)
+	{
+		if(element.getParent() instanceof RClassObject)
+		{
+			//noinspection ConstantConditions
+			element = PsiTreeUtil.getParentOfType(element, RContainer.class).getParent();
+		}
+		return element instanceof PseudoScopeHolder ? (PseudoScopeHolder) element : PsiTreeUtil.getParentOfType(element, PseudoScopeHolder.class);
+	}
 }

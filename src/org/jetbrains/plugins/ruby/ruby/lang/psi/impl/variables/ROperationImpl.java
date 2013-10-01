@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.ROperation;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.07.2006
  */
-public class ROperationImpl extends RPsiElementBase implements ROperation {
-    public ROperationImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class ROperationImpl extends RPsiElementBase implements ROperation
+{
+	public ROperationImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

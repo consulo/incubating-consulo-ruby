@@ -25,11 +25,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  * User: oleg
  * Date: 21.07.2006
  */
-public interface RArgument extends RPsiElement {
-    public RIdentifier getIdentifier();
+public interface RArgument extends RPsiElement
+{
+	public RIdentifier getIdentifier();
 
-    @NotNull
-    public String getName();
+	@NotNull
+	public String getName();
 
-    public ArgumentInfo.Type getType();
+	public ArgumentInfo.Type getType();
 }

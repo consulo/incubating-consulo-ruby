@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -33,52 +34,60 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.Collections;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RReturnStatementImpl extends RPsiElementBase implements RReturnStatement{
-    public RReturnStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RReturnStatementImpl extends RPsiElementBase implements RReturnStatement
+{
+	public RReturnStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRReturnStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRReturnStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RPsiElement> getReturnValues() {
-        final RListOfExpressions list = getReturnList();
-        return list!=null ? list.getElements() : Collections.<RPsiElement>emptyList();
-    }
+	public List<RPsiElement> getReturnValues()
+	{
+		final RListOfExpressions list = getReturnList();
+		return list != null ? list.getElements() : Collections.<RPsiElement>emptyList();
+	}
 
-    @Override
-	public RListOfExpressions getReturnList() {
-        return RubyPsiUtil.getChildByType(this, RListOfExpressions.class, 0);
-    }
+	@Override
+	public RListOfExpressions getReturnList()
+	{
+		return RubyPsiUtil.getChildByType(this, RListOfExpressions.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final List<RPsiElement> values = getReturnValues();
-        if (values.isEmpty()){
-            return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.NilClass), Context.INSTANCE, true);
-        }
-        if (values.size() == 1){
-            final RPsiElement v = values.get(0);
-            return v instanceof RExpression ? ((RExpression) v).getType(fileSymbol) : RType.NOT_TYPED;
-        }
-        return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Array), Context.INSTANCE, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final List<RPsiElement> values = getReturnValues();
+		if(values.isEmpty())
+		{
+			return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.NilClass), Context.INSTANCE, true);
+		}
+		if(values.size() == 1)
+		{
+			final RPsiElement v = values.get(0);
+			return v instanceof RExpression ? ((RExpression) v).getType(fileSymbol) : RType.NOT_TYPED;
+		}
+		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Array), Context.INSTANCE, true);
+	}
 }

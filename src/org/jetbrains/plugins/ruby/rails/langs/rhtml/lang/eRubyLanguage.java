@@ -44,62 +44,65 @@ import com.intellij.psi.templateLanguages.TemplateLanguage;
  * @author: Roman Chernyatchik
  * @date: 02.04.2007
  */
-public class eRubyLanguage extends Language implements TemplateLanguage{
-    public static final eRubyLanguage INSTANCE = new eRubyLanguage();
+public class eRubyLanguage extends Language implements TemplateLanguage
+{
+	public static final eRubyLanguage INSTANCE = new eRubyLanguage();
 
-    public eRubyLanguage() {
-        super("E-RUBY", "application/x-httpd-eruby");
-    }
-
-
-    @NotNull
-    public SyntaxHighlighter getSyntaxHighlighter(final Project project, final VirtualFile virtualFile) {
-        return new RHTMLFileHighlighterImpl();
-    }
-
-    //TODO  getAnnotator()
+	public eRubyLanguage()
+	{
+		super("E-RUBY", "application/x-httpd-eruby");
+	}
 
 
+	@NotNull
+	public SyntaxHighlighter getSyntaxHighlighter(final Project project, final VirtualFile virtualFile)
+	{
+		return new RHTMLFileHighlighterImpl();
+	}
+
+	//TODO  getAnnotator()
 
 
-    public static Block createRHTMLRoot(final PsiElement element,
-                                        final CodeStyleSettings settings,
-                                        final FormattingDocumentModel documentModel) {
-        final PsiFile file = element.getContainingFile();
-        final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(file);
-        assert rhtmlFile != null;
+	public static Block createRHTMLRoot(final PsiElement element, final CodeStyleSettings settings, final FormattingDocumentModel documentModel)
+	{
+		final PsiFile file = element.getContainingFile();
+		final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(file);
+		assert rhtmlFile != null;
 
-        final RHTMLFileViewProvider rhtmlViewProvider = rhtmlFile.getViewProvider();
-        final Language templateLang = rhtmlViewProvider.getTemplateDataLanguage();
+		final RHTMLFileViewProvider rhtmlViewProvider = rhtmlFile.getViewProvider();
+		final Language templateLang = rhtmlViewProvider.getTemplateDataLanguage();
 
 
-        if (templateLang == StdLanguages.HTML || templateLang == StdLanguages.XHTML) {
-            final PsiFile psiRoot = rhtmlViewProvider.getPsi(templateLang);
-            final ASTNode rootNode = SourceTreeToPsiMap.psiElementToTree(psiRoot);
-            return new XmlBlock(rootNode, null, null, new HtmlPolicy(settings, documentModel), null, null);
-        } else {
-            return new ReadOnlyBlock(file.getNode());
-        }
-    }
-//    public static Block createRHTMLRoot(final PsiElement element,
-//                                        final CodeStyleSettings settings,
-//                                        final FormattingDocumentModel documentModel) {
-//        final PsiFile file = element.getContainingFile();
-//        final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(file);
-//        assert rhtmlFile != null;
-//
-//        final RHTMLFileViewProvider rhtmlViewProvider = rhtmlFile.getViewProvider();
-//        final Language templateLang = rhtmlViewProvider.getTemplateDataLanguage();
-//
-//        //TODO leave only HTML, not XML
-//        if (templateLang == StdLanguages.HTML || templateLang == StdLanguages.XHTML) {
-//            final PsiFile psiRoot = rhtmlViewProvider.getPsi(RHTMLLanguage.RHTML);
-//            final ASTNode rootNode = SourceTreeToPsiMap.psiElementToTree(psiRoot);
-//            return new XmlBlock(rootNode, null, null, new HtmlPolicy(settings, documentModel), null, null);
-//        } else {
-//            return new ReadOnlyBlock(file.getNode());
-//        }
-//    }
+		if(templateLang == StdLanguages.HTML || templateLang == StdLanguages.XHTML)
+		{
+			final PsiFile psiRoot = rhtmlViewProvider.getPsi(templateLang);
+			final ASTNode rootNode = SourceTreeToPsiMap.psiElementToTree(psiRoot);
+			return new XmlBlock(rootNode, null, null, new HtmlPolicy(settings, documentModel), null, null);
+		}
+		else
+		{
+			return new ReadOnlyBlock(file.getNode());
+		}
+	}
+	//    public static Block createRHTMLRoot(final PsiElement element,
+	//                                        final CodeStyleSettings settings,
+	//                                        final FormattingDocumentModel documentModel) {
+	//        final PsiFile file = element.getContainingFile();
+	//        final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(file);
+	//        assert rhtmlFile != null;
+	//
+	//        final RHTMLFileViewProvider rhtmlViewProvider = rhtmlFile.getViewProvider();
+	//        final Language templateLang = rhtmlViewProvider.getTemplateDataLanguage();
+	//
+	//        //TODO leave only HTML, not XML
+	//        if (templateLang == StdLanguages.HTML || templateLang == StdLanguages.XHTML) {
+	//            final PsiFile psiRoot = rhtmlViewProvider.getPsi(RHTMLLanguage.RHTML);
+	//            final ASTNode rootNode = SourceTreeToPsiMap.psiElementToTree(psiRoot);
+	//            return new XmlBlock(rootNode, null, null, new HtmlPolicy(settings, documentModel), null, null);
+	//        } else {
+	//            return new ReadOnlyBlock(file.getNode());
+	//        }
+	//    }
 
 }
 

@@ -16,29 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.spacing;
 
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.08.2006
  */
-public interface SpacingTokens extends RubyTokenTypes {
-    /**
-     * Always no spacing before these tokens
-     */
-    final TokenSet NO_SPACING_BEFORE = TokenSet.create(
-            tSEMICOLON,
-            tCOMMA,
-            tCOLON2,
-            tDOT
-    );
+public interface SpacingTokens extends RubyTokenTypes
+{
+	/**
+	 * Always no spacing before these tokens
+	 */
+	final TokenSet NO_SPACING_BEFORE = TokenSet.create(tSEMICOLON, tCOMMA, tCOLON2, tDOT);
 
-    /**
-     * Always at least single space after these tokens
-     */
-    final TokenSet SPACING_AFTER = TokenSet.create(
-            tCOMMA
-    );
+	/**
+	 * Always at least single space after these tokens
+	 */
+	final TokenSet SPACING_AFTER = TokenSet.create(tCOMMA);
 }

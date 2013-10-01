@@ -29,44 +29,52 @@ import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.util.ActionRunner;
 
 
-public class RubySupportLoader implements ApplicationComponent, InspectionToolProvider {
+public class RubySupportLoader implements ApplicationComponent, InspectionToolProvider
+{
 
-    public static void loadRuby() {
-        IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            @Override
-			public void run() throws Exception {
-// Registering Ruby editor actions
-                RubyEditorActionsManager.registerRubyEditorActions();
+	public static void loadRuby()
+	{
+		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		{
+			@Override
+			public void run() throws Exception
+			{
+				// Registering Ruby editor actions
+				RubyEditorActionsManager.registerRubyEditorActions();
 
-            }
-        });
-    }
+			}
+		});
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    @NonNls
-    public String getComponentName() {
-        return RComponents.RUBY_SUPPORT_LOADER;
-    }
+	@NonNls
+	public String getComponentName()
+	{
+		return RComponents.RUBY_SUPPORT_LOADER;
+	}
 
-    @Override
-	public void initComponent() {
-        loadRuby();
-    }
+	@Override
+	public void initComponent()
+	{
+		loadRuby();
+	}
 
 
-    @Override
-	public void disposeComponent() {
-        // do nothing
-    }
+	@Override
+	public void disposeComponent()
+	{
+		// do nothing
+	}
 
-    @Override
-	public Class[] getInspectionClasses() {
-        return new Class[]{
-                RubyDuckTypeInspection.class,
-                RubyResolveInspection.class,
-                RubyScopesInspection.class
-        };
-    }
+	@Override
+	public Class[] getInspectionClasses()
+	{
+		return new Class[]{
+				RubyDuckTypeInspection.class,
+				RubyResolveInspection.class,
+				RubyScopesInspection.class
+		};
+	}
 }

@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,11 +27,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseS
  * @author: Roman Chernyatchik
  * @date: 04.05.2007
  */
-public class RMathBinExpressionNavigator {
-    @Nullable
-    public static RMathBinExpressionImpl getByRBaseString(@NotNull final RBaseString string) {
-        final PsiElement parent = string.getParent();
-        return (parent instanceof RMathBinExpressionImpl) ? (RMathBinExpressionImpl)parent
-                : null;
-    }
+public class RMathBinExpressionNavigator
+{
+	@Nullable
+	public static RMathBinExpressionImpl getByRBaseString(@NotNull final RBaseString string)
+	{
+		final PsiElement parent = string.getParent();
+		return (parent instanceof RMathBinExpressionImpl) ? (RMathBinExpressionImpl) parent : null;
+	}
 }

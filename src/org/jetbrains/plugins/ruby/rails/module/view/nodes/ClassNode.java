@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
@@ -35,99 +34,111 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 08.10.2006
  */
-public class ClassNode extends RailsNode {
-    private RVirtualClass myRubyClass;
-    private final String parentDirFileUrl;
+public class ClassNode extends RailsNode
+{
+	private RVirtualClass myRubyClass;
+	private final String parentDirFileUrl;
 
-    private RFileInfo myFileInfo;
+	private RFileInfo myFileInfo;
 
-    public ClassNode(final Module module, final RVirtualClass rVClass,
-                     final RFileInfo fileInfo) {
-        super(module);
+	public ClassNode(final Module module, final RVirtualClass rVClass, final RFileInfo fileInfo)
+	{
+		super(module);
 
-        myRubyClass = rVClass;
-        myFileInfo = fileInfo;
-        parentDirFileUrl = fileInfo.getFileDirectoryUrl();
+		myRubyClass = rVClass;
+		myFileInfo = fileInfo;
+		parentDirFileUrl = fileInfo.getFileDirectoryUrl();
 
-        final ItemPresentation presentation = rVClass.getPresentation();
-        init(generateNodeId(rVClass), presentation);
-        assert getVirtualFileUrl().equals(fileInfo.getUrl());
-    }
+		final ItemPresentation presentation = rVClass.getPresentation();
+		init(generateNodeId(rVClass), presentation);
+		assert getVirtualFileUrl().equals(fileInfo.getUrl());
+	}
 
-    @NotNull
-    public static NodeId generateNodeId(final RVirtualClass rVClass) {
-        return NodeIdUtil.createForVirtualContainer(rVClass);
-    }
-
-     @Override
-	 public void accept(final SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitClassNode();
-            return;
-        }
-        super.accept(visitor);
-
-    }
-
-    @Override
-	@Nullable
-    public VirtualFile getVirtualFile() {
-        return myRubyClass.getVirtualFile();
-    }
-
-    @Override
-	public RailsNode[] getChildren() {
-        final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
-        final Module module = getModule();
-
-        List<RVirtualStructuralElement> methods
-                = RContainerUtil.selectVirtualElementsByType(myRubyClass.getVirtualStructureElements(), StructureType.METHOD);
-        for (RVirtualElement element : methods) {
-            assert element instanceof RVirtualMethod;
-            final RVirtualMethod method = (RVirtualMethod) element;
-            accept(new RailsNodeVisitorAdapter() {
-                @Override
-				public void visitControllerNode() {
-                    final String controllerName
-                            = ControllersConventions.getControllerNameByClassName(myRubyClass);
-                    children.add(new ActionNode(module, method, parentDirFileUrl,
-                                                getVirtualFileUrl(),
-                                                controllerName));
-                }
-
-                @Override
-				public void visitClassNode() {
-                    children.add(new MethodNode(module, method, getVirtualFileUrl()));
-                }
-            });
-        }
-        final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(myRubyClass);
-        for (final RVirtualClass rClass : allClasses) {
-            children.add(new ClassNode(module, rClass, myFileInfo));
-        }
-        return children.toArray(new RailsNode[children.size()]);
-    }
-
-    @Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.CLASS;
-    }
+	public static NodeId generateNodeId(final RVirtualClass rVClass)
+	{
+		return NodeIdUtil.createForVirtualContainer(rVClass);
+	}
 
-    public RVirtualClass getRubyClass() {
-        return myRubyClass;
-    }
+	@Override
+	public void accept(final SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitClassNode();
+			return;
+		}
+		super.accept(visitor);
 
-    protected String getParentDirUrl() {
-        return parentDirFileUrl;
-    }
+	}
+
+	@Override
+	@Nullable
+	public VirtualFile getVirtualFile()
+	{
+		return myRubyClass.getVirtualFile();
+	}
+
+	@Override
+	public RailsNode[] getChildren()
+	{
+		final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
+		final Module module = getModule();
+
+		List<RVirtualStructuralElement> methods = RContainerUtil.selectVirtualElementsByType(myRubyClass.getVirtualStructureElements(), StructureType.METHOD);
+		for(RVirtualElement element : methods)
+		{
+			assert element instanceof RVirtualMethod;
+			final RVirtualMethod method = (RVirtualMethod) element;
+			accept(new RailsNodeVisitorAdapter()
+			{
+				@Override
+				public void visitControllerNode()
+				{
+					final String controllerName = ControllersConventions.getControllerNameByClassName(myRubyClass);
+					children.add(new ActionNode(module, method, parentDirFileUrl, getVirtualFileUrl(), controllerName));
+				}
+
+				@Override
+				public void visitClassNode()
+				{
+					children.add(new MethodNode(module, method, getVirtualFileUrl()));
+				}
+			});
+		}
+		final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(myRubyClass);
+		for(final RVirtualClass rClass : allClasses)
+		{
+			children.add(new ClassNode(module, rClass, myFileInfo));
+		}
+		return children.toArray(new RailsNode[children.size()]);
+	}
+
+	@Override
+	@NotNull
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.CLASS;
+	}
+
+	public RVirtualClass getRubyClass()
+	{
+		return myRubyClass;
+	}
+
+	protected String getParentDirUrl()
+	{
+		return parentDirFileUrl;
+	}
 }

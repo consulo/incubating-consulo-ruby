@@ -16,29 +16,32 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RConditionalStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.08.2006
  */
-public abstract class RConditionalStatementImpl extends RPsiElementBase implements RConditionalStatement {
-    public RConditionalStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public abstract class RConditionalStatementImpl extends RPsiElementBase implements RConditionalStatement
+{
+	public RConditionalStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RCondition getCondition() {
-        PsiElement cond = RubyPsiUtil.getChildByFilter(this, RubyElementTypes.CONDITION, 0);
-        return cond!=null? (RCondition) cond : null;
-    }
+	public RCondition getCondition()
+	{
+		PsiElement cond = RubyPsiUtil.getChildByFilter(this, RubyElementTypes.CONDITION, 0);
+		return cond != null ? (RCondition) cond : null;
+	}
 }

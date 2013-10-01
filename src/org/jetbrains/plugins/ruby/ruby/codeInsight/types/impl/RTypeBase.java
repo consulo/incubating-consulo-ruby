@@ -28,32 +28,39 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
  * @author: oleg
  * @date: Apr 13, 2008
  */
-public abstract class RTypeBase implements RType {
-    @Override
-	public boolean isTyped() {
-        return false;
-    }
+public abstract class RTypeBase implements RType
+{
+	@Override
+	public boolean isTyped()
+	{
+		return false;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getName() {
-        return null;
-    }
+	public String getName()
+	{
+		return null;
+	}
 
-    @Override
-	public RType addMessage(@NotNull final Message message){
-        final DuckTypeImpl duckType = new DuckTypeImpl();
-        duckType.addMessage(message);
-        return RTypeUtil.joinAnd(this, new RDuckTypeImpl(duckType));
-    }
+	@Override
+	public RType addMessage(@NotNull final Message message)
+	{
+		final DuckTypeImpl duckType = new DuckTypeImpl();
+		duckType.addMessage(message);
+		return RTypeUtil.joinAnd(this, new RDuckTypeImpl(duckType));
+	}
 
-    @Override
-	public boolean matchesMessage(@NotNull final Message message) {
-        for (Message m : getMessagesForName(message.getName())) {
-            if (m.matchesMessage(message)){
-                return true;
-            }
-        }
-        return false;
-    }
+	@Override
+	public boolean matchesMessage(@NotNull final Message message)
+	{
+		for(Message m : getMessagesForName(message.getName()))
+		{
+			if(m.matchesMessage(message))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -26,33 +26,42 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
  * @author: oleg
  * @date: Mar 3, 2008
  */
-public class SymbolFilterFactory {
-    public static final SymbolFilter CLASSES_ONLY_FILTER = SymbolFilterFactory.createFilterByTypeSet(new TypeSet(Type.CLASS, Type.MODULE, Type.JAVA_CLASS, Type.JAVA_PROXY_CLASS, Type.JAVA_PACKAGE));
+public class SymbolFilterFactory
+{
+	public static final SymbolFilter CLASSES_ONLY_FILTER = SymbolFilterFactory.createFilterByTypeSet(new TypeSet(Type.CLASS, Type.MODULE, Type.JAVA_CLASS, Type.JAVA_PROXY_CLASS, Type.JAVA_PACKAGE));
 
-    public static final SymbolFilter EMPTY_FILTER = new SymbolFilter() {
-        @Override
-		public boolean accept(@NotNull final Symbol symbol) {
-            return true;
-        }
-    };
+	public static final SymbolFilter EMPTY_FILTER = new SymbolFilter()
+	{
+		@Override
+		public boolean accept(@NotNull final Symbol symbol)
+		{
+			return true;
+		}
+	};
 
 
-    public static SymbolFilter createFilterByTypeSet(final TypeSet typeSet){
-        return new SymbolFilter() {
-            @Override
-			public boolean accept(@NotNull final Symbol symbol) {
-                return typeSet.contains(symbol.getType());
-            }
-        };
-    }
+	public static SymbolFilter createFilterByTypeSet(final TypeSet typeSet)
+	{
+		return new SymbolFilter()
+		{
+			@Override
+			public boolean accept(@NotNull final Symbol symbol)
+			{
+				return typeSet.contains(symbol.getType());
+			}
+		};
+	}
 
-    public static SymbolFilter createFilterByNameAndTypeSet(@NotNull final String name, final TypeSet typeSet){
-        return new SymbolFilter() {
-            @Override
-			public boolean accept(@NotNull final Symbol symbol) {
-                return typeSet.contains(symbol.getType()) && name.equals(symbol.getName());
-            }
-        };
-    }
+	public static SymbolFilter createFilterByNameAndTypeSet(@NotNull final String name, final TypeSet typeSet)
+	{
+		return new SymbolFilter()
+		{
+			@Override
+			public boolean accept(@NotNull final Symbol symbol)
+			{
+				return typeSet.contains(symbol.getType()) && name.equals(symbol.getName());
+			}
+		};
+	}
 
 }

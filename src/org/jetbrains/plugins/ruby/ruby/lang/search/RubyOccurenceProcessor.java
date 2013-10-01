@@ -16,56 +16,62 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.search;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.TextOccurenceProcessor;
-import com.intellij.util.Processor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.search.TextOccurenceProcessor;
+import com.intellij.util.Processor;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Jan 12, 2008
-*/
-class RubyOccurenceProcessor implements TextOccurenceProcessor {
-    private final PsiElement myElement2Search;
-    private final String myName;
-    private final Processor<PsiReference> myConsumer;
+ *
+ * @author: oleg
+ * @date: Jan 12, 2008
+ */
+class RubyOccurenceProcessor implements TextOccurenceProcessor
+{
+	private final PsiElement myElement2Search;
+	private final String myName;
+	private final Processor<PsiReference> myConsumer;
 
-    public RubyOccurenceProcessor(@NotNull final PsiElement element2Search,
-                                  @NotNull final String name,
-                                  @NotNull final Processor<PsiReference> consumer) {
-        myElement2Search = element2Search;
-        myName = name;
-        myConsumer = consumer;
-    }
+	public RubyOccurenceProcessor(@NotNull final PsiElement element2Search, @NotNull final String name, @NotNull final Processor<PsiReference> consumer)
+	{
+		myElement2Search = element2Search;
+		myName = name;
+		myConsumer = consumer;
+	}
 
-    @Override
-	public boolean execute(final PsiElement element, final int offsetInElement) {
-        final PsiReference ref = element.getReference();
-        if (ref instanceof RPsiPolyvariantReference && !ref.isReferenceTo(myElement2Search)) {
-            final PsiElement refValue = ((RPsiPolyvariantReference) ref).getRefValue();
-            // We should search the same variables
-            if (myElement2Search instanceof RGlobalVariable && !(refValue instanceof RGlobalVariable)){
-                return true;
-            }
-            if (myElement2Search instanceof RClassVariable && !(refValue instanceof RClassVariable)){
-                return true;
-            }
-            if (myElement2Search instanceof RInstanceVariable && !(refValue instanceof RInstanceVariable)){
-                return true;
-            }
-            final String refName = refValue instanceof PsiNamedElement ? ((PsiNamedElement) refValue).getName() : refValue.getText();
-            if (myName.equals(refName)) {
-                return myConsumer.process(ref);
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean execute(final PsiElement element, final int offsetInElement)
+	{
+		final PsiReference ref = element.getReference();
+		if(ref instanceof RPsiPolyvariantReference && !ref.isReferenceTo(myElement2Search))
+		{
+			final PsiElement refValue = ((RPsiPolyvariantReference) ref).getRefValue();
+			// We should search the same variables
+			if(myElement2Search instanceof RGlobalVariable && !(refValue instanceof RGlobalVariable))
+			{
+				return true;
+			}
+			if(myElement2Search instanceof RClassVariable && !(refValue instanceof RClassVariable))
+			{
+				return true;
+			}
+			if(myElement2Search instanceof RInstanceVariable && !(refValue instanceof RInstanceVariable))
+			{
+				return true;
+			}
+			final String refName = refValue instanceof PsiNamedElement ? ((PsiNamedElement) refValue).getName() : refValue.getText();
+			if(myName.equals(refName))
+			{
+				return myConsumer.process(ref);
+			}
+		}
+		return true;
+	}
 }

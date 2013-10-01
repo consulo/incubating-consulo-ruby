@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi;
 /**
  * If element implememts this, it can possible be a ruby call
  */
-public interface RPossibleCall extends RPsiElement {
+public interface RPossibleCall extends RPsiElement
+{
 }

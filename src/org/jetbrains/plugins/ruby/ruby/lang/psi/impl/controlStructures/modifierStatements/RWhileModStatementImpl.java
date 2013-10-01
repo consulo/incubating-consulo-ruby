@@ -16,36 +16,41 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modifierStatements;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RWhileModStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RConditionalStatementImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 13.06.2006
  */
-public class RWhileModStatementImpl extends RConditionalStatementImpl implements RWhileModStatement {
-    public RWhileModStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RWhileModStatementImpl extends RConditionalStatementImpl implements RWhileModStatement
+{
+	public RWhileModStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRWhileModStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRWhileModStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RPsiElement getLoopBody() {
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
-    }
+	@Override
+	public RPsiElement getLoopBody()
+	{
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
+	}
 }

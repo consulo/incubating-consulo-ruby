@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -27,9 +28,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageType;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RConstantImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
-
-import java.util.Collections;
-import java.util.List;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,58 +37,71 @@ import java.util.List;
  * @author: oleg
  * @date: Dec 21, 2007
  */
-public class RConstantReference extends RNamedReference{
-    public RConstantReference(@NotNull RNamedElement element) {
-        super(element);
-    }
+public class RConstantReference extends RNamedReference
+{
+	public RConstantReference(@NotNull RNamedElement element)
+	{
+		super(element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
-        if (((RConstantImpl) myElement).isInDefinition()){
-            return  new ResolveResult[]{
-                    new ResolveResult(){
-                        @Override
+	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
+	{
+		if(((RConstantImpl) myElement).isInDefinition())
+		{
+			return new ResolveResult[]{
+					new ResolveResult()
+					{
+						@Override
 						@Nullable
-                        public PsiElement getElement() {
-                            RubyUsageTypeProvider.setType(RConstantReference.this, RubyUsageType.DECLARATION);
-                            return myElement;
-                        }
+						public PsiElement getElement()
+						{
+							RubyUsageTypeProvider.setType(RConstantReference.this, RubyUsageType.DECLARATION);
+							return myElement;
+						}
 
-                        @Override
-						public boolean isValidResult() {
-                            return true;
-                        }
-                    }
-            };
-        }
-        if (((RConstantImpl) myElement).isClassOrModuleName()){
-            return  new ResolveResult[]{
-                    new ResolveResult(){
-                        @Override
+						@Override
+						public boolean isValidResult()
+						{
+							return true;
+						}
+					}
+			};
+		}
+		if(((RConstantImpl) myElement).isClassOrModuleName())
+		{
+			return new ResolveResult[]{
+					new ResolveResult()
+					{
+						@Override
 						@Nullable
-                        public PsiElement getElement() {
-                            RubyUsageTypeProvider.setType(RConstantReference.this, RubyUsageType.DECLARATION);
-                            return myElement.getParentContainer();
-                        }
+						public PsiElement getElement()
+						{
+							RubyUsageTypeProvider.setType(RConstantReference.this, RubyUsageType.DECLARATION);
+							return myElement.getParentContainer();
+						}
 
-                        @Override
-						public boolean isValidResult() {
-                            return true;
-                        }
-                    }
-            };
-        }
-        return super.multiResolveInner(incompleteCode);
-    }
+						@Override
+						public boolean isValidResult()
+						{
+							return true;
+						}
+					}
+			};
+		}
+		return super.multiResolveInner(incompleteCode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        if (((RConstantImpl) myElement).isInDefinition() || ((RConstantImpl) myElement).isClassOrModuleName()){
-            return Collections.emptyList();
-        }
-        //noinspection ConstantConditions
-        return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.MODULE_OR_CLASS_OR_CONSTANT);
-    }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		if(((RConstantImpl) myElement).isInDefinition() || ((RConstantImpl) myElement).isClassOrModuleName())
+		{
+			return Collections.emptyList();
+		}
+		//noinspection ConstantConditions
+		return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.MODULE_OR_CLASS_OR_CONSTANT);
+	}
 }

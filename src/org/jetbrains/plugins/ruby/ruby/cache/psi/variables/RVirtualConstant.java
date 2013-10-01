@@ -26,10 +26,11 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
  * @author: oleg
  * @date: Nov 20, 2006
  */
-public interface RVirtualConstant extends RVirtualElement {
-    @NotNull
-    public String getName();
+public interface RVirtualConstant extends RVirtualElement
+{
+	@NotNull
+	public String getName();
 
-    @NotNull
-    public RVirtualConstantHolder getHolder();
+	@NotNull
+	public RVirtualConstantHolder getHolder();
 }

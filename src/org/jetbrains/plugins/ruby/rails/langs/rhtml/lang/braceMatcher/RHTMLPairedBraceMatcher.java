@@ -30,29 +30,29 @@ import com.intellij.psi.tree.IElementType;
  * @author: Roman Chernyatchik
  * @date: 20.04.2007
  */
-public class RHTMLPairedBraceMatcher implements PairedBraceMatcher {
-    
-    private final static BracePair[] BRACE_PAIRS = new BracePair[] {
-            new BracePair(RHTMLTokenType.RHTML_EXPRESSION_START,
-                         RHTMLTokenType.RHTML_EXPRESSION_END, false),
+public class RHTMLPairedBraceMatcher implements PairedBraceMatcher
+{
 
-            new BracePair(RHTMLTokenType.RHTML_SCRIPTLET_START,
-                          RHTMLTokenType.RHTML_SCRIPTLET_END, false),
+	private final static BracePair[] BRACE_PAIRS = new BracePair[]{
+			new BracePair(RHTMLTokenType.RHTML_EXPRESSION_START, RHTMLTokenType.RHTML_EXPRESSION_END, false),
 
-            new BracePair( RHTMLTokenType.RHTML_COMMENT_START,
-                          RHTMLTokenType.RHTML_COMMENT_END, false)
-    };
+			new BracePair(RHTMLTokenType.RHTML_SCRIPTLET_START, RHTMLTokenType.RHTML_SCRIPTLET_END, false),
 
-    @Override
-	public BracePair[] getPairs() {
-        return BRACE_PAIRS;
-    }
+			new BracePair(RHTMLTokenType.RHTML_COMMENT_START, RHTMLTokenType.RHTML_COMMENT_END, false)
+	};
 
-    @Override
+	@Override
+	public BracePair[] getPairs()
+	{
+		return BRACE_PAIRS;
+	}
+
+	@Override
 	@SuppressWarnings({"UnusedParameters"})
-    public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1) {
-        return true;
-    }
+	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1)
+	{
+		return true;
+	}
 
 	@Override
 	public int getCodeConstructStart(PsiFile psiFile, int i)

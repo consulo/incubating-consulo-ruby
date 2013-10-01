@@ -34,114 +34,132 @@ import com.intellij.util.messages.MessageBusConnection;
  * @author: Roman Chernyatchik
  * @date: Apr 17, 2008
  */
-public class BaseRailsFacetListener extends FacetManagerAdapter implements ModuleComponent {
-  private MessageBusConnection myConnection;
+public class BaseRailsFacetListener extends FacetManagerAdapter implements ModuleComponent
+{
+	private MessageBusConnection myConnection;
 
-  private Module myModule;
+	private Module myModule;
 
-  public BaseRailsFacetListener(@NotNull final Module module) {
-    myModule = module;
-  }
+	public BaseRailsFacetListener(@NotNull final Module module)
+	{
+		myModule = module;
+	}
 
-  @Override
-  public void initComponent() {
-    myConnection = myModule.getMessageBus().connect();
-    myConnection.subscribe(FacetManager.FACETS_TOPIC, new FacetManagerAdapter() {
-      public void beforeFacetAdded(@NotNull Facet facet) {
-          //Is invoked after ROOTS changed.
-      }
+	@Override
+	public void initComponent()
+	{
+		myConnection = myModule.getMessageBus().connect();
+		myConnection.subscribe(FacetManager.FACETS_TOPIC, new FacetManagerAdapter()
+		{
+			public void beforeFacetAdded(@NotNull Facet facet)
+			{
+				//Is invoked after ROOTS changed.
+			}
 
-      public void facetAdded(@NotNull final Facet facet) {
-          if (! (facet instanceof BaseRailsFacet)) {
-              // ignores not Rails Facets
-              return;
-          }
+			public void facetAdded(@NotNull final Facet facet)
+			{
+				if(!(facet instanceof BaseRailsFacet))
+				{
+					// ignores not Rails Facets
+					return;
+				}
 
-          //noinspection ConstantConditions
-          assert ((BaseRailsFacet)facet).getConfiguration().getRailsApplicationRootPath() != null;
+				//noinspection ConstantConditions
+				assert ((BaseRailsFacet) facet).getConfiguration().getRailsApplicationRootPath() != null;
 
-          // Only if module is loaded and committed. Otherwise RubySdkCachesManager will recreate SymbolCaches  on module added event!
-          final Module module = facet.getModule();
-          if (module.isLoaded()) {
-            performSymbolCacheUpdateCausedByFacet(facet);
-           //   RailsProjectViewPane.getInstance(module.getProject()).facetAdded();
-          }
-      }
+				// Only if module is loaded and committed. Otherwise RubySdkCachesManager will recreate SymbolCaches  on module added event!
+				final Module module = facet.getModule();
+				if(module.isLoaded())
+				{
+					performSymbolCacheUpdateCausedByFacet(facet);
+					//   RailsProjectViewPane.getInstance(module.getProject()).facetAdded();
+				}
+			}
 
-//      public void beforeFacetRemoved(@NotNull final Facet facet) {
-//          //Is invoked after ROOTS changed.(but roots change event doesn't know that facet was removed)
-//          //Module contains JRubyFacet
-//          if (! (facet instanceof BaseRailsFacet)) {
-//              // ignores not Rails Facets
-//              return;
-//          }
-//      }
+			//      public void beforeFacetRemoved(@NotNull final Facet facet) {
+			//          //Is invoked after ROOTS changed.(but roots change event doesn't know that facet was removed)
+			//          //Module contains JRubyFacet
+			//          if (! (facet instanceof BaseRailsFacet)) {
+			//              // ignores not Rails Facets
+			//              return;
+			//          }
+			//      }
 
-        public void facetRemoved(@NotNull final Facet facet) {
-            //Is invoked after ROOTS changed.(but roots change event doesn't know that facet was removed)
-            //Module doesn't contain JRubyFacet
-            if (! (facet instanceof BaseRailsFacet)) {
-                // ignores not Rails Facets
-                return;
-            }
+			public void facetRemoved(@NotNull final Facet facet)
+			{
+				//Is invoked after ROOTS changed.(but roots change event doesn't know that facet was removed)
+				//Module doesn't contain JRubyFacet
+				if(!(facet instanceof BaseRailsFacet))
+				{
+					// ignores not Rails Facets
+					return;
+				}
 
-            performSymbolCacheUpdateCausedByFacet(facet);
-          //  RailsProjectViewPane.getInstance(facet.getModule().getProject()).facetAdded();
-      }
+				performSymbolCacheUpdateCausedByFacet(facet);
+				//  RailsProjectViewPane.getInstance(facet.getModule().getProject()).facetAdded();
+			}
 
-//        public void facetConfigurationChanged(@NotNull final Facet facet) {
-//            //Is invoked after ROOTS changed.
-//            if (! (facet instanceof BaseRailsFacet)) {
-//                // ignores not Rails Facets
-//                return;
-//            }
-//        }
-    });
-  }
+			//        public void facetConfigurationChanged(@NotNull final Facet facet) {
+			//            //Is invoked after ROOTS changed.
+			//            if (! (facet instanceof BaseRailsFacet)) {
+			//                // ignores not Rails Facets
+			//                return;
+			//            }
+			//        }
+		});
+	}
 
-    /**
-     * Adding / removing of Rails/JRails Facet causes caches rebuilding!
-     * Because caches for Ruby singnificantly differs from caches for Rails!
-     * @param facet JRuby/Rails facet
-     */
-    private void performSymbolCacheUpdateCausedByFacet(final Facet facet) {
-        //Perform SymbolCache update caused by Rails/JRails facet
-        final Module facetModule = facet.getModule();
-        SymbolsCache.getInstance(facetModule.getProject()).recreateBuiltInCaches(new Module[]{facetModule});
+	/**
+	 * Adding / removing of Rails/JRails Facet causes caches rebuilding!
+	 * Because caches for Ruby singnificantly differs from caches for Rails!
+	 *
+	 * @param facet JRuby/Rails facet
+	 */
+	private void performSymbolCacheUpdateCausedByFacet(final Facet facet)
+	{
+		//Perform SymbolCache update caused by Rails/JRails facet
+		final Module facetModule = facet.getModule();
+		SymbolsCache.getInstance(facetModule.getProject()).recreateBuiltInCaches(new Module[]{facetModule});
 
-        //Refresh markers and higlighting
-        DaemonCodeAnalyzer.getInstance(facetModule.getProject()).restart();
-    }
+		//Refresh markers and higlighting
+		DaemonCodeAnalyzer.getInstance(facetModule.getProject()).restart();
+	}
 
-    @Override
-	public void disposeComponent() {
-    myConnection.disconnect();
-  }
+	@Override
+	public void disposeComponent()
+	{
+		myConnection.disconnect();
+	}
 
-  @Override
-  @NotNull
-  public String getComponentName() {
-    return RailsComponents.BASE_RAILS_FACET_LISTENER;
-  }
+	@Override
+	@NotNull
+	public String getComponentName()
+	{
+		return RailsComponents.BASE_RAILS_FACET_LISTENER;
+	}
 
-  @Override
-  public void projectOpened() {
-    // called when project is opened
-  }
+	@Override
+	public void projectOpened()
+	{
+		// called when project is opened
+	}
 
-  @Override
-  public void projectClosed() {
-      // called when project is being closed
-      if (RailsFacetUtil.hasRailsSupport(myModule)) {
-          final BaseRailsFacet baseRailsFacet = BaseRailsFacet.getInstance(myModule);
-          assert baseRailsFacet != null;
-          baseRailsFacet.projectClosed();
-      }
-  }
+	@Override
+	public void projectClosed()
+	{
+		// called when project is being closed
+		if(RailsFacetUtil.hasRailsSupport(myModule))
+		{
+			final BaseRailsFacet baseRailsFacet = BaseRailsFacet.getInstance(myModule);
+			assert baseRailsFacet != null;
+			baseRailsFacet.projectClosed();
+		}
+	}
 
-  @Override
-  public void moduleAdded() {
-    // Invoked when the module corresponding to this component instance has been completely
-    // loaded and added to the project.
-  }
+	@Override
+	public void moduleAdded()
+	{
+		// Invoked when the module corresponding to this component instance has been completely
+		// loaded and added to the project.
+	}
 }

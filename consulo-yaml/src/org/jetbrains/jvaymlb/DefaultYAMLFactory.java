@@ -12,7 +12,7 @@
  * rights and limitations under the License.
  *
  * Copyright (C) 2007 Ola Bini <ola@ologix.com>
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either of the GNU General Public License Version 2 or later (the "GPL"),
  * or the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -35,13 +35,17 @@ import org.jvyamlb.YAMLFactory;
 /**
  * @author <a href="mailto:ola.bini@ki.se">Ola Bini</a>
  */
-public class DefaultYAMLFactory extends org.jvyamlb.DefaultYAMLFactory implements YAMLFactory {
-    @Override
-	public ScannerImpl createScanner(final ByteList io) {
-        return new ScannerImpl(io);
-    }
-    @Override
-	public ScannerImpl createScanner(final InputStream io) {
-        return new ScannerImpl(io);
-    }
+public class DefaultYAMLFactory extends org.jvyamlb.DefaultYAMLFactory implements YAMLFactory
+{
+	@Override
+	public ScannerImpl createScanner(final ByteList io)
+	{
+		return new ScannerImpl(io);
+	}
+
+	@Override
+	public ScannerImpl createScanner(final InputStream io)
+	{
+		return new ScannerImpl(io);
+	}
 }

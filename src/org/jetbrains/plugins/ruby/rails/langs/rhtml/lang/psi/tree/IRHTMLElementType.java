@@ -26,21 +26,25 @@ import com.intellij.psi.tree.IElementType;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public class IRHTMLElementType extends IElementType implements PresentableElementType, IRHTMLElement {
-    private String myName;
+public class IRHTMLElementType extends IElementType implements PresentableElementType, IRHTMLElement
+{
+	private String myName;
 
-    public IRHTMLElementType(String debugName) {
-        this(debugName, debugName);
-    }
-    public IRHTMLElementType(final String debugName,
-                             final String presentableName) {
-        super(debugName, eRubyLanguage.INSTANCE);
-        myName = presentableName;
-    }
+	public IRHTMLElementType(String debugName)
+	{
+		this(debugName, debugName);
+	}
+
+	public IRHTMLElementType(final String debugName, final String presentableName)
+	{
+		super(debugName, eRubyLanguage.INSTANCE);
+		myName = presentableName;
+	}
 
 
-    @Override
-	public String getPresentableName() {
-        return myName;
-    }
+	@Override
+	public String getPresentableName()
+	{
+		return myName;
+	}
 }

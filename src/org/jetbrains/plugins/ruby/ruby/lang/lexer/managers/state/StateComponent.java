@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
 /**
  * Each state may have one or more StateComponents, for example: EndDelimiter, BraceCounter, etc.
  */
-public interface StateComponent {
+public interface StateComponent
+{
 }

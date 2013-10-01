@@ -25,10 +25,11 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder
  * User: oleg
  * Date: Aug 22, 2007
  */
-public interface RVirtualGlobalVar extends RVirtualElement {
-    @NotNull
-    public String getText();
+public interface RVirtualGlobalVar extends RVirtualElement
+{
+	@NotNull
+	public String getText();
 
-    @NotNull
-    public RVirtualGlobalVarHolder getHolder();
+	@NotNull
+	public RVirtualGlobalVarHolder getHolder();
 }

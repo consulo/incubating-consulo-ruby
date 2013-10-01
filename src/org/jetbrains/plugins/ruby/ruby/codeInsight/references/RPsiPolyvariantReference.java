@@ -16,34 +16,36 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import com.intellij.openapi.util.Key;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-
-import java.util.List;
+import com.intellij.openapi.util.Key;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 31, 2007
  */
-public interface RPsiPolyvariantReference extends PsiPolyVariantReference {
-    public static final Key<Boolean> REFERENCE_BEING_COMPLETED = Key.create("Ruby.ReferenceBeingCompleted");
+public interface RPsiPolyvariantReference extends PsiPolyVariantReference
+{
+	public static final Key<Boolean> REFERENCE_BEING_COMPLETED = Key.create("Ruby.ReferenceBeingCompleted");
 
-    @NotNull
-    public PsiElement getRefValue();
+	@NotNull
+	public PsiElement getRefValue();
 
-    /**
-     * resolves to symbols
-     * @param fileSymbol FileSymbol
-     * in "empty context"
-     * @return List of symbols
-     */
-    @NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable FileSymbol fileSymbol);
+	/**
+	 * resolves to symbols
+	 *
+	 * @param fileSymbol FileSymbol
+	 *                   in "empty context"
+	 * @return List of symbols
+	 */
+	@NotNull
+	public List<Symbol> multiResolveToSymbols(@Nullable FileSymbol fileSymbol);
 
 }

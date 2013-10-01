@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBraceCodeBlock;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.01.2007
  */
-public class RBraceCodeBlockImpl extends RCodeBlockBase implements RBraceCodeBlock {
+public class RBraceCodeBlockImpl extends RCodeBlockBase implements RBraceCodeBlock
+{
 
-    public RBraceCodeBlockImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RBraceCodeBlockImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

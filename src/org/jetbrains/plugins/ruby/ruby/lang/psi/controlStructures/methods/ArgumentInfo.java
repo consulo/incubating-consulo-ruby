@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.Serializable;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,61 +26,75 @@ import java.io.Serializable;
  * @author: oleg
  * @date: Mar 13, 2007
  */
-public class ArgumentInfo implements Serializable {
-    private final String myName;
-    private final Type myType;
-    private int myHash;
+public class ArgumentInfo implements Serializable
+{
+	private final String myName;
+	private final Type myType;
+	private int myHash;
 
-    public ArgumentInfo(@NotNull final String name, final Type type) {
-        myName = name;
-        myType = type;
-    }
+	public ArgumentInfo(@NotNull final String name, final Type type)
+	{
+		myName = name;
+		myType = type;
+	}
 
-    public String getName() {
-        return myName;
-    }
+	public String getName()
+	{
+		return myName;
+	}
 
-    public Type getType() {
-        return myType;
-    }
+	public Type getType()
+	{
+		return myType;
+	}
 
 
-    public String getPresentableName(){
-        if (myType == Type.ARRAY){
-            return "*"+myName;
-        }
-        if (myType == Type.BLOCK){
-            return "&"+myName;
-        }
-        if (myType == Type.PREDEFINED){
-            return myName+"=...";
-        }
-        return myName;
-    }
+	public String getPresentableName()
+	{
+		if(myType == Type.ARRAY)
+		{
+			return "*" + myName;
+		}
+		if(myType == Type.BLOCK)
+		{
+			return "&" + myName;
+		}
+		if(myType == Type.PREDEFINED)
+		{
+			return myName + "=...";
+		}
+		return myName;
+	}
 
-    public enum Type {
-        SIMPLE,
-        PREDEFINED,
-        BLOCK,
-        ARRAY
-    }
+	public enum Type
+	{
+		SIMPLE,
+		PREDEFINED,
+		BLOCK,
+		ARRAY
+	}
 
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj instanceof ArgumentInfo){
-            final ArgumentInfo argumentInfo = (ArgumentInfo) obj;
-            return getType() == argumentInfo.getType() && getName().equals(argumentInfo.getName());
-        }
-        return false;
-    }
+	public boolean equals(Object obj)
+	{
+		if(this == obj)
+		{
+			return true;
+		}
+		if(obj instanceof ArgumentInfo)
+		{
+			final ArgumentInfo argumentInfo = (ArgumentInfo) obj;
+			return getType() == argumentInfo.getType() && getName().equals(argumentInfo.getName());
+		}
+		return false;
+	}
 
-    public int hashCode() {
-        if (myHash == 0) {
-            myHash = (myName != null ? myName.hashCode() : 0);
-            myHash = 31 * myHash + (myType != null ? myType.hashCode() : 0);
-        }
-        return myHash;
-    }
+	public int hashCode()
+	{
+		if(myHash == 0)
+		{
+			myHash = (myName != null ? myName.hashCode() : 0);
+			myHash = 31 * myHash + (myType != null ? myType.hashCode() : 0);
+		}
+		return myHash;
+	}
 }

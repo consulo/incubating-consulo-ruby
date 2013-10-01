@@ -29,41 +29,49 @@ import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
  * User: oleg, Roman.Chernyatchik
  * Date: Sep 11, 2007
  */
-public class JRubyFacetExternalizer extends SettingsExternalizer {
-    private static JRubyFacetExternalizer myInstance = new JRubyFacetExternalizer();
+public class JRubyFacetExternalizer extends SettingsExternalizer
+{
+	private static JRubyFacetExternalizer myInstance = new JRubyFacetExternalizer();
 
-    @NonNls private static final String JRUBY_SDK_NAME = "JRUBY_SDK_NAME";
-    @NonNls private static final String JRUBY_FACET_CONFIG_ID = "JRUBY_FACET_CONFIG_ID";
-    @NonNls private static final String USE_TEST_UNIT_FRAMEWORK = "USE_TEST_UNIT_FRAMEWORK";
-    @NonNls private static final String TEST_UNIT_FRAMEWORK_ROOT_URL = "TEST_UNIT_FRAMEWORK_ROOT_URL";
+	@NonNls
+	private static final String JRUBY_SDK_NAME = "JRUBY_SDK_NAME";
+	@NonNls
+	private static final String JRUBY_FACET_CONFIG_ID = "JRUBY_FACET_CONFIG_ID";
+	@NonNls
+	private static final String USE_TEST_UNIT_FRAMEWORK = "USE_TEST_UNIT_FRAMEWORK";
+	@NonNls
+	private static final String TEST_UNIT_FRAMEWORK_ROOT_URL = "TEST_UNIT_FRAMEWORK_ROOT_URL";
 
-    public void writeExternal(@NotNull final RSupportPerModuleSettingsImpl config, @NotNull final Element elem) {
+	public void writeExternal(@NotNull final RSupportPerModuleSettingsImpl config, @NotNull final Element elem)
+	{
 
-        writeOption(USE_TEST_UNIT_FRAMEWORK, Boolean.toString(config.shouldUseTestUnitTestFramework()), elem);
-        config.getLoadPathDirs().writeCheckableDirectores(elem, this);
-        writeOption(TEST_UNIT_FRAMEWORK_ROOT_URL, config.getUnitTestsRootUrl(), elem);
-    }
+		writeOption(USE_TEST_UNIT_FRAMEWORK, Boolean.toString(config.shouldUseTestUnitTestFramework()), elem);
+		config.getLoadPathDirs().writeCheckableDirectores(elem, this);
+		writeOption(TEST_UNIT_FRAMEWORK_ROOT_URL, config.getUnitTestsRootUrl(), elem);
+	}
 
-    public void readExternal(@NotNull final RSupportPerModuleSettingsImpl config,
-                             @NotNull final Element elem) {
-        //noinspection unchecked
-        final Map<String, String> optionsByName = buildOptionsByElement(elem);
-        //config.setSdkByName(optionsByName.get(JRUBY_SDK_NAME));
-        config.getLoadPathDirs().loadCheckableDirectores(optionsByName);
+	public void readExternal(@NotNull final RSupportPerModuleSettingsImpl config, @NotNull final Element elem)
+	{
+		//noinspection unchecked
+		final Map<String, String> optionsByName = buildOptionsByElement(elem);
+		//config.setSdkByName(optionsByName.get(JRUBY_SDK_NAME));
+		config.getLoadPathDirs().loadCheckableDirectores(optionsByName);
 
-        final String shouldUseTestFrStr = optionsByName.get(USE_TEST_UNIT_FRAMEWORK);
-        config.setShouldUseTestUnitTestFramework(shouldUseTestFrStr != null && Boolean.valueOf(shouldUseTestFrStr));
+		final String shouldUseTestFrStr = optionsByName.get(USE_TEST_UNIT_FRAMEWORK);
+		config.setShouldUseTestUnitTestFramework(shouldUseTestFrStr != null && Boolean.valueOf(shouldUseTestFrStr));
 
-        final String testUnitUrl = optionsByName.get(TEST_UNIT_FRAMEWORK_ROOT_URL);
-        config.setUnitTestsRootUrl(TextUtil.isEmpty(testUnitUrl) ? null : testUnitUrl);
-    }
+		final String testUnitUrl = optionsByName.get(TEST_UNIT_FRAMEWORK_ROOT_URL);
+		config.setUnitTestsRootUrl(TextUtil.isEmpty(testUnitUrl) ? null : testUnitUrl);
+	}
 
-    public static JRubyFacetExternalizer getInstance(){
-        return myInstance;
-    }
+	public static JRubyFacetExternalizer getInstance()
+	{
+		return myInstance;
+	}
 
-    @Override
-	public String getID() {
-        return JRUBY_FACET_CONFIG_ID;
-    }
+	@Override
+	public String getID()
+	{
+		return JRUBY_FACET_CONFIG_ID;
+	}
 }

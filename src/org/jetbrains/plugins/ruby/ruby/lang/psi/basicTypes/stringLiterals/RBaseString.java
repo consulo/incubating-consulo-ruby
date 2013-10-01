@@ -26,9 +26,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpress
  * @author: oleg
  * @date: Oct 25, 2006
  */
-public interface RBaseString extends RStringLiteral {
+public interface RBaseString extends RStringLiteral
+{
 
-    public void replaceByRSymbol(@NotNull final RSymbol rSymbol);
+	public void replaceByRSymbol(@NotNull final RSymbol rSymbol);
 
-    public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr);
+	public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr);
 }

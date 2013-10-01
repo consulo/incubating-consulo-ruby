@@ -24,8 +24,9 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualObjectClass extends RVirtualFieldContantContainer {
+public interface RVirtualObjectClass extends RVirtualFieldContantContainer
+{
 
-    @NotNull
-    public String getPresentableName();
+	@NotNull
+	public String getPresentableName();
 }

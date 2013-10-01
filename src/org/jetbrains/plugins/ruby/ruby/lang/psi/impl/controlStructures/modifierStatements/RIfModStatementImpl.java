@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modifierStatements;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -28,35 +26,43 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatem
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RConditionalStatementImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 10.06.2006
  */
-public class RIfModStatementImpl extends RConditionalStatementImpl implements RIfModStatement {
-    public RIfModStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RIfModStatementImpl extends RConditionalStatementImpl implements RIfModStatement
+{
+	public RIfModStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRIfModStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRIfModStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RPsiElement getCommand() {
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
-    }
+	@Override
+	public RPsiElement getCommand()
+	{
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RPsiElement command = getCommand();
-        return command instanceof RExpression ? ((RExpression) command).getType(fileSymbol) : RType.NOT_TYPED;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RPsiElement command = getCommand();
+		return command instanceof RExpression ? ((RExpression) command).getType(fileSymbol) : RType.NOT_TYPED;
+	}
 }

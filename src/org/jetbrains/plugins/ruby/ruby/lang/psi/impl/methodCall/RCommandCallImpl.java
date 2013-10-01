@@ -16,28 +16,32 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCommandCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.06.2006
  */
-public class RCommandCallImpl extends RCallBase implements RCommandCall {
-    public RCommandCallImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RCommandCallImpl extends RCallBase implements RCommandCall
+{
+	public RCommandCallImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRCommandCall(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRCommandCall(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 }

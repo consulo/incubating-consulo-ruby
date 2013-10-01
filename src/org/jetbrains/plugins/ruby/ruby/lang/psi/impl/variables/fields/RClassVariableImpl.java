@@ -16,40 +16,46 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.fields;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public class RClassVariableImpl extends RFieldBase implements RClassVariable {
-    public RClassVariableImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RClassVariableImpl extends RFieldBase implements RClassVariable
+{
+	public RClassVariableImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRClassVariable(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRClassVariable(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public FieldType getType() {
-        return FieldType.CLASS_VARIABLE;
-    }
+	@Override
+	public FieldType getType()
+	{
+		return FieldType.CLASS_VARIABLE;
+	}
 
 
-    @Override
-	public String getPrefix() {
-        return PREFIX;
-    }
+	@Override
+	public String getPrefix()
+	{
+		return PREFIX;
+	}
 }

@@ -22,50 +22,55 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi;
  * @author: oleg
  * @date: Jun 20, 2007
  */
-public class StructureType {
-    public static StructureType ALL = new StructureType();
+public class StructureType
+{
+	public static StructureType ALL = new StructureType();
 
-    public static StructureType FAKE = new StructureType();
+	public static StructureType FAKE = new StructureType();
 
-    public static StructureType FILE = new StructureType();
-    public static StructureType MODULE = new StructureType();
-    public static StructureType CLASS = new StructureType();
-    public static StructureType OBJECT_CLASS = new StructureType();
-    public static StructureType METHOD = new StructureType();
-    public static StructureType SINGLETON_METHOD = new StructureType();
+	public static StructureType FILE = new StructureType();
+	public static StructureType MODULE = new StructureType();
+	public static StructureType CLASS = new StructureType();
+	public static StructureType OBJECT_CLASS = new StructureType();
+	public static StructureType METHOD = new StructureType();
+	public static StructureType SINGLETON_METHOD = new StructureType();
 
-    public static StructureType CALL_REQUIRE = new StructureType();
-    public static StructureType CALL_LOAD = new StructureType();
+	public static StructureType CALL_REQUIRE = new StructureType();
+	public static StructureType CALL_LOAD = new StructureType();
 
-    public static StructureType CALL_INCLUDE = new StructureType();
-    public static StructureType CALL_EXTEND = new StructureType();
-
-
-    public static StructureType ALIAS = new StructureType();
-
-    public static StructureType FIELD_ATTR_CALL = new StructureType();
-
-// JRuby specific
-    public static StructureType CALL_IMPORT = new StructureType();
-    public static StructureType CALL_INCLUDE_CLASS = new StructureType();
-    public static StructureType CALL_INCLUDE_PACKAGE = new StructureType();
+	public static StructureType CALL_INCLUDE = new StructureType();
+	public static StructureType CALL_EXTEND = new StructureType();
 
 
-    private StructureType() {
-    }
+	public static StructureType ALIAS = new StructureType();
 
-    public boolean isContainer(){
-        return this == FILE || this == MODULE || this == CLASS || this == OBJECT_CLASS || this == METHOD || this == SINGLETON_METHOD;
-    }
+	public static StructureType FIELD_ATTR_CALL = new StructureType();
 
-    public boolean isStructureCall(){
-        return this == CALL_INCLUDE || this == CALL_EXTEND ||
-                this == CALL_REQUIRE || this == CALL_LOAD ||
-                this == FIELD_ATTR_CALL ||
-                this == CALL_IMPORT || this == CALL_INCLUDE_CLASS || this == CALL_INCLUDE_PACKAGE;
-    }
+	// JRuby specific
+	public static StructureType CALL_IMPORT = new StructureType();
+	public static StructureType CALL_INCLUDE_CLASS = new StructureType();
+	public static StructureType CALL_INCLUDE_PACKAGE = new StructureType();
 
-    public boolean isMethod() {
-        return this == METHOD || this == SINGLETON_METHOD;
-    }
+
+	private StructureType()
+	{
+	}
+
+	public boolean isContainer()
+	{
+		return this == FILE || this == MODULE || this == CLASS || this == OBJECT_CLASS || this == METHOD || this == SINGLETON_METHOD;
+	}
+
+	public boolean isStructureCall()
+	{
+		return this == CALL_INCLUDE || this == CALL_EXTEND ||
+				this == CALL_REQUIRE || this == CALL_LOAD ||
+				this == FIELD_ATTR_CALL ||
+				this == CALL_IMPORT || this == CALL_INCLUDE_CLASS || this == CALL_INCLUDE_PACKAGE;
+	}
+
+	public boolean isMethod()
+	{
+		return this == METHOD || this == SINGLETON_METHOD;
+	}
 }

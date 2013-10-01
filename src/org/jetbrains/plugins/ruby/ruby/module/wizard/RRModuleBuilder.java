@@ -38,43 +38,51 @@ import com.intellij.openapi.util.Pair;
  * @author: oleg
  * @date: 18.08.2006
  */
-public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, RubyWizardSettingsHolder {
-    private Sdk mySdk;
-    private boolean myShouldUseRSpec;
-    private boolean myShouldUseTestUnit;
-    private List<Pair<String, String>> mySourcePaths;
-    private String myContentRootPath;
+public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, RubyWizardSettingsHolder
+{
+	private Sdk mySdk;
+	private boolean myShouldUseRSpec;
+	private boolean myShouldUseTestUnit;
+	private List<Pair<String, String>> mySourcePaths;
+	private String myContentRootPath;
 
-    @Override
+	@Override
 	public abstract void setTestsUnitRootPath(@NotNull final String contentRootPath);
-    protected abstract void setupContentRoot(final ModifiableRootModel rootModel);
 
-    @Override
-	public boolean isRSpecSupportEnabled() {
-        return myShouldUseRSpec;
-    }
+	protected abstract void setupContentRoot(final ModifiableRootModel rootModel);
 
-    public boolean isTestUnitSupportEnabled() {
-        return myShouldUseTestUnit;
-    }
+	@Override
+	public boolean isRSpecSupportEnabled()
+	{
+		return myShouldUseRSpec;
+	}
 
-    public void enableTestUnitSupport(boolean shouldUseTestUnit) {
-        myShouldUseTestUnit = shouldUseTestUnit;
-    }
+	public boolean isTestUnitSupportEnabled()
+	{
+		return myShouldUseTestUnit;
+	}
 
-    public void enableRSpecSupport(boolean shouldUseRSpec) {
-        myShouldUseRSpec = shouldUseRSpec;
-    }
+	public void enableTestUnitSupport(boolean shouldUseTestUnit)
+	{
+		myShouldUseTestUnit = shouldUseTestUnit;
+	}
 
-    @Override
+	public void enableRSpecSupport(boolean shouldUseRSpec)
+	{
+		myShouldUseRSpec = shouldUseRSpec;
+	}
+
+	@Override
 	@Nullable
-    public Sdk getSdk() {
-        return mySdk;
-    }
+	public Sdk getSdk()
+	{
+		return mySdk;
+	}
 
-    @Override
-	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
-        /*if (mySdk != null) {
+	@Override
+	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
+	{
+		/*if (mySdk != null) {
             rootModel.setSdk(mySdk);
             //HACK. Oterwise for new Project first roots change event have wrong SDK!
             //      Value must be same as key, not clone!
@@ -83,58 +91,70 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePat
             rootModel.inheritJdk();
         }
           */
-        setupContentRoot(rootModel);
-    }
+		setupContentRoot(rootModel);
+	}
 
-    @Override
-	public void setSdk(Sdk jdk) {
-        mySdk = jdk;
-    }
+	@Override
+	public void setSdk(Sdk jdk)
+	{
+		mySdk = jdk;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getContentEntryPath() {
-      return myContentRootPath;
-    }
+	public String getContentEntryPath()
+	{
+		return myContentRootPath;
+	}
 
-    @Override
-	public void setContentEntryPath(final String moduleRootPath) {
-        myContentRootPath = moduleRootPath;
-    }
+	@Override
+	public void setContentEntryPath(final String moduleRootPath)
+	{
+		myContentRootPath = moduleRootPath;
+	}
 
-    @Override
-	public void setSourcePaths(final List<Pair<String, String>> paths) {
-        mySourcePaths = paths;
-    }
+	@Override
+	public void setSourcePaths(final List<Pair<String, String>> paths)
+	{
+		mySourcePaths = paths;
+	}
 
-    @Override
-	public List<Pair<String, String>> getSourcePaths() {
-        return mySourcePaths;
-    }
+	@Override
+	public List<Pair<String, String>> getSourcePaths()
+	{
+		return mySourcePaths;
+	}
 
-    @Override
-	public void addSourcePath(final Pair<String,String> sourcePathInfo) {
-      if (mySourcePaths == null) {
-        mySourcePaths = new ArrayList<Pair<String, String>>();
-      }
-      mySourcePaths.add(sourcePathInfo);
-    }
+	@Override
+	public void addSourcePath(final Pair<String, String> sourcePathInfo)
+	{
+		if(mySourcePaths == null)
+		{
+			mySourcePaths = new ArrayList<Pair<String, String>>();
+		}
+		mySourcePaths.add(sourcePathInfo);
+	}
 
-    protected void createDir(@NotNull final String path) {
-        final File file = new File(path);
+	protected void createDir(@NotNull final String path)
+	{
+		final File file = new File(path);
 
-        if (!file.exists()) {
-            boolean wasCreated;
-            try {
-                wasCreated = file.mkdirs();
-            } catch (Exception e) {
-                wasCreated = false;
-            }
-            if (!wasCreated) {
-                Messages.showErrorDialog(RBundle.message("file.cant.create.folder.text", path),
-                                         RBundle.message("file.cant.create.folder.title"));
-            }
-        }
-    }
+		if(!file.exists())
+		{
+			boolean wasCreated;
+			try
+			{
+				wasCreated = file.mkdirs();
+			}
+			catch(Exception e)
+			{
+				wasCreated = false;
+			}
+			if(!wasCreated)
+			{
+				Messages.showErrorDialog(RBundle.message("file.cant.create.folder.text", path), RBundle.message("file.cant.create.folder.title"));
+			}
+		}
+	}
 
 }

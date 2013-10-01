@@ -17,37 +17,40 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.07.2006
  */
-public class OPT_ELSE  implements RubyTokenTypes {
+public class OPT_ELSE implements RubyTokenTypes
+{
 /*
-    opt_else	: none
+	opt_else	: none
             | kELSE compstmt
             ;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        if (!builder.compareAndEat(kELSE)){
-            statementMarker.drop();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		if(!builder.compareAndEat(kELSE))
+		{
+			statementMarker.drop();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        COMPSTMT.parse(builder, kEND, kENSURE);
+		COMPSTMT.parse(builder, kEND, kENSURE);
 
-        statementMarker.done(RubyElementTypes.ELSE_BLOCK);
-        return RubyElementTypes.ELSE_BLOCK;
- }
+		statementMarker.done(RubyElementTypes.ELSE_BLOCK);
+		return RubyElementTypes.ELSE_BLOCK;
+	}
 }

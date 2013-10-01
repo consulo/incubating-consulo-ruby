@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,60 +27,63 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: Sep 20, 2007
  */
-public abstract class NodeInfo {
-    public abstract NodeType getType();
+public abstract class NodeInfo
+{
+	public abstract NodeType getType();
 
-    public abstract TextRange getNextNodeTRange();
+	public abstract TextRange getNextNodeTRange();
 
-    public static TemplateNodeInfo createTemplateInfo(@NotNull final ASTNode templateParentNode,
-                                                      @NotNull final ASTNode templateDateNode,
-                                                      @Nullable final ASTNode nextNode,
-                                                      @Nullable final TextRange nextNodeTRange) {
-        return new TemplateNodeInfo(templateParentNode, templateDateNode, nextNodeTRange, nextNode);
-    }
+	public static TemplateNodeInfo createTemplateInfo(@NotNull final ASTNode templateParentNode, @NotNull final ASTNode templateDateNode, @Nullable final ASTNode nextNode, @Nullable final TextRange nextNodeTRange)
+	{
+		return new TemplateNodeInfo(templateParentNode, templateDateNode, nextNodeTRange, nextNode);
+	}
 
-    public static RHTMLNodeInfo createRHTMLInfo(@NotNull final ASTNode parentNode,
-                                                @Nullable final ASTNode previousNode,
-                                                @Nullable final ASTNode nextNode) {
-        return new RHTMLNodeInfo(parentNode, previousNode, nextNode, nextNode == null ? null : nextNode.getTextRange());
-    }
+	public static RHTMLNodeInfo createRHTMLInfo(@NotNull final ASTNode parentNode, @Nullable final ASTNode previousNode, @Nullable final ASTNode nextNode)
+	{
+		return new RHTMLNodeInfo(parentNode, previousNode, nextNode, nextNode == null ? null : nextNode.getTextRange());
+	}
 
-    @Nullable
-    public static ASTNode getNextRHTMLNodeByInfo(@NotNull final NodeInfo childNodeInfo) {
-        ASTNode childNode;
-        switch (childNodeInfo.getType()) {
-            case RHTML_NODE:
-                childNode = ((RHTMLNodeInfo) childNodeInfo).getNextNode();
-                break;
-            case TEMPLATE_NODE:
-                childNode = ((TemplateNodeInfo) childNodeInfo).getTemplateDataNode();
-                break;
-            default:
-                childNode = null;
-                break;
-        }
-        return childNode;
-    }
+	@Nullable
+	public static ASTNode getNextRHTMLNodeByInfo(@NotNull final NodeInfo childNodeInfo)
+	{
+		ASTNode childNode;
+		switch(childNodeInfo.getType())
+		{
+			case RHTML_NODE:
+				childNode = ((RHTMLNodeInfo) childNodeInfo).getNextNode();
+				break;
+			case TEMPLATE_NODE:
+				childNode = ((TemplateNodeInfo) childNodeInfo).getTemplateDataNode();
+				break;
+			default:
+				childNode = null;
+				break;
+		}
+		return childNode;
+	}
 
-    @Nullable
-    public static ASTNode getNextNodeByInfo(@NotNull final NodeInfo childNodeInfo) {
-        ASTNode childNode;
-        switch (childNodeInfo.getType()) {
-            case RHTML_NODE:
-                childNode = ((RHTMLNodeInfo) childNodeInfo).getNextNode();
-                break;
-            case TEMPLATE_NODE:
-                childNode = ((TemplateNodeInfo) childNodeInfo).getNextTemplateNode();
-                break;
-            default:
-                childNode = null;
-                break;
-        }
-        return childNode;
-    }
+	@Nullable
+	public static ASTNode getNextNodeByInfo(@NotNull final NodeInfo childNodeInfo)
+	{
+		ASTNode childNode;
+		switch(childNodeInfo.getType())
+		{
+			case RHTML_NODE:
+				childNode = ((RHTMLNodeInfo) childNodeInfo).getNextNode();
+				break;
+			case TEMPLATE_NODE:
+				childNode = ((TemplateNodeInfo) childNodeInfo).getNextTemplateNode();
+				break;
+			default:
+				childNode = null;
+				break;
+		}
+		return childNode;
+	}
 
-    public boolean isTemplate() {
-        return getType() == NodeType.TEMPLATE_NODE;
-    }
+	public boolean isTemplate()
+	{
+		return getType() == NodeType.TEMPLATE_NODE;
+	}
 }
 

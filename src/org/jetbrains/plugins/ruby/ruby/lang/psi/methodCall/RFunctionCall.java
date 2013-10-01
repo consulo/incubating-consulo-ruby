@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall;
  * User: oleg
  * Date: 27.07.2006
  */
-public interface RFunctionCall extends RCall {
+public interface RFunctionCall extends RCall
+{
 }

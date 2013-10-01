@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: Mar 3, 2008
  */
-public interface SymbolFilter {
-    public boolean accept(@NotNull final Symbol symbol);
+public interface SymbolFilter
+{
+	public boolean accept(@NotNull final Symbol symbol);
 }

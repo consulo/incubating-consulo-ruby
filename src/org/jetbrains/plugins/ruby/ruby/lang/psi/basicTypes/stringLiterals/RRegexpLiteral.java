@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface RRegexpLiteral extends RStringLiteral{
+public interface RRegexpLiteral extends RStringLiteral
+{
 }

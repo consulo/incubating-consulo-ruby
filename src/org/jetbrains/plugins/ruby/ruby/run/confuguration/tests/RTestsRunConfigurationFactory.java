@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.openapi.project.Project;
+import javax.swing.Icon;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationFactory;
-
-import javax.swing.*;
+import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,26 +33,31 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 18.07.2007
  */
-public class RTestsRunConfigurationFactory extends RubyRunConfigurationFactory {
-    public RTestsRunConfigurationFactory(final ConfigurationType type) {
-        super(type);
-    }
+public class RTestsRunConfigurationFactory extends RubyRunConfigurationFactory
+{
+	public RTestsRunConfigurationFactory(final ConfigurationType type)
+	{
+		super(type);
+	}
 
-    @Override
-	public RunConfiguration createTemplateConfiguration(final Project project) {
-        final RTestsRunConfiguration conf = new RTestsRunConfiguration(project, this, "");
+	@Override
+	public RunConfiguration createTemplateConfiguration(final Project project)
+	{
+		final RTestsRunConfiguration conf = new RTestsRunConfiguration(project, this, "");
 
-        conf.setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
-        return conf;
-    }
+		conf.setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
+		return conf;
+	}
 
-    @Override
-	public String getName() {
-        return RBundle.message("run.configuration.test.name");
-   }
+	@Override
+	public String getName()
+	{
+		return RBundle.message("run.configuration.test.name");
+	}
 
-   @Override
-   public Icon getIcon() {
-       return RubyIcons.RTEST_RUN_CONFIGURATION;
-   }
+	@Override
+	public Icon getIcon()
+	{
+		return RubyIcons.RTEST_RUN_CONFIGURATION;
+	}
 }

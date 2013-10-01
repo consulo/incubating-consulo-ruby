@@ -24,40 +24,48 @@ import com.intellij.ui.treeStructure.SimpleNode;
  * @author: Roman Chernyatchik
  * @date: 15.10.2006
  */
-public abstract class RailsNodeVisitorAdapter implements RailsNodeVisitor {
-    @Override
-	public boolean accept(final SimpleNode simpleNode) {
-        return true;
-    }
+public abstract class RailsNodeVisitorAdapter implements RailsNodeVisitor
+{
+	@Override
+	public boolean accept(final SimpleNode simpleNode)
+	{
+		return true;
+	}
 
-    @Override
-	public void visitClassNode() {
-        // Do nothing
-    }
+	@Override
+	public void visitClassNode()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void visitControllerNode() {
-        // Do nothing
-    }
+	@Override
+	public void visitControllerNode()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void visitModelNode() {
-        // Do nothing
-    }
+	@Override
+	public void visitModelNode()
+	{
+		// Do nothing
+	}
 
 
-    @Override
-	public void visitTestNode() {
-        // Do nothing
-    }
+	@Override
+	public void visitTestNode()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void visitUserNode(final boolean isUnderTestsRoot) {
-        // Do nothing
-    }
+	@Override
+	public void visitUserNode(final boolean isUnderTestsRoot)
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void visitSharedPartialsNode() {
-        // Do nothing
-    }
+	@Override
+	public void visitSharedPartialsNode()
+	{
+		// Do nothing
+	}
 }

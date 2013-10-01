@@ -22,8 +22,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
  * @author: oleg
  * @date: Jan 17, 2008
  */
-public enum Context {
-    INSTANCE,
-    CLASS,
-    ALL
+public enum Context
+{
+	INSTANCE,
+	CLASS,
+	ALL
 }

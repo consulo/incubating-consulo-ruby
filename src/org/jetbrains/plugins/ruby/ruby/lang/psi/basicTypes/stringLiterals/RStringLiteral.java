@@ -16,31 +16,32 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals;
 
-import com.intellij.psi.PsiElement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RLiteral;
-
 import java.util.List;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RLiteral;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.08.2006
  */
-public interface RStringLiteral extends RLiteral {
-    /**
-     * @return string content
-     */
-    public String getContent();
+public interface RStringLiteral extends RLiteral
+{
+	/**
+	 * @return string content
+	 */
+	public String getContent();
 
-    /**
-     * @return true if there are at least one expression subtitution
-     */
-    public boolean hasExpressionSubstitutions();
+	/**
+	 * @return true if there are at least one expression subtitution
+	 */
+	public boolean hasExpressionSubstitutions();
 
-    /**
-     * @return List of all expression subtitutions
-     */
-    public List<RExpressionSubstitution> getExpressionSubstitutions();
+	/**
+	 * @return List of all expression subtitutions
+	 */
+	public List<RExpressionSubstitution> getExpressionSubstitutions();
 
-    public List<PsiElement> getPsiContent();
+	public List<PsiElement> getPsiContent();
 }

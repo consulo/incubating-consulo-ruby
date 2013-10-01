@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi;
  * User: oleg
  * Date: Sep 5, 2007
  */
-public interface RVirtualLoad extends RVirtualRequire{
+public interface RVirtualLoad extends RVirtualRequire
+{
 }

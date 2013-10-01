@@ -16,18 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.heredocs;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.heredocs.RHeredocValue;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.RStringLiteralBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 15.06.2006
  */
-public class RHeredocValueImpl extends RStringLiteralBase implements RHeredocValue {
+public class RHeredocValueImpl extends RStringLiteralBase implements RHeredocValue
+{
 
-    public RHeredocValueImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RHeredocValueImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

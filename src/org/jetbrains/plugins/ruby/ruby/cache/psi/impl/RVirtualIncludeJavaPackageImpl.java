@@ -27,18 +27,21 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
  * User: oleg
  * Date: Sep 26, 2007
  */
-public class RVirtualIncludeJavaPackageImpl extends RVirtualIncludeJavaClassImpl implements RVirtualIncludeJavaPackage {
-    public RVirtualIncludeJavaPackageImpl(@Nullable final RVirtualContainer container,
-                                          @Nullable final String qualifiedName) {
-        super(container, qualifiedName);
-    }
+public class RVirtualIncludeJavaPackageImpl extends RVirtualIncludeJavaClassImpl implements RVirtualIncludeJavaPackage
+{
+	public RVirtualIncludeJavaPackageImpl(@Nullable final RVirtualContainer container, @Nullable final String qualifiedName)
+	{
+		super(container, qualifiedName);
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_INCLUDE_PACKAGE;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_INCLUDE_PACKAGE;
+	}
 
-    public String toString() {
-        return RCall.INCLUDE_PACKAGE_COMMAND + " " + getQualifiedName();
-    }
+	public String toString()
+	{
+		return RCall.INCLUDE_PACKAGE_COMMAND + " " + getQualifiedName();
+	}
 }

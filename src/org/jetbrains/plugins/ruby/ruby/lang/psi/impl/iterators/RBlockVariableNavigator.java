@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,8 +27,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  * @author: oleg
  * @date: Dec 26, 2007
  */
-public class RBlockVariableNavigator {
-    public static RBlockVariables getByIdentifier(@NotNull final RIdentifier identifier){
-        return PsiTreeUtil.getParentOfType(identifier, RBlockVariables.class);
-    }
+public class RBlockVariableNavigator
+{
+	public static RBlockVariables getByIdentifier(@NotNull final RIdentifier identifier)
+	{
+		return PsiTreeUtil.getParentOfType(identifier, RBlockVariables.class);
+	}
 }

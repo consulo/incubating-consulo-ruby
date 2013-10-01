@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
@@ -29,6 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,7 +36,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
  * Date: 27.06.2006
  */
 
-class F_ARGS  implements RubyTokenTypes {
+class F_ARGS implements RubyTokenTypes
+{
 
 
 /*
@@ -71,99 +72,118 @@ f_norm_arg	: tCONSTANT
 		;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        ParsingMethod parsingMethod = new ParsingMethod(){
-            boolean afterDefAsgn = false;
-            boolean afterRestArgs = false;
-            boolean afterBlockArg = false;
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		ParsingMethod parsingMethod = new ParsingMethod()
+		{
+			boolean afterDefAsgn = false;
+			boolean afterRestArgs = false;
+			boolean afterBlockArg = false;
 
-            @Override
+			@Override
 			@NotNull
-            public IElementType parse(final RBuilder builder){
+			public IElementType parse(final RBuilder builder)
+			{
 
-                if (afterBlockArg) {
-                    return RubyElementTypes.EMPTY_INPUT;
-                }
-// f_restarg
-                if (!afterRestArgs && builder.compare(tSTAR)){
-                    afterRestArgs = true;
-                    return parseRestArg(builder);
-                }
+				if(afterBlockArg)
+				{
+					return RubyElementTypes.EMPTY_INPUT;
+				}
+				// f_restarg
+				if(!afterRestArgs && builder.compare(tSTAR))
+				{
+					afterRestArgs = true;
+					return parseRestArg(builder);
+				}
 
-// f_blockarg
-                if (!afterBlockArg && builder.compare(tAMPER)){
-                    afterBlockArg = true;
-                    return parseFBlockArg(builder);
-                }
-// f_arg
-                if (!afterBlockArg && !afterRestArgs && builder.compare(BNF.tF_NORMARGS)){
-                    RMarker marker = builder.mark();
-                    if (builder.compare(BNF.tF_NORMARGS)){
-                        VARIABLE.parse(builder);
-                    }
-// f_optarg
-                    if (!builder.compareAndEat(tASSGN)){
-                        if (afterDefAsgn){
-                            builder.error(ErrorMsg.expected(tASSGN));
-                        }
-                        marker.done(RubyElementTypes.ARGUMENT);
-                        return RubyElementTypes.ARGUMENT;
-                    }
-                    if(ARG.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                        builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-                    }
-                    afterDefAsgn = true;
-                    marker.done(RubyElementTypes.PREDEFINED_ARGUMENT);
-                    return RubyElementTypes.PREDEFINED_ARGUMENT;
-                }
+				// f_blockarg
+				if(!afterBlockArg && builder.compare(tAMPER))
+				{
+					afterBlockArg = true;
+					return parseFBlockArg(builder);
+				}
+				// f_arg
+				if(!afterBlockArg && !afterRestArgs && builder.compare(BNF.tF_NORMARGS))
+				{
+					RMarker marker = builder.mark();
+					if(builder.compare(BNF.tF_NORMARGS))
+					{
+						VARIABLE.parse(builder);
+					}
+					// f_optarg
+					if(!builder.compareAndEat(tASSGN))
+					{
+						if(afterDefAsgn)
+						{
+							builder.error(ErrorMsg.expected(tASSGN));
+						}
+						marker.done(RubyElementTypes.ARGUMENT);
+						return RubyElementTypes.ARGUMENT;
+					}
+					if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+					{
+						builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+					}
+					afterDefAsgn = true;
+					marker.done(RubyElementTypes.PREDEFINED_ARGUMENT);
+					return RubyElementTypes.PREDEFINED_ARGUMENT;
+				}
 
-                return RubyElementTypes.EMPTY_INPUT;
-            }
-        };
+				return RubyElementTypes.EMPTY_INPUT;
+			}
+		};
 
-        int count = ListParsingUtil.parseCommaDelimitedExpressions(builder, parsingMethod);
-        return (count>0) ? RubyElementTypes.LIST_OF_EXPRESSIONS : RubyElementTypes.EMPTY_INPUT;
-    }
+		int count = ListParsingUtil.parseCommaDelimitedExpressions(builder, parsingMethod);
+		return (count > 0) ? RubyElementTypes.LIST_OF_EXPRESSIONS : RubyElementTypes.EMPTY_INPUT;
+	}
 
-    private static IElementType parseF_NORMARG(RBuilder builder) {
-        if (builder.compare(BNF.tF_NORMARGS)){
-            RMarker marker = builder.mark();
-            VARIABLE.parse(builder);
-            marker.done(RubyElementTypes.ARGUMENT);
-            return RubyElementTypes.ARGUMENT;
-        }
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+	private static IElementType parseF_NORMARG(RBuilder builder)
+	{
+		if(builder.compare(BNF.tF_NORMARGS))
+		{
+			RMarker marker = builder.mark();
+			VARIABLE.parse(builder);
+			marker.done(RubyElementTypes.ARGUMENT);
+			return RubyElementTypes.ARGUMENT;
+		}
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
-    /**
-     * Parsing block argument, &arg
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    private static IElementType parseFBlockArg(final RBuilder builder) {
-        RMarker blockMarker = builder.mark();
-        builder.match(tAMPER);
-        if (builder.compare(BNF.tF_NORMARGS)){
-            VARIABLE.parse(builder);
-        }
-        blockMarker.done(RubyElementTypes.BLOCK_ARGUMENT);
-        return RubyElementTypes.BLOCK_ARGUMENT;
-    }
+	/**
+	 * Parsing block argument, &arg
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	private static IElementType parseFBlockArg(final RBuilder builder)
+	{
+		RMarker blockMarker = builder.mark();
+		builder.match(tAMPER);
+		if(builder.compare(BNF.tF_NORMARGS))
+		{
+			VARIABLE.parse(builder);
+		}
+		blockMarker.done(RubyElementTypes.BLOCK_ARGUMENT);
+		return RubyElementTypes.BLOCK_ARGUMENT;
+	}
 
-    /**
-     * Parsing array argument, *arg
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    private static IElementType parseRestArg(final RBuilder builder) {
-        RMarker starMarker = builder.mark();
-        builder.match(tSTAR);
-        if (builder.compare(BNF.tF_NORMARGS)){
-            VARIABLE.parse(builder);
-        }
-        starMarker.done(RubyElementTypes.ARRAY_ARGUMENT);
-        return RubyElementTypes.ARRAY_ARGUMENT;
-    }
+	/**
+	 * Parsing array argument, *arg
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	private static IElementType parseRestArg(final RBuilder builder)
+	{
+		RMarker starMarker = builder.mark();
+		builder.match(tSTAR);
+		if(builder.compare(BNF.tF_NORMARGS))
+		{
+			VARIABLE.parse(builder);
+		}
+		starMarker.done(RubyElementTypes.ARRAY_ARGUMENT);
+		return RubyElementTypes.ARRAY_ARGUMENT;
+	}
 
 }

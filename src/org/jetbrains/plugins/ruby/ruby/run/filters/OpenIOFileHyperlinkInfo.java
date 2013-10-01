@@ -16,6 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.filters;
 
+import java.io.File;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.execution.filters.FileHyperlinkInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -25,11 +30,6 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ActionRunner;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-
-import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,75 +37,86 @@ import java.io.File;
  * @author: Roman Chernyatchik
  * @date: Jan 16, 2008
  */
-public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo {
-    private final Project myProject;
-    private final File myFile;
-    private final int myLine;
-    private final int myColumn;
+public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo
+{
+	private final Project myProject;
+	private final File myFile;
+	private final int myLine;
+	private final int myColumn;
 
-    private OpenFileDescriptor myDescriptor;
-    private boolean isLazyInitialized;
+	private OpenFileDescriptor myDescriptor;
+	private boolean isLazyInitialized;
 
-    public OpenIOFileHyperlinkInfo(final Project project, @NotNull final File file,
-                                   final int line, final int column) {
-        myProject = project;
-        myFile = file;
-        myLine = line;
-        myColumn = column;
-    }
+	public OpenIOFileHyperlinkInfo(final Project project, @NotNull final File file, final int line, final int column)
+	{
+		myProject = project;
+		myFile = file;
+		myLine = line;
+		myColumn = column;
+	}
 
-    public OpenIOFileHyperlinkInfo(final Project project, @NotNull final File file,
-                                   final int line) {
-        this(project, file, line, 0);
-    }
+	public OpenIOFileHyperlinkInfo(final Project project, @NotNull final File file, final int line)
+	{
+		this(project, file, line, 0);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public OpenFileDescriptor getDescriptor() {
-        if (!isLazyInitialized) {
-            final Ref<VirtualFile> virtualFileRef = new Ref<VirtualFile>(null);
-            IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                @Override
-				public void run() throws Exception {
-                    virtualFileRef.set(LocalFileSystem.getInstance().refreshAndFindFileByIoFile(myFile));
-                }
-            });
-            final VirtualFile virtualFile = virtualFileRef.get();
-            myDescriptor = virtualFile == null
-                    ? null
-                    : new OpenFileDescriptor(myProject, virtualFile, myLine, myColumn);
+	public OpenFileDescriptor getDescriptor()
+	{
+		if(!isLazyInitialized)
+		{
+			final Ref<VirtualFile> virtualFileRef = new Ref<VirtualFile>(null);
+			IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+			{
+				@Override
+				public void run() throws Exception
+				{
+					virtualFileRef.set(LocalFileSystem.getInstance().refreshAndFindFileByIoFile(myFile));
+				}
+			});
+			final VirtualFile virtualFile = virtualFileRef.get();
+			myDescriptor = virtualFile == null ? null : new OpenFileDescriptor(myProject, virtualFile, myLine, myColumn);
 
-            isLazyInitialized = true;
-        }
-        return myDescriptor;
-    }
+			isLazyInitialized = true;
+		}
+		return myDescriptor;
+	}
 
-    public File getFile() {
-        return myFile;
-    }
+	public File getFile()
+	{
+		return myFile;
+	}
 
-    public int getLine() {
-        return myLine;
-    }
+	public int getLine()
+	{
+		return myLine;
+	}
 
-    public int getColumn() {
-        return myColumn;
-    }
+	public int getColumn()
+	{
+		return myColumn;
+	}
 
-    @Override
-	public void navigate(final Project project) {
-        ApplicationManager.getApplication().runReadAction(new Runnable() {
-            @Override
-			public void run() {
-                final OpenFileDescriptor fileDesc = getDescriptor();
-                if (fileDesc == null) {
-                    return;
-                }                
-                if (fileDesc.getFile().isValid()) {
-                    FileEditorManager.getInstance(project).openTextEditor(fileDesc, true);
-                }
-            }
-        });
-    }
+	@Override
+	public void navigate(final Project project)
+	{
+		ApplicationManager.getApplication().runReadAction(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				final OpenFileDescriptor fileDesc = getDescriptor();
+				if(fileDesc == null)
+				{
+					return;
+				}
+				if(fileDesc.getFile().isValid())
+				{
+					FileEditorManager.getInstance(project).openTextEditor(fileDesc, true);
+				}
+			}
+		});
+	}
 }
 

@@ -16,7 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import com.intellij.psi.PsiType;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
@@ -26,9 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RJavaType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
-
-import java.util.Collection;
-import java.util.Collections;
+import com.intellij.psi.PsiType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,40 +36,47 @@ import java.util.Collections;
  * @author: oleg
  * @date: May 8, 2008
  */
-public class RJavaTypeImpl extends RTypeBase implements RJavaType {
-    private PsiType myPsiType;
-    private DuckType myJavaType;
+public class RJavaTypeImpl extends RTypeBase implements RJavaType
+{
+	private PsiType myPsiType;
+	private DuckType myJavaType;
 
-    public RJavaTypeImpl(@NotNull final PsiType psiType, @Nullable final FileSymbol fileSymbol) {
-        // TODO: OPTIMIZE! Don`t use ducktype
-        myPsiType = psiType;
-        final Children children = JRubyDuckTypeUtil.getChildrenByPsiType(fileSymbol, myPsiType);
-        myJavaType = RTypeUtil.createDuckTypeByChildren(fileSymbol, children, Collections.emptySet(), RTypeUtil.createFilter(false));
-    }
+	public RJavaTypeImpl(@NotNull final PsiType psiType, @Nullable final FileSymbol fileSymbol)
+	{
+		// TODO: OPTIMIZE! Don`t use ducktype
+		myPsiType = psiType;
+		final Children children = JRubyDuckTypeUtil.getChildrenByPsiType(fileSymbol, myPsiType);
+		myJavaType = RTypeUtil.createDuckTypeByChildren(fileSymbol, children, Collections.emptySet(), RTypeUtil.createFilter(false));
+	}
 
-    @Override
-	public boolean isTyped() {
-        return true;
-    }
+	@Override
+	public boolean isTyped()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getName() {
-        return myPsiType.getPresentableText();
-    }
+	public String getName()
+	{
+		return myPsiType.getPresentableText();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<Message> getMessages() {
-        return myJavaType.getMessages();
-    }
+	public Collection<Message> getMessages()
+	{
+		return myJavaType.getMessages();
+	}
 
-    @Override
-	public Collection<Message> getMessagesForName(@Nullable final String name) {
-        return myJavaType.getMessagesForName(name);
-    }
+	@Override
+	public Collection<Message> getMessagesForName(@Nullable final String name)
+	{
+		return myJavaType.getMessagesForName(name);
+	}
 
-    public String toString() {
-        return "Java type: " + myPsiType.getPresentableText();
-    }
+	public String toString()
+	{
+		return "Java type: " + myPsiType.getPresentableText();
+	}
 }

@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
@@ -37,6 +35,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,94 +44,112 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
  * @author: oleg
  * @date: Mar 6, 2007
  */
-public class RubyFastAnnotatorVisitor extends RubyElementVisitor {
-    private AnnotationHolder myHolder;
+public class RubyFastAnnotatorVisitor extends RubyElementVisitor
+{
+	private AnnotationHolder myHolder;
 
-    public RubyFastAnnotatorVisitor(@NotNull final AnnotationHolder holder){
-        myHolder = holder;
-    }
+	public RubyFastAnnotatorVisitor(@NotNull final AnnotationHolder holder)
+	{
+		myHolder = holder;
+	}
 
-    @Override
-	public void visitRAliasStatement(RAliasStatement rAliasStatement) {
-        if (rAliasStatement.getPsiNewName() instanceof RNthRefImpl) {
-            myHolder.createErrorAnnotation(rAliasStatement, RBundle.message("annotation.error.cannot.make.alias.for.nth.variable"));
-        }
-    }
+	@Override
+	public void visitRAliasStatement(RAliasStatement rAliasStatement)
+	{
+		if(rAliasStatement.getPsiNewName() instanceof RNthRefImpl)
+		{
+			myHolder.createErrorAnnotation(rAliasStatement, RBundle.message("annotation.error.cannot.make.alias.for.nth.variable"));
+		}
+	}
 
-    // parse.y line 486
-    @Override
-	public void visitRLBeginStatement(RLBeginStatementImpl rlBeginStatement) {
-        if (rlBeginStatement.getParentContainer() instanceof RMethod) {
-            myHolder.createErrorAnnotation(rlBeginStatement, RBundle.message("annotation.error.begin.in.method"));
-        }
-    }
+	// parse.y line 486
+	@Override
+	public void visitRLBeginStatement(RLBeginStatementImpl rlBeginStatement)
+	{
+		if(rlBeginStatement.getParentContainer() instanceof RMethod)
+		{
+			myHolder.createErrorAnnotation(rlBeginStatement, RBundle.message("annotation.error.begin.in.method"));
+		}
+	}
 
-    // parse.y line 882
-    @Override
-	public void visitRIdentifier(RIdentifier rIdentifier) {
-        if (RNameNavigator.getRName(rIdentifier) != null) {
-            myHolder.createErrorAnnotation(rIdentifier, RBundle.message("annotation.error.class.module.name.must.be.constant"));
-        }
-    }
+	// parse.y line 882
+	@Override
+	public void visitRIdentifier(RIdentifier rIdentifier)
+	{
+		if(RNameNavigator.getRName(rIdentifier) != null)
+		{
+			myHolder.createErrorAnnotation(rIdentifier, RBundle.message("annotation.error.class.module.name.must.be.constant"));
+		}
+	}
 
-    @Override
-	public void visitRConstant(RConstant rConstant) {
-        final PsiElement parent = rConstant.getParent();
-        if (parent instanceof RColonReference &&
-                ((RColonReference) parent).getValue() == rConstant){
+	@Override
+	public void visitRConstant(RConstant rConstant)
+	{
+		final PsiElement parent = rConstant.getParent();
+		if(parent instanceof RColonReference && ((RColonReference) parent).getValue() == rConstant)
+		{
 
-            // parse.y line 825, 831, 864, 870
-            if (RAssignmentExpressionNavigator.getAssignmentByLeftPart(parent)!= null){
-                myHolder.createErrorAnnotation(RAssignmentExpressionNavigator.getAssignmentByLeftPart(parent),
-                        RBundle.message("annotation.error.dynamic.constant.assignment"));
-            }
-            // parse.y line 1060, 1065
-            if (RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(parent)!= null){
-                myHolder.createErrorAnnotation(RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(parent),
-                        RBundle.message("annotation.error.constant.reassignment"));
-            }
-        }
-        if (RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rConstant)!= null){
-            myHolder.createErrorAnnotation(RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rConstant),
-                    RBundle.message("annotation.error.constant.reassignment"));
-        }
-    }
+			// parse.y line 825, 831, 864, 870
+			if(RAssignmentExpressionNavigator.getAssignmentByLeftPart(parent) != null)
+			{
+				myHolder.createErrorAnnotation(RAssignmentExpressionNavigator.getAssignmentByLeftPart(parent), RBundle.message("annotation.error.dynamic.constant.assignment"));
+			}
+			// parse.y line 1060, 1065
+			if(RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(parent) != null)
+			{
+				myHolder.createErrorAnnotation(RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(parent), RBundle.message("annotation.error.constant.reassignment"));
+			}
+		}
+		if(RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rConstant) != null)
+		{
+			myHolder.createErrorAnnotation(RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rConstant), RBundle.message("annotation.error.constant.reassignment"));
+		}
+	}
 
-    // parse.y line 1624
-    @Override
-	public void visitRClass(RClass rClass) {
-        if (rClass.getParentContainer() instanceof RMethod){
-            myHolder.createErrorAnnotation(rClass.getFirstChild(), RBundle.message("annotation.error.class.in.method"));
-        }
-    }
+	// parse.y line 1624
+	@Override
+	public void visitRClass(RClass rClass)
+	{
+		if(rClass.getParentContainer() instanceof RMethod)
+		{
+			myHolder.createErrorAnnotation(rClass.getFirstChild(), RBundle.message("annotation.error.class.in.method"));
+		}
+	}
 
-    // parse.y line 1662
-    @Override
-	public void visitRModule(RModule rModule) {
-        if (rModule.getParentContainer() instanceof RMethod){
-            myHolder.createErrorAnnotation(rModule.getFirstChild(), RBundle.message("annotation.error.module.in.method"));
-        }
-    }
+	// parse.y line 1662
+	@Override
+	public void visitRModule(RModule rModule)
+	{
+		if(rModule.getParentContainer() instanceof RMethod)
+		{
+			myHolder.createErrorAnnotation(rModule.getFirstChild(), RBundle.message("annotation.error.module.in.method"));
+		}
+	}
 
-    // parse.y line 2281, 2285, 2289, 2293
-    @Override
-	public void visitRParameter(RArgument rArgument) {
-        final PsiElement firstChild = rArgument.getFirstChild();
-        if (firstChild instanceof RConstant){
-            myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.constant"));
-        }
-        if (firstChild instanceof RInstanceVariable){
-            myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.inst.var"));
-        }
-        if (firstChild instanceof RGlobalVariable){
-            myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.global.var"));
-        }
-        if (firstChild instanceof RClassVariable){
-            myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.class.var"));
-        }
-    }
+	// parse.y line 2281, 2285, 2289, 2293
+	@Override
+	public void visitRParameter(RArgument rArgument)
+	{
+		final PsiElement firstChild = rArgument.getFirstChild();
+		if(firstChild instanceof RConstant)
+		{
+			myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.constant"));
+		}
+		if(firstChild instanceof RInstanceVariable)
+		{
+			myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.inst.var"));
+		}
+		if(firstChild instanceof RGlobalVariable)
+		{
+			myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.global.var"));
+		}
+		if(firstChild instanceof RClassVariable)
+		{
+			myHolder.createErrorAnnotation(rArgument, RBundle.message("annotation.error.formal.arg.cannot.be.class.var"));
+		}
+	}
 
-// todo: parse.y line 2371
+	// todo: parse.y line 2371
 /*
 
  public void visitRBodyStatement(final RBodyStatement rBodyStatement) {

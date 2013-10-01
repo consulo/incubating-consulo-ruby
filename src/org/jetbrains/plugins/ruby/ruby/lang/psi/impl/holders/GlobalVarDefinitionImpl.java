@@ -26,32 +26,38 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable
  * User: oleg
  * Date: Aug 22, 2007
  */
-public class GlobalVarDefinitionImpl implements GlobalVarDefinition {
-    private RGlobalVariable myFirstDefinition;
+public class GlobalVarDefinitionImpl implements GlobalVarDefinition
+{
+	private RGlobalVariable myFirstDefinition;
 
-    public GlobalVarDefinitionImpl(@NotNull final RGlobalVariable globalVariable){
-        myFirstDefinition  = globalVariable;
-    }
+	public GlobalVarDefinitionImpl(@NotNull final RGlobalVariable globalVariable)
+	{
+		myFirstDefinition = globalVariable;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RGlobalVariable getFirstDefinition() {
-        return myFirstDefinition;
-    }
+	public RGlobalVariable getFirstDefinition()
+	{
+		return myFirstDefinition;
+	}
 
-    @Override
-	public void process(@NotNull final RGlobalVariable globalVariable) {
-        // do nothing
-    }
+	@Override
+	public void process(@NotNull final RGlobalVariable globalVariable)
+	{
+		// do nothing
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getText() {
-        return myFirstDefinition.getText();
-    }
+	public String getText()
+	{
+		return myFirstDefinition.getText();
+	}
 
-    @Override
-	public boolean isFor(@NotNull final RVirtualGlobalVar virtualGlobalVar) {
-        return getText().equals(virtualGlobalVar.getText());
-    }
+	@Override
+	public boolean isFor(@NotNull final RVirtualGlobalVar virtualGlobalVar)
+	{
+		return getText().equals(virtualGlobalVar.getText());
+	}
 }

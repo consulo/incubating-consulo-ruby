@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,24 +26,25 @@ import java.util.List;
  * @author: oleg
  * @date: Dec 4, 2006
  */
-public interface RVirtualName extends RVirtualElement {
-    /**
-     * @return only name without path
-     */
-    @NotNull
-    public String getName();
+public interface RVirtualName extends RVirtualElement
+{
+	/**
+	 * @return only name without path
+	 */
+	@NotNull
+	public String getName();
 
-    /**
-     * @return List of paths
-     */
-    @NotNull
-    public List<String> getPath();
+	/**
+	 * @return List of paths
+	 */
+	@NotNull
+	public List<String> getPath();
 
-    /**
-     * @return full name,i.e. name with path
-     */
-    @NotNull
-    public String getFullName();
+	/**
+	 * @return full name,i.e. name with path
+	 */
+	@NotNull
+	public String getFullName();
 
-    public boolean isGlobal();
+	public boolean isGlobal();
 }

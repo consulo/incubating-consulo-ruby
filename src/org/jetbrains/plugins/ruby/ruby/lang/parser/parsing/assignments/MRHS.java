@@ -17,8 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assignments;
 
 
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
@@ -28,49 +26,60 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.openapi.util.Ref;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 02.07.2006
  */
-public class MRHS implements RubyTokenTypes {
-    /*
-    mrhs		: args ',' arg_value
-            | args ',' tSTAR arg_value
-            | tSTAR arg_value
-            ;
-    args = arg (, arg)*
-    */
-    public static IElementType parse(final RBuilder builder) {
-        final Ref<Boolean> starSeen = new Ref<Boolean>(false);
-        ParsingMethod parsignMethod = new ParsingMethod() {
-            @Override
+public class MRHS implements RubyTokenTypes
+{
+	/*
+	mrhs		: args ',' arg_value
+			| args ',' tSTAR arg_value
+			| tSTAR arg_value
+			;
+	args = arg (, arg)*
+	*/
+	public static IElementType parse(final RBuilder builder)
+	{
+		final Ref<Boolean> starSeen = new Ref<Boolean>(false);
+		ParsingMethod parsignMethod = new ParsingMethod()
+		{
+			@Override
 			@NotNull
-            public IElementType parse(final RBuilder builder) {
+			public IElementType parse(final RBuilder builder)
+			{
 
-                if (starSeen.get()) {
-                    return RubyElementTypes.EMPTY_INPUT;
-                }
+				if(starSeen.get())
+				{
+					return RubyElementTypes.EMPTY_INPUT;
+				}
 
-                if (builder.compare(tSTAR)) {
-                    starSeen.set(true);
-                    return CALL_ARGS.parseArrayToArguments(builder);
-                }
+				if(builder.compare(tSTAR))
+				{
+					starSeen.set(true);
+					return CALL_ARGS.parseArrayToArguments(builder);
+				}
 
-                return ARG.parse(builder);
-            }
-        };
+				return ARG.parse(builder);
+			}
+		};
 
-        RMarker statementMarker = builder.mark();
-        int count = ListParsingUtil.parseCommaDelimitedExpressions(builder, parsignMethod);
+		RMarker statementMarker = builder.mark();
+		int count = ListParsingUtil.parseCommaDelimitedExpressions(builder, parsignMethod);
 
-        if (count >= 2 || starSeen.get()) {
-            statementMarker.done(RubyElementTypes.LIST_OF_EXPRESSIONS);
-            return RubyElementTypes.MRHS;
-        } else {
-            statementMarker.rollbackTo();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-    }
+		if(count >= 2 || starSeen.get())
+		{
+			statementMarker.done(RubyElementTypes.LIST_OF_EXPRESSIONS);
+			return RubyElementTypes.MRHS;
+		}
+		else
+		{
+			statementMarker.rollbackTo();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+	}
 }

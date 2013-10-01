@@ -22,54 +22,55 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface CoreTypes {
-    public String Object =      "Object";
-    public String Class =       "Class";
-    public String Module =      "Module";
+public interface CoreTypes
+{
+	public String Object = "Object";
+	public String Class = "Class";
+	public String Module = "Module";
 
-    public String Integer =     "Integer";
-    public String Numeric =     "Numeric";
-    public String Fixnum =      "Fixnum";
-    public String Float =       "Float";
-    public String String =      "String";
-    public String Regexp =      "Regexp";
-    public String Array =       "Array";
-    public String Range =       "Range";
-    public String Hash =        "Hash";
-    public String Symbol =      "Symbol";
-    public String IO =          "IO";
-    public String Proc =        "Proc";
+	public String Integer = "Integer";
+	public String Numeric = "Numeric";
+	public String Fixnum = "Fixnum";
+	public String Float = "Float";
+	public String String = "String";
+	public String Regexp = "Regexp";
+	public String Array = "Array";
+	public String Range = "Range";
+	public String Hash = "Hash";
+	public String Symbol = "Symbol";
+	public String IO = "IO";
+	public String Proc = "Proc";
 
-    public String FalseClass =  "FalseClass";
-    public String NilClass =    "NilClass";
-    public String TrueClass =   "TrueClass";
+	public String FalseClass = "FalseClass";
+	public String NilClass = "NilClass";
+	public String TrueClass = "TrueClass";
 
-    public String Time =        "Time";
+	public String Time = "Time";
 
-    public String AllValues[] = new String[]{
-            Object,
-            Class,
-            Module,
+	public String AllValues[] = new String[]{
+			Object,
+			Class,
+			Module,
 
-            Numeric,
-            Integer,
-            Fixnum,
-            Float,
-            String,
-            Regexp,
-            Array,
-            Range,
-            Hash,
-            Symbol,
-            IO,
-            Proc,
+			Numeric,
+			Integer,
+			Fixnum,
+			Float,
+			String,
+			Regexp,
+			Array,
+			Range,
+			Hash,
+			Symbol,
+			IO,
+			Proc,
 
-            FalseClass,
-            NilClass,
-            TrueClass,
+			FalseClass,
+			NilClass,
+			TrueClass,
 
-            Time
-    };
+			Time
+	};
 }
 
 //public enum CoreTypes {

@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationEditor;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,23 +27,24 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfi
  * @author: Roman Chernyatchik
  * @date: 04.08.2007
  */
-public class RailsServerRunConfigurationEditor extends RubyRunConfigurationEditor {
-    public RailsServerRunConfigurationEditor(final Project project,
-                                         final RubyRunConfiguration runConfiguration) {
-        super(project, runConfiguration);
+public class RailsServerRunConfigurationEditor extends RubyRunConfigurationEditor
+{
+	public RailsServerRunConfigurationEditor(final Project project, final RubyRunConfiguration runConfiguration)
+	{
+		super(project, runConfiguration);
 
-        myForm = new RailsServerConfigurationForm(project, runConfiguration);
-    }
+		myForm = new RailsServerConfigurationForm(project, runConfiguration);
+	}
 
-    @Override
-	protected void resetEditorFrom(final RubyRunConfiguration config) {
-        RailsServerRunConfiguration.copyParams((RailsServerRunConfiguration)config,
-                                               (RailsServerConfigurationForm)myForm);
-    }
+	@Override
+	protected void resetEditorFrom(final RubyRunConfiguration config)
+	{
+		RailsServerRunConfiguration.copyParams((RailsServerRunConfiguration) config, (RailsServerConfigurationForm) myForm);
+	}
 
-    @Override
-	protected void applyEditorTo(final RubyRunConfiguration config) throws ConfigurationException {
-        RailsServerRunConfiguration.copyParams((RailsServerConfigurationForm)myForm,
-                                               (RailsServerRunConfiguration)config);
-    }
+	@Override
+	protected void applyEditorTo(final RubyRunConfiguration config) throws ConfigurationException
+	{
+		RailsServerRunConfiguration.copyParams((RailsServerConfigurationForm) myForm, (RailsServerRunConfiguration) config);
+	}
 }

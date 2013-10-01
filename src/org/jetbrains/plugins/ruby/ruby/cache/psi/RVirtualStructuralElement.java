@@ -24,10 +24,11 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
  * @author: oleg
  * @date: Jun 20, 2007
  */
-public interface RVirtualStructuralElement extends RVirtualElement{
+public interface RVirtualStructuralElement extends RVirtualElement
+{
 
-    public StructureType getType();
+	public StructureType getType();
 
-    public RVirtualContainer getVirtualParentContainer();
+	public RVirtualContainer getVirtualParentContainer();
 
 }

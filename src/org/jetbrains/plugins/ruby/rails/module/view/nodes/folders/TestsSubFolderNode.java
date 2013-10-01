@@ -35,34 +35,36 @@ import com.intellij.ui.treeStructure.SimpleNode;
  * @author: Roman Chernyatchik
  * @date: 17.10.2006
  */
-public class TestsSubFolderNode extends FolderNode {
-    protected static final Icon TESTS_OPENED =null/* IconSet.getSourceFolderIcon(true, true)*/;
-    protected static final Icon TESTS_CLOSED = null/*IconSet.getSourceFolderIcon(true, false)/*/;
+public class TestsSubFolderNode extends FolderNode
+{
+	protected static final Icon TESTS_OPENED = null/* IconSet.getSourceFolderIcon(true, true)*/;
+	protected static final Icon TESTS_CLOSED = null/*IconSet.getSourceFolderIcon(true, false)/*/;
 
-    public TestsSubFolderNode(final Module module, final VirtualFile dir,
-                              final SimpleNode parent) {
-        super(module, dir, parent, initPresentationData(dir.getName()));
-    }
+	public TestsSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent)
+	{
+		super(module, dir, parent, initPresentationData(dir.getName()));
+	}
 
-    public TestsSubFolderNode(final Module module, final VirtualFile dir,
-                              final SimpleNode parent, final PresentationData data) {
-        super(module, dir, parent, data);
-    }
+	public TestsSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data)
+	{
+		super(module, dir, parent, data);
+	}
 
-    @Override
-	protected void processNotDirectoryFile(final List<RailsNode> nodes,
-                                           final VirtualFile file, final String url) {
-        if (RubyVirtualFileScanner.isRubyFile(file)) {
-            super.processNotDirectoryFile(nodes, file, url);
-        } else if (RailsUtil.isYMLFile(file.getName())) {
-            nodes.add(new SimpleFileNode(getModule(), file));
-        }
-    }
+	@Override
+	protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file, final String url)
+	{
+		if(RubyVirtualFileScanner.isRubyFile(file))
+		{
+			super.processNotDirectoryFile(nodes, file, url);
+		}
+		else if(RailsUtil.isYMLFile(file.getName()))
+		{
+			nodes.add(new SimpleFileNode(getModule(), file));
+		}
+	}
 
-    private static PresentationData initPresentationData(final String name) {
-        return new PresentationData(name, name,
-                                    TESTS_OPENED,
-                                    TESTS_CLOSED,
-                                    null);
-    }
+	private static PresentationData initPresentationData(final String name)
+	{
+		return new PresentationData(name, name, TESTS_OPENED, TESTS_CLOSED, null);
+	}
 }

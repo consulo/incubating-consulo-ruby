@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
+import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNodeVisitor;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,25 +30,28 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
  * @author: Roman Chernyatchik
  * @date: Aug 27, 2007
  */
-public class RailsSharedPatialsFolderNode extends SharedPartialsSubFolderNode {
-    private static final String SHARED_PARTIALS_FOLDER = RBundle.message("rails.project.module.view.nodes.shared.partials.presentable");
+public class RailsSharedPatialsFolderNode extends SharedPartialsSubFolderNode
+{
+	private static final String SHARED_PARTIALS_FOLDER = RBundle.message("rails.project.module.view.nodes.shared.partials.presentable");
 
-    public RailsSharedPatialsFolderNode(final Module module, final VirtualFile folder) {
-        super(module, folder, null, initPresentationData());
-    }
+	public RailsSharedPatialsFolderNode(final Module module, final VirtualFile folder)
+	{
+		super(module, folder, null, initPresentationData());
+	}
 
-    @Override
-	public void accept(SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitSharedPartialsNode();
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitSharedPartialsNode();
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    private static PresentationData initPresentationData() {
-         return new PresentationData(SHARED_PARTIALS_FOLDER, SHARED_PARTIALS_FOLDER,
-                                     RailsIcons.RAILS_PARTIALS_OPEN, RailsIcons.RAILS_PARTIALS_CLOSED,
-                                     null);
-    }
+	private static PresentationData initPresentationData()
+	{
+		return new PresentationData(SHARED_PARTIALS_FOLDER, SHARED_PARTIALS_FOLDER, RailsIcons.RAILS_PARTIALS_OPEN, RailsIcons.RAILS_PARTIALS_CLOSED, null);
+	}
 }

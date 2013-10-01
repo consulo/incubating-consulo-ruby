@@ -21,7 +21,8 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author yole
  */
-public interface ParamDependency<T> {
-    @Nullable
-    T getValue(ParamContext context);
+public interface ParamDependency<T>
+{
+	@Nullable
+	T getValue(ParamContext context);
 }

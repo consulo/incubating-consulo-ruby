@@ -22,10 +22,11 @@ package org.jetbrains.plugins.ruby.rails;
  * @author: Roman Chernyatchik
  * @date: Apr 11, 2008
  */
-public interface ExternalRailsSettingsDelegate {
-    public String[] getRailsScriptDataBaseTypes();
+public interface ExternalRailsSettingsDelegate
+{
+	public String[] getRailsScriptDataBaseTypes();
 
-    public String[] getRailsServersTypes();
+	public String[] getRailsServersTypes();
 
-    public String getRailsServersTitlesByType(final String serverType);
+	public String getRailsServersTitlesByType(final String serverType);
 }

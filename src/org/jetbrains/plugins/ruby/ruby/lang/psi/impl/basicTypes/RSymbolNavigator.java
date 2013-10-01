@@ -16,25 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 29, 2007
  */
-public class RSymbolNavigator {
-    @Nullable
-    public static RSymbol getSymbolByObject(@NotNull final RPsiElement object){
-        final PsiElement element = object.getParent();
-        if (!(element instanceof RSymbol)){
-            return null;
-        }
-        final RSymbol symbols = (RSymbol) element;
-        return symbols.getObject() == object ? symbols : null;
-    }
+public class RSymbolNavigator
+{
+	@Nullable
+	public static RSymbol getSymbolByObject(@NotNull final RPsiElement object)
+	{
+		final PsiElement element = object.getParent();
+		if(!(element instanceof RSymbol))
+		{
+			return null;
+		}
+		final RSymbol symbols = (RSymbol) element;
+		return symbols.getObject() == object ? symbols : null;
+	}
 }

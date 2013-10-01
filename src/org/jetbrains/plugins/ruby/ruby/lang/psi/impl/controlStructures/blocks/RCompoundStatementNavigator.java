@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,32 +28,38 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompou
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public class RCompoundStatementNavigator {
+public class RCompoundStatementNavigator
+{
 
-    @Nullable
-    public static RCompoundStatement getByPsiElement(@NotNull final PsiElement element) {
-        final PsiElement parent = element.getParent();
-        return (parent instanceof RCompoundStatement) ? (RCompoundStatement) parent : null;
-    }
+	@Nullable
+	public static RCompoundStatement getByPsiElement(@NotNull final PsiElement element)
+	{
+		final PsiElement parent = element.getParent();
+		return (parent instanceof RCompoundStatement) ? (RCompoundStatement) parent : null;
+	}
 
-    @Nullable
-    public static RCompoundStatement getParentCompoundStatement(@NotNull final PsiElement element) {
-        return PsiTreeUtil.getParentOfType(element, RCompoundStatement.class);
-    }
+	@Nullable
+	public static RCompoundStatement getParentCompoundStatement(@NotNull final PsiElement element)
+	{
+		return PsiTreeUtil.getParentOfType(element, RCompoundStatement.class);
+	}
 
-    @Nullable
-    public static RCompoundStatement getNotStrictCompoundStatement(@NotNull final PsiElement element) {
-        System.err.println("element: " + element + "text: " + element.getText());
-        final RCompoundStatement parent = getByPsiElement(element);
-        if (parent!=null){
-            return parent;
-        }
-        final RCompoundStatement next = PsiTreeUtil.getNextSiblingOfType(element, RCompoundStatement.class);
-        if (next!=null){
-            return next;
-        }
-        return PsiTreeUtil.getPrevSiblingOfType(element, RCompoundStatement.class);
-    }
+	@Nullable
+	public static RCompoundStatement getNotStrictCompoundStatement(@NotNull final PsiElement element)
+	{
+		System.err.println("element: " + element + "text: " + element.getText());
+		final RCompoundStatement parent = getByPsiElement(element);
+		if(parent != null)
+		{
+			return parent;
+		}
+		final RCompoundStatement next = PsiTreeUtil.getNextSiblingOfType(element, RCompoundStatement.class);
+		if(next != null)
+		{
+			return next;
+		}
+		return PsiTreeUtil.getPrevSiblingOfType(element, RCompoundStatement.class);
+	}
 
 
 }

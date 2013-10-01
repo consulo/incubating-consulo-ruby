@@ -11,24 +11,28 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
  * @author: oleg
  * @date: 07.04.2008
  */
-abstract class AbstractReferenceAccess implements ReferenceAccess {
-    private final RReference myReference;
-    private final RPsiElement myUsage;
+abstract class AbstractReferenceAccess implements ReferenceAccess
+{
+	private final RReference myReference;
+	private final RPsiElement myUsage;
 
-    public AbstractReferenceAccess(final RPsiElement usage, final RReference reference) {
-        myReference = reference;
-        myUsage = usage;
-    }
+	public AbstractReferenceAccess(final RPsiElement usage, final RReference reference)
+	{
+		myReference = reference;
+		myUsage = usage;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public final RPsiElement getFullReference() {
-        return myReference;
-    }
+	public final RPsiElement getFullReference()
+	{
+		return myReference;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public final RPsiElement getElement() {
-        return myUsage;
-    }
+	public final RPsiElement getElement()
+	{
+		return myUsage;
+	}
 }

@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.usages.UsageView;
 import com.intellij.usages.rules.UsageGroupingRule;
 import com.intellij.usages.rules.UsageGroupingRuleProvider;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,28 +31,34 @@ import org.jetbrains.plugins.ruby.RComponents;
  * @author: oleg
  * @date: Nov 2, 2007
  */
-public class RubyUsagesGroupingRuleProvider implements UsageGroupingRuleProvider {
-    @Override
+public class RubyUsagesGroupingRuleProvider implements UsageGroupingRuleProvider
+{
+	@Override
 	@NotNull
-    public UsageGroupingRule[] getActiveRules(Project project) {
-        return new UsageGroupingRule[]{new RubyUsageGroupingRule()};
-    }
+	public UsageGroupingRule[] getActiveRules(Project project)
+	{
+		return new UsageGroupingRule[]{new RubyUsageGroupingRule()};
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public AnAction[] createGroupingActions(UsageView usageView) {
-        return AnAction.EMPTY_ARRAY;
-    }
+	public AnAction[] createGroupingActions(UsageView usageView)
+	{
+		return AnAction.EMPTY_ARRAY;
+	}
 
-    @NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RUBY_USAGE_GROUP_RULE_PROVIDER;
-    }
+	@NonNls
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RUBY_USAGE_GROUP_RULE_PROVIDER;
+	}
 
-    public void initComponent() {
-    }
+	public void initComponent()
+	{
+	}
 
-    public void disposeComponent() {
-    }
+	public void disposeComponent()
+	{
+	}
 }

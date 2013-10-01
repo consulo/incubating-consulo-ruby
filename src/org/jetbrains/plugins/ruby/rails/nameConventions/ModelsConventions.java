@@ -16,9 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
@@ -30,8 +33,9 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.util.*;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,57 +43,62 @@ import java.util.*;
  * @author: Roman Chernyatchik
  * @date: 08.05.2007
  */
-public class ModelsConventions {
-    public static final String ACTIVER_RECORD = RailsConstants.SDK_ACTIVE_RECORD;
-    public static final String ACTIVE_RECORD_MODULE = RailsConstants.SDK_ACTIVE_RECORD_MODULE;
-    public static final String BASE_CLASS = RailsConstants.BASE_CLASS;
+public class ModelsConventions
+{
+	public static final String ACTIVER_RECORD = RailsConstants.SDK_ACTIVE_RECORD;
+	public static final String ACTIVE_RECORD_MODULE = RailsConstants.SDK_ACTIVE_RECORD_MODULE;
+	public static final String BASE_CLASS = RailsConstants.BASE_CLASS;
 
-    public static boolean isModelFile(@NotNull final RVirtualFile rFile,
-                                      @Nullable final Module module) {
-        return isModelFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
-    }
+	public static boolean isModelFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	{
+		return isModelFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
+	}
 
-    public static boolean isModelFile(@NotNull final RVirtualFile rFile,
-                                      @Nullable final Module module,
-                                      @NotNull final List<RVirtualClass> classes) {
-        if (module == null){
-            return false;
-        }
+	public static boolean isModelFile(@NotNull final RVirtualFile rFile, @Nullable final Module module, @NotNull final List<RVirtualClass> classes)
+	{
+		if(module == null)
+		{
+			return false;
+		}
 
-        final String fileUrl = rFile.getContainingFileUrl();
+		final String fileUrl = rFile.getContainingFileUrl();
 
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
 
-        final String modelsRoot =  railsPaths.getModelRootURL();
-        if (!fileUrl.startsWith(modelsRoot)) {
-             return false;
-        }
+		final String modelsRoot = railsPaths.getModelRootURL();
+		if(!fileUrl.startsWith(modelsRoot))
+		{
+			return false;
+		}
 
-        for (RVirtualClass virtualClass : classes) {
-            if (isModelClass(virtualClass, module)){
-                return true;
-            }
-        }
-        return false;
-    }
+		for(RVirtualClass virtualClass : classes)
+		{
+			if(isModelClass(virtualClass, module))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public static boolean isModelClass(@Nullable final RVirtualClass rClass,
-                                       @NotNull final Module module) {
-        if (!RailsFacetUtil.hasRailsSupport(module)) {
-            return false;
-        }
+	public static boolean isModelClass(@Nullable final RVirtualClass rClass, @NotNull final Module module)
+	{
+		if(!RailsFacetUtil.hasRailsSupport(module))
+		{
+			return false;
+		}
 
-        /**
-         * TODO
-         *
-         * Uncomment next block when virtual file cache will be able
-         * to parse complicated class names(such as Module1:Module2:ClassName)
-         * into RVirtualElements hierarchy
-         */
+		/**
+		 * TODO
+		 *
+		 * Uncomment next block when virtual file cache will be able
+		 * to parse complicated class names(such as Module1:Module2:ClassName)
+		 * into RVirtualElements hierarchy
+		 */
 
           /*  final ArrayList<RVirtualContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
-            final String controllersRootURL = getControllersRootURL(module);
+			final String controllersRootURL = getControllersRootURL(module);
             assert controllersRootURL != null; // for rails modules isn't null
 
             final StringBuffer buff = new StringBuffer(controllersRootURL);
@@ -102,64 +111,65 @@ public class ModelsConventions {
             }
         */
 
-        assert rClass != null; // for rails modules isn't null
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
-        final String fileUrl = rClass.getContainingFileUrl();
+		assert rClass != null; // for rails modules isn't null
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
+		final String fileUrl = rClass.getContainingFileUrl();
 
-        //check directory
-        final String modelsRoot =  railsPaths.getModelRootURL();
-        if (!fileUrl.startsWith(modelsRoot)) {
-             return false;
-        }
-        final String className = rClass.getName();
-        final String fileName = VirtualFileUtil.removeExtension(VirtualFileUtil.getFileName(fileUrl));
-        if (!NamingConventions.toUnderscoreCase(className).equals(fileName)) {
-            return false;
-        }
+		//check directory
+		final String modelsRoot = railsPaths.getModelRootURL();
+		if(!fileUrl.startsWith(modelsRoot))
+		{
+			return false;
+		}
+		final String className = rClass.getName();
+		final String fileName = VirtualFileUtil.removeExtension(VirtualFileUtil.getFileName(fileUrl));
+		if(!NamingConventions.toUnderscoreCase(className).equals(fileName))
+		{
+			return false;
+		}
 
-        //check superclsss
-        final RVirtualName superClass = rClass.getVirtualSuperClass();
-        if (superClass == null) {
-            return false;
-        }
-        final List<String> path = superClass.getPath();
-        //TODO it is HACK!!!! Doesn't work with inheritance
-        return (path.size() == 2
-                && ModelsConventions.ACTIVE_RECORD_MODULE.equals(path.get(0)))
-                && BASE_CLASS.equals(path.get(1));
+		//check superclsss
+		final RVirtualName superClass = rClass.getVirtualSuperClass();
+		if(superClass == null)
+		{
+			return false;
+		}
+		final List<String> path = superClass.getPath();
+		//TODO it is HACK!!!! Doesn't work with inheritance
+		return (path.size() == 2 && ModelsConventions.ACTIVE_RECORD_MODULE.equals(path.get(0))) && BASE_CLASS.equals(path.get(1));
 
-//        final String controllersRootURL = settings.getControllerRootURL();
-//        assert controllersRootURL != null; // for rails modules isn't null
-//
-//        final StringBuffer buff = new StringBuffer(controllersRootURL);
-//        for (String name : path) {
-//            buff.append(VirtualFileUtil.VFS_PATH_SEPARATOR);
-//            buff.append(RailsUtil.toUnderscoreCase(name));
-//        }
-//        buff.append('.').append(RubyFileType.RUBY.getDefaultExtension());
-//        return buff.toString().equals(rClass.getContainingFileUrl());
-    }
+		//        final String controllersRootURL = settings.getControllerRootURL();
+		//        assert controllersRootURL != null; // for rails modules isn't null
+		//
+		//        final StringBuffer buff = new StringBuffer(controllersRootURL);
+		//        for (String name : path) {
+		//            buff.append(VirtualFileUtil.VFS_PATH_SEPARATOR);
+		//            buff.append(RailsUtil.toUnderscoreCase(name));
+		//        }
+		//        buff.append('.').append(RubyFileType.RUBY.getDefaultExtension());
+		//        return buff.toString().equals(rClass.getContainingFileUrl());
+	}
 
-    @NotNull
-    public static List<VirtualFile> getBuiltInAdapters(@NotNull final String activeRecordViewFileUrl) {
-        final VirtualFileManager manager = VirtualFileManager.getInstance();
+	@NotNull
+	public static List<VirtualFile> getBuiltInAdapters(@NotNull final String activeRecordViewFileUrl)
+	{
+		final VirtualFileManager manager = VirtualFileManager.getInstance();
 
-        final String url =
-                VirtualFileUtil.removeExtension(activeRecordViewFileUrl)
-                        + VirtualFileUtil.VFS_PATH_SEPARATOR
-                        + RailsConstants.SDK_ACTIVE_RECORD_ADAPTERS_DIR_NAME;
+		final String url = VirtualFileUtil.removeExtension(activeRecordViewFileUrl) + VirtualFileUtil.VFS_PATH_SEPARATOR + RailsConstants.SDK_ACTIVE_RECORD_ADAPTERS_DIR_NAME;
 
-        final VirtualFile adaptersDir = manager.findFileByUrl(url);
-        if (adaptersDir == null) {
-            return Collections.emptyList();
-        }
-        final Set<VirtualFile> files = new HashSet<VirtualFile>();
-        RubyVirtualFileScanner.addRubyFiles(adaptersDir, files);
-        final ArrayList<VirtualFile> filesList = new ArrayList<VirtualFile>();
-        for (VirtualFile virtualFile : files) {
-            filesList.add(virtualFile);
-        }
-        return filesList;
-    }
+		final VirtualFile adaptersDir = manager.findFileByUrl(url);
+		if(adaptersDir == null)
+		{
+			return Collections.emptyList();
+		}
+		final Set<VirtualFile> files = new HashSet<VirtualFile>();
+		RubyVirtualFileScanner.addRubyFiles(adaptersDir, files);
+		final ArrayList<VirtualFile> filesList = new ArrayList<VirtualFile>();
+		for(VirtualFile virtualFile : files)
+		{
+			filesList.add(virtualFile);
+		}
+		return filesList;
+	}
 }

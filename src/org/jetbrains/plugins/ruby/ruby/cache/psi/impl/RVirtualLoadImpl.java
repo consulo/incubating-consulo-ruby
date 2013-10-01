@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -23,28 +25,32 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 5, 2007
  */
-public class RVirtualLoadImpl extends RVirtualRequireImpl implements RVirtualLoad {
-    public RVirtualLoadImpl(RVirtualContainer container, @NotNull List<String> requires) {
-        super(container, requires);
-    }
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_LOAD;
-    }
+public class RVirtualLoadImpl extends RVirtualRequireImpl implements RVirtualLoad
+{
+	public RVirtualLoadImpl(RVirtualContainer container, @NotNull List<String> requires)
+	{
+		super(container, requires);
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualLoad(this);
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_LOAD;
+	}
 
-    public String toString() {
-        return RCall.LOAD_COMMAND + " " + myRequires;
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualLoad(this);
+	}
+
+	public String toString()
+	{
+		return RCall.LOAD_COMMAND + " " + myRequires;
+	}
 }

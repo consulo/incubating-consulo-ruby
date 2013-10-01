@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import com.intellij.navigation.ItemPresentation;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,8 +25,9 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualModule extends RVirtualFieldContantContainer {
-    @Override
+public interface RVirtualModule extends RVirtualFieldContantContainer
+{
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation();
+	public ItemPresentation getPresentation();
 }

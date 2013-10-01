@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -27,8 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-
-import javax.swing.*;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,37 +36,41 @@ import javax.swing.*;
  * @author: oleg, Roman Chernyatchik
  * @date: Oct 2, 2006
  */
-public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implements RVirtualModule {
-    public RVirtualModuleImpl(@NotNull final RVirtualContainer parentContainer,
-                              @NotNull final RVirtualName virtualName,
-                              @NotNull final AccessModifier defaultChildAccessModifier,
-                              @NotNull final RFileInfo containingFileInfo) {
-        super(parentContainer, virtualName, defaultChildAccessModifier, containingFileInfo);
-    }
+public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implements RVirtualModule
+{
+	public RVirtualModuleImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName virtualName, @NotNull final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	{
+		super(parentContainer, virtualName, defaultChildAccessModifier, containingFileInfo);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RModulePresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RModulePresentationUtil.getPresentation(this);
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RModulePresentationUtil.getIcon(this, flags);
-    }
+	@Nullable
+	public Icon getIcon(final int flags)
+	{
+		return RModulePresentationUtil.getIcon(this, flags);
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualModule(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualModule(this);
+	}
 
-    public String toString() {
-        return "module [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName();
-    }
+	public String toString()
+	{
+		return "module [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName();
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.MODULE;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.MODULE;
+	}
 }

@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualExtend;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -24,28 +26,32 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 5, 2007
  */
-public class RVirtualExtendImpl extends RVirtualIncludeImpl implements RVirtualExtend {
-    public RVirtualExtendImpl(RVirtualContainer container, @NotNull List<RVirtualName> names) {
-        super(container, names);
-    }
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_EXTEND;
-    }
+public class RVirtualExtendImpl extends RVirtualIncludeImpl implements RVirtualExtend
+{
+	public RVirtualExtendImpl(RVirtualContainer container, @NotNull List<RVirtualName> names)
+	{
+		super(container, names);
+	}
 
-    public String toString() {
-        return RCall.EXTEND_COMMAND;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_EXTEND;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualExtend(this);
-    }
+	public String toString()
+	{
+		return RCall.EXTEND_COMMAND;
+	}
+
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualExtend(this);
+	}
 }

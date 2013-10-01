@@ -16,51 +16,65 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
 
-import com.intellij.openapi.diagnostic.Logger;
-
 import java.util.Stack;
+
+import com.intellij.openapi.diagnostic.Logger;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 23, 2006
  */
-public class BraceCounter implements StateComponent {
-    private static final Logger LOG = Logger.getInstance(BraceCounter.class.getName());
+public class BraceCounter implements StateComponent
+{
+	private static final Logger LOG = Logger.getInstance(BraceCounter.class.getName());
 
-    private enum BRACE {
-        OPEN, CLOSE
-    }
-    private Stack<BRACE> myBraceStack;
+	private enum BRACE
+	{
+		OPEN, CLOSE
+	}
 
-    public BraceCounter(){
-        this(0);
-    }
+	private Stack<BRACE> myBraceStack;
 
-    public BraceCounter(final int balance){
-        assert (balance>=0);
-        myBraceStack = new Stack<BRACE>();
-        for (int i=0;i<balance;i++){
-            processOpenBrace();
-        }
-    }
+	public BraceCounter()
+	{
+		this(0);
+	}
 
-    public boolean isEmpty(){
-        return myBraceStack.size()==0;
-    }
+	public BraceCounter(final int balance)
+	{
+		assert (balance >= 0);
+		myBraceStack = new Stack<BRACE>();
+		for(int i = 0; i < balance; i++)
+		{
+			processOpenBrace();
+		}
+	}
 
-    public void processOpenBrace(){
-        myBraceStack.push(BRACE.OPEN);
-    }
-    public void processCloseBrace(){
-        if (myBraceStack.isEmpty()){
-            return;
-        }
-        BRACE previous = myBraceStack.peek();
-        if (previous == BRACE.OPEN){
-            myBraceStack.pop();
-        } else {
-            LOG.error("No open brace for this close");
-        }
-    }
+	public boolean isEmpty()
+	{
+		return myBraceStack.size() == 0;
+	}
+
+	public void processOpenBrace()
+	{
+		myBraceStack.push(BRACE.OPEN);
+	}
+
+	public void processCloseBrace()
+	{
+		if(myBraceStack.isEmpty())
+		{
+			return;
+		}
+		BRACE previous = myBraceStack.peek();
+		if(previous == BRACE.OPEN)
+		{
+			myBraceStack.pop();
+		}
+		else
+		{
+			LOG.error("No open brace for this close");
+		}
+	}
 }

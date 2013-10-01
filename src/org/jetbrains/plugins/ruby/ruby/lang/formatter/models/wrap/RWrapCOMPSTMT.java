@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap;
 /**
  * If some class implements this, every COMPSTM child will be wrapped!
  */
-public interface RWrapCOMPSTMT {
+public interface RWrapCOMPSTMT
+{
 }

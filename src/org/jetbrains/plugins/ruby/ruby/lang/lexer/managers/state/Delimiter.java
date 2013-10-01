@@ -21,20 +21,24 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
  * User: oleg
  * Date: Sep 23, 2006
  */
-public class Delimiter implements StateComponent {
-    private char myBeginDelimiter;
-    private char myEndDelimiter;
+public class Delimiter implements StateComponent
+{
+	private char myBeginDelimiter;
+	private char myEndDelimiter;
 
-    public Delimiter(final char beginDelimter, final char endDelimter){
-        myBeginDelimiter = beginDelimter;
-        myEndDelimiter = endDelimter;
-    }
+	public Delimiter(final char beginDelimter, final char endDelimter)
+	{
+		myBeginDelimiter = beginDelimter;
+		myEndDelimiter = endDelimter;
+	}
 
-    public char getBeginDelimiter() {
-        return myBeginDelimiter;
-    }
+	public char getBeginDelimiter()
+	{
+		return myBeginDelimiter;
+	}
 
-    public char getEndDelimiter(){
-        return myEndDelimiter;
-    }
+	public char getEndDelimiter()
+	{
+		return myEndDelimiter;
+	}
 }

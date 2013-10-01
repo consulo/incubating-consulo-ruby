@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,27 +31,31 @@ import java.awt.*;
  * @author: Roman Chernyatchik, oleg
  * @date: 02.02.2007
  */
-public class RubyHighlightUtil {
-    /**
-     * @param element PsiElement to get start offset
-     * @return Start Offset of given element
-     */
-    public static int getStartOffset(@NotNull final PsiElement element){
-        return element.getTextRange().getStartOffset();
-    }
+public class RubyHighlightUtil
+{
+	/**
+	 * @param element PsiElement to get start offset
+	 * @return Start Offset of given element
+	 */
+	public static int getStartOffset(@NotNull final PsiElement element)
+	{
+		return element.getTextRange().getStartOffset();
+	}
 
-    /**
-     * Returns visible Range of editor
-     * @param editor Editor to get visible area
-     * @return TextRange - the visible area
-     */
-    public static TextRange getVisibleRange(@NotNull final Editor editor) {
-        final Rectangle rect = editor.getScrollingModel().getVisibleArea();
-        final LogicalPosition startPosition = editor.xyToLogicalPosition(new Point(rect.x, rect.y));
-        final LogicalPosition endPosition = editor.xyToLogicalPosition(new Point(rect.x + rect.width, rect.y + rect.height));
+	/**
+	 * Returns visible Range of editor
+	 *
+	 * @param editor Editor to get visible area
+	 * @return TextRange - the visible area
+	 */
+	public static TextRange getVisibleRange(@NotNull final Editor editor)
+	{
+		final Rectangle rect = editor.getScrollingModel().getVisibleArea();
+		final LogicalPosition startPosition = editor.xyToLogicalPosition(new Point(rect.x, rect.y));
+		final LogicalPosition endPosition = editor.xyToLogicalPosition(new Point(rect.x + rect.width, rect.y + rect.height));
 
-        final int visibleStart = editor.logicalPositionToOffset(startPosition);
-        final int visibleEnd = editor.logicalPositionToOffset(new LogicalPosition(endPosition.line + 1, 0));
-        return new TextRange(visibleStart, visibleEnd);
-    }
+		final int visibleStart = editor.logicalPositionToOffset(startPosition);
+		final int visibleEnd = editor.logicalPositionToOffset(new LogicalPosition(endPosition.line + 1, 0));
+		return new TextRange(visibleStart, visibleEnd);
+	}
 }

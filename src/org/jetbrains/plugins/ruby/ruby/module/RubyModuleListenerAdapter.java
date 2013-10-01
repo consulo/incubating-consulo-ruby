@@ -16,35 +16,42 @@
 
 package org.jetbrains.plugins.ruby.ruby.module;
 
+import java.util.List;
+
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 26.09.2006
  */
-public abstract class RubyModuleListenerAdapter implements RubyModuleListener {
+public abstract class RubyModuleListenerAdapter implements RubyModuleListener
+{
 
-    @Override
-	public void moduleAdded(Project project, Module module) {
-    }
+	@Override
+	public void moduleAdded(Project project, Module module)
+	{
+	}
 
-    @Override
-	public void beforeModuleRemoved(Project project, Module module) {
-    }
+	@Override
+	public void beforeModuleRemoved(Project project, Module module)
+	{
+	}
 
-    @Override
-	public void moduleRemoved(Project project, Module module) {
-    }
+	@Override
+	public void moduleRemoved(Project project, Module module)
+	{
+	}
 
-    @Override
-	public void modulesRenamed(Project project, List<Module> modules) {
-    }
+	@Override
+	public void modulesRenamed(Project project, List<Module> modules)
+	{
+	}
 
-    @Override
-	public void moduleChanged() {
-    }
+	@Override
+	public void moduleChanged()
+	{
+	}
 }

@@ -37,68 +37,81 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public abstract class CreateFromTemplateActionBase extends AnAction {
+public abstract class CreateFromTemplateActionBase extends AnAction
+{
 
-    public CreateFromTemplateActionBase(final String text, final String description, final Icon icon) {
-        super(text, description, icon);
-    }
+	public CreateFromTemplateActionBase(final String text, final String description, final Icon icon)
+	{
+		super(text, description, icon);
+	}
 
 
-    @Override
-	public final void actionPerformed(AnActionEvent e) {
-        DataContext dataContext = e.getDataContext();
+	@Override
+	public final void actionPerformed(AnActionEvent e)
+	{
+		DataContext dataContext = e.getDataContext();
 
-        IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
-        if (view == null) {
-            return;
-        }
-        Project project = DataKeys.PROJECT.getData(dataContext);
+		IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
+		if(view == null)
+		{
+			return;
+		}
+		Project project = DataKeys.PROJECT.getData(dataContext);
 
-        PsiDirectory dir = null;//PackageUtil.getOrChooseDirectory(view);
-        if (dir == null) return;
+		PsiDirectory dir = null;//PackageUtil.getOrChooseDirectory(view);
+		if(dir == null)
+		{
+			return;
+		}
 
-        FileTemplate selectedTemplate = getTemplate(project, dir);
-        if (selectedTemplate != null) {
-            AnAction action = getReplacedAction(selectedTemplate);
-            if (action != null) {
-                action.actionPerformed(e);
-            } else {
-                FileTemplateManager.getInstance().addRecentName(selectedTemplate.getName());
-                PsiElement createdElement = invokeDialogAndCreate(project, dir, selectedTemplate);
-                if (createdElement != null) {
-                    view.selectElement(createdElement);
-                }
-            }
-        }
-    }
+		FileTemplate selectedTemplate = getTemplate(project, dir);
+		if(selectedTemplate != null)
+		{
+			AnAction action = getReplacedAction(selectedTemplate);
+			if(action != null)
+			{
+				action.actionPerformed(e);
+			}
+			else
+			{
+				FileTemplateManager.getInstance().addRecentName(selectedTemplate.getName());
+				PsiElement createdElement = invokeDialogAndCreate(project, dir, selectedTemplate);
+				if(createdElement != null)
+				{
+					view.selectElement(createdElement);
+				}
+			}
+		}
+	}
 
-    protected abstract PsiElement invokeDialogAndCreate(final Project project,
-                                                        final PsiDirectory dir,
-                                                        final FileTemplate selectedTemplate);
+	protected abstract PsiElement invokeDialogAndCreate(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
 
-    @SuppressWarnings({"UnusedParameters"})
-    @Nullable
-    protected abstract AnAction getReplacedAction(final FileTemplate template);
+	@SuppressWarnings({"UnusedParameters"})
+	@Nullable
+	protected abstract AnAction getReplacedAction(final FileTemplate template);
 
-    @SuppressWarnings({"UnusedParameters"})
-    protected abstract FileTemplate getTemplate(final Project project, final PsiDirectory dir);
+	@SuppressWarnings({"UnusedParameters"})
+	protected abstract FileTemplate getTemplate(final Project project, final PsiDirectory dir);
 
-    protected boolean canCreateFromTemplate(final AnActionEvent e,
-                                            final FileTemplate template) {
-        if (e == null) {
-            return false;
-        }
-        final DataContext dataContext = e.getDataContext();
-        IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
-        if (view == null) {
-            return false;
-        }
+	protected boolean canCreateFromTemplate(final AnActionEvent e, final FileTemplate template)
+	{
+		if(e == null)
+		{
+			return false;
+		}
+		final DataContext dataContext = e.getDataContext();
+		IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
+		if(view == null)
+		{
+			return false;
+		}
 
-        PsiDirectory[] dirs = view.getDirectories();
-        //noinspection SimplifiableIfStatement
-        if (dirs.length == 0) {
-            return false;
-        }
-        return FileTemplateUtil.canCreateFromTemplate(dirs, template);
-    }
+		PsiDirectory[] dirs = view.getDirectories();
+		//noinspection SimplifiableIfStatement
+		if(dirs.length == 0)
+		{
+			return false;
+		}
+		return FileTemplateUtil.canCreateFromTemplate(dirs, template);
+	}
 }

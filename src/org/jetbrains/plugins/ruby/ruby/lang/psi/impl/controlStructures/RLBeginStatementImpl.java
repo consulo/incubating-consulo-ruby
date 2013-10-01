@@ -16,30 +16,34 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RLBeginStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RLBeginStatementImpl extends RPsiElementBase implements RLBeginStatement {
+public class RLBeginStatementImpl extends RPsiElementBase implements RLBeginStatement
+{
 
-    public RLBeginStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RLBeginStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRLBeginStatement(this);
-            return;
-        }
-        visitor.visitElement(this);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRLBeginStatement(this);
+			return;
+		}
+		visitor.visitElement(this);
+	}
 }

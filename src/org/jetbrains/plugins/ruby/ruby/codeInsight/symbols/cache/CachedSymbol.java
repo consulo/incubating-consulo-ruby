@@ -24,10 +24,11 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
  * User: oleg
  * Date: Oct 8, 2007
  */
-public interface CachedSymbol {
-    @Nullable
-    public FileSymbol getUp2DateSymbol();
+public interface CachedSymbol
+{
+	@Nullable
+	public FileSymbol getUp2DateSymbol();
 
-    @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-    public boolean isUp2Date();
+	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
+	public boolean isUp2Date();
 }

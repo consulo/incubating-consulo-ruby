@@ -22,7 +22,8 @@ package org.jetbrains.plugins.ruby.jruby.facet;
  * @author: oleg, Roman.Chernyatchik
  * @date: Jan 21, 2008
  */
-public class JRubyFacetProvider /*extends FrameworkSupportProvider */{
+public class JRubyFacetProvider /*extends FrameworkSupportProvider */
+{
 
 /*    private static final String FACET_SUPPORT_PREFIX = "facet:";
 

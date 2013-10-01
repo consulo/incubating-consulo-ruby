@@ -33,53 +33,60 @@ import com.intellij.psi.tree.TokenSet;
  */
 public interface RPsiElement extends PsiElement, RVirtualElement
 {
-    /**
-     * Returns child elements in the psi tree
-     * @param filter Types of expected child
-     * @return PsiElement - child psiElement
-     */
-    @NotNull
-    public List<PsiElement> getChildrenByFilter(IElementType filter);
+	/**
+	 * Returns child elements in the psi tree
+	 *
+	 * @param filter Types of expected child
+	 * @return PsiElement - child psiElement
+	 */
+	@NotNull
+	public List<PsiElement> getChildrenByFilter(IElementType filter);
 
-    /**
-     * Returns child element in the psi tree
-     * @param filter Types of expected child
-     * @param number number
-     * @return PsiElement - child psiElement
-     */
-    @Nullable
-    public PsiElement getChildByFilter(TokenSet filter, int number);
-    /**
-     * Returns child element in the psi tree
-     * @param filter Types of expected child
-     * @param number number
-     * @return PsiElement - child psiElement
-     */
-    @Nullable
-    public PsiElement getChildByFilter(IElementType filter, int number);
+	/**
+	 * Returns child element in the psi tree
+	 *
+	 * @param filter Types of expected child
+	 * @param number number
+	 * @return PsiElement - child psiElement
+	 */
+	@Nullable
+	public PsiElement getChildByFilter(TokenSet filter, int number);
 
-    /**
-     * Returns children in psiTree left to element of type c
-     * @return RElement object if found, null otherwise
-     * @param c object of required type
-     */
-    @NotNull
-    public <T extends PsiElement> List<T> getChildrenByType(Class<T> c);
+	/**
+	 * Returns child element in the psi tree
+	 *
+	 * @param filter Types of expected child
+	 * @param number number
+	 * @return PsiElement - child psiElement
+	 */
+	@Nullable
+	public PsiElement getChildByFilter(IElementType filter, int number);
 
-    /**
-     * Returns child with given number in psiTree left to element of type c
-     * @return RElement object if found, null otherwise
-     * @param c object of required type
-     * @param number Number of child
-     */
-    @Nullable
-    public <T extends PsiElement> T getChildByType(Class<T> c, int number);
+	/**
+	 * Returns children in psiTree left to element of type c
+	 *
+	 * @param c object of required type
+	 * @return RElement object if found, null otherwise
+	 */
+	@NotNull
+	public <T extends PsiElement> List<T> getChildrenByType(Class<T> c);
 
-    /**
-     * Returns containing container
-     * @return RContainer instance - "parent container"
-     */
+	/**
+	 * Returns child with given number in psiTree left to element of type c
+	 *
+	 * @param c      object of required type
+	 * @param number Number of child
+	 * @return RElement object if found, null otherwise
+	 */
+	@Nullable
+	public <T extends PsiElement> T getChildByType(Class<T> c, int number);
 
-    @Nullable
-    public RContainer getParentContainer();
+	/**
+	 * Returns containing container
+	 *
+	 * @return RContainer instance - "parent container"
+	 */
+
+	@Nullable
+	public RContainer getParentContainer();
 }

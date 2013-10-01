@@ -16,47 +16,52 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 
-import com.intellij.psi.PsiReference;
-import com.intellij.util.text.StringTokenizer;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.psi.PsiReference;
+import com.intellij.util.text.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 12, 2007
  */
-public class JavaReferencesBuilder {
+public class JavaReferencesBuilder
+{
 
-    @NotNull
-    public static List<PsiReference> createReferences(@NotNull final RPsiElement element,
-                                                      @NotNull final RBaseString rBaseString){
-        final ArrayList<PsiReference> list = new ArrayList<PsiReference>();
-        if (rBaseString.hasExpressionSubstitutions()) {
-            return list;
-        }
-        //noinspection ConstantConditions
-        int offset = rBaseString.getTextOffset() - element.getTextOffset() + rBaseString.getFirstChild().getTextLength();
-        final String content = rBaseString.getContent();
-        if (content.length() == 0){
-            list.add(new JavaReference(null, element, rBaseString, offset, ""));
-            return list;
-        }
-        final StringTokenizer tokenizer = new StringTokenizer(content, ".");
-        JavaReference lastJavaReference = null;
-        while (tokenizer.hasMoreTokens()){
-            int index = tokenizer.getCurrentPosition();
-            if (index!=0){
-                index+=1;
-            }
-            final String token = tokenizer.nextToken();
-            lastJavaReference = new JavaReference(lastJavaReference, element, rBaseString, offset + index, token);
-            list.add(lastJavaReference);
-        }
-        return list;
-    }
+	@NotNull
+	public static List<PsiReference> createReferences(@NotNull final RPsiElement element, @NotNull final RBaseString rBaseString)
+	{
+		final ArrayList<PsiReference> list = new ArrayList<PsiReference>();
+		if(rBaseString.hasExpressionSubstitutions())
+		{
+			return list;
+		}
+		//noinspection ConstantConditions
+		int offset = rBaseString.getTextOffset() - element.getTextOffset() + rBaseString.getFirstChild().getTextLength();
+		final String content = rBaseString.getContent();
+		if(content.length() == 0)
+		{
+			list.add(new JavaReference(null, element, rBaseString, offset, ""));
+			return list;
+		}
+		final StringTokenizer tokenizer = new StringTokenizer(content, ".");
+		JavaReference lastJavaReference = null;
+		while(tokenizer.hasMoreTokens())
+		{
+			int index = tokenizer.getCurrentPosition();
+			if(index != 0)
+			{
+				index += 1;
+			}
+			final String token = tokenizer.nextToken();
+			lastJavaReference = new JavaReference(lastJavaReference, element, rBaseString, offset + index, token);
+			list.add(lastJavaReference);
+		}
+		return list;
+	}
 }

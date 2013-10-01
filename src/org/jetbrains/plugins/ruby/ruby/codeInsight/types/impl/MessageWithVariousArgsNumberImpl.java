@@ -28,39 +28,47 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.MessageWithVariousArgsN
  * @author: oleg
  * @date: May 25, 2007
  */
-public class MessageWithVariousArgsNumberImpl extends MessageImpl implements MessageWithVariousArgsNumber {
-    private int myMinNumber;
-    private int myMaxNumber;
+public class MessageWithVariousArgsNumberImpl extends MessageImpl implements MessageWithVariousArgsNumber
+{
+	private int myMinNumber;
+	private int myMaxNumber;
 
-    public MessageWithVariousArgsNumberImpl(@NotNull String name, int minNumber, int maxNumber, final boolean important, @Nullable final Symbol symbol) {
-        super(name, 0, important, symbol);
-        myMinNumber = minNumber;
-        myMaxNumber = maxNumber;
-    }
+	public MessageWithVariousArgsNumberImpl(@NotNull String name, int minNumber, int maxNumber, final boolean important, @Nullable final Symbol symbol)
+	{
+		super(name, 0, important, symbol);
+		myMinNumber = minNumber;
+		myMaxNumber = maxNumber;
+	}
 
-    @Override
-	public int getMinArgsNumber() {
-        return myMinNumber;
-    }
+	@Override
+	public int getMinArgsNumber()
+	{
+		return myMinNumber;
+	}
 
-    @Override
-	public int getMaxArgsNumber() {
-        return myMaxNumber;
-    }
-    @Override
-	public boolean matchesMessage(@NotNull final Message patternMessage) {
-        if (!getName().equals(patternMessage.getName())){
-            return false;
-        }
-        final int min = getMinArgsNumber();
-        final int max = getMaxArgsNumber();
+	@Override
+	public int getMaxArgsNumber()
+	{
+		return myMaxNumber;
+	}
 
-        if (patternMessage instanceof MessageWithVariousArgsNumber){
-            final MessageWithVariousArgsNumber message = (MessageWithVariousArgsNumber) patternMessage;
-            return min <= message.getMinArgsNumber() && (max==-1 || message.getMaxArgsNumber()<=max);
-        }
+	@Override
+	public boolean matchesMessage(@NotNull final Message patternMessage)
+	{
+		if(!getName().equals(patternMessage.getName()))
+		{
+			return false;
+		}
+		final int min = getMinArgsNumber();
+		final int max = getMaxArgsNumber();
 
-        final int number = patternMessage.getArgumentsNumber();
-        return min<=number && (max==-1 || number<=max);
-    }
+		if(patternMessage instanceof MessageWithVariousArgsNumber)
+		{
+			final MessageWithVariousArgsNumber message = (MessageWithVariousArgsNumber) patternMessage;
+			return min <= message.getMinArgsNumber() && (max == -1 || message.getMaxArgsNumber() <= max);
+		}
+
+		final int number = patternMessage.getArgumentsNumber();
+		return min <= number && (max == -1 || number <= max);
+	}
 }

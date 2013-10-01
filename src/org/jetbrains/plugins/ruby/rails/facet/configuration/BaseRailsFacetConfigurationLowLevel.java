@@ -27,23 +27,27 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: Apr 18, 2008
  */
-public interface BaseRailsFacetConfigurationLowLevel extends BaseRailsFacetConfiguration {
+public interface BaseRailsFacetConfigurationLowLevel extends BaseRailsFacetConfiguration
+{
 
-    public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk);
-    public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk);
+	public void loadGenerators(final boolean forceRegenerate, @Nullable final Sdk sdk);
 
-    public void setRailsApplicationRootPath(@NotNull final String rootPath);
-    public void setModule(@NotNull final Module uncommitedModule);
+	public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk);
 
-    @Nullable
-    public String getNullableRailsApplicationRootPath();
+	public void setRailsApplicationRootPath(@NotNull final String rootPath);
 
-    public void setSdk(@Nullable final Sdk sdk);
+	public void setModule(@NotNull final Module uncommitedModule);
 
-    @Nullable
-    public Sdk getSdk();
-    @Nullable
-    public Module getModule();
+	@Nullable
+	public String getNullableRailsApplicationRootPath();
 
-    public void setInitialized();
+	public void setSdk(@Nullable final Sdk sdk);
+
+	@Nullable
+	public Sdk getSdk();
+
+	@Nullable
+	public Module getModule();
+
+	public void setInitialized();
 }

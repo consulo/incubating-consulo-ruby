@@ -16,17 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RGlobalVariable extends RVirtualGlobalVar, RNamedElement, PsiNamedElement {
+public interface RGlobalVariable extends RVirtualGlobalVar, RNamedElement, PsiNamedElement
+{
 
-    public boolean isInDefinition();
+	public boolean isInDefinition();
 
 }

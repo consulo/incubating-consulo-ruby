@@ -59,44 +59,45 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @author: Roman Chernyatchik
  * @date: Oct 14, 2007
  */
-public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
-    private JTextPane myTPRSpecHomePageLink;
-    private JPanel myContentPane;
-    private JRadioButton myRBUseRSpecPlugin;
-    private JRadioButton myRBUseRspecGem;
-    private JButton myBGetRSpecGemVersion;
+public class RORSelectTestFrameworkPanel implements TestFrameworkOptions
+{
+	private JTextPane myTPRSpecHomePageLink;
+	private JPanel myContentPane;
+	private JRadioButton myRBUseRSpecPlugin;
+	private JRadioButton myRBUseRspecGem;
+	private JButton myBGetRSpecGemVersion;
 
-    private JCheckBox myCBUseRSpec;
-    private JCheckBox myCBUseTestUnit;
+	private JCheckBox myCBUseRSpec;
+	private JCheckBox myCBUseTestUnit;
 
-    private LabeledComponent testUnitRootDirComponent;
-    private TextFieldWithBrowseButton testUnitRootDirTextField;
+	private LabeledComponent testUnitRootDirComponent;
+	private TextFieldWithBrowseButton testUnitRootDirTextField;
 
 
-    public RORSelectTestFrameworkPanel(final boolean useRSpec,
-                                       final boolean preferRSpecSplugin,
-                                       final boolean useTestUnit,
-                                       @NotNull final Module module,
-                                       final boolean forRailsModule) {
+	public RORSelectTestFrameworkPanel(final boolean useRSpec, final boolean preferRSpecSplugin, final boolean useTestUnit, @NotNull final Module module, final boolean forRailsModule)
+	{
 
-        myTPRSpecHomePageLink.addHyperlinkListener(new OpenLinkInBrowserHyperlinkListener(myContentPane));
-        myTPRSpecHomePageLink.setText(RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.framework.choose.rspec.html.link", RSpecUtil.RSPEC_HOME_PAGE_URL)));
-        myTPRSpecHomePageLink.setBackground(myContentPane.getBackground());
+		myTPRSpecHomePageLink.addHyperlinkListener(new OpenLinkInBrowserHyperlinkListener(myContentPane));
+		myTPRSpecHomePageLink.setText(RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.framework.choose.rspec.html.link", RSpecUtil.RSPEC_HOME_PAGE_URL)));
+		myTPRSpecHomePageLink.setBackground(myContentPane.getBackground());
 
-        myCBUseRSpec.setSelected(useRSpec);
+		myCBUseRSpec.setSelected(useRSpec);
 
-        myCBUseTestUnit.setSelected(useTestUnit);
-        myCBUseTestUnit.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                testUnitRootDirComponent.setEnabled(myCBUseTestUnit.isSelected());
-            }
-        });
+		myCBUseTestUnit.setSelected(useTestUnit);
+		myCBUseTestUnit.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				testUnitRootDirComponent.setEnabled(myCBUseTestUnit.isSelected());
+			}
+		});
 
-        final boolean jRubySupport = JRubyUtil.hasJRubySupport(module);
-        testUnitRootDirComponent.setVisible(jRubySupport);
-        if (jRubySupport) {
-            //For JRuby
+		final boolean jRubySupport = JRubyUtil.hasJRubySupport(module);
+		testUnitRootDirComponent.setVisible(jRubySupport);
+		if(jRubySupport)
+		{
+			//For JRuby
 			String testUnitFolderUrl = null;
 			for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
 			{
@@ -107,102 +108,117 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions{
 				}
 			}
 
-            if (testUnitFolderUrl != null) {
-                final String path = FileUtil.toSystemDependentName(VfsUtil.urlToPath(testUnitFolderUrl));
-                testUnitRootDirTextField.setText(path);
-            } else {
-                testUnitRootDirTextField.setText("");
-            }
-            
-            // adding browse action to Test::Unit surces chooser
-            final String title = RBundle.message("module.settings.dialog.test.framework.test.unit.root.path.chooser.caption");
-            final FileChooserDescriptor desc =
-                    RubyRunConfigurationUIUtil.addFolderChooser(title, testUnitRootDirTextField, module.getProject());
-          //  desc.setContextModule(module);
-        }
+			if(testUnitFolderUrl != null)
+			{
+				final String path = FileUtil.toSystemDependentName(VfsUtil.urlToPath(testUnitFolderUrl));
+				testUnitRootDirTextField.setText(path);
+			}
+			else
+			{
+				testUnitRootDirTextField.setText("");
+			}
+
+			// adding browse action to Test::Unit surces chooser
+			final String title = RBundle.message("module.settings.dialog.test.framework.test.unit.root.path.chooser.caption");
+			final FileChooserDescriptor desc = RubyRunConfigurationUIUtil.addFolderChooser(title, testUnitRootDirTextField, module.getProject());
+			//  desc.setContextModule(module);
+		}
 
 
+		if(preferRSpecSplugin && forRailsModule)
+		{
+			myRBUseRSpecPlugin.setSelected(true);
+		}
+		else
+		{
+			myRBUseRspecGem.setSelected(true);
+		}
 
-        if (preferRSpecSplugin && forRailsModule) {
-            myRBUseRSpecPlugin.setSelected(true);
-        } else {
-            myRBUseRspecGem.setSelected(true);
-        }
+		myRBUseRSpecPlugin.setVisible(forRailsModule);
 
-        myRBUseRSpecPlugin.setVisible(forRailsModule);
+		final boolean useRSpecFramework = shouldUseRSpecFramework();
+		myRBUseRSpecPlugin.setEnabled(useRSpecFramework);
+		myRBUseRspecGem.setEnabled(useRSpecFramework);
 
-        final boolean useRSpecFramework = shouldUseRSpecFramework();
-        myRBUseRSpecPlugin.setEnabled(useRSpecFramework);
-        myRBUseRspecGem.setEnabled(useRSpecFramework);
-
-        myCBUseRSpec.addItemListener(new ItemListener() {
-            @Override
-			public void itemStateChanged(ItemEvent e) {
-                final boolean useRSpecFramework = shouldUseRSpecFramework();
-                myRBUseRSpecPlugin.setEnabled(useRSpecFramework);
-                myRBUseRspecGem.setEnabled(useRSpecFramework);
-            }
-        });
+		myCBUseRSpec.addItemListener(new ItemListener()
+		{
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				final boolean useRSpecFramework = shouldUseRSpecFramework();
+				myRBUseRSpecPlugin.setEnabled(useRSpecFramework);
+				myRBUseRspecGem.setEnabled(useRSpecFramework);
+			}
+		});
 
 
-        myBGetRSpecGemVersion.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(ActionEvent e) {
-                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-                if (sdk == null || !RubySdkUtil.isSDKValid(sdk)) {
-                    final String msg = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.messages");
-                    final String title = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.title");
-                    myRBUseRspecGem.setText(RBundle.message("module.settings.dialog.test.framework.rspec.use.gem"));
-                    Messages.showErrorDialog(msg, title);
-                    return;
-                }
-                if (RSpecUtil.checkIfRSpecGemExists(sdk)) {
-                    String vers = RSpecUtil.getRSpecGemVersion(sdk, true, null);
-                    if (TextUtil.isEmpty(vers)) {
-                        vers = RBundle.message("gem.unknown.version");
-                    }
-                    final String text = RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem", vers);
-                    myRBUseRspecGem.setText(text);
-                    return;
-                }
-                final String notInstalled = RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem.version.not.installed");
-                final String text = RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem", notInstalled);
-                myRBUseRspecGem.setText(text);
-            }
-        });
-    }
+		myBGetRSpecGemVersion.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+				if(sdk == null || !RubySdkUtil.isSDKValid(sdk))
+				{
+					final String msg = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.messages");
+					final String title = RBundle.message("module.settings.dialog.test.framework.rspec.use.no.sdk.title");
+					myRBUseRspecGem.setText(RBundle.message("module.settings.dialog.test.framework.rspec.use.gem"));
+					Messages.showErrorDialog(msg, title);
+					return;
+				}
+				if(RSpecUtil.checkIfRSpecGemExists(sdk))
+				{
+					String vers = RSpecUtil.getRSpecGemVersion(sdk, true, null);
+					if(TextUtil.isEmpty(vers))
+					{
+						vers = RBundle.message("gem.unknown.version");
+					}
+					final String text = RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem", vers);
+					myRBUseRspecGem.setText(text);
+					return;
+				}
+				final String notInstalled = RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem.version.not.installed");
+				final String text = RBundle.message("module.settings.dialog.select.test.spec.rb.use.rspec.gem", notInstalled);
+				myRBUseRspecGem.setText(text);
+			}
+		});
+	}
 
-    public JPanel getContentPane() {
-         return myContentPane;
-     }
+	public JPanel getContentPane()
+	{
+		return myContentPane;
+	}
 
-     @Override
-	 public boolean shouldUseRSpecFramework() {
-         return myCBUseRSpec.isSelected();
-     }
+	@Override
+	public boolean shouldUseRSpecFramework()
+	{
+		return myCBUseRSpec.isSelected();
+	}
 
-    @Override
-	public boolean shouldUseTestUnitFramework() {
-        return myCBUseTestUnit.isSelected();
-    }
+	@Override
+	public boolean shouldUseTestUnitFramework()
+	{
+		return myCBUseTestUnit.isSelected();
+	}
 
-    @Override
-	public boolean shouldPreferRSpecPlugin() {
-        return myRBUseRSpecPlugin.isSelected();
-    }
+	@Override
+	public boolean shouldPreferRSpecPlugin()
+	{
+		return myRBUseRSpecPlugin.isSelected();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getTestUnitRootUrl(){
-        final String path = FileUtil.toSystemIndependentName(testUnitRootDirTextField.getText().trim());
-        return TextUtil.isEmpty(path)
-                ? null
-                : VirtualFileUtil.constructLocalUrl(path);
-    }
+	public String getTestUnitRootUrl()
+	{
+		final String path = FileUtil.toSystemIndependentName(testUnitRootDirTextField.getText().trim());
+		return TextUtil.isEmpty(path) ? null : VirtualFileUtil.constructLocalUrl(path);
+	}
 
-    private void createUIComponents() {
-        final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
-        testUnitRootDirComponent = RubyRunConfigurationUIUtil.createDirChooserComponent(wordDirComponentWrapper, RBundle.message("module.settings.dialog.test.framework.test.unit.root.path.title"));
-        testUnitRootDirTextField = wordDirComponentWrapper.get();
-    }
+	private void createUIComponents()
+	{
+		final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		testUnitRootDirComponent = RubyRunConfigurationUIUtil.createDirChooserComponent(wordDirComponentWrapper, RBundle.message("module.settings.dialog.test.framework.test.unit.root.path.title"));
+		testUnitRootDirTextField = wordDirComponentWrapper.get();
+	}
 }

@@ -37,73 +37,81 @@ import com.intellij.ui.RowIcon;
  * User: oleg
  * Date: Sep 13, 2007
  */
-public class JavaLookupItem implements RubyLookupItem,
-        PresentableLookupValue,
-        LookupValueWithPsiElement,
-        LookupValueWithUIHint,
-        LookupValueWithPriority,
-        Iconable {
+public class JavaLookupItem implements RubyLookupItem, PresentableLookupValue, LookupValueWithPsiElement, LookupValueWithUIHint, LookupValueWithPriority, Iconable
+{
 
-    private String myLookupString;
-    private PsiElement myElement;
+	private String myLookupString;
+	private PsiElement myElement;
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myLookupString;
-    }
+	public String getName()
+	{
+		return myLookupString;
+	}
 
-    public JavaLookupItem(@NotNull final String name, @NotNull final PsiElement element) {
-        myLookupString = name;
-        myElement = element;
-    }
+	public JavaLookupItem(@NotNull final String name, @NotNull final PsiElement element)
+	{
+		myLookupString = name;
+		myElement = element;
+	}
 
-    public JavaLookupItem(@NotNull final PsiElement element) {
-        if (element instanceof PsiNamedElement) {
-            myLookupString = ((PsiNamedElement) element).getName();
-            if (myLookupString == null){
-                myLookupString = "";
-            }
-        }
-        myElement = element;
-    }
+	public JavaLookupItem(@NotNull final PsiElement element)
+	{
+		if(element instanceof PsiNamedElement)
+		{
+			myLookupString = ((PsiNamedElement) element).getName();
+			if(myLookupString == null)
+			{
+				myLookupString = "";
+			}
+		}
+		myElement = element;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentation() {
-        return myLookupString;
-    }
+	public String getPresentation()
+	{
+		return myLookupString;
+	}
 
-    @Override
-	public PsiElement getElement() {
-        return myElement;
-    }
+	@Override
+	public PsiElement getElement()
+	{
+		return myElement;
+	}
 
-    @Override
-	public Icon getIcon(int flags) {
-        final RowIcon icon = new RowIcon(2);
-        icon.setIcon(JavaClassPackagePresentationUtil.getJavaIcon(), 0);
-        icon.setIcon(IconDescriptorUpdaters.getIcon(myElement, 0), 1);
-        return icon;
-    }
+	@Override
+	public Icon getIcon(int flags)
+	{
+		final RowIcon icon = new RowIcon(2);
+		icon.setIcon(JavaClassPackagePresentationUtil.getJavaIcon(), 0);
+		icon.setIcon(IconDescriptorUpdaters.getIcon(myElement, 0), 1);
+		return icon;
+	}
 
-    @Override
-	public String getTypeHint() {
-        return "";
-    }
+	@Override
+	public String getTypeHint()
+	{
+		return "";
+	}
 
-    @Override
-	public Color getColorHint() {
-        return null;
-    }
+	@Override
+	public Color getColorHint()
+	{
+		return null;
+	}
 
-    @Override
-	public boolean isBold() {
-        return true;
-    }
+	@Override
+	public boolean isBold()
+	{
+		return true;
+	}
 
-    @Override
-	public int getPriority() {
-        return HIGH;
-    }
+	@Override
+	public int getPriority()
+	{
+		return HIGH;
+	}
 }

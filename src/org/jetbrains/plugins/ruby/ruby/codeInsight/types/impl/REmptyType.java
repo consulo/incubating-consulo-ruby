@@ -15,13 +15,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
-
-import java.util.Collections;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,24 +29,30 @@ import java.util.Set;
  * @author: oleg
  * @date: Apr 14, 2008
  */
-public class REmptyType extends RTypeBase implements RType {
+public class REmptyType extends RTypeBase implements RType
+{
 
-    public static REmptyType INSTANCE = new REmptyType();
+	public static REmptyType INSTANCE = new REmptyType();
 
-    private REmptyType(){}
+	private REmptyType()
+	{
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Set<Message> getMessages() {
-        return Collections.emptySet();
-    }
+	public Set<Message> getMessages()
+	{
+		return Collections.emptySet();
+	}
 
-    @Override
-	public Set<Message> getMessagesForName(@Nullable final String name) {
-        return Collections.emptySet();
-    }
+	@Override
+	public Set<Message> getMessagesForName(@Nullable final String name)
+	{
+		return Collections.emptySet();
+	}
 
-    public String toString() {
-        return "Not typed";
-    }
+	public String toString()
+	{
+		return "Not typed";
+	}
 }

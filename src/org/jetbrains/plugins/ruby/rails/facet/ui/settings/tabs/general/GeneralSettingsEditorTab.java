@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.settings.tabs.general;
 
-import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.options.ConfigurationException;
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import javax.swing.*;
+import com.intellij.facet.ui.FacetEditorTab;
+import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,43 +31,52 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Apr 25, 2008
  */
-public class GeneralSettingsEditorTab extends FacetEditorTab {
-    private BaseRailsFacet myFacet;
-    private GeneralSettingsForm myGeneralSettingsForm;
+public class GeneralSettingsEditorTab extends FacetEditorTab
+{
+	private BaseRailsFacet myFacet;
+	private GeneralSettingsForm myGeneralSettingsForm;
 
-    public GeneralSettingsEditorTab(final BaseRailsFacet facet) {
-        myFacet = facet;
-        myGeneralSettingsForm = new GeneralSettingsForm(facet.getConfiguration().getRailsApplicationRootPath());
-    }
+	public GeneralSettingsEditorTab(final BaseRailsFacet facet)
+	{
+		myFacet = facet;
+		myGeneralSettingsForm = new GeneralSettingsForm(facet.getConfiguration().getRailsApplicationRootPath());
+	}
 
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("rails.facet.settings.tab.general.title");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("rails.facet.settings.tab.general.title");
+	}
 
-    public void onTabEntering() {
-        myGeneralSettingsForm.beforeShow(RModuleUtil.getModuleOrJRubyFacetSdk(myFacet.getModule()));
-    }
+	public void onTabEntering()
+	{
+		myGeneralSettingsForm.beforeShow(RModuleUtil.getModuleOrJRubyFacetSdk(myFacet.getModule()));
+	}
 
-    public JComponent createComponent() {
-        return myGeneralSettingsForm.getContentPane();
-    }
+	public JComponent createComponent()
+	{
+		return myGeneralSettingsForm.getContentPane();
+	}
 
-    public boolean isModified() {
-        return false;
-    }
+	public boolean isModified()
+	{
+		return false;
+	}
 
-    @Override
-	public void apply() throws ConfigurationException {
-        //Do nothing
-    }
+	@Override
+	public void apply() throws ConfigurationException
+	{
+		//Do nothing
+	}
 
-    @Override
-	public void reset() {
-        //Do nothing
-    }
+	@Override
+	public void reset()
+	{
+		//Do nothing
+	}
 
-    public void disposeUIResources() {
-        myGeneralSettingsForm.setClose();
-    }
+	public void disposeUIResources()
+	{
+		myGeneralSettingsForm.setClose();
+	}
 }

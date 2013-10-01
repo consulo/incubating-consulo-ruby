@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree;
  * @author: Roman Chernyatchik
  * @date: Sep 12, 2007
  */
-public interface IRHTMLElement {
+public interface IRHTMLElement
+{
 }

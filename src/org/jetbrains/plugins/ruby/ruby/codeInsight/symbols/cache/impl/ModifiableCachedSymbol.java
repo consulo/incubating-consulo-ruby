@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
+import java.util.List;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -34,9 +34,9 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolCacheUtil
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
-import java.util.List;
-import java.util.Set;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,122 +44,139 @@ import java.util.Set;
  * @author: oleg
  * @date: Oct 7, 2007
  */
-public class ModifiableCachedSymbol extends AbstractCachedSymbol {
-    // Requires from main file
-    private List<RVirtualRequire> myRequires;
+public class ModifiableCachedSymbol extends AbstractCachedSymbol
+{
+	// Requires from main file
+	private List<RVirtualRequire> myRequires;
 
-    // All the list of required files
-    private Set<String> myAllExternalUrls;
+	// All the list of required files
+	private Set<String> myAllExternalUrls;
 
-    private FileSymbol myOuterSymbol;
-    private String myUrl;
-    private boolean isJRubyEnabled;
+	private FileSymbol myOuterSymbol;
+	private String myUrl;
+	private boolean isJRubyEnabled;
 
-    public ModifiableCachedSymbol(@NotNull final Project project,
-                                  @NotNull final String url,
-                                  @Nullable final Module module,
-                                  @Nullable final Sdk sdk,
-                                  final boolean jRubyEnabled) {
-        super(project, module, sdk);
-        myUrl = url;
-        isJRubyEnabled = jRubyEnabled;
-    }
+	public ModifiableCachedSymbol(@NotNull final Project project, @NotNull final String url, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	{
+		super(project, module, sdk);
+		myUrl = url;
+		isJRubyEnabled = jRubyEnabled;
+	}
 
-    @Override
-	public void fileAdded(@NotNull final String url) {
-        // In common case, we clear cache if file is added
-        myOuterSymbol = null;
-        myFileSymbol = null;
-    }
+	@Override
+	public void fileAdded(@NotNull final String url)
+	{
+		// In common case, we clear cache if file is added
+		myOuterSymbol = null;
+		myFileSymbol = null;
+	}
 
-    @Override
-	protected void fileChanged(@NotNull final String url) {
-        if (myOuterSymbol == null) {
-            return;
-        }
+	@Override
+	protected void fileChanged(@NotNull final String url)
+	{
+		if(myOuterSymbol == null)
+		{
+			return;
+		}
 
-        final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
-        final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
-        if (file == null) {
-            return;
-        }
+		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
+		final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
+		if(file == null)
+		{
+			return;
+		}
 
-        if (myUrl.equals(url)) {
-            myFileSymbol = null;
-            if (myRequires == null || !myRequires.equals(file.getRequires())) {
-                myOuterSymbol = null;
-            }
-            return;
-        }
+		if(myUrl.equals(url))
+		{
+			myFileSymbol = null;
+			if(myRequires == null || !myRequires.equals(file.getRequires()))
+			{
+				myOuterSymbol = null;
+			}
+			return;
+		}
 
-        if (myAllExternalUrls == null || myAllExternalUrls.contains(url)) {
-            myFileSymbol = null;
-            myOuterSymbol = null;
-        }
-    }
+		if(myAllExternalUrls == null || myAllExternalUrls.contains(url))
+		{
+			myFileSymbol = null;
+			myOuterSymbol = null;
+		}
+	}
 
-    private void updateOuterSymbol(@NotNull final RVirtualFile file) {
-        if (myOuterSymbol != null) {
-            return;
-        }
-        myOuterSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled, myCaches);
-        FileSymbolUtil.process(myOuterSymbol, myUrl, InterpretationMode.EXTERNAL, false);
+	private void updateOuterSymbol(@NotNull final RVirtualFile file)
+	{
+		if(myOuterSymbol != null)
+		{
+			return;
+		}
+		myOuterSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled, myCaches);
+		FileSymbolUtil.process(myOuterSymbol, myUrl, InterpretationMode.EXTERNAL, false);
 
-// Adding rails specified symbol if needed
-        if (myModule != null && RailsFacetUtil.hasRailsSupport(myModule)) {
-            RailsRequireUtil.requireRailsFiles(myOuterSymbol, file, myUrl, myModule);
-        }
-    }
+		// Adding rails specified symbol if needed
+		if(myModule != null && RailsFacetUtil.hasRailsSupport(myModule))
+		{
+			RailsRequireUtil.requireRailsFiles(myOuterSymbol, file, myUrl, myModule);
+		}
+	}
 
-    @Override
-	protected void updateFileSymbol() {
-        final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
-        final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
-        if (file == null) {
-            myFileSymbol = null;
-            myOuterSymbol = null;
-            return;
-        }
+	@Override
+	protected void updateFileSymbol()
+	{
+		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
+		final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
+		if(file == null)
+		{
+			myFileSymbol = null;
+			myOuterSymbol = null;
+			return;
+		}
 
-        updateOuterSymbol(file);
+		updateOuterSymbol(file);
 
-        if (myFileSymbol == null) {
-            myFileSymbol = new FileSymbol(myOuterSymbol, myProject, isJRubyEnabled, myCaches);
-            FileSymbolUtil.process(myFileSymbol, myUrl, InterpretationMode.IGNORE_EXTERNAL, true);
-            myAllExternalUrls = FileSymbolUtil.getUrls(myFileSymbol);
-            myRequires = file.getRequires();
-        }
-    }
+		if(myFileSymbol == null)
+		{
+			myFileSymbol = new FileSymbol(myOuterSymbol, myProject, isJRubyEnabled, myCaches);
+			FileSymbolUtil.process(myFileSymbol, myUrl, InterpretationMode.IGNORE_EXTERNAL, true);
+			myAllExternalUrls = FileSymbolUtil.getUrls(myFileSymbol);
+			myRequires = file.getRequires();
+		}
+	}
 
-    @Nullable
-    private CachedSymbol getBaseSymbol() {
-        final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
-        final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
-        if (file == null) {
-            return null;
-        }
-        if (RubySdkUtil.isKindOfRubySDK(mySdk)) {
-            final String stubsDir = RubySdkUtil.getRubyStubsDirUrl(mySdk);
-            if (stubsDir == null) {
-                return null;
-            }
+	@Nullable
+	private CachedSymbol getBaseSymbol()
+	{
+		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
+		final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
+		if(file == null)
+		{
+			return null;
+		}
+		if(RubySdkUtil.isKindOfRubySDK(mySdk))
+		{
+			final String stubsDir = RubySdkUtil.getRubyStubsDirUrl(mySdk);
+			if(stubsDir == null)
+			{
+				return null;
+			}
 
-            final SymbolsCache cache = SymbolsCache.getInstance(myProject);
+			final SymbolsCache cache = SymbolsCache.getInstance(myProject);
 
-            // Check if we`re inside rails module
-            if (myModule != null && RailsFacetUtil.hasRailsSupport(myModule)) {
-                // Try to get level
-                final FileSymbolType railsLayerType = RailsRequireUtil.getRailsLayerType(file, myModule);
-                if (railsLayerType != null) {
-                    return cache.getCachedSymbol(railsLayerType, myModule, mySdk, isJRubyEnabled);
-                }
-                // return rails module layer
-                return cache.getCachedSymbol(FileSymbolType.RAILS_MODULE_LAYER, myModule, mySdk, isJRubyEnabled);
-            }
-            // Else we return just module layer
-            return cache.getCachedSymbol(FileSymbolType.MODULE_LAYER, myModule, mySdk, isJRubyEnabled);
-        }
-        return null;
-    }
+			// Check if we`re inside rails module
+			if(myModule != null && RailsFacetUtil.hasRailsSupport(myModule))
+			{
+				// Try to get level
+				final FileSymbolType railsLayerType = RailsRequireUtil.getRailsLayerType(file, myModule);
+				if(railsLayerType != null)
+				{
+					return cache.getCachedSymbol(railsLayerType, myModule, mySdk, isJRubyEnabled);
+				}
+				// return rails module layer
+				return cache.getCachedSymbol(FileSymbolType.RAILS_MODULE_LAYER, myModule, mySdk, isJRubyEnabled);
+			}
+			// Else we return just module layer
+			return cache.getCachedSymbol(FileSymbolType.MODULE_LAYER, myModule, mySdk, isJRubyEnabled);
+		}
+		return null;
+	}
 
 }

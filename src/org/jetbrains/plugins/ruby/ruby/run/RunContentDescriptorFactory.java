@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComponent;
+
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.ui.content.Content;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,50 +33,58 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: Oct 13, 2007
  */
-public abstract class RunContentDescriptorFactory {
-    public static final RunContentDescriptorFactory DEFAULT = new DefaultFactory();
+public abstract class RunContentDescriptorFactory
+{
+	public static final RunContentDescriptorFactory DEFAULT = new DefaultFactory();
 
-    public abstract RunContentDescriptor createDesc(final ConsoleView consoleView,
-                                                    final ProcessHandler processHandler,
-                                                    final ConsolePanel consolePanel,
-                                                    final String consoleTitle);
+	public abstract RunContentDescriptor createDesc(final ConsoleView consoleView, final ProcessHandler processHandler, final ConsolePanel consolePanel, final String consoleTitle);
 
-    private static class DefaultFactory extends RunContentDescriptorFactory {
-        @Override
-		public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle) {
-            return new RunContentDescriptor(consoleView, processHandler, consolePanel, consoleTitle);
-        }
-    }
+	private static class DefaultFactory extends RunContentDescriptorFactory
+	{
+		@Override
+		public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle)
+		{
+			return new RunContentDescriptor(consoleView, processHandler, consolePanel, consoleTitle);
+		}
+	}
 
-    public static class PinTabsFactory extends RunContentDescriptorFactory {
-        final List<Content> myContentList = new ArrayList<Content>();
+	public static class PinTabsFactory extends RunContentDescriptorFactory
+	{
+		final List<Content> myContentList = new ArrayList<Content>();
 
-        @Override
-		public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle) {
-            return new MyDescriptor(consoleView, processHandler, consolePanel, consoleTitle);
-        }
+		@Override
+		public RunContentDescriptor createDesc(ConsoleView consoleView, ProcessHandler processHandler, ConsolePanel consolePanel, String consoleTitle)
+		{
+			return new MyDescriptor(consoleView, processHandler, consolePanel, consoleTitle);
+		}
 
-        public List<Content> getContentList() {
-            return myContentList;
-        }
+		public List<Content> getContentList()
+		{
+			return myContentList;
+		}
 
-        public void unpinAll() {
-            for (Content content : myContentList) {
-                content.setPinned(false);
-            }
-        }
+		public void unpinAll()
+		{
+			for(Content content : myContentList)
+			{
+				content.setPinned(false);
+			}
+		}
 
-        private class MyDescriptor extends RunContentDescriptor {
-            public MyDescriptor(ExecutionConsole executionConsole, ProcessHandler processHandler, JComponent component, String displayName) {
-                super(executionConsole, processHandler, component, displayName);
-            }
+		private class MyDescriptor extends RunContentDescriptor
+		{
+			public MyDescriptor(ExecutionConsole executionConsole, ProcessHandler processHandler, JComponent component, String displayName)
+			{
+				super(executionConsole, processHandler, component, displayName);
+			}
 
-            @Override
-			public void setAttachedContent(Content content) {
-                super.setAttachedContent(content);
-                content.setPinned(true);
-                myContentList.add(content);
-            }
-        }
-    }
+			@Override
+			public void setAttachedContent(Content content)
+			{
+				super.setAttachedContent(content);
+				content.setPinned(true);
+				myContentList.add(content);
+			}
+		}
+	}
 }

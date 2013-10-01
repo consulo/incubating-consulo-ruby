@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public interface RFunctionArgumentList extends RArgumentList{
+public interface RFunctionArgumentList extends RArgumentList
+{
 }

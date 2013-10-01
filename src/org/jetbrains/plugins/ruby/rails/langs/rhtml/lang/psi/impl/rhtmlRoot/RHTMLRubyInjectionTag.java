@@ -27,7 +27,7 @@ import com.intellij.psi.PsiElement;
  */
 public interface RHTMLRubyInjectionTag extends PsiElement
 {
-    @NotNull
-    public String getTagText();
+	@NotNull
+	public String getTagText();
 
 }

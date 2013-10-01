@@ -16,37 +16,43 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 29.09.2006
  */
-public abstract class RailsNode extends RailsAbstractNode {
-    private Module myModule;
+public abstract class RailsNode extends RailsAbstractNode
+{
+	private Module myModule;
 
-    public RailsNode(final Module module) {
-        super(module.getProject());
-        myModule = module;
-    }
+	public RailsNode(final Module module)
+	{
+		super(module.getProject());
+		myModule = module;
+	}
 
-    public Module getModule() {
-        return myModule;
-    }
+	public Module getModule()
+	{
+		return myModule;
+	}
 
-    @Nullable
-    public VirtualFile getVirtualFile() {
-        return VirtualFileManager.getInstance().findFileByUrl(getVirtualFileUrl());
-    }
+	@Nullable
+	public VirtualFile getVirtualFile()
+	{
+		return VirtualFileManager.getInstance().findFileByUrl(getVirtualFileUrl());
+	}
 
-    @NotNull
-    public String getVirtualFileUrl() {
-        return getElement().getFileUrl();
-    }
+	@NotNull
+	public String getVirtualFileUrl()
+	{
+		return getElement().getFileUrl();
+	}
 
 }

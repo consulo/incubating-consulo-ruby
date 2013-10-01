@@ -39,29 +39,32 @@ import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public class CreateRORFromSourcesMode extends WizardMode {
-    @NonNls
-    private Map<String, ModuleBuilder> myBuildersMap = new HashMap<String, ModuleBuilder>();
+public class CreateRORFromSourcesMode extends WizardMode
+{
+	@NonNls
+	private Map<String, ModuleBuilder> myBuildersMap = new HashMap<String, ModuleBuilder>();
 
-    @Override
+	@Override
 	@NotNull
-    public String getDisplayName(WizardContext context) {
-        return RBundle.message("project.new.wizard.from.existent.sources.title", context.getPresentationName());
-    }
+	public String getDisplayName(WizardContext context)
+	{
+		return RBundle.message("project.new.wizard.from.existent.sources.title", context.getPresentationName());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDescription(final WizardContext context) {
-        return RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("project.new.wizard.from.existent.sources.description",
-                ApplicationNamesInfo.getInstance().getProductName(), context.getPresentationName()));
-    }
+	public String getDescription(final WizardContext context)
+	{
+		return RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("project.new.wizard.from.existent.sources.description", ApplicationNamesInfo.getInstance().getProductName(), context.getPresentationName()));
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected StepSequence createSteps(final WizardContext context, final ModulesProvider modulesProvider) {
-        final StepSequence myStepSequence = new StepSequence(null);
+	protected StepSequence createSteps(final WizardContext context, final ModulesProvider modulesProvider)
+	{
+		final StepSequence myStepSequence = new StepSequence(null);
 	  /*
-        //TODO Patch this step!!!!!
+		//TODO Patch this step!!!!!
         myStepSequence.addCommonStep(new ProjectNameWithTypeStep(context, myStepSequence, this));
 
         final ModuleType[] allModuleTypes = ModuleTypeManager.getInstance().getRegisteredTypes();
@@ -82,32 +85,37 @@ public class CreateRORFromSourcesMode extends WizardMode {
                 sequence.addCommonStep(new SupportForFrameworksStep(builder));
             }
         }   */
-        return myStepSequence;
-    }
+		return myStepSequence;
+	}
 
-    @Override
-	public boolean isAvailable(WizardContext context) {
-        return context.getProject() == null;
-    }
+	@Override
+	public boolean isAvailable(WizardContext context)
+	{
+		return context.getProject() == null;
+	}
 
-    @Override
-	public ModuleBuilder getModuleBuilder() {
-        return myBuildersMap.get(getSelectedType());
-    }
+	@Override
+	public ModuleBuilder getModuleBuilder()
+	{
+		return myBuildersMap.get(getSelectedType());
+	}
 
-    @Nullable
-    public JComponent getAdditionalSettings() {
-        return null;
-    }
+	@Nullable
+	public JComponent getAdditionalSettings()
+	{
+		return null;
+	}
 
-    @Override
-	public void onChosen(final boolean enabled) {
+	@Override
+	public void onChosen(final boolean enabled)
+	{
 
-    }
+	}
 
-    @Override
-	public void dispose() {
-        super.dispose();
-        myBuildersMap.clear();
-    }
+	@Override
+	public void dispose()
+	{
+		super.dispose();
+		myBuildersMap.clear();
+	}
 }

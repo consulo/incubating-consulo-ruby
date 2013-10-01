@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers;
 
+import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
-import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,23 +28,29 @@ import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
  * @author: oleg
  * @date: Nov 29, 2006
  */
-public abstract class RubyEditorHandlerUtil extends EditorWriteActionHandler {
+public abstract class RubyEditorHandlerUtil extends EditorWriteActionHandler
+{
 
-    @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-    public static boolean shouldHandle(final Editor editor, final DataContext dataContext) {
-        // RUBY-1697
-        if (!editor.isInsertMode()){
-            return false;
-        }
-        if (DataContextUtil.getLanguage(dataContext) != RubyFileType.RUBY.getLanguage()){
-            return false;
-        }
-        if (DataContextUtil.isReadOnly(editor)) {
-            return false;
-        }
-        if (DataContextUtil.getPsiFile(editor, dataContext) == null) {
-            return false;
-        }
-        return true;
-    }
+	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
+	public static boolean shouldHandle(final Editor editor, final DataContext dataContext)
+	{
+		// RUBY-1697
+		if(!editor.isInsertMode())
+		{
+			return false;
+		}
+		if(DataContextUtil.getLanguage(dataContext) != RubyFileType.RUBY.getLanguage())
+		{
+			return false;
+		}
+		if(DataContextUtil.isReadOnly(editor))
+		{
+			return false;
+		}
+		if(DataContextUtil.getPsiFile(editor, dataContext) == null)
+		{
+			return false;
+		}
+		return true;
+	}
 }

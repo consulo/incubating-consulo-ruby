@@ -12,24 +12,28 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpressio
  * @author: oleg
  * @date: 07.04.2008
  */
-public class AssignAccessImpl implements AssignAccess {
-    private final RAssignmentExpression myAssign;
-    private final RPsiElement myUsage;
+public class AssignAccessImpl implements AssignAccess
+{
+	private final RAssignmentExpression myAssign;
+	private final RPsiElement myUsage;
 
-    public AssignAccessImpl(final RAssignmentExpression assign, final RPsiElement usage) {
-        myAssign = assign;
-        myUsage = usage;
-    }
+	public AssignAccessImpl(final RAssignmentExpression assign, final RPsiElement usage)
+	{
+		myAssign = assign;
+		myUsage = usage;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getValue() {
-        return myAssign.getValue();
-    }
+	public RPsiElement getValue()
+	{
+		return myAssign.getValue();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RPsiElement getElement() {
-        return myUsage;
-    }
+	public RPsiElement getElement()
+	{
+		return myUsage;
+	}
 }

@@ -23,6 +23,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: Apr 17, 2008
  */
-public interface RControlFlowOwner extends RPsiElement {
-    Instruction[] getControlFlow();
+public interface RControlFlowOwner extends RPsiElement
+{
+	Instruction[] getControlFlow();
 }

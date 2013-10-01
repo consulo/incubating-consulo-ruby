@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,20 +30,25 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseS
  * @author: Roman Chernyatchik
  * @date: 16.07.2007
  */
-public class RBaseStringNavigator {
-    @Nullable
-    public static RBaseString getByPsiElement(@Nullable final PsiElement element) {
-        if (element==null){
-            return null;
-        }
-        ASTNode node = element.getNode();
-        if (node==null){
-            return null;
-        }
-        IElementType type = node.getElementType();
-        if (BNF.tSTRING_TOKENS.contains(type)){
-            return PsiTreeUtil.getParentOfType(element, RBaseString.class);
-        }
-        return null;
-    }
+public class RBaseStringNavigator
+{
+	@Nullable
+	public static RBaseString getByPsiElement(@Nullable final PsiElement element)
+	{
+		if(element == null)
+		{
+			return null;
+		}
+		ASTNode node = element.getNode();
+		if(node == null)
+		{
+			return null;
+		}
+		IElementType type = node.getElementType();
+		if(BNF.tSTRING_TOKENS.contains(type))
+		{
+			return PsiTreeUtil.getParentOfType(element, RBaseString.class);
+		}
+		return null;
+	}
 }

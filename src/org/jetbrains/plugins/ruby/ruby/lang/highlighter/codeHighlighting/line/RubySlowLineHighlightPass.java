@@ -16,14 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiMethod;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -36,10 +32,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.Abstrac
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiMethod;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,72 +47,85 @@ import java.util.List;
  * @author: oleg
  * @date: Jun 25, 2007
  */
-public class RubySlowLineHighlightPass extends AbstractRubyHighlighterPass {
-    private Collection<RubyLineMarkerInfo> myLineMarkers;
+public class RubySlowLineHighlightPass extends AbstractRubyHighlighterPass
+{
+	private Collection<RubyLineMarkerInfo> myLineMarkers;
 
 
-    public RubySlowLineHighlightPass(@NotNull final Project project,
-                  @NotNull final RFile psiFile,
-                  @NotNull final Editor editor) {
-        super(project, psiFile, editor, false, HighlightPassConstants.RUBY_LINE_MARKERS_GROUP);
-        
-        // Force Updating symbol before annotating
-        ((RFile) myFile).getFileSymbol();
-    }
+	public RubySlowLineHighlightPass(@NotNull final Project project, @NotNull final RFile psiFile, @NotNull final Editor editor)
+	{
+		super(project, psiFile, editor, false, HighlightPassConstants.RUBY_LINE_MARKERS_GROUP);
 
-    @Override
-	public void doCollectInformation(final ProgressIndicator progress) {
-        ApplicationManager.getApplication().assertReadAccessAllowed();
+		// Force Updating symbol before annotating
+		((RFile) myFile).getFileSymbol();
+	}
 
-        myLineMarkers = new ArrayList<RubyLineMarkerInfo>();
-        setOverrideAndImplementMarkers();
-    }
+	@Override
+	public void doCollectInformation(final ProgressIndicator progress)
+	{
+		ApplicationManager.getApplication().assertReadAccessAllowed();
 
-    @Override
-	public void doApplyInformationToEditor() {
-        RubyLineHighlightingUtil.setLineMarkersToEditor(myProject, myDocument, myLineMarkers, true);
-    }
+		myLineMarkers = new ArrayList<RubyLineMarkerInfo>();
+		setOverrideAndImplementMarkers();
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// Override linemarkers
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public void doApplyInformationToEditor()
+	{
+		RubyLineHighlightingUtil.setLineMarkersToEditor(myProject, myDocument, myLineMarkers, true);
+	}
 
-    private void setOverrideAndImplementMarkers() {
-        for (PsiElement element : getElementsInRange()) {
-            // Hope it`s often enough
-            ProgressManager.getInstance().checkCanceled();
-            addOverrideOrImplementIfNeeded(element);
-        }
-    }
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// Override linemarkers
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void addOverrideOrImplementIfNeeded(final PsiElement element){
-        if (element instanceof RContainer && !(element instanceof PsiFile)){
-            final FileSymbol fileSymbol = LastSymbolStorage.getInstance(myProject).getSymbol();
-            if (fileSymbol == null){
-                return;
-            }
-            final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer((RContainer) element);
-            if (virtualContainer == null) {
-                return;
-            }
-            final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, virtualContainer);
-            if (symbol == null) {
-                return;
-            }
+	private void setOverrideAndImplementMarkers()
+	{
+		for(PsiElement element : getElementsInRange())
+		{
+			// Hope it`s often enough
+			ProgressManager.getInstance().checkCanceled();
+			addOverrideOrImplementIfNeeded(element);
+		}
+	}
 
-            final List<Symbol> overridenSymbols = RubyOverrideImplementUtil.getOverridenSymbols(fileSymbol, symbol);
-            // Adding ruby override markers
-            final List overridenElements = RubyOverrideImplementUtil.getOverridenElements(fileSymbol, symbol, virtualContainer, overridenSymbols);
-            if (!overridenElements.isEmpty()){
-                myLineMarkers.add(new RubyGutterInfo(RubyGutterInfo.Mode.OVERRIDE, element.getProject(), symbol, overridenElements, element.getTextOffset()));
-            } else {
-                // We don`t show implement markers if overriden markers list isn`t empty
-                // Adding JRuby implement markers
-                final List<PsiMethod> methods = RubyOverrideImplementUtil.getImplementedJavaMethods(overridenSymbols);
-                if (!methods.isEmpty()) {
-                    myLineMarkers.add(new RubyGutterInfo(RubyGutterInfo.Mode.IMPLEMENT, element.getProject(), symbol, methods, element.getTextOffset()));
-                }
-            }
-        }
-    }
+	private void addOverrideOrImplementIfNeeded(final PsiElement element)
+	{
+		if(element instanceof RContainer && !(element instanceof PsiFile))
+		{
+			final FileSymbol fileSymbol = LastSymbolStorage.getInstance(myProject).getSymbol();
+			if(fileSymbol == null)
+			{
+				return;
+			}
+			final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer((RContainer) element);
+			if(virtualContainer == null)
+			{
+				return;
+			}
+			final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, virtualContainer);
+			if(symbol == null)
+			{
+				return;
+			}
+
+			final List<Symbol> overridenSymbols = RubyOverrideImplementUtil.getOverridenSymbols(fileSymbol, symbol);
+			// Adding ruby override markers
+			final List overridenElements = RubyOverrideImplementUtil.getOverridenElements(fileSymbol, symbol, virtualContainer, overridenSymbols);
+			if(!overridenElements.isEmpty())
+			{
+				myLineMarkers.add(new RubyGutterInfo(RubyGutterInfo.Mode.OVERRIDE, element.getProject(), symbol, overridenElements, element.getTextOffset()));
+			}
+			else
+			{
+				// We don`t show implement markers if overriden markers list isn`t empty
+				// Adding JRuby implement markers
+				final List<PsiMethod> methods = RubyOverrideImplementUtil.getImplementedJavaMethods(overridenSymbols);
+				if(!methods.isEmpty())
+				{
+					myLineMarkers.add(new RubyGutterInfo(RubyGutterInfo.Mode.IMPLEMENT, element.getProject(), symbol, methods, element.getTextOffset()));
+				}
+			}
+		}
+	}
 }

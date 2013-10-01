@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,44 +32,51 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 29.10.2006
  */
-public class RModulePresentationUtil implements RPresentationConstants {
+public class RModulePresentationUtil implements RPresentationConstants
+{
 
-    public static Icon getIcon() {
-        return RubyIcons.RUBY_MODULE_NODE;
-    }
+	public static Icon getIcon()
+	{
+		return RubyIcons.RUBY_MODULE_NODE;
+	}
 
-    /**
-     * Computes icon for RVirtualModule.
-     * Be careful, if flags contains information about visibility, method uses
-     * RIconsUtils.getIconWithModifiers()
-     * @param rModule RVirtualModule
-     * @param flags com.intellij.openapi.util.Iconable flags
-     * @return Icon
-     */
-    public static Icon getIcon(final RVirtualModule rModule, final int flags) {
-        if ((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY) {
-            return RContainerPresentationUtil.getIconWithModifiers(rModule);
-        }
-        return getIcon();
-    }
+	/**
+	 * Computes icon for RVirtualModule.
+	 * Be careful, if flags contains information about visibility, method uses
+	 * RIconsUtils.getIconWithModifiers()
+	 *
+	 * @param rModule RVirtualModule
+	 * @param flags   com.intellij.openapi.util.Iconable flags
+	 * @return Icon
+	 */
+	public static Icon getIcon(final RVirtualModule rModule, final int flags)
+	{
+		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
+		{
+			return RContainerPresentationUtil.getIconWithModifiers(rModule);
+		}
+		return getIcon();
+	}
 
-    @NotNull
-    public static ItemPresentation getPresentation(final RVirtualModule rModule) {
-        final Icon icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
-        return new PresentationData(formatName(rModule, SHOW_NAME),
-                TextUtil.wrapInParens(getLocation(rModule)),
-                icon, icon, null);
-    }
+	@NotNull
+	public static ItemPresentation getPresentation(final RVirtualModule rModule)
+	{
+		final Icon icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
+		return new PresentationData(formatName(rModule, SHOW_NAME), TextUtil.wrapInParens(getLocation(rModule)), icon, icon, null);
+	}
 
-    public static String getLocation(final RVirtualModule rModule) {
-        return RContainerPresentationUtil.getLocation(rModule);
-    }
+	public static String getLocation(final RVirtualModule rModule)
+	{
+		return RContainerPresentationUtil.getLocation(rModule);
+	}
 
-    public static String formatName(@NotNull final RVirtualModule rModule, final int options) {
-        final StringBuilder buffer = new StringBuilder();
+	public static String formatName(@NotNull final RVirtualModule rModule, final int options)
+	{
+		final StringBuilder buffer = new StringBuilder();
 
-        if ((options & SHOW_FULL_NAME) != 0) {
-            /* it isn't qualified name! only part, that defined by src author
+		if((options & SHOW_FULL_NAME) != 0)
+		{
+			/* it isn't qualified name! only part, that defined by src author
              * Ex.1
              *  module A {
              *    class B {}
@@ -81,11 +88,13 @@ public class RModulePresentationUtil implements RPresentationConstants {
              * }
              * Full name for B is "B::C"
              */
-            buffer.append(rModule.getFullName());
-        } else if ((options & SHOW_NAME) != 0) {
-            buffer.append(rModule.getName());
-        }
+			buffer.append(rModule.getFullName());
+		}
+		else if((options & SHOW_NAME) != 0)
+		{
+			buffer.append(rModule.getName());
+		}
 
-        return buffer.toString();
-    }
+		return buffer.toString();
+	}
 }

@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.refactoring.introduceVariable;
 
-public interface RubyIntroduceVariableSettings {
+public interface RubyIntroduceVariableSettings
+{
 
-  public String getName();
+	public String getName();
 
-  public boolean doReplaceAllOccurrences();
+	public boolean doReplaceAllOccurrences();
 
-  public boolean isOK();
+	public boolean isOK();
 }

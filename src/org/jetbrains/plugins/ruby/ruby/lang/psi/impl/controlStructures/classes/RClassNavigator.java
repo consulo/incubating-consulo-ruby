@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiWhiteSpace;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,16 +29,19 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
  * @author: Roman Chernyatchik
  * @date: 12.03.2007
  */
-public class RClassNavigator {
-    @Nullable
-    public static RClass getByRBodyStatement(@NotNull final RBodyStatement statement) {
-        final PsiElement parent = statement.getParent();
-        return (parent instanceof RClass) ? (RClass)parent : null;
-    }
+public class RClassNavigator
+{
+	@Nullable
+	public static RClass getByRBodyStatement(@NotNull final RBodyStatement statement)
+	{
+		final PsiElement parent = statement.getParent();
+		return (parent instanceof RClass) ? (RClass) parent : null;
+	}
 
-    @Nullable
-    public static RClass getByPsiWhiteSpace(@NotNull final PsiWhiteSpace whiteSpace) {
-        final PsiElement parent = whiteSpace.getParent();
-        return (parent instanceof RClass) ? (RClass)parent : null;
-    }
+	@Nullable
+	public static RClass getByPsiWhiteSpace(@NotNull final PsiWhiteSpace whiteSpace)
+	{
+		final PsiElement parent = whiteSpace.getParent();
+		return (parent instanceof RClass) ? (RClass) parent : null;
+	}
 }

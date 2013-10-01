@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,11 +27,12 @@ import java.util.Collection;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface DuckType {
-    @NotNull
-    public Collection<Message> getMessages();
+public interface DuckType
+{
+	@NotNull
+	public Collection<Message> getMessages();
 
-    public Collection<Message> contains(@NotNull final DuckType duckType);
+	public Collection<Message> contains(@NotNull final DuckType duckType);
 
-    public Collection<Message> getMessagesForName(@Nullable final String name);
+	public Collection<Message> getMessagesForName(@Nullable final String name);
 }

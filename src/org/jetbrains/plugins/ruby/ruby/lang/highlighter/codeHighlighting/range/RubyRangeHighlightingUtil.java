@@ -33,19 +33,19 @@ import com.intellij.psi.PsiFile;
  * @author: oleg
  * @date: Jun 26, 2007
  */
-public class RubyRangeHighlightingUtil {
-    private static final Logger LOG = Logger.getInstance(RubyRangeHighlightingUtil.class.getName());
+public class RubyRangeHighlightingUtil
+{
+	private static final Logger LOG = Logger.getInstance(RubyRangeHighlightingUtil.class.getName());
 
-    public static void setHighlightInfosToEditor(final Project project,
-                                                 final Document document,
-                                                 final Collection<HighlightInfo> markers) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
+	public static void setHighlightInfosToEditor(final Project project, final Document document, final Collection<HighlightInfo> markers)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
 
-        final ArrayList<HighlightInfo> array = new ArrayList<HighlightInfo>();
-        final HighlightInfo[] oldMarkers = RubyRangeHighlightDaemon.getHighlightInfos(document, project);
+		final ArrayList<HighlightInfo> array = new ArrayList<HighlightInfo>();
+		final HighlightInfo[] oldMarkers = RubyRangeHighlightDaemon.getHighlightInfos(document, project);
 
       /*  final MarkupModel markupModel =  DocumentMarkupModel.forDocument(document, project, false);
-        if (oldMarkers != null) {
+		if (oldMarkers != null) {
             for (HighlightInfo info : oldMarkers) {
                 RangeHighlighter highlighter = info.highlighter;
                     markupModel.removeHighlighter(highlighter);
@@ -55,8 +55,9 @@ public class RubyRangeHighlightingUtil {
             }
         }   */
 
-        final PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document);
-        for (HighlightInfo info : markers) {
+		final PsiFile psiFile = PsiDocumentManager.getInstance(project).getPsiFile(document);
+		for(HighlightInfo info : markers)
+		{
             /*info.highlighter =
                     markupModel.addRangeHighlighter(
                             info.startOffset,
@@ -64,13 +65,14 @@ public class RubyRangeHighlightingUtil {
                             HighlighterLayer.ADDITIONAL_SYNTAX,
                             info.getTextAttributes(psiFile),
                             HighlighterTargetArea.EXACT_RANGE);  */
-            array.add(info);
-        }
+			array.add(info);
+		}
 
-        RubyRangeHighlightDaemon.setHighligthInfos(document, array.toArray(new HighlightInfo[array.size()]), project);
+		RubyRangeHighlightDaemon.setHighligthInfos(document, array.toArray(new HighlightInfo[array.size()]), project);
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Added line markers:" + markers.size());
-        }
-    }
+		if(LOG.isDebugEnabled())
+		{
+			LOG.debug("Added line markers:" + markers.size());
+		}
+	}
 }

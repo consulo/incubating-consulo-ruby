@@ -16,75 +16,90 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.editorHandlers;
 
+import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
+import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.RubyEditorHandlerUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
-import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.RubyEditorHandlerUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 09.08.2006
  */
-public class RubyBackspaceHandler extends EditorWriteActionHandler {
-    private EditorActionHandler myOriginalHandler;
+public class RubyBackspaceHandler extends EditorWriteActionHandler
+{
+	private EditorActionHandler myOriginalHandler;
 
-    public RubyBackspaceHandler(EditorActionHandler originalHandler) {
-      myOriginalHandler = originalHandler;
-    }
+	public RubyBackspaceHandler(EditorActionHandler originalHandler)
+	{
+		myOriginalHandler = originalHandler;
+	}
 
-    @Override
-	public void executeWriteAction(Editor editor, DataContext dataContext) {
-        if (!handleBackspace(editor, dataContext) && myOriginalHandler != null) {
-            if (myOriginalHandler.isEnabled(editor, dataContext)){
-                myOriginalHandler.execute(editor, dataContext);
-            }
-        }
-    }
+	@Override
+	public void executeWriteAction(Editor editor, DataContext dataContext)
+	{
+		if(!handleBackspace(editor, dataContext) && myOriginalHandler != null)
+		{
+			if(myOriginalHandler.isEnabled(editor, dataContext))
+			{
+				myOriginalHandler.execute(editor, dataContext);
+			}
+		}
+	}
 
-    /**
-     * Handles backspace action
-     * @param editor Current editor
-     * @param dataContext Current dataTodo context
-     * @return true if some special action perfomed, false otherwise
-     */
-    @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-    private boolean handleBackspace(Editor editor, DataContext dataContext){
-        Project project = DataContextUtil.getProject(dataContext);
-        if (project == null){
-            return false;
-        }
-        if (!RubyEditorHandlerUtil.shouldHandle(editor, dataContext)) {
-            return false;
-        }
+	/**
+	 * Handles backspace action
+	 *
+	 * @param editor      Current editor
+	 * @param dataContext Current dataTodo context
+	 * @return true if some special action perfomed, false otherwise
+	 */
+	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
+	private boolean handleBackspace(Editor editor, DataContext dataContext)
+	{
+		Project project = DataContextUtil.getProject(dataContext);
+		if(project == null)
+		{
+			return false;
+		}
+		if(!RubyEditorHandlerUtil.shouldHandle(editor, dataContext))
+		{
+			return false;
+		}
 
-        int carret = editor.getCaretModel().getOffset();
-        if (carret == 0) return false;
+		int carret = editor.getCaretModel().getOffset();
+		if(carret == 0)
+		{
+			return false;
+		}
 
-        String text = editor.getDocument().getText();
-        char c = text.charAt(carret-1);
-        char correspondChar = TextUtil.getCorrespondingChar(c);
+		String text = editor.getDocument().getText();
+		char c = text.charAt(carret - 1);
+		char correspondChar = TextUtil.getCorrespondingChar(c);
 
-        if (correspondChar!=(char) -1){
-            if (carret != text.length() && text.charAt(carret)==correspondChar){
-                editor.getSelectionModel().setSelection(carret-1, carret+1);
-                EditorModificationUtil.deleteSelectedText(editor);
-                return true;
-            }
-        }
+		if(correspondChar != (char) -1)
+		{
+			if(carret != text.length() && text.charAt(carret) == correspondChar)
+			{
+				editor.getSelectionModel().setSelection(carret - 1, carret + 1);
+				EditorModificationUtil.deleteSelectedText(editor);
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 
-    @Override
-	public boolean isEnabled(Editor editor, DataContext dataContext) {
-        return DataContextUtil.isEnabled(editor, dataContext, myOriginalHandler);
-    }
+	@Override
+	public boolean isEnabled(Editor editor, DataContext dataContext)
+	{
+		return DataContextUtil.isEnabled(editor, dataContext, myOriginalHandler);
+	}
 
 }

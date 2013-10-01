@@ -27,20 +27,33 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigur
  * @author: Roman Chernyatchik
  * @date: May 22, 2008
  */
-public interface RTestRunConfigurationParams extends AbstractRubyRunConfigurationParams {
-    public String getTestsFolderPath();
-    public String getTestScriptPath();
-    public String getTestMethodName();
-    public AbstractRubyRunConfiguration.TestType getTestType();
-    public String getTestQualifiedClassName();
-    public String getTestFileMask();
-    public boolean isInheritanceCheckDisabled();
+public interface RTestRunConfigurationParams extends AbstractRubyRunConfigurationParams
+{
+	public String getTestsFolderPath();
 
-    public void setTestsFolderPath(String path);
-    public void setTestScriptPath(String pathOrMask);
-    public void setTestMethodName(@Nullable String name);
-    public void setTestType(@NotNull AbstractRubyRunConfiguration.TestType testType);
-    public void setTestQualifiedClassName(@Nullable String testClassName);
-    public void setTestFileMask(String testFileMask);
-    public void setInheritanceCheckDisabled(boolean disabled);
+	public String getTestScriptPath();
+
+	public String getTestMethodName();
+
+	public AbstractRubyRunConfiguration.TestType getTestType();
+
+	public String getTestQualifiedClassName();
+
+	public String getTestFileMask();
+
+	public boolean isInheritanceCheckDisabled();
+
+	public void setTestsFolderPath(String path);
+
+	public void setTestScriptPath(String pathOrMask);
+
+	public void setTestMethodName(@Nullable String name);
+
+	public void setTestType(@NotNull AbstractRubyRunConfiguration.TestType testType);
+
+	public void setTestQualifiedClassName(@Nullable String testClassName);
+
+	public void setTestFileMask(String testFileMask);
+
+	public void setInheritanceCheckDisabled(boolean disabled);
 }

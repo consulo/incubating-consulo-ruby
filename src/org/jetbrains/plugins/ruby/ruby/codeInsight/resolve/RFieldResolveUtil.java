@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve;
 
-import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.psi.PsiElement;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
@@ -35,65 +36,71 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldPresentationUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 25.04.2007
  */
-public class RFieldResolveUtil {
+public class RFieldResolveUtil
+{
 
-    /**
-     * Returns all the available fields for this holder
-     * @param fileSymbol FileSymbol
-     * @param holder Holder @return array of Strings for autocomplete
-     * @return variants for autocomplete
-     */
-    @NotNull
-    public static Object[] getVariants(@Nullable final FileSymbol fileSymbol,
-                                       @NotNull final RVirtualFieldHolder holder) {
-        final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
-        if (symbol == null){
-            return new Object[]{};
-        }
-        final Children all = SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, Context.ALL, symbol, null);
+	/**
+	 * Returns all the available fields for this holder
+	 *
+	 * @param fileSymbol FileSymbol
+	 * @param holder     Holder @return array of Strings for autocomplete
+	 * @return variants for autocomplete
+	 */
+	@NotNull
+	public static Object[] getVariants(@Nullable final FileSymbol fileSymbol, @NotNull final RVirtualFieldHolder holder)
+	{
+		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
+		if(symbol == null)
+		{
+			return new Object[]{};
+		}
+		final Children all = SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, Context.ALL, symbol, null);
 
-        //noinspection ConstantConditions
-        final Children fields = all.getSymbolsOfTypes(Types.FIELDS);
+		//noinspection ConstantConditions
+		final Children fields = all.getSymbolsOfTypes(Types.FIELDS);
 
-        final List<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
-        for (Symbol fieldSymbol : fields.getAll()) {
-            final RVirtualField field = (RVirtualField) fieldSymbol.getLastVirtualPrototype(fileSymbol);
-            //noinspection ConstantConditions
-            variants.add(new RubySimpleLookupItem(fieldSymbol.getName(), null, LookupValueWithPriority.NORMAL, false, RFieldPresentationUtil.getIcon(field)));
-        }
-        return variants.toArray(new Object[variants.size()]);
-    }
+		final List<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
+		for(Symbol fieldSymbol : fields.getAll())
+		{
+			final RVirtualField field = (RVirtualField) fieldSymbol.getLastVirtualPrototype(fileSymbol);
+			//noinspection ConstantConditions
+			variants.add(new RubySimpleLookupItem(fieldSymbol.getName(), null, LookupValueWithPriority.NORMAL, false, RFieldPresentationUtil.getIcon(field)));
+		}
+		return variants.toArray(new Object[variants.size()]);
+	}
 
-    @NotNull
-    public static List<PsiElement> resolve(@Nullable final FileSymbol fileSymbol,
-                                           @NotNull final RVirtualFieldHolder holder,
-                                           @NotNull final String name,
-                                           @NotNull final TypeSet acceptableTypes) {
-        final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
-        final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
-        if (symbol == null){
-            return list;
-        }
+	@NotNull
+	public static List<PsiElement> resolve(@Nullable final FileSymbol fileSymbol, @NotNull final RVirtualFieldHolder holder, @NotNull final String name, @NotNull final TypeSet acceptableTypes)
+	{
+		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
+		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
+		if(symbol == null)
+		{
+			return list;
+		}
 
-        final Symbol fieldSymbol = SymbolUtil.findSymbol(fileSymbol, symbol, name, false, acceptableTypes);
-        if (fieldSymbol==null){
-            return list;
-        }
-        for (RVirtualElement prototype : fieldSymbol.getVirtualPrototypes(fileSymbol).getAll()) {
-            final RPsiElement psiElement = RVirtualPsiUtil.findPsiByVirtualElement(prototype, holder.getProject());
-            if (psiElement!=null){
-                list.add(psiElement);
-            }
-        }
-        return list;
-    }
+		final Symbol fieldSymbol = SymbolUtil.findSymbol(fileSymbol, symbol, name, false, acceptableTypes);
+		if(fieldSymbol == null)
+		{
+			return list;
+		}
+		for(RVirtualElement prototype : fieldSymbol.getVirtualPrototypes(fileSymbol).getAll())
+		{
+			final RPsiElement psiElement = RVirtualPsiUtil.findPsiByVirtualElement(prototype, holder.getProject());
+			if(psiElement != null)
+			{
+				list.add(psiElement);
+			}
+		}
+		return list;
+	}
 }

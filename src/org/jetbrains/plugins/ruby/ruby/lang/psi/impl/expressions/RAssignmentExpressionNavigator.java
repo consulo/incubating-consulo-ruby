@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RMultiAssignmentExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RSelfAssignmentExpression;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,24 +30,28 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RSelfAssignmentExpre
  * @author: oleg
  * @date: Feb 16, 2007
  */
-public class RAssignmentExpressionNavigator {
-    @Nullable
-    public static RAssignmentExpression getAssignmentByLeftPart(@NotNull final PsiElement element){
-        PsiElement parent = element.getParent();
-        if (parent instanceof RAssignmentExpression &&
-                !(parent instanceof RSelfAssignmentExpression) &&
-                ((RAssignmentExpression) parent).getObject() == element) {
-            return (RAssignmentExpression)parent;
-        }
+public class RAssignmentExpressionNavigator
+{
+	@Nullable
+	public static RAssignmentExpression getAssignmentByLeftPart(@NotNull final PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if(parent instanceof RAssignmentExpression &&
+				!(parent instanceof RSelfAssignmentExpression) &&
+				((RAssignmentExpression) parent).getObject() == element)
+		{
+			return (RAssignmentExpression) parent;
+		}
 
-        if (parent instanceof RListOfExpressions) {
-            PsiElement grandPa = parent.getParent();
-            if (grandPa instanceof RMultiAssignmentExpression &&
-                    ((RAssignmentExpression) grandPa).getObject() == parent) {
-                return (RAssignmentExpression) grandPa;
-            }
-        }
+		if(parent instanceof RListOfExpressions)
+		{
+			PsiElement grandPa = parent.getParent();
+			if(grandPa instanceof RMultiAssignmentExpression && ((RAssignmentExpression) grandPa).getObject() == parent)
+			{
+				return (RAssignmentExpression) grandPa;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 }

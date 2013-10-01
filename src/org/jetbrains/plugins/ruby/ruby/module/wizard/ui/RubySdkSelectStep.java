@@ -34,81 +34,83 @@ import com.intellij.openapi.ui.Messages;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 16.08.2006
  */
-public class RubySdkSelectStep extends FacetWizardStep {
-    protected final RubySdkChooserPanel myPanel;
-    protected final RubyModuleBuilder mySettingsHolder;
+public class RubySdkSelectStep extends FacetWizardStep
+{
+	protected final RubySdkChooserPanel myPanel;
+	protected final RubyModuleBuilder mySettingsHolder;
 
-    private Icon myIcon;
-    private String myHelp;
+	private Icon myIcon;
+	private String myHelp;
 
-    public RubySdkSelectStep(@NotNull final RubyModuleBuilder settingsHolder,
-                             @Nullable final Icon icon,
-                             @Nullable  final String helpId,
-                             @Nullable final Project project) {
-        super();
-        myIcon = icon;
-        mySettingsHolder = settingsHolder;
-        myPanel = new RubySdkChooserPanel(project);
-        myHelp = helpId;
-    }
+	public RubySdkSelectStep(@NotNull final RubyModuleBuilder settingsHolder, @Nullable final Icon icon, @Nullable final String helpId, @Nullable final Project project)
+	{
+		super();
+		myIcon = icon;
+		mySettingsHolder = settingsHolder;
+		myPanel = new RubySdkChooserPanel(project);
+		myHelp = helpId;
+	}
 
-    @Override
-	public String getHelpId() {
-        return myHelp;
-    }
+	@Override
+	public String getHelpId()
+	{
+		return myHelp;
+	}
 
-    @Override
-	public JComponent getPreferredFocusedComponent() {
-        return myPanel.getPreferredFocusedComponent();
-    }
+	@Override
+	public JComponent getPreferredFocusedComponent()
+	{
+		return myPanel.getPreferredFocusedComponent();
+	}
 
-    @Override
-	public JComponent getComponent() {
-        return myPanel;
-    }
+	@Override
+	public JComponent getComponent()
+	{
+		return myPanel;
+	}
 
 
-    @Override
-	public void updateDataModel() {
-        final Sdk sdk = getSdk();
-        mySettingsHolder.setSdk(sdk);
+	@Override
+	public void updateDataModel()
+	{
+		final Sdk sdk = getSdk();
+		mySettingsHolder.setSdk(sdk);
 
-        NiiChAVOUtil.putJRubyFacetSdkMagic(myPanel, sdk);
+		NiiChAVOUtil.putJRubyFacetSdkMagic(myPanel, sdk);
 
-    }
+	}
 
-    private Sdk getSdk() {
-        return myPanel.getChosenJdk();
-    }
+	private Sdk getSdk()
+	{
+		return myPanel.getChosenJdk();
+	}
 
-    @Override
-	public Icon getIcon() {
-        return myIcon;
-    }
+	@Override
+	public Icon getIcon()
+	{
+		return myIcon;
+	}
 
-    @Override
-	public boolean validate() {
-        Sdk jdk = myPanel.getChosenJdk();
-        if (jdk==null){
-            int result = Messages.showYesNoDialog(
-                    RBundle.message("sdk.error.no.sdk.prompt.messge.confirm.without.sdk"),
-                    RBundle.message("sdk.select.prompt.title"),
-                    Messages.getWarningIcon()
-            );
-            return result == DialogWrapper.OK_EXIT_CODE;
-        }
-        if (!RubySdkUtil.isKindOfRubySDK(jdk)) {
-            Messages.showErrorDialog(
-                    RBundle.message("sdk.error.prompt.message.sdk.not.valid"),
-                    RBundle.message("sdk.select.prompt.title")
-            );
-            return false;
-        }
+	@Override
+	public boolean validate()
+	{
+		Sdk jdk = myPanel.getChosenJdk();
+		if(jdk == null)
+		{
+			int result = Messages.showYesNoDialog(RBundle.message("sdk.error.no.sdk.prompt.messge.confirm.without.sdk"), RBundle.message("sdk.select.prompt.title"), Messages.getWarningIcon());
+			return result == DialogWrapper.OK_EXIT_CODE;
+		}
+		if(!RubySdkUtil.isKindOfRubySDK(jdk))
+		{
+			Messages.showErrorDialog(RBundle.message("sdk.error.prompt.message.sdk.not.valid"), RBundle.message("sdk.select.prompt.title"));
+			return false;
+		}
 /* try to set selected SDK as Project default SDK
-        final ProjectRootManager projectRootManager = ProjectRootManager.getInstance(myProject);
+		final ProjectRootManager projectRootManager = ProjectRootManager.getInstance(myProject);
         if (!jdk.equals(projectRootManager.getSdk())) {
             int result = Messages.showYesNoDialog(
                     RBundle.message("prompt.confirm.default.sdk.change"),
@@ -119,6 +121,6 @@ public class RubySdkSelectStep extends FacetWizardStep {
                 projectRootManager.setSdk(jdk);
             }
         }*/
-        return true;
-    }
+		return true;
+	}
 }

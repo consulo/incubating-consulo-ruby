@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.support.ui.checkableDir;
 
-import com.intellij.openapi.util.io.FileUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.swing.JCheckBox;
 
-import javax.swing.*;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.io.FileUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,30 +27,36 @@ import javax.swing.*;
  * @author: oleg
  * @date: Nov 8, 2006
  */
-public class CheckableDirectoryItem {
-    private String myDirectoryPath;
-    private boolean isChecked;
+public class CheckableDirectoryItem
+{
+	private String myDirectoryPath;
+	private boolean isChecked;
 
-    public CheckableDirectoryItem(@NotNull final String directoryPath, final boolean checked){
-        myDirectoryPath = directoryPath;
-        isChecked = checked;
-    }
+	public CheckableDirectoryItem(@NotNull final String directoryPath, final boolean checked)
+	{
+		myDirectoryPath = directoryPath;
+		isChecked = checked;
+	}
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
+	public void setChecked(boolean checked)
+	{
+		isChecked = checked;
+	}
 
-    public boolean isChecked(){
-        return isChecked;
-    }
+	public boolean isChecked()
+	{
+		return isChecked;
+	}
 
-    @NotNull
-    public String getDirectoryPath(){
-        return myDirectoryPath;
-    }
+	@NotNull
+	public String getDirectoryPath()
+	{
+		return myDirectoryPath;
+	}
 
-    @NotNull
-    public Object createCheckBox() {
-        return new JCheckBox(FileUtil.toSystemDependentName(getDirectoryPath()), isChecked());
-    }
+	@NotNull
+	public Object createCheckBox()
+	{
+		return new JCheckBox(FileUtil.toSystemDependentName(getDirectoryPath()), isChecked());
+	}
 }

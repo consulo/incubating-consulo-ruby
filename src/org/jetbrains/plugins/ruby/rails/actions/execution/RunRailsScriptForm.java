@@ -16,6 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.execution;
 
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.LabeledComponent;
@@ -23,64 +30,62 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.RawCommandLineEditor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 
-import javax.swing.*;
+public class RunRailsScriptForm extends JDialog
+{
+	private JPanel myContentPane;
 
-public class RunRailsScriptForm extends JDialog {
-    private JPanel myContentPane;
+	protected RawCommandLineEditor scriptArgsEditor;
+	@SuppressWarnings({"UnusedDeclaration"})
+	private LabeledComponent<RawCommandLineEditor> scriptArgsComponent;
 
-    protected RawCommandLineEditor scriptArgsEditor;
-    @SuppressWarnings({"UnusedDeclaration"})
-    private LabeledComponent<RawCommandLineEditor> scriptArgsComponent;
+	protected TextFieldWithBrowseButton scriptPathTextField;
+	@SuppressWarnings({"UnusedDeclaration"})
+	private LabeledComponent<TextFieldWithBrowseButton> scriptPathComponent;
 
-    protected TextFieldWithBrowseButton scriptPathTextField;
-    @SuppressWarnings({"UnusedDeclaration"})
-    private LabeledComponent<TextFieldWithBrowseButton> scriptPathComponent;
+	private JLabel myDescriptionLabel;
 
-    private JLabel myDescriptionLabel;
+	public RunRailsScriptForm(@NotNull final Project project, @NotNull final String moduleName, @NotNull final VirtualFile moduleScriptFolder)
+	{
+		myDescriptionLabel.setText(RBundle.message("rails.actions.execution.run.rails.script.dialog.description.caption", moduleName));
 
-    public RunRailsScriptForm(@NotNull final Project project,
-                              @NotNull final String moduleName,
-                              @NotNull final VirtualFile moduleScriptFolder) {
-        myDescriptionLabel.setText(RBundle.message("rails.actions.execution.run.rails.script.dialog.description.caption", moduleName));
+		setContentPane(myContentPane);
+		setModal(true);
 
-        setContentPane(myContentPane);
-        setModal(true);
+		// adding browse action to script chooser
+		String selectScriptTitle = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.path.caption.select");
+		final FileChooserDescriptor fileChooserDescriptor = RubyRunConfigurationUIUtil.addFileChooser(selectScriptTitle, scriptPathTextField, project);
+		fileChooserDescriptor.setRoot(moduleScriptFolder);
+	}
 
-// adding browse action to script chooser
-        String selectScriptTitle = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.path.caption.select");
-        final FileChooserDescriptor fileChooserDescriptor =
-                RubyRunConfigurationUIUtil.addFileChooser(selectScriptTitle, scriptPathTextField, project);
-        fileChooserDescriptor.setRoot(moduleScriptFolder);
-    }
+	public RawCommandLineEditor getArgumentsComponent()
+	{
+		return scriptArgsEditor;
+	}
 
-    public RawCommandLineEditor getArgumentsComponent() {
-        return scriptArgsEditor;
-    }
+	public TextFieldWithBrowseButton getScriptNameComponent()
+	{
+		return scriptPathTextField;
+	}
 
-    public TextFieldWithBrowseButton getScriptNameComponent() {
-        return scriptPathTextField;
-    }
+	@Override
+	public JPanel getContentPane()
+	{
+		return myContentPane;
+	}
 
-    @Override
-	public JPanel getContentPane() {
-        return myContentPane;
-    }
+	private void createUIComponents()
+	{
+		final String dialogCaption = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.args.caption.edit");
+		final String text = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.args.caption");
 
-    private void createUIComponents() {
-        final String dialogCaption = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.args.caption.edit");
-        final String text = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.args.caption");
+		final Ref<RawCommandLineEditor> scriptArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		scriptArgsComponent = RubyRunConfigurationUIUtil.createRawEditorComponent(scriptArgsEditorWrapper, dialogCaption, text);
+		scriptArgsEditor = scriptArgsEditorWrapper.get();
 
-        final Ref<RawCommandLineEditor> scriptArgsEditorWrapper = new Ref<RawCommandLineEditor>();
-        scriptArgsComponent = RubyRunConfigurationUIUtil.createRawEditorComponent(scriptArgsEditorWrapper, dialogCaption, text);
-        scriptArgsEditor = scriptArgsEditorWrapper.get();
-
-        final Ref<TextFieldWithBrowseButton> scriptPathTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
-        final String scriptNameLabel = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.path.caption");
-        scriptPathComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptPathTextFieldWrapper, scriptNameLabel);
-        scriptPathTextField = scriptPathTextFieldWrapper.get();
-    }
+		final Ref<TextFieldWithBrowseButton> scriptPathTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		final String scriptNameLabel = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.path.caption");
+		scriptPathComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptPathTextFieldWrapper, scriptNameLabel);
+		scriptPathTextField = scriptPathTextFieldWrapper.get();
+	}
 }

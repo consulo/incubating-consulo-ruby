@@ -16,73 +16,84 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
+import com.intellij.openapi.actionSystem.AnAction;
+
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: 25.03.2007
-*/
-class RakeArgumentsProvider implements CommandLineArgumentsProvider {
-    private AnAction[] myActions;
-    private final String[] myBeforeArgs;
-    private String[] myAfterArgs;
+ *
+ * @author: Roman Chernyatchik
+ * @date: 25.03.2007
+ */
+class RakeArgumentsProvider implements CommandLineArgumentsProvider
+{
+	private AnAction[] myActions;
+	private final String[] myBeforeArgs;
+	private String[] myAfterArgs;
 
-    public RakeArgumentsProvider(final String[] beforeArgs, final String[] afterArgs) {
-        myBeforeArgs = beforeArgs;
-        myAfterArgs = afterArgs;
-        myActions = new AnAction[]{
-                new RakeCmdParamAction("--trace", " Turn on invoke/execute tracing, enable full backtrace.", RailsIcons.RAKE_PARAMS_TRACE),
-                new RakeCmdParamAction("--dry-run", "Do a dry run without executing actions.", RailsIcons.RAKE_PARAMS_DRY_RUN),
-                new RakeCmdParamAction("--nosearch", "Do not search parent directories for the Rakefile.", RailsIcons.RAKE_PARAMS_NOSEARCH),
-                new RakeCmdParamAction("--prereqs", "Display the tasks and dependencies, then exit.", RailsIcons.RAKE_PARAMS_PREREQS),
-//                    new RakeCmdParamAction("--libdir=LIBDIR", "Include LIBDIR in the search path for required modules.", RailsIcons.RAKE_PARAMS_LIBDIR),
-//                    new RakeCmdParamAction("--rakelibdir=RAKELIBDIR", "Auto-import any .rake files in RAKELIBDIR. (default is 'rakelib')", RailsIcons.RAKE_PARAMS_AUTOIMPORT),
-//                    new RakeCmdParamAction("--require=MODULE", "Require MODULE before executing rakefile.", RailsIcons.RAKE_PARAMS_MODULE),
-//                    new RakeCmdParamAction("--usage", "Display usages.", RailsIcons.RAKE_PARAMS_USAGE),
-        };
-    }
+	public RakeArgumentsProvider(final String[] beforeArgs, final String[] afterArgs)
+	{
+		myBeforeArgs = beforeArgs;
+		myAfterArgs = afterArgs;
+		myActions = new AnAction[]{
+				new RakeCmdParamAction("--trace", " Turn on invoke/execute tracing, enable full backtrace.", RailsIcons.RAKE_PARAMS_TRACE),
+				new RakeCmdParamAction("--dry-run", "Do a dry run without executing actions.", RailsIcons.RAKE_PARAMS_DRY_RUN),
+				new RakeCmdParamAction("--nosearch", "Do not search parent directories for the Rakefile.", RailsIcons.RAKE_PARAMS_NOSEARCH),
+				new RakeCmdParamAction("--prereqs", "Display the tasks and dependencies, then exit.", RailsIcons.RAKE_PARAMS_PREREQS),
+				//                    new RakeCmdParamAction("--libdir=LIBDIR", "Include LIBDIR in the search path for required modules.", RailsIcons.RAKE_PARAMS_LIBDIR),
+				//                    new RakeCmdParamAction("--rakelibdir=RAKELIBDIR", "Auto-import any .rake files in RAKELIBDIR. (default is 'rakelib')", RailsIcons.RAKE_PARAMS_AUTOIMPORT),
+				//                    new RakeCmdParamAction("--require=MODULE", "Require MODULE before executing rakefile.", RailsIcons.RAKE_PARAMS_MODULE),
+				//                    new RakeCmdParamAction("--usage", "Display usages.", RailsIcons.RAKE_PARAMS_USAGE),
+		};
+	}
 
-    @Override
-	public String[] getArguments() {
-        ArrayList<String> argsList = new ArrayList<String>();
-        argsList.addAll(Arrays.asList(myBeforeArgs));
+	@Override
+	public String[] getArguments()
+	{
+		ArrayList<String> argsList = new ArrayList<String>();
+		argsList.addAll(Arrays.asList(myBeforeArgs));
 
-        addRakeParams(argsList);
+		addRakeParams(argsList);
 
-        argsList.addAll(Arrays.asList(myAfterArgs));
-        return argsList.toArray(new String[argsList.size()]);
-    }
+		argsList.addAll(Arrays.asList(myAfterArgs));
+		return argsList.toArray(new String[argsList.size()]);
+	}
 
-    @Override
-	public void disableParametersActions() {
-        for (AnAction action : myActions) {
-            if (action instanceof RakeCmdParamAction) {
-                ((RakeCmdParamAction)action).disableAction();
-            }
-        }
-    }
+	@Override
+	public void disableParametersActions()
+	{
+		for(AnAction action : myActions)
+		{
+			if(action instanceof RakeCmdParamAction)
+			{
+				((RakeCmdParamAction) action).disableAction();
+			}
+		}
+	}
 
-    private void addRakeParams(final ArrayList<String> argsList) {
-        for (AnAction action : myActions) {
-            if (action instanceof RakeCmdParamAction) {
-                final String cmd = ((RakeCmdParamAction)action).getMyCmdArgument();
-                if (!TextUtil.isEmpty(cmd)) {
-                    argsList.add(cmd);
-                }
-            }
-        }
-    }
+	private void addRakeParams(final ArrayList<String> argsList)
+	{
+		for(AnAction action : myActions)
+		{
+			if(action instanceof RakeCmdParamAction)
+			{
+				final String cmd = ((RakeCmdParamAction) action).getMyCmdArgument();
+				if(!TextUtil.isEmpty(cmd))
+				{
+					argsList.add(cmd);
+				}
+			}
+		}
+	}
 
 
-    public AnAction[] getActions() {
-        return myActions;
-    }
+	public AnAction[] getActions()
+	{
+		return myActions;
+	}
 }

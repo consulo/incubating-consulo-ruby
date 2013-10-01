@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
-import com.intellij.openapi.module.Module;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,30 +30,34 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
  * @author: Roman Chernyatchik
  * @date: 22.05.2007
  */
-public class TestsConventions {
-    public static boolean isTestFrameworkFile(@NotNull final RVirtualFile rFile,
-                                     @Nullable final Module module) {
-        if (module == null) {
-            return false;
-        }
+public class TestsConventions
+{
+	public static boolean isTestFrameworkFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	{
+		if(module == null)
+		{
+			return false;
+		}
 
-        final String fileUrl = rFile.getContainingFileUrl();
+		final String fileUrl = rFile.getContainingFileUrl();
 
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
 
-        //Test::Unit
-        final String unitTestRoot = railsPaths.getTestsStdUnitRootURL();
-        if (fileUrl.startsWith(unitTestRoot)) {
-            return true;
-        }
+		//Test::Unit
+		final String unitTestRoot = railsPaths.getTestsStdUnitRootURL();
+		if(fileUrl.startsWith(unitTestRoot))
+		{
+			return true;
+		}
 
-        //RSpec
-        final String specTestUrl = RSpecUtil.getRailsSpecFolderPathOrUrl(railsPaths.getRailsApplicationRootURL());
-        //noinspection RedundantIfStatement
-        if (fileUrl.startsWith(specTestUrl)) {
-            return true;
-        }
-        return false;
-    }
+		//RSpec
+		final String specTestUrl = RSpecUtil.getRailsSpecFolderPathOrUrl(railsPaths.getRailsApplicationRootURL());
+		//noinspection RedundantIfStatement
+		if(fileUrl.startsWith(specTestUrl))
+		{
+			return true;
+		}
+		return false;
+	}
 }

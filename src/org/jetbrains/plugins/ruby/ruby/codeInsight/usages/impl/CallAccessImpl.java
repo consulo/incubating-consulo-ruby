@@ -12,24 +12,28 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
  * @author: oleg
  * @date: 07.04.2008
  */
-public class CallAccessImpl extends AbstractReferenceAccess implements CallAccess {
-  private final RPsiElement myValue;
-  private final RCall myCommandCall;
+public class CallAccessImpl extends AbstractReferenceAccess implements CallAccess
+{
+	private final RPsiElement myValue;
+	private final RCall myCommandCall;
 
-  public CallAccessImpl(final RPsiElement value, final RCall commandCall, final RReference reference, final RPsiElement usage) {
-    super(usage, reference);
-    myValue = value;
-    myCommandCall = commandCall;
-  }
+	public CallAccessImpl(final RPsiElement value, final RCall commandCall, final RReference reference, final RPsiElement usage)
+	{
+		super(usage, reference);
+		myValue = value;
+		myCommandCall = commandCall;
+	}
 
-  @Override
-  @NotNull
-  public RPsiElement getCall() {
-    return myValue;
-  }
+	@Override
+	@NotNull
+	public RPsiElement getCall()
+	{
+		return myValue;
+	}
 
-  @Override
-  public int getNumberOfArgs() {
-    return myCommandCall != null ? myCommandCall.getArguments().size() : 0;
-  }
+	@Override
+	public int getNumberOfArgs()
+	{
+		return myCommandCall != null ? myCommandCall.getArguments().size() : 0;
+	}
 }

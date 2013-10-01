@@ -16,48 +16,55 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.FirstLastTokensBNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.09.2006
  */
-class DefinedExpression implements RubyTokenTypes {
-    /*
-        | kDEFINED opt_nl  arg
-    */
-    public static IElementType parse(final RBuilder builder) {
-        final RMarker statementMarker = builder.mark();
-        if (builder.compareAndEat(kDEFINED)) {
-            if (builder.compareIgnoreEOL(FirstLastTokensBNF.tARG_FIRST_TOKEN)){
-                if (ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT) {
-                    builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-                }
+class DefinedExpression implements RubyTokenTypes
+{
+	/*
+		| kDEFINED opt_nl  arg
+	*/
+	public static IElementType parse(final RBuilder builder)
+	{
+		final RMarker statementMarker = builder.mark();
+		if(builder.compareAndEat(kDEFINED))
+		{
+			if(builder.compareIgnoreEOL(FirstLastTokensBNF.tARG_FIRST_TOKEN))
+			{
+				if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+				{
+					builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+				}
 
-                statementMarker.done(RubyElementTypes.DEFINED_STATEMENT);
-                return RubyElementTypes.DEFINED_STATEMENT;
-            }
-        }
-        statementMarker.rollbackTo();
-        return Assignment.parse(builder);
-    }
+				statementMarker.done(RubyElementTypes.DEFINED_STATEMENT);
+				return RubyElementTypes.DEFINED_STATEMENT;
+			}
+		}
+		statementMarker.rollbackTo();
+		return Assignment.parse(builder);
+	}
 
 
-    /**
-     * Parsing Defined with lead PRIMARY already parsed
-     * @param builder Current builder
-     * @param marker Marker before PRIMARY
-     * @param result result of PRIMARY
-     * @return result of parsing
-     */
-    public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result) {
-        return Assignment.parseWithLeadRANGE(builder, marker, result);
-    }
+	/**
+	 * Parsing Defined with lead PRIMARY already parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before PRIMARY
+	 * @param result  result of PRIMARY
+	 * @return result of parsing
+	 */
+	public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		return Assignment.parseWithLeadRANGE(builder, marker, result);
+	}
 }

@@ -16,14 +16,20 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs;
 
+import java.awt.Cursor;
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.util.Ref;
 import com.intellij.util.Function;
 import com.intellij.util.ui.AsyncProcessIcon;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,129 +37,146 @@ import java.awt.*;
  * @author: Roman Chernyatchik
  * @date: Apr 8, 2008
  */
-public class EvaluatingComponent<T> extends JPanel {
-    private JComponent myOriginalComponent;
-    private Runnable myBeforeLoadingHandler;
-    private Function<Object,T> myEvaluatingFun;
-    private Function<T,Object> myAfterHandler;
-    private String myLoadingLabelText;
-    private AsyncProcessIcon myProgressIcon;
-    private JLabel myLoadingLabel;
-    private volatile boolean myIsRunning;
+public class EvaluatingComponent<T> extends JPanel
+{
+	private JComponent myOriginalComponent;
+	private Runnable myBeforeLoadingHandler;
+	private Function<Object, T> myEvaluatingFun;
+	private Function<T, Object> myAfterHandler;
+	private String myLoadingLabelText;
+	private AsyncProcessIcon myProgressIcon;
+	private JLabel myLoadingLabel;
+	private volatile boolean myIsRunning;
 
-    public EvaluatingComponent(@NotNull final JComponent originalComponent) {
-        myOriginalComponent = originalComponent;
+	public EvaluatingComponent(@NotNull final JComponent originalComponent)
+	{
+		myOriginalComponent = originalComponent;
 
-        myProgressIcon = new AsyncProcessIcon("");
-        myProgressIcon.suspend();
-        myProgressIcon.setOpaque(true);
-        myProgressIcon.setVisible(false);
+		myProgressIcon = new AsyncProcessIcon("");
+		myProgressIcon.suspend();
+		myProgressIcon.setOpaque(true);
+		myProgressIcon.setVisible(false);
 
-        add(myOriginalComponent);
-        add(myProgressIcon);
+		add(myOriginalComponent);
+		add(myProgressIcon);
 
-        myLoadingLabel = new JLabel();
-        add(myLoadingLabel);
-        
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        setBorder(BorderFactory.createEmptyBorder());
-        getInsets().set(0, 0, 0, 0);
-    }
+		myLoadingLabel = new JLabel();
+		add(myLoadingLabel);
 
-    public JComponent getOriginalComponent() {
-        return myOriginalComponent;
-    }
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setBorder(BorderFactory.createEmptyBorder());
+		getInsets().set(0, 0, 0, 0);
+	}
 
-    /**
-     *
-     * @param beforeHandler Setupe before run
-     * @param evaluatingFun Function: null -> (T)evaluated value. Asynch evaluates some action in progress
-     * @param afterHandler  Function:(T)evaluated value -> null. Performs the result of action in EventDispatch Thread
-     * @param loadingLabelText Text during loading
-     */
-    public void setHanlders(@Nullable final Runnable beforeHandler,
-                            @Nullable final Function<Object,T> evaluatingFun,
-                            @Nullable final Function<T, Object> afterHandler,
-                            @NotNull final String loadingLabelText) {
-        myBeforeLoadingHandler = beforeHandler;
-        myEvaluatingFun = evaluatingFun;
-        myAfterHandler = afterHandler;
+	public JComponent getOriginalComponent()
+	{
+		return myOriginalComponent;
+	}
 
-        myLoadingLabelText = loadingLabelText;
-        setProgressComponentVisibility(false, getCursor());
-    }
+	/**
+	 * @param beforeHandler    Setupe before run
+	 * @param evaluatingFun    Function: null -> (T)evaluated value. Asynch evaluates some action in progress
+	 * @param afterHandler     Function:(T)evaluated value -> null. Performs the result of action in EventDispatch Thread
+	 * @param loadingLabelText Text during loading
+	 */
+	public void setHanlders(@Nullable final Runnable beforeHandler, @Nullable final Function<Object, T> evaluatingFun, @Nullable final Function<T, Object> afterHandler, @NotNull final String loadingLabelText)
+	{
+		myBeforeLoadingHandler = beforeHandler;
+		myEvaluatingFun = evaluatingFun;
+		myAfterHandler = afterHandler;
 
-    public boolean isRunning() {
-        return myIsRunning;
-    }
+		myLoadingLabelText = loadingLabelText;
+		setProgressComponentVisibility(false, getCursor());
+	}
 
-    /**
-     * Runs in EventDispatch thread "before" handler, then asynch "eval function"
-     * then in EventDispatch "after" handler
-     */
-    public void run() {
-        final Cursor waitCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        final Cursor oldCursor = setProgressComponentVisibility(true, waitCursor);
-        myProgressIcon.resume();
-        myProgressIcon.setVisible(true);
-        myBeforeLoadingHandler.run();
+	public boolean isRunning()
+	{
+		return myIsRunning;
+	}
+
+	/**
+	 * Runs in EventDispatch thread "before" handler, then asynch "eval function"
+	 * then in EventDispatch "after" handler
+	 */
+	public void run()
+	{
+		final Cursor waitCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+		final Cursor oldCursor = setProgressComponentVisibility(true, waitCursor);
+		myProgressIcon.resume();
+		myProgressIcon.setVisible(true);
+		myBeforeLoadingHandler.run();
 
 
-        final Ref<T> returnValue = new Ref<T>(null);
+		final Ref<T> returnValue = new Ref<T>(null);
 
-        final Thread evalThread = new Thread(new Runnable() {
-            @Override
-			public void run() {
-                myIsRunning = true;
-                // run data
-                if (myEvaluatingFun != null) {
-                    try {
-                        returnValue.set(myEvaluatingFun.fun(null));
-                    } finally {
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-							public void run() {
-                                setProgressComponentVisibility(false, oldCursor);
-                            }
-                        });
-                    }
-                }
+		final Thread evalThread = new Thread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				myIsRunning = true;
+				// run data
+				if(myEvaluatingFun != null)
+				{
+					try
+					{
+						returnValue.set(myEvaluatingFun.fun(null));
+					}
+					finally
+					{
+						SwingUtilities.invokeLater(new Runnable()
+						{
+							@Override
+							public void run()
+							{
+								setProgressComponentVisibility(false, oldCursor);
+							}
+						});
+					}
+				}
 
-                // apply data
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-					public void run() {
-                        setProgressComponentVisibility(false, oldCursor);
+				// apply data
+				SwingUtilities.invokeLater(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						setProgressComponentVisibility(false, oldCursor);
 
-                        if (myAfterHandler != null) {
-                            myAfterHandler.fun(returnValue.get());
-                        }
-                        myIsRunning = false;
-                    }
-                });
-            }
-        });
-        evalThread.start();
-    }
+						if(myAfterHandler != null)
+						{
+							myAfterHandler.fun(returnValue.get());
+						}
+						myIsRunning = false;
+					}
+				});
+			}
+		});
+		evalThread.start();
+	}
 
-    private Cursor setProgressComponentVisibility(final boolean isVisible, final Cursor newCursor) {
-        final Cursor cursor = getCursor();
-        setCursor(newCursor);
-        myProgressIcon.setCursor(newCursor);
-        myOriginalComponent.setCursor(newCursor);
+	private Cursor setProgressComponentVisibility(final boolean isVisible, final Cursor newCursor)
+	{
+		final Cursor cursor = getCursor();
+		setCursor(newCursor);
+		myProgressIcon.setCursor(newCursor);
+		myOriginalComponent.setCursor(newCursor);
 
-        if (isVisible) {
-            myLoadingLabel.setText(myLoadingLabelText);
-            myProgressIcon.resume();
-        } else {
-            myLoadingLabel.setText("");
-            myProgressIcon.suspend();
-        }
+		if(isVisible)
+		{
+			myLoadingLabel.setText(myLoadingLabelText);
+			myProgressIcon.resume();
+		}
+		else
+		{
+			myLoadingLabel.setText("");
+			myProgressIcon.suspend();
+		}
 
-        myProgressIcon.setVisible(isVisible);
-        myLoadingLabel.setVisible(isVisible);
-        repaint();
+		myProgressIcon.setVisible(isVisible);
+		myLoadingLabel.setVisible(isVisible);
+		repaint();
 
-        return cursor;
-    }
+		return cursor;
+	}
 }

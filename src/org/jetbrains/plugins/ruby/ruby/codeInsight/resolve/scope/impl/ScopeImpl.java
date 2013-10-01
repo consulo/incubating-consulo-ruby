@@ -16,6 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.PseudoScopeHolder;
@@ -23,72 +28,80 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.Scope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: May 4, 2007
  */
-public class ScopeImpl implements Scope {
-    private HashMap<String, ScopeVariable> myVariables = new HashMap<String, ScopeVariable>();
-    private final Object LOCK = new Object();
-    private PseudoScopeHolder myHolder;
-    private ArrayList<Scope> mySubScopes = new ArrayList<Scope>();
+public class ScopeImpl implements Scope
+{
+	private HashMap<String, ScopeVariable> myVariables = new HashMap<String, ScopeVariable>();
+	private final Object LOCK = new Object();
+	private PseudoScopeHolder myHolder;
+	private ArrayList<Scope> mySubScopes = new ArrayList<Scope>();
 
-    public ScopeImpl(@NotNull PseudoScopeHolder holder) {
-        myHolder = holder;
-    }
+	public ScopeImpl(@NotNull PseudoScopeHolder holder)
+	{
+		myHolder = holder;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PseudoScopeHolder getHolder() {
-        return myHolder;
-    }
+	public PseudoScopeHolder getHolder()
+	{
+		return myHolder;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<Scope> getSubScopes() {
-        return mySubScopes;
-    }
+	public Collection<Scope> getSubScopes()
+	{
+		return mySubScopes;
+	}
 
-    public void addSubScope(@NotNull final Scope scope) {
-        mySubScopes.add(scope);
-    }
+	public void addSubScope(@NotNull final Scope scope)
+	{
+		mySubScopes.add(scope);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<ScopeVariable> getVariables() {
-        synchronized (LOCK) {
-            return myVariables.values();
-        }
-    }
+	public Collection<ScopeVariable> getVariables()
+	{
+		synchronized(LOCK)
+		{
+			return myVariables.values();
+		}
+	}
 
-    @Override
-	public void processIdentifier(@NotNull final RIdentifier identifier) {
-        final String name = identifier.getText();
-        synchronized (LOCK) {
-            if (getVariableByName(name) == null){
-                myVariables.put(name, new ScopeVariableImpl(name, identifier, identifier.isParameter()));
-            }
-        }
-    }
+	@Override
+	public void processIdentifier(@NotNull final RIdentifier identifier)
+	{
+		final String name = identifier.getText();
+		synchronized(LOCK)
+		{
+			if(getVariableByName(name) == null)
+			{
+				myVariables.put(name, new ScopeVariableImpl(name, identifier, identifier.isParameter()));
+			}
+		}
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public ScopeVariable getVariableByName(@NotNull final String name) {
-        synchronized (LOCK) {
-            return myVariables.get(name);
-        }
-    }
+	public ScopeVariable getVariableByName(@NotNull final String name)
+	{
+		synchronized(LOCK)
+		{
+			return myVariables.get(name);
+		}
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Set<String> getScopeNames() {
-        return myVariables.keySet();
-    }
+	public Set<String> getScopeNames()
+	{
+		return myVariables.keySet();
+	}
 }

@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -26,28 +25,33 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockCall;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RBlockCallImpl extends RPsiElementBase implements RBlockCall {
-    public RBlockCallImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBlockCallImpl extends RPsiElementBase implements RBlockCall
+{
+	public RBlockCallImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RPsiElement call = getCall();
-        return call instanceof RExpression ? ((RExpression) call).getType(fileSymbol) : RType.NOT_TYPED;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RPsiElement call = getCall();
+		return call instanceof RExpression ? ((RExpression) call).getType(fileSymbol) : RType.NOT_TYPED;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RPsiElement getCall() {
-        //noinspection ConstantConditions
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
-    }
+	public RPsiElement getCall()
+	{
+		//noinspection ConstantConditions
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
+	}
 }

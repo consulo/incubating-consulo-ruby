@@ -16,14 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.RubyPsiManager;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
@@ -35,6 +29,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RUnaryExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,66 +41,79 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
  * @author: oleg
  * @date: Mar 30, 2007
  */
-public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpression {
-    public RUnaryExpressionBase(@NotNull ASTNode astNode) {
-        super(astNode);
-    }
+public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpression
+{
+	public RUnaryExpressionBase(@NotNull ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRUnaryExpression(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRUnaryExpression(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getElement() {
-        return getChildByType(RPsiElement.class, 0);
-    }
+	public RPsiElement getElement()
+	{
+		return getChildByType(RPsiElement.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getOperation() {
-        final PsiElement operation = getChildByFilter(TokenBNF.tUNARY_OPS, 0);
-        assert operation!=null;
-        return operation;
-    }
+	public PsiElement getOperation()
+	{
+		final PsiElement operation = getChildByFilter(TokenBNF.tUNARY_OPS, 0);
+		assert operation != null;
+		return operation;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiReference getReference() {
-        final String opName = getOperationName();
-        if (!opName.equals("!")) {
-            return new RQualifiedReference(getProject(), this, getElement(), getOperation(), RReference.Type.COLON_REF, opName);
-        }
-        return null;
-    }
+	public PsiReference getReference()
+	{
+		final String opName = getOperationName();
+		if(!opName.equals("!"))
+		{
+			return new RQualifiedReference(getProject(), this, getElement(), getOperation(), RReference.Type.COLON_REF, opName);
+		}
+		return null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getOperationName() {
-        //noinspection ConstantConditions
-        final IElementType type = getOperation().getNode().getElementType();
-        if (type == RubyTokenTypes.kNOT || type == RubyTokenTypes.tEXCLAMATION){
-            return "!";
-        }
-        if (type == RubyTokenTypes.tUPLUS){
-            return "+@";
-        }
-        if (type == RubyTokenTypes.tUMINUS){
-            return "-@";
-        }
-        return getOperation().getText();
-    }
+	public String getOperationName()
+	{
+		//noinspection ConstantConditions
+		final IElementType type = getOperation().getNode().getElementType();
+		if(type == RubyTokenTypes.kNOT || type == RubyTokenTypes.tEXCLAMATION)
+		{
+			return "!";
+		}
+		if(type == RubyTokenTypes.tUPLUS)
+		{
+			return "+@";
+		}
+		if(type == RubyTokenTypes.tUMINUS)
+		{
+			return "-@";
+		}
+		return getOperation().getText();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final TypeInferenceHelper helper = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper();
-        helper.testAndSet(fileSymbol);
-        return helper.inferUnaryExpressionType(this);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(getProject());
+		helper.testAndSet(fileSymbol);
+		return helper.inferUnaryExpressionType(this);
+	}
 }

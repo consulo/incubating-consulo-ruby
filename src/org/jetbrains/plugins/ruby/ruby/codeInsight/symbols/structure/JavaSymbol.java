@@ -16,29 +16,29 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 13, 2007
  */
-public class JavaSymbol extends PsiElementSymbol {
-    private String myJRubyName;
+public class JavaSymbol extends PsiElementSymbol
+{
+	private String myJRubyName;
 
-    public JavaSymbol(@NotNull final PsiElement element,
-                      @NotNull final String realName,
-                      @Nullable final String jRubyName,
-                      final Type type){
-        super(element, realName, type);
-        myJRubyName = jRubyName;
-    }
+	public JavaSymbol(@NotNull final PsiElement element, @NotNull final String realName, @Nullable final String jRubyName, final Type type)
+	{
+		super(element, realName, type);
+		myJRubyName = jRubyName;
+	}
 
-    @Nullable
-    public String getJRubyName() {
-        return myJRubyName;
-    }
+	@Nullable
+	public String getJRubyName()
+	{
+		return myJRubyName;
+	}
 }

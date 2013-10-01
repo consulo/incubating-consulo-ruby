@@ -16,45 +16,51 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.HashMap;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 23, 2006
  */
-public class State {
-    // state by yyState()
-    private int myYYState;
+public class State
+{
+	// state by yyState()
+	private int myYYState;
 
-    private HashMap<Class, StateComponent> myComponentsMap;
+	private HashMap<Class, StateComponent> myComponentsMap;
 
-    public State(final int state) {
-        myYYState = state;
-        myComponentsMap = new HashMap<Class, StateComponent>();
-    }
+	public State(final int state)
+	{
+		myYYState = state;
+		myComponentsMap = new HashMap<Class, StateComponent>();
+	}
 
-    public int getYYState() {
-        return myYYState;
-    }
+	public int getYYState()
+	{
+		return myYYState;
+	}
 
-    public void setYYState(final int state){
-        myYYState = state;
-    }
+	public void setYYState(final int state)
+	{
+		myYYState = state;
+	}
 
-    public void addComponent(final StateComponent stateComponent){
-        myComponentsMap.put(stateComponent.getClass(), stateComponent);
-    }
+	public void addComponent(final StateComponent stateComponent)
+	{
+		myComponentsMap.put(stateComponent.getClass(), stateComponent);
+	}
 
-    @SuppressWarnings({"unchecked"})
-    @Nullable
-    /**
-     * @return component by class
-     */
-    public <T extends StateComponent> T getComponent(final Class<T> componentClass){
-        return (T) myComponentsMap.get(componentClass);
-    }
+	@SuppressWarnings({"unchecked"})
+	@Nullable
+	/**
+	 * @return component by class
+	 */
+	public <T extends StateComponent> T getComponent(final Class<T> componentClass)
+	{
+		return (T) myComponentsMap.get(componentClass);
+	}
 }
 

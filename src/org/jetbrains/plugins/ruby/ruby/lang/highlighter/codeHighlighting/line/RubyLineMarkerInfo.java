@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
+import java.awt.Color;
+
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.openapi.editor.markup.TextAttributes;
-
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,24 +29,26 @@ import java.awt.*;
  * @author: oleg
  * @date: Jun 25, 2007
  */
-public class RubyLineMarkerInfo {
+public class RubyLineMarkerInfo
+{
 
-    public final int startOffset;
-    public final boolean isSlow;
-    public TextAttributes attributes;
-    public Color separatorColor;
-    public SeparatorPlacement separatorPlacement;
-    public RangeHighlighter highlighter;
+	public final int startOffset;
+	public final boolean isSlow;
+	public TextAttributes attributes;
+	public Color separatorColor;
+	public SeparatorPlacement separatorPlacement;
+	public RangeHighlighter highlighter;
 
 
+	public RubyLineMarkerInfo(final int offset, final boolean slow)
+	{
+		startOffset = offset;
+		isSlow = slow;
+	}
 
-    public RubyLineMarkerInfo(final int offset, final boolean slow) {
-        startOffset = offset;
-        isSlow = slow;
-    }
-
-    public GutterIconRenderer createGutterRenderer() {
-        return null;
-    }
+	public GutterIconRenderer createGutterRenderer()
+	{
+		return null;
+	}
 
 }

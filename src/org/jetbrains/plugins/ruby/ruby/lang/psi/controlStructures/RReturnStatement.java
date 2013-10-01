@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,10 +30,11 @@ import java.util.List;
  * @author: oleg
  * @date: Feb 5, 2007
  */
-public interface RReturnStatement extends RPsiElement, RExpression {
-    @NotNull
-    List<RPsiElement> getReturnValues();
+public interface RReturnStatement extends RPsiElement, RExpression
+{
+	@NotNull
+	List<RPsiElement> getReturnValues();
 
-    @Nullable
-    RListOfExpressions getReturnList();
+	@Nullable
+	RListOfExpressions getReturnList();
 }

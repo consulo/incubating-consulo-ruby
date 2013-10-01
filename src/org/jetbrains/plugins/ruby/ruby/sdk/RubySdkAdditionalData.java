@@ -35,85 +35,106 @@ import com.intellij.openapi.util.SystemInfo;
  * @author: Roman Chernyatchik
  * @date: Nov 30, 2007
  */
-public class RubySdkAdditionalData implements SdkAdditionalData {
+public class RubySdkAdditionalData implements SdkAdditionalData
+{
 	private static final String GEMS_BIN_DIR_PATH = "GEMS_BIN_DIR_PATH";
 
-    private String myGemsBinDirectory;
+	private String myGemsBinDirectory;
 
-    @NotNull
-    public String getGemsBinDirectory() {
-        return myGemsBinDirectory;
-    }
+	@NotNull
+	public String getGemsBinDirectory()
+	{
+		return myGemsBinDirectory;
+	}
 
-    public void setGemsBinDirectory(@NotNull final String path) {
-        myGemsBinDirectory = path;
-    }
+	public void setGemsBinDirectory(@NotNull final String path)
+	{
+		myGemsBinDirectory = path;
+	}
 
 
-    @Override
-	public Object clone() throws CloneNotSupportedException {
-        try {
-            final RubySdkAdditionalData copy = (RubySdkAdditionalData) super.clone();
-            copy.setGemsBinDirectory(myGemsBinDirectory);
-            return copy;
-        }
-        catch (CloneNotSupportedException e) {
-            return null;
-        }
-    }
+	@Override
+	public Object clone() throws CloneNotSupportedException
+	{
+		try
+		{
+			final RubySdkAdditionalData copy = (RubySdkAdditionalData) super.clone();
+			copy.setGemsBinDirectory(myGemsBinDirectory);
+			return copy;
+		}
+		catch(CloneNotSupportedException e)
+		{
+			return null;
+		}
+	}
 
-    public void checkValid(SdkModel sdkModel) throws ConfigurationException {
-        final File file = new File(myGemsBinDirectory);
-        if (!file.exists()) {
-            throw new ConfigurationException(RBundle.message("sdk.error.gems.bindir.doesnt.exist"));
-        }
+	public void checkValid(SdkModel sdkModel) throws ConfigurationException
+	{
+		final File file = new File(myGemsBinDirectory);
+		if(!file.exists())
+		{
+			throw new ConfigurationException(RBundle.message("sdk.error.gems.bindir.doesnt.exist"));
+		}
 
-        if (!file.isDirectory()) {
-            throw new ConfigurationException(RBundle.message("sdk.error.gems.bindir.isnt.directory"));
-        }
-    }
+		if(!file.isDirectory())
+		{
+			throw new ConfigurationException(RBundle.message("sdk.error.gems.bindir.isnt.directory"));
+		}
+	}
 
-    public void save(@NotNull final Element rootElement) {
-        rootElement.setAttribute(GEMS_BIN_DIR_PATH, getGemsBinDirectory());
-    }
+	public void save(@NotNull final Element rootElement)
+	{
+		rootElement.setAttribute(GEMS_BIN_DIR_PATH, getGemsBinDirectory());
+	}
 
-    @NotNull
-    public static SdkAdditionalData load(@NotNull final Sdk sdk, @Nullable Element additional) {
-        final RubySdkAdditionalData data = new RubySdkAdditionalData();
+	@NotNull
+	public static SdkAdditionalData load(@NotNull final Sdk sdk, @Nullable Element additional)
+	{
+		final RubySdkAdditionalData data = new RubySdkAdditionalData();
 
-        final String value = additional != null ? additional.getAttributeValue(GEMS_BIN_DIR_PATH) : null;
-        if (value == null) {
-            final String patchedGemBinDir = patcedMacOsGemsBinPath(sdk);
-            data.setGemsBinDirectory(patchedGemBinDir == null
-                                        ? RubySdkType.getInstance().getBinPath(sdk)
-                                        : patchedGemBinDir);
-        } else {
-            data.setGemsBinDirectory(value);
-        }
+		final String value = additional != null ? additional.getAttributeValue(GEMS_BIN_DIR_PATH) : null;
+		if(value == null)
+		{
+			final String patchedGemBinDir = patcedMacOsGemsBinPath(sdk);
+			data.setGemsBinDirectory(patchedGemBinDir == null ? RubySdkType.getInstance().getBinPath(sdk) : patchedGemBinDir);
+		}
+		else
+		{
+			data.setGemsBinDirectory(value);
+		}
 
-        return data;
-    }
+		return data;
+	}
 
-    @Nullable
-    private static String patcedMacOsGemsBinPath(final Sdk sdk) {
-        if (SystemInfo.isMac) {
-            final String rubyExecutablePath = RubySdkType.getInstance().getVMExecutablePath(sdk);
+	@Nullable
+	private static String patcedMacOsGemsBinPath(final Sdk sdk)
+	{
+		if(SystemInfo.isMac)
+		{
+			final String rubyExecutablePath = RubySdkType.getInstance().getVMExecutablePath(sdk);
 
-            // Gems bin directory "hack" for MacOS defauult ruby installation
-            // because it differs from ruby interpreter home.
-            final File rubyExecFile = new File(rubyExecutablePath);
-            try {
-                if (rubyExecFile.exists()) {
-                    if (rubyExecFile.getCanonicalPath().startsWith(RubySdkType.MAC_OS_BUNDLED_RUBY_PATH_PREFIX)) {
-                        return RubySdkType.MAC_OS_BUNDLED_RUBY_GEM_BIN_PATH;
-                    }
-                }
-            } catch (SecurityException e) {
-                // Do nothing
-            } catch (IOException e) {
-                // Do noting
-            }
-        }
-        return null;
-    }
+			// Gems bin directory "hack" for MacOS defauult ruby installation
+			// because it differs from ruby interpreter home.
+			final File rubyExecFile = new File(rubyExecutablePath);
+			try
+			{
+				if(rubyExecFile.exists())
+				{
+					if(rubyExecFile.getCanonicalPath().startsWith(RubySdkType.MAC_OS_BUNDLED_RUBY_PATH_PREFIX))
+					{
+						return RubySdkType.MAC_OS_BUNDLED_RUBY_GEM_BIN_PATH;
+					}
+				}
+			}
+			catch(SecurityException e)
+			{
+				// Do nothing
+			}
+			catch(IOException e)
+			{
+				// Do noting
+			}
+		}
+		return null;
+	}
 }

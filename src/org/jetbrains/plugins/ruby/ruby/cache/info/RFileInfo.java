@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.info;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
+import java.io.Serializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-
-import java.io.Serializable;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,24 +34,25 @@ import java.io.Serializable;
 /**
  * Stores cached RVirtualFileInfo
  */
-public interface RFileInfo extends Serializable {
+public interface RFileInfo extends Serializable
+{
 
-    public long getTimestamp();
+	public long getTimestamp();
 
-    @NotNull
-    public String getUrl();
+	@NotNull
+	public String getUrl();
 
-    @Nullable
-    public String getFileDirectoryUrl();
+	@Nullable
+	public String getFileDirectoryUrl();
 
-    @NotNull
-    public RVirtualFile getRVirtualFile();
+	@NotNull
+	public RVirtualFile getRVirtualFile();
 
-    @Nullable
-    public VirtualFile getVirtualFile();
+	@Nullable
+	public VirtualFile getVirtualFile();
 
-    @NotNull
-    public Project getProject();
+	@NotNull
+	public Project getProject();
 
-    public void setProject(@NotNull Project project);
+	public void setProject(@NotNull Project project);
 }

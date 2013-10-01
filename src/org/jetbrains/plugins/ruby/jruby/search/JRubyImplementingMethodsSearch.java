@@ -32,22 +32,27 @@ import com.intellij.util.QueryExecutor;
  * @author: oleg
  * @date: Mar 17, 2008
  */
-public class JRubyImplementingMethodsSearch implements QueryExecutor<PsiElement, PsiElement> {
-    @Override
-	public boolean execute(final PsiElement sourceElement, final Processor<PsiElement> consumer) {
-        if (sourceElement instanceof PsiMethod) {
-            final PsiMethod method = ((PsiMethod) sourceElement);
-            final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-                @Override
-				public String compute() {
-                    return method.getName();
-                }
-            });
+public class JRubyImplementingMethodsSearch implements QueryExecutor<PsiElement, PsiElement>
+{
+	@Override
+	public boolean execute(final PsiElement sourceElement, final Processor<PsiElement> consumer)
+	{
+		if(sourceElement instanceof PsiMethod)
+		{
+			final PsiMethod method = ((PsiMethod) sourceElement);
+			final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>()
+			{
+				@Override
+				public String compute()
+				{
+					return method.getName();
+				}
+			});
 
-            final JRubyImplementingMethodsProcessor processor = new JRubyImplementingMethodsProcessor(method, name, consumer);
-            return PsiSearchHelper.SERVICE.getInstance(method.getProject()).
-                    processElementsWithWord(processor, GlobalSearchScope.allScope(sourceElement.getProject()), name, UsageSearchContext.IN_CODE, true);
-        }
-        return true;
-    }
+			final JRubyImplementingMethodsProcessor processor = new JRubyImplementingMethodsProcessor(method, name, consumer);
+			return PsiSearchHelper.SERVICE.getInstance(method.getProject()).
+					processElementsWithWord(processor, GlobalSearchScope.allScope(sourceElement.getProject()), name, UsageSearchContext.IN_CODE, true);
+		}
+		return true;
+	}
 }

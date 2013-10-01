@@ -40,68 +40,79 @@ import com.intellij.openapi.module.ModuleServiceManager;
 
 
 @State(
-  name = "RailsViewFoldersManager",
-  storages = {
-    @Storage(
-      file = "$MODULE_FILE$"
-    )
-  }
+		name = "RailsViewFoldersManager",
+		storages = {
+				@Storage(
+						file = "$MODULE_FILE$"
+				)
+		}
 )
 
 /**
  * Manages custom folders for RailsView
  */
-public class RailsViewFoldersManager implements PersistentStateComponent<Element> {
-    protected static final String URL_ATTR = "url";
-    private static final String USER_URLS = "USER_URLS";
+public class RailsViewFoldersManager implements PersistentStateComponent<Element>
+{
+	protected static final String URL_ATTR = "url";
+	private static final String USER_URLS = "USER_URLS";
 
-    private Set<String> myViewUserUrls = Collections.synchronizedSet(new HashSet<String>());
+	private Set<String> myViewUserUrls = Collections.synchronizedSet(new HashSet<String>());
 
-    public static RailsViewFoldersManager getInstance(@NotNull final Module module) {
-        return ModuleServiceManager.getService(module, RailsViewFoldersManager.class);
-    }
+	public static RailsViewFoldersManager getInstance(@NotNull final Module module)
+	{
+		return ModuleServiceManager.getService(module, RailsViewFoldersManager.class);
+	}
 
-    @NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RAILS_VIEW_FOLDERS_MANAGER;
-    }
+	@NonNls
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RAILS_VIEW_FOLDERS_MANAGER;
+	}
 
-    public Set<String> getRailsViewUserFolderUrls() {
-        return Collections.unmodifiableSet(myViewUserUrls);
-    }
+	public Set<String> getRailsViewUserFolderUrls()
+	{
+		return Collections.unmodifiableSet(myViewUserUrls);
+	}
 
-    public void setRailsViewUserFolderUrls(@NotNull final List<String> urls) {
-        myViewUserUrls.clear();
-        myViewUserUrls.addAll(urls);
-    }
+	public void setRailsViewUserFolderUrls(@NotNull final List<String> urls)
+	{
+		myViewUserUrls.clear();
+		myViewUserUrls.addAll(urls);
+	}
 
-    public void readExternal(final Element element) {
-        final List list = element.getChildren(USER_URLS);
-        for (Object o : list) {
-            myViewUserUrls.add(((Element)o).getAttribute(URL_ATTR).getValue());
-        }
-    }
+	public void readExternal(final Element element)
+	{
+		final List list = element.getChildren(USER_URLS);
+		for(Object o : list)
+		{
+			myViewUserUrls.add(((Element) o).getAttribute(URL_ATTR).getValue());
+		}
+	}
 
-    public void writeExternal(final Element element) {
-        for (String url : myViewUserUrls) {
-            final Element child = new Element(USER_URLS);
-            child.setAttribute(URL_ATTR, url);
+	public void writeExternal(final Element element)
+	{
+		for(String url : myViewUserUrls)
+		{
+			final Element child = new Element(USER_URLS);
+			child.setAttribute(URL_ATTR, url);
 
-            element.addContent(child);
-        }
-    }
+			element.addContent(child);
+		}
+	}
 
-    @Override
-	public Element getState() {
-        final Element e = new Element("state");
-        writeExternal(e);
-        return e;
-    }
+	@Override
+	public Element getState()
+	{
+		final Element e = new Element("state");
+		writeExternal(e);
+		return e;
+	}
 
-    @Override
-	public void loadState(final Element element) {
-        readExternal(element);
-    }
+	@Override
+	public void loadState(final Element element)
+	{
+		readExternal(element);
+	}
 }
 

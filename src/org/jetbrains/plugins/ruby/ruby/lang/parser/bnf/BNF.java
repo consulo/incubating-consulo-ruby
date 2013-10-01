@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser.bnf;
  * User: oleg
  * Date: 30.06.2006
  */
-public interface BNF extends FirstLastTokensBNF, LexicalBNF {
+public interface BNF extends FirstLastTokensBNF, LexicalBNF
+{
 }

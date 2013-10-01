@@ -25,14 +25,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
  * User: oleg
  * Date: 08.08.2006
  */
-public interface ConstantDefinitions {
-    @NotNull
-    public RConstant getFirstDefinition();
+public interface ConstantDefinitions
+{
+	@NotNull
+	public RConstant getFirstDefinition();
 
-    public void process(@NotNull RConstant constant);
+	public void process(@NotNull RConstant constant);
 
-    @NotNull
-    public String getName();
+	@NotNull
+	public String getName();
 
-    public boolean isFor(@NotNull RVirtualConstant constant);
+	public boolean isFor(@NotNull RVirtualConstant constant);
 }

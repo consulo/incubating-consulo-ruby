@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,73 +30,82 @@ import java.util.StringTokenizer;
  * @author: Roman Chernyatchik
  * @date: 22.01.2007
  */
-public class RubyScriptRunnerArgumentsProvider implements CommandLineArgumentsProvider {
-    private String[] myArgsBeforeProvider;
-    private String[] myArgsAfterProvider;
-    private CommandLineArgumentsProvider myProvider;
+public class RubyScriptRunnerArgumentsProvider implements CommandLineArgumentsProvider
+{
+	private String[] myArgsBeforeProvider;
+	private String[] myArgsAfterProvider;
+	private CommandLineArgumentsProvider myProvider;
 
-    public RubyScriptRunnerArgumentsProvider(@Nullable final String[] argsBeforeProvider,
-                                             @Nullable final CommandLineArgumentsProvider provider,
-                                             @Nullable final String[] argsAfterProvider) {
-        myArgsBeforeProvider = argsBeforeProvider;
-        myArgsAfterProvider = argsAfterProvider;
-        myProvider = provider;
-    }
+	public RubyScriptRunnerArgumentsProvider(@Nullable final String[] argsBeforeProvider, @Nullable final CommandLineArgumentsProvider provider, @Nullable final String[] argsAfterProvider)
+	{
+		myArgsBeforeProvider = argsBeforeProvider;
+		myArgsAfterProvider = argsAfterProvider;
+		myProvider = provider;
+	}
 
-    /**
-     * See  RubyScriptRunnerArgumentsProvider#collectArguments(String argumentsString, List<String> params)
-     * @param argumentsString Arguments.
-     * @return List of arguments
-     */
-    @NotNull
-    public static List<String> collectArguments(@NotNull final String argumentsString) {
-        return collectArguments(argumentsString, new ArrayList<String>());
-    }
-    
+	/**
+	 * See  RubyScriptRunnerArgumentsProvider#collectArguments(String argumentsString, List<String> params)
+	 *
+	 * @param argumentsString Arguments.
+	 * @return List of arguments
+	 */
+	@NotNull
+	public static List<String> collectArguments(@NotNull final String argumentsString)
+	{
+		return collectArguments(argumentsString, new ArrayList<String>());
+	}
 
-    /**
-     * Splits arguments line by white spaces in array of strings.
-     * E.g. "tes1 test2 --test3 'test4'" -> ["test1", "test2", "--test3", "'test4'"]
-     * E.g. "tes1='p1, p2' 'something with whitespeces'" -> ["tes1='p1,", "p2'", "'something", "with", "whitespeces'"]
-     * @param argumentsString Arguments.
-     * @param params List with other params. Arguments will be appended to the end of this list.
-     * @return List of arguments
-     */
-    @NotNull
-    public static List<String> collectArguments(@NotNull final String argumentsString,
-                                                @NotNull final List<String> params) {
 
-        final StringTokenizer tokenizer = new StringTokenizer(argumentsString);
-        while (tokenizer.hasMoreTokens()) {
-            final String param = tokenizer.nextToken().trim();
-            if (param.length() > 0) {
-                params.add(param);
-            }
-        }
-        return params;
-    }
+	/**
+	 * Splits arguments line by white spaces in array of strings.
+	 * E.g. "tes1 test2 --test3 'test4'" -> ["test1", "test2", "--test3", "'test4'"]
+	 * E.g. "tes1='p1, p2' 'something with whitespeces'" -> ["tes1='p1,", "p2'", "'something", "with", "whitespeces'"]
+	 *
+	 * @param argumentsString Arguments.
+	 * @param params          List with other params. Arguments will be appended to the end of this list.
+	 * @return List of arguments
+	 */
+	@NotNull
+	public static List<String> collectArguments(@NotNull final String argumentsString, @NotNull final List<String> params)
+	{
 
-    @Override
-	public String[] getArguments() {
-        final ArrayList<String> argsList = new ArrayList<String>();
-        appendToList(argsList, myArgsBeforeProvider);
-        final String[] pArgs = myProvider == null ? null : myProvider.getArguments();
-        appendToList(argsList, pArgs);
-        appendToList(argsList, myArgsAfterProvider);
-        return argsList.toArray(new String[argsList.size()]);
-    }
+		final StringTokenizer tokenizer = new StringTokenizer(argumentsString);
+		while(tokenizer.hasMoreTokens())
+		{
+			final String param = tokenizer.nextToken().trim();
+			if(param.length() > 0)
+			{
+				params.add(param);
+			}
+		}
+		return params;
+	}
 
-    @Override
-	public void disableParametersActions() {
-        if (myProvider != null) {
-            myProvider.disableParametersActions();
-        }
-    }
+	@Override
+	public String[] getArguments()
+	{
+		final ArrayList<String> argsList = new ArrayList<String>();
+		appendToList(argsList, myArgsBeforeProvider);
+		final String[] pArgs = myProvider == null ? null : myProvider.getArguments();
+		appendToList(argsList, pArgs);
+		appendToList(argsList, myArgsAfterProvider);
+		return argsList.toArray(new String[argsList.size()]);
+	}
 
-    private void appendToList(final ArrayList<String> argsList,
-                              final String[] pArgs) {
-        if (pArgs != null) {
-            argsList.addAll(Arrays.asList(pArgs));
-        }
-    }
+	@Override
+	public void disableParametersActions()
+	{
+		if(myProvider != null)
+		{
+			myProvider.disableParametersActions();
+		}
+	}
+
+	private void appendToList(final ArrayList<String> argsList, final String[] pArgs)
+	{
+		if(pArgs != null)
+		{
+			argsList.addAll(Arrays.asList(pArgs));
+		}
+	}
 }

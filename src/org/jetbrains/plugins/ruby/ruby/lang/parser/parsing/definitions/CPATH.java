@@ -17,46 +17,48 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary.PRIMARY;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.07.2006
  */
-class CPATH  implements RubyTokenTypes {
-/*
-    cpath	: tCOLON3 cname
-            | cname
-            | primary_value tCOLON2 cname
+class CPATH implements RubyTokenTypes
+{
+	/*
+		cpath	: tCOLON3 cname
+				| cname
+				| primary_value tCOLON2 cname
 
-    cname		: tIDENTIFIER
-		    | tCONSTANT
-		    ;
+		cname		: tIDENTIFIER
+				| tCONSTANT
+				;
 
-*/
-@NotNull
-    public static IElementType parse(final RBuilder builder){
-    RMarker rollBackMarker = builder.mark();
-    boolean colon3Seen = builder.compare(tCOLON3);
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker rollBackMarker = builder.mark();
+		boolean colon3Seen = builder.compare(tCOLON3);
 
-    IElementType result = PRIMARY.parse(builder);
-    if (result!= RubyElementTypes.EMPTY_INPUT &&
-            (colon3Seen ||
-                result == RubyElementTypes.CONSTANT ||
-                result == RubyElementTypes.IDENTIFIER ||
-                result == RubyElementTypes.COLON_REFERENCE)){
-        rollBackMarker.drop();
-        return result;
-    }
-    rollBackMarker.rollbackTo();
-    return RubyElementTypes.EMPTY_INPUT;
-}
+		IElementType result = PRIMARY.parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT && (colon3Seen ||
+				result == RubyElementTypes.CONSTANT ||
+				result == RubyElementTypes.IDENTIFIER ||
+				result == RubyElementTypes.COLON_REFERENCE))
+		{
+			rollBackMarker.drop();
+			return result;
+		}
+		rollBackMarker.rollbackTo();
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

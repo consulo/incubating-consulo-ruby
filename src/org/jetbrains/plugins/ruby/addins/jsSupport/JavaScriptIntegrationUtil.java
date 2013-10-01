@@ -25,14 +25,17 @@ import com.intellij.psi.tree.IElementType;
  * @author: Roman Chernyatchik
  * @date: Nov 6, 2007
  */
-public class JavaScriptIntegrationUtil {
-    public static boolean isJSEmbeddedContent(final PsiElement htmlPsi) {
-       // return htmlPsi instanceof JSEmbeddedContentImpl;
+public class JavaScriptIntegrationUtil
+{
+	public static boolean isJSEmbeddedContent(final PsiElement htmlPsi)
+	{
+		// return htmlPsi instanceof JSEmbeddedContentImpl;
 		return false;
-    }
+	}
 
-    public static boolean isJSStringContentNode(final IElementType nodeType) {
-       // return nodeType == JSTokenTypes.STRING_LITERAL;
+	public static boolean isJSStringContentNode(final IElementType nodeType)
+	{
+		// return nodeType == JSTokenTypes.STRING_LITERAL;
 		return false;
-    }
+	}
 }

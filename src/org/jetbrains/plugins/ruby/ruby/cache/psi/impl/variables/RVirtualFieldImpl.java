@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
+import java.io.Serializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
@@ -25,60 +27,65 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
 
-import java.io.Serializable;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Nov 22, 2006
  */
-public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualField, Serializable {
-    private String myName;
-    private RVirtualFieldHolder myHolder;
-    private FieldType myType;
+public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualField, Serializable
+{
+	private String myName;
+	private RVirtualFieldHolder myHolder;
+	private FieldType myType;
 
-    public RVirtualFieldImpl(@NotNull final String name, @NotNull final RVirtualFieldHolder holder, final FieldType type) {
-        myName = name;
-        myHolder = holder;
-        myType = type;
-    }
+	public RVirtualFieldImpl(@NotNull final String name, @NotNull final RVirtualFieldHolder holder, final FieldType type)
+	{
+		myName = name;
+		myHolder = holder;
+		myType = type;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualFieldHolder getHolder() {
-        return myHolder;
-    }
+	public RVirtualFieldHolder getHolder()
+	{
+		return myHolder;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myName;
-    }
+	public String getName()
+	{
+		return myName;
+	}
 
-    @Override
-	public FieldType getType() {
-        return myType;
-    }
+	@Override
+	public FieldType getType()
+	{
+		return myType;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitElement(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitElement(this);
+	}
 
-    public String toString() {
-        return myType + " " + myName;
-    }
+	public String toString()
+	{
+		return myType + " " + myName;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getText() {
-        return getPrefix() + myName;
-    }
+	public String getText()
+	{
+		return getPrefix() + myName;
+	}
 
-    private String getPrefix(){
-        return myType == FieldType.INSTANCE_VARIABLE ?
-                RInstanceVariable.PREFIX :
-                RClassVariable.PREFIX;
-    }
+	private String getPrefix()
+	{
+		return myType == FieldType.INSTANCE_VARIABLE ? RInstanceVariable.PREFIX : RClassVariable.PREFIX;
+	}
 }

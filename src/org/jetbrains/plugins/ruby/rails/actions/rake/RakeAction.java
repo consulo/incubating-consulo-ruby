@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.module.Module;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
@@ -26,6 +23,9 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,24 +33,28 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
  * @author: oleg, Roman Chernyatchik
  * @date: 30.08.2006
  */
-class RakeAction extends AnAction {
-    final private RakeTask myTask;
+class RakeAction extends AnAction
+{
+	final private RakeTask myTask;
 
-    public RakeAction(@NotNull final RakeTask task) {
-        super(task.getId(), task.getDescription(), RailsIcons.RAKE_TASK_ICON);
-        myTask = task;
-    }
+	public RakeAction(@NotNull final RakeTask task)
+	{
+		super(task.getId(), task.getDescription(), RailsIcons.RAKE_TASK_ICON);
+		myTask = task;
+	}
 
-    @Override
-	public void actionPerformed(final AnActionEvent e) {
-        RakeUtil.runRakeTask(e.getDataContext(), myTask);
-    }
+	@Override
+	public void actionPerformed(final AnActionEvent e)
+	{
+		RakeUtil.runRakeTask(e.getDataContext(), myTask);
+	}
 
 
-    @Override
-	public void update(final AnActionEvent e) {
-        final Module module = DataContextUtil.getModule(e.getDataContext());
-        final boolean show = RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
-        AnActionUtil.updatePresentation(e.getPresentation(), true, show);
-    }
+	@Override
+	public void update(final AnActionEvent e)
+	{
+		final Module module = DataContextUtil.getModule(e.getDataContext());
+		final boolean show = RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
+		AnActionUtil.updatePresentation(e.getPresentation(), true, show);
+	}
 }

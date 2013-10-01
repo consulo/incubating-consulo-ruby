@@ -16,55 +16,58 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
-
-import java.util.Set;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 20, 2007
  */
-public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol {
-    // All the list of required files
-    private Set<String> myAllExternalUrls;
-    protected final boolean isJRubyEnabled;
+public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol
+{
+	// All the list of required files
+	private Set<String> myAllExternalUrls;
+	protected final boolean isJRubyEnabled;
 
-    public AbstractLayeredCachedSymbol(@NotNull final Project project,
-                               @Nullable final Module module,
-                               @Nullable final Sdk sdk,
-                               final boolean jRubyEnabled) {
-        super(project, module, sdk);
-        isJRubyEnabled = jRubyEnabled;
-    }
+	public AbstractLayeredCachedSymbol(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	{
+		super(project, module, sdk);
+		isJRubyEnabled = jRubyEnabled;
+	}
 
-    @Nullable
-    protected abstract CachedSymbol getBaseSymbol();
+	@Nullable
+	protected abstract CachedSymbol getBaseSymbol();
 
-    @Override
-	protected final void fileChanged(@NotNull String url) {
-        if (myFileSymbol == null) {
-            return;
-        }
-        if (myAllExternalUrls == null || myAllExternalUrls.contains(url)) {
-            myFileSymbol = null;
-        }
-    }
+	@Override
+	protected final void fileChanged(@NotNull String url)
+	{
+		if(myFileSymbol == null)
+		{
+			return;
+		}
+		if(myAllExternalUrls == null || myAllExternalUrls.contains(url))
+		{
+			myFileSymbol = null;
+		}
+	}
 
-    @Override
-	protected void updateFileSymbol() {
-        myFileSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled, myCaches);
-        addAdditionalData();
-        myAllExternalUrls = FileSymbolUtil.getUrls(myFileSymbol);
-    }
+	@Override
+	protected void updateFileSymbol()
+	{
+		myFileSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled, myCaches);
+		addAdditionalData();
+		myAllExternalUrls = FileSymbolUtil.getUrls(myFileSymbol);
+	}
 
-    protected abstract void addAdditionalData();
+	protected abstract void addAdditionalData();
 }

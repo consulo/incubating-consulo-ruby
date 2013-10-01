@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assocs;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -24,6 +23,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.ARG;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,27 +31,33 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
  * @author: oleg
  * @date: Oct 9, 2006
  */
-public class ASSOC_OR_ARG implements RubyTokenTypes {
-    @NotNull
-    public static IElementType parseWithLeadArg(final RBuilder builder, final RMarker marker, final IElementType result){
-        if (result==RubyElementTypes.EMPTY_INPUT){
-            marker.rollbackTo();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+public class ASSOC_OR_ARG implements RubyTokenTypes
+{
+	@NotNull
+	public static IElementType parseWithLeadArg(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		if(result == RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.rollbackTo();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        if (builder.compareAndEat(tASSOC)){
-            if (ARG.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
-            marker.done(RubyElementTypes.ASSOC);
-            return RubyElementTypes.ASSOC;
-        }
+		if(builder.compareAndEat(tASSOC))
+		{
+			if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
+			marker.done(RubyElementTypes.ASSOC);
+			return RubyElementTypes.ASSOC;
+		}
 
-        marker.drop();
-        return result;
-    }
+		marker.drop();
+		return result;
+	}
 
-    public static IElementType parse(final RBuilder builder){
-        return parseWithLeadArg(builder, builder.mark(), ARG.parse(builder));
-    }
+	public static IElementType parse(final RBuilder builder)
+	{
+		return parseWithLeadArg(builder, builder.mark(), ARG.parse(builder));
+	}
 }

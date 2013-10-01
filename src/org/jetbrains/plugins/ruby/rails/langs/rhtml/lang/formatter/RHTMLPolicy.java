@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import com.intellij.formatting.FormattingDocumentModel;
 import com.intellij.formatting.WrapType;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.xml.HtmlPolicy;
 import com.intellij.psi.xml.XmlTag;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,58 +30,71 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
  * @author: Roman Chernyatchik
  * @date: Nov 3, 2007
  */
-public class RHTMLPolicy extends HtmlPolicy {
-    public RHTMLPolicy(CodeStyleSettings settings, FormattingDocumentModel documentModel) {
-        super(settings, documentModel);
-    }
+public class RHTMLPolicy extends HtmlPolicy
+{
+	public RHTMLPolicy(CodeStyleSettings settings, FormattingDocumentModel documentModel)
+	{
+		super(settings, documentModel);
+	}
 
-    @Override
-	public WrapType getWrappingTypeForTagEnd(@Nullable final XmlTag xmlTag) {
-        if (xmlTag == null) {
-            return WrapType.NORMAL;
-        }
-        return super.getWrappingTypeForTagEnd(xmlTag);
-    }
+	@Override
+	public WrapType getWrappingTypeForTagEnd(@Nullable final XmlTag xmlTag)
+	{
+		if(xmlTag == null)
+		{
+			return WrapType.NORMAL;
+		}
+		return super.getWrappingTypeForTagEnd(xmlTag);
+	}
 
-    @Override
-	public WrapType getWrappingTypeForTagBegin(@Nullable final XmlTag xmlTag) {
-        if (xmlTag == null) {
-            return WrapType.NORMAL;
-        }
-        return super.getWrappingTypeForTagBegin(xmlTag);
-    }
+	@Override
+	public WrapType getWrappingTypeForTagBegin(@Nullable final XmlTag xmlTag)
+	{
+		if(xmlTag == null)
+		{
+			return WrapType.NORMAL;
+		}
+		return super.getWrappingTypeForTagBegin(xmlTag);
+	}
 
-    @Override
-	public boolean insertLineBreakBeforeTag(@Nullable final XmlTag xmlTag) {
-        return xmlTag != null && super.insertLineBreakBeforeTag(xmlTag);
-    }
+	@Override
+	public boolean insertLineBreakBeforeTag(@Nullable final XmlTag xmlTag)
+	{
+		return xmlTag != null && super.insertLineBreakBeforeTag(xmlTag);
+	}
 
-    @Override
-	public boolean removeLineBreakBeforeTag(@Nullable final XmlTag xmlTag) {
-        return xmlTag != null && super.removeLineBreakBeforeTag(xmlTag);
-    }
+	@Override
+	public boolean removeLineBreakBeforeTag(@Nullable final XmlTag xmlTag)
+	{
+		return xmlTag != null && super.removeLineBreakBeforeTag(xmlTag);
+	}
 
-   @Override
-   public boolean keepWhiteSpacesInsideTag(@Nullable final XmlTag xmlTag) {
-       return  xmlTag != null && super.keepWhiteSpacesInsideTag(xmlTag);
-   }
+	@Override
+	public boolean keepWhiteSpacesInsideTag(@Nullable final XmlTag xmlTag)
+	{
+		return xmlTag != null && super.keepWhiteSpacesInsideTag(xmlTag);
+	}
 
-   @Override
-   public boolean indentChildrenOf(@Nullable final XmlTag xmlTag) {
-       return xmlTag == null || super.indentChildrenOf(xmlTag);
-   }
+	@Override
+	public boolean indentChildrenOf(@Nullable final XmlTag xmlTag)
+	{
+		return xmlTag == null || super.indentChildrenOf(xmlTag);
+	}
 
-   @Override
-   public boolean isTextElement(@Nullable final XmlTag xmlTag) {
-       return xmlTag == null || super.isTextElement(xmlTag);
-   }
+	@Override
+	public boolean isTextElement(@Nullable final XmlTag xmlTag)
+	{
+		return xmlTag == null || super.isTextElement(xmlTag);
+	}
 
 
-   @Override
-   public int getTextWrap(@Nullable final XmlTag xmlTag) {
-       if (xmlTag != null && xmlTag.getContainingFile() instanceof RHTMLFile) {
-           return CodeStyleSettings.DO_NOT_WRAP;
-       }
-       return getSettings().HTML_TEXT_WRAP;
-   }
+	@Override
+	public int getTextWrap(@Nullable final XmlTag xmlTag)
+	{
+		if(xmlTag != null && xmlTag.getContainingFile() instanceof RHTMLFile)
+		{
+			return CodeStyleSettings.DO_NOT_WRAP;
+		}
+		return getSettings().HTML_TEXT_WRAP;
+	}
 }

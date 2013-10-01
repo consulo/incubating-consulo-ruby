@@ -45,212 +45,243 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.templateLanguages.OuterLanguageElement;
 
-public class RubyBlock implements Block, RubyTokenTypes {
-    final private ASTNode myNode;
-    final private Indent myIndent;
-    private Wrap myWrap;
+public class RubyBlock implements Block, RubyTokenTypes
+{
+	final private ASTNode myNode;
+	final private Indent myIndent;
+	private Wrap myWrap;
 
-    final private CodeStyleSettings mySettings;
+	final private CodeStyleSettings mySettings;
 
-    private List<Block> mySubBlocks = null;
-    private TextRange myTextRange;
-    private TextRange myPatchedTextRange; //is used only for injected ruby code in template context
-    private Alignment myAlignment;
+	private List<Block> mySubBlocks = null;
+	private TextRange myTextRange;
+	private TextRange myPatchedTextRange; //is used only for injected ruby code in template context
+	private Alignment myAlignment;
 
-    /**
-     * For ruby injections in templates. (e.g RHTML)
-     * @param node  AST node
-     * @param indent indent
-     * @param wrap   wrap
-     * @param alignment Alignment
-     * @param settings  settigs
-     * @param patchedTextRange patched range or null if patch range isn't necessary
-     */
-    public RubyBlock(@NotNull final ASTNode node, @NotNull final Indent indent,
-                     @Nullable final Wrap wrap,
-                     @Nullable final Alignment alignment,
-                     final CodeStyleSettings settings,
-                     @Nullable final TextRange patchedTextRange) {
+	/**
+	 * For ruby injections in templates. (e.g RHTML)
+	 *
+	 * @param node             AST node
+	 * @param indent           indent
+	 * @param wrap             wrap
+	 * @param alignment        Alignment
+	 * @param settings         settigs
+	 * @param patchedTextRange patched range or null if patch range isn't necessary
+	 */
+	public RubyBlock(@NotNull final ASTNode node, @NotNull final Indent indent, @Nullable final Wrap wrap, @Nullable final Alignment alignment, final CodeStyleSettings settings, @Nullable final TextRange patchedTextRange)
+	{
 
-        myNode = node;
-        myIndent = indent;
-        myWrap = wrap;
-        mySettings = settings;
-        myAlignment = alignment;
+		myNode = node;
+		myIndent = indent;
+		myWrap = wrap;
+		mySettings = settings;
+		myAlignment = alignment;
 
-        final TextRange nodeTextRange = node.getTextRange();
+		final TextRange nodeTextRange = node.getTextRange();
 
-        myPatchedTextRange = patchedTextRange;
-        if (myPatchedTextRange != null) {
-            myTextRange = nodeTextRange.intersection(patchedTextRange);
-        } else {
-            myTextRange = nodeTextRange;
-        }
-        if (myTextRange == null) {
-            myTextRange = new TextRange(0, -1);
-        }
-    }
+		myPatchedTextRange = patchedTextRange;
+		if(myPatchedTextRange != null)
+		{
+			myTextRange = nodeTextRange.intersection(patchedTextRange);
+		}
+		else
+		{
+			myTextRange = nodeTextRange;
+		}
+		if(myTextRange == null)
+		{
+			myTextRange = new TextRange(0, -1);
+		}
+	}
 
-    public RubyBlock(@NotNull final ASTNode node, @NotNull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings) {
-        this(node,  indent, wrap, null, settings, null);
-    }
-
-
-    @NotNull
-    public ASTNode getNode() {
-        return myNode;
-    }
+	public RubyBlock(@NotNull final ASTNode node, @NotNull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings)
+	{
+		this(node, indent, wrap, null, settings, null);
+	}
 
 
-    @Override
 	@NotNull
-    public TextRange getTextRange() {
-        return myTextRange;
-    }
+	public ASTNode getNode()
+	{
+		return myNode;
+	}
 
-    @Override
+
+	@Override
 	@NotNull
-    public List<Block> getSubBlocks() {
-        if (mySubBlocks==null){
-            mySubBlocks = generateSubBlocks();
-        }
-        return mySubBlocks;
-    }
+	public TextRange getTextRange()
+	{
+		return myTextRange;
+	}
 
-    @Override
-	@Nullable
-    public Wrap getWrap() {
-        return myWrap;
-    }
-
-
-    @Override
-	@Nullable
-    public Indent getIndent() {
-        return myIndent;
-    }
-
-
-    @Override
-	@Nullable
-    public Alignment getAlignment() {
-        return myAlignment;
-    }
-
-    @Override
-	@Nullable
-    public Spacing getSpacing(@NotNull final Block child1, @NotNull final Block child2) {
-        final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child1);
-        final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child2);
-        return RubySpacingProcessor.getSpacing(childNode1, childNode2, mySettings);
-    }
-
-
-    @Override
+	@Override
 	@NotNull
-    public ChildAttributes getChildAttributes(final int newChildIndex) {
-        final PsiElement psiParent = getNode().getPsi();
+	public List<Block> getSubBlocks()
+	{
+		if(mySubBlocks == null)
+		{
+			mySubBlocks = generateSubBlocks();
+		}
+		return mySubBlocks;
+	}
 
-// RFile
-        if (psiParent instanceof RFile){
-            return new ChildAttributes(Indent.getNoneIndent(), null);
-        }
-
-
-// Normal indent handling
-        if (psiParent instanceof RIndentCOMPSTMT || psiParent instanceof RContainer){
-            return new ChildAttributes(Indent.getNormalIndent(), null);
-        }
-
-// after BNF.tCONTINAUTION_INDENT continuation Indent needed
-        if (newChildIndex>0){
-            ASTNode node = getNode().getChildren(null)[newChildIndex];
-            if (BNF.tCONTINUATION_INDENT.contains(node.getElementType())){
-                return new ChildAttributes(Indent.getContinuationIndent(), null);
-            }
-        }
-// No indent by default
-        return new ChildAttributes(Indent.getNoneIndent(), null);
-    }
-
-    @Override
-	public boolean isIncomplete() {
-        return isIncomplete(myNode);
-    }
+	@Override
+	@Nullable
+	public Wrap getWrap()
+	{
+		return myWrap;
+	}
 
 
-    @Override
-	public boolean isLeaf() {
-        return isLeaf(myNode);
-    }
-
-    private boolean isLeaf(@NotNull final ASTNode node){
-        return node.getFirstChildNode() == null;
-    }
-
-    private List<Block> generateSubBlocks(){
-        final ArrayList<Block> subBlocks = new ArrayList<Block>();
-
-// Get all the children with null filter
-        ASTNode children[] = myNode.getChildren(null);
-        int childNumber = children.length;
-        if (childNumber==0){
-            return subBlocks;
-        }
-
-        final int patchedEndOffset = myPatchedTextRange == null ? -1 : myPatchedTextRange.getEndOffset();
-
-        ASTNode prevChildNode = null;
-        for (int i=0; i<childNumber; i++){
-            final ASTNode childNode = children[i];
-            if (canBeCorrectBlock(childNode)) {
-                if (myPatchedTextRange != null && childNode.getStartOffset() >= patchedEndOffset) {
-                    return subBlocks;
-                }
-
-                final Wrap wrap = RubyWrapProcessor.getChildWrap(this, childNode, childNumber, i);
-                final Indent indent = RubyIndentProcessor.getChildIndent(this, prevChildNode, childNode);
-                final RubyBlock rubyBlock = new RubyBlock(childNode, indent, wrap, null, mySettings, myPatchedTextRange);
-                if (rubyBlock.getTextRange().getLength() > 0) {
-                    subBlocks.add(rubyBlock);
-                }
-                prevChildNode = childNode;
-            }
-        }
-        return subBlocks;
-    }
+	@Override
+	@Nullable
+	public Indent getIndent()
+	{
+		return myIndent;
+	}
 
 
-    /**
-     * @param node Tree node
-     * @return true if node is incomplete
-     */
-    private static boolean isIncomplete(@NotNull final ASTNode node) {
-        ASTNode lastChild = node.getLastChildNode();
-        while (lastChild != null &&
-                (lastChild.getPsi() instanceof PsiWhiteSpace || lastChild.getPsi() instanceof PsiComment)) {
-            lastChild = lastChild.getTreePrev();
-        }
-        if (lastChild == null){
-            return false;
-        }
+	@Override
+	@Nullable
+	public Alignment getAlignment()
+	{
+		return myAlignment;
+	}
 
-        //noinspection SimplifiableIfStatement
-        if (lastChild.getPsi() instanceof PsiErrorElement) {
-            return true;
-        }
-        return isIncomplete(lastChild);
-    }
+	@Override
+	@Nullable
+	public Spacing getSpacing(@NotNull final Block child1, @NotNull final Block child2)
+	{
+		final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child1);
+		final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child2);
+		return RubySpacingProcessor.getSpacing(childNode1, childNode2, mySettings);
+	}
 
-    /**
-     * @param node Tree node
-     * @return true, if the current node can be block node, else otherwise
-     */
-    private static boolean canBeCorrectBlock(@NotNull final ASTNode node){
-        return (node.getText().trim().length()>0) && (!(node.getPsi() instanceof OuterLanguageElement));
-    }
 
-    public String toString(){
-        return "Block at: " + myNode.toString();
-    }
+	@Override
+	@NotNull
+	public ChildAttributes getChildAttributes(final int newChildIndex)
+	{
+		final PsiElement psiParent = getNode().getPsi();
+
+		// RFile
+		if(psiParent instanceof RFile)
+		{
+			return new ChildAttributes(Indent.getNoneIndent(), null);
+		}
+
+
+		// Normal indent handling
+		if(psiParent instanceof RIndentCOMPSTMT || psiParent instanceof RContainer)
+		{
+			return new ChildAttributes(Indent.getNormalIndent(), null);
+		}
+
+		// after BNF.tCONTINAUTION_INDENT continuation Indent needed
+		if(newChildIndex > 0)
+		{
+			ASTNode node = getNode().getChildren(null)[newChildIndex];
+			if(BNF.tCONTINUATION_INDENT.contains(node.getElementType()))
+			{
+				return new ChildAttributes(Indent.getContinuationIndent(), null);
+			}
+		}
+		// No indent by default
+		return new ChildAttributes(Indent.getNoneIndent(), null);
+	}
+
+	@Override
+	public boolean isIncomplete()
+	{
+		return isIncomplete(myNode);
+	}
+
+
+	@Override
+	public boolean isLeaf()
+	{
+		return isLeaf(myNode);
+	}
+
+	private boolean isLeaf(@NotNull final ASTNode node)
+	{
+		return node.getFirstChildNode() == null;
+	}
+
+	private List<Block> generateSubBlocks()
+	{
+		final ArrayList<Block> subBlocks = new ArrayList<Block>();
+
+		// Get all the children with null filter
+		ASTNode children[] = myNode.getChildren(null);
+		int childNumber = children.length;
+		if(childNumber == 0)
+		{
+			return subBlocks;
+		}
+
+		final int patchedEndOffset = myPatchedTextRange == null ? -1 : myPatchedTextRange.getEndOffset();
+
+		ASTNode prevChildNode = null;
+		for(int i = 0; i < childNumber; i++)
+		{
+			final ASTNode childNode = children[i];
+			if(canBeCorrectBlock(childNode))
+			{
+				if(myPatchedTextRange != null && childNode.getStartOffset() >= patchedEndOffset)
+				{
+					return subBlocks;
+				}
+
+				final Wrap wrap = RubyWrapProcessor.getChildWrap(this, childNode, childNumber, i);
+				final Indent indent = RubyIndentProcessor.getChildIndent(this, prevChildNode, childNode);
+				final RubyBlock rubyBlock = new RubyBlock(childNode, indent, wrap, null, mySettings, myPatchedTextRange);
+				if(rubyBlock.getTextRange().getLength() > 0)
+				{
+					subBlocks.add(rubyBlock);
+				}
+				prevChildNode = childNode;
+			}
+		}
+		return subBlocks;
+	}
+
+
+	/**
+	 * @param node Tree node
+	 * @return true if node is incomplete
+	 */
+	private static boolean isIncomplete(@NotNull final ASTNode node)
+	{
+		ASTNode lastChild = node.getLastChildNode();
+		while(lastChild != null && (lastChild.getPsi() instanceof PsiWhiteSpace || lastChild.getPsi() instanceof PsiComment))
+		{
+			lastChild = lastChild.getTreePrev();
+		}
+		if(lastChild == null)
+		{
+			return false;
+		}
+
+		//noinspection SimplifiableIfStatement
+		if(lastChild.getPsi() instanceof PsiErrorElement)
+		{
+			return true;
+		}
+		return isIncomplete(lastChild);
+	}
+
+	/**
+	 * @param node Tree node
+	 * @return true, if the current node can be block node, else otherwise
+	 */
+	private static boolean canBeCorrectBlock(@NotNull final ASTNode node)
+	{
+		return (node.getText().trim().length() > 0) && (!(node.getPsi() instanceof OuterLanguageElement));
+	}
+
+	public String toString()
+	{
+		return "Block at: " + myNode.toString();
+	}
 }

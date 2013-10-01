@@ -32,81 +32,86 @@ import com.intellij.openapi.vfs.VirtualFile;
  *
  * @author: Roman Chernyatchik, oleg
  * @date: 07.11.2006
- *   
+ * <p/>
  * Base class for filesCache. Used for module cache and for sdk cache.
  * Basic cache operations, as setupFileCache, refresh, save, get file info.
  */
-public interface RubyFilesCache extends CacheUpdater, Disposable {
+public interface RubyFilesCache extends CacheUpdater, Disposable
+{
 
-    /**
-     * Associate index with given FilesCache
-     * @param index DeclarationIndex to associate for this fileCache
-     */
-    public void registerDeaclarationsIndex(@NotNull final DeclarationsIndex index);
+	/**
+	 * Associate index with given FilesCache
+	 *
+	 * @param index DeclarationIndex to associate for this fileCache
+	 */
+	public void registerDeaclarationsIndex(@NotNull final DeclarationsIndex index);
 
-    @NotNull
-    public DeclarationsIndex getDeclarationsIndex();
+	@NotNull
+	public DeclarationsIndex getDeclarationsIndex();
 
-    /**
-     * Saves cache for module
-     */
-    public void saveCacheToDisk();
+	/**
+	 * Saves cache for module
+	 */
+	public void saveCacheToDisk();
 
-    public void removeCacheFile();
+	public void removeCacheFile();
 
-    /**
-     * Setups cache. E.g. rebuilds wordsIndex. Access to PSI elements is allowed.
-     * @param runProcessWithProgressSynchronously If true, initialization runs with attached progress indicator
-     */
-    public void setupFileCache(final boolean runProcessWithProgressSynchronously);
+	/**
+	 * Setups cache. E.g. rebuilds wordsIndex. Access to PSI elements is allowed.
+	 *
+	 * @param runProcessWithProgressSynchronously
+	 *         If true, initialization runs with attached progress indicator
+	 */
+	public void setupFileCache(final boolean runProcessWithProgressSynchronously);
 
-    /**
-     * Create storage(or load from disk) and register listeners, such as CacheUpdater, Dsposer, etc. Should be invoked in PreStartupActivity.
-     * Access to PSI elements from this method is deinded!
-     * At first setup file cache path and roots urls. Dont invoke this method befor setup!
-     */
-    public void initFileCacheAndRegisterListeners();
+	/**
+	 * Create storage(or load from disk) and register listeners, such as CacheUpdater, Dsposer, etc. Should be invoked in PreStartupActivity.
+	 * Access to PSI elements from this method is deinded!
+	 * At first setup file cache path and roots urls. Dont invoke this method befor setup!
+	 */
+	public void initFileCacheAndRegisterListeners();
 
-    public void setCacheFilePath(@NotNull final String path);
+	public void setCacheFilePath(@NotNull final String path);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// cache functions
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Returns cached file info
-     * @param file VirtualFile to get cache for
-     * @return FileInfo cached info associated with file
-     */
-    @Nullable
-    public RFileInfo getUp2DateFileInfo(@NotNull final VirtualFile file);
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// cache functions
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// Listeners etc
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void addCacheChangedListener(@NotNull final RubyFilesCacheListener listener,
-                                        @NotNull final Disposable parent);
+	/**
+	 * Returns cached file info
+	 *
+	 * @param file VirtualFile to get cache for
+	 * @return FileInfo cached info associated with file
+	 */
+	@Nullable
+	public RFileInfo getUp2DateFileInfo(@NotNull final VirtualFile file);
 
-    public void removeCacheChangedListener(@NotNull final RubyFilesCacheListener listener);
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// Listeners etc
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void addCacheChangedListener(@NotNull final RubyFilesCacheListener listener, @NotNull final Disposable parent);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// Files actions
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void removeCacheChangedListener(@NotNull final RubyFilesCacheListener listener);
 
-    @NotNull
-    public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory);
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//// Files actions
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @NotNull
-    public Set<String> getAllUrls();
+	@NotNull
+	public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory);
 
-    /**
-     * @param url Url to check
-     * @return true if cache contains such an url
-     */
-    public boolean containsUrl(@NotNull String url);
+	@NotNull
+	public Set<String> getAllUrls();
 
-    public void setCacheRootURLs(@NotNull final String[] urls);
+	/**
+	 * @param url Url to check
+	 * @return true if cache contains such an url
+	 */
+	public boolean containsUrl(@NotNull String url);
 
-    public String[] getCacheRootURLs();
+	public void setCacheRootURLs(@NotNull final String[] urls);
 
-    public void forceUpdate();
+	public String[] getCacheRootURLs();
+
+	public void forceUpdate();
 }

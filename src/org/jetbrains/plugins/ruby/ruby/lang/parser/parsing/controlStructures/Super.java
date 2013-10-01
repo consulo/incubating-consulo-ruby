@@ -17,37 +17,41 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 10.07.2006
  */
-public class Super implements RubyTokenTypes {
+public class Super implements RubyTokenTypes
+{
 
-    @NotNull
-    public static IElementType parseWithCommandArgs(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(kSUPER);
-        final boolean braceSeen = builder.compareAndEat(tfLPAREN);
-// In this case we have only kSUPER keyword
-        if (CALL_ARGS.parse(builder) == RubyElementTypes.EMPTY_INPUT && !braceSeen) {
-            statementMarker.rollbackTo();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        if (braceSeen){
-            builder.match(tRPAREN);
-        }
-        final IElementType result = braceSeen ? RubyElementTypes.FUNCTION_CALL : RubyElementTypes.COMMAND_CALL;
-        statementMarker.done(result);
-        return result;
+	@NotNull
+	public static IElementType parseWithCommandArgs(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(kSUPER);
+		final boolean braceSeen = builder.compareAndEat(tfLPAREN);
+		// In this case we have only kSUPER keyword
+		if(CALL_ARGS.parse(builder) == RubyElementTypes.EMPTY_INPUT && !braceSeen)
+		{
+			statementMarker.rollbackTo();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		if(braceSeen)
+		{
+			builder.match(tRPAREN);
+		}
+		final IElementType result = braceSeen ? RubyElementTypes.FUNCTION_CALL : RubyElementTypes.COMMAND_CALL;
+		statementMarker.done(result);
+		return result;
 
-    }
+	}
 }

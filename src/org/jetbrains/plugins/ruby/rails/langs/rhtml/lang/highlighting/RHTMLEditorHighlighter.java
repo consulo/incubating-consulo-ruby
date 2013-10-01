@@ -41,61 +41,64 @@ import com.intellij.psi.PsiFile;
  * @author: Roman Chernyatchik
  * @date: Aug 16, 2007
  */
-public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter {
-    private Project myProject;
-    private VirtualFile myFile;
-    private Language myTemplateLanguage;
+public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter
+{
+	private Project myProject;
+	private VirtualFile myFile;
+	private Language myTemplateLanguage;
 
-    public RHTMLEditorHighlighter(final EditorColorsScheme scheme,
-                                  final Project project,
-                                  final VirtualFile file) {
-        super(SyntaxHighlighterFactory.getSyntaxHighlighter(RHTMLFileType.RHTML, project, file), scheme);
+	public RHTMLEditorHighlighter(final EditorColorsScheme scheme, final Project project, final VirtualFile file)
+	{
+		super(SyntaxHighlighterFactory.getSyntaxHighlighter(RHTMLFileType.RHTML, project, file), scheme);
 
-        myProject = project;
-        myFile = file;
+		myProject = project;
+		myFile = file;
 
 		final SyntaxHighlighter rubyHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(RubyLanguage.INSTANCE, project, file);
 
-        // "\n" separates lexems if there is no separator
-        // <%i = 3%><%a = 6>
-        // ruby code : "i = 3\na = 6" instead of "i = 3a = 6"
-        final LayerDescriptor rubyLayer =
-                new LayerDescriptor(rubyHighlighter, "\n", RHTMLHighlighter.RHTML_SCRIPTING_BACKGROUND);
-        registerLayer(RHTMLTokenType.RUBY_CODE_CHARACTERS, rubyLayer);
-    }
+		// "\n" separates lexems if there is no separator
+		// <%i = 3%><%a = 6>
+		// ruby code : "i = 3\na = 6" instead of "i = 3a = 6"
+		final LayerDescriptor rubyLayer = new LayerDescriptor(rubyHighlighter, "\n", RHTMLHighlighter.RHTML_SCRIPTING_BACKGROUND);
+		registerLayer(RHTMLTokenType.RUBY_CODE_CHARACTERS, rubyLayer);
+	}
 
-    @Override
-	protected boolean updateLayers() {
-        Language templateLanguage = getCurrentTemplateLanguageAndPrefixes();
+	@Override
+	protected boolean updateLayers()
+	{
+		Language templateLanguage = getCurrentTemplateLanguageAndPrefixes();
 
-        //register template language layer (e.g. HTML or maybe Text(for general ERB template))
-        if (!Comparing.equal(myTemplateLanguage, templateLanguage)) {
-            unregisterLayer(RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML);
-            myTemplateLanguage = templateLanguage;
+		//register template language layer (e.g. HTML or maybe Text(for general ERB template))
+		if(!Comparing.equal(myTemplateLanguage, templateLanguage))
+		{
+			unregisterLayer(RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML);
+			myTemplateLanguage = templateLanguage;
 
-            final SyntaxHighlighter templateLanguageHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(myTemplateLanguage, myProject, myFile);
-            //in this case tempate language is HTML and lexem shouldn't be separator with additional
-            //separator, i.e for highlighting "<header<% n %>1>" HTML is interpreted as "<header1>"
-            registerLayer(RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML,
-                          new LayerDescriptor(templateLanguageHighlighter, "", null));
-            return true;
-        }
+			final SyntaxHighlighter templateLanguageHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(myTemplateLanguage, myProject, myFile);
+			//in this case tempate language is HTML and lexem shouldn't be separator with additional
+			//separator, i.e for highlighting "<header<% n %>1>" HTML is interpreted as "<header1>"
+			registerLayer(RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML, new LayerDescriptor(templateLanguageHighlighter, "", null));
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 
-    private Language getCurrentTemplateLanguageAndPrefixes() {
-        if (myProject != null && getDocument() != null) {
-            final PsiDocumentManager instance = PsiDocumentManager.getInstance(myProject);
-            final PsiFile psiFile = instance.getPsiFile(getDocument());
-            if (RHTMLPsiUtil.isInRHTMLFile(psiFile)) {
-                final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(psiFile);
-                assert rhtmlFile != null;
-                return rhtmlFile.getViewProvider().getTemplateDataLanguage();
-            }
-        }
+	private Language getCurrentTemplateLanguageAndPrefixes()
+	{
+		if(myProject != null && getDocument() != null)
+		{
+			final PsiDocumentManager instance = PsiDocumentManager.getInstance(myProject);
+			final PsiFile psiFile = instance.getPsiFile(getDocument());
+			if(RHTMLPsiUtil.isInRHTMLFile(psiFile))
+			{
+				final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(psiFile);
+				assert rhtmlFile != null;
+				return rhtmlFile.getViewProvider().getTemplateDataLanguage();
+			}
+		}
 
-        return StdLanguages.HTML;
-    }
+		return StdLanguages.HTML;
+	}
 }

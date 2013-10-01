@@ -16,19 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.projectview;
 
-import com.intellij.ide.projectView.ProjectViewNode;
-import com.intellij.ide.projectView.TreeStructureProvider;
-import com.intellij.ide.projectView.ViewSettings;
-import com.intellij.ide.util.treeView.AbstractTreeNode;
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
-import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
@@ -38,17 +29,18 @@ import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.intellij.ide.projectView.ProjectViewNode;
+import com.intellij.ide.projectView.TreeStructureProvider;
+import com.intellij.ide.projectView.ViewSettings;
+import com.intellij.ide.util.treeView.AbstractTreeNode;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Comparing;
+import lombok.val;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,121 +48,119 @@ import java.util.List;
  * @author: oleg
  * @date: Oct 30, 2007
  */
-public class RubyTreeStructureProvider implements TreeStructureProvider, ProjectComponent {
-    private final Project myProject;
+public class RubyTreeStructureProvider implements TreeStructureProvider
+{
+	private final Project myProject;
 
-    public RubyTreeStructureProvider(Project project) {
-        myProject = project;
-    }
+	public RubyTreeStructureProvider(Project project)
+	{
+		myProject = project;
+	}
 
-    @Override
-	public Collection<AbstractTreeNode> modify(AbstractTreeNode parent, Collection<AbstractTreeNode> children, ViewSettings settings) {
-// We should just return all the children if we don`t want to use useRubySpecific Project view
-        if (!RApplicationSettings.getInstance().useRubySpecificProjectView){
-            return children;
-        }
-        ArrayList<AbstractTreeNode> result = new ArrayList<AbstractTreeNode>();
-        for (final AbstractTreeNode child : children) {
-            Object o = child.getValue();
-            if (o instanceof RFile) {
-                final RFile rFile = (RFile) o;
-                final Module fileModule = rFile.getModule();
+	@Override
+	public Collection<AbstractTreeNode> modify(AbstractTreeNode parent, Collection<AbstractTreeNode> children, ViewSettings settings)
+	{
+		// We should just return all the children if we don`t want to use useRubySpecific Project view
+		if(!settings.isShowMembers())
+		{
+			return children;
+		}
 
-// We should show special nodes only for ruby/rails or modules with JRuby facets!
-                if (fileModule != null &&
-                        (RubyUtil.isRubyModuleType(fileModule) || RailsFacetUtil.hasRailsSupport(fileModule) || JRubyUtil.hasJRubySupport(fileModule))){
-                    final VirtualFile file = rFile.getVirtualFile();
+		ArrayList<AbstractTreeNode> result = new ArrayList<AbstractTreeNode>();
+		for(val child : children)
+		{
+			Object o = child.getValue();
+			if(o instanceof RFile)
+			{
+				val rFile = (RFile) o;
+				val fileModule = rFile.getModule();
 
-                    //rspec tests
-                    if (RSpecUtil.isRSpecTestFile(file)) {
-                        result.add(child);
-                        continue;
-                    }
+				if(fileModule != null && RubyUtil.isRubyModuleType(fileModule))
+				{
+					val file = rFile.getVirtualFile();
 
-                    final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
-                    if (virtualContainer instanceof RVirtualFile) {
-                        final RVirtualFile rVirtualFile = (RVirtualFile) virtualContainer;
-                        final List<RVirtualClass> classes = RContainerUtil.getTopLevelClasses(virtualContainer);
-                        final List<RVirtualModule> modules = RContainerUtil.getTopLevelModules(virtualContainer);
+					//rspec tests
+					if(RSpecUtil.isRSpecTestFile(file))
+					{
+						result.add(child);
+						continue;
+					}
 
-                        // Rails checks
-                        if (RailsFacetUtil.hasRailsSupport(fileModule)) {
-                            boolean foundRailsNode = false;
-                            for (RVirtualClass aClass : classes) {
-                                if (ControllersConventions.isControllerClass(aClass, fileModule) ||
-                                        ModelsConventions.isModelClass(aClass, fileModule)){
-                                    result.add(new RClassNode(myProject, fileModule, rVirtualFile, aClass, classes, ((ProjectViewNode) parent).getSettings()));
-                                    foundRailsNode = true;
-                                }
-                            }
-                            if (!foundRailsNode) {
-                                for (RVirtualModule module : modules) {
-                                    if (HelpersConventions.isHelperModule(module, fileModule)){
-                                        result.add(new RModuleNode(myProject, fileModule, rVirtualFile, module, ((ProjectViewNode) parent).getSettings()));
-                                        foundRailsNode = true;
-                                    }
-                                }
-                            }
-                            if (foundRailsNode){
-                                continue;
-                            }
-                        }
+					val virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
+					if(virtualContainer instanceof RVirtualFile)
+					{
+						val rVirtualFile = (RVirtualFile) virtualContainer;
+						val classes = RContainerUtil.getTopLevelClasses(virtualContainer);
+						val modules = RContainerUtil.getTopLevelModules(virtualContainer);
 
-                        // Default ruby behavour, checking names conventions
-                        final String fileName = rFile.getVirtualFile().getNameWithoutExtension();
-                        final String mixedFileName = NamingConventions.toMixedCase(fileName);
-                        boolean foundRubyElement = false;
-                        for (RVirtualStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements()) {
-                            final StructureType type = structuralElement.getType();
-                            if (!foundRubyElement && type == StructureType.CLASS) {
-                                if (Comparing.equal(mixedFileName, ((RVirtualClass)structuralElement).getName())) {
-                                    result.add(new RClassNode(myProject, fileModule, rVirtualFile, (RVirtualClass) structuralElement, classes, ((ProjectViewNode) parent).getSettings()));
-                                    foundRubyElement = true;
-                                }
-                            }
-                            if (!foundRubyElement && type == StructureType.MODULE) {
-                                if (Comparing.equal(mixedFileName, ((RVirtualModule)structuralElement).getName())) {
-                                    result.add(new RModuleNode(myProject, fileModule, rVirtualFile, (RVirtualModule) structuralElement, ((ProjectViewNode) parent).getSettings()));
-                                    foundRubyElement = true;
-                                }
-                            }
-                        }
-                        if (foundRubyElement){
-                            continue;
-                        }
-                    }
-                }
-            }
-            result.add(child);
-        }
-        return result;
-    }
+						// Rails checks
+						if(RailsFacetUtil.hasRailsSupport(fileModule))
+						{
+							boolean foundRailsNode = false;
+							for(RVirtualClass aClass : classes)
+							{
+								if(ControllersConventions.isControllerClass(aClass, fileModule) || ModelsConventions.isModelClass(aClass, fileModule))
+								{
+									result.add(new RClassNode(myProject, fileModule, rVirtualFile, aClass, classes, ((ProjectViewNode) parent).getSettings()));
+									foundRailsNode = true;
+								}
+							}
+							if(!foundRailsNode)
+							{
+								for(RVirtualModule module : modules)
+								{
+									if(HelpersConventions.isHelperModule(module, fileModule))
+									{
+										result.add(new RModuleNode(myProject, fileModule, rVirtualFile, module, ((ProjectViewNode) parent).getSettings()));
+										foundRailsNode = true;
+									}
+								}
+							}
+							if(foundRailsNode)
+							{
+								continue;
+							}
+						}
 
-    @Override
-	public Object getData(Collection<AbstractTreeNode> selected, String dataName) {
-        return null;
-    }
+						// Default ruby behavour, checking names conventions
+						val fileName = rFile.getVirtualFile().getNameWithoutExtension();
+						val mixedFileName = NamingConventions.toMixedCase(fileName);
+						boolean foundRubyElement = false;
+						for(RVirtualStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements())
+						{
+							val type = structuralElement.getType();
+							if(!foundRubyElement && type == StructureType.CLASS)
+							{
+								if(Comparing.equal(mixedFileName, ((RVirtualClass) structuralElement).getName()))
+								{
+									result.add(new RClassNode(myProject, fileModule, rVirtualFile, (RVirtualClass) structuralElement, classes, ((ProjectViewNode) parent).getSettings()));
+									foundRubyElement = true;
+								}
+							}
+							if(!foundRubyElement && type == StructureType.MODULE)
+							{
+								if(Comparing.equal(mixedFileName, ((RVirtualModule) structuralElement).getName()))
+								{
+									result.add(new RModuleNode(myProject, fileModule, rVirtualFile, (RVirtualModule) structuralElement, ((ProjectViewNode) parent).getSettings()));
+									foundRubyElement = true;
+								}
+							}
+						}
+						if(foundRubyElement)
+						{
+							continue;
+						}
+					}
+				}
+			}
+			result.add(child);
+		}
+		return result;
+	}
 
-
-    @Override
-	public void projectOpened() {
-    }
-
-    @Override
-	public void projectClosed() {
-    }
-
-    @Override
-	@NotNull
-    public String getComponentName() {
-        return RComponents.RUBY_TREE_STRUCTURE_PROVIDER;
-    }
-
-    @Override
-	public void initComponent() {
-    }
-
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public Object getData(Collection<AbstractTreeNode> selected, String dataName)
+	{
+		return null;
+	}
 }

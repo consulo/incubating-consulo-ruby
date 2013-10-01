@@ -18,21 +18,22 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Oct 7, 2007
-*/
-public enum Type {
-    MODIFIABLE,
+ *
+ * @author: oleg
+ * @date: Oct 7, 2007
+ */
+public enum Type
+{
+	MODIFIABLE,
 
-    BUILT_IN,
-    ACTIVE_SUPPORT_ACTION_CONTROLLER,
-    ACTIVE_SUPPORT_ACTION_VIEW,
-    ACTIVE_SUPPORT_ACTIVE_RECORD,
-    FULL_RAILS,
+	BUILT_IN,
+	ACTIVE_SUPPORT_ACTION_CONTROLLER,
+	ACTIVE_SUPPORT_ACTION_VIEW,
+	ACTIVE_SUPPORT_ACTIVE_RECORD,
+	FULL_RAILS,
 
-    PLUGINS_LAYER,
-    LIBS_LAYER,
-    MODELS_LAYER,
-    CONTROLLERS_VIEWS_LAYER
+	PLUGINS_LAYER,
+	LIBS_LAYER,
+	MODELS_LAYER,
+	CONTROLLERS_VIEWS_LAYER
 }

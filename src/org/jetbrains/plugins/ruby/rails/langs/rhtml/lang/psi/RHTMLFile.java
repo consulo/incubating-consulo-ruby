@@ -26,11 +26,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public interface RHTMLFile extends RFile {
-    @Override
+public interface RHTMLFile extends RFile
+{
+	@Override
 	@NotNull
-    public RHTMLFileViewProvider getViewProvider();
+	public RHTMLFileViewProvider getViewProvider();
 
-    @NotNull
-    public RFile getInnerRubyFile();
+	@NotNull
+	public RFile getInnerRubyFile();
 }

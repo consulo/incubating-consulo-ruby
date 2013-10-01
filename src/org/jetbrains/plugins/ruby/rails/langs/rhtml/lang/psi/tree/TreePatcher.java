@@ -30,22 +30,24 @@ import com.intellij.util.CharTable;
  */
 
 //TODO Refactor with jsp TreePatcher, when it will be available in core API
-public interface TreePatcher {
-    /**
-     * Inserts toInsert into destinationTree according to parser rules.
-     * @param parent Parent element
-     * @param anchorBefore  If not null element will be inserted before it, otherwise as last child in parent
-     * @param toInsert Element to insert
-     */
-    void insert(CompositeElement parent, TreeElement anchorBefore, OuterLanguageElement toInsert);
+public interface TreePatcher
+{
+	/**
+	 * Inserts toInsert into destinationTree according to parser rules.
+	 *
+	 * @param parent       Parent element
+	 * @param anchorBefore If not null element will be inserted before it, otherwise as last child in parent
+	 * @param toInsert     Element to insert
+	 */
+	void insert(CompositeElement parent, TreeElement anchorBefore, OuterLanguageElement toInsert);
 
-    /**
-     * If leaf need to be split to insert OuterLanguageElement this function is called
-     *
-     * @param leaf Leaf to split
-     * @param offset Offset to split leaf into parts
-     * @param table CharTable
-     * @return first part of the split
-     */
-    LeafElement split(LeafElement leaf, int offset, final CharTable table);
+	/**
+	 * If leaf need to be split to insert OuterLanguageElement this function is called
+	 *
+	 * @param leaf   Leaf to split
+	 * @param offset Offset to split leaf into parts
+	 * @param table  CharTable
+	 * @return first part of the split
+	 */
+	LeafElement split(LeafElement leaf, int offset, final CharTable table);
 }

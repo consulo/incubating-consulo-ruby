@@ -21,11 +21,12 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.variables;
  * User: oleg
  * Date: Aug 28, 2007
  */
-public enum FieldAttrType {
-    ATTR_READER,
-    ATTR_WRITER,
-    ATTR_ACCESSOR,
+public enum FieldAttrType
+{
+	ATTR_READER,
+	ATTR_WRITER,
+	ATTR_ACCESSOR,
 
-    ATTR_INTERNAL,
-    CATTR_ACCESSOR
+	ATTR_INTERNAL,
+	CATTR_ACCESSOR
 }

@@ -27,31 +27,36 @@ import com.intellij.psi.PsiElement;
 /**
  * @author: oleg
  */
-public class WrongTopLevelPackageFix implements LocalQuickFix {
+public class WrongTopLevelPackageFix implements LocalQuickFix
+{
 
-    private static final String JAVA = "Java::";
-    protected PsiElement myElement;
+	private static final String JAVA = "Java::";
+	protected PsiElement myElement;
 
-    public WrongTopLevelPackageFix(@NotNull final PsiElement element) {
-        myElement = element;
-    }
+	public WrongTopLevelPackageFix(@NotNull final PsiElement element)
+	{
+		myElement = element;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return "Add Java:: to package";
-    }
+	public String getName()
+	{
+		return "Add Java:: to package";
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getFamilyName() {
-        return "JRuby";
-    }
+	public String getFamilyName()
+	{
+		return "JRuby";
+	}
 
-    @Override
-	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
-        final String text = myElement.getText();
-        final RPsiElement element = RubyPsiUtil.getTopLevelElements(project, JAVA + text).get(0);
-        RubyPsiUtil.replaceInParent(myElement, element);
-    }
+	@Override
+	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor)
+	{
+		final String text = myElement.getText();
+		final RPsiElement element = RubyPsiUtil.getTopLevelElements(project, JAVA + text).get(0);
+		RubyPsiUtil.replaceInParent(myElement, element);
+	}
 }

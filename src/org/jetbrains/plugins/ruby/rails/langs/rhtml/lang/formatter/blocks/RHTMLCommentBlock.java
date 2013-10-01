@@ -16,18 +16,22 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 
-import com.intellij.formatting.*;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
-import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
-import com.intellij.psi.tree.IElementType;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.ChildAttributes;
+import com.intellij.formatting.Indent;
+import com.intellij.formatting.Wrap;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,48 +39,53 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: Sep 21, 2007
  */
-public class RHTMLCommentBlock extends RHTMLBlock {
-    private Indent myChildrenIndent;
+public class RHTMLCommentBlock extends RHTMLBlock
+{
+	private Indent myChildrenIndent;
 
-    public RHTMLCommentBlock(@NotNull final ASTNode node,
-                             @Nullable final Indent indent,
-                             @Nullable final Alignment alignment, @Nullable final Wrap wrap,
-                             final XmlFormattingPolicy xmlFormattingPolicy) {
-        super(node, indent, wrap, xmlFormattingPolicy, alignment);
-        // "<$# ".length = 4
-        myChildrenIndent = Indent.getSpaceIndent(4);
-    }
+	public RHTMLCommentBlock(@NotNull final ASTNode node, @Nullable final Indent indent, @Nullable final Alignment alignment, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy)
+	{
+		super(node, indent, wrap, xmlFormattingPolicy, alignment);
+		// "<$# ".length = 4
+		myChildrenIndent = Indent.getSpaceIndent(4);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected List<Block> buildChildren() {
-        ChameleonTransforming.transformChildren(myNode);
+	protected List<Block> buildChildren()
+	{
+		ChameleonTransforming.transformChildren(myNode);
 
-        final ArrayList<Block> result = new ArrayList<Block>();
-        final Alignment alignment = Alignment.createAlignment();
+		final ArrayList<Block> result = new ArrayList<Block>();
+		final Alignment alignment = Alignment.createAlignment();
 
-        ASTNode child = myNode.getFirstChildNode();
-        while (child != null) {
-            if (RHTMLFormatterUtil.canBeCorrectBlock(child)) {
-                final IElementType childNodeType = child.getElementType();
-                if (childNodeType == RHTMLTokenType.RHTML_COMMENT_START
-                        || childNodeType == RHTMLTokenType.RHTML_COMMENT_END) {
-                    //TODO move to settings - format comments or not
-                    result.add(new RHTMLBlock(child, Indent.getNoneIndent(), null, myXmlFormattingPolicy, alignment));
-                } else {
-                    //TODO move to settings - align rhtml comments or not
-                    // thus indent =  Indent.getAbsoluteNoneIndent() or childrenIndent
-                    result.add(new RHTMLBlock(child, Indent.getAbsoluteNoneIndent(), null, myXmlFormattingPolicy, null));
-                }
-            }
-            child = child.getTreeNext();
-        }
-        return result;
-    }
+		ASTNode child = myNode.getFirstChildNode();
+		while(child != null)
+		{
+			if(RHTMLFormatterUtil.canBeCorrectBlock(child))
+			{
+				final IElementType childNodeType = child.getElementType();
+				if(childNodeType == RHTMLTokenType.RHTML_COMMENT_START || childNodeType == RHTMLTokenType.RHTML_COMMENT_END)
+				{
+					//TODO move to settings - format comments or not
+					result.add(new RHTMLBlock(child, Indent.getNoneIndent(), null, myXmlFormattingPolicy, alignment));
+				}
+				else
+				{
+					//TODO move to settings - align rhtml comments or not
+					// thus indent =  Indent.getAbsoluteNoneIndent() or childrenIndent
+					result.add(new RHTMLBlock(child, Indent.getAbsoluteNoneIndent(), null, myXmlFormattingPolicy, null));
+				}
+			}
+			child = child.getTreeNext();
+		}
+		return result;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ChildAttributes getChildAttributes(int newChildIndex) {
-        return new ChildAttributes(myChildrenIndent, null);
-    }
+	public ChildAttributes getChildAttributes(int newChildIndex)
+	{
+		return new ChildAttributes(myChildrenIndent, null);
+	}
 }

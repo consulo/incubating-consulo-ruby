@@ -16,94 +16,110 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import java.util.HashSet;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
-
-import java.util.HashSet;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class ErrorMsg {
+public class ErrorMsg
+{
 
-    private static final String EXPECTED_MESSAGE = RBundle.message("parsing.message.expected");
-    private static final String UNEXPECTED_MESSAGE = RBundle.message("parsing.message.unexpected");
-    public static final String EXPRESSION_EXPECTED_MESSAGE = expected(RBundle.message("parsing.error.expression"));
+	private static final String EXPECTED_MESSAGE = RBundle.message("parsing.message.expected");
+	private static final String UNEXPECTED_MESSAGE = RBundle.message("parsing.message.unexpected");
+	public static final String EXPRESSION_EXPECTED_MESSAGE = expected(RBundle.message("parsing.error.expression"));
 
-    @NotNull
-    public static String expected(String s) {
-        return EXPECTED_MESSAGE + " " + s;
-    }
+	@NotNull
+	public static String expected(String s)
+	{
+		return EXPECTED_MESSAGE + " " + s;
+	}
 
-    @NotNull
-    private static String unexpected(String s) {
-        return UNEXPECTED_MESSAGE + " " + s;
-    }
+	@NotNull
+	private static String unexpected(String s)
+	{
+		return UNEXPECTED_MESSAGE + " " + s;
+	}
 
-    @NotNull
-    public static String expected(IElementType type) {
-        return expected(getPresentableName(type));
-    }
+	@NotNull
+	public static String expected(IElementType type)
+	{
+		return expected(getPresentableName(type));
+	}
 
-    @Nullable
-    private static String getPresentableName(final IElementType type) {
-        if (type instanceof PresentableElementType) {
-            return ((PresentableElementType)type).getPresentableName();
-        }
-        return type!=null ? type.toString() : "null";
-    }
+	@Nullable
+	private static String getPresentableName(final IElementType type)
+	{
+		if(type instanceof PresentableElementType)
+		{
+			return ((PresentableElementType) type).getPresentableName();
+		}
+		return type != null ? type.toString() : "null";
+	}
 
-    @NotNull
-    public static String unexpected(IElementType type) {
-        return unexpected(getPresentableName(type));
-    }
+	@NotNull
+	public static String unexpected(IElementType type)
+	{
+		return unexpected(getPresentableName(type));
+	}
 
-    @NotNull
-    public static String expected(final TokenSet types, final RBuilder builder) {
-        return EXPECTED_MESSAGE + " " + setToString(types, builder);
-    }
+	@NotNull
+	public static String expected(final TokenSet types, final RBuilder builder)
+	{
+		return EXPECTED_MESSAGE + " " + setToString(types, builder);
+	}
 
-    @NotNull
-    public static String unexpected(final TokenSet types, final RBuilder builder) {
-        return UNEXPECTED_MESSAGE + " " + setToString(types, builder);
-    }
+	@NotNull
+	public static String unexpected(final TokenSet types, final RBuilder builder)
+	{
+		return UNEXPECTED_MESSAGE + " " + setToString(types, builder);
+	}
 
-    @NotNull
-    private static String setToString(@NotNull final TokenSet set, @NotNull final RBuilder builder){
-        final String cachedString = builder.getErrorCache().get(set);
-        if (cachedString!=null){
-            return cachedString;
-        }
+	@NotNull
+	private static String setToString(@NotNull final TokenSet set, @NotNull final RBuilder builder)
+	{
+		final String cachedString = builder.getErrorCache().get(set);
+		if(cachedString != null)
+		{
+			return cachedString;
+		}
 
-        // stringSet used for not to add tokens with similar text, tCOLON2 and tCOLON3 for example!
-        final HashSet<String> stringSet = new HashSet<String>();
-        final StringBuilder buffer = new StringBuilder();
-        for(IElementType myToken: set.getTypes()){
-            if (!builder.isAcceptibleErrorToken(myToken)) {
-                continue;
-            }
-            final String tokenText = getPresentableName(myToken);
-            if (TextUtil.isEmpty(tokenText)) {
-                continue;
-            }
-            if (!stringSet.contains(tokenText)){
-                if (buffer.length()!=0){
-                    buffer.append(" or ");
-                }
-                stringSet.add(tokenText);
-                buffer.append(tokenText);
-            }
-        }
-        final String errorString = buffer.toString();
-        builder.getErrorCache().put(set, errorString);
-        return errorString;
-    }
+		// stringSet used for not to add tokens with similar text, tCOLON2 and tCOLON3 for example!
+		final HashSet<String> stringSet = new HashSet<String>();
+		final StringBuilder buffer = new StringBuilder();
+		for(IElementType myToken : set.getTypes())
+		{
+			if(!builder.isAcceptibleErrorToken(myToken))
+			{
+				continue;
+			}
+			final String tokenText = getPresentableName(myToken);
+			if(TextUtil.isEmpty(tokenText))
+			{
+				continue;
+			}
+			if(!stringSet.contains(tokenText))
+			{
+				if(buffer.length() != 0)
+				{
+					buffer.append(" or ");
+				}
+				stringSet.add(tokenText);
+				buffer.append(tokenText);
+			}
+		}
+		final String errorString = buffer.toString();
+		builder.getErrorCache().put(set, errorString);
+		return errorString;
+	}
 
 }

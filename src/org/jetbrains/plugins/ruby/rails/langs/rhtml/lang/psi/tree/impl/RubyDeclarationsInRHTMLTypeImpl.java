@@ -35,16 +35,20 @@ import com.intellij.util.LanguageVersionUtil;
  * @author: Roman Chernyatchik
  * @date: 07.04.2007
  */
-public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType {//extends TemplateWithOuterFragmentsTypeImpl {
-    public RubyDeclarationsInRHTMLTypeImpl(final String debugName) {
-        super(debugName, RubyLanguage.INSTANCE);
-    }
+public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType
+{//extends TemplateWithOuterFragmentsTypeImpl {
 
-    @Override
-	public ASTNode parseContents(final ASTNode chameleon) {
-        final PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
+	public RubyDeclarationsInRHTMLTypeImpl(final String debugName)
+	{
+		super(debugName, RubyLanguage.INSTANCE);
+	}
 
-        final Lexer lexer = new RHTMLRubyLexer();
+	@Override
+	public ASTNode parseContents(final ASTNode chameleon)
+	{
+		final PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
+
+		final Lexer lexer = new RHTMLRubyLexer();
 
 		LanguageVersion<Language> defaultVersion = LanguageVersionUtil.findDefaultVersion(getLanguage());
 		final Project project = chameleon.getTreeParent().getPsi().getProject();
@@ -52,5 +56,5 @@ public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType {//extends
 		final PsiBuilder builder = factory.createBuilder(project, chameleon, lexer, getLanguage(), defaultVersion, chameleon.getChars());
 
 		return new RHTMLRubyParser().parse(chameleon.getElementType(), builder, defaultVersion);
-    }
+	}
 }

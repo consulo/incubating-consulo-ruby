@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,47 +27,52 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: Sep 22, 2007
  */
-public class RHTMLNodeInfo extends NodeInfo {
-    private final ASTNode parentNode;
-    private final ASTNode previousNode;
-    private final ASTNode nextNode;
+public class RHTMLNodeInfo extends NodeInfo
+{
+	private final ASTNode parentNode;
+	private final ASTNode previousNode;
+	private final ASTNode nextNode;
 
-    @Nullable
-    private final TextRange nextNodeRange;
-
-    protected RHTMLNodeInfo(@NotNull final ASTNode parentNode,
-                            @Nullable final ASTNode previousNode,   //TODO remove, really no usages
-                            @Nullable final ASTNode nextNode,
-                            @Nullable final TextRange nextNodeRange) {
-        this.parentNode = parentNode;
-        this.previousNode = previousNode;
-        this.nextNode = nextNode;
-        this.nextNodeRange = nextNodeRange;
-    }
-
-    @Override
-	public NodeType getType() {
-        return NodeType.RHTML_NODE;
-    }
-
-    @NotNull
-    public ASTNode getParentNode() {
-        return parentNode;
-    }
-
-    @Nullable
-    public ASTNode getPreviousNode() {
-        return previousNode;
-    }
-
-    @Nullable
-    public ASTNode getNextNode() {
-        return nextNode;
-    }
-
-    @Override
 	@Nullable
-    public TextRange getNextNodeTRange() {
-        return nextNodeRange;
-    }
+	private final TextRange nextNodeRange;
+
+	protected RHTMLNodeInfo(@NotNull final ASTNode parentNode, @Nullable final ASTNode previousNode,   //TODO remove, really no usages
+			@Nullable final ASTNode nextNode, @Nullable final TextRange nextNodeRange)
+	{
+		this.parentNode = parentNode;
+		this.previousNode = previousNode;
+		this.nextNode = nextNode;
+		this.nextNodeRange = nextNodeRange;
+	}
+
+	@Override
+	public NodeType getType()
+	{
+		return NodeType.RHTML_NODE;
+	}
+
+	@NotNull
+	public ASTNode getParentNode()
+	{
+		return parentNode;
+	}
+
+	@Nullable
+	public ASTNode getPreviousNode()
+	{
+		return previousNode;
+	}
+
+	@Nullable
+	public ASTNode getNextNode()
+	{
+		return nextNode;
+	}
+
+	@Override
+	@Nullable
+	public TextRange getNextNodeTRange()
+	{
+		return nextNodeRange;
+	}
 }

@@ -26,11 +26,11 @@ import com.intellij.psi.tree.IElementType;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public interface RHTMLTokenTypeEx extends RHTMLTokenType {
-    // This token is passed to html cutting lexer for all not html fragments.
-    public IElementType RHTML_INJECTION_IN_HTML = new IRHTMLElementType("RHTML_INJECTION_IN_HTML");
+public interface RHTMLTokenTypeEx extends RHTMLTokenType
+{
+	// This token is passed to html cutting lexer for all not html fragments.
+	public IElementType RHTML_INJECTION_IN_HTML = new IRHTMLElementType("RHTML_INJECTION_IN_HTML");
 
-    // This token is passed to RHTMLRuby lexer for all not ruby fragments.
-    public IElementType RHTML_INJECTION_IN_RUBY = new IRHTMLElementType("RHTML_INJECTION_IN_RUBY",
-                                                                               RBundle.message("parsing.rhtml.injection.in.ruby.title"));
+	// This token is passed to RHTMLRuby lexer for all not ruby fragments.
+	public IElementType RHTML_INJECTION_IN_RUBY = new IRHTMLElementType("RHTML_INJECTION_IN_RUBY", RBundle.message("parsing.rhtml.injection.in.ruby.title"));
 }

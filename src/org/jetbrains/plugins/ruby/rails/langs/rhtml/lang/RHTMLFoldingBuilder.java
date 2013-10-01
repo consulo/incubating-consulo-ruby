@@ -16,6 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -26,14 +34,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.xml.XmlComment;
 import com.intellij.psi.xml.XmlTag;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,84 +41,100 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 11.04.2007
  */
-public class RHTMLFoldingBuilder implements FoldingBuilder {
-    private static final Logger LOG = Logger.getInstance(RHTMLFoldingBuilder.class.getName());
+public class RHTMLFoldingBuilder implements FoldingBuilder
+{
+	private static final Logger LOG = Logger.getInstance(RHTMLFoldingBuilder.class.getName());
 
-    @NonNls public static final String RHTML_COMMENT_FOLD_TEXT =            "<%#...%>";
-    @NonNls private static final String RHTML_SCRIPTLET_FOLD_TEXT =          "<%...%>";
-    @NonNls private static final String RHTML_EXPRESSION_FOLD_TEXT =         "<%=...%>";
+	@NonNls
+	public static final String RHTML_COMMENT_FOLD_TEXT = "<%#...%>";
+	@NonNls
+	private static final String RHTML_SCRIPTLET_FOLD_TEXT = "<%...%>";
+	@NonNls
+	private static final String RHTML_EXPRESSION_FOLD_TEXT = "<%=...%>";
 
-    @NonNls private static final String XML_COMMENT_OPEN_TAG =               "...";
+	@NonNls
+	private static final String XML_COMMENT_OPEN_TAG = "...";
 
-    private static final TokenSet COLLAPSED_BY_DEFAULT = TokenSet.create(
-            RHTMLElementType.RHTML_COMMENT_ELEMENT);
+	private static final TokenSet COLLAPSED_BY_DEFAULT = TokenSet.create(RHTMLElementType.RHTML_COMMENT_ELEMENT);
 
-    private static final TokenSet FOLDED_ELEMENTS = TokenSet.create(
-                      RHTMLElementType.RHTML_XML_TAG,
-                      RHTMLElementType.RHTML_COMMENT_ELEMENT);
+	private static final TokenSet FOLDED_ELEMENTS = TokenSet.create(RHTMLElementType.RHTML_XML_TAG, RHTMLElementType.RHTML_COMMENT_ELEMENT);
 
-    @Override
+	@Override
 	@NotNull
-    public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document) {
-        List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
-        gatherDescriptors(astNode, descriptors, document);
-        return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
-    }
+	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document)
+	{
+		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
+		gatherDescriptors(astNode, descriptors, document);
+		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+	}
 
-    private void gatherDescriptors(@NotNull final ASTNode node,
-                                   @NotNull final List<FoldingDescriptor> descriptors,
-                                   @NotNull final Document document) {
-        final IElementType type = node.getElementType();
+	private void gatherDescriptors(@NotNull final ASTNode node, @NotNull final List<FoldingDescriptor> descriptors, @NotNull final Document document)
+	{
+		final IElementType type = node.getElementType();
 
-        if (FOLDED_ELEMENTS.contains(type)) {
-            final ASTNode first = node.getFirstChildNode();
-            final ASTNode last = node.getLastChildNode();
-            if (first != null && last != null && first != last) {
-                int startLine = document.getLineNumber(first.getStartOffset());
-                int endLine = document.getLineNumber(last.getStartOffset() + last.getTextLength());
-                if (startLine != endLine) {
-                    descriptors.add(new FoldingDescriptor(node, node.getTextRange()));
-                }
-            }
-        }
+		if(FOLDED_ELEMENTS.contains(type))
+		{
+			final ASTNode first = node.getFirstChildNode();
+			final ASTNode last = node.getLastChildNode();
+			if(first != null && last != null && first != last)
+			{
+				int startLine = document.getLineNumber(first.getStartOffset());
+				int endLine = document.getLineNumber(last.getStartOffset() + last.getTextLength());
+				if(startLine != endLine)
+				{
+					descriptors.add(new FoldingDescriptor(node, node.getTextRange()));
+				}
+			}
+		}
 
 
-        for (ASTNode child : node.getChildren(null)){
-            gatherDescriptors(child, descriptors, document);
-        }
-    }
+		for(ASTNode child : node.getChildren(null))
+		{
+			gatherDescriptors(child, descriptors, document);
+		}
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getPlaceholderText(@NotNull final ASTNode node) {
-        final IElementType nodeType = node.getElementType();
-        if (nodeType == RHTMLElementType.RHTML_XML_TAG) {
-            final ASTNode tagOpen = node.getFirstChildNode();
-            if (tagOpen == null) {
-                return null;
-            }
-            final IElementType type = tagOpen.getElementType();
-            if (type == RHTMLTokenType.RHTML_SCRIPTLET_START) {
-                return RHTML_SCRIPTLET_FOLD_TEXT;
-            } else if (type == RHTMLTokenType.RHTML_EXPRESSION_START) {
-                return RHTML_EXPRESSION_FOLD_TEXT;
-            }
-            return null;
-        } else if (nodeType == RHTMLElementType.RHTML_COMMENT_ELEMENT) {
-            return RHTML_COMMENT_FOLD_TEXT;
-        }
+	public String getPlaceholderText(@NotNull final ASTNode node)
+	{
+		final IElementType nodeType = node.getElementType();
+		if(nodeType == RHTMLElementType.RHTML_XML_TAG)
+		{
+			final ASTNode tagOpen = node.getFirstChildNode();
+			if(tagOpen == null)
+			{
+				return null;
+			}
+			final IElementType type = tagOpen.getElementType();
+			if(type == RHTMLTokenType.RHTML_SCRIPTLET_START)
+			{
+				return RHTML_SCRIPTLET_FOLD_TEXT;
+			}
+			else if(type == RHTMLTokenType.RHTML_EXPRESSION_START)
+			{
+				return RHTML_EXPRESSION_FOLD_TEXT;
+			}
+			return null;
+		}
+		else if(nodeType == RHTMLElementType.RHTML_COMMENT_ELEMENT)
+		{
+			return RHTML_COMMENT_FOLD_TEXT;
+		}
 
-        final PsiElement psi = node.getPsi();
-        if (psi instanceof XmlComment || psi instanceof XmlTag) {
-            return XML_COMMENT_OPEN_TAG;
-        }
+		final PsiElement psi = node.getPsi();
+		if(psi instanceof XmlComment || psi instanceof XmlTag)
+		{
+			return XML_COMMENT_OPEN_TAG;
+		}
 
-        LOG.error("Unknown element:" + psi);
-        return null;
-    }
+		LOG.error("Unknown element:" + psi);
+		return null;
+	}
 
-    @Override
-	public boolean isCollapsedByDefault(@NotNull ASTNode node) {
-        return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
-    }
+	@Override
+	public boolean isCollapsedByDefault(@NotNull ASTNode node)
+	{
+		return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
+	}
 }

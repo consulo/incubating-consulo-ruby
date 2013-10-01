@@ -37,60 +37,69 @@ import com.intellij.openapi.module.ModuleServiceManager;
  * @date: Apr 19, 2008
  */
 @State(
-  name = RComponents.RSPEC_MODULE_SETTINGS_STORAGE,
-  storages = {
-    @Storage(
-      file = "$MODULE_FILE$"
-    )
-  }
+		name = RComponents.RSPEC_MODULE_SETTINGS_STORAGE,
+		storages = {
+				@Storage(
+						file = "$MODULE_FILE$"
+				)
+		}
 )
-public class RSpecModuleSettingsStorage extends SettingsExternalizer implements PersistentStateComponent<Element> {
-    private static final Logger LOG = Logger.getInstance(RSpecModuleSettingsStorage.class.getName());
+public class RSpecModuleSettingsStorage extends SettingsExternalizer implements PersistentStateComponent<Element>
+{
+	private static final Logger LOG = Logger.getInstance(RSpecModuleSettingsStorage.class.getName());
 
-    public RSpecModuleSettings.RSpecSupportType rSpecSupportType = RSpecModuleSettings.RSpecSupportType.NONE;
+	public RSpecModuleSettings.RSpecSupportType rSpecSupportType = RSpecModuleSettings.RSpecSupportType.NONE;
 
-    @NonNls
-    private static final String RSPEC_SUPPORT_TYPE = "RSPEC_SUPPORT_TYPE";
-    @NonNls
-    private static final String RSPEC_MODULE_SETTINGS_STORAGE_ID = "RSPEC_MODULE_SETTINGS_STORAGE_ID";
+	@NonNls
+	private static final String RSPEC_SUPPORT_TYPE = "RSPEC_SUPPORT_TYPE";
+	@NonNls
+	private static final String RSPEC_MODULE_SETTINGS_STORAGE_ID = "RSPEC_MODULE_SETTINGS_STORAGE_ID";
 
-    public static RSpecModuleSettingsStorage getInstance(@NotNull final Module module) {
-        return ModuleServiceManager.getService(module, RSpecModuleSettingsStorage.class);
-    }
+	public static RSpecModuleSettingsStorage getInstance(@NotNull final Module module)
+	{
+		return ModuleServiceManager.getService(module, RSpecModuleSettingsStorage.class);
+	}
 
-    @Override
-	public Element getState() {
-        final Element element = new Element(getID());
+	@Override
+	public Element getState()
+	{
+		final Element element = new Element(getID());
 
-        //writeExternal
-        writeOption(RSPEC_SUPPORT_TYPE,
-                    rSpecSupportType.toString(),
-                    element);
+		//writeExternal
+		writeOption(RSPEC_SUPPORT_TYPE, rSpecSupportType.toString(), element);
 
-        return element;
-    }
+		return element;
+	}
 
-    @Override
-	public void loadState(@NotNull final Element elem) {
-//readExternal
-        final Map<String, String> optionsByName = buildOptionsByElement(elem);
+	@Override
+	public void loadState(@NotNull final Element elem)
+	{
+		//readExternal
+		final Map<String, String> optionsByName = buildOptionsByElement(elem);
 
-        final String rSpecSupportTypeStr = optionsByName.get(RSPEC_SUPPORT_TYPE);
-        if (rSpecSupportTypeStr == null) {
-            rSpecSupportType = RSpecModuleSettings.RSpecSupportType.NONE;
-        } else {
-            try {
-                rSpecSupportType = RSpecModuleSettings.RSpecSupportType.valueOf(rSpecSupportTypeStr);
-            } catch (IllegalArgumentException e) {
-                LOG.warn("RSpec settings: Can't parse RSpecSupportType. Value = " + rSpecSupportTypeStr);
+		final String rSpecSupportTypeStr = optionsByName.get(RSPEC_SUPPORT_TYPE);
+		if(rSpecSupportTypeStr == null)
+		{
+			rSpecSupportType = RSpecModuleSettings.RSpecSupportType.NONE;
+		}
+		else
+		{
+			try
+			{
+				rSpecSupportType = RSpecModuleSettings.RSpecSupportType.valueOf(rSpecSupportTypeStr);
+			}
+			catch(IllegalArgumentException e)
+			{
+				LOG.warn("RSpec settings: Can't parse RSpecSupportType. Value = " + rSpecSupportTypeStr);
 
-                rSpecSupportType = RSpecModuleSettings.RSpecSupportType.NONE;
-            }
-        }
-    }
+				rSpecSupportType = RSpecModuleSettings.RSpecSupportType.NONE;
+			}
+		}
+	}
 
-    @Override
-	public String getID() {
-        return RSPEC_MODULE_SETTINGS_STORAGE_ID;
-    }
+	@Override
+	public String getID()
+	{
+		return RSPEC_MODULE_SETTINGS_STORAGE_ID;
+	}
 }

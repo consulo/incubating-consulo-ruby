@@ -17,98 +17,105 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.*;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.BinaryExprParsing;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ParsingMethodWithAssignmentLookup;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-class BitExpression implements RubyTokenTypes {
+class BitExpression implements RubyTokenTypes
+{
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        return parseBitOr(builder);
-    }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		return parseBitOr(builder);
+	}
 
-    /**
-     * Parsing binary expression with operations:  | ^
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    @NotNull
-    private static IElementType parseBitOr(final RBuilder builder) {
-        return parseBitOrWithLeadBitAnd(builder, builder.mark(), parseBitAnd(builder));
-    }
+	/**
+	 * Parsing binary expression with operations:  | ^
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseBitOr(final RBuilder builder)
+	{
+		return parseBitOrWithLeadBitAnd(builder, builder.mark(), parseBitAnd(builder));
+	}
 
-    /**
-     * Parsing binary or with lead bit and
-     * @param builder Current builder
-     * @return result of parsing
-     * @param marker Marker before lead BitAnd
-     * @param result result of bit And parsing
-     */
-    @NotNull
-    private static IElementType parseBitOrWithLeadBitAnd(final RBuilder builder, final RMarker marker, final IElementType result) {
-        ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @Override
+	/**
+	 * Parsing binary or with lead bit and
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before lead BitAnd
+	 * @param result  result of bit And parsing
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseBitOrWithLeadBitAnd(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
+		{
+			@Override
 			@NotNull
-            public IElementType parseInner(final RBuilder builder){
-                return parseBitAnd(builder);
-            }
-        };
-        return BinaryExprParsing.parseWithLeadOperand(builder,
-                marker, result,
-                parsingMethod,
-                ErrorMsg.EXPRESSION_EXPECTED_MESSAGE,
-                BNF.tBIT_OR_OPS,
-                RubyElementTypes.BIT_EXPRESSION);
-    }
+			public IElementType parseInner(final RBuilder builder)
+			{
+				return parseBitAnd(builder);
+			}
+		};
+		return BinaryExprParsing.parseWithLeadOperand(builder, marker, result, parsingMethod, ErrorMsg.EXPRESSION_EXPECTED_MESSAGE, BNF.tBIT_OR_OPS, RubyElementTypes.BIT_EXPRESSION);
+	}
 
-    /**
-     * Parsing binary expression with operations:  &
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    @NotNull
-    private static IElementType parseBitAnd(final RBuilder builder) {
-        return parseBitAndWithLeadShift(builder, builder.mark(), ShiftExpression.parse(builder));
-    }
+	/**
+	 * Parsing binary expression with operations:  &
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseBitAnd(final RBuilder builder)
+	{
+		return parseBitAndWithLeadShift(builder, builder.mark(), ShiftExpression.parse(builder));
+	}
 
-    /**
-     * Parsing bit and with lead Shift
-     * @param builder Current builder
-     * @return result of parsing
-     * @param marker Marker before lead ShiftExpr
-     * @param result result of ShiftExpr parsing
-     */
-    @NotNull
-    private static IElementType parseBitAndWithLeadShift(final RBuilder builder, final RMarker marker, final IElementType result) {
-        ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @Override
+	/**
+	 * Parsing bit and with lead Shift
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before lead ShiftExpr
+	 * @param result  result of ShiftExpr parsing
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseBitAndWithLeadShift(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
+		{
+			@Override
 			@NotNull
-            public IElementType parseInner(final RBuilder builder){
-                return ShiftExpression.parse(builder);
-            }
-        };
+			public IElementType parseInner(final RBuilder builder)
+			{
+				return ShiftExpression.parse(builder);
+			}
+		};
 
-        return BinaryExprParsing.parseWithLeadOperand(builder,
-                marker, result,
-                parsingMethod,
-                ErrorMsg.EXPRESSION_EXPECTED_MESSAGE,
-                tBIT_AND,
-                RubyElementTypes.BIT_EXPRESSION);
-    }
+		return BinaryExprParsing.parseWithLeadOperand(builder, marker, result, parsingMethod, ErrorMsg.EXPRESSION_EXPECTED_MESSAGE, tBIT_AND, RubyElementTypes.BIT_EXPRESSION);
+	}
 
-    public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result) {
-        return parseBitOrWithLeadBitAnd(builder, marker.precede(),
-                parseBitAndWithLeadShift(builder, marker.precede(),
-                        ShiftExpression.parseWithLeadPRIMARY(builder, marker, result)));
-    }
+	public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		return parseBitOrWithLeadBitAnd(builder, marker.precede(), parseBitAndWithLeadShift(builder, marker.precede(), ShiftExpression.parseWithLeadPRIMARY(builder, marker, result)));
+	}
 }

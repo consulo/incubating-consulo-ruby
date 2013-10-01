@@ -16,21 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RField extends RVirtualField, RNamedElement, PsiNamedElement {
-    /**
-     * @return Holder, some fields can have no holder (if used in file level)
-     */
-    @Nullable
-    public FieldDefinition getDescription();
+public interface RField extends RVirtualField, RNamedElement, PsiNamedElement
+{
+	/**
+	 * @return Holder, some fields can have no holder (if used in file level)
+	 */
+	@Nullable
+	public FieldDefinition getDescription();
 }

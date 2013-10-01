@@ -20,11 +20,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.Instruction;
 /**
  * @author ven
  */
-public interface DfaInstance<E> {
-  void fun(E e, Instruction instruction);
+public interface DfaInstance<E>
+{
+	void fun(E e, Instruction instruction);
 
-  @NotNull
-  E initial();
+	@NotNull
+	E initial();
 
-  boolean isForward();
+	boolean isForward();
 }

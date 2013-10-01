@@ -20,14 +20,21 @@ import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 08.10.2006
  */
-public interface RailsNodeVisitor extends SimpleNodeVisitor {
-    public void visitClassNode();
-    public void visitControllerNode();
-    public void visitModelNode();
-    public void visitTestNode();
-    public void visitUserNode(boolean isUnderTestsRoot);
-    public void visitSharedPartialsNode();
+public interface RailsNodeVisitor extends SimpleNodeVisitor
+{
+	public void visitClassNode();
+
+	public void visitControllerNode();
+
+	public void visitModelNode();
+
+	public void visitTestNode();
+
+	public void visitUserNode(boolean isUnderTestsRoot);
+
+	public void visitSharedPartialsNode();
 }

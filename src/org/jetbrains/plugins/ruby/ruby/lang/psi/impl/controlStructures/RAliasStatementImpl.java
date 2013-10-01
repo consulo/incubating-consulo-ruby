@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElementVisitor;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -33,98 +32,116 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatemen
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.06.2006
  */
-public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatement {
-    public RAliasStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatement
+{
+	public RAliasStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRAliasStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRAliasStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getPsiOldName() {
-        return getChildByType(RPsiElement.class, 1);
-    }
+	public RPsiElement getPsiOldName()
+	{
+		return getChildByType(RPsiElement.class, 1);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getPsiNewName() {
-        return getChildByType(RPsiElement.class, 0);
-    }
+	public RPsiElement getPsiNewName()
+	{
+		return getChildByType(RPsiElement.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getOldName() {
-        return getName(getPsiOldName());
-    }
+	public String getOldName()
+	{
+		return getName(getPsiOldName());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getNewName() {
-        return getName(getPsiNewName());
-    }
+	public String getNewName()
+	{
+		return getName(getPsiNewName());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container,
-                                                       @NotNull final RFileInfo info) {
-        return new RVirtualAliasImpl(container, getOldName(), getNewName());
-    }
+	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, @NotNull final RFileInfo info)
+	{
+		return new RVirtualAliasImpl(container, getOldName(), getNewName());
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.ALIAS;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.ALIAS;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableText() {
-        return getText();
-    }
+	public String getPresentableText()
+	{
+		return getText();
+	}
 
-    @NotNull
-    private static String getName(RPsiElement element) {
-        if (element!=null){
-            if (element instanceof RSymbol){
-                return ((RSymbol) element).getObject().getText();
-            }
-            return element.getText();
-        }
-        return "";
-    }
+	@NotNull
+	private static String getName(RPsiElement element)
+	{
+		if(element != null)
+		{
+			if(element instanceof RSymbol)
+			{
+				return ((RSymbol) element).getObject().getText();
+			}
+			return element.getText();
+		}
+		return "";
+	}
 
-    @Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
-        if (!(element instanceof RVirtualAlias)){
-            return false;
-        }
-        final RVirtualAlias alias = (RVirtualAlias) element;
-        return getNewName().equals(alias.getNewName()) && getOldName().equals(alias.getOldName());
-    }
+	@Override
+	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	{
+		if(!(element instanceof RVirtualAlias))
+		{
+			return false;
+		}
+		final RVirtualAlias alias = (RVirtualAlias) element;
+		return getNewName().equals(alias.getNewName()) && getOldName().equals(alias.getOldName());
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Icon getIcon(final int flags) {
-        return RAliasPresentationUtil.getIcon();
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RAliasPresentationUtil.getIcon();
+	}
 
-    @Override
-	public ItemPresentation getPresentation() {
-        return RAliasPresentationUtil.getPresentation(this);
-    }
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return RAliasPresentationUtil.getPresentation(this);
+	}
 }

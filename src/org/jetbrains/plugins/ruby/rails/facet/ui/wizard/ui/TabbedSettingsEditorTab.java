@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
-import com.intellij.facet.ui.FacetEditorTab;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.facet.ui.FacetEditorTab;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,21 +25,25 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: Apr 5, 2008
  */
-public abstract class TabbedSettingsEditorTab extends FacetEditorTab{
-    private TabbedSettingsContext myContext;
+public abstract class TabbedSettingsEditorTab extends FacetEditorTab
+{
+	private TabbedSettingsContext myContext;
 
-    public void setContext(@NotNull final TabbedSettingsContext context) {
-        myContext = context;
-    }
+	public void setContext(@NotNull final TabbedSettingsContext context)
+	{
+		myContext = context;
+	}
 
-    public TabbedSettingsContext getContext() {
-        return myContext;
-    }
+	public TabbedSettingsContext getContext()
+	{
+		return myContext;
+	}
 
-    /**
-     * It will be invoked before show the dialog.
-     */
-    public void beforeShow() {
-        //Do nothing
-    }
+	/**
+	 * It will be invoked before show the dialog.
+	 */
+	public void beforeShow()
+	{
+		//Do nothing
+	}
 }

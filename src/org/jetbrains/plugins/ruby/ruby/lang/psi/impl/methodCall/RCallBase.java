@@ -16,21 +16,32 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaReferencesBuilder;
-import org.jetbrains.plugins.ruby.ruby.RubyPsiManager;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualExtend;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualInclude;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaPackage;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualExtendImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualImportJavaClassImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualIncludeImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualIncludeJavaClassImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualIncludeJavaPackageImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualLoadImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualRequireImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables.RVirtualFieldAttrImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
@@ -52,279 +63,342 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
 import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Comparing;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.08.2006
  */
-public abstract class RCallBase extends RPsiElementBase implements RPsiElement, RCall {
-    public RCallBase(ASTNode astNode) {
-        super(astNode);
-    }
+public abstract class RCallBase extends RPsiElementBase implements RPsiElement, RCall
+{
+	public RCallBase(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public RubyCallType getCallType() {
-        return RCallBaseUtil.getCallType(this);
-    }
+	public RubyCallType getCallType()
+	{
+		return RCallBaseUtil.getCallType(this);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getPsiCommand() {
-        final PsiElement command = getFirstChild();
-        assert command!=null :  "Cannot find command";
-        return command;
-    }
+	public PsiElement getPsiCommand()
+	{
+		final PsiElement command = getFirstChild();
+		assert command != null : "Cannot find command";
+		return command;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiReference[] getReferences() {
-        final RubyCallType callType = getCallType();
+	public PsiReference[] getReferences()
+	{
+		final RubyCallType callType = getCallType();
 
-// Adding required or loaded elements references
-        final List<RPsiElement> arguments = getCallArguments().getElements();
-        if (callType.isFileRef()){
-            List<PsiReference> refs = new ArrayList<PsiReference>();
-            for (RPsiElement argument : arguments) {
-                // add variants for File.dirname(__FILE__) + 'some string here'
-                if (argument instanceof RBinaryExpression){
-                    final RBinaryExpression expr = (RBinaryExpression) argument;
-                    final RPsiElement right = expr.getRightOperand();
-                    if (expr.getOperationType() == RubyTokenTypes.tPLUS &&
-                            RFileUtil.FILE_DIRNAME.equals(expr.getLeftOperand().getText()) &&
-                            right instanceof RBaseString){
-                        refs.add(new RFileReference(this, argument, right, true));
-                    }
-                } else {
-                    refs.add(new RFileReference(this, argument, argument, false));
-                }
-            }
-            return refs.toArray(new PsiReference[refs.size()]);
-        }
+		// Adding required or loaded elements references
+		final List<RPsiElement> arguments = getCallArguments().getElements();
+		if(callType.isFileRef())
+		{
+			List<PsiReference> refs = new ArrayList<PsiReference>();
+			for(RPsiElement argument : arguments)
+			{
+				// add variants for File.dirname(__FILE__) + 'some string here'
+				if(argument instanceof RBinaryExpression)
+				{
+					final RBinaryExpression expr = (RBinaryExpression) argument;
+					final RPsiElement right = expr.getRightOperand();
+					if(expr.getOperationType() == RubyTokenTypes.tPLUS &&
+							RFileUtil.FILE_DIRNAME.equals(expr.getLeftOperand().getText()) &&
+							right instanceof RBaseString)
+					{
+						refs.add(new RFileReference(this, argument, right, true));
+					}
+				}
+				else
+				{
+					refs.add(new RFileReference(this, argument, argument, false));
+				}
+			}
+			return refs.toArray(new PsiReference[refs.size()]);
+		}
 
-// Adding references from attributes to fields
-        if (callType.isAttributeCall()){
-            final RFieldHolder holder = PsiTreeUtil.getParentOfType(this, RFieldHolder.class);
-            assert holder!=null;
-            List<PsiReference> refs = new ArrayList<PsiReference>();
-            for (RPsiElement argument : arguments) {
-                refs.add(new RFieldAttrReference(this, argument, holder));
-            }
-            return refs.toArray(new PsiReference[refs.size()]);
-        }
+		// Adding references from attributes to fields
+		if(callType.isAttributeCall())
+		{
+			final RFieldHolder holder = PsiTreeUtil.getParentOfType(this, RFieldHolder.class);
+			assert holder != null;
+			List<PsiReference> refs = new ArrayList<PsiReference>();
+			for(RPsiElement argument : arguments)
+			{
+				refs.add(new RFieldAttrReference(this, argument, holder));
+			}
+			return refs.toArray(new PsiReference[refs.size()]);
+		}
 
-// Include_class and include_package references
-        if (callType == RubyCallType.INCLUDE_CLASS_CALL ||
-                callType == RubyCallType.INCLUDE_PACKAGE_CALL){
-            final List<RPsiElement> args = getArguments();
-            if (args.size() == 1){
-                final RPsiElement arg = args.get(0);
-                if (arg instanceof RBaseString){
-                    final List<PsiReference> refs = JavaReferencesBuilder.createReferences(this, (RBaseString) arg);
-                    return refs.toArray(new PsiReference[refs.size()]);
-                }
-            }
-        }
+		// Include_class and include_package references
+		if(callType == RubyCallType.INCLUDE_CLASS_CALL || callType == RubyCallType.INCLUDE_PACKAGE_CALL)
+		{
+			final List<RPsiElement> args = getArguments();
+			if(args.size() == 1)
+			{
+				final RPsiElement arg = args.get(0);
+				if(arg instanceof RBaseString)
+				{
+					final List<PsiReference> refs = JavaReferencesBuilder.createReferences(this, (RBaseString) arg);
+					return refs.toArray(new PsiReference[refs.size()]);
+				}
+			}
+		}
 
-// Gems references
-        if (callType.isGemCall()){
-            if (arguments.size()>=1){
-                final RPsiElement gemName = arguments.get(0);
-                if (gemName instanceof RBaseString){
-                    return new PsiReference[]{new GemReference(this, gemName)};
-                }
-            }
-        }
-        return PsiReference.EMPTY_ARRAY;
-    }
+		// Gems references
+		if(callType.isGemCall())
+		{
+			if(arguments.size() >= 1)
+			{
+				final RPsiElement gemName = arguments.get(0);
+				if(gemName instanceof RBaseString)
+				{
+					return new PsiReference[]{new GemReference(this, gemName)};
+				}
+			}
+		}
+		return PsiReference.EMPTY_ARRAY;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RListOfExpressions getCallArguments() {
-        //noinspection ConstantConditions
-        return getChildByType(RListOfExpressions.class, 0);
-    }
+	public RListOfExpressions getCallArguments()
+	{
+		//noinspection ConstantConditions
+		return getChildByType(RListOfExpressions.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getCommand() {
-        return getPsiCommand().getText();
-    }
+	public String getCommand()
+	{
+		return getPsiCommand().getText();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RPsiElement> getArguments() {
-        return getCallArguments().getElements();
-    }
+	public List<RPsiElement> getArguments()
+	{
+		return getCallArguments().getElements();
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualStructuralElement createVirtualCopy(@Nullable RVirtualContainer container, @Nullable RFileInfo info) {
-        final StructureType type = getType();
-// require
-        if (type == StructureType.CALL_REQUIRE){
-            final VirtualFile file = info!=null ? info.getVirtualFile() : null;
-            return new RVirtualRequireImpl(container, RCallBaseUtil.gatherUrls(this, file));
-        }
-// load
-        if (type == StructureType.CALL_LOAD){
-            final VirtualFile file = info!=null ? info.getVirtualFile() : null;
-            return new RVirtualLoadImpl(container, RCallBaseUtil.gatherUrls(this, file));
-        }
+	public RVirtualStructuralElement createVirtualCopy(@Nullable RVirtualContainer container, @Nullable RFileInfo info)
+	{
+		final StructureType type = getType();
+		// require
+		if(type == StructureType.CALL_REQUIRE)
+		{
+			final VirtualFile file = info != null ? info.getVirtualFile() : null;
+			return new RVirtualRequireImpl(container, RCallBaseUtil.gatherUrls(this, file));
+		}
+		// load
+		if(type == StructureType.CALL_LOAD)
+		{
+			final VirtualFile file = info != null ? info.getVirtualFile() : null;
+			return new RVirtualLoadImpl(container, RCallBaseUtil.gatherUrls(this, file));
+		}
 
-// include
-        if (type == StructureType.CALL_INCLUDE){
-            return new RVirtualIncludeImpl(container, RCallBaseUtil.gatherVirtualNames(this));
-        }
-// extend
-        if (type == StructureType.CALL_EXTEND){
-            return new RVirtualExtendImpl(container, RCallBaseUtil.gatherVirtualNames(this));
-        }
+		// include
+		if(type == StructureType.CALL_INCLUDE)
+		{
+			return new RVirtualIncludeImpl(container, RCallBaseUtil.gatherVirtualNames(this));
+		}
+		// extend
+		if(type == StructureType.CALL_EXTEND)
+		{
+			return new RVirtualExtendImpl(container, RCallBaseUtil.gatherVirtualNames(this));
+		}
 
-// attr_reader, attr_writer, attr_accessor
-        if (type == StructureType.FIELD_ATTR_CALL){
-            return new RVirtualFieldAttrImpl(container, getFieldAttrType(), RCallBaseUtil.gatherStrings(this));
-        }
+		// attr_reader, attr_writer, attr_accessor
+		if(type == StructureType.FIELD_ATTR_CALL)
+		{
+			return new RVirtualFieldAttrImpl(container, getFieldAttrType(), RCallBaseUtil.gatherStrings(this));
+		}
 
-// JRuby specific: import, include Java class or package
-        if (type == StructureType.CALL_IMPORT){
-            return new RVirtualImportJavaClassImpl(container, RCallBaseUtil.gatherVirtualNames(this));
-        }
-        if (type == StructureType.CALL_INCLUDE_CLASS){
-            final String javaQualifiedName = RCallBaseUtil.getJavaQualifiedName(this);
-            if (javaQualifiedName!=null){
-                return new RVirtualIncludeJavaClassImpl(container, javaQualifiedName);
-            }
-        }
-        if (type == StructureType.CALL_INCLUDE_PACKAGE){
-            final String javaQualifiedName = RCallBaseUtil.getJavaQualifiedName(this);
-            if (javaQualifiedName!=null){
-                return new RVirtualIncludeJavaPackageImpl(container, javaQualifiedName);
-            }
-        }
+		// JRuby specific: import, include Java class or package
+		if(type == StructureType.CALL_IMPORT)
+		{
+			return new RVirtualImportJavaClassImpl(container, RCallBaseUtil.gatherVirtualNames(this));
+		}
+		if(type == StructureType.CALL_INCLUDE_CLASS)
+		{
+			final String javaQualifiedName = RCallBaseUtil.getJavaQualifiedName(this);
+			if(javaQualifiedName != null)
+			{
+				return new RVirtualIncludeJavaClassImpl(container, javaQualifiedName);
+			}
+		}
+		if(type == StructureType.CALL_INCLUDE_PACKAGE)
+		{
+			final String javaQualifiedName = RCallBaseUtil.getJavaQualifiedName(this);
+			if(javaQualifiedName != null)
+			{
+				return new RVirtualIncludeJavaPackageImpl(container, javaQualifiedName);
+			}
+		}
 
-        throw new IllegalStateException("Cannot create virtual copy for call type: " + getType());
-    }
+		throw new IllegalStateException("Cannot create virtual copy for call type: " + getType());
+	}
 
 
-    @Override
-	public StructureType getType() {
-        return RCallBaseUtil.getType(this);
-    }
+	@Override
+	public StructureType getType()
+	{
+		return RCallBaseUtil.getType(this);
+	}
 
-    public FieldAttrType getFieldAttrType() {
-        return RCallBaseUtil.getFieldAttrType(this);
-    }
+	public FieldAttrType getFieldAttrType()
+	{
+		return RCallBaseUtil.getFieldAttrType(this);
+	}
 
-    @Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
-        final StructureType myType = getType();
-        if (myType == StructureType.FAKE){
-            return false;
-        }
-        if (myType!=element.getType()){
-            return false;
-        }
-        if (myType == StructureType.CALL_REQUIRE){
-            if (!(element instanceof RVirtualRequire)){
-                return false;
-            }
-            final RVirtualRequire require = (RVirtualRequire) element;
-            return require.getNames().equals(RCallBaseUtil.gatherUrls(this, getContainingFile().getVirtualFile()));
-        }
-        if (myType == StructureType.CALL_LOAD){
-            if (!(element instanceof RVirtualLoad)){
-                return false;
-            }
-            final RVirtualLoad load = (RVirtualLoad) element;
-            return load.getNames().equals(RCallBaseUtil.gatherUrls(this, getContainingFile().getVirtualFile()));
-        }
-        if (myType == StructureType.CALL_INCLUDE){
-            if (!(element instanceof RVirtualInclude)){
-                return false;
-            }
-            final RVirtualInclude include = (RVirtualInclude) element;
-            return include.getNames().equals(RCallBaseUtil.gatherVirtualNames(this));
-        }
-        if (myType == StructureType.CALL_EXTEND){
-            if (!(element instanceof RVirtualExtend)){
-                return false;
-            }
-            final RVirtualExtend extend = (RVirtualExtend) element;
-            return extend.getNames().equals(RCallBaseUtil.gatherVirtualNames(this));
-        }
-        if (myType == StructureType.FIELD_ATTR_CALL){
-            if (!(element instanceof RVirtualFieldAttr)){
-                return false;
-            }
-            final RVirtualFieldAttr fieldAttr = (RVirtualFieldAttr) element;
-            return fieldAttr.getFieldAttrType() == getFieldAttrType() && fieldAttr.getNames().equals(RCallBaseUtil.gatherStrings(this));
-        }
-        if (myType == StructureType.CALL_IMPORT){
-            if (!(element instanceof RVirtualImportJavaClass)){
-                return false;
-            }
-            final RVirtualImportJavaClass importtt = (RVirtualImportJavaClass) element;
-            return importtt.getNames().equals(RCallBaseUtil.gatherVirtualNames(this));
-        }
-        if (myType == StructureType.CALL_INCLUDE_CLASS){
-            if (!(element instanceof RVirtualIncludeJavaClass)){
-                return false;
-            }
-            final RVirtualIncludeJavaClass include = (RVirtualIncludeJavaClass) element;
-            return Comparing.equal(RCallBaseUtil.getJavaQualifiedName(this), include.getQualifiedName());
-        }
-        if (myType == StructureType.CALL_INCLUDE_PACKAGE){
-            if (!(element instanceof RVirtualIncludeJavaPackage)){
-                return false;
-            }
-            final RVirtualIncludeJavaPackage include = (RVirtualIncludeJavaPackage) element;
-            return Comparing.equal(RCallBaseUtil.getJavaQualifiedName(this), include.getQualifiedName());
-        }
-        return false;
-    }
+	@Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	{
+		final StructureType myType = getType();
+		if(myType == StructureType.FAKE)
+		{
+			return false;
+		}
+		if(myType != element.getType())
+		{
+			return false;
+		}
+		if(myType == StructureType.CALL_REQUIRE)
+		{
+			if(!(element instanceof RVirtualRequire))
+			{
+				return false;
+			}
+			final RVirtualRequire require = (RVirtualRequire) element;
+			return require.getNames().equals(RCallBaseUtil.gatherUrls(this, getContainingFile().getVirtualFile()));
+		}
+		if(myType == StructureType.CALL_LOAD)
+		{
+			if(!(element instanceof RVirtualLoad))
+			{
+				return false;
+			}
+			final RVirtualLoad load = (RVirtualLoad) element;
+			return load.getNames().equals(RCallBaseUtil.gatherUrls(this, getContainingFile().getVirtualFile()));
+		}
+		if(myType == StructureType.CALL_INCLUDE)
+		{
+			if(!(element instanceof RVirtualInclude))
+			{
+				return false;
+			}
+			final RVirtualInclude include = (RVirtualInclude) element;
+			return include.getNames().equals(RCallBaseUtil.gatherVirtualNames(this));
+		}
+		if(myType == StructureType.CALL_EXTEND)
+		{
+			if(!(element instanceof RVirtualExtend))
+			{
+				return false;
+			}
+			final RVirtualExtend extend = (RVirtualExtend) element;
+			return extend.getNames().equals(RCallBaseUtil.gatherVirtualNames(this));
+		}
+		if(myType == StructureType.FIELD_ATTR_CALL)
+		{
+			if(!(element instanceof RVirtualFieldAttr))
+			{
+				return false;
+			}
+			final RVirtualFieldAttr fieldAttr = (RVirtualFieldAttr) element;
+			return fieldAttr.getFieldAttrType() == getFieldAttrType() && fieldAttr.getNames().equals(RCallBaseUtil.gatherStrings(this));
+		}
+		if(myType == StructureType.CALL_IMPORT)
+		{
+			if(!(element instanceof RVirtualImportJavaClass))
+			{
+				return false;
+			}
+			final RVirtualImportJavaClass importtt = (RVirtualImportJavaClass) element;
+			return importtt.getNames().equals(RCallBaseUtil.gatherVirtualNames(this));
+		}
+		if(myType == StructureType.CALL_INCLUDE_CLASS)
+		{
+			if(!(element instanceof RVirtualIncludeJavaClass))
+			{
+				return false;
+			}
+			final RVirtualIncludeJavaClass include = (RVirtualIncludeJavaClass) element;
+			return Comparing.equal(RCallBaseUtil.getJavaQualifiedName(this), include.getQualifiedName());
+		}
+		if(myType == StructureType.CALL_INCLUDE_PACKAGE)
+		{
+			if(!(element instanceof RVirtualIncludeJavaPackage))
+			{
+				return false;
+			}
+			final RVirtualIncludeJavaPackage include = (RVirtualIncludeJavaPackage) element;
+			return Comparing.equal(RCallBaseUtil.getJavaQualifiedName(this), include.getQualifiedName());
+		}
+		return false;
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        final FieldAttrType type = getFieldAttrType();
-        if (type != null){
-            return RFieldAttrPresentationUtil.getAttrIcon(type);
-        }
+	@Nullable
+	public Icon getIcon(final int flags)
+	{
+		final FieldAttrType type = getFieldAttrType();
+		if(type != null)
+		{
+			return RFieldAttrPresentationUtil.getAttrIcon(type);
+		}
 
-        if (getCallType() == RubyCallType.IMPORT_CALL ||
-                getCallType() == RubyCallType.INCLUDE_CLASS_CALL ||
-                getCallType() == RubyCallType.INCLUDE_PACKAGE_CALL){
-            return JavaClassPackagePresentationUtil.getIncludeIcon();
-        }
-        return null;
-    }
+		if(getCallType() == RubyCallType.IMPORT_CALL ||
+				getCallType() == RubyCallType.INCLUDE_CLASS_CALL ||
+				getCallType() == RubyCallType.INCLUDE_PACKAGE_CALL)
+		{
+			return JavaClassPackagePresentationUtil.getIncludeIcon();
+		}
+		return null;
+	}
 
-    @Override
-	public ItemPresentation getPresentation() {
-        final StructureType type = getType();
-        if (type == StructureType.FIELD_ATTR_CALL){
-            return RFieldAttrPresentationUtil.getPresentation(this);
-        }
-        if (getCallType() == RubyCallType.IMPORT_CALL ||
-                type == StructureType.CALL_INCLUDE_CLASS || 
-                type == StructureType.CALL_INCLUDE_PACKAGE){
-            return JavaClassPackagePresentationUtil.getIncludeJavaPresentation(this);
-        }
-        return null;
-    }
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		final StructureType type = getType();
+		if(type == StructureType.FIELD_ATTR_CALL)
+		{
+			return RFieldAttrPresentationUtil.getPresentation(this);
+		}
+		if(getCallType() == RubyCallType.IMPORT_CALL ||
+				type == StructureType.CALL_INCLUDE_CLASS ||
+				type == StructureType.CALL_INCLUDE_PACKAGE)
+		{
+			return JavaClassPackagePresentationUtil.getIncludeJavaPresentation(this);
+		}
+		return null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final TypeInferenceHelper helper = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper();
-        helper.testAndSet(fileSymbol);
-        return helper.inferCallType(this);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(getProject());
+		helper.testAndSet(fileSymbol);
+		return helper.inferCallType(this);
+	}
 }

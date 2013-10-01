@@ -25,48 +25,56 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: Mar 15, 2008
  */
-public interface RailsWizardSettingsHolder extends RubyWizardSettingsHolder {
+public interface RailsWizardSettingsHolder extends RubyWizardSettingsHolder
+{
 
-    @Nullable
-    public String getRailsApplicationHomeDirRelativePath();
-    public void setRailsApplicationHomeDirRelativePath(@Nullable final String relativePath);
+	@Nullable
+	public String getRailsApplicationHomeDirRelativePath();
 
-    public Generate getAppGenerateWay();
-    public void setAppGenerateWay(@NotNull final Generate generateWay);
+	public void setRailsApplicationHomeDirRelativePath(@Nullable final String relativePath);
 
-    public void setRSpecConf(@NotNull final RSpecConfiguration RSpecConf);
-    @NotNull
-    public RSpecConfiguration getRSpecConf();
+	public Generate getAppGenerateWay();
 
-    /**
-     * @return Name of DB to preconfigure or null to use default configuration
-     */
-    @Nullable
-    public String getDBNameToPreconfigure();
+	public void setAppGenerateWay(@NotNull final Generate generateWay);
 
-    /**
-     * @param dbName Name of DB to preconfigure or null to use default configuration
-     */
-    public void setDBNameToPreconfigure(@Nullable final String dbName);
+	public void setRSpecConf(@NotNull final RSpecConfiguration RSpecConf);
 
-    enum Generate {
-        NEW, NOT
-    }
+	@NotNull
+	public RSpecConfiguration getRSpecConf();
 
-    interface RSpecConfiguration {
-        public boolean enableRSpecSupport();
-        public boolean enableRSpecRailsSupport();
+	/**
+	 * @return Name of DB to preconfigure or null to use default configuration
+	 */
+	@Nullable
+	public String getDBNameToPreconfigure();
 
-        public boolean shouldInstallRSpecPlugin();
-        public boolean shouldInstallRSpecRailsPlugin();
+	/**
+	 * @param dbName Name of DB to preconfigure or null to use default configuration
+	 */
+	public void setDBNameToPreconfigure(@Nullable final String dbName);
 
-        @NotNull
-        public String getRSpecArgs();
+	enum Generate
+	{
+		NEW, NOT
+	}
 
-        @NotNull
-        public String getRSpecRailsArgs();
+	interface RSpecConfiguration
+	{
+		public boolean enableRSpecSupport();
 
-        @Nullable
-        public String getSvnPath();
-    }
+		public boolean enableRSpecRailsSupport();
+
+		public boolean shouldInstallRSpecPlugin();
+
+		public boolean shouldInstallRSpecRailsPlugin();
+
+		@NotNull
+		public String getRSpecArgs();
+
+		@NotNull
+		public String getRSpecRailsArgs();
+
+		@Nullable
+		public String getSvnPath();
+	}
 }

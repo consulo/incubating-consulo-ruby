@@ -16,43 +16,52 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
-import com.intellij.reference.SoftReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
+import com.intellij.reference.SoftReference;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 19.10.2007
-*/
-public class RubyFilesCacheSoftReferenceAdapter implements RubyFilesCacheListener{
-    private SoftReference<RubyFilesCacheListener> myReference;
+ */
+public class RubyFilesCacheSoftReferenceAdapter implements RubyFilesCacheListener
+{
+	private SoftReference<RubyFilesCacheListener> myReference;
 
-    public RubyFilesCacheSoftReferenceAdapter(@NotNull final RubyFilesCacheListener listener){
-        myReference = new SoftReference<RubyFilesCacheListener>(listener);
-    }
+	public RubyFilesCacheSoftReferenceAdapter(@NotNull final RubyFilesCacheListener listener)
+	{
+		myReference = new SoftReference<RubyFilesCacheListener>(listener);
+	}
 
-    @Override
-	public void fileAdded(@NotNull String url) {
-        final RubyFilesCacheListener listener = myReference.get();
-        if (listener!=null){
-            listener.fileAdded(url);
-        }
-    }
+	@Override
+	public void fileAdded(@NotNull String url)
+	{
+		final RubyFilesCacheListener listener = myReference.get();
+		if(listener != null)
+		{
+			listener.fileAdded(url);
+		}
+	}
 
-    @Override
-	public void fileRemoved(@NotNull String url) {
-        final RubyFilesCacheListener listener = myReference.get();
-        if (listener!=null){
-            listener.fileRemoved(url);
-        }
-    }
+	@Override
+	public void fileRemoved(@NotNull String url)
+	{
+		final RubyFilesCacheListener listener = myReference.get();
+		if(listener != null)
+		{
+			listener.fileRemoved(url);
+		}
+	}
 
-    @Override
-	public void fileUpdated(@NotNull String url) {
-        final RubyFilesCacheListener listener = myReference.get();
-        if (listener!=null){
-            listener.fileUpdated(url);
-        }
-    }
+	@Override
+	public void fileUpdated(@NotNull String url)
+	{
+		final RubyFilesCacheListener listener = myReference.get();
+		if(listener != null)
+		{
+			listener.fileUpdated(url);
+		}
+	}
 }

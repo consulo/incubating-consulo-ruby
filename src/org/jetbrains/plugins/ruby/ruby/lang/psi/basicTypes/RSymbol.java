@@ -16,16 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.08.2006
  */
-public interface RSymbol extends RExpression {
-    @NotNull
-    public PsiElement getObject();
+public interface RSymbol extends RExpression
+{
+	@NotNull
+	public PsiElement getObject();
 }

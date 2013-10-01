@@ -16,10 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.util.IncorrectOperationException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,75 +34,89 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RPseudoConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoConstant {
+public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoConstant
+{
 
-    public static Map<String, String> TYPE_MAP = new HashMap<String, String>();
-    static {
-        TYPE_MAP.put(RubyTokenTypes.kFALSE.toString(),  CoreTypes.FalseClass);
-        TYPE_MAP.put(RubyTokenTypes.kFILE.toString(),   CoreTypes.String);
-        TYPE_MAP.put(RubyTokenTypes.kLINE.toString(),   CoreTypes.Fixnum);
-        TYPE_MAP.put(RubyTokenTypes.kNIL.toString(),    CoreTypes.NilClass);
-        TYPE_MAP.put(RubyTokenTypes.kTRUE.toString(),   CoreTypes.TrueClass);
-    }
+	public static Map<String, String> TYPE_MAP = new HashMap<String, String>();
 
-    public RPseudoConstantImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	static
+	{
+		TYPE_MAP.put(RubyTokenTypes.kFALSE.toString(), CoreTypes.FalseClass);
+		TYPE_MAP.put(RubyTokenTypes.kFILE.toString(), CoreTypes.String);
+		TYPE_MAP.put(RubyTokenTypes.kLINE.toString(), CoreTypes.Fixnum);
+		TYPE_MAP.put(RubyTokenTypes.kNIL.toString(), CoreTypes.NilClass);
+		TYPE_MAP.put(RubyTokenTypes.kTRUE.toString(), CoreTypes.TrueClass);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRPseudoConstant(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	public RPseudoConstantImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	protected PsiReference createReference() {
-        return new RPseudoConstantReference(this);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRPseudoConstant(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
+	protected PsiReference createReference()
+	{
+		return new RPseudoConstantReference(this);
+	}
+
+	@Override
 	@Nullable
-    protected String getPrefix() {
-        return null;
-    }
+	protected String getPrefix()
+	{
+		return null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final String text = getText();
-// kSELF or kSUPER
-        if (RubyTokenTypes.kSELF.toString().equals(text) ||
-                RubyTokenTypes.kSUPER.toString().equals(text)){
-            return super.getType(fileSymbol);
-        }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final String text = getText();
+		// kSELF or kSUPER
+		if(RubyTokenTypes.kSELF.toString().equals(text) || RubyTokenTypes.kSUPER.toString().equals(text))
+		{
+			return super.getType(fileSymbol);
+		}
 
-// Core types
-        final String coreType = TYPE_MAP.get(text);
-        if (coreType!=null){
-            if (CoreTypes.TrueClass.equals(coreType) || CoreTypes.FalseClass.equals(coreType)){
-                return RTypeUtil.getBooleanType(fileSymbol);
-            }
-            return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, coreType), Context.INSTANCE, true);
-        }
-        return RType.NOT_TYPED;
-    }
+		// Core types
+		final String coreType = TYPE_MAP.get(text);
+		if(coreType != null)
+		{
+			if(CoreTypes.TrueClass.equals(coreType) || CoreTypes.FalseClass.equals(coreType))
+			{
+				return RTypeUtil.getBooleanType(fileSymbol);
+			}
+			return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, coreType), Context.INSTANCE, true);
+		}
+		return RType.NOT_TYPED;
+	}
 
-    @Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
-        if (!TextUtil.isCID(newName)){
-            throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
-        }
-    }
+	@Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	{
+		if(!TextUtil.isCID(newName))
+		{
+			throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
+		}
+	}
 }

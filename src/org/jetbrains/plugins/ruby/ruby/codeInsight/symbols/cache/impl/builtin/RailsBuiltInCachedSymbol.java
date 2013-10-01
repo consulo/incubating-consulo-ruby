@@ -34,50 +34,55 @@ import com.intellij.openapi.projectRoots.Sdk;
  * User: oleg
  * Date: Oct 8, 2007
  */
-public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol {
-    private static final Logger LOG = Logger.getInstance(RailsBuiltInCachedSymbol.class.getName());
+public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol
+{
+	private static final Logger LOG = Logger.getInstance(RailsBuiltInCachedSymbol.class.getName());
 
-    public RailsBuiltInCachedSymbol(@NotNull final Project project,
-                                    @NotNull final String url,
-                                    @Nullable final Sdk sdk) {
-        super(project, url, sdk);
-    }
+	public RailsBuiltInCachedSymbol(@NotNull final Project project, @NotNull final String url, @Nullable final Sdk sdk)
+	{
+		super(project, url, sdk);
+	}
 
-    @Override
-	public void fileAdded(@NotNull final String url) {
-        super.fileAdded(url);
-        if (mySdk == null){
-            return;
-        }
-        // We recreate cache if something added to gems
+	@Override
+	public void fileAdded(@NotNull final String url)
+	{
+		super.fileAdded(url);
+		if(mySdk == null)
+		{
+			return;
+		}
+		// We recreate cache if something added to gems
 		final String[] gemsRootUrls = mySdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
-		for (String gemsRootUrl : gemsRootUrls) {
-			if (url.startsWith(gemsRootUrl)){
+		for(String gemsRootUrl : gemsRootUrls)
+		{
+			if(url.startsWith(gemsRootUrl))
+			{
 				myFileSymbol = null;
 				return;
 			}
 		}
 	}
 
-    @Override
-	protected void addAdditionalData() {
-        super.addAdditionalData();
+	@Override
+	protected void addAdditionalData()
+	{
+		super.addAdditionalData();
 
-// Core extensions
-        RailsRequireUtil.loadCoreExtentions(myFileSymbol, InterpretationMode.FULL);
+		// Core extensions
+		RailsRequireUtil.loadCoreExtentions(myFileSymbol, InterpretationMode.FULL);
 
-// Active record
-        RailsRequireUtil.loadDBAdapters(myFileSymbol, InterpretationMode.FULL);
+		// Active record
+		RailsRequireUtil.loadDBAdapters(myFileSymbol, InterpretationMode.FULL);
 
-// Action View
-        RailsRequireUtil.loadBuiltInHelpers(myFileSymbol, InterpretationMode.FULL);
+		// Action View
+		RailsRequireUtil.loadBuiltInHelpers(myFileSymbol, InterpretationMode.FULL);
 
-// Action Mailer
-        MailersConventions.loadBuiltInGems(myFileSymbol, InterpretationMode.FULL);
+		// Action Mailer
+		MailersConventions.loadBuiltInGems(myFileSymbol, InterpretationMode.FULL);
 
-// Load addon file for web service
-        final String url = SymbolCacheUtil.getStubUrl(mySdk, StubsUrls.ACTIVE_SUPPORT_ACTION_MAILER_ADDON_RB);
-        LOG.assertTrue(url!=null);
-        FileSymbolUtil.process(myFileSymbol, url, InterpretationMode.FULL, false);
-    }
+		// Load addon file for web service
+		final String url = SymbolCacheUtil.getStubUrl(mySdk, StubsUrls.ACTIVE_SUPPORT_ACTION_MAILER_ADDON_RB);
+		LOG.assertTrue(url != null);
+		FileSymbolUtil.process(myFileSymbol, url, InterpretationMode.FULL, false);
+	}
 }

@@ -28,8 +28,6 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestUnitUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationForm;
-import org.jetbrains.plugins.ruby.ruby.scope.SearchScope;
-import org.jetbrains.plugins.ruby.ruby.scope.SearchScopeUtil;
 import com.intellij.execution.configuration.BrowseModuleValueActionListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -38,100 +36,104 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.search.GlobalSearchScope;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: 06.08.2007
-*/
+ *
+ * @author: Roman Chernyatchik
+ * @date: 06.08.2007
+ */
 public class TestMethodBrowser extends BrowseModuleValueActionListener
 {
-    private final RTestsRunConfigurationForm myForm;
-    public final SearchScope myScope;
+	private final RTestsRunConfigurationForm myForm;
+	public final GlobalSearchScope myScope;
 
-    public TestMethodBrowser(final Project project, final RTestsRunConfigurationForm form) {
-        super(project);
+	public TestMethodBrowser(final Project project, final RTestsRunConfigurationForm form)
+	{
+		super(project);
 
-        myForm = form;
-        myScope = SearchScopeUtil.getTestUnitClassSearchScope(project);
-    }
+		myForm = form;
+		myScope = GlobalSearchScope.allScope(project);
+	}
 
-    @Override
-	protected String showDialog() {
-        //check script
-        final VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myForm.getTestScriptPath());
-        if (file == null) {
-            Messages.showMessageDialog(getField(), "set.existing.script.name.message", "cannot.browse.method.dialog.title", Messages.getInformationIcon());
-            return null;
-        }
-        //check class name
-        final String classQualifiedName = myForm.getTestQualifiedClassName();        
-        if (classQualifiedName.trim().length() == 0) {
-            Messages.showMessageDialog(getField(),
-                    RBundle.message("set.class.name.message"),
-                    RBundle.message("cannot.browse.method.dialog.title"),
-                    Messages.getInformationIcon());
-            return null;
-        }
+	@Override
+	protected String showDialog()
+	{
+		//check script
+		final VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myForm.getTestScriptPath());
+		if(file == null)
+		{
+			Messages.showMessageDialog(getField(), "set.existing.script.name.message", "cannot.browse.method.dialog.title", Messages.getInformationIcon());
+			return null;
+		}
+		//check class name
+		final String classQualifiedName = myForm.getTestQualifiedClassName();
+		if(classQualifiedName.trim().length() == 0)
+		{
+			Messages.showMessageDialog(getField(), RBundle.message("set.class.name.message"), RBundle.message("cannot.browse.method.dialog.title"), Messages.getInformationIcon());
+			return null;
+		}
 
-        final Ref<FileSymbol> fSWrapper = new Ref<FileSymbol>();
+		final Ref<FileSymbol> fSWrapper = new Ref<FileSymbol>();
 
-        final RVirtualClass testClass =
-                RCacheUtil.getClassByNameInScriptInRubyTestMode(classQualifiedName, getProject(),
-                                                                myScope, file, fSWrapper);
-        if (testClass == null) {
-            Messages.showMessageDialog(getField(),
-                    RBundle.message("class.does.not.exists.error.message", classQualifiedName),
-                    RBundle.message("cannot.browse.method.dialog.title"),
-                    Messages.getInformationIcon());
-            return null;
-        }
+		final RVirtualClass testClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(classQualifiedName, getProject(), myScope, file, fSWrapper);
+		if(testClass == null)
+		{
+			Messages.showMessageDialog(getField(), RBundle.message("class.does.not.exists.error.message", classQualifiedName), RBundle.message("cannot.browse.method.dialog.title"), Messages.getInformationIcon());
+			return null;
+		}
 
-        final TestMethodFilter methodFilter = new TestMethodFilter(testClass);
-        final RMethodList.RMethodProvider methodProvider = new TestMethodProvider(testClass, fSWrapper);
+		final TestMethodFilter methodFilter = new TestMethodFilter(testClass);
+		final RMethodList.RMethodProvider methodProvider = new TestMethodProvider(testClass, fSWrapper);
 
-        final RVirtualMethod psiMethod =
-                RMethodList.showDialog(testClass, methodFilter, methodProvider, getField());
+		final RVirtualMethod psiMethod = RMethodList.showDialog(testClass, methodFilter, methodProvider, getField());
 
-        return psiMethod != null ? psiMethod.getName() : null;
-    }
+		return psiMethod != null ? psiMethod.getName() : null;
+	}
 
-    public static class TestMethodFilter implements Condition<RVirtualMethod> {
-        public final RVirtualClass myRVClass;
+	public static class TestMethodFilter implements Condition<RVirtualMethod>
+	{
+		public final RVirtualClass myRVClass;
 
-        public TestMethodFilter(@NotNull final RVirtualClass rClass) {
-            myRVClass = rClass;
-        }
+		public TestMethodFilter(@NotNull final RVirtualClass rClass)
+		{
+			myRVClass = rClass;
+		}
 
-        /**
-         * @param method must belong to class defined in constructor
-         * @return true if is test method
-         */
-        @Override
-		public boolean value(final RVirtualMethod method) {
-            return RTestUnitUtil.hasValidTestNameAndNotSingleton(method);
-        }
-    }
+		/**
+		 * @param method must belong to class defined in constructor
+		 * @return true if is test method
+		 */
+		@Override
+		public boolean value(final RVirtualMethod method)
+		{
+			return RTestUnitUtil.hasValidTestNameAndNotSingleton(method);
+		}
+	}
 
-    private static class TestMethodProvider implements RMethodList.RMethodProvider {
-        private static final RVirtualMethod[] EMPTY_VIRT_METHODS = new RVirtualMethod[0];
+	private static class TestMethodProvider implements RMethodList.RMethodProvider
+	{
+		private static final RVirtualMethod[] EMPTY_VIRT_METHODS = new RVirtualMethod[0];
 
-        private final RVirtualClass testClass;
-        private final Ref<FileSymbol> fSWrapper;
+		private final RVirtualClass testClass;
+		private final Ref<FileSymbol> fSWrapper;
 
-        public TestMethodProvider(final RVirtualClass testClass, final Ref<FileSymbol> fSWrapper) {
-            this.testClass = testClass;
-            this.fSWrapper = fSWrapper;
-        }
+		public TestMethodProvider(final RVirtualClass testClass, final Ref<FileSymbol> fSWrapper)
+		{
+			this.testClass = testClass;
+			this.fSWrapper = fSWrapper;
+		}
 
-        @Override
-		public RVirtualMethod[] getAllMethods() {
-            final Pair<Symbol, FileSymbol> fileSymbolPair = SymbolUtil.getSymbolByContainerRubyTestMode(testClass, fSWrapper);
-            if (fileSymbolPair == null) {
-                return EMPTY_VIRT_METHODS;
-            }
-            return RVirtualClassUtil.getAllMethods(fileSymbolPair.first, fileSymbolPair.second, Context.ALL);
-        }
-    }
+		@Override
+		public RVirtualMethod[] getAllMethods()
+		{
+			final Pair<Symbol, FileSymbol> fileSymbolPair = SymbolUtil.getSymbolByContainerRubyTestMode(testClass, fSWrapper);
+			if(fileSymbolPair == null)
+			{
+				return EMPTY_VIRT_METHODS;
+			}
+			return RVirtualClassUtil.getAllMethods(fileSymbolPair.first, fileSymbolPair.second, Context.ALL);
+		}
+	}
 }

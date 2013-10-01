@@ -21,8 +21,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RLoopStatement
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 21.03.2007
  */
-public interface RUntilModStatement extends RConditionalStatement, RLoopStatement {
+public interface RUntilModStatement extends RConditionalStatement, RLoopStatement
+{
 }

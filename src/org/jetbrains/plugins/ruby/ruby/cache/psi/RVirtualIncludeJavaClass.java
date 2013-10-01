@@ -23,7 +23,8 @@ import org.jetbrains.annotations.Nullable;
  * User: oleg
  * Date: Sep 12, 2007
  */
-public interface RVirtualIncludeJavaClass extends RVirtualElement{
-    @Nullable
-    public String getQualifiedName();
+public interface RVirtualIncludeJavaClass extends RVirtualElement
+{
+	@Nullable
+	public String getQualifiedName();
 }

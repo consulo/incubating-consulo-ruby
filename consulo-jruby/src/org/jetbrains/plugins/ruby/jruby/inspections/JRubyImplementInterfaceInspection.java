@@ -31,46 +31,53 @@ import com.intellij.psi.PsiElementVisitor;
  * @author: oleg
  * @date: Feb 29, 2008
  */
-public class JRubyImplementInterfaceInspection extends LocalInspectionTool {
-    @NonNls
-    private static final String SHORT_NAME = "JRubyImplement";
+public class JRubyImplementInterfaceInspection extends LocalInspectionTool
+{
+	@NonNls
+	private static final String SHORT_NAME = "JRubyImplement";
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getGroupDisplayName() {
-        return RBundle.message("inspection.group.name");
-    }
+	@Nls
+	public String getGroupDisplayName()
+	{
+		return RBundle.message("inspection.group.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("inspection.implement.interface.name");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("inspection.implement.interface.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @NonNls
-    public String getShortName() {
-        return SHORT_NAME;
-    }
+	@NonNls
+	public String getShortName()
+	{
+		return SHORT_NAME;
+	}
 
-    @Override
-	public boolean isEnabledByDefault() {
-        return true;
-    }
+	@Override
+	public boolean isEnabledByDefault()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-        return new JRubyImplementInterfaceVisitor(holder);
-    }
+	public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+	{
+		return new JRubyImplementInterfaceVisitor(holder);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public HighlightDisplayLevel getDefaultLevel() {
-        return HighlightDisplayLevel.ERROR;
-    }
+	public HighlightDisplayLevel getDefaultLevel()
+	{
+		return HighlightDisplayLevel.ERROR;
+	}
 
 }

@@ -25,18 +25,19 @@ import org.jetbrains.annotations.Nullable;
  * @author: oleg
  * @date: 25.04.2007
  */
-public class RArgumentInfoWithDefaultArgs extends ArgumentInfo{
-    private String myDefValue;
+public class RArgumentInfoWithDefaultArgs extends ArgumentInfo
+{
+	private String myDefValue;
 
-    public RArgumentInfoWithDefaultArgs(@NotNull final String name,
-                                        @Nullable final String defValue,
-                                        final Type type) {
-        super(name, type);
-        myDefValue = defValue;
-    }
+	public RArgumentInfoWithDefaultArgs(@NotNull final String name, @Nullable final String defValue, final Type type)
+	{
+		super(name, type);
+		myDefValue = defValue;
+	}
 
-    @Override
-	public String getPresentableName() {
-        return getName() + "=" + myDefValue;
-    }
+	@Override
+	public String getPresentableName()
+	{
+		return getName() + "=" + myDefValue;
+	}
 }

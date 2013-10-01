@@ -28,17 +28,19 @@ import com.intellij.psi.PsiFile;
  * User: oleg
  * Date: Sep 6, 2007
  */
-public class RubySlowAnnotator extends ExternalAnnotator {
+public class RubySlowAnnotator extends ExternalAnnotator
+{
 
-    public void annotate(@NotNull final PsiFile file, @NotNull final AnnotationHolder holder) {
-        // We hope it`s enough often operation
-        ProgressManager.getInstance().checkCanceled();
+	public void annotate(@NotNull final PsiFile file, @NotNull final AnnotationHolder holder)
+	{
+		// We hope it`s enough often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        assert file instanceof RFile;
-// Force Updating symbol before annotattng
-        ((RFile) file).getFileSymbol();
+		assert file instanceof RFile;
+		// Force Updating symbol before annotattng
+		((RFile) file).getFileSymbol();
 
-        final RubySlowAnnotatorVisitor slowAnnotatorVisitor = new RubySlowAnnotatorVisitor(holder, (RFile) file);
-        file.accept(slowAnnotatorVisitor);
-    }
+		final RubySlowAnnotatorVisitor slowAnnotatorVisitor = new RubySlowAnnotatorVisitor(holder, (RFile) file);
+		file.accept(slowAnnotatorVisitor);
+	}
 }

@@ -16,28 +16,29 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RConstant extends RVirtualConstant, RNamedElement, PsiNamedElement {
+public interface RConstant extends RVirtualConstant, RNamedElement, PsiNamedElement
+{
 
-    public boolean isInDefinition();
+	public boolean isInDefinition();
 
-    public boolean isRealConstant();
+	public boolean isRealConstant();
 
-    @Nullable
-    public ConstantDefinitions getConstantDefinitions();
+	@Nullable
+	public ConstantDefinitions getConstantDefinitions();
 
-    @Override
+	@Override
 	@NotNull
-    public RConstantHolder getHolder();
+	public RConstantHolder getHolder();
 }

@@ -16,27 +16,30 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.06.2006
  */
-public class RClassObjectImpl extends RPsiElementBase implements RClassObject {
-    public RClassObjectImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RClassObjectImpl extends RPsiElementBase implements RClassObject
+{
+	public RClassObjectImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getExpression() {
-        return getChildByType(RPsiElement.class, 0);
-    }
+	public RPsiElement getExpression()
+	{
+		return getChildByType(RPsiElement.class, 0);
+	}
 
 }

@@ -17,20 +17,21 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-class THEN  implements RubyTokenTypes {
-    private static final TokenSet TS_THEN = TokenSet.orSet(TokenSet.create(kTHEN), BNF.tCOLONS);
+class THEN implements RubyTokenTypes
+{
+	private static final TokenSet TS_THEN = TokenSet.orSet(TokenSet.create(kTHEN), BNF.tCOLONS);
 /*
 THEN	: TERM
         | ':'
@@ -38,21 +39,25 @@ THEN	: TERM
 		| TERM then
 */
 
-    public static void parse(final RBuilder builder){
-        // It`s a hack for RHTML
-        if (builder.compare(TokenBNF.tOUTER_ELEMENTS)){
-            return;
-        }
-        if (builder.compareAndEat(TS_THEN)){
-            builder.passEOLs();
-            return;
-        }
-        if (builder.compareAndEat(BNF.tTERM_TOKENS)){
-            builder.compareAndEat(kTHEN);
-            builder.passEOLs();
-            return;
-        }
+	public static void parse(final RBuilder builder)
+	{
+		// It`s a hack for RHTML
+		if(builder.compare(TokenBNF.tOUTER_ELEMENTS))
+		{
+			return;
+		}
+		if(builder.compareAndEat(TS_THEN))
+		{
+			builder.passEOLs();
+			return;
+		}
+		if(builder.compareAndEat(BNF.tTERM_TOKENS))
+		{
+			builder.compareAndEat(kTHEN);
+			builder.passEOLs();
+			return;
+		}
 
-        builder.error(ErrorMsg.expected(TS_THEN, builder));
-    }
+		builder.error(ErrorMsg.expected(TS_THEN, builder));
+	}
 }

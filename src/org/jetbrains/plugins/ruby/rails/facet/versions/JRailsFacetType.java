@@ -34,31 +34,34 @@ import com.intellij.openapi.module.Module;
 /**
  * Package private. You should use general class - BaseRailsFacetType
  */
-class JRailsFacetType extends BaseRailsFacetType<JRailsFacet> {
-    public static final JRailsFacetType INSTANCE = new JRailsFacetType();
+class JRailsFacetType extends BaseRailsFacetType<JRailsFacet>
+{
+	public static final JRailsFacetType INSTANCE = new JRailsFacetType();
 
-    public static void load() {
+	public static void load()
+	{
 
-    }
+	}
 
-    public JRailsFacetType() {
-        super(JRailsFacet.ID, JRailsFacet.ID.toString(), JRubyFacetType.INSTANCE.getId());
-    }
+	public JRailsFacetType()
+	{
+		super(JRailsFacet.ID, JRailsFacet.ID.toString(), JRubyFacetType.INSTANCE.getId());
+	}
 
-    @Override
-	public BaseRailsFacetConfiguration createDefaultConfiguration() {
-        return new BaseRailsFacetConfigurationImpl();
-    }
+	@Override
+	public BaseRailsFacetConfiguration createDefaultConfiguration()
+	{
+		return new BaseRailsFacetConfigurationImpl();
+	}
 
-    public JRailsFacet createFacet(@NotNull final Module module, final String name,
-                                  @NotNull final BaseRailsFacetConfiguration configuration,
-                                  @Nullable final Facet underlyingFacet) {
-        return new JRailsFacet(this, module, name, configuration, underlyingFacet);
-    }
+	public JRailsFacet createFacet(@NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, @Nullable final Facet underlyingFacet)
+	{
+		return new JRailsFacet(this, module, name, configuration, underlyingFacet);
+	}
 
 
   /*
-    protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry, 
+	protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry,
                                            final VirtualFileFilter railsFacetFilter,
                                            final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector) {
         detectorRegistry.registerSubFacetDetectorForWizard(

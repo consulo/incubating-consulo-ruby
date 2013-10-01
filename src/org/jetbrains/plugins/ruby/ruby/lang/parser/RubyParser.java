@@ -33,31 +33,34 @@ import com.intellij.psi.tree.IElementType;
  * User: oleg
  * Date: 24.04.2006
  */
-public class RubyParser implements PsiParser {
-    private static final Logger LOG = Logger.getInstance(RubyParser.class.getName());
+public class RubyParser implements PsiParser
+{
+	private static final Logger LOG = Logger.getInstance(RubyParser.class.getName());
 
-    @Override
+	@Override
 	@NotNull
-    public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion) {
+	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion)
+	{
 
-        final RBuilder rBuilder = createBuilder(builder);
+		final RBuilder rBuilder = createBuilder(builder);
 
-//        rBuilder.setDEBUG(true);
+		//        rBuilder.setDEBUG(true);
 
-        final RMarker rootMarker = rBuilder.mark(false);
+		final RMarker rootMarker = rBuilder.mark(false);
 
-        PROGRAM.parse(rBuilder);
+		PROGRAM.parse(rBuilder);
 
-        rootMarker.done(root);
+		rootMarker.done(root);
 
-        LOG.assertTrue(builder.eof(), "NOT ALL TOKENS WERE PARSED!!!");
+		LOG.assertTrue(builder.eof(), "NOT ALL TOKENS WERE PARSED!!!");
 
-//        rBuilder.printDebugStats();
+		//        rBuilder.printDebugStats();
 
-        return rBuilder.getTreeBuilt();
-    }
+		return rBuilder.getTreeBuilt();
+	}
 
-    protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder) {
-        return new RBuilderImpl(builder);
-    }
+	protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder)
+	{
+		return new RBuilderImpl(builder);
+	}
 }

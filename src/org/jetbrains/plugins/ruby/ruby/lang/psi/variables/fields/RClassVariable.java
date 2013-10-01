@@ -23,7 +23,8 @@ import org.jetbrains.annotations.NonNls;
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RClassVariable extends RField {
-    @NonNls
-    public final String PREFIX = "@@";
+public interface RClassVariable extends RField
+{
+	@NonNls
+	public final String PREFIX = "@@";
 }

@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -26,20 +25,24 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.CoreTypes;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RRangeExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class RRangeExpressionImpl extends RBinaryExpressionBase implements RRangeExpression {
-    public RRangeExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RRangeExpressionImpl extends RBinaryExpressionBase implements RRangeExpression
+{
+	public RRangeExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Range), Context.INSTANCE, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Range), Context.INSTANCE, true);
+	}
 }

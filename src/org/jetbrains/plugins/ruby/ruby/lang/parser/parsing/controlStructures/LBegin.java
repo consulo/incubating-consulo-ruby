@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -25,27 +24,30 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class LBegin implements RubyTokenTypes {
+public class LBegin implements RubyTokenTypes
+{
 /*
-                | `BEGIN' `{' COMPSTMT `}'
+				| `BEGIN' `{' COMPSTMT `}'
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(klBEGIN);
-        builder.match(BNF.tLBRACES);
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(klBEGIN);
+		builder.match(BNF.tLBRACES);
 
-        COMPSTMT.parse(builder, tRBRACE);
+		COMPSTMT.parse(builder, tRBRACE);
 
-        builder.matchIgnoreEOL(tRBRACE);
-        statementMarker.done(RubyElementTypes.LBEGIN_STATEMENT);
-        return RubyElementTypes.LBEGIN_STATEMENT;
-    }
+		builder.matchIgnoreEOL(tRBRACE);
+		statementMarker.done(RubyElementTypes.LBEGIN_STATEMENT);
+		return RubyElementTypes.LBEGIN_STATEMENT;
+	}
 }

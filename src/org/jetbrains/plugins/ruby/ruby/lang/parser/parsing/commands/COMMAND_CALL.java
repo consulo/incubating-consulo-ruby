@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -28,15 +27,17 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Ret
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.iterators.BLOCK_COMMAND;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 06.07.2006
  */
-public class COMMAND_CALL implements RubyTokenTypes {
+public class COMMAND_CALL implements RubyTokenTypes
+{
 /*
-    command_call	: command
+	command_call	: command
             | block_command
             | kRETURN call_args
             | kBREAK call_args
@@ -45,83 +46,95 @@ public class COMMAND_CALL implements RubyTokenTypes {
 
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if (!builder.compare(BNF.tCOMMAND_CALL_FIRST_TOKENS)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(!builder.compare(BNF.tCOMMAND_CALL_FIRST_TOKENS))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 /*
         | kRETURN call_args
 */
-        if (builder.compare(kRETURN)) {
-            IElementType result = Return.parseWithCallArgs(builder);
-            if (result != RubyElementTypes.EMPTY_INPUT) {
-                return RubyElementTypes.RETURN_STATEMENT;
-            }
-        }
+		if(builder.compare(kRETURN))
+		{
+			IElementType result = Return.parseWithCallArgs(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return RubyElementTypes.RETURN_STATEMENT;
+			}
+		}
 
 /*
         | kBREAK call_args
 */
-        if (builder.compare(kBREAK)) {
-            IElementType result = Break.parseWithCallArgs(builder);
-            if (result != RubyElementTypes.EMPTY_INPUT) {
-                return RubyElementTypes.BREAK_STATEMENT;
-            }
-        }
+		if(builder.compare(kBREAK))
+		{
+			IElementType result = Break.parseWithCallArgs(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return RubyElementTypes.BREAK_STATEMENT;
+			}
+		}
 
 /*
         | kNEXT call_args
 */
-        if (builder.compare(kNEXT)) {
-            IElementType result = Next.parseWithCallArgs(builder);
-            if (result != RubyElementTypes.EMPTY_INPUT) {
-                return RubyElementTypes.NEXT_STATEMENT;
-            }
-        }
+		if(builder.compare(kNEXT))
+		{
+			IElementType result = Next.parseWithCallArgs(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return RubyElementTypes.NEXT_STATEMENT;
+			}
+		}
 
 /*
         | block_command
         | command
 */
-        return parseWithLeadCOMMAND(builder, builder.mark(), COMMAND.parse(builder));
-    }
+		return parseWithLeadCOMMAND(builder, builder.mark(), COMMAND.parse(builder));
+	}
 
 
-    /**
-     * Parses command call with leading COMMAND parsed
-     *
-     * @param builder   Current builder
-     * @param marker    Marker before leading COMMAND
-     * @param result result of leading COMMAND parsing
-     * @return result of parsing
-     */
-    private static IElementType parseWithLeadCOMMAND(final RBuilder builder, RMarker marker, IElementType result) {
+	/**
+	 * Parses command call with leading COMMAND parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before leading COMMAND
+	 * @param result  result of leading COMMAND parsing
+	 * @return result of parsing
+	 */
+	private static IElementType parseWithLeadCOMMAND(final RBuilder builder, RMarker marker, IElementType result)
+	{
 /*
         | block_command
         | command
 */
-        if (result != RubyElementTypes.EMPTY_INPUT && builder.compare(kDO)) {
-            return BLOCK_COMMAND.parseWithLeadCOMMAND(builder, marker, result);
-        }
-        if (result != RubyElementTypes.EMPTY_INPUT) {
-            marker.drop();
-            return result;
-        }
-        marker.rollbackTo();
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		if(result != RubyElementTypes.EMPTY_INPUT && builder.compare(kDO))
+		{
+			return BLOCK_COMMAND.parseWithLeadCOMMAND(builder, marker, result);
+		}
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.drop();
+			return result;
+		}
+		marker.rollbackTo();
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 
-    /**
-     * Parses command call with leading ARG parsed
-     *
-     * @param builder   Current builder
-     * @param marker    Marker before leading ARG
-     * @param argResult result of leading ARG parsing
-     * @return result of parsing
-     */
-    public static IElementType parseWithLeadARG(final RBuilder builder, final RMarker marker, final IElementType argResult) {
-        return parseWithLeadCOMMAND(builder, marker.precede(), COMMAND.parseWithLeadARG(builder, marker, argResult));
-    }
+	/**
+	 * Parses command call with leading ARG parsed
+	 *
+	 * @param builder   Current builder
+	 * @param marker    Marker before leading ARG
+	 * @param argResult result of leading ARG parsing
+	 * @return result of parsing
+	 */
+	public static IElementType parseWithLeadARG(final RBuilder builder, final RMarker marker, final IElementType argResult)
+	{
+		return parseWithLeadCOMMAND(builder, marker.precede(), COMMAND.parseWithLeadARG(builder, marker, argResult));
+	}
 }

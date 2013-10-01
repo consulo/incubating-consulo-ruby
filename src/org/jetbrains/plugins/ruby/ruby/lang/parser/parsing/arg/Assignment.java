@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -25,13 +24,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 02.07.2006
  */
-public class Assignment implements RubyTokenTypes {
+public class Assignment implements RubyTokenTypes
+{
 /*
 arg		: lhs '=' arg
 		| lhs '=' arg kRESCUE_MOD arg
@@ -45,43 +46,50 @@ arg		: lhs '=' arg
 		| backref tOP_ASGN arg
 */
 
-    @NotNull
-    public static IElementType parse(RBuilder builder){
-        return parseWithLeadRANGE(builder, builder.mark(), RangeExpression.parse(builder));
-    }
+	@NotNull
+	public static IElementType parse(RBuilder builder)
+	{
+		return parseWithLeadRANGE(builder, builder.mark(), RangeExpression.parse(builder));
+	}
 
-    public static IElementType parseWithLeadRANGE(final RBuilder builder, final RMarker marker, final IElementType result) {
-        if (result==RubyElementTypes.EMPTY_INPUT){
-            marker.drop();
-            return RubyElementTypes.EMPTY_INPUT;  
-        }
+	public static IElementType parseWithLeadRANGE(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		if(result == RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.drop();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-// lhs '=' arg
-        if (BNF.LHS.contains(result) && builder.compareAndEat(tASSGN)){
-            if (ARG.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
-            marker.done(RubyElementTypes.ASSIGNMENT_EXPRESSION);
-            return RubyElementTypes.ASSIGNMENT_EXPRESSION;
-        }
+		// lhs '=' arg
+		if(BNF.LHS.contains(result) && builder.compareAndEat(tASSGN))
+		{
+			if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
+			marker.done(RubyElementTypes.ASSIGNMENT_EXPRESSION);
+			return RubyElementTypes.ASSIGNMENT_EXPRESSION;
+		}
 
-//        | var_lhs tOP_ASGN arg
-//        | primary_value '[' aref_args ']' tOP_ASGN arg
-//        | primary_value '.' tIDENTIFIER tOP_ASGN arg
-//        | primary_value '.' tCONSTANT tOP_ASGN arg
-//        | primary_value tCOLON2 tIDENTIFIER tOP_ASGN arg
-//        | primary_value tCOLON2 tCONSTANT tOP_ASGN arg
-//        | tCOLON3 tCONSTANT tOP_ASGN arg
-//        | backref tOP_ASGN arg
-        if (BNF.LHS.contains(result) && builder.compareAndEat(BNF.tOP_ASGNS)){
-            if (ARG.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
-            marker.done(RubyElementTypes.SELF_ASSIGNMENT_EXPRESSION);
-            return RubyElementTypes.SELF_ASSIGNMENT_EXPRESSION;
-        }
+		//        | var_lhs tOP_ASGN arg
+		//        | primary_value '[' aref_args ']' tOP_ASGN arg
+		//        | primary_value '.' tIDENTIFIER tOP_ASGN arg
+		//        | primary_value '.' tCONSTANT tOP_ASGN arg
+		//        | primary_value tCOLON2 tIDENTIFIER tOP_ASGN arg
+		//        | primary_value tCOLON2 tCONSTANT tOP_ASGN arg
+		//        | tCOLON3 tCONSTANT tOP_ASGN arg
+		//        | backref tOP_ASGN arg
+		if(BNF.LHS.contains(result) && builder.compareAndEat(BNF.tOP_ASGNS))
+		{
+			if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
+			marker.done(RubyElementTypes.SELF_ASSIGNMENT_EXPRESSION);
+			return RubyElementTypes.SELF_ASSIGNMENT_EXPRESSION;
+		}
 
-// otherwise
-        return TernaryExpression.parseWithLeadPRIMARY(builder, marker, result);
-    }
+		// otherwise
+		return TernaryExpression.parseWithLeadPRIMARY(builder, marker, result);
+	}
 }

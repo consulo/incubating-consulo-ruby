@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names;
  * @author: Roman Chernyatchik
  * @date: 07.10.2006
  */
-public interface RSuperClass extends RName {
+public interface RSuperClass extends RName
+{
 }

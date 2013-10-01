@@ -55,69 +55,76 @@ import com.intellij.openapi.vfs.VirtualFileManager;
  * @author: Roman Chernyatchik
  * @date: Oct 18, 2007
  */
-public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implements RSpecRunConfigurationParams {
-    public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*_spec." + RubyFileType.RUBY.getDefaultExtension();
-    public static final String DEFAULT_SPEC_ARGS = "-fs";
+public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implements RSpecRunConfigurationParams
+{
+	public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*_spec." + RubyFileType.RUBY.getDefaultExtension();
+	public static final String DEFAULT_SPEC_ARGS = "-fs";
 
-    private String myTestsFolderPath = TextUtil.EMPTY_STRING;
-    private String myTestScriptPath = TextUtil.EMPTY_STRING;
-    private String myTestFileMask = TextUtil.EMPTY_STRING;
-    private TestType myTestType = TestType.TEST_SCRIPT;
-    private String mySpecArgs = TextUtil.EMPTY_STRING;
+	private String myTestsFolderPath = TextUtil.EMPTY_STRING;
+	private String myTestScriptPath = TextUtil.EMPTY_STRING;
+	private String myTestFileMask = TextUtil.EMPTY_STRING;
+	private TestType myTestType = TestType.TEST_SCRIPT;
+	private String mySpecArgs = TextUtil.EMPTY_STRING;
 
-    private boolean myUseColoredOutput = true; //by default
-    private boolean myUseCustomSpecRunner; //by default
+	private boolean myUseColoredOutput = true; //by default
+	private boolean myUseCustomSpecRunner; //by default
 
-    public static String DEFAULT_CUSTOM_SPEC_RUNNER = RBundle.message("run.configuration.messages.none");
-    private String myCustomSpecsRunnerPath = DEFAULT_CUSTOM_SPEC_RUNNER;
-    private boolean myShouldRunSpecSeparately;
+	public static String DEFAULT_CUSTOM_SPEC_RUNNER = RBundle.message("run.configuration.messages.none");
+	private String myCustomSpecsRunnerPath = DEFAULT_CUSTOM_SPEC_RUNNER;
+	private boolean myShouldRunSpecSeparately;
 
-    public RSpecRunConfiguration(final Project project,
-                                 final ConfigurationFactory factory,
-                                 final String name) {
-        super(project, factory, name);
+	public RSpecRunConfiguration(final Project project, final ConfigurationFactory factory, final String name)
+	{
+		super(project, factory, name);
 
-        setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
-    }
+		setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
+	}
 
-    public static void copyParams(final RSpecRunConfigurationParams fromParams,
-                                  final RSpecRunConfigurationParams toParams) {
-        AbstractRubyRunConfiguration.copyParams(fromParams, toParams);
+	public static void copyParams(final RSpecRunConfigurationParams fromParams, final RSpecRunConfigurationParams toParams)
+	{
+		AbstractRubyRunConfiguration.copyParams(fromParams, toParams);
 
-        toParams.setTestType(fromParams.getTestType());
+		toParams.setTestType(fromParams.getTestType());
 
-        toParams.setTestsFolderPath(fromParams.getTestsFolderPath());
-        toParams.setTestScriptPath(fromParams.getTestScriptPath());
-        toParams.setTestFileMask(fromParams.getTestFileMask());
+		toParams.setTestsFolderPath(fromParams.getTestsFolderPath());
+		toParams.setTestScriptPath(fromParams.getTestScriptPath());
+		toParams.setTestFileMask(fromParams.getTestFileMask());
 
-        toParams.setShouldUseCustomSpecRunner(fromParams.shouldUseCustomSpecRunner());
-        toParams.setShouldRunSpecSeparately(fromParams.shouldRunSpecSeparately());
-        toParams.setSpecArgs(fromParams.getSpecArgs());
-        toParams.setCustomSpecsRunnerPath(fromParams.getCustomSpecsRunnerPath());
+		toParams.setShouldUseCustomSpecRunner(fromParams.shouldUseCustomSpecRunner());
+		toParams.setShouldRunSpecSeparately(fromParams.shouldRunSpecSeparately());
+		toParams.setSpecArgs(fromParams.getSpecArgs());
+		toParams.setCustomSpecsRunnerPath(fromParams.getCustomSpecsRunnerPath());
 
-        toParams.setShouldUseColoredOutput(fromParams.shouldUseColoredOutput());
-    }
+		toParams.setShouldUseColoredOutput(fromParams.shouldUseColoredOutput());
+	}
 
-    @Override
-	protected RSpecRunConfiguration createInstance() {
-        return new RSpecRunConfiguration(getProject(), getFactory(), getName());
-    }
+	@Override
+	protected RSpecRunConfiguration createInstance()
+	{
+		return new RSpecRunConfiguration(getProject(), getFactory(), getName());
+	}
 
 
-    @Override
-	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return new RSpecRunConfigurationEditor(getProject(), this);
-    }
+	@Override
+	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor()
+	{
+		return new RSpecRunConfigurationEditor(getProject(), this);
+	}
 
 	@Nullable
 	@Override
 	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
-		try {
+		try
+		{
 			validateConfiguration(true);
-		} catch (ExecutionException ee) {
+		}
+		catch(ExecutionException ee)
+		{
 			throw ee;
-		} catch (Exception e) {
+		}
+		catch(Exception e)
+		{
 			throw new ExecutionException(e.getMessage(), e);
 		}
 
@@ -127,44 +134,54 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
 	}
 
 
-    @Override
-	protected void validateConfiguration(boolean isExecution) throws Exception {
-        RubyRunConfigurationUtil.inspectSDK(this, isExecution);
-        RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
+	@Override
+	protected void validateConfiguration(boolean isExecution) throws Exception
+	{
+		RubyRunConfigurationUtil.inspectSDK(this, isExecution);
+		RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
 
-        switch (getTestType()) {
-            case ALL_IN_FOLDER:
-                //testfolder
-                inspectSpecsFolder(isExecution);
-                break;
-            case TEST_SCRIPT:
-                //script
-                inspectSpecScript(isExecution);
-                break;
-        }
+		switch(getTestType())
+		{
+			case ALL_IN_FOLDER:
+				//testfolder
+				inspectSpecsFolder(isExecution);
+				break;
+			case TEST_SCRIPT:
+				//script
+				inspectSpecScript(isExecution);
+				break;
+		}
 
-        //if use custom runner
-        if (shouldUseCustomSpecRunner()) {
-            inspectCustomRunnerScript(isExecution);
-        } else {
-            //If alternatie SDK is choosen we had to use gem
-            inspectRSpecGemInAlternativeSDK(isExecution);
+		//if use custom runner
+		if(shouldUseCustomSpecRunner())
+		{
+			inspectCustomRunnerScript(isExecution);
+		}
+		else
+		{
+			//If alternatie SDK is choosen we had to use gem
+			inspectRSpecGemInAlternativeSDK(isExecution);
 
-            //If module
-            inspectRSpecInModule(isExecution);
-        }
+			//If module
+			inspectRSpecInModule(isExecution);
+		}
 
-        final String args = getSpecArgs();
-        if (shouldUseColoredOutput()
-                || (args != null && args.contains(RSpecUtil.COLOURED_COMMAND_LINE_ARG))) {
-            if (SystemInfo.isWindows) {
+		final String args = getSpecArgs();
+		if(shouldUseColoredOutput() || (args != null && args.contains(RSpecUtil.COLOURED_COMMAND_LINE_ARG)))
+		{
+			if(SystemInfo.isWindows)
+			{
 				final String[] gemsRootUrls = getSdk().getRootProvider().getUrls(GemOrderRootType.getInstance());
-				for (String gemsRootUrl : gemsRootUrls) {
+				for(String gemsRootUrl : gemsRootUrls)
+				{
 					final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(gemsRootUrl);
-					if (gemsRoot != null) {
+					if(gemsRoot != null)
+					{
 						final VirtualFile[] files = gemsRoot.getChildren();
-						for (VirtualFile file : files) {
-							if (file.isDirectory() && file.getName().startsWith(RSpecUtil.WIN_32_CONSOLE_GEM)) {
+						for(VirtualFile file : files)
+						{
+							if(file.isDirectory() && file.getName().startsWith(RSpecUtil.WIN_32_CONSOLE_GEM))
+							{
 								final String msg = RBundle.message("rspec.run.configuration.test.plugin.doesnt.support.win32console.gem");
 								RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
 							}
@@ -172,204 +189,243 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
 					}
 				}
 			}
-        }
-    }
+		}
+	}
 
-    private void inspectRSpecInModule(boolean isExecution) throws Exception {
-        if (!shouldUseAlternativeSdk() && !shouldUseCustomSpecRunner()) {
-            final Module module = getModule();
-            assert module != null;
+	private void inspectRSpecInModule(boolean isExecution) throws Exception
+	{
+		if(!shouldUseAlternativeSdk() && !shouldUseCustomSpecRunner())
+		{
+			final Module module = getModule();
+			assert module != null;
 
-            final Sdk sdk = getSdk();
-            assert sdk != null;
+			final Sdk sdk = getSdk();
+			assert sdk != null;
 
-            if (RailsFacetUtil.hasRailsSupport(module)) {
-                final boolean useRSpecPlugin = RSpecModuleSettings.getInstance(module).getRSpecSupportType() == RSpecModuleSettings.RSpecSupportType.RAILS_PLUGIN;
-                if (useRSpecPlugin) {
-                    //chec plugin is installed
-                    final String railsAppHomeUrl = RailsFacetUtil.getRailsAppHomeDirPathUrl(module);
-                    assert railsAppHomeUrl != null;
+			if(RailsFacetUtil.hasRailsSupport(module))
+			{
+				final boolean useRSpecPlugin = RSpecModuleSettings.getInstance(module).getRSpecSupportType() == RSpecModuleSettings.RSpecSupportType.RAILS_PLUGIN;
+				if(useRSpecPlugin)
+				{
+					//chec plugin is installed
+					final String railsAppHomeUrl = RailsFacetUtil.getRailsAppHomeDirPathUrl(module);
+					assert railsAppHomeUrl != null;
 
-                    if (!RSpecUtil.isSpecScriptSupportInstalledInRailsProject(railsAppHomeUrl)) {
-                        final String msg = RBundle.message("rspec.run.configuration.test.plugin.not.installed.install.or.change.to.gem");
-                        RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
-                    }
-                    return;
-                }
-                assertRSpecGemIsInstalled(isExecution, sdk, false);
-                return;
-            } else if (RubyUtil.isRubyModuleType(module) || JRubyUtil.hasJRubySupport(module)) {
-                assertRSpecGemIsInstalled(isExecution, sdk, false);
-                return;
-            }
-            final String msg = RBundle.message("rspec.run.configuration.test.module.should.be.ror");
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
-        }
-    }
+					if(!RSpecUtil.isSpecScriptSupportInstalledInRailsProject(railsAppHomeUrl))
+					{
+						final String msg = RBundle.message("rspec.run.configuration.test.plugin.not.installed.install.or.change.to.gem");
+						RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
+					}
+					return;
+				}
+				assertRSpecGemIsInstalled(isExecution, sdk, false);
+				return;
+			}
+			else if(RubyUtil.isRubyModuleType(module) || JRubyUtil.hasJRubySupport(module))
+			{
+				assertRSpecGemIsInstalled(isExecution, sdk, false);
+				return;
+			}
+			final String msg = RBundle.message("rspec.run.configuration.test.module.should.be.ror");
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
+		}
+	}
 
-    private void inspectRSpecGemInAlternativeSDK(boolean isExecution) throws Exception {
-        if (shouldUseAlternativeSdk() && !shouldUseCustomSpecRunner()) {
-            final Sdk sdk = getAlternativeSdk();
-            assert sdk != null;
+	private void inspectRSpecGemInAlternativeSDK(boolean isExecution) throws Exception
+	{
+		if(shouldUseAlternativeSdk() && !shouldUseCustomSpecRunner())
+		{
+			final Sdk sdk = getAlternativeSdk();
+			assert sdk != null;
 
-            assertRSpecGemIsInstalled(isExecution, sdk, true);
-        }
-    }
+			assertRSpecGemIsInstalled(isExecution, sdk, true);
+		}
+	}
 
-    private void assertRSpecGemIsInstalled(boolean isExecution, Sdk sdk, final boolean isAlternativeSDK) throws Exception {
-        if (!RSpecUtil.checkIfRSpecGemExists(sdk)) {
-            final String msg = isAlternativeSDK
-                    ? RBundle.message("rspec.run.configuration.test.no.gem.in.alternative.sdk")
-                    : RBundle.message("rspec.run.configuration.test.no.gem.in.module.sdk");
+	private void assertRSpecGemIsInstalled(boolean isExecution, Sdk sdk, final boolean isAlternativeSDK) throws Exception
+	{
+		if(!RSpecUtil.checkIfRSpecGemExists(sdk))
+		{
+			final String msg = isAlternativeSDK ? RBundle.message("rspec.run.configuration.test.no.gem.in.alternative.sdk") : RBundle.message("rspec.run.configuration.test.no.gem.in.module.sdk");
 
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
-        }
-    }
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(msg, isExecution);
+		}
+	}
 
-    private void inspectSpecScript(final boolean isExecution) throws Exception {
-        final String scriptPath = getTestScriptPath().trim();
-        final VirtualFile script = LocalFileSystem.getInstance().findFileByPath(scriptPath);
-        if (TextUtil.isEmpty(scriptPath) || script == null || !script.exists()) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.script.not.exists"), isExecution);
-        }
+	private void inspectSpecScript(final boolean isExecution) throws Exception
+	{
+		final String scriptPath = getTestScriptPath().trim();
+		final VirtualFile script = LocalFileSystem.getInstance().findFileByPath(scriptPath);
+		if(TextUtil.isEmpty(scriptPath) || script == null || !script.exists())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.script.not.exists"), isExecution);
+		}
 
-        //noinspection ConstantConditions
-        if (script.isDirectory()) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.script.is.dir"), isExecution);
-        }
-    }
+		//noinspection ConstantConditions
+		if(script.isDirectory())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.script.is.dir"), isExecution);
+		}
+	}
 
-    private void inspectCustomRunnerScript(final boolean isExecution) throws Exception {
-        final String scriptPath = getCustomSpecsRunnerPath().trim();
-        if (TextUtil.isEmpty(scriptPath) || DEFAULT_CUSTOM_SPEC_RUNNER.equals(scriptPath)) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.custom.runner.not.exists"), isExecution);
-        }
-        
-        final VirtualFile script = LocalFileSystem.getInstance().findFileByPath(scriptPath);
-        if (script == null || !script.exists()) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.custom.runner.not.exists"), isExecution);
-        }
+	private void inspectCustomRunnerScript(final boolean isExecution) throws Exception
+	{
+		final String scriptPath = getCustomSpecsRunnerPath().trim();
+		if(TextUtil.isEmpty(scriptPath) || DEFAULT_CUSTOM_SPEC_RUNNER.equals(scriptPath))
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.custom.runner.not.exists"), isExecution);
+		}
 
-        //noinspection ConstantConditions
-        if (script.isDirectory()) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.script.is.dir"), isExecution);
-        }
-    }
+		final VirtualFile script = LocalFileSystem.getInstance().findFileByPath(scriptPath);
+		if(script == null || !script.exists())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.custom.runner.not.exists"), isExecution);
+		}
 
-    private void inspectSpecsFolder(final boolean isExecution) throws Exception {
-        final String folderPath = getTestsFolderPath().trim();
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.folder.not.exists"), isExecution);
-        }
+		//noinspection ConstantConditions
+		if(script.isDirectory())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.script.is.dir"), isExecution);
+		}
+	}
 
-        if (!folder.isDirectory()) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.folder.not.dir"), isExecution);
-        }
-    }
+	private void inspectSpecsFolder(final boolean isExecution) throws Exception
+	{
+		final String folderPath = getTestsFolderPath().trim();
+		File folder = new File(folderPath);
+		if(!folder.exists())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.folder.not.exists"), isExecution);
+		}
 
-    @Override
-	public String getTestsFolderPath() {
-        return myTestsFolderPath;
-    }
+		if(!folder.isDirectory())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("rspec.run.configuration.test.folder.not.dir"), isExecution);
+		}
+	}
 
-    @Override
-	public String getTestScriptPath() {
-        return myTestScriptPath;
-    }
+	@Override
+	public String getTestsFolderPath()
+	{
+		return myTestsFolderPath;
+	}
 
-    @Override
-	public TestType getTestType() {
-        return myTestType;
-    }
+	@Override
+	public String getTestScriptPath()
+	{
+		return myTestScriptPath;
+	}
 
-    @Override
-	public String getTestFileMask() {
-        return myTestFileMask;
-    }
+	@Override
+	public TestType getTestType()
+	{
+		return myTestType;
+	}
 
-    /**
-     * Path to folder
-     *
-     * @param path Path should contains only ruby style path separator: "/"
-     */
-    @Override
-	public void setTestsFolderPath(final String path) {
-        myTestsFolderPath = TextUtil.getAsNotNull(path);
-    }
+	@Override
+	public String getTestFileMask()
+	{
+		return myTestFileMask;
+	}
 
-    @Override
-	public void setTestScriptPath(final String pathOrMask) {
-        myTestScriptPath = TextUtil.getAsNotNull(pathOrMask);
-    }
+	/**
+	 * Path to folder
+	 *
+	 * @param path Path should contains only ruby style path separator: "/"
+	 */
+	@Override
+	public void setTestsFolderPath(final String path)
+	{
+		myTestsFolderPath = TextUtil.getAsNotNull(path);
+	}
 
-    @Override
-	public void setTestType(@NotNull final TestType testType) {
-        myTestType = testType;
-    }
+	@Override
+	public void setTestScriptPath(final String pathOrMask)
+	{
+		myTestScriptPath = TextUtil.getAsNotNull(pathOrMask);
+	}
 
-    @Override
-	public void setTestFileMask(final String testFileMask) {
-        myTestFileMask = TextUtil.getAsNotNull(testFileMask);
-    }
+	@Override
+	public void setTestType(@NotNull final TestType testType)
+	{
+		myTestType = testType;
+	}
 
-    @Override
-	public void readExternal(final Element element) throws InvalidDataException {
-        RSpecRunConfigurationExternalizer.getInstance().readExternal(this, element);
-    }
+	@Override
+	public void setTestFileMask(final String testFileMask)
+	{
+		myTestFileMask = TextUtil.getAsNotNull(testFileMask);
+	}
 
-    @Override
-	public void writeExternal(final Element element) throws WriteExternalException {
-        RSpecRunConfigurationExternalizer.getInstance().writeExternal(this, element);
-    }
+	@Override
+	public void readExternal(final Element element) throws InvalidDataException
+	{
+		RSpecRunConfigurationExternalizer.getInstance().readExternal(this, element);
+	}
 
-    @Override
-	public boolean shouldUseColoredOutput() {
-        return myUseColoredOutput;
-    }
+	@Override
+	public void writeExternal(final Element element) throws WriteExternalException
+	{
+		RSpecRunConfigurationExternalizer.getInstance().writeExternal(this, element);
+	}
 
-    @Override
-	public void setShouldUseColoredOutput(final boolean enabled) {
-        myUseColoredOutput = enabled;
-    }
+	@Override
+	public boolean shouldUseColoredOutput()
+	{
+		return myUseColoredOutput;
+	}
 
-    @Override
-	public String getSpecArgs() {
-        return mySpecArgs;
-    }
+	@Override
+	public void setShouldUseColoredOutput(final boolean enabled)
+	{
+		myUseColoredOutput = enabled;
+	}
 
-    @Override
-	public void setSpecArgs(final String specArgs) {
-        mySpecArgs = TextUtil.getAsNotNull(specArgs);
-    }
+	@Override
+	public String getSpecArgs()
+	{
+		return mySpecArgs;
+	}
 
-    @Override
-	public String getCustomSpecsRunnerPath() {
-        return TextUtil.getAsNotNull(myCustomSpecsRunnerPath).trim();
-    }
+	@Override
+	public void setSpecArgs(final String specArgs)
+	{
+		mySpecArgs = TextUtil.getAsNotNull(specArgs);
+	}
 
-    @Override
-	public void setCustomSpecsRunnerPath(final String specsRunnerPath) {
-        myCustomSpecsRunnerPath = TextUtil.getAsNotNull(specsRunnerPath);
-    }
+	@Override
+	public String getCustomSpecsRunnerPath()
+	{
+		return TextUtil.getAsNotNull(myCustomSpecsRunnerPath).trim();
+	}
 
-    @Override
-	public void setShouldUseCustomSpecRunner(boolean useCustomSpecRunner) {
-        myUseCustomSpecRunner = useCustomSpecRunner;
-    }
+	@Override
+	public void setCustomSpecsRunnerPath(final String specsRunnerPath)
+	{
+		myCustomSpecsRunnerPath = TextUtil.getAsNotNull(specsRunnerPath);
+	}
 
-    @Override
-	public boolean shouldUseCustomSpecRunner() {
-        return myUseCustomSpecRunner;
-    }
+	@Override
+	public void setShouldUseCustomSpecRunner(boolean useCustomSpecRunner)
+	{
+		myUseCustomSpecRunner = useCustomSpecRunner;
+	}
 
-    @Override
-	public boolean shouldRunSpecSeparately() {
-        return myShouldRunSpecSeparately;
-    }
+	@Override
+	public boolean shouldUseCustomSpecRunner()
+	{
+		return myUseCustomSpecRunner;
+	}
 
-    @Override
-	public void setShouldRunSpecSeparately(final boolean shouldRunSpecSeparately) {
-        myShouldRunSpecSeparately = shouldRunSpecSeparately;
-    }
+	@Override
+	public boolean shouldRunSpecSeparately()
+	{
+		return myShouldRunSpecSeparately;
+	}
+
+	@Override
+	public void setShouldRunSpecSeparately(final boolean shouldRunSpecSeparately)
+	{
+		myShouldRunSpecSeparately = shouldRunSpecSeparately;
+	}
 }

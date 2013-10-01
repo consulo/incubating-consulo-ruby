@@ -33,46 +33,50 @@ import com.intellij.openapi.startup.StartupManager;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 11.09.2006
  */
-public class ConsoleWriter {
-    /**
-     * Prints output to Run content console
-     * @param project Current project
-     * @param consoleTitle Console title text
-     * @param out Output to be shown in console
-     * @param filters message Filters to be added
-     */
-    public static void print(@NotNull final Project project,
-                             @NotNull final String consoleTitle,
-                             @NotNull final Output out,
-                             final Filter ... filters) {
-        Runnable myRunnable = new Runnable(){
-            @Override
-			public void run(){
-                ConsoleView consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
-                for (Filter filter : filters) {
-                    consoleView.addMessageFilter(filter);
-                }
-                consoleView.setHelpId(consoleTitle);
-                consoleView.print(out.getStdout(), ConsoleViewContentType.NORMAL_OUTPUT);
-                consoleView.print(out.getStderr(), ConsoleViewContentType.ERROR_OUTPUT);
-                DefaultActionGroup toolbarActions = new DefaultActionGroup();
-                RunContentDescriptor myDescriptor =
-                        new RunContentDescriptor(consoleView, null,
-                                new ConsolePanel(consoleView, toolbarActions),
-                                consoleTitle);
-                Executor defaultRunner = ExecutorRegistry.getInstance().getExecutorById(DefaultRunExecutor.EXECUTOR_ID);
-                toolbarActions.add(new CloseAction(defaultRunner, myDescriptor, project));
-                ExecutionManager.getInstance(project).getContentManager().showRunContent(defaultRunner, myDescriptor);
-            }
-        };
-        if (project.isInitialized()){
-            myRunnable.run();
-        } else {
-// If project is not initialized, default runner is not registered!
-            StartupManager.getInstance(project).registerPostStartupActivity(myRunnable);
-        }
-    }
+public class ConsoleWriter
+{
+	/**
+	 * Prints output to Run content console
+	 *
+	 * @param project      Current project
+	 * @param consoleTitle Console title text
+	 * @param out          Output to be shown in console
+	 * @param filters      message Filters to be added
+	 */
+	public static void print(@NotNull final Project project, @NotNull final String consoleTitle, @NotNull final Output out, final Filter... filters)
+	{
+		Runnable myRunnable = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ConsoleView consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
+				for(Filter filter : filters)
+				{
+					consoleView.addMessageFilter(filter);
+				}
+				consoleView.setHelpId(consoleTitle);
+				consoleView.print(out.getStdout(), ConsoleViewContentType.NORMAL_OUTPUT);
+				consoleView.print(out.getStderr(), ConsoleViewContentType.ERROR_OUTPUT);
+				DefaultActionGroup toolbarActions = new DefaultActionGroup();
+				RunContentDescriptor myDescriptor = new RunContentDescriptor(consoleView, null, new ConsolePanel(consoleView, toolbarActions), consoleTitle);
+				Executor defaultRunner = ExecutorRegistry.getInstance().getExecutorById(DefaultRunExecutor.EXECUTOR_ID);
+				toolbarActions.add(new CloseAction(defaultRunner, myDescriptor, project));
+				ExecutionManager.getInstance(project).getContentManager().showRunContent(defaultRunner, myDescriptor);
+			}
+		};
+		if(project.isInitialized())
+		{
+			myRunnable.run();
+		}
+		else
+		{
+			// If project is not initialized, default runner is not registered!
+			StartupManager.getInstance(project).registerPostStartupActivity(myRunnable);
+		}
+	}
 }

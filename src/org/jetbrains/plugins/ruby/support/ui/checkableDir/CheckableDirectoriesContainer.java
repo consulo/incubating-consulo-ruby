@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.support.ui.checkableDir;
 
-import com.intellij.util.xmlb.annotations.Property;
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import com.intellij.util.xmlb.annotations.Property;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,121 +35,142 @@ import java.util.Map;
  * @date: Jan 19, 2008
  */
 
-public class CheckableDirectoriesContainer implements Cloneable, Serializable {
-//    private static final Logger LOG = Logger.getInstance(CheckableDirectoriesContainer.class.getName());
-    
-    private LinkedList<CheckableDirectoryItem> myDirectories;
-    @NonNls
-    @Property
-    public static final String NUMBER = "NUMBER";
-    @NonNls
-    public static final String DIRECTORY = "DIR";
-    @NonNls
-    public static final String CHECKED = "CHECKED";
+public class CheckableDirectoriesContainer implements Cloneable, Serializable
+{
+	//    private static final Logger LOG = Logger.getInstance(CheckableDirectoriesContainer.class.getName());
 
-    public CheckableDirectoriesContainer() {
-        myDirectories = new LinkedList<CheckableDirectoryItem>();
-    }
+	private LinkedList<CheckableDirectoryItem> myDirectories;
+	@NonNls
+	@Property
+	public static final String NUMBER = "NUMBER";
+	@NonNls
+	public static final String DIRECTORY = "DIR";
+	@NonNls
+	public static final String CHECKED = "CHECKED";
 
-    /**
-     * Adds directory for time O(list length)
-     * @param directory Direcotry
-     * @return false if direcotry is already exists otherwise true
-     */
-    public boolean addCheckableDir(@NotNull final CheckableDirectoryItem directory){
-        if (containsDirectoryPath(directory)) {
-            return false;
-        }
-        myDirectories.add(directory);
-        return true;
-    }
+	public CheckableDirectoriesContainer()
+	{
+		myDirectories = new LinkedList<CheckableDirectoryItem>();
+	}
 
-    public boolean containsDirectoryPath(@NotNull final CheckableDirectoryItem directory) {
-        return getDirByPath(directory.getDirectoryPath()) != null;
-    }
+	/**
+	 * Adds directory for time O(list length)
+	 *
+	 * @param directory Direcotry
+	 * @return false if direcotry is already exists otherwise true
+	 */
+	public boolean addCheckableDir(@NotNull final CheckableDirectoryItem directory)
+	{
+		if(containsDirectoryPath(directory))
+		{
+			return false;
+		}
+		myDirectories.add(directory);
+		return true;
+	}
 
-    @NotNull
-    public List<CheckableDirectoryItem> getCheckableDirectories() {
-        return myDirectories;
-    }
+	public boolean containsDirectoryPath(@NotNull final CheckableDirectoryItem directory)
+	{
+		return getDirByPath(directory.getDirectoryPath()) != null;
+	}
 
-    /**
-     * Clears current directories lists. And loads new from options map.
-     * @param optionsByName Options map
-     */
-    public void loadCheckableDirectores(@NotNull final Map<String, String> optionsByName) {
-        removeAll();
+	@NotNull
+	public List<CheckableDirectoryItem> getCheckableDirectories()
+	{
+		return myDirectories;
+	}
 
-        final String sNumber = optionsByName.get(NUMBER);
-        if (sNumber == null) {
-            return;
-        }
+	/**
+	 * Clears current directories lists. And loads new from options map.
+	 *
+	 * @param optionsByName Options map
+	 */
+	public void loadCheckableDirectores(@NotNull final Map<String, String> optionsByName)
+	{
+		removeAll();
 
-        final int number = Integer.parseInt(sNumber);
-        for (int i = 0; i < number; i++) {
-            final boolean checked = Boolean.valueOf(optionsByName.get(CHECKED + i));
-            final String dir = optionsByName.get(DIRECTORY + i);
-            addCheckableDir(new CheckableDirectoryItem(dir, checked));
-        }
-    }
+		final String sNumber = optionsByName.get(NUMBER);
+		if(sNumber == null)
+		{
+			return;
+		}
 
-    public void stateChanged(@NotNull final String path,
-                             final boolean isChecked) {
-        final List<CheckableDirectoryItem> list = getCheckableDirectories();
-        for (CheckableDirectoryItem directoryItem : list) {
-            if (path.equals(directoryItem.getDirectoryPath())) {
-                directoryItem.setChecked(isChecked);
-                return;
-            }
-        }
-    }
+		final int number = Integer.parseInt(sNumber);
+		for(int i = 0; i < number; i++)
+		{
+			final boolean checked = Boolean.valueOf(optionsByName.get(CHECKED + i));
+			final String dir = optionsByName.get(DIRECTORY + i);
+			addCheckableDir(new CheckableDirectoryItem(dir, checked));
+		}
+	}
 
-    public void writeCheckableDirectores(@NotNull final Element elem,
-                                         @NotNull final SettingsExternalizer ext) {
-        final List<CheckableDirectoryItem> dirs = getCheckableDirectories();
-        ext.writeOption(NUMBER, Integer.toString(dirs.size()), elem);
-        for (int i = 0; i < dirs.size(); i++) {
-            ext.writeOption(CHECKED + i, Boolean.toString(dirs.get(i).isChecked()), elem);
-            ext.writeOption(DIRECTORY + i, dirs.get(i).getDirectoryPath(), elem);
-        }
-    }
+	public void stateChanged(@NotNull final String path, final boolean isChecked)
+	{
+		final List<CheckableDirectoryItem> list = getCheckableDirectories();
+		for(CheckableDirectoryItem directoryItem : list)
+		{
+			if(path.equals(directoryItem.getDirectoryPath()))
+			{
+				directoryItem.setChecked(isChecked);
+				return;
+			}
+		}
+	}
 
-    public void removeAll() {
-        getCheckableDirectories().clear();
-    }
+	public void writeCheckableDirectores(@NotNull final Element elem, @NotNull final SettingsExternalizer ext)
+	{
+		final List<CheckableDirectoryItem> dirs = getCheckableDirectories();
+		ext.writeOption(NUMBER, Integer.toString(dirs.size()), elem);
+		for(int i = 0; i < dirs.size(); i++)
+		{
+			ext.writeOption(CHECKED + i, Boolean.toString(dirs.get(i).isChecked()), elem);
+			ext.writeOption(DIRECTORY + i, dirs.get(i).getDirectoryPath(), elem);
+		}
+	}
 
-    public void removeDirByPath(@NotNull final String path) {
-        final List<CheckableDirectoryItem> list = getCheckableDirectories();
+	public void removeAll()
+	{
+		getCheckableDirectories().clear();
+	}
 
-        final CheckableDirectoryItem directoryItem = getDirByPath(path);
-        if (directoryItem != null) {
-            list.remove(directoryItem);
-        }
-    }
+	public void removeDirByPath(@NotNull final String path)
+	{
+		final List<CheckableDirectoryItem> list = getCheckableDirectories();
 
-    @Nullable
-    public CheckableDirectoryItem getDirByPath(@NotNull final String path) {
-        final List<CheckableDirectoryItem> list = getCheckableDirectories();
+		final CheckableDirectoryItem directoryItem = getDirByPath(path);
+		if(directoryItem != null)
+		{
+			list.remove(directoryItem);
+		}
+	}
 
-        for (CheckableDirectoryItem directoryItem : list) {
-            if (path.equals(directoryItem.getDirectoryPath())) {
-                return directoryItem;
-            }
-        }
-        return null;
-    }
+	@Nullable
+	public CheckableDirectoryItem getDirByPath(@NotNull final String path)
+	{
+		final List<CheckableDirectoryItem> list = getCheckableDirectories();
 
-    @Override
+		for(CheckableDirectoryItem directoryItem : list)
+		{
+			if(path.equals(directoryItem.getDirectoryPath()))
+			{
+				return directoryItem;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	@SuppressWarnings({"CloneDoesntCallSuperClone"})
-    @NotNull
-    public CheckableDirectoriesContainer clone() throws CloneNotSupportedException {
-        final CheckableDirectoriesContainer copy = new CheckableDirectoriesContainer();
-        final List<CheckableDirectoryItem> list = getCheckableDirectories();
-        for (CheckableDirectoryItem item : list) {
-            copy.addCheckableDir(new CheckableDirectoryItem(item.getDirectoryPath(),
-                    item.isChecked()));
-        }
+	@NotNull
+	public CheckableDirectoriesContainer clone() throws CloneNotSupportedException
+	{
+		final CheckableDirectoriesContainer copy = new CheckableDirectoriesContainer();
+		final List<CheckableDirectoryItem> list = getCheckableDirectories();
+		for(CheckableDirectoryItem item : list)
+		{
+			copy.addCheckableDir(new CheckableDirectoryItem(item.getDirectoryPath(), item.isChecked()));
+		}
 
-        return copy;
-    }
+		return copy;
+	}
 }

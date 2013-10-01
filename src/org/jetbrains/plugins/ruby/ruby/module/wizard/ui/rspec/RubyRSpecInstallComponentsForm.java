@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec;
 
-import com.intellij.openapi.projectRoots.Sdk;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RRModuleBuilder;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
-
-import javax.swing.*;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,36 +33,41 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Oct 14, 2007
  */
-public class RubyRSpecInstallComponentsForm {
-    private JPanel myContentPane;
-    private JTextPane myTPInfo;
-    private final RRModuleBuilder myBuilder;
+public class RubyRSpecInstallComponentsForm
+{
+	private JPanel myContentPane;
+	private JTextPane myTPInfo;
+	private final RRModuleBuilder myBuilder;
 
-    public RubyRSpecInstallComponentsForm(final RRModuleBuilder builder) {
-        myBuilder = builder;
-    }
+	public RubyRSpecInstallComponentsForm(final RRModuleBuilder builder)
+	{
+		myBuilder = builder;
+	}
 
-    protected void initBeforeShow() {
-        final Sdk sdk = myBuilder.getSdk();
+	protected void initBeforeShow()
+	{
+		final Sdk sdk = myBuilder.getSdk();
 
-        //check is gem installed.
-        final boolean gemExists = RubySdkUtil.isKindOfRubySDK(sdk) ? RSpecUtil.checkIfRSpecGemExists(sdk) : null;
+		//check is gem installed.
+		final boolean gemExists = RubySdkUtil.isKindOfRubySDK(sdk) ? RSpecUtil.checkIfRSpecGemExists(sdk) : null;
 
-        final String text;
-        if (gemExists) {
-            final String rSpecGemVersion = RSpecUtil.getRSpecGemVersion(sdk, true, null);
-            final String versionStr = TextUtil.isEmpty(rSpecGemVersion)
-                    ? RBundle.message("gem.unknown.version")
-                    : rSpecGemVersion;
+		final String text;
+		if(gemExists)
+		{
+			final String rSpecGemVersion = RSpecUtil.getRSpecGemVersion(sdk, true, null);
+			final String versionStr = TextUtil.isEmpty(rSpecGemVersion) ? RBundle.message("gem.unknown.version") : rSpecGemVersion;
 
-            text = RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.spec.ruby.installed.rspec.gem", versionStr));
-        } else {
-            text = RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.html"));
-        }
-        myTPInfo.setText(text);
-    }
+			text = RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.spec.ruby.installed.rspec.gem", versionStr));
+		}
+		else
+		{
+			text = RubyUIUtil.wrapToHtmlWithLabelFont(RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.html"));
+		}
+		myTPInfo.setText(text);
+	}
 
-    public JPanel getContentPane() {
-        return myContentPane;
-    }
+	public JPanel getContentPane()
+	{
+		return myContentPane;
+	}
 }

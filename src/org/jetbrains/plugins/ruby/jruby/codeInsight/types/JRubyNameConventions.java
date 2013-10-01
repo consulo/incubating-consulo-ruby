@@ -16,50 +16,58 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
-import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.jruby.JavaPsiUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.NamingConventions;
+import com.intellij.psi.PsiMethod;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 13, 2007
  */
-public class JRubyNameConventions {
-    @NonNls
-    private static final String GET = "get";
+public class JRubyNameConventions
+{
+	@NonNls
+	private static final String GET = "get";
 
-    @NonNls
-    private static final String SET = "set";
+	@NonNls
+	private static final String SET = "set";
 
-    @NonNls
-    private static final String IS = "is";
+	@NonNls
+	private static final String IS = "is";
 
-    @NotNull
-    public static String getMethodName(@NotNull final PsiMethod method){
-        return getMethodName(method.getName(), !JavaPsiUtil.isStaticMethod(method));
-    }
+	@NotNull
+	public static String getMethodName(@NotNull final PsiMethod method)
+	{
+		return getMethodName(method.getName(), !JavaPsiUtil.isStaticMethod(method));
+	}
 
-    @NotNull
-    public static String getMethodName(@NotNull final String name){
-        return getMethodName(name, true);
-    }
+	@NotNull
+	public static String getMethodName(@NotNull final String name)
+	{
+		return getMethodName(name, true);
+	}
 
-    @NotNull
-    private static String getMethodName(@NotNull final String name, boolean getsetisEnabled){
-        if (getsetisEnabled){
-            if (name.startsWith(GET)){
-                return NamingConventions.toUnderscoreCase(name.substring(GET.length()));
-            }
-            if (name.startsWith(SET)){
-                return NamingConventions.toUnderscoreCase(name.substring(SET.length())) + "=";
-            }
-            if (name.startsWith(IS)){
-                return NamingConventions.toUnderscoreCase(name.substring(IS.length())) + "?";
-            }
-        }
-        return NamingConventions.toUnderscoreCase(name);
-    }
+	@NotNull
+	private static String getMethodName(@NotNull final String name, boolean getsetisEnabled)
+	{
+		if(getsetisEnabled)
+		{
+			if(name.startsWith(GET))
+			{
+				return NamingConventions.toUnderscoreCase(name.substring(GET.length()));
+			}
+			if(name.startsWith(SET))
+			{
+				return NamingConventions.toUnderscoreCase(name.substring(SET.length())) + "=";
+			}
+			if(name.startsWith(IS))
+			{
+				return NamingConventions.toUnderscoreCase(name.substring(IS.length())) + "?";
+			}
+		}
+		return NamingConventions.toUnderscoreCase(name);
+	}
 }

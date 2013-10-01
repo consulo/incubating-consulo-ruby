@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.refactoring.introduceVariable;
 
-import com.intellij.openapi.util.text.StringUtil;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,44 +29,49 @@ import java.util.regex.Pattern;
  * @author: oleg
  * @date: Oct 27, 2007
  */
-public class NameSuggestorUtil {
+public class NameSuggestorUtil
+{
 
-    private static String deleteNonLetterFromString(@NotNull final String string) {
-      Pattern pattern = Pattern.compile("[^a-zA-Z_]");
-      Matcher matcher = pattern.matcher(string);
-      return matcher.replaceAll("");
-    }
+	private static String deleteNonLetterFromString(@NotNull final String string)
+	{
+		Pattern pattern = Pattern.compile("[^a-zA-Z_]");
+		Matcher matcher = pattern.matcher(string);
+		return matcher.replaceAll("");
+	}
 
-    public static void addNames(@NotNull final List<String> possibleNames,
-                                @NotNull String name) {
-        name = StringUtil.decapitalize(deleteNonLetterFromString(name));
-        if (name.startsWith("get")){
-            name = name.substring(3);
-        } else
-        if (name.startsWith("is")){
-            name = name.substring(2);
-        }
-        while (name.startsWith("_")){
-            name = name.substring(1);
-        }
-        final int length = name.length();
-        for (int i = 0; i < length; i++) {
-            if (Character.isLetter(name.charAt(i)) &&
-                    (i==0 ||
-                    name.charAt(i-1)=='_' ||
-                    Character.isLowerCase(name.charAt(i-1)) &&
-                            Character.isUpperCase(name.charAt(i)))){
-                possibleNames.add(name.substring(i));
-            }
-        }
-    }
+	public static void addNames(@NotNull final List<String> possibleNames, @NotNull String name)
+	{
+		name = StringUtil.decapitalize(deleteNonLetterFromString(name));
+		if(name.startsWith("get"))
+		{
+			name = name.substring(3);
+		}
+		else if(name.startsWith("is"))
+		{
+			name = name.substring(2);
+		}
+		while(name.startsWith("_"))
+		{
+			name = name.substring(1);
+		}
+		final int length = name.length();
+		for(int i = 0; i < length; i++)
+		{
+			if(Character.isLetter(name.charAt(i)) && (i == 0 ||
+					name.charAt(i - 1) == '_' ||
+					Character.isLowerCase(name.charAt(i - 1)) && Character.isUpperCase(name.charAt(i))))
+			{
+				possibleNames.add(name.substring(i));
+			}
+		}
+	}
 
-    public static void addNamesByType(@NotNull final List<String> possibleNames,
-                                      @NotNull String name) {
-        name = StringUtil.decapitalize(deleteNonLetterFromString(name));
-        possibleNames.add(name);
-        possibleNames.add(name.substring(0, 1));
-    }
+	public static void addNamesByType(@NotNull final List<String> possibleNames, @NotNull String name)
+	{
+		name = StringUtil.decapitalize(deleteNonLetterFromString(name));
+		possibleNames.add(name);
+		possibleNames.add(name.substring(0, 1));
+	}
 
 
 }

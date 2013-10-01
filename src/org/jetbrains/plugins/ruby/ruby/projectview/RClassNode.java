@@ -16,14 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.projectview;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.ide.projectView.ProjectViewNode;
-import com.intellij.ide.projectView.ViewSettings;
-import com.intellij.ide.util.treeView.AbstractTreeNode;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.pom.Navigatable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -37,11 +35,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
-
-import javax.swing.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.ide.projectView.ProjectViewNode;
+import com.intellij.ide.projectView.ViewSettings;
+import com.intellij.ide.util.treeView.AbstractTreeNode;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.pom.Navigatable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,80 +50,89 @@ import java.util.List;
  * @author: oleg
  * @date: Oct 30, 2007
  */
-public class RClassNode extends ProjectViewNode<RVirtualClass> {
-    private final Icon myIcon;
-    private final VirtualFile myVirtualFile;
+public class RClassNode extends ProjectViewNode<RVirtualClass>
+{
+	private final Icon myIcon;
+	private final VirtualFile myVirtualFile;
 
-    public RClassNode(@NotNull final Project project,
-                      @Nullable final Module module,
-                      @NotNull final RVirtualFile file,
-                      @NotNull final RVirtualClass value,
-                      @NotNull final List<RVirtualClass> classes,
-                      final ViewSettings viewSettings) {
-        super(project, value, viewSettings);
-        myVirtualFile = file.getVirtualFile();
-        // Rails checks
-        if (module != null && RailsFacetUtil.hasRailsSupport(module)) {
-            if (ControllersConventions.isControllerFile(file, module, classes)){
-                myIcon = RailsIcons.RAILS_CONTROLLER_NODE;
-                return;
-            }
-            if (ModelsConventions.isModelFile(file, module, classes)){
-                myIcon = RailsIcons.RAILS_MODEL_NODE;
-                return;
-            }
-        }
-        myIcon = RClassPresentationUtil.getIcon();
-    }
+	public RClassNode(@NotNull final Project project, @Nullable final Module module, @NotNull final RVirtualFile file, @NotNull final RVirtualClass value, @NotNull final List<RVirtualClass> classes, final ViewSettings viewSettings)
+	{
+		super(project, value, viewSettings);
+		myVirtualFile = file.getVirtualFile();
+		// Rails checks
+		if(module != null && RailsFacetUtil.hasRailsSupport(module))
+		{
+			if(ControllersConventions.isControllerFile(file, module, classes))
+			{
+				myIcon = RailsIcons.RAILS_CONTROLLER_NODE;
+				return;
+			}
+			if(ModelsConventions.isModelFile(file, module, classes))
+			{
+				myIcon = RailsIcons.RAILS_MODEL_NODE;
+				return;
+			}
+		}
+		myIcon = RClassPresentationUtil.getIcon();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public VirtualFile getVirtualFile() {
-        return myVirtualFile;
-    }
+	public VirtualFile getVirtualFile()
+	{
+		return myVirtualFile;
+	}
 
-    @Override
-	public boolean contains(@NotNull VirtualFile file) {
-        return false;
-    }
+	@Override
+	public boolean contains(@NotNull VirtualFile file)
+	{
+		return false;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<AbstractTreeNode> getChildren() {
-        return Collections.emptyList();
-    }
+	public Collection<AbstractTreeNode> getChildren()
+	{
+		return Collections.emptyList();
+	}
 
-    @Override
-	protected void update(PresentationData data) {
-        final RVirtualClass aClass = getValue();
-        data.setIcons(myIcon);
-        data.setLocationString(RClassPresentationUtil.getLocation(aClass));
-        data.setPresentableText(RClassPresentationUtil.formatName(aClass, RPresentationConstants.SHOW_NAME));
-    }
+	@Override
+	protected void update(PresentationData data)
+	{
+		final RVirtualClass aClass = getValue();
+		data.setIcons(myIcon);
+		data.setLocationString(RClassPresentationUtil.getLocation(aClass));
+		data.setPresentableText(RClassPresentationUtil.formatName(aClass, RPresentationConstants.SHOW_NAME));
+	}
 
-    @Override
-	public void navigate(boolean requestFocus) {
-        ((Navigatable)getPsiElement()).navigate(requestFocus);
-    }
+	@Override
+	public void navigate(boolean requestFocus)
+	{
+		((Navigatable) getPsiElement()).navigate(requestFocus);
+	}
 
-    @Override
-	public boolean canNavigate() {
-        return canNavigateToSource();
-    }
+	@Override
+	public boolean canNavigate()
+	{
+		return canNavigateToSource();
+	}
 
-    @Override
-	public boolean canNavigateToSource() {
-        return getPsiElement() instanceof Navigatable;
-    }
+	@Override
+	public boolean canNavigateToSource()
+	{
+		return getPsiElement() instanceof Navigatable;
+	}
 
-    public RStructuralElement getPsiElement(){
-        final RVirtualClass element = getValue();
-        return RVirtualPsiUtil.findInPsi(myProject, element);
-    }
+	public RStructuralElement getPsiElement()
+	{
+		final RVirtualClass element = getValue();
+		return RVirtualPsiUtil.findInPsi(myProject, element);
+	}
 
-    @Override
-	public boolean canRepresent(Object element) {
-        final RStructuralElement psiElement = getPsiElement();
-        return psiElement!=null && RubyPsiUtil.getRFile(psiElement)  == element;
-    }
+	@Override
+	public boolean canRepresent(Object element)
+	{
+		final RStructuralElement psiElement = getPsiElement();
+		return psiElement != null && RubyPsiUtil.getRFile(psiElement) == element;
+	}
 }

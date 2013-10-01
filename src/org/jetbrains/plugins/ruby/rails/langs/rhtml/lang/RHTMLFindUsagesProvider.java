@@ -32,75 +32,86 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: 11.04.2007
  */
-public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider {
+public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
+{
 
-  @Override
-  @Nullable
-  public WordsScanner getWordsScanner() {
-    return new SimpleWordsScanner();
-  }
+	@Override
+	@Nullable
+	public WordsScanner getWordsScanner()
+	{
+		return new SimpleWordsScanner();
+	}
 
-  @Override
-  public boolean canFindUsagesFor(final @NotNull PsiElement psiElement) {
-    if (super.canFindUsagesFor(psiElement)) {
-        return true;
-    }
+	@Override
+	public boolean canFindUsagesFor(final @NotNull PsiElement psiElement)
+	{
+		if(super.canFindUsagesFor(psiElement))
+		{
+			return true;
+		}
 
-    final Language lang = psiElement.getLanguage();
-    if (lang instanceof eRubyLanguage) {
-        return false;
-    }
-    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
-    return delegateProvider.canFindUsagesFor(psiElement);
-  }
+		final Language lang = psiElement.getLanguage();
+		if(lang instanceof eRubyLanguage)
+		{
+			return false;
+		}
+		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		return delegateProvider.canFindUsagesFor(psiElement);
+	}
 
-  @Override
-  @NotNull
-  public String getType(@NotNull PsiElement element) {
-    final String supertype = super.getType(element);
-    if (supertype != null) {
-        return supertype;
-    }
-    final Language lang = element.getLanguage();
-    if (lang instanceof eRubyLanguage) {
-        return "";
-    }
-    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
-    return delegateProvider != null ? delegateProvider.getType(element)
-                                    : "";
-  }
+	@Override
+	@NotNull
+	public String getType(@NotNull PsiElement element)
+	{
+		final String supertype = super.getType(element);
+		if(supertype != null)
+		{
+			return supertype;
+		}
+		final Language lang = element.getLanguage();
+		if(lang instanceof eRubyLanguage)
+		{
+			return "";
+		}
+		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		return delegateProvider != null ? delegateProvider.getType(element) : "";
+	}
 
-  @Override
-  @NotNull
-  public String getDescriptiveName(@NotNull PsiElement element) {
-    final String supertext = super.getDescriptiveName(element);
-    if (supertext != null) {
-        return supertext;
-    }
+	@Override
+	@NotNull
+	public String getDescriptiveName(@NotNull PsiElement element)
+	{
+		final String supertext = super.getDescriptiveName(element);
+		if(supertext != null)
+		{
+			return supertext;
+		}
 
-    final Language lang = element.getLanguage();
-    if (lang instanceof eRubyLanguage) {
-        return "";
-    }
-    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
-    return delegateProvider != null ? delegateProvider.getDescriptiveName(element)
-                                    : "";
-  }
+		final Language lang = element.getLanguage();
+		if(lang instanceof eRubyLanguage)
+		{
+			return "";
+		}
+		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		return delegateProvider != null ? delegateProvider.getDescriptiveName(element) : "";
+	}
 
-  @Override
-  @NotNull
-  public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
-    final String supertext = super.getNodeText(element, useFullName);
-    if (supertext != null) {
-        return supertext;
-    }
+	@Override
+	@NotNull
+	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
+	{
+		final String supertext = super.getNodeText(element, useFullName);
+		if(supertext != null)
+		{
+			return supertext;
+		}
 
-    final Language lang = element.getLanguage();
-    if (lang instanceof eRubyLanguage) {
-        return "";
-    }
-    final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
-    return delegateProvider != null ? delegateProvider.getNodeText(element, useFullName)
-                                    : "";
-  }
+		final Language lang = element.getLanguage();
+		if(lang instanceof eRubyLanguage)
+		{
+			return "";
+		}
+		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		return delegateProvider != null ? delegateProvider.getNodeText(element, useFullName) : "";
+	}
 }

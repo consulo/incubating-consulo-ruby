@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyComponents;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import com.intellij.codeHighlighting.TextEditorHighlightingPass;
+import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
+import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,44 +33,52 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @author: oleg
  * @date: Jun 26, 2007
  */
-public class RubyFastLineHighlightPassFactory implements TextEditorHighlightingPassFactory {
-    private final TextEditorHighlightingPassRegistrar myRegistrar;
+public class RubyFastLineHighlightPassFactory implements TextEditorHighlightingPassFactory
+{
+	private final TextEditorHighlightingPassRegistrar myRegistrar;
 
-    public RubyFastLineHighlightPassFactory(final TextEditorHighlightingPassRegistrar passRegistrar) {
-        myRegistrar = passRegistrar;
-    }
+	public RubyFastLineHighlightPassFactory(final TextEditorHighlightingPassRegistrar passRegistrar)
+	{
+		myRegistrar = passRegistrar;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile,
-                                                             @NotNull final Editor editor) {
-        if (psiFile instanceof RFile){
-            return new RubyFastLineHighlightPass(psiFile.getProject(), (RFile) psiFile, editor);
-        }
-        return null;
-    }
+	public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile, @NotNull final Editor editor)
+	{
+		if(psiFile instanceof RFile)
+		{
+			return new RubyFastLineHighlightPass(psiFile.getProject(), (RFile) psiFile, editor);
+		}
+		return null;
+	}
 
-    @Override
-	public void projectOpened() {
-    }
+	@Override
+	public void projectOpened()
+	{
+	}
 
-    @Override
-	public void projectClosed() {
-    }
+	@Override
+	public void projectClosed()
+	{
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RubyComponents.RUBY_FAST_HIGHLIGHT_LINE_FACTORY;
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return RubyComponents.RUBY_FAST_HIGHLIGHT_LINE_FACTORY;
+	}
 
-    @Override
-	public void initComponent() {
-        myRegistrar.registerTextEditorHighlightingPass(this, null, null, true, -1);
-    }
+	@Override
+	public void initComponent()
+	{
+		myRegistrar.registerTextEditorHighlightingPass(this, null, null, true, -1);
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 }

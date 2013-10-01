@@ -16,21 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.07.2006
  */
-public interface RCompoundStatement extends RExpression {
-    /**
-     * @return All the statements
-     */
-    @NotNull
-    public List<RPsiElement> getStatements();
+public interface RCompoundStatement extends RExpression
+{
+	/**
+	 * @return All the statements
+	 */
+	@NotNull
+	public List<RPsiElement> getStatements();
 }

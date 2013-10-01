@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.regexp;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -27,20 +26,24 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RRegexpLiteral;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.RStringLiteralBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class RRegexpLiteralImpl extends RStringLiteralBase implements RRegexpLiteral {
-    public RRegexpLiteralImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RRegexpLiteralImpl extends RStringLiteralBase implements RRegexpLiteral
+{
+	public RRegexpLiteralImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Regexp), Context.INSTANCE, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Regexp), Context.INSTANCE, true);
+	}
 }

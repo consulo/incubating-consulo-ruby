@@ -16,10 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import javax.swing.*;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,59 +30,58 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 28.11.2006
  */
-public class SimpleGeneratorPanel implements GeneratorPanel {
+public class SimpleGeneratorPanel implements GeneratorPanel
+{
 
-    private JTextField myGeneratorArgsLabelTextField;
-    private JCheckBox myPretendCheckBox;
-    private JCheckBox myForceCheckBox;
-    private JCheckBox mySkipCheckBox;
-    private JCheckBox myBacktraceCheckBox;
-    private JPanel myContentPanel;
-    private JCheckBox mySVNCheckBox;
-    public GeneratorOptions myOptions;
+	private JTextField myGeneratorArgsLabelTextField;
+	private JCheckBox myPretendCheckBox;
+	private JCheckBox myForceCheckBox;
+	private JCheckBox mySkipCheckBox;
+	private JCheckBox myBacktraceCheckBox;
+	private JPanel myContentPanel;
+	private JCheckBox mySVNCheckBox;
+	public GeneratorOptions myOptions;
 
-    @Override
-	public void initPanel(final GeneratorOptions options) {
-        myOptions = options;
-        GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox,
-                                              mySkipCheckBox, myBacktraceCheckBox,
-                                              mySVNCheckBox, myOptions);
-    }
+	@Override
+	public void initPanel(final GeneratorOptions options)
+	{
+		myOptions = options;
+		GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, mySVNCheckBox, myOptions);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public JPanel getContent() {
-        return myContentPanel;
-    }
+	public JPanel getContent()
+	{
+		return myContentPanel;
+	}
 
-    @Override
-	public String getMainArgument() {
-        return myGeneratorArgsLabelTextField.getText().trim();
-    }
+	@Override
+	public String getMainArgument()
+	{
+		return myGeneratorArgsLabelTextField.getText().trim();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getGeneratorArgs() {
-        final StringBuilder buff = new StringBuilder();
-        buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox,
-                                                             myForceCheckBox,
-                                                             myPretendCheckBox,
-                                                             mySkipCheckBox,
-                                                             mySVNCheckBox));
-        
-        buff.append(myGeneratorArgsLabelTextField.getText().trim());
-        return buff.toString();
-    }
+	public String getGeneratorArgs()
+	{
+		final StringBuilder buff = new StringBuilder();
+		buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox, myForceCheckBox, myPretendCheckBox, mySkipCheckBox, mySVNCheckBox));
 
-    @Override
-	public JComponent getPreferredFocusedComponent() {
-        return myGeneratorArgsLabelTextField;
-    }
+		buff.append(myGeneratorArgsLabelTextField.getText().trim());
+		return buff.toString();
+	}
 
-    @Override
-	public void saveSettings(final Project project) {
-        GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox,
-                                     mySkipCheckBox, myBacktraceCheckBox,
-                                     mySVNCheckBox, myOptions, project);
-    }
+	@Override
+	public JComponent getPreferredFocusedComponent()
+	{
+		return myGeneratorArgsLabelTextField;
+	}
+
+	@Override
+	public void saveSettings(final Project project)
+	{
+		GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, mySVNCheckBox, myOptions, project);
+	}
 }

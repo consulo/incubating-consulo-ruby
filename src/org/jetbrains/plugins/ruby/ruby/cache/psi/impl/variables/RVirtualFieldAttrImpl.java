@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -26,70 +29,75 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 28, 2007
  */
-public class RVirtualFieldAttrImpl extends RVirtualStructuralElementBase implements RVirtualFieldAttr, Serializable {
-    private FieldAttrType myType;
-    private List<String> myNames;
-    @NonNls
-    private static final String COMMA = ",";
-    @NonNls
-    private static final String SPACE = " ";
+public class RVirtualFieldAttrImpl extends RVirtualStructuralElementBase implements RVirtualFieldAttr, Serializable
+{
+	private FieldAttrType myType;
+	private List<String> myNames;
+	@NonNls
+	private static final String COMMA = ",";
+	@NonNls
+	private static final String SPACE = " ";
 
-    public RVirtualFieldAttrImpl(final RVirtualContainer container, final FieldAttrType type,
-                                 @NotNull List<String> names
-                                 ) {
-        super(container);
-        myType = type;
-        myNames = names;
-    }
+	public RVirtualFieldAttrImpl(final RVirtualContainer container, final FieldAttrType type, @NotNull List<String> names)
+	{
+		super(container);
+		myType = type;
+		myNames = names;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualFieldAttr(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualFieldAttr(this);
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.FIELD_ATTR_CALL;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.FIELD_ATTR_CALL;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<String> getNames() {
-        return myNames;
-    }
+	public List<String> getNames()
+	{
+		return myNames;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public FieldAttrType getFieldAttrType() {
-        return myType;
-    }
+	public FieldAttrType getFieldAttrType()
+	{
+		return myType;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableText() {
-        final StringBuffer buffer = new StringBuffer();
-        buffer.append(RFieldAttrPresentationUtil.getFieldAttrText(myType));
-        boolean seen = false;
-        for (String name : myNames) {
-            if (seen){
-                buffer.append(COMMA);
-            }
-            seen = true;
-            buffer.append(SPACE).append(name);
-        }
-        return buffer.toString();
-    }
+	public String getPresentableText()
+	{
+		final StringBuffer buffer = new StringBuffer();
+		buffer.append(RFieldAttrPresentationUtil.getFieldAttrText(myType));
+		boolean seen = false;
+		for(String name : myNames)
+		{
+			if(seen)
+			{
+				buffer.append(COMMA);
+			}
+			seen = true;
+			buffer.append(SPACE).append(name);
+		}
+		return buffer.toString();
+	}
 
-    public String toString() {
-        return getPresentableText();
-    }
+	public String toString()
+	{
+		return getPresentableText();
+	}
 
 }

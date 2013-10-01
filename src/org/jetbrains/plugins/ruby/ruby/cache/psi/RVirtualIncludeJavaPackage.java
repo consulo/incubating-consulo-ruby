@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi;
  * User: oleg
  * Date: Sep 26, 2007
  */
-public interface RVirtualIncludeJavaPackage extends RVirtualIncludeJavaClass{
+public interface RVirtualIncludeJavaPackage extends RVirtualIncludeJavaClass
+{
 }

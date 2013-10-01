@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: Nov 20, 2006
  */
-public interface ROperation extends RPsiElement {
+public interface ROperation extends RPsiElement
+{
 }

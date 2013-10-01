@@ -16,18 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.iterators;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 31.07.2006
  */
-public interface RBlockVariables extends RPsiElement {
-    @NotNull
-    public List<RIdentifier> getVariables();
+public interface RBlockVariables extends RPsiElement
+{
+	@NotNull
+	public List<RIdentifier> getVariables();
 }

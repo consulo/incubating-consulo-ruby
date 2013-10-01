@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
+import java.util.Collection;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-
-import java.util.Collection;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,21 +29,22 @@ import java.util.Set;
  * @author: oleg
  * @date: May 4, 2007
  */
-public interface Scope {
-    @NotNull
-    public PseudoScopeHolder getHolder();
+public interface Scope
+{
+	@NotNull
+	public PseudoScopeHolder getHolder();
 
-    @NotNull
-    public Collection<ScopeVariable> getVariables();
+	@NotNull
+	public Collection<ScopeVariable> getVariables();
 
-    void processIdentifier(@NotNull final RIdentifier identifier);
+	void processIdentifier(@NotNull final RIdentifier identifier);
 
-    @Nullable
-    public ScopeVariable getVariableByName(@NotNull final String name);
+	@Nullable
+	public ScopeVariable getVariableByName(@NotNull final String name);
 
-    @NotNull
-    public Set<String> getScopeNames();
+	@NotNull
+	public Set<String> getScopeNames();
 
-    @NotNull
-    public Collection<Scope> getSubScopes(); 
+	@NotNull
+	public Collection<Scope> getSubScopes();
 }

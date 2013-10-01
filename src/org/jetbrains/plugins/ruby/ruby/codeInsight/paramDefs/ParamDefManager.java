@@ -16,33 +16,38 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import com.intellij.openapi.components.ServiceManager;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
+import com.intellij.openapi.components.ServiceManager;
 
 /**
  * @author yole
  */
-public class ParamDefManager {
-    public static ParamDefManager getInstance() {
-        return ServiceManager.getService(ParamDefManager.class);
-    }
+public class ParamDefManager
+{
+	public static ParamDefManager getInstance()
+	{
+		return ServiceManager.getService(ParamDefManager.class);
+	}
 
-    private Map<String, ParamDef[]> myParamDefs = new HashMap<String, ParamDef[]>();
+	private Map<String, ParamDef[]> myParamDefs = new HashMap<String, ParamDef[]>();
 
-    public void registerParamDef(String methodFQN, ParamDef[] paramDefs) {
-        myParamDefs.put(methodFQN, paramDefs);
-    }
+	public void registerParamDef(String methodFQN, ParamDef[] paramDefs)
+	{
+		myParamDefs.put(methodFQN, paramDefs);
+	}
 
-    public ParamDef[] getParamDefs(Symbol method) {
-        String path = SymbolUtil.getPresentablePath(method);
-        return getParamDefs(path);
-    }
+	public ParamDef[] getParamDefs(Symbol method)
+	{
+		String path = SymbolUtil.getPresentablePath(method);
+		return getParamDefs(path);
+	}
 
-    public ParamDef[] getParamDefs(final String methodFQN) {
-        return myParamDefs.get(methodFQN);
-    }
+	public ParamDef[] getParamDefs(final String methodFQN)
+	{
+		return myParamDefs.get(methodFQN);
+	}
 }

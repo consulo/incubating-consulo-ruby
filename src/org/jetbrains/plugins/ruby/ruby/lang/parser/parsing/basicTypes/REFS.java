@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,16 +27,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
  * @author: oleg
  * @date: Feb 27, 2007
  */
-public class REFS implements RubyTokenTypes {
+public class REFS implements RubyTokenTypes
+{
 
-    public static IElementType parse(final RBuilder builder){
-        if (builder.compare(tBACK_REF)){
-            return builder.parseSingleToken(tBACK_REF, RubyElementTypes.BACKREF);
-        }
-        if (builder.compare(tNTH_REF)){
-            return builder.parseSingleToken(tNTH_REF, RubyElementTypes.NTHREF);
-        }
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(builder.compare(tBACK_REF))
+		{
+			return builder.parseSingleToken(tBACK_REF, RubyElementTypes.BACKREF);
+		}
+		if(builder.compare(tNTH_REF))
+		{
+			return builder.parseSingleToken(tNTH_REF, RubyElementTypes.NTHREF);
+		}
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

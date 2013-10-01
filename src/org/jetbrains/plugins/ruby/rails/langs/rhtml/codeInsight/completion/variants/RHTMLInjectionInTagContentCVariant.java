@@ -29,26 +29,31 @@ import com.intellij.psi.xml.XmlTag;
  * @author: Roman Chernyatchik
  * @date: Oct 2, 2007
  */
-public class RHTMLInjectionInTagContentCVariant extends CompletionVariant {
-    public RHTMLInjectionInTagContentCVariant() {
-        super(XmlTag.class, new MyRTHMLInjectionStartFilter());
-    }
+public class RHTMLInjectionInTagContentCVariant extends CompletionVariant
+{
+	public RHTMLInjectionInTagContentCVariant()
+	{
+		super(XmlTag.class, new MyRTHMLInjectionStartFilter());
+	}
 
-    private static class MyRTHMLInjectionStartFilter implements ElementFilter {
+	private static class MyRTHMLInjectionStartFilter implements ElementFilter
+	{
 
-        @Override
-		public boolean isAcceptable(final Object element, final PsiElement context) {
-            //noinspection SimplifiableIfStatement
-            if (!(element instanceof TreeElement)
-                    || !CompletionUtil.DUMMY_IDENTIFIER.trim().equals(((TreeElement) element).getText())) {
-                return false;
-            }
-            return context instanceof XmlTag;
-        }
+		@Override
+		public boolean isAcceptable(final Object element, final PsiElement context)
+		{
+			//noinspection SimplifiableIfStatement
+			if(!(element instanceof TreeElement) || !CompletionUtil.DUMMY_IDENTIFIER.trim().equals(((TreeElement) element).getText()))
+			{
+				return false;
+			}
+			return context instanceof XmlTag;
+		}
 
-        @Override
-		public boolean isClassAcceptable(final Class hintClass) {
-            return true;
-        }
-    }
+		@Override
+		public boolean isClassAcceptable(final Class hintClass)
+		{
+			return true;
+		}
+	}
 }

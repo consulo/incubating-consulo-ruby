@@ -16,19 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.ide.IdeView;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,76 +40,83 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 27.11.2006
  */
-public abstract class AbstractScriptAction extends AnAction {
+public abstract class AbstractScriptAction extends AnAction
+{
 
-    public AbstractScriptAction(@Nullable final String text,
-                                @Nullable final String description,
-                                @Nullable final Icon icon) {
-        super(text, description, icon);
-    }
+	public AbstractScriptAction(@Nullable final String text, @Nullable final String description, @Nullable final Icon icon)
+	{
+		super(text, description, icon);
+	}
 
-    /**
-     * @return Caption for Generate dialog.
-     */
-    protected abstract String getGenerateDialogTitle();
+	/**
+	 * @return Caption for Generate dialog.
+	 */
+	protected abstract String getGenerateDialogTitle();
 
-    /**
-     * @return Caption for error message.
-     */
-    protected abstract String getErrorTitle();
+	/**
+	 * @return Caption for error message.
+	 */
+	protected abstract String getErrorTitle();
 
-    @SuppressWarnings({"UnusedParameters"})
-    protected abstract void checkBeforeCreate(@NotNull final String newName,
-                                              @Nullable final PsiDirectory directory) throws IncorrectOperationException;
+	@SuppressWarnings({"UnusedParameters"})
+	protected abstract void checkBeforeCreate(@NotNull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException;
 
-    protected abstract String[] createScriptParameters(final String inputString, final String railsAppHomePath);
+	protected abstract String[] createScriptParameters(final String inputString, final String railsAppHomePath);
 
-    protected abstract boolean validateBeforeInvokeDialog(final Module module);
-    protected abstract PsiElement[] invokeDialog(@NotNull final Module module,
-                                                 @Nullable final PsiDirectory directory);
+	protected abstract boolean validateBeforeInvokeDialog(final Module module);
 
-    @Override
-	public void actionPerformed(final AnActionEvent e) {
-        final DataContext dataContext = e.getDataContext();
+	protected abstract PsiElement[] invokeDialog(@NotNull final Module module, @Nullable final PsiDirectory directory);
 
-        final IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
-        final Module module = DataKeys.MODULE.getData(dataContext);
-        final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+	@Override
+	public void actionPerformed(final AnActionEvent e)
+	{
+		final DataContext dataContext = e.getDataContext();
 
-        assert module != null;
-        assert jdk != null;
+		final IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
+		final Module module = DataKeys.MODULE.getData(dataContext);
+		final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
 
-        PsiDirectory dir = view == null ? null : view.getOrChooseDirectory();
-        if (dir == null) {
-            final PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
-            if (psiFile != null) {
-                dir = psiFile.getParent();
-            }
-        }
+		assert module != null;
+		assert jdk != null;
 
-        if (!validateBeforeInvokeDialog(module)) {
-            return;
-        }
+		PsiDirectory dir = view == null ? null : view.getOrChooseDirectory();
+		if(dir == null)
+		{
+			final PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
+			if(psiFile != null)
+			{
+				dir = psiFile.getParent();
+			}
+		}
 
-        final PsiElement[] createdElements = invokeDialog(module, dir);
+		if(!validateBeforeInvokeDialog(module))
+		{
+			return;
+		}
 
-        if (view != null) {
-            for (PsiElement createdElement : createdElements) {
-                view.selectElement(createdElement);
-            }
-        }
-    }
+		final PsiElement[] createdElements = invokeDialog(module, dir);
 
-    @Override
-	public void update(@NotNull final AnActionEvent e) {
-        final DataContext dataContext = e.getDataContext();
-        final Presentation presentation = e.getPresentation();
+		if(view != null)
+		{
+			for(PsiElement createdElement : createdElements)
+			{
+				view.selectElement(createdElement);
+			}
+		}
+	}
 
-        final Module module = DataKeys.MODULE.getData(dataContext);
-        boolean show = false;
-        if (module != null) {
-            show = RModuleUtil.getModuleOrJRubyFacetSdk(module) != null;
-        }
-        AnActionUtil.updatePresentation(presentation, show, show);
-    }
+	@Override
+	public void update(@NotNull final AnActionEvent e)
+	{
+		final DataContext dataContext = e.getDataContext();
+		final Presentation presentation = e.getPresentation();
+
+		final Module module = DataKeys.MODULE.getData(dataContext);
+		boolean show = false;
+		if(module != null)
+		{
+			show = RModuleUtil.getModuleOrJRubyFacetSdk(module) != null;
+		}
+		AnActionUtil.updatePresentation(presentation, show, show);
+	}
 }

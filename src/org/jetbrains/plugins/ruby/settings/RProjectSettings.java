@@ -16,19 +16,20 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
+import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
+import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.annotations.Transient;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
-import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
-import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,53 +39,65 @@ import java.util.HashSet;
  */
 
 @State(
-  name = RComponents.RPROJECT_SETTINGS,
-  storages = {
-    @Storage(
-      id="other",
-      file = "$PROJECT_FILE$"
-    )
-  }
+		name = RComponents.RPROJECT_SETTINGS,
+		storages = {
+				@Storage(
+						id = "other",
+						file = "$PROJECT_FILE$"
+				)
+		}
 )
-public class RProjectSettings implements PersistentStateComponent<RProjectSettings> {
-    public ArrayList<String> myOptions = new ArrayList<String>();
-    @Transient
-    private GeneratorOptions generatorsOptions = GeneratorOptions.createEmpty();
+public class RProjectSettings implements PersistentStateComponent<RProjectSettings>
+{
+	public ArrayList<String> myOptions = new ArrayList<String>();
+	@Transient
+	private GeneratorOptions generatorsOptions = GeneratorOptions.createEmpty();
 
-    public RProjectSettings() {
-        generatorsOptions.setOption(Option.SKIP, true);
-    }
+	public RProjectSettings()
+	{
+		generatorsOptions.setOption(Option.SKIP, true);
+	}
 
-    public static RProjectSettings getInstance(@NotNull final Project project) {
-        return ServiceManager.getService(project, RProjectSettings.class);
-    }
+	public static RProjectSettings getInstance(@NotNull final Project project)
+	{
+		return ServiceManager.getService(project, RProjectSettings.class);
+	}
 
-    @Override
-	public RProjectSettings getState() {
-        myOptions.clear();
-        if (generatorsOptions != null) {
-            final HashSet<Option> set = generatorsOptions.getOptions();
-            for (Option option : set) {
-                myOptions.add(option.toString());
-            }
-        }
-        return this;
-    }
+	@Override
+	public RProjectSettings getState()
+	{
+		myOptions.clear();
+		if(generatorsOptions != null)
+		{
+			final HashSet<Option> set = generatorsOptions.getOptions();
+			for(Option option : set)
+			{
+				myOptions.add(option.toString());
+			}
+		}
+		return this;
+	}
 
-    @Override
-	public void loadState(final RProjectSettings state) {
-        generatorsOptions.clear();
-        for (String option : state.myOptions) {
-            try {
-                generatorsOptions.setOption(Option.valueOf(option), true);
-            } catch (IllegalArgumentException e) {
-                //I.e. option were renamed. Do nothing
-            }
-        }
-    }
+	@Override
+	public void loadState(final RProjectSettings state)
+	{
+		generatorsOptions.clear();
+		for(String option : state.myOptions)
+		{
+			try
+			{
+				generatorsOptions.setOption(Option.valueOf(option), true);
+			}
+			catch(IllegalArgumentException e)
+			{
+				//I.e. option were renamed. Do nothing
+			}
+		}
+	}
 
-    @NotNull
-    public GeneratorOptions getGeneratorsOptions() {
-        return generatorsOptions;
-    }
+	@NotNull
+	public GeneratorOptions getGeneratorsOptions()
+	{
+		return generatorsOptions;
+	}
 }

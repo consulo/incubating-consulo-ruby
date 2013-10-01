@@ -14,5 +14,6 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow;
 
-public interface AfterCallInstruction extends Instruction {
+public interface AfterCallInstruction extends Instruction
+{
 }

@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,15 +27,16 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeE
  * @date: 20.04.2007
  */
 
-public class HTMLCuttingLexer extends BlackAndWhiteLexer {
-    public HTMLCuttingLexer() {
-        super(new _RHTMLLexer(),
-              RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML, null,
-              RHTMLTokenTypeEx.RHTML_INJECTION_IN_HTML);
-    }
+public class HTMLCuttingLexer extends BlackAndWhiteLexer
+{
+	public HTMLCuttingLexer()
+	{
+		super(new _RHTMLLexer(), RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML, null, RHTMLTokenTypeEx.RHTML_INJECTION_IN_HTML);
+	}
 
-    @Override
-	protected boolean isWhiteData(final IElementType tokenType) {
-        return tokenType == RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML;
-    }
+	@Override
+	protected boolean isWhiteData(final IElementType tokenType)
+	{
+		return tokenType == RHTMLTokenTypeEx.TEMPLATE_CHARACTERS_IN_RHTML;
+	}
 }

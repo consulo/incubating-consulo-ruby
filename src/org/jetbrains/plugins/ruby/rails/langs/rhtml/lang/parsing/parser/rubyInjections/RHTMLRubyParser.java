@@ -16,22 +16,24 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParser;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.04.2007
  */
-public class RHTMLRubyParser extends RubyParser implements PsiParser {
+public class RHTMLRubyParser extends RubyParser implements PsiParser
+{
 
-    @Override
-	protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder) {
-        return new RHTMLRubyBuilder(builder);
-    }
+	@Override
+	protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder)
+	{
+		return new RHTMLRubyBuilder(builder);
+	}
 
 }

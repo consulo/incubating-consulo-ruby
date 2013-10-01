@@ -25,14 +25,15 @@ import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesCo
  * @author: Roman Chernyatchik
  * @date: Sep 6, 2007
  */
-public interface RSupportPerModuleSettings {
+public interface RSupportPerModuleSettings
+{
 
-    @NotNull
-    public CheckableDirectoriesContainer getLoadPathDirs();
+	@NotNull
+	public CheckableDirectoriesContainer getLoadPathDirs();
 
-    public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs);
+	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs);
 
-    public boolean shouldUseTestUnitTestFramework();
+	public boolean shouldUseTestUnitTestFramework();
 
-    public void setShouldUseTestUnitTestFramework(final boolean shouldUse);
+	public void setShouldUseTestUnitTestFramework(final boolean shouldUse);
 }

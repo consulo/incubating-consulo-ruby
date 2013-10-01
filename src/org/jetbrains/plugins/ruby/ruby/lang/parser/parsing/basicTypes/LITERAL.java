@@ -17,19 +17,20 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-public class LITERAL implements RubyTokenTypes {
+public class LITERAL implements RubyTokenTypes
+{
 
 /*
 literal		: numeric
@@ -39,28 +40,33 @@ literal		: numeric
 		;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if (!builder.compare(BNF.tLITERAL_FIRST_TOKEN)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-// numerical literal parsing
-        if (builder.compare(tINTEGER)) {
-            builder.parseSingleToken(tINTEGER, RubyElementTypes.INTEGER);
-            return RubyElementTypes.INTEGER;
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(!builder.compare(BNF.tLITERAL_FIRST_TOKEN))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		// numerical literal parsing
+		if(builder.compare(tINTEGER))
+		{
+			builder.parseSingleToken(tINTEGER, RubyElementTypes.INTEGER);
+			return RubyElementTypes.INTEGER;
+		}
 
-        if (builder.compare(tFLOAT)) {
-            builder.parseSingleToken(tFLOAT, RubyElementTypes.FLOAT);
-            return RubyElementTypes.FLOAT;
-        }
+		if(builder.compare(tFLOAT))
+		{
+			builder.parseSingleToken(tFLOAT, RubyElementTypes.FLOAT);
+			return RubyElementTypes.FLOAT;
+		}
 
-// :expr = value of variable, constant or operator
-        if (builder.compare(tSYMBEG)) {
-            return SYMBOL.parse(builder);
-        }
+		// :expr = value of variable, constant or operator
+		if(builder.compare(tSYMBEG))
+		{
+			return SYMBOL.parse(builder);
+		}
 
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

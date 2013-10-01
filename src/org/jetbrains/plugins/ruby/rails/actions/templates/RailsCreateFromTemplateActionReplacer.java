@@ -31,35 +31,42 @@ import com.intellij.psi.PsiDirectory;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplateActionReplacer {
+public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplateActionReplacer
+{
 	public static final String RHTML_TEMPLATE_NAME = RBundle.message("template.rhtml.script.name");
 
 	public static final String RXML_TEMPLATE_NAME = RBundle.message("template.rxml.script.name");
 
 	@Override
 	@Nullable
-    public AnAction replaceCreateFromFileTemplateAction(@NotNull final FileTemplate fileTemplate) {
-        final String templateName = fileTemplate.getName();
-        if (templateName.equals(RHTML_TEMPLATE_NAME)) {
-            return new RailsCreateFromTemplateAction(fileTemplate) {
-                @Override
+	public AnAction replaceCreateFromFileTemplateAction(@NotNull final FileTemplate fileTemplate)
+	{
+		final String templateName = fileTemplate.getName();
+		if(templateName.equals(RHTML_TEMPLATE_NAME))
+		{
+			return new RailsCreateFromTemplateAction(fileTemplate)
+			{
+				@Override
 				@NotNull
-                protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir,
-                                                                   final FileTemplate selectedTemplate) {
-                    return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
-                }
-            };
-        } else if (templateName.equals(RXML_TEMPLATE_NAME)) {
-            return new RailsCreateFromTemplateAction(fileTemplate) {
-                @Override
+				protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate)
+				{
+					return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
+				}
+			};
+		}
+		else if(templateName.equals(RXML_TEMPLATE_NAME))
+		{
+			return new RailsCreateFromTemplateAction(fileTemplate)
+			{
+				@Override
 				@NotNull
-                protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir,
-                                                                   final FileTemplate selectedTemplate) {
-                    return new RXMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
-                }
-            };
-        }
-        return null;
-    }
+				protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate)
+				{
+					return new RXMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
+				}
+			};
+		}
+		return null;
+	}
 
 }

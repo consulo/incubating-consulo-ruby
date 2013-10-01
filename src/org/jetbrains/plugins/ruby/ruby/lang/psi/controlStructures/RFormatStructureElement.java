@@ -23,5 +23,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapedAlways;
  * User: oleg
  * Date: 15.08.2006
  */
-public interface RFormatStructureElement extends RWrapedAlways {
+public interface RFormatStructureElement extends RWrapedAlways
+{
 }

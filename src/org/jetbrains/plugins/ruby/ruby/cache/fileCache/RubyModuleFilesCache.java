@@ -16,26 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: Roman.Chernyatchik, oleg
  * @date: Jan 25, 2007
- *
+ * <p/>
  * Cache for module sources.
  * Supports on the fly changes handling.
  * Extends <code>RubyFilesCache</code> functionality
  */
-public interface RubyModuleFilesCache extends RubyFilesCache{
+public interface RubyModuleFilesCache extends RubyFilesCache
+{
 
-    public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory,
-                                                       final boolean onlyDirectoryFiles);
+	public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory, final boolean onlyDirectoryFiles);
 
-    public void registerScanForFilesProvider(final CacheScannerFilesProvider provider);
-    public void unregisterScanForFilesProvider(final CacheScannerFilesProvider provider);
+	public void registerScanForFilesProvider(final CacheScannerFilesProvider provider);
+
+	public void unregisterScanForFilesProvider(final CacheScannerFilesProvider provider);
 }

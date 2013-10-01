@@ -21,16 +21,19 @@ import org.jetbrains.plugins.ruby.RBundle;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: Mar 15, 2008
-*/
-public class FacetCanceledException extends RuntimeException {
-    public FacetCanceledException() {
-        this(RBundle.message("rails.facet.wizard.error.add.facet.canceled"));
-    }
+ *
+ * @author: Roman Chernyatchik
+ * @date: Mar 15, 2008
+ */
+public class FacetCanceledException extends RuntimeException
+{
+	public FacetCanceledException()
+	{
+		this(RBundle.message("rails.facet.wizard.error.add.facet.canceled"));
+	}
 
-    public FacetCanceledException(@NotNull final String causeMsg) {
-        super(causeMsg);
-    }
+	public FacetCanceledException(@NotNull final String causeMsg)
+	{
+		super(causeMsg);
+	}
 }

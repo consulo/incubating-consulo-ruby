@@ -17,8 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary;
 
 
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
@@ -30,15 +28,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.openapi.util.Ref;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 06.07.2006
  */
-public class PAREN_ARGS  implements RubyTokenTypes {
+public class PAREN_ARGS implements RubyTokenTypes
+{
 /*
-    paren_args	: '(' none ')'
+	paren_args	: '(' none ')'
             | '(' call_args opt_nl ')'
             | '(' block_call opt_nl ')'
             | '(' args ',' block_call opt_nl ')'
@@ -57,67 +58,79 @@ CALL_ARGS	: ARGS
 
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        // TODO: optimize!!!
-        if (!builder.compareAndEat(tfLPAREN)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		// TODO: optimize!!!
+		if(!builder.compareAndEat(tfLPAREN))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        RMarker statementMarker = builder.mark();
-        final Ref<Boolean> assocSeen = new Ref<Boolean>(false);
-        final Ref<Boolean> starSeen = new Ref<Boolean>(false);
-        final Ref<Boolean> amperSeen = new Ref<Boolean>(false);
-        final Ref<Boolean> blockCallSeen = new Ref<Boolean>(false);
-        final ParsingMethod parsignMethod = new ParsingMethod() {
-            @Override
+		RMarker statementMarker = builder.mark();
+		final Ref<Boolean> assocSeen = new Ref<Boolean>(false);
+		final Ref<Boolean> starSeen = new Ref<Boolean>(false);
+		final Ref<Boolean> amperSeen = new Ref<Boolean>(false);
+		final Ref<Boolean> blockCallSeen = new Ref<Boolean>(false);
+		final ParsingMethod parsignMethod = new ParsingMethod()
+		{
+			@Override
 			@NotNull
-            public IElementType parse(final RBuilder builder) {
-                if (blockCallSeen.get()) {
-                    return RubyElementTypes.EMPTY_INPUT;
-                }
+			public IElementType parse(final RBuilder builder)
+			{
+				if(blockCallSeen.get())
+				{
+					return RubyElementTypes.EMPTY_INPUT;
+				}
 
-                if (amperSeen.get()) {
-                    return RubyElementTypes.EMPTY_INPUT;
-                }
+				if(amperSeen.get())
+				{
+					return RubyElementTypes.EMPTY_INPUT;
+				}
 
-                if (builder.compare(tAMPER)) {
-                    amperSeen.set(true);
-                    return CALL_ARGS.parseBlockToArg(builder);
-                }
+				if(builder.compare(tAMPER))
+				{
+					amperSeen.set(true);
+					return CALL_ARGS.parseBlockToArg(builder);
+				}
 
-                if (builder.compare(tSTAR) && !starSeen.get()) {
-                    starSeen.set(true);
-                    return CALL_ARGS.parseArrayToArguments(builder);
-                }
+				if(builder.compare(tSTAR) && !starSeen.get())
+				{
+					starSeen.set(true);
+					return CALL_ARGS.parseArrayToArguments(builder);
+				}
 
-                IElementType result = BLOCK_CALL.parse(builder);
-                if (result != RubyElementTypes.EMPTY_INPUT) {
-                    if (result == RubyElementTypes.COMMAND_CALL || result == RubyElementTypes.BLOCK_CALL) {
-                        blockCallSeen.set(true);
-                    }
-                    return result;
-                }
+				IElementType result = BLOCK_CALL.parse(builder);
+				if(result != RubyElementTypes.EMPTY_INPUT)
+				{
+					if(result == RubyElementTypes.COMMAND_CALL || result == RubyElementTypes.BLOCK_CALL)
+					{
+						blockCallSeen.set(true);
+					}
+					return result;
+				}
 
-                result = ASSOC_OR_ARG.parse(builder);
-                if (result == RubyElementTypes.ASSOC){
-                    assocSeen.set(true);
-                    return result;
-                }
+				result = ASSOC_OR_ARG.parse(builder);
+				if(result == RubyElementTypes.ASSOC)
+				{
+					assocSeen.set(true);
+					return result;
+				}
 
-                if (assocSeen.get() && result!=RubyElementTypes.ASSOC){
-                    builder.error(ErrorMsg.expected(tASSOC));
-                }
-                return result;
-            }
-        };
+				if(assocSeen.get() && result != RubyElementTypes.ASSOC)
+				{
+					builder.error(ErrorMsg.expected(tASSOC));
+				}
+				return result;
+			}
+		};
 
 
-        ListParsingUtil.parseCommaDelimitedExpressions(builder, parsignMethod);
-        statementMarker.done(RubyElementTypes.LIST_OF_EXPRESSIONS);
+		ListParsingUtil.parseCommaDelimitedExpressions(builder, parsignMethod);
+		statementMarker.done(RubyElementTypes.LIST_OF_EXPRESSIONS);
 
-        builder.matchIgnoreEOL(tRPAREN);
-        return RubyElementTypes.LIST_OF_EXPRESSIONS;
-    }
+		builder.matchIgnoreEOL(tRPAREN);
+		return RubyElementTypes.LIST_OF_EXPRESSIONS;
+	}
 
 }

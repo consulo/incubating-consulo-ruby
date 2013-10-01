@@ -16,12 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
-import com.intellij.ui.LayeredIcon;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -32,8 +28,12 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
+import com.intellij.ui.LayeredIcon;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,60 +41,70 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 29.10.2006
  */
-public class RClassPresentationUtil implements RPresentationConstants {
+public class RClassPresentationUtil implements RPresentationConstants
+{
 
-    public static Icon getIcon() {
-        return RubyIcons.RUBY_CLASS_NODE;
-    }
+	public static Icon getIcon()
+	{
+		return RubyIcons.RUBY_CLASS_NODE;
+	}
 
-    public static Icon getIcon(@NotNull final RVirtualClass rClass) {
-        if (rClass instanceof RVirtualObjectClass) {
-            final LayeredIcon result = new LayeredIcon(2);
-            result.setIcon(RubyIcons.RUBY_ATTR_STATIC,1);
-            result.setIcon(RubyIcons.RUBY_CLASS_NODE, 0);
-            return result;
-        }
-        return RubyIcons.RUBY_CLASS_NODE;
-    }
+	public static Icon getIcon(@NotNull final RVirtualClass rClass)
+	{
+		if(rClass instanceof RVirtualObjectClass)
+		{
+			final LayeredIcon result = new LayeredIcon(2);
+			result.setIcon(RubyIcons.RUBY_ATTR_STATIC, 1);
+			result.setIcon(RubyIcons.RUBY_CLASS_NODE, 0);
+			return result;
+		}
+		return RubyIcons.RUBY_CLASS_NODE;
+	}
 
-    /**
-     * Computes icon for RVirtualClass.
-     * Be careful, if flags contains information about visibility, method uses
-     * RIconsUtils.getIconWithModifiers()
-     * @param rClass RVirtualClass
-     * @param flags com.intellij.openapi.util.Iconable flags
-     * @return Icon
-     */
-    public static Icon getIcon(@NotNull final RVirtualClass rClass, final int flags) {
-        if ((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY) {
-            return RContainerPresentationUtil.getIconWithModifiers(rClass);
-        }
-        return getIcon(rClass);
-    }
+	/**
+	 * Computes icon for RVirtualClass.
+	 * Be careful, if flags contains information about visibility, method uses
+	 * RIconsUtils.getIconWithModifiers()
+	 *
+	 * @param rClass RVirtualClass
+	 * @param flags  com.intellij.openapi.util.Iconable flags
+	 * @return Icon
+	 */
+	public static Icon getIcon(@NotNull final RVirtualClass rClass, final int flags)
+	{
+		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
+		{
+			return RContainerPresentationUtil.getIconWithModifiers(rClass);
+		}
+		return getIcon(rClass);
+	}
 
-    @NotNull
-    public static ItemPresentation getPresentation(@NotNull final RVirtualClass rClass) {
-        final Icon icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
-        return new PresentationData(formatName(rClass, SHOW_NAME),
-                TextUtil.wrapInParens(getLocation(rClass)),
-                icon, icon, null);
-    }
+	@NotNull
+	public static ItemPresentation getPresentation(@NotNull final RVirtualClass rClass)
+	{
+		final Icon icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
+		return new PresentationData(formatName(rClass, SHOW_NAME), TextUtil.wrapInParens(getLocation(rClass)), icon, icon, null);
+	}
 
-    public static String getLocation(final RVirtualClass rClass) {
-        return RContainerPresentationUtil.getLocation(rClass);
-    }
+	public static String getLocation(final RVirtualClass rClass)
+	{
+		return RContainerPresentationUtil.getLocation(rClass);
+	}
 
-    /**
-     * Formats class representation according options
-     * @param rClass Ruby class
-     * @param options Seee RPresentationConstants
-     * @return formated class representation
-     */
-    public static String formatName(@NotNull final RVirtualClass rClass, final int options) {
-        final StringBuilder buffer = new StringBuilder();
+	/**
+	 * Formats class representation according options
+	 *
+	 * @param rClass  Ruby class
+	 * @param options Seee RPresentationConstants
+	 * @return formated class representation
+	 */
+	public static String formatName(@NotNull final RVirtualClass rClass, final int options)
+	{
+		final StringBuilder buffer = new StringBuilder();
 
-        if ((options & SHOW_FULL_NAME) != 0) {
-            /* it isn't qualified name! only part, that defined by src author
+		if((options & SHOW_FULL_NAME) != 0)
+		{
+			/* it isn't qualified name! only part, that defined by src author
              * Ex.1
              *  module A {
              *    class B {}
@@ -106,52 +116,57 @@ public class RClassPresentationUtil implements RPresentationConstants {
              * }
              * Full name for B is "B::C"
              */
-            buffer.append(rClass.getFullName());
-        } else if ((options & SHOW_NAME) != 0) {
-            buffer.append(rClass.getName());
-        }
+			buffer.append(rClass.getFullName());
+		}
+		else if((options & SHOW_NAME) != 0)
+		{
+			buffer.append(rClass.getName());
+		}
 
-        return buffer.toString();
-    }
+		return buffer.toString();
+	}
 
-    /**
-     * Qualified name is evaluated by symbol, thus you must be
-     * sure, that given class corresponds to current symbol.
-     *
-     * @param fileSymbol FileSymbol
-     *@param rClass Ruby class @return return null if ruby class doesn't correspond to last loaded symbol
-     */
-    @Nullable
-    public static String getRuntimeQualifiedName(@NotNull final FileSymbol fileSymbol, @NotNull final RVirtualClass rClass) {
-        final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
-        return symbol != null ? SymbolUtil.getPresentablePath(symbol) : null;
-    }
+	/**
+	 * Qualified name is evaluated by symbol, thus you must be
+	 * sure, that given class corresponds to current symbol.
+	 *
+	 * @param fileSymbol FileSymbol
+	 * @param rClass     Ruby class @return return null if ruby class doesn't correspond to last loaded symbol
+	 */
+	@Nullable
+	public static String getRuntimeQualifiedName(@NotNull final FileSymbol fileSymbol, @NotNull final RVirtualClass rClass)
+	{
+		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
+		return symbol != null ? SymbolUtil.getPresentablePath(symbol) : null;
+	}
 
-    /**
-     * This is special fast mode for testcase classes
-     *
-     * @param rClass Ruby class
-     * @param fileSymbolWrapper if null nothing will happen. If wrapper contains
-     * not null value, this value will be used for evaluating name, otherwise method
-     * will store evaluated ruby mode symbol.
-     * @return return null if not in ruby test mode and ruby class doesn't correspond to last loaded symbol
-     */
-    @Nullable
-    public static String getRuntimeQualifiedNameInRubyTestMode(@NotNull final RVirtualClass rClass,
-                                                               @Nullable final Ref<FileSymbol> fileSymbolWrapper) {
-        final Pair<Symbol,FileSymbol> pair = SymbolUtil.getSymbolByContainerRubyTestMode(rClass, fileSymbolWrapper);
-        return pair != null && pair.first != null ? SymbolUtil.getPresentablePath(pair.first) : null;
-    }
+	/**
+	 * This is special fast mode for testcase classes
+	 *
+	 * @param rClass            Ruby class
+	 * @param fileSymbolWrapper if null nothing will happen. If wrapper contains
+	 *                          not null value, this value will be used for evaluating name, otherwise method
+	 *                          will store evaluated ruby mode symbol.
+	 * @return return null if not in ruby test mode and ruby class doesn't correspond to last loaded symbol
+	 */
+	@Nullable
+	public static String getRuntimeQualifiedNameInRubyTestMode(@NotNull final RVirtualClass rClass, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
+	{
+		final Pair<Symbol, FileSymbol> pair = SymbolUtil.getSymbolByContainerRubyTestMode(rClass, fileSymbolWrapper);
+		return pair != null && pair.first != null ? SymbolUtil.getPresentablePath(pair.first) : null;
+	}
 
-    /**
-     * @param qualifiedClassName Qualified class name
-     * @return Not qualified name
-     */
-    public static String getNameByQualifiedName(@NotNull final String qualifiedClassName) {
-        final int i = qualifiedClassName.lastIndexOf(RubyUtil.MODULES_PATH_SEPARATOR);
-        if (i < 0) {
-            return qualifiedClassName;
-        }
-        return qualifiedClassName.substring(i + RubyUtil.MODULES_PATH_SEPARATOR.length());
-    }
+	/**
+	 * @param qualifiedClassName Qualified class name
+	 * @return Not qualified name
+	 */
+	public static String getNameByQualifiedName(@NotNull final String qualifiedClassName)
+	{
+		final int i = qualifiedClassName.lastIndexOf(RubyUtil.MODULES_PATH_SEPARATOR);
+		if(i < 0)
+		{
+			return qualifiedClassName;
+		}
+		return qualifiedClassName.substring(i + RubyUtil.MODULES_PATH_SEPARATOR.length());
+	}
 }

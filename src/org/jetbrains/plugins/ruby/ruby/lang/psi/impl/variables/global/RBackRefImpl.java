@@ -23,8 +23,10 @@ import com.intellij.lang.ASTNode;
  * User: oleg
  * Date: 15.07.2006
  */
-public class RBackRefImpl extends RGlobalVariableImpl {
-    public RBackRefImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBackRefImpl extends RGlobalVariableImpl
+{
+	public RBackRefImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

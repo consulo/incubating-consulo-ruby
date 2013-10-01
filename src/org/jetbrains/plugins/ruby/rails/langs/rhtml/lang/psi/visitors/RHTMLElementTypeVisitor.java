@@ -25,8 +25,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
  * @author: Roman Chernyatchik
  * @date: 29.04.2007
  */
-public abstract class RHTMLElementTypeVisitor extends RubyElementVisitor {
-    public void visitRHTMLFile(final RHTMLFile rhtmlFile) {
-        visitElement(rhtmlFile);
-    }
+public abstract class RHTMLElementTypeVisitor extends RubyElementVisitor
+{
+	public void visitRHTMLFile(final RHTMLFile rhtmlFile)
+	{
+		visitElement(rhtmlFile);
+	}
 }

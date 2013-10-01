@@ -16,6 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import com.intellij.lang.Language;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -31,11 +36,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,90 +43,103 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
  * @author: oleg
  * @date: Jan 15, 2007
  */
-public class RIHelpAction extends AnAction {
-    public static final TokenSet TOKENS_TO_SEARCH = TokenSet.orSet(BNF.kRESWORDS, BNF.tCID);
+public class RIHelpAction extends AnAction
+{
+	public static final TokenSet TOKENS_TO_SEARCH = TokenSet.orSet(BNF.kRESWORDS, BNF.tCID);
 
-    @Override
-	public void actionPerformed(@NotNull final AnActionEvent e) {
-        assert canHelp(e);
+	@Override
+	public void actionPerformed(@NotNull final AnActionEvent e)
+	{
+		assert canHelp(e);
 
-        final DataContext dataContext = e.getDataContext();
-        final Editor editor = DataContextUtil.getEditor(dataContext);
-        final Project project = DataContextUtil.getProject(dataContext);
-        assert editor != null;
-        final SelectionModel selectionModel = editor.getSelectionModel();
-        final Ref<String> toSearch = new Ref<String>(selectionModel.getSelectedText());
-        if (toSearch.get()==null){
-            final CaretModel caretModel = editor.getCaretModel();
-            final EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
-            final HighlighterIterator iterator = highlighter.createIterator(caretModel.getOffset());
-            toSearch.set(editor.getDocument().getText().substring(iterator.getStart(), iterator.getEnd()));
-        }
-        assert toSearch.get()!=null;
-        assert project != null;
-        RubyDocManager.getInstance(project).showHelp(toSearch.get());
-        ToolWindowManager.getInstance(project).getToolWindow(RubyDocManager.getName()).show(null);
-    }
+		final DataContext dataContext = e.getDataContext();
+		final Editor editor = DataContextUtil.getEditor(dataContext);
+		final Project project = DataContextUtil.getProject(dataContext);
+		assert editor != null;
+		final SelectionModel selectionModel = editor.getSelectionModel();
+		final Ref<String> toSearch = new Ref<String>(selectionModel.getSelectedText());
+		if(toSearch.get() == null)
+		{
+			final CaretModel caretModel = editor.getCaretModel();
+			final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
+			final HighlighterIterator iterator = highlighter.createIterator(caretModel.getOffset());
+			toSearch.set(editor.getDocument().getText().substring(iterator.getStart(), iterator.getEnd()));
+		}
+		assert toSearch.get() != null;
+		assert project != null;
+		RubyDocManager.getInstance(project).showHelp(toSearch.get());
+		ToolWindowManager.getInstance(project).getToolWindow(RubyDocManager.getName()).show(null);
+	}
 
-    @Override
-	public void update(final AnActionEvent e) {
-        final Presentation presentation = e.getPresentation();
-        presentation.setIcon(RubyIcons.RUBY_ICON);
-// visible only on ruby files
-        presentation.setVisible(DataContextUtil.getLanguage(e.getDataContext()) instanceof RubyLanguage);
-        presentation.setEnabled(canHelp(e));
-    }
+	@Override
+	public void update(final AnActionEvent e)
+	{
+		final Presentation presentation = e.getPresentation();
+		presentation.setIcon(RubyIcons.RUBY_ICON);
+		// visible only on ruby files
+		presentation.setVisible(DataContextUtil.getLanguage(e.getDataContext()) instanceof RubyLanguage);
+		presentation.setEnabled(canHelp(e));
+	}
 
-    /**
-     * Returns true if an action can be executed
-     * @param e Current action event
-     * @return true if help is available, false otherwise
-     */
-    private boolean canHelp(@NotNull final AnActionEvent e) {
-        final DataContext dataContext = e.getDataContext();
-        final Project project = DataContextUtil.getProject(dataContext);
-        if (project == null) {
-            return false;
-        }
+	/**
+	 * Returns true if an action can be executed
+	 *
+	 * @param e Current action event
+	 * @return true if help is available, false otherwise
+	 */
+	private boolean canHelp(@NotNull final AnActionEvent e)
+	{
+		final DataContext dataContext = e.getDataContext();
+		final Project project = DataContextUtil.getProject(dataContext);
+		if(project == null)
+		{
+			return false;
+		}
 
-        if ((DataContextUtil.getEditor(dataContext) == null)) {
-            return false;
-        }
+		if((DataContextUtil.getEditor(dataContext) == null))
+		{
+			return false;
+		}
 
 
-// check if RI is available
-        final RubyDocManager docManager = RubyDocManager.getInstance(project);
-        final boolean canSearch = docManager!=null && docManager.canSearch();
-        if (!canSearch){
-            return false;
-        }
-// check if editor is opened
-        final Editor editor = DataContextUtil.getEditor(dataContext);
-        if (editor==null){
-            return false;
-        }
-// check if we in ruby file
-        final Language language = DataContextUtil.getLanguage(dataContext);
-        if (!(language instanceof RubyLanguage)){
-            return false;
-        }
+		// check if RI is available
+		final RubyDocManager docManager = RubyDocManager.getInstance(project);
+		final boolean canSearch = docManager != null && docManager.canSearch();
+		if(!canSearch)
+		{
+			return false;
+		}
+		// check if editor is opened
+		final Editor editor = DataContextUtil.getEditor(dataContext);
+		if(editor == null)
+		{
+			return false;
+		}
+		// check if we in ruby file
+		final Language language = DataContextUtil.getLanguage(dataContext);
+		if(!(language instanceof RubyLanguage))
+		{
+			return false;
+		}
 
-// check if some text is selected
-        final SelectionModel selectionModel = editor.getSelectionModel();
-        final String selection = selectionModel.getSelectedText();
-        if (selection!=null){
-// we can search !!!
-            return true;
-        }
+		// check if some text is selected
+		final SelectionModel selectionModel = editor.getSelectionModel();
+		final String selection = selectionModel.getSelectedText();
+		if(selection != null)
+		{
+			// we can search !!!
+			return true;
+		}
 
-// check if text at carret is SEARCHABLE
-        final CaretModel caretModel = editor.getCaretModel();
-        final EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
-        final int offset = caretModel.getOffset();
-        if (offset>=editor.getDocument().getTextLength()){
-            return false;
-        }
-        final HighlighterIterator iterator = highlighter.createIterator(offset);
-        return TOKENS_TO_SEARCH.contains(!iterator.atEnd() ? iterator.getTokenType() : null);
-    }
+		// check if text at carret is SEARCHABLE
+		final CaretModel caretModel = editor.getCaretModel();
+		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
+		final int offset = caretModel.getOffset();
+		if(offset >= editor.getDocument().getTextLength())
+		{
+			return false;
+		}
+		final HighlighterIterator iterator = highlighter.createIterator(offset);
+		return TOKENS_TO_SEARCH.contains(!iterator.atEnd() ? iterator.getTokenType() : null);
+	}
 }

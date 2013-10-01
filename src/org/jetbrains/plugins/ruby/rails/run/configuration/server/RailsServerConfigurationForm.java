@@ -56,244 +56,285 @@ import com.intellij.ui.RawCommandLineEditor;
  * @author: Roman Chernyatchik
  * @date: 04.08.2007
  */
-@SuppressWarnings({"UnusedDeclaration", "FieldCanBeLocal"})
-public class RailsServerConfigurationForm extends RubyRunConfigurationForm implements RailsServerRunConfigurationParams {
-    private JPanel generatedPanel1;
+@SuppressWarnings({
+		"UnusedDeclaration",
+		"FieldCanBeLocal"
+})
+public class RailsServerConfigurationForm extends RubyRunConfigurationForm implements RailsServerRunConfigurationParams
+{
+	private JPanel generatedPanel1;
 
-    private LabeledComponent scriptComponent1;
-    private LabeledComponent scriptArgsComponent1;
-    private LabeledComponent workingDirComponent1;
-    private LabeledComponent rubyArgsComponent1;
-    private LabeledComponent modulesComponent1;
+	private LabeledComponent scriptComponent1;
+	private LabeledComponent scriptArgsComponent1;
+	private LabeledComponent workingDirComponent1;
+	private LabeledComponent rubyArgsComponent1;
+	private LabeledComponent modulesComponent1;
 
-    private LabeledComponent myRailsServerComponent;
-    private LabeledComponent myPort;
-    private LabeledComponent myIPAddr;
+	private LabeledComponent myRailsServerComponent;
+	private LabeledComponent myPort;
+	private LabeledComponent myIPAddr;
 
-    private JRadioButton myUseAnyFreePortRadioButton;
-    private JRadioButton myChoosePortManuallyRB;
-    private LabeledComponent myRailsEnvironment;
-    
-    private EnvironmentVariablesComponent myEnvVariablesComponent1;
+	private JRadioButton myUseAnyFreePortRadioButton;
+	private JRadioButton myChoosePortManuallyRB;
+	private LabeledComponent myRailsEnvironment;
 
-    private JTextField myIPAddrField;
-    private JTextField myPortField;
-    private JComboBox myRailsServerComboBox;
-    private JComboBox myRailsEnvironmentComboBox;
+	private EnvironmentVariablesComponent myEnvVariablesComponent1;
 
-    public RailsServerConfigurationForm(@NotNull final Project project,
-                                       @NotNull final RubyRunConfiguration configuration) {
-        super(project, configuration);
+	private JTextField myIPAddrField;
+	private JTextField myPortField;
+	private JComboBox myRailsServerComboBox;
+	private JComboBox myRailsEnvironmentComboBox;
 
-        initComponents1();
-    }
+	public RailsServerConfigurationForm(@NotNull final Project project, @NotNull final RubyRunConfiguration configuration)
+	{
+		super(project, configuration);
 
-    private void initComponents1() {
-        // It's awful hack for LAZY and DRY people. Sorry =)
-        //
-        //noinspection BoundFieldAssignment
-        generatedPanel = generatedPanel1;
+		initComponents1();
+	}
 
-        super.initComponents();
+	private void initComponents1()
+	{
+		// It's awful hack for LAZY and DRY people. Sorry =)
+		//
+		//noinspection BoundFieldAssignment
+		generatedPanel = generatedPanel1;
 
-        // group the radio buttons
-        final ButtonGroup portBG = new ButtonGroup();
-        portBG.add(myChoosePortManuallyRB);
-        portBG.add(myUseAnyFreePortRadioButton);
+		super.initComponents();
 
-        myModulesComboBox.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                final Module module = getModule();
-                if (module == null) {
-                    scriptPathTextField.setText("");
-                    workDirTextField.setText("");
-                } else {
-                    final String text = RailsServerRunConfiguration.getServerScriptPathByModule(module);
-                    scriptPathTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(text)));
-                    final String wd = RailsServerRunConfiguration.getRailsWorkDirByModule(module);
-                    workDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(wd)));
-                }
-            }
-        });
-        scriptPathTextField.setEnabled(false);
-        workDirTextField.setEnabled(false);
+		// group the radio buttons
+		final ButtonGroup portBG = new ButtonGroup();
+		portBG.add(myChoosePortManuallyRB);
+		portBG.add(myUseAnyFreePortRadioButton);
 
-        myChoosePortManuallyRB.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                myPort.setEnabled(isChoosePortManually());
-            }
-        });
-        myUseAnyFreePortRadioButton.addActionListener(new ActionListener() {
-            @Override
-			public void actionPerformed(final ActionEvent e) {
-                myPort.setEnabled(isChoosePortManually());
-            }
-        });
+		myModulesComboBox.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				final Module module = getModule();
+				if(module == null)
+				{
+					scriptPathTextField.setText("");
+					workDirTextField.setText("");
+				}
+				else
+				{
+					final String text = RailsServerRunConfiguration.getServerScriptPathByModule(module);
+					scriptPathTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(text)));
+					final String wd = RailsServerRunConfiguration.getRailsWorkDirByModule(module);
+					workDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(wd)));
+				}
+			}
+		});
+		scriptPathTextField.setEnabled(false);
+		workDirTextField.setEnabled(false);
 
-        myRailsServerComboBox.setModel(new DefaultComboBoxModel(ExternalRailsSettings.getRailsServersTypes()));
-        myRailsEnvironmentComboBox.setModel(new DefaultComboBoxModel(RailsEnvironmentType.values()));
+		myChoosePortManuallyRB.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				myPort.setEnabled(isChoosePortManually());
+			}
+		});
+		myUseAnyFreePortRadioButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(final ActionEvent e)
+			{
+				myPort.setEnabled(isChoosePortManually());
+			}
+		});
 
-        myRailsServerComboBox.setSelectedItem(RailsServerRunConfiguration.DEFAULT_SERVER);
-        myRailsEnvironmentComboBox.setSelectedItem(RailsEnvironmentType.DEVELOPMENT);
-    }
+		myRailsServerComboBox.setModel(new DefaultComboBoxModel(ExternalRailsSettings.getRailsServersTypes()));
+		myRailsEnvironmentComboBox.setModel(new DefaultComboBoxModel(RailsEnvironmentType.values()));
 
-    private void createUIComponents() {
-        final Ref<TextFieldWithBrowseButton> scriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
-        scriptComponent1 = scriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptTextFieldWrapper, RBundle.message("run.configuration.messages.script.path"));
-        scriptPathTextField = scriptTextFieldWrapper.get();
+		myRailsServerComboBox.setSelectedItem(RailsServerRunConfiguration.DEFAULT_SERVER);
+		myRailsEnvironmentComboBox.setSelectedItem(RailsEnvironmentType.DEVELOPMENT);
+	}
 
-        scriptArgsComponent1 = scriptArgsComponent = createScriptArgsComponent();
+	private void createUIComponents()
+	{
+		final Ref<TextFieldWithBrowseButton> scriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		scriptComponent1 = scriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptTextFieldWrapper, RBundle.message("run.configuration.messages.script.path"));
+		scriptPathTextField = scriptTextFieldWrapper.get();
 
-        final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
-        workingDirComponent1 = workingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
-        workDirTextField = wordDirComponentWrapper.get();
+		scriptArgsComponent1 = scriptArgsComponent = createScriptArgsComponent();
 
-        final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
-        rubyArgsComponent1 = rubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
-        rubyArgsEditor = rubyArgsEditorWrapper.get();
+		final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		workingDirComponent1 = workingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
+		workDirTextField = wordDirComponentWrapper.get();
 
-        final Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
-        modulesComponent1 = modulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
-        myModulesComboBox = modulesComboBoxWrapper.get();
+		final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		rubyArgsComponent1 = rubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
+		rubyArgsEditor = rubyArgsEditorWrapper.get();
 
-        myRailsServerComponent = createServersComponent();
-        myRailsEnvironment = createEnvornmentsComponent();
-        myPort = createPortComponent();
-        myIPAddr = createIPAddrComponent();
-    }
+		final Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
+		modulesComponent1 = modulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
+		myModulesComboBox = modulesComboBoxWrapper.get();
 
-   private LabeledComponent createIPAddrComponent() {
-        myIPAddrField = new JTextField();
-        LabeledComponent<JTextField> myComponent = new LabeledComponent<JTextField>();
-        myComponent.setComponent(myIPAddrField);
-        myComponent.setText(RBundle.message("run.configuration.server.dialog.ip"));
+		myRailsServerComponent = createServersComponent();
+		myRailsEnvironment = createEnvornmentsComponent();
+		myPort = createPortComponent();
+		myIPAddr = createIPAddrComponent();
+	}
 
-        return myComponent;
-    }
+	private LabeledComponent createIPAddrComponent()
+	{
+		myIPAddrField = new JTextField();
+		LabeledComponent<JTextField> myComponent = new LabeledComponent<JTextField>();
+		myComponent.setComponent(myIPAddrField);
+		myComponent.setText(RBundle.message("run.configuration.server.dialog.ip"));
 
-    private LabeledComponent createPortComponent() {
-        myPortField = new JTextField();
+		return myComponent;
+	}
 
-        LabeledComponent<JTextField> myComponent = new LabeledComponent<JTextField>();
-        myComponent.setComponent(myPortField);
-        myComponent.setLabelLocation(BorderLayout.WEST);
-        myComponent.setText(RBundle.message("run.configuration.server.dialog.port"));
+	private LabeledComponent createPortComponent()
+	{
+		myPortField = new JTextField();
 
-        return myComponent;
-    }
+		LabeledComponent<JTextField> myComponent = new LabeledComponent<JTextField>();
+		myComponent.setComponent(myPortField);
+		myComponent.setLabelLocation(BorderLayout.WEST);
+		myComponent.setText(RBundle.message("run.configuration.server.dialog.port"));
 
-    private LabeledComponent createServersComponent() {
-        myRailsServerComboBox = new ComboBox();
-        myRailsServerComboBox.setRenderer(new DefaultListCellRenderer() {
-            @Override
-			public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value != null) {
-                    setText(ExternalRailsSettings.getRailsServersTitlesByType((String)value));
-                }
-                return this;
-            }
-        });
+		return myComponent;
+	}
 
-        LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
-        myComponent.setComponent(myRailsServerComboBox);
-        myComponent.setText(RBundle.message("run.configuration.server.dialog.server"));
-        return myComponent;
-    }
+	private LabeledComponent createServersComponent()
+	{
+		myRailsServerComboBox = new ComboBox();
+		myRailsServerComboBox.setRenderer(new DefaultListCellRenderer()
+		{
+			@Override
+			public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			{
+				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if(value != null)
+				{
+					setText(ExternalRailsSettings.getRailsServersTitlesByType((String) value));
+				}
+				return this;
+			}
+		});
 
-    private LabeledComponent createEnvornmentsComponent() {
-        myRailsEnvironmentComboBox = new ComboBox();
-        myRailsEnvironmentComboBox.setRenderer(new DefaultListCellRenderer() {
-            @Override
-			public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value != null) {
-                    setText(((RailsEnvironmentType)value).getParamName());
-                }
-                return this;
-            }
-        });
+		LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
+		myComponent.setComponent(myRailsServerComboBox);
+		myComponent.setText(RBundle.message("run.configuration.server.dialog.server"));
+		return myComponent;
+	}
 
-        LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
-        myComponent.setComponent(myRailsEnvironmentComboBox);
-        myComponent.setText(RBundle.message("run.configuration.server.dialog.environment"));
-        return myComponent;
-    }
+	private LabeledComponent createEnvornmentsComponent()
+	{
+		myRailsEnvironmentComboBox = new ComboBox();
+		myRailsEnvironmentComboBox.setRenderer(new DefaultListCellRenderer()
+		{
+			@Override
+			public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			{
+				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if(value != null)
+				{
+					setText(((RailsEnvironmentType) value).getParamName());
+				}
+				return this;
+			}
+		});
 
-    @Override
-	protected LabeledComponent createScriptArgsComponent() {
-        final LabeledComponent myComponent = super.createScriptArgsComponent();
-        myComponent.setText(RBundle.message("run.configuration.server.args"));        
-        return myComponent;
-    }
+		LabeledComponent<JComboBox> myComponent = new LabeledComponent<JComboBox>();
+		myComponent.setComponent(myRailsEnvironmentComboBox);
+		myComponent.setText(RBundle.message("run.configuration.server.dialog.environment"));
+		return myComponent;
+	}
 
-    @Override
+	@Override
+	protected LabeledComponent createScriptArgsComponent()
+	{
+		final LabeledComponent myComponent = super.createScriptArgsComponent();
+		myComponent.setText(RBundle.message("run.configuration.server.args"));
+		return myComponent;
+	}
+
+	@Override
 	@NotNull
-    public String getIPAddr() {
-        return myIPAddrField.getText().trim();
-    }
+	public String getIPAddr()
+	{
+		return myIPAddrField.getText().trim();
+	}
 
-    @Override
-	public void setIPAddr(final String ip) {
-        myIPAddrField.setText(ip);
-    }
+	@Override
+	public void setIPAddr(final String ip)
+	{
+		myIPAddrField.setText(ip);
+	}
 
-    @Override
-	public String getPort() {
-        return myPortField.getText().trim();
-    }
+	@Override
+	public String getPort()
+	{
+		return myPortField.getText().trim();
+	}
 
-    @Override
-	public void setPort(final String port) {
-        myPortField.setText(port);
-    }
+	@Override
+	public void setPort(final String port)
+	{
+		myPortField.setText(port);
+	}
 
-    @Override
-	public boolean isChoosePortManually() {
-        return myChoosePortManuallyRB.isSelected();
-    }
+	@Override
+	public boolean isChoosePortManually()
+	{
+		return myChoosePortManuallyRB.isSelected();
+	}
 
-    @Override
-	public void setChoosePortManually(final boolean choosePortManually) {
-        if (choosePortManually) {
-            myChoosePortManuallyRB.doClick();
-        } else {
-            myUseAnyFreePortRadioButton.doClick();
-        }
-    }
+	@Override
+	public void setChoosePortManually(final boolean choosePortManually)
+	{
+		if(choosePortManually)
+		{
+			myChoosePortManuallyRB.doClick();
+		}
+		else
+		{
+			myUseAnyFreePortRadioButton.doClick();
+		}
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getServerType() {
-        return (String) myRailsServerComboBox.getSelectedItem();
-    }
+	public String getServerType()
+	{
+		return (String) myRailsServerComboBox.getSelectedItem();
+	}
 
-    @Override
-	public void setServerType(final String type) {
-        myRailsServerComboBox.setSelectedItem(type);
-    }
+	@Override
+	public void setServerType(final String type)
+	{
+		myRailsServerComboBox.setSelectedItem(type);
+	}
 
-    @Override
-	public void setRailsEnvironmentType(@NotNull final RailsServerRunConfiguration.RailsEnvironmentType type) {
-        myRailsEnvironmentComboBox.setSelectedItem(type);
-    }
+	@Override
+	public void setRailsEnvironmentType(@NotNull final RailsServerRunConfiguration.RailsEnvironmentType type)
+	{
+		myRailsEnvironmentComboBox.setSelectedItem(type);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType() {
-        final Object selectedObject = myRailsEnvironmentComboBox.getSelectedItem();
-        return ((RailsServerRunConfiguration.RailsEnvironmentType) selectedObject);
-    }
+	public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType()
+	{
+		final Object selectedObject = myRailsEnvironmentComboBox.getSelectedItem();
+		return ((RailsServerRunConfiguration.RailsEnvironmentType) selectedObject);
+	}
 
-    @Override
-	public Map<String, String> getEnvs() {
-        return myEnvVariablesComponent1.getEnvs();
-    }
+	@Override
+	public Map<String, String> getEnvs()
+	{
+		return myEnvVariablesComponent1.getEnvs();
+	}
 
-    @Override
-	public void setEnvs(@NotNull final Map<String, String> envs) {
-        myEnvVariablesComponent1.setEnvs(envs);
-    }
+	@Override
+	public void setEnvs(@NotNull final Map<String, String> envs)
+	{
+		myEnvVariablesComponent1.setEnvs(envs);
+	}
 }

@@ -26,28 +26,36 @@ import com.intellij.psi.PsiElement;
 /**
  * @author yole
  */
-public class ParamDefImplUtil {
-    public static RubySimpleLookupItem createSimpleLookupItem(final String value, final LookupItemType itemType, final RPsiElement valueElement) {
-        String text = value;
-        if (!(valueElement instanceof RStringLiteral) && !(valueElement instanceof RSymbol)) {
-            if (itemType == LookupItemType.String) {
-                text = "'" + value + "'";
-            }
-            else if (itemType == LookupItemType.Symbol) {
-                text = ":" + value;
-            }
-        }
-        return new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON);
-    }
+public class ParamDefImplUtil
+{
+	public static RubySimpleLookupItem createSimpleLookupItem(final String value, final LookupItemType itemType, final RPsiElement valueElement)
+	{
+		String text = value;
+		if(!(valueElement instanceof RStringLiteral) && !(valueElement instanceof RSymbol))
+		{
+			if(itemType == LookupItemType.String)
+			{
+				text = "'" + value + "'";
+			}
+			else if(itemType == LookupItemType.Symbol)
+			{
+				text = ":" + value;
+			}
+		}
+		return new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON);
+	}
 
-    public static String getElementText(final RPsiElement contextElement) {
-        if (contextElement instanceof RStringLiteral) {
-            return ((RStringLiteral) contextElement).getContent();
-        }
-        if (contextElement instanceof RSymbol) {
-            PsiElement element = ((RSymbol) contextElement).getObject();
-            return element.getText();
-        }
-        return contextElement.getText();
-    }
+	public static String getElementText(final RPsiElement contextElement)
+	{
+		if(contextElement instanceof RStringLiteral)
+		{
+			return ((RStringLiteral) contextElement).getContent();
+		}
+		if(contextElement instanceof RSymbol)
+		{
+			PsiElement element = ((RSymbol) contextElement).getObject();
+			return element.getText();
+		}
+		return contextElement.getText();
+	}
 }

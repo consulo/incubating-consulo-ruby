@@ -35,54 +35,58 @@ import com.intellij.openapi.project.Project;
  * @date: 21.08.2006
  */
 
-public class RubyRunCommandLineState extends ColouredCommandLineState {
+public class RubyRunCommandLineState extends ColouredCommandLineState
+{
 
-    final protected RubyRunConfiguration myConfig;
+	final protected RubyRunConfiguration myConfig;
 
-    public RubyRunCommandLineState(final @NotNull RubyRunConfiguration config,
-			ExecutionEnvironment executionEnvironment) {
-        super(executionEnvironment);
+	public RubyRunCommandLineState(final @NotNull RubyRunConfiguration config, ExecutionEnvironment executionEnvironment)
+	{
+		super(executionEnvironment);
 
-        myConfig = config;
+		myConfig = config;
 
-        final Project project = config.getProject();
+		final Project project = config.getProject();
 
-        final TextConsoleBuilder consoleBuilder =
-                TextConsoleBuilderFactory.getInstance().createBuilder(project);
-        setConsoleBuilder(consoleBuilder);
+		final TextConsoleBuilder consoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(project);
+		setConsoleBuilder(consoleBuilder);
 
-        final String scriptDir = VirtualFileUtil.getParentDir(config.getScriptPath());
+		final String scriptDir = VirtualFileUtil.getParentDir(config.getScriptPath());
 
-        addFilters(config, project, consoleBuilder, scriptDir);
+		addFilters(config, project, consoleBuilder, scriptDir);
 
-        attachCompilerForJRuby(config);
-    }
+		attachCompilerForJRuby(config);
+	}
 
-    public static void addParams(GeneralCommandLine cmdLine, String argsString) {
-        String[] args = argsString.split(" ");
-        for (String arg : args) {
-            if (arg.length() > 0) {
-                cmdLine.addParameter(arg);
-            }
-        }
-    }
+	public static void addParams(GeneralCommandLine cmdLine, String argsString)
+	{
+		String[] args = argsString.split(" ");
+		for(String arg : args)
+		{
+			if(arg.length() > 0)
+			{
+				cmdLine.addParameter(arg);
+			}
+		}
+	}
 
 	@Override
-    public GeneralCommandLine createCommandLine() throws ExecutionException {
-        final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(myConfig);
+	public GeneralCommandLine createCommandLine() throws ExecutionException
+	{
+		final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(myConfig);
 
-        addParams(commandLine, myConfig.getRubyArgs());
-        commandLine.addParameter(myConfig.getScriptPath());
-        addParams(commandLine, myConfig.getScriptArgs());
+		addParams(commandLine, myConfig.getRubyArgs());
+		commandLine.addParameter(myConfig.getScriptPath());
+		addParams(commandLine, myConfig.getScriptArgs());
 
-        return commandLine;
-    }
+		return commandLine;
+	}
 
-    private void addFilters(final RubyRunConfiguration config, final Project project,
-                            final TextConsoleBuilder consoleBuilder, final String scriptDir) {
-        consoleBuilder.addFilter(new RStackTraceFilter(project, scriptDir));
-        consoleBuilder.addFilter(new RFileLinksFilter(config.getModule()));
-    }
+	private void addFilters(final RubyRunConfiguration config, final Project project, final TextConsoleBuilder consoleBuilder, final String scriptDir)
+	{
+		consoleBuilder.addFilter(new RStackTraceFilter(project, scriptDir));
+		consoleBuilder.addFilter(new RFileLinksFilter(config.getModule()));
+	}
 
 }
 

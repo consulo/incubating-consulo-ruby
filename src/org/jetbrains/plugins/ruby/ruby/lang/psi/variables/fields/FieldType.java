@@ -18,11 +18,12 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Feb 13, 2007
-*/
-public enum FieldType {
-    INSTANCE_VARIABLE,
-    CLASS_VARIABLE
+ *
+ * @author: oleg
+ * @date: Feb 13, 2007
+ */
+public enum FieldType
+{
+	INSTANCE_VARIABLE,
+	CLASS_VARIABLE
 }

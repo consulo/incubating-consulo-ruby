@@ -16,64 +16,85 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Oct 7, 2007
-*/
-public class CacheKey {
+ *
+ * @author: oleg
+ * @date: Oct 7, 2007
+ */
+public class CacheKey
+{
 
-    private final String url;
-    private final Module module;
-    private final Sdk sdk;
-    private FileSymbolType type;
-    private boolean isJRubyEnabled;
+	private final String url;
+	private final Module module;
+	private final Sdk sdk;
+	private FileSymbolType type;
+	private boolean isJRubyEnabled;
 
-    public CacheKey(@NotNull final FileSymbolType type,
-                    @Nullable final String url,
-                    @Nullable final Module module,
-                    @Nullable final Sdk sdk,
-                    final boolean isJRubyEnabled) {
-        this.type = type;
-        this.url = url;
-        this.module = module;
-        this.sdk = sdk;
-        this.isJRubyEnabled = isJRubyEnabled;
-    }
+	public CacheKey(@NotNull final FileSymbolType type, @Nullable final String url, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	{
+		this.type = type;
+		this.url = url;
+		this.module = module;
+		this.sdk = sdk;
+		this.isJRubyEnabled = isJRubyEnabled;
+	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///// Do not modify! Generated automatically by IDEA! //////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///// Do not modify! Generated automatically by IDEA! //////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    @SuppressWarnings({"RedundantIfStatement"})
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CacheKey)) return false;
+	@SuppressWarnings({"RedundantIfStatement"})
+	public boolean equals(final Object o)
+	{
+		if(this == o)
+		{
+			return true;
+		}
+		if(!(o instanceof CacheKey))
+		{
+			return false;
+		}
 
-        final CacheKey cacheKey = (CacheKey) o;
+		final CacheKey cacheKey = (CacheKey) o;
 
-        if (isJRubyEnabled != cacheKey.isJRubyEnabled) return false;
-        if (module != null ? !module.equals(cacheKey.module) : cacheKey.module != null) return false;
-        if (sdk != null ? !sdk.equals(cacheKey.sdk) : cacheKey.sdk != null) return false;
-        if (type != cacheKey.type) return false;
-        if (url != null ? !url.equals(cacheKey.url) : cacheKey.url != null) return false;
+		if(isJRubyEnabled != cacheKey.isJRubyEnabled)
+		{
+			return false;
+		}
+		if(module != null ? !module.equals(cacheKey.module) : cacheKey.module != null)
+		{
+			return false;
+		}
+		if(sdk != null ? !sdk.equals(cacheKey.sdk) : cacheKey.sdk != null)
+		{
+			return false;
+		}
+		if(type != cacheKey.type)
+		{
+			return false;
+		}
+		if(url != null ? !url.equals(cacheKey.url) : cacheKey.url != null)
+		{
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    public int hashCode() {
-        int result;
-        result = (url != null ? url.hashCode() : 0);
-        result = 31 * result + (module != null ? module.hashCode() : 0);
-        result = 31 * result + (sdk != null ? sdk.hashCode() : 0);
-        result = 31 * result + type.hashCode();
-        result = 31 * result + (isJRubyEnabled ? 1 : 0);
-        return result;
-    }
+	public int hashCode()
+	{
+		int result;
+		result = (url != null ? url.hashCode() : 0);
+		result = 31 * result + (module != null ? module.hashCode() : 0);
+		result = 31 * result + (sdk != null ? sdk.hashCode() : 0);
+		result = 31 * result + type.hashCode();
+		result = 31 * result + (isJRubyEnabled ? 1 : 0);
+		return result;
+	}
 }

@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import com.intellij.openapi.components.PathMacroManager;
-import com.intellij.openapi.module.Module;
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-
-import java.util.Map;
+import com.intellij.openapi.components.PathMacroManager;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,65 +32,74 @@ import java.util.Map;
  * @author: Roman Chernyatchik
  * @date: Mar 13, 2008
  */
-public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalizer {
-    private static final BaseRailsFacetConfigurationExternalizer INSTANCE = new BaseRailsFacetConfigurationExternalizer();
+public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalizer
+{
+	private static final BaseRailsFacetConfigurationExternalizer INSTANCE = new BaseRailsFacetConfigurationExternalizer();
 
-    @NonNls public static final String RAILS_FACET_CONFIG_ID = "RAILS_FACET_CONFIG_ID";
-    @NonNls public static final String SHOULD_USE_RSPEC_PLUGIN = "SHOULD_USE_RSPEC_PLUGIN";
-    @NonNls public static final String RAILS_FACET_APPLIATION_ROOT = "RAILS_FACET_APPLICATION_ROOT";
+	@NonNls
+	public static final String RAILS_FACET_CONFIG_ID = "RAILS_FACET_CONFIG_ID";
+	@NonNls
+	public static final String SHOULD_USE_RSPEC_PLUGIN = "SHOULD_USE_RSPEC_PLUGIN";
+	@NonNls
+	public static final String RAILS_FACET_APPLIATION_ROOT = "RAILS_FACET_APPLICATION_ROOT";
 
-    public void writeExternal(@NotNull final BaseRailsFacetConfigurationLowLevel config, @NotNull final Element elem) {
-        writeOption(SHOULD_USE_RSPEC_PLUGIN,  String.valueOf(config.shouldUseRSpecPlugin()), elem);
+	public void writeExternal(@NotNull final BaseRailsFacetConfigurationLowLevel config, @NotNull final Element elem)
+	{
+		writeOption(SHOULD_USE_RSPEC_PLUGIN, String.valueOf(config.shouldUseRSpecPlugin()), elem);
 
-        //save collapsed path
-        final String expandedAppHomePath = config.getRailsApplicationRootPath();
-        writeOption(RAILS_FACET_APPLIATION_ROOT,  String.valueOf(collapseIfPossible(config, expandedAppHomePath)), elem);
-    }
+		//save collapsed path
+		final String expandedAppHomePath = config.getRailsApplicationRootPath();
+		writeOption(RAILS_FACET_APPLIATION_ROOT, String.valueOf(collapseIfPossible(config, expandedAppHomePath)), elem);
+	}
 
-    private String collapseIfPossible(final BaseRailsFacetConfigurationLowLevel config,
-                                      final String expandedPath) {
-        final String collapsedPath;
-        final Module module = config.getModule();
-        if (module == null || expandedPath == null) {
-            return expandedPath;
-        }
+	private String collapseIfPossible(final BaseRailsFacetConfigurationLowLevel config, final String expandedPath)
+	{
+		final String collapsedPath;
+		final Module module = config.getModule();
+		if(module == null || expandedPath == null)
+		{
+			return expandedPath;
+		}
 
-        return PathMacroManager.getInstance(module).collapsePath(expandedPath);
-    }
+		return PathMacroManager.getInstance(module).collapsePath(expandedPath);
+	}
 
-    public void readExternal(@NotNull final BaseRailsFacetConfigurationLowLevel config,
-                             @NotNull final Element elem) {
-        //noinspection unchecked
-        final Map<String, String> optionsByName = buildOptionsByElement(elem);
-        config.setShouldUseRSpecPlugin(Boolean.valueOf(optionsByName.get(SHOULD_USE_RSPEC_PLUGIN)));
+	public void readExternal(@NotNull final BaseRailsFacetConfigurationLowLevel config, @NotNull final Element elem)
+	{
+		//noinspection unchecked
+		final Map<String, String> optionsByName = buildOptionsByElement(elem);
+		config.setShouldUseRSpecPlugin(Boolean.valueOf(optionsByName.get(SHOULD_USE_RSPEC_PLUGIN)));
 
-        //rails app root path
-        final String raislAppRootPathCollapsed = optionsByName.get(RAILS_FACET_APPLIATION_ROOT);
-        config.setRailsApplicationRootPath(expandPathIfPossible(config, raislAppRootPathCollapsed));
+		//rails app root path
+		final String raislAppRootPathCollapsed = optionsByName.get(RAILS_FACET_APPLIATION_ROOT);
+		config.setRailsApplicationRootPath(expandPathIfPossible(config, raislAppRootPathCollapsed));
 
-        //initialized
-        config.setInitialized();
-    }
+		//initialized
+		config.setInitialized();
+	}
 
-    @Nullable
-    public String expandPathIfPossible(final BaseRailsFacetConfigurationLowLevel config,
-                                       @Nullable final String pathCollapsed) {
-        final String pathExpanded;
-        final Module module = config.getModule();
-        if (module == null || pathCollapsed == null) {
-            return pathCollapsed;
-        }
+	@Nullable
+	public String expandPathIfPossible(final BaseRailsFacetConfigurationLowLevel config, @Nullable final String pathCollapsed)
+	{
+		final String pathExpanded;
+		final Module module = config.getModule();
+		if(module == null || pathCollapsed == null)
+		{
+			return pathCollapsed;
+		}
 
-        //expand
-        return PathMacroManager.getInstance(module).expandPath(pathCollapsed);
-    }
+		//expand
+		return PathMacroManager.getInstance(module).expandPath(pathCollapsed);
+	}
 
-    public static BaseRailsFacetConfigurationExternalizer getInstance(){
-        return INSTANCE;
-    }
+	public static BaseRailsFacetConfigurationExternalizer getInstance()
+	{
+		return INSTANCE;
+	}
 
-    @Override
-	public String getID() {
-        return RAILS_FACET_CONFIG_ID;
-    }
+	@Override
+	public String getID()
+	{
+		return RAILS_FACET_CONFIG_ID;
+	}
 }

@@ -16,43 +16,50 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
-public class RubyRunConfigurationEditor extends SettingsEditor<RubyRunConfiguration> {
-    protected RubyRunConfigurationForm myForm;
+public class RubyRunConfigurationEditor extends SettingsEditor<RubyRunConfiguration>
+{
+	protected RubyRunConfigurationForm myForm;
 
 
-    public RubyRunConfigurationEditor(final Project project, final RubyRunConfiguration runConfiguration) {
-        myForm = new RubyRunConfigurationForm(project, runConfiguration);
-    }
+	public RubyRunConfigurationEditor(final Project project, final RubyRunConfiguration runConfiguration)
+	{
+		myForm = new RubyRunConfigurationForm(project, runConfiguration);
+	}
 
-    protected RubyRunConfigurationForm getForm() {
-        return myForm;
-    }
+	protected RubyRunConfigurationForm getForm()
+	{
+		return myForm;
+	}
 
-    @Override
-	protected void resetEditorFrom(RubyRunConfiguration config) {
-        RubyRunConfiguration.copyParams(config, myForm);
-    }
+	@Override
+	protected void resetEditorFrom(RubyRunConfiguration config)
+	{
+		RubyRunConfiguration.copyParams(config, myForm);
+	}
 
-    @Override
-	protected void applyEditorTo(RubyRunConfiguration config) throws ConfigurationException {
-        RubyRunConfiguration.copyParams(myForm, config);
-    }
+	@Override
+	protected void applyEditorTo(RubyRunConfiguration config) throws ConfigurationException
+	{
+		RubyRunConfiguration.copyParams(myForm, config);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected JComponent createEditor() {
-        return myForm.getPanel();
-    }
+	protected JComponent createEditor()
+	{
+		return myForm.getPanel();
+	}
 
-    @Override
-	protected void disposeEditor() {
-    }
+	@Override
+	protected void disposeEditor()
+	{
+	}
 }
 

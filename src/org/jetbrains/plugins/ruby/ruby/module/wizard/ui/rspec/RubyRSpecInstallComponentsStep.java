@@ -16,6 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec;
 
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
+import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
+import org.jetbrains.plugins.ruby.ruby.module.wizard.RRModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
@@ -23,12 +30,6 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ui.UIUtil;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.RRModuleBuilder;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,73 +37,81 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Sep 5, 2007
  */
-public class RubyRSpecInstallComponentsStep extends ModuleWizardStep {
+public class RubyRSpecInstallComponentsStep extends ModuleWizardStep
+{
 
-    protected final RubyRSpecInstallComponentsForm myPanel;
-    private Icon myIcon;
-    private String myHelp;
-    private RRModuleBuilder myBuilder;
-    private Project myProject;
+	protected final RubyRSpecInstallComponentsForm myPanel;
+	private Icon myIcon;
+	private String myHelp;
+	private RRModuleBuilder myBuilder;
+	private Project myProject;
 
-    public RubyRSpecInstallComponentsStep(final RRModuleBuilder builder,
-                                          final Icon icon,
-                                          final String helpId,
-                                          final Project project) {
-        super();
-        myIcon = icon;
-        myBuilder = builder;
-        myPanel = new RubyRSpecInstallComponentsForm(builder);
-        myHelp = helpId;
-        myProject = project;
-    }
+	public RubyRSpecInstallComponentsStep(final RRModuleBuilder builder, final Icon icon, final String helpId, final Project project)
+	{
+		super();
+		myIcon = icon;
+		myBuilder = builder;
+		myPanel = new RubyRSpecInstallComponentsForm(builder);
+		myHelp = helpId;
+		myProject = project;
+	}
 
-    @Override
-	public String getHelpId() {
-        return myHelp;
-    }
+	@Override
+	public String getHelpId()
+	{
+		return myHelp;
+	}
 
-    @Override
-	public JComponent getComponent() {
-        return myPanel.getContentPane();
-    }
+	@Override
+	public JComponent getComponent()
+	{
+		return myPanel.getContentPane();
+	}
 
 
-    @Override
-	public void updateDataModel() {
-        // Do nothing
-    }
+	@Override
+	public void updateDataModel()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public Icon getIcon() {
-        return myIcon;
-    }
+	@Override
+	public Icon getIcon()
+	{
+		return myIcon;
+	}
 
-    @Override
-	public void updateStep() {
-        myPanel.initBeforeShow();
-    }
+	@Override
+	public void updateStep()
+	{
+		myPanel.initBeforeShow();
+	}
 
-    @Override
-	public boolean isStepVisible() {
-        if (!myBuilder.isRSpecSupportEnabled() || !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent())) {
-            return false;
-        }
+	@Override
+	public boolean isStepVisible()
+	{
+		if(!myBuilder.isRSpecSupportEnabled() || !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent()))
+		{
+			return false;
+		}
 
-        final Sdk sdk = myBuilder.getSdk();
-        //noinspection SimplifiableIfStatement
-        return sdk != null;
-    }
+		final Sdk sdk = myBuilder.getSdk();
+		//noinspection SimplifiableIfStatement
+		return sdk != null;
+	}
 
-    @Override
-	public boolean validate() throws ConfigurationException {
-        final Sdk sdk = myBuilder.getSdk();
-        if (!RSpecUtil.checkIfRSpecGemExists(sdk)) {
-            final String msg = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.text");
-            final String title = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.title");
-            return Messages.showYesNoDialog(myProject, msg, title, UIUtil.getWarningIcon()) == DialogWrapper.OK_EXIT_CODE;
-        }
-        return true;
-    }
+	@Override
+	public boolean validate() throws ConfigurationException
+	{
+		final Sdk sdk = myBuilder.getSdk();
+		if(!RSpecUtil.checkIfRSpecGemExists(sdk))
+		{
+			final String msg = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.text");
+			final String title = RBundle.message("module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.title");
+			return Messages.showYesNoDialog(myProject, msg, title, UIUtil.getWarningIcon()) == DialogWrapper.OK_EXIT_CODE;
+		}
+		return true;
+	}
 }
 
 

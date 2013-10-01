@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import com.intellij.openapi.util.Iconable;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.Iconable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,14 +25,15 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: Mar 23, 2007
  */
-public interface RVirtualAlias extends RVirtualStructuralElement, Iconable {
+public interface RVirtualAlias extends RVirtualStructuralElement, Iconable
+{
 
-    @NotNull
-    public String getOldName();
+	@NotNull
+	public String getOldName();
 
-    @NotNull
-    public String getNewName();
+	@NotNull
+	public String getNewName();
 
-    @NotNull
-    public String getPresentableText();
+	@NotNull
+	public String getPresentableText();
 }

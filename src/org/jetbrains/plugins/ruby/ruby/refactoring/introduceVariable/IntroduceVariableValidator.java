@@ -23,9 +23,10 @@ import org.jetbrains.annotations.Nullable;
  * User: oleg
  * Date: Sep 21, 2007
  */
-public interface IntroduceVariableValidator {
+public interface IntroduceVariableValidator
+{
 
-    @Nullable
-    public String check(RubyIntroduceVariableSettings settings);
+	@Nullable
+	public String check(RubyIntroduceVariableSettings settings);
 
 }

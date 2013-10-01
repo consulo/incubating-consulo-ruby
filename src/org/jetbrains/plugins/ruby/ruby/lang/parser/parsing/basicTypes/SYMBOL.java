@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -28,53 +27,60 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method.FN
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 24.07.2006
  */
-public class SYMBOL  implements RubyTokenTypes {
+public class SYMBOL implements RubyTokenTypes
+{
 
-    /*
-            symbol		: tSYMBEG sym
-                    ;
+	/*
+			symbol		: tSYMBEG sym
+					;
 
-            sym		: fname
-                    | tIVAR
-                    | tGVAR
-                    | tCVAR
-                    | string
-                    ;
-    */
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if(builder.compare(tSYMBEG)){
-            RMarker statementMarker = builder.mark();
-            builder.match(tSYMBEG);
+			sym		: fname
+					| tIVAR
+					| tGVAR
+					| tCVAR
+					| string
+					;
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(builder.compare(tSYMBEG))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tSYMBEG);
 
-            if (builder.compare(BNF.tSTRINGS_BEGINNINGS)){
-                Strings.parse(builder);
-                statementMarker.done(RubyElementTypes.SYMBOL);
-                return RubyElementTypes.SYMBOL;
-            }
+			if(builder.compare(BNF.tSTRINGS_BEGINNINGS))
+			{
+				Strings.parse(builder);
+				statementMarker.done(RubyElementTypes.SYMBOL);
+				return RubyElementTypes.SYMBOL;
+			}
 
-            if (builder.compare(BNF.tVARS)){
-                VARIABLE.parse(builder);
-                statementMarker.done(RubyElementTypes.SYMBOL);
-                return RubyElementTypes.SYMBOL;
-            }
-            IElementType result = FNAME.parse(builder);
-            if (result != RubyElementTypes.EMPTY_INPUT) {
-                statementMarker.done(RubyElementTypes.SYMBOL);
-                return RubyElementTypes.SYMBOL;
-            }
+			if(builder.compare(BNF.tVARS))
+			{
+				VARIABLE.parse(builder);
+				statementMarker.done(RubyElementTypes.SYMBOL);
+				return RubyElementTypes.SYMBOL;
+			}
+			IElementType result = FNAME.parse(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				statementMarker.done(RubyElementTypes.SYMBOL);
+				return RubyElementTypes.SYMBOL;
+			}
 
-            builder.error(ErrorMsg.expected(RBundle.message("parsing.symbol.content")));
-            statementMarker.done(RubyElementTypes.SYMBOL);
-            return RubyElementTypes.SYMBOL;
-        }
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+			builder.error(ErrorMsg.expected(RBundle.message("parsing.symbol.content")));
+			statementMarker.done(RubyElementTypes.SYMBOL);
+			return RubyElementTypes.SYMBOL;
+		}
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

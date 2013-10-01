@@ -34,94 +34,114 @@ import com.intellij.psi.tree.IElementType;
  * @author: oleg
  * @date: Feb 11, 2008
  */
-public class YAMLLexer extends LexerBase {
-    protected CharSequence myBuffer;
+public class YAMLLexer extends LexerBase
+{
+	protected CharSequence myBuffer;
 
-    protected ScannerImpl myScanner;
-    protected Iterator myIterator;
-    protected Token myToken;
-    protected Token myPrevToken;
+	protected ScannerImpl myScanner;
+	protected Iterator myIterator;
+	protected Token myToken;
+	protected Token myPrevToken;
 
-    private int myStart;
-    private int myEnd;
+	private int myStart;
+	private int myEnd;
 
-    private int myTokenStart;
-    private int myTokenEnd;
-    protected boolean initialStateRead;
+	private int myTokenStart;
+	private int myTokenEnd;
+	protected boolean initialStateRead;
 
-    @Override
-	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
-        myBuffer = buffer;
+	@Override
+	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState)
+	{
+		myBuffer = buffer;
 
-        myStart = startOffset;
-        myEnd = endOffset;
+		myStart = startOffset;
+		myEnd = endOffset;
 
-        myToken = null;
-        myPrevToken = null;
+		myToken = null;
+		myPrevToken = null;
 
-        myTokenStart = 0;
-        myTokenEnd = 0;
-        
-        myScanner = new DefaultYAMLFactory().createScanner(ByteList.create(myBuffer.subSequence(myStart, myEnd)));
-        myIterator = myScanner.iterator();
-        initialStateRead = false;
-        advance();
-    }
+		myTokenStart = 0;
+		myTokenEnd = 0;
 
-    @Deprecated
-    public void start(final char[] buffer, final int startOffset, final int endOffset, final int initialState) {
-        throw new UnsupportedOperationException("Method start is not implemented in org.consulo.yaml.lang.parsing.YAMLLexer");
-    }
+		myScanner = new DefaultYAMLFactory().createScanner(ByteList.create(myBuffer.subSequence(myStart, myEnd)));
+		myIterator = myScanner.iterator();
+		initialStateRead = false;
+		advance();
+	}
 
-    @Override
-	public int getState() {
-        if (initialStateRead){
-            return 1;
-        } else {
-            initialStateRead = true;
-            return 0;
-        }
-    }
+	@Deprecated
+	public void start(final char[] buffer, final int startOffset, final int endOffset, final int initialState)
+	{
+		throw new UnsupportedOperationException("Method start is not implemented in org.consulo.yaml.lang.parsing.YAMLLexer");
+	}
 
-    @Override
+	@Override
+	public int getState()
+	{
+		if(initialStateRead)
+		{
+			return 1;
+		}
+		else
+		{
+			initialStateRead = true;
+			return 0;
+		}
+	}
+
+	@Override
 	@Nullable
-    public IElementType getTokenType() {
-        return myToken!=null ? YAMLTokenTypeFactory.getTypeForToken(myPrevToken, myToken) : null;
-    }
+	public IElementType getTokenType()
+	{
+		return myToken != null ? YAMLTokenTypeFactory.getTypeForToken(myPrevToken, myToken) : null;
+	}
 
-    @Override
-	public int getTokenStart() {
-        return myTokenStart;
-    }
+	@Override
+	public int getTokenStart()
+	{
+		return myTokenStart;
+	}
 
-    @Override
-	public int getTokenEnd() {
-        return myTokenEnd;
-    }
+	@Override
+	public int getTokenEnd()
+	{
+		return myTokenEnd;
+	}
 
-    @Override
-	public void advance() {
-        try {
-            myTokenStart = myTokenEnd;
+	@Override
+	public void advance()
+	{
+		try
+		{
+			myTokenStart = myTokenEnd;
 
-            if (myTokenStart<myEnd && myIterator.hasNext()) {
-                do {
-                    myPrevToken = myToken;
-                    myToken = (Token) myIterator.next();
-                } while (myToken.getStart()==myToken.getEnd() && myIterator.hasNext());
-// We do not modify tokenStart to ensure, that all the regions are covered by lexer
-                myTokenEnd = myToken.getEnd();
-            } else {
-                myToken = null;
-            }
-        } catch (Exception e) {
-            if (myScanner.getOffset()==myTokenStart){
-                myScanner.forward();
-            }
-            myTokenEnd = myScanner.getOffset();
-            myToken = myTokenStart!=myTokenEnd ? new ScannerExceptionToken(myTokenStart, myTokenEnd) : null;
-        }
-    }
+			if(myTokenStart < myEnd && myIterator.hasNext())
+			{
+				do
+				{
+					myPrevToken = myToken;
+					myToken = (Token) myIterator.next();
+				}
+				while(myToken.getStart() == myToken.getEnd() && myIterator.hasNext());
+				// We do not modify tokenStart to ensure, that all the regions are covered by lexer
+				myTokenEnd = myToken.getEnd();
+			}
+			else
+			{
+				myToken = null;
+			}
+		}
+		catch(Exception e)
+		{
+			if(myScanner.getOffset() == myTokenStart)
+			{
+				myScanner.forward();
+			}
+			myTokenEnd = myScanner.getOffset();
+			myToken = myTokenStart != myTokenEnd ? new ScannerExceptionToken(myTokenStart, myTokenEnd) : null;
+		}
+	}
 
 	@Override
 	public CharSequence getBufferSequence()
@@ -129,8 +149,9 @@ public class YAMLLexer extends LexerBase {
 		return myBuffer;
 	}
 
-    @Override
-	public int getBufferEnd() {
-        return myEnd;
-    }
+	@Override
+	public int getBufferEnd()
+	{
+		return myEnd;
+	}
 }

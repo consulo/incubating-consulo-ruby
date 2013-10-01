@@ -16,11 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -47,143 +46,169 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RNameUtil
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RClassImpl extends RFieldConstantContainerImpl implements RClass {
-    public RClassImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RClassImpl extends RFieldConstantContainerImpl implements RClass
+{
+	public RClassImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRClass(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRClass(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RClassPresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RClassPresentationUtil.getPresentation(this);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RClassName getClassName() {
-        return RubyPsiUtil.getChildByType(this, RClassName.class, 0);
-    }
+	public RClassName getClassName()
+	{
+		return RubyPsiUtil.getChildByType(this, RClassName.class, 0);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RSuperClass getPsiSuperClass() {
-        PsiElement superClass = getChildByFilter(RubyElementTypes.SUPER_CLASS, 0);
-        return superClass != null ? (RSuperClass) superClass : null;
-    }
+	public RSuperClass getPsiSuperClass()
+	{
+		PsiElement superClass = getChildByFilter(RubyElementTypes.SUPER_CLASS, 0);
+		return superClass != null ? (RSuperClass) superClass : null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
-                                           @NotNull final RFileInfo info) {
-        final RVirtualName virtualClassName = new RVirtualNameImpl(getFullPath(), isGlobal());
-        final RSuperClass superClass = getPsiSuperClass();
-        RVirtualName virtualSuperClass = null;
-        if (superClass!=null){
-            virtualSuperClass = new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass));
-        }
+	public RVirtualClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo info)
+	{
+		final RVirtualName virtualClassName = new RVirtualNameImpl(getFullPath(), isGlobal());
+		final RSuperClass superClass = getPsiSuperClass();
+		RVirtualName virtualSuperClass = null;
+		if(superClass != null)
+		{
+			virtualSuperClass = new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass));
+		}
 
-        assert virtualParent != null;
-        final RVirtualClassImpl rVirtualClass =
-                new RVirtualClassImpl(virtualParent, virtualClassName, virtualSuperClass,
-                                      getAccessModifier(), info);
-        addVirtualData(rVirtualClass, info);
-        return rVirtualClass;
-    }
+		assert virtualParent != null;
+		final RVirtualClassImpl rVirtualClass = new RVirtualClassImpl(virtualParent, virtualClassName, virtualSuperClass, getAccessModifier(), info);
+		addVirtualData(rVirtualClass, info);
+		return rVirtualClass;
+	}
 
-    @Override
-	public int getTextOffset() {
-        final RClassName className = getClassName();
-        return className!=null ? className.getTextOffset() : super.getTextOffset();
-    }
+	@Override
+	public int getTextOffset()
+	{
+		final RClassName className = getClassName();
+		return className != null ? className.getTextOffset() : super.getTextOffset();
+	}
 
-    @Override
-	public PsiElement setName(@NonNls @NotNull final String name) throws IncorrectOperationException {
-        return null;
-    }
+	@Override
+	public PsiElement setName(@NonNls @NotNull final String name) throws IncorrectOperationException
+	{
+		return null;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CLASS;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CLASS;
+	}
 
-    @Override
-	protected RPsiElement getNameElement() {
-        return getClassName();
-    }
+	@Override
+	protected RPsiElement getNameElement()
+	{
+		return getClassName();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RVirtualName getVirtualSuperClass() {
-        final RSuperClass superClass = getPsiSuperClass();
-        return superClass!=null ? new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass)) : null;
-    }
+	public RVirtualName getVirtualSuperClass()
+	{
+		final RSuperClass superClass = getPsiSuperClass();
+		return superClass != null ? new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass)) : null;
+	}
 
-    @Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element) {
-        if (!super.equalsToVirtual(element)) {
-            return false;
-        }
-        if (!(element instanceof RVirtualClass)){
-            return false;
-        }
-        final RVirtualClass rvClass = (RVirtualClass) element;
+	@Override
+	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	{
+		if(!super.equalsToVirtual(element))
+		{
+			return false;
+		}
+		if(!(element instanceof RVirtualClass))
+		{
+			return false;
+		}
+		final RVirtualClass rvClass = (RVirtualClass) element;
 
-// superclass checking
-        final RSuperClass rSuperClass = getPsiSuperClass();
-        final RVirtualName rvSuperClass = rvClass.getVirtualSuperClass();
-        if (rSuperClass!=null){
-            if (rvSuperClass==null){
-                return false;
-            }
-            if (!RNameUtil.getPath(rSuperClass).equals(rvSuperClass.getPath())){
-                return false;
-            }
-            if (RNameUtil.isGlobal(rSuperClass) != rvSuperClass.isGlobal()){
-                return false;
-            }
-        } else {
-            if (rvSuperClass!=null){
-                return false;
-            }
-        }
-        return true;
-    }
+		// superclass checking
+		final RSuperClass rSuperClass = getPsiSuperClass();
+		final RVirtualName rvSuperClass = rvClass.getVirtualSuperClass();
+		if(rSuperClass != null)
+		{
+			if(rvSuperClass == null)
+			{
+				return false;
+			}
+			if(!RNameUtil.getPath(rSuperClass).equals(rvSuperClass.getPath()))
+			{
+				return false;
+			}
+			if(RNameUtil.isGlobal(rSuperClass) != rvSuperClass.isGlobal())
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if(rvSuperClass != null)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RClass> getSuperClass(@NotNull final FileSymbol fileSymbol) {
-        final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, this);
-        if (symbol == null){
-            return Collections.emptyList();
-        }
-        final ArrayList<RClass> superClasses = new ArrayList<RClass>();
-        for (Symbol superClass : symbol.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet()).getAll()) {
-            for (RVirtualElement element : superClass.getLinkedSymbol().getVirtualPrototypes(fileSymbol).getAll()) {
-                if (element instanceof RClass){
-                    superClasses.add((RClass) element);
-                }
-            }
-        }
-        return superClasses;
-    }
+	public List<RClass> getSuperClass(@NotNull final FileSymbol fileSymbol)
+	{
+		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, this);
+		if(symbol == null)
+		{
+			return Collections.emptyList();
+		}
+		final ArrayList<RClass> superClasses = new ArrayList<RClass>();
+		for(Symbol superClass : symbol.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet()).getAll())
+		{
+			for(RVirtualElement element : superClass.getLinkedSymbol().getVirtualPrototypes(fileSymbol).getAll())
+			{
+				if(element instanceof RClass)
+				{
+					superClasses.add((RClass) element);
+				}
+			}
+		}
+		return superClasses;
+	}
 }

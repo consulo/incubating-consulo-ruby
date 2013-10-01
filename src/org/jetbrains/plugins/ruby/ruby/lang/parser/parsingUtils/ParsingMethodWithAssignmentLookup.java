@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.Assignment;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,19 +28,22 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.Assignment;
  * @author: oleg
  * @date: Feb 18, 2008
  */
-public abstract class ParsingMethodWithAssignmentLookup implements ParsingMethod {
-    @NotNull
-    public abstract IElementType parseInner(final RBuilder builder);
+public abstract class ParsingMethodWithAssignmentLookup implements ParsingMethod
+{
+	@NotNull
+	public abstract IElementType parseInner(final RBuilder builder);
 
-    @Override
-	public final IElementType parse(final RBuilder builder) {
-        final RMarker assignMarker = builder.mark();
-        final IElementType type = parseInner(builder);
-// Lookahead
-        if (BNF.LHS.contains(type) && builder.compare(BNF.tASSGNS)){
-            return Assignment.parseWithLeadRANGE(builder, assignMarker, type);
-        }
-        assignMarker.drop();
-        return type;
-    }
+	@Override
+	public final IElementType parse(final RBuilder builder)
+	{
+		final RMarker assignMarker = builder.mark();
+		final IElementType type = parseInner(builder);
+		// Lookahead
+		if(BNF.LHS.contains(type) && builder.compare(BNF.tASSGNS))
+		{
+			return Assignment.parseWithLeadRANGE(builder, assignMarker, type);
+		}
+		assignMarker.drop();
+		return type;
+	}
 }

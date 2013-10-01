@@ -16,7 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 
-import com.intellij.openapi.progress.ProgressManager;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -24,110 +27,128 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilter;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilterFactory;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.intellij.openapi.progress.ProgressManager;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 15, 2007
  */
-public class Children {
-    public static final Children EMPTY_CHILDREN = new Children(null);
+public class Children
+{
+	public static final Children EMPTY_CHILDREN = new Children(null);
 
-    private final List<Symbol> myList = new ArrayList<Symbol>();
-    private final Object LOCK = new Object();
+	private final List<Symbol> myList = new ArrayList<Symbol>();
+	private final Object LOCK = new Object();
 
-    private final Children myBaseChildren;
+	private final Children myBaseChildren;
 
-    public Children(@Nullable final Children children) {
-        myBaseChildren = children;
-    }
+	public Children(@Nullable final Children children)
+	{
+		myBaseChildren = children;
+	}
 
-    public void addSymbol(@NotNull final Symbol symbol) {
-        synchronized (LOCK) {
-            myList.add(symbol);
-        }
-    }
+	public void addSymbol(@NotNull final Symbol symbol)
+	{
+		synchronized(LOCK)
+		{
+			myList.add(symbol);
+		}
+	}
 
-    public void addSymbols(@NotNull final Collection<Symbol> collection) {
-        for (Symbol symbol : collection) {
-            addSymbol(symbol);
-        }
-    }
+	public void addSymbols(@NotNull final Collection<Symbol> collection)
+	{
+		for(Symbol symbol : collection)
+		{
+			addSymbol(symbol);
+		}
+	}
 
-    public void addChildren(@NotNull final Children children) {
-        addSymbols(children.getAll());
-    }
+	public void addChildren(@NotNull final Children children)
+	{
+		addSymbols(children.getAll());
+	}
 
 
-    @NotNull
-    public List<Symbol> getAll() {
-        final ArrayList<Symbol> all = new ArrayList<Symbol>();
-        addAll(all);
-        return all;
-    }
+	@NotNull
+	public List<Symbol> getAll()
+	{
+		final ArrayList<Symbol> all = new ArrayList<Symbol>();
+		addAll(all);
+		return all;
+	}
 
-    protected void addAll(@NotNull final List<Symbol> list){
-        ProgressManager.getInstance().checkCanceled();
+	protected void addAll(@NotNull final List<Symbol> list)
+	{
+		ProgressManager.getInstance().checkCanceled();
 
-        if (myBaseChildren != null) {
-            myBaseChildren.addAll(list);
-        }
-        synchronized (LOCK) {
-            list.addAll(myList);
-        }
-    }
+		if(myBaseChildren != null)
+		{
+			myBaseChildren.addAll(list);
+		}
+		synchronized(LOCK)
+		{
+			list.addAll(myList);
+		}
+	}
 
-    @Nullable
-    public Symbol getSymbolByNameAndTypes(@NotNull final String name,
-                                          final TypeSet typeSet) {
-        // We don`t want to return something NOT_DEFINED, if something better can be found
-        Symbol foundSymbol = null;
-        for (Symbol symbol : getSymbolsByNameAndTypes(name, typeSet).getAll()) {
-            if (foundSymbol == null || symbol.getType() != Type.NOT_DEFINED) {
-                foundSymbol = symbol;
-            }
-        }
-        return foundSymbol;
-    }
+	@Nullable
+	public Symbol getSymbolByNameAndTypes(@NotNull final String name, final TypeSet typeSet)
+	{
+		// We don`t want to return something NOT_DEFINED, if something better can be found
+		Symbol foundSymbol = null;
+		for(Symbol symbol : getSymbolsByNameAndTypes(name, typeSet).getAll())
+		{
+			if(foundSymbol == null || symbol.getType() != Type.NOT_DEFINED)
+			{
+				foundSymbol = symbol;
+			}
+		}
+		return foundSymbol;
+	}
 
-    @NotNull
-    public Children getSymbolsByNameAndTypes(@NotNull final String name,
-                                             final TypeSet typeSet) {
-        return getChildrenByFilter(SymbolFilterFactory.createFilterByNameAndTypeSet(name, typeSet));
-    }
+	@NotNull
+	public Children getSymbolsByNameAndTypes(@NotNull final String name, final TypeSet typeSet)
+	{
+		return getChildrenByFilter(SymbolFilterFactory.createFilterByNameAndTypeSet(name, typeSet));
+	}
 
-    @NotNull
-    public Children getSymbolsOfTypes(final TypeSet typeSet) {
-        return getChildrenByFilter(SymbolFilterFactory.createFilterByTypeSet(typeSet));
-    }
+	@NotNull
+	public Children getSymbolsOfTypes(final TypeSet typeSet)
+	{
+		return getChildrenByFilter(SymbolFilterFactory.createFilterByTypeSet(typeSet));
+	}
 
-    public boolean hasChildren() {
-        return !myList.isEmpty() || myBaseChildren != null && myBaseChildren.hasChildren();
-    }
+	public boolean hasChildren()
+	{
+		return !myList.isEmpty() || myBaseChildren != null && myBaseChildren.hasChildren();
+	}
 
-    public Children getChildrenByFilter(@NotNull final SymbolFilter filter){
-        final Children children = new Children(null);
-        addChildrenByFilter(children, filter);
-        return children;
-    }
+	public Children getChildrenByFilter(@NotNull final SymbolFilter filter)
+	{
+		final Children children = new Children(null);
+		addChildrenByFilter(children, filter);
+		return children;
+	}
 
-    protected void addChildrenByFilter(@NotNull final Children children, @NotNull final SymbolFilter filter){
-        ProgressManager.getInstance().checkCanceled();
-        if (myBaseChildren!=null){
-            myBaseChildren.addChildrenByFilter(children, filter);
-        }
-        synchronized (LOCK) {
-            for (Symbol symbol : myList) {
-                if (filter.accept(symbol)) {
-                    children.addSymbol(symbol);
-                }
-            }
-        }
-    }
+	protected void addChildrenByFilter(@NotNull final Children children, @NotNull final SymbolFilter filter)
+	{
+		ProgressManager.getInstance().checkCanceled();
+		if(myBaseChildren != null)
+		{
+			myBaseChildren.addChildrenByFilter(children, filter);
+		}
+		synchronized(LOCK)
+		{
+			for(Symbol symbol : myList)
+			{
+				if(filter.accept(symbol))
+				{
+					children.addSymbol(symbol);
+				}
+			}
+		}
+	}
 
 
 }

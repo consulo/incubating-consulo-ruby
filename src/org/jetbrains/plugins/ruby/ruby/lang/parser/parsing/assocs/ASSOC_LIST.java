@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assocs;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
@@ -26,13 +25,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.TRAILER;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-public class ASSOC_LIST  implements RubyTokenTypes {
+public class ASSOC_LIST implements RubyTokenTypes
+{
 
 /*
 assoc_list	: none
@@ -41,37 +42,43 @@ assoc_list	: none
 		;
 */
 
-    /**
-     * @param builder Current builder
-     * @return Number of elements parsed
-     */
-    public static int parse(final RBuilder builder){
-        ParsingMethod parsingMethod = new ParsingMethod(){
-                boolean assocSeen = false;
+	/**
+	 * @param builder Current builder
+	 * @return Number of elements parsed
+	 */
+	public static int parse(final RBuilder builder)
+	{
+		ParsingMethod parsingMethod = new ParsingMethod()
+		{
+			boolean assocSeen = false;
 
-                @Override
-				@NotNull
-                public IElementType parse(final RBuilder builder){
-                    IElementType result =  ASSOC_OR_ARG.parse(builder);
+			@Override
+			@NotNull
+			public IElementType parse(final RBuilder builder)
+			{
+				IElementType result = ASSOC_OR_ARG.parse(builder);
 
-                    if (result == RubyElementTypes.ASSOC){
-                        assocSeen = true;
-                        return result;
-                    }
+				if(result == RubyElementTypes.ASSOC)
+				{
+					assocSeen = true;
+					return result;
+				}
 
-                    if (assocSeen && result != RubyElementTypes.ASSOC){
-                        builder.error(ErrorMsg.expected(tASSOC));
-                    }
-                    return result;
-                }
-            };
-        int count =  ListParsingUtil.parseCommaDelimitedExpressions(builder, parsingMethod, false);
-        if (count!=0){
-            TRAILER.parse(builder);
+				if(assocSeen && result != RubyElementTypes.ASSOC)
+				{
+					builder.error(ErrorMsg.expected(tASSOC));
+				}
+				return result;
+			}
+		};
+		int count = ListParsingUtil.parseCommaDelimitedExpressions(builder, parsingMethod, false);
+		if(count != 0)
+		{
+			TRAILER.parse(builder);
 
-        }
-        return count;
-    }
+		}
+		return count;
+	}
 
 
 }

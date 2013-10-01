@@ -16,6 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.listeners;
 
+import java.util.List;
+
+import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
+import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeSet;
+import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -25,54 +30,57 @@ import com.intellij.pom.PomModelAspect;
 import com.intellij.pom.event.PomChangeSet;
 import com.intellij.pom.event.PomModelEvent;
 import com.intellij.pom.event.PomModelListener;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeSet;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: Oct 2, 2006
  */
-public abstract class RubyPomModelListener implements PomModelListener {
-    private Module myModule;
-    private PomModel myPomModel;
-    private ProjectFileIndex myFileIndex;
+public abstract class RubyPomModelListener implements PomModelListener
+{
+	private Module myModule;
+	private PomModel myPomModel;
+	private ProjectFileIndex myFileIndex;
 
-    public RubyPomModelListener(final Module module, final PomModel pomModel){
-        myModule = module;
-        myPomModel = pomModel;
-        myFileIndex = ProjectRootManager.getInstance(myModule.getProject()).getFileIndex();
-    }
+	public RubyPomModelListener(final Module module, final PomModel pomModel)
+	{
+		myModule = module;
+		myPomModel = pomModel;
+		myFileIndex = ProjectRootManager.getInstance(myModule.getProject()).getFileIndex();
+	}
 
-    @Override
-	public boolean isAspectChangeInteresting(PomModelAspect aspect) {
-        return aspect instanceof RubyPomAspect;
-    }
+	@Override
+	public boolean isAspectChangeInteresting(PomModelAspect aspect)
+	{
+		return aspect instanceof RubyPomAspect;
+	}
 
-    @Override
-	public void modelChanged(final PomModelEvent event) {
-        final PomChangeSet changeSet = event.getChangeSet(myPomModel.getModelAspect(RubyPomAspect.class));
-        if (changeSet != null) {
-            final List<RubyChange> list = ((RubyChangeSet) changeSet).getChanges();
-            if (list.isEmpty()) {
-                return;
-            }
-            final VirtualFile vFile = ((RubyChangeSet)changeSet).getChangedFile().getVirtualFile();
+	@Override
+	public void modelChanged(final PomModelEvent event)
+	{
+		final PomChangeSet changeSet = event.getChangeSet(myPomModel.getModelAspect(RubyPomAspect.class));
+		if(changeSet != null)
+		{
+			final List<RubyChange> list = ((RubyChangeSet) changeSet).getChanges();
+			if(list.isEmpty())
+			{
+				return;
+			}
+			final VirtualFile vFile = ((RubyChangeSet) changeSet).getChangedFile().getVirtualFile();
 
-            if (vFile == null) {
-                return;
-            }
+			if(vFile == null)
+			{
+				return;
+			}
 
-            if (myFileIndex.getModuleForFile(vFile) == myModule) {
-                processEvent(list, vFile);
-            }
-        }
-    }
+			if(myFileIndex.getModuleForFile(vFile) == myModule)
+			{
+				processEvent(list, vFile);
+			}
+		}
+	}
 
-    @SuppressWarnings({"UnusedParameters"})
-    protected abstract void processEvent(final List<RubyChange> list,
-                                         final VirtualFile vFile);
+	@SuppressWarnings({"UnusedParameters"})
+	protected abstract void processEvent(final List<RubyChange> list, final VirtualFile vFile);
 }

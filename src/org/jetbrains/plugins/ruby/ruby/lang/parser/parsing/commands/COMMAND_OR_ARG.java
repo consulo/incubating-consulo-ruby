@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -25,6 +23,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.ARG;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,14 +32,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
  * @author: oleg
  * @date: Oct 16, 2006
  */
-public class COMMAND_OR_ARG implements RubyTokenTypes {
+public class COMMAND_OR_ARG implements RubyTokenTypes
+{
 
-    private static final TokenSet TS_COMMAND_TOKENS = TokenSet.create(kYIELD);
+	private static final TokenSet TS_COMMAND_TOKENS = TokenSet.create(kYIELD);
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
 /*
-    command	: operation command_args
+	command	: operation command_args
             | operation command_args cmd_brace_block
             | primary_value '.' operation2 command_args
             | primary_value '.' operation2 command_args cmd_brace_block
@@ -49,21 +51,24 @@ public class COMMAND_OR_ARG implements RubyTokenTypes {
             | kYIELD command_args
             ;
 */
-        IElementType result;
-        if (builder.compare(TS_COMMAND_TOKENS)){
-            result = COMMAND.parse(builder);
-            if (result != RubyElementTypes.EMPTY_INPUT){
-                return result;
-            }
-        }
+		IElementType result;
+		if(builder.compare(TS_COMMAND_TOKENS))
+		{
+			result = COMMAND.parse(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return result;
+			}
+		}
 
-        RMarker marker = builder.mark();
-        result = ARG.parse(builder);
-        if (!BNF.COMMAND_OBJECTS.contains(result) || !builder.compare(BNF.tCALL_ARG_FIRST_TOKEN)){
-            marker.drop();
-            return result;
-        }
-// else ARG can be the first element in command
-        return COMMAND.parseWithLeadARG(builder, marker, result);
-    }
+		RMarker marker = builder.mark();
+		result = ARG.parse(builder);
+		if(!BNF.COMMAND_OBJECTS.contains(result) || !builder.compare(BNF.tCALL_ARG_FIRST_TOKEN))
+		{
+			marker.drop();
+			return result;
+		}
+		// else ARG can be the first element in command
+		return COMMAND.parseWithLeadARG(builder, marker, result);
+	}
 }

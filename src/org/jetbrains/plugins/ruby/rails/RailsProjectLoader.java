@@ -28,9 +28,10 @@ import com.intellij.openapi.components.ProjectComponent;
  * @date: Aug 30, 2007
  */
 //TODO
-public class RailsProjectLoader implements ProjectComponent {
+public class RailsProjectLoader implements ProjectComponent
+{
    /* public RailsProjectLoader(final CssSupportLoader loader,
-                              final ReferenceProvidersRegistry referenceProvidersRegistry) {
+							  final ReferenceProvidersRegistry referenceProvidersRegistry) {
 
         // this registers standart html ref. provider in rhtml files
         final HtmlInRHTMLReferenceProvider rhtmlReferenceProvider = new HtmlInRHTMLReferenceProvider();
@@ -44,30 +45,35 @@ public class RailsProjectLoader implements ProjectComponent {
         loader.registerCssEnabledFileType(RHTMLFileType.RHTML);
     }     */
 
-    @Override
-	public void projectOpened() {
-        // Do nothing
-    }
+	@Override
+	public void projectOpened()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void projectClosed() {
-        // Do nothing
-    }
+	@Override
+	public void projectClosed()
+	{
+		// Do nothing
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RAILS_PROJECT_LOADER;
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RAILS_PROJECT_LOADER;
+	}
 
-    @Override
-	public void initComponent() {
-        // Do nothing
-    }
+	@Override
+	public void initComponent()
+	{
+		// Do nothing
+	}
 
-    @Override
-	public void disposeComponent() {
-        // Do nothing
-    }
+	@Override
+	public void disposeComponent()
+	{
+		// Do nothing
+	}
 }

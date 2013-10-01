@@ -33,29 +33,33 @@ import com.intellij.psi.PsiJavaPackage;
 /**
  * @author: oleg
  */
-public class WrongTopLevelPackageInspectionVisitor extends RubyInspectionVisitor {
+public class WrongTopLevelPackageInspectionVisitor extends RubyInspectionVisitor
+{
 
-    public WrongTopLevelPackageInspectionVisitor(final ProblemsHolder holder) {
-        super(holder);
-    }
+	public WrongTopLevelPackageInspectionVisitor(final ProblemsHolder holder)
+	{
+		super(holder);
+	}
 
-    @Override
-    public void visitRIdentifier(final RIdentifier rIdentifier) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
-        visitLeftElement(rIdentifier);
-    }
+	@Override
+	public void visitRIdentifier(final RIdentifier rIdentifier)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
+		visitLeftElement(rIdentifier);
+	}
 
-    public void visitLeftElement(@NotNull final RPsiElement leftElement) {
-// RUBY-1679
-        final List<PsiElement> list = ResolveUtil.multiResolve(leftElement);
-        if (list.size()==1){
-            final PsiElement element = list.get(0);
-            if (element instanceof PsiJavaPackage && !JavaResolveUtil.isTopLevelPackageOk((PsiJavaPackage) element)){
-                registerProblem(leftElement,
-                        RBundle.message("inspection.wrong.top.level.package.should.be.one.of", "java, javax, org, com"),
-                        new WrongTopLevelPackageFix(leftElement));
-            }
-        }
-    }
+	public void visitLeftElement(@NotNull final RPsiElement leftElement)
+	{
+		// RUBY-1679
+		final List<PsiElement> list = ResolveUtil.multiResolve(leftElement);
+		if(list.size() == 1)
+		{
+			final PsiElement element = list.get(0);
+			if(element instanceof PsiJavaPackage && !JavaResolveUtil.isTopLevelPackageOk((PsiJavaPackage) element))
+			{
+				registerProblem(leftElement, RBundle.message("inspection.wrong.top.level.package.should.be.one.of", "java, javax, org, com"), new WrongTopLevelPackageFix(leftElement));
+			}
+		}
+	}
 }

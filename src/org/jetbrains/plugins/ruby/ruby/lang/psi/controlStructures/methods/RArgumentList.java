@@ -16,35 +16,36 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.07.2006
  */
-public interface RArgumentList extends RPsiElement {
-    @NotNull
-    public List<RArgument> getArguments();
+public interface RArgumentList extends RPsiElement
+{
+	@NotNull
+	public List<RArgument> getArguments();
 
-    @NotNull
-    public List<ArgumentInfo> getArgumentInfos();
+	@NotNull
+	public List<ArgumentInfo> getArgumentInfos();
 
-    @NotNull
-    public List<ArgumentInfo> getArgumentInfos(boolean includeDefaultArgs);
+	@NotNull
+	public List<ArgumentInfo> getArgumentInfos(boolean includeDefaultArgs);
 
-    /*
-     * returns -1 if not found
-     */
-    public int getArgNumber(@NotNull final RArgument arg);
+	/*
+	 * returns -1 if not found
+	 */
+	public int getArgNumber(@NotNull final RArgument arg);
 
-    /**
-     * @param includeDefaultArgs Include default values into text or not
-     * @return PresentableName of argument list
-     */
-    @NotNull
-    public String getPresentableName(final boolean includeDefaultArgs);
+	/**
+	 * @param includeDefaultArgs Include default values into text or not
+	 * @return PresentableName of argument list
+	 */
+	@NotNull
+	public String getPresentableName(final boolean includeDefaultArgs);
 }

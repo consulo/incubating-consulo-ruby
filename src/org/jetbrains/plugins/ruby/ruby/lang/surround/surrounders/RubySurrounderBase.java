@@ -16,49 +16,54 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import com.intellij.lang.surroundWith.Surrounder;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 5, 2007
  */
-public abstract class RubySurrounderBase implements Surrounder {
-    @Override
-	public boolean isApplicable(@NotNull final PsiElement[] elements) {
-        return elements.length > 0;
-    }
+public abstract class RubySurrounderBase implements Surrounder
+{
+	@Override
+	public boolean isApplicable(@NotNull final PsiElement[] elements)
+	{
+		return elements.length > 0;
+	}
 
-    protected String gatherText(PsiElement[] elements) {
-        final StringBuffer buffer = new StringBuffer();
-        for (PsiElement element : elements) {
-            buffer.append(element.getText());
-        }
-        return buffer.toString();
-    }
+	protected String gatherText(PsiElement[] elements)
+	{
+		final StringBuffer buffer = new StringBuffer();
+		for(PsiElement element : elements)
+		{
+			buffer.append(element.getText());
+		}
+		return buffer.toString();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public TextRange surroundElements(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiElement[] elements) throws IncorrectOperationException {
-        RPsiElement element = RubyPsiUtil.getTopLevelElements(project, getText(elements)).get(0);
+	public TextRange surroundElements(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiElement[] elements) throws IncorrectOperationException
+	{
+		RPsiElement element = RubyPsiUtil.getTopLevelElements(project, getText(elements)).get(0);
 
-        RubyPsiUtil.addBeforeInParent(elements[0], element);
-        RubyPsiUtil.removeElements(elements);
+		RubyPsiUtil.addBeforeInParent(elements[0], element);
+		RubyPsiUtil.removeElements(elements);
 
-        return getTextRange(element);
-    }
+		return getTextRange(element);
+	}
 
-    protected abstract TextRange getTextRange(RPsiElement element);
+	protected abstract TextRange getTextRange(RPsiElement element);
 
-    protected abstract String getText(PsiElement[] elements);
+	protected abstract String getText(PsiElement[] elements);
 
 }

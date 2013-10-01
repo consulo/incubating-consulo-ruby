@@ -21,28 +21,29 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
  * User: oleg
  * Date: Jul 24, 2007
  */
-public enum Expr {
-// Initial state, ignore newlines
-    BEG,
-// State after Binary operation in END or ARG state
-    MID,
-// State after identifier, fid, or come command. Shows that we`re expecting arguments of call or block
-    ARG,
-// State after expression end.
-    END,
+public enum Expr
+{
+	// Initial state, ignore newlines
+	BEG,
+	// State after Binary operation in END or ARG state
+	MID,
+	// State after identifier, fid, or come command. Shows that we`re expecting arguments of call or block
+	ARG,
+	// State after expression end.
+	END,
 
-// When in method definition, rigth after method_name, used to process braces in method arguments
-    CMD_ARG,
+	// When in method definition, rigth after method_name, used to process braces in method arguments
+	CMD_ARG,
 
-// Right after kDO_COND or {
-    CMD_BRACE,
+	// Right after kDO_COND or {
+	CMD_BRACE,
 
-// After Dot or Colon, ignore newlines
-    DOT_OR_COLON,
+	// After Dot or Colon, ignore newlines
+	DOT_OR_COLON,
 
-// After class resword, ingore heredocs
-    CLASS,
+	// After class resword, ingore heredocs
+	CLASS,
 
-// When in alias, in undef, in definition or after Symbeg
-    FNAME
+	// When in alias, in undef, in definition or after Symbeg
+	FNAME
 }

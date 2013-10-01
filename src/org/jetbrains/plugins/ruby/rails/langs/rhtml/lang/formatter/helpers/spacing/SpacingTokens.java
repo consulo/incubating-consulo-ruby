@@ -22,10 +22,11 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.spac
  * @author: Roman Chernyatchik
  * @date: Sep 24, 2007
  */
-public interface SpacingTokens {
-//    TokenSet SPACING_AFTER = TokenSet.create(
-//    );
-//
-//    TokenSet SPACING_BEFORE = TokenSet.create(
-//    );
+public interface SpacingTokens
+{
+	//    TokenSet SPACING_AFTER = TokenSet.create(
+	//    );
+	//
+	//    TokenSet SPACING_BEFORE = TokenSet.create(
+	//    );
 }

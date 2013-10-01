@@ -38,31 +38,31 @@ import com.intellij.openapi.vfs.VirtualFile;
 /**
  * Package private. You should use general class - BaseRailsFacet
  */
-class JRailsFacet extends BaseRailsFacet {
-    @NonNls
-    public static final FacetTypeId<JRailsFacet> ID = new FacetTypeId<JRailsFacet>("JRailsFacetType");
-    
-    public JRailsFacet(@NotNull final FacetType facetType,
-                      @NotNull final Module module,
-                      final String name,
-                      @NotNull final BaseRailsFacetConfiguration configuration,
-                      @Nullable final Facet underlyingFacet) {
-        super(facetType, module, name, configuration, underlyingFacet);
-    }
+class JRailsFacet extends BaseRailsFacet
+{
+	@NonNls
+	public static final FacetTypeId<JRailsFacet> ID = new FacetTypeId<JRailsFacet>("JRailsFacetType");
 
-    @Nullable
-    public static JRailsFacet getInstance(@NotNull final Module module) {
-        return null;
-    }
+	public JRailsFacet(@NotNull final FacetType facetType, @NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, @Nullable final Facet underlyingFacet)
+	{
+		super(facetType, module, name, configuration, underlyingFacet);
+	}
 
-    @Override
+	@Nullable
+	public static JRailsFacet getInstance(@NotNull final Module module)
+	{
+		return null;
+	}
+
+	@Override
 	@NotNull
-    public String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel) {
-            //TODO - think what can we do for module with several content roots?
-            //TODO or getSourceRoots()?
-            final VirtualFile contentRoot = RModuleUtil.getModulesFirstContentRoot(rootModel);
-            assert contentRoot != null; //Can't be null for Rails facet in Ruby module
+	public String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel)
+	{
+		//TODO - think what can we do for module with several content roots?
+		//TODO or getSourceRoots()?
+		final VirtualFile contentRoot = RModuleUtil.getModulesFirstContentRoot(rootModel);
+		assert contentRoot != null; //Can't be null for Rails facet in Ruby module
 
-            return contentRoot.getPath();
-    }
+		return contentRoot.getPath();
+	}
 }

@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,40 +31,48 @@ import org.jetbrains.plugins.ruby.RBundle;
  * @author: oleg
  * @date: Nov 9, 2007
  */
-public class RubyUsageTypeProvider implements UsageTypeProvider{
+public class RubyUsageTypeProvider implements UsageTypeProvider
+{
 
-    public static final Key<RubyUsageType> RUBY_USAGE_TYPE_KEY = new Key<RubyUsageType>("RubyUsageType");
+	public static final Key<RubyUsageType> RUBY_USAGE_TYPE_KEY = new Key<RubyUsageType>("RubyUsageType");
 
-    private static final UsageType TEXT_TYPED = new UsageType(RBundle.message("find.usages.text.matched.group"));
-    private static final UsageType EXPLICITLY_TYPED = new UsageType(RBundle.message("find.usages.explicitly.typed.group"));
-    private static final UsageType DECLARATION = new UsageType(RBundle.message("find.usages.ruby.declarations.group"));
+	private static final UsageType TEXT_TYPED = new UsageType(RBundle.message("find.usages.text.matched.group"));
+	private static final UsageType EXPLICITLY_TYPED = new UsageType(RBundle.message("find.usages.explicitly.typed.group"));
+	private static final UsageType DECLARATION = new UsageType(RBundle.message("find.usages.ruby.declarations.group"));
 
-    @Override
+	@Override
 	@Nullable
-    public UsageType getUsageType(@NotNull final PsiElement element) {
-        final RubyUsageType type = getType(element);
-        if (type == RubyUsageType.DECLARATION){
-            return DECLARATION;
-        }
-        if (type == RubyUsageType.EXPLICITLY_TYPED){
-            return EXPLICITLY_TYPED;
-        }
-        if (type == RubyUsageType.UNCLASSIFIED){
-            return UsageType.UNCLASSIFIED;
-        }
-        if (type == RubyUsageType.TEXT_MATCHED){
-            return TEXT_TYPED;
-        }
-        return null;
-    }
+	public UsageType getUsageType(@NotNull final PsiElement element)
+	{
+		final RubyUsageType type = getType(element);
+		if(type == RubyUsageType.DECLARATION)
+		{
+			return DECLARATION;
+		}
+		if(type == RubyUsageType.EXPLICITLY_TYPED)
+		{
+			return EXPLICITLY_TYPED;
+		}
+		if(type == RubyUsageType.UNCLASSIFIED)
+		{
+			return UsageType.UNCLASSIFIED;
+		}
+		if(type == RubyUsageType.TEXT_MATCHED)
+		{
+			return TEXT_TYPED;
+		}
+		return null;
+	}
 
-    public static void setType(@NotNull final PsiReference reference, final RubyUsageType type){
-        reference.getElement().putUserData(RUBY_USAGE_TYPE_KEY, type);
+	public static void setType(@NotNull final PsiReference reference, final RubyUsageType type)
+	{
+		reference.getElement().putUserData(RUBY_USAGE_TYPE_KEY, type);
 
-    }
+	}
 
-    @Nullable
-    public static RubyUsageType getType(@NotNull final PsiElement element){
-        return element.getUserData(RUBY_USAGE_TYPE_KEY);
-    }
+	@Nullable
+	public static RubyUsageType getType(@NotNull final PsiElement element)
+	{
+		return element.getUserData(RUBY_USAGE_TYPE_KEY);
+	}
 }

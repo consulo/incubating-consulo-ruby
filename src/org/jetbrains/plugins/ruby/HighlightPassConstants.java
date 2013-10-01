@@ -21,14 +21,15 @@ package org.jetbrains.plugins.ruby;
  * User: oleg
  * Date: Jul 5, 2007
  */
-public interface HighlightPassConstants {
+public interface HighlightPassConstants
+{
 
-// Constants for ruby additional highlight pass
+	// Constants for ruby additional highlight pass
 
-    public static final int RUBY_HIGHLIGHTER_RANGE_GROUP = 0x200;
-    public static final int RUBY_LINE_MARKERS_GROUP = 0x400;
+	public static final int RUBY_HIGHLIGHTER_RANGE_GROUP = 0x200;
+	public static final int RUBY_LINE_MARKERS_GROUP = 0x400;
 
-    public static final int CONTROLLER_TO_VIEW_MARKERS_GROUP = 0x800;
-    public static final int VIEW_TO_ACTION_MARKERS_GROUP = 0x1600;
-    public static final int VIEW_TO_CONTROLLER_MARKERS_GROUP = 0x3200;
+	public static final int CONTROLLER_TO_VIEW_MARKERS_GROUP = 0x800;
+	public static final int VIEW_TO_ACTION_MARKERS_GROUP = 0x1600;
+	public static final int VIEW_TO_CONTROLLER_MARKERS_GROUP = 0x3200;
 }

@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
+import javax.swing.SwingUtilities;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.ActionRunner;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,66 +30,90 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Dec 1, 2007
  */
-public class IdeaInternalUtil {
-    private static final Logger LOG = Logger.getInstance(IdeaInternalUtil.class.getName());
+public class IdeaInternalUtil
+{
+	private static final Logger LOG = Logger.getInstance(IdeaInternalUtil.class.getName());
 
-    public static void runInsideWriteAction(@NotNull ActionRunner.InterruptibleRunnable runnable) {
-        try {
-            ActionRunner.runInsideWriteAction(runnable);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
+	public static void runInsideWriteAction(@NotNull ActionRunner.InterruptibleRunnable runnable)
+	{
+		try
+		{
+			ActionRunner.runInsideWriteAction(runnable);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
-    public static void runWriteAction(@NotNull Runnable runnable) {
-        ApplicationManager.getApplication().runWriteAction(runnable);
-    }
+	public static void runWriteAction(@NotNull Runnable runnable)
+	{
+		ApplicationManager.getApplication().runWriteAction(runnable);
+	}
 
-    public static void runInEventDispatchThread(final Runnable runnable, final ModalityState state) {
-        try {
-            if (SwingUtilities.isEventDispatchThread()) {
-                runnable.run();
-            } else {
-                ApplicationManager.getApplication().invokeAndWait(runnable, state);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+	public static void runInEventDispatchThread(final Runnable runnable, final ModalityState state)
+	{
+		try
+		{
+			if(SwingUtilities.isEventDispatchThread())
+			{
+				runnable.run();
+			}
+			else
+			{
+				ApplicationManager.getApplication().invokeAndWait(runnable, state);
+			}
+		}
+		catch(Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
 
 
-    public static void runInEDThreadInWriteAction(@NotNull final ActionRunner.InterruptibleRunnable runnable,
-                                                  final ModalityState state) {
-        runInEventDispatchThread(new Runnable() {
-            @Override
-			public void run() {
-                runInsideWriteAction(runnable);
-            }
-        }, state);
-    }
+	public static void runInEDThreadInWriteAction(@NotNull final ActionRunner.InterruptibleRunnable runnable, final ModalityState state)
+	{
+		runInEventDispatchThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				runInsideWriteAction(runnable);
+			}
+		}, state);
+	}
 
-    public static void runInsideReadAction(@NotNull final ActionRunner.InterruptibleRunnable runnable) {
-        if (ApplicationManager.getApplication().isUnitTestMode()) {
-          ApplicationManager.getApplication().runReadAction(new Runnable() {
-            @Override
-			public void run() {
-              try {
-                runnable.run();
-              }
-              catch (Exception e) {
-                throw new RuntimeException(e);
-              }
-            }
-          });
-        }
-        else {
-          try {
-            ActionRunner.runInsideReadAction(runnable);
-          }
-          catch (Exception e) {
-            LOG.warn(e);
-          }
-        }
-      }
+	public static void runInsideReadAction(@NotNull final ActionRunner.InterruptibleRunnable runnable)
+	{
+		if(ApplicationManager.getApplication().isUnitTestMode())
+		{
+			ApplicationManager.getApplication().runReadAction(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					try
+					{
+						runnable.run();
+					}
+					catch(Exception e)
+					{
+						throw new RuntimeException(e);
+					}
+				}
+			});
+		}
+		else
+		{
+			try
+			{
+				ActionRunner.runInsideReadAction(runnable);
+			}
+			catch(Exception e)
+			{
+				LOG.warn(e);
+			}
+		}
+	}
 }

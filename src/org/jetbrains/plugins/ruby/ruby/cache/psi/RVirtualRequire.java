@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,7 +26,8 @@ import java.util.List;
  * @author: oleg
  * @date: Jun 20, 2007
  */
-public interface RVirtualRequire extends RVirtualStructuralElement {
-    @NotNull
-    public List<String> getNames();
+public interface RVirtualRequire extends RVirtualStructuralElement
+{
+	@NotNull
+	public List<String> getNames();
 }

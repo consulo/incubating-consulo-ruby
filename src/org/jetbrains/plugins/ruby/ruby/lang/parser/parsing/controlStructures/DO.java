@@ -17,37 +17,41 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-class DO implements RubyTokenTypes {
-    private static final TokenSet TS_DO = TokenSet.orSet(TokenSet.orSet(TokenSet.create(kDO_COND), BNF.tCOLONS), BNF.tTERM_TOKENS);
+class DO implements RubyTokenTypes
+{
+	private static final TokenSet TS_DO = TokenSet.orSet(TokenSet.orSet(TokenSet.create(kDO_COND), BNF.tCOLONS), BNF.tTERM_TOKENS);
 
-    /*
-    do		: term
-            | ':'
-            | kDO_COND
-            ;
-    */
-    public static void parse(final RBuilder builder) {
-        // It`s a hack for RHTML
-        if (builder.compare(TokenBNF.tOUTER_ELEMENTS)){
-            return;
-        }
-        if (builder.compareAndEat(TS_DO)) {
-            builder.passEOLs();
-            return;
-        }
+	/*
+	do		: term
+			| ':'
+			| kDO_COND
+			;
+	*/
+	public static void parse(final RBuilder builder)
+	{
+		// It`s a hack for RHTML
+		if(builder.compare(TokenBNF.tOUTER_ELEMENTS))
+		{
+			return;
+		}
+		if(builder.compareAndEat(TS_DO))
+		{
+			builder.passEOLs();
+			return;
+		}
 
-        builder.error(ErrorMsg.expected(TS_DO, builder));
-    }
+		builder.error(ErrorMsg.expected(TS_DO, builder));
+	}
 }

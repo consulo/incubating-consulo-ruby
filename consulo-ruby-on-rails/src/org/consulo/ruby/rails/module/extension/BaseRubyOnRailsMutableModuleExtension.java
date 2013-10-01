@@ -12,9 +12,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  * @author VISTALL
  * @since 25.09.13.
  */
-public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModuleExtension
-		implements RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>,
-					MutableModuleExtension<BaseRubyOnRailsModuleExtension>
+public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModuleExtension implements RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>, MutableModuleExtension<BaseRubyOnRailsModuleExtension>
 {
 	private BaseRubyOnRailsModuleExtension myOriginalExtension;
 

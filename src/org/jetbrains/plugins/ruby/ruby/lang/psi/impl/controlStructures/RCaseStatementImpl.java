@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -26,45 +26,53 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RWhenCase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RCaseStatementImpl extends RPsiElementBase implements RCaseStatement {
-    public RCaseStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RCaseStatementImpl extends RPsiElementBase implements RCaseStatement
+{
+	public RCaseStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRCaseStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRCaseStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RPsiElement getExpression() {
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
-    }
+	@Override
+	public RPsiElement getExpression()
+	{
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 0);
+	}
 
-    @Override
-	public List<RWhenCase> getCases() {
-        return RubyPsiUtil.getChildrenByType(this, RWhenCase.class);
-    }
+	@Override
+	public List<RWhenCase> getCases()
+	{
+		return RubyPsiUtil.getChildrenByType(this, RWhenCase.class);
+	}
 
-    @Override
-	public RElseBlock getElseCase() {
-        return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
-    }
+	@Override
+	public RElseBlock getElseCase()
+	{
+		return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
+	}
 
-    @Override
-	public RPsiElement getLoopBody() {
-        throw new UnsupportedOperationException("getLoopBody is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RCaseStatementImpl");
-    }
+	@Override
+	public RPsiElement getLoopBody()
+	{
+		throw new UnsupportedOperationException("getLoopBody is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RCaseStatementImpl");
+	}
 }

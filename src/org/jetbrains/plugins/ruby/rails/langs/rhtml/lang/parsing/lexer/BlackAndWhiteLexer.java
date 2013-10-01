@@ -33,102 +33,114 @@ import com.intellij.util.text.CharArrayCharSequence;
 /**
  * Separates lexems in two sets
  */
-public abstract class BlackAndWhiteLexer extends Lexer {
-    private Lexer mySeparatorLexer;
-    public IElementType myWhiteToken;
-    public IElementType myWhiteFragmentEnd;
-    public IElementType myBlackToken;
+public abstract class BlackAndWhiteLexer extends Lexer
+{
+	private Lexer mySeparatorLexer;
+	public IElementType myWhiteToken;
+	public IElementType myWhiteFragmentEnd;
+	public IElementType myBlackToken;
 
-    /**
-     * @param separatorLexer Lexer. It's tokens will analyze black and wite separator
-     * @param whiteToken This token is significant for us.
-     * @param whiteFragmentEnd This token tell us that white fragment has just finished.
-     * @param blackToken This will be returned for all other(no significant) tokens
-     */
-    public BlackAndWhiteLexer(final Lexer separatorLexer,
-                              @NotNull final IElementType whiteToken,
-                              @Nullable final IElementType whiteFragmentEnd,
-                              @NotNull final IElementType blackToken) {
+	/**
+	 * @param separatorLexer   Lexer. It's tokens will analyze black and wite separator
+	 * @param whiteToken       This token is significant for us.
+	 * @param whiteFragmentEnd This token tell us that white fragment has just finished.
+	 * @param blackToken       This will be returned for all other(no significant) tokens
+	 */
+	public BlackAndWhiteLexer(final Lexer separatorLexer, @NotNull final IElementType whiteToken, @Nullable final IElementType whiteFragmentEnd, @NotNull final IElementType blackToken)
+	{
 
-        mySeparatorLexer = separatorLexer;
-        myWhiteToken = whiteToken;
-        myWhiteFragmentEnd = whiteFragmentEnd;
-        myBlackToken = blackToken;
-    }
+		mySeparatorLexer = separatorLexer;
+		myWhiteToken = whiteToken;
+		myWhiteFragmentEnd = whiteFragmentEnd;
+		myBlackToken = blackToken;
+	}
 
-    protected abstract boolean isWhiteData(final IElementType tokenType);
+	protected abstract boolean isWhiteData(final IElementType tokenType);
 
-    public void start(final char[] buffer) {
-        start(buffer, 0, buffer.length, 0);
-    }
+	public void start(final char[] buffer)
+	{
+		start(buffer, 0, buffer.length, 0);
+	}
 
-    public void start(final char[] buffer, final int startOffset, final int endOffset) {
-        start(buffer, startOffset, endOffset, 0);
-    }
+	public void start(final char[] buffer, final int startOffset, final int endOffset)
+	{
+		start(buffer, startOffset, endOffset, 0);
+	}
 
-    public void start(final char[] buffer,
-                      final int startOffset, final int endOffset, final int initialState) {
-        start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
-    }
+	public void start(final char[] buffer, final int startOffset, final int endOffset, final int initialState)
+	{
+		start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
+	}
 
-    @Override
-	public void start(final CharSequence buffer,
-                      final int startOffset, final int endOffset, final int initialState) {
-        mySeparatorLexer.start(buffer, startOffset, endOffset, initialState);
-    }
+	@Override
+	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState)
+	{
+		mySeparatorLexer.start(buffer, startOffset, endOffset, initialState);
+	}
 
-    @Override
-	public CharSequence getBufferSequence() {
-        return mySeparatorLexer.getBufferSequence();
-    }
+	@Override
+	public CharSequence getBufferSequence()
+	{
+		return mySeparatorLexer.getBufferSequence();
+	}
 
-    @Override
-	public int getState() {
-        return mySeparatorLexer.getState();
-    }
+	@Override
+	public int getState()
+	{
+		return mySeparatorLexer.getState();
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public IElementType getTokenType() {
-        IElementType tokenType = mySeparatorLexer.getTokenType();
-        if (tokenType == null) {
-            return null;
-        }
-        return isWhiteData(tokenType) ? myWhiteToken : myBlackToken;
-    }
+	public IElementType getTokenType()
+	{
+		IElementType tokenType = mySeparatorLexer.getTokenType();
+		if(tokenType == null)
+		{
+			return null;
+		}
+		return isWhiteData(tokenType) ? myWhiteToken : myBlackToken;
+	}
 
-    public boolean isOnWhiteFragmentEnd() {
-        return mySeparatorLexer.getTokenType() == myWhiteFragmentEnd;
-    }
+	public boolean isOnWhiteFragmentEnd()
+	{
+		return mySeparatorLexer.getTokenType() == myWhiteFragmentEnd;
+	}
 
-    @Override
-	public int getTokenStart() {
-        return mySeparatorLexer.getTokenStart();
-    }
+	@Override
+	public int getTokenStart()
+	{
+		return mySeparatorLexer.getTokenStart();
+	}
 
-    @Override
-	public int getTokenEnd() {
-        return mySeparatorLexer.getTokenEnd();
-    }
+	@Override
+	public int getTokenEnd()
+	{
+		return mySeparatorLexer.getTokenEnd();
+	}
 
-    @Override
-	public void advance() {
-        mySeparatorLexer.advance();
-    }
+	@Override
+	public void advance()
+	{
+		mySeparatorLexer.advance();
+	}
 
-    @Override
-	public LexerPosition getCurrentPosition() {
-        return mySeparatorLexer.getCurrentPosition();
-    }
+	@Override
+	public LexerPosition getCurrentPosition()
+	{
+		return mySeparatorLexer.getCurrentPosition();
+	}
 
-    @Override
-	public void restore(final LexerPosition position) {
-        mySeparatorLexer.restore(position);
-    }
+	@Override
+	public void restore(final LexerPosition position)
+	{
+		mySeparatorLexer.restore(position);
+	}
 
 
-    @Override
-	public int getBufferEnd() {
-        return mySeparatorLexer.getBufferEnd();
-    }
+	@Override
+	public int getBufferEnd()
+	{
+		return mySeparatorLexer.getBufferEnd();
+	}
 }

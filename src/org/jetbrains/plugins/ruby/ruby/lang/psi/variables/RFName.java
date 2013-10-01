@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public interface RFName extends RName, RNamedElement {
+public interface RFName extends RName, RNamedElement
+{
 }

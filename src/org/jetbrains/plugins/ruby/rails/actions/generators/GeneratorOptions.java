@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashSet;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,42 +26,53 @@ import java.util.HashSet;
  * @author: Roman Chernyatchik
  * @date: 25.05.2007
  */
-public class GeneratorOptions {
-    private final HashSet<Option> myOptions = new HashSet<Option>();
+public class GeneratorOptions
+{
+	private final HashSet<Option> myOptions = new HashSet<Option>();
 
-    private GeneratorOptions() {
-    }
+	private GeneratorOptions()
+	{
+	}
 
-    public void setOption(@NotNull final Option option, boolean value) {
-        if (value) {
-            myOptions.add(option);
-        } else {
-            myOptions.remove(option);
-        }
-    }
+	public void setOption(@NotNull final Option option, boolean value)
+	{
+		if(value)
+		{
+			myOptions.add(option);
+		}
+		else
+		{
+			myOptions.remove(option);
+		}
+	}
 
-    public boolean containsValue(final Option option) {
-        return myOptions.contains(option);
-    }
+	public boolean containsValue(final Option option)
+	{
+		return myOptions.contains(option);
+	}
 
-    public HashSet<Option> getOptions() {
-        return myOptions;
-    }
+	public HashSet<Option> getOptions()
+	{
+		return myOptions;
+	}
 
-    public void clear() {
-        myOptions.clear();
-    }
+	public void clear()
+	{
+		myOptions.clear();
+	}
 
-    public static GeneratorOptions createEmpty() {
-        return new GeneratorOptions();
-    }
+	public static GeneratorOptions createEmpty()
+	{
+		return new GeneratorOptions();
+	}
 
-    public enum Option {
-        PRETEND,
-        FORCE,
-        SKIP,
-        BACK_TRACE,
-        SVN,
-        SVN_SHOW_CONFIRMATION
-    }
+	public enum Option
+	{
+		PRETEND,
+		FORCE,
+		SKIP,
+		BACK_TRACE,
+		SVN,
+		SVN_SHOW_CONFIRMATION
+	}
 }

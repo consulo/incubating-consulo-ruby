@@ -25,7 +25,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgum
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface MethodParameterAccess extends WriteAccess {
-    @NotNull
-    RArgument getArgument();
+public interface MethodParameterAccess extends WriteAccess
+{
+	@NotNull
+	RArgument getArgument();
 }

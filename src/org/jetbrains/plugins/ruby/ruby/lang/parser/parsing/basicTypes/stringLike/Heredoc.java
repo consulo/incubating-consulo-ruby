@@ -17,36 +17,36 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike;
 
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 15.06.2006
  */
-public class Heredoc implements RubyTokenTypes {
-    private static final TokenSet ENDS = TokenSet.orSet(
-            BNF.tHEREDOC_ENDS,
-            TokenSet.create(tWHITE_SPACE, tEOL)
-    );
+public class Heredoc implements RubyTokenTypes
+{
+	private static final TokenSet ENDS = TokenSet.orSet(BNF.tHEREDOC_ENDS, TokenSet.create(tWHITE_SPACE, tEOL));
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if (builder.compare(tHEREDOC_ID)) {
-            return builder.parseSingleToken(tHEREDOC_ID, RubyElementTypes.HEREDOC_ID);
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(builder.compare(tHEREDOC_ID))
+		{
+			return builder.parseSingleToken(tHEREDOC_ID, RubyElementTypes.HEREDOC_ID);
+		}
 
-        final IElementType type = StringParsingUtil.parse(builder, ENDS, BNF.tHEREDOC_TOKENS, false);
-        builder.compareAndEat(tEOL);
-        builder.compareAndEat(tWHITE_SPACE);
-        builder.match(BNF.tHEREDOC_ENDS);
-        return type;
-    }
+		final IElementType type = StringParsingUtil.parse(builder, ENDS, BNF.tHEREDOC_TOKENS, false);
+		builder.compareAndEat(tEOL);
+		builder.compareAndEat(tWHITE_SPACE);
+		builder.match(BNF.tHEREDOC_ENDS);
+		return type;
+	}
 
 }

@@ -16,48 +16,55 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.openapi.project.Project;
+import javax.swing.Icon;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.openapi.project.Project;
 
-import javax.swing.*;
+public class RubyRunConfigurationFactory extends ConfigurationFactory
+{
 
-public class RubyRunConfigurationFactory extends ConfigurationFactory {
+	public RubyRunConfigurationFactory(final ConfigurationType type)
+	{
+		super(type);
+	}
 
-    public RubyRunConfigurationFactory(final ConfigurationType type) {
-        super(type);
-    }
+	@Override
+	public RunConfiguration createTemplateConfiguration(final Project project)
+	{
+		final RubyRunConfiguration conf = new RubyRunConfiguration(project, this, "");
+		initDefaultParams(conf);
 
-    @Override
-	public RunConfiguration createTemplateConfiguration(final Project project) {
-        final RubyRunConfiguration conf = new RubyRunConfiguration(project, this, "");
-        initDefaultParams(conf);
+		return conf;
+	}
 
-        return conf;
-    }
+	@Override
+	public String getName()
+	{
+		return RBundle.message("run.configuration.script.name");
+	}
 
-    @Override
-	public String getName() {
-         return RBundle.message("run.configuration.script.name");
-    }
+	@Override
+	public Icon getIcon()
+	{
+		return RubyIcons.RUBY_RUN_CONFIGURATION_SCRIPT;
+	}
 
-    @Override
-	public Icon getIcon() {
-        return RubyIcons.RUBY_RUN_CONFIGURATION_SCRIPT;
-    }
-
-    /**
-     * Sets configuration default params
-     * @param conf configuration
-     */
-    protected void initDefaultParams(final RubyRunConfiguration conf) {
-        final String args = RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS);
-        conf.setRubyArgs(args);
-    }
+	/**
+	 * Sets configuration default params
+	 *
+	 * @param conf configuration
+	 */
+	protected void initDefaultParams(final RubyRunConfiguration conf)
+	{
+		final String args = RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS);
+		conf.setRubyArgs(args);
+	}
 }
 

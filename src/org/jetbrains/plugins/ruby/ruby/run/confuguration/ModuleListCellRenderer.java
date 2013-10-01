@@ -27,20 +27,25 @@ import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: 04.08.2007
-*/
-public class ModuleListCellRenderer extends DefaultListCellRenderer {
-    @Override
-	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        if (value != null) {
-            setText(((Module) value).getName());
-            setIcon(AllIcons.Nodes.Module);
-        } else {
-            setText(RBundle.message("run.configuration.messages.none"));
-        }
-        return this;
-    }
+ *
+ * @author: Roman Chernyatchik
+ * @date: 04.08.2007
+ */
+public class ModuleListCellRenderer extends DefaultListCellRenderer
+{
+	@Override
+	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus)
+	{
+		super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+		if(value != null)
+		{
+			setText(((Module) value).getName());
+			setIcon(AllIcons.Nodes.Module);
+		}
+		else
+		{
+			setText(RBundle.message("run.configuration.messages.none"));
+		}
+		return this;
+	}
 }

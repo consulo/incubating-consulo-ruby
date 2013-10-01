@@ -16,11 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -35,67 +33,78 @@ import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 12.10.2006
  */
-public class RailsApplicationFolderNode extends ControllerSubFolderNode {
-    private static final String APPLICATION_NAME = RBundle.message("rails.project.module.view.nodes.appication.presentable");
+public class RailsApplicationFolderNode extends ControllerSubFolderNode
+{
+	private static final String APPLICATION_NAME = RBundle.message("rails.project.module.view.nodes.appication.presentable");
 
-    public RailsApplicationFolderNode(final Module module, final VirtualFile appControllerRoot) {
-        super(module, appControllerRoot, null, initPresentationData());
-        init(generateNodeId(getVirtualFileUrl()), getPresentation());
-    }
+	public RailsApplicationFolderNode(final Module module, final VirtualFile appControllerRoot)
+	{
+		super(module, appControllerRoot, null, initPresentationData());
+		init(generateNodeId(getVirtualFileUrl()), getPresentation());
+	}
 
-    @NotNull
-    public static NodeId generateNodeId(final String appControllersRootUrl) {
-        return NodeIdUtil.createForDirectory(appControllersRootUrl, true);
-    }
-    
-    @Override
-	public void accept(final SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitControllerNode();
-            return;
-        }
-        super.accept(visitor);
-    }
-
-    @Override
-	public SimpleNode[] getChildren() {
-        List<RailsNode> children = new ArrayList<RailsNode>();
-        final Module module = getModule();
-
-        final VirtualFile appControllerFile = ControllersConventions.getApplicationControllerFile(module);
-        if (appControllerFile != null) {
-            final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
-            final RubyFilesCache cache = manager.getFilesCache();
-            final RFileInfo appContrInfo = cache.getUp2DateFileInfo(appControllerFile);
-            if (appContrInfo != null) {
-                final List<RVirtualClass> allClasses =
-                        RContainerUtil.getTopLevelClasses(appContrInfo.getRVirtualFile());
-                for (RVirtualClass rClass : allClasses) {
-                    children.add(createClassNode(rClass, appContrInfo));
-                }
-            }
-        }
-        return children.toArray(new RailsNode[children.size()]);
-    }
-
-    private static PresentationData initPresentationData() {
-         return new PresentationData(APPLICATION_NAME, APPLICATION_NAME,
-                                     RailsIcons.RAILS_APPlICON_NODES, RailsIcons.RAILS_APPlICON_NODES,
-                                     null);
-    }
-
-    @Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-    }
+	public static NodeId generateNodeId(final String appControllersRootUrl)
+	{
+		return NodeIdUtil.createForDirectory(appControllersRootUrl, true);
+	}
+
+	@Override
+	public void accept(final SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitControllerNode();
+			return;
+		}
+		super.accept(visitor);
+	}
+
+	@Override
+	public SimpleNode[] getChildren()
+	{
+		List<RailsNode> children = new ArrayList<RailsNode>();
+		final Module module = getModule();
+
+		final VirtualFile appControllerFile = ControllersConventions.getApplicationControllerFile(module);
+		if(appControllerFile != null)
+		{
+			final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
+			final RubyFilesCache cache = manager.getFilesCache();
+			final RFileInfo appContrInfo = cache.getUp2DateFileInfo(appControllerFile);
+			if(appContrInfo != null)
+			{
+				final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(appContrInfo.getRVirtualFile());
+				for(RVirtualClass rClass : allClasses)
+				{
+					children.add(createClassNode(rClass, appContrInfo));
+				}
+			}
+		}
+		return children.toArray(new RailsNode[children.size()]);
+	}
+
+	private static PresentationData initPresentationData()
+	{
+		return new PresentationData(APPLICATION_NAME, APPLICATION_NAME, RailsIcons.RAILS_APPlICON_NODES, RailsIcons.RAILS_APPlICON_NODES, null);
+	}
+
+	@Override
+	@NotNull
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+	}
 }

@@ -31,56 +31,72 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
  * @author: oleg
  * @date: Apr 13, 2008
  */
-public class RDuckTypeImpl extends RTypeBase implements RDuckType{
-    private DuckType myDuckType;
-    private boolean isTyped;
+public class RDuckTypeImpl extends RTypeBase implements RDuckType
+{
+	private DuckType myDuckType;
+	private boolean isTyped;
 
-    public RDuckTypeImpl(final DuckType type) {
-        this(type, false);
-    }
+	public RDuckTypeImpl(final DuckType type)
+	{
+		this(type, false);
+	}
 
-    public RDuckTypeImpl(final DuckType type, final boolean typed) {
-        myDuckType = type;
-        isTyped = typed;
-    }
+	public RDuckTypeImpl(final DuckType type, final boolean typed)
+	{
+		myDuckType = type;
+		isTyped = typed;
+	}
 
-    @Override
-	public boolean isTyped() {
-        return isTyped;
-    }
+	@Override
+	public boolean isTyped()
+	{
+		return isTyped;
+	}
 
-    public DuckType getDuckType() {
-        return myDuckType;
-    }
+	public DuckType getDuckType()
+	{
+		return myDuckType;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<Message> getMessages() {
-        return myDuckType.getMessages();
-    }
+	public Collection<Message> getMessages()
+	{
+		return myDuckType.getMessages();
+	}
 
-    @Override
-	public Collection<Message> getMessagesForName(@Nullable final String name) {
-        return myDuckType.getMessagesForName(name);
-    }
+	@Override
+	public Collection<Message> getMessagesForName(@Nullable final String name)
+	{
+		return myDuckType.getMessagesForName(name);
+	}
 
-    @Override
-	public RType addMessage(@NotNull final Message message) {
-        ((DuckTypeImpl) myDuckType).addMessage(message);
-        return this;
-    }
+	@Override
+	public RType addMessage(@NotNull final Message message)
+	{
+		((DuckTypeImpl) myDuckType).addMessage(message);
+		return this;
+	}
 
-    @Override
-    public boolean equals(final Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public boolean equals(final Object o)
+	{
+		if(this == o)
+		{
+			return true;
+		}
+		if(o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
 
-      final RDuckTypeImpl that = (RDuckTypeImpl)o;
-      return myDuckType.getMessages().equals(that.myDuckType.getMessages());
-    }
+		final RDuckTypeImpl that = (RDuckTypeImpl) o;
+		return myDuckType.getMessages().equals(that.myDuckType.getMessages());
+	}
 
-    @Override
-    public int hashCode() {
-      return myDuckType.getMessages().hashCode();
-    }
+	@Override
+	public int hashCode()
+	{
+		return myDuckType.getMessages().hashCode();
+	}
 }

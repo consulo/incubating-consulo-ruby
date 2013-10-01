@@ -16,57 +16,69 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.*;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBlock;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.REnsureBlock;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RRescueBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 13.07.2006
  */
-public class RBodyStatementImpl extends RPsiElementBase implements RBodyStatement {
-    public RBodyStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBodyStatementImpl extends RPsiElementBase implements RBodyStatement
+{
+	public RBodyStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRBodyStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRBodyStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
 
-    @Override
+	@Override
 	@Nullable
-    public RCompoundStatement getBlock() {
-        return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
-    }
+	public RCompoundStatement getBlock()
+	{
+		return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
+	}
 
-    @Override
-	public List<RRescueBlock> getRescueBlocks() {
-        return RubyPsiUtil.getChildrenByType(this, RRescueBlock.class);
-    }
+	@Override
+	public List<RRescueBlock> getRescueBlocks()
+	{
+		return RubyPsiUtil.getChildrenByType(this, RRescueBlock.class);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public REnsureBlock getEnsureBlock() {
-        return RubyPsiUtil.getChildByType(this, REnsureBlock.class, 0);
-    }
+	public REnsureBlock getEnsureBlock()
+	{
+		return RubyPsiUtil.getChildByType(this, REnsureBlock.class, 0);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RElseBlock getElseBlock() {
-        return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
-    }
+	public RElseBlock getElseBlock()
+	{
+		return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
+	}
 }

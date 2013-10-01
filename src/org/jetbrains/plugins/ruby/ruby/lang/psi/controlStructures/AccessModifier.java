@@ -23,9 +23,10 @@ import java.io.Serializable;
  * User: oleg
  * Date: 27.07.2006
  */
-public enum AccessModifier implements Serializable {
-    PRIVATE,
-    PUBLIC,
-    PROTECTED,
-    UNKNOWN
+public enum AccessModifier implements Serializable
+{
+	PRIVATE,
+	PUBLIC,
+	PROTECTED,
+	UNKNOWN
 }

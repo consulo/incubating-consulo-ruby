@@ -41,135 +41,154 @@ import com.intellij.openapi.projectRoots.Sdk;
 /**
  * Some UI hacks for JRuby Facet
  */
-public class NiiChAVOUtil {
-    private static final Logger LOG = Logger.getInstance(NiiChAVOUtil.class.getName());
+public class NiiChAVOUtil
+{
+	private static final Logger LOG = Logger.getInstance(NiiChAVOUtil.class.getName());
 
-    //For JRuby facet
-    @NonNls
-    private static final String JRUBY_FACET_SDK_SETTING = "JRUBY_FACET_SDK_SETTING";
-    @NonNls
-    private static final String JRUBY_FACET_SDK_CHOOSER_SETTING = "JRUBY_FACET_SDK_CHOOSER_SETTING";
+	//For JRuby facet
+	@NonNls
+	private static final String JRUBY_FACET_SDK_SETTING = "JRUBY_FACET_SDK_SETTING";
+	@NonNls
+	private static final String JRUBY_FACET_SDK_CHOOSER_SETTING = "JRUBY_FACET_SDK_CHOOSER_SETTING";
 
-    //Only for Rails Facet(not JRails)
-    @NonNls
-    private static final String RAILS_FACET_SELECTED = "RAILS_FACET_SELECTED";
-    @NonNls
-    private static final String RAILS_FACET_VALIDATORS_MANAGER = "RAILS_FACET_VALIDATORS_MANAGER";
+	//Only for Rails Facet(not JRails)
+	@NonNls
+	private static final String RAILS_FACET_SELECTED = "RAILS_FACET_SELECTED";
+	@NonNls
+	private static final String RAILS_FACET_VALIDATORS_MANAGER = "RAILS_FACET_VALIDATORS_MANAGER";
 
-    @NonNls
-    private static final String SWING_ENABLED_PROPERTY_NAME = "enabled";
+	@NonNls
+	private static final String SWING_ENABLED_PROPERTY_NAME = "enabled";
 
-    public static void addOnComponentFirstTimeEnabledHandler(@NotNull final JComponent component,
-                                                             @NotNull final Runnable closure) {
-        component.addPropertyChangeListener(new PropertyChangeListener() {
-            private boolean firstInvocationFlag = true;
+	public static void addOnComponentFirstTimeEnabledHandler(@NotNull final JComponent component, @NotNull final Runnable closure)
+	{
+		component.addPropertyChangeListener(new PropertyChangeListener()
+		{
+			private boolean firstInvocationFlag = true;
 
-            @Override
-			public void propertyChange(final PropertyChangeEvent evt) {
-                if (firstInvocationFlag
-                        && NiiChAVOUtil.SWING_ENABLED_PROPERTY_NAME.equals(evt.getPropertyName())
-                        && (Boolean)evt.getNewValue()) {
+			@Override
+			public void propertyChange(final PropertyChangeEvent evt)
+			{
+				if(firstInvocationFlag && NiiChAVOUtil.SWING_ENABLED_PROPERTY_NAME.equals(evt.getPropertyName()) && (Boolean) evt.getNewValue())
+				{
 
-                    // Closure
-                    closure.run();
+					// Closure
+					closure.run();
 
-                    firstInvocationFlag = false;
-                }
-            }
-        });
-    }
+					firstInvocationFlag = false;
+				}
+			}
+		});
+	}
 
-    @Nullable
-    public static JComboBox getJRubyFacetSdkChooserMagic(@NotNull final JComponent target) {
-        return getPropertyMagic(target, JRUBY_FACET_SDK_CHOOSER_SETTING);
-    }
+	@Nullable
+	public static JComboBox getJRubyFacetSdkChooserMagic(@NotNull final JComponent target)
+	{
+		return getPropertyMagic(target, JRUBY_FACET_SDK_CHOOSER_SETTING);
+	}
 
-    @Nullable
-    public static Sdk getJRubyFacetSdkMagic(@NotNull final JComponent target) {
-        return getPropertyMagic(target, JRUBY_FACET_SDK_SETTING);
-    }
+	@Nullable
+	public static Sdk getJRubyFacetSdkMagic(@NotNull final JComponent target)
+	{
+		return getPropertyMagic(target, JRUBY_FACET_SDK_SETTING);
+	}
 
-    public static void putJRubyFacetSdkMagic(@NotNull final JComponent target,
-                                             @Nullable final Sdk sdk) {
-        findJRubyFacetUIMagicStorage(target).putClientProperty(JRUBY_FACET_SDK_SETTING, sdk);
-    }
-    public static void putJRubyFacetUIMagic(@NotNull final JComboBox sdkChooser) {
-        findJRubyFacetUIMagicStorage(sdkChooser).putClientProperty(JRUBY_FACET_SDK_CHOOSER_SETTING, sdkChooser);
-    }
+	public static void putJRubyFacetSdkMagic(@NotNull final JComponent target, @Nullable final Sdk sdk)
+	{
+		findJRubyFacetUIMagicStorage(target).putClientProperty(JRUBY_FACET_SDK_SETTING, sdk);
+	}
 
-
-    /**
-     * For Rails Facet only(not for JRails one)
-     * @param target Component
-     * @return Validator
-     */
-    @Nullable
-    public static FacetValidatorsManager getRailsFacetValidatorsManagerMagic(@NotNull final JComponent target) {
-        return getPropertyMagic(target, RAILS_FACET_VALIDATORS_MANAGER);
-    }
-
-    /**
-     * For Rails Facet only(not for JRails one)
-     * @param target Component
-     * @return true, if is facet enabled
-     */
-    @Nullable
-    public static Boolean isRailsFacetEnabledMagic(@NotNull final JComponent target) {
-        final Boolean value =  getPropertyMagic(target, RAILS_FACET_SELECTED);
-        return value == null ? false : value;
-    }
+	public static void putJRubyFacetUIMagic(@NotNull final JComboBox sdkChooser)
+	{
+		findJRubyFacetUIMagicStorage(sdkChooser).putClientProperty(JRUBY_FACET_SDK_CHOOSER_SETTING, sdkChooser);
+	}
 
 
+	/**
+	 * For Rails Facet only(not for JRails one)
+	 *
+	 * @param target Component
+	 * @return Validator
+	 */
+	@Nullable
+	public static FacetValidatorsManager getRailsFacetValidatorsManagerMagic(@NotNull final JComponent target)
+	{
+		return getPropertyMagic(target, RAILS_FACET_VALIDATORS_MANAGER);
+	}
 
-    /**
-     * Saves FacetValidators to revalidate component after changinh SDK for [Ruby] module wizard.
-     * Only for Rails Facet, not for JRails!
-     * @param target Component
-     * @param validatorsManager Facets validator
-     */
-    public static void putRailsFacetValidatorsManagerMagic(@NotNull final JComponent target,
-                                                    FacetValidatorsManager validatorsManager) {
-        findJRubyFacetUIMagicStorage(target).putClientProperty(RAILS_FACET_VALIDATORS_MANAGER, validatorsManager);
-    }
+	/**
+	 * For Rails Facet only(not for JRails one)
+	 *
+	 * @param target Component
+	 * @return true, if is facet enabled
+	 */
+	@Nullable
+	public static Boolean isRailsFacetEnabledMagic(@NotNull final JComponent target)
+	{
+		final Boolean value = getPropertyMagic(target, RAILS_FACET_SELECTED);
+		return value == null ? false : value;
+	}
 
-    /**
-     * Saves Rails(not JRails) facet isEnabled state.
-     * Is Used for [Ruby] module wizard to disable other pure Ruby steps.
-     * @param target Component
-     * @param enabled is facet enabled
-     */
-    public static void putRailsFacetEnabledMagic(@NotNull final JComponent target,
-                                                  boolean enabled) {
-        findJRubyFacetUIMagicStorage(target).putClientProperty(RAILS_FACET_SELECTED, enabled);
-    }
 
-    private static JComponent findJRubyFacetUIMagicStorage(@NotNull final Container target) {
-        JDialog dialog = (JDialog)findJRubyFacetUIMagicStorageContainer(target);
+	/**
+	 * Saves FacetValidators to revalidate component after changinh SDK for [Ruby] module wizard.
+	 * Only for Rails Facet, not for JRails!
+	 *
+	 * @param target            Component
+	 * @param validatorsManager Facets validator
+	 */
+	public static void putRailsFacetValidatorsManagerMagic(@NotNull final JComponent target, FacetValidatorsManager validatorsManager)
+	{
+		findJRubyFacetUIMagicStorage(target).putClientProperty(RAILS_FACET_VALIDATORS_MANAGER, validatorsManager);
+	}
 
-        LOG.assertTrue(dialog != null, "Unable to find Dialog Root!");
-        return dialog.getRootPane();
-    }
+	/**
+	 * Saves Rails(not JRails) facet isEnabled state.
+	 * Is Used for [Ruby] module wizard to disable other pure Ruby steps.
+	 *
+	 * @param target  Component
+	 * @param enabled is facet enabled
+	 */
+	public static void putRailsFacetEnabledMagic(@NotNull final JComponent target, boolean enabled)
+	{
+		findJRubyFacetUIMagicStorage(target).putClientProperty(RAILS_FACET_SELECTED, enabled);
+	}
 
-    private static Container findJRubyFacetUIMagicStorageContainer(@NotNull final Container target) {
-        Container current = target;
-        while (current != null && !(current instanceof JDialog)) {
-            current = current.getParent();
-        }
-        return current;
-    }
+	private static JComponent findJRubyFacetUIMagicStorage(@NotNull final Container target)
+	{
+		JDialog dialog = (JDialog) findJRubyFacetUIMagicStorageContainer(target);
 
-    @Nullable
-    private static <T> T getPropertyMagic(@NotNull final JComponent target, final String propertyName) {
-        final Object value = findJRubyFacetUIMagicStorage(target).getClientProperty(propertyName);
-        if (value != null) {
-            try {
-                //noinspection unchecked
-                return (T)value;
-            } catch (ClassCastException e) {
-                // shouldn't happen!
-                LOG.error(e);
-            }
-        }
-        return null;
-    }
+		LOG.assertTrue(dialog != null, "Unable to find Dialog Root!");
+		return dialog.getRootPane();
+	}
+
+	private static Container findJRubyFacetUIMagicStorageContainer(@NotNull final Container target)
+	{
+		Container current = target;
+		while(current != null && !(current instanceof JDialog))
+		{
+			current = current.getParent();
+		}
+		return current;
+	}
+
+	@Nullable
+	private static <T> T getPropertyMagic(@NotNull final JComponent target, final String propertyName)
+	{
+		final Object value = findJRubyFacetUIMagicStorage(target).getClientProperty(propertyName);
+		if(value != null)
+		{
+			try
+			{
+				//noinspection unchecked
+				return (T) value;
+			}
+			catch(ClassCastException e)
+			{
+				// shouldn't happen!
+				LOG.error(e);
+			}
+		}
+		return null;
+	}
 }

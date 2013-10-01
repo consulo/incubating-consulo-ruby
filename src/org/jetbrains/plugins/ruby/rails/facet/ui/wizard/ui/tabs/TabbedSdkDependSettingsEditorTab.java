@@ -24,10 +24,12 @@ import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.TabbedSettingsEditorT
  * @author: Roman Chernyatchik
  * @date: Apr 9, 2008
  */
-public abstract class TabbedSdkDependSettingsEditorTab extends TabbedSettingsEditorTab {
-    /**
-     * Resets SDK-depending changes after SDK was reseted.
-     */
-    public void resetSdkSettings() {
-    }
+public abstract class TabbedSdkDependSettingsEditorTab extends TabbedSettingsEditorTab
+{
+	/**
+	 * Resets SDK-depending changes after SDK was reseted.
+	 */
+	public void resetSdkSettings()
+	{
+	}
 }

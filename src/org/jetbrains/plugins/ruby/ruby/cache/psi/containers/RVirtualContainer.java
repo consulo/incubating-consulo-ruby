@@ -33,55 +33,56 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualContainer extends RVirtualStructuralElement {
-    /**
-     * @return this container access modifier
-     */
-    @NotNull
-    public AccessModifier getAccessModifier();
+public interface RVirtualContainer extends RVirtualStructuralElement
+{
+	/**
+	 * @return this container access modifier
+	 */
+	@NotNull
+	public AccessModifier getAccessModifier();
 
-    /**
-     * @return default access modifier for subclasses
-     */
-    @NotNull
-    AccessModifier getDefaultChildAccessModifier();
+	/**
+	 * @return default access modifier for subclasses
+	 */
+	@NotNull
+	AccessModifier getDefaultChildAccessModifier();
 
-    @Nullable
-    public RFileInfo getContainingFileInfo();
+	@Nullable
+	public RFileInfo getContainingFileInfo();
 
-    @NotNull
-    public String getContainingFileUrl();
+	@NotNull
+	public String getContainingFileUrl();
 
-    @Nullable
-    public VirtualFile getVirtualFile();
+	@Nullable
+	public VirtualFile getVirtualFile();
 
-    @Nullable
-    public ItemPresentation getPresentation();
+	@Nullable
+	public ItemPresentation getPresentation();
 
-    @NotNull
-    public List<RVirtualStructuralElement> getVirtualStructureElements();
+	@NotNull
+	public List<RVirtualStructuralElement> getVirtualStructureElements();
 
-    public int getIndexOf(@NotNull RVirtualStructuralElement element);
+	public int getIndexOf(@NotNull RVirtualStructuralElement element);
 
-    /**
-     * @return only name without path
-     */
-    @NotNull
-    public String getName();
+	/**
+	 * @return only name without path
+	 */
+	@NotNull
+	public String getName();
 
-    /**
-     * @return List of paths
-     */
-    @NotNull
-    public List<String> getFullPath();
+	/**
+	 * @return List of paths
+	 */
+	@NotNull
+	public List<String> getFullPath();
 
-    /**
-     * @return full name,i.e. name with path
-     */
-    @NotNull
-    public String getFullName();
+	/**
+	 * @return full name,i.e. name with path
+	 */
+	@NotNull
+	public String getFullName();
 
-    public boolean isGlobal();
+	public boolean isGlobal();
 
-    public Project getProject();
+	public Project getProject();
 }

@@ -16,30 +16,34 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElement;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.04.2007
  */
-public class RHTMLRubyBuilder extends RBuilderImpl {
-    public RHTMLRubyBuilder(@NotNull final PsiBuilder psiBuilder) {
-        super(psiBuilder);
-    }
+public class RHTMLRubyBuilder extends RBuilderImpl
+{
+	public RHTMLRubyBuilder(@NotNull final PsiBuilder psiBuilder)
+	{
+		super(psiBuilder);
+	}
 
-    @Override
-	public void error(@NotNull String error) {
-        super.error("[RUBY] "+ error);
-    }
+	@Override
+	public void error(@NotNull String error)
+	{
+		super.error("[RUBY] " + error);
+	}
 
-    @Override
-	public boolean isAcceptibleErrorToken(IElementType myToken) {
-        return myToken instanceof RubyElementType || myToken instanceof IRHTMLElement;
-    }
+	@Override
+	public boolean isAcceptibleErrorToken(IElementType myToken)
+	{
+		return myToken instanceof RubyElementType || myToken instanceof IRHTMLElement;
+	}
 }

@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom.impl;
 
-import com.intellij.pom.PomModel;
-import com.intellij.pom.PomModelAspect;
-import com.intellij.pom.event.PomChangeSet;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeSet;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
+import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeSet;
+import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
+import com.intellij.pom.PomModel;
+import com.intellij.pom.PomModelAspect;
+import com.intellij.pom.event.PomChangeSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,60 +35,74 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 03.10.2006
  */
-public class RubyChangeSetImpl implements RubyChangeSet {
-    private final PomModel myModel;
-    private List<RubyChange> myChanges = new ArrayList<RubyChange>();
-    private final RFile mySubjectToChange;
+public class RubyChangeSetImpl implements RubyChangeSet
+{
+	private final PomModel myModel;
+	private List<RubyChange> myChanges = new ArrayList<RubyChange>();
+	private final RFile mySubjectToChange;
 
 
-    public RubyChangeSetImpl(PomModel model, RFile fileChanged) {
-      myModel = model;
-      mySubjectToChange = fileChanged;
-    }
+	public RubyChangeSetImpl(PomModel model, RFile fileChanged)
+	{
+		myModel = model;
+		mySubjectToChange = fileChanged;
+	}
 
-    @Override
-	public List<RubyChange> getChanges() {
-        return Collections.unmodifiableList(myChanges);
-    }
+	@Override
+	public List<RubyChange> getChanges()
+	{
+		return Collections.unmodifiableList(myChanges);
+	}
 
-    @Override
-	public void add(RubyChange rubyChange) {
-        myChanges.add(rubyChange);
-    }
+	@Override
+	public void add(RubyChange rubyChange)
+	{
+		myChanges.add(rubyChange);
+	}
 
-    @Override
-	public void clear() {
-        myChanges.clear();
-    }
+	@Override
+	public void clear()
+	{
+		myChanges.clear();
+	}
 
-    @Override
-	public RFile getChangedFile() {
-        return mySubjectToChange;
-    }
+	@Override
+	public RFile getChangedFile()
+	{
+		return mySubjectToChange;
+	}
 
-    @Override
-	public PomModelAspect getAspect() {
-        return myModel.getModelAspect(RubyPomAspect.class);
-    }
+	@Override
+	public PomModelAspect getAspect()
+	{
+		return myModel.getModelAspect(RubyPomAspect.class);
+	}
 
-    @Override
-	public void merge(PomChangeSet blocked) {
-        final List<RubyChange> changes = ((RubyChangeSetImpl)blocked).myChanges;
-        for (RubyChange rubyChange : changes) {
-          add(rubyChange);
-        }
-    }
+	@Override
+	public void merge(PomChangeSet blocked)
+	{
+		final List<RubyChange> changes = ((RubyChangeSetImpl) blocked).myChanges;
+		for(RubyChange rubyChange : changes)
+		{
+			add(rubyChange);
+		}
+	}
 
-    public String toString() {
-        final StringBuilder buffer = new StringBuilder();
-        final Iterator<RubyChange> iterator = myChanges.iterator();
-        while (iterator.hasNext()) {
-            RubyChange rubyChange = iterator.next();
-            buffer.append("(");
-            buffer.append(rubyChange.toString());
-            buffer.append(")");
-            if (iterator.hasNext()) buffer.append(", ");
-        }
-        return buffer.toString();
-    }
+	public String toString()
+	{
+		final StringBuilder buffer = new StringBuilder();
+		final Iterator<RubyChange> iterator = myChanges.iterator();
+		while(iterator.hasNext())
+		{
+			RubyChange rubyChange = iterator.next();
+			buffer.append("(");
+			buffer.append(rubyChange.toString());
+			buffer.append(")");
+			if(iterator.hasNext())
+			{
+				buffer.append(", ");
+			}
+		}
+		return buffer.toString();
+	}
 }

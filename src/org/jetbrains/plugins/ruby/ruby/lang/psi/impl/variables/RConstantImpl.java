@@ -16,12 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -47,106 +43,130 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RConstantPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public class RConstantImpl extends RNamedElementBase implements RConstant {
-    private RConstantHolder myHolder;
-    private static final String INTELLIJ_IDEA_RULEZZZ = "IntellijIdeaRulezzz";
+public class RConstantImpl extends RNamedElementBase implements RConstant
+{
+	private RConstantHolder myHolder;
+	private static final String INTELLIJ_IDEA_RULEZZZ = "IntellijIdeaRulezzz";
 
-    public RConstantImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RConstantImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public boolean isInDefinition() {
-        return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this)!=null;
-    }
+	@Override
+	public boolean isInDefinition()
+	{
+		return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this) != null;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public ConstantDefinitions getConstantDefinitions() {
-        return getHolder().getDefinition(this);
-    }
+	public ConstantDefinitions getConstantDefinitions()
+	{
+		return getHolder().getDefinition(this);
+	}
 
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRConstant(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRConstant(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RConstantHolder getHolder() {
-        if (myHolder == null){
-            myHolder = PsiTreeUtil.getParentOfType(this, RConstantHolder.class);
-        }
-        assert myHolder!=null;
-        return myHolder;
-    }
+	public RConstantHolder getHolder()
+	{
+		if(myHolder == null)
+		{
+			myHolder = PsiTreeUtil.getParentOfType(this, RConstantHolder.class);
+		}
+		assert myHolder != null;
+		return myHolder;
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RConstantPresentationUtil.getIcon();
-    }
-
-    @Override
 	@Nullable
-    public ItemPresentation getPresentation() {
-        return RConstantPresentationUtil.getPresentation(this);
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RConstantPresentationUtil.getIcon();
+	}
 
-    @Override
-	protected PsiReference createReference() {
-        String s = getText();
-        if (s.equals(INTELLIJ_IDEA_RULEZZZ)) {
-            ParamContext paramContext = ParamDefUtil.getParamContext(this);
-            if (paramContext != null) {
-                ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);
-                if (paramDef != null) {
-                    return new ParamDefReference(this, paramDef, paramContext);
-                }
-            }
-        }
-        return new RConstantReference(this);
-    }
-
-    @Override
-	public boolean isRealConstant() {
-        if (isInDefinition()){
-            return true;
-        }
-        final RReference ref = RReferenceNavigator.getReferenceByRightPart(this);
-        final PsiReference psiRef = ref != null ? ref.getReference() : new RConstantReference(this);
-        final Symbol symbol = ResolveUtil.resolveToSymbol(forceFileSymbolUpdate(), psiRef);
-        return symbol!=null && (symbol.getType() == Type.CONSTANT || symbol.getType() == Type.JAVA_FIELD);
-    }
-
-    @Override
+	@Override
 	@Nullable
-    protected String getPrefix() {
-        return null;
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RConstantPresentationUtil.getPresentation(this);
+	}
 
-    @Override
-	protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException {
-        if (!Character.isUpperCase(newName.charAt(0)) || !TextUtil.isCID(newName)){
-            throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
-        }
-    }
+	@Override
+	protected PsiReference createReference()
+	{
+		String s = getText();
+		if(s.equals(INTELLIJ_IDEA_RULEZZZ))
+		{
+			ParamContext paramContext = ParamDefUtil.getParamContext(this);
+			if(paramContext != null)
+			{
+				ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);
+				if(paramDef != null)
+				{
+					return new ParamDefReference(this, paramDef, paramContext);
+				}
+			}
+		}
+		return new RConstantReference(this);
+	}
 
-    @Override
+	@Override
+	public boolean isRealConstant()
+	{
+		if(isInDefinition())
+		{
+			return true;
+		}
+		final RReference ref = RReferenceNavigator.getReferenceByRightPart(this);
+		final PsiReference psiRef = ref != null ? ref.getReference() : new RConstantReference(this);
+		final Symbol symbol = ResolveUtil.resolveToSymbol(forceFileSymbolUpdate(), psiRef);
+		return symbol != null && (symbol.getType() == Type.CONSTANT || symbol.getType() == Type.JAVA_FIELD);
+	}
+
+	@Override
+	@Nullable
+	protected String getPrefix()
+	{
+		return null;
+	}
+
+	@Override
+	protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException
+	{
+		if(!Character.isUpperCase(newName.charAt(0)) || !TextUtil.isCID(newName))
+		{
+			throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
+		}
+	}
+
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.CLASS, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.CLASS, true);
+	}
 }

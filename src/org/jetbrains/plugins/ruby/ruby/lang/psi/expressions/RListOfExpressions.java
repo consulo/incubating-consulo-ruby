@@ -16,21 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.07.2006
  */
-public interface RListOfExpressions extends RPsiElement {
-    @NotNull
-    List<RPsiElement> getElements();
+public interface RListOfExpressions extends RPsiElement
+{
+	@NotNull
+	List<RPsiElement> getElements();
 
-    @Nullable
-    RPsiElement getElement(int number);
+	@Nullable
+	RPsiElement getElement(int number);
 }

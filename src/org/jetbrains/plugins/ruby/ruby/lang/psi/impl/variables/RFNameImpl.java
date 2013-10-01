@@ -16,12 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +35,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.RSymbolNavigator
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,73 +48,88 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
  * @author: oleg
  * @date: Feb 19, 2007
  */
-public class RFNameImpl extends RNamedElementBase implements RFName {
-    public RFNameImpl(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+public class RFNameImpl extends RNamedElementBase implements RFName
+{
+	public RFNameImpl(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	protected PsiReference createReference() {
-        throw new UnsupportedOperationException("Method createReference is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RFNameImpl");
-    }
+	@Override
+	protected PsiReference createReference()
+	{
+		throw new UnsupportedOperationException("Method createReference is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RFNameImpl");
+	}
 
-    @Override
-	public PsiReference getReference() {
-        // We shouldn`t return this reference if we have RFieldAttrReference, overriding this reference
-        final RSymbol symbol = RSymbolNavigator.getSymbolByObject(this);
-        if (symbol!=null){
-            final RCall rCall = PsiTreeUtil.getParentOfType(symbol, RCall.class);
-            if (rCall!=null && rCall.getCallType().isAttributeCall()){
-                for (PsiReference reference : rCall.getReferences()) {
-                    if (reference instanceof RFieldAttrReference &&
-                            ((RFieldAttrReference) reference).getRefValue() == symbol){
-                        return null;
-                    }
-                }
-            }
-        }
-        return new RFNameReference(this);
-    }
+	@Override
+	public PsiReference getReference()
+	{
+		// We shouldn`t return this reference if we have RFieldAttrReference, overriding this reference
+		final RSymbol symbol = RSymbolNavigator.getSymbolByObject(this);
+		if(symbol != null)
+		{
+			final RCall rCall = PsiTreeUtil.getParentOfType(symbol, RCall.class);
+			if(rCall != null && rCall.getCallType().isAttributeCall())
+			{
+				for(PsiReference reference : rCall.getReferences())
+				{
+					if(reference instanceof RFieldAttrReference && ((RFieldAttrReference) reference).getRefValue() == symbol)
+					{
+						return null;
+					}
+				}
+			}
+		}
+		return new RFNameReference(this);
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRFName(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRFName(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected String getPrefix() {
-        return null;
-    }
+	protected String getPrefix()
+	{
+		return null;
+	}
 
-    @Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
-        if (!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName)){
-            throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
-        }
-    }
+	@Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	{
+		if(!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName))
+		{
+			throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
+		}
+	}
 
-    @Override
-	public PsiElement setName(@NotNull String newElementName) throws IncorrectOperationException {
-        // We shouldn`t do anything if name is the same
-        if (newElementName.equals(getName())){
-            return null;
-        }
-        checkName(newElementName);
-        final PsiElement element = RubyPsiUtil.getTopLevelElements(getProject(), ':' + newElementName).get(0).
-                getChildByType(RPsiElement.class, 0);
-        //noinspection ConstantConditions
-        RubyPsiUtil.replaceInParent(this.getFirstChild(), element);
-        return element;
-    }
+	@Override
+	public PsiElement setName(@NotNull String newElementName) throws IncorrectOperationException
+	{
+		// We shouldn`t do anything if name is the same
+		if(newElementName.equals(getName()))
+		{
+			return null;
+		}
+		checkName(newElementName);
+		final PsiElement element = RubyPsiUtil.getTopLevelElements(getProject(), ':' + newElementName).get(0).
+				getChildByType(RPsiElement.class, 0);
+		//noinspection ConstantConditions
+		RubyPsiUtil.replaceInParent(this.getFirstChild(), element);
+		return element;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
+	}
 }

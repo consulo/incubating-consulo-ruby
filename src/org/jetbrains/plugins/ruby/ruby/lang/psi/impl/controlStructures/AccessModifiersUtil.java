@@ -27,43 +27,48 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
  * @author: oleg
  * @date: Oct 23, 2006
  */
-public class AccessModifiersUtil {
-    /**
-     * Tries to interpretate a <code>text</code> as <code>ACCESS_MODIFIER</code>
-     * @param text text
-     * @return Appropriate <code>ACCESS_MODIFIER</code> or <code>ACCESS_MODIFIER.UNKNOWN</code>
-     */
-    @NotNull
-    public static AccessModifier getModifierByName(@NotNull final String text) {
-        if (text.equals(RCall.PUBLIC_COMMAND)) {
-            return AccessModifier.PUBLIC;
-        }
-        if (text.equals(RCall.PRIVATE_COMMAND)) {
-            return AccessModifier.PRIVATE;
-        }
-        if (text.equals(RCall.PROTECTED_COMMAND)) {
-            return AccessModifier.PROTECTED;
-        }
-        return AccessModifier.UNKNOWN;
-    }
-    /**
-     * Checks if <code>ACCESS_MODIFIER</code> exists with similar name.
-     * (Uses in RubyAspectImpl)
-     * <p>For example:<br>
-     * p -> true (public / protected)<br>
-     * pro -> true (protected)<br>
-     * pu -> true (public)<br>
-     * pa -> false<br>
-     * private -> true (private)<br>
-     * private_anytext -> true (private)<br>
-     *
-     * @param str text
-     * @return true if str is similar to some valid modifier
-     */
-    public static boolean existModifierByString(final String str) {
-        return !TextUtil.isEmpty(str)
-                && (RCall.PUBLIC_COMMAND.startsWith(str) || str.startsWith(RCall.PUBLIC_COMMAND)
-                    || RCall.PRIVATE_COMMAND.startsWith(str) || str.startsWith(RCall.PRIVATE_COMMAND)
-                    || RCall.PROTECTED_COMMAND.startsWith(str) || str.startsWith(RCall.PROTECTED_COMMAND));
-    }
+public class AccessModifiersUtil
+{
+	/**
+	 * Tries to interpretate a <code>text</code> as <code>ACCESS_MODIFIER</code>
+	 *
+	 * @param text text
+	 * @return Appropriate <code>ACCESS_MODIFIER</code> or <code>ACCESS_MODIFIER.UNKNOWN</code>
+	 */
+	@NotNull
+	public static AccessModifier getModifierByName(@NotNull final String text)
+	{
+		if(text.equals(RCall.PUBLIC_COMMAND))
+		{
+			return AccessModifier.PUBLIC;
+		}
+		if(text.equals(RCall.PRIVATE_COMMAND))
+		{
+			return AccessModifier.PRIVATE;
+		}
+		if(text.equals(RCall.PROTECTED_COMMAND))
+		{
+			return AccessModifier.PROTECTED;
+		}
+		return AccessModifier.UNKNOWN;
+	}
+
+	/**
+	 * Checks if <code>ACCESS_MODIFIER</code> exists with similar name.
+	 * (Uses in RubyAspectImpl)
+	 * <p>For example:<br>
+	 * p -> true (public / protected)<br>
+	 * pro -> true (protected)<br>
+	 * pu -> true (public)<br>
+	 * pa -> false<br>
+	 * private -> true (private)<br>
+	 * private_anytext -> true (private)<br>
+	 *
+	 * @param str text
+	 * @return true if str is similar to some valid modifier
+	 */
+	public static boolean existModifierByString(final String str)
+	{
+		return !TextUtil.isEmpty(str) && (RCall.PUBLIC_COMMAND.startsWith(str) || str.startsWith(RCall.PUBLIC_COMMAND) || RCall.PRIVATE_COMMAND.startsWith(str) || str.startsWith(RCall.PRIVATE_COMMAND) || RCall.PROTECTED_COMMAND.startsWith(str) || str.startsWith(RCall.PROTECTED_COMMAND));
+	}
 }

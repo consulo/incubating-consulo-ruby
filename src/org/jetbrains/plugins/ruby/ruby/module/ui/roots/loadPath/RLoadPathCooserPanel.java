@@ -46,81 +46,96 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @author: Roman Chernyatchik
  * @date: Jan 19, 2008
  */
-public class RLoadPathCooserPanel implements CheckBoxListListener {
-    private JPanel myContentPane;
-    private CheckBoxList myList;
-    private JButton myAddButton;
-    private JButton myRemoveButton;
-    private DefaultListModel myListModel;
-    private final Module myModule;
-    private final CheckableDirectoriesContainer myDirsContainer;
+public class RLoadPathCooserPanel implements CheckBoxListListener
+{
+	private JPanel myContentPane;
+	private CheckBoxList myList;
+	private JButton myAddButton;
+	private JButton myRemoveButton;
+	private DefaultListModel myListModel;
+	private final Module myModule;
+	private final CheckableDirectoriesContainer myDirsContainer;
 
-    public RLoadPathCooserPanel(@NotNull final Module module,
-                                @NotNull final CheckableDirectoriesContainer dirsContainer) {
-        myModule = module;
-        myDirsContainer = dirsContainer;
+	public RLoadPathCooserPanel(@NotNull final Module module, @NotNull final CheckableDirectoriesContainer dirsContainer)
+	{
+		myModule = module;
+		myDirsContainer = dirsContainer;
 
-        // fill list
-        final List<CheckableDirectoryItem> dirs = myDirsContainer.getCheckableDirectories();
-        for (CheckableDirectoryItem directoryItem : dirs) {
-                myListModel.addElement(directoryItem.createCheckBox());
-        }
+		// fill list
+		final List<CheckableDirectoryItem> dirs = myDirsContainer.getCheckableDirectories();
+		for(CheckableDirectoryItem directoryItem : dirs)
+		{
+			myListModel.addElement(directoryItem.createCheckBox());
+		}
 
-        // listeners
-        myAddButton.addActionListener(new ActionListener(){
-            @Override
-			public void actionPerformed(ActionEvent e) {
-                final FileChooserDescriptor dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
-                dirChooser.setShowFileSystemRoots(true);
-                dirChooser.setHideIgnored(true);
-                dirChooser.setTitle(RBundle.message("module.settings.dialog.load.path.filechooser.add.dialog.title"));
-               // dirChooser.setContextModule(module);
-                FileChooserDialog chooser = FileChooserFactory.getInstance().createFileChooser(dirChooser, myContentPane);
-                VirtualFile[] files =  chooser.choose(null, null);
-                for (VirtualFile file : files) {
-// adding to the end
-                    CheckableDirectoryItem docDirectory = new CheckableDirectoryItem(file.getPath(), true);
-                    if (myDirsContainer.addCheckableDir(docDirectory)) {
-                        myListModel.addElement(docDirectory.createCheckBox());
-                    } else {
-                        final String msg = RBundle.message("module.settings.dialog.load.path.error.add.message");
-                        final String title = RBundle.message("module.settings.dialog.load.path.error.add.title");
-                        Messages.showErrorDialog(module.getProject(), msg, title);
-                    }
-                }
-            }
-        });
+		// listeners
+		myAddButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				final FileChooserDescriptor dirChooser = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+				dirChooser.setShowFileSystemRoots(true);
+				dirChooser.setHideIgnored(true);
+				dirChooser.setTitle(RBundle.message("module.settings.dialog.load.path.filechooser.add.dialog.title"));
+				// dirChooser.setContextModule(module);
+				FileChooserDialog chooser = FileChooserFactory.getInstance().createFileChooser(dirChooser, myContentPane);
+				VirtualFile[] files = chooser.choose(null, null);
+				for(VirtualFile file : files)
+				{
+					// adding to the end
+					CheckableDirectoryItem docDirectory = new CheckableDirectoryItem(file.getPath(), true);
+					if(myDirsContainer.addCheckableDir(docDirectory))
+					{
+						myListModel.addElement(docDirectory.createCheckBox());
+					}
+					else
+					{
+						final String msg = RBundle.message("module.settings.dialog.load.path.error.add.message");
+						final String title = RBundle.message("module.settings.dialog.load.path.error.add.title");
+						Messages.showErrorDialog(module.getProject(), msg, title);
+					}
+				}
+			}
+		});
 
-        myRemoveButton.addActionListener(new ActionListener(){
-            @Override
-			public void actionPerformed(ActionEvent e) {
-                int selected = myList.getSelectedIndex();
-                if (selected!=-1){
-// removing index
-                    final JCheckBox checkBox = (JCheckBox)myListModel.get(selected);
-                    myDirsContainer.removeDirByPath(getPath(checkBox));
-                    myListModel.remove(selected);
-                }
-            }
-        });
-    }
+		myRemoveButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				int selected = myList.getSelectedIndex();
+				if(selected != -1)
+				{
+					// removing index
+					final JCheckBox checkBox = (JCheckBox) myListModel.get(selected);
+					myDirsContainer.removeDirByPath(getPath(checkBox));
+					myListModel.remove(selected);
+				}
+			}
+		});
+	}
 
-    public JPanel getContentPane() {
-        return myContentPane;
-    }
+	public JPanel getContentPane()
+	{
+		return myContentPane;
+	}
 
-    @Override
-	public void checkBoxSelectionChanged(int index, boolean value) {
-        final JCheckBox checkBox = (JCheckBox) myListModel.getElementAt(index);
-        myDirsContainer.stateChanged(getPath(checkBox), value);
-    }
+	@Override
+	public void checkBoxSelectionChanged(int index, boolean value)
+	{
+		final JCheckBox checkBox = (JCheckBox) myListModel.getElementAt(index);
+		myDirsContainer.stateChanged(getPath(checkBox), value);
+	}
 
-    private String getPath(final JCheckBox checkBox) {
-        return FileUtil.toSystemIndependentName(checkBox.getText());
-    }
+	private String getPath(final JCheckBox checkBox)
+	{
+		return FileUtil.toSystemIndependentName(checkBox.getText());
+	}
 
-    private void createUIComponents() {
-        myListModel = new DefaultListModel();
-        myList = new CheckBoxList(myListModel, this);
-    }
+	private void createUIComponents()
+	{
+		myListModel = new DefaultListModel();
+		myList = new CheckBoxList(myListModel, this);
+	}
 }

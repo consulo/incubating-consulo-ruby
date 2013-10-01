@@ -16,43 +16,48 @@
 
 package org.jetbrains.plugins.ruby.ruby.refactoring;
 
-import com.intellij.codeInsight.PsiEquivalenceUtil;
-import com.intellij.psi.PsiElement;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.codeInsight.PsiEquivalenceUtil;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 21, 2007
  */
-public class RubyRefactoringUtil {
+public class RubyRefactoringUtil
+{
 
-    /**
-     * Tries to find all the occurences of given expression
-     * @param pattern Search pattern
-     * @param context Search context
-     * @return list of occurences
-     */
-    @NotNull
-    public static List<PsiElement> getOccurences(@NotNull final RPsiElement pattern, 
-                                                 @NotNull final RPsiElement context){
-        final ArrayList<PsiElement> occurences = new ArrayList<PsiElement>();
-        final RubyElementVisitor visitor = new RubyElementVisitor() {
-            @Override
-			public void visitElement(@NotNull final PsiElement element) {
-                if (PsiEquivalenceUtil.areElementsEquivalent(pattern, element)){
-                    occurences.add(element);
-                }
-                element.acceptChildren(this);
-            }
-        };
-        context.acceptChildren(visitor);
-        return occurences;
-    }
+	/**
+	 * Tries to find all the occurences of given expression
+	 *
+	 * @param pattern Search pattern
+	 * @param context Search context
+	 * @return list of occurences
+	 */
+	@NotNull
+	public static List<PsiElement> getOccurences(@NotNull final RPsiElement pattern, @NotNull final RPsiElement context)
+	{
+		final ArrayList<PsiElement> occurences = new ArrayList<PsiElement>();
+		final RubyElementVisitor visitor = new RubyElementVisitor()
+		{
+			@Override
+			public void visitElement(@NotNull final PsiElement element)
+			{
+				if(PsiEquivalenceUtil.areElementsEquivalent(pattern, element))
+				{
+					occurences.add(element);
+				}
+				element.acceptChildren(this);
+			}
+		};
+		context.acceptChildren(visitor);
+		return occurences;
+	}
 
 }

@@ -26,13 +26,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
  * User: oleg
  * Date: 27.06.2006
  */
-public class TERM  implements RubyTokenTypes {
+public class TERM implements RubyTokenTypes
+{
 
-/*
-TERM		: `;'
-		| `\n'
-*/
-    public static void parse(final RBuilder builder){
-        builder.match(BNF.tTERM_TOKENS);
-    }
+	/*
+	TERM		: `;'
+			| `\n'
+	*/
+	public static void parse(final RBuilder builder)
+	{
+		builder.match(BNF.tTERM_TOKENS);
+	}
 }

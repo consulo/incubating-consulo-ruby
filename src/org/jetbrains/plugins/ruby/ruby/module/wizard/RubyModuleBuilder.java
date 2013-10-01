@@ -48,47 +48,50 @@ import com.intellij.openapi.vfs.VirtualFile;
  * @author: oleg, Roman Chernyatchik
  * @date: 16.08.2006
  */
-public class RubyModuleBuilder extends RRModuleBuilder {
+public class RubyModuleBuilder extends RRModuleBuilder
+{
 
-    private String myTestUtinRootPath;
+	private String myTestUtinRootPath;
 
-    @Override
+	@Override
 	@NotNull
-    public Module createModule(ModifiableModuleModel moduleModel) throws InvalidDataException, IOException, ModuleWithNameAlreadyExists, JDOMException, ConfigurationException {
-        final Module myModule = super.createModule(moduleModel);
+	public Module createModule(ModifiableModuleModel moduleModel) throws InvalidDataException, IOException, ModuleWithNameAlreadyExists, JDOMException, ConfigurationException
+	{
+		final Module myModule = super.createModule(moduleModel);
 
-///////////////// Setup default tests folder /////////////////////////////////////////////////////////////////////////
-        final List<String> testUnitFolderUrls = new ArrayList<String>();
+		///////////////// Setup default tests folder /////////////////////////////////////////////////////////////////////////
+		final List<String> testUnitFolderUrls = new ArrayList<String>();
 
-        //TestUnit
-        final String testUnitRootPath = getTestUtinRootPath();
-        createDir(testUnitRootPath);
+		//TestUnit
+		final String testUnitRootPath = getTestUtinRootPath();
+		createDir(testUnitRootPath);
 
-        final String testsUnitFolderUrl =
-                VirtualFileUtil.constructLocalUrl(testUnitRootPath);
-        testUnitFolderUrls.add(testsUnitFolderUrl);
-        if (!RailsFacetUtil.hasRailsSupport(myModule)) {
-            //RubyModuleContentRootManagerImpl.getInstance(myModule).setTestUnitFolderUrls(testUnitFolderUrls);
-        }
-///////////////// Module Settings /////////////////////////
-        //Test:Unit
-        final RSupportPerModuleSettings rubySupportSettings = RModuleUtil.getRubySupportSettings(myModule);
-        assert rubySupportSettings != null;
-        rubySupportSettings.setShouldUseTestUnitTestFramework(isTestUnitSupportEnabled());
+		final String testsUnitFolderUrl = VirtualFileUtil.constructLocalUrl(testUnitRootPath);
+		testUnitFolderUrls.add(testsUnitFolderUrl);
+		if(!RailsFacetUtil.hasRailsSupport(myModule))
+		{
+			//RubyModuleContentRootManagerImpl.getInstance(myModule).setTestUnitFolderUrls(testUnitFolderUrls);
+		}
+		///////////////// Module Settings /////////////////////////
+		//Test:Unit
+		final RSupportPerModuleSettings rubySupportSettings = RModuleUtil.getRubySupportSettings(myModule);
+		assert rubySupportSettings != null;
+		rubySupportSettings.setShouldUseTestUnitTestFramework(isTestUnitSupportEnabled());
 
-        //RSpec for non Rails project
-        if (!RailsFacetUtil.hasRailsSupport(myModule)) {
-            RSpecModuleSettings.getInstance(myModule).setRSpecSupportType(isRSpecSupportEnabled() ? GEM : NONE);
-        }
+		//RSpec for non Rails project
+		if(!RailsFacetUtil.hasRailsSupport(myModule))
+		{
+			RSpecModuleSettings.getInstance(myModule).setRSpecSupportType(isRSpecSupportEnabled() ? GEM : NONE);
+		}
 
-///////////////// Synch files /////////////////
-        RModuleUtil.refreshRubyModuleTypeContent(myModule);
+		///////////////// Synch files /////////////////
+		RModuleUtil.refreshRubyModuleTypeContent(myModule);
 
-        return myModule;
-    }
+		return myModule;
+	}
 
     /* private void installRSpecGem(final Module module) {
-        if (!wizardRubyShouldUseRSpecFramework()) {
+		if (!wizardRubyShouldUseRSpecFramework()) {
             return;
         }
 
@@ -97,28 +100,34 @@ public class RubyModuleBuilder extends RRModuleBuilder {
         }
     }*/
 
-    public ModuleType getModuleType() {
-        return RubyModuleType.getInstance();
-    }
+	public ModuleType getModuleType()
+	{
+		return RubyModuleType.getInstance();
+	}
 
-    @Override
-	public void setTestsUnitRootPath(@NotNull final String path) {
-        myTestUtinRootPath = path;
-    }
+	@Override
+	public void setTestsUnitRootPath(@NotNull final String path)
+	{
+		myTestUtinRootPath = path;
+	}
 
-    private String getTestUtinRootPath() {
-        return myTestUtinRootPath == null ? getContentEntryPath() : myTestUtinRootPath;
-    }
+	private String getTestUtinRootPath()
+	{
+		return myTestUtinRootPath == null ? getContentEntryPath() : myTestUtinRootPath;
+	}
 
-    @Override
-	protected void setupContentRoot(ModifiableRootModel rootModel) {
-        String moduleRootPath = getContentEntryPath();
-        if (moduleRootPath != null) {
-            LocalFileSystem lfs = LocalFileSystem.getInstance();
-            VirtualFile moduleContentRoot = lfs.refreshAndFindFileByPath(FileUtil.toSystemIndependentName(moduleRootPath));
-            if (moduleContentRoot != null) {
-                rootModel.addContentEntry(moduleContentRoot);
-            }
-        }
-    }
+	@Override
+	protected void setupContentRoot(ModifiableRootModel rootModel)
+	{
+		String moduleRootPath = getContentEntryPath();
+		if(moduleRootPath != null)
+		{
+			LocalFileSystem lfs = LocalFileSystem.getInstance();
+			VirtualFile moduleContentRoot = lfs.refreshAndFindFileByPath(FileUtil.toSystemIndependentName(moduleRootPath));
+			if(moduleContentRoot != null)
+			{
+				rootModel.addContentEntry(moduleContentRoot);
+			}
+		}
+	}
 }

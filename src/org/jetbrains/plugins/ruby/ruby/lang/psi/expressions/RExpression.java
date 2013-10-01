@@ -27,7 +27,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 27.07.2006
  */
-public interface RExpression extends RPsiElement {
-    @NotNull
-    RType getType(@Nullable final FileSymbol fileSymbol);
+public interface RExpression extends RPsiElement
+{
+	@NotNull
+	RType getType(@Nullable final FileSymbol fileSymbol);
 }

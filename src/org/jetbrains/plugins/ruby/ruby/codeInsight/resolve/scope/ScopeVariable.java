@@ -29,34 +29,34 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  * @author: oleg
  * @date: May 4, 2007
  */
-public interface ScopeVariable {
-    @NotNull
-    public String getName();
+public interface ScopeVariable
+{
+	@NotNull
+	public String getName();
 
-    @NotNull
-    public RIdentifier getPrototype();
+	@NotNull
+	public RIdentifier getPrototype();
 
-    /**
-     * @return true if it`s a parameter
-     */
-    public boolean isParameter();
+	/**
+	 * @return true if it`s a parameter
+	 */
+	public boolean isParameter();
 
 
-    /**
-     * Creates symbol for local variable by it`s usage
-     *
-     * @return Symbol object
-     */
-    @NotNull
-    public Symbol createSymbol();
+	/**
+	 * Creates symbol for local variable by it`s usage
+	 *
+	 * @return Symbol object
+	 */
+	@NotNull
+	public Symbol createSymbol();
 
-    /**
-     * Creates type for local variable by it`s usages
-     *
-     * @param fileSymbol  FileSymbol
-     * @param rIdentifier Anchor usage
-     * @return Type
-     */
-    public RType getType(@Nullable FileSymbol fileSymbol,
-                         @NotNull final RIdentifier rIdentifier);
+	/**
+	 * Creates type for local variable by it`s usages
+	 *
+	 * @param fileSymbol  FileSymbol
+	 * @param rIdentifier Anchor usage
+	 * @return Type
+	 */
+	public RType getType(@Nullable FileSymbol fileSymbol, @NotNull final RIdentifier rIdentifier);
 }

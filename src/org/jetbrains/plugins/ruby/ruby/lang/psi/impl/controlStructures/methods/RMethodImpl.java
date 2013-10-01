@@ -16,12 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.IncorrectOperationException;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,183 +48,212 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUti
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
-
-import javax.swing.*;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RMethodImpl extends RContainerBase implements RMethod{
-    private static final TokenSet TS_ARGUMENT_LISTS = TokenSet.create(RubyElementTypes.FUNCTION_ARGUMENT_LIST, RubyElementTypes.COMMAND_ARGUMENT_LIST);
-    private boolean isClassConstructor;
+public class RMethodImpl extends RContainerBase implements RMethod
+{
+	private static final TokenSet TS_ARGUMENT_LISTS = TokenSet.create(RubyElementTypes.FUNCTION_ARGUMENT_LIST, RubyElementTypes.COMMAND_ARGUMENT_LIST);
+	private boolean isClassConstructor;
 
-    public RMethodImpl(ASTNode astNode) {
-        super(astNode);
-        updateIfIsConstructor();
-    }
+	public RMethodImpl(ASTNode astNode)
+	{
+		super(astNode);
+		updateIfIsConstructor();
+	}
 
-    private void updateIfIsConstructor() {
-        if (INITIALIZE.equals(getName())) {
-            if (isClassConstructor) {
-                return;
-            }
-            if (isClassConstructor = RContainerUtil.belongsToRContainer(this, StructureType.CLASS)) {
-                super.setAccessModifier(AccessModifier.PRIVATE);
-            }
-        } else {
-            isClassConstructor = false;
-        }
-    }
+	private void updateIfIsConstructor()
+	{
+		if(INITIALIZE.equals(getName()))
+		{
+			if(isClassConstructor)
+			{
+				return;
+			}
+			if(isClassConstructor = RContainerUtil.belongsToRContainer(this, StructureType.CLASS))
+			{
+				super.setAccessModifier(AccessModifier.PRIVATE);
+			}
+		}
+		else
+		{
+			isClassConstructor = false;
+		}
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public AccessModifier getAccessModifier() {
-        updateIfIsConstructor();
-        if (isClassConstructor) {
-            return AccessModifier.PRIVATE;
-        }
-        return super.getAccessModifier();
-    }
+	public AccessModifier getAccessModifier()
+	{
+		updateIfIsConstructor();
+		if(isClassConstructor)
+		{
+			return AccessModifier.PRIVATE;
+		}
+		return super.getAccessModifier();
+	}
 
 
-    @Override
-	public void setAccessModifier(final AccessModifier modifier) {
-        updateIfIsConstructor();
-        if (isClassConstructor) {
-            return;
-        }
-        super.setAccessModifier(modifier);
-    }
+	@Override
+	public void setAccessModifier(final AccessModifier modifier)
+	{
+		updateIfIsConstructor();
+		if(isClassConstructor)
+		{
+			return;
+		}
+		super.setAccessModifier(modifier);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RArgumentList getArgumentList() {
-        PsiElement argList = getChildByFilter(TS_ARGUMENT_LISTS,0);
-        return argList!=null ? (RArgumentList) argList : null;
-    }
+	public RArgumentList getArgumentList()
+	{
+		PsiElement argList = getChildByFilter(TS_ARGUMENT_LISTS, 0);
+		return argList != null ? (RArgumentList) argList : null;
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRMethod(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRMethod(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RMethodPresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RMethodPresentationUtil.getPresentation(this);
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RMethodPresentationUtil.getIcon(this, flags);
-    }
-
-    @Override
 	@Nullable
-    public RMethodName getMethodName() {
-        return getChildByType(RMethodName.class, 0);
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RMethodPresentationUtil.getIcon(this, flags);
+	}
 
-    @Override
+	@Override
+	@Nullable
+	public RMethodName getMethodName()
+	{
+		return getChildByType(RMethodName.class, 0);
+	}
+
+	@Override
 	@NotNull
-    public RVirtualMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
-                                               @NotNull final RFileInfo info) {
-        final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
-        final RVirtualMethodImpl vMethod =
-                new RVirtualMethodImpl(virtualParent, virtualMethodName,
-                                      getArgumentInfos(),
-                                      getAccessModifier(),
-                                      info);
-        addVirtualData(vMethod, info);
-        return vMethod;
-    }
+	public RVirtualMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo info)
+	{
+		final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
+		final RVirtualMethodImpl vMethod = new RVirtualMethodImpl(virtualParent, virtualMethodName, getArgumentInfos(), getAccessModifier(), info);
+		addVirtualData(vMethod, info);
+		return vMethod;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<ArgumentInfo> getArgumentInfos() {
-        final RArgumentList argumentList = getArgumentList();
-        if (argumentList==null){
-            return Collections.emptyList();
-        }
-        return argumentList.getArgumentInfos();
-    }
+	public List<ArgumentInfo> getArgumentInfos()
+	{
+		final RArgumentList argumentList = getArgumentList();
+		if(argumentList == null)
+		{
+			return Collections.emptyList();
+		}
+		return argumentList.getArgumentInfos();
+	}
 
-    @Override
-	public boolean isConstructor() {
-        updateIfIsConstructor();
-        return isClassConstructor;
-    }
+	@Override
+	public boolean isConstructor()
+	{
+		updateIfIsConstructor();
+		return isClassConstructor;
+	}
 
-    @Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element) {
-        return element instanceof RVirtualMethod &&
-                getArgumentInfos().equals(((RVirtualMethod) element).getArgumentInfos()) &&
-                super.equalsToVirtual(element);
-    }
+	@Override
+	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	{
+		return element instanceof RVirtualMethod &&
+				getArgumentInfos().equals(((RVirtualMethod) element).getArgumentInfos()) &&
+				super.equalsToVirtual(element);
+	}
 
-    /**
-     * Method assumes that both method have equal parent container
-     * @param otherMethod other method (virtual or psi)
-     * @return true if methods equals.
-     */
-    @Override
-	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod) {
-        return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
-    }
+	/**
+	 * Method assumes that both method have equal parent container
+	 *
+	 * @param otherMethod other method (virtual or psi)
+	 * @return true if methods equals.
+	 */
+	@Override
+	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod)
+	{
+		return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableName() {
-        final int options = RPresentationConstants.SHOW_NAME | RPresentationConstants.SHOW_PARAMETERS;
-        return RMethodPresentationUtil.formatName(this, options);
-    }
+	public String getPresentableName()
+	{
+		final int options = RPresentationConstants.SHOW_NAME | RPresentationConstants.SHOW_PARAMETERS;
+		return RMethodPresentationUtil.formatName(this, options);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableName(final boolean includeDefaultArgs) {
-        int options = RPresentationConstants.SHOW_NAME
-                            | RPresentationConstants.SHOW_PARAMETERS;
-        if (includeDefaultArgs) {
-            options |= RPresentationConstants.SHOW_INITIALIZER;
-        }
-        return RMethodPresentationUtil.formatName(this, options);
-    }
+	public String getPresentableName(final boolean includeDefaultArgs)
+	{
+		int options = RPresentationConstants.SHOW_NAME | RPresentationConstants.SHOW_PARAMETERS;
+		if(includeDefaultArgs)
+		{
+			options |= RPresentationConstants.SHOW_INITIALIZER;
+		}
+		return RMethodPresentationUtil.formatName(this, options);
+	}
 
-    @Override
-	public int getTextOffset() {
-        final RMethodName methodName = getMethodName();
-        return methodName!=null ? methodName.getTextOffset() : super.getTextOffset();
-    }
+	@Override
+	public int getTextOffset()
+	{
+		final RMethodName methodName = getMethodName();
+		return methodName != null ? methodName.getTextOffset() : super.getTextOffset();
+	}
 
-    @Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-        return null;
-    }
+	@Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	{
+		return null;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.METHOD;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.METHOD;
+	}
 
-    @Override
-	protected RPsiElement getNameElement() {
-        return getMethodName();
-    }
+	@Override
+	protected RPsiElement getNameElement()
+	{
+		return getMethodName();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RCompoundStatement getCompoundStatement() {
-      final RBodyStatement body = RubyPsiUtil.getChildByType(this, RBodyStatement.class, 0);
-      assert body!=null;
-      //noinspection ConstantConditions
-      return RubyPsiUtil.getChildByType(body, RCompoundStatement.class, 0);
-    }
+	public RCompoundStatement getCompoundStatement()
+	{
+		final RBodyStatement body = RubyPsiUtil.getChildByType(this, RBodyStatement.class, 0);
+		assert body != null;
+		//noinspection ConstantConditions
+		return RubyPsiUtil.getChildByType(body, RCompoundStatement.class, 0);
+	}
 }

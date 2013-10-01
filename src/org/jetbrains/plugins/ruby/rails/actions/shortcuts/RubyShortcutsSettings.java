@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
+import java.util.List;
+
+import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
+import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
+import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
-import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
-import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,49 +33,57 @@ import java.util.List;
  * @date: 23.03.2007
  */
 @State(
-        name = "RubyShortcutsSettings",
-        storages = {
-        @Storage(
-                id = "main",
-                file = "$APP_CONFIG$/rubysettings.xml"
-        )}
+		name = "RubyShortcutsSettings",
+		storages = {
+				@Storage(
+						id = "main",
+						file = "$APP_CONFIG$/rubysettings.xml"
+				)
+		}
 )
-public class RubyShortcutsSettings implements PersistentStateComponent<RubyShortcutsSettings>{
-    public RakeTaskSerializableImpl serializableRakeTask;
-    public SerializableGenerator serializableGenerators;
+public class RubyShortcutsSettings implements PersistentStateComponent<RubyShortcutsSettings>
+{
+	public RakeTaskSerializableImpl serializableRakeTask;
+	public SerializableGenerator serializableGenerators;
 
-    public static RubyShortcutsSettings getInstance() {
-        return ServiceManager.getService(RubyShortcutsSettings.class);
-    }
+	public static RubyShortcutsSettings getInstance()
+	{
+		return ServiceManager.getService(RubyShortcutsSettings.class);
+	}
 
-    @Override
-	public RubyShortcutsSettings getState() {
-        return this;
-    }
+	@Override
+	public RubyShortcutsSettings getState()
+	{
+		return this;
+	}
 
-    @Override
-	public void loadState(RubyShortcutsSettings shortcutsSettings) {
-        serializableRakeTask = shortcutsSettings.serializableRakeTask;
-        serializableGenerators = shortcutsSettings.serializableGenerators;
+	@Override
+	public void loadState(RubyShortcutsSettings shortcutsSettings)
+	{
+		serializableRakeTask = shortcutsSettings.serializableRakeTask;
+		serializableGenerators = shortcutsSettings.serializableGenerators;
 
-        initParents(serializableRakeTask, null);
-        initParents(serializableGenerators, null);
-    }
+		initParents(serializableRakeTask, null);
+		initParents(serializableGenerators, null);
+	}
 
-    private void initParents(final SerializableGenerator generator, final SerializableGenerator parentGenerator) {
-        generator.setParent(parentGenerator);
-        final List<SerializableGenerator> generators = generator.getChildren();
-        for (SerializableGenerator child : generators) {
-            initParents(child, child);
-        }
-    }
+	private void initParents(final SerializableGenerator generator, final SerializableGenerator parentGenerator)
+	{
+		generator.setParent(parentGenerator);
+		final List<SerializableGenerator> generators = generator.getChildren();
+		for(SerializableGenerator child : generators)
+		{
+			initParents(child, child);
+		}
+	}
 
-    private void initParents(final RakeTaskSerializableImpl subTask,
-                             final RakeTaskSerializableImpl parentTask) {
-        subTask.setParent(parentTask);
-        final List<? extends RakeTask> tasks = subTask.getSubTasks();
-        for (RakeTask task : tasks) {
-            initParents((RakeTaskSerializableImpl)task, subTask);
-        }
-    }
+	private void initParents(final RakeTaskSerializableImpl subTask, final RakeTaskSerializableImpl parentTask)
+	{
+		subTask.setParent(parentTask);
+		final List<? extends RakeTask> tasks = subTask.getSubTasks();
+		for(RakeTask task : tasks)
+		{
+			initParents((RakeTaskSerializableImpl) task, subTask);
+		}
+	}
 }

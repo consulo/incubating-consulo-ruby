@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,32 +29,38 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 19.07.2007
  */
-public class RSpecRunConfigurationEditor extends SettingsEditor<RSpecRunConfiguration> {
-    private RSpecRunConfigurationForm myForm;
+public class RSpecRunConfigurationEditor extends SettingsEditor<RSpecRunConfiguration>
+{
+	private RSpecRunConfigurationForm myForm;
 
 
-    public RSpecRunConfigurationEditor(final Project project, final RSpecRunConfiguration configuration) {
-        myForm = new RSpecRunConfigurationForm(project, configuration);
-    }
+	public RSpecRunConfigurationEditor(final Project project, final RSpecRunConfiguration configuration)
+	{
+		myForm = new RSpecRunConfigurationForm(project, configuration);
+	}
 
-    @Override
-	protected void resetEditorFrom(final RSpecRunConfiguration config) {
-        RSpecRunConfiguration.copyParams(config, myForm);
-    }
+	@Override
+	protected void resetEditorFrom(final RSpecRunConfiguration config)
+	{
+		RSpecRunConfiguration.copyParams(config, myForm);
+	}
 
-    @Override
-	protected void applyEditorTo(final RSpecRunConfiguration config) throws ConfigurationException {
-        RSpecRunConfiguration.copyParams(myForm, config);
-    }
+	@Override
+	protected void applyEditorTo(final RSpecRunConfiguration config) throws ConfigurationException
+	{
+		RSpecRunConfiguration.copyParams(myForm, config);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected JComponent createEditor() {
-        return myForm.getPanel();
-    }
+	protected JComponent createEditor()
+	{
+		return myForm.getPanel();
+	}
 
-    @Override
-	protected void disposeEditor() {
-        myForm = null;
-    }
+	@Override
+	protected void disposeEditor()
+	{
+		myForm = null;
+	}
 }

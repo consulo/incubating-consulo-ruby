@@ -25,18 +25,19 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilte
  * @author: oleg
  * @date: Mar 3, 2008
  */
-public interface ScopeAutocompleteFilter {
+public interface ScopeAutocompleteFilter
+{
 
-    boolean allowJRuby();
+	boolean allowJRuby();
 
-    boolean allowOutterMembers();
+	boolean allowOutterMembers();
 
-    boolean allowOwnMembers();
+	boolean allowOwnMembers();
 
-    boolean allowLocalVariablesAndParameters();
+	boolean allowLocalVariablesAndParameters();
 
-    boolean allowReswords();
+	boolean allowReswords();
 
-    @NotNull
-    SymbolFilter getSymbolFilter();
+	@NotNull
+	SymbolFilter getSymbolFilter();
 }

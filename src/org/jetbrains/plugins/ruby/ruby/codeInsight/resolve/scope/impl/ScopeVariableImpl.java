@@ -16,10 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl;
 
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.RubyPsiManager;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -29,6 +27,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,53 +35,60 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  * @author: oleg
  * @date: May 4, 2007
  */
-public class ScopeVariableImpl implements ScopeVariable {
-    private String myName;
-    private boolean isParameter;
-    private RIdentifier myPrototype;
-    private Symbol mySymbol;
+public class ScopeVariableImpl implements ScopeVariable
+{
+	private String myName;
+	private boolean isParameter;
+	private RIdentifier myPrototype;
+	private Symbol mySymbol;
 
-    public ScopeVariableImpl(@NotNull final String name, @NotNull final RIdentifier element, final boolean isParameter) {
-        myName = name;
-        myPrototype = element;
-        this.isParameter = isParameter;
-    }
+	public ScopeVariableImpl(@NotNull final String name, @NotNull final RIdentifier element, final boolean isParameter)
+	{
+		myName = name;
+		myPrototype = element;
+		this.isParameter = isParameter;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myName;
-    }
+	public String getName()
+	{
+		return myName;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RIdentifier getPrototype() {
-        return myPrototype;
-    }
+	public RIdentifier getPrototype()
+	{
+		return myPrototype;
+	}
 
 
-    @Override
-	public boolean isParameter() {
-        return isParameter;
-    }
+	@Override
+	public boolean isParameter()
+	{
+		return isParameter;
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public Symbol createSymbol() {
-        if (mySymbol == null) {
-            mySymbol = new PsiElementSymbol(myPrototype, getName(), Type.LOCAL_VARIABLE);
-        }
-        return mySymbol;
-    }
+	public Symbol createSymbol()
+	{
+		if(mySymbol == null)
+		{
+			mySymbol = new PsiElementSymbol(myPrototype, getName(), Type.LOCAL_VARIABLE);
+		}
+		return mySymbol;
+	}
 
-    @Override
-	public RType getType(@Nullable final FileSymbol fileSymbol,
-                         @NotNull final RIdentifier usage) {
-        final RControlFlowOwner controlFlowOwner = PsiTreeUtil.getParentOfType(myPrototype, RControlFlowOwner.class);
-        assert controlFlowOwner!=null;
-        final TypeInferenceHelper helper = RubyPsiManager.getInstance(usage.getProject()).getTypeInferenceHelper();
-        helper.testAndSet(fileSymbol);
-        return helper.inferLocalVariableType(controlFlowOwner, usage);
-    }
+	@Override
+	public RType getType(@Nullable final FileSymbol fileSymbol, @NotNull final RIdentifier usage)
+	{
+		final RControlFlowOwner controlFlowOwner = PsiTreeUtil.getParentOfType(myPrototype, RControlFlowOwner.class);
+		assert controlFlowOwner != null;
+		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(usage.getProject());
+		helper.testAndSet(fileSymbol);
+		return helper.inferLocalVariableType(controlFlowOwner, usage);
+	}
 }

@@ -16,13 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -31,84 +24,108 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractLayeredCachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.vfs.VirtualFileManager;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 8, 2007
  */
-public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol {
-    protected String myLoadUrl;
-    private static final Logger LOG = Logger.getInstance(BuiltInCachedSymbol.class.getName());
+public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol
+{
+	protected String myLoadUrl;
+	private static final Logger LOG = Logger.getInstance(BuiltInCachedSymbol.class.getName());
 
-    public BuiltInCachedSymbol(@NotNull final Project project,
-                               @NotNull final String url,
-                               @Nullable final Sdk sdk) {
-        super(project, null, sdk, false);
-        myLoadUrl = url;
-    }
+	public BuiltInCachedSymbol(@NotNull final Project project, @NotNull final String url, @Nullable final Sdk sdk)
+	{
+		super(project, null, sdk, false);
+		myLoadUrl = url;
+	}
 
-    /**
-     * Rebuilds FileSymbol with ProgressBar
-     */
-    @Override
-	protected final void updateFileSymbol() {
-        if (myFileSymbol == null) {
-            final ProgressManager manager = ProgressManager.getInstance();
+	/**
+	 * Rebuilds FileSymbol with ProgressBar
+	 */
+	@Override
+	protected final void updateFileSymbol()
+	{
+		if(myFileSymbol == null)
+		{
+			final ProgressManager manager = ProgressManager.getInstance();
 
-            final Runnable runnable = new Runnable() {
-                @Override
-				public void run() {
-                    final ProgressIndicator indicator = manager.getProgressIndicator();
-                    if (indicator != null && mySdk!=null) {
-                        indicator.setText(mySdk.getName());
-                    }
-                    BuiltInCachedSymbol.super.updateFileSymbol();
-                }
-            };
-            if (manager.getProgressIndicator() != null) {
-                runnable.run();
-            } else {
-                final String title = RBundle.message("cache.symbol.recreating.builtins.title");
-                manager.runProcessWithProgressSynchronously(runnable, title, false, myProject);
-            }
-        }
-    }
+			final Runnable runnable = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					final ProgressIndicator indicator = manager.getProgressIndicator();
+					if(indicator != null && mySdk != null)
+					{
+						indicator.setText(mySdk.getName());
+					}
+					BuiltInCachedSymbol.super.updateFileSymbol();
+				}
+			};
+			if(manager.getProgressIndicator() != null)
+			{
+				runnable.run();
+			}
+			else
+			{
+				final String title = RBundle.message("cache.symbol.recreating.builtins.title");
+				manager.runProcessWithProgressSynchronously(runnable, title, false, myProject);
+			}
+		}
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected CachedSymbol getBaseSymbol() {
-        return null;
-    }
+	protected CachedSymbol getBaseSymbol()
+	{
+		return null;
+	}
 
-    @Override
-	public void fileAdded(@NotNull String url) {
-        if (mySdk!=null){
-            if (url.startsWith(RubySdkUtil.getRubyStubsDirUrl(mySdk))){
-                myFileSymbol = null;
-            }
-        }
-    }
+	@Override
+	public void fileAdded(@NotNull String url)
+	{
+		if(mySdk != null)
+		{
+			if(url.startsWith(RubySdkUtil.getRubyStubsDirUrl(mySdk)))
+			{
+				myFileSymbol = null;
+			}
+		}
+	}
 
-    private void addSdkLoadPath() {
-        if (mySdk!=null && RubySdkUtil.isKindOfRubySDK(mySdk)){
-            for (String rootUrl : RubySdkUtil.getSdkRootsWithAllGems(mySdk)) {
-// TODO: uncomment, when require_gem and gem commands will be supported, load all the gems into loadpath
-//                        // Add rails gems to loadpath
-//                        for (String gemLibUrl : RailsGemsUtil.getRailsGems(mySdk)) {
-//                            myFileSymbol.addLoadPath(gemLibUrl);
-//                        }
-                FileSymbolUtil.addLoadPath(myFileSymbol, rootUrl);
-            }
-        }
-    }
+	private void addSdkLoadPath()
+	{
+		if(mySdk != null && RubySdkUtil.isKindOfRubySDK(mySdk))
+		{
+			for(String rootUrl : RubySdkUtil.getSdkRootsWithAllGems(mySdk))
+			{
+				// TODO: uncomment, when require_gem and gem commands will be supported, load all the gems into loadpath
+				//                        // Add rails gems to loadpath
+				//                        for (String gemLibUrl : RailsGemsUtil.getRailsGems(mySdk)) {
+				//                            myFileSymbol.addLoadPath(gemLibUrl);
+				//                        }
+				FileSymbolUtil.addLoadPath(myFileSymbol, rootUrl);
+			}
+		}
+	}
 
-    @Override
-	protected void addAdditionalData() {
-        addSdkLoadPath();
-        if (!ApplicationManager.getApplication().isUnitTestMode()){
-            LOG.assertTrue(VirtualFileManager.getInstance().findFileByUrl(myLoadUrl) != null, "Stubs are corrupted. Cannot find file: " + myLoadUrl);
-        }
-        FileSymbolUtil.process(myFileSymbol, myLoadUrl, InterpretationMode.FULL, true);
-    }
+	@Override
+	protected void addAdditionalData()
+	{
+		addSdkLoadPath();
+		if(!ApplicationManager.getApplication().isUnitTestMode())
+		{
+			LOG.assertTrue(VirtualFileManager.getInstance().findFileByUrl(myLoadUrl) != null, "Stubs are corrupted. Cannot find file: " + myLoadUrl);
+		}
+		FileSymbolUtil.process(myFileSymbol, myLoadUrl, InterpretationMode.FULL, true);
+	}
 }

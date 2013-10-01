@@ -28,54 +28,58 @@ import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
  * @date: Jun 8, 2007
  */
 
-public class SpecialSymbol extends Symbol{
+public class SpecialSymbol extends Symbol
+{
 
-    private final Symbol myLinkedSymbol;
+	private final Symbol myLinkedSymbol;
 
-    public SpecialSymbol(@NotNull final FileSymbol fileSymbol,
-                         @Nullable String name,
-                         @Nullable final Symbol parent,
-                         @NotNull final Symbol symbol,
-                         final Type type){
-        super(fileSymbol, name, type, parent, null);
-        myLinkedSymbol = symbol;
-    }
+	public SpecialSymbol(@NotNull final FileSymbol fileSymbol, @Nullable String name, @Nullable final Symbol parent, @NotNull final Symbol symbol, final Type type)
+	{
+		super(fileSymbol, name, type, parent, null);
+		myLinkedSymbol = symbol;
+	}
 
-    public SpecialSymbol(@NotNull final FileSymbol fileSymbol,
-                         @Nullable final Symbol parent,
-                         @NotNull final Symbol symbol,
-                         final Type type){
-        this(fileSymbol, null, parent, symbol, type);
-    }
+	public SpecialSymbol(@NotNull final FileSymbol fileSymbol, @Nullable final Symbol parent, @NotNull final Symbol symbol, final Type type)
+	{
+		this(fileSymbol, null, parent, symbol, type);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Symbol getLinkedSymbol() {
-        return myLinkedSymbol;
-    }
+	public Symbol getLinkedSymbol()
+	{
+		return myLinkedSymbol;
+	}
 
-    @Override
+	@Override
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-    public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("[" + getId() + "] " + getType() +  " ");
-        if (myName!=null){
-            if (useHtml){
-                MarkupUtil.appendBold(builder, myName);
-            } else {
-                builder.append(myName);
-            }
-            builder.append(" ");
-        }
-        if (useHtml){
-            MarkupUtil.appendBold(builder, myLinkedSymbol.getName());
-            builder.append(" ");
-        }
-        builder.append("[" + myLinkedSymbol.getId() + "]");
-        return builder.toString();
-    }
+	public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml)
+	{
+		final StringBuilder builder = new StringBuilder();
+		builder.append("[" + getId() + "] " + getType() + " ");
+		if(myName != null)
+		{
+			if(useHtml)
+			{
+				MarkupUtil.appendBold(builder, myName);
+			}
+			else
+			{
+				builder.append(myName);
+			}
+			builder.append(" ");
+		}
+		if(useHtml)
+		{
+			MarkupUtil.appendBold(builder, myLinkedSymbol.getName());
+			builder.append(" ");
+		}
+		builder.append("[" + myLinkedSymbol.getId() + "]");
+		return builder.toString();
+	}
 
-    public String toString() {
-        return myType + ": [" + myLinkedSymbol.toString() + "]";
-    }
+	public String toString()
+	{
+		return myType + ": [" + myLinkedSymbol.toString() + "]";
+	}
 }

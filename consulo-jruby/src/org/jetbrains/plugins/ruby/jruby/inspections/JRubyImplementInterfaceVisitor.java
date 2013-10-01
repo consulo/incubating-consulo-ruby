@@ -37,33 +37,41 @@ import rb.implement.ImplementHandler;
  * @author: oleg
  * @date: Feb 29, 2008
  */
-public class JRubyImplementInterfaceVisitor extends RubyInspectionVisitor {
+public class JRubyImplementInterfaceVisitor extends RubyInspectionVisitor
+{
 
-    protected ImplementHandler myHandler;
+	protected ImplementHandler myHandler;
 
-    public JRubyImplementInterfaceVisitor(final ProblemsHolder holder) {
-        super(holder);
-       // myHandler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
-    }
+	public JRubyImplementInterfaceVisitor(final ProblemsHolder holder)
+	{
+		super(holder);
+		// myHandler = (ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
+	}
 
-    @Override
-	public void visitRClass(final RClass rClass) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitRClass(final RClass rClass)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        final FileSymbol fileSymbol = LastSymbolStorage.getInstance(rClass.getProject()).getSymbol();
-        final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
-        if (symbol!=null){
-            try {
-                final List<ClassMember> methods = myHandler.create_implement_members(symbol);
-                if (!methods.isEmpty()){
-                    final String message = RBundle.message("inspection.implement.interface.class.should.implement.method") + methods.get(0).getText();
-                    //noinspection ConstantConditions
-                    registerProblem(rClass.getClassName(), message, new JRubyImplementInterfaceFix(rClass.getLastChild(), symbol));
-                }
-            } catch (Exception e) {
-                throw new ProcessCanceledException();
-            }
-        }
-    }
+		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(rClass.getProject()).getSymbol();
+		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
+		if(symbol != null)
+		{
+			try
+			{
+				final List<ClassMember> methods = myHandler.create_implement_members(symbol);
+				if(!methods.isEmpty())
+				{
+					final String message = RBundle.message("inspection.implement.interface.class.should.implement.method") + methods.get(0).getText();
+					//noinspection ConstantConditions
+					registerProblem(rClass.getClassName(), message, new JRubyImplementInterfaceFix(rClass.getLastChild(), symbol));
+				}
+			}
+			catch(Exception e)
+			{
+				throw new ProcessCanceledException();
+			}
+		}
+	}
 }

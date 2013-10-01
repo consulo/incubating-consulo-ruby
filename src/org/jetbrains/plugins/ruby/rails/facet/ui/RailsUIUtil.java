@@ -32,58 +32,71 @@ import com.intellij.util.Function;
  * @author: Roman Chernyatchik
  * @date: Apr 25, 2008
  */
-public class RailsUIUtil {
-    public static void setupRailsVersionEvaluator(final Sdk sdk,
-                                               final JLabel railsVersionLabel,
-                                               final EvaluatingComponent<String> ecRailsVersionLabel,
-                                               final RailsVersionComponent componet) {
-    //noinspection ConstantConditions
-    if (sdk == null) {
-        railsVersionLabel.setText(RBundle.message("sdk.no.specified"));
-    } else  if (!RailsUtil.hasRailsSupportInSDK(sdk)){
-        railsVersionLabel.setText(RBundle.message("sdk.error.no.rails.found"));
-    } else {
-        ecRailsVersionLabel.setHanlders(
-                // Hides original lable text
-                new Runnable() {
-                    @Override
-					public void run() {
-                        railsVersionLabel.setText("");
-                    }
-                },
-                // Evaluates Rails SDK version
-                new Function<Object, String>() {
-                    @Override
-					public String fun(final Object o) {
-                        return RailsUtil.getRailsVersion(sdk, false, new Function<Object, Boolean>() {
-                            @Override
-							public Boolean fun(final Object o) {
-                                // Cancel process if form was closed
-                                return componet.isCloosed();
-                            }
-                        });
-                    }
-                },
-                // Sets found SDK version
-                new Function<String, Object>() {
-                    @Override
-					public Object fun(final String vers) {
-                        componet.setRailsVersion(vers);
-                        railsVersionLabel.setText(TextUtil.isEmpty(vers)
-                                ? RBundle.message("sdk.error.rails.unknown.verson")
-                                : vers);
+public class RailsUIUtil
+{
+	public static void setupRailsVersionEvaluator(final Sdk sdk, final JLabel railsVersionLabel, final EvaluatingComponent<String> ecRailsVersionLabel, final RailsVersionComponent componet)
+	{
+		//noinspection ConstantConditions
+		if(sdk == null)
+		{
+			railsVersionLabel.setText(RBundle.message("sdk.no.specified"));
+		}
+		else if(!RailsUtil.hasRailsSupportInSDK(sdk))
+		{
+			railsVersionLabel.setText(RBundle.message("sdk.error.no.rails.found"));
+		}
+		else
+		{
+			ecRailsVersionLabel.setHanlders(
+					// Hides original lable text
+					new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							railsVersionLabel.setText("");
+						}
+					},
+					// Evaluates Rails SDK version
+					new Function<Object, String>()
+					{
+						@Override
+						public String fun(final Object o)
+						{
+							return RailsUtil.getRailsVersion(sdk, false, new Function<Object, Boolean>()
+							{
+								@Override
+								public Boolean fun(final Object o)
+								{
+									// Cancel process if form was closed
+									return componet.isCloosed();
+								}
+							});
+						}
+					},
+					// Sets found SDK version
+					new Function<String, Object>()
+					{
+						@Override
+						public Object fun(final String vers)
+						{
+							componet.setRailsVersion(vers);
+							railsVersionLabel.setText(TextUtil.isEmpty(vers) ? RBundle.message("sdk.error.rails.unknown.verson") : vers);
 
-                        return null;
-                    }
-                }, RBundle.message("common.msgs.fetching.version"));
+							return null;
+						}
+					}, RBundle.message("common.msgs.fetching.version")
+			);
 
-        // Starts SDK version evaluator
-        ecRailsVersionLabel.run();
-    }
-}
+			// Starts SDK version evaluator
+			ecRailsVersionLabel.run();
+		}
+	}
 
-    public interface RailsVersionComponent {
-        public boolean isCloosed();
-        public void setRailsVersion(@Nullable final String railsVersion);
-    }
+	public interface RailsVersionComponent
+	{
+		public boolean isCloosed();
+
+		public void setRailsVersion(@Nullable final String railsVersion);
+	}
 }

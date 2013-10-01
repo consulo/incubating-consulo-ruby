@@ -16,40 +16,46 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
+
 /**
  * @author yole
  */
-public class HashParamDef extends ParamDef {
-    private Map<String, ParamDef> myParams = new HashMap<String, ParamDef>();
+public class HashParamDef extends ParamDef
+{
+	private Map<String, ParamDef> myParams = new HashMap<String, ParamDef>();
 
-    @Override
+	@Override
 	@Nullable
-    public List<RubyLookupItem> getVariants(ParamContext context) {
-        List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
-        for(String key: myParams.keySet()) {
-            result.add(new RubySimpleLookupItem(":" + key, null, 0, true, RubyIcons.RUBY_ICON));
-        }
-        return result;
-    }
+	public List<RubyLookupItem> getVariants(ParamContext context)
+	{
+		List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
+		for(String key : myParams.keySet())
+		{
+			result.add(new RubySimpleLookupItem(":" + key, null, 0, true, RubyIcons.RUBY_ICON));
+		}
+		return result;
+	}
 
-    public void add(String optionName, ParamDef paramDef) {
-        myParams.put(optionName, paramDef);
-    }
+	public void add(String optionName, ParamDef paramDef)
+	{
+		myParams.put(optionName, paramDef);
+	}
 
-    public ParamDef getValueParamDef(String key) {
-        if (key.startsWith(":")) {
-            return myParams.get(key.substring(1));
-        }
-        return myParams.get(key);        
-    }
+	public ParamDef getValueParamDef(String key)
+	{
+		if(key.startsWith(":"))
+		{
+			return myParams.get(key.substring(1));
+		}
+		return myParams.get(key);
+	}
 }

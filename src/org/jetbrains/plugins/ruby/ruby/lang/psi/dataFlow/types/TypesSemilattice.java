@@ -14,69 +14,88 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.types;
 
-import com.intellij.util.containers.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.Semilattice;
-
-import java.util.ArrayList;
-import java.util.Map;
+import com.intellij.util.containers.HashMap;
 
 /**
  * @author oleg
  */
-public class TypesSemilattice implements Semilattice<Map<String, RType>> {
+public class TypesSemilattice implements Semilattice<Map<String, RType>>
+{
 
-    @Override
-	public Map<String, RType> join(final ArrayList<Map<String, RType>> ins) {
-        if (ins.size() == 0) return new HashMap<String, RType>();
+	@Override
+	public Map<String, RType> join(final ArrayList<Map<String, RType>> ins)
+	{
+		if(ins.size() == 0)
+		{
+			return new HashMap<String, RType>();
+		}
 
-        Map<String, RType> result = new HashMap<String, RType>(ins.get(0));
+		Map<String, RType> result = new HashMap<String, RType>(ins.get(0));
 
-        for (int i = 1; i < ins.size(); i++) {
-            Map<String, RType> map = ins.get(i);
+		for(int i = 1; i < ins.size(); i++)
+		{
+			Map<String, RType> map = ins.get(i);
 
-            for (Map.Entry<String, RType> entry : map.entrySet()) {
-                final String name = entry.getKey();
-                final RType t1 = entry.getValue();
-                if (result.containsKey(name)){
-                    final RType t2 = result.get(name);
-                    if (t1 != null && t2 != null) {
-                        result.put(name, RTypeUtil.joinOr(t1, t2));
-                    } else {
-                        result.put(name, null);
-                    }
-                } else {
-                    result.put(name, t1);
-                }
-            }
-        }
+			for(Map.Entry<String, RType> entry : map.entrySet())
+			{
+				final String name = entry.getKey();
+				final RType t1 = entry.getValue();
+				if(result.containsKey(name))
+				{
+					final RType t2 = result.get(name);
+					if(t1 != null && t2 != null)
+					{
+						result.put(name, RTypeUtil.joinOr(t1, t2));
+					}
+					else
+					{
+						result.put(name, null);
+					}
+				}
+				else
+				{
+					result.put(name, t1);
+				}
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-	public boolean eq(final Map<String, RType> e1, final Map<String, RType> e2) {
-        if (e1.size() != e2.size()) {
-            return false;
-        }
-        for (Map.Entry<String, RType> entry : e1.entrySet()) {
-            final String name = entry.getKey();
-            final RType value1 = entry.getValue();
-            if (!e2.containsKey(name)) {
-                return false;
-            }
-            RType value2 = e2.get(name);
-            if (value1 == null && value2 != null ||
-                    value2 == null && value1 != null) {
-                return false;
-            }
-            if (value1 != null && value2 != null) {
-                if (!RTypeUtil.equal(entry.getValue(), e2.get(entry.getKey()))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean eq(final Map<String, RType> e1, final Map<String, RType> e2)
+	{
+		if(e1.size() != e2.size())
+		{
+			return false;
+		}
+		for(Map.Entry<String, RType> entry : e1.entrySet())
+		{
+			final String name = entry.getKey();
+			final RType value1 = entry.getValue();
+			if(!e2.containsKey(name))
+			{
+				return false;
+			}
+			RType value2 = e2.get(name);
+			if(value1 == null && value2 != null || value2 == null && value1 != null)
+			{
+				return false;
+			}
+			if(value1 != null && value2 != null)
+			{
+				if(!RTypeUtil.equal(entry.getValue(), e2.get(entry.getKey())))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

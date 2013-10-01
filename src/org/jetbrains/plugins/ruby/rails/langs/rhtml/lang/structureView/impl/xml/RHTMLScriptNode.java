@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml;
 
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import java.util.Collection;
-import java.util.Collections;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,28 +33,33 @@ import java.util.Collections;
  * @author: Roman Chernyatchik
  * @date: 21.05.2007
  */
-public class RHTMLScriptNode extends PsiTreeElementBase<RHTMLRubyInjectionTag> {
-    public static final String RHTML_PREFIX = "rhtml:";
+public class RHTMLScriptNode extends PsiTreeElementBase<RHTMLRubyInjectionTag>
+{
+	public static final String RHTML_PREFIX = "rhtml:";
 
-    public RHTMLScriptNode(final RHTMLRubyInjectionTagImpl element) {
-        super(element);
-    }
+	public RHTMLScriptNode(final RHTMLRubyInjectionTagImpl element)
+	{
+		super(element);
+	}
 
-    @Override
+	@Override
 	@NonNls
-    public String getPresentableText() {
-        return RHTML_PREFIX;
-    }
+	public String getPresentableText()
+	{
+		return RHTML_PREFIX;
+	}
 
-    @Override
-	public String getLocationString() {
-        final RHTMLRubyInjectionTag element = getElement();
-        return element != null ? element.getTagText().trim() : TextUtil.EMPTY_STRING;
-    }
+	@Override
+	public String getLocationString()
+	{
+		final RHTMLRubyInjectionTag element = getElement();
+		return element != null ? element.getTagText().trim() : TextUtil.EMPTY_STRING;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<StructureViewTreeElement> getChildrenBase() {
-        return Collections.emptyList();
-    }
+	public Collection<StructureViewTreeElement> getChildrenBase()
+	{
+		return Collections.emptyList();
+	}
 }

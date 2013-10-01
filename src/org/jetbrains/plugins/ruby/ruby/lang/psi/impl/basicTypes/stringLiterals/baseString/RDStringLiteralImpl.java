@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.baseString;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.RBaseStringImpl;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 20.05.2005
  */
-public class RDStringLiteralImpl extends RBaseStringImpl implements RBaseString {
-    public RDStringLiteralImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RDStringLiteralImpl extends RBaseStringImpl implements RBaseString
+{
+	public RDStringLiteralImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

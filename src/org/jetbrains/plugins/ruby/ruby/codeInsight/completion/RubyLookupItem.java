@@ -24,7 +24,8 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: May 20, 2007
  */
-public interface RubyLookupItem {
-    @NotNull
-    public String getName();
+public interface RubyLookupItem
+{
+	@NotNull
+	public String getName();
 }

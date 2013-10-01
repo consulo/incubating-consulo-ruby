@@ -28,34 +28,40 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
  * User: oleg
  * Date: 21.07.2006
  */
-public class FieldDefinitionImpl implements FieldDefinition {
-    private final RField myFirstUsage;
+public class FieldDefinitionImpl implements FieldDefinition
+{
+	private final RField myFirstUsage;
 
-    public FieldDefinitionImpl(@NotNull final RField field){
-// setting no acess as defaults
-        myFirstUsage = field;
-    }
+	public FieldDefinitionImpl(@NotNull final RField field)
+	{
+		// setting no acess as defaults
+		myFirstUsage = field;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RField getFirstUsage() {
-        return myFirstUsage;
-    }
+	public RField getFirstUsage()
+	{
+		return myFirstUsage;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        //noinspection ConstantConditions
-        return myFirstUsage.getName();
-    }
+	public String getName()
+	{
+		//noinspection ConstantConditions
+		return myFirstUsage.getName();
+	}
 
-    @Override
-	public FieldType getType() {
-        return getFirstUsage().getType();
-    }
+	@Override
+	public FieldType getType()
+	{
+		return getFirstUsage().getType();
+	}
 
-    @Override
-	public boolean isFor(@Nullable final RVirtualField field) {
-        return field!=null && getType() == field.getType() && getName().equals(field.getName());
-    }
+	@Override
+	public boolean isFor(@Nullable final RVirtualField field)
+	{
+		return field != null && getType() == field.getType() && getName().equals(field.getName());
+	}
 }

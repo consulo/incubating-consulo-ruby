@@ -38,118 +38,145 @@ import com.intellij.psi.xml.XmlElementType;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public class RHTMLParser implements PsiParser {
-    @Override
+public class RHTMLParser implements PsiParser
+{
+	@Override
 	@NotNull
-    public ASTNode parse(final IElementType root, final PsiBuilder builder, LanguageVersion languageVersion) {
-        builder.enforceCommentTokens(TokenSet.EMPTY);
+	public ASTNode parse(final IElementType root, final PsiBuilder builder, LanguageVersion languageVersion)
+	{
+		builder.enforceCommentTokens(TokenSet.EMPTY);
 
-        final PsiBuilder.Marker file = builder.mark();
-        final RHTMLParsing parsing = new RHTMLParsing(builder);
+		final PsiBuilder.Marker file = builder.mark();
+		final RHTMLParsing parsing = new RHTMLParsing(builder);
 
-        parsing.parseDocument();
-        file.done(root);
+		parsing.parseDocument();
+		file.done(root);
 
-        return builder.getTreeBuilt();
-    }
+		return builder.getTreeBuilt();
+	}
 
-    private static class RHTMLParsing extends XmlParsing {
-        private int openTagsCount = 0;
-        private PsiBuilder myPsiBuilder;
+	private static class RHTMLParsing extends XmlParsing
+	{
+		private int openTagsCount = 0;
+		private PsiBuilder myPsiBuilder;
 
-        public RHTMLParsing(final PsiBuilder builder) {
-            super(builder);
-            myPsiBuilder = builder;
-        }
+		public RHTMLParsing(final PsiBuilder builder)
+		{
+			super(builder);
+			myPsiBuilder = builder;
+		}
 
-        @Override
-		protected void parseComment() {
-            final PsiBuilder.Marker comment = mark();
-            advance();
-            while (!eof()) {
-                final IElementType tt = token();
-                if (tt == RHTMLTokenType.RHTML_COMMENT_END) {
-                    break;
-                }
-                advance();
-            }
-            if (token() == RHTML_COMMENT_END) {
-                advance();
-            } else {
-                mark().error(RBundle.message("rhtml.parsing.named.element.is.not.closed", "comment"));
-            }
-            comment.done(RHTMLElementType.RHTML_COMMENT_ELEMENT);
-        }
+		@Override
+		protected void parseComment()
+		{
+			final PsiBuilder.Marker comment = mark();
+			advance();
+			while(!eof())
+			{
+				final IElementType tt = token();
+				if(tt == RHTMLTokenType.RHTML_COMMENT_END)
+				{
+					break;
+				}
+				advance();
+			}
+			if(token() == RHTML_COMMENT_END)
+			{
+				advance();
+			}
+			else
+			{
+				mark().error(RBundle.message("rhtml.parsing.named.element.is.not.closed", "comment"));
+			}
+			comment.done(RHTMLElementType.RHTML_COMMENT_ELEMENT);
+		}
 
-        //is comment start token
-        @Override
-		protected boolean isCommentToken(final IElementType tt) {
-            return tt == RHTMLTokenType.RHTML_COMMENT_START;
-        }
+		//is comment start token
+		@Override
+		protected boolean isCommentToken(final IElementType tt)
+		{
+			return tt == RHTMLTokenType.RHTML_COMMENT_START;
+		}
 
-        @Override
-		public void parseTagContent() {
-            while (!RHTMLPsiUtil.isRubyCodeInjectionEnd(token()) && !eof()) {
-                final IElementType tt = token();
-                if (RHTMLPsiUtil.isRubyCodeInjectionStart(tt)
-                    || RHTMLPsiUtil.isRubyCodeInjectionEnd(tt)) {
+		@Override
+		public void parseTagContent()
+		{
+			while(!RHTMLPsiUtil.isRubyCodeInjectionEnd(token()) && !eof())
+			{
+				final IElementType tt = token();
+				if(RHTMLPsiUtil.isRubyCodeInjectionStart(tt) || RHTMLPsiUtil.isRubyCodeInjectionEnd(tt))
+				{
 
-                    parseRubyCodeInjection();
-                } else if (isCommentToken(tt)) {
+					parseRubyCodeInjection();
+				}
+				else if(isCommentToken(tt))
+				{
 
-                    parseComment();
-                } else if (tt == RHTMLTokenType.FLEX_ERROR) {
-                    final PsiBuilder.Marker flexError = mark();
-                    advance();
-                    flexError.error(RBundle.message("rhtml.parsing.flex.error"));
-                }
-                else {
-                    advance();
-                }
-            }
-        }
+					parseComment();
+				}
+				else if(tt == RHTMLTokenType.FLEX_ERROR)
+				{
+					final PsiBuilder.Marker flexError = mark();
+					advance();
+					flexError.error(RBundle.message("rhtml.parsing.flex.error"));
+				}
+				else
+				{
+					advance();
+				}
+			}
+		}
 
-        @Override
-		public void parseDocument() {
-            final PsiBuilder.Marker doc = mark();
+		@Override
+		public void parseDocument()
+		{
+			final PsiBuilder.Marker doc = mark();
 
-            mark().done(XmlElementType.XML_PROLOG);
+			mark().done(XmlElementType.XML_PROLOG);
 
-            while (!eof()) {
-                parseTagContent();
-            }
-            doc.done(XmlElementType.HTML_DOCUMENT);
-        }
+			while(!eof())
+			{
+				parseTagContent();
+			}
+			doc.done(XmlElementType.HTML_DOCUMENT);
+		}
 
-        private void parseRubyCodeInjection() {
-            if (RHTMLPsiUtil.isRubyCodeInjectionStart(token())){
-                openTagsCount++;
-            }
-            final PsiBuilder.Marker tag = mark();
+		private void parseRubyCodeInjection()
+		{
+			if(RHTMLPsiUtil.isRubyCodeInjectionStart(token()))
+			{
+				openTagsCount++;
+			}
+			final PsiBuilder.Marker tag = mark();
 
-            advance();
-            final PsiBuilder.Marker content = mark();
+			advance();
+			final PsiBuilder.Marker content = mark();
 
-            parseTagContent();
+			parseTagContent();
 
-            if (RHTMLPsiUtil.isRubyCodeInjectionEnd(token())) {
-                openTagsCount--;
-                if (openTagsCount < 0) {
-                    openTagsCount = 0;
-                    tag.doneBefore(RHTMLElementType.RHTML_XML_TAG, content, RBundle.message("rhtml.parsing.named.element.is.not.closed", "injection"));
-                    content.drop();
-                    return;
-                }
-            } else {
-                error(RBundle.message("rhtml.parsing.unexpected.end.of.file"));
-            }
-            content.drop();
-            advance();
-            tag.done(RHTMLElementType.RHTML_XML_TAG);
-        }
+			if(RHTMLPsiUtil.isRubyCodeInjectionEnd(token()))
+			{
+				openTagsCount--;
+				if(openTagsCount < 0)
+				{
+					openTagsCount = 0;
+					tag.doneBefore(RHTMLElementType.RHTML_XML_TAG, content, RBundle.message("rhtml.parsing.named.element.is.not.closed", "injection"));
+					content.drop();
+					return;
+				}
+			}
+			else
+			{
+				error(RBundle.message("rhtml.parsing.unexpected.end.of.file"));
+			}
+			content.drop();
+			advance();
+			tag.done(RHTMLElementType.RHTML_XML_TAG);
+		}
 
-        private void error(final String message) {
-            myPsiBuilder.error(message);
-        }
-    }
+		private void error(final String message)
+		{
+			myPsiBuilder.error(message);
+		}
+	}
 }

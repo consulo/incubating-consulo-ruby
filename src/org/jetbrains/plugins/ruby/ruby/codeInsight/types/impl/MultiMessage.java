@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,52 +29,65 @@ import java.util.Collection;
  * @author: oleg
  * @date: May 25, 2007
  */
-public class MultiMessage extends MessageImpl implements Message{
-    protected Message[] myMessages;
+public class MultiMessage extends MessageImpl implements Message
+{
+	protected Message[] myMessages;
 
-    public MultiMessage(@NotNull String name, final boolean important, @NotNull final Message ... messages) {
-        super(name, 0, important, null);
-        myMessages = messages;
-    }
+	public MultiMessage(@NotNull String name, final boolean important, @NotNull final Message... messages)
+	{
+		super(name, 0, important, null);
+		myMessages = messages;
+	}
 
-    public Message[] getMessages() {
-        return myMessages;
-    }
+	public Message[] getMessages()
+	{
+		return myMessages;
+	}
 
-    @Override
-	public int getArgumentsNumber() {
-        return 0;
-    }
+	@Override
+	public int getArgumentsNumber()
+	{
+		return 0;
+	}
 
-    @Override
-	public boolean matchesMessage(@NotNull final Message patternMessage) {
-        for (Message message : myMessages) {
-            if (!message.matchesMessage(patternMessage)){
-                return false;
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean matchesMessage(@NotNull final Message patternMessage)
+	{
+		for(Message message : myMessages)
+		{
+			if(!message.matchesMessage(patternMessage))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public Symbol getSymbol() {
-        for (Message message : myMessages) {
-            final Symbol symbol = message.getSymbol();
-            if (symbol!=null){
-                return symbol;
-            }
-        }
-        return null;
-    }
+	@Override
+	public Symbol getSymbol()
+	{
+		for(Message message : myMessages)
+		{
+			final Symbol symbol = message.getSymbol();
+			if(symbol != null)
+			{
+				return symbol;
+			}
+		}
+		return null;
+	}
 
-    public Collection<Symbol> getSymbols() {
-        final ArrayList<Symbol> list = new ArrayList<Symbol>(myMessages.length);
-        for (Message message : myMessages) {
-            final Symbol symbol = message.getSymbol();
-            if (symbol!=null){
-                list.add(symbol);
-            }
-        }
-        return list;
-    }
+	public Collection<Symbol> getSymbols()
+	{
+		final ArrayList<Symbol> list = new ArrayList<Symbol>(myMessages.length);
+		for(Message message : myMessages)
+		{
+			final Symbol symbol = message.getSymbol();
+			if(symbol != null)
+			{
+				list.add(symbol);
+			}
+		}
+		return list;
+	}
 }

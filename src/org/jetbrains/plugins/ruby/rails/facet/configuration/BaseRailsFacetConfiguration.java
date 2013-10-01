@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import com.intellij.facet.FacetConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
+import com.intellij.facet.FacetConfiguration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,25 +27,30 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
  * @author: Roman Chernyatchik
  * @date: Mar 13, 2008
  */
-public interface BaseRailsFacetConfiguration extends FacetConfiguration {
-    public boolean shouldUseRSpecPlugin();
-    public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin);
+public interface BaseRailsFacetConfiguration extends FacetConfiguration
+{
+	public boolean shouldUseRSpecPlugin();
 
-    @NotNull
-    public String getRailsApplicationRootPath();
-    @NotNull
-    public String getRailsApplicationRootPathUrl();
+	public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin);
 
-    @NotNull
-    public StandardRailsPaths getPaths();
+	@NotNull
+	public String getRailsApplicationRootPath();
 
-    @Nullable
-    public String[] getGenerators();
-    public void reloadGenerators();
+	@NotNull
+	public String getRailsApplicationRootPathUrl();
 
-    @Nullable
-    public RakeTask getRakeTasks();
-    public void reloadRakeTasks();
+	@NotNull
+	public StandardRailsPaths getPaths();
 
-    public boolean isInitialized();
+	@Nullable
+	public String[] getGenerators();
+
+	public void reloadGenerators();
+
+	@Nullable
+	public RakeTask getRakeTasks();
+
+	public void reloadRakeTasks();
+
+	public boolean isInitialized();
 }

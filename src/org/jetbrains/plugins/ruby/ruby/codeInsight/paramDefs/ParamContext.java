@@ -16,53 +16,61 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.project.Project;
 
 /**
  * @author yole
  */
-public class ParamContext {
-    private RPsiElement myValueElement;
-    private RCall myCall;
-    private int myIndex;
-    private String myHashKey;
+public class ParamContext
+{
+	private RPsiElement myValueElement;
+	private RCall myCall;
+	private int myIndex;
+	private String myHashKey;
 
-    public ParamContext(@NotNull final RPsiElement valueElement, @NotNull RCall call, int index, String hashKey) {
-        myValueElement = valueElement;
-        myCall = call;
-        myIndex = index;
-        myHashKey = hashKey;
-    }
+	public ParamContext(@NotNull final RPsiElement valueElement, @NotNull RCall call, int index, String hashKey)
+	{
+		myValueElement = valueElement;
+		myCall = call;
+		myIndex = index;
+		myHashKey = hashKey;
+	}
 
-    @NotNull
-    public RPsiElement getValueElement() {
-        return myValueElement;
-    }
+	@NotNull
+	public RPsiElement getValueElement()
+	{
+		return myValueElement;
+	}
 
-    @NotNull
-    public RCall getCall() {
-        return myCall;
-    }
+	@NotNull
+	public RCall getCall()
+	{
+		return myCall;
+	}
 
-    public int getIndex() {
-        return myIndex;
-    }
+	public int getIndex()
+	{
+		return myIndex;
+	}
 
-    public String getHashKey() {
-        return myHashKey;
-    }
+	public String getHashKey()
+	{
+		return myHashKey;
+	}
 
-    public Module getModule() {
-        return ModuleUtil.findModuleForPsiElement(myValueElement);
-    }
+	public Module getModule()
+	{
+		return ModuleUtil.findModuleForPsiElement(myValueElement);
+	}
 
-    public Project getProject() {
-        Module module = getModule();
-        return module == null ? null : module.getProject();
-    }
+	public Project getProject()
+	{
+		Module module = getModule();
+		return module == null ? null : module.getProject();
+	}
 }

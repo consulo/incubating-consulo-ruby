@@ -16,32 +16,38 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: May 20, 2007
  */
-public class RReferenceNavigator {
-    @Nullable
-    public static RReference getReferenceByLeftPart(@NotNull final PsiElement element){
-        PsiElement parent = element.getParent();
-        if (parent instanceof RReference && ((RReference) parent).getReciever() == element) {
-            return (RReference)parent;
-        }
-        return null;
-    }
+public class RReferenceNavigator
+{
+	@Nullable
+	public static RReference getReferenceByLeftPart(@NotNull final PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if(parent instanceof RReference && ((RReference) parent).getReciever() == element)
+		{
+			return (RReference) parent;
+		}
+		return null;
+	}
 
-    @Nullable
-    public static RReference getReferenceByRightPart(@NotNull final PsiElement element){
-        PsiElement parent = element.getParent();
-        if (parent instanceof RReference && ((RReference) parent).getValue() == element) {
-            return (RReference)parent;
-        }
-        return null;
-    }
+	@Nullable
+	public static RReference getReferenceByRightPart(@NotNull final PsiElement element)
+	{
+		PsiElement parent = element.getParent();
+		if(parent instanceof RReference && ((RReference) parent).getValue() == element)
+		{
+			return (RReference) parent;
+		}
+		return null;
+	}
 }

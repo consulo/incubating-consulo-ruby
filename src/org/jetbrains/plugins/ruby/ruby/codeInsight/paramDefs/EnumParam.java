@@ -16,40 +16,46 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
 import org.jruby.RubySymbol;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 /**
  * @author yole
  */
-public class EnumParam extends ParamDef {
-    private Collection myVariants;
+public class EnumParam extends ParamDef
+{
+	private Collection myVariants;
 
-    public EnumParam(Collection variants) {
-        myVariants = variants;
-    }
+	public EnumParam(Collection variants)
+	{
+		myVariants = variants;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public List<RubyLookupItem> getVariants(ParamContext context) {
-        List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
-        for(Object variant: myVariants) {
-            String text;
-            if (variant instanceof RubySymbol) {
-                text = ':' + variant.toString();
-            }
-            else {
-                text = variant.toString();
-            }
-            result.add(new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON));
-        }
-        return result;
-    }
+	public List<RubyLookupItem> getVariants(ParamContext context)
+	{
+		List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
+		for(Object variant : myVariants)
+		{
+			String text;
+			if(variant instanceof RubySymbol)
+			{
+				text = ':' + variant.toString();
+			}
+			else
+			{
+				text = variant.toString();
+			}
+			result.add(new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON));
+		}
+		return result;
+	}
 }

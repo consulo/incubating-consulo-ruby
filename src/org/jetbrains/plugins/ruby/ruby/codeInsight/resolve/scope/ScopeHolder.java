@@ -25,7 +25,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: May 4, 2007
  */
-public interface ScopeHolder extends RPsiElement, PseudoScopeHolder {
-    @NotNull
-    public RootScope getScope();
+public interface ScopeHolder extends RPsiElement, PseudoScopeHolder
+{
+	@NotNull
+	public RootScope getScope();
 }

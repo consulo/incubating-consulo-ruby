@@ -17,22 +17,23 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing;
 
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 27.06.2006
  */
-public class COMPSTMT{
+public class COMPSTMT
+{
 
 /*
-    compstmt	: stmts opt_terms
+	compstmt	: stmts opt_terms
             ;
 
     stmts	: none
@@ -42,24 +43,27 @@ public class COMPSTMT{
 */
 
 
-    /**
-     * @param builder Current builder
-     * @param endDelimiters Set of end delimiters
-     */
-    public static void parse(final RBuilder builder, IElementType ... endDelimiters){
-        builder.passJunks();
-        parseSTMTS(builder, TokenSet.create(endDelimiters));
-    }
+	/**
+	 * @param builder       Current builder
+	 * @param endDelimiters Set of end delimiters
+	 */
+	public static void parse(final RBuilder builder, IElementType... endDelimiters)
+	{
+		builder.passJunks();
+		parseSTMTS(builder, TokenSet.create(endDelimiters));
+	}
 
-    /**
-     * Parsing STATEMENTS up to the one of end delimiters or up to the end
-     * @param builder Current builder
-     * @param endDelimiters Set of end delimiters
-     */
-    private static void parseSTMTS(final RBuilder builder, TokenSet endDelimiters){
-        RMarker blockMarker = builder.mark();
-        ListParsingUtil.parseSTMTS(builder, endDelimiters);
-        blockMarker.done(RubyElementTypes.COMPOUND_STATEMENT);
-    }
+	/**
+	 * Parsing STATEMENTS up to the one of end delimiters or up to the end
+	 *
+	 * @param builder       Current builder
+	 * @param endDelimiters Set of end delimiters
+	 */
+	private static void parseSTMTS(final RBuilder builder, TokenSet endDelimiters)
+	{
+		RMarker blockMarker = builder.mark();
+		ListParsingUtil.parseSTMTS(builder, endDelimiters);
+		blockMarker.done(RubyElementTypes.COMPOUND_STATEMENT);
+	}
 
 }

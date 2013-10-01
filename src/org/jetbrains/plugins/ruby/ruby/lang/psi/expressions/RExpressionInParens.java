@@ -25,7 +25,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: Mar 30, 2007
  */
-public interface RExpressionInParens extends RExpression{
-    @Nullable
-    public RPsiElement getExpression();
+public interface RExpressionInParens extends RExpression
+{
+	@Nullable
+	public RPsiElement getExpression();
 }

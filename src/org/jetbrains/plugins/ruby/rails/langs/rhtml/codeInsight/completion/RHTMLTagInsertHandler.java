@@ -29,16 +29,16 @@ import com.intellij.psi.PsiDocumentManager;
  * @author: Roman Chernyatchik
  * @date: 02.05.2007
  */
-public class RHTMLTagInsertHandler extends BasicInsertHandler {
-    private void insertRubyCodeCloseTag(final Editor editor, char completionChar) {
-        // completionChar: '-', '=', '#'
-        final String separatorStr = (completionChar == ' ' || completionChar == '\n'
-            ? ""
-            : completionChar) + "  " + RHTMLCompletionData.RHTML_INJECTION_CLOSE;
-        EditorModificationUtil.insertStringAtCaret(editor, separatorStr);
-        PsiDocumentManager.getInstance(editor.getProject()).commitDocument(editor.getDocument());
-        editor.getCaretModel().moveCaretRelatively(-3, 0, false, false, true);
-    }
+public class RHTMLTagInsertHandler extends BasicInsertHandler
+{
+	private void insertRubyCodeCloseTag(final Editor editor, char completionChar)
+	{
+		// completionChar: '-', '=', '#'
+		final String separatorStr = (completionChar == ' ' || completionChar == '\n' ? "" : completionChar) + "  " + RHTMLCompletionData.RHTML_INJECTION_CLOSE;
+		EditorModificationUtil.insertStringAtCaret(editor, separatorStr);
+		PsiDocumentManager.getInstance(editor.getProject()).commitDocument(editor.getDocument());
+		editor.getCaretModel().moveCaretRelatively(-3, 0, false, false, true);
+	}
 
 	@Override
 	public void handleInsert(InsertionContext context, LookupElement item)

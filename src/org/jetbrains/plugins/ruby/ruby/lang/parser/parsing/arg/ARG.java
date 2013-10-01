@@ -17,12 +17,12 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -71,28 +71,34 @@ arg		: lhs '=' arg
 		;
 */
 
-public class ARG {
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        if (builder.isDEBUG()){
-            builder.ARG();
-        }
+public class ARG
+{
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(builder.isDEBUG())
+		{
+			builder.ARG();
+		}
 
-        if (!builder.compare(BNF.tARG_FIRST_TOKEN)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        return DefinedExpression.parse(builder);
-    }
+		if(!builder.compare(BNF.tARG_FIRST_TOKEN))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		return DefinedExpression.parse(builder);
+	}
 
 
-    /**
-     * Parsing ARG with lead PRIMARY already parsed
-     * @param builder Current builder
-     * @param marker Marker before PRIMARY
-     * @param result result of PRIMARY
-     * @return result of ARG parsing
-     */
-    public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result){
-        return DefinedExpression.parseWithLeadPRIMARY(builder, marker, result);
-    }
+	/**
+	 * Parsing ARG with lead PRIMARY already parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before PRIMARY
+	 * @param result  result of PRIMARY
+	 * @return result of ARG parsing
+	 */
+	public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		return DefinedExpression.parseWithLeadPRIMARY(builder, marker, result);
+	}
 }

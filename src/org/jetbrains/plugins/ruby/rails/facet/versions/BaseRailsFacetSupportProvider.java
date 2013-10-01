@@ -22,7 +22,8 @@ package org.jetbrains.plugins.ruby.rails.facet.versions;
  * @author: Roman Chernyatchik
  * @date: Mar 15, 2008
  */
-public abstract class BaseRailsFacetSupportProvider/*<T extends BaseRailsFacet> extends FacetTypeFrameworkSupportProvider<T> */{
+public abstract class BaseRailsFacetSupportProvider/*<T extends BaseRailsFacet> extends FacetTypeFrameworkSupportProvider<T> */
+{
 /*    @Nullable protected RailsWizardSettingsHolder mySettingsHolder;
 
     protected BaseRailsFacetSupportProvider(@NotNull final FacetType<T, ?> baseRailsFacetFacetType) {
@@ -74,7 +75,7 @@ public abstract class BaseRailsFacetSupportProvider/*<T extends BaseRailsFacet> 
      * @param version Facet version
      */
   /*  protected void onFacetCreated(final T facet,
-                                  final ModifiableRootModel rootModel,
+								  final ModifiableRootModel rootModel,
                                   final String version) {
         super.onFacetCreated(facet, rootModel, version);
 

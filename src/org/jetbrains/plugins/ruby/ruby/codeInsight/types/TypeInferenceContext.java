@@ -16,36 +16,38 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
-import com.intellij.util.containers.WeakHashMap;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.util.containers.WeakHashMap;
+
 /**
  * @author: oleg
  */
-public class TypeInferenceContext {
-    public static final int MAX_DEPTH = 3;
+public class TypeInferenceContext
+{
+	public static final int MAX_DEPTH = 3;
 
-    public TypeInferenceContext(final FileSymbol fs) {
-        fileSymbol = fs;
-        localVariablesTypesCache = new WeakHashMap<RControlFlowOwner, Map<RIdentifier, RType>>();
-        methodsBeingInferred = new HashSet<RControlFlowOwner>();
-        expressionsBeingInferred = new HashSet<RExpression>();
-        depth = 0;
-    }
+	public TypeInferenceContext(final FileSymbol fs)
+	{
+		fileSymbol = fs;
+		localVariablesTypesCache = new WeakHashMap<RControlFlowOwner, Map<RIdentifier, RType>>();
+		methodsBeingInferred = new HashSet<RControlFlowOwner>();
+		expressionsBeingInferred = new HashSet<RExpression>();
+		depth = 0;
+	}
 
-    public FileSymbol fileSymbol;
-    public WeakHashMap<RControlFlowOwner, Map<RIdentifier, RType>> localVariablesTypesCache;
+	public FileSymbol fileSymbol;
+	public WeakHashMap<RControlFlowOwner, Map<RIdentifier, RType>> localVariablesTypesCache;
 
-    // Use these to prevent infinite execution of type inference mechanism
-    public Set<RControlFlowOwner> methodsBeingInferred;
-    public Set<RExpression> expressionsBeingInferred;
+	// Use these to prevent infinite execution of type inference mechanism
+	public Set<RControlFlowOwner> methodsBeingInferred;
+	public Set<RExpression> expressionsBeingInferred;
 
-    public int depth;
+	public int depth;
 }

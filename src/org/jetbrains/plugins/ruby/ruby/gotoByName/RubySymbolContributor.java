@@ -38,91 +38,103 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik, oleg
  * @date: 07.11.2006
  */
-public class RubySymbolContributor extends RubyBaseContributor implements ChooseByNameContributor{
+public class RubySymbolContributor extends RubyBaseContributor implements ChooseByNameContributor
+{
 
-    @Override
-	public String[] getNames(final Project project, boolean includeNonProjectItems) {
-        final ArrayList<String> names = new ArrayList<String>();
-        final Module[] modules = ModuleManager.getInstance(project).getModules();
-        final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
+	@Override
+	public String[] getNames(final Project project, boolean includeNonProjectItems)
+	{
+		final ArrayList<String> names = new ArrayList<String>();
+		final Module[] modules = ModuleManager.getInstance(project).getModules();
+		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
 
-        for (Module module : modules) {
-            final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
-// CachesManager is null for not ruby modules
-            if (cachesManager!=null){
-                final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
-                names.addAll(declarationsIndex.getAllClassesNames());
-                names.addAll(declarationsIndex.getAllModulesNames());
-                names.addAll(declarationsIndex.getAllMethodsNames());
-                names.addAll(declarationsIndex.getAllFieldsNames());
-                names.addAll(declarationsIndex.getAllConstantsNames());
-                names.addAll(declarationsIndex.getAllGlobalVarsNames());
-                names.addAll(declarationsIndex.getAllAliasesNames());
-                names.addAll(declarationsIndex.getAllFieldAttrsNames());
-            }
+		for(Module module : modules)
+		{
+			final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
+			// CachesManager is null for not ruby modules
+			if(cachesManager != null)
+			{
+				final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
+				names.addAll(declarationsIndex.getAllClassesNames());
+				names.addAll(declarationsIndex.getAllModulesNames());
+				names.addAll(declarationsIndex.getAllMethodsNames());
+				names.addAll(declarationsIndex.getAllFieldsNames());
+				names.addAll(declarationsIndex.getAllConstantsNames());
+				names.addAll(declarationsIndex.getAllGlobalVarsNames());
+				names.addAll(declarationsIndex.getAllAliasesNames());
+				names.addAll(declarationsIndex.getAllFieldAttrsNames());
+			}
 
-// Adding sdk`s info if needed
-            if (includeNonProjectItems) {
-                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-                final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
-                if (declarationsIndex!=null){
-                    names.addAll(declarationsIndex.getAllClassesNames());
-                    names.addAll(declarationsIndex.getAllModulesNames());
-                    names.addAll(declarationsIndex.getAllMethodsNames());
-                    names.addAll(declarationsIndex.getAllFieldsNames());
-                    names.addAll(declarationsIndex.getAllConstantsNames());
-                    names.addAll(declarationsIndex.getAllGlobalVarsNames());
-                    names.addAll(declarationsIndex.getAllAliasesNames());
-                    names.addAll(declarationsIndex.getAllFieldAttrsNames());
-                }
-            }
-        }
-        return names.toArray(new String[names.size()]);
-    }
+			// Adding sdk`s info if needed
+			if(includeNonProjectItems)
+			{
+				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+				final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
+				if(declarationsIndex != null)
+				{
+					names.addAll(declarationsIndex.getAllClassesNames());
+					names.addAll(declarationsIndex.getAllModulesNames());
+					names.addAll(declarationsIndex.getAllMethodsNames());
+					names.addAll(declarationsIndex.getAllFieldsNames());
+					names.addAll(declarationsIndex.getAllConstantsNames());
+					names.addAll(declarationsIndex.getAllGlobalVarsNames());
+					names.addAll(declarationsIndex.getAllAliasesNames());
+					names.addAll(declarationsIndex.getAllFieldAttrsNames());
+				}
+			}
+		}
+		return names.toArray(new String[names.size()]);
+	}
 
 
 	@Override
-	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems) {
-        final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);
-        final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
-        final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
+	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems)
+	{
+		final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);
+		final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
+		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
 
-        for (Module module : modules) {
-            final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
-// CachesManager is null for not ruby modules
-            if (cachesManager!=null){
-                final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
-                addItems(declarationsIndex.getClassesByName(name), project, items);
-                addItems(declarationsIndex.getModulesByName(name), project, items);
-                addItems(declarationsIndex.getMethodsByName(name), project, items);
-                addItems(declarationsIndex.getFieldsByName(name), project, items);
-                addItems(declarationsIndex.getConstantsByName(name), project, items);
-                addItems(declarationsIndex.getGlobalVarsByName(name), project, items);
-                addItems(declarationsIndex.getAliasesByName(name), project, items);
-                addItems(declarationsIndex.getFieldAttrsByName(name), project, items);
-            }
+		for(Module module : modules)
+		{
+			final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
+			// CachesManager is null for not ruby modules
+			if(cachesManager != null)
+			{
+				final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
+				addItems(declarationsIndex.getClassesByName(name), project, items);
+				addItems(declarationsIndex.getModulesByName(name), project, items);
+				addItems(declarationsIndex.getMethodsByName(name), project, items);
+				addItems(declarationsIndex.getFieldsByName(name), project, items);
+				addItems(declarationsIndex.getConstantsByName(name), project, items);
+				addItems(declarationsIndex.getGlobalVarsByName(name), project, items);
+				addItems(declarationsIndex.getAliasesByName(name), project, items);
+				addItems(declarationsIndex.getFieldAttrsByName(name), project, items);
+			}
 
-// Adding sdk`s info if needed
-            if (includeNonProjectItems) {
-                final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-                final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
-                if (declarationsIndex!=null){
-                    addItems(declarationsIndex.getClassesByName(name), project, items);
-                    addItems(declarationsIndex.getModulesByName(name), project, items);
-                    addItems(declarationsIndex.getMethodsByName(name), project, items);
-                    addItems(declarationsIndex.getFieldsByName(name), project, items);
-                    addItems(declarationsIndex.getConstantsByName(name), project, items);
-                    addItems(declarationsIndex.getGlobalVarsByName(name), project, items);
-                    addItems(declarationsIndex.getAliasesByName(name), project, items);
-                    addItems(declarationsIndex.getFieldAttrsByName(name), project, items);
-                }
-            }
-        }
-        return items.toArray(new NavigationItem[items.size()]);
-      }
+			// Adding sdk`s info if needed
+			if(includeNonProjectItems)
+			{
+				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+				final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
+				if(declarationsIndex != null)
+				{
+					addItems(declarationsIndex.getClassesByName(name), project, items);
+					addItems(declarationsIndex.getModulesByName(name), project, items);
+					addItems(declarationsIndex.getMethodsByName(name), project, items);
+					addItems(declarationsIndex.getFieldsByName(name), project, items);
+					addItems(declarationsIndex.getConstantsByName(name), project, items);
+					addItems(declarationsIndex.getGlobalVarsByName(name), project, items);
+					addItems(declarationsIndex.getAliasesByName(name), project, items);
+					addItems(declarationsIndex.getFieldAttrsByName(name), project, items);
+				}
+			}
+		}
+		return items.toArray(new NavigationItem[items.size()]);
+	}
 
-    private void addItems(@NotNull final List elements, @NotNull final Project project, @NotNull final ArrayList<NavigationItem> items) {
-        //noinspection unchecked
-        items.addAll(getItems(elements,  project));
-    }
+	private void addItems(@NotNull final List elements, @NotNull final Project project, @NotNull final ArrayList<NavigationItem> items)
+	{
+		//noinspection unchecked
+		items.addAll(getItems(elements, project));
+	}
 }

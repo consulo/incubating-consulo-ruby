@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IFileElementType;
  * @author: oleg
  * @date: Feb 21, 2008
  */
-public interface YAMLElementTypes {
-    IFileElementType FILE = new IFileElementType(YAMLLanguage.INSTANCE);
+public interface YAMLElementTypes
+{
+	IFileElementType FILE = new IFileElementType(YAMLLanguage.INSTANCE);
 }

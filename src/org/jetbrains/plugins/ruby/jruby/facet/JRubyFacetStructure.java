@@ -16,20 +16,22 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 25, 2007
  */
-public class JRubyFacetStructure {
+public class JRubyFacetStructure
+{
 
-    public static boolean isValidForJRubyFacet(@NotNull final VirtualFile file) {
-        return RubyVirtualFileScanner.isRubyFile(file) || ViewsConventions.isViewFile(file);
-    }
+	public static boolean isValidForJRubyFacet(@NotNull final VirtualFile file)
+	{
+		return RubyVirtualFileScanner.isRubyFile(file) || ViewsConventions.isViewFile(file);
+	}
 
 }

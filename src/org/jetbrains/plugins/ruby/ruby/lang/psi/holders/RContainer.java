@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -25,27 +27,24 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 20.07.2006
  */
 
-public interface RContainer extends RVirtualContainer, RPsiElement, ScopeHolder, RControlFlowOwner,
-        RStructuralElement {
+public interface RContainer extends RVirtualContainer, RPsiElement, ScopeHolder, RControlFlowOwner, RStructuralElement
+{
 
-    @NotNull
-    public List<RStructuralElement> getStructureElements();
+	@NotNull
+	public List<RStructuralElement> getStructureElements();
 
-    /**
-     * Container always have only one copy
-     */
-    @Override
+	/**
+	 * Container always have only one copy
+	 */
+	@Override
 	@SuppressWarnings({"JavaDoc"})
-    @NotNull
-    public abstract RVirtualContainer createVirtualCopy(@Nullable final RVirtualContainer container,
-                                                        @NotNull final RFileInfo info);
+	@NotNull
+	public abstract RVirtualContainer createVirtualCopy(@Nullable final RVirtualContainer container, @NotNull final RFileInfo info);
 
 }

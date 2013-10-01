@@ -26,6 +26,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructu
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RBeginEndBlockStatement extends RPsiElement,
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild {
+public interface RBeginEndBlockStatement extends RPsiElement, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
 }

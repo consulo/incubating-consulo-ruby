@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationExternalizer;
-
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,65 +29,71 @@ import java.util.Map;
  * @author: Roman Chernyatchik
  * @date: 04.08.2007
  */
-public class RailsServerRunConfigurationExternalizer extends RubyRunConfigurationExternalizer {
-    private static RailsServerRunConfigurationExternalizer myInstance = new RailsServerRunConfigurationExternalizer();
+public class RailsServerRunConfigurationExternalizer extends RubyRunConfigurationExternalizer
+{
+	private static RailsServerRunConfigurationExternalizer myInstance = new RailsServerRunConfigurationExternalizer();
 
-    @NonNls
-    public static final String RAILS_SERVER_CONFIG_SETTINGS_ID = "RAILS_SERVER_CONFIG_SETTINGS_ID";
+	@NonNls
+	public static final String RAILS_SERVER_CONFIG_SETTINGS_ID = "RAILS_SERVER_CONFIG_SETTINGS_ID";
 
-    @NonNls
-    private static final String CHOOSE_MANUALLY = "CHOOSE_MANUALLY";
-    @NonNls
-    private static final String PORT = "PORT";
-    @NonNls
-    private static final String IP = "IP";
-    @NonNls
-    public static final String SERVER_TYPE = "RAILS_SERVER_TYPE";
-    @NonNls
-    public static final String ENVIRONMENT_TYPE = "ENVIRONMENT_TYPE";
+	@NonNls
+	private static final String CHOOSE_MANUALLY = "CHOOSE_MANUALLY";
+	@NonNls
+	private static final String PORT = "PORT";
+	@NonNls
+	private static final String IP = "IP";
+	@NonNls
+	public static final String SERVER_TYPE = "RAILS_SERVER_TYPE";
+	@NonNls
+	public static final String ENVIRONMENT_TYPE = "ENVIRONMENT_TYPE";
 
-    @Override
-	public void writeExternal(final RubyRunConfiguration config, final Element elem) {
-        super.writeExternal(config, elem);
+	@Override
+	public void writeExternal(final RubyRunConfiguration config, final Element elem)
+	{
+		super.writeExternal(config, elem);
 
-        final RailsServerRunConfiguration conf = (RailsServerRunConfiguration)config;
-        writeOption(PORT,  conf.getPort(), elem);
-        writeOption(IP,  conf.getIPAddr(), elem);
-        writeOption(CHOOSE_MANUALLY,  String.valueOf(conf.isChoosePortManually()), elem);
-        writeOption(SERVER_TYPE, conf.getServerType(), elem);
-        writeOption(ENVIRONMENT_TYPE,  conf.getRailsEnvironmentType().toString(), elem);
-    }
+		final RailsServerRunConfiguration conf = (RailsServerRunConfiguration) config;
+		writeOption(PORT, conf.getPort(), elem);
+		writeOption(IP, conf.getIPAddr(), elem);
+		writeOption(CHOOSE_MANUALLY, String.valueOf(conf.isChoosePortManually()), elem);
+		writeOption(SERVER_TYPE, conf.getServerType(), elem);
+		writeOption(ENVIRONMENT_TYPE, conf.getRailsEnvironmentType().toString(), elem);
+	}
 
-    @Override
-	public void readExternal(final RubyRunConfiguration config, final Element elem) {
-        super.readExternal(config, elem);
+	@Override
+	public void readExternal(final RubyRunConfiguration config, final Element elem)
+	{
+		super.readExternal(config, elem);
 
-        final RailsServerRunConfiguration conf = (RailsServerRunConfiguration)config;
+		final RailsServerRunConfiguration conf = (RailsServerRunConfiguration) config;
 
-        //noinspection unchecked
-        Map<String, String> optionsByName = buildOptionsByElement(elem);
+		//noinspection unchecked
+		Map<String, String> optionsByName = buildOptionsByElement(elem);
 
-        conf.setPort(optionsByName.get(PORT));
-        conf.setIPAddr(optionsByName.get(IP));
-        conf.setChoosePortManually(Boolean.valueOf(optionsByName.get(CHOOSE_MANUALLY)));
+		conf.setPort(optionsByName.get(PORT));
+		conf.setIPAddr(optionsByName.get(IP));
+		conf.setChoosePortManually(Boolean.valueOf(optionsByName.get(CHOOSE_MANUALLY)));
 
-        final String serverType = optionsByName.get(SERVER_TYPE);
-        if (serverType != null) {
-            conf.setServerType(serverType);
-        }
-        final String envType = optionsByName.get(ENVIRONMENT_TYPE);
-        if (envType != null) {
-            conf.setRailsEnvironmentType(Enum.valueOf(RailsServerRunConfiguration.RailsEnvironmentType.class,
-                                          envType));
-        }
-    }
+		final String serverType = optionsByName.get(SERVER_TYPE);
+		if(serverType != null)
+		{
+			conf.setServerType(serverType);
+		}
+		final String envType = optionsByName.get(ENVIRONMENT_TYPE);
+		if(envType != null)
+		{
+			conf.setRailsEnvironmentType(Enum.valueOf(RailsServerRunConfiguration.RailsEnvironmentType.class, envType));
+		}
+	}
 
-    public static RailsServerRunConfigurationExternalizer getInstance(){
-        return myInstance;
-    }
+	public static RailsServerRunConfigurationExternalizer getInstance()
+	{
+		return myInstance;
+	}
 
-    @Override
-	public String getID() {
-        return RAILS_SERVER_CONFIG_SETTINGS_ID;
-    }
+	@Override
+	public String getID()
+	{
+		return RAILS_SERVER_CONFIG_SETTINGS_ID;
+	}
 }

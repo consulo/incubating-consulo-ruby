@@ -37,53 +37,60 @@ import com.intellij.openapi.util.Ref;
  * @author: oleg
  * @date: Nov 28, 2007
  */
-public class RubySdkConfigurablePanel{
-    private JPanel mainPanel;
+public class RubySdkConfigurablePanel
+{
+	private JPanel mainPanel;
 
-    // ruby interpreter
-    private LabeledComponent<JTextPane> myRubyInterpreterComponent;
-    private JTextPane myRubyInterpreterPathTP;
+	// ruby interpreter
+	private LabeledComponent<JTextPane> myRubyInterpreterComponent;
+	private JTextPane myRubyInterpreterPathTP;
 
-    // gems bin folder
-    private LabeledComponent myGemsBinFolderComponent;
-    protected TextFieldWithBrowseButton myGemsBinFolderTF;
+	// gems bin folder
+	private LabeledComponent myGemsBinFolderComponent;
+	protected TextFieldWithBrowseButton myGemsBinFolderTF;
 
-    public RubySdkConfigurablePanel() {
+	public RubySdkConfigurablePanel()
+	{
 
-    }
+	}
 
-    private void createUIComponents() {
-        myRubyInterpreterPathTP = new JTextPane();
-        myRubyInterpreterPathTP.setEditable(false);
-        myRubyInterpreterPathTP.setEnabled(false);
-        myRubyInterpreterPathTP.setBorder(new EtchedBorder());
-        myRubyInterpreterComponent = new LabeledComponent<JTextPane>();
-        myRubyInterpreterComponent.setComponent(myRubyInterpreterPathTP);
-        myRubyInterpreterComponent.setText(RBundle.message("ruby.configuration.interpreter.path"));
+	private void createUIComponents()
+	{
+		myRubyInterpreterPathTP = new JTextPane();
+		myRubyInterpreterPathTP.setEditable(false);
+		myRubyInterpreterPathTP.setEnabled(false);
+		myRubyInterpreterPathTP.setBorder(new EtchedBorder());
+		myRubyInterpreterComponent = new LabeledComponent<JTextPane>();
+		myRubyInterpreterComponent.setComponent(myRubyInterpreterPathTP);
+		myRubyInterpreterComponent.setText(RBundle.message("ruby.configuration.interpreter.path"));
 
-        final Ref<TextFieldWithBrowseButton> gemsBinDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
-        final String gemsBinDirChooserTitle = RBundle.message("ruby.configuration.gems.bin.dir.path");
-        myGemsBinFolderComponent = RubyRunConfigurationUIUtil.createDirChooserComponent(gemsBinDirComponentWrapper, gemsBinDirChooserTitle);
-        myGemsBinFolderTF = gemsBinDirComponentWrapper.get();
-        myGemsBinFolderComponent.setToolTipText(RBundle.message("ruby.configuration.gems.bin.dir.path.tooltip"));
+		final Ref<TextFieldWithBrowseButton> gemsBinDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		final String gemsBinDirChooserTitle = RBundle.message("ruby.configuration.gems.bin.dir.path");
+		myGemsBinFolderComponent = RubyRunConfigurationUIUtil.createDirChooserComponent(gemsBinDirComponentWrapper, gemsBinDirChooserTitle);
+		myGemsBinFolderTF = gemsBinDirComponentWrapper.get();
+		myGemsBinFolderComponent.setToolTipText(RBundle.message("ruby.configuration.gems.bin.dir.path.tooltip"));
 
 		RubyRunConfigurationUIUtil.addFileChooser(RBundle.message("ruby.configuration.gems.bin.dir.select.path"), myGemsBinFolderTF, null);
 	}
 
-    public JComponent getPanel() {
-        return mainPanel;
-    }
+	public JComponent getPanel()
+	{
+		return mainPanel;
+	}
 
-    public void setRubyText(String path) {
-        myRubyInterpreterPathTP.setText(toSystemDependentName(path));
-    }
+	public void setRubyText(String path)
+	{
+		myRubyInterpreterPathTP.setText(toSystemDependentName(path));
+	}
 
-    public String getGemsBinFolder() {
-        final String text = myGemsBinFolderTF.getText().trim();
-        return VirtualFileUtil.convertToVFSPathAndNormalizeSlashes(text);
-    }
+	public String getGemsBinFolder()
+	{
+		final String text = myGemsBinFolderTF.getText().trim();
+		return VirtualFileUtil.convertToVFSPathAndNormalizeSlashes(text);
+	}
 
-    public void setGemsBinFolder(@NotNull final String path) {
-        myGemsBinFolderTF.setText(toSystemDependentName(path));
-    }
+	public void setGemsBinFolder(@NotNull final String path)
+	{
+		myGemsBinFolderTF.setText(toSystemDependentName(path));
+	}
 }

@@ -32,38 +32,47 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
  * @author: Roman Chernyatchik, oleg
  * @date: 17.10.2006
  */
-public class YAMLFileType extends LanguageFileType {
-    public static final YAMLFileType INSTANCE = new YAMLFileType();
-    @NonNls private static final String DEFAULT_EXTENSION = "yml";
-    @NonNls private static final String NAME = "YAML";
-    @NonNls private static final String DESCRIPTION = YAMLBundle.message("filetype.description.yml");
+public class YAMLFileType extends LanguageFileType
+{
+	public static final YAMLFileType INSTANCE = new YAMLFileType();
+	@NonNls
+	private static final String DEFAULT_EXTENSION = "yml";
+	@NonNls
+	private static final String NAME = "YAML";
+	@NonNls
+	private static final String DESCRIPTION = YAMLBundle.message("filetype.description.yml");
 
-    private YAMLFileType() {
-        super(YAMLLanguage.INSTANCE);
-    }
+	private YAMLFileType()
+	{
+		super(YAMLLanguage.INSTANCE);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return NAME;
-    }
+	public String getName()
+	{
+		return NAME;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDescription() {
-        return DESCRIPTION;
-    }
+	public String getDescription()
+	{
+		return DESCRIPTION;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDefaultExtension() {
-        return DEFAULT_EXTENSION;
-    }
+	public String getDefaultExtension()
+	{
+		return DEFAULT_EXTENSION;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Icon getIcon() {
-        return AllIcons.Nodes.DataTables;
-    }
+	public Icon getIcon()
+	{
+		return AllIcons.Nodes.DataTables;
+	}
 }
 

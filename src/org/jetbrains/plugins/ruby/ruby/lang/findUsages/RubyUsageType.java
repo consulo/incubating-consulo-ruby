@@ -22,9 +22,10 @@ package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
  * @author: oleg
  * @date: Dec 3, 2007
  */
-public enum RubyUsageType {
-    DECLARATION,
-    EXPLICITLY_TYPED,
-    UNCLASSIFIED,
-    TEXT_MATCHED
+public enum RubyUsageType
+{
+	DECLARATION,
+	EXPLICITLY_TYPED,
+	UNCLASSIFIED,
+	TEXT_MATCHED
 }

@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: Apr 14, 2008
  */
-public interface RControlFlowProcessor {
-    boolean process(@NotNull final Instruction instruction);
+public interface RControlFlowProcessor
+{
+	boolean process(@NotNull final Instruction instruction);
 }

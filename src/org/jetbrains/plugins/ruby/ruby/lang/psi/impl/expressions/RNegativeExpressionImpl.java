@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RUnaryExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,14 +30,17 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RUnaryExpression;
  * Date: 04.05.2005
  */
 
-public class RNegativeExpressionImpl extends RUnaryExpressionBase implements RUnaryExpression {
-    public RNegativeExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RNegativeExpressionImpl extends RUnaryExpressionBase implements RUnaryExpression
+{
+	public RNegativeExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.getBooleanType(fileSymbol);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.getBooleanType(fileSymbol);
+	}
 }

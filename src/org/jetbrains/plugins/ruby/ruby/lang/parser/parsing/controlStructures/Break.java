@@ -17,35 +17,39 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 10.07.2006
  */
-public class Break implements RubyTokenTypes {
+public class Break implements RubyTokenTypes
+{
 
-    @NotNull
-    public static IElementType parseWithCallArgs(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(kBREAK);
-        final boolean braceSeen = builder.compareAndEat(tfLPAREN);
-        if (CALL_ARGS.parse(builder) == RubyElementTypes.EMPTY_INPUT) {
-            statementMarker.rollbackTo();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        if (braceSeen){
-            builder.match(tRPAREN);
-        }
-        statementMarker.done(RubyElementTypes.BREAK_STATEMENT);
-        return RubyElementTypes.BREAK_STATEMENT;
+	@NotNull
+	public static IElementType parseWithCallArgs(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(kBREAK);
+		final boolean braceSeen = builder.compareAndEat(tfLPAREN);
+		if(CALL_ARGS.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+		{
+			statementMarker.rollbackTo();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		if(braceSeen)
+		{
+			builder.match(tRPAREN);
+		}
+		statementMarker.done(RubyElementTypes.BREAK_STATEMENT);
+		return RubyElementTypes.BREAK_STATEMENT;
 
-    }
+	}
 }

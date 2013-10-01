@@ -30,21 +30,22 @@ import com.intellij.openapi.util.Key;
  * @author: Roman Chernyatchik
  * @date: 04.02.2007
  */
-public class DaemonCodeAnalyzerUtil {
-    private static final Key<RailsLineMarkerInfo[]> RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY = Key.create("DaemonCodeAnalyzerUtil.RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY");
+public class DaemonCodeAnalyzerUtil
+{
+	private static final Key<RailsLineMarkerInfo[]> RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY = Key.create("DaemonCodeAnalyzerUtil.RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY");
 
-    @Nullable
-    public static RailsLineMarkerInfo[] getLineMarkers(final Document document,
-                                                      final Project project) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
-        return markup.getUserData(RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY);
-    }
+	@Nullable
+	public static RailsLineMarkerInfo[] getLineMarkers(final Document document, final Project project)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
+		MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
+		return markup.getUserData(RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY);
+	}
 
-    public static void setRubyLineMarkers(final Document document, final RailsLineMarkerInfo[] lineMarkers,
-                                          final Project project) {
-        ApplicationManager.getApplication().assertIsDispatchThread();
-        MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
-        markup.putUserData(RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY, lineMarkers);
-    }
+	public static void setRubyLineMarkers(final Document document, final RailsLineMarkerInfo[] lineMarkers, final Project project)
+	{
+		ApplicationManager.getApplication().assertIsDispatchThread();
+		MarkupModel markup = DocumentMarkupModel.forDocument(document, project, false);
+		markup.putUserData(RAILS_MARKERS_IN_EDITOR_DOCUMENT_KEY, lineMarkers);
+	}
 }

@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
-import com.intellij.openapi.diagnostic.Logger;
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-
-import java.util.Map;
+import com.intellij.openapi.diagnostic.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,47 +30,53 @@ import java.util.Map;
  * @author: oleg, Roman.Chernyatchik
  * @date: Nov 8, 2006
  */
-class RDocSettingsExternalizer extends SettingsExternalizer {
-    private static final Logger LOG = Logger.getInstance(RDocSettingsExternalizer.class.getName());
+class RDocSettingsExternalizer extends SettingsExternalizer
+{
+	private static final Logger LOG = Logger.getInstance(RDocSettingsExternalizer.class.getName());
 
-    private static RDocSettingsExternalizer myInstance = new RDocSettingsExternalizer();
+	private static RDocSettingsExternalizer myInstance = new RDocSettingsExternalizer();
 
-    @NonNls
-    private static final String USE_DEFAULTS = "DEFAULTS";
+	@NonNls
+	private static final String USE_DEFAULTS = "DEFAULTS";
 
-    @NonNls
-    private static final String RDOC_SETTINGS_ID = "RUBY_DOC";
+	@NonNls
+	private static final String RDOC_SETTINGS_ID = "RUBY_DOC";
 
-    public void writeExternal(@NotNull final RDocSettings settings,
-                              @NotNull final Element elem) {
-        boolean doUseDefaults = settings.doUseDefaults();
-        writeOption(USE_DEFAULTS, Boolean.toString(doUseDefaults), elem);
+	public void writeExternal(@NotNull final RDocSettings settings, @NotNull final Element elem)
+	{
+		boolean doUseDefaults = settings.doUseDefaults();
+		writeOption(USE_DEFAULTS, Boolean.toString(doUseDefaults), elem);
 
-        settings.getDocDirs().writeCheckableDirectores(elem, this);
-    }
+		settings.getDocDirs().writeCheckableDirectores(elem, this);
+	}
 
-    public void readExternal(@NotNull final RDocSettings settings,
-                             @NotNull final Element elem) {
-        try {
-            //noinspection unchecked
-            final Map<String, String> optionsByName = buildOptionsByElement(elem);
+	public void readExternal(@NotNull final RDocSettings settings, @NotNull final Element elem)
+	{
+		try
+		{
+			//noinspection unchecked
+			final Map<String, String> optionsByName = buildOptionsByElement(elem);
 
-            final String useDefaults = optionsByName.get(USE_DEFAULTS);
-            settings.setUseDefaults(Boolean.valueOf(useDefaults));
-            
-            settings.getDocDirs().loadCheckableDirectores(optionsByName);
-        } catch (Exception e) {
-            // ignore. something was saved incorrectly
-            LOG.warn(e);
-        }
-    }
+			final String useDefaults = optionsByName.get(USE_DEFAULTS);
+			settings.setUseDefaults(Boolean.valueOf(useDefaults));
 
-    public static RDocSettingsExternalizer getInstance() {
-        return myInstance;
-    }
+			settings.getDocDirs().loadCheckableDirectores(optionsByName);
+		}
+		catch(Exception e)
+		{
+			// ignore. something was saved incorrectly
+			LOG.warn(e);
+		}
+	}
 
-    @Override
-	public String getID() {
-        return RDOC_SETTINGS_ID;
-    }
+	public static RDocSettingsExternalizer getInstance()
+	{
+		return myInstance;
+	}
+
+	@Override
+	public String getID()
+	{
+		return RDOC_SETTINGS_ID;
+	}
 }

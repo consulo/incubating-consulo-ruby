@@ -16,20 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.07.2006
  */
-public interface ParsingMethod {
-    /**
-     * Parses some expression
-     * @param builder Builder used for parsing
-     * @return The type of parsed expression
-     */
+public interface ParsingMethod
+{
+	/**
+	 * Parses some expression
+	 *
+	 * @param builder Builder used for parsing
+	 * @return The type of parsed expression
+	 */
 
-    public IElementType parse(final RBuilder builder);
+	public IElementType parse(final RBuilder builder);
 }

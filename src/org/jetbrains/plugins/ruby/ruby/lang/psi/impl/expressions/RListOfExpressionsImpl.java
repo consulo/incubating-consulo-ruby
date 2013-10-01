@@ -16,56 +16,64 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.IElementType;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 09.06.2006
  */
-public class RListOfExpressionsImpl extends RPsiElementBase implements RListOfExpressions {
-    public RListOfExpressionsImpl(ASTNode astNode) {
-      super(astNode);
-    }
+public class RListOfExpressionsImpl extends RPsiElementBase implements RListOfExpressions
+{
+	public RListOfExpressionsImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RPsiElement> getElements() {
-      LinkedList<RPsiElement> elements = new LinkedList<RPsiElement>();
-      for (PsiElement child : getChildren()){
-        //noinspection ConstantConditions
-        final IElementType type = child.getNode().getElementType();
-        if (type != RubyTokenTypes.tCOMMA && child instanceof RPsiElement){
-          elements.add((RPsiElement) child);
-        }
-      }
-      return elements;
-    }
+	public List<RPsiElement> getElements()
+	{
+		LinkedList<RPsiElement> elements = new LinkedList<RPsiElement>();
+		for(PsiElement child : getChildren())
+		{
+			//noinspection ConstantConditions
+			final IElementType type = child.getNode().getElementType();
+			if(type != RubyTokenTypes.tCOMMA && child instanceof RPsiElement)
+			{
+				elements.add((RPsiElement) child);
+			}
+		}
+		return elements;
+	}
 
-    @Override
-	public RPsiElement getElement(final int number) {
-      final List<RPsiElement> elementList = getElements();
-      return elementList.size()>number ? elementList.get(number) : null;
-    }
+	@Override
+	public RPsiElement getElement(final int number)
+	{
+		final List<RPsiElement> elementList = getElements();
+		return elementList.size() > number ? elementList.get(number) : null;
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-      if (visitor instanceof RubyElementVisitor){
-        ((RubyElementVisitor) visitor).visitRListOfExpressions(this);
-        return;
-      }
-      super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRListOfExpressions(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 }

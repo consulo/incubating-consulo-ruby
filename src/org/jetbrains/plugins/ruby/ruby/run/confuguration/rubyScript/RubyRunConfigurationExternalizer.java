@@ -16,41 +16,49 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
+import java.util.Map;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigurationeExternalizer;
 
-import java.util.Map;
+public class RubyRunConfigurationExternalizer extends AbstractRubyRunConfigurationeExternalizer
+{
+	private static RubyRunConfigurationExternalizer myInstance = new RubyRunConfigurationExternalizer();
 
-public class RubyRunConfigurationExternalizer extends AbstractRubyRunConfigurationeExternalizer {
-    private static RubyRunConfigurationExternalizer myInstance = new RubyRunConfigurationExternalizer();
+	@NonNls
+	private static final String SCRIPT_PATH = "SCRIPT_PATH";
+	@NonNls
+	private static final String SCRIPT_ARGS = "SCRIPT_ARGS";
+	@NonNls
+	public static final String RUBY_RUN_CONFIG_SETTINGS_ID = "RUBY_RUN_CONFIG";
 
-    @NonNls private static final String SCRIPT_PATH = "SCRIPT_PATH";
-    @NonNls private static final String SCRIPT_ARGS = "SCRIPT_ARGS";
-    @NonNls public static final String RUBY_RUN_CONFIG_SETTINGS_ID = "RUBY_RUN_CONFIG";
+	public void writeExternal(final RubyRunConfiguration config, final Element elem)
+	{
+		super.writeExternal(config, elem);
+		writeOption(SCRIPT_PATH, config.getScriptPath(), elem);
+		writeOption(SCRIPT_ARGS, config.getScriptArgs(), elem);
+	}
 
-    public void writeExternal(final RubyRunConfiguration config, final Element elem) {
-        super.writeExternal(config, elem);
-        writeOption(SCRIPT_PATH,  config.getScriptPath(), elem);
-        writeOption(SCRIPT_ARGS,  config.getScriptArgs(), elem);
-    }
+	public void readExternal(final RubyRunConfiguration config, final Element elem)
+	{
+		super.readExternal(config, elem);
 
-    public void readExternal(final RubyRunConfiguration config, final Element elem) {
-        super.readExternal(config, elem);
+		//noinspection unchecked
+		Map<String, String> optionsByName = buildOptionsByElement(elem);
 
-        //noinspection unchecked
-        Map<String, String> optionsByName = buildOptionsByElement(elem);
+		config.setScriptPath(optionsByName.get(SCRIPT_PATH));
+		config.setScriptArgs(optionsByName.get(SCRIPT_ARGS));
+	}
 
-        config.setScriptPath(optionsByName.get(SCRIPT_PATH));
-        config.setScriptArgs(optionsByName.get(SCRIPT_ARGS));
-    }
+	public static RubyRunConfigurationExternalizer getInstance()
+	{
+		return myInstance;
+	}
 
-    public static RubyRunConfigurationExternalizer getInstance(){
-        return myInstance;
-    }
-
-    @Override
-	public String getID() {
-        return RUBY_RUN_CONFIG_SETTINGS_ID;
-    }
+	@Override
+	public String getID()
+	{
+		return RUBY_RUN_CONFIG_SETTINGS_ID;
+	}
 }

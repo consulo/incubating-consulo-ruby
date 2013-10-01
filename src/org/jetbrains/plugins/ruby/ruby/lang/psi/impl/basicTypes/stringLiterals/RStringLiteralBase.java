@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamContext;
@@ -37,64 +37,78 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RExpressionSubstitution;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.08.2006
  */
-public class RStringLiteralBase extends RPsiElementBase implements RStringLiteral {
-    public RStringLiteralBase(ASTNode astNode) {
-        super(astNode);
-    }
+public class RStringLiteralBase extends RPsiElementBase implements RStringLiteral
+{
+	public RStringLiteralBase(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public String getContent() {
-        String content = "";
-        List<PsiElement> list = getPsiContent();
-        for (PsiElement e : list){
-            content+=e.getText();
-        }
-        return content;
-    }
+	@Override
+	public String getContent()
+	{
+		String content = "";
+		List<PsiElement> list = getPsiContent();
+		for(PsiElement e : list)
+		{
+			content += e.getText();
+		}
+		return content;
+	}
 
-    @Override
-	public boolean hasExpressionSubstitutions() {
-        return getExpressionSubstitutions().size()!=0;
-    }
+	@Override
+	public boolean hasExpressionSubstitutions()
+	{
+		return getExpressionSubstitutions().size() != 0;
+	}
 
-    @Override
-	public List<RExpressionSubstitution> getExpressionSubstitutions() {
-        List<PsiElement> list = RubyPsiUtil.getChildrenByFilter(this, RubyElementTypes.EXPR_SUBTITUTION);
-        ArrayList<RExpressionSubstitution> exprList = new ArrayList<RExpressionSubstitution>();
-        for (PsiElement e : list){
-            exprList.add((RExpressionSubstitution) e);
-        }
-        return exprList;
-    }
+	@Override
+	public List<RExpressionSubstitution> getExpressionSubstitutions()
+	{
+		List<PsiElement> list = RubyPsiUtil.getChildrenByFilter(this, RubyElementTypes.EXPR_SUBTITUTION);
+		ArrayList<RExpressionSubstitution> exprList = new ArrayList<RExpressionSubstitution>();
+		for(PsiElement e : list)
+		{
+			exprList.add((RExpressionSubstitution) e);
+		}
+		return exprList;
+	}
 
-    @Override
-	public List<PsiElement> getPsiContent() {
-        return RubyPsiUtil.getChildrenByFilter(this, BNF.tSTRING_LIKE_CONTENTS);
-    }
+	@Override
+	public List<PsiElement> getPsiContent()
+	{
+		return RubyPsiUtil.getChildrenByFilter(this, BNF.tSTRING_LIKE_CONTENTS);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.String), Context.INSTANCE, true);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.String), Context.INSTANCE, true);
+	}
 
-    @Override
-	public PsiReference getReference() {
-        ParamContext paramContext = ParamDefUtil.getParamContext(this);
-        if (paramContext == null) return null;
-        ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);
-        if (paramDef != null) {
-            return new ParamDefReference(this, paramDef, paramContext);
-        }
-        return null;
-    }
+	@Override
+	public PsiReference getReference()
+	{
+		ParamContext paramContext = ParamDefUtil.getParamContext(this);
+		if(paramContext == null)
+		{
+			return null;
+		}
+		ParamDef paramDef = ParamDefUtil.getParamDef(paramContext);
+		if(paramDef != null)
+		{
+			return new ParamDefReference(this, paramDef, paramContext);
+		}
+		return null;
+	}
 }

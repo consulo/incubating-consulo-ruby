@@ -38,33 +38,35 @@ import com.intellij.openapi.vfs.VirtualFileFilter;
 /**
  * Package private. You should use general class - BaseRailsFacetType
  */
-class RailsFacetType extends BaseRailsFacetType<RailsFacet> {
-    public static final RailsFacetType INSTANCE = new RailsFacetType();
+class RailsFacetType extends BaseRailsFacetType<RailsFacet>
+{
+	public static final RailsFacetType INSTANCE = new RailsFacetType();
 
-    public static void load() {
+	public static void load()
+	{
 
-    }
+	}
 
-    public RailsFacetType() {
-        super(RailsFacet.ID, RailsFacet.ID.toString(), null);
-    }
+	public RailsFacetType()
+	{
+		super(RailsFacet.ID, RailsFacet.ID.toString(), null);
+	}
 
-    @Override
-	public BaseRailsFacetConfiguration createDefaultConfiguration() {
-        return new BaseRailsFacetConfigurationImpl();
-    }
+	@Override
+	public BaseRailsFacetConfiguration createDefaultConfiguration()
+	{
+		return new BaseRailsFacetConfigurationImpl();
+	}
 
-    public RailsFacet createFacet(@NotNull final Module module, final String name,
-                                  @NotNull final BaseRailsFacetConfiguration configuration,
-                                  @Nullable final Facet underlyingFacet) {
-        return new RailsFacet(this, module, name, configuration, underlyingFacet);
-    }
+	public RailsFacet createFacet(@NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, @Nullable final Facet underlyingFacet)
+	{
+		return new RailsFacet(this, module, name, configuration, underlyingFacet);
+	}
 
 
-    @Override
-	protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry,
-                                             final VirtualFileFilter railsFacetFilter,
-                                             final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector) {
-        detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, railsFacetFilter, facetDetector);
-    }
+	@Override
+	protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry, final VirtualFileFilter railsFacetFilter, final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector)
+	{
+		detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, railsFacetFilter, facetDetector);
+	}
 }

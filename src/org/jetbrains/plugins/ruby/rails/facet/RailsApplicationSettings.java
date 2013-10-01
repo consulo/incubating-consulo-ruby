@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,29 +30,34 @@ import org.jetbrains.annotations.Nullable;
  * @date: Apr 14, 2008
  */
 @State(
-        name = "RailsApplicationSettings",
-        storages = {
-        @Storage(
-                id = "main",
-                file = "$APP_CONFIG$/rubysettings.xml"
-        )}
+		name = "RailsApplicationSettings",
+		storages = {
+				@Storage(
+						id = "main",
+						file = "$APP_CONFIG$/rubysettings.xml"
+				)
+		}
 )
-public class RailsApplicationSettings implements PersistentStateComponent<RailsApplicationSettings> {
-    @Nullable
-    public String wizardRailsFacetPreconfigureDBName = null;
+public class RailsApplicationSettings implements PersistentStateComponent<RailsApplicationSettings>
+{
+	@Nullable
+	public String wizardRailsFacetPreconfigureDBName = null;
 
 
-    public static RailsApplicationSettings getInstance() {
-        return ServiceManager.getService(RailsApplicationSettings.class);
-    }
+	public static RailsApplicationSettings getInstance()
+	{
+		return ServiceManager.getService(RailsApplicationSettings.class);
+	}
 
-    @Override
-	public RailsApplicationSettings getState() {
-        return this;
-    }
+	@Override
+	public RailsApplicationSettings getState()
+	{
+		return this;
+	}
 
-    @Override
-	public void loadState(@NotNull final RailsApplicationSettings settings) {
-        wizardRailsFacetPreconfigureDBName = settings.wizardRailsFacetPreconfigureDBName;
-    }
+	@Override
+	public void loadState(@NotNull final RailsApplicationSettings settings)
+	{
+		wizardRailsFacetPreconfigureDBName = settings.wizardRailsFacetPreconfigureDBName;
+	}
 }

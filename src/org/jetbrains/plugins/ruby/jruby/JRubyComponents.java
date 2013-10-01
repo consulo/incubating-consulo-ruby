@@ -23,8 +23,9 @@ import org.jetbrains.annotations.NonNls;
  * User: oleg
  * Date: Sep 11, 2007
  */
-public interface JRubyComponents {
+public interface JRubyComponents
+{
 
-    @NonNls
-    final String JRUBY_SUPPORT_LOADER = "JRUBY_SUPPORT_LOADER";
+	@NonNls
+	final String JRUBY_SUPPORT_LOADER = "JRUBY_SUPPORT_LOADER";
 }

@@ -12,17 +12,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
  * @author: oleg
  * @date: 07.04.2008
  */
-public class ConstantAccessImpl extends AbstractReferenceAccess implements ConstantAccess {
-  private final RPsiElement myValue;
+public class ConstantAccessImpl extends AbstractReferenceAccess implements ConstantAccess
+{
+	private final RPsiElement myValue;
 
-  public ConstantAccessImpl(final RPsiElement value, final RReference reference, final RPsiElement usage) {
-    super(usage, reference);
-    myValue = value;
-  }
+	public ConstantAccessImpl(final RPsiElement value, final RReference reference, final RPsiElement usage)
+	{
+		super(usage, reference);
+		myValue = value;
+	}
 
-  @Override
-  @NotNull
-  public RConstant getConstant() {
-    return (RConstant) myValue;
-  }
+	@Override
+	@NotNull
+	public RConstant getConstant()
+	{
+		return (RConstant) myValue;
+	}
 }

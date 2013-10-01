@@ -21,9 +21,11 @@ import com.intellij.psi.PsiElement;
 /**
  * @author yole
  */
-public class RubyRecursiveElementVisitor extends RubyElementVisitor {
-    @Override
-	public void visitElement(final PsiElement element) {
-        element.acceptChildren(this);
-    }
+public class RubyRecursiveElementVisitor extends RubyElementVisitor
+{
+	@Override
+	public void visitElement(final PsiElement element)
+	{
+		element.acceptChildren(this);
+	}
 }

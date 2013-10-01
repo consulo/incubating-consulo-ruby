@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer;
  * @author: Roman Chernyatchik
  * @date: 07.04.2007
  */
-public interface OuterElementInRHTMLOrRubyLang extends RHTMLOuterLanguageElement {
+public interface OuterElementInRHTMLOrRubyLang extends RHTMLOuterLanguageElement
+{
 }

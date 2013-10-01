@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,40 +29,46 @@ import java.util.List;
  * @author: oleg
  * @date: Oct 30, 2007
  */
-public class RailsGemsUtil {
+public class RailsGemsUtil
+{
 
-    private static final String[] RAILS_GEMS = new String[]{
-            "actionmailer",
-            "actionpack",
-            "actionwebservice",
-            "activerecord",
-            "activesupport",
-            "rails",
-            "rake"
-    };
+	private static final String[] RAILS_GEMS = new String[]{
+			"actionmailer",
+			"actionpack",
+			"actionwebservice",
+			"activerecord",
+			"activesupport",
+			"rails",
+			"rake"
+	};
 
-    public static List<String> getRailsGems(@NotNull final String gemsRootUrl,
-                                            @NotNull final VirtualFile gemsRootFile){
-        final ArrayList<String> railsGemsUrls = new ArrayList<String>();
-        for (String gemUrl : RubySdkUtil.getAllGemsLibUrls(gemsRootFile)) {
-            if (isRailsGem(gemsRootUrl, gemUrl)){
-                railsGemsUrls.add(gemUrl);
-            }
-        }
-        return railsGemsUrls;
-    }
+	public static List<String> getRailsGems(@NotNull final String gemsRootUrl, @NotNull final VirtualFile gemsRootFile)
+	{
+		final ArrayList<String> railsGemsUrls = new ArrayList<String>();
+		for(String gemUrl : RubySdkUtil.getAllGemsLibUrls(gemsRootFile))
+		{
+			if(isRailsGem(gemsRootUrl, gemUrl))
+			{
+				railsGemsUrls.add(gemUrl);
+			}
+		}
+		return railsGemsUrls;
+	}
 
-    /*
-     * Checks that gemUrl is rails required!
-     */
-    private static boolean isRailsGem(@NotNull final String gemsRootUrl, @NotNull final String gemUrl) {
-        final String gemName = gemUrl.substring(gemsRootUrl.length()+1);
-        for (String gem : RAILS_GEMS) {
-            if (gemName.startsWith(gem)){
-                return true;
-            }
-        }
-        return false;
-    }
+	/*
+	 * Checks that gemUrl is rails required!
+	 */
+	private static boolean isRailsGem(@NotNull final String gemsRootUrl, @NotNull final String gemUrl)
+	{
+		final String gemName = gemUrl.substring(gemsRootUrl.length() + 1);
+		for(String gem : RAILS_GEMS)
+		{
+			if(gemName.startsWith(gem))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

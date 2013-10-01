@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import com.intellij.openapi.vfs.VirtualFile;
+import java.util.StringTokenizer;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.StringTokenizer;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,44 +28,51 @@ import java.util.StringTokenizer;
  * @author: oleg
  * @date: Dec 3, 2007
  */
-public class GemInfo {
-    private final String myName;
-    private final String myVersion;
+public class GemInfo
+{
+	private final String myName;
+	private final String myVersion;
 
-    public GemInfo(@NotNull final String name, @NotNull final String version) {
-        myName = name;
-        myVersion = version;
-    }
+	public GemInfo(@NotNull final String name, @NotNull final String version)
+	{
+		myName = name;
+		myVersion = version;
+	}
 
-    @NotNull
-    public String getName(){
-        return myName;
-    }
+	@NotNull
+	public String getName()
+	{
+		return myName;
+	}
 
-    @NotNull
-    public String getVersion(){
-        return myVersion;
-    }
+	@NotNull
+	public String getVersion()
+	{
+		return myVersion;
+	}
 
-    public static GemInfo create(@NotNull final VirtualFile gemFile) {
-        return create(gemFile.getName());
-    }
+	public static GemInfo create(@NotNull final VirtualFile gemFile)
+	{
+		return create(gemFile.getName());
+	}
 
-    private static GemInfo create(@NotNull final String name) {
-        final StringTokenizer st = new StringTokenizer(name, "-");
-        final String gemName = st.nextToken();
-        final String gemVersion = st.nextToken();
-        return new GemInfo(gemName, gemVersion);
-    }
+	private static GemInfo create(@NotNull final String name)
+	{
+		final StringTokenizer st = new StringTokenizer(name, "-");
+		final String gemName = st.nextToken();
+		final String gemVersion = st.nextToken();
+		return new GemInfo(gemName, gemVersion);
+	}
 
-    @Nullable
-    public static String getGemNameByUrl(@NotNull final String gemsRootUrl,
-                                         @NotNull final String fileUrl){
-        final String s = fileUrl.substring(gemsRootUrl.length()+1);
-        final int slashIndex = s.indexOf('/');
-        if (slashIndex!=-1){
-            return s.substring(0, slashIndex);
-        }
-        return null;
-    }
+	@Nullable
+	public static String getGemNameByUrl(@NotNull final String gemsRootUrl, @NotNull final String fileUrl)
+	{
+		final String s = fileUrl.substring(gemsRootUrl.length() + 1);
+		final int slashIndex = s.indexOf('/');
+		if(slashIndex != -1)
+		{
+			return s.substring(0, slashIndex);
+		}
+		return null;
+	}
 }

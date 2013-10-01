@@ -16,12 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.global;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,79 +36,98 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RNamedElementBase
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RGlobalVariablePresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVariable {
+public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVariable
+{
 
-    private RGlobalVarHolder myHolder;
+	private RGlobalVarHolder myHolder;
 
-    @NonNls private static final String DOLLAR = "$";
+	@NonNls
+	private static final String DOLLAR = "$";
 
-    public RGlobalVariableImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RGlobalVariableImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRGlobalVariable(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRGlobalVariable(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	protected PsiReference createReference() {
-        return new RGlobalVariableReference(this);
-    }
+	@Override
+	protected PsiReference createReference()
+	{
+		return new RGlobalVariableReference(this);
+	}
 
-    @Nullable
-    public Icon getIcon(int flags) {
-        return RGlobalVariablePresentationUtil.getIcon();
-    }
-
-    @Override
-	public ItemPresentation getPresentation() {
-        return RGlobalVariablePresentationUtil.getPresentation(this);
-    }
-
-    @Override
-	public boolean isInDefinition() {
-        return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this)!=null;
-    }
-
-    @Override
-	@NotNull
-    public RVirtualGlobalVarHolder getHolder() {
-        if (myHolder == null){
-            myHolder = PsiTreeUtil.getParentOfType(this, RGlobalVarHolder.class);
-        }
-        assert myHolder!=null;
-        return myHolder;
-    }
-
-    @Override
 	@Nullable
-    protected String getPrefix() {
-        return DOLLAR;
-    }
+	public Icon getIcon(int flags)
+	{
+		return RGlobalVariablePresentationUtil.getIcon();
+	}
 
-    @Override
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return RGlobalVariablePresentationUtil.getPresentation(this);
+	}
+
+	@Override
+	public boolean isInDefinition()
+	{
+		return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this) != null;
+	}
+
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
-    }
+	public RVirtualGlobalVarHolder getHolder()
+	{
+		if(myHolder == null)
+		{
+			myHolder = PsiTreeUtil.getParentOfType(this, RGlobalVarHolder.class);
+		}
+		assert myHolder != null;
+		return myHolder;
+	}
 
-    @Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
-        if (!TextUtil.isCID(newName)){
-            throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
-        }
-    }
+	@Override
+	@Nullable
+	protected String getPrefix()
+	{
+		return DOLLAR;
+	}
+
+	@Override
+	@NotNull
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
+	}
+
+	@Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	{
+		if(!TextUtil.isCID(newName))
+		{
+			throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
+		}
+	}
 }

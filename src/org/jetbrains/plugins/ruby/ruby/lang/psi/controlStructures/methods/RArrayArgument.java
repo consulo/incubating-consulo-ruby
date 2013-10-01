@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
  * @author: oleg
  * @date: 10.03.2007
  */
-public interface RArrayArgument extends RArgument {
+public interface RArrayArgument extends RArgument
+{
 }

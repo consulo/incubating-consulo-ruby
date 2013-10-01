@@ -22,16 +22,17 @@ package org.jetbrains.plugins.ruby.ruby.run;
  * @author: Roman Chernyatchik
  * @date: 22.01.2007
  */
-public interface CommandLineArgumentsProvider {
-    /**
-     * @return Commands to execute (one command corresponds to one add argument)
-     */
-    public String[] getArguments();
-//    public String getCommandLine();
+public interface CommandLineArgumentsProvider
+{
+	/**
+	 * @return Commands to execute (one command corresponds to one add argument)
+	 */
+	public String[] getArguments();
+	//    public String getCommandLine();
 
-    /**
-     * If provider creates actions (AnAction) for cmdline parameters' control this
-     * method will disable them. Uses in ConsoleRunner when user changes cmdline manualy. 
-     */
-    public void disableParametersActions();
+	/**
+	 * If provider creates actions (AnAction) for cmdline parameters' control this
+	 * method will disable them. Uses in ConsoleRunner when user changes cmdline manualy.
+	 */
+	public void disableParametersActions();
 }

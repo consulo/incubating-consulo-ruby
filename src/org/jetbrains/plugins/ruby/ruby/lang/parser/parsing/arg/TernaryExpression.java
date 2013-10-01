@@ -17,56 +17,64 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.07.2006
  */
-class TernaryExpression implements RubyTokenTypes {
-    /**
-     * Parsing ternary with lead RANGE already parsed
-     * @param builder Current builder
-     * @param marker Marker before RANGE
-     * @param result result of RANGE
-     * @return result of parsing
-     */
-    private static IElementType parseWithLeadRANGE(final RBuilder builder, RMarker marker, final IElementType result){
-// ternary expression parsing
-        if (!builder.compare(tQUESTION)) {
-            marker.drop();
-            return result;
-        }
-        marker.done(RubyElementTypes.CONDITION);
-        marker = marker.precede();
+class TernaryExpression implements RubyTokenTypes
+{
+	/**
+	 * Parsing ternary with lead RANGE already parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before RANGE
+	 * @param result  result of RANGE
+	 * @return result of parsing
+	 */
+	private static IElementType parseWithLeadRANGE(final RBuilder builder, RMarker marker, final IElementType result)
+	{
+		// ternary expression parsing
+		if(!builder.compare(tQUESTION))
+		{
+			marker.drop();
+			return result;
+		}
+		marker.done(RubyElementTypes.CONDITION);
+		marker = marker.precede();
 
-        builder.match(tQUESTION);
-        if (ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT) {
-            builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-        }
-        builder.match(BNF.tCOLONS, ErrorMsg.expected(":"));
-        if (ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT) {
-            builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-        }
-        marker.done(RubyElementTypes.TERNARY_EXPRESSION);
-        return RubyElementTypes.TERNARY_EXPRESSION;
-    }
+		builder.match(tQUESTION);
+		if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+		{
+			builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+		}
+		builder.match(BNF.tCOLONS, ErrorMsg.expected(":"));
+		if(ARG.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+		{
+			builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+		}
+		marker.done(RubyElementTypes.TERNARY_EXPRESSION);
+		return RubyElementTypes.TERNARY_EXPRESSION;
+	}
 
-    /**
-     * Parsing Ternary with lead PRIMARY already parsed
-     * @param builder Current builder
-     * @param marker Marker before PRIMARY
-     * @param result result of PRIMARY
-     * @return result of parsing
-     */
-    public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result) {
-        return parseWithLeadRANGE(builder, marker.precede(), RangeExpression.parseWithLeadPRIMARY(builder, marker, result));
-    }
+	/**
+	 * Parsing Ternary with lead PRIMARY already parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before PRIMARY
+	 * @param result  result of PRIMARY
+	 * @return result of parsing
+	 */
+	public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result)
+	{
+		return parseWithLeadRANGE(builder, marker.precede(), RangeExpression.parseWithLeadPRIMARY(builder, marker, result));
+	}
 }

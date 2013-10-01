@@ -42,60 +42,67 @@ import com.intellij.ui.awt.RelativePoint;
  * @author: oleg
  * @date: Jun 27, 2007
  */
-public class RubyGutterNavigator {
-    private static final Logger LOG = Logger.getInstance(RubyGutterNavigator.class.getName());
+public class RubyGutterNavigator
+{
+	private static final Logger LOG = Logger.getInstance(RubyGutterNavigator.class.getName());
 
-    public static void browse(@NotNull final MouseEvent e,
-                              @NotNull final RubyGutterInfo info) {
-        final Project project = info.getProject();
-        final ArrayList<Navigatable> navigatable = new ArrayList<Navigatable>();
-        for (Object element : info.getElements()) {
-            PsiElement psiElem = null;
-            if (element instanceof PsiMethod){
-                psiElem = (PsiMethod) element;
-            } else
-            if (element instanceof RVirtualElement) {
-                psiElem = RVirtualPsiUtil.findPsiByVirtualElement((RVirtualElement) element, project);
-            }
-            // Add if we found navigatable element
-            if (psiElem instanceof Navigatable) {
-                navigatable.add((Navigatable) psiElem);
-            }
-        }
-        openTargets(e, info.getMode() == RubyGutterInfo.Mode.OVERRIDE ?
-                RBundle.message("line.marker.override.select.variant") :
-                RBundle.message("line.marker.implement.select.variant"),
-                new DefaultPsiElementCellRenderer(), navigatable.toArray(new Navigatable[navigatable.size()]));
-    }
+	public static void browse(@NotNull final MouseEvent e, @NotNull final RubyGutterInfo info)
+	{
+		final Project project = info.getProject();
+		final ArrayList<Navigatable> navigatable = new ArrayList<Navigatable>();
+		for(Object element : info.getElements())
+		{
+			PsiElement psiElem = null;
+			if(element instanceof PsiMethod)
+			{
+				psiElem = (PsiMethod) element;
+			}
+			else if(element instanceof RVirtualElement)
+			{
+				psiElem = RVirtualPsiUtil.findPsiByVirtualElement((RVirtualElement) element, project);
+			}
+			// Add if we found navigatable element
+			if(psiElem instanceof Navigatable)
+			{
+				navigatable.add((Navigatable) psiElem);
+			}
+		}
+		openTargets(e, info.getMode() == RubyGutterInfo.Mode.OVERRIDE ? RBundle.message("line.marker.override.select.variant") : RBundle.message("line.marker.implement.select.variant"), new DefaultPsiElementCellRenderer(), navigatable.toArray(new Navigatable[navigatable.size()]));
+	}
 
-    public static void openTargets(@NotNull final MouseEvent e,
-                                   @NotNull final String title,
-                                   @NotNull final ListCellRenderer listRenderer,
-                                   @NotNull final Navigatable... targets) {
-        if (targets.length == 0) {
-            return;
-        }
+	public static void openTargets(@NotNull final MouseEvent e, @NotNull final String title, @NotNull final ListCellRenderer listRenderer, @NotNull final Navigatable... targets)
+	{
+		if(targets.length == 0)
+		{
+			return;
+		}
 
-        if (targets.length == 1) {
-            targets[0].navigate(true);
-            return;
-        }
+		if(targets.length == 1)
+		{
+			targets[0].navigate(true);
+			return;
+		}
 
-        final JList list = new JList(targets);
-        list.setCellRenderer(listRenderer);
-        new PopupChooserBuilder(list).setTitle(title).setMovable(true)
-                .setItemChoosenCallback(new Runnable() {
-                    @Override
-					public void run() {
-                        int[] ids = list.getSelectedIndices();
-                        if (ids == null || ids.length == 0) return;
-                        Object[] selectedElements = list.getSelectedValues();
-                        for (Object element : selectedElements) {
-                            PsiElement selected = (PsiElement) element;
-                            LOG.assertTrue(selected.isValid());
-                            ((Navigatable) selected).navigate(true);
-                        }
-                    }
-                }).createPopup().show(new RelativePoint(e));
-    }
+		final JList list = new JList(targets);
+		list.setCellRenderer(listRenderer);
+		new PopupChooserBuilder(list).setTitle(title).setMovable(true).setItemChoosenCallback(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				int[] ids = list.getSelectedIndices();
+				if(ids == null || ids.length == 0)
+				{
+					return;
+				}
+				Object[] selectedElements = list.getSelectedValues();
+				for(Object element : selectedElements)
+				{
+					PsiElement selected = (PsiElement) element;
+					LOG.assertTrue(selected.isValid());
+					((Navigatable) selected).navigate(true);
+				}
+			}
+		}).createPopup().show(new RelativePoint(e));
+	}
 }

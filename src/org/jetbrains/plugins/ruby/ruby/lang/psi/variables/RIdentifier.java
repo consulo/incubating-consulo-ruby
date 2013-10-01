@@ -16,43 +16,44 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RIdentifier extends RPossibleCall, RNamedElement, PsiNamedElement {
+public interface RIdentifier extends RPossibleCall, RNamedElement, PsiNamedElement
+{
 
-    /**
-     * @return true if identifier is local variable, false otherwise
-     */
-    public boolean isLocalVariable();
+	/**
+	 * @return true if identifier is local variable, false otherwise
+	 */
+	public boolean isLocalVariable();
 
-    /**
-     * @return true if identifier is parameter
-     */
-    public boolean isParameter();
+	/**
+	 * @return true if identifier is parameter
+	 */
+	public boolean isParameter();
 
-    /**
-     * @return true if identifier is method parameter
-     */
-    public boolean isMethodParameter();
+	/**
+	 * @return true if identifier is method parameter
+	 */
+	public boolean isMethodParameter();
 
-    /**
-     * @return true if identifier is block parameter
-     */
-    public boolean isBlockParameter();
+	/**
+	 * @return true if identifier is block parameter
+	 */
+	public boolean isBlockParameter();
 
-    /**
-     * @return ScopeVariable for given identifier
-     */
-    @Nullable
-    public ScopeVariable getScopeVariable();
+	/**
+	 * @return ScopeVariable for given identifier
+	 */
+	@Nullable
+	public ScopeVariable getScopeVariable();
 
 
 }

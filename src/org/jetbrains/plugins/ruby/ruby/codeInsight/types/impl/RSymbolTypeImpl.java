@@ -16,13 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.types.*;
-
-import java.util.Collection;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.CoreTypes;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RSymbolType;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,65 +35,81 @@ import java.util.Collection;
  * @author: oleg
  * @date: Apr 13, 2008
  */
-public class RSymbolTypeImpl extends RTypeBase implements RSymbolType {
-    private DuckType myDuckType;
-    private Symbol mySymbol;
+public class RSymbolTypeImpl extends RTypeBase implements RSymbolType
+{
+	private DuckType myDuckType;
+	private Symbol mySymbol;
 
-    public RSymbolTypeImpl(@Nullable final FileSymbol fileSymbol,
-                           @NotNull final Symbol symbol,
-                           final Context context,
-                           final boolean inReference) {
-        // TODO[oleg]: OPTIMIZE! Don`t use ducktype
-        mySymbol = symbol;
-        myDuckType = RTypeUtil.createDuckTypeBySymbol(fileSymbol, symbol, context, inReference);
-    }
+	public RSymbolTypeImpl(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, final Context context, final boolean inReference)
+	{
+		// TODO[oleg]: OPTIMIZE! Don`t use ducktype
+		mySymbol = symbol;
+		myDuckType = RTypeUtil.createDuckTypeBySymbol(fileSymbol, symbol, context, inReference);
+	}
 
-    public Symbol getSymbol() {
-        return mySymbol;
-    }
+	public Symbol getSymbol()
+	{
+		return mySymbol;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<Message> getMessages() {
-        return myDuckType.getMessages();
-    }
+	public Collection<Message> getMessages()
+	{
+		return myDuckType.getMessages();
+	}
 
-    @Override
-	public Collection<Message> getMessagesForName(@Nullable final String name) {
-        return myDuckType.getMessagesForName(name);
-    }
+	@Override
+	public Collection<Message> getMessagesForName(@Nullable final String name)
+	{
+		return myDuckType.getMessagesForName(name);
+	}
 
-    @Override
-	public boolean isTyped() {
-        // handle nil value correctly
-        return !CoreTypes.NilClass.equals(getName());
-    }
+	@Override
+	public boolean isTyped()
+	{
+		// handle nil value correctly
+		return !CoreTypes.NilClass.equals(getName());
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getName() {
-        return mySymbol.getName();
-    }
+	public String getName()
+	{
+		return mySymbol.getName();
+	}
 
-    public String toString() {
-        return "Symbol type: " + mySymbol.getName();
-    }
+	public String toString()
+	{
+		return "Symbol type: " + mySymbol.getName();
+	}
 
-    @Override
-    public boolean equals(final Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public boolean equals(final Object o)
+	{
+		if(this == o)
+		{
+			return true;
+		}
+		if(o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
 
-      final RSymbolTypeImpl that = (RSymbolTypeImpl)o;
+		final RSymbolTypeImpl that = (RSymbolTypeImpl) o;
 
-      if (!mySymbol.equals(that.mySymbol)) return false;
+		if(!mySymbol.equals(that.mySymbol))
+		{
+			return false;
+		}
 
-      return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-      int result = mySymbol.hashCode();
-      return result;
-    }
+	@Override
+	public int hashCode()
+	{
+		int result = mySymbol.hashCode();
+		return result;
+	}
 }

@@ -16,12 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import com.intellij.ide.structureView.impl.StructureNodeRenderer;
-import com.intellij.openapi.ui.DialogBuilder;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.ui.*;
+import java.awt.BorderLayout;
+import java.util.Comparator;
+
+import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -32,10 +34,16 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.Comparator;
+import com.intellij.ide.structureView.impl.StructureNodeRenderer;
+import com.intellij.openapi.ui.DialogBuilder;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.ui.ColoredListCellRenderer;
+import com.intellij.ui.ListScrollingUtil;
+import com.intellij.ui.ScrollPaneFactory;
+import com.intellij.ui.SimpleTextAttributes;
+import com.intellij.ui.SortedListModel;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,95 +51,101 @@ import java.util.Comparator;
  * @author: Roman Chernyatchik
  * @date: 06.08.2007
  */
-public class RMethodList extends JPanel {
-  private final RVirtualClass myRVClass;
+public class RMethodList extends JPanel
+{
+	private final RVirtualClass myRVClass;
 
-    private final SortedListModel<RVirtualMethod> myListModel;
+	private final SortedListModel<RVirtualMethod> myListModel;
 
-    private final JList myList;
+	private final JList myList;
 
-    public RMethodList(@NotNull final RVirtualClass rVClass,
-                       @NotNull final Condition<RVirtualMethod> filter,
-                       @NotNull final RMethodProvider methodProvider) {
-        super(new BorderLayout());
+	public RMethodList(@NotNull final RVirtualClass rVClass, @NotNull final Condition<RVirtualMethod> filter, @NotNull final RMethodProvider methodProvider)
+	{
+		super(new BorderLayout());
 
-        myRVClass = rVClass;
+		myRVClass = rVClass;
 
-        myListModel = new SortedListModel<RVirtualMethod>(new RMethodComparator());
-        myList = new JList(myListModel);
+		myListModel = new SortedListModel<RVirtualMethod>(new RMethodComparator());
+		myList = new JList(myListModel);
 
-        createList(methodProvider.getAllMethods(), filter);
+		createList(methodProvider.getAllMethods(), filter);
 
-        add(ScrollPaneFactory.createScrollPane(myList));
+		add(ScrollPaneFactory.createScrollPane(myList));
 
-        myList.setCellRenderer(new MyMethodsListCellRenderer());
-        myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        ListScrollingUtil.ensureSelectionExists(myList);
-    }
+		myList.setCellRenderer(new MyMethodsListCellRenderer());
+		myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		ListScrollingUtil.ensureSelectionExists(myList);
+	}
 
-    private void createList(@NotNull final RVirtualMethod[] allMethods,
-                            @NotNull final Condition<RVirtualMethod> filter) {
-        for (RVirtualMethod method : allMethods) {
-            if (filter.value(method)) myListModel.add(method);
-        }
-    }
+	private void createList(@NotNull final RVirtualMethod[] allMethods, @NotNull final Condition<RVirtualMethod> filter)
+	{
+		for(RVirtualMethod method : allMethods)
+		{
+			if(filter.value(method))
+			{
+				myListModel.add(method);
+			}
+		}
+	}
 
-    public RVirtualMethod getSelected() {
-        return (RVirtualMethod)myList.getSelectedValue();
-    }
+	public RVirtualMethod getSelected()
+	{
+		return (RVirtualMethod) myList.getSelectedValue();
+	}
 
-    public static RVirtualMethod showDialog(final RVirtualClass rClass,
-                                            final Condition<RVirtualMethod> filter,
-                                            @NotNull final RMethodProvider methodProvider,
-                                            final JComponent parent) {
-    final RMethodList RMethodList = new RMethodList(rClass, filter, methodProvider);
-    final DialogBuilder builder = new DialogBuilder(parent);
-    builder.setCenterPanel(RMethodList);
-    builder.setPreferedFocusComponent(RMethodList.myList);
-    builder.setTitle(RBundle.message("choose.test.method.dialog.title"));
-    return builder.show() == DialogWrapper.OK_EXIT_CODE ? RMethodList.getSelected() : null;
-  }
+	public static RVirtualMethod showDialog(final RVirtualClass rClass, final Condition<RVirtualMethod> filter, @NotNull final RMethodProvider methodProvider, final JComponent parent)
+	{
+		final RMethodList RMethodList = new RMethodList(rClass, filter, methodProvider);
+		final DialogBuilder builder = new DialogBuilder(parent);
+		builder.setCenterPanel(RMethodList);
+		builder.setPreferedFocusComponent(RMethodList.myList);
+		builder.setTitle(RBundle.message("choose.test.method.dialog.title"));
+		return builder.show() == DialogWrapper.OK_EXIT_CODE ? RMethodList.getSelected() : null;
+	}
 
-    private static class RMethodComparator implements Comparator<RVirtualMethod> {
-        @Override
-		public int compare(final RVirtualMethod rMethod1, final RVirtualMethod rMethod2) {
-            return rMethod1.getName().compareToIgnoreCase(rMethod2.getName());
-        }
-    }
+	private static class RMethodComparator implements Comparator<RVirtualMethod>
+	{
+		@Override
+		public int compare(final RVirtualMethod rMethod1, final RVirtualMethod rMethod2)
+		{
+			return rMethod1.getName().compareToIgnoreCase(rMethod2.getName());
+		}
+	}
 
-    private class MyMethodsListCellRenderer extends ColoredListCellRenderer {
-        @Override
-		protected void customizeCellRenderer(final JList list, final Object value,
-                                             final int index, final boolean selected,
-                                             final boolean hasFocus) {
+	private class MyMethodsListCellRenderer extends ColoredListCellRenderer
+	{
+		@Override
+		protected void customizeCellRenderer(final JList list, final Object value, final int index, final boolean selected, final boolean hasFocus)
+		{
 
-            final RVirtualMethod rVMethod = (RVirtualMethod)value;
+			final RVirtualMethod rVMethod = (RVirtualMethod) value;
 
-            final SimpleTextAttributes methodAttrs =
-                    StructureNodeRenderer.applyDeprecation(rVMethod, SimpleTextAttributes.REGULAR_ATTRIBUTES);
-            append(RMethodPresentationUtil.formatName(rVMethod, RPresentationConstants.SHOW_NAME),
-                    methodAttrs);
+			final SimpleTextAttributes methodAttrs = StructureNodeRenderer.applyDeprecation(rVMethod, SimpleTextAttributes.REGULAR_ATTRIBUTES);
+			append(RMethodPresentationUtil.formatName(rVMethod, RPresentationConstants.SHOW_NAME), methodAttrs);
 
-            final RVirtualClass containingClass = RVirtualPsiUtil.getContainingRVClass(rVMethod);
-            final SimpleTextAttributes locationAttrs = SimpleTextAttributes.GRAY_ATTRIBUTES;
-            //assert containingClass != null;
-            if (containingClass != null) {
-                if (!myRVClass.equals(containingClass)) {
-                    append(" (" + RClassPresentationUtil.formatName(containingClass, RPresentationConstants.SHOW_NAME) + ")",
-                            locationAttrs);
-                }
-            } else {
-                final RVirtualContainer parentCont = rVMethod.getVirtualParentContainer();
-                assert parentCont != null; //belongs to class, module of file
-                append(" (" + RContainerPresentationUtil.formatName(parentCont, RPresentationConstants.SHOW_NAME) + ")",
-                        locationAttrs);
-            }
+			final RVirtualClass containingClass = RVirtualPsiUtil.getContainingRVClass(rVMethod);
+			final SimpleTextAttributes locationAttrs = SimpleTextAttributes.GRAY_ATTRIBUTES;
+			//assert containingClass != null;
+			if(containingClass != null)
+			{
+				if(!myRVClass.equals(containingClass))
+				{
+					append(" (" + RClassPresentationUtil.formatName(containingClass, RPresentationConstants.SHOW_NAME) + ")", locationAttrs);
+				}
+			}
+			else
+			{
+				final RVirtualContainer parentCont = rVMethod.getVirtualParentContainer();
+				assert parentCont != null; //belongs to class, module of file
+				append(" (" + RContainerPresentationUtil.formatName(parentCont, RPresentationConstants.SHOW_NAME) + ")", locationAttrs);
+			}
 
-            setIcon(RMethodPresentationUtil.getIcon(rVMethod, Iconable.ICON_FLAG_VISIBILITY));
-        }
-    }
+			setIcon(RMethodPresentationUtil.getIcon(rVMethod, Iconable.ICON_FLAG_VISIBILITY));
+		}
+	}
 
-    public interface RMethodProvider {
-        public RVirtualMethod[] getAllMethods();
-    }
+	public interface RMethodProvider
+	{
+		public RVirtualMethod[] getAllMethods();
+	}
 }

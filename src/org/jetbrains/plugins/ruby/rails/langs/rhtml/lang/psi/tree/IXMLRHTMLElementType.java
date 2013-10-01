@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree;
 
-import com.intellij.psi.tree.xml.IXmlElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
+import com.intellij.psi.tree.xml.IXmlElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,21 +25,25 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
  * @author: Roman Chernyatchik
  * @date: Aug 18, 2007
  */
-public class IXMLRHTMLElementType extends IXmlElementType implements PresentableElementType, IRHTMLElement {
-    private String myName;
+public class IXMLRHTMLElementType extends IXmlElementType implements PresentableElementType, IRHTMLElement
+{
+	private String myName;
 
-    public IXMLRHTMLElementType(String debugName) {
-        this(debugName, debugName);
-    }
-    public IXMLRHTMLElementType(final String debugName,
-                                final String presentableName) {
-        super(debugName);
-        myName = presentableName;
-    }
+	public IXMLRHTMLElementType(String debugName)
+	{
+		this(debugName, debugName);
+	}
+
+	public IXMLRHTMLElementType(final String debugName, final String presentableName)
+	{
+		super(debugName);
+		myName = presentableName;
+	}
 
 
-    @Override
-	public String getPresentableName() {
-        return myName;
-    }
+	@Override
+	public String getPresentableName()
+	{
+		return myName;
+	}
 }

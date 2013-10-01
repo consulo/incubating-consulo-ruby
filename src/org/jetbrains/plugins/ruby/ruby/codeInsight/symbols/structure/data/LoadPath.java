@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.HashSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,40 +30,49 @@ import java.util.Set;
  * @author: oleg
  * @date: Oct 30, 2007
  */
-public class LoadPath {
+public class LoadPath
+{
 
-    private final Object LOCK = new Object();
+	private final Object LOCK = new Object();
 
-    private final LoadPath myBaseLoadPath;
+	private final LoadPath myBaseLoadPath;
 
-    private Set<VirtualFile> myLoadPathes = new HashSet<VirtualFile>();
+	private Set<VirtualFile> myLoadPathes = new HashSet<VirtualFile>();
 
-    public LoadPath(@Nullable final LoadPath loadPath) {
-        myBaseLoadPath = loadPath;
-    }
+	public LoadPath(@Nullable final LoadPath loadPath)
+	{
+		myBaseLoadPath = loadPath;
+	}
 
-    @NotNull
-    public Set<VirtualFile> getLoadPathFiles(){
-        final HashSet<VirtualFile> all = new HashSet<VirtualFile>();
-        addAll(all);
-        return all;
-    }
-    
-    protected void addAll(@NotNull final Set<VirtualFile> set){
-        if (myBaseLoadPath != null) {
-            myBaseLoadPath.addAll(set);
-        }
-        synchronized (LOCK) {
-            set.addAll(myLoadPathes);
-        }
-    }
+	@NotNull
+	public Set<VirtualFile> getLoadPathFiles()
+	{
+		final HashSet<VirtualFile> all = new HashSet<VirtualFile>();
+		addAll(all);
+		return all;
+	}
 
-    public void addLoadPathUrl(@NotNull final String loadPathUrl){
-        final VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(loadPathUrl);
-        if (file!=null){
-            synchronized (LOCK) {
-                myLoadPathes.add(file);
-            }
-        }
-    }
+	protected void addAll(@NotNull final Set<VirtualFile> set)
+	{
+		if(myBaseLoadPath != null)
+		{
+			myBaseLoadPath.addAll(set);
+		}
+		synchronized(LOCK)
+		{
+			set.addAll(myLoadPathes);
+		}
+	}
+
+	public void addLoadPathUrl(@NotNull final String loadPathUrl)
+	{
+		final VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(loadPathUrl);
+		if(file != null)
+		{
+			synchronized(LOCK)
+			{
+				myLoadPathes.add(file);
+			}
+		}
+	}
 }

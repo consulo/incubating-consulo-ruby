@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.PsiElementVisitor;
 import com.intellij.util.CharTable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,19 +29,22 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: 07.04.2007
  */
-public class OuterRHTMLElementInHTMLImpl extends LeafPsiElement implements OuterRHTMLElementInHTML {
-    public OuterRHTMLElementInHTMLImpl(final IElementType type, final CharSequence buffer,
-                                       final int startOffset, final int endOffset, CharTable table) {
-        super(type, buffer, startOffset, endOffset, table);
-    }
+public class OuterRHTMLElementInHTMLImpl extends LeafPsiElement implements OuterRHTMLElementInHTML
+{
+	public OuterRHTMLElementInHTMLImpl(final IElementType type, final CharSequence buffer, final int startOffset, final int endOffset, CharTable table)
+	{
+		super(type, buffer, startOffset, endOffset, table);
+	}
 
-    public String toString() {
-        return "Outer: " + getElementType() + ", RHTML characters in HTML lang";
-    }
+	public String toString()
+	{
+		return "Outer: " + getElementType() + ", RHTML characters in HTML lang";
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor) {
-        visitor.visitOuterLanguageElement(this);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		visitor.visitOuterLanguageElement(this);
+	}
 }
 

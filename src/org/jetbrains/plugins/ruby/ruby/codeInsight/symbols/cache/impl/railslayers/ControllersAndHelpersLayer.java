@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -27,53 +24,61 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg, Roman.Chernyatchik
  * Date: Oct 22, 2007
  */
-public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol {
-    private String myControllersRootUrl;
-    private String myHelpersRootUrl;
+public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol
+{
+	private String myControllersRootUrl;
+	private String myHelpersRootUrl;
 
-    public ControllersAndHelpersLayer(@NotNull final Project project,
-                           @Nullable final Module module,
-                           @Nullable final Sdk sdk,
-                           final boolean isJRubyEnabled) {
-        super(FileSymbolType.MODELS_LAYER, project, module, sdk, isJRubyEnabled);
+	public ControllersAndHelpersLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	{
+		super(FileSymbolType.MODELS_LAYER, project, module, sdk, isJRubyEnabled);
 
-        assert module != null;
+		assert module != null;
 
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
 
-        myControllersRootUrl = railsPaths.getControllerRootURL();
-        myHelpersRootUrl = railsPaths.getHelpersRootURL();
-    }
+		myControllersRootUrl = railsPaths.getControllerRootURL();
+		myHelpersRootUrl = railsPaths.getHelpersRootURL();
+	}
 
-    @Override
-	public void fileAdded(@NotNull String url) {
-        if (url.startsWith(myControllersRootUrl)) {
-            myFileSymbol = null;
-            return;
-        }
+	@Override
+	public void fileAdded(@NotNull String url)
+	{
+		if(url.startsWith(myControllersRootUrl))
+		{
+			myFileSymbol = null;
+			return;
+		}
 
-        if (url.startsWith(myHelpersRootUrl)) {
-            myFileSymbol = null;
-            return;
-        }
-        final CachedSymbol baseCachedSymbol = getBaseSymbol();
-        if (baseCachedSymbol!=null){
-            ((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
-            if (!baseCachedSymbol.isUp2Date()){
-                myFileSymbol = null;
-            }
-        }
-    }
+		if(url.startsWith(myHelpersRootUrl))
+		{
+			myFileSymbol = null;
+			return;
+		}
+		final CachedSymbol baseCachedSymbol = getBaseSymbol();
+		if(baseCachedSymbol != null)
+		{
+			((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
+			if(!baseCachedSymbol.isUp2Date())
+			{
+				myFileSymbol = null;
+			}
+		}
+	}
 
-    @Override
-	protected void addAdditionalData() {
-        RailsRequireUtil.loadAllControllersAndHelpers(myFileSymbol, myModule);
-    }
+	@Override
+	protected void addAdditionalData()
+	{
+		RailsRequireUtil.loadAllControllersAndHelpers(myFileSymbol, myModule);
+	}
 }

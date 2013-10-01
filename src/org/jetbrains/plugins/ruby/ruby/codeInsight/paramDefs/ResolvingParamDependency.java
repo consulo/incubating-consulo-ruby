@@ -16,47 +16,56 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author yole
  */
-public class ResolvingParamDependency implements ParamDependency<PsiElement> {
-    private final String myKey;
+public class ResolvingParamDependency implements ParamDependency<PsiElement>
+{
+	private final String myKey;
 
-    public ResolvingParamDependency(final String key) {
-        myKey = key;
-    }
+	public ResolvingParamDependency(final String key)
+	{
+		myKey = key;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement getValue(final ParamContext context) {
-        RListOfExpressions args = context.getCall().getCallArguments();
-        for(RPsiElement element: args.getElements()) {
-            if (element instanceof RAssoc) {
-                final RAssoc rAssoc = (RAssoc) element;
-                RPsiElement key = rAssoc.getKey();
-                RPsiElement value = rAssoc.getValue();
-                if (key instanceof RSymbol && value != null) {
-                    String s = key.getText();
-                    if (s.equals(myKey)) {
-                        ParamContext dependencyContext = new ParamContext(value, context.getCall(), context.getIndex(), myKey);
-                        ParamDef dependencyParamDef = ParamDefUtil.getParamDef(dependencyContext);
-                        if (dependencyParamDef != null) {
-                            PsiElement result = dependencyParamDef.resolveReference(dependencyContext);
-                            if (result != null) {
-                                return result;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
+	public PsiElement getValue(final ParamContext context)
+	{
+		RListOfExpressions args = context.getCall().getCallArguments();
+		for(RPsiElement element : args.getElements())
+		{
+			if(element instanceof RAssoc)
+			{
+				final RAssoc rAssoc = (RAssoc) element;
+				RPsiElement key = rAssoc.getKey();
+				RPsiElement value = rAssoc.getValue();
+				if(key instanceof RSymbol && value != null)
+				{
+					String s = key.getText();
+					if(s.equals(myKey))
+					{
+						ParamContext dependencyContext = new ParamContext(value, context.getCall(), context.getIndex(), myKey);
+						ParamDef dependencyParamDef = ParamDefUtil.getParamDef(dependencyContext);
+						if(dependencyParamDef != null)
+						{
+							PsiElement result = dependencyParamDef.resolveReference(dependencyContext);
+							if(result != null)
+							{
+								return result;
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
 }

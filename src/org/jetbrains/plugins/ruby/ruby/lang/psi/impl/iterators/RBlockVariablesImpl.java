@@ -16,43 +16,49 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 15.06.2006
  */
-public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariables {
-    public RBlockVariablesImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariables
+{
+	public RBlockVariablesImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRBlockVariables(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRBlockVariables(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RIdentifier> getVariables() {
-        RListOfExpressions list = getChildByType(RListOfExpressions.class, 0);
-        if (list !=null){
-            return list.getChildrenByType(RIdentifier.class);
-        }
-        return getChildrenByType(RIdentifier.class);
-    }
+	public List<RIdentifier> getVariables()
+	{
+		RListOfExpressions list = getChildByType(RListOfExpressions.class, 0);
+		if(list != null)
+		{
+			return list.getChildrenByType(RIdentifier.class);
+		}
+		return getChildrenByType(RIdentifier.class);
+	}
 }

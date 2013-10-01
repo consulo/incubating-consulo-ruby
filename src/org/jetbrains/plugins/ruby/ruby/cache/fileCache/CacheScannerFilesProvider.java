@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.roots.ModuleRootManager;
-
 import java.util.Collection;
+
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,8 +27,7 @@ import java.util.Collection;
  * @author: Roman Chernyatchik
  * @date: Apr 23, 2008
  */
-public interface CacheScannerFilesProvider {
-    public void scanAndAdd(final String[] rootUrls,
-                           final Collection<VirtualFile> files,
-                           final ModuleRootManager moduleRootManager);
+public interface CacheScannerFilesProvider
+{
+	public void scanAndAdd(final String[] rootUrls, final Collection<VirtualFile> files, final ModuleRootManager moduleRootManager);
 }

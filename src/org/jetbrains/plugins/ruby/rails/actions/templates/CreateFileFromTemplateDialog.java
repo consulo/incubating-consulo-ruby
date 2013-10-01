@@ -55,182 +55,206 @@ import com.intellij.util.IncorrectOperationException;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public class CreateFileFromTemplateDialog extends DialogWrapper {
-    @NotNull
-    private final PsiDirectory myDirectory;
-    @NotNull
-    private final Project myProject;
-    private PsiElement myCreatedElement;
-    private final CreateFromTemplatePanel myAttrPanel;
-    private final JComponent myAttrComponent;
-    @NotNull
-    private final FileTemplate myTemplate;
-    private Properties myDefaultProperties;
+public class CreateFileFromTemplateDialog extends DialogWrapper
+{
+	@NotNull
+	private final PsiDirectory myDirectory;
+	@NotNull
+	private final Project myProject;
+	private PsiElement myCreatedElement;
+	private final CreateFromTemplatePanel myAttrPanel;
+	private final JComponent myAttrComponent;
+	@NotNull
+	private final FileTemplate myTemplate;
+	private Properties myDefaultProperties;
 
-    public CreateFileFromTemplateDialog(@NotNull final Project project,
-                                        @NotNull final PsiDirectory directory,
-                                        @NotNull final FileTemplate template) {
-        super(project, true);
-        myDirectory = directory;
-        myProject = project;
-        myTemplate = template;
-        setTitle(RBundle.message("title.new.from.template", template.getName()));
+	public CreateFileFromTemplateDialog(@NotNull final Project project, @NotNull final PsiDirectory directory, @NotNull final FileTemplate template)
+	{
+		super(project, true);
+		myDirectory = directory;
+		myProject = project;
+		myTemplate = template;
+		setTitle(RBundle.message("title.new.from.template", template.getName()));
 
-        PsiJavaPackage aPackage = null;//myDirectory.getPackage();
-        String packageName = aPackage == null ? "" : aPackage.getQualifiedName();
-        myDefaultProperties = FileTemplateManager.getInstance().getDefaultProperties();
-        myDefaultProperties.setProperty(FileTemplate.ATTRIBUTE_PACKAGE_NAME, packageName);
+		PsiJavaPackage aPackage = null;//myDirectory.getPackage();
+		String packageName = aPackage == null ? "" : aPackage.getQualifiedName();
+		myDefaultProperties = FileTemplateManager.getInstance().getDefaultProperties();
+		myDefaultProperties.setProperty(FileTemplate.ATTRIBUTE_PACKAGE_NAME, packageName);
 
-        String[] unsetAttributes = null;
-        try {
-            unsetAttributes = myTemplate.getUnsetAttributes(myDefaultProperties);
-        }
-        catch (ParseException e) {
-            showErrorDialog(e);
-        }
+		String[] unsetAttributes = null;
+		try
+		{
+			unsetAttributes = myTemplate.getUnsetAttributes(myDefaultProperties);
+		}
+		catch(ParseException e)
+		{
+			showErrorDialog(e);
+		}
 
        /* if (unsetAttributes != null) {
-            myAttrPanel = new CreateFromTemplatePanel(unsetAttributes, true);
+			myAttrPanel = new CreateFromTemplatePanel(unsetAttributes, true);
             myAttrComponent = myAttrPanel.getComponent();
             init();
-        } else*/ {
-            myAttrPanel = null;
-            myAttrComponent = null;
-        }
-    }
+        } else*/
+		{
+			myAttrPanel = null;
+			myAttrComponent = null;
+		}
+	}
 
-    public PsiElement create() {
-        if (myAttrPanel != null) {
-            if (myAttrPanel.hasSomethingToAsk()) {
-                show();
-            } else {
-                doCreate(null);
-            }
-        }
-        return myCreatedElement;
-    }
+	public PsiElement create()
+	{
+		if(myAttrPanel != null)
+		{
+			if(myAttrPanel.hasSomethingToAsk())
+			{
+				show();
+			}
+			else
+			{
+				doCreate(null);
+			}
+		}
+		return myCreatedElement;
+	}
 
-    @Override
-	protected void doOKAction() {
-        String fileName = myAttrPanel.getFileName();
-        if (fileName != null && fileName.length() == 0) {
-            Messages.showErrorDialog(myAttrComponent, RBundle.message("error.please.enter.a.file.name"), CommonBundle.getErrorTitle());
-            return;
-        }
-        doCreate(fileName);
-        if (myCreatedElement != null) {
-            super.doOKAction();
-        }
-    }
+	@Override
+	protected void doOKAction()
+	{
+		String fileName = myAttrPanel.getFileName();
+		if(fileName != null && fileName.length() == 0)
+		{
+			Messages.showErrorDialog(myAttrComponent, RBundle.message("error.please.enter.a.file.name"), CommonBundle.getErrorTitle());
+			return;
+		}
+		doCreate(fileName);
+		if(myCreatedElement != null)
+		{
+			super.doOKAction();
+		}
+	}
 
-    private void doCreate(final String fileName) {
-        try {
-            myCreatedElement = createFromTemplate(myTemplate, fileName,
-                                                  myAttrPanel.getProperties(myDefaultProperties),
-                                                  myDirectory);
-        }
-        catch (Exception e) {
-            showErrorDialog(e);
-        }
-    }
+	private void doCreate(final String fileName)
+	{
+		try
+		{
+			myCreatedElement = createFromTemplate(myTemplate, fileName, myAttrPanel.getProperties(myDefaultProperties), myDirectory);
+		}
+		catch(Exception e)
+		{
+			showErrorDialog(e);
+		}
+	}
 
-    private void showErrorDialog(final Exception e) {
-        Messages.showErrorDialog(myProject, filterMessage(e.getMessage()), RBundle.message("title.cannot.create.file"));
-    }
+	private void showErrorDialog(final Exception e)
+	{
+		Messages.showErrorDialog(myProject, filterMessage(e.getMessage()), RBundle.message("title.cannot.create.file"));
+	}
 
-    @Nullable
-    private String filterMessage(String message) {
-        if (message == null) return null;
-        @NonNls String ioExceptionPrefix = "java.io.IOException:";
-        if (message.startsWith(ioExceptionPrefix)) {
-            message = message.substring(ioExceptionPrefix.length());
-        }
-        return RBundle.message("error.unable.to.parse.template.message", myTemplate.getName(), message);
-    }
+	@Nullable
+	private String filterMessage(String message)
+	{
+		if(message == null)
+		{
+			return null;
+		}
+		@NonNls String ioExceptionPrefix = "java.io.IOException:";
+		if(message.startsWith(ioExceptionPrefix))
+		{
+			message = message.substring(ioExceptionPrefix.length());
+		}
+		return RBundle.message("error.unable.to.parse.template.message", myTemplate.getName(), message);
+	}
 
-    @Override
-	protected JComponent createCenterPanel() {
-        myAttrPanel.ensureFitToScreen(200, 200);
-        JPanel centerPanel = new JPanel(new GridBagLayout());
-        centerPanel.add(myAttrComponent, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        return centerPanel;
-    }
+	@Override
+	protected JComponent createCenterPanel()
+	{
+		myAttrPanel.ensureFitToScreen(200, 200);
+		JPanel centerPanel = new JPanel(new GridBagLayout());
+		centerPanel.add(myAttrComponent, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+		return centerPanel;
+	}
 
-    @Override
-	public JComponent getPreferredFocusedComponent() {
-        return IdeFocusTraversalPolicy.getPreferredFocusedComponent(myAttrComponent);
-    }
+	@Override
+	public JComponent getPreferredFocusedComponent()
+	{
+		return IdeFocusTraversalPolicy.getPreferredFocusedComponent(myAttrComponent);
+	}
 
-    protected PsiElement createFromTemplate(@NotNull final FileTemplate template,
-                                            @NonNls @Nullable final String fileName,
-                                            @Nullable Properties props,
-                                            @NotNull final PsiDirectory directory) throws Exception {
-        @NotNull final Project project = directory.getProject();
-        if (props == null) {
-            props = FileTemplateManager.getInstance().getDefaultProperties();
-        }
-        FileTemplateManager.getInstance().addRecentName(template.getName());
-       // FileTemplateUtil.setPackageNameAttribute(props, directory);
+	protected PsiElement createFromTemplate(@NotNull final FileTemplate template, @NonNls @Nullable final String fileName, @Nullable Properties props, @NotNull final PsiDirectory directory) throws Exception
+	{
+		@NotNull final Project project = directory.getProject();
+		if(props == null)
+		{
+			props = FileTemplateManager.getInstance().getDefaultProperties();
+		}
+		FileTemplateManager.getInstance().addRecentName(template.getName());
+		// FileTemplateUtil.setPackageNameAttribute(props, directory);
 
-        if (fileName != null && props.getProperty(FileTemplate.ATTRIBUTE_NAME) == null) {
-            props.setProperty(FileTemplate.ATTRIBUTE_NAME, fileName);
-        }
+		if(fileName != null && props.getProperty(FileTemplate.ATTRIBUTE_NAME) == null)
+		{
+			props.setProperty(FileTemplate.ATTRIBUTE_NAME, fileName);
+		}
 
-        //Set escaped references to dummy values to remove leading "\" (if not already explicitely set)
-        String[] dummyRefs = FileTemplateUtil.calculateAttributes(template.getText(), props, true);
-        for (String dummyRef : dummyRefs) {
-            props.setProperty(dummyRef, "");
-        }
-        String mergedText;
+		//Set escaped references to dummy values to remove leading "\" (if not already explicitely set)
+		String[] dummyRefs = FileTemplateUtil.calculateAttributes(template.getText(), props, true);
+		for(String dummyRef : dummyRefs)
+		{
+			props.setProperty(dummyRef, "");
+		}
+		String mergedText;
 
-        mergedText = template.getText(props);
+		mergedText = template.getText(props);
 
-        final String templateText = StringUtil.convertLineSeparators(mergedText);
+		final String templateText = StringUtil.convertLineSeparators(mergedText);
 
-        final Ref<Exception> commandExceptionWrapper = new Ref<Exception>();
-        final Ref<PsiElement> psiFileWrapper = new Ref<PsiElement>();
+		final Ref<Exception> commandExceptionWrapper = new Ref<Exception>();
+		final Ref<PsiElement> psiFileWrapper = new Ref<PsiElement>();
 
-        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-            @Override
-			public void run() {
-                final Runnable run = new Runnable() {
-                    @Override
-					public void run() {
-                        try {
-                            psiFileWrapper.set(createPsiFile(template, project, directory, templateText, fileName));
-                        }
-                        catch (Exception ex) {
-                            commandExceptionWrapper.set(ex);
-                        }
-                    }
-                };
-                ApplicationManager.getApplication().runWriteAction(run);
-            }
-        }, RBundle.message("command.create.file.from.template"), null);
-        if (commandExceptionWrapper.get() != null) {
-            throw commandExceptionWrapper.get();
-        }
-        return psiFileWrapper.get();
-    }
+		CommandProcessor.getInstance().executeCommand(project, new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				final Runnable run = new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						try
+						{
+							psiFileWrapper.set(createPsiFile(template, project, directory, templateText, fileName));
+						}
+						catch(Exception ex)
+						{
+							commandExceptionWrapper.set(ex);
+						}
+					}
+				};
+				ApplicationManager.getApplication().runWriteAction(run);
+			}
+		}, RBundle.message("command.create.file.from.template"), null);
+		if(commandExceptionWrapper.get() != null)
+		{
+			throw commandExceptionWrapper.get();
+		}
+		return psiFileWrapper.get();
+	}
 
-    protected PsiFile createPsiFile(final FileTemplate template, final Project project, final PsiDirectory directory, final String templateText, final String fileName) throws IncorrectOperationException {
-        return createPsiFile(project, directory, templateText, fileName, template.getExtension());
-    }
+	protected PsiFile createPsiFile(final FileTemplate template, final Project project, final PsiDirectory directory, final String templateText, final String fileName) throws IncorrectOperationException
+	{
+		return createPsiFile(project, directory, templateText, fileName, template.getExtension());
+	}
 
-    public static PsiFile createPsiFile(final Project project,
-                                        final @NotNull PsiDirectory directory,
-                                        final String content,
-                                        final String fileName,
-                                        final String extension) throws IncorrectOperationException {
-        final String suggestedFileNameEnd = "." + extension;
+	public static PsiFile createPsiFile(final Project project, final @NotNull PsiDirectory directory, final String content, final String fileName, final String extension) throws IncorrectOperationException
+	{
+		final String suggestedFileNameEnd = "." + extension;
 
-        final String realfileName = fileName.endsWith(suggestedFileNameEnd)
-                ? fileName
-                : fileName + suggestedFileNameEnd;
+		final String realfileName = fileName.endsWith(suggestedFileNameEnd) ? fileName : fileName + suggestedFileNameEnd;
 
-        directory.checkCreateFile(realfileName);
+		directory.checkCreateFile(realfileName);
 
-        final PsiFile file = PsiFileFactory.getInstance(project).createFileFromText(realfileName, content);
-        return (PsiFile) directory.add(file);
-    }
+		final PsiFile file = PsiFileFactory.getInstance(project).createFileFromText(realfileName, content);
+		return (PsiFile) directory.add(file);
+	}
 }

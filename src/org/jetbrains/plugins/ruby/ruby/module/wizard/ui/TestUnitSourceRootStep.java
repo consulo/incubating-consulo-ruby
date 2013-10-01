@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
+import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.FacetWizardStep;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,57 +29,64 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Aug 21, 2007
  */
-public class TestUnitSourceRootStep extends FacetWizardStep {
-    private Icon myIcon;
-    private RubyModuleBuilder mySettingsHolder;
-    private String myHelp;
-    private final TestSourceRootPanel myForm;
+public class TestUnitSourceRootStep extends FacetWizardStep
+{
+	private Icon myIcon;
+	private RubyModuleBuilder mySettingsHolder;
+	private String myHelp;
+	private final TestSourceRootPanel myForm;
 
-    public TestUnitSourceRootStep(final RubyModuleBuilder settingsHolder,
-                                  final Icon icon,
-                                  final String help) {
-        super();
-        myIcon = icon;
-        mySettingsHolder = settingsHolder;
-        myForm = new TestSourceRootPanel(settingsHolder);
-        myHelp = help;
-    }
+	public TestUnitSourceRootStep(final RubyModuleBuilder settingsHolder, final Icon icon, final String help)
+	{
+		super();
+		myIcon = icon;
+		mySettingsHolder = settingsHolder;
+		myForm = new TestSourceRootPanel(settingsHolder);
+		myHelp = help;
+	}
 
-    @Override
-	public Icon getIcon() {
-        return myIcon;
-    }
+	@Override
+	public Icon getIcon()
+	{
+		return myIcon;
+	}
 
-    @Override
-	public JComponent getPreferredFocusedComponent() {
-        return myForm.getPreferredFocusedComponent();
-    }
+	@Override
+	public JComponent getPreferredFocusedComponent()
+	{
+		return myForm.getPreferredFocusedComponent();
+	}
 
-    @Override
-	public String getHelpId() {
-        return myHelp;
-    }
+	@Override
+	public String getHelpId()
+	{
+		return myHelp;
+	}
 
-    @Override
-	public JComponent getComponent() {
-        return myForm.getContentPane();
-    }
+	@Override
+	public JComponent getComponent()
+	{
+		return myForm.getContentPane();
+	}
 
-    @Override
-	public void updateStep() {
-        myForm.update();
-    }
+	@Override
+	public void updateStep()
+	{
+		myForm.update();
+	}
 
-    @Override
-	public boolean isStepVisible() {
-        return mySettingsHolder.isTestUnitSupportEnabled()
-                && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
-    }
+	@Override
+	public boolean isStepVisible()
+	{
+		return mySettingsHolder.isTestUnitSupportEnabled() && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
+	}
 
-    @Override
-	public void updateDataModel() {
-        if (!myForm.shouldSearchInWholeModule()) {
-            mySettingsHolder.setTestsUnitRootPath(myForm.getAbsoluteTestsPath());
-        }
-    }
+	@Override
+	public void updateDataModel()
+	{
+		if(!myForm.shouldSearchInWholeModule())
+		{
+			mySettingsHolder.setTestsUnitRootPath(myForm.getAbsoluteTestsPath());
+		}
+	}
 }

@@ -16,18 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer;
 
+import java.io.Reader;
+
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.MergingLexerAdapter;
 import com.intellij.psi.tree.TokenSet;
 
-import java.io.Reader;
 
+public class RubyLexer extends MergingLexerAdapter
+{
+	private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(RubyTokenTypes.tWHITE_SPACE);
 
-public class RubyLexer extends MergingLexerAdapter {
-    private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(RubyTokenTypes.tWHITE_SPACE);
-
-    public RubyLexer() {
-        super(new FlexAdapter(new _RubyLexer((Reader) null)), TOKENS_TO_MERGE);
-    }
+	public RubyLexer()
+	{
+		super(new FlexAdapter(new _RubyLexer((Reader) null)), TOKENS_TO_MERGE);
+	}
 }
 

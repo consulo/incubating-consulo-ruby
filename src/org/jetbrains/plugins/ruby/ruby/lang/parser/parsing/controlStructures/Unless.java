@@ -17,44 +17,46 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 10.06.2006
  */
-public class Unless implements RubyTokenTypes {
-/*
-        | kUNLESS expr_value then
-          compstmt
-          opt_else
-          kEND
-*/
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+public class Unless implements RubyTokenTypes
+{
+	/*
+			| kUNLESS expr_value then
+			  compstmt
+			  opt_else
+			  kEND
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        builder.match(kUNLESS);
+		builder.match(kUNLESS);
 
-        Condition.parse(builder);
+		Condition.parse(builder);
 
-        THEN.parse(builder);
+		THEN.parse(builder);
 
-        COMPSTMT.parse(builder, kELSE, kEND);
+		COMPSTMT.parse(builder, kELSE, kEND);
 
-        builder.passEOLs();
-        OPT_ELSE.parse(builder);
+		builder.passEOLs();
+		OPT_ELSE.parse(builder);
 
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(RubyElementTypes.UNLESS_STATEMENT);
-        return RubyElementTypes.UNLESS_STATEMENT;
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(RubyElementTypes.UNLESS_STATEMENT);
+		return RubyElementTypes.UNLESS_STATEMENT;
 
-    }
+	}
 }

@@ -16,45 +16,53 @@
 
 package org.jetbrains.plugins.ruby.rails;
 
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.util.ActionRunner;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.rails.actions.RailsEditorActionsManager;
 import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacetType;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
+import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.util.ActionRunner;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg, Roman.Chernyatchik
  * @date: 16.08.2006
  */
-public class RailsSupportLoader implements ApplicationComponent {
+public class RailsSupportLoader implements ApplicationComponent
+{
 
-    @Override
+	@Override
 	@NotNull
-    public String getComponentName() {
-        return RComponents.RAILS_SUPPORT_LOADER;
-    }
+	public String getComponentName()
+	{
+		return RComponents.RAILS_SUPPORT_LOADER;
+	}
 
-    @Override
-	public void initComponent() {
-       loadRails();
-    }
+	@Override
+	public void initComponent()
+	{
+		loadRails();
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 
 
-    public static void loadRails() {
-        IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-                @Override
-				public void run() throws Exception {
-                    RailsEditorActionsManager.registerEditorActions();
+	public static void loadRails()
+	{
+		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		{
+			@Override
+			public void run() throws Exception
+			{
+				RailsEditorActionsManager.registerEditorActions();
 
-                    BaseRailsFacetType.load();
-                }
-            });
-    }
+				BaseRailsFacetType.load();
+			}
+		});
+	}
 }

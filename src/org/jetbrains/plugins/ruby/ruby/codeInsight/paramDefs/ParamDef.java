@@ -16,21 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import com.intellij.psi.PsiElement;
+import java.util.Collection;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
-
-import java.util.Collection;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author yole
  */
-public abstract class ParamDef {
-    @Nullable
-    public abstract Collection<RubyLookupItem> getVariants(ParamContext context);
+public abstract class ParamDef
+{
+	@Nullable
+	public abstract Collection<RubyLookupItem> getVariants(ParamContext context);
 
-    @Nullable
-    public PsiElement resolveReference(final ParamContext context) {
-        return null;
-    }
+	@Nullable
+	public PsiElement resolveReference(final ParamContext context)
+	{
+		return null;
+	}
 }

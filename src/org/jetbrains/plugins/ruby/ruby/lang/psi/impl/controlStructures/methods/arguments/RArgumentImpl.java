@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.arguments;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
@@ -25,42 +23,51 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgum
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.06.2006
  */
-public class RArgumentImpl extends RPsiElementBase implements RArgument {
-    public RArgumentImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RArgumentImpl extends RPsiElementBase implements RArgument
+{
+	public RArgumentImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName(){
-        final RIdentifier identifier = getIdentifier();
-        //noinspection ConstantConditions
-        return identifier!=null ? identifier.getName() : "";
-    }
+	public String getName()
+	{
+		final RIdentifier identifier = getIdentifier();
+		//noinspection ConstantConditions
+		return identifier != null ? identifier.getName() : "";
+	}
 
-    @Override
-	public RIdentifier getIdentifier(){
-        return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
-    }
+	@Override
+	public RIdentifier getIdentifier()
+	{
+		return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRParameter(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRParameter(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public ArgumentInfo.Type getType() {
-        return ArgumentInfo.Type.SIMPLE;
-    }
+	@Override
+	public ArgumentInfo.Type getType()
+	{
+		return ArgumentInfo.Type.SIMPLE;
+	}
 
 }

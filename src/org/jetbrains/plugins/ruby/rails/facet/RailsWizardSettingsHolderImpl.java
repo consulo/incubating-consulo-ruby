@@ -21,7 +21,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.rails.facet.ui.wizard.tabs.RSpecComponentsInstallerTab;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,87 +28,102 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: Apr 10, 2008
  */
-public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder {
-    private Sdk mySdk;
+public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder
+{
+	private Sdk mySdk;
 
-    private Generate myGenerateRailsAppWay = Generate.NEW;
-    private String myRailsApplicatlionRootRelativePath;
-    private String myDbNameToPreconfigure;
-    private RSpecConfiguration myRSpecConf;
+	private Generate myGenerateRailsAppWay = Generate.NEW;
+	private String myRailsApplicatlionRootRelativePath;
+	private String myDbNameToPreconfigure;
+	private RSpecConfiguration myRSpecConf;
 
-    protected RailsWizardSettingsHolderImpl() {
-    }
+	protected RailsWizardSettingsHolderImpl()
+	{
+	}
 
-    public static RailsWizardSettingsHolder createDefaultConf() {
-        final RailsWizardSettingsHolderImpl settings = new RailsWizardSettingsHolderImpl();
-        
-        settings.setRSpecConf(RSpecComponentsInstallerTab.getStoredDefaultConf());
+	public static RailsWizardSettingsHolder createDefaultConf()
+	{
+		final RailsWizardSettingsHolderImpl settings = new RailsWizardSettingsHolderImpl();
 
-        return settings;
-    }
+		settings.setRSpecConf(RSpecComponentsInstallerTab.getStoredDefaultConf());
 
-    @Override
-	public Generate getAppGenerateWay() {
-        return myGenerateRailsAppWay;
-    }
+		return settings;
+	}
 
-    @Override
-	public void setAppGenerateWay(@NotNull final Generate generateWay) {
-        myGenerateRailsAppWay = generateWay;
-    }
+	@Override
+	public Generate getAppGenerateWay()
+	{
+		return myGenerateRailsAppWay;
+	}
 
-    @Override
+	@Override
+	public void setAppGenerateWay(@NotNull final Generate generateWay)
+	{
+		myGenerateRailsAppWay = generateWay;
+	}
+
+	@Override
 	@Nullable
-    public String getDBNameToPreconfigure() {
-        return myDbNameToPreconfigure;
-    }
+	public String getDBNameToPreconfigure()
+	{
+		return myDbNameToPreconfigure;
+	}
 
-    @Override
-	public void setDBNameToPreconfigure(@Nullable final String dbName) {
-        myDbNameToPreconfigure = dbName;
-    }
+	@Override
+	public void setDBNameToPreconfigure(@Nullable final String dbName)
+	{
+		myDbNameToPreconfigure = dbName;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RSpecConfiguration getRSpecConf() {
-        return myRSpecConf;
-    }
+	public RSpecConfiguration getRSpecConf()
+	{
+		return myRSpecConf;
+	}
 
-    @Override
-	public void setRSpecConf(@NotNull final RSpecConfiguration rSpecConf) {
-        myRSpecConf = rSpecConf;
-    }
+	@Override
+	public void setRSpecConf(@NotNull final RSpecConfiguration rSpecConf)
+	{
+		myRSpecConf = rSpecConf;
+	}
 
-    @Override
-	public boolean isRSpecSupportEnabled() {
-        final RSpecConfiguration conf = getRSpecConf();
-        return conf.enableRSpecSupport() || conf.enableRSpecRailsSupport();
-    }
+	@Override
+	public boolean isRSpecSupportEnabled()
+	{
+		final RSpecConfiguration conf = getRSpecConf();
+		return conf.enableRSpecSupport() || conf.enableRSpecRailsSupport();
+	}
 
-    @Override
-	public void setTestsUnitRootPath(@NotNull final String contentRootPath) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public void setTestsUnitRootPath(@NotNull final String contentRootPath)
+	{
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getRailsApplicationHomeDirRelativePath() {
-        return myRailsApplicatlionRootRelativePath;
-    }
+	public String getRailsApplicationHomeDirRelativePath()
+	{
+		return myRailsApplicatlionRootRelativePath;
+	}
 
-    @Override
-	public void setRailsApplicationHomeDirRelativePath(@Nullable final String relativePath) {
-        myRailsApplicatlionRootRelativePath = relativePath;
-    }
+	@Override
+	public void setRailsApplicationHomeDirRelativePath(@Nullable final String relativePath)
+	{
+		myRailsApplicatlionRootRelativePath = relativePath;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Sdk getSdk() {
-        return mySdk;
-    }
+	public Sdk getSdk()
+	{
+		return mySdk;
+	}
 
-    @Override
-	public void setSdk(@Nullable final Sdk sdk) {
-        mySdk = sdk;
-    }
+	@Override
+	public void setSdk(@Nullable final Sdk sdk)
+	{
+		mySdk = sdk;
+	}
 }

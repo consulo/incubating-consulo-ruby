@@ -31,24 +31,30 @@ import com.intellij.psi.FileViewProvider;
  * @author: Roman Chernyatchik
  * @date: 02.04.2007
  */
-public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile {
-    public RHTMLRubyFileImpl(final FileViewProvider viewProvider) {
-        super(eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, viewProvider);
-    }
+public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile
+{
+	public RHTMLRubyFileImpl(final FileViewProvider viewProvider)
+	{
+		super(eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, eRubyElementTypes.RUBY_DECLARATIONS_IN_RHTML_ROOT, viewProvider);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RHTMLFileViewProvider getViewProvider() {
-        return (RHTMLFileViewProvider)super.getViewProvider();
-    }
-     @Override
-	 protected boolean isPsiUpToDate(VirtualFile vFile) {
-         final FileViewProvider viewProvider = myManager.findViewProvider(vFile);
-         assert viewProvider != null;
-         return viewProvider.getPsi(RubyLanguage.INSTANCE) == this;
-     }
+	public RHTMLFileViewProvider getViewProvider()
+	{
+		return (RHTMLFileViewProvider) super.getViewProvider();
+	}
 
-    public String toString() {
-        return "RHTMLRubyFile:" + getName();
-    }
+	@Override
+	protected boolean isPsiUpToDate(VirtualFile vFile)
+	{
+		final FileViewProvider viewProvider = myManager.findViewProvider(vFile);
+		assert viewProvider != null;
+		return viewProvider.getPsi(RubyLanguage.INSTANCE) == this;
+	}
+
+	public String toString()
+	{
+		return "RHTMLRubyFile:" + getName();
+	}
 }

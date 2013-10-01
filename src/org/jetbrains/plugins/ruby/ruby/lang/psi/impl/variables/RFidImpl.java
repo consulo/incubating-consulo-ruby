@@ -16,10 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,41 +24,53 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RNamedReferenc
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFid;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.06.2006
  */
-public class RFidImpl extends RNamedElementBase implements RFid {
-    public RFidImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RFidImpl extends RNamedElementBase implements RFid
+{
+	public RFidImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	protected PsiReference createReference() {
-        return new RNamedReference(this);
-    }
+	@Override
+	protected PsiReference createReference()
+	{
+		return new RNamedReference(this);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRFid(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRFid(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected String getPrefix() {
-        return null;
-    }
+	protected String getPrefix()
+	{
+		return null;
+	}
 
-    @Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
-        if (!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName)){
-            throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
-        }
-    }
+	@Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	{
+		if(!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName))
+		{
+			throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
+		}
+	}
 }

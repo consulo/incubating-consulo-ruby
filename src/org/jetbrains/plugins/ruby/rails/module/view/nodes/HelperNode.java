@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -28,52 +29,56 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 13.10.2006
  */
-public class HelperNode extends RailsNode {
-    private RVirtualModule myRModule;
+public class HelperNode extends RailsNode
+{
+	private RVirtualModule myRModule;
 
-    public HelperNode(final Module module, final RVirtualModule rModule, final String fileUrl) {
-        super(module);
-        
-        myRModule = rModule;
-        init(generateNodeId(rModule), initPresentationData(rModule.getName()));
-        assert getVirtualFileUrl().equals(fileUrl);
-    }
+	public HelperNode(final Module module, final RVirtualModule rModule, final String fileUrl)
+	{
+		super(module);
 
-    public static NodeId generateNodeId(final RVirtualModule rModule) {
-        return NodeIdUtil.createForVirtualContainer(rModule);
-    }
+		myRModule = rModule;
+		init(generateNodeId(rModule), initPresentationData(rModule.getName()));
+		assert getVirtualFileUrl().equals(fileUrl);
+	}
 
-    @Override
-	public RailsNode[] getChildren() {
-        final List<RailsNode> children = new ArrayList<RailsNode>();
+	public static NodeId generateNodeId(final RVirtualModule rModule)
+	{
+		return NodeIdUtil.createForVirtualContainer(rModule);
+	}
 
-        for (RVirtualStructuralElement element :
-                RContainerUtil.selectVirtualElementsByType(myRModule.getVirtualStructureElements(), StructureType.METHOD)) {
-            assert element instanceof RVirtualMethod;
-            children.add(new MethodNode(getModule(), (RVirtualMethod) element, getVirtualFileUrl()));
-        }
+	@Override
+	public RailsNode[] getChildren()
+	{
+		final List<RailsNode> children = new ArrayList<RailsNode>();
 
-        return children.toArray(new RailsNode[children.size()]);
-    }
+		for(RVirtualStructuralElement element : RContainerUtil.selectVirtualElementsByType(myRModule.getVirtualStructureElements(), StructureType.METHOD))
+		{
+			assert element instanceof RVirtualMethod;
+			children.add(new MethodNode(getModule(), (RVirtualMethod) element, getVirtualFileUrl()));
+		}
 
-    @Override
+		return children.toArray(new RailsNode[children.size()]);
+	}
+
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.HELPER;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.HELPER;
+	}
 
-    private static PresentationData initPresentationData(final String name) {
-       return new PresentationData(name, name,
-                                   RailsIcons.RAILS_HELPERS_NODES, RailsIcons.RAILS_HELPERS_NODES,
-                                   null);
-   }
+	private static PresentationData initPresentationData(final String name)
+	{
+		return new PresentationData(name, name, RailsIcons.RAILS_HELPERS_NODES, RailsIcons.RAILS_HELPERS_NODES, null);
+	}
 }

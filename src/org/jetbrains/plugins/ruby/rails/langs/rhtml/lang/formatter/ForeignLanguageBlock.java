@@ -32,7 +32,8 @@ import com.intellij.psi.formatter.xml.AnotherLanguageBlockWrapper;
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
 
 //TODO separate with AnotherLanguageBlockWrapper after IDEA #7613
-public class ForeignLanguageBlock extends AnotherLanguageBlockWrapper {
+public class ForeignLanguageBlock extends AnotherLanguageBlockWrapper
+{
 	public ForeignLanguageBlock(ASTNode node, XmlFormattingPolicy policy, Block original, Indent indent, int offset, @Nullable TextRange range)
 	{
 		super(node, policy, original, indent, offset, range);

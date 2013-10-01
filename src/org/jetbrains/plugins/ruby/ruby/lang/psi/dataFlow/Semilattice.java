@@ -19,8 +19,9 @@ import java.util.ArrayList;
 /**
  * @author ven
  */
-public interface Semilattice<E> {
-  E join(ArrayList<E> ins);
+public interface Semilattice<E>
+{
+	E join(ArrayList<E> ins);
 
-  boolean eq(E e1, E e2);
+	boolean eq(E e1, E e2);
 }

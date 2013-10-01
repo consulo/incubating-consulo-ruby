@@ -17,38 +17,40 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method.BODYSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class BeginEndBlock implements RubyTokenTypes {
+public class BeginEndBlock implements RubyTokenTypes
+{
 /*
-        | begin
+		| begin
 		  bodystmt
 		  end
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        builder.match(kBEGIN);
+		builder.match(kBEGIN);
 
-        BODYSTMT.parse(builder);
+		BODYSTMT.parse(builder);
 
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(RubyElementTypes.BEGIN_END_BLOCK_STATEMENT);
-        return RubyElementTypes.BEGIN_END_BLOCK_STATEMENT;
-    }
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(RubyElementTypes.BEGIN_END_BLOCK_STATEMENT);
+		return RubyElementTypes.BEGIN_END_BLOCK_STATEMENT;
+	}
 
 
 }

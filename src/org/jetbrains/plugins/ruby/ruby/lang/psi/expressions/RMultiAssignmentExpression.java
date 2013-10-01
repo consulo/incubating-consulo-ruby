@@ -21,14 +21,15 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
  * User: oleg
  * Date: 11.08.2006
  */
-public interface RMultiAssignmentExpression extends RAssignmentExpression{
-    /**
-     * @return true, if assigned object is a list of expressions
-     */
-    public boolean isMultiObject();
+public interface RMultiAssignmentExpression extends RAssignmentExpression
+{
+	/**
+	 * @return true, if assigned object is a list of expressions
+	 */
+	public boolean isMultiObject();
 
-    /**
-     * @return true, if assigned value is a list of expressions
-     */
-    public boolean isMultiValue();
+	/**
+	 * @return true, if assigned value is a list of expressions
+	 */
+	public boolean isMultiValue();
 }

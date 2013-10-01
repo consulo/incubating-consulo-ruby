@@ -26,32 +26,38 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
  * User: oleg
  * Date: 08.08.2006
  */
-public class ConstantDefinitionsImpl implements ConstantDefinitions {
-    private RConstant myFirstDefinition;
+public class ConstantDefinitionsImpl implements ConstantDefinitions
+{
+	private RConstant myFirstDefinition;
 
-    public ConstantDefinitionsImpl(@NotNull final RConstant constant){
-        myFirstDefinition  = constant;
-    }
+	public ConstantDefinitionsImpl(@NotNull final RConstant constant)
+	{
+		myFirstDefinition = constant;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RConstant getFirstDefinition() {
-        return myFirstDefinition;
-    }
+	public RConstant getFirstDefinition()
+	{
+		return myFirstDefinition;
+	}
 
-    @Override
-	public void process(@NotNull final RConstant constant) {
-        // do nothing
-    }
+	@Override
+	public void process(@NotNull final RConstant constant)
+	{
+		// do nothing
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myFirstDefinition.getName();
-    }
+	public String getName()
+	{
+		return myFirstDefinition.getName();
+	}
 
-    @Override
-	public boolean isFor(@NotNull final RVirtualConstant constant) {
-        return getName().equals(constant.getName());
-    }
+	@Override
+	public boolean isFor(@NotNull final RVirtualConstant constant)
+	{
+		return getName().equals(constant.getName());
+	}
 }

@@ -16,44 +16,51 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RDotReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.07.2005
  */
-public class RDotReferenceImpl extends RReferenceBase implements RDotReference {
-    public RDotReferenceImpl(ASTNode astNode) {
-        super(astNode);
-    }
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRDotReference(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+public class RDotReferenceImpl extends RReferenceBase implements RDotReference
+{
+	public RDotReferenceImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRDotReference(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getDelimiter() {
-        PsiElement dot = getChildByFilter(RubyTokenTypes.tDOT,0);
-        assert dot!=null;
-        return dot;
-    }
+	public PsiElement getDelimiter()
+	{
+		PsiElement dot = getChildByFilter(RubyTokenTypes.tDOT, 0);
+		assert dot != null;
+		return dot;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Type getType() {
-        return Type.DOT_REF;
-    }
+	public Type getType()
+	{
+		return Type.DOT_REF;
+	}
 }

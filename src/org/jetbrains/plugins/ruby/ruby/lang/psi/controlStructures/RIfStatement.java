@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.RWrapAndIndentCOMPSTMT;
@@ -25,21 +27,19 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBl
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElsifBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RIfStatement extends RConditionalStatement, RExpression,
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild {
-    @NotNull
-    RCompoundStatement getThenBlock();
+public interface RIfStatement extends RConditionalStatement, RExpression, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
+	@NotNull
+	RCompoundStatement getThenBlock();
 
-    @NotNull
-    List<RElsifBlock> getElsifBlocks();
+	@NotNull
+	List<RElsifBlock> getElsifBlocks();
 
-    @Nullable
-    RElseBlock getElseBlock();
+	@Nullable
+	RElseBlock getElseBlock();
 }

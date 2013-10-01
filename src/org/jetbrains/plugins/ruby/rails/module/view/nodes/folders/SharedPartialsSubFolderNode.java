@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import java.util.List;
+
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
+import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNode;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
-import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,22 +32,25 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 19.05.2007
  */
-public class SharedPartialsSubFolderNode extends FolderNode {
+public class SharedPartialsSubFolderNode extends FolderNode
+{
 
-    public SharedPartialsSubFolderNode(final Module module, final VirtualFile folder,
-                             final SimpleNode parent) {
-        super(module, folder, parent);
-    }
+	public SharedPartialsSubFolderNode(final Module module, final VirtualFile folder, final SimpleNode parent)
+	{
+		super(module, folder, parent);
+	}
 
-    public SharedPartialsSubFolderNode(final Module module, final VirtualFile dir,
-                             final SimpleNode parent, final PresentationData data) {
-        super(module, dir, parent, data);
-    }
+	public SharedPartialsSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data)
+	{
+		super(module, dir, parent, data);
+	}
 
-    @Override
-	protected void processNotDirectoryFile(List<RailsNode> nodes, VirtualFile file, String url) {
-        if (ViewsConventions.isValidPartialViewFile(file)) {
-            nodes.add(new SimpleFileNode(getModule(), file));
-        }
-    }   
+	@Override
+	protected void processNotDirectoryFile(List<RailsNode> nodes, VirtualFile file, String url)
+	{
+		if(ViewsConventions.isValidPartialViewFile(file))
+		{
+			nodes.add(new SimpleFileNode(getModule(), file));
+		}
+	}
 }

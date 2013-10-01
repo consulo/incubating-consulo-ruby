@@ -50,147 +50,170 @@ import com.intellij.util.messages.MessageBusConnection;
  * @author: Roman Chernyatchik
  * @date: Mar 13, 2008
  */
-public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration> {
-    private CacheScannerFilesProvider myRailsAdditionalScannerProvider;
+public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
+{
+	private CacheScannerFilesProvider myRailsAdditionalScannerProvider;
 
-    private MessageBusConnection myConnection;
+	private MessageBusConnection myConnection;
 
-    /**
-     * Doesn't change given Root Model
-     * @param rootModel Root Module
-     * @return Simple suggests root path for rails application. It is the first content root.
-     */
-    @NotNull
-    public abstract String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel);
-
-
-    public BaseRailsFacet(@NotNull final FacetType facetType,
-                          @NotNull final Module module,
-                          final String name,
-                          @NotNull final BaseRailsFacetConfiguration configuration,
-                          final Facet underlyingFacet) {
-        super(facetType, module, name, configuration, underlyingFacet);
-
-        /**
-         * only for loading of existing module. Doesn't work for new Ruby module.
-         * (sdk is unknown)
-         */
-         final Sdk sdk;
-         if (RubyUtil.isRubyModuleType(module)) {
-             //ruby module
-             sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-         } else {
-             //jruby facet
-             assert (underlyingFacet instanceof JRubyFacet);
-			 sdk = null;
-            // sdk = ((JRubyFacet)underlyingFacet).getConfiguration().getSdk();
-         }
-        final BaseRailsFacetConfigurationLowLevel facetConfiguration = (BaseRailsFacetConfigurationLowLevel)this.getConfiguration();
-        facetConfiguration.setSdk(sdk);
+	/**
+	 * Doesn't change given Root Model
+	 *
+	 * @param rootModel Root Module
+	 * @return Simple suggests root path for rails application. It is the first content root.
+	 */
+	@NotNull
+	public abstract String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel);
 
 
-///////////////// Setup Cache Manager /////////////////////////////////////////////////
-        myRailsAdditionalScannerProvider = new CacheScannerFilesProvider() {
-            @Override
-			public void scanAndAdd(final String[] rootUrls,
-                                   final Collection<VirtualFile> files,
-                                   final ModuleRootManager moduleRootManager) {
-                RubyVirtualFileScanner.searchAdditionalRailsFileCacheFiles(moduleRootManager, files);
-            }
-        };
+	public BaseRailsFacet(@NotNull final FacetType facetType, @NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, final Facet underlyingFacet)
+	{
+		super(facetType, module, name, configuration, underlyingFacet);
 
-        //If we load serialized facet, FacetModulManger(thus module) doesn't know about all
-        //facets yet. Thus we can't obtain JRuby face by module.
-        final RubyModuleCachesManager cacheManager;
-        if (underlyingFacet != null && underlyingFacet instanceof JRubyFacet) {
-            //JRuby facet
-            cacheManager = ((JRubyFacet)underlyingFacet).getRubyModuleCachesManager();
-        } else {
-            //Ruby module
-            cacheManager = RubyModuleCachesManager.getInstance(module);
-        }
-        cacheManager.registerScanForFilesProvider(myRailsAdditionalScannerProvider);
+		/**
+		 * only for loading of existing module. Doesn't work for new Ruby module.
+		 * (sdk is unknown)
+		 */
+		final Sdk sdk;
+		if(RubyUtil.isRubyModuleType(module))
+		{
+			//ruby module
+			sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+		}
+		else
+		{
+			//jruby facet
+			assert (underlyingFacet instanceof JRubyFacet);
+			sdk = null;
+			// sdk = ((JRubyFacet)underlyingFacet).getConfiguration().getSdk();
+		}
+		final BaseRailsFacetConfigurationLowLevel facetConfiguration = (BaseRailsFacetConfigurationLowLevel) this.getConfiguration();
+		facetConfiguration.setSdk(sdk);
 
-///////////////// Init Facet /////////////////////////////////////////////////
-         BaseRailsFacetBuilder.initFacetInstance(this);
 
-//////////////// Roots Changed listener //////////////////////////////////////
-        /**
-         * Uses following contract:
-         * The following actions leads to Roots Changed event
-         * ### Changing of SDK in Ruby Module type
-         * ### Changing of SDK in JRuby Facet Configuration
-         *
-         * If SDK was really changed this code will load Generators and RakeTasks for new SDK
-         */
-        final ModuleRootListener moduleRootListener = new ModuleRootListener() {
-            @Override
-			public void beforeRootsChange(final ModuleRootEvent event) {
-                // Do nothing
-            }
+		///////////////// Setup Cache Manager /////////////////////////////////////////////////
+		myRailsAdditionalScannerProvider = new CacheScannerFilesProvider()
+		{
+			@Override
+			public void scanAndAdd(final String[] rootUrls, final Collection<VirtualFile> files, final ModuleRootManager moduleRootManager)
+			{
+				RubyVirtualFileScanner.searchAdditionalRailsFileCacheFiles(moduleRootManager, files);
+			}
+		};
 
-            @Override
-			public void rootsChanged(final ModuleRootEvent event) {
-                final Sdk newSDK = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-                final BaseRailsFacetConfigurationLowLevel conf = (BaseRailsFacetConfigurationLowLevel) getConfiguration();
-                final Sdk oldSDK = conf.getSdk();
-                if (newSDK != oldSDK) {
-                    conf.setSdk(newSDK);
+		//If we load serialized facet, FacetModulManger(thus module) doesn't know about all
+		//facets yet. Thus we can't obtain JRuby face by module.
+		final RubyModuleCachesManager cacheManager;
+		if(underlyingFacet != null && underlyingFacet instanceof JRubyFacet)
+		{
+			//JRuby facet
+			cacheManager = ((JRubyFacet) underlyingFacet).getRubyModuleCachesManager();
+		}
+		else
+		{
+			//Ruby module
+			cacheManager = RubyModuleCachesManager.getInstance(module);
+		}
+		cacheManager.registerScanForFilesProvider(myRailsAdditionalScannerProvider);
 
-                    final Runnable runnable = new Runnable() {
-                    @Override
-					public void run() {
-                            BaseRailsFacetBuilder.regenerateRakeTasksAndGeneratorsSettings(BaseRailsFacet.this, newSDK);
-                        }
-                    };
-                    final Project project = (Project) event.getSource();
-                    if (project.isInitialized()) {
-                        runnable.run();
-                    } else {
-                        StartupManager.getInstance(project).registerPostStartupActivity(runnable);
-                    }
-                }
-            }
-        };
-        myConnection = module.getProject().getMessageBus().connect();
-        myConnection.subscribe(ProjectTopics.PROJECT_ROOTS, moduleRootListener);
-    }
+		///////////////// Init Facet /////////////////////////////////////////////////
+		BaseRailsFacetBuilder.initFacetInstance(this);
 
-    @Override
-	public void disposeFacet() {
-        myConnection.disconnect();
-        
-        final Module module = getModule();
-        if (!module.isDisposed()) {
-            final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
-            manager.unregisterScanForFilesProvider(myRailsAdditionalScannerProvider);
-        }
-        super.disposeFacet();
-    }
+		//////////////// Roots Changed listener //////////////////////////////////////
+		/**
+		 * Uses following contract:
+		 * The following actions leads to Roots Changed event
+		 * ### Changing of SDK in Ruby Module type
+		 * ### Changing of SDK in JRuby Facet Configuration
+		 *
+		 * If SDK was really changed this code will load Generators and RakeTasks for new SDK
+		 */
+		final ModuleRootListener moduleRootListener = new ModuleRootListener()
+		{
+			@Override
+			public void beforeRootsChange(final ModuleRootEvent event)
+			{
+				// Do nothing
+			}
 
-    /**
-     * Returns JRuby or Rails facet according given module
-     * @param module Ruby or Java module
-     * @return Base Rails facet
-     */
-    @Nullable
-    public static BaseRailsFacet getInstance(@NotNull final Module module) {
-        if (RubyUtil.isRubyModuleType(module)) {
-            //in ruby module
-            return RailsFacet.getInstance(module);
-        }
-         //in other modules (java)
-        return JRailsFacet.getInstance(module);
-    }
+			@Override
+			public void rootsChanged(final ModuleRootEvent event)
+			{
+				final Sdk newSDK = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+				final BaseRailsFacetConfigurationLowLevel conf = (BaseRailsFacetConfigurationLowLevel) getConfiguration();
+				final Sdk oldSDK = conf.getSdk();
+				if(newSDK != oldSDK)
+				{
+					conf.setSdk(newSDK);
 
-    public void projectClosed() {
-        //TODO implement
-    }
+					final Runnable runnable = new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							BaseRailsFacetBuilder.regenerateRakeTasksAndGeneratorsSettings(BaseRailsFacet.this, newSDK);
+						}
+					};
+					final Project project = (Project) event.getSource();
+					if(project.isInitialized())
+					{
+						runnable.run();
+					}
+					else
+					{
+						StartupManager.getInstance(project).registerPostStartupActivity(runnable);
+					}
+				}
+			}
+		};
+		myConnection = module.getProject().getMessageBus().connect();
+		myConnection.subscribe(ProjectTopics.PROJECT_ROOTS, moduleRootListener);
+	}
 
-    public static FacetTypeId<? extends BaseRailsFacet> getRailsFacetID() {
-        return RailsFacet.ID;
-    }
-    public static FacetTypeId<? extends BaseRailsFacet> getJRailsFacetID() {
-        return JRailsFacet.ID;
-    }
+	@Override
+	public void disposeFacet()
+	{
+		myConnection.disconnect();
+
+		final Module module = getModule();
+		if(!module.isDisposed())
+		{
+			final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
+			manager.unregisterScanForFilesProvider(myRailsAdditionalScannerProvider);
+		}
+		super.disposeFacet();
+	}
+
+	/**
+	 * Returns JRuby or Rails facet according given module
+	 *
+	 * @param module Ruby or Java module
+	 * @return Base Rails facet
+	 */
+	@Nullable
+	public static BaseRailsFacet getInstance(@NotNull final Module module)
+	{
+		if(RubyUtil.isRubyModuleType(module))
+		{
+			//in ruby module
+			return RailsFacet.getInstance(module);
+		}
+		//in other modules (java)
+		return JRailsFacet.getInstance(module);
+	}
+
+	public void projectClosed()
+	{
+		//TODO implement
+	}
+
+	public static FacetTypeId<? extends BaseRailsFacet> getRailsFacetID()
+	{
+		return RailsFacet.ID;
+	}
+
+	public static FacetTypeId<? extends BaseRailsFacet> getJRailsFacetID()
+	{
+		return JRailsFacet.ID;
+	}
 }

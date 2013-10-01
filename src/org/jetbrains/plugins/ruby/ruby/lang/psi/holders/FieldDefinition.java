@@ -27,15 +27,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
  * User: oleg
  * Date: 18.07.2006
  */
-public interface FieldDefinition {
+public interface FieldDefinition
+{
 
-    @NotNull
-    public RField getFirstUsage();
+	@NotNull
+	public RField getFirstUsage();
 
-    @NotNull
-    public String getName();
+	@NotNull
+	public String getName();
 
-    public FieldType getType();
+	public FieldType getType();
 
-    public boolean isFor(@Nullable final RVirtualField field);
+	public boolean isFor(@Nullable final RVirtualField field);
 }

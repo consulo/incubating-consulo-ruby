@@ -1,4 +1,3 @@
-
 <!--
   ~ Copyright 2000-2008 JetBrains s.r.o.
   ~
@@ -17,45 +16,45 @@
 
 <!-- Use this build only with idea-flex.skeleton and with patched JFlex.jar -->
 <project name="Generate lexer from ruby.flex, using idea flex skeleton and patched JFlex" default="dist">
-    <property name = "jflex.dir" value="../../../../../../../../lib"/>
+	<property name="jflex.dir" value="../../../../../../../../lib"/>
 
-    <property name = "lexer.dir" value="."/>
-    <property name = "lexer.file" value = "${lexer.dir}/_RubyLexer.java"/>
-    <property name = "lexer.log" value = "${lexer.dir}/jflex.log"/>
-    <property name = "lexer.source" value = "${lexer.dir}/ruby.flex"/>
-    <property name = "lexer.skeleton" value = "${jflex.dir}/idea-flex.skeleton"/>
-    <property name = "compiler.max.memory" value="256m"/>
-    <property name = "jflex.file" value="${jflex.dir}/JFlex.jar"/>
+	<property name="lexer.dir" value="."/>
+	<property name="lexer.file" value="${lexer.dir}/_RubyLexer.java"/>
+	<property name="lexer.log" value="${lexer.dir}/jflex.log"/>
+	<property name="lexer.source" value="${lexer.dir}/ruby.flex"/>
+	<property name="lexer.skeleton" value="${jflex.dir}/idea-flex.skeleton"/>
+	<property name="compiler.max.memory" value="256m"/>
+	<property name="jflex.file" value="${jflex.dir}/JFlex.jar"/>
 
-    <target name="clean">
-        <delete file = "${lexer.file}~"/>
-        <delete file = "${lexer.file}"/>
-        <delete file = "${lexer.log}"/>
-    </target>
+	<target name="clean">
+		<delete file="${lexer.file}~"/>
+		<delete file="${lexer.file}"/>
+		<delete file="${lexer.log}"/>
+	</target>
 
-    <target name="jflex" description = "Produces Jflex based lexer" depends="clean">
+	<target name="jflex" description="Produces Jflex based lexer" depends="clean">
 		<echo message="Generating flex file"/>
-        <java  jar="${jflex.file}" output="${lexer.log}" fork="true" maxmemory="${compiler.max.memory}">
-            <arg value = "--charat"/>
-            <arg value = "-skel"/>
-            <arg value = "${lexer.skeleton}"/>
-            <arg value = "${lexer.source}" />
-        </java>
+		<java jar="${jflex.file}" output="${lexer.log}" fork="true" maxmemory="${compiler.max.memory}">
+			<arg value="--charat"/>
+			<arg value="-skel"/>
+			<arg value="${lexer.skeleton}"/>
+			<arg value="${lexer.source}"/>
+		</java>
 
-        <echo message="Patching flex file"/>
-        <replace file="${lexer.file}" token="yybegin(initialState);" value="reset(initialState);">
-        </replace>
+		<echo message="Patching flex file"/>
+		<replace file="${lexer.file}" token="yybegin(initialState);" value="reset(initialState);">
+		</replace>
 
-        <replace file="${lexer.file}">
-              <replacetoken><![CDATA[  private void zzScanError(int errorCode) {
+		<replace file="${lexer.file}">
+			<replacetoken><![CDATA[  private void zzScanError(int errorCode) {
     ]]></replacetoken>
-              <replacevalue><![CDATA[  private void zzScanError(int errorCode) {
+			<replacevalue><![CDATA[  private void zzScanError(int errorCode) {
           System.out.println("Current state: " + mySM.getStateName());
         System.out.println("Text: " + myCM.safeReadStringAt(0, 10));
     ]]></replacevalue>
-        </replace>
+		</replace>
 	</target>
 
-    <target name="dist" depends="clean, jflex" description="main target"/>
+	<target name="dist" depends="clean, jflex" description="main target"/>
 
 </project>

@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigurationParams;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,24 +26,41 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: May 22, 2008
  */
-public interface RSpecRunConfigurationParams extends AbstractRubyRunConfigurationParams {
-    public String getTestsFolderPath();
-    public String getTestScriptPath();
-    public AbstractRubyRunConfiguration.TestType getTestType();
-    public String getTestFileMask();
-    public String getSpecArgs();
-    public String getCustomSpecsRunnerPath();
-    public boolean shouldUseColoredOutput();
-    public boolean shouldUseCustomSpecRunner();
-    public boolean shouldRunSpecSeparately();
+public interface RSpecRunConfigurationParams extends AbstractRubyRunConfigurationParams
+{
+	public String getTestsFolderPath();
 
-    public void setTestsFolderPath(String path);
-    public void setTestScriptPath(String pathOrMask);
-    public void setTestType(@NotNull AbstractRubyRunConfiguration.TestType testType);
-    public void setTestFileMask(String testFileMask);
-    public void setSpecArgs(String specArgs);
-    public void setCustomSpecsRunnerPath(String specsRunnerPath);
-    public void setShouldUseColoredOutput(boolean enabled);
-    public void setShouldUseCustomSpecRunner(boolean useCustomSpecRunner);
-    public void setShouldRunSpecSeparately(boolean shouldRunSpecSeparately);
+	public String getTestScriptPath();
+
+	public AbstractRubyRunConfiguration.TestType getTestType();
+
+	public String getTestFileMask();
+
+	public String getSpecArgs();
+
+	public String getCustomSpecsRunnerPath();
+
+	public boolean shouldUseColoredOutput();
+
+	public boolean shouldUseCustomSpecRunner();
+
+	public boolean shouldRunSpecSeparately();
+
+	public void setTestsFolderPath(String path);
+
+	public void setTestScriptPath(String pathOrMask);
+
+	public void setTestType(@NotNull AbstractRubyRunConfiguration.TestType testType);
+
+	public void setTestFileMask(String testFileMask);
+
+	public void setSpecArgs(String specArgs);
+
+	public void setCustomSpecsRunnerPath(String specsRunnerPath);
+
+	public void setShouldUseColoredOutput(boolean enabled);
+
+	public void setShouldUseCustomSpecRunner(boolean useCustomSpecRunner);
+
+	public void setShouldRunSpecSeparately(boolean shouldRunSpecSeparately);
 }

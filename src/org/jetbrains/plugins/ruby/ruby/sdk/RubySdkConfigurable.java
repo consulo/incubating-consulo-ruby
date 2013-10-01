@@ -37,76 +37,89 @@ import com.intellij.util.ActionRunner;
  * @author: oleg
  * @date: Nov 28, 2007
  */
-public class RubySdkConfigurable  implements AdditionalDataConfigurable {
-    private Sdk mySdk;
-    private RubySdkConfigurablePanel myRubyConfigurablePanel;
+public class RubySdkConfigurable implements AdditionalDataConfigurable
+{
+	private Sdk mySdk;
+	private RubySdkConfigurablePanel myRubyConfigurablePanel;
 
-    private String myGemsPath;
+	private String myGemsPath;
 
-    @Nullable
-    public String getGemsPath() {
-        return myGemsPath;
-    }
+	@Nullable
+	public String getGemsPath()
+	{
+		return myGemsPath;
+	}
 
-    public void setGemsPath(@Nullable final String gemsPath) {
-        myGemsPath = gemsPath;
-    }
+	public void setGemsPath(@Nullable final String gemsPath)
+	{
+		myGemsPath = gemsPath;
+	}
 
-    public RubySdkConfigurable() {
-        myRubyConfigurablePanel = new RubySdkConfigurablePanel();
-    }
+	public RubySdkConfigurable()
+	{
+		myRubyConfigurablePanel = new RubySdkConfigurablePanel();
+	}
 
-    @Override
-	public void setSdk(@NotNull final Sdk sdk) {
-        mySdk = sdk;
-    }
+	@Override
+	public void setSdk(@NotNull final Sdk sdk)
+	{
+		mySdk = sdk;
+	}
 
-    @Override
-	public JComponent createComponent() {
-        return myRubyConfigurablePanel.getPanel();
-    }
+	@Override
+	public JComponent createComponent()
+	{
+		return myRubyConfigurablePanel.getPanel();
+	}
 
-    @Override
-	public boolean isModified() {
-        return !RubySdkUtil.getGemsBinFolderPath(mySdk).equals(myRubyConfigurablePanel.getGemsBinFolder());
-    }
+	@Override
+	public boolean isModified()
+	{
+		return !RubySdkUtil.getGemsBinFolderPath(mySdk).equals(myRubyConfigurablePanel.getGemsBinFolder());
+	}
 
-    @Override
-	public void apply() throws ConfigurationException {
-        //Gems bin folder
-        final String newGemsBinFolder = myRubyConfigurablePanel.getGemsBinFolder();
-        ((RubySdkType) mySdk.getSdkType()).setGemsBinDirectory(mySdk, newGemsBinFolder);
+	@Override
+	public void apply() throws ConfigurationException
+	{
+		//Gems bin folder
+		final String newGemsBinFolder = myRubyConfigurablePanel.getGemsBinFolder();
+		((RubySdkType) mySdk.getSdkType()).setGemsBinDirectory(mySdk, newGemsBinFolder);
 
-        //Patch source roots according to classpath
-        final SdkModificator modificator = mySdk.getSdkModificator();
-        modificator.removeRoots(OrderRootType.CLASSES);
-        for (VirtualFile file : modificator.getRoots(OrderRootType.CLASSES)) {
-            modificator.addRoot(file, OrderRootType.SOURCES);
-        }
-        RubySdkType.findAndSaveGemsRootsBy(modificator);     
+		//Patch source roots according to classpath
+		final SdkModificator modificator = mySdk.getSdkModificator();
+		modificator.removeRoots(OrderRootType.CLASSES);
+		for(VirtualFile file : modificator.getRoots(OrderRootType.CLASSES))
+		{
+			modificator.addRoot(file, OrderRootType.SOURCES);
+		}
+		RubySdkType.findAndSaveGemsRootsBy(modificator);
 
-        modificator.commitChanges();
+		modificator.commitChanges();
 
-// Change libraries facet libraries
-        IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable(){
-            @Override
-			public void run() throws Exception {
-                JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(OrderRootType.CLASSES));
-            }
-        });
-    }
+		// Change libraries facet libraries
+		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		{
+			@Override
+			public void run() throws Exception
+			{
+				JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(OrderRootType.CLASSES));
+			}
+		});
+	}
 
-    @Override
-	public void reset() {
-        final RubySdkType type = (RubySdkType)mySdk.getSdkType();
-        myRubyConfigurablePanel.setRubyText(type.getVMExecutablePath(mySdk));
-        myRubyConfigurablePanel.setGemsBinFolder(RubySdkUtil.getGemsBinFolderPath(mySdk));
-        myRubyConfigurablePanel.getPanel().repaint();
-    }
+	@Override
+	public void reset()
+	{
+		final RubySdkType type = (RubySdkType) mySdk.getSdkType();
+		myRubyConfigurablePanel.setRubyText(type.getVMExecutablePath(mySdk));
+		myRubyConfigurablePanel.setGemsBinFolder(RubySdkUtil.getGemsBinFolderPath(mySdk));
+		myRubyConfigurablePanel.getPanel().repaint();
+	}
 
-    @Override
-	public void disposeUIResources() {
-        // do nothing. we don`t have them
-    }
+	@Override
+	public void disposeUIResources()
+	{
+		// do nothing. we don`t have them
+	}
 
 }

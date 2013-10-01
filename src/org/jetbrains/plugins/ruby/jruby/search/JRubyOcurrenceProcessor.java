@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.jruby.search;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.TextOccurenceProcessor;
 import com.intellij.util.Processor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,34 +31,37 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantRef
  * @author: oleg
  * @date: Jan 12, 2008
  */
-public class JRubyOcurrenceProcessor implements TextOccurenceProcessor{
-    private PsiMethod myMethod;
-    private String myName;
-    private Processor<PsiReference> myPsiReferenceProcessor;
-    private boolean myShouldResolve;
+public class JRubyOcurrenceProcessor implements TextOccurenceProcessor
+{
+	private PsiMethod myMethod;
+	private String myName;
+	private Processor<PsiReference> myPsiReferenceProcessor;
+	private boolean myShouldResolve;
 
-    public JRubyOcurrenceProcessor(@NotNull final PsiMethod method,
-                                       @NotNull final String name,
-                                       @NotNull final Processor<PsiReference> psiReferenceProcessor,
-                                       final boolean shouldResolve) {
-        myMethod = method;
-        myName = name;
-        myPsiReferenceProcessor = psiReferenceProcessor;
-        myShouldResolve = shouldResolve;
-    }
+	public JRubyOcurrenceProcessor(@NotNull final PsiMethod method, @NotNull final String name, @NotNull final Processor<PsiReference> psiReferenceProcessor, final boolean shouldResolve)
+	{
+		myMethod = method;
+		myName = name;
+		myPsiReferenceProcessor = psiReferenceProcessor;
+		myShouldResolve = shouldResolve;
+	}
 
-    @Override
-	public boolean execute(PsiElement element, int offsetInElement) {
-        final PsiReference ref = element.getReference();
-        if (ref instanceof RPsiPolyvariantReference) {
-            if (myShouldResolve && ref.isReferenceTo(myMethod) || !myShouldResolve && !ref.isReferenceTo(myMethod)) {
-                final PsiElement refValue = ((RPsiPolyvariantReference) ref).getRefValue();
-                final String refName = refValue instanceof PsiNamedElement ? ((PsiNamedElement) refValue).getName() : refValue.getText();
-                if (myName.equals(refName)) {
-                    return myPsiReferenceProcessor.process(ref);
-                }
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean execute(PsiElement element, int offsetInElement)
+	{
+		final PsiReference ref = element.getReference();
+		if(ref instanceof RPsiPolyvariantReference)
+		{
+			if(myShouldResolve && ref.isReferenceTo(myMethod) || !myShouldResolve && !ref.isReferenceTo(myMethod))
+			{
+				final PsiElement refValue = ((RPsiPolyvariantReference) ref).getRefValue();
+				final String refName = refValue instanceof PsiNamedElement ? ((PsiNamedElement) refValue).getName() : refValue.getText();
+				if(myName.equals(refName))
+				{
+					return myPsiReferenceProcessor.process(ref);
+				}
+			}
+		}
+		return true;
+	}
 }

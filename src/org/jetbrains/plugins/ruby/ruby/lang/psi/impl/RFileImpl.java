@@ -28,49 +28,58 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.tree.IFileElementType;
 
-public class RFileImpl extends RPsiFileBase implements RFile {
-    @NotNull private Language myLanguage;
-    @NotNull private ParserDefinition myParserDefinition;
-
-    public RFileImpl(final FileViewProvider viewProvider) {
-        super(viewProvider);
-        initLanguage(RubyLanguage.INSTANCE);
-
-        // For debug mode
-        // This enables bread crumbs loader for ruby files.
-        if (ApplicationManagerEx.getApplicationEx().isInternal()) {
-          //  putUserData(BreadcrumbsLoaderComponentImpl.BREADCRUMBS_SUITABLE_FILE, new Object());
-        }
-    }
-
-    @Override
+public class RFileImpl extends RPsiFileBase implements RFile
+{
 	@NotNull
-    public FileType getFileType() {
-        return RubyFileType.RUBY;
-    }
-
-    public String toString(){
-        return "Ruby file";
-    }
-
-    @Override
+	private Language myLanguage;
 	@NotNull
-    public final Language getLanguage() {
-        return myLanguage;
-    }
+	private ParserDefinition myParserDefinition;
+
+	public RFileImpl(final FileViewProvider viewProvider)
+	{
+		super(viewProvider);
+		initLanguage(RubyLanguage.INSTANCE);
+
+		// For debug mode
+		// This enables bread crumbs loader for ruby files.
+		if(ApplicationManagerEx.getApplicationEx().isInternal())
+		{
+			//  putUserData(BreadcrumbsLoaderComponentImpl.BREADCRUMBS_SUITABLE_FILE, new Object());
+		}
+	}
+
+	@Override
+	@NotNull
+	public FileType getFileType()
+	{
+		return RubyFileType.RUBY;
+	}
+
+	public String toString()
+	{
+		return "Ruby file";
+	}
+
+	@Override
+	@NotNull
+	public final Language getLanguage()
+	{
+		return myLanguage;
+	}
 
 
+	//////////////////////////// PsiFileBase /////////////////////////////
 
-//////////////////////////// PsiFileBase /////////////////////////////
-
-    private void initLanguage(final Language language) {
-        myLanguage = language;
-        final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(language);
-        if (parserDefinition == null) {
-            throw new RuntimeException("PsiFileBase: language.getParserDefinition() returned null.");
-        }
-        myParserDefinition = parserDefinition;
-        final IFileElementType nodeType = parserDefinition.getFileNodeType();
-        init(nodeType, nodeType);
-    }
+	private void initLanguage(final Language language)
+	{
+		myLanguage = language;
+		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(language);
+		if(parserDefinition == null)
+		{
+			throw new RuntimeException("PsiFileBase: language.getParserDefinition() returned null.");
+		}
+		myParserDefinition = parserDefinition;
+		final IFileElementType nodeType = parserDefinition.getFileNodeType();
+		init(nodeType, nodeType);
+	}
 }

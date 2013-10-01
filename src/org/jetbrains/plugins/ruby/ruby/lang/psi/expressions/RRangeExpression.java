@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface RRangeExpression extends RBinaryExpression {
+public interface RRangeExpression extends RBinaryExpression
+{
 }

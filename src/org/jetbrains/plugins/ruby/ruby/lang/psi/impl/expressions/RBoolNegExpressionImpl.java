@@ -16,27 +16,30 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RBoolNegExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 10.05.2005
  */
-public class RBoolNegExpressionImpl extends RUnaryExpressionBase implements RBoolNegExpression {
-    public RBoolNegExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBoolNegExpressionImpl extends RUnaryExpressionBase implements RBoolNegExpression
+{
+	public RBoolNegExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        return RTypeUtil.getBooleanType(fileSymbol);
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		return RTypeUtil.getBooleanType(fileSymbol);
+	}
 }

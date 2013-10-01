@@ -16,6 +16,16 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
+import java.awt.Component;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.options.ConfigurationException;
@@ -25,11 +35,6 @@ import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Comparing;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.support.utils.OSUtil;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,84 +42,90 @@ import java.awt.*;
  * @author: Roman Chernyatchik, oleg
  * @date: Oct 27, 2007
  */
-public class GeneralSettingsTab implements UnnamedConfigurable {
-    private JPanel myContentPane;
+public class GeneralSettingsTab implements UnnamedConfigurable
+{
+	private JPanel myContentPane;
 
-    private JCheckBox rubyStacktraceFilterCheckBox;
-    private JCheckBox colorModeCheckBox;
-    private JCheckBox otherFiltersCheckBox;
-    private JCheckBox useRubyProjectViewBox;
-    private JTextField myTFAdditioanlPath;
-    private JTextPane myTPIdeaPath;
+	private JCheckBox rubyStacktraceFilterCheckBox;
+	private JCheckBox colorModeCheckBox;
+	private JCheckBox otherFiltersCheckBox;
+	private JCheckBox useRubyProjectViewBox;
+	private JTextField myTFAdditioanlPath;
+	private JTextPane myTPIdeaPath;
 
-    public Component getContentPanel() {
-        return myContentPane;
-    }
+	public Component getContentPanel()
+	{
+		return myContentPane;
+	}
 
-    @Override
-	public JComponent createComponent() {
-        //N/A
-        return null;
-    }
+	@Override
+	public JComponent createComponent()
+	{
+		//N/A
+		return null;
+	}
 
-    @Override
-	public boolean isModified() {
-        final RApplicationSettings settings = RApplicationSettings.getInstance();
-        return settings.useConsoleOutputOtherFilters != otherFiltersCheckBox.isSelected()
-               || settings.useConsoleOutputRubyStacktraceFilter != rubyStacktraceFilterCheckBox.isSelected()
-               || settings.useConsoleColorMode != colorModeCheckBox.isSelected()
-               || settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected()
-               || !Comparing.equal(myTFAdditioanlPath.getText().trim(), settings.additionalEnvPATH);
-    }
+	@Override
+	public boolean isModified()
+	{
+		final RApplicationSettings settings = RApplicationSettings.getInstance();
+		return settings.useConsoleOutputOtherFilters != otherFiltersCheckBox.isSelected() || settings.useConsoleOutputRubyStacktraceFilter != rubyStacktraceFilterCheckBox.isSelected() || settings.useConsoleColorMode != colorModeCheckBox.isSelected() || settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected() || !Comparing.equal(myTFAdditioanlPath.getText().trim(), settings.additionalEnvPATH);
+	}
 
-    public boolean isProjectViewStyleChanged() {
-        final RApplicationSettings settings = RApplicationSettings.getInstance();
-        return settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected();
-    }
+	public boolean isProjectViewStyleChanged()
+	{
+		final RApplicationSettings settings = RApplicationSettings.getInstance();
+		return settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected();
+	}
 
-    @Override
-	public void apply() throws ConfigurationException {
-        final RApplicationSettings settings = RApplicationSettings.getInstance();
-        settings.useConsoleOutputOtherFilters = otherFiltersCheckBox.isSelected();
-        settings.useConsoleOutputRubyStacktraceFilter = rubyStacktraceFilterCheckBox.isSelected();
-        settings.useConsoleColorMode = colorModeCheckBox.isSelected();
-        settings.additionalEnvPATH = myTFAdditioanlPath.getText().trim();
+	@Override
+	public void apply() throws ConfigurationException
+	{
+		final RApplicationSettings settings = RApplicationSettings.getInstance();
+		settings.useConsoleOutputOtherFilters = otherFiltersCheckBox.isSelected();
+		settings.useConsoleOutputRubyStacktraceFilter = rubyStacktraceFilterCheckBox.isSelected();
+		settings.useConsoleColorMode = colorModeCheckBox.isSelected();
+		settings.additionalEnvPATH = myTFAdditioanlPath.getText().trim();
 
-        final boolean isProjectViewStyleChanged = isProjectViewStyleChanged();
-        settings.useRubySpecificProjectView = useRubyProjectViewBox.isSelected();
-        if (isProjectViewStyleChanged){
-            final int result = Messages.showYesNoDialog(myContentPane.getParent(),
-                    RBundle.message("settings.plugin.general.tab.use.ruby.project.view.changed.message"),
-                    RBundle.message("settings.plugin.general.tab.use.ruby.project.view.changed.title"),
-                    Messages.getQuestionIcon());
-            if (result == DialogWrapper.OK_EXIT_CODE){
-                ApplicationManager.getApplication().invokeLater(new Runnable() {
-                    @Override
-					public void run() {
-                        // reload all projects
-                        for (Project project : ProjectManager.getInstance().getOpenProjects()) {
-                            ProjectManager.getInstance().reloadProject(project);
-                        }
-                    }
-                }, ModalityState.NON_MODAL);
-            }
-        }
-    }
+		final boolean isProjectViewStyleChanged = isProjectViewStyleChanged();
+		settings.useRubySpecificProjectView = useRubyProjectViewBox.isSelected();
+		if(isProjectViewStyleChanged)
+		{
+			final int result = Messages.showYesNoDialog(myContentPane.getParent(), RBundle.message("settings.plugin.general.tab.use.ruby.project.view.changed.message"), RBundle.message("settings.plugin.general.tab.use.ruby.project.view.changed.title"), Messages.getQuestionIcon());
+			if(result == DialogWrapper.OK_EXIT_CODE)
+			{
+				ApplicationManager.getApplication().invokeLater(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						// reload all projects
+						for(Project project : ProjectManager.getInstance().getOpenProjects())
+						{
+							ProjectManager.getInstance().reloadProject(project);
+						}
+					}
+				}, ModalityState.NON_MODAL);
+			}
+		}
+	}
 
-    @Override
-	public void reset() {
-        final RApplicationSettings settings = RApplicationSettings.getInstance();
-        rubyStacktraceFilterCheckBox.setSelected(settings.useConsoleOutputRubyStacktraceFilter);
-        otherFiltersCheckBox.setSelected(settings.useConsoleOutputOtherFilters);
-        colorModeCheckBox.setSelected(settings.useConsoleColorMode);
-        useRubyProjectViewBox.setSelected(settings.useRubySpecificProjectView);
-        myTFAdditioanlPath.setText(settings.additionalEnvPATH);
+	@Override
+	public void reset()
+	{
+		final RApplicationSettings settings = RApplicationSettings.getInstance();
+		rubyStacktraceFilterCheckBox.setSelected(settings.useConsoleOutputRubyStacktraceFilter);
+		otherFiltersCheckBox.setSelected(settings.useConsoleOutputOtherFilters);
+		colorModeCheckBox.setSelected(settings.useConsoleColorMode);
+		useRubyProjectViewBox.setSelected(settings.useRubySpecificProjectView);
+		myTFAdditioanlPath.setText(settings.additionalEnvPATH);
 
-        myTPIdeaPath.setText(System.getenv(OSUtil.getPATHenvVariableName()));
-    }
+		myTPIdeaPath.setText(System.getenv(OSUtil.getPATHenvVariableName()));
+	}
 
-    @Override
-	public void disposeUIResources() {
-        //Do nothing
-    }
+	@Override
+	public void disposeUIResources()
+	{
+		//Do nothing
+	}
 }

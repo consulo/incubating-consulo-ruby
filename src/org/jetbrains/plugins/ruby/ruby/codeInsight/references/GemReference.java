@@ -51,116 +51,139 @@ import com.intellij.util.IncorrectOperationException;
  * @author: oleg
  * @date: Dec 3, 2007
  */
-public class GemReference implements RPsiPolyvariantReference{
-    private RCall myOwner;
-    private RPsiElement myElement;
-    private TextRange myTextRange;
+public class GemReference implements RPsiPolyvariantReference
+{
+	private RCall myOwner;
+	private RPsiElement myElement;
+	private TextRange myTextRange;
 
-    public GemReference(RCall rCall, RPsiElement gemName) {
-        myOwner = rCall;
-        myElement = gemName;
-        myTextRange = computeTextRange(myElement);
-    }
+	public GemReference(RCall rCall, RPsiElement gemName)
+	{
+		myOwner = rCall;
+		myElement = gemName;
+		myTextRange = computeTextRange(myElement);
+	}
 
-    private TextRange computeTextRange(@NotNull final RPsiElement element) {
-        final int relativeStartOffset = element.getTextOffset() - myOwner.getTextOffset();
-        int start = relativeStartOffset;
-        if (element instanceof RBaseString) {
-            final PsiElement firstChild = element.getFirstChild();
-            if (firstChild !=null){
-                start+=firstChild.getTextLength();
-            }
+	private TextRange computeTextRange(@NotNull final RPsiElement element)
+	{
+		final int relativeStartOffset = element.getTextOffset() - myOwner.getTextOffset();
+		int start = relativeStartOffset;
+		if(element instanceof RBaseString)
+		{
+			final PsiElement firstChild = element.getFirstChild();
+			if(firstChild != null)
+			{
+				start += firstChild.getTextLength();
+			}
 
-            int end = relativeStartOffset + element.getTextLength();
-            final PsiElement lastChild = element.getLastChild();
-            //noinspection ConstantConditions
-            if (lastChild !=null && lastChild.getNode().getElementType() == RubyTokenTypes.tSTRING_END){
-                end-=lastChild.getTextLength();
-            }
-            return new TextRange(start, end);
-        }
-        return new TextRange(relativeStartOffset, relativeStartOffset + element.getTextLength());
-    }
+			int end = relativeStartOffset + element.getTextLength();
+			final PsiElement lastChild = element.getLastChild();
+			//noinspection ConstantConditions
+			if(lastChild != null && lastChild.getNode().getElementType() == RubyTokenTypes.tSTRING_END)
+			{
+				end -= lastChild.getTextLength();
+			}
+			return new TextRange(start, end);
+		}
+		return new TextRange(relativeStartOffset, relativeStartOffset + element.getTextLength());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getRefValue() {
-        return myElement;
-    }
+	public PsiElement getRefValue()
+	{
+		return myElement;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        throw new UnsupportedOperationException("method multiResolveToSymbols is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
-    }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		throw new UnsupportedOperationException("method multiResolveToSymbols is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ResolveResult[] multiResolve(boolean incompleteCode) {
-        return ResolveResult.EMPTY_ARRAY;
-    }
+	public ResolveResult[] multiResolve(boolean incompleteCode)
+	{
+		return ResolveResult.EMPTY_ARRAY;
+	}
 
-    @Override
-	public PsiElement getElement() {
-        return myOwner;
-    }
+	@Override
+	public PsiElement getElement()
+	{
+		return myOwner;
+	}
 
-    @Override
-	public TextRange getRangeInElement() {
-        return myTextRange;
-    }
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return myTextRange;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement resolve() {
-        return null;
-    }
+	public PsiElement resolve()
+	{
+		return null;
+	}
 
-    @Override
-	public String getCanonicalText() {
-        return null;
-    }
+	@Override
+	public String getCanonicalText()
+	{
+		return null;
+	}
 
-    @Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-        throw new UnsupportedOperationException("method handleElementRename is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
-    }
+	@Override
+	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
+	{
+		throw new UnsupportedOperationException("method handleElementRename is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
+	}
 
-    @Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-        return null;
-    }
+	@Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	{
+		return null;
+	}
 
-    @Override
-	public boolean isReferenceTo(PsiElement element) {
-        return false;
-    }
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		return false;
+	}
 
-    @Override
-	public Object[] getVariants() {
-        if (myElement instanceof RBaseString) {
-            final RFile rFile = RubyPsiUtil.getRFile(myOwner);
-            assert rFile!=null;
-            final Sdk sdk = rFile.getSdk();
-            if (sdk!=null && RubySdkUtil.isKindOfRubySDK(sdk)){
+	@Override
+	public Object[] getVariants()
+	{
+		if(myElement instanceof RBaseString)
+		{
+			final RFile rFile = RubyPsiUtil.getRFile(myOwner);
+			assert rFile != null;
+			final Sdk sdk = rFile.getSdk();
+			if(sdk != null && RubySdkUtil.isKindOfRubySDK(sdk))
+			{
 				final String[] rootUrls = sdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
 				final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
-				for (String rootUrl : rootUrls) {
+				for(String rootUrl : rootUrls)
+				{
 					final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(rootUrl);
-					if (gemsRoot != null) {
-						for (GemInfo gemInfo : RubySdkUtil.getAllGems(gemsRoot)) {
+					if(gemsRoot != null)
+					{
+						for(GemInfo gemInfo : RubySdkUtil.getAllGems(gemsRoot))
+						{
 							variants.add(new RubySimpleLookupItem(gemInfo.getName(), gemInfo.getVersion(), LookupValueWithPriority.NORMAL, true, RubyIcons.RUBY_ICON));
 						}
 					}
 				}
 				return variants.toArray();
 			}
-        }
-        return PsiReference.EMPTY_ARRAY;
-    }
+		}
+		return PsiReference.EMPTY_ARRAY;
+	}
 
-    @Override
-	public boolean isSoft() {
-        return true;
-    }
+	@Override
+	public boolean isSoft()
+	{
+		return true;
+	}
 }

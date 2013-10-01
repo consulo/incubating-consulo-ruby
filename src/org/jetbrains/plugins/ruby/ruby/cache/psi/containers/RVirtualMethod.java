@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,17 +27,18 @@ import java.util.List;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualMethod extends RVirtualContainer {
+public interface RVirtualMethod extends RVirtualContainer
+{
 
-    @NotNull
-    public List<ArgumentInfo> getArgumentInfos();
+	@NotNull
+	public List<ArgumentInfo> getArgumentInfos();
 
-    /**
-     * @return the full method signature
-     * Warning! do not use this for searching!!!
-     */
-    public String getPresentableName();
+	/**
+	 * @return the full method signature
+	 *         Warning! do not use this for searching!!!
+	 */
+	public String getPresentableName();
 
-    public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod);
+	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod);
 
 }

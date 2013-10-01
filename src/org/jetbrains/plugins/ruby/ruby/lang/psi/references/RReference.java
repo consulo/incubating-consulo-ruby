@@ -28,18 +28,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  * @author: oleg
  * @date: Oct 30, 2006
  */
-public interface RReference extends RPossibleCall, RExpression {
-    public enum Type {
-        DOT_REF,
-        COLON_REF
-    }
+public interface RReference extends RPossibleCall, RExpression
+{
+	public enum Type
+	{
+		DOT_REF,
+		COLON_REF
+	}
 
-    @Nullable
-    public RPsiElement getValue();
+	@Nullable
+	public RPsiElement getValue();
 
-    @Nullable
-    public RPsiElement getReciever();
+	@Nullable
+	public RPsiElement getReciever();
 
-    @NotNull
-    public Type getType();
+	@NotNull
+	public Type getType();
 }

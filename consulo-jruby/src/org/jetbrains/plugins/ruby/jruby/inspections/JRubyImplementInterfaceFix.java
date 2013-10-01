@@ -36,44 +36,53 @@ import rb.implement.ImplementHandler;
  * @author: oleg
  * @date: Feb 29, 2008
  */
-public class JRubyImplementInterfaceFix implements LocalQuickFix {
-    protected Symbol mySymbol;
-    protected PsiElement myEndElement;
+public class JRubyImplementInterfaceFix implements LocalQuickFix
+{
+	protected Symbol mySymbol;
+	protected PsiElement myEndElement;
 
-    public JRubyImplementInterfaceFix(@NotNull final PsiElement endElement, @NotNull final Symbol symbol) {
-        myEndElement = endElement;
-        mySymbol = symbol;
-    }
+	public JRubyImplementInterfaceFix(@NotNull final PsiElement endElement, @NotNull final Symbol symbol)
+	{
+		myEndElement = endElement;
+		mySymbol = symbol;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return "Implement methods";
-    }
+	public String getName()
+	{
+		return "Implement methods";
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getFamilyName() {
-        return "JRuby";
-    }
+	public String getFamilyName()
+	{
+		return "JRuby";
+	}
 
-    @Override
-	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
-        final ImplementHandler handler = null; //(ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
-        if (handler != null) {
-            // Looking for editor
-            Editor editor = null;
-            final PsiFile file = myEndElement.getContainingFile();
-            final VirtualFile virtualFile = file.getVirtualFile();
-            if (virtualFile != null) {
-                for (FileEditor fileEditor : FileEditorManager.getInstance(project).getEditors(virtualFile)) {
-                    if (fileEditor instanceof TextEditor){
-                        editor = ((TextEditor) fileEditor).getEditor();
-                        break;
-                    }
-                }
-            }
-            handler.execute(editor, project, myEndElement, mySymbol);
-        }
-    }
+	@Override
+	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor)
+	{
+		final ImplementHandler handler = null; //(ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
+		if(handler != null)
+		{
+			// Looking for editor
+			Editor editor = null;
+			final PsiFile file = myEndElement.getContainingFile();
+			final VirtualFile virtualFile = file.getVirtualFile();
+			if(virtualFile != null)
+			{
+				for(FileEditor fileEditor : FileEditorManager.getInstance(project).getEditors(virtualFile))
+				{
+					if(fileEditor instanceof TextEditor)
+					{
+						editor = ((TextEditor) fileEditor).getEditor();
+						break;
+					}
+				}
+			}
+			handler.execute(editor, project, myEndElement, mySymbol);
+		}
+	}
 }

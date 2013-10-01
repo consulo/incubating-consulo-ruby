@@ -27,7 +27,6 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
-import org.jetbrains.plugins.ruby.ruby.scope.SearchScopeUtil;
 
 /**
  * Created by IntelliJ IDEA.

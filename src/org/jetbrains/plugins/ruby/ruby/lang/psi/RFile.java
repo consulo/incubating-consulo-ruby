@@ -35,35 +35,36 @@ import com.intellij.psi.PsiFile;
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RFile extends RVirtualFile, RFieldConstantContainer, RGlobalVarHolder, PsiFile {
+public interface RFile extends RVirtualFile, RFieldConstantContainer, RGlobalVarHolder, PsiFile
+{
 
-    @NotNull
-    public RCompoundStatement getCompoundStatement();
-
-    @Override
 	@NotNull
-    public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @NotNull RFileInfo fileInfo);
+	public RCompoundStatement getCompoundStatement();
 
-    @Override
+	@Override
+	@NotNull
+	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @NotNull RFileInfo fileInfo);
+
+	@Override
 	@Nullable
-    public RContainer getParentContainer();
+	public RContainer getParentContainer();
 
-    @Override
+	@Override
 	@Nullable
-    public RFileInfo getContainingFileInfo();
+	public RFileInfo getContainingFileInfo();
 
-    @Nullable
-    public Module getModule();
+	@Nullable
+	public Module getModule();
 
-    /**
-     * @return Sdk, for given file. It`s module sdk if file is a part of any module,
-     * sdk if the file if a part of this sdk or null otherwise
-     */
-    @Nullable
-    public Sdk getSdk();
+	/**
+	 * @return Sdk, for given file. It`s module sdk if file is a part of any module,
+	 *         sdk if the file if a part of this sdk or null otherwise
+	 */
+	@Nullable
+	public Sdk getSdk();
 
-    @Nullable
-    public FileSymbol getFileSymbol();
+	@Nullable
+	public FileSymbol getFileSymbol();
 
-    public boolean isJRubyEnabled();
+	public boolean isJRubyEnabled();
 }

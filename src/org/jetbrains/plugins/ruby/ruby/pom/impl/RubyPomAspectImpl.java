@@ -16,6 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom.impl;
 
+import java.util.Collections;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RComponents;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
@@ -26,14 +34,6 @@ import com.intellij.pom.tree.TreeAspect;
 import com.intellij.pom.tree.events.TreeChangeEvent;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
-
-import java.util.Collections;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,74 +41,87 @@ import java.util.Collections;
  * @author: Roman Chernyatchik
  * @date: 03.10.2006
  */
-public class RubyPomAspectImpl implements RubyPomAspect {
-    private final PomModel myModel;
-    private final TreeAspect myTreeAspect;
+public class RubyPomAspectImpl implements RubyPomAspect
+{
+	private final PomModel myModel;
+	private final TreeAspect myTreeAspect;
 
 
-    public RubyPomAspectImpl(final PomModel model,
-                             final TreeAspect treeAspect,
-                             final Project project) {
-        myModel = model;
-        myTreeAspect = treeAspect;
-        myModel.registerAspect(RubyPomAspect.class, this, Collections.singleton((PomModelAspect) myTreeAspect));
-    }
+	public RubyPomAspectImpl(final PomModel model, final TreeAspect treeAspect, final Project project)
+	{
+		myModel = model;
+		myTreeAspect = treeAspect;
+		myModel.registerAspect(RubyPomAspect.class, this, Collections.singleton((PomModelAspect) myTreeAspect));
+	}
 
-    @NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RUBY_ASPECT;
-    }
+	@NonNls
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RUBY_ASPECT;
+	}
 
-    public void initComponent() {
-    }
+	public void initComponent()
+	{
+	}
 
-    public void projectOpened() {
-    }
-
-
-    public void projectClosed() {
-    }
+	public void projectOpened()
+	{
+	}
 
 
-    @Override
-	public void update(PomModelEvent event) {
-        // we hope it`s enough often operation
-        ProgressManager.getInstance().checkCanceled();
+	public void projectClosed()
+	{
+	}
 
-        if (!event.getChangedAspects().contains(myTreeAspect)) {
-            return;
-        }
 
-        final TreeChangeEvent changeSet = (TreeChangeEvent) event.getChangeSet(myTreeAspect);
-        if (changeSet == null) {
-            return;
-        }
+	@Override
+	public void update(PomModelEvent event)
+	{
+		// we hope it`s enough often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        final ASTNode rootElement = changeSet.getRootElement();
-        final PsiFile file = (PsiFile) rootElement.getPsi();
-        if (!(file instanceof RFile)) {
-            return;
-        }
-        final RubyChangeSetImpl rubyChangeSet = new RubyChangeSetImpl(myModel, (RFile) file);
-        final RubyAspectVisitor visitor = new RubyAspectVisitor(rubyChangeSet);
-        final ASTNode[] changedElements = changeSet.getChangedElements();
-        for (ASTNode changedASTNode : changedElements) {
-            final PsiElement psiElement = changedASTNode.getPsi();
-            assert psiElement!=null;
-// We use RubyAspectVisitor only for Ruby changes
-            if (psiElement.getLanguage() == RubyLanguage.INSTANCE){
-                if (!visitor.isChangeFound()){
-                    psiElement.accept(visitor);
-                }
-            }
-        }
-        if (rubyChangeSet.getChanges().size() > 0) {
-            event.registerChangeSet(this, rubyChangeSet);
-        }
-    }
+		if(!event.getChangedAspects().contains(myTreeAspect))
+		{
+			return;
+		}
 
-    public void disposeComponent() {
-    }
+		final TreeChangeEvent changeSet = (TreeChangeEvent) event.getChangeSet(myTreeAspect);
+		if(changeSet == null)
+		{
+			return;
+		}
+
+		final ASTNode rootElement = changeSet.getRootElement();
+		final PsiFile file = (PsiFile) rootElement.getPsi();
+		if(!(file instanceof RFile))
+		{
+			return;
+		}
+		final RubyChangeSetImpl rubyChangeSet = new RubyChangeSetImpl(myModel, (RFile) file);
+		final RubyAspectVisitor visitor = new RubyAspectVisitor(rubyChangeSet);
+		final ASTNode[] changedElements = changeSet.getChangedElements();
+		for(ASTNode changedASTNode : changedElements)
+		{
+			final PsiElement psiElement = changedASTNode.getPsi();
+			assert psiElement != null;
+			// We use RubyAspectVisitor only for Ruby changes
+			if(psiElement.getLanguage() == RubyLanguage.INSTANCE)
+			{
+				if(!visitor.isChangeFound())
+				{
+					psiElement.accept(visitor);
+				}
+			}
+		}
+		if(rubyChangeSet.getChanges().size() > 0)
+		{
+			event.registerChangeSet(this, rubyChangeSet);
+		}
+	}
+
+	public void disposeComponent()
+	{
+	}
 
 }

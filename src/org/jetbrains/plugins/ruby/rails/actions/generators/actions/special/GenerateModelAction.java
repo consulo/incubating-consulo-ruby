@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.psi.PsiDirectory;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +24,8 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import com.intellij.openapi.module.Module;
+import com.intellij.psi.PsiDirectory;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,43 +34,48 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
  * @date: 25.11.2006
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class GenerateModelAction extends SimpleGeneratorAction {
-    @NonNls
-    public static final String GENERATOR_MODEL = "model";
+public class GenerateModelAction extends SimpleGeneratorAction
+{
+	@NonNls
+	public static final String GENERATOR_MODEL = "model";
 
-    public GenerateModelAction() {
-        this(null);
-    }
+	public GenerateModelAction()
+	{
+		this(null);
+	}
 
-    public GenerateModelAction(final String actionName) {
-        super(GENERATOR_MODEL,
-              actionName != null ? actionName : RBundle.message("new.generate.model.text"),
-              RBundle.message("new.generate.model.description"),
-              RailsIcons.RAILS_MODEL_NODE);
-    }
+	public GenerateModelAction(final String actionName)
+	{
+		super(GENERATOR_MODEL, actionName != null ? actionName : RBundle.message("new.generate.model.text"), RBundle.message("new.generate.model.description"), RailsIcons.RAILS_MODEL_NODE);
+	}
 
-    @Override
-	protected String getGenerateDialogTitle() {
-        return RBundle.message("new.generate.model.action.prompt.title");
-    }
+	@Override
+	protected String getGenerateDialogTitle()
+	{
+		return RBundle.message("new.generate.model.action.prompt.title");
+	}
 
-    @Override
-	protected String getErrorTitle() {
-        return RBundle.message("new.generate.model.error.title");
-    }
+	@Override
+	protected String getErrorTitle()
+	{
+		return RBundle.message("new.generate.model.error.title");
+	}
 
-    @Override
-	protected SimpleGeneratorInputValidator createValidator(@NotNull final Module module,
-                                                            @Nullable final PsiDirectory directory) {
-        return new SimpleGeneratorInputValidator(this, module, directory) {
-            @Override
-			public boolean checkInput(String inputString) {
-                if (TextUtil.isEmpty(inputString)) {
-                    showErrorDialog(RBundle.message("new.generate.common.error.script.arguments.should.be.specified"));
-                    return false;
-                }
-                return true;
-            }
-        };
-    }
+	@Override
+	protected SimpleGeneratorInputValidator createValidator(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	{
+		return new SimpleGeneratorInputValidator(this, module, directory)
+		{
+			@Override
+			public boolean checkInput(String inputString)
+			{
+				if(TextUtil.isEmpty(inputString))
+				{
+					showErrorDialog(RBundle.message("new.generate.common.error.script.arguments.should.be.specified"));
+					return false;
+				}
+				return true;
+			}
+		};
+	}
 }

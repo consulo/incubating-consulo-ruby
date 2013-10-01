@@ -16,11 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
-import com.intellij.util.IncorrectOperationException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.RFieldResolveUtil;
@@ -38,9 +36,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseS
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveResult;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,178 +48,208 @@ import java.util.List;
  * @author: oleg
  * @date: Mar 12, 2007
  */
-public class RFieldAttrReference implements RPsiPolyvariantReference {
+public class RFieldAttrReference implements RPsiPolyvariantReference
+{
 
-    private final RCall myCall;
-    private final TextRange myTextRange;
-    private final PsiElement myElement;
-    private final RFieldHolder myHolder;
-    private final String myName;
+	private final RCall myCall;
+	private final TextRange myTextRange;
+	private final PsiElement myElement;
+	private final RFieldHolder myHolder;
+	private final String myName;
 
 
-    public RFieldAttrReference(@NotNull final RCall call,
-                           @NotNull final PsiElement element,
-                           @NotNull final RFieldHolder holder) {
-        myCall = call;
-        myHolder = holder;
-        myElement = element;
+	public RFieldAttrReference(@NotNull final RCall call, @NotNull final PsiElement element, @NotNull final RFieldHolder holder)
+	{
+		myCall = call;
+		myHolder = holder;
+		myElement = element;
 
-        final int relativeStartOffset = element.getTextOffset() - myCall.getTextOffset();
-        myTextRange = computeTextRange(element, relativeStartOffset, relativeStartOffset + element.getTextLength());
-        myName = RubyPsiUtil.evaluate(myElement);
-    }
+		final int relativeStartOffset = element.getTextOffset() - myCall.getTextOffset();
+		myTextRange = computeTextRange(element, relativeStartOffset, relativeStartOffset + element.getTextLength());
+		myName = RubyPsiUtil.evaluate(myElement);
+	}
 
-    private TextRange computeTextRange(final PsiElement element, int start, int end) {
-        if (element instanceof RBaseString){
-            final PsiElement firstChild = element.getFirstChild();
-            if (firstChild !=null){
-                start+=firstChild.getTextLength();
-            }
+	private TextRange computeTextRange(final PsiElement element, int start, int end)
+	{
+		if(element instanceof RBaseString)
+		{
+			final PsiElement firstChild = element.getFirstChild();
+			if(firstChild != null)
+			{
+				start += firstChild.getTextLength();
+			}
 
-            final PsiElement lastChild = element.getLastChild();
-            //noinspection ConstantConditions
-            if (lastChild !=null && lastChild.getNode().getElementType() == RubyTokenTypes.tSTRING_END){
-                end-=lastChild.getTextLength();
-            }
-            return new TextRange(start, end);
-        }
-        if (element instanceof RSymbol){
-            final PsiElement firstChild = element.getFirstChild();
-            final PsiElement lastChild = element.getLastChild();
-            if (firstChild !=null){
-                start+=firstChild.getTextLength();
-            }
-            if (lastChild instanceof RBaseString){
-                return computeTextRange(element.getLastChild(), start, end);
-            }
-        }
-        return new TextRange(start, end);
-    }
+			final PsiElement lastChild = element.getLastChild();
+			//noinspection ConstantConditions
+			if(lastChild != null && lastChild.getNode().getElementType() == RubyTokenTypes.tSTRING_END)
+			{
+				end -= lastChild.getTextLength();
+			}
+			return new TextRange(start, end);
+		}
+		if(element instanceof RSymbol)
+		{
+			final PsiElement firstChild = element.getFirstChild();
+			final PsiElement lastChild = element.getLastChild();
+			if(firstChild != null)
+			{
+				start += firstChild.getTextLength();
+			}
+			if(lastChild instanceof RBaseString)
+			{
+				return computeTextRange(element.getLastChild(), start, end);
+			}
+		}
+		return new TextRange(start, end);
+	}
 
-    @Override
-	public PsiElement getElement() {
-        return myCall;
-    }
+	@Override
+	public PsiElement getElement()
+	{
+		return myCall;
+	}
 
-    public PsiElement getReferenceContent(){
-        return myElement;
-    }
+	public PsiElement getReferenceContent()
+	{
+		return myElement;
+	}
 
-    @Override
-	public TextRange getRangeInElement() {
-        return myTextRange;
-    }
+	@Override
+	public TextRange getRangeInElement()
+	{
+		return myTextRange;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement resolve() {
-        return ResolveUtil.resolvePolyVarReference(this);
-    }
+	public PsiElement resolve()
+	{
+		return ResolveUtil.resolvePolyVarReference(this);
+	}
 
 
-    @Override
-	public String getCanonicalText() {
-        return myName;
-    }
+	@Override
+	public String getCanonicalText()
+	{
+		return myName;
+	}
 
-    @Override
-	public PsiElement handleElementRename(String newName) throws IncorrectOperationException {
-        if (!TextUtil.isCID(newName)){
-            throw new IncorrectOperationException("Wrong name");
-        }
+	@Override
+	public PsiElement handleElementRename(String newName) throws IncorrectOperationException
+	{
+		if(!TextUtil.isCID(newName))
+		{
+			throw new IncorrectOperationException("Wrong name");
+		}
 
-        return rename(myElement, newName);
-    }
+		return rename(myElement, newName);
+	}
 
-    private PsiElement rename(final PsiElement element, @NotNull final String newName) throws IncorrectOperationException {
-        if (element instanceof RBaseString){
-            final List<PsiElement> myContent = ((RBaseString) element).getPsiContent();
-            if (myContent.size()!=1){
-                return null;
-            }
-            final String text = "%Q(" + newName + ")";
-            final PsiElement newString = RubyPsiUtil.getTopLevelElements(myCall.getProject(), text).get(0);
-            assert newString instanceof RBaseString;
-            final List<PsiElement> newStringContent = ((RBaseString) newString).getPsiContent();
-            assert newStringContent.size()==1;
-            final PsiElement newContext = newStringContent.get(0);
-            RubyPsiUtil.replaceInParent(myContent.get(0), newContext);
-            return newContext;
-        }
-        if (element instanceof RSymbol){
-            final PsiElement myObject = ((RSymbol) element).getObject();
+	private PsiElement rename(final PsiElement element, @NotNull final String newName) throws IncorrectOperationException
+	{
+		if(element instanceof RBaseString)
+		{
+			final List<PsiElement> myContent = ((RBaseString) element).getPsiContent();
+			if(myContent.size() != 1)
+			{
+				return null;
+			}
+			final String text = "%Q(" + newName + ")";
+			final PsiElement newString = RubyPsiUtil.getTopLevelElements(myCall.getProject(), text).get(0);
+			assert newString instanceof RBaseString;
+			final List<PsiElement> newStringContent = ((RBaseString) newString).getPsiContent();
+			assert newStringContent.size() == 1;
+			final PsiElement newContext = newStringContent.get(0);
+			RubyPsiUtil.replaceInParent(myContent.get(0), newContext);
+			return newContext;
+		}
+		if(element instanceof RSymbol)
+		{
+			final PsiElement myObject = ((RSymbol) element).getObject();
 
-            if (myObject instanceof RBaseString){
-                return rename(myObject, newName);
-            }
-            final ASTNode myNode = myObject.getNode();
+			if(myObject instanceof RBaseString)
+			{
+				return rename(myObject, newName);
+			}
+			final ASTNode myNode = myObject.getNode();
 
-            final String text = ":" + newName;
-            final PsiElement newSymbol = RubyPsiUtil.getTopLevelElements(myCall.getProject(), text).get(0);
-            assert newSymbol instanceof RSymbol;
-            final PsiElement newObject = ((RSymbol) newSymbol).getObject() ;
-            final ASTNode newNode = newObject.getNode();
+			final String text = ":" + newName;
+			final PsiElement newSymbol = RubyPsiUtil.getTopLevelElements(myCall.getProject(), text).get(0);
+			assert newSymbol instanceof RSymbol;
+			final PsiElement newObject = ((RSymbol) newSymbol).getObject();
+			final ASTNode newNode = newObject.getNode();
 
-            //noinspection ConstantConditions
-            element.getNode().replaceChild(myNode, newNode);
-            return newObject;
-        }
-        return null;
-    }
+			//noinspection ConstantConditions
+			element.getNode().replaceChild(myNode, newNode);
+			return newObject;
+		}
+		return null;
+	}
 
-    @Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-        return null;
-    }
+	@Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	{
+		return null;
+	}
 
-    @Override
-	public boolean isReferenceTo(PsiElement element) {
-        return resolve() == element;
-    }
+	@Override
+	public boolean isReferenceTo(PsiElement element)
+	{
+		return resolve() == element;
+	}
 
-    @Override
-	public Object[] getVariants() {
-        final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();
-        return RFieldResolveUtil.getVariants(fileSymbol, myHolder);
-    }
+	@Override
+	public Object[] getVariants()
+	{
+		final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();
+		return RFieldResolveUtil.getVariants(fileSymbol, myHolder);
+	}
 
-    @Override
-	public boolean isSoft() {
-        return true;
-    }
+	@Override
+	public boolean isSoft()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getRefValue() {
-        return myElement;
-    }
+	public PsiElement getRefValue()
+	{
+		return myElement;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        throw new UnsupportedOperationException("multiResolveToSymbols is not implemented in org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFieldAttrReference");
-    }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		throw new UnsupportedOperationException("multiResolveToSymbols is not implemented in org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFieldAttrReference");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ResolveResult[] multiResolve(boolean incompleteCode) {
-        final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();
-        final ArrayList<ResolveResult> list = new ArrayList<ResolveResult>();
-        for (final PsiElement element : RFieldResolveUtil.resolve(fileSymbol, myHolder, myName, Types.FIELDS)) {
-            list.add(new ResolveResult(){
-                    @Override
-					@Nullable
-                    public PsiElement getElement() {
-                        RubyUsageTypeProvider.setType(RFieldAttrReference.this, RubyUsageType.UNCLASSIFIED);
-                        return element;
-                    }
+	public ResolveResult[] multiResolve(boolean incompleteCode)
+	{
+		final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();
+		final ArrayList<ResolveResult> list = new ArrayList<ResolveResult>();
+		for(final PsiElement element : RFieldResolveUtil.resolve(fileSymbol, myHolder, myName, Types.FIELDS))
+		{
+			list.add(new ResolveResult()
+			{
+				@Override
+				@Nullable
+				public PsiElement getElement()
+				{
+					RubyUsageTypeProvider.setType(RFieldAttrReference.this, RubyUsageType.UNCLASSIFIED);
+					return element;
+				}
 
-                    @Override
-					public boolean isValidResult() {
-                        return true;
-                    }
-                });
-        }
-        return list.toArray(new ResolveResult[list.size()]);
-    }
+				@Override
+				public boolean isValidResult()
+				{
+					return true;
+				}
+			});
+		}
+		return list.toArray(new ResolveResult[list.size()]);
+	}
 }

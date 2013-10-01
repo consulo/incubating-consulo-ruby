@@ -16,13 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -34,10 +31,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,56 +45,53 @@ import java.util.Collections;
  * @author: Roman Chernyatchik
  * @date: 02.02.2007
  */
-public class RailsControllerToViewMarkersPass extends ElementsStartsAtRangeHighlighterPass {
-    /**
-     * "Go to view of action" markers
-     */
-    private Collection<RailsLineMarkerInfo> myActionToViewMarkers = Collections.emptyList();
-    private final Module myModule;
+public class RailsControllerToViewMarkersPass extends ElementsStartsAtRangeHighlighterPass
+{
+	/**
+	 * "Go to view of action" markers
+	 */
+	private Collection<RailsLineMarkerInfo> myActionToViewMarkers = Collections.emptyList();
+	private final Module myModule;
 
-    public RailsControllerToViewMarkersPass(final Module module, final PsiFile psiFile,
-                                            final Editor editor) {
-        super(module.getProject(),
-             psiFile, editor, false, HighlightPassConstants.CONTROLLER_TO_VIEW_MARKERS_GROUP);
-        myModule = module;
-        assert RailsFacetUtil.hasRailsSupport(module);
-    }
+	public RailsControllerToViewMarkersPass(final Module module, final PsiFile psiFile, final Editor editor)
+	{
+		super(module.getProject(), psiFile, editor, false, HighlightPassConstants.CONTROLLER_TO_VIEW_MARKERS_GROUP);
+		myModule = module;
+		assert RailsFacetUtil.hasRailsSupport(module);
+	}
 
-    @Override
-	public void doCollectInformation(final ProgressIndicator progress) {
-        // We call this often enough
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void doCollectInformation(final ProgressIndicator progress)
+	{
+		// We call this often enough
+		ProgressManager.getInstance().checkCanceled();
 
-        ApplicationManager.getApplication().assertReadAccessAllowed();
-        
-        myActionToViewMarkers = new ArrayList<RailsLineMarkerInfo>();
+		ApplicationManager.getApplication().assertReadAccessAllowed();
 
-        for (PsiElement element : getElementsInRange()) {
-            if (element instanceof RMethod
-                || element instanceof RClass) {
-                addActionViewInfo(myActionToViewMarkers, (RContainer)element);
-            }
-        }
-    }
+		myActionToViewMarkers = new ArrayList<RailsLineMarkerInfo>();
 
-    private void addActionViewInfo(@NotNull final Collection<RailsLineMarkerInfo> viewMarkers,
-                                   @NotNull final RContainer methodOrClass) {
+		for(PsiElement element : getElementsInRange())
+		{
+			if(element instanceof RMethod || element instanceof RClass)
+			{
+				addActionViewInfo(myActionToViewMarkers, (RContainer) element);
+			}
+		}
+	}
 
-        if (SwitchToView.isSwitchToViewEnabled(methodOrClass, myModule)) {
-            final RailsLineMarkerInfo info =
-                    new RailsLineMarkerInfo(myModule,
-                            RailsLineMarkerInfo.MarkerType.CONTROLLER_TO_VIEW,
-                            methodOrClass,
-                            RubyHighlightUtil.getStartOffset(methodOrClass),
-                            RailsIcons.RAILS_ACTION_TO_VIEW_MARKER);
-            viewMarkers.add(info);
-        }
-    }
+	private void addActionViewInfo(@NotNull final Collection<RailsLineMarkerInfo> viewMarkers, @NotNull final RContainer methodOrClass)
+	{
 
-    @Override
-	public void doApplyInformationToEditor() {
-        RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument,
-                                                      myActionToViewMarkers,
-                                                      HighlightPassConstants.CONTROLLER_TO_VIEW_MARKERS_GROUP);
-    }
+		if(SwitchToView.isSwitchToViewEnabled(methodOrClass, myModule))
+		{
+			final RailsLineMarkerInfo info = new RailsLineMarkerInfo(myModule, RailsLineMarkerInfo.MarkerType.CONTROLLER_TO_VIEW, methodOrClass, RubyHighlightUtil.getStartOffset(methodOrClass), RailsIcons.RAILS_ACTION_TO_VIEW_MARKER);
+			viewMarkers.add(info);
+		}
+	}
+
+	@Override
+	public void doApplyInformationToEditor()
+	{
+		RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument, myActionToViewMarkers, HighlightPassConstants.CONTROLLER_TO_VIEW_MARKERS_GROUP);
+	}
 }

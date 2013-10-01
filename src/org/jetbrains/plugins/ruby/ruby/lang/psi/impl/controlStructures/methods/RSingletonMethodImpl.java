@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -32,56 +29,62 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMethod {
-    public RSingletonMethodImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMethod
+{
+	public RSingletonMethodImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RClassObject getClassObject(){
-        PsiElement result =  getChildByFilter(RubyElementTypes.CLASS_OBJECT,0);
-        return result instanceof RClassObject ?  (RClassObject) result : null;
-    }
+	public RClassObject getClassObject()
+	{
+		PsiElement result = getChildByFilter(RubyElementTypes.CLASS_OBJECT, 0);
+		return result instanceof RClassObject ? (RClassObject) result : null;
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRSingletonMethod(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRSingletonMethod(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualSingletonMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent,
-                                               @NotNull RFileInfo info) {
-        final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
-        assert virtualParent != null;
-        
-        final RVirtualSingletonMethodImpl singletonMethod =
-                new RVirtualSingletonMethodImpl(virtualParent, virtualMethodName,
-                                                getArgumentInfos(),
-                                                getAccessModifier(),
-                                                info);
-        addVirtualData(singletonMethod, info);
-        return singletonMethod;
-    }
+	public RVirtualSingletonMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull RFileInfo info)
+	{
+		final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
+		assert virtualParent != null;
 
-    @Override
-	public boolean isConstructor() {
-        return false;
-    }
+		final RVirtualSingletonMethodImpl singletonMethod = new RVirtualSingletonMethodImpl(virtualParent, virtualMethodName, getArgumentInfos(), getAccessModifier(), info);
+		addVirtualData(singletonMethod, info);
+		return singletonMethod;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.SINGLETON_METHOD;
-    }
+	@Override
+	public boolean isConstructor()
+	{
+		return false;
+	}
+
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.SINGLETON_METHOD;
+	}
 }

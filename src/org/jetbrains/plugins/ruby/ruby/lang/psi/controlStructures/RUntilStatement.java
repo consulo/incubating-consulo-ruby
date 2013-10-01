@@ -24,6 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RUntilStatement extends RConditionalStatement, RLoopStatement,
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild {
+public interface RUntilStatement extends RConditionalStatement, RLoopStatement, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
 }

@@ -16,36 +16,38 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 22, 2007
  */
-public class RGlobalVariablePresentationUtil {
+public class RGlobalVariablePresentationUtil
+{
 
-    public static Icon getIcon() {
-        return RubyIcons.RUBY_GLOBAL_VAR_NODE;
-    }
+	public static Icon getIcon()
+	{
+		return RubyIcons.RUBY_GLOBAL_VAR_NODE;
+	}
 
-    public static ItemPresentation getPresentation(@NotNull final RVirtualGlobalVar var) {
-        final Icon icon = getIcon();
-        return new PresentationData(var.getText(),
-                TextUtil.wrapInParens(getLocation(var)),
-                icon, icon, null);
-    }
+	public static ItemPresentation getPresentation(@NotNull final RVirtualGlobalVar var)
+	{
+		final Icon icon = getIcon();
+		return new PresentationData(var.getText(), TextUtil.wrapInParens(getLocation(var)), icon, icon, null);
+	}
 
-    public static String getLocation(@NotNull final RVirtualGlobalVar var){
-        return RContainerPresentationUtil.getContainerNameWithLocation(var.getHolder());
-    }
+	public static String getLocation(@NotNull final RVirtualGlobalVar var)
+	{
+		return RContainerPresentationUtil.getContainerNameWithLocation(var.getHolder());
+	}
 
 
 }

@@ -17,39 +17,41 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class While implements RubyTokenTypes {
+public class While implements RubyTokenTypes
+{
 
-/*
-        | kWHILE  expr_value do
-          compstmt
-          kEND
-*/
-@NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+	/*
+			| kWHILE  expr_value do
+			  compstmt
+			  kEND
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        builder.match(kWHILE);
+		builder.match(kWHILE);
 
-        Condition.parse(builder);
-        DO.parse(builder);
+		Condition.parse(builder);
+		DO.parse(builder);
 
-        COMPSTMT.parse(builder, kEND);
+		COMPSTMT.parse(builder, kEND);
 
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(RubyElementTypes.WHILE_STATEMENT);
-        return RubyElementTypes.WHILE_STATEMENT;
-    }
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(RubyElementTypes.WHILE_STATEMENT);
+		return RubyElementTypes.WHILE_STATEMENT;
+	}
 }

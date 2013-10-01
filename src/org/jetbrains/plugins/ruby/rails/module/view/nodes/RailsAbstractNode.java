@@ -27,70 +27,80 @@ import com.intellij.ui.treeStructure.SimpleNode;
  * Created by IntelliJ IDEA.
  *
  * @author: Roman Chernyatchik
- * @date: 02.03.2007                       
+ * @date: 02.03.2007
  */
-public abstract class RailsAbstractNode extends SimpleNode {
+public abstract class RailsAbstractNode extends SimpleNode
+{
 
-    protected RailsAbstractNode[] CHILDREN_EMPTY = new RailsAbstractNode[0];
+	protected RailsAbstractNode[] CHILDREN_EMPTY = new RailsAbstractNode[0];
 
-    private NodeId myId;
-    private ItemPresentation myPresentation;
-    private Object[] myEqObjects;
+	private NodeId myId;
+	private ItemPresentation myPresentation;
+	private Object[] myEqObjects;
 
-    public RailsAbstractNode(final Project project) {
-        super(project);
-    }
+	public RailsAbstractNode(final Project project)
+	{
+		super(project);
+	}
 
-    public void init(final NodeId id, @NotNull final ItemPresentation presentation) {
-        myId = id;
-        myEqObjects = new Object[]{id};
-        myPresentation = presentation;
-        setIcon(myPresentation.getIcon(false));
-    }
+	public void init(final NodeId id, @NotNull final ItemPresentation presentation)
+	{
+		myId = id;
+		myEqObjects = new Object[]{id};
+		myPresentation = presentation;
+		setIcon(myPresentation.getIcon(false));
+	}
 
-    @Override
-	public Object[] getEqualityObjects() {
-        return myEqObjects;
-    }
+	@Override
+	public Object[] getEqualityObjects()
+	{
+		return myEqObjects;
+	}
 
-    /**
-     * @return Node type for sorting in <code>RailsProjectNodeComparator</code>
-     */
-    @NotNull
-    public abstract RailsProjectNodeComparator.NodeType getType();
+	/**
+	 * @return Node type for sorting in <code>RailsProjectNodeComparator</code>
+	 */
+	@NotNull
+	public abstract RailsProjectNodeComparator.NodeType getType();
 
-    @Override
-	public NodeId getElement() {
-        return myId;
-    }
+	@Override
+	public NodeId getElement()
+	{
+		return myId;
+	}
 
-    @Override
-	protected void doUpdate() {
-        myPresentation = updatePresentation(myPresentation);
-        setIcon(myPresentation.getIcon(false));
-        setPlainText(myPresentation.getPresentableText());
+	@Override
+	protected void doUpdate()
+	{
+		myPresentation = updatePresentation(myPresentation);
+		setIcon(myPresentation.getIcon(false));
+		setPlainText(myPresentation.getPresentableText());
 		setIcon(getIcon());
-    }
+	}
 
-    /**
-     * You can override this method and change presentation data.
-     * @param presentation Presentation data for update.
-     * @return updated presentation
-     */
-    protected ItemPresentation updatePresentation(final ItemPresentation presentation){
-        return presentation;
-    }
+	/**
+	 * You can override this method and change presentation data.
+	 *
+	 * @param presentation Presentation data for update.
+	 * @return updated presentation
+	 */
+	protected ItemPresentation updatePresentation(final ItemPresentation presentation)
+	{
+		return presentation;
+	}
 
 
-    @Override
-	public boolean expandOnDoubleClick() {
-        return false;
-    }
+	@Override
+	public boolean expandOnDoubleClick()
+	{
+		return false;
+	}
 
-    @Override
-	public SimpleNode[] getChildren() {
-        return CHILDREN_EMPTY;
-    }
+	@Override
+	public SimpleNode[] getChildren()
+	{
+		return CHILDREN_EMPTY;
+	}
 
 
 }

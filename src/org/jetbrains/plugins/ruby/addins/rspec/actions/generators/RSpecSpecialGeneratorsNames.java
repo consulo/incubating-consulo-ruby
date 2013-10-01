@@ -22,7 +22,8 @@ package org.jetbrains.plugins.ruby.addins.rspec.actions.generators;
  * @author: Roman Chernyatchik
  * @date: Oct 27, 2007
  */
-public interface RSpecSpecialGeneratorsNames {
-    public static final String GENERATOR_CONTROLLER = "rspec_controller";
-    public static final String GENERATOR_MODEL = "rspec_model";    
+public interface RSpecSpecialGeneratorsNames
+{
+	public static final String GENERATOR_CONTROLLER = "rspec_controller";
+	public static final String GENERATOR_MODEL = "rspec_model";
 }

@@ -44,63 +44,71 @@ import com.intellij.openapi.util.Key;
  * @author: Roman Chernyatchik
  * @date: Oct 18, 2007
  */
-public abstract class AbstractRTestsCommandLineState extends ColouredCommandLineState {
-    protected File tempFile;
+public abstract class AbstractRTestsCommandLineState extends ColouredCommandLineState
+{
+	protected File tempFile;
 
-    protected AbstractRTestsCommandLineState(final AbstractRubyRunConfiguration config,
-                                             ExecutionEnvironment executionEnvironment) {
-        super(executionEnvironment);
-        final Project project = config.getProject();
+	protected AbstractRTestsCommandLineState(final AbstractRubyRunConfiguration config, ExecutionEnvironment executionEnvironment)
+	{
+		super(executionEnvironment);
+		final Project project = config.getProject();
 
-        final TextConsoleBuilder consoleBuilder =
-                TextConsoleBuilderFactory.getInstance().createBuilder(project);
-        setConsoleBuilder(consoleBuilder);
+		final TextConsoleBuilder consoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(project);
+		setConsoleBuilder(consoleBuilder);
 
-        addFilters(config, project, consoleBuilder, config.getWorkingDirectory());
+		addFilters(config, project, consoleBuilder, config.getWorkingDirectory());
 
-        attachCompilerForJRuby(config);
-    }
+		attachCompilerForJRuby(config);
+	}
 
 
 	@Override
 	public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException
 	{
 		final ExecutionResult result = super.execute(executor, runner);
-        if (result != null) {
-            result.getProcessHandler().addProcessListener(new ProcessListener() {
-                @Override
-				public void startNotified(final ProcessEvent event) {
-                }
+		if(result != null)
+		{
+			result.getProcessHandler().addProcessListener(new ProcessListener()
+			{
+				@Override
+				public void startNotified(final ProcessEvent event)
+				{
+				}
 
-                @Override
-				public void processTerminated(final ProcessEvent event) {
-                    if (tempFile != null) {
-                        tempFile.delete();
-                    }
-                }
+				@Override
+				public void processTerminated(final ProcessEvent event)
+				{
+					if(tempFile != null)
+					{
+						tempFile.delete();
+					}
+				}
 
-                @Override
-				public void processWillTerminate(final ProcessEvent event, final boolean willBeDestroyed) {
-                }
+				@Override
+				public void processWillTerminate(final ProcessEvent event, final boolean willBeDestroyed)
+				{
+				}
 
-                @Override
-				public void onTextAvailable(final ProcessEvent event, final Key outputType) {
-                }
-            });
-        }
-        return result;
-    }
+				@Override
+				public void onTextAvailable(final ProcessEvent event, final Key outputType)
+				{
+				}
+			});
+		}
+		return result;
+	}
 
-    protected void addFilters(final AbstractRubyRunConfiguration config, final Project project,
-                              final TextConsoleBuilder consoleBuilder, final String scriptDir) {
-        consoleBuilder.addFilter(new RStackTraceFilter(project, scriptDir));
-        consoleBuilder.addFilter(new RFileLinksFilter(config.getModule()));
-    }
+	protected void addFilters(final AbstractRubyRunConfiguration config, final Project project, final TextConsoleBuilder consoleBuilder, final String scriptDir)
+	{
+		consoleBuilder.addFilter(new RStackTraceFilter(project, scriptDir));
+		consoleBuilder.addFilter(new RFileLinksFilter(config.getModule()));
+	}
 
-    protected GeneralCommandLine createTestDefaultCmdLine(final AbstractRubyRunConfiguration config) throws CantRunException {
-        final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(config);
+	protected GeneralCommandLine createTestDefaultCmdLine(final AbstractRubyRunConfiguration config) throws CantRunException
+	{
+		final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(config);
 
-        RubyRunCommandLineState.addParams(commandLine, config.getRubyArgs());
-        return commandLine;
-    }
+		RubyRunCommandLineState.addParams(commandLine, config.getRubyArgs());
+		return commandLine;
+	}
 }

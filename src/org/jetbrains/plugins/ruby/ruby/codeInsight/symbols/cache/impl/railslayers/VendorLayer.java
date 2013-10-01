@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,29 +32,32 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCa
  * Date: Oct 20, 2007
  */
 
-public class VendorLayer extends AbstractRailsLayeredCachedSymbol {
+public class VendorLayer extends AbstractRailsLayeredCachedSymbol
+{
 
-    public VendorLayer(@NotNull final Project project,
-                       @Nullable final Module module,
-                       @Nullable final Sdk sdk,
-                       final boolean isJRubyEnabled) {
-        super(FileSymbolType.RAILS_MODULE_LAYER, project, module, sdk, isJRubyEnabled);
-    }
+	public VendorLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	{
+		super(FileSymbolType.RAILS_MODULE_LAYER, project, module, sdk, isJRubyEnabled);
+	}
 
-    @Override
-	public void fileAdded(@NotNull String url) {
-        final CachedSymbol baseCachedSymbol = getBaseSymbol();
-        if (baseCachedSymbol != null) {
-            ((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
-            if (!baseCachedSymbol.isUp2Date()) {
-                myFileSymbol = null;
-            }
-        }
-    }
+	@Override
+	public void fileAdded(@NotNull String url)
+	{
+		final CachedSymbol baseCachedSymbol = getBaseSymbol();
+		if(baseCachedSymbol != null)
+		{
+			((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
+			if(!baseCachedSymbol.isUp2Date())
+			{
+				myFileSymbol = null;
+			}
+		}
+	}
 
-    @Override
-	protected void addAdditionalData() {
-        RailsRequireUtil.loadAllVendorsLibsWithoutEdgeRails(myFileSymbol, myModule);
-    }
+	@Override
+	protected void addAdditionalData()
+	{
+		RailsRequireUtil.loadAllVendorsLibsWithoutEdgeRails(myFileSymbol, myModule);
+	}
 
 }

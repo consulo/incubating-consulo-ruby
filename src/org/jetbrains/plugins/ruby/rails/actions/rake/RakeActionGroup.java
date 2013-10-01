@@ -16,10 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.module.Module;
+import java.util.ArrayList;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -28,80 +26,98 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
-
-import java.util.ArrayList;
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 30.08.2006
  */
-public class RakeActionGroup extends ActionGroup {
-    private final static String NAME = "Rake";
-    private final RakeTask myTask;
+public class RakeActionGroup extends ActionGroup
+{
+	private final static String NAME = "Rake";
+	private final RakeTask myTask;
 
-    public RakeActionGroup() {
-        this(null);
-    }
+	public RakeActionGroup()
+	{
+		this(null);
+	}
 
-    public RakeActionGroup(@Nullable final RakeTask task){
-        super(task == null ? NAME : task.getId(), true);
-        myTask = task;
-        if (myTask != null) {
-            getTemplatePresentation().setIcon(RailsIcons.RAKE_GROUP_ICON);
-        }
-    }
+	public RakeActionGroup(@Nullable final RakeTask task)
+	{
+		super(task == null ? NAME : task.getId(), true);
+		myTask = task;
+		if(myTask != null)
+		{
+			getTemplatePresentation().setIcon(RailsIcons.RAKE_GROUP_ICON);
+		}
+	}
 
-    @Override
-	public void update(@NotNull AnActionEvent event) {
-        final Module module = DataContextUtil.getModule(event.getDataContext());
+	@Override
+	public void update(@NotNull AnActionEvent event)
+	{
+		final Module module = DataContextUtil.getModule(event.getDataContext());
 
-        // show only on module with enabled Rails support and valid Ruby SDK with rails installed
-        final boolean isVisible = module != null
-                                  &&  RailsFacetUtil.hasRailsSupport(module);
-        final boolean isEnabled;
-        if (isVisible) {
-            final BaseRailsFacetConfiguration railsConf =  RailsFacetUtil.getRailsFacetConfiguration(module);
+		// show only on module with enabled Rails support and valid Ruby SDK with rails installed
+		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
+		final boolean isEnabled;
+		if(isVisible)
+		{
+			final BaseRailsFacetConfiguration railsConf = RailsFacetUtil.getRailsFacetConfiguration(module);
 
-            assert railsConf != null; //Can't ne null, has been already checked
-            isEnabled = railsConf.getRakeTasks() != null;
-        } else {
-            isEnabled = false;
-        }
+			assert railsConf != null; //Can't ne null, has been already checked
+			isEnabled = railsConf.getRakeTasks() != null;
+		}
+		else
+		{
+			isEnabled = false;
+		}
 
-        AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isEnabled);
-    }
+		AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isEnabled);
+	}
 
 
-    @Override
-	public AnAction[] getChildren(@Nullable final AnActionEvent event) {
-        if (event == null) {   //TODO any sense?
-            return AnActionUtil.NO_ACTIONS;
-        }
+	@Override
+	public AnAction[] getChildren(@Nullable final AnActionEvent event)
+	{
+		if(event == null)
+		{   //TODO any sense?
+			return AnActionUtil.NO_ACTIONS;
+		}
 
-        final Module module = DataContextUtil.getModule(event.getDataContext());
-        if (module == null) {
-            return AnActionUtil.NO_ACTIONS;
-        }
+		final Module module = DataContextUtil.getModule(event.getDataContext());
+		if(module == null)
+		{
+			return AnActionUtil.NO_ACTIONS;
+		}
 
-        // if we still dont` have any children
-        final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(module);
-        assert configuration != null;
+		// if we still dont` have any children
+		final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(module);
+		assert configuration != null;
 
-        final RakeTask rakeTask = myTask != null ? myTask : configuration.getRakeTasks();
-        if (rakeTask == null) {
-            return AnActionUtil.NO_ACTIONS;
-        }
+		final RakeTask rakeTask = myTask != null ? myTask : configuration.getRakeTasks();
+		if(rakeTask == null)
+		{
+			return AnActionUtil.NO_ACTIONS;
+		}
 
-        final ArrayList<AnAction> myChildren = new ArrayList<AnAction>();
-        for (RakeTask task : rakeTask.getSubTasks()) {
-            if (task.isGroup()) {
-                myChildren.add(new RakeActionGroup(task));
-            } else {
-                myChildren.add(new RakeAction(task));
-            }
-        }
-        return myChildren.toArray(new AnAction[myChildren.size()]);
-    }
+		final ArrayList<AnAction> myChildren = new ArrayList<AnAction>();
+		for(RakeTask task : rakeTask.getSubTasks())
+		{
+			if(task.isGroup())
+			{
+				myChildren.add(new RakeActionGroup(task));
+			}
+			else
+			{
+				myChildren.add(new RakeAction(task));
+			}
+		}
+		return myChildren.toArray(new AnAction[myChildren.size()]);
+	}
 
 }

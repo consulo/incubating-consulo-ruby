@@ -16,58 +16,64 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.treeStructure.SimpleNode;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 28.09.2006
  */
-public class RailsProjectRootNode extends RailsAbstractNode {
-    private Map<Module, RailsProjectModuleNode> myModulesNodes =
-            new HashMap<Module, RailsProjectModuleNode>();
+public class RailsProjectRootNode extends RailsAbstractNode
+{
+	private Map<Module, RailsProjectModuleNode> myModulesNodes = new HashMap<Module, RailsProjectModuleNode>();
 
-    public RailsProjectRootNode(@NotNull final Project project) {
-        super(project);
-        init(generateNodeId(), new PresentationData(null, null, null, null, null));
-    }
+	public RailsProjectRootNode(@NotNull final Project project)
+	{
+		super(project);
+		init(generateNodeId(), new PresentationData(null, null, null, null, null));
+	}
 
-    public static NodeId generateNodeId() {
-        return NodeIdUtil.createForRoot();
-    }
+	public static NodeId generateNodeId()
+	{
+		return NodeIdUtil.createForRoot();
+	}
 
-    @Override
-	public SimpleNode[] getChildren() {
-        final Map<Module, RailsProjectModuleNode> newNodes =
-                new HashMap<Module, RailsProjectModuleNode>();
-        final Module[] allRailsModules = RailsUtil.getAllModulesWithRailsSupport(myProject);
-        for (final Module module : allRailsModules) {
-            RailsProjectModuleNode node = myModulesNodes.get(module);
-            if (node == null) {
-                node = new RailsProjectModuleNode(module);
-            }
-            newNodes.put(module, node);
-        }
-        myModulesNodes = newNodes;
-        final Collection<RailsProjectModuleNode> moduleNodes = newNodes.values();
-        return moduleNodes.toArray(new SimpleNode[moduleNodes.size()]);
-    }
+	@Override
+	public SimpleNode[] getChildren()
+	{
+		final Map<Module, RailsProjectModuleNode> newNodes = new HashMap<Module, RailsProjectModuleNode>();
+		final Module[] allRailsModules = RailsUtil.getAllModulesWithRailsSupport(myProject);
+		for(final Module module : allRailsModules)
+		{
+			RailsProjectModuleNode node = myModulesNodes.get(module);
+			if(node == null)
+			{
+				node = new RailsProjectModuleNode(module);
+			}
+			newNodes.put(module, node);
+		}
+		myModulesNodes = newNodes;
+		final Collection<RailsProjectModuleNode> moduleNodes = newNodes.values();
+		return moduleNodes.toArray(new SimpleNode[moduleNodes.size()]);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.ROOT;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.ROOT;
+	}
 }

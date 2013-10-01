@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,6 +25,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  * @author: oleg
  * @date: 08.05.2007
  */
-public interface RNamedElement extends PsiNamedElement, RExpression {
+public interface RNamedElement extends PsiNamedElement, RExpression
+{
 
 }

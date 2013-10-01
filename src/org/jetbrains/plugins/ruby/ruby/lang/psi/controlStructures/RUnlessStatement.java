@@ -30,11 +30,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RUnlessStatement extends RPsiElement, RConditionalStatement, RExpression,
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild {
-    @NotNull
-    RCompoundStatement getThenBlock();
+public interface RUnlessStatement extends RPsiElement, RConditionalStatement, RExpression, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
+	@NotNull
+	RCompoundStatement getThenBlock();
 
-    @Nullable
-    RElseBlock getElseBlock();
+	@Nullable
+	RElseBlock getElseBlock();
 }

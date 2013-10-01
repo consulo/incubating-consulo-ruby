@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -29,75 +28,88 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method.FN
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.06.2006
  */
-public class Alias implements RubyTokenTypes {
+public class Alias implements RubyTokenTypes
+{
+	/*
+		: kALIAS fitem  fitem
+		| kALIAS tGVAR tGVAR
+		| kALIAS tGVAR tBACK_REF
+		| kALIAS tGVAR tNTH_REF
+	*/
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		builder.match(kALIAS);
+
 /*
-    : kALIAS fitem  fitem
-    | kALIAS tGVAR tGVAR
+	| kALIAS tGVAR tGVAR
     | kALIAS tGVAR tBACK_REF
     | kALIAS tGVAR tNTH_REF
 */
-@NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        builder.match(kALIAS);
+		if(builder.compare(tGVAR))
+		{
+			builder.parseSingleToken(tGVAR, RubyElementTypes.GLOBAL_VARIABLE);
 
-/*
-    | kALIAS tGVAR tGVAR
-    | kALIAS tGVAR tBACK_REF
-    | kALIAS tGVAR tNTH_REF
-*/
-        if (builder.compare(tGVAR)){
-            builder.parseSingleToken(tGVAR, RubyElementTypes.GLOBAL_VARIABLE);
+			if(builder.compare(tGVAR))
+			{
+				builder.parseSingleToken(tGVAR, RubyElementTypes.GLOBAL_VARIABLE);
+			}
+			else if(builder.compare(BNF.tREFS))
+			{
+				REFS.parse(builder);
+			}
+			else
+			{
+				builder.error(ErrorMsg.expected(RBundle.message("parsing.alias.object")));
+			}
+			statementMarker.done(RubyElementTypes.ALIAS_STATEMENT);
+			return RubyElementTypes.ALIAS_STATEMENT;
+		}
 
-            if (builder.compare(tGVAR)){
-                builder.parseSingleToken(tGVAR, RubyElementTypes.GLOBAL_VARIABLE);
-            } else
-            if (builder.compare(BNF.tREFS)){
-                REFS.parse(builder);
-            } else {
-                builder.error(ErrorMsg.expected(RBundle.message("parsing.alias.object")));
-            }
-            statementMarker.done(RubyElementTypes.ALIAS_STATEMENT);
-            return RubyElementTypes.ALIAS_STATEMENT;
-        }
+		// kALIAS fitem fitem
+		IElementType result = parseFItem(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			if(parseFItem(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.expected(RBundle.message("parsing.alias.object")));
+			}
+			statementMarker.done(RubyElementTypes.ALIAS_STATEMENT);
+			return RubyElementTypes.ALIAS_STATEMENT;
+		}
 
-// kALIAS fitem fitem
-        IElementType result = parseFItem(builder);
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            if (parseFItem(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.expected(RBundle.message("parsing.alias.object")));
-            }
-            statementMarker.done(RubyElementTypes.ALIAS_STATEMENT);
-            return RubyElementTypes.ALIAS_STATEMENT;
-        }
+		builder.error(ErrorMsg.expected(RBundle.message("parsing.alias.object")));
+		statementMarker.done(RubyElementTypes.ALIAS_STATEMENT);
+		return RubyElementTypes.ALIAS_STATEMENT;
+	}
 
-        builder.error(ErrorMsg.expected(RBundle.message("parsing.alias.object")));
-        statementMarker.done(RubyElementTypes.ALIAS_STATEMENT);
-        return RubyElementTypes.ALIAS_STATEMENT;
-    }
+	/*
+		fitem	: fname
+				| symbol
+				;
+	*/
+	private static IElementType parseFItem(final RBuilder builder)
+	{
+		IElementType result = SYMBOL.parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			return result;
+		}
 
-/*
-    fitem	: fname
-            | symbol
-            ;
-*/
-    private static IElementType parseFItem(final RBuilder builder){
-        IElementType result = SYMBOL.parse(builder);
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            return result;
-        }
-
-        result = FNAME.parse(builder);
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            return result;
-        }
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		result = FNAME.parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			return result;
+		}
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

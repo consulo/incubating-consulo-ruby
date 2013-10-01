@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: Feb 5, 2007
  */
-public interface RRetryStatement extends RPsiElement{
+public interface RRetryStatement extends RPsiElement
+{
 }

@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -23,40 +26,43 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Jun 20, 2007
  */
-public class RVirtualRequireImpl extends  RVirtualStructuralElementBase implements RVirtualRequire, Serializable {
-    protected List<String> myRequires;
+public class RVirtualRequireImpl extends RVirtualStructuralElementBase implements RVirtualRequire, Serializable
+{
+	protected List<String> myRequires;
 
-    public RVirtualRequireImpl(final RVirtualContainer container, @NotNull final List<String> requires) {
-        super(container);
-        myRequires = requires;
-    }
+	public RVirtualRequireImpl(final RVirtualContainer container, @NotNull final List<String> requires)
+	{
+		super(container);
+		myRequires = requires;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<String> getNames() {
-        return myRequires;
-    }
+	public List<String> getNames()
+	{
+		return myRequires;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_REQUIRE;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_REQUIRE;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualRequire(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualRequire(this);
+	}
 
-    public String toString() {
-        return RCall.REQUIRE_COMMAND + " " + myRequires;
-    }
+	public String toString()
+	{
+		return RCall.REQUIRE_COMMAND + " " + myRequires;
+	}
 }

@@ -6,7 +6,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 /**
  * @author oleg
  */
-public interface RescueBlockAccess extends ImplicitTypeAccess {
-  @Nullable
-  RPsiElement getTypeElement();
+public interface RescueBlockAccess extends ImplicitTypeAccess
+{
+	@Nullable
+	RPsiElement getTypeElement();
 }

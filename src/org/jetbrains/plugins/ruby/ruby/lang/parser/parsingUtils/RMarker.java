@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,11 +29,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Wrapper for PsiBuilder.Marker
  */
-public interface RMarker {
-    @NotNull
-    public RMarker precede();
-    public void drop();
-    public void rollbackTo();
-    public void done(IElementType type);
-    public void error(String message);
+public interface RMarker
+{
+	@NotNull
+	public RMarker precede();
+
+	public void drop();
+
+	public void rollbackTo();
+
+	public void done(IElementType type);
+
+	public void error(String message);
 }

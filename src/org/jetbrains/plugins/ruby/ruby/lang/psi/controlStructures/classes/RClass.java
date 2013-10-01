@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes;
 
-import com.intellij.psi.PsiNamedElement;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -27,23 +28,22 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RClassNa
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
-
-import java.util.List;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RClass extends RVirtualClass, RFieldConstantContainer,
-        RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer {
+public interface RClass extends RVirtualClass, RFieldConstantContainer, RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer
+{
 
-    @Nullable
-    public RClassName getClassName();
+	@Nullable
+	public RClassName getClassName();
 
-    @Nullable
-    public RSuperClass getPsiSuperClass();
+	@Nullable
+	public RSuperClass getPsiSuperClass();
 
-    @NotNull
-    public List<RClass> getSuperClass(@NotNull FileSymbol fileSymbol);
+	@NotNull
+	public List<RClass> getSuperClass(@NotNull FileSymbol fileSymbol);
 }

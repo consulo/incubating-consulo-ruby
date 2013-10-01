@@ -25,6 +25,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
  * @author: oleg
  * @date: Mar 13, 2007
  */
-public interface RVirtualFieldContantContainer extends RVirtualContainer,
-        RVirtualFieldHolder, RVirtualConstantHolder {
+public interface RVirtualFieldContantContainer extends RVirtualContainer, RVirtualFieldHolder, RVirtualConstantHolder
+{
 }

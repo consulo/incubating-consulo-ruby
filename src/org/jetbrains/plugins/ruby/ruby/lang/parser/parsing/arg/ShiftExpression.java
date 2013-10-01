@@ -17,58 +17,64 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.*;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.BinaryExprParsing;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ParsingMethodWithAssignmentLookup;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-class ShiftExpression implements RubyTokenTypes {
+class ShiftExpression implements RubyTokenTypes
+{
 
-    /**
-      * Parsing binary expression with operations:  >>, <<
-      * @param builder Current builder
-      * @return result of parsing
-      */
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        return parseWithLeadMathExpr(builder, builder.mark(), MathExpression.parse(builder));
-    }
+	/**
+	 * Parsing binary expression with operations:  >>, <<
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		return parseWithLeadMathExpr(builder, builder.mark(), MathExpression.parse(builder));
+	}
 
-    /**
-      * Parsing shift expr with lead Math Expr
-      * @param builder Current builder
-      * @return result of parsing
-     * @param marker Marker before lead Math Expr
-     * @param result result of math Expr parsed
-      */
-    @NotNull
-    public static IElementType parseWithLeadMathExpr(final RBuilder builder, final RMarker marker, final IElementType result) {
-        ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @Override
+	/**
+	 * Parsing shift expr with lead Math Expr
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before lead Math Expr
+	 * @param result  result of math Expr parsed
+	 * @return result of parsing
+	 */
+	@NotNull
+	public static IElementType parseWithLeadMathExpr(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
+		{
+			@Override
 			@NotNull
-            public IElementType parseInner(final RBuilder builder){
-                return MathExpression.parse(builder);
-            }
-        };
+			public IElementType parseInner(final RBuilder builder)
+			{
+				return MathExpression.parse(builder);
+			}
+		};
 
-        return BinaryExprParsing.parseWithLeadOperand(builder,
-                marker, result,
-                parsingMethod,
-                ErrorMsg.EXPRESSION_EXPECTED_MESSAGE,
-                BNF.tSHIFT_OPS,
-                RubyElementTypes.SHIFT_EXPRESSION);
-    }
+		return BinaryExprParsing.parseWithLeadOperand(builder, marker, result, parsingMethod, ErrorMsg.EXPRESSION_EXPECTED_MESSAGE, BNF.tSHIFT_OPS, RubyElementTypes.SHIFT_EXPRESSION);
+	}
 
-    public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result) {
-        return parseWithLeadMathExpr(builder, marker.precede(),
-                MathExpression.parseWithLeadPRIMARY(builder, marker, result));
-    }
+	public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result)
+	{
+		return parseWithLeadMathExpr(builder, marker.precede(), MathExpression.parseWithLeadPRIMARY(builder, marker, result));
+	}
 }

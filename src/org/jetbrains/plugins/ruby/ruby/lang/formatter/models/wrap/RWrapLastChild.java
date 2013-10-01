@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap;
 /**
  * If class implements this, last child is always wrapped
  */
-public interface RWrapLastChild {
+public interface RWrapLastChild
+{
 }

@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -26,55 +25,63 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.OPT
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.OPT_RESCUE;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.07.2006
  */
-public class BODYSTMT  implements RubyTokenTypes {
-    /*
-        opt_ensure	: kENSURE compstmt
-                | none
-                ;
-    */
-    @NotNull
-    private static IElementType parseOPT_ENSURE(final RBuilder builder) {
-        if (!builder.compare(kENSURE)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        final RMarker statementMarker = builder.mark();
-        builder.match(kENSURE);
+public class BODYSTMT implements RubyTokenTypes
+{
+	/*
+		opt_ensure	: kENSURE compstmt
+				| none
+				;
+	*/
+	@NotNull
+	private static IElementType parseOPT_ENSURE(final RBuilder builder)
+	{
+		if(!builder.compare(kENSURE))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		final RMarker statementMarker = builder.mark();
+		builder.match(kENSURE);
 
-        COMPSTMT.parse(builder, kEND);
+		COMPSTMT.parse(builder, kEND);
 
-        statementMarker.done(RubyElementTypes.ENSURE_BLOCK);
-        return RubyElementTypes.ENSURE_BLOCK;
-    }
+		statementMarker.done(RubyElementTypes.ENSURE_BLOCK);
+		return RubyElementTypes.ENSURE_BLOCK;
+	}
 
-    /*
-    bodystmt	: compstmt
-              opt_rescue
-              opt_else
-              opt_ensure
-            ;
+	/*
+	bodystmt	: compstmt
+			  opt_rescue
+			  opt_else
+			  opt_ensure
+			;
 
 */
-    public static void parse(final RBuilder builder) {
-        builder.passEOLs();
+	public static void parse(final RBuilder builder)
+	{
+		builder.passEOLs();
 
-        RMarker bodyMarker = builder.mark();
-        COMPSTMT.parse(builder, kEND, kRESCUE, kELSE, kENSURE);
+		RMarker bodyMarker = builder.mark();
+		COMPSTMT.parse(builder, kEND, kRESCUE, kELSE, kENSURE);
 
-        while (builder.compareIgnoreEOL(kRESCUE)){
-            OPT_RESCUE.parse(builder);
-        }
-        if (builder.compareIgnoreEOL(kELSE)){
-            OPT_ELSE.parse(builder);
-        }
-        if (builder.compareIgnoreEOL(kENSURE)){
-            parseOPT_ENSURE(builder);
-        }
-        bodyMarker.done(RubyElementTypes.BODY_STATEMENT);
-    }
+		while(builder.compareIgnoreEOL(kRESCUE))
+		{
+			OPT_RESCUE.parse(builder);
+		}
+		if(builder.compareIgnoreEOL(kELSE))
+		{
+			OPT_ELSE.parse(builder);
+		}
+		if(builder.compareIgnoreEOL(kENSURE))
+		{
+			parseOPT_ENSURE(builder);
+		}
+		bodyMarker.done(RubyElementTypes.BODY_STATEMENT);
+	}
 }

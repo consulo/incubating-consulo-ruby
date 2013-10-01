@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
  * @author: oleg
  * @date: Nov 20, 2006
  */
-public interface RFid extends RPossibleCall, RNamedElement {
+public interface RFid extends RPossibleCall, RNamedElement
+{
 }

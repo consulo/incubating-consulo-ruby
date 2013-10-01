@@ -36,29 +36,32 @@ import com.intellij.psi.tree.IElementType;
 public class YAMLSyntaxHighlighter extends SyntaxHighlighterBase implements YAMLTokenTypes
 {
 
-    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
+	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
-    static {
-        ATTRIBUTES.put(SCALAR_TEXT_TYPE, YAMLHighlighter.SCALAR_TEXT);
-        ATTRIBUTES.put(SCALAR_STRING_TYPE, YAMLHighlighter.SCALAR_STRING);
-        ATTRIBUTES.put(SCALAR_DSTRING_TYPE, YAMLHighlighter.SCALAR_DSTRING);
-        ATTRIBUTES.put(SCALAR_LIST_TYPE, YAMLHighlighter.SCALAR_LIST);
-        ATTRIBUTES.put(SCALAR_VALUE_TYPE, YAMLHighlighter.SCALAR_VALUE);
-        ATTRIBUTES.put(SCALAR_KEY_TYPE, YAMLHighlighter.SCALAR_KEY);
-        ATTRIBUTES.put(VALUE_TYPE, YAMLHighlighter.VALUE);
-        ATTRIBUTES.put(COMMENT_TYPE, YAMLHighlighter.COMMENT);
-    }
+	static
+	{
+		ATTRIBUTES.put(SCALAR_TEXT_TYPE, YAMLHighlighter.SCALAR_TEXT);
+		ATTRIBUTES.put(SCALAR_STRING_TYPE, YAMLHighlighter.SCALAR_STRING);
+		ATTRIBUTES.put(SCALAR_DSTRING_TYPE, YAMLHighlighter.SCALAR_DSTRING);
+		ATTRIBUTES.put(SCALAR_LIST_TYPE, YAMLHighlighter.SCALAR_LIST);
+		ATTRIBUTES.put(SCALAR_VALUE_TYPE, YAMLHighlighter.SCALAR_VALUE);
+		ATTRIBUTES.put(SCALAR_KEY_TYPE, YAMLHighlighter.SCALAR_KEY);
+		ATTRIBUTES.put(VALUE_TYPE, YAMLHighlighter.VALUE);
+		ATTRIBUTES.put(COMMENT_TYPE, YAMLHighlighter.COMMENT);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        return pack(ATTRIBUTES.get(tokenType));
-    }
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
+		return pack(ATTRIBUTES.get(tokenType));
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Lexer getHighlightingLexer() {
-        return new YAMLLexer();
-    }
+	public Lexer getHighlightingLexer()
+	{
+		return new YAMLLexer();
+	}
 }

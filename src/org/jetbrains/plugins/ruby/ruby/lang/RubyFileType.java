@@ -16,51 +16,60 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
-import javax.swing.*;
 
+public class RubyFileType extends LanguageFileType
+{
+	public static final RubyFileType RUBY = new RubyFileType();
+	@NonNls
+	private static final String DESCRIPTION = RBundle.message("filetype.description.rb");
+	@NonNls
+	private static final String DEFAULT_EXTENSION = "dist/rb";
+	@NonNls
+	private static final String NAME = "Ruby";
+	public static final Icon ICON = RubyIcons.RUBY_ICON;
 
-public class RubyFileType extends LanguageFileType {
-    public static final RubyFileType RUBY = new RubyFileType();
-    @NonNls private static final String DESCRIPTION = RBundle.message("filetype.description.rb");
-    @NonNls private static final String DEFAULT_EXTENSION = "dist/rb";
-    @NonNls private static final String NAME = "Ruby";
-    public static final Icon ICON = RubyIcons.RUBY_ICON;
+	public static final String RUBY_EXTENTIONS = "rb;rbw;rake;";
 
-    public static final String RUBY_EXTENTIONS = "rb;rbw;rake;";
+	private RubyFileType()
+	{
+		super(RubyLanguage.INSTANCE);
+	}
 
-    private RubyFileType() {
-        super(RubyLanguage.INSTANCE);
-    }
-    
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return NAME;
-    }
+	public String getName()
+	{
+		return NAME;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDescription() {
-        return DESCRIPTION;
-    }
+	public String getDescription()
+	{
+		return DESCRIPTION;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDefaultExtension() {
-        return DEFAULT_EXTENSION;
-    }
+	public String getDefaultExtension()
+	{
+		return DEFAULT_EXTENSION;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Icon getIcon() {
-        return ICON;
-    }
+	public Icon getIcon()
+	{
+		return ICON;
+	}
 }
 

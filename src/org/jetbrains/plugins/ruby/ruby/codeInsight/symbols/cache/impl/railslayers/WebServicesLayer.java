@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -26,47 +23,54 @@ import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg, Roman.Chernyatchik
  * Date: Dec 10, 2007
  */
-public class WebServicesLayer extends AbstractRailsLayeredCachedSymbol {
-    private String myLayerRootUrl;
+public class WebServicesLayer extends AbstractRailsLayeredCachedSymbol
+{
+	private String myLayerRootUrl;
 
-    public WebServicesLayer(@NotNull final Project project,
-                     @Nullable final Module module,
-                     @Nullable final Sdk sdk,
-                     final boolean isJRubyEnabled) {
-        super(FileSymbolType.LIBS_LAYER, project, module, sdk, isJRubyEnabled);
+	public WebServicesLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	{
+		super(FileSymbolType.LIBS_LAYER, project, module, sdk, isJRubyEnabled);
 
-        assert module != null;
+		assert module != null;
 
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
 
-        myLayerRootUrl = railsPaths.getApisRootURL();
-    }
+		myLayerRootUrl = railsPaths.getApisRootURL();
+	}
 
-    @Override
-	public void fileAdded(@NotNull String url) {
-        if (url.startsWith(myLayerRootUrl)) {
-            myFileSymbol = null;
-            return;
-        }
+	@Override
+	public void fileAdded(@NotNull String url)
+	{
+		if(url.startsWith(myLayerRootUrl))
+		{
+			myFileSymbol = null;
+			return;
+		}
 
-        final CachedSymbol baseCachedSymbol = getBaseSymbol();
-        if (baseCachedSymbol!=null){
-            ((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
-            if (!baseCachedSymbol.isUp2Date()){
-                myFileSymbol = null;
-            }
-        }
-    }
+		final CachedSymbol baseCachedSymbol = getBaseSymbol();
+		if(baseCachedSymbol != null)
+		{
+			((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
+			if(!baseCachedSymbol.isUp2Date())
+			{
+				myFileSymbol = null;
+			}
+		}
+	}
 
-    @Override
-	protected void addAdditionalData() {
-        // do nothing
-    }
+	@Override
+	protected void addAdditionalData()
+	{
+		// do nothing
+	}
 }

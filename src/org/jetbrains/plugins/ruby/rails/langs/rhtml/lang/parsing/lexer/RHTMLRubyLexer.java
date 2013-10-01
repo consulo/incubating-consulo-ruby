@@ -33,181 +33,222 @@ import com.intellij.util.text.CharArrayCharSequence;
  * @author: Roman Chernyatchik
  * @date: 31.03.2007
  */
-public class RHTMLRubyLexer  extends MergingLexerAdapter {
-    private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(RHTMLTokenTypeEx.RHTML_INJECTION_IN_RUBY);
+public class RHTMLRubyLexer extends MergingLexerAdapter
+{
+	private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(RHTMLTokenTypeEx.RHTML_INJECTION_IN_RUBY);
 
-    public RHTMLRubyLexer() {
-        this(false);
-    }
+	public RHTMLRubyLexer()
+	{
+		this(false);
+	}
 
-    /**
-     * Is used when lexer should return ruby and rhtml lexems, e.g. for ColorsPage 
-     * @param inHighlighingMode If true lexer will returns rhtml lexems as is instead of special stub
-     */
-    public RHTMLRubyLexer(final boolean inHighlighingMode) {
-        super(new _RHTMLRubyLexer(inHighlighingMode), TOKENS_TO_MERGE);
-    }
+	/**
+	 * Is used when lexer should return ruby and rhtml lexems, e.g. for ColorsPage
+	 *
+	 * @param inHighlighingMode If true lexer will returns rhtml lexems as is instead of special stub
+	 */
+	public RHTMLRubyLexer(final boolean inHighlighingMode)
+	{
+		super(new _RHTMLRubyLexer(inHighlighingMode), TOKENS_TO_MERGE);
+	}
 }
 
-class _RHTMLRubyLexer extends Lexer {
-    private Lexer myRHTMLLexer = new _RHTMLLexer();
-    private RubyLexer myRubyLexer = new RubyLexer();
+class _RHTMLRubyLexer extends Lexer
+{
+	private Lexer myRHTMLLexer = new _RHTMLLexer();
+	private RubyLexer myRubyLexer = new RubyLexer();
 
-    private Lexer myCurRubyLexer = null;
-    private boolean myInHighlighingMode;
+	private Lexer myCurRubyLexer = null;
+	private boolean myInHighlighingMode;
 
-    public _RHTMLRubyLexer(final boolean inHighlighingMode) {
-        myInHighlighingMode = inHighlighingMode;
-    }
+	public _RHTMLRubyLexer(final boolean inHighlighingMode)
+	{
+		myInHighlighingMode = inHighlighingMode;
+	}
 
-    public void start(char[] buffer) {
-        start(buffer, 0, buffer.length, 0);
-    }
+	public void start(char[] buffer)
+	{
+		start(buffer, 0, buffer.length, 0);
+	}
 
-    public void start(char[] buffer, int startOffset, int endOffset) {
-        start(buffer, startOffset, endOffset, 0);
-    }
+	public void start(char[] buffer, int startOffset, int endOffset)
+	{
+		start(buffer, startOffset, endOffset, 0);
+	}
 
-    public void start(char[] buffer, int startOffset, int endOffset, int initialState) {
-        start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
-    }
+	public void start(char[] buffer, int startOffset, int endOffset, int initialState)
+	{
+		start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
+	}
 
-    @Override
-	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
-        myRHTMLLexer.start(buffer, startOffset, endOffset, initialState);
-        setupRubyLexer();
-    }
+	@Override
+	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState)
+	{
+		myRHTMLLexer.start(buffer, startOffset, endOffset, initialState);
+		setupRubyLexer();
+	}
 
-    @Override
-	public CharSequence getBufferSequence() {
-        return myRHTMLLexer.getBufferSequence();
-    }
+	@Override
+	public CharSequence getBufferSequence()
+	{
+		return myRHTMLLexer.getBufferSequence();
+	}
 
-    @Override
-	public int getState() {
-        return myRHTMLLexer.getState();
-    }
+	@Override
+	public int getState()
+	{
+		return myRHTMLLexer.getState();
+	}
 
-    @Override
-	public IElementType getTokenType() {
-        IElementType tokenType = myRHTMLLexer.getTokenType();
-        if (tokenType == null) {
-            return null;
-        }
-        if (tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS) {
-            return myCurRubyLexer.getTokenType();
-        } else {
-            return !myInHighlighingMode
-                    ? RHTMLTokenTypeEx.RHTML_INJECTION_IN_RUBY
-                    : tokenType;
-        }
-    }
+	@Override
+	public IElementType getTokenType()
+	{
+		IElementType tokenType = myRHTMLLexer.getTokenType();
+		if(tokenType == null)
+		{
+			return null;
+		}
+		if(tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS)
+		{
+			return myCurRubyLexer.getTokenType();
+		}
+		else
+		{
+			return !myInHighlighingMode ? RHTMLTokenTypeEx.RHTML_INJECTION_IN_RUBY : tokenType;
+		}
+	}
 
-    @Override
-	public int getTokenStart() {
-        IElementType tokenType = myRHTMLLexer.getTokenType();
-        if (tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS) {
-            return myCurRubyLexer.getTokenStart();
-        } else {
-            return myRHTMLLexer.getTokenStart();
-        }
-    }
+	@Override
+	public int getTokenStart()
+	{
+		IElementType tokenType = myRHTMLLexer.getTokenType();
+		if(tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS)
+		{
+			return myCurRubyLexer.getTokenStart();
+		}
+		else
+		{
+			return myRHTMLLexer.getTokenStart();
+		}
+	}
 
-    @Override
-	public int getTokenEnd() {
-        IElementType tokenType = myRHTMLLexer.getTokenType();
-        if (tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS) {
-            return myCurRubyLexer.getTokenEnd();
-        } else {
-            return myRHTMLLexer.getTokenEnd();
-        }
-    }
+	@Override
+	public int getTokenEnd()
+	{
+		IElementType tokenType = myRHTMLLexer.getTokenType();
+		if(tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS)
+		{
+			return myCurRubyLexer.getTokenEnd();
+		}
+		else
+		{
+			return myRHTMLLexer.getTokenEnd();
+		}
+	}
 
-    @Override
-	public void advance() {
-        IElementType tokenType = myRHTMLLexer.getTokenType();
-        if (tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS) {
-            myCurRubyLexer.advance();
-            if (myCurRubyLexer.getTokenType() != null) {
-                return;
-            }
-        }
-        myRHTMLLexer.advance();
-        setupRubyLexer();
-    }
+	@Override
+	public void advance()
+	{
+		IElementType tokenType = myRHTMLLexer.getTokenType();
+		if(tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS)
+		{
+			myCurRubyLexer.advance();
+			if(myCurRubyLexer.getTokenType() != null)
+			{
+				return;
+			}
+		}
+		myRHTMLLexer.advance();
+		setupRubyLexer();
+	}
 
-    private void setupRubyLexer() {
-        while (true) {
-            IElementType tokenType = myRHTMLLexer.getTokenType();
-            if (tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS) {
-                myCurRubyLexer = myRubyLexer;
-            } else {
-                return;
-            }
+	private void setupRubyLexer()
+	{
+		while(true)
+		{
+			IElementType tokenType = myRHTMLLexer.getTokenType();
+			if(tokenType == RHTMLTokenType.RUBY_CODE_CHARACTERS)
+			{
+				myCurRubyLexer = myRubyLexer;
+			}
+			else
+			{
+				return;
+			}
 
-            myCurRubyLexer.start(myRHTMLLexer.getBufferSequence(), myRHTMLLexer.getTokenStart(), myRHTMLLexer.getTokenEnd(), _RubyLexer.YYINITIAL);
-            if (myCurRubyLexer.getTokenType() != null) {
-                return;
-            }
-            myRHTMLLexer.advance();
-        }
-    }
+			myCurRubyLexer.start(myRHTMLLexer.getBufferSequence(), myRHTMLLexer.getTokenStart(), myRHTMLLexer.getTokenEnd(), _RubyLexer.YYINITIAL);
+			if(myCurRubyLexer.getTokenType() != null)
+			{
+				return;
+			}
+			myRHTMLLexer.advance();
+		}
+	}
 
-    private static class Position implements LexerPosition {
-        private final LexerPosition myRubyPosition;
-        private final LexerPosition myRhtmlPosition;
+	private static class Position implements LexerPosition
+	{
+		private final LexerPosition myRubyPosition;
+		private final LexerPosition myRhtmlPosition;
 
-        public Position(final LexerPosition rubyPosition, final LexerPosition rhtmlPosition) {
-            myRubyPosition = rubyPosition;
-            myRhtmlPosition = rhtmlPosition;
-        }
+		public Position(final LexerPosition rubyPosition, final LexerPosition rhtmlPosition)
+		{
+			myRubyPosition = rubyPosition;
+			myRhtmlPosition = rhtmlPosition;
+		}
 
-        @Override
-		public int getOffset() {
-            final int rhtmlPos = myRhtmlPosition != null ? myRhtmlPosition.getOffset() : 0;
-            final int rubyPos = myRubyPosition == null ? 0 : myRubyPosition.getOffset();
-            return Math.max(rhtmlPos, rubyPos);
-        }
+		@Override
+		public int getOffset()
+		{
+			final int rhtmlPos = myRhtmlPosition != null ? myRhtmlPosition.getOffset() : 0;
+			final int rubyPos = myRubyPosition == null ? 0 : myRubyPosition.getOffset();
+			return Math.max(rhtmlPos, rubyPos);
+		}
 
-        public LexerPosition getRubyPosition() {
-            return myRubyPosition;
-        }
+		public LexerPosition getRubyPosition()
+		{
+			return myRubyPosition;
+		}
 
-        public LexerPosition getRhtmlPosition() {
-            return myRhtmlPosition;
-        }
+		public LexerPosition getRhtmlPosition()
+		{
+			return myRhtmlPosition;
+		}
 
-        @Override
-		public int getState() {
-            return 0;
-        }
-    }
+		@Override
+		public int getState()
+		{
+			return 0;
+		}
+	}
 
-    @Override
-	public LexerPosition getCurrentPosition() {
-        return new Position(myCurRubyLexer != null ? myCurRubyLexer.getCurrentPosition()
-                                                   : null,
-                            myRHTMLLexer.getCurrentPosition());
-    }
+	@Override
+	public LexerPosition getCurrentPosition()
+	{
+		return new Position(myCurRubyLexer != null ? myCurRubyLexer.getCurrentPosition() : null, myRHTMLLexer.getCurrentPosition());
+	}
 
-    @Override
-	public void restore(final LexerPosition position) {
-        final Position p = (Position)position;
-        myRHTMLLexer.restore(p.getRhtmlPosition());
+	@Override
+	public void restore(final LexerPosition position)
+	{
+		final Position p = (Position) position;
+		myRHTMLLexer.restore(p.getRhtmlPosition());
 
-        final LexerPosition rubyPos = p.getRubyPosition();
-        if (rubyPos != null && rubyPos.getOffset() < myCurRubyLexer.getBufferEnd()) {
-            myCurRubyLexer.restore(rubyPos);
-        } else {
-            myCurRubyLexer = null;
-            setupRubyLexer();
-        }
-    }
+		final LexerPosition rubyPos = p.getRubyPosition();
+		if(rubyPos != null && rubyPos.getOffset() < myCurRubyLexer.getBufferEnd())
+		{
+			myCurRubyLexer.restore(rubyPos);
+		}
+		else
+		{
+			myCurRubyLexer = null;
+			setupRubyLexer();
+		}
+	}
 
 
-
-    @Override
-	public int getBufferEnd() {
-        return myRHTMLLexer.getBufferEnd();
-    }
+	@Override
+	public int getBufferEnd()
+	{
+		return myRHTMLLexer.getBufferEnd();
+	}
 }

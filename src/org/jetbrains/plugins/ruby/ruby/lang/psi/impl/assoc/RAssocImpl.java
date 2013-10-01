@@ -16,31 +16,35 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class RAssocImpl extends RPsiElementBase implements RAssoc {
-    public RAssocImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RAssocImpl extends RPsiElementBase implements RAssoc
+{
+	public RAssocImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getKey() {
-        return getChildByType(RPsiElement.class, 0);
-    }
+	public RPsiElement getKey()
+	{
+		return getChildByType(RPsiElement.class, 0);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getValue() {
-        return getChildByType(RPsiElement.class, 1);
-    }
+	public RPsiElement getValue()
+	{
+		return getChildByType(RPsiElement.class, 1);
+	}
 }

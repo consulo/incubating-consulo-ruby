@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RLiteral;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface RFloatConstant extends RLiteral {
+public interface RFloatConstant extends RLiteral
+{
 }

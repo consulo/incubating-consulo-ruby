@@ -26,22 +26,29 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
  * User: oleg
  * Date: 05.07.2006
  */
-public class TERMS  implements RubyTokenTypes {
-  /*
-    terms		: term
-            | terms ';'
-            ;
-*/
-    public static void parse(final RBuilder builder){
-        TERM.parse(builder);
-        while (builder.compareAndEat(BNF.tTERM_TOKENS)){}
-    }
+public class TERMS implements RubyTokenTypes
+{
+	/*
+		terms		: term
+				| terms ';'
+				;
+	*/
+	public static void parse(final RBuilder builder)
+	{
+		TERM.parse(builder);
+		while(builder.compareAndEat(BNF.tTERM_TOKENS))
+		{
+		}
+	}
 
-/*    opt_terms    : none
-            | terms
-            ;
-*/
-    public static void parseOpt(final RBuilder builder){
-        while (builder.compareAndEat(BNF.tTERM_TOKENS)){}
-    }
+	/*    opt_terms    : none
+				| terms
+				;
+	*/
+	public static void parseOpt(final RBuilder builder)
+	{
+		while(builder.compareAndEat(BNF.tTERM_TOKENS))
+		{
+		}
+	}
 }

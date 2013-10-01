@@ -16,31 +16,35 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import com.intellij.psi.PsiElement;
+import java.util.Collection;
+
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
-
-import java.util.Collection;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author yole
  */
-public class ListParamDef extends ParamDef {
-    private ParamDef myBaseParamDef;
+public class ListParamDef extends ParamDef
+{
+	private ParamDef myBaseParamDef;
 
-    public ListParamDef(final ParamDef baseParamDef) {
-        myBaseParamDef = baseParamDef;
-    }
+	public ListParamDef(final ParamDef baseParamDef)
+	{
+		myBaseParamDef = baseParamDef;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Collection<RubyLookupItem> getVariants(final ParamContext context) {
-        return myBaseParamDef.getVariants(context);
-    }
+	public Collection<RubyLookupItem> getVariants(final ParamContext context)
+	{
+		return myBaseParamDef.getVariants(context);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement resolveReference(final ParamContext context) {
-        return myBaseParamDef.resolveReference(context);
-    }
+	public PsiElement resolveReference(final ParamContext context)
+	{
+		return myBaseParamDef.resolveReference(context);
+	}
 }

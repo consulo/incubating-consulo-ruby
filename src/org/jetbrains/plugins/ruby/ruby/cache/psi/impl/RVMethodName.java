@@ -16,43 +16,50 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Jul 6, 2007
  */
-public class RVMethodName extends RVirtualNameImpl implements RVirtualName {
-    private static final String DOT = ".";
+public class RVMethodName extends RVirtualNameImpl implements RVirtualName
+{
+	private static final String DOT = ".";
 
-    public RVMethodName(@NotNull List<String> fullPath, boolean global) {
-        super(fullPath, global);
-    }
+	public RVMethodName(@NotNull List<String> fullPath, boolean global)
+	{
+		super(fullPath, global);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getFullName() {
-        if (myFullName ==null){
-            final StringBuilder buffer = new StringBuilder();
-            if (isGlobal){
-                buffer.append(COLON2);
-            }
-            boolean smthAdded = false;
-            final int size = myFullPath.size();
-            for (int i = 0; i < size; i++) {
-                String s = myFullPath.get(i);
-                if (smthAdded) {
-                    buffer.append(i == size - 1 ? DOT : COLON2);
-                }
-                buffer.append(s);
-                smthAdded = true;
-            }
-            myFullName = buffer.toString();
-        }
-        return myFullName;
-    }
+	public String getFullName()
+	{
+		if(myFullName == null)
+		{
+			final StringBuilder buffer = new StringBuilder();
+			if(isGlobal)
+			{
+				buffer.append(COLON2);
+			}
+			boolean smthAdded = false;
+			final int size = myFullPath.size();
+			for(int i = 0; i < size; i++)
+			{
+				String s = myFullPath.get(i);
+				if(smthAdded)
+				{
+					buffer.append(i == size - 1 ? DOT : COLON2);
+				}
+				buffer.append(s);
+				smthAdded = true;
+			}
+			myFullName = buffer.toString();
+		}
+		return myFullName;
+	}
 }

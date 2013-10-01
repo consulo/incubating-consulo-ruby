@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-
-import javax.swing.*;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,47 +32,58 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 17.10.2006
  */
-public class RXMLFileType  extends LanguageFileType {
-    public static final String VALID_EXTENTIONS = "rxml;builder;";
+public class RXMLFileType extends LanguageFileType
+{
+	public static final String VALID_EXTENTIONS = "rxml;builder;";
 
-    public static final RXMLFileType RXML = new RXMLFileType();
-    @NonNls private static final String NAME = "RXML";
-    @NonNls private static final String DESCRIPTION = RBundle.message("filetype.description.rxml");
-    @NonNls private static final String DEFAULT_EXTENSION = "rxml";
-    @NonNls private static final String BUILDER_EXTENSION = "builder";
-    private static final Icon ICON = RailsIcons.RXTML_ICON;
+	public static final RXMLFileType RXML = new RXMLFileType();
+	@NonNls
+	private static final String NAME = "RXML";
+	@NonNls
+	private static final String DESCRIPTION = RBundle.message("filetype.description.rxml");
+	@NonNls
+	private static final String DEFAULT_EXTENSION = "rxml";
+	@NonNls
+	private static final String BUILDER_EXTENSION = "builder";
+	private static final Icon ICON = RailsIcons.RXTML_ICON;
 
-    private RXMLFileType() {
-        super(RubyFileType.RUBY.getLanguage());
-    }
+	private RXMLFileType()
+	{
+		super(RubyFileType.RUBY.getLanguage());
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return NAME;
-    }
+	public String getName()
+	{
+		return NAME;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDescription() {
-        return DESCRIPTION;
-    }
+	public String getDescription()
+	{
+		return DESCRIPTION;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDefaultExtension() {
-        return DEFAULT_EXTENSION;
-    }
+	public String getDefaultExtension()
+	{
+		return DEFAULT_EXTENSION;
+	}
 
-    @NotNull
-    public String getBuilderExtension() {
-        return BUILDER_EXTENSION; 
-    }
+	@NotNull
+	public String getBuilderExtension()
+	{
+		return BUILDER_EXTENSION;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Icon getIcon() {
-        return ICON;
-    }
+	public Icon getIcon()
+	{
+		return ICON;
+	}
 }
 

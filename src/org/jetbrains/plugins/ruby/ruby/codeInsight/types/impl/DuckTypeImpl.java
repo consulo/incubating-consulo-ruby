@@ -16,13 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import com.intellij.util.containers.HashMap;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
-
-import java.util.*;
+import com.intellij.util.containers.HashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,59 +34,72 @@ import java.util.*;
  * @author: oleg
  * @date: May 25, 2007
  */
-public class DuckTypeImpl implements DuckType {
-    private Map<String, Collection<Message>> myMessages = new HashMap<String, Collection<Message>>();
+public class DuckTypeImpl implements DuckType
+{
+	private Map<String, Collection<Message>> myMessages = new HashMap<String, Collection<Message>>();
 
-    public void clear(){
-        myMessages.clear();
-    }
+	public void clear()
+	{
+		myMessages.clear();
+	}
 
-    public void addMessage(@NotNull final Message message){
-        // Add messsage to all message
-        addForName(message, null);
-        // Add message to map by it`s name
-        addForName(message, message.getName());
-    }
+	public void addMessage(@NotNull final Message message)
+	{
+		// Add messsage to all message
+		addForName(message, null);
+		// Add message to map by it`s name
+		addForName(message, message.getName());
+	}
 
-    private void addForName(@NotNull final Message message, final String name) {
-        Collection<Message> messages = myMessages.get(name);
-        if (messages == null){
-            messages = new ArrayList<Message>();
-            myMessages.put(name, messages);
-        }
-        messages.add(message);
-    }
+	private void addForName(@NotNull final Message message, final String name)
+	{
+		Collection<Message> messages = myMessages.get(name);
+		if(messages == null)
+		{
+			messages = new ArrayList<Message>();
+			myMessages.put(name, messages);
+		}
+		messages.add(message);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Collection<Message> getMessages() {
-        return getMessagesForName(null);
-    }
+	public Collection<Message> getMessages()
+	{
+		return getMessagesForName(null);
+	}
 
-    @Override
-	public Collection<Message> contains(@NotNull final DuckType type) {
-        final List<Message> messages = new ArrayList<Message>();
-        for (Message typeMessage : type.getMessages()) {
-            boolean found = false;
-            for (Message message : getMessages()) {
-                found = found || message.matchesMessage(typeMessage);
-            }
-            if (!found){
-                messages.add(typeMessage);
-            }
-        }
-        return messages;
-    }
+	@Override
+	public Collection<Message> contains(@NotNull final DuckType type)
+	{
+		final List<Message> messages = new ArrayList<Message>();
+		for(Message typeMessage : type.getMessages())
+		{
+			boolean found = false;
+			for(Message message : getMessages())
+			{
+				found = found || message.matchesMessage(typeMessage);
+			}
+			if(!found)
+			{
+				messages.add(typeMessage);
+			}
+		}
+		return messages;
+	}
 
-    @Override
-	public Collection<Message> getMessagesForName(@Nullable String name) {
-        final Collection<Message> messages = myMessages.get(name);
-        return messages!=null ? messages : Collections.<Message>emptyList();
-    }
+	@Override
+	public Collection<Message> getMessagesForName(@Nullable String name)
+	{
+		final Collection<Message> messages = myMessages.get(name);
+		return messages != null ? messages : Collections.<Message>emptyList();
+	}
 
-    public void addMessages(final Collection<Message> messages) {
-        for (Message message : messages) {
-            addMessage(message);
-        }
-    }
+	public void addMessages(final Collection<Message> messages)
+	{
+		for(Message message : messages)
+		{
+			addMessage(message);
+		}
+	}
 }

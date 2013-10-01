@@ -48,215 +48,259 @@ import com.intellij.psi.ResolveResult;
  * @author: oleg
  * @date: Mar 6, 2007
  */
-public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor {
-    private AnnotationHolder myHolder;
-    private RFile myFile;
+public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor
+{
+	private AnnotationHolder myHolder;
+	private RFile myFile;
 
 
-    public RubySlowAnnotatorVisitor(@NotNull final AnnotationHolder holder, @NotNull final RFile rFile) {
-        myHolder = holder;
-        myFile = rFile;
-    }
+	public RubySlowAnnotatorVisitor(@NotNull final AnnotationHolder holder, @NotNull final RFile rFile)
+	{
+		myHolder = holder;
+		myFile = rFile;
+	}
 
-    // required files annotating
-    @Override
-	public void visitRequireCall(@NotNull final RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	// required files annotating
+	@Override
+	public void visitRequireCall(@NotNull final RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitRequireOrLoad(rCall);
-    }
+		visitRequireOrLoad(rCall);
+	}
 
-    @Override
-	public void visitLoadCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitLoadCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitRequireOrLoad(rCall);
-    }
+		visitRequireOrLoad(rCall);
+	}
 
-    private void visitRequireOrLoad(RCall rCall) {
-        final List<RPsiElement> args = rCall.getArguments();
-        if (args.isEmpty()){
-            myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
-            return;
-        }
-        final PsiReference[] requiredReferences = rCall.getReferences();
-        for (PsiReference reference : requiredReferences) {
-            if (reference instanceof RFileReference){
-                final RFileReference reqReference = (RFileReference) reference;
-                final PsiElement ref = reqReference.getRefValue();
-                final String name = RFileUtil.evaluate(rCall.getContainingFile().getVirtualFile(), ref);
-                if (!(myFile.isJRubyEnabled() && JRubyUtil.JAVA.equals(name))){
-                    if (name!=null) {
-                        final ResolveResult[] results = reqReference.multiResolve(true);
-                        if (results.length == 0) {
-                            myHolder.createErrorAnnotation(ref, RBundle.message("annotation.error.cannot.find.required.file"));
-                        }
-                        if (results.length > 1){
-                            final Annotation annotation = myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.implicit.multivariant.required.item"));
-                            annotation.setTextAttributes(RubyHighlighter.INSPECTION_MULTIPLE_RESOLVE_WARNING);
-                        }
-                    } else {
-                        myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.implicit.required.item"));
-                    }
-                }
-            }
-        }
-    }
+	private void visitRequireOrLoad(RCall rCall)
+	{
+		final List<RPsiElement> args = rCall.getArguments();
+		if(args.isEmpty())
+		{
+			myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
+			return;
+		}
+		final PsiReference[] requiredReferences = rCall.getReferences();
+		for(PsiReference reference : requiredReferences)
+		{
+			if(reference instanceof RFileReference)
+			{
+				final RFileReference reqReference = (RFileReference) reference;
+				final PsiElement ref = reqReference.getRefValue();
+				final String name = RFileUtil.evaluate(rCall.getContainingFile().getVirtualFile(), ref);
+				if(!(myFile.isJRubyEnabled() && JRubyUtil.JAVA.equals(name)))
+				{
+					if(name != null)
+					{
+						final ResolveResult[] results = reqReference.multiResolve(true);
+						if(results.length == 0)
+						{
+							myHolder.createErrorAnnotation(ref, RBundle.message("annotation.error.cannot.find.required.file"));
+						}
+						if(results.length > 1)
+						{
+							final Annotation annotation = myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.implicit.multivariant.required.item"));
+							annotation.setTextAttributes(RubyHighlighter.INSPECTION_MULTIPLE_RESOLVE_WARNING);
+						}
+					}
+					else
+					{
+						myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.implicit.required.item"));
+					}
+				}
+			}
+		}
+	}
 
-    @Override
-	public void visitIncludeCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitIncludeCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitIncludeOrExtend(rCall);
-    }
+		visitIncludeOrExtend(rCall);
+	}
 
-    @Override
-	public void visitExtendCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitExtendCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitIncludeOrExtend(rCall);
-    }
+		visitIncludeOrExtend(rCall);
+	}
 
-    private void visitIncludeOrExtend(RCall rCall) {
-        final List<RPsiElement> args = rCall.getArguments();
-        if (args.isEmpty()){
-            myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
-            return;
-        }
-        for (RPsiElement arg : args) {
-            final List<Symbol> symbols = ResolveUtil.resolveToSymbols(arg);
-            if (symbols.size() != 1){
-                myHolder.createWarningAnnotation(arg, RBundle.message("annotation.warning.cannot.resolve.include"));
-            }
-        }
-    }
+	private void visitIncludeOrExtend(RCall rCall)
+	{
+		final List<RPsiElement> args = rCall.getArguments();
+		if(args.isEmpty())
+		{
+			myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
+			return;
+		}
+		for(RPsiElement arg : args)
+		{
+			final List<Symbol> symbols = ResolveUtil.resolveToSymbols(arg);
+			if(symbols.size() != 1)
+			{
+				myHolder.createWarningAnnotation(arg, RBundle.message("annotation.warning.cannot.resolve.include"));
+			}
+		}
+	}
 
-    @Override
-	public void visitAttrAccessorCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitAttrAccessorCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitAttrCall(rCall);
-    }
+		visitAttrCall(rCall);
+	}
 
-    @Override
-	public void visitAttrWriterCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitAttrWriterCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitAttrCall(rCall);
-    }
+		visitAttrCall(rCall);
+	}
 
-    @Override
-	public void visitAttrReaderCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitAttrReaderCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitAttrCall(rCall);
-    }
+		visitAttrCall(rCall);
+	}
 
-    @Override
-	public void visitAttrInternalCall(@NotNull RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitAttrInternalCall(@NotNull RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitAttrCall(rCall);
-    }
+		visitAttrCall(rCall);
+	}
 
-    @Override
-	public void visitCAttrAccessorCall(@NotNull final RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitCAttrAccessorCall(@NotNull final RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitAttrCall(rCall);
-    }
+		visitAttrCall(rCall);
+	}
 
-    private void visitAttrCall(@NotNull RCall rCall) {
-        final List<RPsiElement> args = rCall.getArguments();
-        if (args.isEmpty()){
-            myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
-            return;
-        }
-        final PsiReference[] fieldReferences = rCall.getReferences();
-        for (PsiReference reference : fieldReferences) {
-            final RFieldAttrReference fieldAttrReference = (RFieldAttrReference) reference;
-            final ResolveResult[] results = fieldAttrReference.multiResolve(true);
-            final PsiElement ref = fieldAttrReference.getReferenceContent();
-            if (results.length == 0) {
-                myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.cannot.find.variable"));
-            }
-            if (results.length > 1) {
-                myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.multivariable.found"));
-            }
-        }
-    }
+	private void visitAttrCall(@NotNull RCall rCall)
+	{
+		final List<RPsiElement> args = rCall.getArguments();
+		if(args.isEmpty())
+		{
+			myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
+			return;
+		}
+		final PsiReference[] fieldReferences = rCall.getReferences();
+		for(PsiReference reference : fieldReferences)
+		{
+			final RFieldAttrReference fieldAttrReference = (RFieldAttrReference) reference;
+			final ResolveResult[] results = fieldAttrReference.multiResolve(true);
+			final PsiElement ref = fieldAttrReference.getReferenceContent();
+			if(results.length == 0)
+			{
+				myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.cannot.find.variable"));
+			}
+			if(results.length > 1)
+			{
+				myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.multivariable.found"));
+			}
+		}
+	}
 
-    @Override
-	public void visitImportClassCall(@NotNull final RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitImportClassCall(@NotNull final RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        final List<RPsiElement> args = rCall.getArguments();
-        if (args.isEmpty()){
-            myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
-            return;
-        }
-        for (RPsiElement arg : args) {
-            final List<PsiElement> list = ResolveUtil.multiResolve(arg);
-            if (!(list.size()==1 && list.get(0) instanceof PsiClass)){
-                myHolder.createErrorAnnotation(arg, RBundle.message("annotation.error.should.be.java.class"));
-            }
-        }
-    }
+		final List<RPsiElement> args = rCall.getArguments();
+		if(args.isEmpty())
+		{
+			myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
+			return;
+		}
+		for(RPsiElement arg : args)
+		{
+			final List<PsiElement> list = ResolveUtil.multiResolve(arg);
+			if(!(list.size() == 1 && list.get(0) instanceof PsiClass))
+			{
+				myHolder.createErrorAnnotation(arg, RBundle.message("annotation.error.should.be.java.class"));
+			}
+		}
+	}
 
-    @Override
-	public void visitIncludeClassCall(@NotNull final RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitIncludeClassCall(@NotNull final RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitIncludeJava(rCall, PsiClass.class, RBundle.message("annotation.error.should.be.java.class"));
-    }
+		visitIncludeJava(rCall, PsiClass.class, RBundle.message("annotation.error.should.be.java.class"));
+	}
 
-    @Override
-	public void visitIncludePackageCall(@NotNull final RCall rCall) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitIncludePackageCall(@NotNull final RCall rCall)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        visitIncludeJava(rCall, PsiJavaPackage.class, RBundle.message("annotation.error.should.be.java.package"));
-    }
+		visitIncludeJava(rCall, PsiJavaPackage.class, RBundle.message("annotation.error.should.be.java.package"));
+	}
 
-    private void visitIncludeJava(final RCall rCall, final Class clazzz, final String errorMsg) {
-        final List<RPsiElement> args = rCall.getArguments();
-        if (args.isEmpty()){
-            myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
-            return;
-        }
-        final PsiReference[] references = rCall.getReferences();
-        if (references.length == 0){
-            myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.should.be.java"));
-            return;
-        }
-        if (!clazzz.isInstance(references[references.length-1].resolve())){
-            myHolder.createErrorAnnotation(rCall, errorMsg);
-        }
-    }
+	private void visitIncludeJava(final RCall rCall, final Class clazzz, final String errorMsg)
+	{
+		final List<RPsiElement> args = rCall.getArguments();
+		if(args.isEmpty())
+		{
+			myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.no.arguments"));
+			return;
+		}
+		final PsiReference[] references = rCall.getReferences();
+		if(references.length == 0)
+		{
+			myHolder.createErrorAnnotation(rCall, RBundle.message("annotation.error.should.be.java"));
+			return;
+		}
+		if(!clazzz.isInstance(references[references.length - 1].resolve()))
+		{
+			myHolder.createErrorAnnotation(rCall, errorMsg);
+		}
+	}
 
-    @Override
-	public void visitRSymbol(RSymbol rSymbol) {
-        // It`s often operation
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void visitRSymbol(RSymbol rSymbol)
+	{
+		// It`s often operation
+		ProgressManager.getInstance().checkCanceled();
 
-        final PsiReference[] references = rSymbol.getReferences();
-        for (PsiReference reference : references) {
-            if (reference instanceof JavaReference){
-                if (reference.resolve()==null){
-                    myHolder.createErrorAnnotation(rSymbol, RBundle.message("annotation.error.should.be.java"));
-                }
-            }
-        }
-    }
+		final PsiReference[] references = rSymbol.getReferences();
+		for(PsiReference reference : references)
+		{
+			if(reference instanceof JavaReference)
+			{
+				if(reference.resolve() == null)
+				{
+					myHolder.createErrorAnnotation(rSymbol, RBundle.message("annotation.error.should.be.java"));
+				}
+			}
+		}
+	}
 }

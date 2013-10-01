@@ -24,15 +24,18 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: 07.10.2006
  */
-public abstract class RubyChangeVisitorAdapter implements RubyChangeVisitor {
+public abstract class RubyChangeVisitorAdapter implements RubyChangeVisitor
+{
 
-    @Override
-	public void anythingChanged(final PsiElement element) {
-        //Do nothing
-    }
+	@Override
+	public void anythingChanged(final PsiElement element)
+	{
+		//Do nothing
+	}
 
-    @Override
-	public void structureChanged() {
-        //Do nothing
-    }
+	@Override
+	public void structureChanged()
+	{
+		//Do nothing
+	}
 }

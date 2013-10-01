@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -26,41 +25,43 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method.BO
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class Module implements RubyTokenTypes {
+public class Module implements RubyTokenTypes
+{
 /*
-        | kMODULE cpath
+		| kMODULE cpath
           bodystmt
           kEND
 
 */
 
 
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+		builder.match(kMODULE);
 
-        builder.match(kMODULE);
-
-        RMarker cpathMarker = builder.mark();
-        if (CPATH.parse(builder)==RubyElementTypes.EMPTY_INPUT) {
-            builder.error(ErrorMsg.expected(RBundle.message("parsing.module.name")));
-        }
-        cpathMarker.done(RubyElementTypes.MODULE_NAME);
+		RMarker cpathMarker = builder.mark();
+		if(CPATH.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+		{
+			builder.error(ErrorMsg.expected(RBundle.message("parsing.module.name")));
+		}
+		cpathMarker.done(RubyElementTypes.MODULE_NAME);
 
 
+		BODYSTMT.parse(builder);
 
-        BODYSTMT.parse(builder);
-
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(RubyElementTypes.MODULE);
-        return RubyElementTypes.MODULE;
-    }
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(RubyElementTypes.MODULE);
+		return RubyElementTypes.MODULE;
+	}
 
 }

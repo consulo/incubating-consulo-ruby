@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -28,8 +28,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageType;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-
-import java.util.List;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,37 +37,45 @@ import java.util.List;
  * @author: oleg
  * @date: Dec 21, 2007
  */
-public class RGlobalVariableReference extends RNamedReference{
-    public RGlobalVariableReference(@NotNull RNamedElement element) {
-        super(element);
-    }
+public class RGlobalVariableReference extends RNamedReference
+{
+	public RGlobalVariableReference(@NotNull RNamedElement element)
+	{
+		super(element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        return multiresolveToSymbols(fileSymbol, myElement.getText(), true, new TypeSet(Type.GLOBAL_VARIABLE, Type.ALIAS));
-    }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		return multiresolveToSymbols(fileSymbol, myElement.getText(), true, new TypeSet(Type.GLOBAL_VARIABLE, Type.ALIAS));
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected ResolveResult[] multiResolveInner(boolean incompleteCode) {
-        if (((RGlobalVariable) myElement).isInDefinition()){
-            return  new ResolveResult[]{
-                    new ResolveResult(){
-                        @Override
+	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
+	{
+		if(((RGlobalVariable) myElement).isInDefinition())
+		{
+			return new ResolveResult[]{
+					new ResolveResult()
+					{
+						@Override
 						@Nullable
-                        public PsiElement getElement() {
-                            RubyUsageTypeProvider.setType(RGlobalVariableReference.this, RubyUsageType.DECLARATION);
-                            return myElement;
-                        }
+						public PsiElement getElement()
+						{
+							RubyUsageTypeProvider.setType(RGlobalVariableReference.this, RubyUsageType.DECLARATION);
+							return myElement;
+						}
 
-                        @Override
-						public boolean isValidResult() {
-                            return true;
-                        }
-                    }
-            };
-        }
-        return super.multiResolveInner(incompleteCode);
-    }
+						@Override
+						public boolean isValidResult()
+						{
+							return true;
+						}
+					}
+			};
+		}
+		return super.multiResolveInner(incompleteCode);
+	}
 }

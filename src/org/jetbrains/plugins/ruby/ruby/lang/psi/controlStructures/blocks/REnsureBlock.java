@@ -25,6 +25,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 07.08.2006
  */
-public interface REnsureBlock extends RPsiElement,
-        RWrapAndIndentCOMPSTMT, RWrapedAlways {
+public interface REnsureBlock extends RPsiElement, RWrapAndIndentCOMPSTMT, RWrapedAlways
+{
 }

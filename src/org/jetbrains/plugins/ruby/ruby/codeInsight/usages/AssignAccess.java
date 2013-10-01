@@ -9,7 +9,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: 06.05.2007
  */
-public interface AssignAccess extends WriteAccess {
-  @Nullable
-  RPsiElement getValue();
+public interface AssignAccess extends WriteAccess
+{
+	@Nullable
+	RPsiElement getValue();
 }

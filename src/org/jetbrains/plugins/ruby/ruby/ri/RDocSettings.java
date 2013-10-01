@@ -30,35 +30,42 @@ import com.intellij.openapi.util.WriteExternalException;
  * @date: Nov 8, 2006
  */
 @ApplicationService
-public class RDocSettings implements JDOMExternalizable {
-    private boolean doUseDefaults;
+public class RDocSettings implements JDOMExternalizable
+{
+	private boolean doUseDefaults;
 
-    private final CheckableDirectoriesContainer docDirs;
+	private final CheckableDirectoriesContainer docDirs;
 
-    public RDocSettings(){
-        doUseDefaults = true;
-        docDirs = new CheckableDirectoriesContainer();
-    }
+	public RDocSettings()
+	{
+		doUseDefaults = true;
+		docDirs = new CheckableDirectoriesContainer();
+	}
 
-    @Override
-	public void readExternal(Element element) throws InvalidDataException {
-        RDocSettingsExternalizer.getInstance().readExternal(this, element);
-    }
+	@Override
+	public void readExternal(Element element) throws InvalidDataException
+	{
+		RDocSettingsExternalizer.getInstance().readExternal(this, element);
+	}
 
-    @Override
-	public void writeExternal(Element element) throws WriteExternalException {
-        RDocSettingsExternalizer.getInstance().writeExternal(this, element);
-    }
+	@Override
+	public void writeExternal(Element element) throws WriteExternalException
+	{
+		RDocSettingsExternalizer.getInstance().writeExternal(this, element);
+	}
 
-    public void setUseDefaults(final boolean b) {
-        doUseDefaults = b;
-    }
+	public void setUseDefaults(final boolean b)
+	{
+		doUseDefaults = b;
+	}
 
-    public boolean doUseDefaults() {
-        return doUseDefaults;
-    }
+	public boolean doUseDefaults()
+	{
+		return doUseDefaults;
+	}
 
-    public CheckableDirectoriesContainer getDocDirs() {
-        return docDirs;
-    }
+	public CheckableDirectoriesContainer getDocDirs()
+	{
+		return docDirs;
+	}
 }

@@ -16,16 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RDoCodeBlock;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.01.2007
  */
-public class RDoCodeBlockImpl extends RCodeBlockBase implements RDoCodeBlock {
-    public RDoCodeBlockImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RDoCodeBlockImpl extends RCodeBlockBase implements RDoCodeBlock
+{
+	public RDoCodeBlockImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

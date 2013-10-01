@@ -16,19 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Oct 5, 2007
  */
-public class RubyIntentionUtil {
-    public static boolean isAvailable(@NotNull final Editor editor,
-                                      @NotNull final PsiFile psiFile) {
-        return editor.getDocument().isWritable() && psiFile.getLanguage() instanceof RubyLanguage;
-    }
+public class RubyIntentionUtil
+{
+	public static boolean isAvailable(@NotNull final Editor editor, @NotNull final PsiFile psiFile)
+	{
+		return editor.getDocument().isWritable() && psiFile.getLanguage() instanceof RubyLanguage;
+	}
 }

@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -24,21 +23,25 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RSelfAssignmentExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 17.01.2007
  */
-public class RSelfAssignmentExpressionImpl extends RAssignmentExpressionImpl implements RSelfAssignmentExpression {
-    public RSelfAssignmentExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RSelfAssignmentExpressionImpl extends RAssignmentExpressionImpl implements RSelfAssignmentExpression
+{
+	public RSelfAssignmentExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RPsiElement object = getObject();
-        return object instanceof RExpression ? ((RExpression) object).getType(fileSymbol) : RType.NOT_TYPED;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RPsiElement object = getObject();
+		return object instanceof RExpression ? ((RExpression) object).getType(fileSymbol) : RType.NOT_TYPED;
+	}
 }

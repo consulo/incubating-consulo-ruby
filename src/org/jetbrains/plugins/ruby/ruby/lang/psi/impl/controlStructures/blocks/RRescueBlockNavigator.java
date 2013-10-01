@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RRescueBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators.RBlockVariableNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,16 +29,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  * @author: oleg
  * @date: Dec 26, 2007
  */
-public class RRescueBlockNavigator {
-    public static RRescueBlock getByParameter(@NotNull final RIdentifier identifier){
-        final RBlockVariables blockVariables = RBlockVariableNavigator.getByIdentifier(identifier);
-        if (blockVariables == null){
-            return null;
-        }
-        final RRescueBlock rescueBlock = PsiTreeUtil.getParentOfType(blockVariables, RRescueBlock.class);
-        if (rescueBlock == null){
-            return null;
-        }
-        return rescueBlock.getBlockVariables() == blockVariables ? rescueBlock : null;
-    }
+public class RRescueBlockNavigator
+{
+	public static RRescueBlock getByParameter(@NotNull final RIdentifier identifier)
+	{
+		final RBlockVariables blockVariables = RBlockVariableNavigator.getByIdentifier(identifier);
+		if(blockVariables == null)
+		{
+			return null;
+		}
+		final RRescueBlock rescueBlock = PsiTreeUtil.getParentOfType(blockVariables, RRescueBlock.class);
+		if(rescueBlock == null)
+		{
+			return null;
+		}
+		return rescueBlock.getBlockVariables() == blockVariables ? rescueBlock : null;
+	}
 }

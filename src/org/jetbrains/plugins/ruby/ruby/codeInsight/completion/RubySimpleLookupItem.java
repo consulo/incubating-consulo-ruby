@@ -16,83 +16,89 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
-import com.intellij.codeInsight.lookup.*;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
+import java.awt.Color;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
+import com.intellij.codeInsight.lookup.DeferredUserLookupValue;
+import com.intellij.codeInsight.lookup.LookupItem;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
+import com.intellij.codeInsight.lookup.PresentableLookupValue;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Iconable;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 22.04.2007
  */
-public class RubySimpleLookupItem implements RubyLookupItem,
-        PresentableLookupValue,
-        DeferredUserLookupValue,
-        LookupValueWithUIHint,
-        LookupValueWithPriority,
-        Iconable {
+public class RubySimpleLookupItem implements RubyLookupItem, PresentableLookupValue, DeferredUserLookupValue, LookupValueWithUIHint, LookupValueWithPriority, Iconable
+{
 
-    private String myLookupString;
-    private String myTypeText;
-    private boolean isBold;
-    private Icon myIcon;
-    private int myPriority;
+	private String myLookupString;
+	private String myTypeText;
+	private boolean isBold;
+	private Icon myIcon;
+	private int myPriority;
 
-    public RubySimpleLookupItem(@NotNull final String lookupString,
-                                @Nullable final String typeText,
-                                final int priority,
-                                final boolean bold,
-                                final Icon icon) {
-        myLookupString = lookupString;
-        myTypeText = typeText;
-        isBold = bold;
-        myPriority = priority;
-        myIcon = icon;
-    }
+	public RubySimpleLookupItem(@NotNull final String lookupString, @Nullable final String typeText, final int priority, final boolean bold, final Icon icon)
+	{
+		myLookupString = lookupString;
+		myTypeText = typeText;
+		isBold = bold;
+		myPriority = priority;
+		myIcon = icon;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myLookupString;
-    }
+	public String getName()
+	{
+		return myLookupString;
+	}
 
-    @Override
-	public String getPresentation() {
-        return myLookupString;
-    }
+	@Override
+	public String getPresentation()
+	{
+		return myLookupString;
+	}
 
-    @Override
-	public boolean handleUserSelection(LookupItem item, Project project) {
-        return true;
-    }
+	@Override
+	public boolean handleUserSelection(LookupItem item, Project project)
+	{
+		return true;
+	}
 
-    @Override
-	public String getTypeHint() {
-        return myTypeText != null ? myTypeText : "";
-    }
+	@Override
+	public String getTypeHint()
+	{
+		return myTypeText != null ? myTypeText : "";
+	}
 
-    @Override
-	public Color getColorHint() {
-        return null;
-    }
+	@Override
+	public Color getColorHint()
+	{
+		return null;
+	}
 
-    @Override
-	public boolean isBold() {
-        return isBold;
-    }
+	@Override
+	public boolean isBold()
+	{
+		return isBold;
+	}
 
-    @Override
-	public Icon getIcon(int flags) {
-        return myIcon;
-    }
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return myIcon;
+	}
 
-    @Override
-	public int getPriority() {
-        return myPriority;
-    }
+	@Override
+	public int getPriority()
+	{
+		return myPriority;
+	}
 }

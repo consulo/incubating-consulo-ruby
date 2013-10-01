@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualSingletonMethod extends RVirtualMethod{
+public interface RVirtualSingletonMethod extends RVirtualMethod
+{
 }

@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.namesValidator;
 
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,20 +28,25 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
  * @author: oleg
  * @date: Dec 3, 2007
  */
-public class RubyNamesValidator implements NamesValidator {
-    @Override
-	public boolean isKeyword(String name, Project project) {
-        final IElementType keywords[]= BNF.kRESWORDS.getTypes();
-        for (IElementType type : keywords) {
-            if (type.toString().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
+public class RubyNamesValidator implements NamesValidator
+{
+	@Override
+	public boolean isKeyword(String name, Project project)
+	{
+		final IElementType keywords[] = BNF.kRESWORDS.getTypes();
+		for(IElementType type : keywords)
+		{
+			if(type.toString().equals(name))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @Override
-	public boolean isIdentifier(String name, Project project) {
-        return TextUtil.isCID(name) || TextUtil.isFID(name) || TextUtil.isAID(name);
-    }
+	@Override
+	public boolean isIdentifier(String name, Project project)
+	{
+		return TextUtil.isCID(name) || TextUtil.isFID(name) || TextUtil.isAID(name);
+	}
 }

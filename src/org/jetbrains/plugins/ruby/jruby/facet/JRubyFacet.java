@@ -40,35 +40,33 @@ import com.intellij.util.ActionRunner;
 
 public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl> implements FacetRootsProvider
 {
-    public static final FacetTypeId<JRubyFacet> ID = new FacetTypeId<JRubyFacet>("JRubyFacetType");
+	public static final FacetTypeId<JRubyFacet> ID = new FacetTypeId<JRubyFacet>("JRubyFacetType");
 
-    @NonNls
-    private static final String JRUBY_FACET_SDK_OLD_LIB_NAME = "JRuby facet sdk";
-    @NonNls
-    public static final String JRUBY_FACET_LIBRARY_NAME_SUFFIX = " facet library";
-
-
-    private RubyModuleCachesManager myRubyModuleCachesManager;
-
-    public JRubyFacet(@NotNull final FacetType facetType,
-                      @NotNull final Module module,
-                      final String name,
-                      @NotNull RSupportPerModuleSettingsImpl configuration,
-                      final Facet underlyingFacet) {
-        super(facetType, module, name, configuration, underlyingFacet);
+	@NonNls
+	private static final String JRUBY_FACET_SDK_OLD_LIB_NAME = "JRuby facet sdk";
+	@NonNls
+	public static final String JRUBY_FACET_LIBRARY_NAME_SUFFIX = " facet library";
 
 
-        final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
-        final PsiManager psiManager = PsiManager.getInstance(module.getProject());
-        myRubyModuleCachesManager = new RubyModuleCachesManager(module, rootManager, psiManager);
-        myRubyModuleCachesManager.initComponent();
-    }
+	private RubyModuleCachesManager myRubyModuleCachesManager;
 
-    /**
-     * Here we try to add JRuby SDK as library invisible to user to module
-     */
-    public void updateSdkLibrary() {
-       /* IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
+	public JRubyFacet(@NotNull final FacetType facetType, @NotNull final Module module, final String name, @NotNull RSupportPerModuleSettingsImpl configuration, final Facet underlyingFacet)
+	{
+		super(facetType, module, name, configuration, underlyingFacet);
+
+
+		final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
+		final PsiManager psiManager = PsiManager.getInstance(module.getProject());
+		myRubyModuleCachesManager = new RubyModuleCachesManager(module, rootManager, psiManager);
+		myRubyModuleCachesManager.initComponent();
+	}
+
+	/**
+	 * Here we try to add JRuby SDK as library invisible to user to module
+	 */
+	public void updateSdkLibrary()
+	{
+	   /* IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
             @Override
 			public void run() throws Exception {
                 final Module module = getModule();
@@ -119,62 +117,75 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl> implements 
                 }
             }
         });  */
-    }
+	}
 
-    public void removeSdkLibrary() {
-        IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable() {
-            @Override
-			public void run() throws Exception {
-                final Module module = getModule();
-                final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
-                final ModifiableRootModel model = rootManager.getModifiableModel();
-                // Just remove all old facet libraries
-                for (OrderEntry entry : model.getOrderEntries()) {
-                    if (entry instanceof LibraryOrderEntry){
-                        final Library library = ((LibraryOrderEntry) entry).getLibrary();
-                        if (library!=null){
-                            final String libraryName = library.getName();
-                            if (libraryName!=null && libraryName.endsWith(JRUBY_FACET_LIBRARY_NAME_SUFFIX)){
-                                model.removeOrderEntry(entry);
-                            }
-                        }
-                    }
-                }
-                model.commit();
-            }
-        });
-    }
+	public void removeSdkLibrary()
+	{
+		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		{
+			@Override
+			public void run() throws Exception
+			{
+				final Module module = getModule();
+				final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
+				final ModifiableRootModel model = rootManager.getModifiableModel();
+				// Just remove all old facet libraries
+				for(OrderEntry entry : model.getOrderEntries())
+				{
+					if(entry instanceof LibraryOrderEntry)
+					{
+						final Library library = ((LibraryOrderEntry) entry).getLibrary();
+						if(library != null)
+						{
+							final String libraryName = library.getName();
+							if(libraryName != null && libraryName.endsWith(JRUBY_FACET_LIBRARY_NAME_SUFFIX))
+							{
+								model.removeOrderEntry(entry);
+							}
+						}
+					}
+				}
+				model.commit();
+			}
+		});
+	}
 
-    @NotNull
-    public static String getFacetLibraryName(final String sdkName) {
-        return sdkName + JRUBY_FACET_LIBRARY_NAME_SUFFIX;
-    }
+	@NotNull
+	public static String getFacetLibraryName(final String sdkName)
+	{
+		return sdkName + JRUBY_FACET_LIBRARY_NAME_SUFFIX;
+	}
 
-    @Override
-	public void initFacet() {
-        super.initFacet();
-        updateSdkLibrary();
-    }
+	@Override
+	public void initFacet()
+	{
+		super.initFacet();
+		updateSdkLibrary();
+	}
 
-    @Nullable
-    public static JRubyFacet getInstance(@NotNull final Module module) {
-        return null;
-    }
-
-
-    public RubyModuleCachesManager getRubyModuleCachesManager() {
-        return myRubyModuleCachesManager;
-    }
-
-    public void projectClosed() {
-        myRubyModuleCachesManager.projectClosed();
+	@Nullable
+	public static JRubyFacet getInstance(@NotNull final Module module)
+	{
+		return null;
+	}
 
 
-        myRubyModuleCachesManager.disposeComponent();
-    }
+	public RubyModuleCachesManager getRubyModuleCachesManager()
+	{
+		return myRubyModuleCachesManager;
+	}
 
-    @NotNull
-    public Collection<VirtualFile> getFacetRoots() {
-        return Arrays.asList(ModuleRootManager.getInstance(getModule()).getContentRoots());        
-    }
+	public void projectClosed()
+	{
+		myRubyModuleCachesManager.projectClosed();
+
+
+		myRubyModuleCachesManager.disposeComponent();
+	}
+
+	@NotNull
+	public Collection<VirtualFile> getFacetRoots()
+	{
+		return Arrays.asList(ModuleRootManager.getInstance(getModule()).getContentRoots());
+	}
 }

@@ -16,7 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import com.intellij.navigation.ItemPresentation;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -30,9 +33,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
-
-import javax.swing.*;
-import java.util.List;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,66 +41,73 @@ import java.util.List;
  * @author: oleg, Roman Chernyathcik
  * @date: Oct 2, 2006
  */
-public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtualMethod{
+public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtualMethod
+{
 
-    private final List<ArgumentInfo> myArgumentInfos;
+	private final List<ArgumentInfo> myArgumentInfos;
 
-    public RVirtualMethodImpl(final RVirtualContainer parentContainer,
-                              @NotNull final RVirtualName name,
-                              @NotNull final List<ArgumentInfo> arguments,
-                              final AccessModifier defaultChildAccessModifier,
-                              @NotNull final RFileInfo containingFileInfo) {
-        super(parentContainer, name, defaultChildAccessModifier, containingFileInfo);
-        myArgumentInfos = arguments;
-    }
+	public RVirtualMethodImpl(final RVirtualContainer parentContainer, @NotNull final RVirtualName name, @NotNull final List<ArgumentInfo> arguments, final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	{
+		super(parentContainer, name, defaultChildAccessModifier, containingFileInfo);
+		myArgumentInfos = arguments;
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RMethodPresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RMethodPresentationUtil.getPresentation(this);
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RMethodPresentationUtil.getIcon(this, flags);
-    }
+	@Nullable
+	public Icon getIcon(final int flags)
+	{
+		return RMethodPresentationUtil.getIcon(this, flags);
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualMethod(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualMethod(this);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<ArgumentInfo> getArgumentInfos() {
-        return myArgumentInfos;
-    }
+	public List<ArgumentInfo> getArgumentInfos()
+	{
+		return myArgumentInfos;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableName() {
-        final int options = RPresentationConstants.SHOW_FULL_NAME | RPresentationConstants.SHOW_PARAMETERS;
-        return RMethodPresentationUtil.formatName(this, options);
-    }
+	public String getPresentableName()
+	{
+		final int options = RPresentationConstants.SHOW_FULL_NAME | RPresentationConstants.SHOW_PARAMETERS;
+		return RMethodPresentationUtil.formatName(this, options);
+	}
 
-    /**
-     * Method assumes that both method have equal parent container
-     * @param otherMethod other method (virtual or psi)
-     * @return true if methods equals.
-     */
-    @Override
-	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod) {
-        return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
-    }
+	/**
+	 * Method assumes that both method have equal parent container
+	 *
+	 * @param otherMethod other method (virtual or psi)
+	 * @return true if methods equals.
+	 */
+	@Override
+	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod)
+	{
+		return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
+	}
 
-    public String toString() {
-        return "def [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getPresentableName();
-    }
+	public String toString()
+	{
+		return "def [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getPresentableName();
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.METHOD;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.METHOD;
+	}
 
 }

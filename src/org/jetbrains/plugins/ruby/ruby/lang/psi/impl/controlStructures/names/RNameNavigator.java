@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.names;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,22 +26,27 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
  * @author: oleg
  * @date: Feb 27, 2007
  */
-public class RNameNavigator {
-    /**
-     * Returns RName by elemen
-     * @param element PsiElement, representing cname
-     * @return RCpath object, if found, null otherwise
-     */
-    public static RName getRName(final PsiElement element){
-        PsiElement candidate = element.getParent();
-        if (candidate instanceof RName){
-            return (RName) candidate;
-        }
-        if (candidate instanceof RReference &&
-                ((RReference) candidate).getValue() == element &&
-                candidate.getParent() instanceof RName){
-            return (RName) candidate.getParent();
-        }
-        return null;
-    }
+public class RNameNavigator
+{
+	/**
+	 * Returns RName by elemen
+	 *
+	 * @param element PsiElement, representing cname
+	 * @return RCpath object, if found, null otherwise
+	 */
+	public static RName getRName(final PsiElement element)
+	{
+		PsiElement candidate = element.getParent();
+		if(candidate instanceof RName)
+		{
+			return (RName) candidate;
+		}
+		if(candidate instanceof RReference &&
+				((RReference) candidate).getValue() == element &&
+				candidate.getParent() instanceof RName)
+		{
+			return (RName) candidate.getParent();
+		}
+		return null;
+	}
 }

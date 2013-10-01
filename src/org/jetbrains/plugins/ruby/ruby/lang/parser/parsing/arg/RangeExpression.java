@@ -17,64 +17,72 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.*;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.BinaryExprParsing;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ParsingMethodWithAssignmentLookup;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-class RangeExpression {
+class RangeExpression
+{
 
-    /**
-     * Range expression parsing
-     * @return result of parsing
-     * @param builder current builder
-     */
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        return parseWithLeadBool(builder, builder.mark(), BooleanExpression.parse(builder));
-    }
+	/**
+	 * Range expression parsing
+	 *
+	 * @param builder current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		return parseWithLeadBool(builder, builder.mark(), BooleanExpression.parse(builder));
+	}
 
-    /**
-     * Range expression parsing with lead Bool
-     * @return result of parsing
-     * @param builder current builder
-     * @param marker  Marker before Bool expr
-     * @param result result of Bool parsing
-     */
-    @NotNull
-    public static IElementType parseWithLeadBool(final RBuilder builder, final RMarker marker, final IElementType result){
-        ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @Override
+	/**
+	 * Range expression parsing with lead Bool
+	 *
+	 * @param builder current builder
+	 * @param marker  Marker before Bool expr
+	 * @param result  result of Bool parsing
+	 * @return result of parsing
+	 */
+	@NotNull
+	public static IElementType parseWithLeadBool(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
+		{
+			@Override
 			@NotNull
-            public IElementType parseInner(final RBuilder builder){
-                return BooleanExpression.parse(builder);
-            }
-        };
+			public IElementType parseInner(final RBuilder builder)
+			{
+				return BooleanExpression.parse(builder);
+			}
+		};
 
-        return BinaryExprParsing.parseWithLeadOperand(builder,
-                marker, result,
-                parsingMethod,
-                ErrorMsg.EXPRESSION_EXPECTED_MESSAGE,
-                BNF.tRANGE_TOKENS,
-                RubyElementTypes.RANGE_EXPRESSION);
+		return BinaryExprParsing.parseWithLeadOperand(builder, marker, result, parsingMethod, ErrorMsg.EXPRESSION_EXPECTED_MESSAGE, BNF.tRANGE_TOKENS, RubyElementTypes.RANGE_EXPRESSION);
 
-    }
+	}
 
-    /**
-     * Range expression parsing with lead PRIMARY
-     * @return result of parsing
-     * @param builder current builder
-     * @param marker  Marker before PRIMARY
-     * @param result result of PRIMARY parsed 
-    */
-    public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result) {
-        return parseWithLeadBool(builder, marker.precede(), BooleanExpression.parseWithLeadPRIMARY(builder, marker, result));
-    }
+	/**
+	 * Range expression parsing with lead PRIMARY
+	 *
+	 * @param builder current builder
+	 * @param marker  Marker before PRIMARY
+	 * @param result  result of PRIMARY parsed
+	 * @return result of parsing
+	 */
+	public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		return parseWithLeadBool(builder, marker.precede(), BooleanExpression.parseWithLeadPRIMARY(builder, marker, result));
+	}
 }

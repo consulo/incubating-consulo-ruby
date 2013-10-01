@@ -16,30 +16,34 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 4, 2007
  */
-public class RubyBraceSurrounder extends RubySurrounderBase {
+public class RubyBraceSurrounder extends RubySurrounderBase
+{
 
-    @Override
-	public String getTemplateDescription() {
-        return "(...)";
-    }
+	@Override
+	public String getTemplateDescription()
+	{
+		return "(...)";
+	}
 
-    @Override
-	protected String getText(PsiElement[] elements) {
-        return "(" + gatherText(elements)+ ")";
-    }
+	@Override
+	protected String getText(PsiElement[] elements)
+	{
+		return "(" + gatherText(elements) + ")";
+	}
 
-    @Override
-	protected TextRange getTextRange(@NotNull final RPsiElement element) {
-        return element.getTextRange();
-    }
+	@Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element)
+	{
+		return element.getTextRange();
+	}
 }

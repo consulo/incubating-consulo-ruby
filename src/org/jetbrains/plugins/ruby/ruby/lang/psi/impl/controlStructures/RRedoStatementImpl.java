@@ -16,37 +16,42 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RLoopStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RRedoStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RRedoStatementImpl extends RPsiElementBase implements RRedoStatement{
-    public RRedoStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RRedoStatementImpl extends RPsiElementBase implements RRedoStatement
+{
+	public RRedoStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRRedoStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRRedoStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RLoopStatement getLoop() {
-        return PsiTreeUtil.getParentOfType(this, RLoopStatement.class);
-    }
+	@Override
+	public RLoopStatement getLoop()
+	{
+		return PsiTreeUtil.getParentOfType(this, RLoopStatement.class);
+	}
 }
 

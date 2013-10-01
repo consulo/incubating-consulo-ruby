@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,22 +29,27 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
  * @author: Roman Chernyatchik, oleg
  * @date: 04.05.2007
  */
-public class RCallNavigator {
-    @Nullable
-    public static RCall getByRListOfExpressions(@NotNull final RListOfExpressions list) {
-        final PsiElement parent = list.getParent();
-        if (parent instanceof RCall && ((RCall)parent).getCallArguments() == list){
-            return (RCall) parent;
-        }
-        return null;
-    }
+public class RCallNavigator
+{
+	@Nullable
+	public static RCall getByRListOfExpressions(@NotNull final RListOfExpressions list)
+	{
+		final PsiElement parent = list.getParent();
+		if(parent instanceof RCall && ((RCall) parent).getCallArguments() == list)
+		{
+			return (RCall) parent;
+		}
+		return null;
+	}
 
-    @Nullable
-    public static RCall getByCommand(@NotNull final RPsiElement command) {
-        final PsiElement parent = command.getParent();
-        if (parent instanceof RCall && ((RCall)parent).getPsiCommand() == command){
-            return (RCall) parent;
-        }
-        return null;
-    }
+	@Nullable
+	public static RCall getByCommand(@NotNull final RPsiElement command)
+	{
+		final PsiElement parent = command.getParent();
+		if(parent instanceof RCall && ((RCall) parent).getPsiCommand() == command)
+		{
+			return (RCall) parent;
+		}
+		return null;
+	}
 }

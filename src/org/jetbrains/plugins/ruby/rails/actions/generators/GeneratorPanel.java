@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
+import javax.swing.JComponent;
 
-import javax.swing.*;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,40 +27,46 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 04.12.2006
  */
-public interface GeneratorPanel {
+public interface GeneratorPanel
+{
 
-    public void initPanel(final GeneratorOptions options);
-    /**
-     * Returns generate script arguments with options.
-     * For example :
-     *    "-f User login logout" for ruby generate/script controller
-     * @return script arguments
-     */
-    @NotNull
-    public String getGeneratorArgs();
+	public void initPanel(final GeneratorOptions options);
 
-    /**
-     * Returns content for generate dialog(without buttons OK, Cancel).
-     * This component will be added to the generate dialog content.
-     * @return JComponent with GUI for generate dialog.
-     */
-    @NotNull
-    public JComponent getContent();
+	/**
+	 * Returns generate script arguments with options.
+	 * For example :
+	 * "-f User login logout" for ruby generate/script controller
+	 *
+	 * @return script arguments
+	 */
+	@NotNull
+	public String getGeneratorArgs();
 
-    /**
-     * Sets focused component.
-     * @return component
-     */
-    public JComponent getPreferredFocusedComponent();
+	/**
+	 * Returns content for generate dialog(without buttons OK, Cancel).
+	 * This component will be added to the generate dialog content.
+	 *
+	 * @return JComponent with GUI for generate dialog.
+	 */
+	@NotNull
+	public JComponent getContent();
 
-    /**
-     * @return Data that must be checked by validator
-     */
-    public String getMainArgument();
+	/**
+	 * Sets focused component.
+	 *
+	 * @return component
+	 */
+	public JComponent getPreferredFocusedComponent();
 
-    /**
-     * Save settings on OK pressed
-     * @param project Project
-     */
-    public void saveSettings(final Project project);
+	/**
+	 * @return Data that must be checked by validator
+	 */
+	public String getMainArgument();
+
+	/**
+	 * Save settings on OK pressed
+	 *
+	 * @param project Project
+	 */
+	public void saveSettings(final Project project);
 }

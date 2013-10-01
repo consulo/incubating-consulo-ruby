@@ -16,6 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.lang.Language;
 import com.intellij.lang.StdLanguages;
 import com.intellij.psi.FileViewProvider;
@@ -24,11 +29,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlFile;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,52 +36,68 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @author: Roman Chernyatchik
  * @date: 11.04.2007
  */
-public class RHTMLPsiUtil {
-    @Nullable
-    public static RHTMLFile getRHTMLFileRoot(final PsiElement element) {
-        final PsiFile containingFile = element.getContainingFile();
-        if (containingFile == null) return null;
+public class RHTMLPsiUtil
+{
+	@Nullable
+	public static RHTMLFile getRHTMLFileRoot(final PsiElement element)
+	{
+		final PsiFile containingFile = element.getContainingFile();
+		if(containingFile == null)
+		{
+			return null;
+		}
 
-        final FileViewProvider viewProvider = containingFile.getViewProvider();
-        final PsiFile psiFile = viewProvider.getPsi(viewProvider.getBaseLanguage());
-        return psiFile instanceof RHTMLFile ? (RHTMLFile)psiFile : null;
-    }
+		final FileViewProvider viewProvider = containingFile.getViewProvider();
+		final PsiFile psiFile = viewProvider.getPsi(viewProvider.getBaseLanguage());
+		return psiFile instanceof RHTMLFile ? (RHTMLFile) psiFile : null;
+	}
 
-    @Nullable
-    public static RFile getRubyFileRoot(final PsiElement element) {
-        final PsiFile containingFile = element.getContainingFile();
-        if (containingFile == null) return null;
+	@Nullable
+	public static RFile getRubyFileRoot(final PsiElement element)
+	{
+		final PsiFile containingFile = element.getContainingFile();
+		if(containingFile == null)
+		{
+			return null;
+		}
 
-        final FileViewProvider viewProvider = containingFile.getViewProvider();
-        final PsiFile psiFile = viewProvider.getPsi(RubyLanguage.INSTANCE);
-        return psiFile instanceof RFile ? (RFile)psiFile : null;
-    }
+		final FileViewProvider viewProvider = containingFile.getViewProvider();
+		final PsiFile psiFile = viewProvider.getPsi(RubyLanguage.INSTANCE);
+		return psiFile instanceof RFile ? (RFile) psiFile : null;
+	}
 
-    @Nullable
-    public static XmlFile getHTMLFileRoot(final PsiElement element) {
-        final PsiFile containingFile = element.getContainingFile();
-        if (containingFile == null) return null;
+	@Nullable
+	public static XmlFile getHTMLFileRoot(final PsiElement element)
+	{
+		final PsiFile containingFile = element.getContainingFile();
+		if(containingFile == null)
+		{
+			return null;
+		}
 
-        final FileViewProvider viewProvider = containingFile.getViewProvider();
-        final PsiFile psiFile = viewProvider.getPsi(StdLanguages.HTML);
-        return psiFile instanceof XmlFile ? (XmlFile)psiFile : null;
-    }
+		final FileViewProvider viewProvider = containingFile.getViewProvider();
+		final PsiFile psiFile = viewProvider.getPsi(StdLanguages.HTML);
+		return psiFile instanceof XmlFile ? (XmlFile) psiFile : null;
+	}
 
-    public static boolean isRubyCodeInjectionStart(final IElementType tokenType) {
-        return RHTMLTokenType.RHTML_SEPARATORS_STARTS.contains(tokenType);
-    }
+	public static boolean isRubyCodeInjectionStart(final IElementType tokenType)
+	{
+		return RHTMLTokenType.RHTML_SEPARATORS_STARTS.contains(tokenType);
+	}
 
-    public static boolean isRubyCodeInjectionEnd(final IElementType tokenType) {
-        return RHTMLTokenType.RHTML_SEPARATORS_ENDS.contains(tokenType);
-    }
+	public static boolean isRubyCodeInjectionEnd(final IElementType tokenType)
+	{
+		return RHTMLTokenType.RHTML_SEPARATORS_ENDS.contains(tokenType);
+	}
 
 
-    public static boolean isRubyContext(final PsiElement position) {
-        return PsiTreeUtil.getContextOfType(position, RHTMLRubyFile.class, false) != null;
-    }
+	public static boolean isRubyContext(final PsiElement position)
+	{
+		return PsiTreeUtil.getContextOfType(position, RHTMLRubyFile.class, false) != null;
+	}
 
 /*
-    public static IChameleonElementType createSimpleRubyBlockChameleon(@NonNls final String debugName,
+	public static IChameleonElementType createSimpleRubyBlockChameleon(@NonNls final String debugName,
                                                                        final IElementType start,
                                                                        final IElementType end,
                                                                        final int startLength) {
@@ -170,15 +186,18 @@ public class RHTMLPsiUtil {
   }
 */
 
-    public static boolean isInRHTMLFile(final PsiElement element) {
-        if (element == null) {
-            return false;
-        }
-        final PsiFile psiFile = element.getContainingFile();
-        if (psiFile == null) {
-            return false;
-        }
-        final Language language = psiFile.getViewProvider().getBaseLanguage();
-        return language == eRubyLanguage.INSTANCE;
-    }
+	public static boolean isInRHTMLFile(final PsiElement element)
+	{
+		if(element == null)
+		{
+			return false;
+		}
+		final PsiFile psiFile = element.getContainingFile();
+		if(psiFile == null)
+		{
+			return false;
+		}
+		final Language language = psiFile.getViewProvider().getBaseLanguage();
+		return language == eRubyLanguage.INSTANCE;
+	}
 }

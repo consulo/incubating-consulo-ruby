@@ -17,28 +17,31 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike;
 
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class Words implements RubyTokenTypes {
-    private static final TokenSet tWORDS_ENDS = TokenSet.create(tWORDS_END);
+public class Words implements RubyTokenTypes
+{
+	private static final TokenSet tWORDS_ENDS = TokenSet.create(tWORDS_END);
 
-    /**
-     * Words parsing , i.e. %W(...) or %w(...)
-     * @param builder Current builder
-     * @return Result of parsing
-     */
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        return StringParsingUtil.parse(builder, tWORDS_ENDS, BNF.tWORDS_TOKENS);
-    }
+	/**
+	 * Words parsing , i.e. %W(...) or %w(...)
+	 *
+	 * @param builder Current builder
+	 * @return Result of parsing
+	 */
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		return StringParsingUtil.parse(builder, tWORDS_ENDS, BNF.tWORDS_TOKENS);
+	}
 }

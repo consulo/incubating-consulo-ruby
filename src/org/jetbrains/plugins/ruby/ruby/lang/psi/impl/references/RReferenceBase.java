@@ -16,14 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.RubyPsiManager;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.JavaClassReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.NewReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
@@ -40,9 +38,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.Collections;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,101 +49,122 @@ import java.util.List;
  * @author: oleg
  * @date: 08.05.2007
  */
-public abstract class RReferenceBase extends RPsiElementBase implements RReference {
-    @NonNls
-    private static final String GET_INSTANCE = "getInstance";
-    @NonNls
-    private static final String INSTANCE = "instance";
+public abstract class RReferenceBase extends RPsiElementBase implements RReference
+{
+	@NonNls
+	private static final String GET_INSTANCE = "getInstance";
+	@NonNls
+	private static final String INSTANCE = "instance";
 
-    public RReferenceBase(ASTNode astNode) {
-        super(astNode);
-    }
+	public RReferenceBase(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRReference(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRReference(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RPsiElement getValue() {
-        return PsiTreeUtil.getNextSiblingOfType(getDelimiter(), RPsiElement.class);
-    }
+	@Override
+	public RPsiElement getValue()
+	{
+		return PsiTreeUtil.getNextSiblingOfType(getDelimiter(), RPsiElement.class);
+	}
 
-    @Override
-	public RPsiElement getReciever() {
-        return PsiTreeUtil.getPrevSiblingOfType(getDelimiter(), RPsiElement.class);
-    }
+	@Override
+	public RPsiElement getReciever()
+	{
+		return PsiTreeUtil.getPrevSiblingOfType(getDelimiter(), RPsiElement.class);
+	}
 
-    @NotNull
-    public abstract PsiElement getDelimiter();
-
-    @Override
-	@Nullable
-    public RQualifiedReference getReference() {
-        final RPsiElement reciever = getReciever();
-        final RPsiElement value = getValue();
-        if (reciever == null || value == null) {
-            return null;
-        }
-        if (RMethod.NEW.equals(value.getText())){
-            return new NewReference(getProject(), this, reciever, value);
-        }
-        if (isJavaClassCall()){
-            return new JavaClassReference(getProject(), this, reciever, value);
-        }
-        return new RQualifiedReference(getProject(), this, reciever, value, getType());
-    }
-
-    @Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        if (isConstructorLike()){
-            final RPsiElement reciever = getReciever();
-            final List<Symbol> symbols = ResolveUtil.resolveToSymbols(reciever);
-            // If it`s constructor like, we should return instance type
-            if (symbols.size() == 1) {
-                return RTypeUtil.createTypeBySymbol(fileSymbol, symbols.get(0), Context.INSTANCE, true);
-            } else {
-                return RType.NOT_TYPED;
-            }
-        }
+	public abstract PsiElement getDelimiter();
 
-        // If it`s constructor like, we should return instance type
-        final Symbol symbol = ResolveUtil.resolveToSymbol(fileSymbol, getReference());
-        if (symbol == null){
-            return RType.NOT_TYPED;
-        }
-        final org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type type = symbol.getType();
-        if (Types.METHODS.contains(type)){
-            final TypeInferenceHelper helper = RubyPsiManager.getInstance(getProject()).getTypeInferenceHelper();
-            helper.testAndSet(fileSymbol);
-            return helper.inferCallTypeBySymbol(symbol, Collections.<RPsiElement>emptyList());
-        }
+	@Override
+	@Nullable
+	public RQualifiedReference getReference()
+	{
+		final RPsiElement reciever = getReciever();
+		final RPsiElement value = getValue();
+		if(reciever == null || value == null)
+		{
+			return null;
+		}
+		if(RMethod.NEW.equals(value.getText()))
+		{
+			return new NewReference(getProject(), this, reciever, value);
+		}
+		if(isJavaClassCall())
+		{
+			return new JavaClassReference(getProject(), this, reciever, value);
+		}
+		return new RQualifiedReference(getProject(), this, reciever, value, getType());
+	}
 
-        // If we can resolve to module, class, java_class or java_proxy_class we expect class context
-        final Context context = Types.MODULE_OR_CLASS.contains(type) ? Context.CLASS : Context.INSTANCE;
-        return RTypeUtil.createTypeBySymbol(fileSymbol, symbol, context, true);
-    }
+	@Override
+	@NotNull
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		if(isConstructorLike())
+		{
+			final RPsiElement reciever = getReciever();
+			final List<Symbol> symbols = ResolveUtil.resolveToSymbols(reciever);
+			// If it`s constructor like, we should return instance type
+			if(symbols.size() == 1)
+			{
+				return RTypeUtil.createTypeBySymbol(fileSymbol, symbols.get(0), Context.INSTANCE, true);
+			}
+			else
+			{
+				return RType.NOT_TYPED;
+			}
+		}
 
-    public boolean isConstructorLike(){
-        final RPsiElement value = getValue();
-        if (value!=null) {
-            final String text = value.getText();
-            return RMethod.NEW.equals(text) || GET_INSTANCE.equals(text) || INSTANCE.equals(text);
-        }
-        return false;
-    }
+		// If it`s constructor like, we should return instance type
+		final Symbol symbol = ResolveUtil.resolveToSymbol(fileSymbol, getReference());
+		if(symbol == null)
+		{
+			return RType.NOT_TYPED;
+		}
+		final org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type type = symbol.getType();
+		if(Types.METHODS.contains(type))
+		{
+			final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(getProject());
+			helper.testAndSet(fileSymbol);
+			return helper.inferCallTypeBySymbol(symbol, Collections.<RPsiElement>emptyList());
+		}
 
-    public boolean isJavaClassCall(){
-        final RPsiElement value = getValue();
-        if (value!=null) {
-            final String text = value.getText();
-            return RMethod.JAVA_CLASS.equals(text);
-        }
-        return false;
-    }
+		// If we can resolve to module, class, java_class or java_proxy_class we expect class context
+		final Context context = Types.MODULE_OR_CLASS.contains(type) ? Context.CLASS : Context.INSTANCE;
+		return RTypeUtil.createTypeBySymbol(fileSymbol, symbol, context, true);
+	}
+
+	public boolean isConstructorLike()
+	{
+		final RPsiElement value = getValue();
+		if(value != null)
+		{
+			final String text = value.getText();
+			return RMethod.NEW.equals(text) || GET_INSTANCE.equals(text) || INSTANCE.equals(text);
+		}
+		return false;
+	}
+
+	public boolean isJavaClassCall()
+	{
+		final RPsiElement value = getValue();
+		if(value != null)
+		{
+			final String text = value.getText();
+			return RMethod.JAVA_CLASS.equals(text);
+		}
+		return false;
+	}
 }

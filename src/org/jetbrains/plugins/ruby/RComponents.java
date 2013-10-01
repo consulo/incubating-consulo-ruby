@@ -29,26 +29,44 @@ import org.jetbrains.plugins.ruby.ruby.RubyComponents;
 /**
  * All ruby components names are enumerated here. Use this names to get Component by name.
  */
-public interface RComponents extends RubyComponents, RailsComponents {
-    @NonNls final String PLUGIN_ID = "Ruby";
+public interface RComponents extends RubyComponents, RailsComponents
+{
+	@NonNls
+	final String PLUGIN_ID = "Ruby";
 
-    @NonNls final String RSETTINGS =                    "RSettings";
-    @NonNls final String RPROJECT_SETTINGS =            "RProjectSettings";
-    @NonNls final String RMODULE_SETTINGS_STORAGE =     "RModuleSettingsStorage";
-    @NonNls final String RI_MODULE_COMPONENT  =         "RIModuleComponent";
-    @NonNls final String RUBY_ERROR_REPORTER =          "RubyErrorReporter";
-    @NonNls final String RLAST_SYMBOL_STORAGE =         "RLastSymbolStorage";
-    @NonNls final String RPROJECT_ROOT_MANAGER =        "RProjectRootManager";
-    @NonNls final String RUBY_ICON_PROVIDER =           "RubyIconProvider";
+	@NonNls
+	final String RSETTINGS = "RSettings";
+	@NonNls
+	final String RPROJECT_SETTINGS = "RProjectSettings";
+	@NonNls
+	final String RMODULE_SETTINGS_STORAGE = "RModuleSettingsStorage";
+	@NonNls
+	final String RI_MODULE_COMPONENT = "RIModuleComponent";
+	@NonNls
+	final String RUBY_ERROR_REPORTER = "RubyErrorReporter";
+	@NonNls
+	final String RLAST_SYMBOL_STORAGE = "RLastSymbolStorage";
+	@NonNls
+	final String RPROJECT_ROOT_MANAGER = "RProjectRootManager";
+	@NonNls
+	final String RUBY_ICON_PROVIDER = "RubyIconProvider";
 
-    @NonNls final String RSPEC_SUPPORT_LOADER =         "RspecSupportLoader";
-    @NonNls final String RSPEC_MODULE_SETTINGS_STORAGE ="RSpecModuleSettingsStorage";
-    @NonNls final String RSPEC_MODULE_SETTINGS =        "RSpecModuleSettings";
-    @NonNls final String RSPEC_RUN_CONFIGURATION_TYPE = "RSpecRunConfigurationType";
+	@NonNls
+	final String RSPEC_SUPPORT_LOADER = "RspecSupportLoader";
+	@NonNls
+	final String RSPEC_MODULE_SETTINGS_STORAGE = "RSpecModuleSettingsStorage";
+	@NonNls
+	final String RSPEC_MODULE_SETTINGS = "RSpecModuleSettings";
+	@NonNls
+	final String RSPEC_RUN_CONFIGURATION_TYPE = "RSpecRunConfigurationType";
 
 
-    @NonNls final String RUBY_TREE_STRUCTURE_PROVIDER =  "RubyTreeStructureProvider";
-    @NonNls final String RUBY_USAGE_GROUP_RULE_PROVIDER ="RubyUsageGroupRuleProvider";
-    @NonNls final String RUBY_PSI_MANAGER =              "RubyPsiManager";
-    @NonNls final String JRUBY_SDK_TABLE_LISTENER =      "JRubySdkTableListener";
+	@NonNls
+	final String RUBY_TREE_STRUCTURE_PROVIDER = "RubyTreeStructureProvider";
+	@NonNls
+	final String RUBY_USAGE_GROUP_RULE_PROVIDER = "RubyUsageGroupRuleProvider";
+	@NonNls
+	final String RUBY_PSI_MANAGER = "RubyPsiManager";
+	@NonNls
+	final String JRUBY_SDK_TABLE_LISTENER = "JRubySdkTableListener";
 }

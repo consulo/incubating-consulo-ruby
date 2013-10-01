@@ -21,8 +21,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.references;
  * User: oleg
  * Date: 09.08.2006
  */
-public interface RColonReference extends RReference{
+public interface RColonReference extends RReference
+{
 
-    public boolean isColon3Reference();
+	public boolean isColon3Reference();
 
 }

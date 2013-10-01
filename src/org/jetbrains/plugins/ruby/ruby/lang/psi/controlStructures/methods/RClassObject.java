@@ -24,7 +24,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 21.07.2006
  */
-public interface RClassObject extends RPsiElement {
-    @Nullable
-    public RPsiElement getExpression();
+public interface RClassObject extends RPsiElement
+{
+	@Nullable
+	public RPsiElement getExpression();
 }

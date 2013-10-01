@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -27,15 +26,17 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Sup
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Yield;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 06.07.2006
  */
-public class COMMAND implements RubyTokenTypes {
+public class COMMAND implements RubyTokenTypes
+{
 /*
-    command	: operation command_args
+	command	: operation command_args
             | operation command_args cmd_brace_block
             | primary_value '.' operation2 command_args
             | primary_value '.' operation2 command_args cmd_brace_block
@@ -46,56 +47,67 @@ public class COMMAND implements RubyTokenTypes {
             ;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        if (!builder.compare(BNF.tCOMMAND_FIRST_TOKENS)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(!builder.compare(BNF.tCOMMAND_FIRST_TOKENS))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        if (builder.compare(kYIELD)){
-            IElementType result = Yield.parseWithCommandArgs(builder);
-            if (result!=RubyElementTypes.EMPTY_INPUT){
-                return result;
-            }
-        }
+		if(builder.compare(kYIELD))
+		{
+			IElementType result = Yield.parseWithCommandArgs(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return result;
+			}
+		}
 
-        if (builder.compare(kSUPER)){
-            IElementType result = Super.parseWithCommandArgs(builder);
-            if (result!=RubyElementTypes.EMPTY_INPUT){
-                return result;
-            }
-        }
+		if(builder.compare(kSUPER))
+		{
+			IElementType result = Super.parseWithCommandArgs(builder);
+			if(result != RubyElementTypes.EMPTY_INPUT)
+			{
+				return result;
+			}
+		}
 
-        return parseWithLeadARG(builder, builder.mark(), ARG.parse(builder));
-    }
+		return parseWithLeadARG(builder, builder.mark(), ARG.parse(builder));
+	}
 
-    /**
-     * Parses command with ARG as it`s first element (command_object)
-     * @param builder Current builder
-     * @param marker Marker before lead ARG
-     * @param result ARG parsing result
-     * @return command parsing result
-     */
-    @NotNull
-    public static IElementType parseWithLeadARG(final RBuilder builder, RMarker marker, final IElementType result) {
-        if (BNF.COMMAND_OBJECTS.contains(result)){
-            if (CALL_ARGS.parse(builder)!=RubyElementTypes.EMPTY_INPUT){
-                marker.done(RubyElementTypes.COMMAND_CALL);
+	/**
+	 * Parses command with ARG as it`s first element (command_object)
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before lead ARG
+	 * @param result  ARG parsing result
+	 * @return command parsing result
+	 */
+	@NotNull
+	public static IElementType parseWithLeadARG(final RBuilder builder, RMarker marker, final IElementType result)
+	{
+		if(BNF.COMMAND_OBJECTS.contains(result))
+		{
+			if(CALL_ARGS.parse(builder) != RubyElementTypes.EMPTY_INPUT)
+			{
+				marker.done(RubyElementTypes.COMMAND_CALL);
 
-// Checking for optional cmd_brace_block
-                if (builder.compare(tLBRACE)){
-                    marker = marker.precede();
-                    BRACE_BLOCK.parse(builder);
-                    marker.done(RubyElementTypes.BLOCK_CALL);
-                    return RubyElementTypes.BLOCK_CALL;
-                }
+				// Checking for optional cmd_brace_block
+				if(builder.compare(tLBRACE))
+				{
+					marker = marker.precede();
+					BRACE_BLOCK.parse(builder);
+					marker.done(RubyElementTypes.BLOCK_CALL);
+					return RubyElementTypes.BLOCK_CALL;
+				}
 
-                return RubyElementTypes.COMMAND_CALL;
-            }
-        }
+				return RubyElementTypes.COMMAND_CALL;
+			}
+		}
 
-        marker.rollbackTo();
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		marker.rollbackTo();
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 }
 

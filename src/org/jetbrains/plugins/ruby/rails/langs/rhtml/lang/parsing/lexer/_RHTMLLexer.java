@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
+import java.io.Reader;
+
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.MergingLexerAdapter;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-
-import java.io.Reader;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,10 +33,12 @@ import java.io.Reader;
 /**
  * This wrapper for flex lexer.
  */
-public class _RHTMLLexer  extends MergingLexerAdapter {
-    private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML);
+public class _RHTMLLexer extends MergingLexerAdapter
+{
+	private static final TokenSet TOKENS_TO_MERGE = TokenSet.create(RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML);
 
-    public _RHTMLLexer() {
-        super(new FlexAdapter(new _RHTMLFlexLexer((Reader)null)), TOKENS_TO_MERGE);
-    }
+	public _RHTMLLexer()
+	{
+		super(new FlexAdapter(new _RHTMLFlexLexer((Reader) null)), TOKENS_TO_MERGE);
+	}
 }

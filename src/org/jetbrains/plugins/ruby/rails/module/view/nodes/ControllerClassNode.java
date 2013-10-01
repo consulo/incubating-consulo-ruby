@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -33,94 +33,100 @@ import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: Roman Chernyatchik
  * @date: 11.10.2006
  */
-public class ControllerClassNode extends ClassNode {
+public class ControllerClassNode extends ClassNode
+{
 
-    public ControllerClassNode(final Module module, final RVirtualClass rVClass,
-                               final RFileInfo fileInfo) {
+	public ControllerClassNode(final Module module, final RVirtualClass rVClass, final RFileInfo fileInfo)
+	{
 
-        super(module, rVClass, fileInfo);
+		super(module, rVClass, fileInfo);
 
-        init(getElement(), RControllerPresentationUtil.getPresentation(getRubyClass()));
-    }
+		init(getElement(), RControllerPresentationUtil.getPresentation(getRubyClass()));
+	}
 
-    @Override
-	public void accept(final SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitControllerNode();
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(final SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitControllerNode();
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
-	public RailsNode[] getChildren() {
-        final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
-        final String className = getRubyClass().getName();
+	@Override
+	public RailsNode[] getChildren()
+	{
+		final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
+		final String className = getRubyClass().getName();
 
-        final String cName = ControllersConventions.getControllerNameByClassName(className);
-        final Module module = getModule();
+		final String cName = ControllersConventions.getControllerNameByClassName(className);
+		final Module module = getModule();
 
-        final String parentDirUrl = getParentDirUrl();
-        if (cName != null && parentDirUrl != null) {
-            /**
-             * Add layouts
-             */
-            final List<VirtualFile> layouts =
-                    ViewsConventions.getLayouts(parentDirUrl, cName, module);
-            for (VirtualFile layout : layouts) {
-                children.add(new LayoutNode(module, layout));
-            }
+		final String parentDirUrl = getParentDirUrl();
+		if(cName != null && parentDirUrl != null)
+		{
+			/**
+			 * Add layouts
+			 */
+			final List<VirtualFile> layouts = ViewsConventions.getLayouts(parentDirUrl, cName, module);
+			for(VirtualFile layout : layouts)
+			{
+				children.add(new LayoutNode(module, layout));
+			}
 
-            /**
-             * Add helper
-             */
-            final String helperUrl =
-                    HelpersConventions.getHelperURL(parentDirUrl, cName, module);
-            assert helperUrl != null; // helper url for controller always exists
+			/**
+			 * Add helper
+			 */
+			final String helperUrl = HelpersConventions.getHelperURL(parentDirUrl, cName, module);
+			assert helperUrl != null; // helper url for controller always exists
 
-            final VirtualFile helperFile = VirtualFileManager.getInstance().findFileByUrl(helperUrl);
-            if (helperFile != null) {
-                final RubyModuleFilesCache cache =
-                        RubyModuleCachesManager.getInstance(module).getFilesCache();
-                final RFileInfo helperFileInfo = cache.getUp2DateFileInfo(helperFile);
-                assert helperFileInfo != null; // shouldn't be null
-                final RVirtualModule rModule =
-                        HelpersConventions.getHelperModule(helperFileInfo.getRVirtualFile(),
-                                className);
-                if (rModule != null) {
-                    children.add(new HelperNode(module, rModule, helperUrl));
-                }
-            }
-        }
-        /**
-         * Add actions
-         */
-        final RailsNode[] actionNodes = super.getChildren();
-        children.addAll(Arrays.asList(actionNodes));
+			final VirtualFile helperFile = VirtualFileManager.getInstance().findFileByUrl(helperUrl);
+			if(helperFile != null)
+			{
+				final RubyModuleFilesCache cache = RubyModuleCachesManager.getInstance(module).getFilesCache();
+				final RFileInfo helperFileInfo = cache.getUp2DateFileInfo(helperFile);
+				assert helperFileInfo != null; // shouldn't be null
+				final RVirtualModule rModule = HelpersConventions.getHelperModule(helperFileInfo.getRVirtualFile(), className);
+				if(rModule != null)
+				{
+					children.add(new HelperNode(module, rModule, helperUrl));
+				}
+			}
+		}
+		/**
+		 * Add actions
+		 */
+		final RailsNode[] actionNodes = super.getChildren();
+		children.addAll(Arrays.asList(actionNodes));
 
-        /**
-         * Add partial templates
-         */
-        final VirtualFile folder = ViewsConventions.getViewsFolder(getVirtualFile(), module);
-        if (folder != null) {
-            children.add(new PartialsFolder(module, folder, this));
-        }
-        return children.toArray(new RailsNode[children.size()]);
-    }
+		/**
+		 * Add partial templates
+		 */
+		final VirtualFile folder = ViewsConventions.getViewsFolder(getVirtualFile(), module);
+		if(folder != null)
+		{
+			children.add(new PartialsFolder(module, folder, this));
+		}
+		return children.toArray(new RailsNode[children.size()]);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.CONTROLLER;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.CONTROLLER;
+	}
 }

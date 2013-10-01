@@ -16,12 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiFile;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToAction;
@@ -29,10 +27,12 @@ import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsUpdateHighlightersUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,48 +40,44 @@ import java.util.Collections;
  * @author: Roman Chernyatchik
  * @date: 04.02.2007
  */
-public class RailsViewToActionMarkersPass extends ElementsStartsAtRangeHighlighterPass {
-    /**
-     * "Go to action of view" markers
-     */
-    private Collection<RailsLineMarkerInfo> myViewToActionMarkers = Collections.emptyList();
-    private final Module myModule;
+public class RailsViewToActionMarkersPass extends ElementsStartsAtRangeHighlighterPass
+{
+	/**
+	 * "Go to action of view" markers
+	 */
+	private Collection<RailsLineMarkerInfo> myViewToActionMarkers = Collections.emptyList();
+	private final Module myModule;
 
-    public RailsViewToActionMarkersPass(final Module module, final PsiFile psiFile,
-                                       final Editor editor) {
-        super(module.getProject(),
-             psiFile, editor, true, HighlightPassConstants.VIEW_TO_ACTION_MARKERS_GROUP);
-        myModule = module;
-        assert RailsFacetUtil.hasRailsSupport(module);
-    }
+	public RailsViewToActionMarkersPass(final Module module, final PsiFile psiFile, final Editor editor)
+	{
+		super(module.getProject(), psiFile, editor, true, HighlightPassConstants.VIEW_TO_ACTION_MARKERS_GROUP);
+		myModule = module;
+		assert RailsFacetUtil.hasRailsSupport(module);
+	}
 
-    @Override
-	public void doCollectInformation(final ProgressIndicator progress) {
-        // We call this often enough
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void doCollectInformation(final ProgressIndicator progress)
+	{
+		// We call this often enough
+		ProgressManager.getInstance().checkCanceled();
 
-        ApplicationManager.getApplication().assertReadAccessAllowed();
+		ApplicationManager.getApplication().assertReadAccessAllowed();
 
-        myViewToActionMarkers = new ArrayList<RailsLineMarkerInfo>();
+		myViewToActionMarkers = new ArrayList<RailsLineMarkerInfo>();
 
-        if (!SwitchToAction.isSwitchToActionEnabled(myFile, myModule)) {
-            return;
-        }
+		if(!SwitchToAction.isSwitchToActionEnabled(myFile, myModule))
+		{
+			return;
+		}
 
-        final RailsLineMarkerInfo info =
-                new RailsLineMarkerInfo(myModule,
-                    RailsLineMarkerInfo.MarkerType.VIEW_TO_ACTION,
-                        myFile,
-                    RubyHighlightUtil.getStartOffset(myFile),
-                    RailsIcons.RAILS_VIEW_TO_ACTION_MARKER);        
-        myViewToActionMarkers.add(info);
-    }
+		final RailsLineMarkerInfo info = new RailsLineMarkerInfo(myModule, RailsLineMarkerInfo.MarkerType.VIEW_TO_ACTION, myFile, RubyHighlightUtil.getStartOffset(myFile), RailsIcons.RAILS_VIEW_TO_ACTION_MARKER);
+		myViewToActionMarkers.add(info);
+	}
 
-    @Override
-	public void doApplyInformationToEditor() {
-        RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument,
-                                                      myViewToActionMarkers,
-                                                      HighlightPassConstants.VIEW_TO_ACTION_MARKERS_GROUP);
+	@Override
+	public void doApplyInformationToEditor()
+	{
+		RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument, myViewToActionMarkers, HighlightPassConstants.VIEW_TO_ACTION_MARKERS_GROUP);
 
-    }
+	}
 }

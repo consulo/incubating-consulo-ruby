@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall;
 
-import com.intellij.psi.PsiElement;
+import java.util.List;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
@@ -24,73 +25,91 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
-
-import java.util.List;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.08.2006
  */
-public interface RCall extends RPossibleCall, RStructuralElement, RExpression {
-    /**
-     * Ruby defined function names
-     */
-    @NonNls final String RAISE_COMMAND =            "raise";
+public interface RCall extends RPossibleCall, RStructuralElement, RExpression
+{
+	/**
+	 * Ruby defined function names
+	 */
+	@NonNls
+	final String RAISE_COMMAND = "raise";
 
-    @NonNls final String REQUIRE_COMMAND =          "require";
-    @NonNls final String LOAD_COMMAND =             "load";
+	@NonNls
+	final String REQUIRE_COMMAND = "require";
+	@NonNls
+	final String LOAD_COMMAND = "load";
 
-    @NonNls final String INCLUDE_COMMAND =          "include";
-    @NonNls final String EXTEND_COMMAND =           "extend";
+	@NonNls
+	final String INCLUDE_COMMAND = "include";
+	@NonNls
+	final String EXTEND_COMMAND = "extend";
 
-    @NonNls final String ATTR_READER_COMMAND =      "attr_reader";
-    @NonNls final String ATTR_WRITER_COMMAND =      "attr_writer";
-    @NonNls final String ATTR_ACCESSOR_COMMAND =    "attr_accessor";
+	@NonNls
+	final String ATTR_READER_COMMAND = "attr_reader";
+	@NonNls
+	final String ATTR_WRITER_COMMAND = "attr_writer";
+	@NonNls
+	final String ATTR_ACCESSOR_COMMAND = "attr_accessor";
 
-    @NonNls final String ATTR_INTERNAL =            "attr_internal";
-    @NonNls final String CATTR_ACCESSOR =           "cattr_accessor";
+	@NonNls
+	final String ATTR_INTERNAL = "attr_internal";
+	@NonNls
+	final String CATTR_ACCESSOR = "cattr_accessor";
 
-    @NonNls final String PRIVATE_COMMAND =          "private";
-    @NonNls final String PUBLIC_COMMAND =           "public";
-    @NonNls final String PROTECTED_COMMAND =        "protected";
+	@NonNls
+	final String PRIVATE_COMMAND = "private";
+	@NonNls
+	final String PUBLIC_COMMAND = "public";
+	@NonNls
+	final String PROTECTED_COMMAND = "protected";
 
-// JRuby specific call
-    @NonNls final String IMPORT_COMMAND =           "import";
-    @NonNls final String INCLUDE_CLASS_COMMAND =    "include_class";
-    @NonNls final String INCLUDE_PACKAGE_COMMAND =  "include_package";
+	// JRuby specific call
+	@NonNls
+	final String IMPORT_COMMAND = "import";
+	@NonNls
+	final String INCLUDE_CLASS_COMMAND = "include_class";
+	@NonNls
+	final String INCLUDE_PACKAGE_COMMAND = "include_package";
 
-// Gems specific call
-    @NonNls final String REQUIRE_GEM_COMMAND =      "require_gem";
-    @NonNls final String GEM_COMMAND =              "gem";
+	// Gems specific call
+	@NonNls
+	final String REQUIRE_GEM_COMMAND = "require_gem";
+	@NonNls
+	final String GEM_COMMAND = "gem";
 
-    /**
-     * @return DuckType of current call
-     */
-    @NotNull
-    public RubyCallType getCallType();
+	/**
+	 * @return DuckType of current call
+	 */
+	@NotNull
+	public RubyCallType getCallType();
 
-    /**
-     * @return command object.
-     */
-    @NotNull
-    public PsiElement getPsiCommand();
+	/**
+	 * @return command object.
+	 */
+	@NotNull
+	public PsiElement getPsiCommand();
 
-    /**
-     * @return PsiElement - arguments
-     */
-    @NotNull
-    public RListOfExpressions getCallArguments();
+	/**
+	 * @return PsiElement - arguments
+	 */
+	@NotNull
+	public RListOfExpressions getCallArguments();
 
-    /**
-     * @return Command name
-     */
-    @NotNull
-    public String getCommand();
+	/**
+	 * @return Command name
+	 */
+	@NotNull
+	public String getCommand();
 
-    /**
-     * @return call arguments
-     */
-    @NotNull
-    List<RPsiElement> getArguments();
+	/**
+	 * @return call arguments
+	 */
+	@NotNull
+	List<RPsiElement> getArguments();
 }

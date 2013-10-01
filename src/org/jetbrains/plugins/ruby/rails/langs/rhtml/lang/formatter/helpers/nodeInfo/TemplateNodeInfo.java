@@ -16,54 +16,58 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.TextRange;
 
-public class TemplateNodeInfo extends NodeInfo {
-    private final ASTNode templateParentNode;
-    private final ASTNode templateDataNode;
-    @Nullable
-    private final TextRange nextNodeTRange;
-
-    @Nullable
-    private final ASTNode nextTemplateNode;
-
-    protected TemplateNodeInfo(@NotNull final ASTNode templateParentNode,
-                               @NotNull final ASTNode templateDataNode,
-                               @Nullable final TextRange nextNodeTRange,
-                               @Nullable final ASTNode nextTemplateNode) {
-
-        this.templateParentNode = templateParentNode;
-        this.templateDataNode = templateDataNode;
-        this.nextNodeTRange = nextNodeTRange;
-        this.nextTemplateNode = nextTemplateNode;
-    }
-
-    @Override
-	public NodeType getType() {
-        return NodeType.TEMPLATE_NODE;
-    }
-
-    @NotNull
-    public ASTNode getTemplateParentNode() {
-        return templateParentNode;
-    }
-
-    @NotNull
-    public ASTNode getTemplateDataNode() {
-        return templateDataNode;
-    }
-
-    @Override
+public class TemplateNodeInfo extends NodeInfo
+{
+	private final ASTNode templateParentNode;
+	private final ASTNode templateDataNode;
 	@Nullable
-    public TextRange getNextNodeTRange() {
-        return nextNodeTRange;
-    }
+	private final TextRange nextNodeTRange;
 
-    @Nullable
-    public ASTNode getNextTemplateNode() {
-        return nextTemplateNode;
-    }
+	@Nullable
+	private final ASTNode nextTemplateNode;
+
+	protected TemplateNodeInfo(@NotNull final ASTNode templateParentNode, @NotNull final ASTNode templateDataNode, @Nullable final TextRange nextNodeTRange, @Nullable final ASTNode nextTemplateNode)
+	{
+
+		this.templateParentNode = templateParentNode;
+		this.templateDataNode = templateDataNode;
+		this.nextNodeTRange = nextNodeTRange;
+		this.nextTemplateNode = nextTemplateNode;
+	}
+
+	@Override
+	public NodeType getType()
+	{
+		return NodeType.TEMPLATE_NODE;
+	}
+
+	@NotNull
+	public ASTNode getTemplateParentNode()
+	{
+		return templateParentNode;
+	}
+
+	@NotNull
+	public ASTNode getTemplateDataNode()
+	{
+		return templateDataNode;
+	}
+
+	@Override
+	@Nullable
+	public TextRange getNextNodeTRange()
+	{
+		return nextNodeTRange;
+	}
+
+	@Nullable
+	public ASTNode getNextTemplateNode()
+	{
+		return nextTemplateNode;
+	}
 }

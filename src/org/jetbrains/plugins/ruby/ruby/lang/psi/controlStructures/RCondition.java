@@ -25,6 +25,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * Date: 07.08.2006
  */
 public interface RCondition extends RPsiElement,
-// formatting models
-        RNotWraped {
+		// formatting models
+		RNotWraped
+{
 }

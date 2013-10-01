@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,10 +29,11 @@ import java.util.List;
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public interface RVirtualFile extends RVirtualFieldContantContainer, RVirtualGlobalVarHolder {
-    @Nullable
-    public String getPresentableLocation();
+public interface RVirtualFile extends RVirtualFieldContantContainer, RVirtualGlobalVarHolder
+{
+	@Nullable
+	public String getPresentableLocation();
 
-    @NotNull
-    public List<RVirtualRequire> getRequires();
+	@NotNull
+	public List<RVirtualRequire> getRequires();
 }

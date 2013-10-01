@@ -16,59 +16,66 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 
-import com.intellij.facet.ui.FacetEditorContext;
-import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.options.ConfigurationException;
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.SelectJRubySdkPane;
-
-import javax.swing.*;
+import com.intellij.facet.ui.FacetEditorContext;
+import com.intellij.facet.ui.FacetEditorTab;
+import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: Nov 4, 2007
-*/
-public class JRubySdkEditorTab extends FacetEditorTab {
-    private SelectJRubySdkPane mySdkPaneSelect;
-    private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
-    protected FacetEditorContext myEditorContext;
+ *
+ * @author: Roman Chernyatchik
+ * @date: Nov 4, 2007
+ */
+public class JRubySdkEditorTab extends FacetEditorTab
+{
+	private SelectJRubySdkPane mySdkPaneSelect;
+	private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
+	protected FacetEditorContext myEditorContext;
 
-    public JRubySdkEditorTab(@NotNull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration,
-                             @NotNull final FacetEditorContext editorContext) {
-        myJRubyFacetConfiguration = jRubyFacetConfiguration;
-        myEditorContext = editorContext;
-    }
+	public JRubySdkEditorTab(@NotNull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration, @NotNull final FacetEditorContext editorContext)
+	{
+		myJRubyFacetConfiguration = jRubyFacetConfiguration;
+		myEditorContext = editorContext;
+	}
 
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("jruby.settings.tabs.sdk.title");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("jruby.settings.tabs.sdk.title");
+	}
 
-    public JComponent createComponent() {
-        //noinspection ConstantConditions
-        mySdkPaneSelect = new SelectJRubySdkPane(myJRubyFacetConfiguration);
-        return mySdkPaneSelect.getPanel();
-    }
+	public JComponent createComponent()
+	{
+		//noinspection ConstantConditions
+		mySdkPaneSelect = new SelectJRubySdkPane(myJRubyFacetConfiguration);
+		return mySdkPaneSelect.getPanel();
+	}
 
-    public boolean isModified() {
-        return myJRubyFacetConfiguration.isChanged();
-    }
+	public boolean isModified()
+	{
+		return myJRubyFacetConfiguration.isChanged();
+	}
 
-    @Override
-	public void apply() throws ConfigurationException {
-    }
+	@Override
+	public void apply() throws ConfigurationException
+	{
+	}
 
-    @Override
-	public void reset() {
-        myJRubyFacetConfiguration.setChanged(false);
-    }
+	@Override
+	public void reset()
+	{
+		myJRubyFacetConfiguration.setChanged(false);
+	}
 
-    public void disposeUIResources() {
-        mySdkPaneSelect = null;
-    }
+	public void disposeUIResources()
+	{
+		mySdkPaneSelect = null;
+	}
 }

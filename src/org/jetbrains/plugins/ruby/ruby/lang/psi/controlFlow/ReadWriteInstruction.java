@@ -16,7 +16,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow;
 
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.Access;
 
-public interface ReadWriteInstruction extends Instruction {
-  String getVariableName();
-  Access getAccess();
+public interface ReadWriteInstruction extends Instruction
+{
+	String getVariableName();
+
+	Access getAccess();
 }

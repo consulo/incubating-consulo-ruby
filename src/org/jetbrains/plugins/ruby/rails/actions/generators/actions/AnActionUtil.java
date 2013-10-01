@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.Presentation;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,27 +26,31 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: 29.01.2007
  */
-public class AnActionUtil {
-    public static final AnAction[] NO_ACTIONS = new AnAction[0];
+public class AnActionUtil
+{
+	public static final AnAction[] NO_ACTIONS = new AnAction[0];
 
-    /**
-     * Enables, disables, hides or shows action presentation
-     * @param presentation action presentation
-     * @param visible if presentation should be visible
-     * @param enabled if presentation should be enabled
-     */
-    public static void updatePresentation(@Nullable final Presentation presentation,
-                                          final boolean visible,
-                                          final boolean enabled) {
-        if (presentation == null) {
-            return;
-        }
+	/**
+	 * Enables, disables, hides or shows action presentation
+	 *
+	 * @param presentation action presentation
+	 * @param visible      if presentation should be visible
+	 * @param enabled      if presentation should be enabled
+	 */
+	public static void updatePresentation(@Nullable final Presentation presentation, final boolean visible, final boolean enabled)
+	{
+		if(presentation == null)
+		{
+			return;
+		}
 
-        if (presentation.isVisible() != visible) {
-            presentation.setVisible(visible);
-        }
-        if (presentation.isEnabled() != enabled) {
-            presentation.setEnabled(enabled);
-        }
-    }
+		if(presentation.isVisible() != visible)
+		{
+			presentation.setVisible(visible);
+		}
+		if(presentation.isEnabled() != enabled)
+		{
+			presentation.setEnabled(enabled);
+		}
+	}
 }

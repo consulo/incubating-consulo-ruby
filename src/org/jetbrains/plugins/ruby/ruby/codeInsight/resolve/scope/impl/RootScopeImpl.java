@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl;
 
+import java.util.Collection;
+import java.util.HashMap;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.PseudoScopeHolder;
@@ -23,35 +26,37 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.Scope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeHolder;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Jul 12, 2007
  */
-public class RootScopeImpl extends ScopeImpl implements RootScope {
-    private HashMap<PseudoScopeHolder, Scope> mySubScopes = new HashMap<PseudoScopeHolder, Scope>();
+public class RootScopeImpl extends ScopeImpl implements RootScope
+{
+	private HashMap<PseudoScopeHolder, Scope> mySubScopes = new HashMap<PseudoScopeHolder, Scope>();
 
-    public RootScopeImpl(@NotNull final ScopeHolder holder) {
-        super(holder);
-    }
+	public RootScopeImpl(@NotNull final ScopeHolder holder)
+	{
+		super(holder);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Scope getChildScope(@NotNull final PseudoScopeHolder holder) {
-        return mySubScopes.get(holder);
-    }
+	public Scope getChildScope(@NotNull final PseudoScopeHolder holder)
+	{
+		return mySubScopes.get(holder);
+	}
 
-    @Override
-	public void registerSubScope(@NotNull final PseudoScopeHolder scopeHolder, @NotNull final Scope childScope) {
-        mySubScopes.put(scopeHolder, childScope);
-    }
+	@Override
+	public void registerSubScope(@NotNull final PseudoScopeHolder scopeHolder, @NotNull final Scope childScope)
+	{
+		mySubScopes.put(scopeHolder, childScope);
+	}
 
-    @Override
-	public Collection<Scope> getAllChildScopes(){
-        return mySubScopes.values();
-    }
+	@Override
+	public Collection<Scope> getAllChildScopes()
+	{
+		return mySubScopes.values();
+	}
 
 }

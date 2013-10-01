@@ -31,53 +31,61 @@ import com.intellij.util.net.NetUtils;
  * @author: Roman Chernyatchik
  * @date: 04.08.2007
  */
-public class RailsServerRunCommandLineState extends RubyRunCommandLineState {
+public class RailsServerRunCommandLineState extends RubyRunCommandLineState
+{
 
-    public RailsServerRunCommandLineState(final RailsServerRunConfiguration config,
-			ExecutionEnvironment executionEnvironment) {
-        super(config, executionEnvironment);
-    }
+	public RailsServerRunCommandLineState(final RailsServerRunConfiguration config, ExecutionEnvironment executionEnvironment)
+	{
+		super(config, executionEnvironment);
+	}
 
-    @Override
-	public GeneralCommandLine createCommandLine() throws ExecutionException {
-        final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(myConfig);
-        final RailsServerRunConfiguration config = (RailsServerRunConfiguration)myConfig;
+	@Override
+	public GeneralCommandLine createCommandLine() throws ExecutionException
+	{
+		final GeneralCommandLine commandLine = createGeneralDefaultCmdLine(myConfig);
+		final RailsServerRunConfiguration config = (RailsServerRunConfiguration) myConfig;
 
-        int port_int;
-        if (config.isChoosePortManually()) {
-            port_int = Integer.valueOf(config.getPort());
-        } else {
-            try {
-                port_int = NetUtils.findAvailableSocketPort();
-            } catch (IOException e) {
-                throw new ExecutionException("Error occured while searching for free port");
-            }
-        }
+		int port_int;
+		if(config.isChoosePortManually())
+		{
+			port_int = Integer.valueOf(config.getPort());
+		}
+		else
+		{
+			try
+			{
+				port_int = NetUtils.findAvailableSocketPort();
+			}
+			catch(IOException e)
+			{
+				throw new ExecutionException("Error occured while searching for free port");
+			}
+		}
 
-        //interpretator params
-        addParams(commandLine, myConfig.getRubyArgs());
-        //scrtipt/server
-        commandLine.addParameter(myConfig.getScriptPath());
+		//interpretator params
+		addParams(commandLine, myConfig.getRubyArgs());
+		//scrtipt/server
+		commandLine.addParameter(myConfig.getScriptPath());
 
-        //server
-        final String server = config.getServerType();
-        commandLine.addParameter(server);
+		//server
+		final String server = config.getServerType();
+		commandLine.addParameter(server);
 
-        //server port
-        commandLine.addParameter(RailsConstants.PARAM_SERVER_PORT);
-        commandLine.addParameter(String.valueOf(port_int));
+		//server port
+		commandLine.addParameter(RailsConstants.PARAM_SERVER_PORT);
+		commandLine.addParameter(String.valueOf(port_int));
 
-        //server ip address
-        commandLine.addParameter(RailsConstants.PARAM_SERVER_IP);
-        commandLine.addParameter(config.getIPAddr());
+		//server ip address
+		commandLine.addParameter(RailsConstants.PARAM_SERVER_IP);
+		commandLine.addParameter(config.getIPAddr());
 
-        //server environment
-        commandLine.addParameter(RailsConstants.PARAM_SERVER_ENVIRONMENT);
-        commandLine.addParameter(config.getRailsEnvironmentType().getParamName());
+		//server environment
+		commandLine.addParameter(RailsConstants.PARAM_SERVER_ENVIRONMENT);
+		commandLine.addParameter(config.getRailsEnvironmentType().getParamName());
 
-        //server args
-        addParams(commandLine, myConfig.getScriptArgs());
+		//server args
+		addParams(commandLine, myConfig.getScriptArgs());
 
-        return commandLine;
-    }
+		return commandLine;
+	}
 }

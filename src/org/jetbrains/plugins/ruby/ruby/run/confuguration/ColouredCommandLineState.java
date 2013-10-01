@@ -41,77 +41,82 @@ import com.intellij.openapi.roots.OrderEnumerator;
  * @author: Roman Chernyatchik
  * @date: Nov 7, 2007
  */
-public abstract class ColouredCommandLineState extends CommandLineState {
+public abstract class ColouredCommandLineState extends CommandLineState
+{
 	protected ColouredCommandLineState(ExecutionEnvironment environment)
 	{
 		super(environment);
 	}
 
 	@Override
-	protected OSProcessHandler startProcess() throws ExecutionException {
-        final GeneralCommandLine cmdLine = createCommandLine();
-        final OSProcessHandler processHandler =
-                createOSProcessHandler(cmdLine.createProcess(),
-                                       cmdLine.getCommandLineString());
-        ProcessTerminatedListener.attach(processHandler);
-        return processHandler;
-   }
+	protected OSProcessHandler startProcess() throws ExecutionException
+	{
+		final GeneralCommandLine cmdLine = createCommandLine();
+		final OSProcessHandler processHandler = createOSProcessHandler(cmdLine.createProcess(), cmdLine.getCommandLineString());
+		ProcessTerminatedListener.attach(processHandler);
+		return processHandler;
+	}
 
 	public GeneralCommandLine createCommandLine() throws ExecutionException
 	{
 		return createGeneralDefaultCmdLine((AbstractRubyRunConfiguration) getEnvironment().getRunProfile());
 	}
 
-    public static OSProcessHandler createOSProcessHandler(final Process process,
-                                                          final String commandLine) {
-        return RApplicationSettings.getInstance().useConsoleColorMode
-                ? new ColouredProcessHandler(process, commandLine)
-                : new OSProcessHandler(process, commandLine);
-    }
+	public static OSProcessHandler createOSProcessHandler(final Process process, final String commandLine)
+	{
+		return RApplicationSettings.getInstance().useConsoleColorMode ? new ColouredProcessHandler(process, commandLine) : new OSProcessHandler(process, commandLine);
+	}
 
-    protected GeneralCommandLine createGeneralDefaultCmdLine(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException {
-        checkConfiguration(config);
+	protected GeneralCommandLine createGeneralDefaultCmdLine(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException
+	{
+		checkConfiguration(config);
 
-        final Sdk sdk = config.getSdk();
-        assert (sdk != null);
+		final Sdk sdk = config.getSdk();
+		assert (sdk != null);
 
 
-        final String workingDir = config.getWorkingDirectory().trim().length() != 0
-                ? config.getWorkingDirectory()
-                : null;
+		final String workingDir = config.getWorkingDirectory().trim().length() != 0 ? config.getWorkingDirectory() : null;
 
         /* Uncomment to set working directory by ruby itself
-            commandLine.addParameter("-C");
+			commandLine.addParameter("-C");
             commandLine.addParameter(myConfig.getWORK_DIR());
         */
 
-        final Module module = config.getModule();
-        final String classPath;
-        if (module == null || !JRubySdkType.isJRubySDK(sdk)) {
-            classPath = null;
-        } else {
+		final Module module = config.getModule();
+		final String classPath;
+		if(module == null || !JRubySdkType.isJRubySDK(sdk))
+		{
+			classPath = null;
+		}
+		else
+		{
 			ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
 
 			OrderEnumerator orderEnumerator = moduleRootManager.orderEntries();
 			orderEnumerator = orderEnumerator.withoutSdk().recursively();
 
 			classPath = orderEnumerator.getSourcePathsList().getPathsString();
-        }
+		}
 
-        return Runner.createAndSetupCmdLine(null, workingDir, classPath, config.getEnvs(), config.isPassParentEnvs(), RubySdkUtil.getVMExecutablePath(sdk));
-    }
+		return Runner.createAndSetupCmdLine(null, workingDir, classPath, config.getEnvs(), config.isPassParentEnvs(), RubySdkUtil.getVMExecutablePath(sdk));
+	}
 
-    protected void checkConfiguration(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException {
-        try {
-            config.checkConfiguration();
-        } catch (RuntimeConfigurationException e) {
-            throw new CantRunException(e.getMessage());
-        }
-    }
+	protected void checkConfiguration(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException
+	{
+		try
+		{
+			config.checkConfiguration();
+		}
+		catch(RuntimeConfigurationException e)
+		{
+			throw new CantRunException(e.getMessage());
+		}
+	}
 
-    protected void attachCompilerForJRuby(final AbstractRubyRunConfiguration config) {
+	protected void attachCompilerForJRuby(final AbstractRubyRunConfiguration config)
+	{
       /*  if (JRubySdkType.isJRubySDK(config.getSdk())) {
             setModuleToCompile(config.getModule());
         }     */
-    }
+	}
 }

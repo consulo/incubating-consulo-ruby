@@ -8,8 +8,7 @@ import com.intellij.openapi.module.Module;
  * @author VISTALL
  * @since 25.09.13.
  */
-public class BaseRubyOnRailsModuleExtension extends ModuleExtensionImpl<BaseRubyOnRailsModuleExtension>
-		implements RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>
+public class BaseRubyOnRailsModuleExtension extends ModuleExtensionImpl<BaseRubyOnRailsModuleExtension> implements RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>
 {
 	public BaseRubyOnRailsModuleExtension(@NotNull String id, @NotNull Module module)
 	{

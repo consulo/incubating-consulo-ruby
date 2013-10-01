@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.arguments;
 
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgument;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,9 +28,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public class RArgumentNavigator {
-    @Nullable
-    public static RArgument getByRIdentifier(@NotNull final RIdentifier identifier) {
-        return PsiTreeUtil.getParentOfType(identifier, RArgument.class);
-    }
+public class RArgumentNavigator
+{
+	@Nullable
+	public static RArgument getByRIdentifier(@NotNull final RIdentifier identifier)
+	{
+		return PsiTreeUtil.getParentOfType(identifier, RArgument.class);
+	}
 }

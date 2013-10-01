@@ -23,6 +23,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RLoopStatement extends RPsiElement {
-    RPsiElement getLoopBody();
+public interface RLoopStatement extends RPsiElement
+{
+	RPsiElement getLoopBody();
 }

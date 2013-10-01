@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
+import java.io.Serializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-
-import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,33 +30,39 @@ import java.io.Serializable;
  * @author: oleg
  * @date: Nov 22, 2006
  */
-public class RVirtualConstantImpl extends RVirtualElementBase implements RVirtualConstant, Serializable {
-    private String myName;
-    private RVirtualConstantHolder myHolder;
+public class RVirtualConstantImpl extends RVirtualElementBase implements RVirtualConstant, Serializable
+{
+	private String myName;
+	private RVirtualConstantHolder myHolder;
 
-    public RVirtualConstantImpl(@NotNull final String name, @NotNull final RVirtualConstantHolder holder) {
-        myName = name;
-        myHolder = holder;
-    }
+	public RVirtualConstantImpl(@NotNull final String name, @NotNull final RVirtualConstantHolder holder)
+	{
+		myName = name;
+		myHolder = holder;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myName;
-    }
+	public String getName()
+	{
+		return myName;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualConstantHolder getHolder() {
-        return myHolder;
-    }
+	public RVirtualConstantHolder getHolder()
+	{
+		return myHolder;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitElement(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitElement(this);
+	}
 
-    public String toString() {
-        return myName;
-    }
+	public String toString()
+	{
+		return myName;
+	}
 }

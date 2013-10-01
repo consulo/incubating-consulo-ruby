@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -28,42 +31,46 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Dec 21, 2007
  */
-public class RPseudoConstantReference extends RNamedReference{
-    public RPseudoConstantReference(@NotNull RNamedElement element) {
-        super(element);
-    }
+public class RPseudoConstantReference extends RNamedReference
+{
+	public RPseudoConstantReference(@NotNull RNamedElement element)
+	{
+		super(element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-// kSUPER
-        if (RubyTokenTypes.kSUPER.toString().equals(myElement.getText())){
-            final RContainer container = myElement.getParentContainer();
-            assert container!=null;
-            final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, container);
-            final Symbol context = SymbolUtil.getClassModuleFileSymbol(symbol);
-            if (context == null || context.getType()!= Type.CLASS){
-                return super.multiResolveToSymbols(fileSymbol);
-            }
-            final Children children = context.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet());
-// If we have no explicit superclass
-            if (!children.hasChildren()){
-                return Arrays.asList(SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Object));
-            }
-            final Symbol superClass = children.getAll().get(0).getLinkedSymbol();
-            if (superClass.getType() != Type.NOT_DEFINED) {
-                return Arrays.asList(superClass);
-            }
-        }
-        return super.multiResolveToSymbols(fileSymbol);
-    }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		// kSUPER
+		if(RubyTokenTypes.kSUPER.toString().equals(myElement.getText()))
+		{
+			final RContainer container = myElement.getParentContainer();
+			assert container != null;
+			final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, container);
+			final Symbol context = SymbolUtil.getClassModuleFileSymbol(symbol);
+			if(context == null || context.getType() != Type.CLASS)
+			{
+				return super.multiResolveToSymbols(fileSymbol);
+			}
+			final Children children = context.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet());
+			// If we have no explicit superclass
+			if(!children.hasChildren())
+			{
+				return Arrays.asList(SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Object));
+			}
+			final Symbol superClass = children.getAll().get(0).getLinkedSymbol();
+			if(superClass.getType() != Type.NOT_DEFINED)
+			{
+				return Arrays.asList(superClass);
+			}
+		}
+		return super.multiResolveToSymbols(fileSymbol);
+	}
 }

@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names;
  * User: oleg
  * Date: 21.07.2006
  */
-public interface RMethodName extends RName{
+public interface RMethodName extends RName
+{
 }

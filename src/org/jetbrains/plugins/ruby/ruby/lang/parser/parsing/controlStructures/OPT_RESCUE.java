@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -28,49 +27,57 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assignments.MRHS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.07.2006
  */
-public class OPT_RESCUE  implements RubyTokenTypes {
+public class OPT_RESCUE implements RubyTokenTypes
+{
 
 /*
-    exc_list	: arg_value
+	exc_list	: arg_value
             | mrhs
             | none
             ;
 */
 
-    @NotNull
-    private static IElementType parseEXC_LIST(final RBuilder builder){
-        IElementType result = MRHS.parse(builder);
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            return result;
-        }
-        result = ARG.parse(builder);
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            return result;
-        }
+	@NotNull
+	private static IElementType parseEXC_LIST(final RBuilder builder)
+	{
+		IElementType result = MRHS.parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			return result;
+		}
+		result = ARG.parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			return result;
+		}
 
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
-/*
-    exc_var		: tASSOC lhs
-            | none
-            ;
-*/
-    private static void parseEXC_VAR(final RBuilder builder) {
-        if (builder.compareAndEat(tASSOC)){
-            final RMarker marker = builder.mark();
-            if (LHS.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
-            marker.done(RubyElementTypes.BLOCK_VARIABLES);
-        }
-    }
+	/*
+		exc_var		: tASSOC lhs
+				| none
+				;
+	*/
+	private static void parseEXC_VAR(final RBuilder builder)
+	{
+		if(builder.compareAndEat(tASSOC))
+		{
+			final RMarker marker = builder.mark();
+			if(LHS.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
+			marker.done(RubyElementTypes.BLOCK_VARIABLES);
+		}
+	}
 
 /*
     opt_rescue	: kRESCUE exc_list exc_var then
@@ -80,26 +87,28 @@ public class OPT_RESCUE  implements RubyTokenTypes {
             ;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
-        if (!builder.compareAndEat(kRESCUE)){
-            statementMarker.drop();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
+		if(!builder.compareAndEat(kRESCUE))
+		{
+			statementMarker.drop();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        parseEXC_LIST(builder);
+		parseEXC_LIST(builder);
 
-        parseEXC_VAR(builder);
+		parseEXC_VAR(builder);
 
-        THEN.parse(builder);
+		THEN.parse(builder);
 
-        COMPSTMT.parse(builder, kRESCUE, kELSE, kENSURE, kEND);
+		COMPSTMT.parse(builder, kRESCUE, kELSE, kENSURE, kEND);
 
-        parse(builder);
+		parse(builder);
 
-        statementMarker.done(RubyElementTypes.RESCUE_BLOCK);
-        return RubyElementTypes.RESCUE_BLOCK;
-    }
+		statementMarker.done(RubyElementTypes.RESCUE_BLOCK);
+		return RubyElementTypes.RESCUE_BLOCK;
+	}
 
 }

@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.io.Serializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -23,38 +25,41 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 
-import java.io.Serializable;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 12, 2007
  */
-public class RVirtualIncludeJavaClassImpl extends RVirtualStructuralElementBase implements RVirtualIncludeJavaClass, Serializable {
-    private String myQualifiedName;
+public class RVirtualIncludeJavaClassImpl extends RVirtualStructuralElementBase implements RVirtualIncludeJavaClass, Serializable
+{
+	private String myQualifiedName;
 
-    public RVirtualIncludeJavaClassImpl(final RVirtualContainer container,
-                                        final String qualifiedName) {
-        super(container);
-        myQualifiedName = qualifiedName;
-    }
+	public RVirtualIncludeJavaClassImpl(final RVirtualContainer container, final String qualifiedName)
+	{
+		super(container);
+		myQualifiedName = qualifiedName;
+	}
 
-    @Override
-	public void accept(@NotNull final RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualIncludeJavaClass(this);
-    }
+	@Override
+	public void accept(@NotNull final RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualIncludeJavaClass(this);
+	}
 
-    public String toString() {
-        return RCall.INCLUDE_CLASS_COMMAND + " " + myQualifiedName;
-    }
+	public String toString()
+	{
+		return RCall.INCLUDE_CLASS_COMMAND + " " + myQualifiedName;
+	}
 
-    @Override
-	public String getQualifiedName() {
-        return myQualifiedName;
-    }
+	@Override
+	public String getQualifiedName()
+	{
+		return myQualifiedName;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_INCLUDE_CLASS;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_INCLUDE_CLASS;
+	}
 }

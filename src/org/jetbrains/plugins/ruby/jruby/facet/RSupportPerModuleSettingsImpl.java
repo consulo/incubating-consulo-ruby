@@ -37,69 +37,82 @@ import com.intellij.openapi.util.WriteExternalException;
  * Date: Sep 11, 2007
  */
 
-public class RSupportPerModuleSettingsImpl implements FacetConfiguration, RSupportPerModuleSettings {
+public class RSupportPerModuleSettingsImpl implements FacetConfiguration, RSupportPerModuleSettings
+{
 
-    private boolean changed;
-    private boolean shouldUseRSpecTestFramework = true;
-    private CheckableDirectoriesContainer myLoadPathDirs;
-    private String myUnitTestsRootUrl;
+	private boolean changed;
+	private boolean shouldUseRSpecTestFramework = true;
+	private CheckableDirectoriesContainer myLoadPathDirs;
+	private String myUnitTestsRootUrl;
 
-    public RSupportPerModuleSettingsImpl() {
-        myLoadPathDirs = new CheckableDirectoriesContainer();
-    }
+	public RSupportPerModuleSettingsImpl()
+	{
+		myLoadPathDirs = new CheckableDirectoriesContainer();
+	}
 
-    public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager) {
-        changed = false;
-        return new FacetEditorTab[] {
-                new JRubySdkEditorTab(this, editorContext),
-                new JRubyRTestFrameworkChooser(this, editorContext),
-                new JRubyLoadPathChooser(this, editorContext)
-        };
-    }
+	public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager)
+	{
+		changed = false;
+		return new FacetEditorTab[]{
+				new JRubySdkEditorTab(this, editorContext),
+				new JRubyRTestFrameworkChooser(this, editorContext),
+				new JRubyLoadPathChooser(this, editorContext)
+		};
+	}
 
-    public void readExternal(Element element) throws InvalidDataException {
-        JRubyFacetExternalizer.getInstance().readExternal(this, element);
-    }
+	public void readExternal(Element element) throws InvalidDataException
+	{
+		JRubyFacetExternalizer.getInstance().readExternal(this, element);
+	}
 
-    public void writeExternal(Element element) throws WriteExternalException {
-        JRubyFacetExternalizer.getInstance().writeExternal(this, element);
-    }
+	public void writeExternal(Element element) throws WriteExternalException
+	{
+		JRubyFacetExternalizer.getInstance().writeExternal(this, element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public CheckableDirectoriesContainer getLoadPathDirs() {
-        return myLoadPathDirs;
-    }
+	public CheckableDirectoriesContainer getLoadPathDirs()
+	{
+		return myLoadPathDirs;
+	}
 
-    public boolean isChanged() {
-        return changed;
-    }
+	public boolean isChanged()
+	{
+		return changed;
+	}
 
-    public void setChanged(boolean changed) {
-        this.changed = changed;
-    }
+	public void setChanged(boolean changed)
+	{
+		this.changed = changed;
+	}
 
-    @Override
-	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs) {
-        myLoadPathDirs = loadPathDirs;
-    }
+	@Override
+	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs)
+	{
+		myLoadPathDirs = loadPathDirs;
+	}
 
-    @Override
-	public boolean shouldUseTestUnitTestFramework() {
-        return shouldUseRSpecTestFramework;
-    }
+	@Override
+	public boolean shouldUseTestUnitTestFramework()
+	{
+		return shouldUseRSpecTestFramework;
+	}
 
-    @Override
-	public void setShouldUseTestUnitTestFramework(final boolean shouldUse) {
-        shouldUseRSpecTestFramework = shouldUse;
-    }
+	@Override
+	public void setShouldUseTestUnitTestFramework(final boolean shouldUse)
+	{
+		shouldUseRSpecTestFramework = shouldUse;
+	}
 
-    public void setUnitTestsRootUrl(final String testsUnitRootUrl) {
-        myUnitTestsRootUrl = testsUnitRootUrl;
-    }
+	public void setUnitTestsRootUrl(final String testsUnitRootUrl)
+	{
+		myUnitTestsRootUrl = testsUnitRootUrl;
+	}
 
-    @Nullable
-    public String getUnitTestsRootUrl() {
-        return myUnitTestsRootUrl;
-    }
+	@Nullable
+	public String getUnitTestsRootUrl()
+	{
+		return myUnitTestsRootUrl;
+	}
 }

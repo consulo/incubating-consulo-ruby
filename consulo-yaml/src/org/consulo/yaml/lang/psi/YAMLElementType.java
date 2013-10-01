@@ -25,8 +25,10 @@ import com.intellij.psi.tree.IElementType;
  * @author: oleg
  * @date: Feb 21, 2008
  */
-public class YAMLElementType extends IElementType{
-    public YAMLElementType(String debugName) {
-        super(debugName, YAMLFileType.INSTANCE.getLanguage());
-    }
+public class YAMLElementType extends IElementType
+{
+	public YAMLElementType(String debugName)
+	{
+		super(debugName, YAMLFileType.INSTANCE.getLanguage());
+	}
 }

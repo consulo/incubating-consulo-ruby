@@ -25,16 +25,17 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 11.08.2006
  */
-public interface RAssignmentExpression extends RExpression {
-    /**
-     * @return assignment object
-     */
-    @NotNull
-    RPsiElement getObject();
+public interface RAssignmentExpression extends RExpression
+{
+	/**
+	 * @return assignment object
+	 */
+	@NotNull
+	RPsiElement getObject();
 
-    /**
-     * @return assignment value
-     */
-    @Nullable
-    RPsiElement getValue();
+	/**
+	 * @return assignment value
+	 */
+	@Nullable
+	RPsiElement getValue();
 }

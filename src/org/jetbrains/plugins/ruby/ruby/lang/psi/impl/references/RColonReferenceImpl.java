@@ -16,10 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.Colon3Reference;
@@ -28,56 +24,70 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RColonReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class RColonReferenceImpl extends RReferenceBase implements RColonReference {
-    private static final TokenSet TS_COLONS = TokenSet.create(RubyTokenTypes.tCOLON2, RubyTokenTypes.tCOLON3);
+public class RColonReferenceImpl extends RReferenceBase implements RColonReference
+{
+	private static final TokenSet TS_COLONS = TokenSet.create(RubyTokenTypes.tCOLON2, RubyTokenTypes.tCOLON3);
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRColonReference(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRColonReference(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    public RColonReferenceImpl(ASTNode astNode) {
-        super(astNode);
-    }
+	public RColonReferenceImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement getDelimiter() {
-        PsiElement colon = getChildByFilter(TS_COLONS, 0);
-        assert colon!=null;
-        return colon;
-    }
+	public PsiElement getDelimiter()
+	{
+		PsiElement colon = getChildByFilter(TS_COLONS, 0);
+		assert colon != null;
+		return colon;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Type getType() {
-        return Type.COLON_REF;
-    }
+	public Type getType()
+	{
+		return Type.COLON_REF;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RQualifiedReference getReference() {
-        if (isColon3Reference()){
-            final RPsiElement value = getValue();
-            if (value != null) {
-                return new Colon3Reference(getProject(), this, value);
-            }
-        }
-        return super.getReference();
-    }
+	public RQualifiedReference getReference()
+	{
+		if(isColon3Reference())
+		{
+			final RPsiElement value = getValue();
+			if(value != null)
+			{
+				return new Colon3Reference(getProject(), this, value);
+			}
+		}
+		return super.getReference();
+	}
 
-    @Override
-	public boolean isColon3Reference() {
-        return getChildByFilter(RubyTokenTypes.tCOLON3, 0)!=null;
-    }
+	@Override
+	public boolean isColon3Reference()
+	{
+		return getChildByFilter(RubyTokenTypes.tCOLON3, 0) != null;
+	}
 }

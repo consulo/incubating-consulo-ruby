@@ -34,27 +34,31 @@ import com.intellij.util.QueryExecutor;
  * @author: oleg
  * @date: Jan 12, 2008
  */
-public class JRubyTextRefSearcher implements QueryExecutor<PsiReference, MethodReferencesSearch.SearchParameters> {
+public class JRubyTextRefSearcher implements QueryExecutor<PsiReference, MethodReferencesSearch.SearchParameters>
+{
 
-    @Override
-	public boolean execute(@NotNull final MethodReferencesSearch.SearchParameters params,
-                           @NotNull final Processor<PsiReference> psiReferenceProcessor) {
-        final PsiMethod method = params.getMethod();
-        final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-            @Override
-			public String compute() {
-                return method.getName();
-            }
-        });
-        // We should search only if JRubyName differs from name
-        final String jrubyName = JRubyNameConventions.getMethodName(name).replace("=", "");
-        if (name.equals(jrubyName)) {
-            return true;
-        }
+	@Override
+	public boolean execute(@NotNull final MethodReferencesSearch.SearchParameters params, @NotNull final Processor<PsiReference> psiReferenceProcessor)
+	{
+		final PsiMethod method = params.getMethod();
+		final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>()
+		{
+			@Override
+			public String compute()
+			{
+				return method.getName();
+			}
+		});
+		// We should search only if JRubyName differs from name
+		final String jrubyName = JRubyNameConventions.getMethodName(name).replace("=", "");
+		if(name.equals(jrubyName))
+		{
+			return true;
+		}
 
-        final JRubyOcurrenceProcessor processor = new JRubyOcurrenceProcessor(method, jrubyName, psiReferenceProcessor, false);
-        short searchContext = UsageSearchContext.IN_CODE;
-        return PsiSearchHelper.SERVICE.getInstance(method.getProject()).
-                processElementsWithWord(processor, params.getScope(), jrubyName, searchContext, true);
-    }
+		final JRubyOcurrenceProcessor processor = new JRubyOcurrenceProcessor(method, jrubyName, psiReferenceProcessor, false);
+		short searchContext = UsageSearchContext.IN_CODE;
+		return PsiSearchHelper.SERVICE.getInstance(method.getProject()).
+				processElementsWithWord(processor, params.getScope(), jrubyName, searchContext, true);
+	}
 }

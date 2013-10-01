@@ -17,39 +17,42 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary.AREF_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class Array implements RubyTokenTypes {
-    /**
-     * Array parsing
-     * @param builder Current builder
-     * @return Result of parsing
-     */
+public class Array implements RubyTokenTypes
+{
+	/**
+	 * Array parsing
+	 *
+	 * @param builder Current builder
+	 * @return Result of parsing
+	 */
 /*
-        | tLBRACK aref_args ']'
+		| tLBRACK aref_args ']'
 */
-      @NotNull
-      public static IElementType parse(final RBuilder builder) {
-        RMarker statementMarker = builder.mark();
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        builder.match(tLBRACK);
+		builder.match(tLBRACK);
 
-        AREF_ARGS.parse(builder);
+		AREF_ARGS.parse(builder);
 
-        builder.match(tRBRACK);
-        statementMarker.done(RubyElementTypes.ARRAY);
-        return RubyElementTypes.ARRAY;
-    }
+		builder.match(tRBRACK);
+		statementMarker.done(RubyElementTypes.ARRAY);
+		return RubyElementTypes.ARRAY;
+	}
 
 }

@@ -16,22 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 21, 2007
  */
-public interface RGlobalVarHolder extends RVirtualGlobalVarHolder, RContainer {
-    @NotNull
-    public List<GlobalVarDefinition> getGlobalVarDefinitions();
+public interface RGlobalVarHolder extends RVirtualGlobalVarHolder, RContainer
+{
+	@NotNull
+	public List<GlobalVarDefinition> getGlobalVarDefinitions();
 
-    @Nullable
-    public GlobalVarDefinition getDefinition(@NotNull final RVirtualGlobalVar globalVar);
+	@Nullable
+	public GlobalVarDefinition getDefinition(@NotNull final RVirtualGlobalVar globalVar);
 }

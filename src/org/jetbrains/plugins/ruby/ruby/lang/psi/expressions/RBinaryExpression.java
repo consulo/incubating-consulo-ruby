@@ -16,24 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 17.01.2007
  */
-public interface RBinaryExpression extends RExpression{
-    @NotNull
-    public IElementType getOperationType();
+public interface RBinaryExpression extends RExpression
+{
+	@NotNull
+	public IElementType getOperationType();
 
-    @NotNull
-    public RPsiElement getLeftOperand();
+	@NotNull
+	public RPsiElement getLeftOperand();
 
-    @Nullable
-    public RPsiElement getRightOperand();
+	@Nullable
+	public RPsiElement getRightOperand();
 
 }

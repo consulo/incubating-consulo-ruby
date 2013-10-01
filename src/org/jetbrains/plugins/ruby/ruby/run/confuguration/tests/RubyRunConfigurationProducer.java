@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
 import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,34 +32,38 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationTyp
  * @author: Roman Chernyatchik
  * @date: Aug 18, 2007
  */
-public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer  implements Cloneable {
-    private PsiElement mySourceElement;
+public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable
+{
+	private PsiElement mySourceElement;
 
-    public RubyRunConfigurationProducer() {
-        super(RubyRunConfigurationType.getInstance());
-    }
+	public RubyRunConfigurationProducer()
+	{
+		super(RubyRunConfigurationType.getInstance());
+	}
 
-    @Override
-	public PsiElement getSourceElement() {
-        return mySourceElement;
-    }
+	@Override
+	public PsiElement getSourceElement()
+	{
+		return mySourceElement;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context) {
-        final PsiElement element = location.getPsiElement();
+	protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context)
+	{
+		final PsiElement element = location.getPsiElement();
 
-        if (!(element instanceof PsiDirectory)
-                && !(element instanceof RFile)
-                && !(element.getContainingFile() instanceof RFile)) {
-            return null;
-        }
-        mySourceElement = element;
-        return (RunnerAndConfigurationSettingsImpl) RubyRunConfigurationType.getInstance().createConfigurationByLocation(location);
-    }
+		if(!(element instanceof PsiDirectory) && !(element instanceof RFile) && !(element.getContainingFile() instanceof RFile))
+		{
+			return null;
+		}
+		mySourceElement = element;
+		return (RunnerAndConfigurationSettingsImpl) RubyRunConfigurationType.getInstance().createConfigurationByLocation(location);
+	}
 
-    @Override
-	public int compareTo(Object o) {
-        return PREFERED;
-    }
+	@Override
+	public int compareTo(Object o)
+	{
+		return PREFERED;
+	}
 }

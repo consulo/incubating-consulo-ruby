@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,11 +26,13 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: 17.04.2007
  */
-public class RHTMLPsiCreator {
-    @NotNull
-    @SuppressWarnings({"UnusedDeclaration"})
-    public static PsiElement createElement(final ASTNode node) {
-        //noinspection ConstantConditions
-        return null; //Shouldn't happen
-    }
+public class RHTMLPsiCreator
+{
+	@NotNull
+	@SuppressWarnings({"UnusedDeclaration"})
+	public static PsiElement createElement(final ASTNode node)
+	{
+		//noinspection ConstantConditions
+		return null; //Shouldn't happen
+	}
 }

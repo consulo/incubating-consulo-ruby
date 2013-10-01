@@ -16,19 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import com.intellij.openapi.editor.colors.EditorColorsManager;
-import com.intellij.openapi.editor.colors.EditorFontType;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.Output;
+import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.Output;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.editor.colors.EditorFontType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,51 +40,63 @@ import java.awt.event.ComponentListener;
  * @author: Roman Chernyatchik
  * @date: 05.12.2006
  */
-public class GeneratorHelpPanel {
-    private JPanel myContentPanel;
-    private JTextPane myTextPane;
-    private JScrollPane myScrollPane;
+public class GeneratorHelpPanel
+{
+	private JPanel myContentPanel;
+	private JTextPane myTextPane;
+	private JScrollPane myScrollPane;
 
-    public GeneratorHelpPanel(final Output output) {
-        final Document doc = myTextPane.getDocument();
-        try {
-            doc.remove(0, doc.getLength());
-            SimpleAttributeSet attrs = new SimpleAttributeSet();
+	public GeneratorHelpPanel(final Output output)
+	{
+		final Document doc = myTextPane.getDocument();
+		try
+		{
+			doc.remove(0, doc.getLength());
+			SimpleAttributeSet attrs = new SimpleAttributeSet();
 
-            myTextPane.setFont(EditorColorsManager.getInstance().getGlobalScheme().getFont(EditorFontType.PLAIN));
-            doc.insertString(0, output.getStdout() + "\n", attrs);
-            if (!TextUtil.isEmpty(output.getStderr())) {
-                StyleConstants.setForeground(attrs, Color.RED);
-                doc.insertString(doc.getLength(), output.getStderr(), attrs);
-            }
-        } catch (BadLocationException e) {
-            // Shouldn't be thrown
-        }
+			myTextPane.setFont(EditorColorsManager.getInstance().getGlobalScheme().getFont(EditorFontType.PLAIN));
+			doc.insertString(0, output.getStdout() + "\n", attrs);
+			if(!TextUtil.isEmpty(output.getStderr()))
+			{
+				StyleConstants.setForeground(attrs, Color.RED);
+				doc.insertString(doc.getLength(), output.getStderr(), attrs);
+			}
+		}
+		catch(BadLocationException e)
+		{
+			// Shouldn't be thrown
+		}
 
-        myScrollPane.addComponentListener(new ComponentListener() {
-            @Override
-			public void componentResized(ComponentEvent e) {
-                myScrollPane.getViewport().scrollRectToVisible(new Rectangle(0, -myScrollPane.getHeight(), 0, 0));
-            }
+		myScrollPane.addComponentListener(new ComponentListener()
+		{
+			@Override
+			public void componentResized(ComponentEvent e)
+			{
+				myScrollPane.getViewport().scrollRectToVisible(new Rectangle(0, -myScrollPane.getHeight(), 0, 0));
+			}
 
-            @Override
-			public void componentMoved(ComponentEvent e) {
-                //Do nothing
-            }
+			@Override
+			public void componentMoved(ComponentEvent e)
+			{
+				//Do nothing
+			}
 
-            @Override
-			public void componentShown(ComponentEvent e) {
-                //Do nothing
-            }
+			@Override
+			public void componentShown(ComponentEvent e)
+			{
+				//Do nothing
+			}
 
-            @Override
-			public void componentHidden(ComponentEvent e) {
-                //Do nothing
-            }
-        });
-    }
+			@Override
+			public void componentHidden(ComponentEvent e)
+			{
+				//Do nothing
+			}
+		});
+	}
 
-    public JPanel getContent() {
-        return myContentPanel;
-    }
+	public JPanel getContent()
+	{
+		return myContentPanel;
+	}
 }

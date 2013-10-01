@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import com.intellij.openapi.util.Comparing;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.MessageWithVariousArgsNumber;
+import com.intellij.openapi.util.Comparing;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,62 +29,82 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.MessageWithVariousArgsN
  * @author: oleg
  * @date: May 23, 2007
  */
-public class MessageImpl implements Message {
-    protected String myName;
-    protected int myNumber;
-    protected Symbol mySymbol;
-    protected boolean isImportant;
+public class MessageImpl implements Message
+{
+	protected String myName;
+	protected int myNumber;
+	protected Symbol mySymbol;
+	protected boolean isImportant;
 
-    public MessageImpl(@NotNull final String name, final int number, final boolean important, @Nullable final Symbol symbol) {
-        myName = name;
-        myNumber = number;
-        mySymbol = symbol;
-        isImportant = important;
-    }
+	public MessageImpl(@NotNull final String name, final int number, final boolean important, @Nullable final Symbol symbol)
+	{
+		myName = name;
+		myNumber = number;
+		mySymbol = symbol;
+		isImportant = important;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myName;
-    }
+	public String getName()
+	{
+		return myName;
+	}
 
-    @Override
-	public int getArgumentsNumber() {
-        return myNumber;
-    }
+	@Override
+	public int getArgumentsNumber()
+	{
+		return myNumber;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public Symbol getSymbol() {
-        return mySymbol;
-    }
+	public Symbol getSymbol()
+	{
+		return mySymbol;
+	}
 
-    @Override
-	public boolean matchesMessage(@NotNull final Message patternMessage) {
-        if (patternMessage instanceof MessageWithVariousArgsNumber){
-            return false;
-        }
-        //noinspection SimplifiableIfStatement
-        if (!getName().equals(patternMessage.getName())){
-            return false;
-        }
-        return getArgumentsNumber() == patternMessage.getArgumentsNumber();
-    }
+	@Override
+	public boolean matchesMessage(@NotNull final Message patternMessage)
+	{
+		if(patternMessage instanceof MessageWithVariousArgsNumber)
+		{
+			return false;
+		}
+		//noinspection SimplifiableIfStatement
+		if(!getName().equals(patternMessage.getName()))
+		{
+			return false;
+		}
+		return getArgumentsNumber() == patternMessage.getArgumentsNumber();
+	}
 
-    @Override
-	public boolean isImportant() {
-        return isImportant;
-    }
+	@Override
+	public boolean isImportant()
+	{
+		return isImportant;
+	}
 
-    public String toString() {
-        return myName + ": " + mySymbol + "; " + isImportant;
-    }
+	public String toString()
+	{
+		return myName + ": " + mySymbol + "; " + isImportant;
+	}
 
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MessageImpl)) return false;
-        final MessageImpl message = (MessageImpl) o;
-        if (!Comparing.equal(getName(), message.getName())) return false;
-        return getSymbol() == message.getSymbol();
-    }
+	public boolean equals(final Object o)
+	{
+		if(this == o)
+		{
+			return true;
+		}
+		if(!(o instanceof MessageImpl))
+		{
+			return false;
+		}
+		final MessageImpl message = (MessageImpl) o;
+		if(!Comparing.equal(getName(), message.getName()))
+		{
+			return false;
+		}
+		return getSymbol() == message.getSymbol();
+	}
 }

@@ -16,55 +16,60 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.ToggleAction;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.ToggleAction;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: 25.03.2007
-*/
-class RakeCmdParamAction extends ToggleAction {
-    private final String myCmdArgument;
-    private boolean myIsSelected;
-    private boolean myIsDisabled;
+ *
+ * @author: Roman Chernyatchik
+ * @date: 25.03.2007
+ */
+class RakeCmdParamAction extends ToggleAction
+{
+	private final String myCmdArgument;
+	private boolean myIsSelected;
+	private boolean myIsDisabled;
 
-    public RakeCmdParamAction(@NotNull final String cmdArgument,
-                              @Nullable final String description,
-                              @Nullable final Icon icon) {
-        super(cmdArgument, description, icon);
-        myCmdArgument = cmdArgument;
-    }
+	public RakeCmdParamAction(@NotNull final String cmdArgument, @Nullable final String description, @Nullable final Icon icon)
+	{
+		super(cmdArgument, description, icon);
+		myCmdArgument = cmdArgument;
+	}
 
-    @Override
-	public boolean isSelected(final AnActionEvent e) {
-        return myIsSelected;
-    }
+	@Override
+	public boolean isSelected(final AnActionEvent e)
+	{
+		return myIsSelected;
+	}
 
-    @Override
-	public void setSelected(final AnActionEvent e, final boolean state) {
-        this.myIsSelected = state;
-    }
+	@Override
+	public void setSelected(final AnActionEvent e, final boolean state)
+	{
+		this.myIsSelected = state;
+	}
 
-    @NotNull
-    public String getMyCmdArgument() {
-        return myIsSelected ? myCmdArgument : TextUtil.EMPTY_STRING;
-    }
+	@NotNull
+	public String getMyCmdArgument()
+	{
+		return myIsSelected ? myCmdArgument : TextUtil.EMPTY_STRING;
+	}
 
-    public void disableAction() {
-        setSelected(null, false);
-        myIsDisabled = true;
-    }
+	public void disableAction()
+	{
+		setSelected(null, false);
+		myIsDisabled = true;
+	}
 
-    @Override
-	public void update(final AnActionEvent e) {
-        super.update(e);
-        e.getPresentation().setEnabled(!myIsDisabled);
-    }
+	@Override
+	public void update(final AnActionEvent e)
+	{
+		super.update(e);
+		e.getPresentation().setEnabled(!myIsDisabled);
+	}
 }

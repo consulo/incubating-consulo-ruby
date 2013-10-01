@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.indent;
 /**
  * If class implements this, every COMPSTMT child will be indented.
  */
-public interface RIndentCOMPSTMT {
+public interface RIndentCOMPSTMT
+{
 }

@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -30,6 +27,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+import com.intellij.lang.cacheBuilder.WordsScanner;
+import com.intellij.lang.findUsages.FindUsagesProvider;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,71 +37,87 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable
  * @author: oleg
  * @date: Mar 9, 2007
  */
-public class RubyFindUsagesProvider implements FindUsagesProvider {
-    private RubyWordsScanner rubyWordsScanner;
+public class RubyFindUsagesProvider implements FindUsagesProvider
+{
+	private RubyWordsScanner rubyWordsScanner;
 
-    @Override
+	@Override
 	@Nullable
-    public WordsScanner getWordsScanner() {
-        if (rubyWordsScanner == null) {
-            rubyWordsScanner = new RubyWordsScanner();
-        }
-        return rubyWordsScanner;
-    }
+	public WordsScanner getWordsScanner()
+	{
+		if(rubyWordsScanner == null)
+		{
+			rubyWordsScanner = new RubyWordsScanner();
+		}
+		return rubyWordsScanner;
+	}
 
-    @Override
-	public boolean canFindUsagesFor(@NotNull final PsiElement psiElement) {
-        // we can find containers except RObjectClass
-        if (psiElement instanceof RContainer && !(psiElement instanceof RObjectClass)) {
-            return true;
-        }
+	@Override
+	public boolean canFindUsagesFor(@NotNull final PsiElement psiElement)
+	{
+		// we can find containers except RObjectClass
+		if(psiElement instanceof RContainer && !(psiElement instanceof RObjectClass))
+		{
+			return true;
+		}
 
-        if (psiElement instanceof RField) {
-            return true;
-        }
-        if (psiElement instanceof RConstant) {
-            return ((RConstant) psiElement).isInDefinition();
-        }
-        if (psiElement instanceof RGlobalVariable) {
-            return true;
-        }
-        if (psiElement instanceof RIdentifier) {
-            final RIdentifier id = (RIdentifier) psiElement;
-            return id.isParameter() || id.isLocalVariable();
-        }
-        return false;
-    }
+		if(psiElement instanceof RField)
+		{
+			return true;
+		}
+		if(psiElement instanceof RConstant)
+		{
+			return ((RConstant) psiElement).isInDefinition();
+		}
+		if(psiElement instanceof RGlobalVariable)
+		{
+			return true;
+		}
+		if(psiElement instanceof RIdentifier)
+		{
+			final RIdentifier id = (RIdentifier) psiElement;
+			return id.isParameter() || id.isLocalVariable();
+		}
+		return false;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getHelpId(@NotNull PsiElement psiElement) {
-        return null;
-    }
+	public String getHelpId(@NotNull PsiElement psiElement)
+	{
+		return null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getType(@NotNull PsiElement psiElement) {
-        if (psiElement instanceof RIdentifier) {
-            final RIdentifier id = (RIdentifier) psiElement;
-            if (id.isParameter()) {
-                return RBundle.message("parameter");
-            }
-            if (id.isLocalVariable()) {
-                return RBundle.message("local.variable");
-            }
-        }
-        return psiElement.toString();
-    }
+	public String getType(@NotNull PsiElement psiElement)
+	{
+		if(psiElement instanceof RIdentifier)
+		{
+			final RIdentifier id = (RIdentifier) psiElement;
+			if(id.isParameter())
+			{
+				return RBundle.message("parameter");
+			}
+			if(id.isLocalVariable())
+			{
+				return RBundle.message("local.variable");
+			}
+		}
+		return psiElement.toString();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDescriptiveName(@NotNull PsiElement element) {
-        return RubyPsiUtil.getPresentableName(element);
-    }
+	public String getDescriptiveName(@NotNull PsiElement element)
+	{
+		return RubyPsiUtil.getPresentableName(element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
-        return RubyPsiUtil.getPresentableName(element);
-    }
+	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
+	{
+		return RubyPsiUtil.getPresentableName(element);
+	}
 }

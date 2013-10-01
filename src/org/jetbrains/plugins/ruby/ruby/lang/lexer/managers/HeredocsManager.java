@@ -16,179 +16,208 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
-
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.08.2006
  */
-public class HeredocsManager {
-    private ContentManager contentManager;
+public class HeredocsManager
+{
+	private ContentManager contentManager;
 
-    private Queue<Heredoc> myHeredocs;
+	private Queue<Heredoc> myHeredocs;
 
-    @NonNls
-    private static final String REPLACE_REGEX = "<<|-|\\\"|'";
-    @NonNls
-    private static final String INDENTED_PREFIX = "<<-";
+	@NonNls
+	private static final String REPLACE_REGEX = "<<|-|\\\"|'";
+	@NonNls
+	private static final String INDENTED_PREFIX = "<<-";
 
-    public HeredocsManager(@NotNull final _RubyLexer lexer){
-        this.contentManager = lexer.getContentManager();
-        myHeredocs = new LinkedList<Heredoc>();
-    }
+	public HeredocsManager(@NotNull final _RubyLexer lexer)
+	{
+		this.contentManager = lexer.getContentManager();
+		myHeredocs = new LinkedList<Heredoc>();
+	}
 
-    public void reset(){
-        myHeredocs.clear();
-    }
+	public void reset()
+	{
+		myHeredocs.clear();
+	}
 
-    /**
-     * Registers new heredoc id in heredocs list.
-     * @param id Heredoc id to register, as string
-     */
-    public void registerHeredoc(@NotNull final String id) {
-        final boolean isIndented = isIndented(id);
-        final String name = getName(id);
-        myHeredocs.add(new Heredoc(name, isIndented));
-    }
+	/**
+	 * Registers new heredoc id in heredocs list.
+	 *
+	 * @param id Heredoc id to register, as string
+	 */
+	public void registerHeredoc(@NotNull final String id)
+	{
+		final boolean isIndented = isIndented(id);
+		final String name = getName(id);
+		myHeredocs.add(new Heredoc(name, isIndented));
+	}
 
-    public static String getName(@NotNull final String id) {
-        return id.replaceAll(REPLACE_REGEX,"");
-    }
+	public static String getName(@NotNull final String id)
+	{
+		return id.replaceAll(REPLACE_REGEX, "");
+	}
 
-    public static boolean isIndented(@NotNull final String id) {
-        return id.startsWith(INDENTED_PREFIX);
-    }
+	public static boolean isIndented(@NotNull final String id)
+	{
+		return id.startsWith(INDENTED_PREFIX);
+	}
 
-    /**
-    * @return current heredoc id length
-    */
-    public int getIdLength(){
-        assert(size()>0);
-        return myHeredocs.peek().getId().length();
-    }
+	/**
+	 * @return current heredoc id length
+	 */
+	public int getIdLength()
+	{
+		assert (size() > 0);
+		return myHeredocs.peek().getId().length();
+	}
 
-    /**
-    * @return current heredoc id length
-    */
-    public boolean isIndented(){
-        assert(size()>0);
-        return myHeredocs.peek().isIndented();
-    }
+	/**
+	 * @return current heredoc id length
+	 */
+	public boolean isIndented()
+	{
+		assert (size() > 0);
+		return myHeredocs.peek().isIndented();
+	}
 
-    public boolean isEndSeen() {
-        assert (size()>0);
-        return myHeredocs.peek().isEndSeen();
-    }
-
-
-    /**
-     * @return true if heredoc end delimiter can be found at offset pos, false otherwise
-     * @param initialPos Position to check
-     */
-    private boolean checkForHeredocEnd(final int initialPos) {
-        boolean atEol;
-        if ((atEol = TextUtil.isEol(contentManager.safeReadAt(initialPos))) ||
-                TextUtil.isEol(contentManager.safeReadAt(initialPos -1))){
-            final Heredoc heredoc = myHeredocs.peek();
-            final String id = heredoc.getId();
-            final boolean isIndented = heredoc.isIndented();
-            final int len = id.length();
-
-// if not indented, id starts now
-            boolean idStarted = !isIndented;
-            int readLength = 0;
-// if we are at eol, we start reading from next symbol
-            int pos = atEol ? initialPos+1 : initialPos;
-
-            boolean result = true;
-            while (result && contentManager.canReadAt(pos) && readLength<len){
-                char currentChar = contentManager.safeReadAt(pos);
-                if (!idStarted && !TextUtil.isWhiteSpace(currentChar)){
-                    idStarted = true;
-                }
-                if (idStarted){
-                    result = id.charAt(readLength)==currentChar;
-                    readLength++;
-                }
-                pos++;
-            }
-            result = result &&
-                    readLength == len &&
-                    (!contentManager.canReadAt(pos) || TextUtil.isWhiteSpaceOrEol(contentManager.safeReadAt(pos)));
-            if (result){
-                heredoc.setEndSeen(true);
-            }
-            return result;
-        }
-        return false;
-    }
-
-    /**
-     * Eats heredoc content up to the end delimiter or expression substitution
-     * @return length
-     */
-    public int eatHereDocContent(){
-        int pos=0;
-        while (true){
-            if (!contentManager.canReadAt(pos) || checkForHeredocEnd(pos)){
-                return pos>0 ? pos : ContentManager.END_SEEN;
-            }
-            if (contentManager.checkForExprSubtitution(pos)){
-                return pos>0 ? pos : ContentManager.EXPR_SUBT_SEEN;
-            }
-            pos++;
-        }
-    }
-
-    public Heredoc poll(){
-        assert (size()>0);
-        return myHeredocs.poll();
-    }
-
-    public int size(){
-        return myHeredocs.size();
-    }
+	public boolean isEndSeen()
+	{
+		assert (size() > 0);
+		return myHeredocs.peek().isEndSeen();
+	}
 
 
+	/**
+	 * @param initialPos Position to check
+	 * @return true if heredoc end delimiter can be found at offset pos, false otherwise
+	 */
+	private boolean checkForHeredocEnd(final int initialPos)
+	{
+		boolean atEol;
+		if((atEol = TextUtil.isEol(contentManager.safeReadAt(initialPos))) || TextUtil.isEol(contentManager.safeReadAt(initialPos - 1)))
+		{
+			final Heredoc heredoc = myHeredocs.peek();
+			final String id = heredoc.getId();
+			final boolean isIndented = heredoc.isIndented();
+			final int len = id.length();
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Heredoc
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public class Heredoc {
+			// if not indented, id starts now
+			boolean idStarted = !isIndented;
+			int readLength = 0;
+			// if we are at eol, we start reading from next symbol
+			int pos = atEol ? initialPos + 1 : initialPos;
 
-// Heredoc ID string
-        private String id;
-// If heredoc indented or not
-        private boolean isIndented;
+			boolean result = true;
+			while(result && contentManager.canReadAt(pos) && readLength < len)
+			{
+				char currentChar = contentManager.safeReadAt(pos);
+				if(!idStarted && !TextUtil.isWhiteSpace(currentChar))
+				{
+					idStarted = true;
+				}
+				if(idStarted)
+				{
+					result = id.charAt(readLength) == currentChar;
+					readLength++;
+				}
+				pos++;
+			}
+			result = result &&
+					readLength == len &&
+					(!contentManager.canReadAt(pos) || TextUtil.isWhiteSpaceOrEol(contentManager.safeReadAt(pos)));
+			if(result)
+			{
+				heredoc.setEndSeen(true);
+			}
+			return result;
+		}
+		return false;
+	}
 
-        private boolean endSeen = false;
+	/**
+	 * Eats heredoc content up to the end delimiter or expression substitution
+	 *
+	 * @return length
+	 */
+	public int eatHereDocContent()
+	{
+		int pos = 0;
+		while(true)
+		{
+			if(!contentManager.canReadAt(pos) || checkForHeredocEnd(pos))
+			{
+				return pos > 0 ? pos : ContentManager.END_SEEN;
+			}
+			if(contentManager.checkForExprSubtitution(pos))
+			{
+				return pos > 0 ? pos : ContentManager.EXPR_SUBT_SEEN;
+			}
+			pos++;
+		}
+	}
 
-        public Heredoc(String id, boolean isIndented){
-            this.id =id;
-            this.isIndented=isIndented;
-            endSeen = false;
-        }
-        public String getId(){
-            return id;
-        }
-        public boolean isIndented(){
-            return isIndented;
-        }
+	public Heredoc poll()
+	{
+		assert (size() > 0);
+		return myHeredocs.poll();
+	}
 
-        public boolean isEndSeen() {
-            return endSeen;
-        }
+	public int size()
+	{
+		return myHeredocs.size();
+	}
 
-        public void setEndSeen(boolean endSeen) {
-            this.endSeen = endSeen;
-        }
-    }
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Heredoc
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public class Heredoc
+	{
+
+		// Heredoc ID string
+		private String id;
+		// If heredoc indented or not
+		private boolean isIndented;
+
+		private boolean endSeen = false;
+
+		public Heredoc(String id, boolean isIndented)
+		{
+			this.id = id;
+			this.isIndented = isIndented;
+			endSeen = false;
+		}
+
+		public String getId()
+		{
+			return id;
+		}
+
+		public boolean isIndented()
+		{
+			return isIndented;
+		}
+
+		public boolean isEndSeen()
+		{
+			return endSeen;
+		}
+
+		public void setEndSeen(boolean endSeen)
+		{
+			this.endSeen = endSeen;
+		}
+	}
 
 }

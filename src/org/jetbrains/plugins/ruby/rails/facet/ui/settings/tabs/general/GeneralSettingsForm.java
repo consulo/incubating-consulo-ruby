@@ -30,51 +30,60 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: Apr 25, 2008
  */
-public class GeneralSettingsForm implements RailsUIUtil.RailsVersionComponent{
-    private JLabel myRailsVersionLabel;
-    private JPanel myContentPane;
-    private EvaluatingComponent<String> myECRailsVersionLabel;
-    private JLabel myRailsAppHomeDirPathValue;
+public class GeneralSettingsForm implements RailsUIUtil.RailsVersionComponent
+{
+	private JLabel myRailsVersionLabel;
+	private JPanel myContentPane;
+	private EvaluatingComponent<String> myECRailsVersionLabel;
+	private JLabel myRailsAppHomeDirPathValue;
 
-    private String myRailsVersion;
-    /**
-     * Form is closed state
-     */
-    private volatile boolean myIsClosed;
+	private String myRailsVersion;
+	/**
+	 * Form is closed state
+	 */
+	private volatile boolean myIsClosed;
 
-    public GeneralSettingsForm(final String railsApplicationRootPath) {
-        myRailsAppHomeDirPathValue.setText(railsApplicationRootPath);
-    }
+	public GeneralSettingsForm(final String railsApplicationRootPath)
+	{
+		myRailsAppHomeDirPathValue.setText(railsApplicationRootPath);
+	}
 
 
-    public void beforeShow(@Nullable final Sdk sdk) {
-        myIsClosed = false;
+	public void beforeShow(@Nullable final Sdk sdk)
+	{
+		myIsClosed = false;
 
-        if (myRailsVersion == null) {
-            RailsUIUtil.setupRailsVersionEvaluator(sdk, myRailsVersionLabel, myECRailsVersionLabel, this);
-        }
-    }
+		if(myRailsVersion == null)
+		{
+			RailsUIUtil.setupRailsVersionEvaluator(sdk, myRailsVersionLabel, myECRailsVersionLabel, this);
+		}
+	}
 
-    public void setClose() {
-        myIsClosed = true;
-    }
+	public void setClose()
+	{
+		myIsClosed = true;
+	}
 
-    private void createUIComponents() {
-        myRailsVersionLabel = new JLabel("");
-        myECRailsVersionLabel = new EvaluatingComponent<String>(myRailsVersionLabel);
-    }
+	private void createUIComponents()
+	{
+		myRailsVersionLabel = new JLabel("");
+		myECRailsVersionLabel = new EvaluatingComponent<String>(myRailsVersionLabel);
+	}
 
-    @Override
-	public boolean isCloosed() {
-        return myIsClosed;
-    }
+	@Override
+	public boolean isCloosed()
+	{
+		return myIsClosed;
+	}
 
-    @Override
-	public void setRailsVersion(@Nullable final String railsVersion) {
-        myRailsVersion = railsVersion;
-    }
+	@Override
+	public void setRailsVersion(@Nullable final String railsVersion)
+	{
+		myRailsVersion = railsVersion;
+	}
 
-    public JPanel getContentPane() {
-        return myContentPane;
-    }
+	public JPanel getContentPane()
+	{
+		return myContentPane;
+	}
 }

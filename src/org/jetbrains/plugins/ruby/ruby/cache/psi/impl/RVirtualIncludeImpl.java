@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualInclude;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -24,49 +27,54 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Apr 3, 2007
  */
-public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implements RVirtualInclude, Serializable {
-    protected List<RVirtualName> myNames;
+public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implements RVirtualInclude, Serializable
+{
+	protected List<RVirtualName> myNames;
 
-    public RVirtualIncludeImpl(final RVirtualContainer container, @NotNull List<RVirtualName> includes) {
-        super(container);
-        myNames = includes;
-    }
+	public RVirtualIncludeImpl(final RVirtualContainer container, @NotNull List<RVirtualName> includes)
+	{
+		super(container);
+		myNames = includes;
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CALL_INCLUDE;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CALL_INCLUDE;
+	}
 
-    public String toString() {
-        return RCall.INCLUDE_COMMAND;
-    }
+	public String toString()
+	{
+		return RCall.INCLUDE_COMMAND;
+	}
 
-    @Override
-	public void dump(@NotNull StringBuilder buffer, int indent) {
-        super.dump(buffer, indent);
-        for (RVirtualName myInclude : myNames) {
-            buffer.append("\n");
-            ((RVirtualNameImpl) myInclude).dump(buffer, indent+1);
-        }
-    }
+	@Override
+	public void dump(@NotNull StringBuilder buffer, int indent)
+	{
+		super.dump(buffer, indent);
+		for(RVirtualName myInclude : myNames)
+		{
+			buffer.append("\n");
+			((RVirtualNameImpl) myInclude).dump(buffer, indent + 1);
+		}
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualInclude(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualInclude(this);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualName> getNames() {
-        return myNames;
-    }
+	public List<RVirtualName> getNames()
+	{
+		return myNames;
+	}
 }

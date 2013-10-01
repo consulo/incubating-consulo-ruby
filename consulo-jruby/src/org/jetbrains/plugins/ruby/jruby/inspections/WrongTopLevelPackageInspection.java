@@ -12,46 +12,53 @@ import com.intellij.psi.PsiElementVisitor;
 /**
  * @author: oleg
  */
-public class WrongTopLevelPackageInspection extends LocalInspectionTool {
-    @NonNls
-    private static final String SHORT_NAME = "WrongTopLevelPackage";
+public class WrongTopLevelPackageInspection extends LocalInspectionTool
+{
+	@NonNls
+	private static final String SHORT_NAME = "WrongTopLevelPackage";
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getGroupDisplayName() {
-        return RBundle.message("inspection.group.name");
-    }
+	@Nls
+	public String getGroupDisplayName()
+	{
+		return RBundle.message("inspection.group.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("inspection.wrong.top.level.package");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("inspection.wrong.top.level.package");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @NonNls
-    public String getShortName() {
-        return SHORT_NAME;
-    }
+	@NonNls
+	public String getShortName()
+	{
+		return SHORT_NAME;
+	}
 
-    @Override
-	public boolean isEnabledByDefault() {
-        return true;
-    }
+	@Override
+	public boolean isEnabledByDefault()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-        return new WrongTopLevelPackageInspectionVisitor(holder);
-    }
+	public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+	{
+		return new WrongTopLevelPackageInspectionVisitor(holder);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public HighlightDisplayLevel getDefaultLevel() {
-        return HighlightDisplayLevel.ERROR;
-    }
+	public HighlightDisplayLevel getDefaultLevel()
+	{
+		return HighlightDisplayLevel.ERROR;
+	}
 
 }

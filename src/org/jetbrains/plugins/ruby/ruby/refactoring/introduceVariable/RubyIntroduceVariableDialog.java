@@ -53,176 +53,207 @@ import com.intellij.ui.EditorTextField;
 import com.intellij.ui.StringComboboxEditor;
 import com.intellij.util.containers.HashSet;
 
-public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIntroduceVariableSettings {
+public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIntroduceVariableSettings
+{
 
-    private Project myProject;
-    private final int myOccurrencesCount;
-    private final IntroduceVariableValidator myValidator;
-    private EventListenerList myListenerList = new EventListenerList();
+	private Project myProject;
+	private final int myOccurrencesCount;
+	private final IntroduceVariableValidator myValidator;
+	private EventListenerList myListenerList = new EventListenerList();
 
-    private static final String NAME = RBundle.message("refactoring.introduce.variable.dialog.title");
+	private static final String NAME = RBundle.message("refactoring.introduce.variable.dialog.title");
 
-    private JPanel myContentPane;
-    private ComboBox myNameComboBox;
-    private JCheckBox myCheckBox;
-    private JLabel myNameLabel;
+	private JPanel myContentPane;
+	private ComboBox myNameComboBox;
+	private JCheckBox myCheckBox;
+	private JLabel myNameLabel;
 
-    private static Set<String> RESWORDS;
-    static {
-        RESWORDS = new HashSet<String>();
-        for (IElementType type : TokenBNF.kALL_RESWORDS.getTypes()) {
-            RESWORDS.add(type.toString());
-        }
-    }
-    public RubyIntroduceVariableDialog(@NotNull final Project project,
-                                       final int occurrencesCount,
-                                       @NotNull final IntroduceVariableValidator validator,
-                                       final String[] possibleNames) {
-        super(project, true);
-        myProject = project;
-        myOccurrencesCount = occurrencesCount;
-        myValidator = validator;
-        setUpNameComboBox(possibleNames);
+	private static Set<String> RESWORDS;
 
-        setModal(true);
-        setTitle(NAME);
-        init();
-        setUpDialog();
-        updateOkStatus();
-    }
+	static
+	{
+		RESWORDS = new HashSet<String>();
+		for(IElementType type : TokenBNF.kALL_RESWORDS.getTypes())
+		{
+			RESWORDS.add(type.toString());
+		}
+	}
 
-    @Override
+	public RubyIntroduceVariableDialog(@NotNull final Project project, final int occurrencesCount, @NotNull final IntroduceVariableValidator validator, final String[] possibleNames)
+	{
+		super(project, true);
+		myProject = project;
+		myOccurrencesCount = occurrencesCount;
+		myValidator = validator;
+		setUpNameComboBox(possibleNames);
+
+		setModal(true);
+		setTitle(NAME);
+		init();
+		setUpDialog();
+		updateOkStatus();
+	}
+
+	@Override
 	@Nullable
-    protected JComponent createCenterPanel() {
-        return myContentPane;
-    }
+	protected JComponent createCenterPanel()
+	{
+		return myContentPane;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public String getName() {
-        final Object s = myNameComboBox.getEditor().getItem();
-        if (s instanceof String && ((String) s).length() > 0) {
-            return (String) s;
-        } else {
-            return null;
-        }
-    }
+	public String getName()
+	{
+		final Object s = myNameComboBox.getEditor().getItem();
+		if(s instanceof String && ((String) s).length() > 0)
+		{
+			return (String) s;
+		}
+		else
+		{
+			return null;
+		}
+	}
 
-    @Override
-	public boolean doReplaceAllOccurrences() {
-        return myCheckBox.isSelected();
-    }
+	@Override
+	public boolean doReplaceAllOccurrences()
+	{
+		return myCheckBox.isSelected();
+	}
 
-    private void setUpDialog() {
+	private void setUpDialog()
+	{
 
-        myCheckBox.setMnemonic(KeyEvent.VK_A);
-        myNameLabel.setLabelFor(myNameComboBox);
+		myCheckBox.setMnemonic(KeyEvent.VK_A);
+		myNameLabel.setLabelFor(myNameComboBox);
 
 
-        // Replace occurences
-        if (myOccurrencesCount > 1) {
-            myCheckBox.setSelected(false);
-            myCheckBox.setEnabled(true);
-            myCheckBox.setText(myCheckBox.getText() + " (" + myOccurrencesCount + " occurrences)");
-        } else {
-            myCheckBox.setSelected(false);
-            myCheckBox.setEnabled(false);
-        }
-    }
+		// Replace occurences
+		if(myOccurrencesCount > 1)
+		{
+			myCheckBox.setSelected(false);
+			myCheckBox.setEnabled(true);
+			myCheckBox.setText(myCheckBox.getText() + " (" + myOccurrencesCount + " occurrences)");
+		}
+		else
+		{
+			myCheckBox.setSelected(false);
+			myCheckBox.setEnabled(false);
+		}
+	}
 
-    private void setUpNameComboBox(final String[] possibleNames) {
-        final EditorComboBoxEditor comboEditor = new StringComboboxEditor(myProject, RubyFileType.RUBY, myNameComboBox);
+	private void setUpNameComboBox(final String[] possibleNames)
+	{
+		final EditorComboBoxEditor comboEditor = new StringComboboxEditor(myProject, RubyFileType.RUBY, myNameComboBox);
 
-        myNameComboBox.setEditor(comboEditor);
-        myNameComboBox.setRenderer(new EditorComboBoxRenderer(comboEditor));
-        myNameComboBox.setEditable(true);
-        myNameComboBox.setMaximumRowCount(8);
-        myListenerList.add(DataChangedListener.class, new DataChangedListener());
+		myNameComboBox.setEditor(comboEditor);
+		myNameComboBox.setRenderer(new EditorComboBoxRenderer(comboEditor));
+		myNameComboBox.setEditable(true);
+		myNameComboBox.setMaximumRowCount(8);
+		myListenerList.add(DataChangedListener.class, new DataChangedListener());
 
-        myNameComboBox.addItemListener(
-                new ItemListener() {
-                    @Override
-					public void itemStateChanged(ItemEvent e) {
-                        fireNameDataChanged();
-                    }
-                }
-        );
+		myNameComboBox.addItemListener(new ItemListener()
+		{
+			@Override
+			public void itemStateChanged(ItemEvent e)
+			{
+				fireNameDataChanged();
+			}
+		});
 
-        ((EditorTextField) myNameComboBox.getEditor().getEditorComponent()).addDocumentListener(new DocumentListener() {
-            @Override
-			public void beforeDocumentChange(DocumentEvent event) {
-            }
+		((EditorTextField) myNameComboBox.getEditor().getEditorComponent()).addDocumentListener(new DocumentListener()
+		{
+			@Override
+			public void beforeDocumentChange(DocumentEvent event)
+			{
+			}
 
-            @Override
-			public void documentChanged(DocumentEvent event) {
-                fireNameDataChanged();
-            }
-        }
-        );
+			@Override
+			public void documentChanged(DocumentEvent event)
+			{
+				fireNameDataChanged();
+			}
+		});
 
-        myContentPane.registerKeyboardAction(new ActionListener() {
-            @Override
-			public void actionPerformed(ActionEvent e) {
-                myNameComboBox.requestFocus();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.ALT_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+		myContentPane.registerKeyboardAction(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				myNameComboBox.requestFocus();
+			}
+		}, KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.ALT_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        for (String possibleName : possibleNames) {
-            myNameComboBox.addItem(possibleName);
-        }
-    }
+		for(String possibleName : possibleNames)
+		{
+			myNameComboBox.addItem(possibleName);
+		}
+	}
 
-    @Override
-	public JComponent getPreferredFocusedComponent() {
-        return myNameComboBox;
-    }
+	@Override
+	public JComponent getPreferredFocusedComponent()
+	{
+		return myNameComboBox;
+	}
 
-    @Override
-	protected Action[] createActions() {
-        return new Action[]{
-                getOKAction(),
-                getCancelAction(),
-                getHelpAction()
-        };
-    }
+	@Override
+	protected Action[] createActions()
+	{
+		return new Action[]{
+				getOKAction(),
+				getCancelAction(),
+				getHelpAction()
+		};
+	}
 
-    @Override
-	protected void doOKAction() {
-        final String result = myValidator.check(this);
-        if (result!=null){
-            Messages.showErrorDialog(myContentPane, result, RBundle.message("refactoring.introduce.variable.dialog.title"));
-            doCancelAction();
-            return;
-        }
-        super.doOKAction();
-    }
+	@Override
+	protected void doOKAction()
+	{
+		final String result = myValidator.check(this);
+		if(result != null)
+		{
+			Messages.showErrorDialog(myContentPane, result, RBundle.message("refactoring.introduce.variable.dialog.title"));
+			doCancelAction();
+			return;
+		}
+		super.doOKAction();
+	}
 
-    @Override
-	protected void doHelpAction() {
-        HelpManager.getInstance().invokeHelp(HelpID.INTRODUCE_VARIABLE);
-    }
+	@Override
+	protected void doHelpAction()
+	{
+		HelpManager.getInstance().invokeHelp(HelpID.INTRODUCE_VARIABLE);
+	}
 
-    class DataChangedListener implements EventListener {
-        void dataChanged() {
-            updateOkStatus();
-        }
-    }
+	class DataChangedListener implements EventListener
+	{
+		void dataChanged()
+		{
+			updateOkStatus();
+		}
+	}
 
-    private void updateOkStatus() {
-        String text = getName();
-        setOKActionEnabled(checkName(text));
-    }
+	private void updateOkStatus()
+	{
+		String text = getName();
+		setOKActionEnabled(checkName(text));
+	}
 
-    private boolean checkName(String text) {
-        return text != null && TextUtil.isIdentifier(text) && !RESWORDS.contains(text);
-    }
+	private boolean checkName(String text)
+	{
+		return text != null && TextUtil.isIdentifier(text) && !RESWORDS.contains(text);
+	}
 
-    private void fireNameDataChanged() {
-        for (Object object : myListenerList.getListenerList()) {
-            if (object instanceof DataChangedListener) {
-                ((DataChangedListener) object).dataChanged();
-            }
-        }
-    }
+	private void fireNameDataChanged()
+	{
+		for(Object object : myListenerList.getListenerList())
+		{
+			if(object instanceof DataChangedListener)
+			{
+				((DataChangedListener) object).dataChanged();
+			}
+		}
+	}
 
 }

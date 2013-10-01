@@ -16,40 +16,45 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.arguments;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RBlockArgument;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.06.2006
  */
-public class RBlockArgumentImpl extends RPsiElementBase implements RBlockArgument {
-    public RBlockArgumentImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RBlockArgumentImpl extends RPsiElementBase implements RBlockArgument
+{
+	public RBlockArgumentImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName(){
-        final RIdentifier identifier = getIdentifier();
-        //noinspection ConstantConditions
-        return identifier!=null ? identifier.getName() : "";
-    }
+	public String getName()
+	{
+		final RIdentifier identifier = getIdentifier();
+		//noinspection ConstantConditions
+		return identifier != null ? identifier.getName() : "";
+	}
 
-    @Override
-	public RIdentifier getIdentifier(){
-        return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
-    }
+	@Override
+	public RIdentifier getIdentifier()
+	{
+		return RubyPsiUtil.getChildByType(this, RIdentifier.class, 0);
+	}
 
-    @Override
-	public ArgumentInfo.Type getType() {
-        return ArgumentInfo.Type.BLOCK;
-    }
+	@Override
+	public ArgumentInfo.Type getType()
+	{
+		return ArgumentInfo.Type.BLOCK;
+	}
 
 }

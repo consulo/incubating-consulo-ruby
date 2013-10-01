@@ -33,38 +33,44 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 
 
-public class RubyParserDefinition implements ParserDefinition, RubyElementTypes {
+public class RubyParserDefinition implements ParserDefinition, RubyElementTypes
+{
 
-    @Override
+	@Override
 	@NotNull
-    public Lexer createLexer(Project project, LanguageVersion languageVersion) {
-        return new RubyLexer();
-    }
+	public Lexer createLexer(Project project, LanguageVersion languageVersion)
+	{
+		return new RubyLexer();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiParser createParser(Project project, LanguageVersion languageVersion) {
-        return new RubyParser();
-//        return new RubyMockParser();
-    }
+	public PsiParser createParser(Project project, LanguageVersion languageVersion)
+	{
+		return new RubyParser();
+		//        return new RubyMockParser();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public IFileElementType getFileNodeType() {
-        return RubyElementTypes.FILE;
-    }
+	public IFileElementType getFileNodeType()
+	{
+		return RubyElementTypes.FILE;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
-        return BNF.tWHITESPACES;
-    }
+	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
+	{
+		return BNF.tWHITESPACES;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public TokenSet getCommentTokens(LanguageVersion languageVersion) {
-        return BNF.tCOMMENTS;
-    }
+	public TokenSet getCommentTokens(LanguageVersion languageVersion)
+	{
+		return BNF.tCOMMENTS;
+	}
 
 	@NotNull
 	@Override
@@ -75,18 +81,21 @@ public class RubyParserDefinition implements ParserDefinition, RubyElementTypes 
 
 	@Override
 	@NotNull
-    public PsiElement createElement(@NotNull ASTNode node) {
-        return RubyPsiCreator.create(node);
-    }
+	public PsiElement createElement(@NotNull ASTNode node)
+	{
+		return RubyPsiCreator.create(node);
+	}
 
-    @Override
-	public PsiFile createFile(FileViewProvider viewProvider) {
-        return new RFileImpl(viewProvider);
-    }
+	@Override
+	public PsiFile createFile(FileViewProvider viewProvider)
+	{
+		return new RFileImpl(viewProvider);
+	}
 
-    @Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
-        return SpaceRequirements.MAY;
-    }
+	@Override
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
+	{
+		return SpaceRequirements.MAY;
+	}
 
 }

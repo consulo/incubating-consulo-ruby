@@ -28,12 +28,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RRescueBlock extends RPsiElement, PseudoScopeHolder,
-        RWrapAndIndentCOMPSTMT, RWrapedAlways {
+public interface RRescueBlock extends RPsiElement, PseudoScopeHolder, RWrapAndIndentCOMPSTMT, RWrapedAlways
+{
 
-    @Nullable
-    public RBlockVariables getBlockVariables();
+	@Nullable
+	public RBlockVariables getBlockVariables();
 
-    @Nullable
-    public RPsiElement getException();
+	@Nullable
+	public RPsiElement getException();
 }

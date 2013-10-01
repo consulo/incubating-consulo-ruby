@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.ui.LayeredIcon;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.ui.LayeredIcon;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,62 +35,72 @@ import javax.swing.*;
  * @author: oleg
  * @date: Feb 16, 2007
  */
-public class RFieldPresentationUtil implements RubyIcons {
+public class RFieldPresentationUtil implements RubyIcons
+{
 
-    public static Icon getIcon(@NotNull final RVirtualField rVirtualField) {
-        return getIconByRField(rVirtualField);
-    }
+	public static Icon getIcon(@NotNull final RVirtualField rVirtualField)
+	{
+		return getIconByRField(rVirtualField);
+	}
 
-    /**
-     * Computes icon for RVirtualClass.
-     * Be careful, if flags contains information about visibility, method uses
-     * RIconsUtils.getIconWithModifiers()
-     * @param rVirtualField RVirtualClass
-     * @param flags com.intellij.openapi.util.Iconable flags
-     * @return Icon
-     */
-    public static Icon getIcon(@NotNull final RVirtualField rVirtualField, final int flags) {
-        if ((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY) {
-            return getIconByRField(rVirtualField);
-        }
-        return RubyIcons.RUBY_FIELD_NODE;
-    }
+	/**
+	 * Computes icon for RVirtualClass.
+	 * Be careful, if flags contains information about visibility, method uses
+	 * RIconsUtils.getIconWithModifiers()
+	 *
+	 * @param rVirtualField RVirtualClass
+	 * @param flags         com.intellij.openapi.util.Iconable flags
+	 * @return Icon
+	 */
+	public static Icon getIcon(@NotNull final RVirtualField rVirtualField, final int flags)
+	{
+		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
+		{
+			return getIconByRField(rVirtualField);
+		}
+		return RubyIcons.RUBY_FIELD_NODE;
+	}
 
-    public static ItemPresentation getPresentation(@NotNull final RVirtualField rVirtualField) {
-        final Icon icon = getIcon(rVirtualField, Iconable.ICON_FLAG_VISIBILITY);
-        return new PresentationData(rVirtualField.getName(),
-                TextUtil.wrapInParens(getLocation(rVirtualField)),
-                icon, icon, null);
-    }
+	public static ItemPresentation getPresentation(@NotNull final RVirtualField rVirtualField)
+	{
+		final Icon icon = getIcon(rVirtualField, Iconable.ICON_FLAG_VISIBILITY);
+		return new PresentationData(rVirtualField.getName(), TextUtil.wrapInParens(getLocation(rVirtualField)), icon, icon, null);
+	}
 
-    public static String getLocation(@NotNull final RVirtualField field){
-        return RContainerPresentationUtil.getContainerNameWithLocation(field.getHolder());
-    }
+	public static String getLocation(@NotNull final RVirtualField field)
+	{
+		return RContainerPresentationUtil.getContainerNameWithLocation(field.getHolder());
+	}
 
-    /**
-     * Generates the icon by RVirtualField
-     * @param field Field to get the icon for
-     * @return Field icon
-     */
-    public static Icon getIconByRField(final RVirtualField field) {
-        final FieldType type = field.getType();
-        final Icon attrIcon = getIconType(type);
-        if (attrIcon!=null){
-            LayeredIcon icon = new LayeredIcon(2);
-            icon.setIcon(RUBY_FIELD_NODE,0);
-            icon.setIcon(attrIcon,1);
-            return icon;
-        }
-        return RUBY_FIELD_NODE;
-    }
+	/**
+	 * Generates the icon by RVirtualField
+	 *
+	 * @param field Field to get the icon for
+	 * @return Field icon
+	 */
+	public static Icon getIconByRField(final RVirtualField field)
+	{
+		final FieldType type = field.getType();
+		final Icon attrIcon = getIconType(type);
+		if(attrIcon != null)
+		{
+			LayeredIcon icon = new LayeredIcon(2);
+			icon.setIcon(RUBY_FIELD_NODE, 0);
+			icon.setIcon(attrIcon, 1);
+			return icon;
+		}
+		return RUBY_FIELD_NODE;
+	}
 
-    @Nullable
-    private static Icon getIconType(final FieldType type) {
-        if (type == FieldType.CLASS_VARIABLE){
-            return RUBY_ATTR_STATIC;
-        }
-        return null;
-    }
+	@Nullable
+	private static Icon getIconType(final FieldType type)
+	{
+		if(type == FieldType.CLASS_VARIABLE)
+		{
+			return RUBY_ATTR_STATIC;
+		}
+		return null;
+	}
 
 
 }

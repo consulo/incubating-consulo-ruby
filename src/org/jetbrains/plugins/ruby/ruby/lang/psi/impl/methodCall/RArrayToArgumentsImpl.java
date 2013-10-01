@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RArrayToArguments;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class RArrayToArgumentsImpl extends RPsiElementBase implements RArrayToArguments {
-    public RArrayToArgumentsImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RArrayToArgumentsImpl extends RPsiElementBase implements RArrayToArguments
+{
+	public RArrayToArgumentsImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

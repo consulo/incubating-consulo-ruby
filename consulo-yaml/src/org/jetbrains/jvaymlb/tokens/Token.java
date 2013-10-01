@@ -30,20 +30,24 @@ package org.jetbrains.jvaymlb.tokens;
 /**
  * @author <a href="mailto:ola.bini@ki.se">Ola Bini</a>
  */
-public abstract class Token extends org.jvyamlb.tokens.Token {
-    protected int myStart;
-    protected int myEnd;
+public abstract class Token extends org.jvyamlb.tokens.Token
+{
+	protected int myStart;
+	protected int myEnd;
 
-    public Token(final int start, final int end) {
-        myStart = start;
-        myEnd = end;
-    }
+	public Token(final int start, final int end)
+	{
+		myStart = start;
+		myEnd = end;
+	}
 
-    public int getStart() {
-        return myStart;
-    }
+	public int getStart()
+	{
+		return myStart;
+	}
 
-    public int getEnd() {
-        return myEnd;
-    }
+	public int getEnd()
+	{
+		return myEnd;
+	}
 }// Token

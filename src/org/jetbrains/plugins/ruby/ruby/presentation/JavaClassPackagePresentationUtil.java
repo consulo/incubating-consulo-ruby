@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
@@ -25,35 +25,39 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 13, 2007
  */
-public class JavaClassPackagePresentationUtil {
-    @Nullable
-    public static ItemPresentation getIncludeJavaPresentation(@NotNull final RCallBase rCall) {
-        if (rCall.getCallType() != RubyCallType.INCLUDE_CLASS_CALL){
-            return null;
-        }
-        final Icon icon = getIncludeIcon();
-        return new PresentationData(rCall.getText(),
-                TextUtil.wrapInParens(getLocation(rCall)),
-                icon, icon, null);
-    }
+public class JavaClassPackagePresentationUtil
+{
+	@Nullable
+	public static ItemPresentation getIncludeJavaPresentation(@NotNull final RCallBase rCall)
+	{
+		if(rCall.getCallType() != RubyCallType.INCLUDE_CLASS_CALL)
+		{
+			return null;
+		}
+		final Icon icon = getIncludeIcon();
+		return new PresentationData(rCall.getText(), TextUtil.wrapInParens(getLocation(rCall)), icon, icon, null);
+	}
 
-    public static Icon getIncludeIcon() {
-        return JRubyIcons.JRUBY_ICON;
-    }
+	public static Icon getIncludeIcon()
+	{
+		return JRubyIcons.JRUBY_ICON;
+	}
 
-    public static Icon getJavaIcon() {
-        return JRubyIcons.JAVA_ICON;
-    }
+	public static Icon getJavaIcon()
+	{
+		return JRubyIcons.JAVA_ICON;
+	}
 
-    public static String getLocation(@NotNull final RCall call){
-        return RContainerPresentationUtil.getLocation(call);
-    }
+	public static String getLocation(@NotNull final RCall call)
+	{
+		return RContainerPresentationUtil.getLocation(call);
+	}
 }

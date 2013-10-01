@@ -45,74 +45,89 @@ import com.intellij.psi.PsiFile;
  * @author: Roman Chernyatchik
  * @date: 02.02.2007
  */
-public class RailsHighlightPassFactory implements TextEditorHighlightingPassFactory {
-    private final TextEditorHighlightingPassRegistrar myRegistrar;
+public class RailsHighlightPassFactory implements TextEditorHighlightingPassFactory
+{
+	private final TextEditorHighlightingPassRegistrar myRegistrar;
 
-    public RailsHighlightPassFactory(final TextEditorHighlightingPassRegistrar passRegistrar) {
-        myRegistrar = passRegistrar;
-    }
+	public RailsHighlightPassFactory(final TextEditorHighlightingPassRegistrar passRegistrar)
+	{
+		myRegistrar = passRegistrar;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile,
-                                                             @NotNull final Editor editor) {
-        if (psiFile==null){
-            return null;
-        }
+	public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile, @NotNull final Editor editor)
+	{
+		if(psiFile == null)
+		{
+			return null;
+		}
 
-        final Module module = ModuleUtil.findModuleForPsiElement(psiFile);
-        if (module != null && RailsFacetUtil.hasRailsSupport(module)) {
-            final VirtualFile file = psiFile.getVirtualFile();
-            if (file != null) {
-                final String name = file.getName();
-                if (ViewsConventions.isValidViewFileName(name)) {
-                    if (ViewsConventions.isPartialViewName(name)) {
-                        return new RailsViewToControllerMarkersPass(module, psiFile, editor);
-                    }
-                    return new RailsViewToActionMarkersPass(module, psiFile, editor);
-                } else if (RubyVirtualFileScanner.isRubyFile(file)) {
-                    return new RailsControllerToViewMarkersPass(module, psiFile, editor);
-                }
-            }
-        }
+		final Module module = ModuleUtil.findModuleForPsiElement(psiFile);
+		if(module != null && RailsFacetUtil.hasRailsSupport(module))
+		{
+			final VirtualFile file = psiFile.getVirtualFile();
+			if(file != null)
+			{
+				final String name = file.getName();
+				if(ViewsConventions.isValidViewFileName(name))
+				{
+					if(ViewsConventions.isPartialViewName(name))
+					{
+						return new RailsViewToControllerMarkersPass(module, psiFile, editor);
+					}
+					return new RailsViewToActionMarkersPass(module, psiFile, editor);
+				}
+				else if(RubyVirtualFileScanner.isRubyFile(file))
+				{
+					return new RailsControllerToViewMarkersPass(module, psiFile, editor);
+				}
+			}
+		}
 
-        //[HACK] may be it is hack.. Removes all Rails Highlighter if Rails Facet was deleted from module.
-        final Document document = editor.getDocument();
-        final Project project = psiFile.getProject();
-        final MarkupModel markupModel = DocumentMarkupModel.forDocument(document, project, false);
-        final RailsLineMarkerInfo[] markers = DaemonCodeAnalyzerUtil.getLineMarkers(document, project);
-        //removes all Rails specific markers
-        if (markers != null) {
-            for (RailsLineMarkerInfo marker : markers) {
-                markupModel.removeHighlighter(marker.highlighter);
-            }
-        }
-        return null;
-    }
+		//[HACK] may be it is hack.. Removes all Rails Highlighter if Rails Facet was deleted from module.
+		final Document document = editor.getDocument();
+		final Project project = psiFile.getProject();
+		final MarkupModel markupModel = DocumentMarkupModel.forDocument(document, project, false);
+		final RailsLineMarkerInfo[] markers = DaemonCodeAnalyzerUtil.getLineMarkers(document, project);
+		//removes all Rails specific markers
+		if(markers != null)
+		{
+			for(RailsLineMarkerInfo marker : markers)
+			{
+				markupModel.removeHighlighter(marker.highlighter);
+			}
+		}
+		return null;
+	}
 
-    @Override
-	public void projectOpened() {
-    }
+	@Override
+	public void projectOpened()
+	{
+	}
 
-    @Override
-	public void projectClosed() {
-    }
+	@Override
+	public void projectClosed()
+	{
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RailsComponents.RAILS_HIGHLIGHT_PASS_FACTORY;
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return RailsComponents.RAILS_HIGHLIGHT_PASS_FACTORY;
+	}
 
-    @Override
-	public void initComponent() {
-        myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST,
-                Pass.UPDATE_ALL, true, true);
-    }
+	@Override
+	public void initComponent()
+	{
+		myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST, Pass.UPDATE_ALL, true, true);
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 }
 

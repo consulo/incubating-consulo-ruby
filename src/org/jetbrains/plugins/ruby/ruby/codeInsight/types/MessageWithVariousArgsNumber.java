@@ -22,12 +22,13 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
  * @author: oleg
  * @date: May 25, 2007
  */
-public interface MessageWithVariousArgsNumber extends Message{
+public interface MessageWithVariousArgsNumber extends Message
+{
 
-    public int getMinArgsNumber();
+	public int getMinArgsNumber();
 
-    /**
-     * @return maximum number of arguments, or -1 if infinite
-     */
-    public int getMaxArgsNumber();
+	/**
+	 * @return maximum number of arguments, or -1 if infinite
+	 */
+	public int getMaxArgsNumber();
 }

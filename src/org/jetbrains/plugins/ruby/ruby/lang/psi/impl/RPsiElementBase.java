@@ -16,13 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -36,8 +31,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.names.RNameNavigator;
-
-import java.util.List;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 
 
 /**
@@ -45,89 +45,105 @@ import java.util.List;
  * User: oleg
  * Date: 07.05.2005
  */
-public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement {
-    public RPsiElementBase(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
+{
+	public RPsiElementBase(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Language getLanguage() {
-        return RubyFileType.RUBY.getLanguage();
-    }
+	public Language getLanguage()
+	{
+		return RubyFileType.RUBY.getLanguage();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName(){
-        return getText();
-    }
+	public String getName()
+	{
+		return getText();
+	}
 
-    public final String toString(){
-        return getNode().getElementType().toString();
-    }
+	public final String toString()
+	{
+		return getNode().getElementType().toString();
+	}
 
-    @Override
-	public PsiElement replace(@NotNull PsiElement element){
-        RubyPsiUtil.replaceInParent(this, element);
-        return element;
-    }
+	@Override
+	public PsiElement replace(@NotNull PsiElement element)
+	{
+		RubyPsiUtil.replaceInParent(this, element);
+		return element;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<PsiElement> getChildrenByFilter(IElementType filter) {
-        return RubyPsiUtil.getChildrenByFilter(this, filter);
-    }
+	public List<PsiElement> getChildrenByFilter(IElementType filter)
+	{
+		return RubyPsiUtil.getChildrenByFilter(this, filter);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement getChildByFilter(TokenSet filter, int number) {
-        return RubyPsiUtil.getChildByFilter(this, filter, number);
-    }
+	public PsiElement getChildByFilter(TokenSet filter, int number)
+	{
+		return RubyPsiUtil.getChildByFilter(this, filter, number);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public PsiElement getChildByFilter(IElementType filter, int number) {
-        return RubyPsiUtil.getChildByFilter(this, filter, number);
-    }
+	public PsiElement getChildByFilter(IElementType filter, int number)
+	{
+		return RubyPsiUtil.getChildByFilter(this, filter, number);
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public <T extends PsiElement> List<T> getChildrenByType(Class<T> c) {
-        return RubyPsiUtil.getChildrenByType(this, c);
-    }
+	public <T extends PsiElement> List<T> getChildrenByType(Class<T> c)
+	{
+		return RubyPsiUtil.getChildrenByType(this, c);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public <T extends PsiElement> T getChildByType(Class<T> c, int number) {
-        return RubyPsiUtil.getChildByType(this, c, number);
-    }
+	public <T extends PsiElement> T getChildByType(Class<T> c, int number)
+	{
+		return RubyPsiUtil.getChildByType(this, c, number);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RContainer getParentContainer() {
-        return PsiTreeUtil.getParentOfType(this, RContainer.class);
-    }
+	public RContainer getParentContainer()
+	{
+		return PsiTreeUtil.getParentOfType(this, RContainer.class);
+	}
 
-    @Nullable
-    public RVirtualContainer getVirtualParentContainer() {
-        return getParentContainer();
-    }
+	@Nullable
+	public RVirtualContainer getVirtualParentContainer()
+	{
+		return getParentContainer();
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitElement(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitElement(this);
+	}
 
-    public boolean isClassOrModuleName() {
-        final RName rName = RNameNavigator.getRName(this);
-        return rName != null && !(rName instanceof RSuperClass);
-    }
+	public boolean isClassOrModuleName()
+	{
+		final RName rName = RNameNavigator.getRName(this);
+		return rName != null && !(rName instanceof RSuperClass);
+	}
 
-    @Nullable
-    public FileSymbol forceFileSymbolUpdate(){
-        final RFile file = RubyPsiUtil.getRFile(this);
-        assert file!=null;
-        return file.getFileSymbol();
-    }
+	@Nullable
+	public FileSymbol forceFileSymbolUpdate()
+	{
+		final RFile file = RubyPsiUtil.getRFile(this);
+		assert file != null;
+		return file.getFileSymbol();
+	}
 }

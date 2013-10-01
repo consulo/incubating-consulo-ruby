@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.module.Module;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,33 +30,37 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
  * @author: Roman Chernyatchik
  * @date: 10.10.2006
  */
-public class MethodNode extends RailsNode {
-    private final RVirtualMethod myMethod;
+public class MethodNode extends RailsNode
+{
+	private final RVirtualMethod myMethod;
 
-    public MethodNode(final Module module, final RVirtualMethod method,
-                      final String fileUrl) {
-        super(module);
-        myMethod = method;
+	public MethodNode(final Module module, final RVirtualMethod method, final String fileUrl)
+	{
+		super(module);
+		myMethod = method;
 
-        final ItemPresentation presentation = method.getPresentation();
-        assert presentation != null;
-        
-        init(generateNodeId(method), presentation);
-        assert getVirtualFileUrl().equals(fileUrl);
-    }
+		final ItemPresentation presentation = method.getPresentation();
+		assert presentation != null;
 
-    @NotNull
-    public static NodeId generateNodeId(final RVirtualMethod method) {
-        return NodeIdUtil.createForVirtualContainer(method);
-    }
+		init(generateNodeId(method), presentation);
+		assert getVirtualFileUrl().equals(fileUrl);
+	}
 
-    @Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.METHOD;
-    }
+	public static NodeId generateNodeId(final RVirtualMethod method)
+	{
+		return NodeIdUtil.createForVirtualContainer(method);
+	}
 
-    public RVirtualMethod getMethod() {
-        return myMethod;
-    }
+	@Override
+	@NotNull
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.METHOD;
+	}
+
+	public RVirtualMethod getMethod()
+	{
+		return myMethod;
+	}
 }

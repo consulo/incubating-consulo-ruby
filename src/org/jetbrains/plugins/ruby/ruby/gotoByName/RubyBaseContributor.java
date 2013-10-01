@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.gotoByName;
 
-import com.intellij.navigation.ChooseByNameContributor;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.project.Project;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.navigation.ChooseByNameContributor;
+import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,18 +33,21 @@ import java.util.List;
  * @author: oleg
  * @date: Mar 2, 2007
  */
-abstract class RubyBaseContributor implements ChooseByNameContributor {
+abstract class RubyBaseContributor implements ChooseByNameContributor
+{
 
-    public static List<NavigationItem> getItems(@NotNull final List<RVirtualElement> elements,
-                                                @NotNull final Project project) {
-        final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
-        for (RVirtualElement prototype : elements) {
-            final RPsiElement psiElement = RVirtualPsiUtil.findPsiByVirtualElement(prototype, project);
+	public static List<NavigationItem> getItems(@NotNull final List<RVirtualElement> elements, @NotNull final Project project)
+	{
+		final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
+		for(RVirtualElement prototype : elements)
+		{
+			final RPsiElement psiElement = RVirtualPsiUtil.findPsiByVirtualElement(prototype, project);
 
-            if (psiElement instanceof NavigationItem) {
-                items.add(((NavigationItem) psiElement));
-            }
-        }
-        return items;
-    }
+			if(psiElement instanceof NavigationItem)
+			{
+				items.add(((NavigationItem) psiElement));
+			}
+		}
+		return items;
+	}
 }

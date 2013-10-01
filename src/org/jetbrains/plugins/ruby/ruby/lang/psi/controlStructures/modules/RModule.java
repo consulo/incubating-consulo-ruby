@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules;
 
-import com.intellij.psi.PsiNamedElement;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
@@ -24,15 +23,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructu
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RModule extends RVirtualModule,
-        RFormatStructureElement, RWrapLastChild, RFieldConstantContainer, PsiNamedElement, RContainer {
+public interface RModule extends RVirtualModule, RFormatStructureElement, RWrapLastChild, RFieldConstantContainer, PsiNamedElement, RContainer
+{
 
-    @Nullable
-    public RModuleName getModuleName();
+	@Nullable
+	public RModuleName getModuleName();
 }

@@ -16,10 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyBlock;
@@ -32,80 +28,91 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.heredo
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+import com.intellij.formatting.Indent;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 01.08.2006
  */
-public class RubyIndentProcessor implements RubyTokenTypes {
+public class RubyIndentProcessor implements RubyTokenTypes
+{
 
-    /**
-     * Calculates indent, based on code style, between parent block and blockNode node
-     *
-     * @param parent        parent block
-     * @param blockNode         blockNode node
-     * @param prevBlockNode previous block node
-     * @return indent
-     */
-    @NotNull
-    public static Indent getChildIndent(@NotNull final RubyBlock parent,
-                                        @Nullable final ASTNode prevBlockNode,
-                                        @NotNull final ASTNode blockNode) {
-        final PsiElement psiParent = parent.getNode().getPsi();
-        final PsiElement psiChild = blockNode.getPsi();
-        final IElementType childType = blockNode.getElementType();
+	/**
+	 * Calculates indent, based on code style, between parent block and blockNode node
+	 *
+	 * @param parent        parent block
+	 * @param blockNode     blockNode node
+	 * @param prevBlockNode previous block node
+	 * @return indent
+	 */
+	@NotNull
+	public static Indent getChildIndent(@NotNull final RubyBlock parent, @Nullable final ASTNode prevBlockNode, @NotNull final ASTNode blockNode)
+	{
+		final PsiElement psiParent = parent.getNode().getPsi();
+		final PsiElement psiChild = blockNode.getPsi();
+		final IElementType childType = blockNode.getElementType();
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RFile
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (psiParent instanceof RFile){
-            return Indent.getNoneIndent();
-        }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// RFile
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(psiParent instanceof RFile)
+		{
+			return Indent.getNoneIndent();
+		}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// if heredoc content, heredoc_end or block comment
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (psiChild instanceof RHeredocValue || childType == tHEREDOC_END ||
-                BNF.tBLOCK_COMMENT_TOKENS.contains(childType)) {
-            return Indent.getAbsoluteNoneIndent();
-        }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// if heredoc content, heredoc_end or block comment
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(psiChild instanceof RHeredocValue || childType == tHEREDOC_END ||
+				BNF.tBLOCK_COMMENT_TOKENS.contains(childType))
+		{
+			return Indent.getAbsoluteNoneIndent();
+		}
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TLINE_COMMENT
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (childType == TLINE_COMMENT){
-// if line comment has absolutely no indent, we shouldn`t touch it
-            final ASTNode prevNode = blockNode.getTreePrev();
-            if (prevNode!=null && prevNode.getElementType() == tEOL){
-                return Indent.getAbsoluteNoneIndent();
-            }
-            if (psiParent instanceof RWrapAndIndentCOMPSTMT || psiParent instanceof RContainer) {
-                return Indent.getNormalIndent();
-            }
-        }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// TLINE_COMMENT
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(childType == TLINE_COMMENT)
+		{
+			// if line comment has absolutely no indent, we shouldn`t touch it
+			final ASTNode prevNode = blockNode.getTreePrev();
+			if(prevNode != null && prevNode.getElementType() == tEOL)
+			{
+				return Indent.getAbsoluteNoneIndent();
+			}
+			if(psiParent instanceof RWrapAndIndentCOMPSTMT || psiParent instanceof RContainer)
+			{
+				return Indent.getNormalIndent();
+			}
+		}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// if after tCONTINUATION ContinuationIndent needed
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (prevBlockNode!=null){
-            if (BNF.tCONTINUATION_INDENT.contains(prevBlockNode.getElementType()) &&
-                    !(psiChild instanceof RBodyStatement || psiChild instanceof RCompoundStatement)){
-                return Indent.getContinuationIndent();
-            }
-        }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// if after tCONTINUATION ContinuationIndent needed
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(prevBlockNode != null)
+		{
+			if(BNF.tCONTINUATION_INDENT.contains(prevBlockNode.getElementType()) && !(psiChild instanceof RBodyStatement || psiChild instanceof RCompoundStatement))
+			{
+				return Indent.getContinuationIndent();
+			}
+		}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////// RIndentCOMPSTMT ////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (psiParent instanceof RIndentCOMPSTMT && psiChild instanceof RCompoundStatement) {
-            return Indent.getNormalIndent();
-        }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////// RIndentCOMPSTMT ////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(psiParent instanceof RIndentCOMPSTMT && psiChild instanceof RCompoundStatement)
+		{
+			return Indent.getNormalIndent();
+		}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////// Default Indent /////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        return Indent.getNoneIndent();
-    }
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////// Default Indent /////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		return Indent.getNoneIndent();
+	}
 }

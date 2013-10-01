@@ -25,19 +25,28 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfi
  * @author: Roman Chernyatchik
  * @date: May 22, 2008
  */
-public interface RailsServerRunConfigurationParams extends RubyRunConfigurationParams {
+public interface RailsServerRunConfigurationParams extends RubyRunConfigurationParams
+{
 
-    public String getPort();
-    public boolean isChoosePortManually();
-    @NotNull
-    public String getIPAddr();
-    @NotNull
-    public String getServerType();
-    public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType();
+	public String getPort();
 
-    public void setPort(String port);
-    public void setChoosePortManually(boolean choosePortManually);
-    public void setIPAddr(String ip);
-    public void setServerType(@NotNull String type);
-    public void setRailsEnvironmentType(RailsServerRunConfiguration.RailsEnvironmentType railsEnvironmentType);
+	public boolean isChoosePortManually();
+
+	@NotNull
+	public String getIPAddr();
+
+	@NotNull
+	public String getServerType();
+
+	public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType();
+
+	public void setPort(String port);
+
+	public void setChoosePortManually(boolean choosePortManually);
+
+	public void setIPAddr(String ip);
+
+	public void setServerType(@NotNull String type);
+
+	public void setRailsEnvironmentType(RailsServerRunConfiguration.RailsEnvironmentType railsEnvironmentType);
 }

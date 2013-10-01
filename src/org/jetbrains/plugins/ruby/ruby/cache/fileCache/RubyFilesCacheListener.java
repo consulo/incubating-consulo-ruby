@@ -27,24 +27,28 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Tracks <code>org.jetbrains.plugins.ruby.ruby.cache.fileCache.FilesCache</code>
- *  state changes.
+ * state changes.
  */
-public interface RubyFilesCacheListener {
-    /**
-     * File was added to cache
-     * @param url file url
-     */
-    public void fileAdded(@NotNull final String url);
+public interface RubyFilesCacheListener
+{
+	/**
+	 * File was added to cache
+	 *
+	 * @param url file url
+	 */
+	public void fileAdded(@NotNull final String url);
 
-    /**
-     * File was removed from cache
-     * @param url file url
-     */
-    public void fileRemoved(@NotNull final String url);
+	/**
+	 * File was removed from cache
+	 *
+	 * @param url file url
+	 */
+	public void fileRemoved(@NotNull final String url);
 
-    /**
-     * File was updated in cache
-     * @param url file url
-     */
-    public void fileUpdated(@NotNull final String url);
+	/**
+	 * File was updated in cache
+	 *
+	 * @param url file url
+	 */
+	public void fileUpdated(@NotNull final String url);
 }

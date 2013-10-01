@@ -16,10 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -30,49 +26,61 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpressio
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssignmentExpression {
-    public RAssignmentExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssignmentExpression
+{
+	public RAssignmentExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RPsiElement getObject() {
-        final RPsiElement object = getChildByType(RPsiElement.class, 0);
-        assert object!=null;
-        return object;
-    }
+	public RPsiElement getObject()
+	{
+		final RPsiElement object = getChildByType(RPsiElement.class, 0);
+		assert object != null;
+		return object;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getValue() {
-        PsiElement ASSGN = getASSGN();
-        return ASSGN != null ? PsiTreeUtil.getNextSiblingOfType(ASSGN, RPsiElement.class) : null;
-    }
+	public RPsiElement getValue()
+	{
+		PsiElement ASSGN = getASSGN();
+		return ASSGN != null ? PsiTreeUtil.getNextSiblingOfType(ASSGN, RPsiElement.class) : null;
+	}
 
-    private PsiElement getASSGN(){
-        return getChildByFilter(BNF.tASSGNS, 0);
-    }
+	private PsiElement getASSGN()
+	{
+		return getChildByFilter(BNF.tASSGNS, 0);
+	}
 
-    @Override
-	public void accept(@NotNull final PsiElementVisitor visitor){
-        if (visitor instanceof RubyElementVisitor){
-            ((RubyElementVisitor) visitor).visitRAssignmentExpression(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull final PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRAssignmentExpression(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RPsiElement value = getValue();
-        return value instanceof RExpression ? ((RExpression) value).getType(fileSymbol) : RType.NOT_TYPED;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RPsiElement value = getValue();
+		return value instanceof RExpression ? ((RExpression) value).getType(fileSymbol) : RType.NOT_TYPED;
+	}
 }

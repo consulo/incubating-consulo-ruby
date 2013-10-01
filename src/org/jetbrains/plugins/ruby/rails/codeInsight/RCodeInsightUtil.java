@@ -36,139 +36,149 @@ import com.intellij.psi.util.PsiTreeUtil;
  * @author: Roman Chernyatchik
  * @date: Oct 30, 2007
  */
-public class RCodeInsightUtil {
-    private static final Logger LOG = Logger.getInstance(RCodeInsightUtil.class.getName());
+public class RCodeInsightUtil
+{
+	private static final Logger LOG = Logger.getInstance(RCodeInsightUtil.class.getName());
 
-    @NotNull
-    public static List<PsiElement> getElementsStartsInRange(@NotNull final PsiElement root,
-                                                            final int startOffset,
-                                                            final int endOffset,
-                                                            boolean includeAllParents) {
-        return getElementsStartsInRange(root, startOffset, endOffset, includeAllParents, null);
-    }
+	@NotNull
+	public static List<PsiElement> getElementsStartsInRange(@NotNull final PsiElement root, final int startOffset, final int endOffset, boolean includeAllParents)
+	{
+		return getElementsStartsInRange(root, startOffset, endOffset, includeAllParents, null);
+	}
 
-    @NotNull
-    public static List<PsiElement> getElementsStartsInRange(@NotNull final PsiElement root,
-                                                            final int startOffset,
-                                                            final int endOffset,
-                                                            boolean includeAllParents,
-                                                            final RubyElementVisitor elVisitor) {
+	@NotNull
+	public static List<PsiElement> getElementsStartsInRange(@NotNull final PsiElement root, final int startOffset, final int endOffset, boolean includeAllParents, final RubyElementVisitor elVisitor)
+	{
 
-        final PsiElement commonParent = findCommonParent(root, startOffset, endOffset);
-        if (commonParent == null) {
-            return Collections.emptyList();
-        }
-        final List<PsiElement> list = new ArrayList<PsiElement>();
+		final PsiElement commonParent = findCommonParent(root, startOffset, endOffset);
+		if(commonParent == null)
+		{
+			return Collections.emptyList();
+		}
+		final List<PsiElement> list = new ArrayList<PsiElement>();
 
-        final int currentOffset = commonParent.getTextRange().getStartOffset();
+		final int currentOffset = commonParent.getTextRange().getStartOffset();
 
-        final PsiElementVisitor visitor = elVisitor == null
-                ? new ElementsInRangeElementVisitor(currentOffset, endOffset, startOffset, list)
-                : elVisitor;
+		final PsiElementVisitor visitor = elVisitor == null ? new ElementsInRangeElementVisitor(currentOffset, endOffset, startOffset, list) : elVisitor;
 
-        commonParent.accept(visitor);
+		commonParent.accept(visitor);
 
-        PsiElement parent = commonParent;
-        while (parent != null && parent != root) {
-            list.add(parent);
-            parent = includeAllParents ? parent.getParent() : null;
-        }
-        list.add(root);
+		PsiElement parent = commonParent;
+		while(parent != null && parent != root)
+		{
+			list.add(parent);
+			parent = includeAllParents ? parent.getParent() : null;
+		}
+		list.add(root);
 
-        return Collections.unmodifiableList(list);
-    }
+		return Collections.unmodifiableList(list);
+	}
 
-    //TODO refactor with IDEA CodeInsightUtil
-    @Nullable
-    private static PsiElement findCommonParent(@NotNull final PsiElement root,
-                                               final int startOffset, final int endOffset) {
-        if (startOffset == endOffset) {
-            return null;
-        }
+	//TODO refactor with IDEA CodeInsightUtil
+	@Nullable
+	private static PsiElement findCommonParent(@NotNull final PsiElement root, final int startOffset, final int endOffset)
+	{
+		if(startOffset == endOffset)
+		{
+			return null;
+		}
 
-        final PsiElement left = findElementAtInRoot(root, startOffset);
-        final PsiElement right = findElementAtInRoot(root, endOffset - 1);
-        if (left == null || right == null) {
-            return null;
-        }
+		final PsiElement left = findElementAtInRoot(root, startOffset);
+		final PsiElement right = findElementAtInRoot(root, endOffset - 1);
+		if(left == null || right == null)
+		{
+			return null;
+		}
 
-        PsiElement commonParent = PsiTreeUtil.findCommonParent(left, right);
+		PsiElement commonParent = PsiTreeUtil.findCommonParent(left, right);
 
-        LOG.assertTrue(commonParent != null);
-        LOG.assertTrue(commonParent.getTextRange() != null);
+		LOG.assertTrue(commonParent != null);
+		LOG.assertTrue(commonParent.getTextRange() != null);
 
-        while (commonParent.getParent() != null
-               && commonParent.getTextRange().equals(commonParent.getParent().getTextRange())) {
-            commonParent = commonParent.getParent();
-        }
-        return commonParent;
-    }
+		while(commonParent.getParent() != null && commonParent.getTextRange().equals(commonParent.getParent().getTextRange()))
+		{
+			commonParent = commonParent.getParent();
+		}
+		return commonParent;
+	}
 
-    //TODO refactor with IDEA CodeInsightUtil
-    @Nullable
-    private static PsiElement findElementAtInRoot(@NotNull final PsiElement root,
-                                                  final int offset) {
-        if (root instanceof PsiFile) {
-            final PsiFile file = (PsiFile) root;
+	//TODO refactor with IDEA CodeInsightUtil
+	@Nullable
+	private static PsiElement findElementAtInRoot(@NotNull final PsiElement root, final int offset)
+	{
+		if(root instanceof PsiFile)
+		{
+			final PsiFile file = (PsiFile) root;
 
             /*final LanguageDialect dialect = file.getLanguageDialect();
-            if (dialect != null) {
+			if (dialect != null) {
                 final PsiElement element = file.getViewProvider().findElementAt(offset, dialect);
                 if (element != null) {
                     return element;
                 }
             }    */
 
-            return file.getViewProvider().findElementAt(offset, root.getLanguage());
-        }
+			return file.getViewProvider().findElementAt(offset, root.getLanguage());
+		}
 
-        return root.findElementAt(offset);
-    }
+		return root.findElementAt(offset);
+	}
 
-    public static class ElementsInRangeElementVisitor extends RubyElementVisitor {
-        private final int myEndOffset;
-        private final int myStartOffset;
-        private final List<PsiElement> myList;
+	public static class ElementsInRangeElementVisitor extends RubyElementVisitor
+	{
+		private final int myEndOffset;
+		private final int myStartOffset;
+		private final List<PsiElement> myList;
 
-        private int myOffset;
+		private int myOffset;
 
-        public ElementsInRangeElementVisitor(final int currentOffset,
-                                             final int endOffset, final int startOffset,
-                                             final List<PsiElement> list) {
-            myEndOffset = endOffset;
-            myStartOffset = startOffset;
-            myList = list;
-            myOffset = currentOffset;
-        }
+		public ElementsInRangeElementVisitor(final int currentOffset, final int endOffset, final int startOffset, final List<PsiElement> list)
+		{
+			myEndOffset = endOffset;
+			myStartOffset = startOffset;
+			myList = list;
+			myOffset = currentOffset;
+		}
 
-        @Override
-		public void visitReferenceExpression(PsiReferenceExpression expression) {
-            visitElement(expression);
-        }
+		@Override
+		public void visitReferenceExpression(PsiReferenceExpression expression)
+		{
+			visitElement(expression);
+		}
 
-        @Override
-		public void visitElement(PsiElement element) {
-            processElement(element);
-        }
+		@Override
+		public void visitElement(PsiElement element)
+		{
+			processElement(element);
+		}
 
-        protected void processElement(PsiElement element) {
-            PsiElement child = element.getFirstChild();
-            if (child != null) {
-                // composite element
-                while (child != null) {
-                    if (myOffset > myEndOffset) break;
-                    int start = myOffset;
-                    child.accept(this);
-                    //element start
-                    if (myStartOffset <= start) {
-                        myList.add(child);
-                    }
-                    child = child.getNextSibling();
-                }
-            } else {
-                // leaf element
-                myOffset += element.getTextLength();
-            }
-        }
-    }
+		protected void processElement(PsiElement element)
+		{
+			PsiElement child = element.getFirstChild();
+			if(child != null)
+			{
+				// composite element
+				while(child != null)
+				{
+					if(myOffset > myEndOffset)
+					{
+						break;
+					}
+					int start = myOffset;
+					child.accept(this);
+					//element start
+					if(myStartOffset <= start)
+					{
+						myList.add(child);
+					}
+					child = child.getNextSibling();
+				}
+			}
+			else
+			{
+				// leaf element
+				myOffset += element.getTextLength();
+			}
+		}
+	}
 }

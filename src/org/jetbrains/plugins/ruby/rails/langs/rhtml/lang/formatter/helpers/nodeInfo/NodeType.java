@@ -22,7 +22,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.node
  * @author: Roman Chernyatchik
  * @date: Sep 22, 2007
  */
-enum NodeType {
-    TEMPLATE_NODE,
-    RHTML_NODE
+enum NodeType
+{
+	TEMPLATE_NODE,
+	RHTML_NODE
 }

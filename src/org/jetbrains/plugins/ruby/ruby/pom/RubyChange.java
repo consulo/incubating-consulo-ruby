@@ -22,6 +22,7 @@ package org.jetbrains.plugins.ruby.ruby.pom;
  * @author: Roman Chernyatchik
  * @date: 03.10.2006
  */
-public interface RubyChange {
-    public void accept(final RubyChangeVisitor visitor);
+public interface RubyChange
+{
+	public void accept(final RubyChangeVisitor visitor);
 }

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -29,60 +29,70 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompou
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElsifBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 10.06.2006
  */
-public class RIfStatementImpl extends RConditionalStatementImpl implements RIfStatement {
-    public RIfStatementImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RIfStatementImpl extends RConditionalStatementImpl implements RIfStatement
+{
+	public RIfStatementImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof RubyElementVisitor) {
-            ((RubyElementVisitor)visitor).visitRIfStatement(this);
-            return;
-        }
-        super.accept(visitor);
-    }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRIfStatement(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RCompoundStatement getThenBlock() {
-        //noinspection ConstantConditions
-        return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
-    }
+	public RCompoundStatement getThenBlock()
+	{
+		//noinspection ConstantConditions
+		return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RElsifBlock> getElsifBlocks() {
-        return RubyPsiUtil.getChildrenByType(this, RElsifBlock.class);
-    }
+	public List<RElsifBlock> getElsifBlocks()
+	{
+		return RubyPsiUtil.getChildrenByType(this, RElsifBlock.class);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RElseBlock getElseBlock() {
-        return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
-    }
+	public RElseBlock getElseBlock()
+	{
+		return RubyPsiUtil.getChildByType(this, RElseBlock.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RCompoundStatement thenBlock = getThenBlock();
-        final List<RElsifBlock> elsifBlocks = getElsifBlocks();
-        final RElseBlock elseBlock = getElseBlock();
-        RType result = thenBlock.getType(fileSymbol);
-        for (RElsifBlock elsifBlock : elsifBlocks) {
-            result = RTypeUtil.joinOr(result, elsifBlock.getBody().getType(fileSymbol));
-        }
-        if (elseBlock != null){
-            result = RTypeUtil.joinOr(result, elseBlock.getBody().getType(fileSymbol));
-        }
-        return result;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RCompoundStatement thenBlock = getThenBlock();
+		final List<RElsifBlock> elsifBlocks = getElsifBlocks();
+		final RElseBlock elseBlock = getElseBlock();
+		RType result = thenBlock.getType(fileSymbol);
+		for(RElsifBlock elsifBlock : elsifBlocks)
+		{
+			result = RTypeUtil.joinOr(result, elsifBlock.getBody().getType(fileSymbol));
+		}
+		if(elseBlock != null)
+		{
+			result = RTypeUtil.joinOr(result, elseBlock.getBody().getType(fileSymbol));
+		}
+		return result;
+	}
 }

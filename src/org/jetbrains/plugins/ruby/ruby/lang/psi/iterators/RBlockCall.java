@@ -26,7 +26,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  * User: oleg
  * Date: Jul 12, 2007
  */
-public interface RBlockCall extends RPsiElement, PseudoScopeHolder, RExpression {
-    @NotNull
-    RPsiElement getCall();
+public interface RBlockCall extends RPsiElement, PseudoScopeHolder, RExpression
+{
+	@NotNull
+	RPsiElement getCall();
 }

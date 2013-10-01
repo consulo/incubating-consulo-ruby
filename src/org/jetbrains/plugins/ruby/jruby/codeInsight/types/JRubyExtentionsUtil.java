@@ -36,99 +36,104 @@ import com.intellij.psi.search.GlobalSearchScope;
  * This class is used to extend Java class type with ruby methods
  * See jruby/lib/java/* for more details
  */
-public class JRubyExtentionsUtil {
+public class JRubyExtentionsUtil
+{
 
-    @NonNls
-    public static final String JAVA_PROXY_METHODS = "JavaProxyMethods";
-    @NonNls
-    private static final String JAVA_UTIL_MAP = "java.util.Map";
-    @NonNls
-    private static final String JAVA_LANG_COMPARABLE = "java.lang.Comparable";
-    @NonNls
-    private static final String JAVA_UTIL_COLLECTION = "java.util.Collection";
-    @NonNls
-    private static final String JAVA_UTIL_ENUMERATION = "java.util.Enumeration";
-    @NonNls
-    private static final String JAVA_UTIL_ITERATOR = "java.util.Iterator";
-    @NonNls
-    private static final String JAVA_UTIL_LIST = "java.util.List";
-    @NonNls
-    private static final String JAVA_LANG_RUNNABLE = "java.lang.Runnable";
+	@NonNls
+	public static final String JAVA_PROXY_METHODS = "JavaProxyMethods";
+	@NonNls
+	private static final String JAVA_UTIL_MAP = "java.util.Map";
+	@NonNls
+	private static final String JAVA_LANG_COMPARABLE = "java.lang.Comparable";
+	@NonNls
+	private static final String JAVA_UTIL_COLLECTION = "java.util.Collection";
+	@NonNls
+	private static final String JAVA_UTIL_ENUMERATION = "java.util.Enumeration";
+	@NonNls
+	private static final String JAVA_UTIL_ITERATOR = "java.util.Iterator";
+	@NonNls
+	private static final String JAVA_UTIL_LIST = "java.util.List";
+	@NonNls
+	private static final String JAVA_LANG_RUNNABLE = "java.lang.Runnable";
 
-    @NonNls
-    private static final String JAVA_UTIL_MAP_RB = "JavaUtilMap";
-    @NonNls
-    private static final String JAVA_LANG_COMPARABLE_RB = "JavaLangComparable";
-    @NonNls
-    private static final String JAVA_UTIL_COLLECTION_RB = "JavaUtilCollection";
-    @NonNls
-    private static final String JAVA_UTIL_ENUMERATION_RB = "JavaUtilEnumeration";
-    @NonNls
-    private static final String JAVA_UTIL_ITERATOR_RB = "JavaUtilIterator";
-    @NonNls
-    private static final String JAVA_UTIL_LIST_RB = "JavaUtilList";
-    @NonNls
-    private static final String JAVA_LANG_RUNNABLE_RB = "JavaLangRunnable";
+	@NonNls
+	private static final String JAVA_UTIL_MAP_RB = "JavaUtilMap";
+	@NonNls
+	private static final String JAVA_LANG_COMPARABLE_RB = "JavaLangComparable";
+	@NonNls
+	private static final String JAVA_UTIL_COLLECTION_RB = "JavaUtilCollection";
+	@NonNls
+	private static final String JAVA_UTIL_ENUMERATION_RB = "JavaUtilEnumeration";
+	@NonNls
+	private static final String JAVA_UTIL_ITERATOR_RB = "JavaUtilIterator";
+	@NonNls
+	private static final String JAVA_UTIL_LIST_RB = "JavaUtilList";
+	@NonNls
+	private static final String JAVA_LANG_RUNNABLE_RB = "JavaLangRunnable";
 
 
-    /*
-    * Each proxy class is extended with JavaProxyMethods symbols
-    */
-    public static void addJavaProxyMethods(@Nullable final FileSymbol fileSymbol, 
-                                           @NotNull final Children children,
-                                           @NotNull final Context context){
-        // Here we add JavaProxyMethods to children
-        SymbolUtil.includeTopLevelModuleSymbol(fileSymbol, children, context, JAVA_PROXY_METHODS);
-    }
+	/*
+	* Each proxy class is extended with JavaProxyMethods symbols
+	*/
+	public static void addJavaProxyMethods(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context)
+	{
+		// Here we add JavaProxyMethods to children
+		SymbolUtil.includeTopLevelModuleSymbol(fileSymbol, children, context, JAVA_PROXY_METHODS);
+	}
 
-    public static void extendJavaClassWithStubs(@Nullable final FileSymbol fileSymbol,
-                                                @NotNull final Children children,
-                                                @NotNull final PsiClass clazzz,
-                                                @NotNull final Context context){
-        final Project project = clazzz.getProject();
-        final JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
-        final GlobalSearchScope scope = GlobalSearchScope.allScope(project);
+	public static void extendJavaClassWithStubs(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final PsiClass clazzz, @NotNull final Context context)
+	{
+		final Project project = clazzz.getProject();
+		final JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
+		final GlobalSearchScope scope = GlobalSearchScope.allScope(project);
 
-        // java.util.Map
-        final PsiClass javaUtilMapClass = javaPsiFacade.findClass(JAVA_UTIL_MAP, scope);
-        if (javaUtilMapClass!=null && clazzz.isInheritor(javaUtilMapClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_MAP_RB);
-        }
+		// java.util.Map
+		final PsiClass javaUtilMapClass = javaPsiFacade.findClass(JAVA_UTIL_MAP, scope);
+		if(javaUtilMapClass != null && clazzz.isInheritor(javaUtilMapClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_MAP_RB);
+		}
 
-        // java.lang.Comparable
-        final PsiClass javaLangComparableClass = javaPsiFacade.findClass(JAVA_LANG_COMPARABLE, scope);
-        if (javaLangComparableClass!=null && clazzz.isInheritor(javaLangComparableClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_LANG_COMPARABLE_RB);
-        }
+		// java.lang.Comparable
+		final PsiClass javaLangComparableClass = javaPsiFacade.findClass(JAVA_LANG_COMPARABLE, scope);
+		if(javaLangComparableClass != null && clazzz.isInheritor(javaLangComparableClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_LANG_COMPARABLE_RB);
+		}
 
-        // java.util.Collection
-        final PsiClass javaUtilCollectionClass = javaPsiFacade.findClass(JAVA_UTIL_COLLECTION, scope);
-        if (javaUtilCollectionClass!=null && clazzz.isInheritor(javaUtilCollectionClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_COLLECTION_RB);
-        }
+		// java.util.Collection
+		final PsiClass javaUtilCollectionClass = javaPsiFacade.findClass(JAVA_UTIL_COLLECTION, scope);
+		if(javaUtilCollectionClass != null && clazzz.isInheritor(javaUtilCollectionClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_COLLECTION_RB);
+		}
 
-        // java.util.Enumeration
-        final PsiClass javaUtilEnumerationClass = javaPsiFacade.findClass(JAVA_UTIL_ENUMERATION, scope);
-        if (javaUtilEnumerationClass!=null && clazzz.isInheritor(javaUtilEnumerationClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_ENUMERATION_RB);
-        }
+		// java.util.Enumeration
+		final PsiClass javaUtilEnumerationClass = javaPsiFacade.findClass(JAVA_UTIL_ENUMERATION, scope);
+		if(javaUtilEnumerationClass != null && clazzz.isInheritor(javaUtilEnumerationClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_ENUMERATION_RB);
+		}
 
-        // java.util.Iterator
-        final PsiClass javaUtilIteratorClass = javaPsiFacade.findClass(JAVA_UTIL_ITERATOR, scope);
-        if (javaUtilIteratorClass!=null && clazzz.isInheritor(javaUtilIteratorClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_ITERATOR_RB);
-        }
+		// java.util.Iterator
+		final PsiClass javaUtilIteratorClass = javaPsiFacade.findClass(JAVA_UTIL_ITERATOR, scope);
+		if(javaUtilIteratorClass != null && clazzz.isInheritor(javaUtilIteratorClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_ITERATOR_RB);
+		}
 
-        // java.util.List
-        final PsiClass javaUtilListClass = javaPsiFacade.findClass(JAVA_UTIL_LIST, scope);
-        if (javaUtilListClass!=null && clazzz.isInheritor(javaUtilListClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_LIST_RB);
-        }
+		// java.util.List
+		final PsiClass javaUtilListClass = javaPsiFacade.findClass(JAVA_UTIL_LIST, scope);
+		if(javaUtilListClass != null && clazzz.isInheritor(javaUtilListClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_UTIL_LIST_RB);
+		}
 
-        // java.lang.Runnable
-        final PsiClass javaLangRunnableClass = javaPsiFacade.findClass(JAVA_LANG_RUNNABLE, scope);
-        if (javaLangRunnableClass!=null && clazzz.isInheritor(javaLangRunnableClass, true)){
-            SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_LANG_RUNNABLE_RB);
-        }
-    }
+		// java.lang.Runnable
+		final PsiClass javaLangRunnableClass = javaPsiFacade.findClass(JAVA_LANG_RUNNABLE, scope);
+		if(javaLangRunnableClass != null && clazzz.isInheritor(javaLangRunnableClass, true))
+		{
+			SymbolUtil.includeTopLevelClassSymbol(fileSymbol, children, context, JAVA_LANG_RUNNABLE_RB);
+		}
+	}
 }

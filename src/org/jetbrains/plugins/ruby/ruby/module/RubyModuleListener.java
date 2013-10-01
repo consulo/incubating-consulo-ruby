@@ -27,8 +27,9 @@ import com.intellij.openapi.project.ModuleListener;
 /**
  * Listener for changes in Ruby/Rails modules
  */
-public interface RubyModuleListener extends ModuleListener {
+public interface RubyModuleListener extends ModuleListener
+{
 
-    public void moduleChanged();
+	public void moduleChanged();
 
 }

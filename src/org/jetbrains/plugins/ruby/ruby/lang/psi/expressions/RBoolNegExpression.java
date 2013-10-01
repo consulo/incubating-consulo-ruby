@@ -18,8 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @autor: oleg
  * @date: Nov 26, 2007
  */
-public interface RBoolNegExpression extends RUnaryExpression{
+public interface RBoolNegExpression extends RUnaryExpression
+{
 }

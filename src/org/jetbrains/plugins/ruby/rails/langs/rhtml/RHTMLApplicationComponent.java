@@ -31,50 +31,60 @@ import com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl;
  * @author: Roman Chernyatchik
  * @date: 14.04.2007
  */
-public class RHTMLApplicationComponent  implements ApplicationComponent {
+public class RHTMLApplicationComponent implements ApplicationComponent
+{
 
-    @SuppressWarnings({"UnusedDeclaration", "UnusedParameters"})
-    //fileTypeManager: to ensure that file types are initialized
-    public RHTMLApplicationComponent(final FileTypeManagerImpl fileTypeManager) {
-        loadRHTML();
-    }
+	@SuppressWarnings({
+			"UnusedDeclaration",
+			"UnusedParameters"
+	})
+	//fileTypeManager: to ensure that file types are initialized
+	public RHTMLApplicationComponent(final FileTypeManagerImpl fileTypeManager)
+	{
+		loadRHTML();
+	}
 
-    public static void loadRHTML() {
-        //Element Factory for RHTML lang elements
-       // Factory.addElementFactory(new RHTMLElementFactory());
+	public static void loadRHTML()
+	{
+		//Element Factory for RHTML lang elements
+		// Factory.addElementFactory(new RHTMLElementFactory());
 
-        //Brace Matcher
-        //BraceMatchingUtil.registerBraceMatcher(RHTMLFileType.RHTML, new RHTMLBraceMather());
+		//Brace Matcher
+		//BraceMatchingUtil.registerBraceMatcher(RHTMLFileType.RHTML, new RHTMLBraceMather());
 
-        //Quote Handler
-        TypedHandler.registerQuoteHandler(RHTMLFileType.RHTML, new HtmlQuoteHandler());
+		//Quote Handler
+		TypedHandler.registerQuoteHandler(RHTMLFileType.RHTML, new HtmlQuoteHandler());
 
-        //TODO Metadata Bindings
+		//TODO Metadata Bindings
 
-        registerCompletionData();
-    }
+		registerCompletionData();
+	}
 
-    /**
-     * Enables autocompletion for HTML and Ruby in RHTML files.
-     */
-    private static void registerCompletionData() {
-        CompletionUtil.registerCompletionData(RHTMLFileType.RHTML, new RHTMLCompletionData());
-    }
+	/**
+	 * Enables autocompletion for HTML and Ruby in RHTML files.
+	 */
+	private static void registerCompletionData()
+	{
+		CompletionUtil.registerCompletionData(RHTMLFileType.RHTML, new RHTMLCompletionData());
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-          return getClass().getName();
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return getClass().getName();
+	}
 
-    @Override
-	public void initComponent() {
-        //Do nothing
-    }
+	@Override
+	public void initComponent()
+	{
+		//Do nothing
+	}
 
-    @Override
-	public void disposeComponent() {
-        //Do nothing
-    }
+	@Override
+	public void disposeComponent()
+	{
+		//Do nothing
+	}
 }

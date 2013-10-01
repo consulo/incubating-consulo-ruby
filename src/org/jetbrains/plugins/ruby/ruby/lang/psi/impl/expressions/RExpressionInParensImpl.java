@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -25,27 +24,32 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpressionInParens;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class RExpressionInParensImpl extends RPsiElementBase implements RExpressionInParens {
-    public RExpressionInParensImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RExpressionInParensImpl extends RPsiElementBase implements RExpressionInParens
+{
+	public RExpressionInParensImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getExpression() {
-        return getChildByType(RPsiElement.class, 0);
-    }
+	public RPsiElement getExpression()
+	{
+		return getChildByType(RPsiElement.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RPsiElement expression = getExpression();
-        return expression instanceof RExpression ? ((RExpression) expression).getType(fileSymbol) : RType.NOT_TYPED;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RPsiElement expression = getExpression();
+		return expression instanceof RExpression ? ((RExpression) expression).getType(fileSymbol) : RType.NOT_TYPED;
+	}
 }

@@ -28,18 +28,20 @@ import com.intellij.ui.ComboboxWithBrowseButton;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman.Chernyatchik
-* @date: 22.07.2008
-*/
-public class JRubySDKsComboboxWithBrowseButton extends ComboboxWithBrowseButton {
-    public JRubySDKsComboboxWithBrowseButton() {
-        final JComboBox sdkCombobox = getComboBox();
+ *
+ * @author: Roman.Chernyatchik
+ * @date: 22.07.2008
+ */
+public class JRubySDKsComboboxWithBrowseButton extends ComboboxWithBrowseButton
+{
+	public JRubySDKsComboboxWithBrowseButton()
+	{
+		final JComboBox sdkCombobox = getComboBox();
 
-        sdkCombobox.setRenderer(new SDKListCellRenderer());
+		sdkCombobox.setRenderer(new SDKListCellRenderer());
 
        /* addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
                 final Project defaultProject = ProjectManager.getInstance().getDefaultProject();
                 SdksEditor editor = new SdksEditor(null, defaultProject, JRubySDKsComboboxWithBrowseButton.this);
                 editor.show();
@@ -54,26 +56,31 @@ public class JRubySDKsComboboxWithBrowseButton extends ComboboxWithBrowseButton 
                 }
             }
         }); */
-    }
+	}
 
-    public void addComboboxActionListener(final ActionListener l) {
-        getComboBox().addActionListener(l);
-    }
+	public void addComboboxActionListener(final ActionListener l)
+	{
+		getComboBox().addActionListener(l);
+	}
 
-    public void rebuildSdksListAndSelectSdk(final Sdk selectedSdk) {
-        final Sdk[] sdks = JRubySdkUtil.getValidSdks();
+	public void rebuildSdksListAndSelectSdk(final Sdk selectedSdk)
+	{
+		final Sdk[] sdks = JRubySdkUtil.getValidSdks();
 
-        final JComboBox sdksComboBox = getComboBox();
-        sdksComboBox.setModel(new DefaultComboBoxModel(sdks));
+		final JComboBox sdksComboBox = getComboBox();
+		sdksComboBox.setModel(new DefaultComboBoxModel(sdks));
 
-        if (selectedSdk != null) {
-            for (Sdk candidateSdk : sdks) {
-                if (candidateSdk != null && candidateSdk.getName().equals(selectedSdk.getName())) {
-                    sdksComboBox.setSelectedItem(candidateSdk);
-                    return;
-                }
-            }
-        }
-        sdksComboBox.setSelectedItem(null);
-    }
+		if(selectedSdk != null)
+		{
+			for(Sdk candidateSdk : sdks)
+			{
+				if(candidateSdk != null && candidateSdk.getName().equals(selectedSdk.getName()))
+				{
+					sdksComboBox.setSelectedItem(candidateSdk);
+					return;
+				}
+			}
+		}
+		sdksComboBox.setSelectedItem(null);
+	}
 }

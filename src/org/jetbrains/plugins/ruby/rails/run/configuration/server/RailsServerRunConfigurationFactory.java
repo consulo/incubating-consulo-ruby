@@ -37,81 +37,90 @@ import com.intellij.openapi.util.SystemInfo;
  * @author: Roman Chernyatchik
  * @date: 04.08.2007
  */
-public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFactory {
-    public static final String SERVER_TITLE = RBundle.message("run.configuration.server.title");
-    public final int RAILS_DEFAULT_PORT = 3000;
+public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFactory
+{
+	public static final String SERVER_TITLE = RBundle.message("run.configuration.server.title");
+	public final int RAILS_DEFAULT_PORT = 3000;
 
-    public final String WIN_LOCALHOST = "127.0.0.1";
-    public final String NOT_WIN_LOCALHOST = "0.0.0.0";
+	public final String WIN_LOCALHOST = "127.0.0.1";
+	public final String NOT_WIN_LOCALHOST = "0.0.0.0";
 
 
-    private static String LOCALHOST;
-    {
-        LOCALHOST = SystemInfo.isWindows ? WIN_LOCALHOST : NOT_WIN_LOCALHOST;
-    }
+	private static String LOCALHOST;
 
-    public RailsServerRunConfigurationFactory(final ConfigurationType type) {
-        super(type);
-    }
+	{
+		LOCALHOST = SystemInfo.isWindows ? WIN_LOCALHOST : NOT_WIN_LOCALHOST;
+	}
 
-    /**
-     * Initialize Rails Server Run config
-     * @param module Ruby / Java module
-     * @return Rails Server Run configuration settings
-     */
-    public RunnerAndConfigurationSettings createRunConfigurationSettings(@NotNull final Module module) {
-        final RunnerAndConfigurationSettings settings =
-                RubyRunConfigurationUtil.create(module.getProject(), this, "");
-        final RubyRunConfiguration conf = (RubyRunConfiguration)settings.getConfiguration();
+	public RailsServerRunConfigurationFactory(final ConfigurationType type)
+	{
+		super(type);
+	}
 
-        initDefaultConfiguration(module, conf);
+	/**
+	 * Initialize Rails Server Run config
+	 *
+	 * @param module Ruby / Java module
+	 * @return Rails Server Run configuration settings
+	 */
+	public RunnerAndConfigurationSettings createRunConfigurationSettings(@NotNull final Module module)
+	{
+		final RunnerAndConfigurationSettings settings = RubyRunConfigurationUtil.create(module.getProject(), this, "");
+		final RubyRunConfiguration conf = (RubyRunConfiguration) settings.getConfiguration();
 
-        return settings;
-    }
+		initDefaultConfiguration(module, conf);
 
-    /**
-     * Initialize Rails Server Run config
-     * @param module Ruby / Java module
-     * @param conf RailsServer Run Configuration
-     */
-    private void initDefaultConfiguration(@NotNull final Module module,
-                                          @NotNull final RubyRunConfiguration conf) {
+		return settings;
+	}
 
-        initDefaultParams(conf);
-        conf.setName(RailsServerRunConfigurationFactory.SERVER_TITLE + ':' + module.getName());
+	/**
+	 * Initialize Rails Server Run config
+	 *
+	 * @param module Ruby / Java module
+	 * @param conf   RailsServer Run Configuration
+	 */
+	private void initDefaultConfiguration(@NotNull final Module module, @NotNull final RubyRunConfiguration conf)
+	{
 
-        conf.setScriptPath(RailsServerRunConfiguration.getServerScriptPathByModule(module));
-        conf.setWorkingDirectory(RailsServerRunConfiguration.getRailsWorkDirByModule(module));
-        conf.setModule(module);
-    }
+		initDefaultParams(conf);
+		conf.setName(RailsServerRunConfigurationFactory.SERVER_TITLE + ':' + module.getName());
 
-    @Override
-	public RunConfiguration createTemplateConfiguration(final Project project) {
-        final RubyRunConfiguration conf = new RailsServerRunConfiguration(project, this, "");
-        initDefaultParams(conf);
+		conf.setScriptPath(RailsServerRunConfiguration.getServerScriptPathByModule(module));
+		conf.setWorkingDirectory(RailsServerRunConfiguration.getRailsWorkDirByModule(module));
+		conf.setModule(module);
+	}
 
-        return conf;
-    }
+	@Override
+	public RunConfiguration createTemplateConfiguration(final Project project)
+	{
+		final RubyRunConfiguration conf = new RailsServerRunConfiguration(project, this, "");
+		initDefaultParams(conf);
 
-    @Override
-	public String getName() {
-        return SERVER_TITLE;
-   }
+		return conf;
+	}
 
-   @Override
-   public Icon getIcon() {
-       return RubyIcons.RAILS_SERVER_RUN_CONFIGURATION;
-   }
+	@Override
+	public String getName()
+	{
+		return SERVER_TITLE;
+	}
 
-    @Override
-	protected void initDefaultParams(final RubyRunConfiguration conf) {
-        super.initDefaultParams(conf);
+	@Override
+	public Icon getIcon()
+	{
+		return RubyIcons.RAILS_SERVER_RUN_CONFIGURATION;
+	}
 
-        final RailsServerRunConfiguration config = (RailsServerRunConfiguration)conf;
-        config.setChoosePortManually(Boolean.TRUE);
-        config.setPort(String.valueOf(RAILS_DEFAULT_PORT));
-        config.setIPAddr(LOCALHOST);
-        config.setRailsEnvironmentType(RailsServerRunConfiguration.RailsEnvironmentType.DEVELOPMENT);
-        config.setServerType(RailsServerRunConfiguration.DEFAULT_SERVER);
-    }
+	@Override
+	protected void initDefaultParams(final RubyRunConfiguration conf)
+	{
+		super.initDefaultParams(conf);
+
+		final RailsServerRunConfiguration config = (RailsServerRunConfiguration) conf;
+		config.setChoosePortManually(Boolean.TRUE);
+		config.setPort(String.valueOf(RAILS_DEFAULT_PORT));
+		config.setIPAddr(LOCALHOST);
+		config.setRailsEnvironmentType(RailsServerRunConfiguration.RailsEnvironmentType.DEVELOPMENT);
+		config.setServerType(RailsServerRunConfiguration.DEFAULT_SERVER);
+	}
 }

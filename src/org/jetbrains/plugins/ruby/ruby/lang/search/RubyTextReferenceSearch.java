@@ -36,36 +36,43 @@ import com.intellij.util.QueryExecutor;
  * @author: oleg
  * @date: Dec 3, 2007
  */
-public class RubyTextReferenceSearch implements QueryExecutor<PsiReference, ReferencesSearch.SearchParameters> {
+public class RubyTextReferenceSearch implements QueryExecutor<PsiReference, ReferencesSearch.SearchParameters>
+{
 
-    @Override
-	public boolean execute(@NotNull final ReferencesSearch.SearchParameters params,
-                           @NotNull final Processor<PsiReference> consumer) {
-        final PsiElement element2Search = params.getElementToSearch();
-        if (element2Search instanceof PsiNamedElement && element2Search instanceof RPsiElement) {
-            final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>() {
-                @Override
-				public String compute() {
-                    return ((PsiNamedElement) element2Search).getName();
-                }
-            });
-            // we don`t search elements with null name
-            if (name == null){
-                return false;
-            }
-            // we don`t search local variables
-            if (element2Search instanceof RIdentifier){
-                final RIdentifier rIdentifier = (RIdentifier) element2Search;
-                if (rIdentifier.isParameter() || rIdentifier.isLocalVariable()) {
-                    return true;
-                }
-            }
-            final RubyOccurenceProcessor processor = new RubyOccurenceProcessor(element2Search, name, consumer);
-            short searchContext = UsageSearchContext.IN_CODE;
-            return PsiSearchHelper.SERVICE.getInstance(element2Search.getProject()).
-                    processElementsWithWord(processor, params.getEffectiveSearchScope(), name, searchContext, true);
-        }
-        return true;
-    }
+	@Override
+	public boolean execute(@NotNull final ReferencesSearch.SearchParameters params, @NotNull final Processor<PsiReference> consumer)
+	{
+		final PsiElement element2Search = params.getElementToSearch();
+		if(element2Search instanceof PsiNamedElement && element2Search instanceof RPsiElement)
+		{
+			final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>()
+			{
+				@Override
+				public String compute()
+				{
+					return ((PsiNamedElement) element2Search).getName();
+				}
+			});
+			// we don`t search elements with null name
+			if(name == null)
+			{
+				return false;
+			}
+			// we don`t search local variables
+			if(element2Search instanceof RIdentifier)
+			{
+				final RIdentifier rIdentifier = (RIdentifier) element2Search;
+				if(rIdentifier.isParameter() || rIdentifier.isLocalVariable())
+				{
+					return true;
+				}
+			}
+			final RubyOccurenceProcessor processor = new RubyOccurenceProcessor(element2Search, name, consumer);
+			short searchContext = UsageSearchContext.IN_CODE;
+			return PsiSearchHelper.SERVICE.getInstance(element2Search.getProject()).
+					processElementsWithWord(processor, params.getEffectiveSearchScope(), name, searchContext, true);
+		}
+		return true;
+	}
 
 }

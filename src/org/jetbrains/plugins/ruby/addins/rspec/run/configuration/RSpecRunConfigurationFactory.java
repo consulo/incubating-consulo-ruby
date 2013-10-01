@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.openapi.project.Project;
+import javax.swing.Icon;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationFactory;
-
-import javax.swing.*;
+import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,30 +33,35 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: Oct 18, 2007
  */
-public class RSpecRunConfigurationFactory extends RubyRunConfigurationFactory {
-    public RSpecRunConfigurationFactory(final ConfigurationType type) {
-        super(type);
-    }
+public class RSpecRunConfigurationFactory extends RubyRunConfigurationFactory
+{
+	public RSpecRunConfigurationFactory(final ConfigurationType type)
+	{
+		super(type);
+	}
 
-    @Override
-	public RunConfiguration createTemplateConfiguration(final Project project) {
-        final RSpecRunConfiguration conf = new RSpecRunConfiguration(project, this, "");
+	@Override
+	public RunConfiguration createTemplateConfiguration(final Project project)
+	{
+		final RSpecRunConfiguration conf = new RSpecRunConfiguration(project, this, "");
 
-        conf.setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
-        conf.setCustomSpecsRunnerPath(RSpecRunConfiguration.DEFAULT_CUSTOM_SPEC_RUNNER);
-        conf.setSpecArgs(RSpecRunConfiguration.DEFAULT_SPEC_ARGS);
-        conf.setTestFileMask(RSpecRunConfiguration.DEFAULT_TESTS_SEARCH_MASK);
-        conf.setShouldUseCustomSpecRunner(false);
-        return conf;
-    }
+		conf.setRubyArgs(RubyRunConfigurationUtil.collectArguments(RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS));
+		conf.setCustomSpecsRunnerPath(RSpecRunConfiguration.DEFAULT_CUSTOM_SPEC_RUNNER);
+		conf.setSpecArgs(RSpecRunConfiguration.DEFAULT_SPEC_ARGS);
+		conf.setTestFileMask(RSpecRunConfiguration.DEFAULT_TESTS_SEARCH_MASK);
+		conf.setShouldUseCustomSpecRunner(false);
+		return conf;
+	}
 
-    @Override
-	public String getName() {
-        return RBundle.message("rspec.run.configuration.rspec.name");
-   }
+	@Override
+	public String getName()
+	{
+		return RBundle.message("rspec.run.configuration.rspec.name");
+	}
 
-   @Override
-   public Icon getIcon() {
-       return RSpecIcons.RUN_CONFIGURATION_ICON;
-   }
+	@Override
+	public Icon getIcon()
+	{
+		return RSpecIcons.RUN_CONFIGURATION_ICON;
+	}
 }

@@ -34,43 +34,50 @@ import com.intellij.openapi.options.UnnamedConfigurable;
  * @author: oleg
  * @date: Nov 16, 2006
  */
-class RSettingsPane {
-    private JPanel generatedPanel;
-    private JTabbedPane settingsTabbedPane;
+class RSettingsPane
+{
+	private JPanel generatedPanel;
+	private JTabbedPane settingsTabbedPane;
 
-    private List<UnnamedConfigurable> configurableList =  new ArrayList<UnnamedConfigurable>();
+	private List<UnnamedConfigurable> configurableList = new ArrayList<UnnamedConfigurable>();
 
-    public JComponent getPanel(){
-        settingsTabbedPane.setBackground(generatedPanel.getBackground());
+	public JComponent getPanel()
+	{
+		settingsTabbedPane.setBackground(generatedPanel.getBackground());
 
-        final GeneralSettingsTab generalTab = new GeneralSettingsTab();
-        configurableList.add(generalTab);
-        settingsTabbedPane.addTab(RBundle.message("settings.plugin.general.tab.title"),
-                                  generalTab.getContentPanel());
-        settingsTabbedPane.addTab(RBundle.message("settings.register.shortcut.tab.title"),
-                                  new RegisteredActionNamesPanel().getContentPanel());
+		final GeneralSettingsTab generalTab = new GeneralSettingsTab();
+		configurableList.add(generalTab);
+		settingsTabbedPane.addTab(RBundle.message("settings.plugin.general.tab.title"), generalTab.getContentPanel());
+		settingsTabbedPane.addTab(RBundle.message("settings.register.shortcut.tab.title"), new RegisteredActionNamesPanel().getContentPanel());
 
-        return generatedPanel;
-    }
+		return generatedPanel;
+	}
 
-    public void apply() throws ConfigurationException {
-        for (UnnamedConfigurable configurable : configurableList) {
-            configurable.apply();
-        }
-    }
+	public void apply() throws ConfigurationException
+	{
+		for(UnnamedConfigurable configurable : configurableList)
+		{
+			configurable.apply();
+		}
+	}
 
-    public void reset() {
-        for (UnnamedConfigurable configurable : configurableList) {
-            configurable.reset();
-        }
-    }
+	public void reset()
+	{
+		for(UnnamedConfigurable configurable : configurableList)
+		{
+			configurable.reset();
+		}
+	}
 
-    public boolean isModified() {
-        for (UnnamedConfigurable configurable : configurableList) {
-            if (configurable.isModified()) {
-                return true;
-            }
-        }
-        return  false;
-    }
+	public boolean isModified()
+	{
+		for(UnnamedConfigurable configurable : configurableList)
+		{
+			if(configurable.isModified())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

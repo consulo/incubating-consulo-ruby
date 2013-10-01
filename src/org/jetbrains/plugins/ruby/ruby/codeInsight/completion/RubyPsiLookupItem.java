@@ -41,103 +41,104 @@ import com.intellij.psi.PsiElement;
  * @author: oleg
  * @date: Apr 22, 2007
  */
-public class RubyPsiLookupItem implements RubyLookupItem,
-        PresentableLookupValue,
-        DeferredUserLookupValue,
-        LookupValueWithUIHint,
-        LookupValueWithPsiElement,
-        LookupValueWithTail,
-        LookupValueWithPriority,
-        Iconable {
+public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue, DeferredUserLookupValue, LookupValueWithUIHint, LookupValueWithPsiElement, LookupValueWithTail, LookupValueWithPriority, Iconable
+{
 
 
-    private RVirtualElement myPrototype;
-    private String myLookupString;
-    private String myTypeText;
-    private boolean isBold;
-    private Icon myIcon;
-    private Project myProject;
-    private String myTailText;
-    private PsiElement myCachedPsiElement;
-    private int myPriority;
+	private RVirtualElement myPrototype;
+	private String myLookupString;
+	private String myTypeText;
+	private boolean isBold;
+	private Icon myIcon;
+	private Project myProject;
+	private String myTailText;
+	private PsiElement myCachedPsiElement;
+	private int myPriority;
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return myLookupString;
-    }
+	public String getName()
+	{
+		return myLookupString;
+	}
 
-    public RubyPsiLookupItem(@NotNull final Project project,
-                             @NotNull final String lookupString,
-                             @Nullable final String tailText,
-                             @Nullable final String typeText,
-                             @NotNull final RVirtualElement prototype,
-                             final int priority,
-                             final boolean bold,
-                             @Nullable final Icon icon) {
-        myProject = project;
-        myLookupString = lookupString;
-        myTailText = tailText;
-        myTypeText = typeText;
-        myPrototype = prototype;
-        myPriority = priority;
-        isBold = bold;
-        myIcon = icon;
-    }
+	public RubyPsiLookupItem(@NotNull final Project project, @NotNull final String lookupString, @Nullable final String tailText, @Nullable final String typeText, @NotNull final RVirtualElement prototype, final int priority, final boolean bold, @Nullable final Icon icon)
+	{
+		myProject = project;
+		myLookupString = lookupString;
+		myTailText = tailText;
+		myTypeText = typeText;
+		myPrototype = prototype;
+		myPriority = priority;
+		isBold = bold;
+		myIcon = icon;
+	}
 
-    public boolean isStrikeout() {
-        return false;
-    }
+	public boolean isStrikeout()
+	{
+		return false;
+	}
 
-    @Override
-	public String getPresentation() {
-        return myLookupString;
-    }
+	@Override
+	public String getPresentation()
+	{
+		return myLookupString;
+	}
 
-    @Override
-	public boolean handleUserSelection(LookupItem item, Project project) {
-        return true;
-    }
+	@Override
+	public boolean handleUserSelection(LookupItem item, Project project)
+	{
+		return true;
+	}
 
-    @Override
-	public String getTypeHint() {
-        return myTypeText;
-    }
+	@Override
+	public String getTypeHint()
+	{
+		return myTypeText;
+	}
 
-    @Override
-	public Color getColorHint() {
-        return null;
-    }
+	@Override
+	public Color getColorHint()
+	{
+		return null;
+	}
 
-    @Override
-	public boolean isBold() {
-        return isBold;
-    }
+	@Override
+	public boolean isBold()
+	{
+		return isBold;
+	}
 
-    @Override
-	public int getPriority() {
-        return myPriority;
-    }
+	@Override
+	public int getPriority()
+	{
+		return myPriority;
+	}
 
-    @Override
-	public PsiElement getElement() {
-        if (myPrototype == null){
-            return null;
-        }
-        if (myCachedPsiElement == null){
-// The slowest operation!
-            myCachedPsiElement = RVirtualPsiUtil.findPsiByVirtualElement(myPrototype, myProject);
-        }
-        return myCachedPsiElement;
-    }
+	@Override
+	public PsiElement getElement()
+	{
+		if(myPrototype == null)
+		{
+			return null;
+		}
+		if(myCachedPsiElement == null)
+		{
+			// The slowest operation!
+			myCachedPsiElement = RVirtualPsiUtil.findPsiByVirtualElement(myPrototype, myProject);
+		}
+		return myCachedPsiElement;
+	}
 
-    @Override
-	public Icon getIcon(int flags) {
-        return myIcon;
-    }
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return myIcon;
+	}
 
-    @Override
-	public String getTailText() {
-        return myTailText!=null ? myTailText : "";
-    }
+	@Override
+	public String getTailText()
+	{
+		return myTailText != null ? myTailText : "";
+	}
 }

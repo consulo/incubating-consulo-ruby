@@ -22,6 +22,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi;
  * @author: Roman Chernyatchik
  * @date: Aug 18, 2007
  */
-public interface PresentableElementType {
-    public String getPresentableName();
+public interface PresentableElementType
+{
+	public String getPresentableName();
 }

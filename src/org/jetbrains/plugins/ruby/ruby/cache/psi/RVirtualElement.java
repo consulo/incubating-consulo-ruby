@@ -24,8 +24,9 @@ import org.jetbrains.annotations.NotNull;
  * @author: oleg
  * @date: Feb 13, 2007
  */
-public interface RVirtualElement {
+public interface RVirtualElement
+{
 
-    public void accept(@NotNull RubyVirtualElementVisitor visitor);
+	public void accept(@NotNull RubyVirtualElementVisitor visitor);
 
 }

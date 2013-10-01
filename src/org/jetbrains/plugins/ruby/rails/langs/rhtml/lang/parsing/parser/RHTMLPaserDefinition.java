@@ -43,56 +43,56 @@ import com.intellij.psi.tree.TokenSet;
  * @date: 03.04.2007
  */
 
-public class RHTMLPaserDefinition implements ParserDefinition {
-    private TokenSet myCommentTokens;
-    private TokenSet myWhitespaceTokens;
-    private ParserDefinition myTemplateParserDefinition;
+public class RHTMLPaserDefinition implements ParserDefinition
+{
+	private TokenSet myCommentTokens;
+	private TokenSet myWhitespaceTokens;
+	private ParserDefinition myTemplateParserDefinition;
 
-    public RHTMLPaserDefinition() {
-        myTemplateParserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(HTMLLanguage.INSTANCE);
-        assert myTemplateParserDefinition != null;
-        
+	public RHTMLPaserDefinition()
+	{
+		myTemplateParserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(HTMLLanguage.INSTANCE);
+		assert myTemplateParserDefinition != null;
 
-    }
 
-    @Override
+	}
+
+	@Override
 	@NotNull
-    public Lexer createLexer(Project project, LanguageVersion languageVersion) {
-        return new _RHTMLLexer();
-    }
+	public Lexer createLexer(Project project, LanguageVersion languageVersion)
+	{
+		return new _RHTMLLexer();
+	}
 
-    @Override
-	public IFileElementType getFileNodeType() {
-        return eRubyElementTypes.RHTML_FILE;
-    }
+	@Override
+	public IFileElementType getFileNodeType()
+	{
+		return eRubyElementTypes.RHTML_FILE;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
-		if(myWhitespaceTokens == null) {
-			myWhitespaceTokens = TokenSet.orSet(
-					RHTMLTokenType.RHTML_WHITE_SPECE_TOKENS,
-					myTemplateParserDefinition.getWhitespaceTokens(languageVersion)
-			);
+	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
+	{
+		if(myWhitespaceTokens == null)
+		{
+			myWhitespaceTokens = TokenSet.orSet(RHTMLTokenType.RHTML_WHITE_SPECE_TOKENS, myTemplateParserDefinition.getWhitespaceTokens(languageVersion));
 		}
-        return myWhitespaceTokens;
-    }
+		return myWhitespaceTokens;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public TokenSet getCommentTokens(LanguageVersion languageVersion) {
-        if (myCommentTokens == null) {
-            myCommentTokens = TokenSet.orSet(
-                    TokenSet.create(
-                            RHTMLElementType.RHTML_COMMENT_ELEMENT,
+	public TokenSet getCommentTokens(LanguageVersion languageVersion)
+	{
+		if(myCommentTokens == null)
+		{
+			myCommentTokens = TokenSet.orSet(TokenSet.create(RHTMLElementType.RHTML_COMMENT_ELEMENT,
 
-                            RHTMLTokenType.RHTML_COMMENT_START,
-                            RHTMLTokenType.RHTML_COMMENT_CHARACTERS,
-                            RHTMLTokenType.RHTML_COMMENT_END
-                    ), myTemplateParserDefinition.getCommentTokens(languageVersion));
-        }
-        return myCommentTokens;
-    }
+					RHTMLTokenType.RHTML_COMMENT_START, RHTMLTokenType.RHTML_COMMENT_CHARACTERS, RHTMLTokenType.RHTML_COMMENT_END), myTemplateParserDefinition.getCommentTokens(languageVersion));
+		}
+		return myCommentTokens;
+	}
 
 	@NotNull
 	@Override
@@ -103,30 +103,34 @@ public class RHTMLPaserDefinition implements ParserDefinition {
 
 	@Override
 	@NotNull
-    public PsiParser createParser(final Project project, LanguageVersion languageVersion) {
-        //We use RHML_FILE instead of this. Shouldn't be invoked!
-        //throw new UnsupportedOperationException("Should'n be invoked");
-        return new RHTMLParser();
-    }
+	public PsiParser createParser(final Project project, LanguageVersion languageVersion)
+	{
+		//We use RHML_FILE instead of this. Shouldn't be invoked!
+		//throw new UnsupportedOperationException("Should'n be invoked");
+		return new RHTMLParser();
+	}
 
-    @Override
-	public PsiFile createFile(final FileViewProvider viewProvider) {
-        return new RHTMLFileImpl(viewProvider);
-    }
+	@Override
+	public PsiFile createFile(final FileViewProvider viewProvider)
+	{
+		return new RHTMLFileImpl(viewProvider);
+	}
 
-    @Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
-        if (RHTMLTokenType.RHTML_SEPARATORS.contains(left.getElementType()) ||
-                RHTMLTokenType.RHTML_SEPARATORS.contains(right.getElementType())) {
-            return SpaceRequirements.MUST_LINE_BREAK;
-        }
-        return SpaceRequirements.MAY;
-    }
+	@Override
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right)
+	{
+		if(RHTMLTokenType.RHTML_SEPARATORS.contains(left.getElementType()) || RHTMLTokenType.RHTML_SEPARATORS.contains(right.getElementType()))
+		{
+			return SpaceRequirements.MUST_LINE_BREAK;
+		}
+		return SpaceRequirements.MAY;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElement createElement(final ASTNode node) {
-        return RHTMLPsiCreator.createElement(node);
-    }
+	public PsiElement createElement(final ASTNode node)
+	{
+		return RHTMLPsiCreator.createElement(node);
+	}
 }
 

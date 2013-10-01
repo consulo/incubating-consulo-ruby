@@ -37,76 +37,83 @@ import com.intellij.openapi.options.colors.ColorSettingsPage;
  * @author: oleg
  * @date: Feb 28, 2008
  */
-public class YAMLColorsPage implements ColorSettingsPage {
+public class YAMLColorsPage implements ColorSettingsPage
+{
 
-    private static final String DEMO_TEXT =
-        "# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html\n" +
-        "static_sidebar:\n" +
-        "  id: \"foo\"\n" +
-        "  name: 'side_bar'\n" +
-        "  staged_position: 1\n" +
-        "  blog_id: 1\n" +
-        "  config: |+\n" +
-        "    --- !map:HashWithIndifferentAccess\n" +
-        "      title: Static Sidebar\n" +
-        "      body: The body of a static sidebar\n" +
-        "  type: StaticSidebar\n" +
-        "  type: > some_type_here";
+	private static final String DEMO_TEXT = "# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html\n" +
+			"static_sidebar:\n" +
+			"  id: \"foo\"\n" +
+			"  name: 'side_bar'\n" +
+			"  staged_position: 1\n" +
+			"  blog_id: 1\n" +
+			"  config: |+\n" +
+			"    --- !map:HashWithIndifferentAccess\n" +
+			"      title: Static Sidebar\n" +
+			"      body: The body of a static sidebar\n" +
+			"  type: StaticSidebar\n" +
+			"  type: > some_type_here";
 
-    private static final AttributesDescriptor[] ATTRS = new AttributesDescriptor[]{
-            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.key"), YAMLHighlighter.SCALAR_KEY),
-            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.text"), YAMLHighlighter.SCALAR_TEXT),
-            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.string"), YAMLHighlighter.SCALAR_STRING),
-            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.dstring"), YAMLHighlighter.SCALAR_DSTRING),
-            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.block"), YAMLHighlighter.SCALAR_LIST),
-            new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.block2"), YAMLHighlighter.SCALAR_VALUE),
-    };
+	private static final AttributesDescriptor[] ATTRS = new AttributesDescriptor[]{
+			new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.key"), YAMLHighlighter.SCALAR_KEY),
+			new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.text"), YAMLHighlighter.SCALAR_TEXT),
+			new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.string"), YAMLHighlighter.SCALAR_STRING),
+			new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.dstring"), YAMLHighlighter.SCALAR_DSTRING),
+			new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.block"), YAMLHighlighter.SCALAR_LIST),
+			new AttributesDescriptor(YAMLBundle.message("color.settings.yaml.block2"), YAMLHighlighter.SCALAR_VALUE),
+	};
 
-    // Empty still
-    private static Map<String, TextAttributesKey> ADDITIONAL_HIGHLIGHT_DESCRIPTORS = new HashMap<String, TextAttributesKey>();
+	// Empty still
+	private static Map<String, TextAttributesKey> ADDITIONAL_HIGHLIGHT_DESCRIPTORS = new HashMap<String, TextAttributesKey>();
 
-    private static final ColorDescriptor[] COLORS = new ColorDescriptor[0];
+	private static final ColorDescriptor[] COLORS = new ColorDescriptor[0];
 
-    @Override
+	@Override
 	@Nullable
-    public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-        return ADDITIONAL_HIGHLIGHT_DESCRIPTORS;
-    }
+	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
+	{
+		return ADDITIONAL_HIGHLIGHT_DESCRIPTORS;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDisplayName() {
-        return YAMLBundle.message("color.settings.yaml.name");
-    }
+	public String getDisplayName()
+	{
+		return YAMLBundle.message("color.settings.yaml.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public Icon getIcon() {
-        return AllIcons.Nodes.DataTables;
-    }
+	public Icon getIcon()
+	{
+		return AllIcons.Nodes.DataTables;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public AttributesDescriptor[] getAttributeDescriptors() {
-        return ATTRS;
-    }
+	public AttributesDescriptor[] getAttributeDescriptors()
+	{
+		return ATTRS;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public ColorDescriptor[] getColorDescriptors() {
-        return COLORS;
-    }
+	public ColorDescriptor[] getColorDescriptors()
+	{
+		return COLORS;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public SyntaxHighlighter getHighlighter() {
-        return new YAMLSyntaxHighlighter();
-    }
+	public SyntaxHighlighter getHighlighter()
+	{
+		return new YAMLSyntaxHighlighter();
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDemoText() {
-        return DEMO_TEXT;
-    }
+	public String getDemoText()
+	{
+		return DEMO_TEXT;
+	}
 
 }

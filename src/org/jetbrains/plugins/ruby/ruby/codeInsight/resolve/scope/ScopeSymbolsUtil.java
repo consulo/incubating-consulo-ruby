@@ -16,9 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -41,12 +45,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.presentation.SymbolPresentationUtil;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,142 +55,165 @@ import java.util.List;
  * @author: oleg
  * @date: Apr 22, 2007
  */
-public class ScopeSymbolsUtil {
-    private static ArrayList<RubyLookupItem> RESWORDS_LOOKUP_ITEMS;
+public class ScopeSymbolsUtil
+{
+	private static ArrayList<RubyLookupItem> RESWORDS_LOOKUP_ITEMS;
 
-    /**
-     * Creates lookup Items for file
-     * @param fileSymbol FileSymbol
-     * @param element anchor RPsiElement
-     * @param filter Filter used
-     * @return List of RubyLookupItems
-     * Priority:
-     * 0. JRuby commands and packages
-     * 1. Outter members (constants, modules, classes only)
-     * 2. Superclasses and mixins members
-     * 3. Own members
-     * 4. local variables and parameters
-     * 5. Ruby reswords
-     */
-    public static List<RubyLookupItem> getScopeSymbolsAndKeywordsLookupItems(@Nullable final FileSymbol fileSymbol,
-                                                                             @NotNull final RPsiElement element,
-                                                                             @NotNull final ScopeAutocompleteFilter filter){
-        final RContainer container = element instanceof RContainer ? (RContainer) element : element.getParentContainer();
-        assert container!=null;
-        
-        final HashMap<String, RubyLookupItem> map = new HashMap<String, RubyLookupItem>();
+	/**
+	 * Creates lookup Items for file
+	 *
+	 * @param fileSymbol FileSymbol
+	 * @param element    anchor RPsiElement
+	 * @param filter     Filter used
+	 * @return List of RubyLookupItems
+	 *         Priority:
+	 *         0. JRuby commands and packages
+	 *         1. Outter members (constants, modules, classes only)
+	 *         2. Superclasses and mixins members
+	 *         3. Own members
+	 *         4. local variables and parameters
+	 *         5. Ruby reswords
+	 */
+	public static List<RubyLookupItem> getScopeSymbolsAndKeywordsLookupItems(@Nullable final FileSymbol fileSymbol, @NotNull final RPsiElement element, @NotNull final ScopeAutocompleteFilter filter)
+	{
+		final RContainer container = element instanceof RContainer ? (RContainer) element : element.getParentContainer();
+		assert container != null;
 
-        if (fileSymbol != null) {
-// JRuby specific items
-            if (fileSymbol.isJRubyEnabled()){
-                if (filter.allowJRuby()){
-                    // add top level java packages
-                    for (PsiElement psiElement : JavaResolveUtil.getAllowedTopLevelPackagesAndClasses(container.getProject())) {
-                        final RubyLookupItem item = new JavaLookupItem(psiElement);
-                        map.put(item.getName(), item);
-                    }
-                }
-            }
+		final HashMap<String, RubyLookupItem> map = new HashMap<String, RubyLookupItem>();
 
-            final Symbol context = SymbolUtil.getClassModuleFileSymbol(SymbolUtil.getSymbolByContainer(fileSymbol, container));
-            if (filter.allowOutterMembers() && context != null) {
-// outter symbols
-                Symbol anchor = context.getParentSymbol();
-                while (anchor!=null){
-                    for (Symbol symbol : anchor.getChildren(fileSymbol).getSymbolsOfTypes(Types.MODULE_OR_CLASS_OR_CONSTANT).getChildrenByFilter(filter.getSymbolFilter()).getAll()) {
-                        final String name = symbol.getName();
-                        if (name != null) {
-                            map.put(name, SymbolPresentationUtil.createRubyLookupItem(symbol, name, false, false));
-                        }
-                    }
-                    anchor = anchor.getParentSymbol();
-                }
+		if(fileSymbol != null)
+		{
+			// JRuby specific items
+			if(fileSymbol.isJRubyEnabled())
+			{
+				if(filter.allowJRuby())
+				{
+					// add top level java packages
+					for(PsiElement psiElement : JavaResolveUtil.getAllowedTopLevelPackagesAndClasses(container.getProject()))
+					{
+						final RubyLookupItem item = new JavaLookupItem(psiElement);
+						map.put(item.getName(), item);
+					}
+				}
+			}
+
+			final Symbol context = SymbolUtil.getClassModuleFileSymbol(SymbolUtil.getSymbolByContainer(fileSymbol, container));
+			if(filter.allowOutterMembers() && context != null)
+			{
+				// outter symbols
+				Symbol anchor = context.getParentSymbol();
+				while(anchor != null)
+				{
+					for(Symbol symbol : anchor.getChildren(fileSymbol).getSymbolsOfTypes(Types.MODULE_OR_CLASS_OR_CONSTANT).getChildrenByFilter(filter.getSymbolFilter()).getAll())
+					{
+						final String name = symbol.getName();
+						if(name != null)
+						{
+							map.put(name, SymbolPresentationUtil.createRubyLookupItem(symbol, name, false, false));
+						}
+					}
+					anchor = anchor.getParentSymbol();
+				}
 
 
-// If we can add members from scope
-                if (filter.allowOwnMembers()) {
+				// If we can add members from scope
+				if(filter.allowOwnMembers())
+				{
 
-// rails specific symbols
-                    for (Symbol symbol : RailsSymbolUtil.getRailsSpecificSymbols(fileSymbol, context, Context.ALL).getChildrenByFilter(filter.getSymbolFilter()).getAll()) {
-                        final String name = symbol.getName();
-                        if (name != null){
-                            final RubyLookupItem item = SymbolPresentationUtil.createRubyLookupItem(symbol, name, false, false);
-                            if (item!=null){
-                                map.put(item.getName(), item);
-                            }
-                        }
-                    }
+					// rails specific symbols
+					for(Symbol symbol : RailsSymbolUtil.getRailsSpecificSymbols(fileSymbol, context, Context.ALL).getChildrenByFilter(filter.getSymbolFilter()).getAll())
+					{
+						final String name = symbol.getName();
+						if(name != null)
+						{
+							final RubyLookupItem item = SymbolPresentationUtil.createRubyLookupItem(symbol, name, false, false);
+							if(item != null)
+							{
+								map.put(item.getName(), item);
+							}
+						}
+					}
 
-// symbols from scope
-                    final RType type = RTypeUtil.createTypeBySymbol(fileSymbol, context, Context.ALL, false);
-                    for (RubyLookupItem item : RTypeUtil.getLookupItemsByType(type, null, filter.getSymbolFilter())) {
-                        if (item != null) {
-                            // To prevent show java with unknown icon in autocompletion, except java package
-                            final String s = item.getName();
-                            if (!"java".equals(s)){
-                                map.put(s, item);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+					// symbols from scope
+					final RType type = RTypeUtil.createTypeBySymbol(fileSymbol, context, Context.ALL, false);
+					for(RubyLookupItem item : RTypeUtil.getLookupItemsByType(type, null, filter.getSymbolFilter()))
+					{
+						if(item != null)
+						{
+							// To prevent show java with unknown icon in autocompletion, except java package
+							final String s = item.getName();
+							if(!"java".equals(s))
+							{
+								map.put(s, item);
+							}
+						}
+					}
+				}
+			}
+		}
 
-// local variables
-        if (filter.allowLocalVariablesAndParameters()) {
-            for (RubyLookupItem item : getScopeLocalVariables(element)) {
-                map.put(item.getName(), item);
-            }
-        }
+		// local variables
+		if(filter.allowLocalVariablesAndParameters())
+		{
+			for(RubyLookupItem item : getScopeLocalVariables(element))
+			{
+				map.put(item.getName(), item);
+			}
+		}
 
-// reswords adding
-        if (filter.allowReswords()) {
-            for (RubyLookupItem item : getReswordsLookupItems()) {
-                map.put(item.getName(), item);
-            }
-        }
+		// reswords adding
+		if(filter.allowReswords())
+		{
+			for(RubyLookupItem item : getReswordsLookupItems())
+			{
+				map.put(item.getName(), item);
+			}
+		}
 
-        return new ArrayList<RubyLookupItem>(map.values());
-    }
+		return new ArrayList<RubyLookupItem>(map.values());
+	}
 
-    private static ArrayList<RubyLookupItem> getReswordsLookupItems() {
-        if (RESWORDS_LOOKUP_ITEMS == null){
-            final IElementType keywords[]= BNF.kRESWORDS.getTypes();
+	private static ArrayList<RubyLookupItem> getReswordsLookupItems()
+	{
+		if(RESWORDS_LOOKUP_ITEMS == null)
+		{
+			final IElementType keywords[] = BNF.kRESWORDS.getTypes();
 
-            final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
-            for (IElementType type : keywords) {
-                final String name = type.toString();
-                final RubySimpleLookupItem lookupItem = new RubySimpleLookupItem(name, null, LookupValueWithPriority.NORMAL, true, null);
-                variants.add(lookupItem);
-            }
-// RUBY-806: adding __END__ to autocomplete variants
-            final IElementType endType = RubyTokenTypes.tEND_MARKER;
-            final String name = endType.toString();
-            final RubySimpleLookupItem endLookupItem = new RubySimpleLookupItem(name, null, LookupValueWithPriority.NORMAL, false, null);
-            variants.add(endLookupItem);
-            RESWORDS_LOOKUP_ITEMS = variants;
-        }
-        return RESWORDS_LOOKUP_ITEMS;
-    }
+			final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
+			for(IElementType type : keywords)
+			{
+				final String name = type.toString();
+				final RubySimpleLookupItem lookupItem = new RubySimpleLookupItem(name, null, LookupValueWithPriority.NORMAL, true, null);
+				variants.add(lookupItem);
+			}
+			// RUBY-806: adding __END__ to autocomplete variants
+			final IElementType endType = RubyTokenTypes.tEND_MARKER;
+			final String name = endType.toString();
+			final RubySimpleLookupItem endLookupItem = new RubySimpleLookupItem(name, null, LookupValueWithPriority.NORMAL, false, null);
+			variants.add(endLookupItem);
+			RESWORDS_LOOKUP_ITEMS = variants;
+		}
+		return RESWORDS_LOOKUP_ITEMS;
+	}
 
-    @NotNull 
-    private static List<RubyLookupItem> getScopeLocalVariables(@NotNull final RPsiElement element) {
-        final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
-        final HashSet<String> names = new HashSet<String>();
-        for (ScopeVariable scopeVariable : ScopeUtil.gatherScopeVariables(element)) {
-            final String newName = scopeVariable.getName();
-            if (!names.contains(newName) && scopeVariable.getPrototype() != element){
-                names.add(newName);
-                final Icon icon = scopeVariable.isParameter() ? RubyIcons.RUBY_PARAMETER_NODE : RubyIcons.RUBY_VARIABLE_NODE;
-                final String typeText = scopeVariable.isParameter() ? RBundle.message("parameter") :
-                        RBundle.message("local.variable");
-                final RubyPsiLookupItem lookupItem =
-                        new RubyPsiLookupItem(element.getProject(), newName, null, typeText, scopeVariable.getPrototype(),
-                                LookupValueWithPriority.HIGH, true, icon);
-                variants.add(lookupItem);
-            }
-        }
-        return variants;
-    }
+	@NotNull
+	private static List<RubyLookupItem> getScopeLocalVariables(@NotNull final RPsiElement element)
+	{
+		final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
+		final HashSet<String> names = new HashSet<String>();
+		for(ScopeVariable scopeVariable : ScopeUtil.gatherScopeVariables(element))
+		{
+			final String newName = scopeVariable.getName();
+			if(!names.contains(newName) && scopeVariable.getPrototype() != element)
+			{
+				names.add(newName);
+				final Icon icon = scopeVariable.isParameter() ? RubyIcons.RUBY_PARAMETER_NODE : RubyIcons.RUBY_VARIABLE_NODE;
+				final String typeText = scopeVariable.isParameter() ? RBundle.message("parameter") : RBundle.message("local.variable");
+				final RubyPsiLookupItem lookupItem = new RubyPsiLookupItem(element.getProject(), newName, null, typeText, scopeVariable.getPrototype(), LookupValueWithPriority.HIGH, true, icon);
+				variants.add(lookupItem);
+			}
+		}
+		return variants;
+	}
 
 }

@@ -18,12 +18,13 @@ package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: 25.03.2007
-*/
-public enum ShortcutsTreeState {
-    RAKE_SUBTREE,
-    GENERATORS_SUBTREE,
-    UNKNOWN
+ *
+ * @author: Roman Chernyatchik
+ * @date: 25.03.2007
+ */
+public enum ShortcutsTreeState
+{
+	RAKE_SUBTREE,
+	GENERATORS_SUBTREE,
+	UNKNOWN
 }

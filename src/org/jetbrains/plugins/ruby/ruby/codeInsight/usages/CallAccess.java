@@ -6,9 +6,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 /**
  * @author oleg
  */
-public interface CallAccess extends ReferenceAccess {
-  @NotNull
-  RPsiElement getCall();
+public interface CallAccess extends ReferenceAccess
+{
+	@NotNull
+	RPsiElement getCall();
 
-  int getNumberOfArgs();
+	int getNumberOfArgs();
 }

@@ -35,46 +35,46 @@ import com.intellij.psi.PsiFile;
  * @author: Roman Chernyatchik, oleg
  * @date: 02.02.2007
  */
- public abstract class AbstractRubyHighlighterPass extends TextEditorHighlightingPass {
-    protected final Project myProject;
-    protected final PsiFile myFile;
-    protected final Editor myEditor;
+public abstract class AbstractRubyHighlighterPass extends TextEditorHighlightingPass
+{
+	protected final Project myProject;
+	protected final PsiFile myFile;
+	protected final Editor myEditor;
 
-    protected final int myStartOffset;
-    protected final int myEndOffset;
-    private final List<PsiElement> myElements;
+	protected final int myStartOffset;
+	protected final int myEndOffset;
+	private final List<PsiElement> myElements;
 
-    public AbstractRubyHighlighterPass(@NotNull final Project project,
-                                       @NotNull final PsiFile psiFile,
-                                       @NotNull final Editor editor,
-                                       final boolean updateVisible,
-                                       final int passId) {
-        super(project, editor.getDocument());
-        myFile = psiFile;
-        myEditor = editor;
-        myProject = project;
-        
-        setId(passId);
-        if (updateVisible) {
-            final TextRange visibleRange = RubyHighlightUtil.getVisibleRange(myEditor);
-            myStartOffset = visibleRange.getStartOffset();
-            myEndOffset = visibleRange.getEndOffset();
-        } else {
-            myStartOffset = 0;
-            myEndOffset = psiFile.getTextLength();
-        }
-        myElements = collectElementsInRange(psiFile, myStartOffset, myEndOffset);
-    }
+	public AbstractRubyHighlighterPass(@NotNull final Project project, @NotNull final PsiFile psiFile, @NotNull final Editor editor, final boolean updateVisible, final int passId)
+	{
+		super(project, editor.getDocument());
+		myFile = psiFile;
+		myEditor = editor;
+		myProject = project;
 
-    @NotNull
-    protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile,
-                                                      final int startOffset, final int endOffset) {
-        return psiFile instanceof RHTMLFile ?
-				CollectHighlightsUtil.getElementsInRange(((RHTMLFile) psiFile).getInnerRubyFile(), startOffset, endOffset, false):
-				CollectHighlightsUtil.getElementsInRange(psiFile, startOffset, endOffset, false);
-    }
+		setId(passId);
+		if(updateVisible)
+		{
+			final TextRange visibleRange = RubyHighlightUtil.getVisibleRange(myEditor);
+			myStartOffset = visibleRange.getStartOffset();
+			myEndOffset = visibleRange.getEndOffset();
+		}
+		else
+		{
+			myStartOffset = 0;
+			myEndOffset = psiFile.getTextLength();
+		}
+		myElements = collectElementsInRange(psiFile, myStartOffset, myEndOffset);
+	}
 
-    protected List<PsiElement> getElementsInRange(){
-        return myElements;
-    }
+	@NotNull
+	protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile, final int startOffset, final int endOffset)
+	{
+		return psiFile instanceof RHTMLFile ? CollectHighlightsUtil.getElementsInRange(((RHTMLFile) psiFile).getInnerRubyFile(), startOffset, endOffset, false) : CollectHighlightsUtil.getElementsInRange(psiFile, startOffset, endOffset, false);
+	}
+
+	protected List<PsiElement> getElementsInRange()
+	{
+		return myElements;
+	}
 }

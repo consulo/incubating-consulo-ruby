@@ -18,8 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @autor: oleg
  * @date: Nov 26, 2007
  */
-public interface RBoolBinExpression extends RBinaryExpression{
+public interface RBoolBinExpression extends RBinaryExpression
+{
 }

@@ -14,19 +14,22 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiElement;
 
-public interface Instruction {
-    Iterable<? extends Instruction> succ(CallEnvironment env);
-    Iterable<? extends Instruction> pred(CallEnvironment env);
+public interface Instruction
+{
+	Iterable<? extends Instruction> succ(CallEnvironment env);
+
+	Iterable<? extends Instruction> pred(CallEnvironment env);
 
 
-    Iterable<? extends Instruction> allSucc();
-    Iterable<? extends Instruction> allPred();
+	Iterable<? extends Instruction> allSucc();
 
-    int num();
+	Iterable<? extends Instruction> allPred();
 
-    @Nullable
-    PsiElement getElement();
+	int num();
+
+	@Nullable
+	PsiElement getElement();
 }

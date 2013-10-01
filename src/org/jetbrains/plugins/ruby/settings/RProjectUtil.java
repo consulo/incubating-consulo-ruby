@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
+import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.VcsConfiguration;
 import com.intellij.openapi.vcs.VcsShowConfirmationOption;
 import com.intellij.openapi.vcs.VcsShowConfirmationOptionImpl;
 import com.intellij.openapi.vcs.ex.ProjectLevelVcsManagerEx;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
-import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,39 +32,38 @@ import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptio
  * @author: Roman Chernyatchik
  * @date: 25.05.2007
  */
-public class RProjectUtil {
-    public static boolean isVcsAddSilently(@NotNull final Project project) {
-        final VcsShowConfirmationOptionImpl opt =
-                ProjectLevelVcsManagerEx.getInstanceEx(project)
-                        .getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
-        return opt.getValue() == VcsShowConfirmationOption.Value.DO_ACTION_SILENTLY;
-    }
-    
-    public static boolean isVcsAddNothingSilently(@NotNull final Project project) {
-        final VcsShowConfirmationOptionImpl opt =
-                ProjectLevelVcsManagerEx.getInstanceEx(project)
-                        .getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
-        return opt.getValue() == VcsShowConfirmationOption.Value.DO_NOTHING_SILENTLY;
-    }
+public class RProjectUtil
+{
+	public static boolean isVcsAddSilently(@NotNull final Project project)
+	{
+		final VcsShowConfirmationOptionImpl opt = ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
+		return opt.getValue() == VcsShowConfirmationOption.Value.DO_ACTION_SILENTLY;
+	}
 
-    public static boolean isVcsAddShowConfirmation(@NotNull final Project project) {
-        final VcsShowConfirmationOptionImpl opt =
-                ProjectLevelVcsManagerEx.getInstanceEx(project)
-                        .getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
-        return opt.getValue() == VcsShowConfirmationOption.Value.SHOW_CONFIRMATION;
-    }
+	public static boolean isVcsAddNothingSilently(@NotNull final Project project)
+	{
+		final VcsShowConfirmationOptionImpl opt = ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
+		return opt.getValue() == VcsShowConfirmationOption.Value.DO_NOTHING_SILENTLY;
+	}
 
-    public static GeneratorOptions getGeneratorsOptions(@NotNull final Project project) {
-        final GeneratorOptions options = RProjectSettings.getInstance(project).getGeneratorsOptions();
-        final boolean showConfirmation = isVcsAddShowConfirmation(project);
+	public static boolean isVcsAddShowConfirmation(@NotNull final Project project)
+	{
+		final VcsShowConfirmationOptionImpl opt = ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
+		return opt.getValue() == VcsShowConfirmationOption.Value.SHOW_CONFIRMATION;
+	}
 
-        options.setOption(Option.SVN_SHOW_CONFIRMATION, showConfirmation);
-        
-        if (!showConfirmation) {
-            // set SVN option from Vcs settings
-            options.setOption(Option.SVN,
-                              isVcsAddSilently(project));
-        }
-        return options;
-    }
+	public static GeneratorOptions getGeneratorsOptions(@NotNull final Project project)
+	{
+		final GeneratorOptions options = RProjectSettings.getInstance(project).getGeneratorsOptions();
+		final boolean showConfirmation = isVcsAddShowConfirmation(project);
+
+		options.setOption(Option.SVN_SHOW_CONFIRMATION, showConfirmation);
+
+		if(!showConfirmation)
+		{
+			// set SVN option from Vcs settings
+			options.setOption(Option.SVN, isVcsAddSilently(project));
+		}
+		return options;
+	}
 }

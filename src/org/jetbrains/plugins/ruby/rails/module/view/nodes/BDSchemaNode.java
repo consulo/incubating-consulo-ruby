@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,14 +28,17 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
  * @author: Roman Chernyatchik
  * @date: 19.05.2007
  */
-public class BDSchemaNode extends SimpleFileNode {
-    public BDSchemaNode(final Module module, final VirtualFile file) {
-        super(module, file, RailsIcons.RAILS_SCHEMA_FILE);
-    }
+public class BDSchemaNode extends SimpleFileNode
+{
+	public BDSchemaNode(final Module module, final VirtualFile file)
+	{
+		super(module, file, RailsIcons.RAILS_SCHEMA_FILE);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.BD_SCHEMA;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.BD_SCHEMA;
+	}
 }

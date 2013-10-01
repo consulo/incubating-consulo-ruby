@@ -24,5 +24,6 @@ import com.intellij.pom.PomModelAspect;
  * @author: Roman Chernyatchik
  * @date: 03.10.2006
  */
-public interface RubyPomAspect extends PomModelAspect {
+public interface RubyPomAspect extends PomModelAspect
+{
 }

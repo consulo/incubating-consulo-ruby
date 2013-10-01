@@ -17,20 +17,21 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 09.06.2006
  */
-public class If implements RubyTokenTypes {
+public class If implements RubyTokenTypes
+{
 
 /*
 		| if EXPR THEN
@@ -40,40 +41,42 @@ public class If implements RubyTokenTypes {
 		  end
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        builder.match(kIF);
+		builder.match(kIF);
 
-        Condition.parse(builder);
+		Condition.parse(builder);
 
-        THEN.parse(builder);
+		THEN.parse(builder);
 
-        COMPSTMT.parse(builder, kELSE, kELSIF, kEND);
+		COMPSTMT.parse(builder, kELSE, kELSIF, kEND);
 
 
-// elsif
-        while (builder.compareIgnoreEOL(kELSIF)){
-            RMarker elsifMarker = builder.mark();
-            builder.match(kELSIF);
+		// elsif
+		while(builder.compareIgnoreEOL(kELSIF))
+		{
+			RMarker elsifMarker = builder.mark();
+			builder.match(kELSIF);
 
-            Condition.parse(builder);
+			Condition.parse(builder);
 
-            THEN.parse(builder);
+			THEN.parse(builder);
 
-            COMPSTMT.parse(builder, kELSE, kELSIF, kEND);
-            elsifMarker.done(RubyElementTypes.ELSIF_BLOCK);
-        }
+			COMPSTMT.parse(builder, kELSE, kELSIF, kEND);
+			elsifMarker.done(RubyElementTypes.ELSIF_BLOCK);
+		}
 
-// else
-        builder.passEOLs();
-        OPT_ELSE.parse(builder);
+		// else
+		builder.passEOLs();
+		OPT_ELSE.parse(builder);
 
-        builder.matchIgnoreEOL(kEND);
-        statementMarker.done(RubyElementTypes.IF_STATEMENT);
-        return RubyElementTypes.IF_STATEMENT;
+		builder.matchIgnoreEOL(kEND);
+		statementMarker.done(RubyElementTypes.IF_STATEMENT);
+		return RubyElementTypes.IF_STATEMENT;
 
-    }
+	}
 
 }

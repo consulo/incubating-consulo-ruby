@@ -34,93 +34,114 @@ import com.intellij.psi.search.GlobalSearchScope;
  * User: oleg
  * Date: Sep 13, 2007
  */
-public class JavaResolveUtil {
+public class JavaResolveUtil
+{
 
-    public static final String[] TOP_LEVEL_JAVA_ALLOWED = new String[]{
-            "java",
-            "javax",
-            "org",
-            "com"
-    };
+	public static final String[] TOP_LEVEL_JAVA_ALLOWED = new String[]{
+			"java",
+			"javax",
+			"org",
+			"com"
+	};
 
 
-    public static boolean isTopLevelPackageOk(@NotNull final PsiPackage packaggge){
-        final String name = packaggge.getName();
-        for (String s : TOP_LEVEL_JAVA_ALLOWED) {
-            if (s.equals(name)){
-                return true;
-            }
-        }
-        return false;
-    }
+	public static boolean isTopLevelPackageOk(@NotNull final PsiPackage packaggge)
+	{
+		final String name = packaggge.getName();
+		for(String s : TOP_LEVEL_JAVA_ALLOWED)
+		{
+			if(s.equals(name))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @NotNull
-    public static List<PsiElement> getTopLevelPackagesAndClasses(@NotNull final Project project) {
-        final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
-        final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
-        if (topLevel != null) {
-// Add ALL top level packages
-            for (PsiPackage psiPackage : topLevel.getSubPackages()) {
-                if (psiPackage.isValid()){
-                    list.add(psiPackage);
-                }
-            }
-// Add top level classes
-            for (PsiClass psiClass : topLevel.getClasses()) {
-                if (psiClass.isValid()){
-                    list.add(psiClass);
-                }
-            }
-        }
-        return list;
-    }
+	@NotNull
+	public static List<PsiElement> getTopLevelPackagesAndClasses(@NotNull final Project project)
+	{
+		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
+		final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
+		if(topLevel != null)
+		{
+			// Add ALL top level packages
+			for(PsiPackage psiPackage : topLevel.getSubPackages())
+			{
+				if(psiPackage.isValid())
+				{
+					list.add(psiPackage);
+				}
+			}
+			// Add top level classes
+			for(PsiClass psiClass : topLevel.getClasses())
+			{
+				if(psiClass.isValid())
+				{
+					list.add(psiClass);
+				}
+			}
+		}
+		return list;
+	}
 
-    @NotNull
-    public static List<PsiElement> getAllowedTopLevelPackagesAndClasses(@NotNull final Project project) {
-        final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
-// Add ALLOWED top level packages
-        for (String name : TOP_LEVEL_JAVA_ALLOWED) {
-            final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(name);
-            if (psiPackage!=null && psiPackage.isValid()){
-                list.add(psiPackage);
-            }
-        }
+	@NotNull
+	public static List<PsiElement> getAllowedTopLevelPackagesAndClasses(@NotNull final Project project)
+	{
+		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
+		// Add ALLOWED top level packages
+		for(String name : TOP_LEVEL_JAVA_ALLOWED)
+		{
+			final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(name);
+			if(psiPackage != null && psiPackage.isValid())
+			{
+				list.add(psiPackage);
+			}
+		}
 
-// Add top level classes
-        final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
-        if (topLevel != null && topLevel.isValid()) {
-            for (PsiClass psiClass : topLevel.getClasses()) {
-                if (psiClass.isValid()){
-                    list.add(psiClass);
-                }
-            }
-        }
-        return list;
-    }
+		// Add top level classes
+		final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
+		if(topLevel != null && topLevel.isValid())
+		{
+			for(PsiClass psiClass : topLevel.getClasses())
+			{
+				if(psiClass.isValid())
+				{
+					list.add(psiClass);
+				}
+			}
+		}
+		return list;
+	}
 
-    @Nullable
-    public static PsiElement getPackageOrClass(@NotNull final Project project, @NotNull final String fullName) {
-        final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(fullName);
-        if (psiPackage!=null && psiPackage.isValid()){
-            return psiPackage;
-        }
-        final PsiClass psiClass = JavaPsiFacade.getInstance(project).findClass(fullName, GlobalSearchScope.allScope(project));
-        if (psiClass!=null && psiClass.isValid()){
-            return psiClass;
-        }
-        return null;
-    }
+	@Nullable
+	public static PsiElement getPackageOrClass(@NotNull final Project project, @NotNull final String fullName)
+	{
+		final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(fullName);
+		if(psiPackage != null && psiPackage.isValid())
+		{
+			return psiPackage;
+		}
+		final PsiClass psiClass = JavaPsiFacade.getInstance(project).findClass(fullName, GlobalSearchScope.allScope(project));
+		if(psiClass != null && psiClass.isValid())
+		{
+			return psiClass;
+		}
+		return null;
+	}
 
-    @Nullable
-    public static PsiElement getPackageOrClass(@NotNull final Project project,
-                                               @NotNull final List<String> path) {
-        final StringBuffer buffer = new StringBuffer();
-        for (String name : path) {
-            if (buffer.length()>0){
-                buffer.append('.');
-            }
-            buffer.append(name);
-        }
-        return getPackageOrClass(project, buffer.toString());
-    }
+	@Nullable
+	public static PsiElement getPackageOrClass(@NotNull final Project project, @NotNull final List<String> path)
+	{
+		final StringBuffer buffer = new StringBuffer();
+		for(String name : path)
+		{
+			if(buffer.length() > 0)
+			{
+				buffer.append('.');
+			}
+			buffer.append(name);
+		}
+		return getPackageOrClass(project, buffer.toString());
+	}
 }

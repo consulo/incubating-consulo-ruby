@@ -17,8 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary;
 
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -27,19 +25,33 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.EXPR;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assocs.ASSOCS;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.*;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.Array;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.LITERAL;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.OPERATION;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.REFS;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.VARIABLE;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike.Heredoc;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike.Regexp;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike.Strings;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike.Words;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.BRACE_BLOCK;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.*;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.BeginEndBlock;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Case;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Defined;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.For;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.If;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Unless;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Until;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.While;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures.Yield;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.Class;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.Module;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method.Method;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -132,33 +144,31 @@ method_call	: operation paren_args
 		;
 */
 
-public class PRIMARY implements RubyTokenTypes {
-    private static final TokenSet TOKENS = TokenSet.orSet( 
-            BNF.tDOT_OR_COLON,
-            BNF.tCODE_BLOCK_BEG_TOKENS,
-            TokenSet.create(
-                    tfLPAREN,
-                    tfLBRACK
-            )
-    );
+public class PRIMARY implements RubyTokenTypes
+{
+	private static final TokenSet TOKENS = TokenSet.orSet(BNF.tDOT_OR_COLON, BNF.tCODE_BLOCK_BEG_TOKENS, TokenSet.create(tfLPAREN, tfLBRACK));
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-        if (builder.isDEBUG()){
-            builder.PRIMARY();
-        }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(builder.isDEBUG())
+		{
+			builder.PRIMARY();
+		}
 
-        if (!builder.compare(BNF.tPRIMARY_FISRT_TOKEN)) {
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+		if(!builder.compare(BNF.tPRIMARY_FISRT_TOKEN))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        RMarker statementMarker = builder.mark();
-        IElementType result = parseSinglePrimary(builder);
+		RMarker statementMarker = builder.mark();
+		IElementType result = parseSinglePrimary(builder);
 
-        if (result == RubyElementTypes.EMPTY_INPUT) {
-            statementMarker.drop();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+		if(result == RubyElementTypes.EMPTY_INPUT)
+		{
+			statementMarker.drop();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
 /*
 primary : primary tCOLON2 tCONSTANT
@@ -173,214 +183,245 @@ primary : primary tCOLON2 tCONSTANT
 		;
 */
 
-//TODO: Now we ignore the differences between operations
-        while (builder.compare(TOKENS)) {
+		//TODO: Now we ignore the differences between operations
+		while(builder.compare(TOKENS))
+		{
 
 /*
-            | primary '[' aref_args ']'
+			| primary '[' aref_args ']'
 */
-            if (builder.compareAndEat(tfLBRACK)) {
-                AREF_ARGS.parse(builder);
-                builder.match(tRBRACK);
-                statementMarker.done(RubyElementTypes.ARRAY_REFERENCE);
-                result = RubyElementTypes.ARRAY_REFERENCE;
-                statementMarker = statementMarker.precede();
-            }
+			if(builder.compareAndEat(tfLBRACK))
+			{
+				AREF_ARGS.parse(builder);
+				builder.match(tRBRACK);
+				statementMarker.done(RubyElementTypes.ARRAY_REFERENCE);
+				result = RubyElementTypes.ARRAY_REFERENCE;
+				statementMarker = statementMarker.precede();
+			}
 
 /*
             | primary_value '.' operation2 opt_paren_args
 */
-            if (builder.compareAndEat(tDOT)) {
-                if (OPERATION.parse2(builder) == RubyElementTypes.EMPTY_INPUT) {
-                    builder.error(ErrorMsg.expected(RBundle.message("parsing.operation")));
-                }
-                statementMarker.done(RubyElementTypes.DOT_REFERENCE);
-                result = RubyElementTypes.DOT_REFERENCE;
-                statementMarker = statementMarker.precede();
-            }
+			if(builder.compareAndEat(tDOT))
+			{
+				if(OPERATION.parse2(builder) == RubyElementTypes.EMPTY_INPUT)
+				{
+					builder.error(ErrorMsg.expected(RBundle.message("parsing.operation")));
+				}
+				statementMarker.done(RubyElementTypes.DOT_REFERENCE);
+				result = RubyElementTypes.DOT_REFERENCE;
+				statementMarker = statementMarker.precede();
+			}
 
 /*
             | primary_value tCOLON2 operation2 paren_args
             | primary_value tCOLON2 operation3
 */
-            if (builder.compareAndEat(tCOLON2)) {
-                if (OPERATION.parse2(builder) == RubyElementTypes.EMPTY_INPUT) {
-                    builder.error(ErrorMsg.expected(RBundle.message("parsing.operation")));
-                }
-                statementMarker.done(RubyElementTypes.COLON_REFERENCE);
-                result = RubyElementTypes.COLON_REFERENCE;
-                statementMarker = statementMarker.precede();
-            }
+			if(builder.compareAndEat(tCOLON2))
+			{
+				if(OPERATION.parse2(builder) == RubyElementTypes.EMPTY_INPUT)
+				{
+					builder.error(ErrorMsg.expected(RBundle.message("parsing.operation")));
+				}
+				statementMarker.done(RubyElementTypes.COLON_REFERENCE);
+				result = RubyElementTypes.COLON_REFERENCE;
+				statementMarker = statementMarker.precede();
+			}
 
 /*
             | operation paren_args [brace_block]
 */
-            if (builder.compare(tfLPAREN)) {
-                if (BNF.COMMAND_OBJECTS.contains(result)) {
-                    PAREN_ARGS.parse(builder);
-                    statementMarker.done(RubyElementTypes.FUNCTION_CALL);
-                    result = RubyElementTypes.FUNCTION_CALL;
-                    statementMarker = statementMarker.precede();
-                } else {
-                    statementMarker.drop();
-                    return result;
-                }
-            }
+			if(builder.compare(tfLPAREN))
+			{
+				if(BNF.COMMAND_OBJECTS.contains(result))
+				{
+					PAREN_ARGS.parse(builder);
+					statementMarker.done(RubyElementTypes.FUNCTION_CALL);
+					result = RubyElementTypes.FUNCTION_CALL;
+					statementMarker = statementMarker.precede();
+				}
+				else
+				{
+					statementMarker.drop();
+					return result;
+				}
+			}
 
-//          [brace_block]
-            if (builder.compare(BNF.tCODE_BLOCK_BEG_TOKENS)) {
-                if (BNF.ITERATOR_OBJECTS.contains(result)) {
-                    BRACE_BLOCK.parse(builder);
-                    statementMarker.done(RubyElementTypes.BLOCK_CALL);
-                    result = RubyElementTypes.BLOCK_CALL;
-                    statementMarker = statementMarker.precede();
-                } else {
-                    statementMarker.drop();
-                    return result;
-                }
-            }
+			//          [brace_block]
+			if(builder.compare(BNF.tCODE_BLOCK_BEG_TOKENS))
+			{
+				if(BNF.ITERATOR_OBJECTS.contains(result))
+				{
+					BRACE_BLOCK.parse(builder);
+					statementMarker.done(RubyElementTypes.BLOCK_CALL);
+					result = RubyElementTypes.BLOCK_CALL;
+					statementMarker = statementMarker.precede();
+				}
+				else
+				{
+					statementMarker.drop();
+					return result;
+				}
+			}
 
-        }
+		}
 
-        statementMarker.drop();
-        return result;
-    }
+		statementMarker.drop();
+		return result;
+	}
 
-    /*
-            primary	: literal
-                    | strings
-                    | xstring
-                    | regexp
-                    | words
-                    | qwords
-                    | var_ref
-                    | backref
-                    | tFID
-                    | tCOLON3 tCONSTANT
-                    ;
-    */
-    @NotNull
-    private static IElementType parseSinglePrimary(final RBuilder builder) {
+	/*
+			primary	: literal
+					| strings
+					| xstring
+					| regexp
+					| words
+					| qwords
+					| var_ref
+					| backref
+					| tFID
+					| tCOLON3 tCONSTANT
+					;
+	*/
+	@NotNull
+	private static IElementType parseSinglePrimary(final RBuilder builder)
+	{
 
-// strings parsing
-        if (builder.compare(BNF.tSTRINGS_BEGINNINGS)) {
-            return Strings.parse(builder);
-        }
+		// strings parsing
+		if(builder.compare(BNF.tSTRINGS_BEGINNINGS))
+		{
+			return Strings.parse(builder);
+		}
 
-// regexp parsing
-        if (builder.compare(BNF.tREGEXP_BEGINNINGS)) {
-            return Regexp.parse(builder);
-        }
+		// regexp parsing
+		if(builder.compare(BNF.tREGEXP_BEGINNINGS))
+		{
+			return Regexp.parse(builder);
+		}
 
-// words parsing
-        if (builder.compare(BNF.tWORDS_BEGINNINGS)) {
-            return Words.parse(builder);
-        }
+		// words parsing
+		if(builder.compare(BNF.tWORDS_BEGINNINGS))
+		{
+			return Words.parse(builder);
+		}
 
-// heredocs parsing
-        if (builder.compare(tHEREDOC_ID)) {
-            return Heredoc.parse(builder);
-        }
+		// heredocs parsing
+		if(builder.compare(tHEREDOC_ID))
+		{
+			return Heredoc.parse(builder);
+		}
 
 /*
         | backref
         | nthref
 */
-        if (builder.compare(BNF.tREFS)){
-            return REFS.parse(builder);    
-        }
+		if(builder.compare(BNF.tREFS))
+		{
+			return REFS.parse(builder);
+		}
 /*
         | tFID
 */
-        if (builder.compare(tFID)){
-            return builder.parseSingleToken(tFID, RubyElementTypes.FID);
-        }
+		if(builder.compare(tFID))
+		{
+			return builder.parseSingleToken(tFID, RubyElementTypes.FID);
+		}
 /*
         | literal
 */
-        if (builder.compare(BNF.tLITERAL_FIRST_TOKEN)){
-            return LITERAL.parse(builder);
-        }
+		if(builder.compare(BNF.tLITERAL_FIRST_TOKEN))
+		{
+			return LITERAL.parse(builder);
+		}
 /*
         | var_ref
 */
-        if (builder.compare(BNF.tVARIABLES)) {
-            return VARIABLE.parse(builder);
-        }
+		if(builder.compare(BNF.tVARIABLES))
+		{
+			return VARIABLE.parse(builder);
+		}
 /*
         | tLPAREN compstmt ')'
 */
-        if (builder.compare(tLPAREN)) {
-            RMarker statementMarker = builder.mark();
-            builder.match(tLPAREN);
-            COMPSTMT.parse(builder, tRPAREN);
-            builder.matchIgnoreEOL(tRPAREN);
-            statementMarker.done(RubyElementTypes.EXPRESSION_IN_PARENS);
-            return RubyElementTypes.EXPRESSION_IN_PARENS;
-        }
+		if(builder.compare(tLPAREN))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tLPAREN);
+			COMPSTMT.parse(builder, tRPAREN);
+			builder.matchIgnoreEOL(tRPAREN);
+			statementMarker.done(RubyElementTypes.EXPRESSION_IN_PARENS);
+			return RubyElementTypes.EXPRESSION_IN_PARENS;
+		}
 /*
         | tLPAREN_ARG expr  opt_nl ')'
 */
-        if (builder.compare(tLPAREN_ARG)) {
-            RMarker statementMarker = builder.mark();
-            builder.match(tLPAREN_ARG);
-            EXPR.parse(builder);
-            builder.matchIgnoreEOL(tRPAREN);
-            statementMarker.done(RubyElementTypes.EXPRESSION_IN_PARENS);
-            return RubyElementTypes.EXPRESSION_IN_PARENS;
-        }
+		if(builder.compare(tLPAREN_ARG))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tLPAREN_ARG);
+			EXPR.parse(builder);
+			builder.matchIgnoreEOL(tRPAREN);
+			statementMarker.done(RubyElementTypes.EXPRESSION_IN_PARENS);
+			return RubyElementTypes.EXPRESSION_IN_PARENS;
+		}
 
 /*
         | tLBRACK aref_args ']'
 */
-        if (builder.compare(tLBRACK)) {
-            return Array.parse(builder);
-        }
+		if(builder.compare(tLBRACK))
+		{
+			return Array.parse(builder);
+		}
 /*
         | tLBRACE assoc_list RCURLY
 */
-        if (builder.compare(tLBRACE)) {
-            return ASSOCS.parse(builder);
-        }
+		if(builder.compare(tLBRACE))
+		{
+			return ASSOCS.parse(builder);
+		}
 /*
         | tCOLON3 tCONSTANT
 */
-        if (builder.compare(tCOLON3)) {
-            RMarker exprMarker = builder.mark();
-            builder.match(tCOLON3);
+		if(builder.compare(tCOLON3))
+		{
+			RMarker exprMarker = builder.mark();
+			builder.match(tCOLON3);
 
-            builder.parseSingleToken(tCONSTANT, RubyElementTypes.CONSTANT);
-            exprMarker.done(RubyElementTypes.COLON_REFERENCE);
-            return RubyElementTypes.COLON_REFERENCE;
-        }
+			builder.parseSingleToken(tCONSTANT, RubyElementTypes.CONSTANT);
+			exprMarker.done(RubyElementTypes.COLON_REFERENCE);
+			return RubyElementTypes.COLON_REFERENCE;
+		}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Control structures ///////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////// Control structures ///////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /*
         | kRETURN
 */
-        if (builder.compare(kRETURN)) {
-            return builder.parseSingleToken(kRETURN, RubyElementTypes.RETURN_STATEMENT);
-        }
+		if(builder.compare(kRETURN))
+		{
+			return builder.parseSingleToken(kRETURN, RubyElementTypes.RETURN_STATEMENT);
+		}
 
 /*
         | kDEFINED opt_nl '('  expr ')'
 */
-        if (builder.compare(kDEFINED)) {
-            return Defined.parseWithParenthes(builder);
-        }
+		if(builder.compare(kDEFINED))
+		{
+			return Defined.parseWithParenthes(builder);
+		}
 
 /*
         | kYIELD '(' call_args ')'
         | kYIELD '(' ')'
         | kYIELD
 */
-        if (builder.compare(kYIELD)) {
-            return Yield.parseWithParenthes(builder);
-        }
+		if(builder.compare(kYIELD))
+		{
+			return Yield.parseWithParenthes(builder);
+		}
 
 /*
         | kIF expr_value then
@@ -388,9 +429,10 @@ primary : primary tCOLON2 tCONSTANT
           if_tail
           kEND
 */
-        if (builder.compare(kIF)) {
-            return If.parse(builder);
-        }
+		if(builder.compare(kIF))
+		{
+			return If.parse(builder);
+		}
 
 /*
         | kUNLESS expr_value then
@@ -398,9 +440,10 @@ primary : primary tCOLON2 tCONSTANT
           opt_else
           kEND
 */
-        if (builder.compare(kUNLESS)) {
-            return Unless.parse(builder);
-        }
+		if(builder.compare(kUNLESS))
+		{
+			return Unless.parse(builder);
+		}
 
 /*
         | kCASE expr_value opt_terms
@@ -409,82 +452,92 @@ primary : primary tCOLON2 tCONSTANT
         | kCASE opt_terms case_body kEND
         | kCASE opt_terms kELSE compstmt kEND
 */
-        if (builder.compare(kCASE)) {
-            return Case.parse(builder);
-        }
+		if(builder.compare(kCASE))
+		{
+			return Case.parse(builder);
+		}
 
 /*
         | kWHILE  expr_value do
           compstmt
           kEND
 */
-        if (builder.compare(kWHILE)) {
-            return While.parse(builder);
-        }
+		if(builder.compare(kWHILE))
+		{
+			return While.parse(builder);
+		}
 
 /*
         | kUNTIL  expr_value do
           compstmt
           kEND
 */
-        if (builder.compare(kUNTIL)) {
-            return Until.parse(builder);
-        }
+		if(builder.compare(kUNTIL))
+		{
+			return Until.parse(builder);
+		}
 
 /*
         | kFOR block_var kIN  expr_value do
           compstmt
           kEND
 */
-        if (builder.compare(kFOR)) {
-            return For.parse(builder);
-        }
+		if(builder.compare(kFOR))
+		{
+			return For.parse(builder);
+		}
 
 /*
         | kBEGIN
           bodystmt
           kEND
 */
-        if (builder.compare(kBEGIN)) {
-            return BeginEndBlock.parse(builder);
-        }
+		if(builder.compare(kBEGIN))
+		{
+			return BeginEndBlock.parse(builder);
+		}
 
 /*
         | kRETRY
 */
-        if (builder.compare(kRETRY)) {
-            return builder.parseSingleToken(kRETRY, RubyElementTypes.RETRY_STATEMENT);
-        }
+		if(builder.compare(kRETRY))
+		{
+			return builder.parseSingleToken(kRETRY, RubyElementTypes.RETRY_STATEMENT);
+		}
 
 /*
         | kBREAK
 */
-        if (builder.compare(kBREAK)) {
-            return builder.parseSingleToken(kBREAK, RubyElementTypes.BREAK_STATEMENT);
-        }
+		if(builder.compare(kBREAK))
+		{
+			return builder.parseSingleToken(kBREAK, RubyElementTypes.BREAK_STATEMENT);
+		}
 
 /*
         | kNEXT
 */
-        if (builder.compare(kNEXT)) {
-            return builder.parseSingleToken(kNEXT, RubyElementTypes.NEXT_STATEMENT);
-        }
+		if(builder.compare(kNEXT))
+		{
+			return builder.parseSingleToken(kNEXT, RubyElementTypes.NEXT_STATEMENT);
+		}
 
 /*
         | kREDO
 */
-        if (builder.compare(kREDO)) {
-            return builder.parseSingleToken(kREDO, RubyElementTypes.REDO_STATEMENT);
-        }
+		if(builder.compare(kREDO))
+		{
+			return builder.parseSingleToken(kREDO, RubyElementTypes.REDO_STATEMENT);
+		}
 
 /*
         | kMODULE cpath
           bodystmt
           kEND
 */
-        if (builder.compare(kMODULE)) {
-            return Module.parse(builder);
-        }
+		if(builder.compare(kMODULE))
+		{
+			return Module.parse(builder);
+		}
 
 /*
 		| kCLASS cpath superclass
@@ -495,9 +548,10 @@ primary : primary tCOLON2 tCONSTANT
 		  bodystmt
 		  kEND
 */
-        if (builder.compare(kCLASS)) {
-            return Class.parse(builder);
-        }
+		if(builder.compare(kCLASS))
+		{
+			return Class.parse(builder);
+		}
 
 /*
         | kDEF fname
@@ -509,12 +563,13 @@ primary : primary tCOLON2 tCONSTANT
           bodystmt
           kEND
 */
-        if (builder.compare(kDEF)) {
-            return Method.parse(builder);
-        }
+		if(builder.compare(kDEF))
+		{
+			return Method.parse(builder);
+		}
 
 
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

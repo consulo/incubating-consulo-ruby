@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.filters;
 
+import java.io.File;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,52 +29,66 @@ import java.io.File;
  * @author: Roman Chernyatchik
  * @date: Jan 16, 2008
  */
-public class FileLinksFilterUtil {
-    private static final int LENGTH_THRESHOLD = 255;
+public class FileLinksFilterUtil
+{
+	private static final int LENGTH_THRESHOLD = 255;
 
-    /**
-     * Searches File object by given file path. If file doesn't exist of is a directory
-     * method returns null. If file with path filePath doesn't exists method tries to find
-     * file at path: filePaht+".rb"
-     * @param filePath File path
-     * @return File
-     */
-    @Nullable
-    public static File getFileByRubyLink(@NotNull final String filePath) {
-        File srcFile = new File(filePath);
+	/**
+	 * Searches File object by given file path. If file doesn't exist of is a directory
+	 * method returns null. If file with path filePath doesn't exists method tries to find
+	 * file at path: filePaht+".rb"
+	 *
+	 * @param filePath File path
+	 * @return File
+	 */
+	@Nullable
+	public static File getFileByRubyLink(@NotNull final String filePath)
+	{
+		File srcFile = new File(filePath);
 
-        try {
-            // sometimes ruby files are mentioned without extension, e.g. "examle.rb" -> "example"
-            if (!srcFile.exists() || srcFile.isDirectory()) {
-                final File srcRBFile = new File(filePath + "." + RubyFileType.RUBY.getDefaultExtension());
-                if (!srcFile.exists() || (srcFile.isDirectory() && srcRBFile.exists())) {
-                    srcFile = srcRBFile;
-                }
-            }
-            if (srcFile.exists() && !srcFile.isDirectory()) {
-                return srcFile;
-            }
-        } catch (SecurityException e) {
-            // Do nothing
-        }
-        return null;
-    }
+		try
+		{
+			// sometimes ruby files are mentioned without extension, e.g. "examle.rb" -> "example"
+			if(!srcFile.exists() || srcFile.isDirectory())
+			{
+				final File srcRBFile = new File(filePath + "." + RubyFileType.RUBY.getDefaultExtension());
+				if(!srcFile.exists() || (srcFile.isDirectory() && srcRBFile.exists()))
+				{
+					srcFile = srcRBFile;
+				}
+			}
+			if(srcFile.exists() && !srcFile.isDirectory())
+			{
+				return srcFile;
+			}
+		}
+		catch(SecurityException e)
+		{
+			// Do nothing
+		}
+		return null;
+	}
 
-    public static boolean hasExeExtention(@NotNull final File srcFile) {
-        // excludes .exe
-        final String ext = VirtualFileUtil.getExtension(srcFile.getName());
-        if (ext != null) {
-            if ("exe".equals(ext.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public static boolean hasExeExtention(@NotNull final File srcFile)
+	{
+		// excludes .exe
+		final String ext = VirtualFileUtil.getExtension(srcFile.getName());
+		if(ext != null)
+		{
+			if("exe".equals(ext.toLowerCase()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public static String cutLineIfLong(final String line) {
-        if (line.length() <= LENGTH_THRESHOLD) {
-            return line;
-        }
-        return line.substring(0, LENGTH_THRESHOLD + 1);
-    }
+	public static String cutLineIfLong(final String line)
+	{
+		if(line.length() <= LENGTH_THRESHOLD)
+		{
+			return line;
+		}
+		return line.substring(0, LENGTH_THRESHOLD + 1);
+	}
 }

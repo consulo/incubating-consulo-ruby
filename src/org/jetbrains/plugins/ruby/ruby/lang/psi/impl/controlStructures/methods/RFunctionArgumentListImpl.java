@@ -16,34 +16,39 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RFunctionArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 13.07.2006
  */
-public class RFunctionArgumentListImpl extends RCommandArgumentListImpl implements RFunctionArgumentList {
-    public RFunctionArgumentListImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RFunctionArgumentListImpl extends RCommandArgumentListImpl implements RFunctionArgumentList
+{
+	public RFunctionArgumentListImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-           if (visitor instanceof RubyElementVisitor) {
-               ((RubyElementVisitor)visitor).visitRFunctionArgumentList(this);
-               return;
-           }
-           super.accept(visitor);
-       }
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof RubyElementVisitor)
+		{
+			((RubyElementVisitor) visitor).visitRFunctionArgumentList(this);
+			return;
+		}
+		super.accept(visitor);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getPresentableName(boolean includeDefaultArgs) {
-        return "(" + super.getPresentableName(includeDefaultArgs) + ")";
-    }
+	public String getPresentableName(boolean includeDefaultArgs)
+	{
+		return "(" + super.getPresentableName(includeDefaultArgs) + ")";
+	}
 }

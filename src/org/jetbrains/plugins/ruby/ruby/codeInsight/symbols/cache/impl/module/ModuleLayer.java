@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.module;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
@@ -31,6 +28,9 @@ import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesCo
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoryItem;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,52 +38,63 @@ import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
  * @author: oleg
  * @date: Jan 25, 2008
  */
-public class ModuleLayer extends AbstractLayeredCachedSymbol{
+public class ModuleLayer extends AbstractLayeredCachedSymbol
+{
 
-    public ModuleLayer(@NotNull final Project project,
-                       @Nullable final Module module,
-                       @Nullable final Sdk sdk,
-                       final boolean jRubyEnabled) {
-        super(project, module, sdk, jRubyEnabled);
-    }
+	public ModuleLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	{
+		super(project, module, sdk, jRubyEnabled);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected CachedSymbol getBaseSymbol() {
-        final SymbolsCache cache = SymbolsCache.getInstance(myProject);
-        return cache.getBuiltInCachedSymbol(FileSymbolType.BUILT_IN, mySdk, isJRubyEnabled);
-    }
+	protected CachedSymbol getBaseSymbol()
+	{
+		final SymbolsCache cache = SymbolsCache.getInstance(myProject);
+		return cache.getBuiltInCachedSymbol(FileSymbolType.BUILT_IN, mySdk, isJRubyEnabled);
+	}
 
-    @Override
-	protected void addAdditionalData() {
-        // Extend loadpath with user directories
-        if (myModule!=null){
-            CheckableDirectoriesContainer checkDirectories = null;
-            if (isJRubyEnabled){
-                final JRubyFacet facet = JRubyFacet.getInstance(myModule);
-                if (facet != null) {
-                    checkDirectories = facet.getConfiguration().getLoadPathDirs();
-                }
-            } else {
-                RSupportPerModuleSettings settings = RModuleUtil.getRubySupportSettings(myModule);
-                if (settings!=null){
-                    checkDirectories = settings.getLoadPathDirs();
+	@Override
+	protected void addAdditionalData()
+	{
+		// Extend loadpath with user directories
+		if(myModule != null)
+		{
+			CheckableDirectoriesContainer checkDirectories = null;
+			if(isJRubyEnabled)
+			{
+				final JRubyFacet facet = JRubyFacet.getInstance(myModule);
+				if(facet != null)
+				{
+					checkDirectories = facet.getConfiguration().getLoadPathDirs();
+				}
+			}
+			else
+			{
+				RSupportPerModuleSettings settings = RModuleUtil.getRubySupportSettings(myModule);
+				if(settings != null)
+				{
+					checkDirectories = settings.getLoadPathDirs();
 
-                }
-            }
+				}
+			}
 
-            if (checkDirectories!=null){
-                for (CheckableDirectoryItem item : checkDirectories.getCheckableDirectories()) {
-                    if (item.isChecked()){
-                        myFileSymbol.addLoadPathUrl(VirtualFileUtil.constructLocalUrl(item.getDirectoryPath()));
-                    }
-                }
-            }
-        }
-    }
+			if(checkDirectories != null)
+			{
+				for(CheckableDirectoryItem item : checkDirectories.getCheckableDirectories())
+				{
+					if(item.isChecked())
+					{
+						myFileSymbol.addLoadPathUrl(VirtualFileUtil.constructLocalUrl(item.getDirectoryPath()));
+					}
+				}
+			}
+		}
+	}
 
-    @Override
-	public void fileAdded(@NotNull final String url) {
-        // do nothing
-    }
+	@Override
+	public void fileAdded(@NotNull final String url)
+	{
+		// do nothing
+	}
 }

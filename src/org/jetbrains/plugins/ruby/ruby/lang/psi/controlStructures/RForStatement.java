@@ -27,9 +27,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompou
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RForStatement extends RPsiElement, PseudoScopeHolder, 
-        RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild {
-    RPsiElement getVariable();
-    RPsiElement getExpression();
-    RCompoundStatement getBody();
+public interface RForStatement extends RPsiElement, PseudoScopeHolder, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
+{
+	RPsiElement getVariable();
+
+	RPsiElement getExpression();
+
+	RCompoundStatement getBody();
 }

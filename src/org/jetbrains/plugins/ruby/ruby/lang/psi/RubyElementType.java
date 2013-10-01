@@ -16,16 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 17.04.2005
  */
-public class RubyElementType extends IElementType {
-    public RubyElementType(String debugName) {
-        super(debugName, RubyFileType.RUBY.getLanguage());
-    }
+public class RubyElementType extends IElementType
+{
+	public RubyElementType(String debugName)
+	{
+		super(debugName, RubyFileType.RUBY.getLanguage());
+	}
 }

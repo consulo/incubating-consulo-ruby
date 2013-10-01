@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.Expr;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,114 +27,129 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.Expr;
  * @author: oleg
  * @date: 10.09.2006
  */
-public class TokensManager implements RubyTokenTypes {
+public class TokensManager implements RubyTokenTypes
+{
 
-    final private StatesManager myStatesManager;
-    private boolean spaceSeen;
+	final private StatesManager myStatesManager;
+	private boolean spaceSeen;
 
-    public TokensManager(final _RubyLexer lexer){
-        myStatesManager = lexer.getStatesManager();
-    }
+	public TokensManager(final _RubyLexer lexer)
+	{
+		myStatesManager = lexer.getStatesManager();
+	}
 
-    public void reset(){
-        spaceSeen = false;
-    }
+	public void reset()
+	{
+		spaceSeen = false;
+	}
 
-    /**
-     * @return true if resword is allowed now
-     */
-    public boolean reswordAllowed(){
-        return !isFnameAllowed();
-    }
+	/**
+	 * @return true if resword is allowed now
+	 */
+	public boolean reswordAllowed()
+	{
+		return !isFnameAllowed();
+	}
 
-    /**
-     * @return true if "Identifier=" allowed
-     */
-    public boolean isAssignOpAllowed() {
-        return myStatesManager.getExpr() == Expr.FNAME;
-    }
+	/**
+	 * @return true if "Identifier=" allowed
+	 */
+	public boolean isAssignOpAllowed()
+	{
+		return myStatesManager.getExpr() == Expr.FNAME;
+	}
 
-    /**
-     * @return true if fname allowed, i.e. tAREF, tASET, tUPLUS_OP, tUMINUS_OP
-     */
-    public boolean isFnameAllowed() {
-        final Expr expr = myStatesManager.getExpr();
-        return expr == Expr.FNAME || expr == Expr.DOT_OR_COLON;
-    }
+	/**
+	 * @return true if fname allowed, i.e. tAREF, tASET, tUPLUS_OP, tUMINUS_OP
+	 */
+	public boolean isFnameAllowed()
+	{
+		final Expr expr = myStatesManager.getExpr();
+		return expr == Expr.FNAME || expr == Expr.DOT_OR_COLON;
+	}
 
-    public boolean isColon2Allowed(){
-        final Expr expr = myStatesManager.getExpr();
-        return expr == Expr.END ||
-                expr == Expr.CMD_ARG ||
-                expr == Expr.ARG && !spaceSeen;
-    }
-    /**
-     * @return true if stringlike beginnig with % allowed
-     */
-    public boolean stringAllowed(){
-        return stringAllowed(false);
-    }
+	public boolean isColon2Allowed()
+	{
+		final Expr expr = myStatesManager.getExpr();
+		return expr == Expr.END ||
+				expr == Expr.CMD_ARG ||
+				expr == Expr.ARG && !spaceSeen;
+	}
 
-    /**
-     * @return true if string or regexp, beginning with /, % allowed
-     * @param followCharIsWhiteSpaceOrEol Following character is whitespace or Eol
-     */
-    public boolean stringAllowed(final boolean followCharIsWhiteSpaceOrEol){
-        final Expr expr = myStatesManager.getExpr();
-        return !isFnameAllowed() &&
-                (expr == Expr.BEG || expr == Expr.CMD_BRACE || expr == Expr.MID ||
-                        expr == Expr.ARG && spaceSeen && !followCharIsWhiteSpaceOrEol);
-    }
+	/**
+	 * @return true if stringlike beginnig with % allowed
+	 */
+	public boolean stringAllowed()
+	{
+		return stringAllowed(false);
+	}
 
-    /**
-     * @return true if unary operation is allowed
-     * @param followCharIsWhiteSpaceOrEol Following character is whitespace or Eol
-     */
-    public boolean unaryAllowed(final boolean followCharIsWhiteSpaceOrEol){
-        final Expr expr = myStatesManager.getExpr();
-        return !isFnameAllowed() &&
-                (expr == Expr.BEG || expr == Expr.CMD_BRACE || expr == Expr.MID || expr == Expr.CMD_ARG ||
-                        expr == Expr.ARG && spaceSeen && !followCharIsWhiteSpaceOrEol);
-    }
+	/**
+	 * @param followCharIsWhiteSpaceOrEol Following character is whitespace or Eol
+	 * @return true if string or regexp, beginning with /, % allowed
+	 */
+	public boolean stringAllowed(final boolean followCharIsWhiteSpaceOrEol)
+	{
+		final Expr expr = myStatesManager.getExpr();
+		return !isFnameAllowed() && (expr == Expr.BEG || expr == Expr.CMD_BRACE || expr == Expr.MID ||
+				expr == Expr.ARG && spaceSeen && !followCharIsWhiteSpaceOrEol);
+	}
 
-    public boolean isHeredocAllowed(){
-        return myStatesManager.getExpr()!= Expr.CLASS && unaryAllowed(false);
-    }
+	/**
+	 * @param followCharIsWhiteSpaceOrEol Following character is whitespace or Eol
+	 * @return true if unary operation is allowed
+	 */
+	public boolean unaryAllowed(final boolean followCharIsWhiteSpaceOrEol)
+	{
+		final Expr expr = myStatesManager.getExpr();
+		return !isFnameAllowed() && (expr == Expr.BEG || expr == Expr.CMD_BRACE || expr == Expr.MID || expr == Expr.CMD_ARG ||
+				expr == Expr.ARG && spaceSeen && !followCharIsWhiteSpaceOrEol);
+	}
 
-    /**
-     * Process the token seen and returns is
-     * @param type DuckType of token seen
-     * @return type
-     */
-    public IElementType process(IElementType type){
-        spaceSeen = (type == tWHITE_SPACE);
-        myStatesManager.process(type);
-        return type;
-    }
+	public boolean isHeredocAllowed()
+	{
+		return myStatesManager.getExpr() != Expr.CLASS && unaryAllowed(false);
+	}
 
-    public boolean ignoreEOL(){
-        final Expr expr = myStatesManager.getExpr();
-        return !myStatesManager.isAfterHeredoc() &&
-                (expr == Expr.BEG || expr == Expr.MID || expr == Expr.CMD_BRACE && myStatesManager.ignoreEol ||
-                        expr == Expr.DOT_OR_COLON || expr == Expr.CLASS || expr == Expr.FNAME);
-    }
+	/**
+	 * Process the token seen and returns is
+	 *
+	 * @param type DuckType of token seen
+	 * @return type
+	 */
+	public IElementType process(IElementType type)
+	{
+		spaceSeen = (type == tWHITE_SPACE);
+		myStatesManager.process(type);
+		return type;
+	}
 
-  /**
-   * @return true if fTokens allowed, i.e. func(, func{, func[, tCOLON2
-   */
-    public boolean isFTokenAllowed(){
-        return !spaceSeen && isExprEnd();
-    }
+	public boolean ignoreEOL()
+	{
+		final Expr expr = myStatesManager.getExpr();
+		return !myStatesManager.isAfterHeredoc() && (expr == Expr.BEG || expr == Expr.MID || expr == Expr.CMD_BRACE && myStatesManager.ignoreEol ||
+				expr == Expr.DOT_OR_COLON || expr == Expr.CLASS || expr == Expr.FNAME);
+	}
 
-    /**
-     * @return true if Arg token allowed, i.e. tLPAREN_ARG
-     */
-    public boolean isArgTokenAllowed(){
-        return spaceSeen && myStatesManager.getExpr() == Expr.ARG;
-    }
+	/**
+	 * @return true if fTokens allowed, i.e. func(, func{, func[, tCOLON2
+	 */
+	public boolean isFTokenAllowed()
+	{
+		return !spaceSeen && isExprEnd();
+	}
 
-    public boolean isExprEnd(){
-        final Expr expr = myStatesManager.getExpr();
-        return expr == Expr.END || expr == Expr.ARG;
-    }
+	/**
+	 * @return true if Arg token allowed, i.e. tLPAREN_ARG
+	 */
+	public boolean isArgTokenAllowed()
+	{
+		return spaceSeen && myStatesManager.getExpr() == Expr.ARG;
+	}
+
+	public boolean isExprEnd()
+	{
+		final Expr expr = myStatesManager.getExpr();
+		return expr == Expr.END || expr == Expr.ARG;
+	}
 }

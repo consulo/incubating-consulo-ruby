@@ -16,15 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages;
 
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiParameter;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.*;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.AssignAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.CallAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.ConstantAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.FieldWriteAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.JavaTypedAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.RescueBlockAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.SelfAssignAccessImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RRescueBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
@@ -48,8 +54,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFid;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-
-import java.util.List;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiParameter;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,148 +63,184 @@ import java.util.List;
  * @author: oleg
  * @date: 06.05.2007
  */
-public class UsageAnalyzer {
+public class UsageAnalyzer
+{
 
-    public static Access createUsageAccess(@NotNull final RPsiElement usage) {
-// Rescue block
-        if (usage instanceof RIdentifier) {
-            final RRescueBlock rescueBlock = RRescueBlockNavigator.getByParameter((RIdentifier) usage);
-            if (rescueBlock != null) {
-                return new RescueBlockAccessImpl(rescueBlock, usage);
-            }
-        }
+	public static Access createUsageAccess(@NotNull final RPsiElement usage)
+	{
+		// Rescue block
+		if(usage instanceof RIdentifier)
+		{
+			final RRescueBlock rescueBlock = RRescueBlockNavigator.getByParameter((RIdentifier) usage);
+			if(rescueBlock != null)
+			{
+				return new RescueBlockAccessImpl(rescueBlock, usage);
+			}
+		}
 
-// Overriden method argument
-        if (usage instanceof RIdentifier && ((RIdentifier) usage).isMethodParameter()) {
-            final RContainer container = usage.getParentContainer();
-            if (container instanceof RMethod) {
-                final RArgument argument = RArgumentNavigator.getByRIdentifier((RIdentifier) usage);
-                assert argument != null;
-                if (argument.getType() == ArgumentInfo.Type.SIMPLE) {
-                    final RArgumentList list = RArgumentListNavigator.getByArgument(argument);
-                    if (list != null) {
-                        final int number = list.getArgNumber(argument);
-                        if (number != -1) {
-                            // We can say precisely only if all prev arguments are simple arguments
-                            boolean nonSimpleArgSeen = false;
-                            for (ArgumentInfo argumentInfo : list.getArgumentInfos().subList(0, number)) {
-                                if (argumentInfo.getType() != ArgumentInfo.Type.SIMPLE) {
-                                    nonSimpleArgSeen = true;
-                                }
-                            }
-                            if (!nonSimpleArgSeen) {
-                                final FileSymbol fileSymbol = LastSymbolStorage.getInstance(usage.getProject()).getSymbol();
-                                final Symbol methodSymbol = SymbolUtil.getSymbolByContainer(fileSymbol, container);
-                                if (methodSymbol != null) {
-                                    final List<Symbol> overridenSymbols = RubyOverrideImplementUtil.getOverridenSymbols(fileSymbol, methodSymbol);
-                                    // At first we look for implemented methods
-                                    for (PsiMethod element : RubyOverrideImplementUtil.getImplementedJavaMethods(overridenSymbols)) {
-                                        final PsiParameter[] params = element.getParameterList().getParameters();
-                                        if (number < params.length) {
-                                            return new JavaTypedAccessImpl(params, number, usage);
-                                        }
-                                    }
-                                    // Then we look for overriden PsiMethods
-                                    for (Object element : RubyOverrideImplementUtil.getOverridenElements(fileSymbol, methodSymbol, null, overridenSymbols)) {
-                                        if (element instanceof PsiMethod) {
-                                            final PsiParameter[] params = ((PsiMethod) element).getParameterList().getParameters();
-                                            if (number < params.length) {
-                                                return new JavaTypedAccessImpl(params,  number, usage);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+		// Overriden method argument
+		if(usage instanceof RIdentifier && ((RIdentifier) usage).isMethodParameter())
+		{
+			final RContainer container = usage.getParentContainer();
+			if(container instanceof RMethod)
+			{
+				final RArgument argument = RArgumentNavigator.getByRIdentifier((RIdentifier) usage);
+				assert argument != null;
+				if(argument.getType() == ArgumentInfo.Type.SIMPLE)
+				{
+					final RArgumentList list = RArgumentListNavigator.getByArgument(argument);
+					if(list != null)
+					{
+						final int number = list.getArgNumber(argument);
+						if(number != -1)
+						{
+							// We can say precisely only if all prev arguments are simple arguments
+							boolean nonSimpleArgSeen = false;
+							for(ArgumentInfo argumentInfo : list.getArgumentInfos().subList(0, number))
+							{
+								if(argumentInfo.getType() != ArgumentInfo.Type.SIMPLE)
+								{
+									nonSimpleArgSeen = true;
+								}
+							}
+							if(!nonSimpleArgSeen)
+							{
+								final FileSymbol fileSymbol = LastSymbolStorage.getInstance(usage.getProject()).getSymbol();
+								final Symbol methodSymbol = SymbolUtil.getSymbolByContainer(fileSymbol, container);
+								if(methodSymbol != null)
+								{
+									final List<Symbol> overridenSymbols = RubyOverrideImplementUtil.getOverridenSymbols(fileSymbol, methodSymbol);
+									// At first we look for implemented methods
+									for(PsiMethod element : RubyOverrideImplementUtil.getImplementedJavaMethods(overridenSymbols))
+									{
+										final PsiParameter[] params = element.getParameterList().getParameters();
+										if(number < params.length)
+										{
+											return new JavaTypedAccessImpl(params, number, usage);
+										}
+									}
+									// Then we look for overriden PsiMethods
+									for(Object element : RubyOverrideImplementUtil.getOverridenElements(fileSymbol, methodSymbol, null, overridenSymbols))
+									{
+										if(element instanceof PsiMethod)
+										{
+											final PsiParameter[] params = ((PsiMethod) element).getParameterList().getParameters();
+											if(number < params.length)
+											{
+												return new JavaTypedAccessImpl(params, number, usage);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 
-        if (usage instanceof RIdentifier) {
-            final RIdentifier identifier = (RIdentifier) usage;
-// Block Parameter
-            if (identifier.isBlockParameter()){
-                return new BlockParameterAccess() {
-                    @Override
+		if(usage instanceof RIdentifier)
+		{
+			final RIdentifier identifier = (RIdentifier) usage;
+			// Block Parameter
+			if(identifier.isBlockParameter())
+			{
+				return new BlockParameterAccess()
+				{
+					@Override
 					@NotNull
-                    public RPsiElement getElement() {
-                        return identifier;
-                    }
+					public RPsiElement getElement()
+					{
+						return identifier;
+					}
 
-                    @Override
+					@Override
 					@NotNull
-                    public RBlockVariables getBlockVariables() {
-                        return RBlockVariableNavigator.getByIdentifier(identifier);
-                    }
-                };
-            }
+					public RBlockVariables getBlockVariables()
+					{
+						return RBlockVariableNavigator.getByIdentifier(identifier);
+					}
+				};
+			}
 
-// Method Parameter
-            if (identifier.isMethodParameter()) {
-                return new MethodParameterAccess() {
-                    @Override
+			// Method Parameter
+			if(identifier.isMethodParameter())
+			{
+				return new MethodParameterAccess()
+				{
+					@Override
 					@NotNull
-                    public RPsiElement getElement() {
-                        return identifier;
-                    }
+					public RPsiElement getElement()
+					{
+						return identifier;
+					}
 
-                    @Override
+					@Override
 					@NotNull
-                    public RArgument getArgument() {
-                        //noinspection ConstantConditions
-                        return RArgumentNavigator.getByRIdentifier(identifier);
-                    }
-                };
-            }
-        }
+					public RArgument getArgument()
+					{
+						//noinspection ConstantConditions
+						return RArgumentNavigator.getByRIdentifier(identifier);
+					}
+				};
+			}
+		}
 
-// Assignment
-        final RAssignmentExpression assignment = RAssignmentExpressionNavigator.getAssignmentByLeftPart(usage);
-        if (assignment != null) {
-            return new AssignAccessImpl(assignment, usage);
-        }
+		// Assignment
+		final RAssignmentExpression assignment = RAssignmentExpressionNavigator.getAssignmentByLeftPart(usage);
+		if(assignment != null)
+		{
+			return new AssignAccessImpl(assignment, usage);
+		}
 
-// Self assignment
-        final RSelfAssignmentExpression selfAssignment = RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(usage);
-        if (selfAssignment != null) {
-            return new SelfAssignAccessImpl(selfAssignment, usage);
-        }
+		// Self assignment
+		final RSelfAssignmentExpression selfAssignment = RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(usage);
+		if(selfAssignment != null)
+		{
+			return new SelfAssignAccessImpl(selfAssignment, usage);
+		}
 
-// References
-        final RReference reference = RReferenceNavigator.getReferenceByLeftPart(usage);
-        if (reference != null) {
-            final RPsiElement value = reference.getValue();
+		// References
+		final RReference reference = RReferenceNavigator.getReferenceByLeftPart(usage);
+		if(reference != null)
+		{
+			final RPsiElement value = reference.getValue();
 
-// Field write access
-            if (value instanceof RConstant || value instanceof RIdentifier) {
-                final RAssignmentExpression refAssign = RAssignmentExpressionNavigator.getAssignmentByLeftPart(reference);
-                if (refAssign != null) {
-                    return new FieldWriteAccessImpl(value, reference, usage);
-                }
-            }
+			// Field write access
+			if(value instanceof RConstant || value instanceof RIdentifier)
+			{
+				final RAssignmentExpression refAssign = RAssignmentExpressionNavigator.getAssignmentByLeftPart(reference);
+				if(refAssign != null)
+				{
+					return new FieldWriteAccessImpl(value, reference, usage);
+				}
+			}
 
-// Constant, i.e. variable.CONSTANT
-            if (value instanceof RConstant) {
-                return new ConstantAccessImpl(value, reference, usage);
+			// Constant, i.e. variable.CONSTANT
+			if(value instanceof RConstant)
+			{
+				return new ConstantAccessImpl(value, reference, usage);
 
-            }
+			}
 
-// method_call, i.e. variable.methodName
-            if (value instanceof RIdentifier || value instanceof RFid) {
-                final RCall commandCall = RCallNavigator.getByCommand(reference);
-                return new CallAccessImpl(value, commandCall, reference, usage);
-            }
+			// method_call, i.e. variable.methodName
+			if(value instanceof RIdentifier || value instanceof RFid)
+			{
+				final RCall commandCall = RCallNavigator.getByCommand(reference);
+				return new CallAccessImpl(value, commandCall, reference, usage);
+			}
 
-        }
+		}
 
-        return new ReadAccess() {
-            @Override
+		return new ReadAccess()
+		{
+			@Override
 			@NotNull
-            public RPsiElement getElement() {
-                return usage;
-            }
-        };
-    }
+			public RPsiElement getElement()
+			{
+				return usage;
+			}
+		};
+	}
 
 }

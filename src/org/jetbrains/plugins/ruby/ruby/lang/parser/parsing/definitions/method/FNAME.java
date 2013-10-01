@@ -17,22 +17,23 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 09.07.2006
  */
-public class FNAME  implements RubyTokenTypes {
+public class FNAME implements RubyTokenTypes
+{
 
 /*
-    fname	: tIDENTIFIER
+	fname	: tIDENTIFIER
             | tCONSTANT
             | tFID
             | op
@@ -41,14 +42,14 @@ public class FNAME  implements RubyTokenTypes {
 */
 
 
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(!builder.compare(BNF.tFNAME))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        if (!builder.compare(BNF.tFNAME)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-
-        return builder.parseSingleToken(BNF.tFNAME, RubyElementTypes.FNAME);
-    }
+		return builder.parseSingleToken(BNF.tFNAME, RubyElementTypes.FNAME);
+	}
 }

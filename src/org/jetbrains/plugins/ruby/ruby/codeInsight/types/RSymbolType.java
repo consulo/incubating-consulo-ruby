@@ -10,5 +10,6 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
  * @author: oleg
  * @date: Apr 13, 2008
  */
-public interface RSymbolType extends RType{
+public interface RSymbolType extends RType
+{
 }

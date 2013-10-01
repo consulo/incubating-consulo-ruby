@@ -28,9 +28,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RObjectClass extends RVirtualObjectClass, RFieldConstantContainer,
-        RFormatStructureElement, RWrapLastChild {
+public interface RObjectClass extends RVirtualObjectClass, RFieldConstantContainer, RFormatStructureElement, RWrapLastChild
+{
 
-    @Nullable
-    public RClassObject getObject();
+	@Nullable
+	public RClassObject getObject();
 }

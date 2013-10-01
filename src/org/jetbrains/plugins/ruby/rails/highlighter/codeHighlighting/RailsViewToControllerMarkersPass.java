@@ -16,12 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiFile;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToController;
@@ -29,10 +27,12 @@ import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsUpdateHighlightersUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,48 +40,44 @@ import java.util.Collections;
  * @author: Roman Chernyatchik
  * @date: 04.02.2007
  */
-public class RailsViewToControllerMarkersPass extends ElementsStartsAtRangeHighlighterPass {
-    /**
-     * "Switch to controller of partial view" markers
-     */
-    private Collection<RailsLineMarkerInfo> myViewToControllerMarkers = Collections.emptyList();
-    private final Module myModule;
+public class RailsViewToControllerMarkersPass extends ElementsStartsAtRangeHighlighterPass
+{
+	/**
+	 * "Switch to controller of partial view" markers
+	 */
+	private Collection<RailsLineMarkerInfo> myViewToControllerMarkers = Collections.emptyList();
+	private final Module myModule;
 
-    public RailsViewToControllerMarkersPass(final Module module, final PsiFile psiFile,
-                                            final Editor editor) {
-        super(module.getProject(),
-             psiFile, editor, true, HighlightPassConstants.VIEW_TO_CONTROLLER_MARKERS_GROUP);
-        myModule = module;
-        assert RailsFacetUtil.hasRailsSupport(module);
-    }
+	public RailsViewToControllerMarkersPass(final Module module, final PsiFile psiFile, final Editor editor)
+	{
+		super(module.getProject(), psiFile, editor, true, HighlightPassConstants.VIEW_TO_CONTROLLER_MARKERS_GROUP);
+		myModule = module;
+		assert RailsFacetUtil.hasRailsSupport(module);
+	}
 
-    @Override
-	public void doCollectInformation(final ProgressIndicator progress) {
-        // We call this often enough
-        ProgressManager.getInstance().checkCanceled();
+	@Override
+	public void doCollectInformation(final ProgressIndicator progress)
+	{
+		// We call this often enough
+		ProgressManager.getInstance().checkCanceled();
 
-        ApplicationManager.getApplication().assertReadAccessAllowed();
+		ApplicationManager.getApplication().assertReadAccessAllowed();
 
-        myViewToControllerMarkers = new ArrayList<RailsLineMarkerInfo>();
+		myViewToControllerMarkers = new ArrayList<RailsLineMarkerInfo>();
 
-        if (!SwitchToController.isSwitchToControllerEnabled(myFile, myModule)) {
-            return;
-        }
+		if(!SwitchToController.isSwitchToControllerEnabled(myFile, myModule))
+		{
+			return;
+		}
 
-        final RailsLineMarkerInfo info =
-                new RailsLineMarkerInfo(myModule,
-                    RailsLineMarkerInfo.MarkerType.VIEW_TO_CONTROLLER,
-                    myFile,
-                    RubyHighlightUtil.getStartOffset(myFile),
-                    RailsIcons.RAILS_VIEW_TO_CONTROLLER_MARKER);
-        myViewToControllerMarkers.add(info);
-    }
+		final RailsLineMarkerInfo info = new RailsLineMarkerInfo(myModule, RailsLineMarkerInfo.MarkerType.VIEW_TO_CONTROLLER, myFile, RubyHighlightUtil.getStartOffset(myFile), RailsIcons.RAILS_VIEW_TO_CONTROLLER_MARKER);
+		myViewToControllerMarkers.add(info);
+	}
 
-    @Override
-	public void doApplyInformationToEditor() {
-        RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument,
-                                                      myViewToControllerMarkers,
-                                                      HighlightPassConstants.VIEW_TO_CONTROLLER_MARKERS_GROUP);
+	@Override
+	public void doApplyInformationToEditor()
+	{
+		RailsUpdateHighlightersUtil.setLineMarkersToEditor(myProject, myDocument, myViewToControllerMarkers, HighlightPassConstants.VIEW_TO_CONTROLLER_MARKERS_GROUP);
 
-    }
+	}
 }

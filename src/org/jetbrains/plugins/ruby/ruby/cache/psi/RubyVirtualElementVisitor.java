@@ -16,7 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
 
 /**
@@ -25,65 +30,81 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
  * @author: oleg
  * @date: Feb 15, 2007
  */
-public abstract class RubyVirtualElementVisitor {
+public abstract class RubyVirtualElementVisitor
+{
 
-    public void visitElement(RVirtualElement virtualElement){
-        // do nothing
-    }
+	public void visitElement(RVirtualElement virtualElement)
+	{
+		// do nothing
+	}
 
-    public void visitRVirtualClass(RVirtualClass virtualClass) {
-        visitElement(virtualClass);
-    }
+	public void visitRVirtualClass(RVirtualClass virtualClass)
+	{
+		visitElement(virtualClass);
+	}
 
-    public void visitRVirtualObjectClass(RVirtualObjectClass virtualObjectClass) {
-        visitElement(virtualObjectClass);
-    }
+	public void visitRVirtualObjectClass(RVirtualObjectClass virtualObjectClass)
+	{
+		visitElement(virtualObjectClass);
+	}
 
-    public void visitRVirtualMethod(RVirtualMethod virtualMethod) {
-        visitElement(virtualMethod);
-    }
+	public void visitRVirtualMethod(RVirtualMethod virtualMethod)
+	{
+		visitElement(virtualMethod);
+	}
 
-    public void visitRVirtualSingletonMethod(RVirtualSingletonMethod virtualSingletonMethod) {
-        visitElement(virtualSingletonMethod);
-    }
+	public void visitRVirtualSingletonMethod(RVirtualSingletonMethod virtualSingletonMethod)
+	{
+		visitElement(virtualSingletonMethod);
+	}
 
-    public void visitRVirtualModule(RVirtualModule virtualModule) {
-        visitElement(virtualModule);
-    }
+	public void visitRVirtualModule(RVirtualModule virtualModule)
+	{
+		visitElement(virtualModule);
+	}
 
-    public void visitRVirtualFile(RVirtualFile virtualFile) {
-        visitElement(virtualFile);
-    }
+	public void visitRVirtualFile(RVirtualFile virtualFile)
+	{
+		visitElement(virtualFile);
+	}
 
-    public void visitRVirtualRequire(RVirtualRequire virtualRequire) {
-        visitElement(virtualRequire);
-    }
+	public void visitRVirtualRequire(RVirtualRequire virtualRequire)
+	{
+		visitElement(virtualRequire);
+	}
 
-    public void visitRVirtualLoad(RVirtualLoad rVirtualLoad) {
-        visitElement(rVirtualLoad);
-    }
+	public void visitRVirtualLoad(RVirtualLoad rVirtualLoad)
+	{
+		visitElement(rVirtualLoad);
+	}
 
-    public void visitRVirtualAlias(RVirtualAlias rVirtualAlias) {
-        visitElement(rVirtualAlias);
-    }
+	public void visitRVirtualAlias(RVirtualAlias rVirtualAlias)
+	{
+		visitElement(rVirtualAlias);
+	}
 
-    public void visitRVirtualInclude(RVirtualInclude rVirtualInclude) {
-        visitElement(rVirtualInclude);
-    }
+	public void visitRVirtualInclude(RVirtualInclude rVirtualInclude)
+	{
+		visitElement(rVirtualInclude);
+	}
 
-    public void visitRVirtualExtend(RVirtualExtend rVirtualExtend) {
-        visitElement(rVirtualExtend);
-    }
+	public void visitRVirtualExtend(RVirtualExtend rVirtualExtend)
+	{
+		visitElement(rVirtualExtend);
+	}
 
-    public void visitRVirtualFieldAttr(RVirtualFieldAttr rVirtualFieldAttr) {
-        visitElement(rVirtualFieldAttr);
-    }
+	public void visitRVirtualFieldAttr(RVirtualFieldAttr rVirtualFieldAttr)
+	{
+		visitElement(rVirtualFieldAttr);
+	}
 
-    public void visitRVirtualImportJavaClass(RVirtualImportJavaClass rVirtualImportJavaClass) {
-        visitElement(rVirtualImportJavaClass);
-    }
+	public void visitRVirtualImportJavaClass(RVirtualImportJavaClass rVirtualImportJavaClass)
+	{
+		visitElement(rVirtualImportJavaClass);
+	}
 
-    public void visitRVirtualIncludeJavaClass(RVirtualIncludeJavaClass rVirtualIncludeJavaClass) {
-        visitElement(rVirtualIncludeJavaClass);
-    }
+	public void visitRVirtualIncludeJavaClass(RVirtualIncludeJavaClass rVirtualIncludeJavaClass)
+	{
+		visitElement(rVirtualIncludeJavaClass);
+	}
 }

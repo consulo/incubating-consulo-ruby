@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -26,16 +25,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.iterators.OPT_BLOCK_VAR;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.07.2006
  */
-public class BRACE_BLOCK implements RubyTokenTypes {
+public class BRACE_BLOCK implements RubyTokenTypes
+{
 
 /*
-    brace_block	: LCURLY
+	brace_block	: LCURLY
               opt_block_var
               compstmt RCURLY
             | kDO
@@ -44,28 +45,30 @@ public class BRACE_BLOCK implements RubyTokenTypes {
             ;
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
 
-        if (!builder.compare(BNF.tCODE_BLOCK_BEG_TOKENS)){
-            return RubyElementTypes.EMPTY_INPUT;
-        }
+		if(!builder.compare(BNF.tCODE_BLOCK_BEG_TOKENS))
+		{
+			return RubyElementTypes.EMPTY_INPUT;
+		}
 
-        final IElementType blockType = builder.compare(kDO) ? RubyElementTypes.DO_CODE_BLOCK : RubyElementTypes.BRACE_CODE_BLOCK;
-        final IElementType endDelim =  blockType == RubyElementTypes.DO_CODE_BLOCK ? kEND : tRBRACE;
+		final IElementType blockType = builder.compare(kDO) ? RubyElementTypes.DO_CODE_BLOCK : RubyElementTypes.BRACE_CODE_BLOCK;
+		final IElementType endDelim = blockType == RubyElementTypes.DO_CODE_BLOCK ? kEND : tRBRACE;
 
-        RMarker iteratorBlockMarker = builder.mark();
+		RMarker iteratorBlockMarker = builder.mark();
 
-        builder.match(BNF.tCODE_BLOCK_BEG_TOKENS);
+		builder.match(BNF.tCODE_BLOCK_BEG_TOKENS);
 
-        OPT_BLOCK_VAR.parse(builder);
+		OPT_BLOCK_VAR.parse(builder);
 
-        builder.passEOLs();
-        COMPSTMT.parse(builder, endDelim);
+		builder.passEOLs();
+		COMPSTMT.parse(builder, endDelim);
 
-        builder.matchIgnoreEOL(endDelim);
-        iteratorBlockMarker.done(blockType);
-        return blockType;
-    }
+		builder.matchIgnoreEOL(endDelim);
+		iteratorBlockMarker.done(blockType);
+		return blockType;
+	}
 
 }

@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +23,9 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GenerateDialogs;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;
 import org.jetbrains.plugins.ruby.rails.presentation.RControllerPresentationUtil;
+import com.intellij.openapi.module.Module;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,44 +34,44 @@ import org.jetbrains.plugins.ruby.rails.presentation.RControllerPresentationUtil
  * @date: 25.11.2006
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class GenerateControllerAction extends SimpleGeneratorAction {
-    @NonNls
-    public static final String GENERATOR_CONTROLLER = "controller";
+public class GenerateControllerAction extends SimpleGeneratorAction
+{
+	@NonNls
+	public static final String GENERATOR_CONTROLLER = "controller";
 
-    public GenerateControllerAction() {
-        this(null, GENERATOR_CONTROLLER);
-    }
+	public GenerateControllerAction()
+	{
+		this(null, GENERATOR_CONTROLLER);
+	}
 
-    public GenerateControllerAction(final String actionName, final String generatorName) {
-        super(generatorName,
-              actionName != null ? actionName : RBundle.message("new.generate.controller.text"),
-              RBundle.message("new.generate.controller.description"),
-              RControllerPresentationUtil.getIcon());
-    }
+	public GenerateControllerAction(final String actionName, final String generatorName)
+	{
+		super(generatorName, actionName != null ? actionName : RBundle.message("new.generate.controller.text"), RBundle.message("new.generate.controller.description"), RControllerPresentationUtil.getIcon());
+	}
 
-    @Override
-	protected String getGenerateDialogTitle() {
-        return RBundle.message("new.generate.controller.action.prompt.title");
-    }
+	@Override
+	protected String getGenerateDialogTitle()
+	{
+		return RBundle.message("new.generate.controller.action.prompt.title");
+	}
 
-    @Override
-	protected String getErrorTitle() {
-        return RBundle.message("new.generate.controller.error.title");
-    }
+	@Override
+	protected String getErrorTitle()
+	{
+		return RBundle.message("new.generate.controller.error.title");
+	}
 
-    @Override
-	protected ControllerInputValidator createValidator(@NotNull final Module module,
-                                                       @Nullable final PsiDirectory directory) {
-        return new ControllerInputValidator(this, module, directory);
-    }
+	@Override
+	protected ControllerInputValidator createValidator(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	{
+		return new ControllerInputValidator(this, module, directory);
+	}
 
-    @Override
-	protected PsiElement[] invokeDialog(@NotNull final Module module,
-                                        @Nullable final PsiDirectory directory) {
-        final ControllerInputValidator validator = createValidator(module, directory);
-        GenerateDialogs.showGenerateControllerDialog(module,
-                                                     getGenerateDialogTitle(),
-                                                     validator);
-        return validator.getCreatedElements();
-    }
+	@Override
+	protected PsiElement[] invokeDialog(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	{
+		final ControllerInputValidator validator = createValidator(module, directory);
+		GenerateDialogs.showGenerateControllerDialog(module, getGenerateDialogTitle(), validator);
+		return validator.getCreatedElements();
+	}
 }

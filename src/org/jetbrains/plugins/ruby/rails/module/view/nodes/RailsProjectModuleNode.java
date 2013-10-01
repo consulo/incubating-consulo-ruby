@@ -48,70 +48,79 @@ import com.intellij.ui.treeStructure.SimpleNode;
  * @author: Roman Chernyatchik
  * @date: 28.09.2006
  */
-public class RailsProjectModuleNode extends RailsNode {
+public class RailsProjectModuleNode extends RailsNode
+{
 
-    public RailsProjectModuleNode(@NotNull final Module module) {
-        super(module);
+	public RailsProjectModuleNode(@NotNull final Module module)
+	{
+		super(module);
 
-        init(generateNodeId(module), initPresentationData());
-    }
+		init(generateNodeId(module), initPresentationData());
+	}
 
-    @NotNull
-    public static NodeId generateNodeId(final Module module) {
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
-
-        final String url = railsPaths.getRailsApplicationRootURL();
-        return NodeIdUtil.createForDirectory(url, false);
-    }
-
-    @Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.RMODULE;
-    }
+	public static NodeId generateNodeId(final Module module)
+	{
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
 
-    @Override
-	public SimpleNode[] getChildren() {
-        final ArrayList<RailsNode> nodesList = new ArrayList<RailsNode>();
-        final Module module = getModule();
+		final String url = railsPaths.getRailsApplicationRootURL();
+		return NodeIdUtil.createForDirectory(url, false);
+	}
 
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
+	@Override
+	@NotNull
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.RMODULE;
+	}
 
-        final VirtualFileManager fileManager = VirtualFileManager.getInstance();
+	@Override
+	public SimpleNode[] getChildren()
+	{
+		final ArrayList<RailsNode> nodesList = new ArrayList<RailsNode>();
+		final Module module = getModule();
 
-        VirtualFile root = fileManager.findFileByUrl(railsPaths.getControllerRootURL());
-        if (root != null) {
-            nodesList.add(new RailsApplicationFolderNode(module, root));
-        }
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
 
-        root = fileManager.findFileByUrl(railsPaths.getModelRootURL());
-        if (root != null) {
-            nodesList.add(new RailsModelFolderNode(module, root));
-        }
+		final VirtualFileManager fileManager = VirtualFileManager.getInstance();
 
-        root = fileManager.findFileByUrl(railsPaths.getControllerRootURL());
-        if (root != null) {
-            nodesList.add(new RailsControllersFolderNode(module, root));
-        }
+		VirtualFile root = fileManager.findFileByUrl(railsPaths.getControllerRootURL());
+		if(root != null)
+		{
+			nodesList.add(new RailsApplicationFolderNode(module, root));
+		}
 
-//TODO correct
-//        final boolean isRSpecSupportEnabled = railsPaths.rSpecSupportType();
-//        if (!isRSpecSupportEnabled) {
-//            root = fileManager.findFileByUrl(railsPaths.getTestsStdUnitRootURL());
-//            if (root != null) {
-//                nodesList.add(new RailsTestsFolderNode(module, root));
-//            }
-//        }
+		root = fileManager.findFileByUrl(railsPaths.getModelRootURL());
+		if(root != null)
+		{
+			nodesList.add(new RailsModelFolderNode(module, root));
+		}
 
-        root = fileManager.findFileByUrl(railsPaths.getDefaultSharedPartialsRootURL());
-        if (root != null) {
-            nodesList.add(new RailsSharedPatialsFolderNode(module, root));
-        }
+		root = fileManager.findFileByUrl(railsPaths.getControllerRootURL());
+		if(root != null)
+		{
+			nodesList.add(new RailsControllersFolderNode(module, root));
+		}
 
-        final Set<String> urls = RailsViewFoldersManager.getInstance(module).getRailsViewUserFolderUrls();
-        final Set<String> testUrls = new HashSet<String>();
+		//TODO correct
+		//        final boolean isRSpecSupportEnabled = railsPaths.rSpecSupportType();
+		//        if (!isRSpecSupportEnabled) {
+		//            root = fileManager.findFileByUrl(railsPaths.getTestsStdUnitRootURL());
+		//            if (root != null) {
+		//                nodesList.add(new RailsTestsFolderNode(module, root));
+		//            }
+		//        }
+
+		root = fileManager.findFileByUrl(railsPaths.getDefaultSharedPartialsRootURL());
+		if(root != null)
+		{
+			nodesList.add(new RailsSharedPatialsFolderNode(module, root));
+		}
+
+		final Set<String> urls = RailsViewFoldersManager.getInstance(module).getRailsViewUserFolderUrls();
+		final Set<String> testUrls = new HashSet<String>();
 		for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
 		{
 			for(String url : o.getFolderUrls(ContentFolderType.TEST))
@@ -120,22 +129,22 @@ public class RailsProjectModuleNode extends RailsNode {
 			}
 		}
 
-		for (String url : urls) {
-            final VirtualFile file = fileManager.findFileByUrl(url);
-            if (file != null) {
-                nodesList.add(new RailsUserFolderNode(module, file, this, testUrls.contains(url)));
-            }
-        }
-        return nodesList.toArray(new RailsNode[nodesList.size()]);
-    }
+		for(String url : urls)
+		{
+			final VirtualFile file = fileManager.findFileByUrl(url);
+			if(file != null)
+			{
+				nodesList.add(new RailsUserFolderNode(module, file, this, testUrls.contains(url)));
+			}
+		}
+		return nodesList.toArray(new RailsNode[nodesList.size()]);
+	}
 
-    private PresentationData initPresentationData() {
-        //TODO add JRails or Rails modules
-        String name = getModule().getName();
-        return new PresentationData(name, name,
-                RailsIcons.RAILS_MODULE_OPENED,
-                RailsIcons.RAILS_MODULE_CLOSED,
-                null);
+	private PresentationData initPresentationData()
+	{
+		//TODO add JRails or Rails modules
+		String name = getModule().getName();
+		return new PresentationData(name, name, RailsIcons.RAILS_MODULE_OPENED, RailsIcons.RAILS_MODULE_CLOSED, null);
 
-    }
+	}
 }

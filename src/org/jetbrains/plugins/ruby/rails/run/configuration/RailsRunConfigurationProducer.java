@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration;
 
-import com.intellij.execution.junit.RuntimeConfigurationProducer;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiDirectory;
+import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
+import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.openapi.module.Module;
-import org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecRunConfigurationType;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,40 +33,45 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
-public class RailsRunConfigurationProducer  extends RuntimeConfigurationProducer implements Cloneable {
-    private PsiElement mySourceElement;
+public class RailsRunConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable
+{
+	private PsiElement mySourceElement;
 
-    public RailsRunConfigurationProducer() {
-        super(RailsRunConfigurationType.getInstance());
-    }
+	public RailsRunConfigurationProducer()
+	{
+		super(RailsRunConfigurationType.getInstance());
+	}
 
-    @Override
-	public PsiElement getSourceElement() {
-        return mySourceElement;
-    }
+	@Override
+	public PsiElement getSourceElement()
+	{
+		return mySourceElement;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context) {
-        final PsiElement element = location.getPsiElement();
+	protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context)
+	{
+		final PsiElement element = location.getPsiElement();
 
-        if (!(element instanceof PsiDirectory)
-                && !(element instanceof RFile)
-                && !(element.getContainingFile() instanceof RFile)) {
-            return null;
-        }
+		if(!(element instanceof PsiDirectory) && !(element instanceof RFile) && !(element.getContainingFile() instanceof RFile))
+		{
+			return null;
+		}
 
-        final Module module = context.getModule();
-        if (module == null || !RailsFacetUtil.hasRailsSupport(module)) {
-            return null;
-        }
-        
-        mySourceElement = element;
-        return (RunnerAndConfigurationSettingsImpl)RailsRunConfigurationType.getInstance().createConfigurationByLocation(location);
-    }
+		final Module module = context.getModule();
+		if(module == null || !RailsFacetUtil.hasRailsSupport(module))
+		{
+			return null;
+		}
 
-    @Override
-	public int compareTo(Object o) {
-        return PREFERED;
-    }
+		mySourceElement = element;
+		return (RunnerAndConfigurationSettingsImpl) RailsRunConfigurationType.getInstance().createConfigurationByLocation(location);
+	}
+
+	@Override
+	public int compareTo(Object o)
+	{
+		return PREFERED;
+	}
 }

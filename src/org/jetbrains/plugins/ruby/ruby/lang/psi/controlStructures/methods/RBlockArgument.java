@@ -22,5 +22,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
  * @author: oleg
  * @date: 10.03.2007
  */
-public interface RBlockArgument extends RArgument {
+public interface RBlockArgument extends RArgument
+{
 }

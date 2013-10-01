@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,11 +28,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
  * @author: Roman Chernyatchik
  * @date: 11.03.2007
  */
-public class RMethodNavigator {
-    @Nullable
-    public static RMethod getByRBodyStatement(@NotNull final RBodyStatement statement) {
-       final PsiElement parent = statement.getParent();
-       return (parent instanceof RMethod) ? (RMethod)parent
-                                          : null;
-   }
+public class RMethodNavigator
+{
+	@Nullable
+	public static RMethod getByRBodyStatement(@NotNull final RBodyStatement statement)
+	{
+		final PsiElement parent = statement.getParent();
+		return (parent instanceof RMethod) ? (RMethod) parent : null;
+	}
 }

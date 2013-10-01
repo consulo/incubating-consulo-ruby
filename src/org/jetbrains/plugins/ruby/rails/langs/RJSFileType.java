@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-
-import javax.swing.*;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,39 +32,47 @@ import javax.swing.*;
  * @author: Roman Chernyatchik
  * @date: 21.03.2007
  */
-public class RJSFileType extends LanguageFileType {
-        public static final RJSFileType RJS = new RJSFileType();
-        @NonNls
-        private static final String DESCRIPTION = RBundle.message("filetype.description.rjs");
-        @NonNls private static final String DEFAULT_EXTENSION = "rjs";
-        @NonNls private static final String NAME = "Rjs";
-        private static final Icon ICON = RailsIcons.RJS_ICON;
+public class RJSFileType extends LanguageFileType
+{
+	public static final RJSFileType RJS = new RJSFileType();
+	@NonNls
+	private static final String DESCRIPTION = RBundle.message("filetype.description.rjs");
+	@NonNls
+	private static final String DEFAULT_EXTENSION = "rjs";
+	@NonNls
+	private static final String NAME = "Rjs";
+	private static final Icon ICON = RailsIcons.RJS_ICON;
 
-        private RJSFileType() {
-            super(RubyFileType.RUBY.getLanguage());
-        }
+	private RJSFileType()
+	{
+		super(RubyFileType.RUBY.getLanguage());
+	}
 
-        @Override
-		@NotNull
-        public String getName() {
-            return NAME;
-        }
+	@Override
+	@NotNull
+	public String getName()
+	{
+		return NAME;
+	}
 
-        @Override
-		@NotNull
-        public String getDescription() {
-            return DESCRIPTION;
-        }
+	@Override
+	@NotNull
+	public String getDescription()
+	{
+		return DESCRIPTION;
+	}
 
-        @Override
-		@NotNull
-        public String getDefaultExtension() {
-            return DEFAULT_EXTENSION;
-        }
+	@Override
+	@NotNull
+	public String getDefaultExtension()
+	{
+		return DEFAULT_EXTENSION;
+	}
 
-        @Override
-		@Nullable
-        public Icon getIcon() {
-            return ICON;
-        }
-    }
+	@Override
+	@Nullable
+	public Icon getIcon()
+	{
+		return ICON;
+	}
+}

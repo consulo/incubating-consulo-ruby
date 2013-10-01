@@ -18,23 +18,28 @@ package org.jetbrains.plugins.ruby.rails.actions.rake;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 30.08.2006
  */
-public class RakeCommand {
-    public String getCommand() {
-        return command;
-    }
+public class RakeCommand
+{
+	public String getCommand()
+	{
+		return command;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription()
+	{
+		return description;
+	}
 
-    private String command;
-    private String description;
+	private String command;
+	private String description;
 
-    public RakeCommand(final String command, final String description){
-        this.command = command;
-        this.description = description;
-    }
+	public RakeCommand(final String command, final String description)
+	{
+		this.command = command;
+		this.description = description;
+	}
 }

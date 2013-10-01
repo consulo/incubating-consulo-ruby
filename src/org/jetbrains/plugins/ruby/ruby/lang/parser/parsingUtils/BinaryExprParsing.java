@@ -16,118 +16,115 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.07.2006
  */
-public class BinaryExprParsing implements RubyTokenTypes {
+public class BinaryExprParsing implements RubyTokenTypes
+{
 
-    /**
-     * Parsing (leftOperand Operation rightOperand) Operation ...
-     * @param builder Current builder
-     * @param parseOperandMethod method used parsing each of single operands
-     * @param errorOperandNotFound Error which generates when no operand found, but it must exist
-     * @param operations Set of the operation tokens
-     * @param statementType The result type of expression
-     * @return Result of parsing
-     */
-    public static IElementType parse(final RBuilder builder, final ParsingMethod parseOperandMethod,
-                                     final String errorOperandNotFound,
-                                     final TokenSet operations,
-                                     final IElementType statementType){
-        return parseWithLeadOperand(builder, builder.mark(), parseOperandMethod.parse(builder), parseOperandMethod, errorOperandNotFound, operations, statementType);
-    }
+	/**
+	 * Parsing (leftOperand Operation rightOperand) Operation ...
+	 *
+	 * @param builder              Current builder
+	 * @param parseOperandMethod   method used parsing each of single operands
+	 * @param errorOperandNotFound Error which generates when no operand found, but it must exist
+	 * @param operations           Set of the operation tokens
+	 * @param statementType        The result type of expression
+	 * @return Result of parsing
+	 */
+	public static IElementType parse(final RBuilder builder, final ParsingMethod parseOperandMethod, final String errorOperandNotFound, final TokenSet operations, final IElementType statementType)
+	{
+		return parseWithLeadOperand(builder, builder.mark(), parseOperandMethod.parse(builder), parseOperandMethod, errorOperandNotFound, operations, statementType);
+	}
 
-    /**
-     * Parsing (leftOperand Operation rightOperand) Operation ...
-     * @param builder Current builder
-     * @param parseOperandMethod method used parsing each of single operands
-     * @param errorOperandNotFound Error which generates when no operand found, but it must exist
-     * @param operation type of operationToken
-     * @param statementType The result type of expression
-     * @return Result of parsing
-     */
-    public static IElementType parse(final RBuilder builder, final ParsingMethod parseOperandMethod,
-                                     final String errorOperandNotFound,
-                                     final IElementType operation,
-                                     final IElementType statementType){
+	/**
+	 * Parsing (leftOperand Operation rightOperand) Operation ...
+	 *
+	 * @param builder              Current builder
+	 * @param parseOperandMethod   method used parsing each of single operands
+	 * @param errorOperandNotFound Error which generates when no operand found, but it must exist
+	 * @param operation            type of operationToken
+	 * @param statementType        The result type of expression
+	 * @return Result of parsing
+	 */
+	public static IElementType parse(final RBuilder builder, final ParsingMethod parseOperandMethod, final String errorOperandNotFound, final IElementType operation, final IElementType statementType)
+	{
 
-        return parseWithLeadOperand(builder, builder.mark(), parseOperandMethod.parse(builder), parseOperandMethod, errorOperandNotFound, operation, statementType);
-    }
+		return parseWithLeadOperand(builder, builder.mark(), parseOperandMethod.parse(builder), parseOperandMethod, errorOperandNotFound, operation, statementType);
+	}
 
-    /**
-     * Parsing (leftOperand Operation rightOperand) Operation ...
-     * @param builder Current builder
-     * @param parseOperandMethod method used parsing each of single operands
-     * @param errorOperandNotFound Error which generates when no operand found, but it must exist
-     * @param operations Set of the operation tokens
-     * @param statementType The result type of expression
-     * @return Result of parsing
-     * @param marker Marker before first operand
-     * @param result result of First operand parsing
-     */
-    public static IElementType parseWithLeadOperand(final RBuilder builder,
-                                     RMarker marker,
-                                     IElementType result,
-                                     final ParsingMethod parseOperandMethod,
-                                     final String errorOperandNotFound,
-                                     final TokenSet operations,
-                                     final IElementType statementType){
-        if (result==RubyElementTypes.EMPTY_INPUT){
-            marker.drop();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        while (builder.compareAndEat(operations)) {
-            if(parseOperandMethod.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(errorOperandNotFound);
-            }
-            marker.done(statementType);
-            marker = marker.precede();
-            result = statementType;
-        }
-        marker.drop();
-        return result;
-    }
+	/**
+	 * Parsing (leftOperand Operation rightOperand) Operation ...
+	 *
+	 * @param builder              Current builder
+	 * @param parseOperandMethod   method used parsing each of single operands
+	 * @param errorOperandNotFound Error which generates when no operand found, but it must exist
+	 * @param operations           Set of the operation tokens
+	 * @param statementType        The result type of expression
+	 * @param marker               Marker before first operand
+	 * @param result               result of First operand parsing
+	 * @return Result of parsing
+	 */
+	public static IElementType parseWithLeadOperand(final RBuilder builder, RMarker marker, IElementType result, final ParsingMethod parseOperandMethod, final String errorOperandNotFound, final TokenSet operations, final IElementType statementType)
+	{
+		if(result == RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.drop();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		while(builder.compareAndEat(operations))
+		{
+			if(parseOperandMethod.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(errorOperandNotFound);
+			}
+			marker.done(statementType);
+			marker = marker.precede();
+			result = statementType;
+		}
+		marker.drop();
+		return result;
+	}
 
-    /**
-     * Parsing (leftOperand Operation rightOperand) Operation ...
-     * @param builder Current builder
-     * @param parseOperandMethod method used parsing each of single operands
-     * @param errorOperandNotFound Error which generates when no operand found, but it must exist
-     * @param operation type of operationToken
-     * @param statementType The result type of expression
-     * @return Result of parsing
-     * @param marker Marker before first operand
-     * @param result result of First operand parsing
-     */
-    public static IElementType parseWithLeadOperand(final RBuilder builder,
-                                     RMarker marker,
-                                     IElementType result,
-                                     final ParsingMethod parseOperandMethod,
-                                     final String errorOperandNotFound,
-                                     final IElementType operation,
-                                     final IElementType statementType){
-        if (result==RubyElementTypes.EMPTY_INPUT){
-            marker.drop();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-        while (builder.compareAndEat(operation)) {
-            if(parseOperandMethod.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(errorOperandNotFound);
-            }
-            marker.done(statementType);
-            marker = marker.precede();
-            result = statementType;
-        }
-        marker.drop();
-        return result;
-    }
+	/**
+	 * Parsing (leftOperand Operation rightOperand) Operation ...
+	 *
+	 * @param builder              Current builder
+	 * @param parseOperandMethod   method used parsing each of single operands
+	 * @param errorOperandNotFound Error which generates when no operand found, but it must exist
+	 * @param operation            type of operationToken
+	 * @param statementType        The result type of expression
+	 * @param marker               Marker before first operand
+	 * @param result               result of First operand parsing
+	 * @return Result of parsing
+	 */
+	public static IElementType parseWithLeadOperand(final RBuilder builder, RMarker marker, IElementType result, final ParsingMethod parseOperandMethod, final String errorOperandNotFound, final IElementType operation, final IElementType statementType)
+	{
+		if(result == RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.drop();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+		while(builder.compareAndEat(operation))
+		{
+			if(parseOperandMethod.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(errorOperandNotFound);
+			}
+			marker.done(statementType);
+			marker = marker.precede();
+			result = statementType;
+		}
+		marker.drop();
+		return result;
+	}
 
 }

@@ -38,29 +38,29 @@ import com.intellij.openapi.vfs.VirtualFile;
 /**
  * Package private. You should use general class - BaseRailsFacet
  */
-class RailsFacet extends BaseRailsFacet {
-    @NonNls
-    public static final FacetTypeId<RailsFacet> ID = new FacetTypeId<RailsFacet>("RailsFacetType");
+class RailsFacet extends BaseRailsFacet
+{
+	@NonNls
+	public static final FacetTypeId<RailsFacet> ID = new FacetTypeId<RailsFacet>("RailsFacetType");
 
-    public RailsFacet(@NotNull final FacetType facetType,
-                      @NotNull final Module module,
-                      final String name,
-                      @NotNull final BaseRailsFacetConfiguration configuration,
-                      @Nullable final Facet underlyingFacet) {
-        super(facetType, module, name, configuration, underlyingFacet);
-    }
+	public RailsFacet(@NotNull final FacetType facetType, @NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, @Nullable final Facet underlyingFacet)
+	{
+		super(facetType, module, name, configuration, underlyingFacet);
+	}
 
-    @Nullable
-    public static RailsFacet getInstance(@NotNull final Module module) {
-        return null;
-    }
+	@Nullable
+	public static RailsFacet getInstance(@NotNull final Module module)
+	{
+		return null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel) {
-        final VirtualFile contentRoot = RModuleUtil.getModulesFirstContentRoot(rootModel);
-        assert contentRoot != null; //Can't be null for Rails facet in Ruby module
+	public String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel)
+	{
+		final VirtualFile contentRoot = RModuleUtil.getModulesFirstContentRoot(rootModel);
+		assert contentRoot != null; //Can't be null for Rails facet in Ruby module
 
-        return contentRoot.getPath();
-    }
+		return contentRoot.getPath();
+	}
 }

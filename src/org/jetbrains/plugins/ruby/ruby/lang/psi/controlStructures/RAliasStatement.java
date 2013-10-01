@@ -27,11 +27,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
  * @author: oleg
  * @date: Feb 5, 2007
  */
-public interface RAliasStatement extends RStructuralElement, RVirtualAlias {
-    @Nullable
-    public RPsiElement getPsiOldName();
+public interface RAliasStatement extends RStructuralElement, RVirtualAlias
+{
+	@Nullable
+	public RPsiElement getPsiOldName();
 
-    @Nullable
-    public RPsiElement getPsiNewName();
+	@Nullable
+	public RPsiElement getPsiNewName();
 
 }

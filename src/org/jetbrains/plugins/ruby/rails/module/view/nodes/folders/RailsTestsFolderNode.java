@@ -33,36 +33,39 @@ import com.intellij.ui.treeStructure.SimpleNodeVisitor;
  * @author: Roman Chernyatchik
  * @date: 29.09.2006
  */
-public class RailsTestsFolderNode extends TestsSubFolderNode {
-    private static final String TESTS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.tests.presentable");
-    protected static final Icon TEST_ROOT_OPENED = null /*IconSet.getSourceRootIcon(true, true)*/;
-    protected static final Icon TEST_ROOT_CLOSED =  null/*IconSet.getSourceRootIcon(true, false)*/;
+public class RailsTestsFolderNode extends TestsSubFolderNode
+{
+	private static final String TESTS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.tests.presentable");
+	protected static final Icon TEST_ROOT_OPENED = null /*IconSet.getSourceRootIcon(true, true)*/;
+	protected static final Icon TEST_ROOT_CLOSED = null/*IconSet.getSourceRootIcon(true, false)*/;
 
-    public RailsTestsFolderNode(final Module module, final VirtualFile rootDir) {
-        super(module, rootDir, null, initPresentationData());
-    }
+	public RailsTestsFolderNode(final Module module, final VirtualFile rootDir)
+	{
+		super(module, rootDir, null, initPresentationData());
+	}
 
-    @Override
-	public void accept(final SimpleNodeVisitor visitor) {
-        if (visitor instanceof RailsNodeVisitor) {
-            ((RailsNodeVisitor)visitor).visitTestNode();
-            return;
-        }
-        super.accept(visitor);
+	@Override
+	public void accept(final SimpleNodeVisitor visitor)
+	{
+		if(visitor instanceof RailsNodeVisitor)
+		{
+			((RailsNodeVisitor) visitor).visitTestNode();
+			return;
+		}
+		super.accept(visitor);
 
-    }
+	}
 
-    @NotNull
-    @Override
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-    }
+	@NotNull
+	@Override
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+	}
 
-    private static PresentationData initPresentationData() {
-        return new PresentationData(TESTS_VIEW_NAME, null,
-                                    TEST_ROOT_OPENED,
-                                    TEST_ROOT_CLOSED,
-                                    null);
-    }
+	private static PresentationData initPresentationData()
+	{
+		return new PresentationData(TESTS_VIEW_NAME, null, TEST_ROOT_OPENED, TEST_ROOT_CLOSED, null);
+	}
 }
 

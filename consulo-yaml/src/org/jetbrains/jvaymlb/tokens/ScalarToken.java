@@ -12,7 +12,7 @@
  * rights and limitations under the License.
  *
  * Copyright (C) 2007 Ola Bini <ola@ologix.com>
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either of the GNU General Public License Version 2 or later (the "GPL"),
  * or the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -32,35 +32,42 @@ import org.jruby.util.ByteList;
 /**
  * @author <a href="mailto:ola.bini@ki.se">Ola Bini</a>
  */
-public class ScalarToken extends Token {
-    private ByteList value;
-    private boolean plain;
-    private char style;
+public class ScalarToken extends Token
+{
+	private ByteList value;
+	private boolean plain;
+	private char style;
 
-    public ScalarToken(final ByteList value, final boolean plain, final int start, final int end) {
-        this(value,plain,(char)0, start, end);
-    }
+	public ScalarToken(final ByteList value, final boolean plain, final int start, final int end)
+	{
+		this(value, plain, (char) 0, start, end);
+	}
 
-    public ScalarToken(final ByteList value, final boolean plain, final char style, final int start, final int end) {
-        super(start, end);
-        this.value = value;
-        this.plain = plain;
-        this.style = style;
-    }
+	public ScalarToken(final ByteList value, final boolean plain, final char style, final int start, final int end)
+	{
+		super(start, end);
+		this.value = value;
+		this.plain = plain;
+		this.style = style;
+	}
 
-    public boolean getPlain() {
-        return this.plain;
-    }
+	public boolean getPlain()
+	{
+		return this.plain;
+	}
 
-    public ByteList getValue() {
-        return this.value;
-    }
+	public ByteList getValue()
+	{
+		return this.value;
+	}
 
-    public char getStyle() {
-        return this.style;
-    }
+	public char getStyle()
+	{
+		return this.style;
+	}
 
-    public String toString() {
-        return "#<" + this.getClass().getName() + " value=\"" + new String(value.bytes()) + "\" style="  + getStyle() + " plain="  + getPlain() + ">";
-    }
+	public String toString()
+	{
+		return "#<" + this.getClass().getName() + " value=\"" + new String(value.bytes()) + "\" style=" + getStyle() + " plain=" + getPlain() + ">";
+	}
 }// ScalarToken

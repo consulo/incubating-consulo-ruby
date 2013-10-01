@@ -28,36 +28,43 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.module.ModuleType;
 
-public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements ApplicationComponent {
-    @NonNls private static final String RUBY_MODULE = "RUBY_MODULE";
-
-    public RubyModuleType() {
-        //super(RUBY_MODULE);
-    }
-
-    @NotNull
-    public static RubyModuleType getInstance(){
-        return ApplicationManager.getApplication().getComponent(RubyModuleType.class);
-    }
-
-    @Override
+public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements ApplicationComponent
+{
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RUBY_MODULE_TYPE;
-    }
+	private static final String RUBY_MODULE = "RUBY_MODULE";
 
-    @Override
-	public void initComponent() {
-       // ModuleTypeManager.getInstance().registerModuleType(this);
-    }
+	public RubyModuleType()
+	{
+		//super(RUBY_MODULE);
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@NotNull
+	public static RubyModuleType getInstance()
+	{
+		return ApplicationManager.getApplication().getComponent(RubyModuleType.class);
+	}
+
+	@Override
+	@NonNls
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RUBY_MODULE_TYPE;
+	}
+
+	@Override
+	public void initComponent()
+	{
+		// ModuleTypeManager.getInstance().registerModuleType(this);
+	}
+
+	@Override
+	public void disposeComponent()
+	{
+	}
 
    /* public ModuleWizardStep[] createWizardSteps(final WizardContext ctx, final RubyModuleBuilder builder,
-                                                final ModulesProvider provider) {
+												final ModulesProvider provider) {
         ArrayList<ModuleWizardStep> steps = new ArrayList<ModuleWizardStep>();
 
         steps.add(new RubySdkSelectStep(builder, RubyIcons.RUBY_ADD_MODULE, null, ctx.getProject()));
@@ -71,27 +78,32 @@ public class RubyModuleType extends ModuleType<RubyModuleBuilder> implements App
     }     */
 
 
-    public RubyModuleBuilder createModuleBuilder() {
-        return new RubyModuleBuilder();
-    }
+	public RubyModuleBuilder createModuleBuilder()
+	{
+		return new RubyModuleBuilder();
+	}
 
 
-    public String getName() {
-        return RBundle.message("module.ruby.title");
-    }
+	public String getName()
+	{
+		return RBundle.message("module.ruby.title");
+	}
 
-    public String getDescription() {
-        return RBundle.message("module.ruby.description");
-    }
-
-
-    public Icon getBigIcon() {
-        return RubyIcons.RUBY_MODULE_BIG;
-    }
+	public String getDescription()
+	{
+		return RBundle.message("module.ruby.description");
+	}
 
 
-    public Icon getNodeIcon(boolean isOpened) {
-        return isOpened? RubyIcons.RUBY_MODULE_OPENED : RubyIcons.RUBY_MODULE_CLOSED;
-    }
+	public Icon getBigIcon()
+	{
+		return RubyIcons.RUBY_MODULE_BIG;
+	}
+
+
+	public Icon getNodeIcon(boolean isOpened)
+	{
+		return isOpened ? RubyIcons.RUBY_MODULE_OPENED : RubyIcons.RUBY_MODULE_CLOSED;
+	}
 }
 

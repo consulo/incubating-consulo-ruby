@@ -16,11 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
@@ -28,6 +23,11 @@ import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.ui.Messages;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,35 +35,39 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
  * @author: Roman Chernyatchik
  * @date: Jan 17, 2008
  */
-public class ReloadGeneratorsAction extends AnAction {
-    @Override
-	public void actionPerformed(@NotNull final AnActionEvent event) {
-        final Module module = DataContextUtil.getModule(event.getDataContext());
-        assert module != null;
+public class ReloadGeneratorsAction extends AnAction
+{
+	@Override
+	public void actionPerformed(@NotNull final AnActionEvent event)
+	{
+		final Module module = DataContextUtil.getModule(event.getDataContext());
+		assert module != null;
 
-        //Save all opened documents
-        FileDocumentManager.getInstance().saveAllDocuments();
+		//Save all opened documents
+		FileDocumentManager.getInstance().saveAllDocuments();
 
-        final BaseRailsFacetConfiguration conf = RailsFacetUtil.getRailsFacetConfiguration(module);
-        assert conf != null;
+		final BaseRailsFacetConfiguration conf = RailsFacetUtil.getRailsFacetConfiguration(module);
+		assert conf != null;
 
-        if (RModuleUtil.getModuleOrJRubyFacetSdk(module) == null) {
-            final String msg = RBundle.message("rails.facet.action.regenerate.generators.error.wrong.sdk");
-            final String title = RBundle.message("action.registered.shortcut.execute.disabled.title");
-            Messages.showErrorDialog(module.getProject(), msg , title);
+		if(RModuleUtil.getModuleOrJRubyFacetSdk(module) == null)
+		{
+			final String msg = RBundle.message("rails.facet.action.regenerate.generators.error.wrong.sdk");
+			final String title = RBundle.message("action.registered.shortcut.execute.disabled.title");
+			Messages.showErrorDialog(module.getProject(), msg, title);
 
-            return;
-        }
-        conf.reloadGenerators();
-    }
+			return;
+		}
+		conf.reloadGenerators();
+	}
 
-    @Override
-	public void update(@NotNull final AnActionEvent event) {
-        final Module module = DataContextUtil.getModule(event.getDataContext());
+	@Override
+	public void update(@NotNull final AnActionEvent event)
+	{
+		final Module module = DataContextUtil.getModule(event.getDataContext());
 
-        // show only on for modules with Rails enabled support
-        final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
+		// show only on for modules with Rails enabled support
+		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
 
-        AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isVisible);
-    }
+		AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isVisible);
+	}
 }

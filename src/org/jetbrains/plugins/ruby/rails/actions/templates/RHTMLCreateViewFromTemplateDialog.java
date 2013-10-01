@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
@@ -23,8 +25,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,36 +32,38 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public class RHTMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDialog {
-//    @NonNls
-//    public static final String PATCHED_HTML_ERB_VIEW_EXTENSION = "html_erb";
+public class RHTMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDialog
+{
+	//    @NonNls
+	//    public static final String PATCHED_HTML_ERB_VIEW_EXTENSION = "html_erb";
 
-    public RHTMLCreateViewFromTemplateDialog(@NotNull final Project project, @NotNull final PsiDirectory directory, @NotNull final FileTemplate template) {
-        super(project, directory, template);
-    }
+	public RHTMLCreateViewFromTemplateDialog(@NotNull final Project project, @NotNull final PsiDirectory directory, @NotNull final FileTemplate template)
+	{
+		super(project, directory, template);
+	}
 
-    @Override
-	protected PsiFile createPsiFile(final FileTemplate template,
-                                    final Project project,
-                                    final PsiDirectory directory,
-                                    final String templateText,
-                                    final String fileName) throws IncorrectOperationException {
-        final String defaultExt = template.getExtension();
-        final FileType fileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(defaultExt);
-        assert fileType == RHTMLFileType.RHTML;
+	@Override
+	protected PsiFile createPsiFile(final FileTemplate template, final Project project, final PsiDirectory directory, final String templateText, final String fileName) throws IncorrectOperationException
+	{
+		final String defaultExt = template.getExtension();
+		final FileType fileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(defaultExt);
+		assert fileType == RHTMLFileType.RHTML;
 
-        final String rhtmlExt = RHTMLFileType.RHTML.getDefaultExtension();
-        final String erbExt = RHTMLFileType.RHTML.getERBExtension();
+		final String rhtmlExt = RHTMLFileType.RHTML.getDefaultExtension();
+		final String erbExt = RHTMLFileType.RHTML.getERBExtension();
 
-        String ext = defaultExt;
-        if (fileName.endsWith(erbExt)) {
-            ext = erbExt;
-        } else if (fileName.endsWith(rhtmlExt)) {
-            ext = rhtmlExt;
-        }
-//        else if (PATCHED_HTML_ERB_VIEW_EXTENSION.equals(defaultExt)) {
-//            ext = ViewsConventions.HTML_ERB_VIEW_EXTENSION;
-//        }
-        return createPsiFile(project, directory, templateText, fileName, ext);
-    }
+		String ext = defaultExt;
+		if(fileName.endsWith(erbExt))
+		{
+			ext = erbExt;
+		}
+		else if(fileName.endsWith(rhtmlExt))
+		{
+			ext = rhtmlExt;
+		}
+		//        else if (PATCHED_HTML_ERB_VIEW_EXTENSION.equals(defaultExt)) {
+		//            ext = ViewsConventions.HTML_ERB_VIEW_EXTENSION;
+		//        }
+		return createPsiFile(project, directory, templateText, fileName, ext);
+	}
 }

@@ -24,12 +24,15 @@ import org.jruby.util.ByteList;
  * @author: oleg
  * @date: Feb 21, 2008
  */
-public class FlowScalarToken extends ScalarToken{
-    public FlowScalarToken(final ByteList value, final boolean plain, final int start, final int end) {
-        super(value, plain, start, end);
-    }
+public class FlowScalarToken extends ScalarToken
+{
+	public FlowScalarToken(final ByteList value, final boolean plain, final int start, final int end)
+	{
+		super(value, plain, start, end);
+	}
 
-    public FlowScalarToken(final ByteList value, final boolean plain, final char style, final int start, final int end) {
-        super(value, plain, style, start, end);
-    }
+	public FlowScalarToken(final ByteList value, final boolean plain, final char style, final int start, final int end)
+	{
+		super(value, plain, style, start, end);
+	}
 }

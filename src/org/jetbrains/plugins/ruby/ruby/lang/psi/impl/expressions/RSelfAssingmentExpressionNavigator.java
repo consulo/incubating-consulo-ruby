@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RSelfAssignmentExpression;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,14 +27,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RSelfAssignmentExpre
  * @author: oleg
  * @date: Feb 27, 2007
  */
-public class RSelfAssingmentExpressionNavigator {
-    @Nullable
-    public static RSelfAssignmentExpression getSelfAssignmentByLeftPart(@NotNull final PsiElement element){
-        final PsiElement parent = element.getParent();
-        if (parent instanceof RSelfAssignmentExpression &&
-                ((RSelfAssignmentExpression) parent).getObject() == element) {
-                return (RSelfAssignmentExpression) parent;
-            }
-        return null;
-    }
+public class RSelfAssingmentExpressionNavigator
+{
+	@Nullable
+	public static RSelfAssignmentExpression getSelfAssignmentByLeftPart(@NotNull final PsiElement element)
+	{
+		final PsiElement parent = element.getParent();
+		if(parent instanceof RSelfAssignmentExpression && ((RSelfAssignmentExpression) parent).getObject() == element)
+		{
+			return (RSelfAssignmentExpression) parent;
+		}
+		return null;
+	}
 }

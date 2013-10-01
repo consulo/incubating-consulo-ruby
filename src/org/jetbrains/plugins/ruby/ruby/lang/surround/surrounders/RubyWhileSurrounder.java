@@ -16,34 +16,38 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RWhileStatement;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 5, 2007
  */
-public class RubyWhileSurrounder extends RubySurrounderBase{
+public class RubyWhileSurrounder extends RubySurrounderBase
+{
 
-    @Override
-	protected TextRange getTextRange(@NotNull final RPsiElement element) {
-        assert element instanceof RWhileStatement;
-        final RCondition condition = ((RWhileStatement) element).getCondition();
-        return condition!=null ? condition.getTextRange() : null;
-    }
+	@Override
+	protected TextRange getTextRange(@NotNull final RPsiElement element)
+	{
+		assert element instanceof RWhileStatement;
+		final RCondition condition = ((RWhileStatement) element).getCondition();
+		return condition != null ? condition.getTextRange() : null;
+	}
 
-    @Override
-	protected String getText(PsiElement[] elements) {
-        return "while condition do\n" + gatherText(elements) + "\nend";
-    }
+	@Override
+	protected String getText(PsiElement[] elements)
+	{
+		return "while condition do\n" + gatherText(elements) + "\nend";
+	}
 
-    @Override
-	public String getTemplateDescription() {
-        return "while ... do ... end";
-    }
+	@Override
+	public String getTemplateDescription()
+	{
+		return "while ... do ... end";
+	}
 }

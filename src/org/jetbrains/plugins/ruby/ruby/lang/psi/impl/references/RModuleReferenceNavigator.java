@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RColonReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,11 +28,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
  * @author: Roman Chernyatchik
  * @date: 10.03.2007
  */
-public class RModuleReferenceNavigator {
-    @Nullable
-    public static RColonReference getByRConstant(@NotNull final RConstant cons) {
-        final PsiElement parent = cons.getParent();
-        return (parent instanceof RColonReference) ? (RColonReference)parent
-                                                    : null;
-    }
+public class RModuleReferenceNavigator
+{
+	@Nullable
+	public static RColonReference getByRConstant(@NotNull final RConstant cons)
+	{
+		final PsiElement parent = cons.getParent();
+		return (parent instanceof RColonReference) ? (RColonReference) parent : null;
+	}
 }

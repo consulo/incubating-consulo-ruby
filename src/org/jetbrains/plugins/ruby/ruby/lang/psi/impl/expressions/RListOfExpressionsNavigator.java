@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,10 +27,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
  * @author: Roman Chernyatchik
  * @date: 04.05.2007
  */
-public class RListOfExpressionsNavigator {
-    @Nullable
-    public static RListOfExpressions getByPsiElement(@NotNull final PsiElement statement) {
-        final PsiElement parent = statement.getParent();
-        return (parent instanceof RListOfExpressions) ? (RListOfExpressions) parent : null;
-    }
+public class RListOfExpressionsNavigator
+{
+	@Nullable
+	public static RListOfExpressions getByPsiElement(@NotNull final PsiElement statement)
+	{
+		final PsiElement parent = statement.getParent();
+		return (parent instanceof RListOfExpressions) ? (RListOfExpressions) parent : null;
+	}
 }

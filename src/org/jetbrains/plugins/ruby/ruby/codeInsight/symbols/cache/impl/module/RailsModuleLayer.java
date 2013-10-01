@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.module;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -28,6 +25,9 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,48 +35,53 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCa
  * @author: oleg
  * @date: Nov 12, 2007
  */
-public class RailsModuleLayer extends ModuleLayer {
-    private final String myLayerRootUrl;
+public class RailsModuleLayer extends ModuleLayer
+{
+	private final String myLayerRootUrl;
 
-    public RailsModuleLayer(@NotNull final Project project,
-                          @Nullable final Module module,
-                          @Nullable final Sdk sdk,
-                          final boolean jRubyEnabled) {
-        super(project, module, sdk, jRubyEnabled);
-        assert module != null;
-        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-        assert railsPaths != null; //Not null for modules with Rails Support
-        myLayerRootUrl = railsPaths.getVendorRootURL();
-    }
+	public RailsModuleLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	{
+		super(project, module, sdk, jRubyEnabled);
+		assert module != null;
+		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+		assert railsPaths != null; //Not null for modules with Rails Support
+		myLayerRootUrl = railsPaths.getVendorRootURL();
+	}
 
-    @Override
-	public void fileAdded(@NotNull final String url) {
-        if (url.startsWith(myLayerRootUrl)) {
-            myFileSymbol = null;
-            return;
-        }
-        final CachedSymbol baseCachedSymbol = getBaseSymbol();
-        if (baseCachedSymbol != null) {
-            ((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
-            if (!baseCachedSymbol.isUp2Date()) {
-                myFileSymbol = null;
-            }
-        }
-    }
+	@Override
+	public void fileAdded(@NotNull final String url)
+	{
+		if(url.startsWith(myLayerRootUrl))
+		{
+			myFileSymbol = null;
+			return;
+		}
+		final CachedSymbol baseCachedSymbol = getBaseSymbol();
+		if(baseCachedSymbol != null)
+		{
+			((AbstractCachedSymbol) baseCachedSymbol).fileAdded(url);
+			if(!baseCachedSymbol.isUp2Date())
+			{
+				myFileSymbol = null;
+			}
+		}
+	}
 
-    @Override
+	@Override
 	@SuppressWarnings({"StringEquality"})
-    @Nullable
-    protected CachedSymbol getBaseSymbol() {
-        final SymbolsCache cache = SymbolsCache.getInstance(myProject);
-        return cache.getBuiltInCachedSymbol(FileSymbolType.RAILS_BUILT_IN, mySdk, isJRubyEnabled);
-    }
+	@Nullable
+	protected CachedSymbol getBaseSymbol()
+	{
+		final SymbolsCache cache = SymbolsCache.getInstance(myProject);
+		return cache.getBuiltInCachedSymbol(FileSymbolType.RAILS_BUILT_IN, mySdk, isJRubyEnabled);
+	}
 
-    @Override
-	protected void addAdditionalData() {
-        super.addAdditionalData();
+	@Override
+	protected void addAdditionalData()
+	{
+		super.addAdditionalData();
 
-        // add default rails loadpath
-        RailsRequireUtil.addRailsLoadPath(myFileSymbol, myModule);
-    }
+		// add default rails loadpath
+		RailsRequireUtil.addRailsLoadPath(myFileSymbol, myModule);
+	}
 }

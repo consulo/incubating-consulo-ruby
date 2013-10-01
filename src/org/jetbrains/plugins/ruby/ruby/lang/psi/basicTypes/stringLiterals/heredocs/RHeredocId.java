@@ -24,6 +24,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  * @author: oleg
  * @date: Feb 10, 2007
  */
-public interface RHeredocId extends RExpression {
+public interface RHeredocId extends RExpression
+{
 
 }

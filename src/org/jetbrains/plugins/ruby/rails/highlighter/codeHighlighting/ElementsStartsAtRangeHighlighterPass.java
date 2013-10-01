@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.codeInsight.RCodeInsightUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.AbstractRubyHighlighterPass;
-
-import java.util.List;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,19 +33,19 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: Oct 30, 2007
  */
-public abstract class ElementsStartsAtRangeHighlighterPass extends AbstractRubyHighlighterPass {
-    public ElementsStartsAtRangeHighlighterPass(@NotNull final Project project, @NotNull final PsiFile psiFile, @NotNull final Editor editor, final boolean updateVisible, final int passId) {
-        super(project, psiFile, editor, updateVisible, passId);
-    }
+public abstract class ElementsStartsAtRangeHighlighterPass extends AbstractRubyHighlighterPass
+{
+	public ElementsStartsAtRangeHighlighterPass(@NotNull final Project project, @NotNull final PsiFile psiFile, @NotNull final Editor editor, final boolean updateVisible, final int passId)
+	{
+		super(project, psiFile, editor, updateVisible, passId);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile,
-                                                      final int startOffset, final  int endOffset) {
-        final PsiFile file =  psiFile instanceof RHTMLFile
-            ? ((RHTMLFile) psiFile).getInnerRubyFile()
-            : psiFile;
+	protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile, final int startOffset, final int endOffset)
+	{
+		final PsiFile file = psiFile instanceof RHTMLFile ? ((RHTMLFile) psiFile).getInnerRubyFile() : psiFile;
 
-        return RCodeInsightUtil.getElementsStartsInRange(file, startOffset, endOffset, false);
-    }
+		return RCodeInsightUtil.getElementsStartsInRange(file, startOffset, endOffset, false);
+	}
 }

@@ -16,50 +16,54 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake.task;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 29.08.2006
  */
-public interface RakeTask {
-    public static final String RAKE_COMMAND_DELIMITER = ":";
+public interface RakeTask
+{
+	public static final String RAKE_COMMAND_DELIMITER = ":";
 
-    /**
-     * @return Task Identifier
-     */
-    public String getId();
+	/**
+	 * @return Task Identifier
+	 */
+	public String getId();
 
-    /**
-     * @return Task description
-     */
-    public String getDescription();
+	/**
+	 * @return Task description
+	 */
+	public String getDescription();
 
-    /**
-     * @return true if current Task has children, false otherwise
-     */
-    public boolean isGroup();
+	/**
+	 * @return true if current Task has children, false otherwise
+	 */
+	public boolean isGroup();
 
-    /**
-     * @return Children tasks
-     */
-    @NotNull
-    public List<? extends RakeTask> getSubTasks();
+	/**
+	 * @return Children tasks
+	 */
+	@NotNull
+	public List<? extends RakeTask> getSubTasks();
 
-    /**
-     * Returns full command if current Task isn`t a group of tasks, or null
-     * @return String - fullCommand
-     */
-    @Nullable
-    public String getFullCommand();
+	/**
+	 * Returns full command if current Task isn`t a group of tasks, or null
+	 *
+	 * @return String - fullCommand
+	 */
+	@Nullable
+	public String getFullCommand();
 
-    /**
-     * Adds rake task, as a child task
-     * @param task Task to add
-     */
-    public void addSubTask(final RakeTask task);    
+	/**
+	 * Adds rake task, as a child task
+	 *
+	 * @param task Task to add
+	 */
+	public void addSubTask(final RakeTask task);
 }

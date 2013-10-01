@@ -16,11 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.fields;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,59 +29,72 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RNamedElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public abstract class RFieldBase extends RNamedElementBase implements RField {
-    private RFieldHolder myHolder;
+public abstract class RFieldBase extends RNamedElementBase implements RField
+{
+	private RFieldHolder myHolder;
 
 
-    public RFieldBase(ASTNode astNode) {
-        super(astNode);
-    }
+	public RFieldBase(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public FieldDefinition getDescription() {
-        return getHolder().getDefinition(this);
-    }
+	public FieldDefinition getDescription()
+	{
+		return getHolder().getDefinition(this);
+	}
 
-    @Override
-	protected PsiReference createReference() {
-        return new RFieldReference(this);
-    }
+	@Override
+	protected PsiReference createReference()
+	{
+		return new RFieldReference(this);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RFieldHolder getHolder() {
-        if (myHolder==null){
-            myHolder = PsiTreeUtil.getParentOfType(this, RFieldHolder.class);
-            assert myHolder!=null;
-        }
-        return myHolder;
-    }
+	public RFieldHolder getHolder()
+	{
+		if(myHolder == null)
+		{
+			myHolder = PsiTreeUtil.getParentOfType(this, RFieldHolder.class);
+			assert myHolder != null;
+		}
+		return myHolder;
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RFieldPresentationUtil.getIcon(this, flags);
-    }
-
-    @Override
 	@Nullable
-    public ItemPresentation getPresentation() {
-        return RFieldPresentationUtil.getPresentation(this);
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RFieldPresentationUtil.getIcon(this, flags);
+	}
 
-    @Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException {
-        if (!TextUtil.isCID(newName)){
-            throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
-        }
-    }
+	@Override
+	@Nullable
+	public ItemPresentation getPresentation()
+	{
+		return RFieldPresentationUtil.getPresentation(this);
+	}
+
+	@Override
+	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	{
+		if(!TextUtil.isCID(newName))
+		{
+			throw new IncorrectOperationException(RBundle.message("rename.incorrect.name"));
+		}
+	}
 }
 

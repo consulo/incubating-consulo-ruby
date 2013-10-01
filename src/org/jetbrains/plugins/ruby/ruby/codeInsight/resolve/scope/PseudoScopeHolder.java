@@ -23,5 +23,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: Jul 12, 2007
  */
-public interface PseudoScopeHolder extends RPsiElement {
+public interface PseudoScopeHolder extends RPsiElement
+{
 }

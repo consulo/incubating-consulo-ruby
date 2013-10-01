@@ -26,8 +26,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
  * User: oleg
  * Date: 08.08.2006
  */
-public interface RWhenCase extends RPsiElement, 
-        RWrapAndIndentCOMPSTMT {
-    RListOfExpressions getCaseExpression();
-    RCompoundStatement getCaseBody();
+public interface RWhenCase extends RPsiElement, RWrapAndIndentCOMPSTMT
+{
+	RListOfExpressions getCaseExpression();
+
+	RCompoundStatement getCaseBody();
 }

@@ -17,101 +17,107 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.*;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.BinaryExprParsing;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ParsingMethodWithAssignmentLookup;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-class BooleanExpression implements RubyTokenTypes {
+class BooleanExpression implements RubyTokenTypes
+{
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        return parseOr(builder);
-    }
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		return parseOr(builder);
+	}
 
-    /**
-     * Parsing binary expression with operations:  ||
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    @NotNull
-    private static IElementType parseOr(final RBuilder builder) {
-        return parseOrWithLeadAND(builder, builder.mark(), parseAnd(builder));
-    }
+	/**
+	 * Parsing binary expression with operations:  ||
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseOr(final RBuilder builder)
+	{
+		return parseOrWithLeadAND(builder, builder.mark(), parseAnd(builder));
+	}
 
-    /**
-     * Parsing Or with Lead AND parsed
-     * @param builder Current builder
-     * @return result of parsing
-     * @param marker Marker before lead AND
-     * @param result result of AND parsing
-     */
-    @NotNull
-    private static IElementType parseOrWithLeadAND(final RBuilder builder, final RMarker marker, final IElementType result) {
-        ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @Override
+	/**
+	 * Parsing Or with Lead AND parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before lead AND
+	 * @param result  result of AND parsing
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseOrWithLeadAND(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
+		{
+			@Override
 			@NotNull
-            public IElementType parseInner(final RBuilder builder){
-                return parseAnd(builder);
-            }
-        };
+			public IElementType parseInner(final RBuilder builder)
+			{
+				return parseAnd(builder);
+			}
+		};
 
-        return BinaryExprParsing.parseWithLeadOperand(builder,
-                marker,
-                result,
-                parsingMethod,
-                ErrorMsg.EXPRESSION_EXPECTED_MESSAGE,
-                tOR,
-                RubyElementTypes.BOOL_BINARY_EXPRESSION);
+		return BinaryExprParsing.parseWithLeadOperand(builder, marker, result, parsingMethod, ErrorMsg.EXPRESSION_EXPECTED_MESSAGE, tOR, RubyElementTypes.BOOL_BINARY_EXPRESSION);
 
-    }
+	}
 
-    /**
-     * Parsing binary expression with operations:  &&
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    @NotNull
-    private static IElementType parseAnd(final RBuilder builder) {
-        return parseAndWithLeadMatch(builder, builder.mark(), MatchingExpression.parse(builder));
-    }
+	/**
+	 * Parsing binary expression with operations:  &&
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseAnd(final RBuilder builder)
+	{
+		return parseAndWithLeadMatch(builder, builder.mark(), MatchingExpression.parse(builder));
+	}
 
-    /**
-     * Parsing binary expression with operations:  &&
-     * @param builder Current builder
-     * @return result of parsing
-     * @param marker Marker before lead Match
-     * @param result result of Match parsing
-     */
-    @NotNull
-    private static IElementType parseAndWithLeadMatch(final RBuilder builder, final RMarker marker, final IElementType result) {
-        ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup(){
-            @Override
+	/**
+	 * Parsing binary expression with operations:  &&
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before lead Match
+	 * @param result  result of Match parsing
+	 * @return result of parsing
+	 */
+	@NotNull
+	private static IElementType parseAndWithLeadMatch(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
+		{
+			@Override
 			@NotNull
-            public IElementType parseInner(final RBuilder builder){
-                return MatchingExpression.parse(builder);
-            }
-        };
+			public IElementType parseInner(final RBuilder builder)
+			{
+				return MatchingExpression.parse(builder);
+			}
+		};
 
-        return BinaryExprParsing.parseWithLeadOperand(builder,
-                marker, result,
-                parsingMethod,
-                ErrorMsg.EXPRESSION_EXPECTED_MESSAGE,
-                tAND,
-                RubyElementTypes.BOOL_BINARY_EXPRESSION);
+		return BinaryExprParsing.parseWithLeadOperand(builder, marker, result, parsingMethod, ErrorMsg.EXPRESSION_EXPECTED_MESSAGE, tAND, RubyElementTypes.BOOL_BINARY_EXPRESSION);
 
-    }
+	}
 
-    public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result) {
-        return parseOrWithLeadAND(builder, marker.precede(),
-                parseAndWithLeadMatch(builder, marker.precede(),
-                        MatchingExpression.parseWithLeadPRIMARY(builder, marker, result)));
-    }
+	public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		return parseOrWithLeadAND(builder, marker.precede(), parseAndWithLeadMatch(builder, marker.precede(), MatchingExpression.parseWithLeadPRIMARY(builder, marker, result)));
+	}
 }

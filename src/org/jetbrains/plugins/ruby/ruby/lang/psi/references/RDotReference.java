@@ -21,5 +21,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.references;
  * User: oleg
  * Date: 08.08.2006
  */
-public interface RDotReference extends RReference {
+public interface RDotReference extends RReference
+{
 }

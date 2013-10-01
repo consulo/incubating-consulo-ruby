@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -28,42 +27,49 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RTernaryExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 06.07.2006
  */
-public class RTernaryExpressionImpl extends RPsiElementBase implements RTernaryExpression{
-    public RTernaryExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RTernaryExpressionImpl extends RPsiElementBase implements RTernaryExpression
+{
+	public RTernaryExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-	public RPsiElement getTrueCommand() {
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 1);
-    }
+	@Override
+	public RPsiElement getTrueCommand()
+	{
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 1);
+	}
 
-    @Override
-	public RPsiElement getFalseCommand() {
-        return RubyPsiUtil.getChildByType(this, RPsiElement.class, 2);
-    }
+	@Override
+	public RPsiElement getFalseCommand()
+	{
+		return RubyPsiUtil.getChildByType(this, RPsiElement.class, 2);
+	}
 
-    @Override
-	public RCondition getCondition() {
-        return RubyPsiUtil.getChildByType(this, RCondition.class, 0);
-    }
+	@Override
+	public RCondition getCondition()
+	{
+		return RubyPsiUtil.getChildByType(this, RCondition.class, 0);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RType getType(@Nullable final FileSymbol fileSymbol) {
-        final RPsiElement trueCommand = getTrueCommand();
-        final RPsiElement falseCommand = getFalseCommand();
-        final RType result = trueCommand instanceof RExpression ? 
-                ((RExpression) trueCommand).getType(fileSymbol) : RType.NOT_TYPED;
-        if (falseCommand instanceof RExpression){
-            return RTypeUtil.joinOr(result, ((RExpression) falseCommand).getType(fileSymbol));
-        }
-        return result;
-    }
+	public RType getType(@Nullable final FileSymbol fileSymbol)
+	{
+		final RPsiElement trueCommand = getTrueCommand();
+		final RPsiElement falseCommand = getFalseCommand();
+		final RType result = trueCommand instanceof RExpression ? ((RExpression) trueCommand).getType(fileSymbol) : RType.NOT_TYPED;
+		if(falseCommand instanceof RExpression)
+		{
+			return RTypeUtil.joinOr(result, ((RExpression) falseCommand).getType(fileSymbol));
+		}
+		return result;
+	}
 }

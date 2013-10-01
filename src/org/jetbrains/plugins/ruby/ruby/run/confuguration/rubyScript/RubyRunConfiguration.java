@@ -36,52 +36,62 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 
-public class RubyRunConfiguration extends AbstractRubyRunConfiguration implements RubyRunConfigurationParams {
-    private String myScriptPath = TextUtil.EMPTY_STRING;
-    private String myScriptArgs = TextUtil.EMPTY_STRING;
+public class RubyRunConfiguration extends AbstractRubyRunConfiguration implements RubyRunConfigurationParams
+{
+	private String myScriptPath = TextUtil.EMPTY_STRING;
+	private String myScriptArgs = TextUtil.EMPTY_STRING;
 
-    public RubyRunConfiguration(final Project project, final ConfigurationFactory factory,
-                                final String name) {
-        super(project, factory, name);
-    }
+	public RubyRunConfiguration(final Project project, final ConfigurationFactory factory, final String name)
+	{
+		super(project, factory, name);
+	}
 
-    @Override
-	protected RubyRunConfiguration createInstance() {
-        return new RubyRunConfiguration(getProject(), getFactory(), getName());
-    }
+	@Override
+	protected RubyRunConfiguration createInstance()
+	{
+		return new RubyRunConfiguration(getProject(), getFactory(), getName());
+	}
 
-    public static void copyParams(final RubyRunConfigurationParams fromParams,
-                                  final RubyRunConfigurationParams toParams) {
-        AbstractRubyRunConfiguration.copyParams(fromParams, toParams);
+	public static void copyParams(final RubyRunConfigurationParams fromParams, final RubyRunConfigurationParams toParams)
+	{
+		AbstractRubyRunConfiguration.copyParams(fromParams, toParams);
 
-        toParams.setScriptPath(fromParams.getScriptPath());
-        toParams.setScriptArgs(fromParams.getScriptArgs());
-    }
+		toParams.setScriptPath(fromParams.getScriptPath());
+		toParams.setScriptArgs(fromParams.getScriptArgs());
+	}
 
-    @Override
-	public String getScriptPath() {
-        return myScriptPath;
-    }
+	@Override
+	public String getScriptPath()
+	{
+		return myScriptPath;
+	}
 
-    @Override
-	public void setScriptPath(final String scriptPath) {
-        myScriptPath = TextUtil.getAsNotNull(scriptPath);
-    }
+	@Override
+	public void setScriptPath(final String scriptPath)
+	{
+		myScriptPath = TextUtil.getAsNotNull(scriptPath);
+	}
 
-    @Override
-	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return new RubyRunConfigurationEditor(getProject(), this);
-    }
+	@Override
+	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor()
+	{
+		return new RubyRunConfigurationEditor(getProject(), this);
+	}
 
 	@Nullable
 	@Override
 	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
-		try {
+		try
+		{
 			validateConfiguration(true);
-		} catch (ExecutionException ee) {
+		}
+		catch(ExecutionException ee)
+		{
 			throw ee;
-		} catch (Exception e) {
+		}
+		catch(Exception e)
+		{
 			throw new ExecutionException(e.getMessage(), e);
 		}
 
@@ -89,44 +99,52 @@ public class RubyRunConfiguration extends AbstractRubyRunConfiguration implement
 		return new RubyRunCommandLineState(this, executionEnvironment);
 	}
 
-    @Override
-	protected void validateConfiguration(final boolean isExecution) throws Exception {
-        RubyRunConfigurationUtil.inspectSDK(this, isExecution);
+	@Override
+	protected void validateConfiguration(final boolean isExecution) throws Exception
+	{
+		RubyRunConfigurationUtil.inspectSDK(this, isExecution);
 
-        // Script inspection
-        if (getScriptPath() == null || getScriptPath().trim().length() == 0) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.not.specified"), isExecution);
-        }
+		// Script inspection
+		if(getScriptPath() == null || getScriptPath().trim().length() == 0)
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.not.specified"), isExecution);
+		}
 
-        File script = new File(getScriptPath());
-        if (!script.exists()){
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.not.exists"), isExecution);
-        }
-        if (!script.isFile()){
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.is.not.file"), isExecution);
-        }
+		File script = new File(getScriptPath());
+		if(!script.exists())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.not.exists"), isExecution);
+		}
+		if(!script.isFile())
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("run.configuration.script.is.not.file"), isExecution);
+		}
 
-        RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
-    }
+		RubyRunConfigurationUtil.inspectWorkingDirectory(this, isExecution);
+	}
 
-    @Override
-	public String getScriptArgs() {
-        return myScriptArgs;
-    }
+	@Override
+	public String getScriptArgs()
+	{
+		return myScriptArgs;
+	}
 
-    @Override
-	public void setScriptArgs(String myScriptArgs) {
-        this.myScriptArgs = TextUtil.getAsNotNull(myScriptArgs);
-    }
+	@Override
+	public void setScriptArgs(String myScriptArgs)
+	{
+		this.myScriptArgs = TextUtil.getAsNotNull(myScriptArgs);
+	}
 
 
-    @Override
-	public void readExternal(Element element) throws InvalidDataException {
-        RubyRunConfigurationExternalizer.getInstance().readExternal(this, element);
-    }
+	@Override
+	public void readExternal(Element element) throws InvalidDataException
+	{
+		RubyRunConfigurationExternalizer.getInstance().readExternal(this, element);
+	}
 
-    @Override
-	public void writeExternal(Element element) throws WriteExternalException {
-        RubyRunConfigurationExternalizer.getInstance().writeExternal(this, element);
-    }
+	@Override
+	public void writeExternal(Element element) throws WriteExternalException
+	{
+		RubyRunConfigurationExternalizer.getInstance().writeExternal(this, element);
+	}
 }

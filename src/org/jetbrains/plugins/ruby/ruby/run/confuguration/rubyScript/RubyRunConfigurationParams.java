@@ -8,10 +8,13 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigur
  * @author: Roman Chernyatchik
  * @date: May 22, 2008
  */
-public interface RubyRunConfigurationParams extends AbstractRubyRunConfigurationParams {
-    public String getScriptArgs();
-    public String getScriptPath();
+public interface RubyRunConfigurationParams extends AbstractRubyRunConfigurationParams
+{
+	public String getScriptArgs();
 
-    public void setScriptPath(final String scriptPath);
-    public void setScriptArgs(final String myScriptArgs);
+	public String getScriptPath();
+
+	public void setScriptPath(final String scriptPath);
+
+	public void setScriptArgs(final String myScriptArgs);
 }

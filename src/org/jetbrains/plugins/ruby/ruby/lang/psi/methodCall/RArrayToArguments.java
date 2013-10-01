@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: May 12, 2008
  */
-public interface RArrayToArguments extends RPsiElement{
+public interface RArrayToArguments extends RPsiElement
+{
 }

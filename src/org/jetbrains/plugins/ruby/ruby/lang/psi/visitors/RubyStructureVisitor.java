@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.visitors;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjectClass;
@@ -24,52 +23,62 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 31.07.2006
  */
-public abstract class RubyStructureVisitor extends RubyElementVisitor {
+public abstract class RubyStructureVisitor extends RubyElementVisitor
+{
 
-    @Override
-	public void visitElement(PsiElement psiElement){
-        psiElement.acceptChildren(this);
-    }
+	@Override
+	public void visitElement(PsiElement psiElement)
+	{
+		psiElement.acceptChildren(this);
+	}
 
-    @Override
-	public void visitRFile(RFile file){
-        visitContainer(file);
-    }
+	@Override
+	public void visitRFile(RFile file)
+	{
+		visitContainer(file);
+	}
 
-    @Override
-	public void visitRModule(RModule rModule){
-        visitContainer(rModule);
-    }
+	@Override
+	public void visitRModule(RModule rModule)
+	{
+		visitContainer(rModule);
+	}
 
-    @Override
-	public void visitRClass(RClass rClass){
-        visitContainer(rClass);
-    }
+	@Override
+	public void visitRClass(RClass rClass)
+	{
+		visitContainer(rClass);
+	}
 
-    @Override
-	public void visitRObjectClass(RObjectClass rMetaClass){
-        visitContainer(rMetaClass);
-    }
+	@Override
+	public void visitRObjectClass(RObjectClass rMetaClass)
+	{
+		visitContainer(rMetaClass);
+	}
 
-    @Override
-	public void visitRMethod(RMethod rMethod){
-        visitContainer(rMethod);
-    }
+	@Override
+	public void visitRMethod(RMethod rMethod)
+	{
+		visitContainer(rMethod);
+	}
 
-    @Override
-	public void visitRSingletonMethod(RSingletonMethod rSingletonMethod){
-        visitContainer(rSingletonMethod);
-    }
+	@Override
+	public void visitRSingletonMethod(RSingletonMethod rSingletonMethod)
+	{
+		visitContainer(rSingletonMethod);
+	}
 
-    /**
-    * Method to override
-    * @param rContainer container to visit
-    */
-    public abstract void visitContainer(RContainer rContainer);
+	/**
+	 * Method to override
+	 *
+	 * @param rContainer container to visit
+	 */
+	public abstract void visitContainer(RContainer rContainer);
 }

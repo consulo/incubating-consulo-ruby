@@ -17,13 +17,13 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html;
 
 
-import com.intellij.psi.xml.XmlFile;
-import com.intellij.psi.xml.XmlFileNSInfoProvider;
-import com.intellij.xml.util.XmlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import com.intellij.psi.xml.XmlFile;
+import com.intellij.psi.xml.XmlFileNSInfoProvider;
+import com.intellij.xml.util.XmlUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,16 +36,23 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
  * This class adds html tags auto completion for *.rhtml files.
  */
 @SuppressWarnings({"ComponentRegistrationProblems"})
-public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider {
-    private static String[][] NAMESPACES =
-            new String[][]{new String[]{TextUtil.EMPTY_STRING, XmlUtil.XHTML_URI}};
+public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider
+{
+	private static String[][] NAMESPACES = new String[][]{
+			new String[]{
+					TextUtil.EMPTY_STRING,
+					XmlUtil.XHTML_URI
+			}
+	};
 
-    @Override
+	@Override
 	@Nullable
-    public String[][] getDefaultNamespaces(final @NotNull XmlFile file) {
-        if (RHTMLFileType.RHTML.equals(file.getFileType())) {
-            return NAMESPACES;
-        }
-        return null;
-    }
+	public String[][] getDefaultNamespaces(final @NotNull XmlFile file)
+	{
+		if(RHTMLFileType.RHTML.equals(file.getFileType()))
+		{
+			return NAMESPACES;
+		}
+		return null;
+	}
 }

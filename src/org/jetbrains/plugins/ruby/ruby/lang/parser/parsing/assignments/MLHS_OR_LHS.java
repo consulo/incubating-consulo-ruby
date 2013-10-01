@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assignments;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,47 +28,57 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
  * @author: oleg
  * @date: Oct 9, 2006
  */
-public class MLHS_OR_LHS implements RubyTokenTypes {
-    /**
-     * Parses MLHS or LHS object
-     * @param builder Current builder
-     * @return result of parsing
-     */
-    public static IElementType parse(final RBuilder builder){
-        if (builder.compare(tLPAREN)){
-            return MLHS.parse(builder);
-        }
-        return parseWithLeadLHS(builder, builder.mark(), LHS.parse(builder));
-    }
+public class MLHS_OR_LHS implements RubyTokenTypes
+{
+	/**
+	 * Parses MLHS or LHS object
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	public static IElementType parse(final RBuilder builder)
+	{
+		if(builder.compare(tLPAREN))
+		{
+			return MLHS.parse(builder);
+		}
+		return parseWithLeadLHS(builder, builder.mark(), LHS.parse(builder));
+	}
 
 
-    /**
-     * Parses MLHS_OR_LHS with lead PRIMARY parsed
-     * @param builder Current builder
-     * @param marker Marker before PRIMARY parsed
-     * @param result result of PRIMARY parsing
-     * @return result of parsing
-     */
-    public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result){
-        return parseWithLeadLHS(builder, marker.precede(), LHS.parseWithLeadPRIMARY(builder, marker, result));
-    }
+	/**
+	 * Parses MLHS_OR_LHS with lead PRIMARY parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before PRIMARY parsed
+	 * @param result  result of PRIMARY parsing
+	 * @return result of parsing
+	 */
+	public static IElementType parseWithLeadPRIMARY(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		return parseWithLeadLHS(builder, marker.precede(), LHS.parseWithLeadPRIMARY(builder, marker, result));
+	}
 
-    /**
-     * Parses MLHS_OR_LHS with lead LHS parsed
-     * @param builder Current builder
-     * @param marker Marker before LHS parsed
-     * @param result result of LHS parsing
-     * @return result of parsing
-     */
-    public static IElementType parseWithLeadLHS(final RBuilder builder, final RMarker marker, final IElementType result){
-        if (result!=RubyElementTypes.EMPTY_INPUT && builder.compare(tCOMMA)){
-            return MLHS.parseWithLeadLHS(builder, marker);
-        }
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            marker.drop();
-            return result;
-        }
-        marker.rollbackTo();
-        return MLHS.parse(builder);
-    }
+	/**
+	 * Parses MLHS_OR_LHS with lead LHS parsed
+	 *
+	 * @param builder Current builder
+	 * @param marker  Marker before LHS parsed
+	 * @param result  result of LHS parsing
+	 * @return result of parsing
+	 */
+	public static IElementType parseWithLeadLHS(final RBuilder builder, final RMarker marker, final IElementType result)
+	{
+		if(result != RubyElementTypes.EMPTY_INPUT && builder.compare(tCOMMA))
+		{
+			return MLHS.parseWithLeadLHS(builder, marker);
+		}
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.drop();
+			return result;
+		}
+		marker.rollbackTo();
+		return MLHS.parse(builder);
+	}
 }

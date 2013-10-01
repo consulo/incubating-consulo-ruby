@@ -35,7 +35,8 @@ import com.intellij.psi.xml.XmlTag;
  * @author: Roman Chernyatchik
  * @date: 21.05.2007
  */
-public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements RHTMLRubyInjectionTag {
+public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements RHTMLRubyInjectionTag
+{
 
 	public RHTMLRubyInjectionTagImpl(@NotNull ASTNode node)
 	{
@@ -44,23 +45,26 @@ public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements R
 
 	@Override
 	@NotNull
-    public String getTagText() {
-        final PsiElement[] elements = getElements();
-        final StringBuilder buff = new StringBuilder();
+	public String getTagText()
+	{
+		final PsiElement[] elements = getElements();
+		final StringBuilder buff = new StringBuilder();
 
-        for (final PsiElement element : elements) {
-            final ASTNode treeElement = element.getNode();
-            if (treeElement != null
-                && treeElement.getElementType() == RHTMLTokenType.RUBY_CODE_CHARACTERS) {
-                buff.append(treeElement.getText());
-            }
-        }
-        return buff.toString();
-    }
+		for(final PsiElement element : elements)
+		{
+			final ASTNode treeElement = element.getNode();
+			if(treeElement != null && treeElement.getElementType() == RHTMLTokenType.RUBY_CODE_CHARACTERS)
+			{
+				buff.append(treeElement.getText());
+			}
+		}
+		return buff.toString();
+	}
 
-    //TODO Make it protected in parent
-    private PsiElement[] getElements() {
-        final List<PsiElement> elements = new ArrayList<PsiElement>();
+	//TODO Make it protected in parent
+	private PsiElement[] getElements()
+	{
+		final List<PsiElement> elements = new ArrayList<PsiElement>();
 		PsiElementProcessor processor = new PsiElementProcessor()
 		{
 			@Override
@@ -71,22 +75,25 @@ public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements R
 			}
 		};
 		PsiTreeUtil.processElements(getContainingFile(), processor);
-        return elements.toArray(new PsiElement[elements.size()]);
-      }
+		return elements.toArray(new PsiElement[elements.size()]);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getName() {
-        return getTagText().trim();
-    }
+	public String getName()
+	{
+		return getTagText().trim();
+	}
 
 
-    @NonNls
-    public String toString() {
-        return "Ruby injection:" + getName();
-    }
+	@NonNls
+	public String toString()
+	{
+		return "Ruby injection:" + getName();
+	}
 
-    public XmlTag findParentTag() {
-        return null;
-    }
+	public XmlTag findParentTag()
+	{
+		return null;
+	}
 }

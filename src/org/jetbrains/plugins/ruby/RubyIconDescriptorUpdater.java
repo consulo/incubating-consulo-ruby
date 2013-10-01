@@ -43,7 +43,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUti
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 import com.intellij.ide.IconDescriptor;
 import com.intellij.ide.IconDescriptorUpdater;
 import com.intellij.openapi.module.Module;
@@ -72,12 +71,6 @@ public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 			if(RSpecUtil.isFileWithRSpecTestFileName(rFile.getVirtualFile()))
 			{
 				return RSpecIcons.TEST_SCRIPT_ICON;
-			}
-
-			// We should just return null to use default ruby file icon if we don`t want to use useRubySpecific Project view
-			if(!RApplicationSettings.getInstance().useRubySpecificProjectView)
-			{
-				return null;
 			}
 
 			final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);

@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
+import javax.swing.Icon;
+
+import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.vcs.FileStatus;
 import com.intellij.usages.UsageGroup;
 import com.intellij.usages.UsageView;
-import org.jetbrains.plugins.ruby.RBundle;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,48 +29,58 @@ import javax.swing.*;
  * @author: oleg
  * @date: Nov 2, 2007
  */
-class RubyTextMatchedGroup implements UsageGroup {
+class RubyTextMatchedGroup implements UsageGroup
+{
 
-    @Override
-	public Icon getIcon(boolean isOpen) {
-        return null;
-    }
+	@Override
+	public Icon getIcon(boolean isOpen)
+	{
+		return null;
+	}
 
-    @Override
-	public String getText(UsageView view) {
-        return RBundle.message("find.usages.text.matched.group");
-    }
+	@Override
+	public String getText(UsageView view)
+	{
+		return RBundle.message("find.usages.text.matched.group");
+	}
 
-    @Override
-	public FileStatus getFileStatus() {
-        return null;
-    }
+	@Override
+	public FileStatus getFileStatus()
+	{
+		return null;
+	}
 
-    @Override
-	public boolean isValid() {
-        return true;
-    }
+	@Override
+	public boolean isValid()
+	{
+		return true;
+	}
 
-    @Override
-	public void update() {
-    }
+	@Override
+	public void update()
+	{
+	}
 
-    @Override
-	public int compareTo(UsageGroup usageGroup) {
-        return getText(null).compareTo(usageGroup.getText(null));
-    }
+	@Override
+	public int compareTo(UsageGroup usageGroup)
+	{
+		return getText(null).compareTo(usageGroup.getText(null));
+	}
 
-    @Override
-	public void navigate(boolean b) {
-    }
+	@Override
+	public void navigate(boolean b)
+	{
+	}
 
-    @Override
-	public boolean canNavigate() {
-        return false;
-    }
+	@Override
+	public boolean canNavigate()
+	{
+		return false;
+	}
 
-    @Override
-	public boolean canNavigateToSource() {
-        return false;
-    }
+	@Override
+	public boolean canNavigateToSource()
+	{
+		return false;
+	}
 }

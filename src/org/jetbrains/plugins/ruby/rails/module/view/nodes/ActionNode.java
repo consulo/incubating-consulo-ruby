@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,39 +34,42 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 15.10.2006
  */
-public class ActionNode extends MethodNode {
-    // For node id generator see MethodNode.generateNodeId(),
-    // if you want change it, then fix RailsProjectViewPane.buildNodeIdsPath()
+public class ActionNode extends MethodNode
+{
+	// For node id generator see MethodNode.generateNodeId(),
+	// if you want change it, then fix RailsProjectViewPane.buildNodeIdsPath()
 
-    private final String myControllerDirUrl;
-    private final String myControllerName;
+	private final String myControllerDirUrl;
+	private final String myControllerName;
 
-    public ActionNode(final Module module, final RVirtualMethod method,
-                      final String controllerDirUrl, final String fileUrl,
-                      final String controllerName) {
-        super(module, method, fileUrl);
-        myControllerDirUrl = controllerDirUrl;
-        myControllerName = controllerName;
-    }
+	public ActionNode(final Module module, final RVirtualMethod method, final String controllerDirUrl, final String fileUrl, final String controllerName)
+	{
+		super(module, method, fileUrl);
+		myControllerDirUrl = controllerDirUrl;
+		myControllerName = controllerName;
+	}
 
-    @Override
-	public SimpleNode[] getChildren() {
-        final List<RailsNode> childNodes = new ArrayList<RailsNode>();
-        final Module module = getModule();
+	@Override
+	public SimpleNode[] getChildren()
+	{
+		final List<RailsNode> childNodes = new ArrayList<RailsNode>();
+		final Module module = getModule();
 
-        if (ControllersConventions.isValidActionMethod(getMethod())) {
-            final List<VirtualFile> views =
-                    ViewsConventions.getViews(getMethod(), myControllerDirUrl, myControllerName, module);
-            for (VirtualFile view : views) {
-                childNodes.add(new SimpleFileNode(module, view));
-            }
-        }
-        return childNodes.toArray(new RailsNode[childNodes.size()]);
-    }
+		if(ControllersConventions.isValidActionMethod(getMethod()))
+		{
+			final List<VirtualFile> views = ViewsConventions.getViews(getMethod(), myControllerDirUrl, myControllerName, module);
+			for(VirtualFile view : views)
+			{
+				childNodes.add(new SimpleFileNode(module, view));
+			}
+		}
+		return childNodes.toArray(new RailsNode[childNodes.size()]);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.ACTION;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.ACTION;
+	}
 }

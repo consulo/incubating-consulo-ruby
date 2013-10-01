@@ -16,35 +16,39 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.EXPR;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.09.2006
  */
-public class Condition implements RubyTokenTypes {
-    /**
-     * Parses condition
-     * @param builder Current builder
-     */
-    public static void parse(final RBuilder builder) {
-        RMarker statementMarker = builder.mark();
+public class Condition implements RubyTokenTypes
+{
+	/**
+	 * Parses condition
+	 *
+	 * @param builder Current builder
+	 */
+	public static void parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        IElementType result = EXPR.parse(builder);
+		IElementType result = EXPR.parse(builder);
 
-        if (result != RubyElementTypes.EMPTY_INPUT) {
-            statementMarker.done(RubyElementTypes.CONDITION);
-            return;
-        }
-        statementMarker.rollbackTo();
-        builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-    }
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			statementMarker.done(RubyElementTypes.CONDITION);
+			return;
+		}
+		statementMarker.rollbackTo();
+		builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+	}
 
 }

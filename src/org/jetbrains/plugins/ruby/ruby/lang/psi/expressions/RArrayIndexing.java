@@ -24,10 +24,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * User: oleg
  * Date: 09.08.2006
  */
-public interface RArrayIndexing extends RPsiElement {
-    @Nullable
-    public RPsiElement getReciever();
+public interface RArrayIndexing extends RPsiElement
+{
+	@Nullable
+	public RPsiElement getReciever();
 
-    @Nullable
-    public RListOfExpressions getValue();
+	@Nullable
+	public RListOfExpressions getValue();
 }

@@ -22,9 +22,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 21.03.2007
  */
-public interface RUnlessModStatement extends RConditionalStatement, RExpression {
-    RPsiElement getCommand();
+public interface RUnlessModStatement extends RConditionalStatement, RExpression
+{
+	RPsiElement getCommand();
 }

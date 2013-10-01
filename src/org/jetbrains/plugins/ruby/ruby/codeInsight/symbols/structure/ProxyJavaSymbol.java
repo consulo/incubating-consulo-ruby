@@ -16,46 +16,49 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 25, 2007
  */
-public class ProxyJavaSymbol extends Symbol {
+public class ProxyJavaSymbol extends Symbol
+{
 
-    private final PsiElement myPsiJavaElement;
+	private final PsiElement myPsiJavaElement;
 
-    public ProxyJavaSymbol(@NotNull final FileSymbol fileSymbol,
-                           @Nullable final String name,
-                           @Nullable final PsiElement element,
-                           @Nullable final Symbol parent,
-                           @Nullable final RVirtualElement prototype){
-        super(fileSymbol, name, Type.JAVA_PROXY_CLASS, parent, prototype);
-        myPsiJavaElement = element;
-    }
+	public ProxyJavaSymbol(@NotNull final FileSymbol fileSymbol, @Nullable final String name, @Nullable final PsiElement element, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	{
+		super(fileSymbol, name, Type.JAVA_PROXY_CLASS, parent, prototype);
+		myPsiJavaElement = element;
+	}
 
-    @Override
+	@Override
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-    public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("[" + getId() + "] " + getType() +  " ");
-        if (useHtml){
-            MarkupUtil.appendBold(builder, myPsiJavaElement.toString());
-        } else {
-            builder.append(myPsiJavaElement);
-        }
-        return builder.toString();
-    }
+	public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml)
+	{
+		final StringBuilder builder = new StringBuilder();
+		builder.append("[" + getId() + "] " + getType() + " ");
+		if(useHtml)
+		{
+			MarkupUtil.appendBold(builder, myPsiJavaElement.toString());
+		}
+		else
+		{
+			builder.append(myPsiJavaElement);
+		}
+		return builder.toString();
+	}
 
-    @NotNull
-    public PsiElement getPsiElement() {
-        return myPsiJavaElement;
-    }
+	@NotNull
+	public PsiElement getPsiElement()
+	{
+		return myPsiJavaElement;
+	}
 }

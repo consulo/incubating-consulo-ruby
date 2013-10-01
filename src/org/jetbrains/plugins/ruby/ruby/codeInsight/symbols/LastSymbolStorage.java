@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
+import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,43 +30,52 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
  * @author: oleg
  * @date: Aug 18, 2007
  */
-public class LastSymbolStorage implements ProjectComponent {
-    @Override
-	public void projectOpened() {
-    }
+public class LastSymbolStorage implements ProjectComponent
+{
+	@Override
+	public void projectOpened()
+	{
+	}
 
-    @Override
-	public void projectClosed() {
-    }
+	@Override
+	public void projectClosed()
+	{
+	}
 
-    @Override
+	@Override
 	@NonNls
-    @NotNull
-    public String getComponentName() {
-        return RComponents.RLAST_SYMBOL_STORAGE;
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return RComponents.RLAST_SYMBOL_STORAGE;
+	}
 
-    @Override
-	public void initComponent() {
-    }
+	@Override
+	public void initComponent()
+	{
+	}
 
-    @Override
-	public void disposeComponent() {
-    }
+	@Override
+	public void disposeComponent()
+	{
+	}
 
-    private FileSymbol lastEvaluatedSymbol;
+	private FileSymbol lastEvaluatedSymbol;
 
-    @Nullable
-    public synchronized FileSymbol getSymbol() {
-        return lastEvaluatedSymbol;
-    }
+	@Nullable
+	public synchronized FileSymbol getSymbol()
+	{
+		return lastEvaluatedSymbol;
+	}
 
-    public synchronized void setSymbol(@Nullable final FileSymbol symbol) {
-        lastEvaluatedSymbol = symbol;
-    }
+	public synchronized void setSymbol(@Nullable final FileSymbol symbol)
+	{
+		lastEvaluatedSymbol = symbol;
+	}
 
-    @NotNull
-    public static LastSymbolStorage getInstance(@NotNull final Project project){
-        return project.getComponent(LastSymbolStorage.class);
-    }
+	@NotNull
+	public static LastSymbolStorage getInstance(@NotNull final Project project)
+	{
+		return project.getComponent(LastSymbolStorage.class);
+	}
 }

@@ -31,23 +31,22 @@ import com.intellij.openapi.projectRoots.Sdk;
  * User: oleg
  * Date: Oct 20, 2007
  */
-abstract class AbstractRailsLayeredCachedSymbol extends AbstractLayeredCachedSymbol {
-    private final FileSymbolType myNextLayerType;
+abstract class AbstractRailsLayeredCachedSymbol extends AbstractLayeredCachedSymbol
+{
+	private final FileSymbolType myNextLayerType;
 
-    public AbstractRailsLayeredCachedSymbol(@NotNull final FileSymbolType nextLayerType,
-                                  @NotNull final Project project,
-                                  @Nullable final Module module,
-                                  @Nullable final Sdk sdk,
-                                  final boolean jRubyEnabled) {
-        super(project, module, sdk, jRubyEnabled);
-        myNextLayerType = nextLayerType;
-    }
+	public AbstractRailsLayeredCachedSymbol(@NotNull final FileSymbolType nextLayerType, @NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	{
+		super(project, module, sdk, jRubyEnabled);
+		myNextLayerType = nextLayerType;
+	}
 
-    @Override
+	@Override
 	@Nullable
-    protected CachedSymbol getBaseSymbol() {
-        final SymbolsCache cache = SymbolsCache.getInstance(myProject);
-        return cache.getCachedSymbol(myNextLayerType, myModule, mySdk, isJRubyEnabled);
-    }
+	protected CachedSymbol getBaseSymbol()
+	{
+		final SymbolsCache cache = SymbolsCache.getInstance(myProject);
+		return cache.getCachedSymbol(myNextLayerType, myModule, mySdk, isJRubyEnabled);
+	}
 
 }

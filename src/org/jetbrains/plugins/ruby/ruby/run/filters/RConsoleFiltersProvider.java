@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.filters;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.filters.ConsoleFilterProvider;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,10 +27,12 @@ import org.jetbrains.annotations.NotNull;
  * @author: Roman Chernyatchik
  * @date: Sep 4, 2007
  */
-public class RConsoleFiltersProvider implements ConsoleFilterProvider {
-    @Override
+public class RConsoleFiltersProvider implements ConsoleFilterProvider
+{
+	@Override
 	@NotNull
-    public Filter[] getDefaultFilters(@NotNull final Project project) {
-        return new Filter[]{new RStackTraceFilter(project)};
-    }
+	public Filter[] getDefaultFilters(@NotNull final Project project)
+	{
+		return new Filter[]{new RStackTraceFilter(project)};
+	}
 }

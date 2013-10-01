@@ -16,26 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.08.2006
  */
-public interface RConstantHolder extends RContainer, RVirtualConstantHolder {
-    /**
-     * Returns list of defined Constants of this Constant holder
-     * @return List of ConstantDefinitions objects
-     */
-    @NotNull
-    public List<ConstantDefinitions> getConstantDefinitions();
+public interface RConstantHolder extends RContainer, RVirtualConstantHolder
+{
+	/**
+	 * Returns list of defined Constants of this Constant holder
+	 *
+	 * @return List of ConstantDefinitions objects
+	 */
+	@NotNull
+	public List<ConstantDefinitions> getConstantDefinitions();
 
-    @Nullable
-    public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant);
+	@Nullable
+	public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant);
 }

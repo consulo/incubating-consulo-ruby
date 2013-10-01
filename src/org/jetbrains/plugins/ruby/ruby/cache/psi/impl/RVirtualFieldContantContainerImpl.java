@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -26,58 +28,61 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Mar 13, 2007
  */
-public abstract class RVirtualFieldContantContainerImpl extends RVirtualContainerBase
-        implements RVirtualFieldContantContainer {
-    private List<RVirtualConstant> myConstants;
-    private List<RVirtualField> myFields;
+public abstract class RVirtualFieldContantContainerImpl extends RVirtualContainerBase implements RVirtualFieldContantContainer
+{
+	private List<RVirtualConstant> myConstants;
+	private List<RVirtualField> myFields;
 
-    // RVirtualConstantsHolder methods
-    public void setVirtualConstants(@NotNull final List<RVirtualConstant> containerConstants) {
-        myConstants = containerConstants;
-    }
+	// RVirtualConstantsHolder methods
+	public void setVirtualConstants(@NotNull final List<RVirtualConstant> containerConstants)
+	{
+		myConstants = containerConstants;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualConstant> getVirtualConstants() {
-        return myConstants;
-    }
+	public List<RVirtualConstant> getVirtualConstants()
+	{
+		return myConstants;
+	}
 
-    // RVirtualFieldsHolder methods
-    public void setVirtualFields(List<RVirtualField> fields) {
-        myFields = fields;
-    }
+	// RVirtualFieldsHolder methods
+	public void setVirtualFields(List<RVirtualField> fields)
+	{
+		myFields = fields;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<RVirtualField> getVirtualFields() {
-        return myFields;
-    }
+	public List<RVirtualField> getVirtualFields()
+	{
+		return myFields;
+	}
 
-    protected RVirtualFieldContantContainerImpl(@Nullable RVirtualContainer container,
-                                                @NotNull RVirtualName name,
-                                                AccessModifier accessModifier,
-                                                @NotNull RFileInfo containingFileInfo) {
-        super(container, name, accessModifier, containingFileInfo);
-    }
+	protected RVirtualFieldContantContainerImpl(@Nullable RVirtualContainer container, @NotNull RVirtualName name, AccessModifier accessModifier, @NotNull RFileInfo containingFileInfo)
+	{
+		super(container, name, accessModifier, containingFileInfo);
+	}
 
-    @Override
-	public void dump(@NotNull StringBuilder buffer, final int indent) {
-        super.dump(buffer, indent);
-        for (RVirtualConstant constant : myConstants) {
-            buffer.append(NEW_LINE);
-            ((RVirtualElementBase) constant).dump(buffer, indent+1);
-        }
-        for (RVirtualField myField : myFields) {
-            buffer.append(NEW_LINE);
-            ((RVirtualElementBase) myField).dump(buffer, indent+1);
-        }
-    }
+	@Override
+	public void dump(@NotNull StringBuilder buffer, final int indent)
+	{
+		super.dump(buffer, indent);
+		for(RVirtualConstant constant : myConstants)
+		{
+			buffer.append(NEW_LINE);
+			((RVirtualElementBase) constant).dump(buffer, indent + 1);
+		}
+		for(RVirtualField myField : myFields)
+		{
+			buffer.append(NEW_LINE);
+			((RVirtualElementBase) myField).dump(buffer, indent + 1);
+		}
+	}
 }

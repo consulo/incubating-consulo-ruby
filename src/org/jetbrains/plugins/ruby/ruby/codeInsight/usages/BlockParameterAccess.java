@@ -25,7 +25,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
  * @author: oleg
  * @date: May 23, 2007
  */
-public interface BlockParameterAccess extends WriteAccess {
-    @NotNull
-    RBlockVariables getBlockVariables();
+public interface BlockParameterAccess extends WriteAccess
+{
+	@NotNull
+	RBlockVariables getBlockVariables();
 }

@@ -26,12 +26,14 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: Mar 15, 2008
  */
-public interface RubyWizardSettingsHolder {
-    @Nullable
-    public Sdk getSdk();
-    public void setSdk(@Nullable Sdk sdk);
+public interface RubyWizardSettingsHolder
+{
+	@Nullable
+	public Sdk getSdk();
 
-    public boolean isRSpecSupportEnabled();
+	public void setSdk(@Nullable Sdk sdk);
 
-    public void setTestsUnitRootPath(@NotNull String contentRootPath);
+	public boolean isRSpecSupportEnabled();
+
+	public void setTestsUnitRootPath(@NotNull String contentRootPath);
 }

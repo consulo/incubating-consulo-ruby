@@ -23,7 +23,9 @@ import java.util.Stack;
  * @author: oleg
  * @date: Apr 17, 2008
  */
-public interface CallEnvironment {
-    Stack<CallInstruction> callStack(Instruction instruction);
-    void update(Stack<CallInstruction> callStack, Instruction instruction);
+public interface CallEnvironment
+{
+	Stack<CallInstruction> callStack(Instruction instruction);
+
+	void update(Stack<CallInstruction> callStack, Instruction instruction);
 }

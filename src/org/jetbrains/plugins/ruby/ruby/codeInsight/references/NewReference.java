@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -32,10 +32,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,40 +43,46 @@ import java.util.List;
  * @author: oleg
  * @date: Jan 16, 2008
  */
-public class NewReference extends RQualifiedReference {
-    public NewReference(@NotNull final Project project,
-                        @NotNull final RPsiElement wholeReference,
-                        @Nullable final RPsiElement refObject,
-                        @NotNull final PsiElement refValue) {
-        super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.INITIALIZE);
-    }
+public class NewReference extends RQualifiedReference
+{
+	public NewReference(@NotNull final Project project, @NotNull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @NotNull final PsiElement refValue)
+	{
+		super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.INITIALIZE);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        if (((RPsiElementBase) myWholeReference).isClassOrModuleName()){
-            return Collections.emptyList();
-        }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		if(((RPsiElementBase) myWholeReference).isClassOrModuleName())
+		{
+			return Collections.emptyList();
+		}
 
-        // We process only JAVA_CLASS here
-        final List<Symbol> symbols = ResolveUtil.resolveToSymbols(myRefObject);
-        if (symbols.size()==1){
-            PsiElement element = null;
-            final Symbol symbol = symbols.get(0);
-            if (symbol.getType() == Type.JAVA_CLASS){
-                element = ((JavaSymbol) symbol).getPsiElement();
-            }
-            if (symbol.getType() == Type.JAVA_PROXY_CLASS){
-                element = ((ProxyJavaSymbol) symbol).getPsiElement();
-            }
-            if (element instanceof PsiClass){
-                final ArrayList<Symbol> variants = new ArrayList<Symbol>();
-                for (PsiMethod method : ((PsiClass) element).getConstructors()) {
-                    variants.add(new JavaSymbol(method, method.getName(), null, Type.JAVA_METHOD));
-                }
-                return variants;
-            }
-        }
-        return super.multiResolveToSymbols(fileSymbol);
-    }
+		// We process only JAVA_CLASS here
+		final List<Symbol> symbols = ResolveUtil.resolveToSymbols(myRefObject);
+		if(symbols.size() == 1)
+		{
+			PsiElement element = null;
+			final Symbol symbol = symbols.get(0);
+			if(symbol.getType() == Type.JAVA_CLASS)
+			{
+				element = ((JavaSymbol) symbol).getPsiElement();
+			}
+			if(symbol.getType() == Type.JAVA_PROXY_CLASS)
+			{
+				element = ((ProxyJavaSymbol) symbol).getPsiElement();
+			}
+			if(element instanceof PsiClass)
+			{
+				final ArrayList<Symbol> variants = new ArrayList<Symbol>();
+				for(PsiMethod method : ((PsiClass) element).getConstructors())
+				{
+					variants.add(new JavaSymbol(method, method.getName(), null, Type.JAVA_METHOD));
+				}
+				return variants;
+			}
+		}
+		return super.multiResolveToSymbols(fileSymbol);
+	}
 }

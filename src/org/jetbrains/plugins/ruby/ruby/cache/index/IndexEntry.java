@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.index;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -26,33 +28,39 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Feb 13, 2007
  */
-public interface IndexEntry {
+public interface IndexEntry
+{
 
-    @NotNull
-    public List<RVirtualClass> getClasses();
-    @NotNull
-    public List<RVirtualModule> getModules();
-    @NotNull
-    public List<RVirtualMethod> getMethods();
-    @NotNull
-    public List<RVirtualField> getFields();
-    @NotNull
-    public List<RVirtualConstant> getConstants();
-    @NotNull
-    public List<RVirtualGlobalVar> getGlobalVars();
-    @NotNull
-    public List<RVirtualAlias> getAliases();
-    @NotNull
-    public List<RVirtualFieldAttr> getFieldAttrs();
+	@NotNull
+	public List<RVirtualClass> getClasses();
 
-    public boolean isEmpty();
+	@NotNull
+	public List<RVirtualModule> getModules();
+
+	@NotNull
+	public List<RVirtualMethod> getMethods();
+
+	@NotNull
+	public List<RVirtualField> getFields();
+
+	@NotNull
+	public List<RVirtualConstant> getConstants();
+
+	@NotNull
+	public List<RVirtualGlobalVar> getGlobalVars();
+
+	@NotNull
+	public List<RVirtualAlias> getAliases();
+
+	@NotNull
+	public List<RVirtualFieldAttr> getFieldAttrs();
+
+	public boolean isEmpty();
 
 }

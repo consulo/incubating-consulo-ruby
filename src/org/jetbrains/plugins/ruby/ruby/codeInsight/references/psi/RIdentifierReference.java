@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
@@ -29,40 +32,44 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Dec 21, 2007
  */
-public class RIdentifierReference extends RNamedReference {
-    public RIdentifierReference(@NotNull RNamedElement element) {
-        super(element);
-    }
+public class RIdentifierReference extends RNamedReference
+{
+	public RIdentifierReference(@NotNull RNamedElement element)
+	{
+		super(element);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol) {
-        final RIdentifier identifier = (RIdentifier) myElement;
-        final ScopeVariable scopeVariable = identifier.getScopeVariable();
-        if (scopeVariable != null) {
-            return Collections.singletonList(scopeVariable.createSymbol());
-        }
+	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
+	{
+		final RIdentifier identifier = (RIdentifier) myElement;
+		final ScopeVariable scopeVariable = identifier.getScopeVariable();
+		if(scopeVariable != null)
+		{
+			return Collections.singletonList(scopeVariable.createSymbol());
+		}
 
-        // constructor handling
-        if (RMethod.NEW.equals(myElement.getName())) {
-            final RClass rClass = RubyPsiUtil.getContainingRClass(myElement);
-            if (rClass!=null){
-                final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
-                if (symbol!=null){
-                    return symbol.getChildren(fileSymbol).getSymbolsByNameAndTypes(RMethod.INITIALIZE, Type.CLASS_METHOD.asSet()).getAll();
-                }
-            }
-        }
+		// constructor handling
+		if(RMethod.NEW.equals(myElement.getName()))
+		{
+			final RClass rClass = RubyPsiUtil.getContainingRClass(myElement);
+			if(rClass != null)
+			{
+				final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
+				if(symbol != null)
+				{
+					return symbol.getChildren(fileSymbol).getSymbolsByNameAndTypes(RMethod.INITIALIZE, Type.CLASS_METHOD.asSet()).getAll();
+				}
+			}
+		}
 
-        return super.multiResolveToSymbols(fileSymbol);
-    }
+		return super.multiResolveToSymbols(fileSymbol);
+	}
 }

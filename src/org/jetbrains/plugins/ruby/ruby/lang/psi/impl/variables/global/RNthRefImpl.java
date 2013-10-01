@@ -24,8 +24,10 @@ import com.intellij.lang.ASTNode;
  * @author: oleg
  * @date: Feb 27, 2007
  */
-public class RNthRefImpl  extends RGlobalVariableImpl {
-    public RNthRefImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RNthRefImpl extends RGlobalVariableImpl
+{
+	public RNthRefImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

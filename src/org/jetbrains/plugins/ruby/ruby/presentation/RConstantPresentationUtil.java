@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,22 +31,24 @@ import javax.swing.*;
  * @author: oleg
  * @date: Feb 16, 2007
  */
-public class RConstantPresentationUtil {
+public class RConstantPresentationUtil
+{
 
-    public static Icon getIcon() {
-        return RubyIcons.RUBY_CONSTANT_NODE;
-    }
+	public static Icon getIcon()
+	{
+		return RubyIcons.RUBY_CONSTANT_NODE;
+	}
 
-    public static ItemPresentation getPresentation(@NotNull final RVirtualConstant constant) {
-        final Icon icon = getIcon();
-        return new PresentationData(constant.getName(),
-                TextUtil.wrapInParens(getLocation(constant)),
-                icon, icon, null);
-    }
+	public static ItemPresentation getPresentation(@NotNull final RVirtualConstant constant)
+	{
+		final Icon icon = getIcon();
+		return new PresentationData(constant.getName(), TextUtil.wrapInParens(getLocation(constant)), icon, icon, null);
+	}
 
-    public static String getLocation(@NotNull final RVirtualConstant constant){
-        return RContainerPresentationUtil.getContainerNameWithLocation(constant.getHolder());
-    }
+	public static String getLocation(@NotNull final RVirtualConstant constant)
+	{
+		return RContainerPresentationUtil.getContainerNameWithLocation(constant.getHolder());
+	}
 
 
 }

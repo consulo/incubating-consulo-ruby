@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import com.intellij.util.xmlb.annotations.Transient;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+import com.intellij.util.xmlb.annotations.Transient;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,46 +29,55 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 25.03.2007
  */
-public class SerializableGenerator implements Serializable {
-    public boolean group;
-    public String name;
-    public ArrayList<SerializableGenerator> children = new ArrayList<SerializableGenerator>();
-    @Transient
-    private SerializableGenerator parent;
+public class SerializableGenerator implements Serializable
+{
+	public boolean group;
+	public String name;
+	public ArrayList<SerializableGenerator> children = new ArrayList<SerializableGenerator>();
+	@Transient
+	private SerializableGenerator parent;
 
-    public SerializableGenerator() {
-    }
+	public SerializableGenerator()
+	{
+	}
 
-    public SerializableGenerator(final String name, final boolean group,
-                                 @Nullable final SerializableGenerator parent) {
-        this.name = name;
-        this.group = group;
-        this.parent = parent;
-    }
+	public SerializableGenerator(final String name, final boolean group, @Nullable final SerializableGenerator parent)
+	{
+		this.name = name;
+		this.group = group;
+		this.parent = parent;
+	}
 
-    public void addChild(final SerializableGenerator child) {
-        children.add(child);
-    }
+	public void addChild(final SerializableGenerator child)
+	{
+		children.add(child);
+	}
 
-    public boolean isGroup() {
-        return group;
-    }
+	public boolean isGroup()
+	{
+		return group;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName()
+	{
+		return name;
+	}
 
-    public List<SerializableGenerator> getChildren() {
-        return children;
-    }
+	public List<SerializableGenerator> getChildren()
+	{
+		return children;
+	}
 
-    public void setParent(final SerializableGenerator parent) {
-        this.parent = parent;
-    }
+	public void setParent(final SerializableGenerator parent)
+	{
+		this.parent = parent;
+	}
 
-    public void removeFromParent() {
-        if (parent != null) {
-            parent.children.remove(this);
-        }
-    }
+	public void removeFromParent()
+	{
+		if(parent != null)
+		{
+			parent.children.remove(this);
+		}
+	}
 }

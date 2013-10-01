@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,31 +27,36 @@ import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
  * @author: oleg
  * @date: 19.10.2007
  */
-public class PsiElementSymbol extends Symbol{
-    private final PsiElement myPsiElement;
+public class PsiElementSymbol extends Symbol
+{
+	private final PsiElement myPsiElement;
 
-    public PsiElementSymbol(@NotNull final PsiElement element,
-                            @NotNull final String name,
-                            final Type type){
-        super(element.getProject(), name, type, null, null);
-        myPsiElement = element;
-    }
+	public PsiElementSymbol(@NotNull final PsiElement element, @NotNull final String name, final Type type)
+	{
+		super(element.getProject(), name, type, null, null);
+		myPsiElement = element;
+	}
 
-    @Override
+	@Override
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-    public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("[" + getId() + "] " + getType() +  " ");
-        if (useHtml){
-            MarkupUtil.appendBold(builder, myPsiElement.toString());
-        } else {
-            builder.append(myPsiElement);
-        }
-        return builder.toString();
-    }
+	public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml)
+	{
+		final StringBuilder builder = new StringBuilder();
+		builder.append("[" + getId() + "] " + getType() + " ");
+		if(useHtml)
+		{
+			MarkupUtil.appendBold(builder, myPsiElement.toString());
+		}
+		else
+		{
+			builder.append(myPsiElement);
+		}
+		return builder.toString();
+	}
 
-    @NotNull
-    public PsiElement getPsiElement() {
-        return myPsiElement;
-    }
+	@NotNull
+	public PsiElement getPsiElement()
+	{
+		return myPsiElement;
+	}
 }

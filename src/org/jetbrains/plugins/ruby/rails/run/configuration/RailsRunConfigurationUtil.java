@@ -27,20 +27,23 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUti
  * @author: Roman Chernyatchik
  * @date: Apr 26, 2008
  */
-public class RailsRunConfigurationUtil {
-    /**
-     * Checks that SDK is valid Ruby kind SDK with Rails Support
-     * @param conf RunConfiguration
-     * @param isExecution Execution or validating mode
-     * @throws Exception Instection errors (ExecutionException or RuntimeException)
-     */
-    public static void inspectRailsSDK(final AbstractRubyRunConfiguration conf,
-                                       final boolean isExecution) throws Exception {
-        // Is Valid Ruby SDK
-        RubyRunConfigurationUtil.inspectSDK(conf, isExecution);
-        // SDK inspection
-        if (!RailsUtil.hasRailsSupportInSDK(conf.getSdk())) {
-            RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("sdk.error.no.rails.found"), isExecution);
-        }
-    }
+public class RailsRunConfigurationUtil
+{
+	/**
+	 * Checks that SDK is valid Ruby kind SDK with Rails Support
+	 *
+	 * @param conf        RunConfiguration
+	 * @param isExecution Execution or validating mode
+	 * @throws Exception Instection errors (ExecutionException or RuntimeException)
+	 */
+	public static void inspectRailsSDK(final AbstractRubyRunConfiguration conf, final boolean isExecution) throws Exception
+	{
+		// Is Valid Ruby SDK
+		RubyRunConfigurationUtil.inspectSDK(conf, isExecution);
+		// SDK inspection
+		if(!RailsUtil.hasRailsSupportInSDK(conf.getSdk()))
+		{
+			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message("sdk.error.no.rails.found"), isExecution);
+		}
+	}
 }

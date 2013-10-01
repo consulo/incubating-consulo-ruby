@@ -16,59 +16,66 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.scopes;
 
-import com.intellij.codeHighlighting.HighlightDisplayLevel;
-import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.psi.PsiElementVisitor;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
+import com.intellij.codeHighlighting.HighlightDisplayLevel;
+import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Jul 12, 2007
  */
-public class RubyScopesInspection extends LocalInspectionTool {
-    @NonNls
-    private static final String SHORT_NAME = "RubyLocalVar";
+public class RubyScopesInspection extends LocalInspectionTool
+{
+	@NonNls
+	private static final String SHORT_NAME = "RubyLocalVar";
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getGroupDisplayName() {
-        return RBundle.message("inspection.group.name");
-    }
+	@Nls
+	public String getGroupDisplayName()
+	{
+		return RBundle.message("inspection.group.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("inspection.scopes.name");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("inspection.scopes.name");
+	}
 
-    @Override
+	@Override
 	@NotNull
-    @NonNls
-    public String getShortName() {
-        return SHORT_NAME;
-    }
+	@NonNls
+	public String getShortName()
+	{
+		return SHORT_NAME;
+	}
 
-    @Override
-	public boolean isEnabledByDefault() {
-        return true;
-    }
+	@Override
+	public boolean isEnabledByDefault()
+	{
+		return true;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
-        return new RubyScopesVisitor(holder);
-    }
+	public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+	{
+		return new RubyScopesVisitor(holder);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public HighlightDisplayLevel getDefaultLevel() {
-        return HighlightDisplayLevel.WARNING;
-    }
+	public HighlightDisplayLevel getDefaultLevel()
+	{
+		return HighlightDisplayLevel.WARNING;
+	}
 }

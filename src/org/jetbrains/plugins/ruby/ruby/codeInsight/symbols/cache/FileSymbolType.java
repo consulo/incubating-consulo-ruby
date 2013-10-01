@@ -18,26 +18,27 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: oleg
-* @date: Oct 7, 2007
-*/
-public enum FileSymbolType {
-    MODIFIABLE,
+ *
+ * @author: oleg
+ * @date: Oct 7, 2007
+ */
+public enum FileSymbolType
+{
+	MODIFIABLE,
 
-// Built in types
-    BUILT_IN,
-    RAILS_BUILT_IN,
+	// Built in types
+	BUILT_IN,
+	RAILS_BUILT_IN,
 
-// Module layers
-    MODULE_LAYER,
-    RAILS_MODULE_LAYER,
+	// Module layers
+	MODULE_LAYER,
+	RAILS_MODULE_LAYER,
 
-// Rails specific layers
-    VENDOR_LAYER,
-    LIBS_LAYER,
-    MODELS_LAYER,
-    CONTROLLERS_AND_HELPERS_LAYER,
-    MAILERS_LAYER,
-    WEBSERVICES_LAYER
+	// Rails specific layers
+	VENDOR_LAYER,
+	LIBS_LAYER,
+	MODELS_LAYER,
+	CONTROLLERS_AND_HELPERS_LAYER,
+	MAILERS_LAYER,
+	WEBSERVICES_LAYER
 }

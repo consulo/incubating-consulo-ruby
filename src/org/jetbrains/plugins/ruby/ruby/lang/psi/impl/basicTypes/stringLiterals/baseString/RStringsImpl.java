@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.baseString;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 16.06.2006
  */
-public class RStringsImpl extends RPsiElementBase {
-    public RStringsImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RStringsImpl extends RPsiElementBase
+{
+	public RStringsImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
 }

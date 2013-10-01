@@ -24,5 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStrin
  * User: oleg
  * Date: 31.07.2006
  */
-public interface RHeredocValue extends RPsiElement, RStringLiteral {
+public interface RHeredocValue extends RPsiElement, RStringLiteral
+{
 }

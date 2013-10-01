@@ -18,23 +18,28 @@ package org.jetbrains.plugins.ruby.ruby.run;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: 24.08.2006
  */
-public class Output {
-        private String stdout;
-        private String stderr;
+public class Output
+{
+	private String stdout;
+	private String stderr;
 
-        public Output(String stdout, String stderr){
-            this.stdout = stdout;
-            this.stderr = stderr;
-        }
+	public Output(String stdout, String stderr)
+	{
+		this.stdout = stdout;
+		this.stderr = stderr;
+	}
 
-        public String getStdout() {
-            return stdout;
-        }
+	public String getStdout()
+	{
+		return stdout;
+	}
 
-        public String getStderr() {
-            return stderr;
-        }
+	public String getStderr()
+	{
+		return stderr;
+	}
 }

@@ -16,36 +16,43 @@
 
 package org.jetbrains.plugins.ruby;
 
-import com.intellij.CommonBundle;
-import com.intellij.reference.SoftReference;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.PropertyKey;
-
 import java.lang.ref.Reference;
 import java.util.ResourceBundle;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.PropertyKey;
+import com.intellij.CommonBundle;
+import com.intellij.reference.SoftReference;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 21.07.2006
  */
-public class RBundle {
-    private static Reference<ResourceBundle> ourBundle;
+public class RBundle
+{
+	private static Reference<ResourceBundle> ourBundle;
 
-    @NonNls
-    private static final String BUNDLE = "org.jetbrains.plugins.ruby.RBundle";
+	@NonNls
+	private static final String BUNDLE = "org.jetbrains.plugins.ruby.RBundle";
 
-    public static String message(@PropertyKey(resourceBundle = BUNDLE)String key, Object... params) {
-      return CommonBundle.message(getBundle(), key, params);
-    }
+	public static String message(@PropertyKey(resourceBundle = BUNDLE) String key, Object... params)
+	{
+		return CommonBundle.message(getBundle(), key, params);
+	}
 
-    private static ResourceBundle getBundle() {
-      ResourceBundle bundle = null;
-      if (ourBundle != null) bundle = ourBundle.get();
-      if (bundle == null) {
-        bundle = ResourceBundle.getBundle(BUNDLE);
-        ourBundle = new SoftReference<ResourceBundle>(bundle);
-      }
-      return bundle;
-    }
+	private static ResourceBundle getBundle()
+	{
+		ResourceBundle bundle = null;
+		if(ourBundle != null)
+		{
+			bundle = ourBundle.get();
+		}
+		if(bundle == null)
+		{
+			bundle = ResourceBundle.getBundle(BUNDLE);
+			ourBundle = new SoftReference<ResourceBundle>(bundle);
+		}
+		return bundle;
+	}
 }

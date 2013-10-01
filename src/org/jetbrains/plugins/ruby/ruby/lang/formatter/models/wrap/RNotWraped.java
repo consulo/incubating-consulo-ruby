@@ -25,5 +25,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap;
 /**
  * If some class implements this, there won`t be any wrap before
  */
-public interface RNotWraped {
+public interface RNotWraped
+{
 }

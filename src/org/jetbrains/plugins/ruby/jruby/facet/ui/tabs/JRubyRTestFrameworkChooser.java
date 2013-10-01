@@ -43,68 +43,75 @@ import com.intellij.openapi.options.ConfigurationException;
  * @date: Oct 20, 2007
  */
 
-public class JRubyRTestFrameworkChooser extends FacetEditorTab {
-    public JRubyRTestFrameworkChooser(@NotNull final RSupportPerModuleSettingsImpl myJRubyFacetConfiguration,
-                                      @NotNull final FacetEditorContext myEditorContext) {
-        this.myJRubyFacetConfiguration = myJRubyFacetConfiguration;
-        this.myEditorContext = myEditorContext;
-    }
+public class JRubyRTestFrameworkChooser extends FacetEditorTab
+{
+	public JRubyRTestFrameworkChooser(@NotNull final RSupportPerModuleSettingsImpl myJRubyFacetConfiguration, @NotNull final FacetEditorContext myEditorContext)
+	{
+		this.myJRubyFacetConfiguration = myJRubyFacetConfiguration;
+		this.myEditorContext = myEditorContext;
+	}
 
-    private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
-    private FacetEditorContext myEditorContext;
+	private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
+	private FacetEditorContext myEditorContext;
 
-    private TestFrameworkOptions myTestFramworkOptions;
+	private TestFrameworkOptions myTestFramworkOptions;
 
-    @Nls
-    public String getDisplayName() {
-        return RBundle.message("module.settings.dialog.test.framework.tab.title");
-    }
+	@Nls
+	public String getDisplayName()
+	{
+		return RBundle.message("module.settings.dialog.test.framework.tab.title");
+	}
 
-    public JComponent createComponent() {
-        final Module module = myEditorContext.getModule();
-        assert module != null;
+	public JComponent createComponent()
+	{
+		final Module module = myEditorContext.getModule();
+		assert module != null;
 
-        final boolean useRSpec = RSpecModuleSettings.getInstance(module).shouldUseRSpecTestFramework();
+		final boolean useRSpec = RSpecModuleSettings.getInstance(module).shouldUseRSpecTestFramework();
 
-        final boolean useTestUnit = myJRubyFacetConfiguration.shouldUseTestUnitTestFramework();
-        final RORSelectTestFrameworkPanel panel = new RORSelectTestFrameworkPanel(useRSpec, false, useTestUnit, module, false);
-        myTestFramworkOptions = panel;
-        return panel.getContentPane();
-    }
+		final boolean useTestUnit = myJRubyFacetConfiguration.shouldUseTestUnitTestFramework();
+		final RORSelectTestFrameworkPanel panel = new RORSelectTestFrameworkPanel(useRSpec, false, useTestUnit, module, false);
+		myTestFramworkOptions = panel;
+		return panel.getContentPane();
+	}
 
-    @Nullable
-    public Icon getIcon() {
-        return RSpecIcons.RUN_CONFIGURATION_ICON;
-    }
+	@Nullable
+	public Icon getIcon()
+	{
+		return RSpecIcons.RUN_CONFIGURATION_ICON;
+	}
 
-    public boolean isModified() {
-        final Module module = myEditorContext.getModule();
-        assert module != null;
+	public boolean isModified()
+	{
+		final Module module = myEditorContext.getModule();
+		assert module != null;
 
-        if (JRubyFacet.getInstance(module) == null) {
-            //New uncommitted JRuby facet
-            return true;
-        }
+		if(JRubyFacet.getInstance(module) == null)
+		{
+			//New uncommitted JRuby facet
+			return true;
+		}
 
-        final boolean shouldUseRSpec = RSpecModuleSettings.getInstance(module).shouldUseRSpecTestFramework();
-        //noinspection ConstantConditions
-        final RSupportPerModuleSettings settings = RModuleUtil.getRubySupportSettings(module);
-        assert settings != null;
-        final boolean shouldUseTestUnit = settings.shouldUseTestUnitTestFramework();
+		final boolean shouldUseRSpec = RSpecModuleSettings.getInstance(module).shouldUseRSpecTestFramework();
+		//noinspection ConstantConditions
+		final RSupportPerModuleSettings settings = RModuleUtil.getRubySupportSettings(module);
+		assert settings != null;
+		final boolean shouldUseTestUnit = settings.shouldUseTestUnitTestFramework();
 
-       // final String oldTestUnitRootUrl = JRubyModuleContentRootManager.getInstance(module).getUnitTestsRootUrl();
-      //  final String newTestUnitRootUrl = myTestFramworkOptions.getTestUnitRootUrl();
+		// final String oldTestUnitRootUrl = JRubyModuleContentRootManager.getInstance(module).getUnitTestsRootUrl();
+		//  final String newTestUnitRootUrl = myTestFramworkOptions.getTestUnitRootUrl();
 
        /* return myTestFramworkOptions != null
-               && !(shouldUseRSpec == myTestFramworkOptions.shouldUseRSpecFramework()
+			   && !(shouldUseRSpec == myTestFramworkOptions.shouldUseRSpecFramework()
                     && shouldUseTestUnit == myTestFramworkOptions.shouldUseTestUnitFramework()
                     && ((oldTestUnitRootUrl == null && newTestUnitRootUrl == null)
                         || (oldTestUnitRootUrl != null && oldTestUnitRootUrl.equals(newTestUnitRootUrl)))); */
 		return false;
-    }
+	}
 
-    @Override
-	public void apply() throws ConfigurationException {
+	@Override
+	public void apply() throws ConfigurationException
+	{
       /*  final Module module = myEditorContext.getModule();
         assert module != null;
 
@@ -139,13 +146,15 @@ public class JRubyRTestFrameworkChooser extends FacetEditorTab {
             }
             rootManager.setUnitTestsRootUrl(myTestFramworkOptions.getTestUnitRootUrl());
         }    */
-    }
+	}
 
-    @Override
-	public void reset() {
-    }
+	@Override
+	public void reset()
+	{
+	}
 
-    public void disposeUIResources() {
-        myTestFramworkOptions = null;
-    }
+	public void disposeUIResources()
+	{
+		myTestFramworkOptions = null;
+	}
 }

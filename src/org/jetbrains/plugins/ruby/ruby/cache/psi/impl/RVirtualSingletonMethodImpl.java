@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -26,30 +28,28 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMet
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  *
  * @author: oleg
  * @date: Oct 2, 2006
  */
-public class RVirtualSingletonMethodImpl extends RVirtualMethodImpl implements RVirtualSingletonMethod {
-    public RVirtualSingletonMethodImpl(@NotNull final RVirtualContainer parentContainer,
-                                       @NotNull final RVirtualName virtualName,
-                                       @NotNull final List<ArgumentInfo> argumentInfos,
-                                       final AccessModifier defaultChildAccessModifier,
-                                       final RFileInfo containingFileInfo) {
-        super(parentContainer, virtualName, argumentInfos, defaultChildAccessModifier, containingFileInfo);
-    }
+public class RVirtualSingletonMethodImpl extends RVirtualMethodImpl implements RVirtualSingletonMethod
+{
+	public RVirtualSingletonMethodImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName virtualName, @NotNull final List<ArgumentInfo> argumentInfos, final AccessModifier defaultChildAccessModifier, final RFileInfo containingFileInfo)
+	{
+		super(parentContainer, virtualName, argumentInfos, defaultChildAccessModifier, containingFileInfo);
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualSingletonMethod(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualSingletonMethod(this);
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.SINGLETON_METHOD;
-    }
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.SINGLETON_METHOD;
+	}
 }

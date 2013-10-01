@@ -43,109 +43,127 @@ import com.intellij.psi.PsiMethod;
  * @author: oleg
  * @date: Jun 27, 2007
  */
-public class RubyGutterInfo extends RubyLineMarkerInfo{
-    enum Mode{
-        OVERRIDE,
-        IMPLEMENT
-    }
-    private final Mode myMode;
-    private final List myElements;
-    private final Project myProject;
-    private final Symbol mySymbol;
-    private String myToolTip;
-    private static final String NEWLINE_AND_SPACES = "<br>&nbsp;&nbsp;&nbsp;";
+public class RubyGutterInfo extends RubyLineMarkerInfo
+{
+	enum Mode
+	{
+		OVERRIDE,
+		IMPLEMENT
+	}
 
-    public RubyGutterInfo(final Mode mode,
-                          @NotNull final Project project,
-                          @NotNull final Symbol symbol,
-                          @NotNull final List elements,
-                          int startOffset) {
-        super(startOffset, true);
-        myMode = mode;
-        myProject = project;
-        mySymbol = symbol;
-        myElements = elements;
-        assert !myElements.isEmpty();
+	private final Mode myMode;
+	private final List myElements;
+	private final Project myProject;
+	private final Symbol mySymbol;
+	private String myToolTip;
+	private static final String NEWLINE_AND_SPACES = "<br>&nbsp;&nbsp;&nbsp;";
 
-        createToolTip();
-    }
+	public RubyGutterInfo(final Mode mode, @NotNull final Project project, @NotNull final Symbol symbol, @NotNull final List elements, int startOffset)
+	{
+		super(startOffset, true);
+		myMode = mode;
+		myProject = project;
+		mySymbol = symbol;
+		myElements = elements;
+		assert !myElements.isEmpty();
 
-    private void createToolTip() {
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append(myMode == Mode.OVERRIDE ? RBundle.message("overrides") : RBundle.message("implements"));
-        buffer.append(MarkupConstants.SPACE);
-        MarkupUtil.appendBoldCode(buffer, mySymbol.getName());
-        buffer.append(MarkupConstants.SPACE).append(RBundle.message("in"));
+		createToolTip();
+	}
 
-        final LinkedHashSet<String> locations = new LinkedHashSet<String>();
-        for (Object element : myElements) {
-            // Here we process Ruby elements
-            if (element instanceof RVirtualStructuralElement){
-                locations.add(RContainerPresentationUtil.getLocation((RVirtualStructuralElement) element));
-            }
-            // Here we process overriden Java methods
-            if (element instanceof PsiMethod){
-                locations.add(((PsiMethod) element).getContainingClass().getQualifiedName());
-            }
-        }
+	private void createToolTip()
+	{
+		final StringBuilder buffer = new StringBuilder();
+		buffer.append(myMode == Mode.OVERRIDE ? RBundle.message("overrides") : RBundle.message("implements"));
+		buffer.append(MarkupConstants.SPACE);
+		MarkupUtil.appendBoldCode(buffer, mySymbol.getName());
+		buffer.append(MarkupConstants.SPACE).append(RBundle.message("in"));
 
-        final int size = locations.size();
-        for (String location : locations) {
-            if (size > 1){
-                buffer.append(NEWLINE_AND_SPACES);
-            } else {
-                buffer.append(MarkupConstants.SPACE);
-            }
-            buffer.append(location);
-        }
+		final LinkedHashSet<String> locations = new LinkedHashSet<String>();
+		for(Object element : myElements)
+		{
+			// Here we process Ruby elements
+			if(element instanceof RVirtualStructuralElement)
+			{
+				locations.add(RContainerPresentationUtil.getLocation((RVirtualStructuralElement) element));
+			}
+			// Here we process overriden Java methods
+			if(element instanceof PsiMethod)
+			{
+				locations.add(((PsiMethod) element).getContainingClass().getQualifiedName());
+			}
+		}
 
-        myToolTip = buffer.toString();
-    }
+		final int size = locations.size();
+		for(String location : locations)
+		{
+			if(size > 1)
+			{
+				buffer.append(NEWLINE_AND_SPACES);
+			}
+			else
+			{
+				buffer.append(MarkupConstants.SPACE);
+			}
+			buffer.append(location);
+		}
 
-    public Mode getMode() {
-        return myMode;
-    }
+		myToolTip = buffer.toString();
+	}
 
-    public List getElements() {
-        return myElements;
-    }
+	public Mode getMode()
+	{
+		return myMode;
+	}
 
-    public Project getProject() {
-        return myProject;
-    }
+	public List getElements()
+	{
+		return myElements;
+	}
 
-    @Override
+	public Project getProject()
+	{
+		return myProject;
+	}
+
+	@Override
 	@Nullable
-    public GutterIconRenderer createGutterRenderer() {
-        return new MyGutterIconRenderer();
-    }
+	public GutterIconRenderer createGutterRenderer()
+	{
+		return new MyGutterIconRenderer();
+	}
 
-    private class MyGutterIconRenderer extends GutterIconRenderer {
-        @Override
+	private class MyGutterIconRenderer extends GutterIconRenderer
+	{
+		@Override
 		@NotNull
-        public Icon getIcon() {
-            return myMode == Mode.OVERRIDE ? RubyIcons.RUBY_GUTTER_OVERRIDING : RubyIcons.RUBY_GUTTER_IMPLEMENTING;
-        }
+		public Icon getIcon()
+		{
+			return myMode == Mode.OVERRIDE ? RubyIcons.RUBY_GUTTER_OVERRIDING : RubyIcons.RUBY_GUTTER_IMPLEMENTING;
+		}
 
-        @Override
-		public AnAction getClickAction() {
-            return new MyNavigateAction();
-        }
+		@Override
+		public AnAction getClickAction()
+		{
+			return new MyNavigateAction();
+		}
 
-        @Override
-		public boolean isNavigateAction() {
-            return true;
-        }
+		@Override
+		public boolean isNavigateAction()
+		{
+			return true;
+		}
 
-        @Override
-		public String getTooltipText() {
-            return myToolTip;
-        }
+		@Override
+		public String getTooltipText()
+		{
+			return myToolTip;
+		}
 
-        @Override
-		public GutterIconRenderer.Alignment getAlignment() {
-            return Alignment.LEFT;
-        }
+		@Override
+		public GutterIconRenderer.Alignment getAlignment()
+		{
+			return Alignment.LEFT;
+		}
 
 		@Override
 		public boolean equals(Object o)
@@ -160,11 +178,13 @@ public class RubyGutterInfo extends RubyLineMarkerInfo{
 		}
 	}
 
-    private class MyNavigateAction extends AnAction {
-        @Override
-		public void actionPerformed(final AnActionEvent e) {
-            MouseEvent mouseEvent = (MouseEvent)e.getInputEvent();
-            RubyGutterNavigator.browse(mouseEvent, RubyGutterInfo.this);
-        }
-    }
+	private class MyNavigateAction extends AnAction
+	{
+		@Override
+		public void actionPerformed(final AnActionEvent e)
+		{
+			MouseEvent mouseEvent = (MouseEvent) e.getInputEvent();
+			RubyGutterNavigator.browse(mouseEvent, RubyGutterInfo.this);
+		}
+	}
 }

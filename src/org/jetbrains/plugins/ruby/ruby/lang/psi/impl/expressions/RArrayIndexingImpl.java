@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
+import java.util.ArrayList;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
@@ -29,50 +28,59 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RArrayIndexing;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
-
-import java.util.ArrayList;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 14.07.2005
  */
-public class RArrayIndexingImpl extends RPsiElementBase implements RArrayIndexing {
-    public RArrayIndexingImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RArrayIndexingImpl extends RPsiElementBase implements RArrayIndexing
+{
+	public RArrayIndexingImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RPsiElement getReciever() {
-        PsiElement object = getFirstChild();
-        return object instanceof RPsiElement ? (RPsiElement) object : null;
-    }
+	public RPsiElement getReciever()
+	{
+		PsiElement object = getFirstChild();
+		return object instanceof RPsiElement ? (RPsiElement) object : null;
+	}
 
-    public boolean isInDefinition() {
-         return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this)!=null;
-     }
+	public boolean isInDefinition()
+	{
+		return RAssignmentExpressionNavigator.getAssignmentByLeftPart(this) != null;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public PsiReference[] getReferences() {
-        final PsiElement lBracket = getChildByFilter(RubyTokenTypes.tfLBRACK, 0);
-        final PsiElement rBracket = getChildByFilter(RubyTokenTypes.tRBRACK, 0);
-        final String name = isInDefinition() ? RubyTokenTypes.tASET.toString() : RubyTokenTypes.tAREF.toString();
-        final ArrayList<PsiReference> refs = new ArrayList<PsiReference>();
-        if (lBracket != null) {
-            refs.add(new RQualifiedReference(getProject(), this, getReciever(), lBracket, RReference.Type.COLON_REF, name));
-        }
-        if (rBracket != null) {
-            refs.add(new RQualifiedReference(getProject(), this, getReciever(), rBracket, RReference.Type.COLON_REF, name));
-        }
-        return refs.toArray(new PsiReference[refs.size()]);
-    }
+	public PsiReference[] getReferences()
+	{
+		final PsiElement lBracket = getChildByFilter(RubyTokenTypes.tfLBRACK, 0);
+		final PsiElement rBracket = getChildByFilter(RubyTokenTypes.tRBRACK, 0);
+		final String name = isInDefinition() ? RubyTokenTypes.tASET.toString() : RubyTokenTypes.tAREF.toString();
+		final ArrayList<PsiReference> refs = new ArrayList<PsiReference>();
+		if(lBracket != null)
+		{
+			refs.add(new RQualifiedReference(getProject(), this, getReciever(), lBracket, RReference.Type.COLON_REF, name));
+		}
+		if(rBracket != null)
+		{
+			refs.add(new RQualifiedReference(getProject(), this, getReciever(), rBracket, RReference.Type.COLON_REF, name));
+		}
+		return refs.toArray(new PsiReference[refs.size()]);
+	}
 
-    @Override
+	@Override
 	@Nullable
-    public RListOfExpressions getValue() {
-        PsiElement list = getChildByFilter(RubyElementTypes.LIST_OF_EXPRESSIONS,0);
-        return list instanceof RListOfExpressions ? (RListOfExpressions) list : null;
-    }
+	public RListOfExpressions getValue()
+	{
+		PsiElement list = getChildByFilter(RubyElementTypes.LIST_OF_EXPRESSIONS, 0);
+		return list instanceof RListOfExpressions ? (RListOfExpressions) list : null;
+	}
 }

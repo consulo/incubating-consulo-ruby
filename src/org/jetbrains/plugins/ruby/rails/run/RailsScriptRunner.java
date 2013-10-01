@@ -37,72 +37,57 @@ import com.intellij.openapi.projectRoots.Sdk;
  * @author: Roman Chernyatchik
  * @date: Apr 16, 2008
  */
-public class RailsScriptRunner {
-     /**
-     * @param module           Commited module 
-     * @param processListener  Listener
-     * @param consoleFilters   Filters
-     * @param userActions      Action
-     * @param runInBackgroundThread  To Run in background
-     * @param consoleTitle     Title of console
-     * @param provider         Arguments provider
-     * @param descFactory      Content descriptor provider
-     */
-    public static void runRailsScriptInCosole(@NotNull final Module module,
-                                             @Nullable final ProcessListener processListener,
-                                             @Nullable final Filter[] consoleFilters,
-                                             @Nullable final AnAction[] userActions,
-                                             final boolean runInBackgroundThread,
-                                             @NotNull final String consoleTitle,
-                                             @NotNull final CommandLineArgumentsProvider provider,
-                                             @Nullable final RunContentDescriptorFactory descFactory) {
-        runRailsScriptInCosole(RModuleUtil.getModuleOrJRubyFacetSdk(module), module, processListener, consoleFilters, userActions,
-                              runInBackgroundThread, consoleTitle, provider,
-                              descFactory
-        );
-    }
+public class RailsScriptRunner
+{
+	/**
+	 * @param module                Commited module
+	 * @param processListener       Listener
+	 * @param consoleFilters        Filters
+	 * @param userActions           Action
+	 * @param runInBackgroundThread To Run in background
+	 * @param consoleTitle          Title of console
+	 * @param provider              Arguments provider
+	 * @param descFactory           Content descriptor provider
+	 */
+	public static void runRailsScriptInCosole(@NotNull final Module module, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String consoleTitle, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory)
+	{
+		runRailsScriptInCosole(RModuleUtil.getModuleOrJRubyFacetSdk(module), module, processListener, consoleFilters, userActions, runInBackgroundThread, consoleTitle, provider, descFactory);
+	}
 
-    /**
-     * @param sdk              SDK
-     * @param uncommitedModule Uncommited module (i.e. may be without SDK)
-     * @param processListener  Listener
-     * @param consoleFilters   Filters
-     * @param userActions      Action
-     * @param runInBackgroundThread  To Run in background
-     * @param consoleTitle     Title of console
-     * @param provider         Arguments provider
-     * @param descFactory      Content descriptor provider
-     */
-    public static void runRailsScriptInCosole(@Nullable final Sdk sdk, @NotNull final Module uncommitedModule,
-                                               @Nullable final ProcessListener processListener,
-                                               @Nullable final Filter[] consoleFilters,
-                                               @Nullable final AnAction[] userActions,
-                                               final boolean runInBackgroundThread,
-                                               @NotNull final String consoleTitle,
-                                               @NotNull final CommandLineArgumentsProvider provider,
-                                               @Nullable final RunContentDescriptorFactory descFactory
-    ) {
-        try {
-            validateModule(uncommitedModule);
-        } catch (ExecutionException e) {
-            RubyScriptRunner.showExecutionErrorDialog(e);
-            return;
-        }
+	/**
+	 * @param sdk                   SDK
+	 * @param uncommitedModule      Uncommited module (i.e. may be without SDK)
+	 * @param processListener       Listener
+	 * @param consoleFilters        Filters
+	 * @param userActions           Action
+	 * @param runInBackgroundThread To Run in background
+	 * @param consoleTitle          Title of console
+	 * @param provider              Arguments provider
+	 * @param descFactory           Content descriptor provider
+	 */
+	public static void runRailsScriptInCosole(@Nullable final Sdk sdk, @NotNull final Module uncommitedModule, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String consoleTitle, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory)
+	{
+		try
+		{
+			validateModule(uncommitedModule);
+		}
+		catch(ExecutionException e)
+		{
+			RubyScriptRunner.showExecutionErrorDialog(e);
+			return;
+		}
 
-        RubyScriptRunner.runRubyScriptInCosole(
-                              processListener, consoleFilters, userActions,
-                              runInBackgroundThread, consoleTitle, provider,
-                              descFactory,
-                              RailsFacetUtil.getRailsAppHomeDirPath(uncommitedModule),
-                              sdk,
-                              uncommitedModule.getProject());
-    }
+		RubyScriptRunner.runRubyScriptInCosole(processListener, consoleFilters, userActions, runInBackgroundThread, consoleTitle, provider, descFactory, RailsFacetUtil.getRailsAppHomeDirPath(uncommitedModule), sdk, uncommitedModule.getProject());
+	}
 
-    private static void validateModule(final Module module) throws ExecutionException {
-        if (module != null) {
-            if (!RModuleUtil.hasRubySupport(module)) {
-                throw new ExecutionException(RBundle.message("error.module.ror.valid.expected", module));
-            }
-        }
-    }
+	private static void validateModule(final Module module) throws ExecutionException
+	{
+		if(module != null)
+		{
+			if(!RModuleUtil.hasRubySupport(module))
+			{
+				throw new ExecutionException(RBundle.message("error.module.ror.valid.expected", module));
+			}
+		}
+	}
 }

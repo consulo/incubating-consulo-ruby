@@ -25,7 +25,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
  * User: oleg
  * Date: 26.07.2006
  */
-public class TRAILER  implements RubyTokenTypes {
+public class TRAILER implements RubyTokenTypes
+{
 /*
 trailer		: none
             | '\n'
@@ -33,8 +34,9 @@ trailer		: none
             ;
 */
 
-    public static void parse(final RBuilder builder){
-        builder.compareAndEat(tCOMMA);
-        builder.passEOLs();
-    }
+	public static void parse(final RBuilder builder)
+	{
+		builder.compareAndEat(tCOMMA);
+		builder.passEOLs();
+	}
 }

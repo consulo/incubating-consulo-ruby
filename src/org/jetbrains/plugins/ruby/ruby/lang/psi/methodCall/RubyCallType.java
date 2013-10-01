@@ -25,32 +25,36 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall;
 /**
  * Ruby defined functions
  */
-public enum RubyCallType {
-    RAISE_CALL,
-    REQUIRE_CALL, LOAD_CALL,
-    INCLUDE_CALL, EXTEND_CALL,
+public enum RubyCallType
+{
+	RAISE_CALL,
+	REQUIRE_CALL, LOAD_CALL,
+	INCLUDE_CALL, EXTEND_CALL,
 
-    ATTR_READER_CALL, ATTR_WRITER_CALL, ATTR_ACCESSOR_CALL,
-    ATTR_INTERNAL_CALL, CATTR_ACCESSOR_CALL,
-    PRIVATE_CALL, PUBLIC_CALL, PROTECTED_CALL,
-    IMPORT_CALL, INCLUDE_CLASS_CALL, INCLUDE_PACKAGE_CALL,
-    REQUIRE_GEM_CALL, GEM_CALL,
-    UNKNOWN;
+	ATTR_READER_CALL, ATTR_WRITER_CALL, ATTR_ACCESSOR_CALL,
+	ATTR_INTERNAL_CALL, CATTR_ACCESSOR_CALL,
+	PRIVATE_CALL, PUBLIC_CALL, PROTECTED_CALL,
+	IMPORT_CALL, INCLUDE_CLASS_CALL, INCLUDE_PACKAGE_CALL,
+	REQUIRE_GEM_CALL, GEM_CALL,
+	UNKNOWN;
 
-    public boolean isAttributeCall(){
-        return this == ATTR_ACCESSOR_CALL || 
-                this == ATTR_READER_CALL ||
-                this == ATTR_WRITER_CALL ||
-                this == ATTR_INTERNAL_CALL ||
-                this == CATTR_ACCESSOR_CALL;
+	public boolean isAttributeCall()
+	{
+		return this == ATTR_ACCESSOR_CALL ||
+				this == ATTR_READER_CALL ||
+				this == ATTR_WRITER_CALL ||
+				this == ATTR_INTERNAL_CALL ||
+				this == CATTR_ACCESSOR_CALL;
 
-    }
+	}
 
-    public boolean isGemCall() {
-        return this == REQUIRE_GEM_CALL || this == GEM_CALL;
-    }
+	public boolean isGemCall()
+	{
+		return this == REQUIRE_GEM_CALL || this == GEM_CALL;
+	}
 
-    public boolean isFileRef(){
-        return this == REQUIRE_CALL || this == LOAD_CALL;
-    }
+	public boolean isFileRef()
+	{
+		return this == REQUIRE_CALL || this == LOAD_CALL;
+	}
 }

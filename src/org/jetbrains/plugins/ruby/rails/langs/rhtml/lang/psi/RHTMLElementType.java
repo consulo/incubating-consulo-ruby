@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IXMLRHTMLElementType;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,31 +26,32 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IXMLRHTMLEleme
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public interface RHTMLElementType {
-    //RHTML Elements
+public interface RHTMLElementType
+{
+	//RHTML Elements
 
-    // Tag in RHTML Document
-    IElementType RHTML_XML_TAG = new IXMLRHTMLElementType("RHTML_XML_TAG");
+	// Tag in RHTML Document
+	IElementType RHTML_XML_TAG = new IXMLRHTMLElementType("RHTML_XML_TAG");
 
-    // RHTML Comment tag 
-    IElementType RHTML_COMMENT_ELEMENT = new IXMLRHTMLElementType("RHTML_COMMENT_ELEMENT");
+	// RHTML Comment tag
+	IElementType RHTML_COMMENT_ELEMENT = new IXMLRHTMLElementType("RHTML_COMMENT_ELEMENT");
 
-    // Ruby code in pure RHTML root
-    IElementType RHTML_RUBY_XML_TEXT = new IRHTMLElementType("RHTML_RUBY_XML_TEXT");
+	// Ruby code in pure RHTML root
+	IElementType RHTML_RUBY_XML_TEXT = new IRHTMLElementType("RHTML_RUBY_XML_TEXT");
 
-    // RHTML Document
-    IElementType RHTML_DOCUMENT = new IRHTMLElementType("RHTML_DOCUMENT");
+	// RHTML Document
+	IElementType RHTML_DOCUMENT = new IRHTMLElementType("RHTML_DOCUMENT");
 
-//    // <%= ... %>
-//    IElementType RHTML_EXPRESSION =
-//            RHTMLPsiUtil.createSimpleRubyBlockChameleon("RHTML_EXPRESSION",
-//                                               RHTMLTokenType.RHTML_EXPRESSION_START,
-//                                               RHTMLTokenType.RHTML_EXPRESSION_END, 3);
-//
-//    // <% ... %>
-//    IElementType RHTML_SCRIPTLET =
-//            RHTMLPsiUtil.createSimpleRubyBlockChameleon("RHTML_SCRIPTLET",
-//                                               RHTMLTokenType.RHTML_SCRIPTLET_START,
-//                                               RHTMLTokenType.RHTML_SCRIPTLET_END, 2);
+	//    // <%= ... %>
+	//    IElementType RHTML_EXPRESSION =
+	//            RHTMLPsiUtil.createSimpleRubyBlockChameleon("RHTML_EXPRESSION",
+	//                                               RHTMLTokenType.RHTML_EXPRESSION_START,
+	//                                               RHTMLTokenType.RHTML_EXPRESSION_END, 3);
+	//
+	//    // <% ... %>
+	//    IElementType RHTML_SCRIPTLET =
+	//            RHTMLPsiUtil.createSimpleRubyBlockChameleon("RHTML_SCRIPTLET",
+	//                                               RHTMLTokenType.RHTML_SCRIPTLET_START,
+	//                                               RHTMLTokenType.RHTML_SCRIPTLET_END, 2);
 
 }

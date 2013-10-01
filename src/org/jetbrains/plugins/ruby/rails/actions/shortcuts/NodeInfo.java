@@ -16,42 +16,48 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
-import javax.swing.*;
+import javax.swing.Icon;
 
 /**
  * Created by IntelliJ IDEA.
-*
-* @author: Roman Chernyatchik
-* @date: 24.03.2007
-*/
-abstract class NodeInfo<T> {
-    private final Icon myOpenIcon;
-    private final Icon myClosedIcon;
-    private final T myData;
-    private boolean myIsGroup;
+ *
+ * @author: Roman Chernyatchik
+ * @date: 24.03.2007
+ */
+abstract class NodeInfo<T>
+{
+	private final Icon myOpenIcon;
+	private final Icon myClosedIcon;
+	private final T myData;
+	private boolean myIsGroup;
 
-    public NodeInfo(final Icon openIcon, final Icon closedIcon, final T data, final boolean isGroup) {
-        myOpenIcon = openIcon;
-        myClosedIcon = closedIcon;
-        myData = data;
-        myIsGroup = isGroup;
-    }
+	public NodeInfo(final Icon openIcon, final Icon closedIcon, final T data, final boolean isGroup)
+	{
+		myOpenIcon = openIcon;
+		myClosedIcon = closedIcon;
+		myData = data;
+		myIsGroup = isGroup;
+	}
 
-    public abstract String getActionId();
+	public abstract String getActionId();
 
-    public Icon getOpenIcon() {
-        return myOpenIcon;
-    }
+	public Icon getOpenIcon()
+	{
+		return myOpenIcon;
+	}
 
-    public Icon getClosedIcon() {
-        return myClosedIcon;
-    }
+	public Icon getClosedIcon()
+	{
+		return myClosedIcon;
+	}
 
-    public T getData() {
-        return myData;
-    }
+	public T getData()
+	{
+		return myData;
+	}
 
-    public boolean isGroup() {
-        return myIsGroup;
-    }
+	public boolean isGroup()
+	{
+		return myIsGroup;
+	}
 }

@@ -23,6 +23,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.indent.RIndentCOMPS
  * User: oleg
  * Date: 21.01.2007
  */
-public interface RBraceCodeBlock extends RCodeBlock,
-        RIndentCOMPSTMT {
+public interface RBraceCodeBlock extends RCodeBlock, RIndentCOMPSTMT
+{
 }

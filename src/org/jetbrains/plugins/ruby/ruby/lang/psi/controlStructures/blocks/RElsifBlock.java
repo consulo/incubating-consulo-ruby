@@ -27,9 +27,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RConditionalSt
  * User: oleg
  * Date: 07.08.2006
  */
-public interface RElsifBlock extends RPsiElement, RConditionalStatement,
-        RWrapAndIndentCOMPSTMT, RWrapedAlways {
+public interface RElsifBlock extends RPsiElement, RConditionalStatement, RWrapAndIndentCOMPSTMT, RWrapedAlways
+{
 
-    @NotNull
-    RCompoundStatement getBody();
+	@NotNull
+	RCompoundStatement getBody();
 }

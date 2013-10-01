@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,11 +27,10 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
  * @author: Roman Chernyatchik
  * @date: 21.11.2006
  */
-public class RubyProjectPresentationUtil {
-    public static ItemPresentation getPresentation(final Project project) {
-        return new PresentationData(project.getName(),
-                                    project.getPresentableUrl(),
-                                    RailsIcons.RAILS_PROJECT_VIEW,
-                                    RailsIcons.RAILS_PROJECT_VIEW, null);
-    }
+public class RubyProjectPresentationUtil
+{
+	public static ItemPresentation getPresentation(final Project project)
+	{
+		return new PresentationData(project.getName(), project.getPresentableUrl(), RailsIcons.RAILS_PROJECT_VIEW, RailsIcons.RAILS_PROJECT_VIEW, null);
+	}
 }

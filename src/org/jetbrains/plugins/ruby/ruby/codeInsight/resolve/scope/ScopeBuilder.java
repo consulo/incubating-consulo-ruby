@@ -16,7 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import com.intellij.psi.PsiElement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl.RootScopeImpl;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl.ScopeImpl;
@@ -25,8 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RSelfAssingment
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-
-import java.util.*;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,77 +38,89 @@ import java.util.*;
  * @author: oleg
  * @date: May 4, 2007
  */
-public class ScopeBuilder {
+public class ScopeBuilder
+{
 
-    public static RootScope buildScope(@NotNull final ScopeHolder holder){
-        final RootScope rootScope = new RootScopeImpl(holder);
-        //noinspection unchecked
-        buildScope(rootScope, Collections.EMPTY_SET, holder, true);
-        rootScope.registerSubScope(holder, rootScope);
-        return rootScope;
-    }
+	public static RootScope buildScope(@NotNull final ScopeHolder holder)
+	{
+		final RootScope rootScope = new RootScopeImpl(holder);
+		//noinspection unchecked
+		buildScope(rootScope, Collections.EMPTY_SET, holder, true);
+		rootScope.registerSubScope(holder, rootScope);
+		return rootScope;
+	}
 
-    public static Scope buildScope(@NotNull final RootScope root,
-                                   @NotNull final Set<String> outerNames,
-                                   @NotNull final PseudoScopeHolder holder,
-                                   final boolean isRoot){
-        final Scope scope = isRoot ? root : new ScopeImpl(holder);
-        final ScopeVisitor scopeVisitor = new ScopeVisitor();
-        holder.acceptChildren(scopeVisitor);
+	public static Scope buildScope(@NotNull final RootScope root, @NotNull final Set<String> outerNames, @NotNull final PseudoScopeHolder holder, final boolean isRoot)
+	{
+		final Scope scope = isRoot ? root : new ScopeImpl(holder);
+		final ScopeVisitor scopeVisitor = new ScopeVisitor();
+		holder.acceptChildren(scopeVisitor);
 
-        for (RIdentifier identifier : scopeVisitor.getCandidates()) {
-            if (!outerNames.contains(identifier.getName())){
-                scope.processIdentifier(identifier);
-            }
-        }
-        final HashSet<String> names = new HashSet<String>(outerNames);
+		for(RIdentifier identifier : scopeVisitor.getCandidates())
+		{
+			if(!outerNames.contains(identifier.getName()))
+			{
+				scope.processIdentifier(identifier);
+			}
+		}
+		final HashSet<String> names = new HashSet<String>(outerNames);
 
-        names.addAll(scope.getScopeNames());
-        for (PseudoScopeHolder scopeHolder : scopeVisitor.getSubHolders()) {
-            final Scope childScope = buildScope(root, names, scopeHolder, false);
-            ((ScopeImpl) scope).addSubScope(childScope);
-            root.registerSubScope(scopeHolder, childScope);
-        }
-        return scope;
-    }
+		names.addAll(scope.getScopeNames());
+		for(PseudoScopeHolder scopeHolder : scopeVisitor.getSubHolders())
+		{
+			final Scope childScope = buildScope(root, names, scopeHolder, false);
+			((ScopeImpl) scope).addSubScope(childScope);
+			root.registerSubScope(scopeHolder, childScope);
+		}
+		return scope;
+	}
 
-    public static class ScopeVisitor extends RubyElementVisitor{
-        private List<PseudoScopeHolder> subHolders = new ArrayList<PseudoScopeHolder>();
-        private List<RIdentifier> candidates = new ArrayList<RIdentifier>();
+	public static class ScopeVisitor extends RubyElementVisitor
+	{
+		private List<PseudoScopeHolder> subHolders = new ArrayList<PseudoScopeHolder>();
+		private List<RIdentifier> candidates = new ArrayList<RIdentifier>();
 
-        @Override
-		public void visitRIdentifier(@NotNull final RIdentifier rIdentifier) {
-            if (rIdentifier.isParameter() ||
-                    RAssignmentExpressionNavigator.getAssignmentByLeftPart(rIdentifier)!=null ||
-                    RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rIdentifier)!=null){
-                candidates.add(rIdentifier);
-            }
-        }
+		@Override
+		public void visitRIdentifier(@NotNull final RIdentifier rIdentifier)
+		{
+			if(rIdentifier.isParameter() ||
+					RAssignmentExpressionNavigator.getAssignmentByLeftPart(rIdentifier) != null ||
+					RSelfAssingmentExpressionNavigator.getSelfAssignmentByLeftPart(rIdentifier) != null)
+			{
+				candidates.add(rIdentifier);
+			}
+		}
 
-        @Override
-		public void visitRBlockVariables(@NotNull final RBlockVariables blockVariables) {
-            for (RIdentifier identifier : blockVariables.getVariables()) {
-                candidates.add(identifier);
-            }
-        }
+		@Override
+		public void visitRBlockVariables(@NotNull final RBlockVariables blockVariables)
+		{
+			for(RIdentifier identifier : blockVariables.getVariables())
+			{
+				candidates.add(identifier);
+			}
+		}
 
-        @Override
-		public void visitElement(@NotNull final PsiElement element) {
-            if (element instanceof PseudoScopeHolder){
-                subHolders.add((PseudoScopeHolder) element);
-                return;
-            }
-            element.acceptChildren(this);
-        }
+		@Override
+		public void visitElement(@NotNull final PsiElement element)
+		{
+			if(element instanceof PseudoScopeHolder)
+			{
+				subHolders.add((PseudoScopeHolder) element);
+				return;
+			}
+			element.acceptChildren(this);
+		}
 
-        @NotNull
-        public List<PseudoScopeHolder> getSubHolders() {
-            return subHolders;
-        }
+		@NotNull
+		public List<PseudoScopeHolder> getSubHolders()
+		{
+			return subHolders;
+		}
 
-        @NotNull
-        public List<RIdentifier> getCandidates() {
-            return candidates;
-        }
-    }
+		@NotNull
+		public List<RIdentifier> getCandidates()
+		{
+			return candidates;
+		}
+	}
 }

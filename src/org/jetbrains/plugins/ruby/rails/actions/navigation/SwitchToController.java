@@ -16,6 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
+import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
+import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
+import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
@@ -29,13 +36,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiFile;
 import com.intellij.ui.awt.RelativePoint;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
-import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,85 +43,98 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
  * @author: Roman Chernyatchik
  * @date: Sep 4, 2007
  */
-public class SwitchToController extends EditorAction {
-    private static final String CANT_NAVIGATE = RBundle.message("codeInsight.rails.switch.to.controller.cant.navigate");
-    private static final String SWITCH_TO_CONTROLLER_TITLE = RBundle.message("codeInsight.rails.switch.to.controller.title");
+public class SwitchToController extends EditorAction
+{
+	private static final String CANT_NAVIGATE = RBundle.message("codeInsight.rails.switch.to.controller.cant.navigate");
+	private static final String SWITCH_TO_CONTROLLER_TITLE = RBundle.message("codeInsight.rails.switch.to.controller.title");
 
-    public SwitchToController() {
-        super(new Handler());
+	public SwitchToController()
+	{
+		super(new Handler());
 
-        final Presentation presentation = getTemplatePresentation();
-        presentation.setText(SWITCH_TO_CONTROLLER_TITLE);
-        presentation.setDescription(RBundle.message("codeInsight.rails.switch.to.controller.description"));
-        presentation.setIcon(RailsIcons.RAILS_VIEW_TO_CONTROLLER_MARKER);
-    }
+		final Presentation presentation = getTemplatePresentation();
+		presentation.setText(SWITCH_TO_CONTROLLER_TITLE);
+		presentation.setDescription(RBundle.message("codeInsight.rails.switch.to.controller.description"));
+		presentation.setIcon(RailsIcons.RAILS_VIEW_TO_CONTROLLER_MARKER);
+	}
 
-    protected static class Handler extends EditorActionHandler {
-        @Override
-		public void execute(Editor editor, DataContext dataContext) {
+	protected static class Handler extends EditorActionHandler
+	{
+		@Override
+		public void execute(Editor editor, DataContext dataContext)
+		{
 
-            // must be in rails module
-            final Module module = DataKeys.MODULE.getData(dataContext);
-            if (module == null || !RailsFacetUtil.hasRailsSupport(module)) {
-                cantNavigate();
-                return;
-            }
+			// must be in rails module
+			final Module module = DataKeys.MODULE.getData(dataContext);
+			if(module == null || !RailsFacetUtil.hasRailsSupport(module))
+			{
+				cantNavigate();
+				return;
+			}
 
-            PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
-            if (psiFile == null) {
-                cantNavigate();
-                return;
-            }
+			PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
+			if(psiFile == null)
+			{
+				cantNavigate();
+				return;
+			}
 
-            // must be in view file
-            final VirtualFile file = psiFile.getVirtualFile();
-            if (file == null || !ViewsConventions.isValidViewFileName(file.getName())
-                    || file.getParent() == null) {
-                cantNavigate();
-                return;
-            }
+			// must be in view file
+			final VirtualFile file = psiFile.getVirtualFile();
+			if(file == null || !ViewsConventions.isValidViewFileName(file.getName()) || file.getParent() == null)
+			{
+				cantNavigate();
+				return;
+			}
 
-            final RClass rClass = ControllersConventions.getControllerByViewFile(psiFile, module);
-            if (rClass == null) {
-                cantNavigate();
-                return;
-            }
+			final RClass rClass = ControllersConventions.getControllerByViewFile(psiFile, module);
+			if(rClass == null)
+			{
+				cantNavigate();
+				return;
+			}
 
-            if (!isSwitchToControllerEnabled(psiFile, module)) {
-                cantNavigate();
-                return;
-            }
+			if(!isSwitchToControllerEnabled(psiFile, module))
+			{
+				cantNavigate();
+				return;
+			}
 
-            final RelativePoint relativePoint = JBPopupFactory.getInstance().guessBestPopupLocation(dataContext);
-            if (relativePoint == null) {
-                cantNavigate();
-                return;
-            }
+			final RelativePoint relativePoint = JBPopupFactory.getInstance().guessBestPopupLocation(dataContext);
+			if(relativePoint == null)
+			{
+				cantNavigate();
+				return;
+			}
 
-            switchToController(module, psiFile);
-        }
+			switchToController(module, psiFile);
+		}
 
-        private void cantNavigate() {
-            Messages.showInfoMessage(CANT_NAVIGATE, SWITCH_TO_CONTROLLER_TITLE);
-        }
+		private void cantNavigate()
+		{
+			Messages.showInfoMessage(CANT_NAVIGATE, SWITCH_TO_CONTROLLER_TITLE);
+		}
 
-    }
+	}
 
-    @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-    public static boolean isSwitchToControllerEnabled(@NotNull final PsiFile file,
-                                                      @NotNull final Module module) {
-        return ViewsConventions.isPartialViewName(file.getName()) &&
-               ControllersConventions.getControllerByViewFile(file, module) != null;
-    }
+	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
+	public static boolean isSwitchToControllerEnabled(@NotNull final PsiFile file, @NotNull final Module module)
+	{
+		return ViewsConventions.isPartialViewName(file.getName()) && ControllersConventions.getControllerByViewFile(file, module) != null;
+	}
 
-    public static void switchToController(final Module module, final PsiFile file) {
-        final RClass rClass = ControllersConventions.getControllerByViewFile(file, module);
-        assert rClass !=null;
+	public static void switchToController(final Module module, final PsiFile file)
+	{
+		final RClass rClass = ControllersConventions.getControllerByViewFile(file, module);
+		assert rClass != null;
 
-        if (rClass instanceof Navigatable) {
-            ((Navigatable)rClass).navigate(true);
-        } else {
-            assert false;
-        }
-    }
+		if(rClass instanceof Navigatable)
+		{
+			((Navigatable) rClass).navigate(true);
+		}
+		else
+		{
+			assert false;
+		}
+	}
 }

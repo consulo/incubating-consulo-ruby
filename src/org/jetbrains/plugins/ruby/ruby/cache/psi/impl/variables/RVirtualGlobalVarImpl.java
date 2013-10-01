@@ -16,46 +16,52 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
+import java.io.Serializable;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 
-import java.io.Serializable;
-
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 22, 2007
  */
-public class RVirtualGlobalVarImpl extends RVirtualElementBase implements RVirtualGlobalVar, Serializable {
-    private String myText;
-    private RVirtualGlobalVarHolder myHolder;
+public class RVirtualGlobalVarImpl extends RVirtualElementBase implements RVirtualGlobalVar, Serializable
+{
+	private String myText;
+	private RVirtualGlobalVarHolder myHolder;
 
-    public RVirtualGlobalVarImpl(@NotNull final String text, @NotNull final RVirtualGlobalVarHolder holder) {
-        myText = text;
-        myHolder = holder;
-    }
+	public RVirtualGlobalVarImpl(@NotNull final String text, @NotNull final RVirtualGlobalVarHolder holder)
+	{
+		myText = text;
+		myHolder = holder;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public String getText() {
-        return myText;
-    }
+	public String getText()
+	{
+		return myText;
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RVirtualGlobalVarHolder getHolder() {
-        return myHolder;
-    }
+	public RVirtualGlobalVarHolder getHolder()
+	{
+		return myHolder;
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitElement(this);
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitElement(this);
+	}
 
-    public String toString() {
-        return myText;
-    }
+	public String toString()
+	{
+		return myText;
+	}
 }

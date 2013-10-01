@@ -16,14 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.FacetWizardStep;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
-
-import javax.swing.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,70 +33,79 @@ import java.awt.event.ItemListener;
  * @author: Roman Chernyatchik
  * @date: Aug 21, 2007
  */
-public class SelectTestFrameworkStep extends FacetWizardStep {
-    private Icon myIcon;
-    private RubyModuleBuilder mySettingsHolder;
-    private String myHelp;
-    private final SelectTestFrameworkPanel myForm;
+public class SelectTestFrameworkStep extends FacetWizardStep
+{
+	private Icon myIcon;
+	private RubyModuleBuilder mySettingsHolder;
+	private String myHelp;
+	private final SelectTestFrameworkPanel myForm;
 
-    public SelectTestFrameworkStep(final RubyModuleBuilder settingsHolder,
-                                   final Icon icon,
-                                   final String help) {
-        super();
-        myIcon = icon;
-        mySettingsHolder = settingsHolder;
-        myHelp = help;
+	public SelectTestFrameworkStep(final RubyModuleBuilder settingsHolder, final Icon icon, final String help)
+	{
+		super();
+		myIcon = icon;
+		mySettingsHolder = settingsHolder;
+		myHelp = help;
 
-        final RSpecApplicationSettings settings = RSpecApplicationSettings.getInstance();
+		final RSpecApplicationSettings settings = RSpecApplicationSettings.getInstance();
 
-        final boolean shouldUseRSpecFramework = settings.wizardRubyShouldUseRSpecFramework;
-        final boolean shouldUseTestUnit = settings.wizardRubyShouldUseTestUnitFramework;
+		final boolean shouldUseRSpecFramework = settings.wizardRubyShouldUseRSpecFramework;
+		final boolean shouldUseTestUnit = settings.wizardRubyShouldUseTestUnitFramework;
 
-        settingsHolder.enableTestUnitSupport(shouldUseTestUnit);
-        settingsHolder.enableRSpecSupport(shouldUseRSpecFramework);
+		settingsHolder.enableTestUnitSupport(shouldUseTestUnit);
+		settingsHolder.enableRSpecSupport(shouldUseRSpecFramework);
 
 
-        myForm = new SelectTestFrameworkPanel(new ItemListener() {
-            @Override
-			public void itemStateChanged(final ItemEvent e) {
-                fireStateChanged();
-            }
-        }, shouldUseTestUnit, shouldUseRSpecFramework);
-    }
+		myForm = new SelectTestFrameworkPanel(new ItemListener()
+		{
+			@Override
+			public void itemStateChanged(final ItemEvent e)
+			{
+				fireStateChanged();
+			}
+		}, shouldUseTestUnit, shouldUseRSpecFramework);
+	}
 
-    @Override
-	public Icon getIcon() {
-        return myIcon;
-    }
+	@Override
+	public Icon getIcon()
+	{
+		return myIcon;
+	}
 
-    @Override
-	public String getHelpId() {
-        return myHelp;
-    }
+	@Override
+	public String getHelpId()
+	{
+		return myHelp;
+	}
 
-    @Override
-	public JComponent getComponent() {
-        return myForm.getContentPane();
-    }
+	@Override
+	public JComponent getComponent()
+	{
+		return myForm.getContentPane();
+	}
 
-    @Override
-	public void updateStep() {
-        updateDataModel();
-    }
+	@Override
+	public void updateStep()
+	{
+		updateDataModel();
+	}
 
-    @Override
-	public void onStepLeaving() {
-        RSpecApplicationSettings.getInstance().wizardRubyShouldUseRSpecFramework = myForm.shouldUseRSpecFramework();
-    }
+	@Override
+	public void onStepLeaving()
+	{
+		RSpecApplicationSettings.getInstance().wizardRubyShouldUseRSpecFramework = myForm.shouldUseRSpecFramework();
+	}
 
-    @Override
-	public void updateDataModel() {
-        mySettingsHolder.enableRSpecSupport(myForm.shouldUseRSpecFramework());
-        mySettingsHolder.enableTestUnitSupport(myForm.shouldUseTestUnitFramework());
-    }
+	@Override
+	public void updateDataModel()
+	{
+		mySettingsHolder.enableRSpecSupport(myForm.shouldUseRSpecFramework());
+		mySettingsHolder.enableTestUnitSupport(myForm.shouldUseTestUnitFramework());
+	}
 
-    @Override
-	public boolean isStepVisible() {
-        return super.isStepVisible() && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
-    }
+	@Override
+	public boolean isStepVisible()
+	{
+		return super.isStepVisible() && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
+	}
 }

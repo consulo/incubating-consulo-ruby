@@ -23,9 +23,10 @@ package org.jetbrains.plugins.ruby.rails.facet.versions;
  * @date: Mar 13, 2008
  */
 
-public class JRailsFacetSupportProvider /*extends BaseRailsFacetSupportProvider<JRailsFacet> */{
+public class JRailsFacetSupportProvider /*extends BaseRailsFacetSupportProvider<JRailsFacet> */
+{
  /*   public JRailsFacetSupportProvider() {
-        super(JRailsFacetType.INSTANCE);
+		super(JRailsFacetType.INSTANCE);
     }
 
     @Nullable

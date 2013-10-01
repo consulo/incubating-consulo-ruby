@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RExpressionSubstitution;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class RExpressionSubstitutionImpl extends RPsiElementBase implements RExpressionSubstitution {
-    public RExpressionSubstitutionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RExpressionSubstitutionImpl extends RPsiElementBase implements RExpressionSubstitution
+{
+	public RExpressionSubstitutionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

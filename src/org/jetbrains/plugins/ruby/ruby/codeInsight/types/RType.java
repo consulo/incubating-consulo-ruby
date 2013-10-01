@@ -16,36 +16,38 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.REmptyType;
 
-import java.util.Collection;
-
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author: oleg
  * @date: Apr 13, 2008
  */
-public interface RType {
-    public static final RType NOT_TYPED = REmptyType.INSTANCE;
+public interface RType
+{
+	public static final RType NOT_TYPED = REmptyType.INSTANCE;
 
-    boolean isTyped();
+	boolean isTyped();
 
-    @Nullable
-    String getName();
+	@Nullable
+	String getName();
 
-    RType addMessage(@NotNull Message message);
+	RType addMessage(@NotNull Message message);
 
-    @NotNull
-    Collection<Message> getMessages();
+	@NotNull
+	Collection<Message> getMessages();
 
-    Collection<Message> getMessagesForName(@Nullable String name);
+	Collection<Message> getMessagesForName(@Nullable String name);
 
-    /**
-     * @param message Patern message
-     * @return true, if this can be matched by patterMessage
-     */
-    public boolean matchesMessage(@NotNull final Message message);
+	/**
+	 * @param message Patern message
+	 * @return true, if this can be matched by patterMessage
+	 */
+	public boolean matchesMessage(@NotNull final Message message);
 
 }

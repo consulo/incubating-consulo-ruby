@@ -16,16 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import com.intellij.lang.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RBinaryExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 28.04.2005
  */
-public class RMathBinExpressionImpl extends RBinaryExpressionBase implements RBinaryExpression {
-    public RMathBinExpressionImpl(ASTNode astNode) {
-        super(astNode);
-    }
+public class RMathBinExpressionImpl extends RBinaryExpressionBase implements RBinaryExpression
+{
+	public RMathBinExpressionImpl(ASTNode astNode)
+	{
+		super(astNode);
+	}
 }

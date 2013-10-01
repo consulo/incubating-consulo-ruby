@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -27,8 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,49 +36,53 @@ import javax.swing.*;
  * @author: oleg, Roman Chernyathcik
  * @date: Oct 2, 2006
  */
-public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl implements RVirtualClass {
+public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl implements RVirtualClass
+{
 
-    private RVirtualName myVirtualSuperClass;
+	private RVirtualName myVirtualSuperClass;
 
-    public RVirtualClassImpl(@NotNull final RVirtualContainer parentContainer,
-                             @NotNull final RVirtualName virtualName,
-                             @Nullable final RVirtualName virtualSuperClass,
-                             @NotNull final AccessModifier defaultChildAccessModifier,
-                             @NotNull final RFileInfo containingFileInfo) {
-        super(parentContainer, virtualName, defaultChildAccessModifier, containingFileInfo);
-        myVirtualSuperClass = virtualSuperClass;
-    }
+	public RVirtualClassImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName virtualName, @Nullable final RVirtualName virtualSuperClass, @NotNull final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	{
+		super(parentContainer, virtualName, defaultChildAccessModifier, containingFileInfo);
+		myVirtualSuperClass = virtualSuperClass;
+	}
 
 
-    @Override
+	@Override
 	@NotNull
-    public ItemPresentation getPresentation() {
-        return RClassPresentationUtil.getPresentation(this);
-    }
+	public ItemPresentation getPresentation()
+	{
+		return RClassPresentationUtil.getPresentation(this);
+	}
 
-    @Nullable
-    public Icon getIcon(final int flags) {
-        return RClassPresentationUtil.getIcon(this, flags);
-    }
-
-    @Override
 	@Nullable
-    public RVirtualName getVirtualSuperClass() {
-        return myVirtualSuperClass;
-    }
+	public Icon getIcon(final int flags)
+	{
+		return RClassPresentationUtil.getIcon(this, flags);
+	}
 
-    @Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor) {
-        visitor.visitRVirtualClass(this);
-    }
+	@Override
+	@Nullable
+	public RVirtualName getVirtualSuperClass()
+	{
+		return myVirtualSuperClass;
+	}
 
-    public String toString() {
-        return "class [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " +  getFullName() +
-                (myVirtualSuperClass!=null ? " < [" + ((RVirtualElementBase) myVirtualSuperClass).getId()  + "] "+ myVirtualSuperClass.getFullName() : "");
-    }
+	@Override
+	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	{
+		visitor.visitRVirtualClass(this);
+	}
 
-    @Override
-	public StructureType getType() {
-        return StructureType.CLASS;
-    }
+	public String toString()
+	{
+		return "class [" + ((RVirtualElementBase) getVirtualName()).getId() + "] " + getFullName() +
+				(myVirtualSuperClass != null ? " < [" + ((RVirtualElementBase) myVirtualSuperClass).getId() + "] " + myVirtualSuperClass.getFullName() : "");
+	}
+
+	@Override
+	public StructureType getType()
+	{
+		return StructureType.CLASS;
+	}
 }

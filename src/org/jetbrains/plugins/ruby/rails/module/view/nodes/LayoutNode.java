@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,15 +27,18 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
  * @author: Roman Chernyatchik
  * @date: 16.10.2006
  */
-public class LayoutNode extends SimpleFileNode {
+public class LayoutNode extends SimpleFileNode
+{
 
-    public LayoutNode(final Module module, final VirtualFile myFile) {
-        super(module, myFile);
-    }
+	public LayoutNode(final Module module, final VirtualFile myFile)
+	{
+		super(module, myFile);
+	}
 
-    @Override
+	@Override
 	@NotNull
-    public RailsProjectNodeComparator.NodeType getType() {
-        return RailsProjectNodeComparator.NodeType.LAYOUT;
-    }
+	public RailsProjectNodeComparator.NodeType getType()
+	{
+		return RailsProjectNodeComparator.NodeType.LAYOUT;
+	}
 }

@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,22 +26,31 @@ import java.io.File;
  * @author: Roman Chernyatchik
  * @date: Dec 1, 2007
  */
-public class FileUtil {
-    public static boolean checkIfIsExistingFile(@NotNull final String path) {
-        final File file = new File(path);
-        try {
-            return file.exists() && file.isFile();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+public class FileUtil
+{
+	public static boolean checkIfIsExistingFile(@NotNull final String path)
+	{
+		final File file = new File(path);
+		try
+		{
+			return file.exists() && file.isFile();
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
 
-    public static boolean checkIfIsExistingDirectory(@NotNull final String path) {
-        final File file = new File(path);
-        try {
-            return file.exists() && file.isDirectory();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+	public static boolean checkIfIsExistingDirectory(@NotNull final String path)
+	{
+		final File file = new File(path);
+		try
+		{
+			return file.exists() && file.isDirectory();
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
 }

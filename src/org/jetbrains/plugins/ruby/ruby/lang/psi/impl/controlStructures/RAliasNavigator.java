@@ -16,36 +16,41 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 29, 2007
  */
-public class RAliasNavigator {
+public class RAliasNavigator
+{
 
-    @Nullable
-    public static RAliasStatement getAliasByOldName(@NotNull final RPsiElement element){
-        final PsiElement parent = element.getParent();
-        if (!(parent instanceof RAliasStatement)){
-            return null;
-        }
-        final RAliasStatement alias = (RAliasStatement) parent;
-        return alias.getPsiOldName() == element ? alias : null;
-    }
+	@Nullable
+	public static RAliasStatement getAliasByOldName(@NotNull final RPsiElement element)
+	{
+		final PsiElement parent = element.getParent();
+		if(!(parent instanceof RAliasStatement))
+		{
+			return null;
+		}
+		final RAliasStatement alias = (RAliasStatement) parent;
+		return alias.getPsiOldName() == element ? alias : null;
+	}
 
-    @Nullable
-    public static RAliasStatement getAliasByNewName(@NotNull final RPsiElement element){
-        final PsiElement parent = element.getParent();
-        if (!(parent instanceof RAliasStatement)){
-            return null;
-        }
-        final RAliasStatement alias = (RAliasStatement) parent;
-        return alias.getPsiNewName() == element ? alias : null;
-    }
+	@Nullable
+	public static RAliasStatement getAliasByNewName(@NotNull final RPsiElement element)
+	{
+		final PsiElement parent = element.getParent();
+		if(!(parent instanceof RAliasStatement))
+		{
+			return null;
+		}
+		final RAliasStatement alias = (RAliasStatement) parent;
+		return alias.getPsiNewName() == element ? alias : null;
+	}
 }

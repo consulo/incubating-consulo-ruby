@@ -12,7 +12,7 @@
  * rights and limitations under the License.
  *
  * Copyright (C) 2007 Ola Bini <ola@ologix.com>
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either of the GNU General Public License Version 2 or later (the "GPL"),
  * or the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -30,28 +30,34 @@ package org.jetbrains.jvaymlb.tokens;
 /**
  * @author <a href="mailto:ola.bini@ki.se">Ola Bini</a>
  */
-public class AliasToken extends Token {
-    private String value;
+public class AliasToken extends Token
+{
+	private String value;
 
-    public AliasToken(final int start, final int end) {
-        super(start, end);
-    }
+	public AliasToken(final int start, final int end)
+	{
+		super(start, end);
+	}
 
-    public AliasToken(final String value, final int start, final int end) {
-        super(start, end);
-        this.value = value;
-    }
+	public AliasToken(final String value, final int start, final int end)
+	{
+		super(start, end);
+		this.value = value;
+	}
 
-    @Override
-	public void setValue(final Object value) {
-        this.value = (String)value;
-    }
+	@Override
+	public void setValue(final Object value)
+	{
+		this.value = (String) value;
+	}
 
-    public String getValue() {
-        return this.value;
-    }
+	public String getValue()
+	{
+		return this.value;
+	}
 
-    public String toString() {
-        return "#<" + this.getClass().getName() + " value=\"" + value + "\">";
-    }
+	public String toString()
+	{
+		return "#<" + this.getClass().getName() + " value=\"" + value + "\">";
+	}
 }// AliasToken

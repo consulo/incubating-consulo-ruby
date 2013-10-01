@@ -25,7 +25,8 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep;
  * @date: Mar 15, 2008
  */
 //TODO Remove me after JRails UI will be completed!
-public abstract class FacetWizardStep extends ModuleWizardStep {
-  public static final FacetWizardStep[] EMPTY_ARRAY = new FacetWizardStep[0];
+public abstract class FacetWizardStep extends ModuleWizardStep
+{
+	public static final FacetWizardStep[] EMPTY_ARRAY = new FacetWizardStep[0];
 }
 

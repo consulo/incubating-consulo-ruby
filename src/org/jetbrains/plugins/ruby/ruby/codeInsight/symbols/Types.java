@@ -22,223 +22,100 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
  * @author: oleg
  * @date: Jun 13, 2007
  */
-public class Types {
+public class Types
+{
 
-    public static TypeSet EMPTY_CONTEXT_RESOLVE_TYPES = new TypeSet(
-            Type.INSTANCE_METHOD,
-            Type.CLASS_METHOD,
-            Type.ALIAS,
+	public static TypeSet EMPTY_CONTEXT_RESOLVE_TYPES = new TypeSet(Type.INSTANCE_METHOD, Type.CLASS_METHOD, Type.ALIAS,
 
-            Type.MODULE,
-            Type.CLASS, Type.JAVA_PROXY_CLASS,
-            Type.CONSTANT,
-            Type.GLOBAL_VARIABLE,
+			Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.CONSTANT, Type.GLOBAL_VARIABLE,
 
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD,
+			Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD,
 
-// Field readers and writers
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR,
-// for Rails
-            Type.NOT_DEFINED
-    );
+			// Field readers and writers
+			Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR,
+			// for Rails
+			Type.NOT_DEFINED);
 
-    // The same as EMPTY_CONTEXT_RESOLVE_TYPES, but with fields
-    public static TypeSet EMPTY_CONTEXT_AUTOCOMPLETE_TYPES = new TypeSet(
-            Type.INSTANCE_METHOD,
-            Type.CLASS_METHOD,
-            Type.ALIAS,
+	// The same as EMPTY_CONTEXT_RESOLVE_TYPES, but with fields
+	public static TypeSet EMPTY_CONTEXT_AUTOCOMPLETE_TYPES = new TypeSet(Type.INSTANCE_METHOD, Type.CLASS_METHOD, Type.ALIAS,
 
-            Type.MODULE,
-            Type.CLASS, Type.JAVA_PROXY_CLASS,
-            Type.CONSTANT,
-            Type.GLOBAL_VARIABLE,
+			Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.CONSTANT, Type.GLOBAL_VARIABLE,
 
-            Type.INSTANCE_FIELD,
-            Type.CLASS_INSTANCE_FIELD,
-            Type.CLASS_FIELD,
+			Type.INSTANCE_FIELD, Type.CLASS_INSTANCE_FIELD, Type.CLASS_FIELD,
 
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD,
+			Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD,
 
-// Field readers and writers
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR,
-// for Rails
-            Type.ATTRIBUTE,
-            Type.NOT_DEFINED
-    );
+			// Field readers and writers
+			Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR,
+			// for Rails
+			Type.ATTRIBUTE, Type.NOT_DEFINED);
 
-    public static TypeSet TOP_LEVEL_AUTOCOMPLETE_TYPES = new TypeSet(
-            Type.INSTANCE_METHOD,
-            Type.CLASS_METHOD,
-            Type.ALIAS,
+	public static TypeSet TOP_LEVEL_AUTOCOMPLETE_TYPES = new TypeSet(Type.INSTANCE_METHOD, Type.CLASS_METHOD, Type.ALIAS,
 
-            Type.MODULE,
-            Type.CLASS, Type.JAVA_PROXY_CLASS,
-            Type.CONSTANT,
-            Type.GLOBAL_VARIABLE,
+			Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.CONSTANT, Type.GLOBAL_VARIABLE,
 
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD
-    );
+			Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD);
 
-    public static TypeSet REFERENCE_AUTOCOMPLETE_TYPES = new TypeSet(
-            Type.CLASS_METHOD,
-            Type.INSTANCE_METHOD,
-            Type.ALIAS,
+	public static TypeSet REFERENCE_AUTOCOMPLETE_TYPES = new TypeSet(Type.CLASS_METHOD, Type.INSTANCE_METHOD, Type.ALIAS,
 
-// Field readers and writers
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR,
+			// Field readers and writers
+			Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR,
 
-// Local variables concerned types
-            Type.CALL_ACCESS,
-            Type.CONSTANT_ACCESS,
-            Type.FIELD_WRITE_ACCESS,
+			// Local variables concerned types
+			Type.CALL_ACCESS, Type.CONSTANT_ACCESS, Type.FIELD_WRITE_ACCESS,
 
-            Type.MODULE,
-            Type.CLASS, Type.JAVA_PROXY_CLASS,
-            Type.CONSTANT,
+			Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.CONSTANT,
 
-// Field readers and writers
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR,
+			// Field readers and writers
+			Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR,
 
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD
-    );
+			Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD);
 
-    public static TypeSet OBJECT_SUPERCLASSES = new TypeSet(
-            Type.MODULE,
-            Type.CLASS,
-            Type.LOCAL_VARIABLE);
+	public static TypeSet OBJECT_SUPERCLASSES = new TypeSet(Type.MODULE, Type.CLASS, Type.LOCAL_VARIABLE);
 
-    public static TypeSet FIELDS = new TypeSet(
-            Type.INSTANCE_FIELD,
-            Type.CLASS_INSTANCE_FIELD,
-            Type.CLASS_FIELD);
+	public static TypeSet FIELDS = new TypeSet(Type.INSTANCE_FIELD, Type.CLASS_INSTANCE_FIELD, Type.CLASS_FIELD);
 
-    public static TypeSet MODULE_OR_CLASS = new TypeSet(
-            Type.MODULE,
-            Type.CLASS,
-            Type.JAVA_PROXY_CLASS,
-            Type.JAVA_CLASS);
+	public static TypeSet MODULE_OR_CLASS = new TypeSet(Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.JAVA_CLASS);
 
-    public static TypeSet MODULE_OR_CLASS_OR_CONSTANT = new TypeSet(
-            Type.MODULE,
-            Type.CLASS,
-            Type.JAVA_PROXY_CLASS,
-            Type.JAVA_CLASS,
-            Type.CONSTANT
-    );
+	public static TypeSet MODULE_OR_CLASS_OR_CONSTANT = new TypeSet(Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.JAVA_CLASS, Type.CONSTANT);
 
-    public static TypeSet METHODS = new TypeSet(
-            Type.INSTANCE_METHOD,
-            Type.CLASS_METHOD,
-            Type.JAVA_METHOD
-    );
+	public static TypeSet METHODS = new TypeSet(Type.INSTANCE_METHOD, Type.CLASS_METHOD, Type.JAVA_METHOD);
 
-    public static TypeSet ATTR_METHODS = new TypeSet(
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR
-    );
+	public static TypeSet ATTR_METHODS = new TypeSet(Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR);
 
-    public static TypeSet METHODS_LIKE = new TypeSet(
-            Type.INSTANCE_METHOD,
-            Type.CLASS_METHOD,
-            Type.JAVA_METHOD,
-            Type.ALIAS,
+	public static TypeSet METHODS_LIKE = new TypeSet(Type.INSTANCE_METHOD, Type.CLASS_METHOD, Type.JAVA_METHOD, Type.ALIAS,
 
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR,
+			Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR,
 
-            Type.CALL_ACCESS,
-            Type.FIELD_WRITE_ACCESS
-    );
+			Type.CALL_ACCESS, Type.FIELD_WRITE_ACCESS);
 
-    public static TypeSet ARGS = new TypeSet(
-            Type.ARG_ARRAY,
-            Type.ARG_BLOCK,
-            Type.ARG_PREDEFINED,
-            Type.ARG_SIMPLE
-    );
+	public static TypeSet ARGS = new TypeSet(Type.ARG_ARRAY, Type.ARG_BLOCK, Type.ARG_PREDEFINED, Type.ARG_SIMPLE);
 
-    public static TypeSet STATIC_TYPES = new TypeSet(
-            Type.CLASS_METHOD,
+	public static TypeSet STATIC_TYPES = new TypeSet(Type.CLASS_METHOD,
 
-            Type.MODULE,
-            Type.CLASS, Type.JAVA_PROXY_CLASS,
-            Type.CONSTANT,
-            Type.GLOBAL_VARIABLE,
+			Type.MODULE, Type.CLASS, Type.JAVA_PROXY_CLASS, Type.CONSTANT, Type.GLOBAL_VARIABLE,
 
-            Type.CLASS_INSTANCE_FIELD,
-            Type.CLASS_FIELD,
+			Type.CLASS_INSTANCE_FIELD, Type.CLASS_FIELD,
 
-// Java is static and instance
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD,
+			// Java is static and instance
+			Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD,
 
-// for Rails
-            Type.NOT_DEFINED
-    );
+			// for Rails
+			Type.NOT_DEFINED);
 
-    public static TypeSet INSTANCE_TYPES = new TypeSet(
-            Type.INSTANCE_METHOD,
-            Type.ALIAS,
+	public static TypeSet INSTANCE_TYPES = new TypeSet(Type.INSTANCE_METHOD, Type.ALIAS,
 
-            Type.INSTANCE_FIELD,
+			Type.INSTANCE_FIELD,
 
-// Java is static and instance
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD,
+			// Java is static and instance
+			Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD,
 
-// Field readers and writers
-            Type.FIELD_READER,
-            Type.FIELD_WRITER,
-            Type.ATTR_INTERNAL,
-            Type.CATTR_ACCESSOR,
-// for Rails
-            Type.NOT_DEFINED
-    );
+			// Field readers and writers
+			Type.FIELD_READER, Type.FIELD_WRITER, Type.ATTR_INTERNAL, Type.CATTR_ACCESSOR,
+			// for Rails
+			Type.NOT_DEFINED);
 
-    public static TypeSet JAVA = new TypeSet(
-            Type.JAVA_CLASS,
-            Type.JAVA_METHOD,
-            Type.JAVA_PACKAGE,
-            Type.JAVA_FIELD
-    );
+	public static TypeSet JAVA = new TypeSet(Type.JAVA_CLASS, Type.JAVA_METHOD, Type.JAVA_PACKAGE, Type.JAVA_FIELD);
 
-    public static TypeSet ALIAS_OBJECTS = new TypeSet(
-            Type.CLASS,
-            Type.MODULE, 
-            Type.INSTANCE_METHOD, Type.CLASS_METHOD,
-            Type.CONSTANT,
-            Type.GLOBAL_VARIABLE, Type.INSTANCE_FIELD, Type.CLASS_FIELD, Type.CLASS_INSTANCE_FIELD,
-            Type.JAVA_CLASS, Type.JAVA_PROXY_CLASS);
+	public static TypeSet ALIAS_OBJECTS = new TypeSet(Type.CLASS, Type.MODULE, Type.INSTANCE_METHOD, Type.CLASS_METHOD, Type.CONSTANT, Type.GLOBAL_VARIABLE, Type.INSTANCE_FIELD, Type.CLASS_FIELD, Type.CLASS_INSTANCE_FIELD, Type.JAVA_CLASS, Type.JAVA_PROXY_CLASS);
 }

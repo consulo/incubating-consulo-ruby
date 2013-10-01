@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
+import java.util.List;
+
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.ClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.ControllerClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,36 +35,39 @@ import java.util.List;
  * @author: Roman Chernyatchik
  * @date: 17.10.2006
  */
-public class ControllerSubFolderNode extends FolderNode {
-    public ControllerSubFolderNode(final Module module, final VirtualFile dir,
-                                   final SimpleNode parent) {
-        super(module, dir, parent);
-    }
+public class ControllerSubFolderNode extends FolderNode
+{
+	public ControllerSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent)
+	{
+		super(module, dir, parent);
+	}
 
 
-    public ControllerSubFolderNode(final Module module, final VirtualFile dir,
-                                   final SimpleNode parent, final PresentationData data) {
-        super(module, dir, parent, data);
-    }
+	public ControllerSubFolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data)
+	{
+		super(module, dir, parent, data);
+	}
 
 
-    @Override
-	protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file,
-                                           final String url) {
-        if (ControllersConventions.isApplicationControllerFile(file, getModule())) {
-            return;
-        }
-        super.processNotDirectoryFile(nodes, file, url);
-    }
+	@Override
+	protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file, final String url)
+	{
+		if(ControllersConventions.isApplicationControllerFile(file, getModule()))
+		{
+			return;
+		}
+		super.processNotDirectoryFile(nodes, file, url);
+	}
 
-    @Override
-	protected ClassNode createClassNode(final RVirtualClass rClass,
-                                       final RFileInfo rFileInfo) {
-        final Module module = getModule();
+	@Override
+	protected ClassNode createClassNode(final RVirtualClass rClass, final RFileInfo rFileInfo)
+	{
+		final Module module = getModule();
 
-        if (ControllersConventions.isControllerClass(rClass, module)) {
-            return new ControllerClassNode(module, rClass, rFileInfo);
-        }
-        return new ClassNode(module, rClass, rFileInfo);
-    }
+		if(ControllersConventions.isControllerClass(rClass, module))
+		{
+			return new ControllerClassNode(module, rClass, rFileInfo);
+		}
+		return new ClassNode(module, rClass, rFileInfo);
+	}
 }

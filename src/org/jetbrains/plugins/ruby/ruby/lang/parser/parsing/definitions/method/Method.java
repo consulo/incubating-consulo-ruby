@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -28,16 +27,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.VARIABLE;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class Method implements RubyTokenTypes {
+public class Method implements RubyTokenTypes
+{
 
 /*
-        | kDEF fname
+		| kDEF fname
           f_arglist
           bodystmt
           kEND
@@ -47,82 +48,91 @@ public class Method implements RubyTokenTypes {
           kEND
 */
 
-    @NotNull
-    public static IElementType parse(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        builder.match(kDEF);
+		builder.match(kDEF);
 
-        IElementType definitionType = parseMethodNameAndGetType(builder);
+		IElementType definitionType = parseMethodNameAndGetType(builder);
 
-        F_ARGLIST.parse(builder);
+		F_ARGLIST.parse(builder);
 
-        BODYSTMT.parse(builder);
+		BODYSTMT.parse(builder);
 
-        builder.matchIgnoreEOL(kEND);
+		builder.matchIgnoreEOL(kEND);
 
-        statementMarker.done(definitionType);
-        return definitionType;
-    }
+		statementMarker.done(definitionType);
+		return definitionType;
+	}
 
 
-    //  [singleton dot_or_colon] fname
-    @NotNull
-    private static IElementType parseMethodNameAndGetType(final RBuilder builder) {
-        boolean singletonSeen = false;
+	//  [singleton dot_or_colon] fname
+	@NotNull
+	private static IElementType parseMethodNameAndGetType(final RBuilder builder)
+	{
+		boolean singletonSeen = false;
 
-        RMarker methodNameMarker = builder.mark();
+		RMarker methodNameMarker = builder.mark();
 
-        IElementType result = parseSingleton(builder);
-        if (builder.compare(BNF.tDOT_OR_COLON)){
-            if (result==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
-            builder.match(BNF.tDOT_OR_COLON);
-            singletonSeen = true;
-        } else {
-            methodNameMarker.rollbackTo();
-            methodNameMarker = builder.mark();
-        }
+		IElementType result = parseSingleton(builder);
+		if(builder.compare(BNF.tDOT_OR_COLON))
+		{
+			if(result == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
+			builder.match(BNF.tDOT_OR_COLON);
+			singletonSeen = true;
+		}
+		else
+		{
+			methodNameMarker.rollbackTo();
+			methodNameMarker = builder.mark();
+		}
 
-        if (FNAME.parse(builder)==RubyElementTypes.EMPTY_INPUT){
-            builder.error(ErrorMsg.expected(RBundle.message("parsing.method.name")));
-        }
-        methodNameMarker.done(RubyElementTypes.METHOD_NAME);
-        return (singletonSeen)? RubyElementTypes.SINGLETON_METHOD :
-                    RubyElementTypes.METHOD;
-    }
+		if(FNAME.parse(builder) == RubyElementTypes.EMPTY_INPUT)
+		{
+			builder.error(ErrorMsg.expected(RBundle.message("parsing.method.name")));
+		}
+		methodNameMarker.done(RubyElementTypes.METHOD_NAME);
+		return (singletonSeen) ? RubyElementTypes.SINGLETON_METHOD : RubyElementTypes.METHOD;
+	}
 
-/*
-    singleton	: var_ref
-            | '('  expr opt_nl ')'
-            ;
-    var_ref : variable;
+	/*
+		singleton	: var_ref
+				| '('  expr opt_nl ')'
+				;
+		var_ref : variable;
 
-*/
-    @NotNull
-    private static IElementType parseSingleton(final RBuilder builder){
-        RMarker statementMarker = builder.mark();
+	*/
+	@NotNull
+	private static IElementType parseSingleton(final RBuilder builder)
+	{
+		RMarker statementMarker = builder.mark();
 
-        if (builder.compareAndEat(BNF.tLPARENS)){
+		if(builder.compareAndEat(BNF.tLPARENS))
+		{
 
-            EXPR.parse(builder);
-            builder.compareAndEat(tEOL);
+			EXPR.parse(builder);
+			builder.compareAndEat(tEOL);
 
-            builder.match(tRPAREN);
-            statementMarker.done(RubyElementTypes.CLASS_OBJECT);
-            return RubyElementTypes.CLASS_OBJECT;
+			builder.match(tRPAREN);
+			statementMarker.done(RubyElementTypes.CLASS_OBJECT);
+			return RubyElementTypes.CLASS_OBJECT;
 
-        }
+		}
 
-        IElementType result = VARIABLE.parse(builder);
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            statementMarker.done(RubyElementTypes.CLASS_OBJECT);
-            return RubyElementTypes.CLASS_OBJECT;
-        }
+		IElementType result = VARIABLE.parse(builder);
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			statementMarker.done(RubyElementTypes.CLASS_OBJECT);
+			return RubyElementTypes.CLASS_OBJECT;
+		}
 
-        statementMarker.rollbackTo();
-        return RubyElementTypes.EMPTY_INPUT;
-    }
+		statementMarker.rollbackTo();
+		return RubyElementTypes.EMPTY_INPUT;
+	}
 
 }

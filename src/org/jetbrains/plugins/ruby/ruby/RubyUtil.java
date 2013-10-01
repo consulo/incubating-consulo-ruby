@@ -28,34 +28,35 @@ import com.intellij.openapi.module.ModuleUtilCore;
  * @author: Roman Chernyatchik
  * @date: 30.09.2006
  */
-public class RubyUtil {
-    @NonNls
-    public static final String MODULES_PATH_SEPARATOR = "::";
-    @NonNls
-    public static final char RUBY_PATH_SEPARATOR = '/';
+public class RubyUtil
+{
+	@NonNls
+	public static final String MODULES_PATH_SEPARATOR = "::";
+	@NonNls
+	public static final char RUBY_PATH_SEPARATOR = '/';
 
-    /**
-     * This arguments uses to obtain correct output when ruby script
-     * should be run in console.
-     */
-    @NonNls
-    protected static String RUN_IN_CONSOLE_HACK = "STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)";
-    @NonNls
-    public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS = {}
-            /*SystemInfo.isWindows
+	/**
+	 * This arguments uses to obtain correct output when ruby script
+	 * should be run in console.
+	 */
+	@NonNls
+	protected static String RUN_IN_CONSOLE_HACK = "STDOUT.sync=true;STDERR.sync=true;load($0=ARGV.shift)";
+	@NonNls
+	public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS = {}
+			/*SystemInfo.isWindows
                 ? new String[]{"-e", "\"" + RUN_IN_CONSOLE_HACK + "\""}
                 : new String[]{"-e", RUN_IN_CONSOLE_HACK}*/;
-    public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS_NO_SHIFT
-            = {}/*new String[]{"-e", "STDOUT.sync=true;STDERR.sync=true"}*/;
+	public static String[] RUN_IN_CONSOLE_HACK_ARGUMENTS_NO_SHIFT = {}/*new String[]{"-e", "STDOUT.sync=true;STDERR.sync=true"}*/;
 
-    /**
-     * Check if module is Ruby module
-     *
-     * @param module some module
-     * @return true if is ruby module.
-     */
-    public static boolean isRubyModuleType(@Nullable final Module module) {
-        return module != null && ModuleUtilCore.getExtension(module, RubyModuleExtension.class) != null;
-    }
+	/**
+	 * Check if module is Ruby module
+	 *
+	 * @param module some module
+	 * @return true if is ruby module.
+	 */
+	public static boolean isRubyModuleType(@Nullable final Module module)
+	{
+		return module != null && ModuleUtilCore.getExtension(module, RubyModuleExtension.class) != null;
+	}
 
 }

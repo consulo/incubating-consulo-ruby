@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.annotations.Transient;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,55 +31,62 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
  * @date: Oct 11, 2007
  */
 @State(
-        name = "RApplicationSettings",
-        storages = {
-        @Storage(
-                id = "main",
-                file = "$APP_CONFIG$/rubysettings.xml"
-        )} 
+		name = "RApplicationSettings",
+		storages = {
+				@Storage(
+						id = "main",
+						file = "$APP_CONFIG$/rubysettings.xml"
+				)
+		}
 )
-public class RApplicationSettings implements PersistentStateComponent<RApplicationSettings> {
-    //Output console
-    public boolean useConsoleOutputRubyStacktraceFilter = true;
-    public boolean useConsoleOutputOtherFilters = true;
-    public boolean useConsoleColorMode = true;
+public class RApplicationSettings implements PersistentStateComponent<RApplicationSettings>
+{
+	//Output console
+	public boolean useConsoleOutputRubyStacktraceFilter = true;
+	public boolean useConsoleOutputOtherFilters = true;
+	public boolean useConsoleColorMode = true;
 
-    // Project view
-    public boolean useRubySpecificProjectView = false;
+	// Project view
+	public boolean useRubySpecificProjectView = false;
 
-    //Other params
-    @Transient
-    private boolean myJsSupportEnabled = false;
+	//Other params
+	@Transient
+	private boolean myJsSupportEnabled = false;
 
-    //Enviroment
-    public String additionalEnvPATH = TextUtil.EMPTY_STRING;
+	//Enviroment
+	public String additionalEnvPATH = TextUtil.EMPTY_STRING;
 
-    public static RApplicationSettings getInstance() {
-        return ServiceManager.getService(RApplicationSettings.class);
-    }
+	public static RApplicationSettings getInstance()
+	{
+		return ServiceManager.getService(RApplicationSettings.class);
+	}
 
-    @Override
-	public RApplicationSettings getState() {
-        return this;
-    }
+	@Override
+	public RApplicationSettings getState()
+	{
+		return this;
+	}
 
-    @Override
-	public void loadState(@NotNull final RApplicationSettings settings) {
-        additionalEnvPATH = settings.additionalEnvPATH;
+	@Override
+	public void loadState(@NotNull final RApplicationSettings settings)
+	{
+		additionalEnvPATH = settings.additionalEnvPATH;
 
-        //console filters
-        useConsoleOutputRubyStacktraceFilter = settings.useConsoleOutputRubyStacktraceFilter;
-        useConsoleOutputOtherFilters = settings.useConsoleOutputOtherFilters;
+		//console filters
+		useConsoleOutputRubyStacktraceFilter = settings.useConsoleOutputRubyStacktraceFilter;
+		useConsoleOutputOtherFilters = settings.useConsoleOutputOtherFilters;
 
-        // project view
-        useRubySpecificProjectView = settings.useRubySpecificProjectView;
-    }
+		// project view
+		useRubySpecificProjectView = settings.useRubySpecificProjectView;
+	}
 
-    public boolean isJsSupportEnabled() {
-        return myJsSupportEnabled;
-    }
+	public boolean isJsSupportEnabled()
+	{
+		return myJsSupportEnabled;
+	}
 
-    public void setJsSupportEnabled(final boolean jsSupportEnabled) {
-        myJsSupportEnabled = jsSupportEnabled;
-    }
+	public void setJsSupportEnabled(final boolean jsSupportEnabled)
+	{
+		myJsSupportEnabled = jsSupportEnabled;
+	}
 }

@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,22 +35,24 @@ import javax.swing.*;
 /**
  * For ".self" etc
  */
-public class RObjectClassPresentationUtil {
+public class RObjectClassPresentationUtil
+{
 
-    public static Icon getIcon() {
-        return RubyIcons.RUBY_OBJECT_CLASS_NODE;
-    }
+	public static Icon getIcon()
+	{
+		return RubyIcons.RUBY_OBJECT_CLASS_NODE;
+	}
 
-    @NotNull
-    public static ItemPresentation getPresentation(@NotNull final RVirtualObjectClass objectClass) {
-        final Icon icon = getIcon();
-        return new PresentationData(objectClass.getPresentableName(),
-                TextUtil.wrapInParens(getLocation(objectClass)),
-                icon, icon, null);
-    }
+	@NotNull
+	public static ItemPresentation getPresentation(@NotNull final RVirtualObjectClass objectClass)
+	{
+		final Icon icon = getIcon();
+		return new PresentationData(objectClass.getPresentableName(), TextUtil.wrapInParens(getLocation(objectClass)), icon, icon, null);
+	}
 
-    private static String getLocation(RVirtualObjectClass objectClass) {
-        return RContainerPresentationUtil.getLocation(objectClass);
-    }
+	private static String getLocation(RVirtualObjectClass objectClass)
+	{
+		return RContainerPresentationUtil.getLocation(objectClass);
+	}
 
 }

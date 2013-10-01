@@ -36,303 +36,349 @@ import com.intellij.util.text.CharArrayCharSequence;
  * @date: 04.04.2007
  */
 
-public class RHTMLColorsPageHighlightingLexer extends Lexer {
-    private static final int HTML_MASK = 0x7FE0;
-    private static final int RHTML_MASK = 0x1F;
-    private static final int QUEUE_MASK = 0x3FFF8000;
+public class RHTMLColorsPageHighlightingLexer extends Lexer
+{
+	private static final int HTML_MASK = 0x7FE0;
+	private static final int RHTML_MASK = 0x1F;
+	private static final int QUEUE_MASK = 0x3FFF8000;
 
-    private static final int QUEUE_SHIFT = 15;
-    private static final int HTML_SHIFT = 5;
+	private static final int QUEUE_SHIFT = 15;
+	private static final int HTML_SHIFT = 5;
 
-    private final static int HTML_COMMENT_STATE = _HtmlLexer.COMMENT;
-
-
-    private int myTokenStart;
-    private int myTokenEnd;
-    private int myState;
-
-    private IElementType myTokenType;
-    private Queue<Token> myCommentTokensQueue;
-
-    private RHTMLRubyLexer myRHTMLRubyLexer = new RHTMLRubyLexer(true);
-    private Lexer myHtmlLexer = new HtmlHighlightingLexer();
-    private Lexer myCurHTMLLexer = null; // myHTMLLexer
-
-    public void start(char[] buffer) {
-        start(buffer, 0, buffer.length, 0);
-    }
-
-    public void start(char[] buffer, int startOffset, int endOffset) {
-        start(buffer, startOffset, endOffset, 0);
-    }
-
-    public void start(char[] buffer, int startOffset, int endOffset, int initialState) {
-        start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
-    }
+	private final static int HTML_COMMENT_STATE = _HtmlLexer.COMMENT;
 
 
-    /**
-     * Packs rhtml lexer state and html lexer state in one integer.
-     * @param rSt rhtml lexer state
-     * @param hSt html lexer state
-     * @return Packed state
-     */
-    private int packState(final int rSt, final int hSt) {
-        return packRhtmlState(rSt) | packHtmlState(hSt);
-    }
+	private int myTokenStart;
+	private int myTokenEnd;
+	private int myState;
 
-    /**
-     * Packs rhtml lexer state to a special format
-     * @param rSt rhtml lexer state
-     * @return Packed state
-     */
-    private int packRhtmlState(final int rSt) {
-        /**
-         * WARNING: rst must be limited by 3 bites
-         */
-        return rSt & RHTML_MASK;
-    }
+	private IElementType myTokenType;
+	private Queue<Token> myCommentTokensQueue;
 
-    /**
-     * Unpacks rhtml lexer state from packed format
-     * @param state lexer state
-     * @return Unpacked state
-     */
-    private int unpackRhtmlState(final int state) {
-        return state & RHTML_MASK;
-    }
+	private RHTMLRubyLexer myRHTMLRubyLexer = new RHTMLRubyLexer(true);
+	private Lexer myHtmlLexer = new HtmlHighlightingLexer();
+	private Lexer myCurHTMLLexer = null; // myHTMLLexer
 
-    /**
-     * Packs html lexer state to a special format
-     * @param hSt html lexer state
-     * @return Packed state
-     */
-    private int packHtmlState(final int hSt) {
-        return (hSt << HTML_SHIFT) & HTML_MASK;
-    }
+	public void start(char[] buffer)
+	{
+		start(buffer, 0, buffer.length, 0);
+	}
 
-    /**
-     * Unpacks html lexer state from packed format
-     * @param state lexer state
-     * @return unpacked state
-     */
-    private int unpackHtmlState(final int state) {
-        return (state & HTML_MASK) >> HTML_SHIFT;
-    }
+	public void start(char[] buffer, int startOffset, int endOffset)
+	{
+		start(buffer, startOffset, endOffset, 0);
+	}
+
+	public void start(char[] buffer, int startOffset, int endOffset, int initialState)
+	{
+		start(new CharArrayCharSequence(buffer), startOffset, endOffset, initialState);
+	}
 
 
+	/**
+	 * Packs rhtml lexer state and html lexer state in one integer.
+	 *
+	 * @param rSt rhtml lexer state
+	 * @param hSt html lexer state
+	 * @return Packed state
+	 */
+	private int packState(final int rSt, final int hSt)
+	{
+		return packRhtmlState(rSt) | packHtmlState(hSt);
+	}
 
-    @Override
-	public void start(final CharSequence buffer,
-                      final int startOffset, final int endOffset, final int initialState) {
-        myRHTMLRubyLexer.start(buffer, startOffset, endOffset, unpackRhtmlState(initialState));
+	/**
+	 * Packs rhtml lexer state to a special format
+	 *
+	 * @param rSt rhtml lexer state
+	 * @return Packed state
+	 */
+	private int packRhtmlState(final int rSt)
+	{
+		/**
+		 * WARNING: rst must be limited by 3 bites
+		 */
+		return rSt & RHTML_MASK;
+	}
 
-        myCommentTokensQueue = new LinkedList<Token>();
-        myTokenStart = myTokenEnd = startOffset;
-        myTokenType = null;
+	/**
+	 * Unpacks rhtml lexer state from packed format
+	 *
+	 * @param state lexer state
+	 * @return Unpacked state
+	 */
+	private int unpackRhtmlState(final int state)
+	{
+		return state & RHTML_MASK;
+	}
 
-        myState = initialState;
+	/**
+	 * Packs html lexer state to a special format
+	 *
+	 * @param hSt html lexer state
+	 * @return Packed state
+	 */
+	private int packHtmlState(final int hSt)
+	{
+		return (hSt << HTML_SHIFT) & HTML_MASK;
+	}
 
-        setupHTMLLexer();
-    }
-
-    @Override
-	public CharSequence getBufferSequence() {
-        return myRHTMLRubyLexer.getBufferSequence();
-    }
-
-    @Override
-	public int getState() {
-        locateToken();
-        return myState | ((myCommentTokensQueue.size() << QUEUE_SHIFT) & QUEUE_MASK);  //myHtmlLexer.getState()
-    }
-
-
-    private void locateToken() {
-        if (myTokenType != null) {
-            return;
-        }
-        myTokenStart = myTokenEnd;
-
-        final Token queuedToken = myCommentTokensQueue.peek();
-        if (queuedToken != null) {
-            myTokenType = queuedToken.tokenType;
-            myTokenEnd = queuedToken.tokenEnd;
-
-            /**
-             * Determine state:
-             * We are in html comment tokens, thus html tokens may be only
-             * RHTMLTokenTypeEx.XML_COMMENT_CHARACTERS and state = HTML_COMMENT_STATE
-             */
-             myState = packHtmlState(HTML_COMMENT_STATE) | (packRhtmlState(queuedToken.rhtmlLexerState));
-            return;
-        }
-
-        myTokenType = myRHTMLRubyLexer.getTokenType();
-        if (myTokenType == null) {
-            // e.g. whole text was lexed.
-            return;
-        }
-
-        //current rhtml state
-        final int rSt = myRHTMLRubyLexer.getState();
-
-        if (myTokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML) {
-            myTokenType = myCurHTMLLexer.getTokenType();
-            myTokenEnd = myCurHTMLLexer.getTokenEnd();
-            //Determines state
-            myState = packState(rSt, myCurHTMLLexer.getState());
-
-            //If in HTML comment, then add it!
-            if (myTokenType == RHTMLTokenType.XML_COMMENT_START) {
-                //Eat whole HTML comment till XML_COMMENT_CLOSE_TAG
-                fedHtmlCommentQueue();
-            }
-        } else {
-            myTokenEnd = myRHTMLRubyLexer.getTokenEnd();
-            //Determines state: use current rhtml state and last html state
-            myState = packState(rSt, unpackHtmlState(myState));
-        }
-    }
+	/**
+	 * Unpacks html lexer state from packed format
+	 *
+	 * @param state lexer state
+	 * @return unpacked state
+	 */
+	private int unpackHtmlState(final int state)
+	{
+		return (state & HTML_MASK) >> HTML_SHIFT;
+	}
 
 
-    private void createAndOfferToken(final Lexer lexer, final IElementType tokenType) {
-        Token token = new Token(myRHTMLRubyLexer.getState(), tokenType,
-                                lexer.getTokenStart(), lexer.getTokenEnd());
-        myCommentTokensQueue.offer(token);
-    }
+	@Override
+	public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState)
+	{
+		myRHTMLRubyLexer.start(buffer, startOffset, endOffset, unpackRhtmlState(initialState));
 
-    private void fedHtmlCommentQueue() {
-        IElementType tokenType;
+		myCommentTokensQueue = new LinkedList<Token>();
+		myTokenStart = myTokenEnd = startOffset;
+		myTokenType = null;
 
-        int prevState = myState;
-        myState = packState(unpackRhtmlState(myState), HTML_COMMENT_STATE);
+		myState = initialState;
 
-        //Put current token into Queue (for advance() method)
-        createAndOfferToken(myCurHTMLLexer, myCurHTMLLexer.getTokenType());
+		setupHTMLLexer();
+	}
 
-        do {
-            advanceWithoutCommentQueue();
-            tokenType = myRHTMLRubyLexer.getTokenType();
-            if (tokenType == null) {
-                break;
-            }
-            if (tokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML) {
-                tokenType = myCurHTMLLexer.getTokenType();
+	@Override
+	public CharSequence getBufferSequence()
+	{
+		return myRHTMLRubyLexer.getBufferSequence();
+	}
 
-                //Exit if comment has been ended
-                if (tokenType == RHTMLTokenType.XML_COMMENT_END) {
-                    break;
-                }
+	@Override
+	public int getState()
+	{
+		locateToken();
+		return myState | ((myCommentTokensQueue.size() << QUEUE_SHIFT) & QUEUE_MASK);  //myHtmlLexer.getState()
+	}
 
-                //If it is another HTML lexem it should be COMMENT_CHARACTERS
-                //because we are in html comment block;
-                createAndOfferToken(myCurHTMLLexer, RHTMLTokenType.XML_COMMENT_CHARACTERS);
-            } else {
-                //insert ruby code as is.
-                createAndOfferToken(myRHTMLRubyLexer, tokenType);
-            }
-        } while (true);
 
-        myState = prevState;
-    }
+	private void locateToken()
+	{
+		if(myTokenType != null)
+		{
+			return;
+		}
+		myTokenStart = myTokenEnd;
 
-    @Override
-	public IElementType getTokenType() {
-        locateToken();
-        return myTokenType;
-    }
+		final Token queuedToken = myCommentTokensQueue.peek();
+		if(queuedToken != null)
+		{
+			myTokenType = queuedToken.tokenType;
+			myTokenEnd = queuedToken.tokenEnd;
 
-    @Override
-	public int getTokenStart() {
-        locateToken();
-        return myTokenStart;
-    }
+			/**
+			 * Determine state:
+			 * We are in html comment tokens, thus html tokens may be only
+			 * RHTMLTokenTypeEx.XML_COMMENT_CHARACTERS and state = HTML_COMMENT_STATE
+			 */
+			myState = packHtmlState(HTML_COMMENT_STATE) | (packRhtmlState(queuedToken.rhtmlLexerState));
+			return;
+		}
 
-    @Override
-	public int getTokenEnd() {
-        locateToken();
-        return myTokenEnd;
-    }
+		myTokenType = myRHTMLRubyLexer.getTokenType();
+		if(myTokenType == null)
+		{
+			// e.g. whole text was lexed.
+			return;
+		}
 
-    @Override
-	public void advance() {
-        myTokenType = null;
-        if (myCommentTokensQueue.poll() == null) {
-            advanceWithoutCommentQueue();
-        }
-    }
+		//current rhtml state
+		final int rSt = myRHTMLRubyLexer.getState();
 
-    private void advanceWithoutCommentQueue() {
-        IElementType tokenType = myRHTMLRubyLexer.getTokenType();
-        if (tokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML) {
-            myCurHTMLLexer.advance();
-            if (myCurHTMLLexer.getTokenType() != null) {
-                return;
-            }
-        }
-        myRHTMLRubyLexer.advance();
-        setupHTMLLexer();
-    }
+		if(myTokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML)
+		{
+			myTokenType = myCurHTMLLexer.getTokenType();
+			myTokenEnd = myCurHTMLLexer.getTokenEnd();
+			//Determines state
+			myState = packState(rSt, myCurHTMLLexer.getState());
 
-    private void setupHTMLLexer() {
-        while (true) {
-            IElementType tokenType = myRHTMLRubyLexer.getTokenType();
-            if (tokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML) {
-                myCurHTMLLexer = myHtmlLexer;
-            } else {
-                return;
-            }
+			//If in HTML comment, then add it!
+			if(myTokenType == RHTMLTokenType.XML_COMMENT_START)
+			{
+				//Eat whole HTML comment till XML_COMMENT_CLOSE_TAG
+				fedHtmlCommentQueue();
+			}
+		}
+		else
+		{
+			myTokenEnd = myRHTMLRubyLexer.getTokenEnd();
+			//Determines state: use current rhtml state and last html state
+			myState = packState(rSt, unpackHtmlState(myState));
+		}
+	}
 
-            myCurHTMLLexer.start(myRHTMLRubyLexer.getBufferSequence(),
-                                 myRHTMLRubyLexer.getTokenStart(),
-                                 myRHTMLRubyLexer.getTokenEnd(),
-                                 unpackHtmlState(myState));
-            if (myCurHTMLLexer.getTokenType() != null) {
-                return;
-            }
-            myRHTMLRubyLexer.advance();
-        }
-    }
 
-    private static class MyState implements LexerState {
-        public Queue<Token> queue;
+	private void createAndOfferToken(final Lexer lexer, final IElementType tokenType)
+	{
+		Token token = new Token(myRHTMLRubyLexer.getState(), tokenType, lexer.getTokenStart(), lexer.getTokenEnd());
+		myCommentTokensQueue.offer(token);
+	}
 
-        public int state;
-        public int start;
+	private void fedHtmlCommentQueue()
+	{
+		IElementType tokenType;
 
-        public MyState(final Queue<Token> queue,
-                       final int state, final int start) {
-            this.queue = queue;
-            this.state = state;
-            this.start = start;
-        }
+		int prevState = myState;
+		myState = packState(unpackRhtmlState(myState), HTML_COMMENT_STATE);
 
-        @Override
-		public short intern() {
-            return 0;
-        }
-    }
+		//Put current token into Queue (for advance() method)
+		createAndOfferToken(myCurHTMLLexer, myCurHTMLLexer.getTokenType());
 
-    private static class Position implements LexerPosition {
-        private final LexerPosition myHTMLPosition;
-        private final LexerPosition myRhtmlPosition;
-        private MyState myState;
+		do
+		{
+			advanceWithoutCommentQueue();
+			tokenType = myRHTMLRubyLexer.getTokenType();
+			if(tokenType == null)
+			{
+				break;
+			}
+			if(tokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML)
+			{
+				tokenType = myCurHTMLLexer.getTokenType();
 
-        public Position(final LexerPosition htmlPosition,
-                        final LexerPosition rhtmlPosition, final MyState state) {
-            myRhtmlPosition = rhtmlPosition;
-            myState = state;
+				//Exit if comment has been ended
+				if(tokenType == RHTMLTokenType.XML_COMMENT_END)
+				{
+					break;
+				}
 
-            myHTMLPosition = htmlPosition;
-        }
+				//If it is another HTML lexem it should be COMMENT_CHARACTERS
+				//because we are in html comment block;
+				createAndOfferToken(myCurHTMLLexer, RHTMLTokenType.XML_COMMENT_CHARACTERS);
+			}
+			else
+			{
+				//insert ruby code as is.
+				createAndOfferToken(myRHTMLRubyLexer, tokenType);
+			}
+		}
+		while(true);
 
-        @Override
-		public int getOffset() {
-            final int rhtmlPos = myRhtmlPosition != null ? myRhtmlPosition.getOffset() : 0;
-            final int htmlPos = myHTMLPosition == null ? 0 : myHTMLPosition.getOffset();
-            return Math.max(rhtmlPos, htmlPos);
-        }
+		myState = prevState;
+	}
+
+	@Override
+	public IElementType getTokenType()
+	{
+		locateToken();
+		return myTokenType;
+	}
+
+	@Override
+	public int getTokenStart()
+	{
+		locateToken();
+		return myTokenStart;
+	}
+
+	@Override
+	public int getTokenEnd()
+	{
+		locateToken();
+		return myTokenEnd;
+	}
+
+	@Override
+	public void advance()
+	{
+		myTokenType = null;
+		if(myCommentTokensQueue.poll() == null)
+		{
+			advanceWithoutCommentQueue();
+		}
+	}
+
+	private void advanceWithoutCommentQueue()
+	{
+		IElementType tokenType = myRHTMLRubyLexer.getTokenType();
+		if(tokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML)
+		{
+			myCurHTMLLexer.advance();
+			if(myCurHTMLLexer.getTokenType() != null)
+			{
+				return;
+			}
+		}
+		myRHTMLRubyLexer.advance();
+		setupHTMLLexer();
+	}
+
+	private void setupHTMLLexer()
+	{
+		while(true)
+		{
+			IElementType tokenType = myRHTMLRubyLexer.getTokenType();
+			if(tokenType == RHTMLTokenType.TEMPLATE_CHARACTERS_IN_RHTML)
+			{
+				myCurHTMLLexer = myHtmlLexer;
+			}
+			else
+			{
+				return;
+			}
+
+			myCurHTMLLexer.start(myRHTMLRubyLexer.getBufferSequence(), myRHTMLRubyLexer.getTokenStart(), myRHTMLRubyLexer.getTokenEnd(), unpackHtmlState(myState));
+			if(myCurHTMLLexer.getTokenType() != null)
+			{
+				return;
+			}
+			myRHTMLRubyLexer.advance();
+		}
+	}
+
+	private static class MyState implements LexerState
+	{
+		public Queue<Token> queue;
+
+		public int state;
+		public int start;
+
+		public MyState(final Queue<Token> queue, final int state, final int start)
+		{
+			this.queue = queue;
+			this.state = state;
+			this.start = start;
+		}
+
+		@Override
+		public short intern()
+		{
+			return 0;
+		}
+	}
+
+	private static class Position implements LexerPosition
+	{
+		private final LexerPosition myHTMLPosition;
+		private final LexerPosition myRhtmlPosition;
+		private MyState myState;
+
+		public Position(final LexerPosition htmlPosition, final LexerPosition rhtmlPosition, final MyState state)
+		{
+			myRhtmlPosition = rhtmlPosition;
+			myState = state;
+
+			myHTMLPosition = htmlPosition;
+		}
+
+		@Override
+		public int getOffset()
+		{
+			final int rhtmlPos = myRhtmlPosition != null ? myRhtmlPosition.getOffset() : 0;
+			final int htmlPos = myHTMLPosition == null ? 0 : myHTMLPosition.getOffset();
+			return Math.max(rhtmlPos, htmlPos);
+		}
 
 		@Override
 		public int getState()
@@ -340,68 +386,75 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer {
 			return 0;
 		}
 
-		public LexerPosition getHTMLPosition() {
-            return myHTMLPosition;
-        }
+		public LexerPosition getHTMLPosition()
+		{
+			return myHTMLPosition;
+		}
 
-        public LexerPosition getRhtmlPosition() {
-            return myRhtmlPosition;
-        }
+		public LexerPosition getRhtmlPosition()
+		{
+			return myRhtmlPosition;
+		}
 
-        public MyState getMyState() {
-            return myState;
-        }
-    }
+		public MyState getMyState()
+		{
+			return myState;
+		}
+	}
 
-    @Override
-	public LexerPosition getCurrentPosition() {
-        final LinkedList<Token> queue = new LinkedList<Token>(myCommentTokensQueue);
-        final MyState state = new MyState(queue, myState,
-                                          myRHTMLRubyLexer.getTokenStart());
+	@Override
+	public LexerPosition getCurrentPosition()
+	{
+		final LinkedList<Token> queue = new LinkedList<Token>(myCommentTokensQueue);
+		final MyState state = new MyState(queue, myState, myRHTMLRubyLexer.getTokenStart());
 
-        return new Position(myCurHTMLLexer != null ? myCurHTMLLexer.getCurrentPosition()
-                                                   : null,
-                            myRHTMLRubyLexer.getCurrentPosition(), state);
-    }
+		return new Position(myCurHTMLLexer != null ? myCurHTMLLexer.getCurrentPosition() : null, myRHTMLRubyLexer.getCurrentPosition(), state);
+	}
 
-    @Override
-	public void restore(final LexerPosition position) {
-        final Position p = (Position)position;
+	@Override
+	public void restore(final LexerPosition position)
+	{
+		final Position p = (Position) position;
 
-        myCommentTokensQueue = p.getMyState().queue;
-        myTokenType = null;
+		myCommentTokensQueue = p.getMyState().queue;
+		myTokenType = null;
 
-        myTokenStart = myTokenEnd = p.getMyState().start;
-        myState = p.getMyState().state;
+		myTokenStart = myTokenEnd = p.getMyState().start;
+		myState = p.getMyState().state;
 
-        myRHTMLRubyLexer.restore(p.getRhtmlPosition());
-        final LexerPosition rubyPos = p.getHTMLPosition();
-        if (rubyPos != null && rubyPos.getOffset() < myCurHTMLLexer.getBufferEnd()) {
-            myCurHTMLLexer.restore(rubyPos);
-        } else {
-            myCurHTMLLexer = null;
-            setupHTMLLexer();
-        }
-    }
+		myRHTMLRubyLexer.restore(p.getRhtmlPosition());
+		final LexerPosition rubyPos = p.getHTMLPosition();
+		if(rubyPos != null && rubyPos.getOffset() < myCurHTMLLexer.getBufferEnd())
+		{
+			myCurHTMLLexer.restore(rubyPos);
+		}
+		else
+		{
+			myCurHTMLLexer = null;
+			setupHTMLLexer();
+		}
+	}
 
 
-    @Override
-	public int getBufferEnd() {
-        return myRHTMLRubyLexer.getBufferEnd();
-    }
+	@Override
+	public int getBufferEnd()
+	{
+		return myRHTMLRubyLexer.getBufferEnd();
+	}
 
-    private static class Token {
-        public final int tokenStart;
-        public final int tokenEnd;
-        public final int rhtmlLexerState;
-        public final IElementType tokenType;
+	private static class Token
+	{
+		public final int tokenStart;
+		public final int tokenEnd;
+		public final int rhtmlLexerState;
+		public final IElementType tokenType;
 
-        public Token(final int rhtmlLexerState, final IElementType tokenType,
-                     final int tokenStart, final int tokenEnd) {
-            this.tokenEnd = tokenEnd;
-            this.tokenStart = tokenStart;
-            this.tokenType = tokenType;
-            this.rhtmlLexerState = rhtmlLexerState;
-        }
-    }
+		public Token(final int rhtmlLexerState, final IElementType tokenType, final int tokenStart, final int tokenEnd)
+		{
+			this.tokenEnd = tokenEnd;
+			this.tokenStart = tokenStart;
+			this.tokenType = tokenType;
+			this.rhtmlLexerState = rhtmlLexerState;
+		}
+	}
 }

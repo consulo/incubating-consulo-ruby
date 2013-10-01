@@ -27,11 +27,10 @@ import com.intellij.openapi.module.Module;
  * @author: Roman Chernyatchik
  * @date: 21.11.2006
  */
-public class RubyModulePresentationUtil {
-    public static ItemPresentation getPresentation(final Module module) {
-        return new PresentationData(module.getName(), module.getModuleDirPath(),
-                                    RailsIcons.RAILS_MODULE_OPENED,
-                                    RailsIcons.RAILS_MODULE_CLOSED,
-                                    null);
-    }
+public class RubyModulePresentationUtil
+{
+	public static ItemPresentation getPresentation(final Module module)
+	{
+		return new PresentationData(module.getName(), module.getModuleDirPath(), RailsIcons.RAILS_MODULE_OPENED, RailsIcons.RAILS_MODULE_CLOSED, null);
+	}
 }

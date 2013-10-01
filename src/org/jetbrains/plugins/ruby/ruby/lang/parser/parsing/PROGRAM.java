@@ -25,15 +25,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
  * User: oleg
  * Date: 31.07.2006
  */
-public class PROGRAM implements RubyTokenTypes {
-    /**
-     * Program parsing
-     * @param builder Current builder
-     */
-    public static void parse(final RBuilder builder) {
-        COMPSTMT.parse(builder, tEOF);
-        builder.passEOLs();
-        builder.passJunks();
-    }
+public class PROGRAM implements RubyTokenTypes
+{
+	/**
+	 * Program parsing
+	 *
+	 * @param builder Current builder
+	 */
+	public static void parse(final RBuilder builder)
+	{
+		COMPSTMT.parse(builder, tEOF);
+		builder.passEOLs();
+		builder.passJunks();
+	}
 
 }

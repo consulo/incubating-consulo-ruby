@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import java.io.Serializable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-
-import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,17 +27,19 @@ import java.io.Serializable;
  * @author: oleg
  * @date: Jun 21, 2007
  */
-public abstract class RVirtualStructuralElementBase extends RVirtualElementBase implements RVirtualStructuralElement,
-        Serializable {
+public abstract class RVirtualStructuralElementBase extends RVirtualElementBase implements RVirtualStructuralElement, Serializable
+{
 
-    private RVirtualContainer myContainer;
+	private RVirtualContainer myContainer;
 
-    protected RVirtualStructuralElementBase(RVirtualContainer container) {
-        myContainer = container;
-    }
+	protected RVirtualStructuralElementBase(RVirtualContainer container)
+	{
+		myContainer = container;
+	}
 
-    @Override
-	public final RVirtualContainer getVirtualParentContainer() {
-        return myContainer;
-    }
+	@Override
+	public final RVirtualContainer getVirtualParentContainer()
+	{
+		return myContainer;
+	}
 }

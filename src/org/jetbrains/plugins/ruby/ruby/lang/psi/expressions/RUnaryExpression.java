@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,13 +27,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  * @author: oleg
  * @date: May 25, 2007
  */
-public interface RUnaryExpression extends RExpression{
-    @Nullable
-    public RPsiElement getElement();
+public interface RUnaryExpression extends RExpression
+{
+	@Nullable
+	public RPsiElement getElement();
 
-    @NotNull
-    public PsiElement getOperation();
+	@NotNull
+	public PsiElement getOperation();
 
-    @NotNull
-    public String getOperationName();
+	@NotNull
+	public String getOperationName();
 }

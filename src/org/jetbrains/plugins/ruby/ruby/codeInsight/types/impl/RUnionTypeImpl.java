@@ -15,14 +15,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
+import java.util.Collection;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RUnionType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
-
-import java.util.Collection;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RUnionType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,64 +30,80 @@ import java.util.Collection;
  * @author: oleg
  * @date: Apr 15, 2008
  */
-public class RUnionTypeImpl extends RTypeBase implements RUnionType {
-    public RType myType1;
-    public RType myType2;
+public class RUnionTypeImpl extends RTypeBase implements RUnionType
+{
+	public RType myType1;
+	public RType myType2;
 
-    public RUnionTypeImpl(final RType type1, final RType type2) {
-        myType1 = type1;
-        myType2 = type2;
-    }
+	public RUnionTypeImpl(final RType type1, final RType type2)
+	{
+		myType1 = type1;
+		myType2 = type2;
+	}
 
 
-    @Override
+	@Override
 	@SuppressWarnings({"unchecked"})
-    @NotNull
-    public Collection<Message> getMessages() {
-        return RTypeUtil.union(myType1.getMessages(), myType2.getMessages());
-    }
+	@NotNull
+	public Collection<Message> getMessages()
+	{
+		return RTypeUtil.union(myType1.getMessages(), myType2.getMessages());
+	}
 
-    @Override
+	@Override
 	@SuppressWarnings({"unchecked"})
-    public Collection<Message> getMessagesForName(@Nullable final String name) {
-        return RTypeUtil.union(myType1.getMessagesForName(name), myType2.getMessagesForName(name));
-    }
+	public Collection<Message> getMessagesForName(@Nullable final String name)
+	{
+		return RTypeUtil.union(myType1.getMessagesForName(name), myType2.getMessagesForName(name));
+	}
 
-    @Override
-	public boolean isTyped() {
-        return myType1.isTyped() || myType2.isTyped();
-    }
+	@Override
+	public boolean isTyped()
+	{
+		return myType1.isTyped() || myType2.isTyped();
+	}
 
-    public String toString() {
-        return "Union type";
-    }
+	public String toString()
+	{
+		return "Union type";
+	}
 
-    @Override
-	public RType addMessage(@NotNull final Message message) {
-        if (myType2 instanceof RDuckTypeImpl) {
-            myType2.addMessage(message);
-            return this;
-        }
-        final DuckTypeImpl type = new DuckTypeImpl();
-        type.addMessage(message);
-        return RTypeUtil.joinAnd(this, new RDuckTypeImpl(type));
-    }
+	@Override
+	public RType addMessage(@NotNull final Message message)
+	{
+		if(myType2 instanceof RDuckTypeImpl)
+		{
+			myType2.addMessage(message);
+			return this;
+		}
+		final DuckTypeImpl type = new DuckTypeImpl();
+		type.addMessage(message);
+		return RTypeUtil.joinAnd(this, new RDuckTypeImpl(type));
+	}
 
-    @Override
-    public boolean equals(final Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public boolean equals(final Object o)
+	{
+		if(this == o)
+		{
+			return true;
+		}
+		if(o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
 
-      final RUnionTypeImpl that = (RUnionTypeImpl)o;
-      if ((myType1.equals(that.myType1) && myType2.equals(that.myType2)) ||
-          (myType2.equals(that.myType1) && myType1.equals(that.myType2))) {
-        return true;
-      }
-      return false;
-    }
+		final RUnionTypeImpl that = (RUnionTypeImpl) o;
+		if((myType1.equals(that.myType1) && myType2.equals(that.myType2)) || (myType2.equals(that.myType1) && myType1.equals(that.myType2)))
+		{
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public int hashCode() {
-      return myType1.hashCode() << 16 + myType2.hashCode();
-    }
+	@Override
+	public int hashCode()
+	{
+		return myType1.hashCode() << 16 + myType2.hashCode();
+	}
 }

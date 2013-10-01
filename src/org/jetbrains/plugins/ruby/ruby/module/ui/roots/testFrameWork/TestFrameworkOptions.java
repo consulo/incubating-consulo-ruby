@@ -24,10 +24,14 @@ import org.jetbrains.annotations.Nullable;
  * @author: Roman Chernyatchik
  * @date: Oct 20, 2007
  */
-public interface TestFrameworkOptions {
-    public boolean shouldUseRSpecFramework();
-    public boolean shouldUseTestUnitFramework();
-    public boolean shouldPreferRSpecPlugin();
-    @Nullable
-    public String getTestUnitRootUrl();
+public interface TestFrameworkOptions
+{
+	public boolean shouldUseRSpecFramework();
+
+	public boolean shouldUseTestUnitFramework();
+
+	public boolean shouldPreferRSpecPlugin();
+
+	@Nullable
+	public String getTestUnitRootUrl();
 }

@@ -49,54 +49,59 @@ import com.intellij.psi.xml.XmlElementType;
  * @author: Roman Chernyatchik
  * @date: Sep 11, 2007
  */
-public class RHTMLFormattingModelBuilder implements FormattingModelBuilder {
-    private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class.getName());
+public class RHTMLFormattingModelBuilder implements FormattingModelBuilder
+{
+	private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class.getName());
 
-    @Override
+	@Override
 	@NotNull
-    public FormattingModel createModel(@NotNull final PsiElement element,
-                                       final CodeStyleSettings settings) {
-        final PsiFile psiFile = element.getContainingFile();
+	public FormattingModel createModel(@NotNull final PsiElement element, final CodeStyleSettings settings)
+	{
+		final PsiFile psiFile = element.getContainingFile();
 
-        final FormattingDocumentModelImpl documentModel = FormattingDocumentModelImpl.createOn(psiFile);
-        final XmlFormattingPolicy rhtmlPolicy = new RHTMLPolicy(settings, documentModel);
+		final FormattingDocumentModelImpl documentModel = FormattingDocumentModelImpl.createOn(psiFile);
+		final XmlFormattingPolicy rhtmlPolicy = new RHTMLPolicy(settings, documentModel);
 
-        //noinspection ConstantConditions
-        final ASTNode node = element.getNode();
+		//noinspection ConstantConditions
+		final ASTNode node = element.getNode();
 
-        assert node != null;
-        assert psiFile != null;
+		assert node != null;
+		assert psiFile != null;
 
-        final FileViewProvider vProvider = psiFile.getViewProvider();
+		final FileViewProvider vProvider = psiFile.getViewProvider();
 
-        final Block block;
-        if (node.getElementType() == XmlElementType.HTML_DOCUMENT) {
-            final PsiElement rhtmlElement =
-                    RHTMLFormatterUtil.findRHTMLElementByStartOffset(vProvider, node.getStartOffset(), true);
-            assert rhtmlElement != null; //it is RHTML Document
+		final Block block;
+		if(node.getElementType() == XmlElementType.HTML_DOCUMENT)
+		{
+			final PsiElement rhtmlElement = RHTMLFormatterUtil.findRHTMLElementByStartOffset(vProvider, node.getStartOffset(), true);
+			assert rhtmlElement != null; //it is RHTML Document
 
-            final ASTNode rhmtlElementNode = rhtmlElement.getNode();
-            assert rhmtlElementNode != null; //it is RHTML Element, it's node isn't null!
+			final ASTNode rhmtlElementNode = rhtmlElement.getNode();
+			assert rhmtlElementNode != null; //it is RHTML Element, it's node isn't null!
 
-            block = new RHTMLBlock(rhmtlElementNode, Indent.getNoneIndent(), null, rhtmlPolicy);
-        } else if (vProvider instanceof RHTMLFileViewProvider
-                && (element instanceof XmlAttribute || element instanceof XmlAttributeValue)) {
-            block = new RHTMLHtmlBlock(node, null, null, rhtmlPolicy, Indent.getNoneIndent(), vProvider, element.getTextRange());
-        } else if (element instanceof OuterRHTMLElementInHTML) {
-            final PsiElement rhtmlProjection =
-                    RHTMLFormatterUtil.findRHTMLElementByStartOffset(vProvider, node.getStartOffset(), true);
-            assert rhtmlProjection != null;
+			block = new RHTMLBlock(rhmtlElementNode, Indent.getNoneIndent(), null, rhtmlPolicy);
+		}
+		else if(vProvider instanceof RHTMLFileViewProvider && (element instanceof XmlAttribute || element instanceof XmlAttributeValue))
+		{
+			block = new RHTMLHtmlBlock(node, null, null, rhtmlPolicy, Indent.getNoneIndent(), vProvider, element.getTextRange());
+		}
+		else if(element instanceof OuterRHTMLElementInHTML)
+		{
+			final PsiElement rhtmlProjection = RHTMLFormatterUtil.findRHTMLElementByStartOffset(vProvider, node.getStartOffset(), true);
+			assert rhtmlProjection != null;
 
-            final ASTNode rhtmlNode = rhtmlProjection.getNode();
+			final ASTNode rhtmlNode = rhtmlProjection.getNode();
 
-            assert rhtmlNode != null;
-            LOG.assertTrue(rhtmlNode.getElementType() == RHTMLElementType.RHTML_XML_TAG, "RHTML injection expected, but was: " + rhtmlNode.getElementType());
-            block = new RHTMLRubyInjectionBlock(rhtmlNode, Indent.getNoneIndent(), null, rhtmlPolicy, null, null, null);
-        }else {
-            block = new RHTMLBlock(node, Indent.getAbsoluteNoneIndent(), null, rhtmlPolicy);
-        }
-        return FormattingModelProvider.createFormattingModelForPsiFile(psiFile, block, settings);
-    }
+			assert rhtmlNode != null;
+			LOG.assertTrue(rhtmlNode.getElementType() == RHTMLElementType.RHTML_XML_TAG, "RHTML injection expected, but was: " + rhtmlNode.getElementType());
+			block = new RHTMLRubyInjectionBlock(rhtmlNode, Indent.getNoneIndent(), null, rhtmlPolicy, null, null, null);
+		}
+		else
+		{
+			block = new RHTMLBlock(node, Indent.getAbsoluteNoneIndent(), null, rhtmlPolicy);
+		}
+		return FormattingModelProvider.createFormattingModelForPsiFile(psiFile, block, settings);
+	}
 
 	@Nullable
 	@Override

@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -25,85 +24,101 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary.PRIMARY;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-class MathTerm implements RubyTokenTypes {
+class MathTerm implements RubyTokenTypes
+{
 
 
-    /**
-      * Parsing math term, i.e. -mt, +mt, !mt, ~mt or primary
-      * @param builder Current builder
-      * @return result of parsing
-      */
-    @NotNull
-    public static IElementType parse(final RBuilder builder) {
-// plus
-        if (builder.compare(tUPLUS)) {
-            RMarker statementMarker= builder.mark();
-            builder.match(tUPLUS);
+	/**
+	 * Parsing math term, i.e. -mt, +mt, !mt, ~mt or primary
+	 *
+	 * @param builder Current builder
+	 * @return result of parsing
+	 */
+	@NotNull
+	public static IElementType parse(final RBuilder builder)
+	{
+		// plus
+		if(builder.compare(tUPLUS))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tUPLUS);
 
-            if(parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
+			if(parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
 
-            statementMarker.done(RubyElementTypes.UNARY_EXPRESSION);
-            return RubyElementTypes.UNARY_EXPRESSION;
-        }
+			statementMarker.done(RubyElementTypes.UNARY_EXPRESSION);
+			return RubyElementTypes.UNARY_EXPRESSION;
+		}
 
-// minus
-        if (builder.compare(tUMINUS)) {
-            RMarker statementMarker = builder.mark();
-            builder.match(tUMINUS);
+		// minus
+		if(builder.compare(tUMINUS))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tUMINUS);
 
-            if(parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
+			if(parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
 
-            statementMarker.done(RubyElementTypes.NEGATIVE_EXPRESSION);
-            return RubyElementTypes.NEGATIVE_EXPRESSION;
-        }
+			statementMarker.done(RubyElementTypes.NEGATIVE_EXPRESSION);
+			return RubyElementTypes.NEGATIVE_EXPRESSION;
+		}
 
-// exclamation
-        if (builder.compare(tEXCLAMATION)) {
-            RMarker statementMarker = builder.mark();
-            builder.match(tEXCLAMATION);
+		// exclamation
+		if(builder.compare(tEXCLAMATION))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tEXCLAMATION);
 
-            if(parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
+			if(parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
 
-            statementMarker.done(RubyElementTypes.BOOL_NEGATIVE_EXPRESSION);
-            return RubyElementTypes.BOOL_NEGATIVE_EXPRESSION;
-        }
+			statementMarker.done(RubyElementTypes.BOOL_NEGATIVE_EXPRESSION);
+			return RubyElementTypes.BOOL_NEGATIVE_EXPRESSION;
+		}
 
-// tilde
-        if (builder.compare(tTILDE)) {
-            RMarker statementMarker = builder.mark();
-            builder.match(tTILDE);
+		// tilde
+		if(builder.compare(tTILDE))
+		{
+			RMarker statementMarker = builder.mark();
+			builder.match(tTILDE);
 
-            if(parse(builder)==RubyElementTypes.EMPTY_INPUT){
-                builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
-            }
+			if(parse(builder) == RubyElementTypes.EMPTY_INPUT)
+			{
+				builder.error(ErrorMsg.EXPRESSION_EXPECTED_MESSAGE);
+			}
 
-            statementMarker.done(RubyElementTypes.UNARY_EXPRESSION);
-            return RubyElementTypes.UNARY_EXPRESSION;
-        }
+			statementMarker.done(RubyElementTypes.UNARY_EXPRESSION);
+			return RubyElementTypes.UNARY_EXPRESSION;
+		}
 
-        return PRIMARY.parse(builder);
-    }
+		return PRIMARY.parse(builder);
+	}
 
 
-    public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result) {
-        if (result!=RubyElementTypes.EMPTY_INPUT){
-            marker.drop();
-            return result;
-        } else {
-            marker.rollbackTo();
-            return RubyElementTypes.EMPTY_INPUT;
-        }
-    }
+	public static IElementType parseWithLeadPRIMARY(RBuilder builder, RMarker marker, IElementType result)
+	{
+		if(result != RubyElementTypes.EMPTY_INPUT)
+		{
+			marker.drop();
+			return result;
+		}
+		else
+		{
+			marker.rollbackTo();
+			return RubyElementTypes.EMPTY_INPUT;
+		}
+	}
 }
