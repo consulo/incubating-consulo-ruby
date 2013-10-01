@@ -51,7 +51,7 @@ public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType
 		final Lexer lexer = new RHTMLRubyLexer();
 
 		LanguageVersion<Language> defaultVersion = LanguageVersionUtil.findDefaultVersion(getLanguage());
-		final Project project = chameleon.getTreeParent().getPsi().getProject();
+		final Project project = chameleon.getPsi().getProject();
 
 		final PsiBuilder builder = factory.createBuilder(project, chameleon, lexer, getLanguage(), defaultVersion, chameleon.getChars());
 

@@ -19,4 +19,10 @@ public class GemOrderRootType extends PersistentOrderRootType
 	{
 		super("GEM", "GEM");
 	}
+
+	@Override
+	public boolean skipWriteIfEmpty()
+	{
+		return true;
+	}
 }

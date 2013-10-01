@@ -27,6 +27,11 @@
 
 	<depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
 
+	<extensions defaultExtensionNs="org.consulo.java.platform">
+		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
+		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
+	</extensions>
+
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="org.jetbrains.plugins.ruby.RubyFileTypeFactory"/>
 		<gotoClassContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubyClassAndModuleContributor"/>
@@ -50,6 +55,8 @@
 		<lang.psiStructureViewFactory language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilderFactory"/>
 		<lang.surroundDescriptor language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor" />
 
+		<editorHighlighterProvider filetype="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighterFactory" />
+
 		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler" />
 		<moduleExtensionProvider key="ruby" implementationClass="org.consulo.ruby.module.extension.BaseRubyModuleExtensionProvider" />
 
@@ -65,8 +72,6 @@
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager" serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"/>
 
 		<referencesSearch implementation="org.jetbrains.plugins.ruby.ruby.lang.search.RubyTextReferenceSearch"/>
-		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
-		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
 
 		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType" />
 
@@ -110,6 +115,7 @@
 		<projectService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper"
 						serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper" />
 
+		<usageGroupingRuleProvider implementation="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsagesGroupingRuleProvider" />
 		<toolWindow id="RDoc"
 					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
 					anchor="right"
@@ -139,11 +145,6 @@
 		</component>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLApplicationComponent</implementation-class>
-		</component>
-
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsagesGroupingRuleProvider
-			</implementation-class>
 		</component>
 
 		<!-- RSpec Support -->

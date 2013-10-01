@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLFileHighlighterImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
@@ -37,6 +36,7 @@ import com.intellij.psi.formatter.xml.ReadOnlyBlock;
 import com.intellij.psi.formatter.xml.XmlBlock;
 import com.intellij.psi.impl.source.SourceTreeToPsiMap;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,7 +69,7 @@ public class eRubyLanguage extends Language implements TemplateLanguage
 		final RHTMLFile rhtmlFile = RHTMLPsiUtil.getRHTMLFileRoot(file);
 		assert rhtmlFile != null;
 
-		final RHTMLFileViewProvider rhtmlViewProvider = rhtmlFile.getViewProvider();
+		final TemplateLanguageFileViewProvider rhtmlViewProvider = rhtmlFile.getViewProvider();
 		final Language templateLang = rhtmlViewProvider.getTemplateDataLanguage();
 
 

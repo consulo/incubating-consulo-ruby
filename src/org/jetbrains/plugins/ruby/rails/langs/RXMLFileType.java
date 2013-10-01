@@ -49,7 +49,7 @@ public class RXMLFileType extends LanguageFileType
 
 	private RXMLFileType()
 	{
-		super(RubyFileType.RUBY.getLanguage());
+		super(RubyFileType.INSTANCE.getLanguage());
 	}
 
 	@Override

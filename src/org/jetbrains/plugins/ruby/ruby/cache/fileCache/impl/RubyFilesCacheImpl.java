@@ -43,11 +43,13 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.RFilesStorage;
 import org.jetbrains.plugins.ruby.ruby.cache.info.impl.RFilesStorageImpl;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.ide.caches.CacheUpdater;
 import com.intellij.ide.caches.FileContent;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.DumbServiceImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.Disposer;
@@ -640,7 +642,14 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 
 	private void registerAsCacheUpdater()
 	{
-		StartupManager.getInstance(myProject).registerCacheUpdater(this);
+		StartupManager.getInstance(myProject).registerPreStartupActivity(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				StartupManager.getInstance(myProject).registerCacheUpdater(RubyFilesCacheImpl.this);
+			}
+		});
 	}
 
 	private void unregisterAsCacheUpdater()
@@ -655,18 +664,9 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	@Override
 	public void forceUpdate()
 	{
-	   /* final FileSystemSynchronizer synchronizer = new FileSystemSynchronizer();
-        synchronizer.registerCacheUpdater(this);
-        if (!ApplicationManager.getApplication().isUnitTestMode() && myProject.isOpen()) {
-            Runnable process = new Runnable() {
-                public void run() {
-                    synchronizer.execute();
-                }
-            };
-            ProgressManager.getInstance().runProcessWithProgressSynchronously(process, RBundle.message("project.root.change.loading.progress"), false, myProject);
-        } else {
-            synchronizer.execute();
-        }  */
+		DumbServiceImpl dumbService = DumbServiceImpl.getInstance(myProject);
+
+		dumbService.queueCacheUpdateInDumbMode(Collections.<CacheUpdater>singletonList(this));
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

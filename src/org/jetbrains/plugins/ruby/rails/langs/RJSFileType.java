@@ -45,7 +45,7 @@ public class RJSFileType extends LanguageFileType
 
 	private RJSFileType()
 	{
-		super(RubyFileType.RUBY.getLanguage());
+		super(RubyFileType.INSTANCE.getLanguage());
 	}
 
 	@Override

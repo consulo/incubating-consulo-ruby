@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLHighlighter;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLHighlighterKeys;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer._RHTMLLexer;
 import com.intellij.lexer.Lexer;
@@ -40,17 +40,17 @@ public class RHTMLFileHighlighterImpl extends SyntaxHighlighterBase
 
 	static
 	{
-		fillMap(ATTRIBUTES, RHTMLTokenType.RHTML_ALL_COMMENT_TOKENS, RHTMLHighlighter.COMMENT);
+		fillMap(ATTRIBUTES, RHTMLTokenType.RHTML_ALL_COMMENT_TOKENS, RHTMLHighlighterKeys.COMMENT);
 
-		ATTRIBUTES.put(RHTMLTokenType.RHTML_SCRIPTLET_START, RHTMLHighlighter.RHTML_SCRIPTLET_START);
-		ATTRIBUTES.put(RHTMLTokenType.RHTML_SCRIPTLET_END, RHTMLHighlighter.RHTML_SCRIPTLET_END);
+		ATTRIBUTES.put(RHTMLTokenType.RHTML_SCRIPTLET_START, RHTMLHighlighterKeys.RHTML_SCRIPTLET_START);
+		ATTRIBUTES.put(RHTMLTokenType.RHTML_SCRIPTLET_END, RHTMLHighlighterKeys.RHTML_SCRIPTLET_END);
 
-		ATTRIBUTES.put(RHTMLTokenType.RHTML_EXPRESSION_START, RHTMLHighlighter.RHTML_EXPRESSION_START);
-		ATTRIBUTES.put(RHTMLTokenType.RHTML_EXPRESSION_END, RHTMLHighlighter.RHTML_EXPRESSION_END);
+		ATTRIBUTES.put(RHTMLTokenType.RHTML_EXPRESSION_START, RHTMLHighlighterKeys.RHTML_EXPRESSION_START);
+		ATTRIBUTES.put(RHTMLTokenType.RHTML_EXPRESSION_END, RHTMLHighlighterKeys.RHTML_EXPRESSION_END);
 
-		ATTRIBUTES.put(RHTMLTokenType.OMIT_NEW_LINE, RHTMLHighlighter.OMIT_NEW_LINE);
+		ATTRIBUTES.put(RHTMLTokenType.OMIT_NEW_LINE, RHTMLHighlighterKeys.OMIT_NEW_LINE);
 
-		ATTRIBUTES.put(RHTMLTokenType.FLEX_ERROR, RHTMLHighlighter.FLEX_ERROR);
+		ATTRIBUTES.put(RHTMLTokenType.FLEX_ERROR, RHTMLHighlighterKeys.FLEX_ERROR);
 	}
 
 	@Override

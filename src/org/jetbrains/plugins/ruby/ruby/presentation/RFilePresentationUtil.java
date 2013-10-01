@@ -52,7 +52,7 @@ public class RFilePresentationUtil
 	 */
 	public static Icon getIcon()
 	{
-		return RubyFileType.RUBY.getIcon();
+		return RubyFileType.INSTANCE.getIcon();
 	}
 
 	@NotNull

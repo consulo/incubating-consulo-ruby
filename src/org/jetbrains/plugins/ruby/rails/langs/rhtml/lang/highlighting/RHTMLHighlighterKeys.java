@@ -30,7 +30,7 @@ import com.intellij.openapi.editor.markup.TextAttributes;
  * @author: Roman Chernyatchik
  * @date: Aug 16, 2007
  */
-public class RHTMLHighlighter
+public class RHTMLHighlighterKeys
 {
 	@NonNls
 	private static final String RHTML_COMMENT_ID = "RHTML_COMMENT_ID";

@@ -247,7 +247,7 @@ public class ControllersConventions
 			buff.append(NamingConventions.toUnderscoreCase(controllerClassName));
 		}
 		buff.append('.');
-		buff.append(RubyFileType.RUBY.getDefaultExtension());
+		buff.append(RubyFileType.INSTANCE.getDefaultExtension());
 		return buff.toString();
 	}
 
@@ -273,7 +273,7 @@ public class ControllersConventions
 			return null;
 		}
 		final String root = settings.getControllerRootURL();
-		return root + VirtualFileUtil.VFS_PATH_SEPARATOR + RailsConstants.APPLICATION_NAME + "." + RubyFileType.RUBY.getDefaultExtension();
+		return root + VirtualFileUtil.VFS_PATH_SEPARATOR + RailsConstants.APPLICATION_NAME + "." + RubyFileType.INSTANCE.getDefaultExtension();
 	}
 
 	@Nullable
@@ -444,7 +444,7 @@ public class ControllersConventions
 			buff.append(VirtualFileUtil.VFS_PATH_SEPARATOR);
 			buff.append(NamingConventions.toUnderscoreCase(name));
 		}
-		buff.append('.').append(RubyFileType.RUBY.getDefaultExtension());
+		buff.append('.').append(RubyFileType.INSTANCE.getDefaultExtension());
 		return buff.toString().equals(url);
 	}
 
@@ -526,7 +526,7 @@ public class ControllersConventions
 		buff.append(controllerName);
 		buff.append(RailsConstants.CONTROLLERS_FILE_NAME_SUFFIX);
 		buff.append(".");
-		buff.append(RubyFileType.RUBY.getDefaultExtension());
+		buff.append(RubyFileType.INSTANCE.getDefaultExtension());
 		return buff.toString();
 	}
 
@@ -572,7 +572,7 @@ public class ControllersConventions
 		buff.append(folderUrl.substring(start));
 		buff.append(RailsConstants.CONTROLLERS_FILE_NAME_SUFFIX);
 		buff.append('.');
-		buff.append(RubyFileType.RUBY.getDefaultExtension());
+		buff.append(RubyFileType.INSTANCE.getDefaultExtension());
 		return buff.toString();
 	}
 
@@ -602,7 +602,7 @@ public class ControllersConventions
 		buff.append(viewFileUrl.substring(start, end));
 		buff.append(RailsConstants.CONTROLLERS_FILE_NAME_SUFFIX);
 		buff.append('.');
-		buff.append(RubyFileType.RUBY.getDefaultExtension());
+		buff.append(RubyFileType.INSTANCE.getDefaultExtension());
 		return buff.toString();
 	}
 

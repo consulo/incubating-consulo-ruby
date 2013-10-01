@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFieldAttrReferenc
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFileReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlighter;
+import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlighterKeys;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
@@ -107,7 +107,7 @@ public class RubySlowAnnotatorVisitor extends RubySystemCallVisitor
 						if(results.length > 1)
 						{
 							final Annotation annotation = myHolder.createWarningAnnotation(ref, RBundle.message("annotation.warning.implicit.multivariant.required.item"));
-							annotation.setTextAttributes(RubyHighlighter.INSPECTION_MULTIPLE_RESOLVE_WARNING);
+							annotation.setTextAttributes(RubyHighlighterKeys.INSPECTION_MULTIPLE_RESOLVE_WARNING);
 						}
 					}
 					else

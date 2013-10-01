@@ -49,7 +49,7 @@ public class DataContextUtil
 	public static boolean isEnabled(@NotNull final Editor editor, @NotNull final DataContext dataContext, @NotNull final EditorActionHandler originalHandler)
 	{
 		//noinspection SimplifiableIfStatement
-		if(getLanguage(dataContext) == RubyFileType.RUBY.getLanguage())
+		if(getLanguage(dataContext) == RubyFileType.INSTANCE.getLanguage())
 		{
 			return true;
 		}

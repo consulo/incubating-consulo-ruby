@@ -61,7 +61,7 @@ import com.intellij.psi.search.GlobalSearchScope;
  */
 public class RTestsRunConfiguration extends AbstractRubyRunConfiguration implements RTestRunConfigurationParams
 {
-	public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*." + RubyFileType.RUBY.getDefaultExtension();
+	public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*." + RubyFileType.INSTANCE.getDefaultExtension();
 
 	private static final RVirtualMethod[] EMPTY_VIRT_METHODS = new RVirtualMethod[0];
 

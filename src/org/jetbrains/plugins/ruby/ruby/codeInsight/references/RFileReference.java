@@ -175,7 +175,7 @@ public class RFileReference implements RPsiPolyvariantReference
 					if(!foundNames.contains(requireUrl))
 					{
 						foundNames.add(requireUrl);
-						variants.add(new RubySimpleLookupItem(requireUrl, null, LookupValueWithPriority.NORMAL, false, RubyFileType.ICON));
+						variants.add(new RubySimpleLookupItem(requireUrl, null, LookupValueWithPriority.NORMAL, false, RubyFileType.INSTANCE.getIcon()));
 					}
 				}
 			}

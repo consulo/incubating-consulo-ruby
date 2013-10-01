@@ -39,7 +39,6 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubySupportLoader;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
 /**
@@ -60,12 +59,12 @@ public class TestUtil {
      * @return PsiFile - the resulting file
      */
     public static RFile createPseudoPhysicalFile(final Project project, final String text) {
-        return (RFile) PsiManager.getInstance(project).getElementFactory().createFileFromText(TEMP_FILE, RubyFileType.RUBY,
+        return (RFile) PsiManager.getInstance(project).getElementFactory().createFileFromText(TEMP_FILE, RubyFileType.INSTANCE,
                 text, LocalTimeCounter.currentTime(), true);
     }
 
     public static RHTMLFile createPseudoPhysicalRHTMLFile(final Project project, final String text) {
-        return (RHTMLFile) PsiManager.getInstance(project).getElementFactory().createFileFromText(RHTML_TEMP_FILE, RHTMLFileType.RHTML,
+        return (RHTMLFile) PsiManager.getInstance(project).getElementFactory().createFileFromText(RHTML_TEMP_FILE, RHTMLFileType.INSTANCE,
                 text, LocalTimeCounter.currentTime(), true);
     }
 

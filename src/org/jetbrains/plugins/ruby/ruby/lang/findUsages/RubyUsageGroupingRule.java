@@ -30,7 +30,7 @@ import com.intellij.usages.rules.PsiElementUsage;
  */
 public class RubyUsageGroupingRule implements OrderableUsageGroupingRule
 {
-	private RubyTextMatchedGroup TEXT_MATCHED = new RubyTextMatchedGroup();
+	private RubyTextMatchedGroup myMatchedGroup = new RubyTextMatchedGroup();
 
 	@Override
 	public UsageGroup groupUsage(Usage usage)
@@ -42,7 +42,7 @@ public class RubyUsageGroupingRule implements OrderableUsageGroupingRule
 			{
 				if(RubyUsageTypeProvider.getType(element) == RubyUsageType.TEXT_MATCHED)
 				{
-					return TEXT_MATCHED;
+					return myMatchedGroup;
 				}
 			}
 		}

@@ -28,6 +28,6 @@ public class RubyElementType extends IElementType
 {
 	public RubyElementType(String debugName)
 	{
-		super(debugName, RubyFileType.RUBY.getLanguage());
+		super(debugName, RubyFileType.INSTANCE.getLanguage());
 	}
 }

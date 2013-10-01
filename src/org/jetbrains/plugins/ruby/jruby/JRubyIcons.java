@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.jruby;
 
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NonNls;
 import com.intellij.openapi.util.IconLoader;
 
 /**
@@ -28,13 +27,7 @@ import com.intellij.openapi.util.IconLoader;
  */
 public interface JRubyIcons
 {
-	/**
-	 * Please ensure that DATA_PATH corresponds with real resources path
-	 */
-	@NonNls
-	final String DATA_PATH = "/org/jetbrains/plugins/ruby/jruby/";
-
-	final Icon JRUBY_ICON = IconLoader.findIcon(DATA_PATH + "jruby.png");
+	final Icon JRUBY_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby.png");
 	final Icon JRUBY_SDK_ADD_ICON = JRUBY_ICON;
 	final Icon JAVA_ICON = IconLoader.findIcon("/general/addJdk.png");
 

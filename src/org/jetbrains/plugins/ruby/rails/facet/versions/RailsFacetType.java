@@ -67,6 +67,6 @@ class RailsFacetType extends BaseRailsFacetType<RailsFacet>
 	@Override
 	protected void registerDetectorForWizard(final FacetDetectorRegistryEx<BaseRailsFacetConfiguration> detectorRegistry, final VirtualFileFilter railsFacetFilter, final FacetDetector<VirtualFile, BaseRailsFacetConfiguration> facetDetector)
 	{
-		detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, railsFacetFilter, facetDetector);
+		detectorRegistry.registerDetectorForWizard(RubyFileType.INSTANCE, railsFacetFilter, facetDetector);
 	}
 }

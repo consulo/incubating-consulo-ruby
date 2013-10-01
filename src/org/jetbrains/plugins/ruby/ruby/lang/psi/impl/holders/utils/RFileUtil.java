@@ -50,7 +50,7 @@ import com.intellij.psi.PsiElement;
 public class RFileUtil
 {
 	@NonNls
-	public static final String RB_FILE_SUFFIX = "." + RubyFileType.RUBY.getDefaultExtension();
+	public static final String RB_FILE_SUFFIX = "." + RubyFileType.INSTANCE.getDefaultExtension();
 	@NonNls
 	public static final String SO_FILE_SUFFIX = "." + "so";
 	@NonNls

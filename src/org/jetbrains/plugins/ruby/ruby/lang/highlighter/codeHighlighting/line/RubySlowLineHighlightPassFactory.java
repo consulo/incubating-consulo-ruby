@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.RubyComponents;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
+import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 
 /**
@@ -33,13 +33,12 @@ import com.intellij.psi.PsiFile;
  * @author: oleg
  * @date: Jun 26, 2007
  */
-public class RubySlowLineHighlightPassFactory implements TextEditorHighlightingPassFactory
+public class RubySlowLineHighlightPassFactory extends AbstractProjectComponent implements TextEditorHighlightingPassFactory
 {
-	private final TextEditorHighlightingPassRegistrar myRegistrar;
-
-	public RubySlowLineHighlightPassFactory(final TextEditorHighlightingPassRegistrar passRegistrar)
+	public RubySlowLineHighlightPassFactory(final Project project, final TextEditorHighlightingPassRegistrar passRegistrar)
 	{
-		myRegistrar = passRegistrar;
+		super(project);
+		passRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST, 0, true, true);
 	}
 
 	@Override
@@ -51,34 +50,5 @@ public class RubySlowLineHighlightPassFactory implements TextEditorHighlightingP
 			return new RubySlowLineHighlightPass(psiFile.getProject(), (RFile) psiFile, editor);
 		}
 		return null;
-	}
-
-	@Override
-	public void projectOpened()
-	{
-	}
-
-	@Override
-	public void projectClosed()
-	{
-	}
-
-	@Override
-	@NonNls
-	@NotNull
-	public String getComponentName()
-	{
-		return RubyComponents.RUBY_SLOW_HIGHLIGHT_LINE_FACTORY;
-	}
-
-	@Override
-	public void initComponent()
-	{
-		myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST, 0, true, true);
-	}
-
-	@Override
-	public void disposeComponent()
-	{
 	}
 }

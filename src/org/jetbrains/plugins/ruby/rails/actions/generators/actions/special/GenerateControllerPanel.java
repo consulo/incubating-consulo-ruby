@@ -243,7 +243,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 		myBuff.append(NamingConventions.toUnderscoreCase(myControllerName.getText().trim()));
 		myBuff.append(RailsConstants.CONTROLLERS_FILE_NAME_SUFFIX);
 		myBuff.append(".");
-		myBuff.append(RubyFileType.RUBY.getDefaultExtension());
+		myBuff.append(RubyFileType.INSTANCE.getDefaultExtension());
 		final int width = myControllerName.getWidth() - myLocationLabel.getSize().width;
 		final FontMetrics fontMetrics = myLocationPanel.getFontMetrics(myLocationPanel.getFont());
 		TextUtil.truncWithDots(myBuff, width, fontMetrics);

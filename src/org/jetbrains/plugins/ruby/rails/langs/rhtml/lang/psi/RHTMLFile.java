@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,10 +28,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  */
 public interface RHTMLFile extends RFile
 {
-	@Override
 	@NotNull
-	public RHTMLFileViewProvider getViewProvider();
+	@Override
+	TemplateLanguageFileViewProvider getViewProvider();
 
 	@NotNull
-	public RFile getInnerRubyFile();
+	RFile getInnerRubyFile();
 }

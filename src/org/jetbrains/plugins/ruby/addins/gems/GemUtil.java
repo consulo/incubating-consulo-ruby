@@ -54,7 +54,7 @@ public class GemUtil
 		{
 			return path;
 		}
-		path += "." + RubyFileType.RUBY.getDefaultExtension();
+		path += "." + RubyFileType.INSTANCE.getDefaultExtension();
 
 		if(FileUtil.checkIfIsExistingFile(path))
 		{

@@ -49,7 +49,7 @@ public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider
 	@Nullable
 	public String[][] getDefaultNamespaces(final @NotNull XmlFile file)
 	{
-		if(RHTMLFileType.RHTML.equals(file.getFileType()))
+		if(RHTMLFileType.INSTANCE.equals(file.getFileType()))
 		{
 			return NAMESPACES;
 		}

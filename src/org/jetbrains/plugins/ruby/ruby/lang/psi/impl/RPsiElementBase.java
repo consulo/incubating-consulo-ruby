@@ -56,7 +56,7 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
 	@NotNull
 	public Language getLanguage()
 	{
-		return RubyFileType.RUBY.getLanguage();
+		return RubyFileType.INSTANCE.getLanguage();
 	}
 
 	@Override

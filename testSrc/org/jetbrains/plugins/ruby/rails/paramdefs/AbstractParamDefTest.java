@@ -39,7 +39,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.RSymbolImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.RStringLiteralBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RConstantImpl;
-import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
 import org.jetbrains.plugins.ruby.support.TestUtil;
 
 import java.util.Collections;

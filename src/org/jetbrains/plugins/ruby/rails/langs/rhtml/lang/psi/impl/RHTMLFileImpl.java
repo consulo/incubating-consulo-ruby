@@ -21,7 +21,6 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.visitors.RHTMLElementTypeVisitor;
@@ -55,6 +54,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.PsiFileImpl;
+import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
@@ -64,7 +64,7 @@ import com.intellij.psi.tree.TokenSet;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile
+public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 {
 
 	public RHTMLFileImpl(FileViewProvider viewProvider)
@@ -86,9 +86,9 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile
 
 	@Override
 	@NotNull
-	public RHTMLFileViewProvider getViewProvider()
+	public TemplateLanguageFileViewProvider getViewProvider()
 	{
-		return (RHTMLFileViewProvider) super.getViewProvider();
+		return (TemplateLanguageFileViewProvider) super.getViewProvider();
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile, RFile
 	@NotNull
 	public FileType getFileType()
 	{
-		return RHTMLFileType.RHTML;
+		return RHTMLFileType.INSTANCE;
 	}
 
 	///////////////////// RFile methods ///////////////////////////////

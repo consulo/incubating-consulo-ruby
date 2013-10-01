@@ -39,7 +39,7 @@ public abstract class RubyEditorHandlerUtil extends EditorWriteActionHandler
 		{
 			return false;
 		}
-		if(DataContextUtil.getLanguage(dataContext) != RubyFileType.RUBY.getLanguage())
+		if(DataContextUtil.getLanguage(dataContext) != RubyFileType.INSTANCE.getLanguage())
 		{
 			return false;
 		}

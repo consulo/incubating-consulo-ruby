@@ -33,6 +33,8 @@ import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
+import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import lombok.val;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +42,7 @@ import com.intellij.psi.impl.source.PsiFileImpl;
  * @author: Roman Chernyatchik
  * @date: 02.04.2007
  */
-public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
+public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider
 {
 	private Set<Language> myViews = null;
 
@@ -56,6 +58,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		return eRubyLanguage.INSTANCE;
 	}
 
+	@Override
 	@NotNull
 	public Language getTemplateDataLanguage()
 	{
@@ -89,7 +92,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	{
 		if(lang == RubyLanguage.INSTANCE)
 		{
-			final RHTMLRubyFileImpl ruby = new RHTMLRubyFileImpl(this);
+			val ruby = new RHTMLRubyFileImpl(this);
 			ruby.setOriginalFile(getPsi(eRubyLanguage.INSTANCE));
 			return ruby;
 		}
@@ -103,7 +106,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		}
 		else if(lang == eRubyLanguage.INSTANCE)
 		{
-			final ParserDefinition def = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+			val def = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
 
 			return def.createFile(this);
 		}

@@ -145,7 +145,7 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
 
 	private void setUpNameComboBox(final String[] possibleNames)
 	{
-		final EditorComboBoxEditor comboEditor = new StringComboboxEditor(myProject, RubyFileType.RUBY, myNameComboBox);
+		final EditorComboBoxEditor comboEditor = new StringComboboxEditor(myProject, RubyFileType.INSTANCE, myNameComboBox);
 
 		myNameComboBox.setEditor(comboEditor);
 		myNameComboBox.setRenderer(new EditorComboBoxRenderer(comboEditor));

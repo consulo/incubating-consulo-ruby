@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.lang;
 
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -28,14 +27,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 
 public class RubyFileType extends LanguageFileType
 {
-	public static final RubyFileType RUBY = new RubyFileType();
-	@NonNls
-	private static final String DESCRIPTION = RBundle.message("filetype.description.rb");
-	@NonNls
-	private static final String DEFAULT_EXTENSION = "dist/rb";
-	@NonNls
-	private static final String NAME = "Ruby";
-	public static final Icon ICON = RubyIcons.RUBY_ICON;
+	public static final RubyFileType INSTANCE = new RubyFileType();
 
 	public static final String RUBY_EXTENTIONS = "rb;rbw;rake;";
 
@@ -48,28 +40,28 @@ public class RubyFileType extends LanguageFileType
 	@NotNull
 	public String getName()
 	{
-		return NAME;
+		return "RUBY";
 	}
 
 	@Override
 	@NotNull
 	public String getDescription()
 	{
-		return DESCRIPTION;
+		return RBundle.message("filetype.description.rb");
 	}
 
 	@Override
 	@NotNull
 	public String getDefaultExtension()
 	{
-		return DEFAULT_EXTENSION;
+		return "rb";
 	}
 
 	@Override
 	@Nullable
 	public Icon getIcon()
 	{
-		return ICON;
+		return RubyIcons.RUBY_ICON;
 	}
 }
 

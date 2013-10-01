@@ -298,7 +298,7 @@ public class RailsRequireUtil
 			{
 				set.add(init);
 			}
-			final VirtualFile mainFile = file.findChild(file.getName() + "." + RubyFileType.RUBY.getDefaultExtension());
+			final VirtualFile mainFile = file.findChild(file.getName() + "." + RubyFileType.INSTANCE.getDefaultExtension());
 			if(mainFile != null)
 			{
 				set.add(mainFile);

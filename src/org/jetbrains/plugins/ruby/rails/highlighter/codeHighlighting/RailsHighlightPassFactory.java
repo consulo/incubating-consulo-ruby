@@ -16,10 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.rails.RailsComponents;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.DaemonCodeAnalyzerUtil;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -29,6 +27,7 @@ import com.intellij.codeHighlighting.Pass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassRegistrar;
+import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.impl.DocumentMarkupModel;
@@ -45,13 +44,12 @@ import com.intellij.psi.PsiFile;
  * @author: Roman Chernyatchik
  * @date: 02.02.2007
  */
-public class RailsHighlightPassFactory implements TextEditorHighlightingPassFactory
+public class RailsHighlightPassFactory extends AbstractProjectComponent implements TextEditorHighlightingPassFactory
 {
-	private final TextEditorHighlightingPassRegistrar myRegistrar;
-
-	public RailsHighlightPassFactory(final TextEditorHighlightingPassRegistrar passRegistrar)
+	public RailsHighlightPassFactory(final Project project, final TextEditorHighlightingPassRegistrar passRegistrar)
 	{
-		myRegistrar = passRegistrar;
+		super(project);
+		passRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST, Pass.UPDATE_ALL, true, true);
 	}
 
 	@Override
@@ -99,35 +97,6 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void projectOpened()
-	{
-	}
-
-	@Override
-	public void projectClosed()
-	{
-	}
-
-	@Override
-	@NonNls
-	@NotNull
-	public String getComponentName()
-	{
-		return RailsComponents.RAILS_HIGHLIGHT_PASS_FACTORY;
-	}
-
-	@Override
-	public void initComponent()
-	{
-		myRegistrar.registerTextEditorHighlightingPass(this, TextEditorHighlightingPassRegistrar.Anchor.LAST, Pass.UPDATE_ALL, true, true);
-	}
-
-	@Override
-	public void disposeComponent()
-	{
 	}
 }
 

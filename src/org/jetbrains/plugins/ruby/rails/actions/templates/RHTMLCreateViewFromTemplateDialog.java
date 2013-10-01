@@ -47,10 +47,10 @@ public class RHTMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDia
 	{
 		final String defaultExt = template.getExtension();
 		final FileType fileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(defaultExt);
-		assert fileType == RHTMLFileType.RHTML;
+		assert fileType == RHTMLFileType.INSTANCE;
 
-		final String rhtmlExt = RHTMLFileType.RHTML.getDefaultExtension();
-		final String erbExt = RHTMLFileType.RHTML.getERBExtension();
+		final String rhtmlExt = RHTMLFileType.INSTANCE.getDefaultExtension();
+		final String erbExt = RHTMLFileType.INSTANCE.getERBExtension();
 
 		String ext = defaultExt;
 		if(fileName.endsWith(erbExt))

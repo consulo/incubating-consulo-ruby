@@ -49,7 +49,7 @@ public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter
 
 	public RHTMLEditorHighlighter(final EditorColorsScheme scheme, final Project project, final VirtualFile file)
 	{
-		super(SyntaxHighlighterFactory.getSyntaxHighlighter(RHTMLFileType.RHTML, project, file), scheme);
+		super(SyntaxHighlighterFactory.getSyntaxHighlighter(RHTMLFileType.INSTANCE, project, file), scheme);
 
 		myProject = project;
 		myFile = file;
@@ -59,7 +59,7 @@ public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter
 		// "\n" separates lexems if there is no separator
 		// <%i = 3%><%a = 6>
 		// ruby code : "i = 3\na = 6" instead of "i = 3a = 6"
-		final LayerDescriptor rubyLayer = new LayerDescriptor(rubyHighlighter, "\n", RHTMLHighlighter.RHTML_SCRIPTING_BACKGROUND);
+		final LayerDescriptor rubyLayer = new LayerDescriptor(rubyHighlighter, "\n", RHTMLHighlighterKeys.RHTML_SCRIPTING_BACKGROUND);
 		registerLayer(RHTMLTokenType.RUBY_CODE_CHARACTERS, rubyLayer);
 	}
 

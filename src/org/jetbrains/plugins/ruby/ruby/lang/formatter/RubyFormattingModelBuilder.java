@@ -52,6 +52,6 @@ public class RubyFormattingModelBuilder implements FormattingModelBuilder
 	@Override
 	public TextRange getRangeAffectingIndent(PsiFile psiFile, int i, ASTNode astNode)
 	{
-		return null;
+		return astNode.getTextRange();
 	}
 }

@@ -57,7 +57,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
  */
 public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implements RSpecRunConfigurationParams
 {
-	public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*_spec." + RubyFileType.RUBY.getDefaultExtension();
+	public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*_spec." + RubyFileType.INSTANCE.getDefaultExtension();
 	public static final String DEFAULT_SPEC_ARGS = "-fs";
 
 	private String myTestsFolderPath = TextUtil.EMPTY_STRING;

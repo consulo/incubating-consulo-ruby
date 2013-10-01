@@ -53,7 +53,7 @@ public class RHTMLApplicationComponent implements ApplicationComponent
 		//BraceMatchingUtil.registerBraceMatcher(RHTMLFileType.RHTML, new RHTMLBraceMather());
 
 		//Quote Handler
-		TypedHandler.registerQuoteHandler(RHTMLFileType.RHTML, new HtmlQuoteHandler());
+		TypedHandler.registerQuoteHandler(RHTMLFileType.INSTANCE, new HtmlQuoteHandler());
 
 		//TODO Metadata Bindings
 
@@ -65,7 +65,7 @@ public class RHTMLApplicationComponent implements ApplicationComponent
 	 */
 	private static void registerCompletionData()
 	{
-		CompletionUtil.registerCompletionData(RHTMLFileType.RHTML, new RHTMLCompletionData());
+		CompletionUtil.registerCompletionData(RHTMLFileType.INSTANCE, new RHTMLCompletionData());
 	}
 
 	@Override

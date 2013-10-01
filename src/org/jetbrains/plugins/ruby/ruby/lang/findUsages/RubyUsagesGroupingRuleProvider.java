@@ -16,9 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.usages.UsageView;
@@ -45,20 +43,5 @@ public class RubyUsagesGroupingRuleProvider implements UsageGroupingRuleProvider
 	public AnAction[] createGroupingActions(UsageView usageView)
 	{
 		return AnAction.EMPTY_ARRAY;
-	}
-
-	@NonNls
-	@NotNull
-	public String getComponentName()
-	{
-		return RComponents.RUBY_USAGE_GROUP_RULE_PROVIDER;
-	}
-
-	public void initComponent()
-	{
-	}
-
-	public void disposeComponent()
-	{
 	}
 }

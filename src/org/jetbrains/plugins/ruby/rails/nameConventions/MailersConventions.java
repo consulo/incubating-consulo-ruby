@@ -174,7 +174,7 @@ public class MailersConventions
 				{
 					final String tMailDirUrl = tMailDir.getUrl();
 					fileSymbol.addLoadPathUrl(tMailDirUrl);
-					final String tmailUrl = tMailDirUrl + VirtualFileUtil.VFS_PATH_SEPARATOR + ACTION_MAILER_BUILT_IN_GEMS_TMAIL + "." + RubyFileType.RUBY.getDefaultExtension();
+					final String tmailUrl = tMailDirUrl + VirtualFileUtil.VFS_PATH_SEPARATOR + ACTION_MAILER_BUILT_IN_GEMS_TMAIL + "." + RubyFileType.INSTANCE.getDefaultExtension();
 					FileSymbolUtil.process(fileSymbol, tmailUrl, mode, false);
 				}
 			}

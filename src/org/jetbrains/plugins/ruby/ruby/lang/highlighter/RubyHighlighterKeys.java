@@ -28,7 +28,7 @@ import com.intellij.openapi.editor.markup.EffectType;
 import com.intellij.openapi.editor.markup.TextAttributes;
 
 
-public class RubyHighlighter
+public class RubyHighlighterKeys
 {
 	@NonNls
 	static final String KEYWORD_ID = "RUBY_KEYWORD";

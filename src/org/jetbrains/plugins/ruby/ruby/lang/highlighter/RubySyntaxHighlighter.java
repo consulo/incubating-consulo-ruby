@@ -48,46 +48,46 @@ public class RubySyntaxHighlighter extends SyntaxHighlighterBase implements Ruby
 
 	static
 	{
-		fillMap(ATTRIBUTES, BNF.kALL_RESWORDS, RubyHighlighter.KEYWORD);
-		fillMap(ATTRIBUTES, BNF.tOPS, RubyHighlighter.OPERATION_SIGN);
-		fillMap(ATTRIBUTES, BNF.tCOMMENTS, RubyHighlighter.COMMENT);
-		fillMap(ATTRIBUTES, BNF.tNUMBERS, RubyHighlighter.NUMBER);
+		fillMap(ATTRIBUTES, BNF.kALL_RESWORDS, RubyHighlighterKeys.KEYWORD);
+		fillMap(ATTRIBUTES, BNF.tOPS, RubyHighlighterKeys.OPERATION_SIGN);
+		fillMap(ATTRIBUTES, BNF.tCOMMENTS, RubyHighlighterKeys.COMMENT);
+		fillMap(ATTRIBUTES, BNF.tNUMBERS, RubyHighlighterKeys.NUMBER);
 
-		fillMap(ATTRIBUTES, tBRACES, RubyHighlighter.BRACKETS);
+		fillMap(ATTRIBUTES, tBRACES, RubyHighlighterKeys.BRACKETS);
 
-		ATTRIBUTES.put(T_STRING_CONTENT, RubyHighlighter.STRING);
-		fillMap(ATTRIBUTES, BNF.tSTRING_DELIMITERS, RubyHighlighter.STRING);
+		ATTRIBUTES.put(T_STRING_CONTENT, RubyHighlighterKeys.STRING);
+		fillMap(ATTRIBUTES, BNF.tSTRING_DELIMITERS, RubyHighlighterKeys.STRING);
 
-		ATTRIBUTES.put(tREGEXP_CONTENT, RubyHighlighter.REGEXPS);
-		fillMap(ATTRIBUTES, BNF.tREGEXP_DELIMITERS, RubyHighlighter.REGEXPS);
+		ATTRIBUTES.put(tREGEXP_CONTENT, RubyHighlighterKeys.REGEXPS);
+		fillMap(ATTRIBUTES, BNF.tREGEXP_DELIMITERS, RubyHighlighterKeys.REGEXPS);
 
-		ATTRIBUTES.put(tWORDS_CONTENT, RubyHighlighter.WORDS);
-		fillMap(ATTRIBUTES, BNF.tWORDS_DELIMITERS, RubyHighlighter.WORDS);
+		ATTRIBUTES.put(tWORDS_CONTENT, RubyHighlighterKeys.WORDS);
+		fillMap(ATTRIBUTES, BNF.tWORDS_DELIMITERS, RubyHighlighterKeys.WORDS);
 
-		ATTRIBUTES.put(tHEREDOC_CONTENT, RubyHighlighter.HEREDOC_CONTENT);
-		fillMap(ATTRIBUTES, BNF.tHEREDOC_ALL_IDS, RubyHighlighter.HEREDOC_ID);
+		ATTRIBUTES.put(tHEREDOC_CONTENT, RubyHighlighterKeys.HEREDOC_CONTENT);
+		fillMap(ATTRIBUTES, BNF.tHEREDOC_ALL_IDS, RubyHighlighterKeys.HEREDOC_ID);
 
-		fillMap(ATTRIBUTES, BNF.tEXPR_SUBT_TOKENS, RubyHighlighter.EXPR_SUBST_MARKS);
+		fillMap(ATTRIBUTES, BNF.tEXPR_SUBT_TOKENS, RubyHighlighterKeys.EXPR_SUBST_MARKS);
 
-		ATTRIBUTES.put(tCOMMA, RubyHighlighter.COMMA);
-		ATTRIBUTES.put(tSEMICOLON, RubyHighlighter.SEMICOLON);
-		ATTRIBUTES.put(tLINE_CONTINUATION, RubyHighlighter.LINE_CONTINUATION);
+		ATTRIBUTES.put(tCOMMA, RubyHighlighterKeys.COMMA);
+		ATTRIBUTES.put(tSEMICOLON, RubyHighlighterKeys.SEMICOLON);
+		ATTRIBUTES.put(tLINE_CONTINUATION, RubyHighlighterKeys.LINE_CONTINUATION);
 
-		ATTRIBUTES.put(tIDENTIFIER, RubyHighlighter.IDENTIFIER);
-		ATTRIBUTES.put(tCONSTANT, RubyHighlighter.CONSTANT);
-		ATTRIBUTES.put(tCVAR, RubyHighlighter.CVAR);
-		ATTRIBUTES.put(tGVAR, RubyHighlighter.GVAR);
-		ATTRIBUTES.put(tIVAR, RubyHighlighter.IVAR);
+		ATTRIBUTES.put(tIDENTIFIER, RubyHighlighterKeys.IDENTIFIER);
+		ATTRIBUTES.put(tCONSTANT, RubyHighlighterKeys.CONSTANT);
+		ATTRIBUTES.put(tCVAR, RubyHighlighterKeys.CVAR);
+		ATTRIBUTES.put(tGVAR, RubyHighlighterKeys.GVAR);
+		ATTRIBUTES.put(tIVAR, RubyHighlighterKeys.IVAR);
 
-		ATTRIBUTES.put(tNTH_REF, RubyHighlighter.NTH_REF);
-		ATTRIBUTES.put(tBACK_REF, RubyHighlighter.BACK_REF);
+		ATTRIBUTES.put(tNTH_REF, RubyHighlighterKeys.NTH_REF);
+		ATTRIBUTES.put(tBACK_REF, RubyHighlighterKeys.BACK_REF);
 
-		ATTRIBUTES.put(tESCAPE_SEQUENCE, RubyHighlighter.ESCAPE_SEQUENCE);
-		ATTRIBUTES.put(tINVALID_ESCAPE_SEQUENCE, RubyHighlighter.INVALID_ESCAPE_SEQUENCE);
+		ATTRIBUTES.put(tESCAPE_SEQUENCE, RubyHighlighterKeys.ESCAPE_SEQUENCE);
+		ATTRIBUTES.put(tINVALID_ESCAPE_SEQUENCE, RubyHighlighterKeys.INVALID_ESCAPE_SEQUENCE);
 
-		ATTRIBUTES.put(tBAD_CHARACTER, RubyHighlighter.BAD_CHARACTER);
+		ATTRIBUTES.put(tBAD_CHARACTER, RubyHighlighterKeys.BAD_CHARACTER);
 
-		ATTRIBUTES.put(tASSOC, RubyHighlighter.HASH_ASSOC);
+		ATTRIBUTES.put(tASSOC, RubyHighlighterKeys.HASH_ASSOC);
 
 	}
 

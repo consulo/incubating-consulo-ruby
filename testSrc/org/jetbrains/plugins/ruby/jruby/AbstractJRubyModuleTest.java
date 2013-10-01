@@ -30,7 +30,6 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetType;
 import org.jetbrains.plugins.ruby.ruby.cache.AbstractRubyModuleCacheTest;
-import org.jetbrains.plugins.ruby.ruby.module.RubyModuleType;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
 import org.jetbrains.plugins.ruby.support.TestUtil;
 

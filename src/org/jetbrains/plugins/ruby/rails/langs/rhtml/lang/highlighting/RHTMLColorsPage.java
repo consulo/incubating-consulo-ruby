@@ -51,13 +51,13 @@ public class RHTMLColorsPage implements ColorSettingsPage
 			"<% } %> \n";
 
 	private static final AttributesDescriptor[] ATTRS = new AttributesDescriptor[]{
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.scriptlet.start"), RHTMLHighlighter.RHTML_SCRIPTLET_START),
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.scriptlet.end"), RHTMLHighlighter.RHTML_SCRIPTLET_END),
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.expr.start"), RHTMLHighlighter.RHTML_EXPRESSION_START),
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.expr.end"), RHTMLHighlighter.RHTML_EXPRESSION_END),
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.comment"), RHTMLHighlighter.COMMENT),
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.omit.new.line"), RHTMLHighlighter.OMIT_NEW_LINE),
-			new AttributesDescriptor(RBundle.message("color.settings.rhtml.scripting.bkg"), RHTMLHighlighter.RHTML_SCRIPTING_BACKGROUND)
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.scriptlet.start"), RHTMLHighlighterKeys.RHTML_SCRIPTLET_START),
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.scriptlet.end"), RHTMLHighlighterKeys.RHTML_SCRIPTLET_END),
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.expr.start"), RHTMLHighlighterKeys.RHTML_EXPRESSION_START),
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.expr.end"), RHTMLHighlighterKeys.RHTML_EXPRESSION_END),
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.comment"), RHTMLHighlighterKeys.COMMENT),
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.omit.new.line"), RHTMLHighlighterKeys.OMIT_NEW_LINE),
+			new AttributesDescriptor(RBundle.message("color.settings.rhtml.scripting.bkg"), RHTMLHighlighterKeys.RHTML_SCRIPTING_BACKGROUND)
 	};
 
 	private static final ColorDescriptor[] COLORS = new ColorDescriptor[0];
@@ -141,7 +141,7 @@ public class RHTMLColorsPage implements ColorSettingsPage
 
 			if(tokenType instanceof RubyElementType)
 			{
-				return pack(RHTMLHighlighter.RHTML_SCRIPTING_BACKGROUND, myRubyHighlighter.getTokenHighlights(tokenType));
+				return pack(RHTMLHighlighterKeys.RHTML_SCRIPTING_BACKGROUND, myRubyHighlighter.getTokenHighlights(tokenType));
 			}
 
 			return myHTMLHighlighter.getTokenHighlights(tokenType);

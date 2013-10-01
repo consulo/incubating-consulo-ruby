@@ -52,7 +52,7 @@ public class RFileImpl extends RPsiFileBase implements RFile
 	@NotNull
 	public FileType getFileType()
 	{
-		return RubyFileType.RUBY;
+		return RubyFileType.INSTANCE;
 	}
 
 	public String toString()

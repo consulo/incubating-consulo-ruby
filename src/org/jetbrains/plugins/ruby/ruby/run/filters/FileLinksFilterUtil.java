@@ -51,7 +51,7 @@ public class FileLinksFilterUtil
 			// sometimes ruby files are mentioned without extension, e.g. "examle.rb" -> "example"
 			if(!srcFile.exists() || srcFile.isDirectory())
 			{
-				final File srcRBFile = new File(filePath + "." + RubyFileType.RUBY.getDefaultExtension());
+				final File srcRBFile = new File(filePath + "." + RubyFileType.INSTANCE.getDefaultExtension());
 				if(!srcFile.exists() || (srcFile.isDirectory() && srcRBFile.exists()))
 				{
 					srcFile = srcRBFile;

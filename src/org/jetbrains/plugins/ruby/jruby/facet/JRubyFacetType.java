@@ -98,7 +98,7 @@ public class JRubyFacetType extends FacetType<JRubyFacet, RSupportPerModuleSetti
 				return module != null && !RubyUtil.isRubyModuleType(module) && !JRubyUtil.hasJRubySupport(module) && JRubyFacetStructure.isValidForJRubyFacet(vFile);
 			}
 		};
-		detectorRegistry.registerOnTheFlyDetector(RubyFileType.RUBY, jrubyFacetFilter, condition, new FacetDetector<PsiFile, RSupportPerModuleSettingsImpl>()
+		detectorRegistry.registerOnTheFlyDetector(RubyFileType.INSTANCE, jrubyFacetFilter, condition, new FacetDetector<PsiFile, RSupportPerModuleSettingsImpl>()
 		{
 			public RSupportPerModuleSettingsImpl detectFacet(PsiFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations)
 			{
@@ -106,7 +106,7 @@ public class JRubyFacetType extends FacetType<JRubyFacet, RSupportPerModuleSetti
 			}
 		});
 
-		detectorRegistry.registerDetectorForWizard(RubyFileType.RUBY, jrubyFacetFilter, new FacetDetector<VirtualFile, RSupportPerModuleSettingsImpl>()
+		detectorRegistry.registerDetectorForWizard(RubyFileType.INSTANCE, jrubyFacetFilter, new FacetDetector<VirtualFile, RSupportPerModuleSettingsImpl>()
 		{
 			public RSupportPerModuleSettingsImpl detectFacet(VirtualFile source, Collection<RSupportPerModuleSettingsImpl> existentFacetConfigurations)
 			{

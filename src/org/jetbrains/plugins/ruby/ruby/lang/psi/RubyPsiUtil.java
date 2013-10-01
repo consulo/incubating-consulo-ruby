@@ -78,7 +78,7 @@ public class RubyPsiUtil
 {
 	private static final Logger LOG = Logger.getInstance(RubyPsiUtil.class.getName());
 	@NonNls
-	private static final String TEMP_FILE_NAME = "ruby_temp_file_" + RubyPsiUtil.class.hashCode() + "." + RubyFileType.RUBY.getDefaultExtension();
+	private static final String TEMP_FILE_NAME = "ruby_temp_file_" + RubyPsiUtil.class.hashCode() + "." + RubyFileType.INSTANCE.getDefaultExtension();
 
 	/**
 	 * Creates Ruby File with text as content
@@ -102,7 +102,7 @@ public class RubyPsiUtil
 
 	public static RFile createDummyRubyFile(final Project project, @NotNull final String text)
 	{
-		final FileType type = RubyFileType.RUBY;
+		final FileType type = RubyFileType.INSTANCE;
 		return (RFile) createFileFromText(project, TEMP_FILE_NAME, type, text);
 	}
 

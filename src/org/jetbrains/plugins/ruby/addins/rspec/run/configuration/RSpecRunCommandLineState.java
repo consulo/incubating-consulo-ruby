@@ -131,7 +131,7 @@ public class RSpecRunCommandLineState extends AbstractRTestsCommandLineState
 
 	private void createRunInFolderConfScript(@Nullable final String rspecScriptPath, final String rubyExecutablePath, final boolean runSeparately) throws IOException
 	{
-		tempFile = File.createTempFile(TEMP_FILE_PREFIX, "." + RubyFileType.RUBY.getDefaultExtension());
+		tempFile = File.createTempFile(TEMP_FILE_PREFIX, "." + RubyFileType.INSTANCE.getDefaultExtension());
 		tempFile.deleteOnExit();
 		// Write to temp file
 		final StringBuilder buff = new StringBuilder();

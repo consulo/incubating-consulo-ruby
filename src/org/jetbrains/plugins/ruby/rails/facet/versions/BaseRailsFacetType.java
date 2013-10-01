@@ -110,7 +110,7 @@ public abstract class BaseRailsFacetType<F extends BaseRailsFacet> extends Facet
 
 
 		//checks if file is boot.rb of Rails application
-		detectorRegistry.registerOnTheFlyDetector(RubyFileType.RUBY, railsFacetFilter, condition, new FacetDetector<PsiFile, BaseRailsFacetConfiguration>()
+		detectorRegistry.registerOnTheFlyDetector(RubyFileType.INSTANCE, railsFacetFilter, condition, new FacetDetector<PsiFile, BaseRailsFacetConfiguration>()
 		{
 			public BaseRailsFacetConfiguration detectFacet(final PsiFile psiFile, final Collection<BaseRailsFacetConfiguration> existentFacetConfigurations)
 			{

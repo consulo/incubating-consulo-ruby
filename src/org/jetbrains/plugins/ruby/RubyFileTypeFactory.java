@@ -36,11 +36,11 @@ public class RubyFileTypeFactory extends FileTypeFactory
 	public void createFileTypes(@NotNull FileTypeConsumer consumer)
 	{
 		// Loading Ruby file type
-		consumer.consume(RubyFileType.RUBY, RubyFileType.RUBY_EXTENTIONS);
+		consumer.consume(RubyFileType.INSTANCE, RubyFileType.RUBY_EXTENTIONS);
 		// Loading rails related types
 
 		consumer.consume(RJSFileType.RJS, RJSFileType.RJS.getDefaultExtension());
-		consumer.consume(RHTMLFileType.RHTML, RHTMLFileType.VALID_EXTENTIONS);
+		consumer.consume(RHTMLFileType.INSTANCE, RHTMLFileType.VALID_EXTENTIONS);
 		consumer.consume(RXMLFileType.RXML, RXMLFileType.VALID_EXTENTIONS);
 	}
 }

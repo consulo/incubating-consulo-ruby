@@ -40,7 +40,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 public class RHTMLFileType extends XmlLikeFileType
 {
 	public static final String VALID_EXTENTIONS = "rhtml;erb;";
-	public static final RHTMLFileType RHTML = new RHTMLFileType();
+	public static final RHTMLFileType INSTANCE = new RHTMLFileType();
 
 	@NonNls
 	private static final String NAME = "RHTML";

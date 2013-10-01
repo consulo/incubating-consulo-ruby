@@ -29,27 +29,27 @@ import com.intellij.psi.PsiElement;
  */
 public class RubyHighlightInfoType implements HighlightInfoType
 {
-	public static final RubyHighlightInfoType RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.REQUIRE_OR_LOAD_CALL_ID, RubyHighlighter.REQUIRE_OR_LOAD_CALL);
-	public static final RubyHighlightInfoType RUBY_REQUIRE_OR_LOAD_CALL_ARG_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.REQUIRE_OR_LOAD_CALL_ARG_ID, RubyHighlighter.REQUIRE_OR_LOAD_CALL_ARG);
+	public static final RubyHighlightInfoType RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL_ID, RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL);
+	public static final RubyHighlightInfoType RUBY_REQUIRE_OR_LOAD_CALL_ARG_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL_ARG_ID, RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL_ARG);
 
-	public static final RubyHighlightInfoType RUBY_INCLUDE_OR_EXTEND_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.INCLUDE_OR_EXTEND_CALL_ID, RubyHighlighter.INCLUDE_OR_EXTEND_CALL);
+	public static final RubyHighlightInfoType RUBY_INCLUDE_OR_EXTEND_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.INCLUDE_OR_EXTEND_CALL_ID, RubyHighlighterKeys.INCLUDE_OR_EXTEND_CALL);
 
-	public static final RubyHighlightInfoType RUBY_PRIVATE_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.PRIVATE_CALL_ID, RubyHighlighter.PRIVATE_CALL);
-	public static final RubyHighlightInfoType RUBY_PROTECTED_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.PROTECTED_CALL_ID, RubyHighlighter.PROTECTED_CALL);
-	public static final RubyHighlightInfoType RUBY_PUBLIC_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.PUBLIC_CALL_ID, RubyHighlighter.PUBLIC_CALL);
+	public static final RubyHighlightInfoType RUBY_PRIVATE_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.PRIVATE_CALL_ID, RubyHighlighterKeys.PRIVATE_CALL);
+	public static final RubyHighlightInfoType RUBY_PROTECTED_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.PROTECTED_CALL_ID, RubyHighlighterKeys.PROTECTED_CALL);
+	public static final RubyHighlightInfoType RUBY_PUBLIC_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.PUBLIC_CALL_ID, RubyHighlighterKeys.PUBLIC_CALL);
 
-	public static final RubyHighlightInfoType RUBY_ATTR_READER_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.ATTR_READER_CALL_ID, RubyHighlighter.ATTR_READER);
-	public static final RubyHighlightInfoType RUBY_ATTR_WRITER_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.ATTR_WRITER_CALL_ID, RubyHighlighter.ATTR_WRITER);
-	public static final RubyHighlightInfoType RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.ATTR_ACCESSOR_CALL_ID, RubyHighlighter.ATTR_ACCESSOR);
-	public static final RubyHighlightInfoType RUBY_RAILS_ATTR_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.RAILS_ATTR_CALL_ID, RubyHighlighter.RAILS_ATTR);
+	public static final RubyHighlightInfoType RUBY_ATTR_READER_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.ATTR_READER_CALL_ID, RubyHighlighterKeys.ATTR_READER);
+	public static final RubyHighlightInfoType RUBY_ATTR_WRITER_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.ATTR_WRITER_CALL_ID, RubyHighlighterKeys.ATTR_WRITER);
+	public static final RubyHighlightInfoType RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.ATTR_ACCESSOR_CALL_ID, RubyHighlighterKeys.ATTR_ACCESSOR);
+	public static final RubyHighlightInfoType RUBY_RAILS_ATTR_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.RAILS_ATTR_CALL_ID, RubyHighlighterKeys.RAILS_ATTR);
 
-	public static final RubyHighlightInfoType RUBY_CONSTANT_DEF_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.CONSTANT_DEF_ID, RubyHighlighter.CONSTANT_DEF);
-	public static final RubyHighlightInfoType RUBY_SYMBOL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.SYMBOL_ID, RubyHighlighter.SYMBOL);
-	public static final RubyHighlightInfoType RUBY_LOCAL_VARIABLE_HIGHTLIGHT = new RubyHighlightInfoType(RubyHighlighter.LOCAL_VARIABLE_ID, RubyHighlighter.LOCAL_VARIABLE);
+	public static final RubyHighlightInfoType RUBY_CONSTANT_DEF_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.CONSTANT_DEF_ID, RubyHighlighterKeys.CONSTANT_DEF);
+	public static final RubyHighlightInfoType RUBY_SYMBOL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.SYMBOL_ID, RubyHighlighterKeys.SYMBOL);
+	public static final RubyHighlightInfoType RUBY_LOCAL_VARIABLE_HIGHTLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.LOCAL_VARIABLE_ID, RubyHighlighterKeys.LOCAL_VARIABLE);
 
-	public static final RubyHighlightInfoType JRUBY_INCLUDE_JAVA_HIGHTLIGHT = new RubyHighlightInfoType(RubyHighlighter.INCLUDE_JAVA_CALL_ID, RubyHighlighter.INCLUDE_JAVA_CALL);
+	public static final RubyHighlightInfoType JRUBY_INCLUDE_JAVA_HIGHTLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.INCLUDE_JAVA_CALL_ID, RubyHighlighterKeys.INCLUDE_JAVA_CALL);
 
-	public static final RubyHighlightInfoType RUBY_REQUIRE_GEM_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighter.REQUIRE_GEM_CALL_ID, RubyHighlighter.REQUIRE_GEM_CALL);
+	public static final RubyHighlightInfoType RUBY_REQUIRE_GEM_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.REQUIRE_GEM_CALL_ID, RubyHighlighterKeys.REQUIRE_GEM_CALL);
 
 	private String myText;
 	private TextAttributesKey myTextAttributesKey;
