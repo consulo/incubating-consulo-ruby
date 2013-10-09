@@ -55,4 +55,10 @@ public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider
 		}
 		return null;
 	}
+
+	@Override
+	public boolean overrideNamespaceFromDocType(@NotNull XmlFile xmlFile)
+	{
+		return true;
+	}
 }

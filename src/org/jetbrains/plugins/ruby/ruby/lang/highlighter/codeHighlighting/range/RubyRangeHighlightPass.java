@@ -98,7 +98,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		{
 			if(rConstant.isRealConstant())
 			{
-				myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_CONSTANT_DEF_HIGHLIGHT, rConstant, null));
+				myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_CONSTANT_DEF_HIGHLIGHT).range(rConstant).create());
 			}
 		}
 
@@ -107,7 +107,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		{
 			if(rIdentifier.isParameter() || rIdentifier.isLocalVariable())
 			{
-				myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_LOCAL_VARIABLE_HIGHTLIGHT, rIdentifier, null));
+				myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_LOCAL_VARIABLE_HIGHTLIGHT).range(rIdentifier).create());
 				return;
 			}
 			// If its not a command
@@ -117,33 +117,33 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 				AccessModifier mod = AccessModifiersUtil.getModifierByName(text);
 				if(mod == AccessModifier.PUBLIC)
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_PUBLIC_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PUBLIC_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 				if(mod == AccessModifier.PRIVATE)
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_PRIVATE_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PRIVATE_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 				if(mod == AccessModifier.PROTECTED)
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_PROTECTED_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PROTECTED_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 				// commands
 				if(RCall.ATTR_ACCESSOR_COMMAND.equals(text))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 				if(RCall.ATTR_READER_COMMAND.equals(text))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_READER_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_READER_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 				if(RCall.ATTR_WRITER_COMMAND.equals(text))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_WRITER_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_WRITER_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 
 				if(RCall.EXTEND_COMMAND.equals(text) || RCall.INCLUDE_COMMAND.equals(text))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_INCLUDE_OR_EXTEND_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_INCLUDE_OR_EXTEND_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 
 				final RFile rFile = RubyPsiUtil.getRFile(rIdentifier);
@@ -152,17 +152,17 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 						RCall.INCLUDE_CLASS_COMMAND.equals(text) ||
 						RCall.INCLUDE_PACKAGE_COMMAND.equals(text)))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT).range(rIdentifier).create());
 				}
 
 				if(RCall.LOAD_COMMAND.equals(text) || RCall.REQUIRE_COMMAND.equals(text))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 
 				if(RCall.GEM_COMMAND.equals(text) || RCall.REQUIRE_GEM_COMMAND.equals(text))
 				{
-					myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT, rIdentifier, null));
+					myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT).range(rIdentifier).create());
 				}
 			}
 		}
@@ -181,10 +181,10 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 
 		private void visitRequireOrLoad(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 			for(RPsiElement arg : rCall.getArguments())
 			{
-				myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_ARG_HIGHLIGHT, arg, null));
+				myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_ARG_HIGHLIGHT).range(arg).create());
 			}
 		}
 
@@ -202,61 +202,61 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 
 		private void visitIncludeOrExtend(RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_INCLUDE_OR_EXTEND_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_INCLUDE_OR_EXTEND_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitAttrAccessorCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitAttrWriterCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_WRITER_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_WRITER_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitAttrReaderCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_READER_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_READER_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitAttrInternalCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_RAILS_ATTR_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_RAILS_ATTR_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitCAttrAccessorCall(@NotNull final RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_RAILS_ATTR_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_RAILS_ATTR_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitPublicCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_PUBLIC_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PUBLIC_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitProtectedCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_PROTECTED_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PROTECTED_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitPrivateCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_PRIVATE_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PRIVATE_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
 		public void visitRSymbol(@NotNull RSymbol rSymbol)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_SYMBOL_HIGHLIGHT, rSymbol, null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_SYMBOL_HIGHLIGHT).range(rSymbol).create());
 		}
 
 		@Override
@@ -266,7 +266,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 			assert rFile != null;
 			if(rFile.isJRubyEnabled())
 			{
-				myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT, rCall.getPsiCommand(), null));
+				myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT).range(rCall.getPsiCommand()).create());
 			}
 		}
 
@@ -277,7 +277,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 			assert rFile != null;
 			if(rFile.isJRubyEnabled())
 			{
-				myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT, rCall.getPsiCommand(), null));
+				myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT).range(rCall.getPsiCommand()).create());
 			}
 		}
 
@@ -288,14 +288,14 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 			assert rFile != null;
 			if(rFile.isJRubyEnabled())
 			{
-				myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT, rCall.getPsiCommand(), null));
+				myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.JRUBY_INCLUDE_JAVA_HIGHTLIGHT).range(rCall.getPsiCommand()).create());
 			}
 		}
 
 		@Override
 		public void visitGemCall(@NotNull RCall rCall)
 		{
-			myCollection.add(HighlightInfo.createHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_GEM_CALL_HIGHLIGHT, rCall.getPsiCommand(), null));
+			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_GEM_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 	}
 }

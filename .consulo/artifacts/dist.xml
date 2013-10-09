@@ -9,6 +9,7 @@
             <element id="directory" name="META-INF">
               <element id="dir-copy" path="$PROJECT_DIR$/META-INF" />
             </element>
+            <element id="module-production-resource-output" name="consulo-ruby" />
           </element>
           <element id="dir-copy" path="$PROJECT_DIR$/jruby" />
         </element>
@@ -18,6 +19,7 @@
         <element id="directory" name="lib">
           <element id="zip-archive" name="yaml.jar">
             <element id="module-output" name="consulo-yaml" />
+            <element id="module-production-resource-output" name="consulo-yaml" />
           </element>
           <element id="file-copy" path="$PROJECT_DIR$/jruby/jruby-complete.jar" />
         </element>
@@ -26,6 +28,7 @@
         <element id="directory" name="lib">
           <element id="zip-archive" name="jruby.jar">
             <element id="module-output" name="consulo-jruby" />
+            <element id="module-production-resource-output" name="consulo-jruby" />
           </element>
         </element>
         <element id="dir-copy" path="$PROJECT_DIR$/consulo-jruby/dist" />
@@ -34,6 +37,7 @@
         <element id="directory" name="lib">
           <element id="zip-archive" name="ruby-on-rails.jar">
             <element id="module-output" name="consulo-ruby-on-rails" />
+            <element id="module-production-resource-output" name="consulo-ruby-on-rails" />
           </element>
         </element>
       </element>
@@ -41,6 +45,7 @@
         <element id="directory" name="lib">
           <element id="zip-archive" name="jruby-on-rails.jar">
             <element id="module-output" name="consulo-jruby-on-rails" />
+            <element id="module-production-resource-output" name="consulo-jruby-on-rails" />
           </element>
         </element>
       </element>

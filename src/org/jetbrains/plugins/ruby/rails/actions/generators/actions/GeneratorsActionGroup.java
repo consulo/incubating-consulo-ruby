@@ -33,7 +33,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Separator;
+import com.intellij.openapi.actionSystem.AnSeparator;
 import com.intellij.openapi.module.Module;
 
 /**
@@ -88,7 +88,7 @@ public class GeneratorsActionGroup extends ActionGroup
 			}
 			myActions.add(createGeneratorAction(name2Action, generator));
 		}
-		myActions.add(Separator.getInstance());
+		myActions.add(AnSeparator.getInstance());
 
 		return myActions.toArray(new AnAction[myActions.size()]);
 	}
