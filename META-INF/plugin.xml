@@ -27,7 +27,7 @@
 
 	<depends optional="true" config-file="ruby-javascript-integration.xml">JavaScript</depends>
 
-	<extensions defaultExtensionNs="org.consulo.java.platform">
+	<extensions defaultExtensionNs="org.consulo.java">
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
 		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
 	</extensions>

@@ -72,4 +72,10 @@ public class RubyHighlightInfoType implements HighlightInfoType
 	{
 		return myTextAttributesKey;
 	}
+
+	@Override
+	public boolean needUpdateOnTyping()
+	{
+		return false;
+	}
 }

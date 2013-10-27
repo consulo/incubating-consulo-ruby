@@ -67,8 +67,8 @@ public class RIHelpAction extends AnAction
 		}
 		assert toSearch.get() != null;
 		assert project != null;
-		RubyDocManager.getInstance(project).showHelp(toSearch.get());
-		ToolWindowManager.getInstance(project).getToolWindow(RubyDocManager.getName()).show(null);
+
+		ToolWindowManager.getInstance(project).getToolWindow("RDoc").show(null);
 	}
 
 	@Override
@@ -102,13 +102,6 @@ public class RIHelpAction extends AnAction
 		}
 
 
-		// check if RI is available
-		final RubyDocManager docManager = RubyDocManager.getInstance(project);
-		final boolean canSearch = docManager != null && docManager.canSearch();
-		if(!canSearch)
-		{
-			return false;
-		}
 		// check if editor is opened
 		final Editor editor = DataContextUtil.getEditor(dataContext);
 		if(editor == null)

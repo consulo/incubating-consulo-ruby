@@ -5,7 +5,7 @@
       <module name="consulo-ruby" dirurl="file://$PROJECT_DIR$">
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
         <extension id="lombok" />
-        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" custom-plugin-dir-url="file://$MODULE_DIR$/dep" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/aSrc" />
@@ -14,31 +14,6 @@
         <orderEntry type="module-extension-sdk" extension-id="java" />
         <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
         <orderEntry type="sourceFolder" forTests="false" />
-        <orderEntry type="module-library">
-          <library name="consulo:Java">
-            <CLASSES>
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-copyright.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-debugger-api.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-debugger-impl.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-intellilang.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java.jar!/" />
-            </CLASSES>
-            <DOCUMENTATION />
-            <SOURCES />
-          </library>
-        </orderEntry>
-        <orderEntry type="module-library">
-          <library name="consulo:Java Platform">
-            <CLASSES>
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-compiler-artifact-impl.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-platform.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-rt.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/jdk-annotations.jar!/" />
-            </CLASSES>
-            <DOCUMENTATION />
-            <SOURCES />
-          </library>
-        </orderEntry>
         <orderEntry type="module-library" exported="">
           <library>
             <CLASSES>
@@ -48,23 +23,37 @@
             <SOURCES />
           </library>
         </orderEntry>
+        <orderEntry type="module" module-name="consulo-yaml" />
         <orderEntry type="module-library">
           <library name="consulo:XML">
             <CLASSES>
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/xml/lib/xml-copyright.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/xml/lib/xml-dom.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/xml/lib/xml-intellilang.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/xml/lib/xml.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/xml/lib/jaxen-1.1.3.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/xml/lib/jsr173_1.0_api.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/xml/lib/resolver.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/xml/lib/xbean.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/xml/lib/xerces.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/xml/lib/xml.jar!/" />
             </CLASSES>
             <DOCUMENTATION />
             <SOURCES />
           </library>
         </orderEntry>
-        <orderEntry type="module" module-name="consulo-yaml" />
+        <orderEntry type="module-library">
+          <library name="consulo:Java">
+            <CLASSES>
+              <root url="jar://$MODULE_DIR$/dep/java/lib/java-manifest.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/java/lib/java-rt.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/java/lib/java.jar!/" />
+              <root url="jar://$MODULE_DIR$/dep/java/lib/jdk-annotations.jar!/" />
+            </CLASSES>
+            <DOCUMENTATION />
+            <SOURCES />
+          </library>
+        </orderEntry>
       </module>
       <module name="consulo-jruby" dirurl="file://$PROJECT_DIR$/consulo-jruby">
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
-        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" custom-plugin-dir-url="file://$MODULE_DIR$/../dep" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
           <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
@@ -72,27 +61,14 @@
         <orderEntry type="module-extension-sdk" extension-id="java" />
         <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
         <orderEntry type="sourceFolder" forTests="false" />
+        <orderEntry type="module" module-name="consulo-ruby" exported="" />
         <orderEntry type="module-library">
           <library name="consulo:Java">
             <CLASSES>
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-copyright.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-debugger-api.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-debugger-impl.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-intellilang.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java.jar!/" />
-            </CLASSES>
-            <DOCUMENTATION />
-            <SOURCES />
-          </library>
-        </orderEntry>
-        <orderEntry type="module" module-name="consulo-ruby" exported="" />
-        <orderEntry type="module-library">
-          <library name="consulo:Java Platform">
-            <CLASSES>
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-compiler-artifact-impl.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-platform.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/java-rt.jar!/" />
-              <root url="jar://$APPLICATION_HOME_DIR$/plugins/java-platform/lib/jdk-annotations.jar!/" />
+              <root url="jar://$MODULE_DIR$/../dep/java/lib/java-manifest.jar!/" />
+              <root url="jar://$MODULE_DIR$/../dep/java/lib/java-rt.jar!/" />
+              <root url="jar://$MODULE_DIR$/../dep/java/lib/java.jar!/" />
+              <root url="jar://$MODULE_DIR$/../dep/java/lib/jdk-annotations.jar!/" />
             </CLASSES>
             <DOCUMENTATION />
             <SOURCES />
