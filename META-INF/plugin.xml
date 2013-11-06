@@ -116,11 +116,16 @@
 						serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper" />
 
 		<usageGroupingRuleProvider implementation="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsagesGroupingRuleProvider" />
+
+		<listOfElements name="rdocToolwindowModuleExtensionList">
+			<add>ruby</add>
+		</listOfElements>
+
 		<toolWindow id="RDoc"
 					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
 					anchor="right"
 					secondary="true"
-					requireModuleExtensions="ruby, jruby"
+					requireModuleExtensions="@@rdocToolwindowModuleExtensionList"
 					factoryClass="org.consulo.ruby.toolWindow.RDocToolWindowFactory" />
 	</extensions>
 

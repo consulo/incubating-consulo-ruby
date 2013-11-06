@@ -13,6 +13,8 @@
 	</project-components>  -->
 
 	<extensions defaultExtensionNs="com.intellij">
+		<addTo.listOfElements name="rdocToolwindowModuleExtensionList">jruby</addTo.listOfElements>
+
 		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
 
 		<moduleExtensionProvider key="jruby" parent-key="java" implementationClass="org.consulo.jruby.module.extension.JRubyModuleExtensionProvider" />
