@@ -82,7 +82,7 @@ public class RubyVirtualFileScanner
 
 	public static boolean isRubyFile(@Nullable final VirtualFile fileOrDir)
 	{
-		return !(fileOrDir == null || fileOrDir.isDirectory()) && isRubyFile(fileOrDir.getName());
+		return !(fileOrDir == null || fileOrDir.isDirectory()) && fileOrDir.getFileType() instanceof RubyFileType;
 	}
 
 	/**

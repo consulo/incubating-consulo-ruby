@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
@@ -177,7 +178,7 @@ public class RubyRunConfigurationUIUtil
 		return folderChooserDescriptor;
 	}
 
-	public static FileChooserDescriptor addFileChooser(@NotNull final String title, @NotNull final TextFieldWithBrowseButton textField, @NotNull final Project project)
+	public static FileChooserDescriptor addFileChooser(@NotNull final String title, @NotNull final TextFieldWithBrowseButton textField, @Nullable final Project project)
 	{
 		final FileChooserDescriptor fileChooserDescriptor = FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor();
 		fileChooserDescriptor.setTitle(title);

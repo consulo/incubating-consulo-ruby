@@ -150,7 +150,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 
 	@Override
 	@Nullable
-	public Spacing getSpacing(@NotNull final Block child1, @NotNull final Block child2)
+	public Spacing getSpacing(@Nullable final Block child1, @NotNull final Block child2)
 	{
 		final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child1);
 		final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child2);
