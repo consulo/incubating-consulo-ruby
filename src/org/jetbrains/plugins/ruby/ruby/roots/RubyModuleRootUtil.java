@@ -1,11 +1,12 @@
 package org.jetbrains.plugins.ruby.ruby.roots;
 
 import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.roots.ContentFolderScopes;
+import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ContentFolderType;
 import com.intellij.openapi.roots.ModuleRootManager;
 
 /**
@@ -23,7 +24,7 @@ public class RubyModuleRootUtil
 			ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
 			for(ContentEntry contentEntry : moduleRootManager.getContentEntries())
 			{
-				for(String t : contentEntry.getFolderUrls(ContentFolderType.TEST))
+				for(String t : contentEntry.getFolderUrls(ContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
 				{
 					if(url.equals(t))
 					{

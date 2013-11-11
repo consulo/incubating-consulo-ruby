@@ -39,11 +39,12 @@ import org.jetbrains.plugins.ruby.support.OpenLinkInBrowserHyperlinkListener;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import org.mustbe.consulo.roots.ContentFolderScopes;
+import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ContentFolderType;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.Messages;
@@ -101,7 +102,7 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions
 			String testUnitFolderUrl = null;
 			for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
 			{
-				for(VirtualFile virtualFile : o.getFolderFiles(ContentFolderType.TEST))
+				for(VirtualFile virtualFile : o.getFolderFiles(ContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
 				{
 					testUnitFolderUrl = virtualFile.getUrl();
 					break;

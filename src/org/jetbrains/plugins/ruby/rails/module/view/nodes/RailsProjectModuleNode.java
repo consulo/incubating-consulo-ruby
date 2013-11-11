@@ -33,10 +33,11 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControlle
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsModelFolderNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsSharedPatialsFolderNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsUserFolderNode;
+import org.mustbe.consulo.roots.ContentFolderScopes;
+import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ContentFolderType;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -123,7 +124,7 @@ public class RailsProjectModuleNode extends RailsNode
 		final Set<String> testUrls = new HashSet<String>();
 		for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
 		{
-			for(String url : o.getFolderUrls(ContentFolderType.TEST))
+			for(String url : o.getFolderUrls(ContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
 			{
 				testUrls.add(url);
 			}
