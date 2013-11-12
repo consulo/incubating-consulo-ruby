@@ -18,10 +18,13 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
 import javax.swing.Icon;
 
+import org.consulo.ruby.module.extension.RubyModuleExtension;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
+import org.mustbe.consulo.module.extension.ModuleExtensionHelper;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -42,6 +45,12 @@ public class RubyRunConfigurationFactory extends ConfigurationFactory
 		initDefaultParams(conf);
 
 		return conf;
+	}
+
+	@Override
+	public boolean isApplicable(@NotNull Project project)
+	{
+		return ModuleExtensionHelper.getInstance(project).hasModuleExtension(RubyModuleExtension.class);
 	}
 
 	@Override
