@@ -30,13 +30,6 @@ public class JRubyOnRailsModuleExtensionProvider implements ModuleExtensionProvi
 
 	@NotNull
 	@Override
-	public Class<JRubyOnRailsModuleExtension> getImmutableClass()
-	{
-		return JRubyOnRailsModuleExtension.class;
-	}
-
-	@NotNull
-	@Override
 	public JRubyOnRailsModuleExtension createImmutable(@NotNull String s, @NotNull Module module)
 	{
 		return new JRubyOnRailsModuleExtension(s, module);

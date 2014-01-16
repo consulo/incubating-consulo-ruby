@@ -79,7 +79,7 @@ public class RLoadPathCooserPanel implements CheckBoxListListener
 				dirChooser.setHideIgnored(true);
 				dirChooser.setTitle(RBundle.message("module.settings.dialog.load.path.filechooser.add.dialog.title"));
 				// dirChooser.setContextModule(module);
-				FileChooserDialog chooser = FileChooserFactory.getInstance().createFileChooser(dirChooser, myContentPane);
+				FileChooserDialog chooser = FileChooserFactory.getInstance().createFileChooser(dirChooser, module.getProject(),  myContentPane);
 				VirtualFile[] files = chooser.choose(null, null);
 				for(VirtualFile file : files)
 				{

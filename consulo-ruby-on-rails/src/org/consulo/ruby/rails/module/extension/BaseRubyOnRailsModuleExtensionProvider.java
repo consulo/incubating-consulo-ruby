@@ -30,13 +30,6 @@ public class BaseRubyOnRailsModuleExtensionProvider implements ModuleExtensionPr
 
 	@NotNull
 	@Override
-	public Class<BaseRubyOnRailsModuleExtension> getImmutableClass()
-	{
-		return BaseRubyOnRailsModuleExtension.class;
-	}
-
-	@NotNull
-	@Override
 	public BaseRubyOnRailsModuleExtension createImmutable(@NotNull String s, @NotNull Module module)
 	{
 		return new BaseRubyOnRailsModuleExtension(s, module);

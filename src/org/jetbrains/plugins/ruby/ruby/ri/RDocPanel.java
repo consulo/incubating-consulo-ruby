@@ -115,4 +115,9 @@ public class RDocPanel
 		myPane.getModel().setSelectedIndex(0);
 		myInfoPane.showHelp(name);
 	}
+
+	public Project getProject()
+	{
+		return myProject;
+	}
 }

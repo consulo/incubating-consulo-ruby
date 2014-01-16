@@ -3,9 +3,9 @@
   <component name="ModuleManager">
     <modules>
       <module name="consulo-ruby" dirurl="file://$PROJECT_DIR$">
+        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" custom-plugin-dir-url="file://$MODULE_DIR$/dep" />
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
         <extension id="lombok" />
-        <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" custom-plugin-dir-url="file://$MODULE_DIR$/dep" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/aSrc" />
@@ -52,8 +52,8 @@
         </orderEntry>
       </module>
       <module name="consulo-jruby" dirurl="file://$PROJECT_DIR$/consulo-jruby">
-        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
         <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" custom-plugin-dir-url="file://$MODULE_DIR$/../dep" />
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
           <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
@@ -76,8 +76,8 @@
         </orderEntry>
       </module>
       <module name="consulo-yaml" dirurl="file://$PROJECT_DIR$/consulo-yaml">
-        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
         <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
@@ -96,8 +96,8 @@
         </orderEntry>
       </module>
       <module name="consulo-jruby-on-rails" dirurl="file://$PROJECT_DIR$/consulo-jruby-on-rails">
-        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
         <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
@@ -122,8 +122,8 @@
         <orderEntry type="module" module-name="consulo-ruby-on-rails" />
       </module>
       <module name="consulo-ruby-on-rails" dirurl="file://$PROJECT_DIR$/consulo-ruby-on-rails">
-        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
         <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
+        <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="SOURCE_DIR" />
         <content url="file://$MODULE_DIR$">
           <content-folder type="PRODUCTION_RESOURCE" url="file://$MODULE_DIR$/resources" />
           <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src" />
