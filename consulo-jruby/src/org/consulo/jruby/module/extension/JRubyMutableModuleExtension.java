@@ -1,9 +1,6 @@
 package org.consulo.jruby.module.extension;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 import org.consulo.module.extension.MutableModuleExtensionWithSdk;
 import org.consulo.module.extension.MutableModuleInheritableNamedPointer;
@@ -21,12 +18,9 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  */
 public class JRubyMutableModuleExtension extends JRubyModuleExtension implements RubyModuleExtension<JRubyModuleExtension>, MutableModuleExtensionWithSdk<JRubyModuleExtension>
 {
-	private JRubyModuleExtension myOriginalExtension;
-
-	public JRubyMutableModuleExtension(@NotNull String id, @NotNull Module module, @NotNull JRubyModuleExtension originalExtension)
+	public JRubyMutableModuleExtension(@NotNull String id, @NotNull Module module)
 	{
 		super(id, module);
-		myOriginalExtension = originalExtension;
 	}
 
 	@NotNull
@@ -40,9 +34,7 @@ public class JRubyMutableModuleExtension extends JRubyModuleExtension implements
 	@Override
 	public JComponent createConfigurablePanel(@NotNull ModifiableRootModel modifiableRootModel, @Nullable Runnable runnable)
 	{
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new ModuleExtensionWithSdkPanel(this, runnable), BorderLayout.NORTH);
-		return panel;
+		return wrapToNorth(new ModuleExtensionWithSdkPanel(this, runnable));
 	}
 
 	@Override
@@ -52,14 +44,8 @@ public class JRubyMutableModuleExtension extends JRubyModuleExtension implements
 	}
 
 	@Override
-	public boolean isModified()
+	public boolean isModified(@NotNull JRubyModuleExtension extension)
 	{
-		return isModifiedImpl(myOriginalExtension);
-	}
-
-	@Override
-	public void commit()
-	{
-		myOriginalExtension.commit(this);
+		return isModifiedImpl(extension);
 	}
 }

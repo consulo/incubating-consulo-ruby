@@ -16,12 +16,9 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 public class JRubyOnRailsMutableModuleExtension extends JRubyOnRailsModuleExtension
 		implements MutableModuleExtension<JRubyOnRailsModuleExtension>, ModuleExtension<JRubyOnRailsModuleExtension>
 {
-	private JRubyOnRailsModuleExtension myOriginalExtension;
-
-	public JRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull Module module, @NotNull JRubyOnRailsModuleExtension originalExtension)
+	public JRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull Module module)
 	{
 		super(id, module);
-		myOriginalExtension = originalExtension;
 	}
 
 	@Nullable
@@ -38,14 +35,8 @@ public class JRubyOnRailsMutableModuleExtension extends JRubyOnRailsModuleExtens
 	}
 
 	@Override
-	public boolean isModified()
+	public boolean isModified(@NotNull JRubyOnRailsModuleExtension extension)
 	{
-		return myOriginalExtension.isEnabled() != isEnabled();
-	}
-
-	@Override
-	public void commit()
-	{
-		myOriginalExtension.commit(this);
+		return extension.isEnabled() != isEnabled();
 	}
 }

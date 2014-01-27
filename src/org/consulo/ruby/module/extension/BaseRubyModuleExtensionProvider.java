@@ -37,8 +37,8 @@ public class BaseRubyModuleExtensionProvider implements ModuleExtensionProvider<
 
 	@NotNull
 	@Override
-	public BaseRubyMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module, @NotNull BaseRubyModuleExtension baseRubyModuleExtension)
+	public BaseRubyMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module)
 	{
-		return new BaseRubyMutableModuleExtension(s, module, baseRubyModuleExtension);
+		return new BaseRubyMutableModuleExtension(s, module);
 	}
 }

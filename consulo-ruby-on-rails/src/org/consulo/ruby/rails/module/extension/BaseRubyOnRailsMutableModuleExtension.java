@@ -12,14 +12,12 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  * @author VISTALL
  * @since 25.09.13.
  */
-public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModuleExtension implements RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>, MutableModuleExtension<BaseRubyOnRailsModuleExtension>
+public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModuleExtension implements
+		RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>, MutableModuleExtension<BaseRubyOnRailsModuleExtension>
 {
-	private BaseRubyOnRailsModuleExtension myOriginalExtension;
-
-	public BaseRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull Module module, @NotNull BaseRubyOnRailsModuleExtension originalExtension)
+	public BaseRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull Module module)
 	{
 		super(id, module);
-		myOriginalExtension = originalExtension;
 	}
 
 	@Nullable
@@ -36,14 +34,8 @@ public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModule
 	}
 
 	@Override
-	public boolean isModified()
+	public boolean isModified(@NotNull BaseRubyOnRailsModuleExtension extension)
 	{
-		return myOriginalExtension.isEnabled() != isEnabled();
-	}
-
-	@Override
-	public void commit()
-	{
-		myOriginalExtension.commit(this);
+		return extension.isEnabled() != isEnabled();
 	}
 }

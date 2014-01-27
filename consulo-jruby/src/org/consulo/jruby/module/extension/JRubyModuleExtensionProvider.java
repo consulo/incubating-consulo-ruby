@@ -37,8 +37,8 @@ public class JRubyModuleExtensionProvider implements ModuleExtensionProvider<JRu
 
 	@NotNull
 	@Override
-	public JRubyMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module, @NotNull JRubyModuleExtension baseRubyModuleExtension)
+	public JRubyMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module)
 	{
-		return new JRubyMutableModuleExtension(s, module, baseRubyModuleExtension);
+		return new JRubyMutableModuleExtension(s, module);
 	}
 }
