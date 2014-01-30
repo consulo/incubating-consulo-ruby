@@ -17,6 +17,7 @@
 package org.jetbrains.plugins.ruby.jruby.search;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.generate.tostring.util.StringUtil;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
@@ -51,7 +52,7 @@ public class JRubyNamesReferenceSearcher implements QueryExecutor<PsiReference, 
 		});
 		// We should search only if JRubyName differs from name
 		final String jrubyName = JRubyNameConventions.getMethodName(name).replace("=", "");
-		if(name.equals(jrubyName))
+		if(name.equals(jrubyName) || StringUtil.isEmpty(jrubyName))
 		{
 			return true;
 		}
