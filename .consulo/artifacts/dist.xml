@@ -6,9 +6,6 @@
         <element id="directory" name="lib">
           <element id="zip-archive" name="ruby.jar">
             <element id="module-output" name="consulo-ruby" />
-            <element id="directory" name="META-INF">
-              <element id="dir-copy" path="$PROJECT_DIR$/META-INF" />
-            </element>
             <element id="module-production-resource-output" name="consulo-ruby" />
           </element>
           <element id="dir-copy" path="$PROJECT_DIR$/jruby" />
