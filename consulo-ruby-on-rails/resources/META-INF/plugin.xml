@@ -6,7 +6,11 @@
 	<depends>org.consulo.ruby</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<moduleExtensionProvider key="ruby-on-rails" parent-key="ruby"
-								 implementationClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtensionProvider" />
+		<moduleExtensionProvider key="ruby-on-rails"
+								 parentKey="ruby"
+								 name="Rails"
+								 icon="/org/jetbrains/plugins/ruby/rails/rails_small.png"
+								 immutableClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtension"
+								 mutableClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsMutableModuleExtension" />
 	</extensions>
 </idea-plugin>

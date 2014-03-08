@@ -58,7 +58,11 @@
 		<editorHighlighterProvider filetype="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighterFactory" />
 
 		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler" />
-		<moduleExtensionProvider key="ruby" implementationClass="org.consulo.ruby.module.extension.BaseRubyModuleExtensionProvider" />
+		<moduleExtensionProvider key="ruby"
+								 name="Ruby"
+								 icon="/org/jetbrains/plugins/ruby/ruby/ruby.png"
+								 immutableClass="org.consulo.ruby.module.extension.BaseRubyModuleExtension"
+								 mutableClass="org.consulo.ruby.module.extension.BaseRubyMutableModuleExtension" />
 
 		<iconDescriptorUpdater implementation="org.jetbrains.plugins.ruby.RubyIconDescriptorUpdater"/>
 

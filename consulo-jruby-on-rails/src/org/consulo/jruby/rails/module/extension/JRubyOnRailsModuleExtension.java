@@ -3,7 +3,7 @@ package org.consulo.jruby.rails.module.extension;
 import org.consulo.module.extension.impl.ModuleExtensionImpl;
 import org.consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
  * @author VISTALL
@@ -12,7 +12,7 @@ import com.intellij.openapi.module.Module;
 public class JRubyOnRailsModuleExtension extends ModuleExtensionImpl<JRubyOnRailsModuleExtension>
 		implements RubyOnRailsModuleExtension<JRubyOnRailsModuleExtension>
 {
-	public JRubyOnRailsModuleExtension(@NotNull String id, @NotNull Module module)
+	public JRubyOnRailsModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}

@@ -8,8 +8,8 @@ import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import org.mustbe.consulo.roots.ContentFoldersSupport;
 import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
 import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
  * @author VISTALL
@@ -23,7 +23,7 @@ public class BaseRubyModuleExtension extends ModuleExtensionWithSdkImpl<BaseRuby
 {
 	private RSupportPerModuleSettings mySettings;
 
-	public BaseRubyModuleExtension(@NotNull String id, @NotNull Module module)
+	public BaseRubyModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 

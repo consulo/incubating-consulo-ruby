@@ -17,6 +17,11 @@
 
 		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
 
-		<moduleExtensionProvider key="jruby" parent-key="java" implementationClass="org.consulo.jruby.module.extension.JRubyModuleExtensionProvider" />
+		<moduleExtensionProvider key="jruby"
+								 parentKey="java"
+								 icon="/icons/jruby.png"
+								 name="JRuby"
+								 immutableClass="org.consulo.jruby.module.extension.JRubyModuleExtension"
+								 mutableClass="org.consulo.jruby.module.extension.JRubyMutableModuleExtension" />
 	</extensions>
 </idea-plugin>

@@ -5,7 +5,6 @@ import javax.swing.JComponent;
 import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
@@ -15,14 +14,14 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModuleExtension implements
 		RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>, MutableModuleExtension<BaseRubyOnRailsModuleExtension>
 {
-	public BaseRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull Module module)
+	public BaseRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}
 
 	@Nullable
 	@Override
-	public JComponent createConfigurablePanel(@NotNull ModifiableRootModel modifiableRootModel, @Nullable Runnable runnable)
+	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
 	{
 		return null;
 	}

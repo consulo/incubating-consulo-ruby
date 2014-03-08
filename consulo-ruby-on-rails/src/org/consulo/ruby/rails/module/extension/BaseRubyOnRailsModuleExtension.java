@@ -2,15 +2,16 @@ package org.consulo.ruby.rails.module.extension;
 
 import org.consulo.module.extension.impl.ModuleExtensionImpl;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
  * @author VISTALL
  * @since 25.09.13.
  */
-public class BaseRubyOnRailsModuleExtension extends ModuleExtensionImpl<BaseRubyOnRailsModuleExtension> implements RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>
+public class BaseRubyOnRailsModuleExtension extends ModuleExtensionImpl<BaseRubyOnRailsModuleExtension> implements
+		RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>
 {
-	public BaseRubyOnRailsModuleExtension(@NotNull String id, @NotNull Module module)
+	public BaseRubyOnRailsModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}
