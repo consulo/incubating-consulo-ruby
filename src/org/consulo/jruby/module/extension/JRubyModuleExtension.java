@@ -23,8 +23,9 @@ public class JRubyModuleExtension extends ModuleExtensionWithSdkImpl<JRubyModule
 		mySettings = new RSupportPerModuleSettingsImpl();
 	}
 
+	@NotNull
 	@Override
-	protected Class<? extends SdkType> getSdkTypeClass()
+	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return JRubySdkType.class;
 	}

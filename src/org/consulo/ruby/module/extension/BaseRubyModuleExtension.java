@@ -30,8 +30,9 @@ public class BaseRubyModuleExtension extends ModuleExtensionWithSdkImpl<BaseRuby
 		mySettings = new RSupportPerModuleSettingsImpl();
 	}
 
+	@NotNull
 	@Override
-	protected Class<? extends SdkType> getSdkTypeClass()
+	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return RubySdkType.class;
 	}
