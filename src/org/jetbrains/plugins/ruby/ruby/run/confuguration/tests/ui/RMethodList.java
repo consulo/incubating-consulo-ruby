@@ -98,7 +98,7 @@ public class RMethodList extends JPanel
 		final RMethodList RMethodList = new RMethodList(rClass, filter, methodProvider);
 		final DialogBuilder builder = new DialogBuilder(parent);
 		builder.setCenterPanel(RMethodList);
-		builder.setPreferedFocusComponent(RMethodList.myList);
+		builder.setPreferredFocusComponent(RMethodList.myList);
 		builder.setTitle(RBundle.message("choose.test.method.dialog.title"));
 		return builder.show() == DialogWrapper.OK_EXIT_CODE ? RMethodList.getSelected() : null;
 	}

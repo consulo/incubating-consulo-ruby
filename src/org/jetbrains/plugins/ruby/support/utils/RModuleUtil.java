@@ -164,7 +164,7 @@ public class RModuleUtil
 			@Override
 			public void run() throws Exception
 			{
-				VirtualFileManager.getInstance().refresh(true);
+				VirtualFileManager.getInstance().asyncRefresh(null);
 			}
 		});
 	}

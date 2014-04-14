@@ -245,7 +245,7 @@ public class Runner
 
 
 		//Setting cmdLine params
-		cmdLine.setEnvParams(envParams);
+		cmdLine.getEnvironment().putAll(envParams);
 		return cmdLine;
 	}
 

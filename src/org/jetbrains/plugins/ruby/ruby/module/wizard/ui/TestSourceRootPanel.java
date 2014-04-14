@@ -250,7 +250,7 @@ public class TestSourceRootPanel
 			final VirtualFile contentEntryDir = getContentEntryDir();
 			if(contentEntryDir != null)
 			{
-				myChooserDescriptor.setRoot(contentEntryDir);
+				myChooserDescriptor.setRoots(contentEntryDir);
 				final String textBefore = myField.getText().trim();
 				super.actionPerformed(e);
 				if(!textBefore.equals(myField.getText().trim()))

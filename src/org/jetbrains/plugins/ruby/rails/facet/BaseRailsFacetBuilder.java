@@ -197,7 +197,7 @@ public class BaseRailsFacetBuilder
 				desc.setTitle(RBundle.message("rails.facet.builder.rails.application.choose.title"));
 				desc.setDescription(RBundle.message("rails.facet.builder.rails.application.choose.relative.path"));
 				//   desc.setContextModule(uncommitedModule);
-				desc.setRoot(VirtualFileUtil.findFileByLocalPath(defaultAppHome));
+				desc.setRoots(VirtualFileUtil.findFileByLocalPath(defaultAppHome));
 				desc.setIsTreeRootVisible(true);
 				//Folder Chooser Dialog
 				final FileChooserDialogImpl dialog = new FileChooserDialogImpl(desc, project);

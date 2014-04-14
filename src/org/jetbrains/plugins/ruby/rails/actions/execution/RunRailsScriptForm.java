@@ -55,7 +55,7 @@ public class RunRailsScriptForm extends JDialog
 		// adding browse action to script chooser
 		String selectScriptTitle = RBundle.message("rails.actions.execution.run.rails.script.dialog.component.script.path.caption.select");
 		final FileChooserDescriptor fileChooserDescriptor = RubyRunConfigurationUIUtil.addFileChooser(selectScriptTitle, scriptPathTextField, project);
-		fileChooserDescriptor.setRoot(moduleScriptFolder);
+		fileChooserDescriptor.setRoots(moduleScriptFolder);
 	}
 
 	public RawCommandLineEditor getArgumentsComponent()
