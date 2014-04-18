@@ -36,8 +36,8 @@ import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindowId;
 import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.peer.PeerFactory;
 import com.intellij.ui.content.Content;
+import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.MessageView;
 import com.intellij.util.Function;
 import com.intellij.util.concurrency.Semaphore;
@@ -116,7 +116,7 @@ public class ExecutionHelper
 			public void run()
 			{
 				final MessageView messageView = myProject.getComponent(MessageView.class);
-				final Content content = PeerFactory.getInstance().getContentFactory().createContent(errorTreeView, tabDisplayName, true);
+				final Content content = ContentFactory.SERVICE.getInstance().createContent(errorTreeView, tabDisplayName, true);
 				messageView.getContentManager().addContent(content);
 				Disposer.register(content, errorTreeView);
 				messageView.getContentManager().setSelectedContent(content);
