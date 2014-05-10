@@ -17,7 +17,8 @@ public class GemOrderRootTypeUIFactory implements OrderRootTypeUIFactory
 	@Override
 	public SdkPathEditor createPathEditor(Sdk sdk)
 	{
-		return new SdkPathEditor(getNodeText(), GemOrderRootType.getInstance(), new FileChooserDescriptor(true, false, false, false, false, true));
+		return new SdkPathEditor(getNodeText(), GemOrderRootType.getInstance(), new FileChooserDescriptor(true, false, false, false, false, true),
+				sdk);
 	}
 
 	@Override
