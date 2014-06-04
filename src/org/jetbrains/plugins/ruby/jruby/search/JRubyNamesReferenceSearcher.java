@@ -17,10 +17,10 @@
 package org.jetbrains.plugins.ruby.jruby.search;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.generate.tostring.util.StringUtil;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.PsiSearchHelper;
