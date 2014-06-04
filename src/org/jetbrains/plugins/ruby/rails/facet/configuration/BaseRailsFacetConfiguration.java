@@ -19,7 +19,6 @@ package org.jetbrains.plugins.ruby.rails.facet.configuration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
-import com.intellij.facet.FacetConfiguration;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,7 +26,7 @@ import com.intellij.facet.FacetConfiguration;
  * @author: Roman Chernyatchik
  * @date: Mar 13, 2008
  */
-public interface BaseRailsFacetConfiguration extends FacetConfiguration
+public interface BaseRailsFacetConfiguration
 {
 	public boolean shouldUseRSpecPlugin();
 

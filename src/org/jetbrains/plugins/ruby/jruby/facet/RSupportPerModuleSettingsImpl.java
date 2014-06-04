@@ -24,7 +24,6 @@ import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubyRTestFrameworkChooser
 import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubySdkEditorTab;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
-import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.ui.FacetEditorContext;
 import com.intellij.facet.ui.FacetEditorTab;
 import com.intellij.facet.ui.FacetValidatorsManager;
@@ -37,7 +36,7 @@ import com.intellij.openapi.util.WriteExternalException;
  * Date: Sep 11, 2007
  */
 
-public class RSupportPerModuleSettingsImpl implements FacetConfiguration, RSupportPerModuleSettings
+public class RSupportPerModuleSettingsImpl implements RSupportPerModuleSettings
 {
 
 	private boolean changed;

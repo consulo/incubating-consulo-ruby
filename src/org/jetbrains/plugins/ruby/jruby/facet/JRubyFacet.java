@@ -25,9 +25,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.facet.Facet;
-import com.intellij.facet.FacetRootsProvider;
-import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -38,9 +35,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.ActionRunner;
 
-public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl> implements FacetRootsProvider
+public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 {
-	public static final FacetTypeId<JRubyFacet> ID = new FacetTypeId<JRubyFacet>("JRubyFacetType");
 
 	@NonNls
 	private static final String JRUBY_FACET_SDK_OLD_LIB_NAME = "JRuby facet sdk";
@@ -50,9 +46,9 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl> implements 
 
 	private RubyModuleCachesManager myRubyModuleCachesManager;
 
-	public JRubyFacet(@NotNull final FacetType facetType, @NotNull final Module module, final String name, @NotNull RSupportPerModuleSettingsImpl configuration, final Facet underlyingFacet)
+	public JRubyFacet(@NotNull final Module module, final String name, @NotNull RSupportPerModuleSettingsImpl configuration, final Facet underlyingFacet)
 	{
-		super(facetType, module, name, configuration, underlyingFacet);
+		super(module, name, configuration, underlyingFacet);
 
 
 		final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);

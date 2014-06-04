@@ -147,9 +147,6 @@
 
 
 		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.rails.RailsSupportLoader</implementation-class>
-		</component>
-		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.settings.RSettings</implementation-class>
 		</component>
 		<component>
@@ -281,16 +278,6 @@
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager</implementation-class>
 			<option name="type" value="RUBY_MODULE"/>
-		</component>
-
-		<!--JRuby Facet-->
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetListener</implementation-class>
-		</component>
-
-		<!--BaseRails Facet-->
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.rails.facet.BaseRailsFacetListener</implementation-class>
 		</component>
 
 		<!-- RSpec Support -->

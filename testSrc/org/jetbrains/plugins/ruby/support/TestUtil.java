@@ -32,7 +32,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.IntRef;
 import org.jetbrains.plugins.ruby.jruby.JRubySupportLoader;
-import org.jetbrains.plugins.ruby.rails.RailsSupportLoader;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLApplicationComponent;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;

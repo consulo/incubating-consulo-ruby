@@ -7,6 +7,7 @@ import com.intellij.psi.impl.source.tree.TreeElement;
  * @author VISTALL
  * @since 24.09.13.
  */
+@Deprecated
 public class ChameleonTransforming
 {
 	public static void transformChildren(ASTNode node)

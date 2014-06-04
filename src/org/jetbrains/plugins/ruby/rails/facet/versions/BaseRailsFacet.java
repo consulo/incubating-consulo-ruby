@@ -31,8 +31,6 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import com.intellij.ProjectTopics;
 import com.intellij.facet.Facet;
-import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -50,6 +48,7 @@ import com.intellij.util.messages.MessageBusConnection;
  * @author: Roman Chernyatchik
  * @date: Mar 13, 2008
  */
+@Deprecated
 public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 {
 	private CacheScannerFilesProvider myRailsAdditionalScannerProvider;
@@ -66,9 +65,9 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 	public abstract String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel);
 
 
-	public BaseRailsFacet(@NotNull final FacetType facetType, @NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, final Facet underlyingFacet)
+	public BaseRailsFacet(@NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, final Facet underlyingFacet)
 	{
-		super(facetType, module, name, configuration, underlyingFacet);
+		super(module, name, configuration, underlyingFacet);
 
 		/**
 		 * only for loading of existing module. Doesn't work for new Ruby module.
@@ -193,27 +192,6 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 	@Nullable
 	public static BaseRailsFacet getInstance(@NotNull final Module module)
 	{
-		if(RubyUtil.isRubyModuleType(module))
-		{
-			//in ruby module
-			return RailsFacet.getInstance(module);
-		}
-		//in other modules (java)
-		return JRailsFacet.getInstance(module);
-	}
-
-	public void projectClosed()
-	{
-		//TODO implement
-	}
-
-	public static FacetTypeId<? extends BaseRailsFacet> getRailsFacetID()
-	{
-		return RailsFacet.ID;
-	}
-
-	public static FacetTypeId<? extends BaseRailsFacet> getJRailsFacetID()
-	{
-		return JRailsFacet.ID;
+		return null; //TODO [VISTALl] use org.consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension
 	}
 }

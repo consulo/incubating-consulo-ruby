@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.converting;
 
-import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.testFramework.IdeaTestCase;
 import org.jdom.Document;
@@ -24,7 +23,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
-import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacetType;
 
 import java.io.File;
 import java.io.IOException;

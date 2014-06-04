@@ -6,9 +6,10 @@ import com.intellij.openapi.module.Module;
  * @author VISTALL
  * @since 24.09.13.
  */
-public class Facet<T extends FacetConfiguration>
+@Deprecated
+public class Facet<T>
 {
-	public Facet(FacetType facetType, Module module, String name, T configuration, Facet underlyingFacet)
+	public Facet(Module module, String name, T configuration, Facet underlyingFacet)
 	{
 
 	}

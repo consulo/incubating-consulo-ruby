@@ -20,7 +20,6 @@ import java.util.Collections;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacetType;
 import org.jetbrains.plugins.ruby.jruby.inspections.JRubyImplementInterfaceInspection;
 import org.jetbrains.plugins.ruby.jruby.inspections.WrongTopLevelPackageInspection;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
@@ -105,8 +104,7 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
 			@Override
 			public void run() throws Exception
 			{
-				// registering ruby facet
-				JRubyFacetType.load();
+
 
 				// load jruby written components
 				loadJRubyPluginComponents();
