@@ -1,15 +1,17 @@
 package org.jetbrains.plugins.ruby.ruby.sdk.gemRootType;
 
+import org.consulo.lombok.annotations.LazyInstance;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.openapi.roots.PersistentOrderRootType;
+import com.intellij.openapi.roots.OrderRootType;
 
 /**
  * @author VISTALL
  * @since 25.09.13.
  */
-public class GemOrderRootType extends PersistentOrderRootType
+public class GemOrderRootType extends OrderRootType
 {
 	@NotNull
+	@LazyInstance
 	public static GemOrderRootType getInstance()
 	{
 		return getOrderRootType(GemOrderRootType.class);
@@ -17,12 +19,6 @@ public class GemOrderRootType extends PersistentOrderRootType
 
 	public GemOrderRootType()
 	{
-		super("GEM", "GEM");
-	}
-
-	@Override
-	public boolean skipWriteIfEmpty()
-	{
-		return true;
+		super("rubyGems");
 	}
 }

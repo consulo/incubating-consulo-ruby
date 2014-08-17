@@ -88,7 +88,7 @@
 		<internalFileTemplate name="TestUnit test Template" />
 
 		<orderRootType implementation="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType" />
-		<orderRootTypeEditor key="GEM" implementationClass="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootTypeUIFactory" />
+		<orderRootTypeEditor key="rubyGems" implementationClass="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootTypeUIFactory" />
 
 		<!--<overridingMethodsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyOverridingMethodsSearch"/>-->
 		<!--<definitionsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyImplementingMethodsSearch"/>-->
