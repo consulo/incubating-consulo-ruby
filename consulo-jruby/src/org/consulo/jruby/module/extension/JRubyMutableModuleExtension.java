@@ -9,7 +9,7 @@ import org.consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL
@@ -17,7 +17,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  */
 public class JRubyMutableModuleExtension extends JRubyModuleExtension implements RubyModuleExtension<JRubyModuleExtension>, MutableModuleExtensionWithSdk<JRubyModuleExtension>
 {
-	public JRubyMutableModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
+	public JRubyMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
 	{
 		super(id, module);
 	}

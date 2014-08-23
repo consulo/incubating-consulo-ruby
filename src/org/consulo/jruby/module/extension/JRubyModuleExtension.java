@@ -7,7 +7,7 @@ import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL
@@ -17,7 +17,7 @@ public class JRubyModuleExtension extends ModuleExtensionWithSdkImpl<JRubyModule
 {
 	private RSupportPerModuleSettings mySettings;
 
-	public JRubyModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
+	public JRubyModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
 	{
 		super(id, module);
 		mySettings = new RSupportPerModuleSettingsImpl();

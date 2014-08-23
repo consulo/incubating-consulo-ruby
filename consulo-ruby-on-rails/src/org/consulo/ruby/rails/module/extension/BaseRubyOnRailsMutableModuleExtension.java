@@ -5,7 +5,7 @@ import javax.swing.JComponent;
 import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL
@@ -14,7 +14,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 public class BaseRubyOnRailsMutableModuleExtension extends BaseRubyOnRailsModuleExtension implements
 		RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>, MutableModuleExtension<BaseRubyOnRailsModuleExtension>
 {
-	public BaseRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
+	public BaseRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
 	{
 		super(id, module);
 	}

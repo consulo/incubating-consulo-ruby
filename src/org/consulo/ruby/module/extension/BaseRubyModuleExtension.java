@@ -9,7 +9,7 @@ import org.mustbe.consulo.roots.ContentFoldersSupport;
 import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
 import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL
@@ -23,7 +23,7 @@ public class BaseRubyModuleExtension extends ModuleExtensionWithSdkImpl<BaseRuby
 {
 	private RSupportPerModuleSettings mySettings;
 
-	public BaseRubyModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
+	public BaseRubyModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
 	{
 		super(id, module);
 
