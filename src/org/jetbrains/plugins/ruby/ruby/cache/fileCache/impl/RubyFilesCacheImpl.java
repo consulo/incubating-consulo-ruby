@@ -45,6 +45,7 @@ import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.ide.caches.CacheUpdater;
 import com.intellij.ide.caches.FileContent;
+import com.intellij.ide.startup.StartupManagerEx;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -647,7 +648,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 			@Override
 			public void run()
 			{
-				StartupManager.getInstance(myProject).registerCacheUpdater(RubyFilesCacheImpl.this);
+				StartupManagerEx.getInstanceEx(myProject).registerCacheUpdater(RubyFilesCacheImpl.this);
 			}
 		});
 	}
