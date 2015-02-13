@@ -64,6 +64,8 @@
 								 immutableClass="org.consulo.ruby.module.extension.BaseRubyModuleExtension"
 								 mutableClass="org.consulo.ruby.module.extension.BaseRubyMutableModuleExtension" />
 
+		<contentFolderSupportPatcher implementation="org.consulo.ruby.module.extension.BaseRubyContentFolderSupportPatcher" />
+
 		<iconDescriptorUpdater implementation="org.jetbrains.plugins.ruby.RubyIconDescriptorUpdater"/>
 
 		<lang.fileViewProviderFactory language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.eRubyFileViewProviderFactory" />

@@ -92,7 +92,7 @@ public class JRubySdkType extends RubySdkType
 	}
 
 	@Override
-	public String suggestHomePath()
+	protected String suggestHomePath()
 	{
 		return RubySdkUtil.suggestJRubyHomePath();
 	}

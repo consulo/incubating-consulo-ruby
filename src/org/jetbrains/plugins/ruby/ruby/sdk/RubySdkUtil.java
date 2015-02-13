@@ -23,7 +23,6 @@ import java.util.List;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
@@ -243,7 +242,7 @@ public class RubySdkUtil
 		{
 			return RUBY_UNIX_DEFAULT_HOME_PATH;
 		}
-		throw new IllegalStateException(RBundle.message("os.not.supported"));
+		return null;
 	}
 
 	public static String suggestJRubyHomePath()
@@ -263,7 +262,7 @@ public class RubySdkUtil
 		{
 			return JRUBY_UNIX_DEFAULT_HOME_PATH;
 		}
-		throw new IllegalStateException(RBundle.message("os.not.supported"));
+		return null;
 	}
 
 	@NotNull

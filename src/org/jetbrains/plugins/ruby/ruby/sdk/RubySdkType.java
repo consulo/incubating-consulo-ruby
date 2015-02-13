@@ -18,6 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.sdk;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -167,8 +169,25 @@ public class RubySdkType extends SdkType
 		return RUBY_EXE;
 	}
 
+	@NotNull
 	@Override
-	public String suggestHomePath()
+	public Collection<String> suggestHomePaths()
+	{
+		String s = suggestHomePath();
+		if(s != null)
+		{
+			return Collections.singletonList(s);
+		}
+		return super.suggestHomePaths();
+	}
+
+	@Override
+	public boolean canCreatePredefinedSdks()
+	{
+		return true;
+	}
+
+	protected String suggestHomePath()
 	{
 		return RubySdkUtil.suggestRubyHomePath();
 	}
@@ -312,24 +331,10 @@ public class RubySdkType extends SdkType
 		return RubySdkAdditionalData.load(sdk, additional);
 	}
 
-	@Override
-	public SdkAdditionalData loadAdditionalData(Element additional)
-	{
-		//N/A
-		return null;
-	}
-
 	@NotNull
 	public String getBinPath(final Sdk sdk)
 	{
 		return sdk.getHomePath() + BIN_DIR;
-	}
-
-	@Nullable
-	public String getToolsPath(final Sdk sdk)
-	{
-		//TODO Hot fix for [RUBY-216], remove it in Selena release!
-		return getBinPath(sdk);
 	}
 
 	@Nullable
