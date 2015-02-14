@@ -23,7 +23,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
 import com.intellij.formatting.Wrap;
 import com.intellij.formatting.WrapType;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -48,7 +48,7 @@ public class RHTMLWrapProcessor
 		if((nodeType == RHTMLElementType.RHTML_XML_TAG || nodeType == RHTMLTokenTypeEx.RHTML_INJECTION_IN_HTML) && fileViewProvider != null && RHTMLFormatterUtil.isScripletRHTMLXmlTagNode(node))
 		{
 
-			final PsiElement psiElement = fileViewProvider.findElementAt(node.getStartOffset() - 1, StdLanguages.HTML);
+			final PsiElement psiElement = fileViewProvider.findElementAt(node.getStartOffset() - 1, HTMLLanguage.INSTANCE);
 			final String text = trimEndSpaces(psiElement != null ? psiElement.getText() : null);
 			//for html comments
 			final boolean shouldIgnoreIndent = text != null && text.endsWith("\n");

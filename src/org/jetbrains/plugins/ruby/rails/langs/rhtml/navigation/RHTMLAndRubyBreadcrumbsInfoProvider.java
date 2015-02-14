@@ -30,7 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -178,7 +178,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
 
 			//Parent is HTML
 			//Outer for RHTML in HTML
-			final PsiElement htmlElem = provider.findElementAt(startOffset, StdLanguages.HTML);
+			final PsiElement htmlElem = provider.findElementAt(startOffset, HTMLLanguage.INSTANCE);
 			if(htmlElem != null)
 			{
 				//search max upper tree

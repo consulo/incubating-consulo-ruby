@@ -23,7 +23,7 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import com.intellij.lang.Language;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.ex.util.LayerDescriptor;
 import com.intellij.openapi.editor.ex.util.LayeredLexerEditorHighlighter;
@@ -99,6 +99,6 @@ public class RHTMLEditorHighlighter extends LayeredLexerEditorHighlighter
 			}
 		}
 
-		return StdLanguages.HTML;
+		return HTMLLanguage.INSTANCE;
 	}
 }

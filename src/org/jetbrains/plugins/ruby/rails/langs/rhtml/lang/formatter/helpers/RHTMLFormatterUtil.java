@@ -30,7 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks.RC
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 import com.intellij.formatting.Block;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -163,7 +163,7 @@ public class RHTMLFormatterUtil
 	@Nullable
 	public static PsiElement findUpperHTMLElement(@NotNull final FileViewProvider provider, final int startOffset, @Nullable final TextRange boundsTRange)
 	{
-		PsiElement htmlPsi = provider.findElementAt(startOffset, StdLanguages.HTML);
+		PsiElement htmlPsi = provider.findElementAt(startOffset, HTMLLanguage.INSTANCE);
 		PsiElement htmlPsiParent = (htmlPsi != null ? htmlPsi.getParent() : null);
 		TextRange htmlParentRange = (htmlPsiParent != null ? htmlPsiParent.getTextRange() : null);
 		//goes up until  XmlTag or XmlAttribute or XmlAttributeValue starts in startOffset and in geiven bounds

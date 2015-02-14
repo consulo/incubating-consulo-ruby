@@ -22,7 +22,7 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.lang.Language;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -76,7 +76,7 @@ public class RHTMLPsiUtil
 		}
 
 		final FileViewProvider viewProvider = containingFile.getViewProvider();
-		final PsiFile psiFile = viewProvider.getPsi(StdLanguages.HTML);
+		final PsiFile psiFile = viewProvider.getPsi(HTMLLanguage.INSTANCE);
 		return psiFile instanceof XmlFile ? (XmlFile) psiFile : null;
 	}
 

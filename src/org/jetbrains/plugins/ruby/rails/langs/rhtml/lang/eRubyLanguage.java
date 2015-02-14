@@ -24,7 +24,8 @@ import com.intellij.formatting.Block;
 import com.intellij.formatting.FormattingDocumentModel;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
+import com.intellij.lang.xhtml.XHTMLLanguage;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -73,7 +74,7 @@ public class eRubyLanguage extends Language implements TemplateLanguage
 		final Language templateLang = rhtmlViewProvider.getTemplateDataLanguage();
 
 
-		if(templateLang == StdLanguages.HTML || templateLang == StdLanguages.XHTML)
+		if(templateLang == HTMLLanguage.INSTANCE || templateLang == XHTMLLanguage.INSTANCE)
 		{
 			final PsiFile psiRoot = rhtmlViewProvider.getPsi(templateLang);
 			final ASTNode rootNode = SourceTreeToPsiMap.psiElementToTree(psiRoot);

@@ -46,7 +46,7 @@ import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageFormatting;
-import com.intellij.lang.StdLanguages;
+import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.FileViewProvider;
@@ -135,7 +135,7 @@ public class RHTMLBlockGenerator
 		}
 		else if(childNodeType == RHTMLElementType.RHTML_COMMENT_ELEMENT)
 		{
-			final PsiElement psiElement = fileViewProvider.findElementAt(childNode.getStartOffset() - 1, StdLanguages.HTML);
+			final PsiElement psiElement = fileViewProvider.findElementAt(childNode.getStartOffset() - 1, HTMLLanguage.INSTANCE);
 			final String text = psiElement != null ? psiElement.getText() : null;
 			final boolean shouldIgnoreIndent = text != null && text.endsWith("\n");
 
@@ -393,12 +393,12 @@ public class RHTMLBlockGenerator
 			final int tRangeStart = textRange.getStartOffset();
 
 			int lastElemInTRangeOffset = textRange.getEndOffset();
-			PsiElement lastElemInTRange = provider.findElementAt(lastElemInTRangeOffset - 1, StdLanguages.HTML);
+			PsiElement lastElemInTRange = provider.findElementAt(lastElemInTRangeOffset - 1, HTMLLanguage.INSTANCE);
 
 			while(lastElemInTRange != null && tRangeStart <= lastElemInTRangeOffset && !RHTMLFormatterUtil.canBeCorrectBlock(lastElemInTRange.getNode()))
 			{
 				lastElemInTRangeOffset -= lastElemInTRange.getTextLength();
-				lastElemInTRange = provider.findElementAt(lastElemInTRangeOffset - 1, StdLanguages.HTML);
+				lastElemInTRange = provider.findElementAt(lastElemInTRangeOffset - 1, HTMLLanguage.INSTANCE);
 			}
 			LOG.assertTrue(tRangeStart < lastElemInTRangeOffset); //this case must be processed early!
 			textRangeWithoutTrailingWhiteSpaces = new TextRange(tRangeStart, lastElemInTRangeOffset);
