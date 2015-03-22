@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks.RCompoundStatementNavigator;
 import com.intellij.formatting.Indent;
+import com.intellij.ide.highlighter.XmlFileType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
@@ -102,7 +103,7 @@ public class RHTMLIndentProcessor
 
 	public static int getHTMLIndentSize(XmlFormattingPolicy fPolicy)
 	{
-		return fPolicy.getSettings().XML_INDENT_OPTIONS.INDENT_SIZE;
+		return fPolicy.getSettings().getIndentSize(XmlFileType.INSTANCE);
 	}
 
 	public static Indent getRTHMLIndent(@NotNull final CodeStyleSettings settings, final int count)

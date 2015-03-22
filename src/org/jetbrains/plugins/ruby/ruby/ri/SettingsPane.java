@@ -81,7 +81,7 @@ class SettingsPane implements CheckBoxListListener
 				dirChooser.setHideIgnored(true);
 				dirChooser.setTitle("Select directory");
 				FileChooserDialog chooser = FileChooserFactory.getInstance().createFileChooser(dirChooser, docPanel.getProject(),  mainPanel);
-				VirtualFile[] files = chooser.choose(null, null);
+				VirtualFile[] files = chooser.choose(null);
 				if(files.length > 0)
 				{
 					// adding to the end
