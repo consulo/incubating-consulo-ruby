@@ -39,9 +39,9 @@ public class RubySpacingProcessor
 	 * @return Spacing object
 	 */
 	@Nullable
-	public static Spacing getSpacing(@NotNull final ASTNode leftChild, @NotNull final ASTNode rightChild, final CodeStyleSettings settings)
+	public static Spacing getSpacing(@Nullable final ASTNode leftChild, @NotNull final ASTNode rightChild, final CodeStyleSettings settings)
 	{
-		if(SpacingTokens.SPACING_AFTER.contains(leftChild.getElementType()))
+		if(leftChild != null && SpacingTokens.SPACING_AFTER.contains(leftChild.getElementType()))
 		{
 			return SINGLE_SPACING;
 		}

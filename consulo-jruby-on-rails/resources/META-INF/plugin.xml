@@ -3,7 +3,7 @@
 	<name>JRuby on Rails</name>
 	<version>SNAPSHOT</version>
 
-	<depends>org.consulo.ruby.rails</depends>
+	<depends>consulo.ruby.rails</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<moduleExtensionProvider key="jruby-on-rails"
