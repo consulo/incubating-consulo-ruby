@@ -2,7 +2,7 @@
   <artifact build-on-make="true" name="dist">
     <output-path>$PROJECT_DIR$/out/artifacts/dist</output-path>
     <root id="root">
-      <element id="directory" name="ruby">
+      <element id="directory" name="consulo.ruby">
         <element id="directory" name="lib">
           <element id="zip-archive" name="ruby.jar">
             <element id="module-output" name="consulo-ruby" />
@@ -12,16 +12,7 @@
         </element>
         <element id="dir-copy" path="$PROJECT_DIR$/dist" />
       </element>
-      <element id="directory" name="yaml">
-        <element id="directory" name="lib">
-          <element id="zip-archive" name="yaml.jar">
-            <element id="module-output" name="consulo-yaml" />
-            <element id="module-production-resource-output" name="consulo-yaml" />
-          </element>
-          <element id="file-copy" path="$PROJECT_DIR$/jruby/jruby-complete.jar" />
-        </element>
-      </element>
-      <element id="directory" name="jruby">
+      <element id="directory" name="consulo.jruby">
         <element id="directory" name="lib">
           <element id="zip-archive" name="jruby.jar">
             <element id="module-output" name="consulo-jruby" />
@@ -30,7 +21,7 @@
         </element>
         <element id="dir-copy" path="$PROJECT_DIR$/consulo-jruby/dist" />
       </element>
-      <element id="directory" name="ruby-on-rails">
+      <element id="directory" name="consulo.ruby.rails">
         <element id="directory" name="lib">
           <element id="zip-archive" name="ruby-on-rails.jar">
             <element id="module-output" name="consulo-ruby-on-rails" />
@@ -38,7 +29,7 @@
           </element>
         </element>
       </element>
-      <element id="directory" name="jruby-on-rails">
+      <element id="directory" name="consulo.jruby.rails">
         <element id="directory" name="lib">
           <element id="zip-archive" name="jruby-on-rails.jar">
             <element id="module-output" name="consulo-jruby-on-rails" />

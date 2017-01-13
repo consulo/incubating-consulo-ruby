@@ -1,10 +1,10 @@
-<idea-plugin version="2">
-	<id>org.consulo.jruby</id>
+<idea-plugin>
+	<id>consulo.jruby</id>
 	<name>JRuby</name>
-	<version>1.0</version>
+	<version>SNAPSHOT</version>
 
-	<depends>org.consulo.ruby</depends>
-	<depends>org.consulo.java</depends>
+	<depends>consulo.ruby</depends>
+	<depends>consulo.java</depends>
 
 	<!--<project-components>
 		<component>
@@ -21,7 +21,7 @@
 								 parentKey="java"
 								 icon="/icons/jruby.png"
 								 name="JRuby"
-								 immutableClass="org.consulo.jruby.module.extension.JRubyModuleExtension"
-								 mutableClass="org.consulo.jruby.module.extension.JRubyMutableModuleExtension" />
+								 immutableClass="consulo.jruby.module.extension.JRubyModuleExtension"
+								 mutableClass="consulo.jruby.module.extension.JRubyMutableModuleExtension" />
 	</extensions>
 </idea-plugin>

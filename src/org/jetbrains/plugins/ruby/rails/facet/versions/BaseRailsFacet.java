@@ -192,6 +192,6 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 	@Nullable
 	public static BaseRailsFacet getInstance(@NotNull final Module module)
 	{
-		return null; //TODO [VISTALl] use org.consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension
+		return null; //TODO [VISTALl] use consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension
 	}
 }

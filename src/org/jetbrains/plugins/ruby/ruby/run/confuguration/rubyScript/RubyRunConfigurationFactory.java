@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
 import javax.swing.Icon;
 
-import org.consulo.ruby.module.extension.RubyModuleExtension;
+import consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;

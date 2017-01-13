@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.support.utils;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.consulo.ruby.module.extension.RubyModuleExtension;
+import consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;

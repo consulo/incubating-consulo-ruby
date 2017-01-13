@@ -1,16 +1,16 @@
-<idea-plugin version="2">
-	<id>org.consulo.ruby.rails</id>
+<idea-plugin>
+	<id>consulo.ruby.rails</id>
 	<name>Ruby on Rails</name>
-	<version>1.0</version>
+	<version>SNAPSHOT</version>
 
-	<depends>org.consulo.ruby</depends>
+	<depends>consulo.ruby</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<moduleExtensionProvider key="ruby-on-rails"
 								 parentKey="ruby"
 								 name="Rails"
 								 icon="/org/jetbrains/plugins/ruby/rails/rails_small.png"
-								 immutableClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtension"
-								 mutableClass="org.consulo.ruby.rails.module.extension.BaseRubyOnRailsMutableModuleExtension" />
+								 immutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtension"
+								 mutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsMutableModuleExtension" />
 	</extensions>
 </idea-plugin>

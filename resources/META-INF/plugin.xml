@@ -14,10 +14,10 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2">
-	<id>org.consulo.ruby</id>
+<idea-plugin>
+	<id>consulo.ruby</id>
 	<name>Ruby</name>
-	<version>1.0</version>
+	<version>SNAPSHOT</version>
 	<description>The Ruby plug-in makes IntelliJ IDEA the smart Ruby and Ruby on Rails editor, ideal for the full cycle application development.</description>
 	<vendor>JetBrains</vendor>
 	<resource-bundle xmlns="">org.jetbrains.plugins.ruby.RBundle</resource-bundle>
@@ -68,10 +68,10 @@
 		<moduleExtensionProvider key="ruby"
 								 name="Ruby"
 								 icon="/org/jetbrains/plugins/ruby/ruby/ruby.png"
-								 immutableClass="org.consulo.ruby.module.extension.BaseRubyModuleExtension"
-								 mutableClass="org.consulo.ruby.module.extension.BaseRubyMutableModuleExtension" />
+								 immutableClass="consulo.ruby.module.extension.BaseRubyModuleExtension"
+								 mutableClass="consulo.ruby.module.extension.BaseRubyMutableModuleExtension" />
 
-		<contentFolderSupportPatcher implementation="org.consulo.ruby.module.extension.BaseRubyContentFolderSupportPatcher" />
+		<contentFolderSupportPatcher implementation="consulo.ruby.module.extension.BaseRubyContentFolderSupportPatcher" />
 
 		<iconDescriptorUpdater implementation="org.jetbrains.plugins.ruby.RubyIconDescriptorUpdater"/>
 
@@ -139,7 +139,7 @@
 					anchor="right"
 					secondary="true"
 					requireModuleExtensions="@@rdocToolwindowModuleExtensionList"
-					factoryClass="org.consulo.ruby.toolWindow.RDocToolWindowFactory" />
+					factoryClass="consulo.ruby.toolWindow.RDocToolWindowFactory" />
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij.xml">

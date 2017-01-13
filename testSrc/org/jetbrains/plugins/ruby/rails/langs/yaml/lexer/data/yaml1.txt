@@ -1,6 +1,0 @@
-a: b
-------
-scalar key: [0, 1], {a}
-value: [1, 2], {:}
-unknown: [2, 3], { }
-scalar value: [3, 4], {b}

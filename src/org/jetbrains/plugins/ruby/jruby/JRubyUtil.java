@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import org.consulo.jruby.module.extension.JRubyModuleExtension;
+import consulo.jruby.module.extension.JRubyModuleExtension;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

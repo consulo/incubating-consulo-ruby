@@ -1,7 +1,7 @@
-<idea-plugin version="2">
-	<id>org.consulo.jruby.rails</id>
+<idea-plugin>
+	<id>consulo.jruby.rails</id>
 	<name>JRuby on Rails</name>
-	<version>1.0</version>
+	<version>SNAPSHOT</version>
 
 	<depends>org.consulo.ruby.rails</depends>
 
@@ -10,7 +10,7 @@
 								 parentKey="jruby"
 								 icon="/org/jetbrains/plugins/ruby/rails/rails_small.png"
 								 name="Rails"
-								 immutableClass="org.consulo.jruby.rails.module.extension.JRubyOnRailsModuleExtension"
-								 mutableClass="org.consulo.jruby.rails.module.extension.JRubyOnRailsMutableModuleExtension" />
+								 immutableClass="consulo.jruby.rails.module.extension.JRubyOnRailsModuleExtension"
+								 mutableClass="consulo.jruby.rails.module.extension.JRubyOnRailsMutableModuleExtension" />
 	</extensions>
 </idea-plugin>
