@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.actions;
 
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
@@ -173,10 +173,10 @@ public abstract class BaseEditorActionTestCase extends BaseRubyFileSetTestCase {
     public class RubyDataContext implements DataContext {
         @Nullable
         public Object getData(@NonNls String dataId) {
-            if (DataKeys.LANGUAGE.getName().equals(dataId)) {
+            if (CommonDataKeys.LANGUAGE.getName().equals(dataId)) {
                 return myFile.getLanguage();
             }
-            if (DataKeys.PROJECT.getName().equals(dataId)) {
+            if (CommonDataKeys.PROJECT.getName().equals(dataId)) {
                 return myFile.getProject();
             }
 
@@ -187,10 +187,10 @@ public abstract class BaseEditorActionTestCase extends BaseRubyFileSetTestCase {
     public class RHTMLDataContext implements DataContext {
         @Nullable
         public Object getData(@NonNls String dataId) {
-            if (DataKeys.LANGUAGE.getName().equals(dataId)) {
+            if (CommonDataKeys.LANGUAGE.getName().equals(dataId)) {
                 return eRubyLanguage.INSTANCE;
             }
-            if (DataKeys.PROJECT.getName().equals(dataId)) {
+            if (CommonDataKeys.PROJECT.getName().equals(dataId)) {
                 return myFile.getProject();
             }
 

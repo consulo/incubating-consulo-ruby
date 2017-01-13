@@ -24,7 +24,7 @@ import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorAction;
@@ -65,14 +65,14 @@ public class SwitchToController extends EditorAction
 		{
 
 			// must be in rails module
-			final Module module = DataKeys.MODULE.getData(dataContext);
+			final Module module = CommonDataKeys.MODULE.getData(dataContext);
 			if(module == null || !RailsFacetUtil.hasRailsSupport(module))
 			{
 				cantNavigate();
 				return;
 			}
 
-			PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
+			PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
 			if(psiFile == null)
 			{
 				cantNavigate();

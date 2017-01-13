@@ -1,8 +1,8 @@
 package org.jetbrains.plugins.ruby.ruby.sdk.gemRootType;
 
-import org.consulo.lombok.annotations.LazyInstance;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.roots.OrderRootType;
+import consulo.lombok.annotations.Lazy;
 
 /**
  * @author VISTALL
@@ -11,7 +11,7 @@ import com.intellij.openapi.roots.OrderRootType;
 public class GemOrderRootType extends OrderRootType
 {
 	@NotNull
-	@LazyInstance
+	@Lazy
 	public static GemOrderRootType getInstance()
 	{
 		return getOrderRootType(GemOrderRootType.class);

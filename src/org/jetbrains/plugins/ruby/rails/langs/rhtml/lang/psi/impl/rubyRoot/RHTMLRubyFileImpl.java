@@ -20,9 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLRubyFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiFileBase;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 
 /**
@@ -45,13 +43,13 @@ public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile
 		return (RHTMLFileViewProvider) super.getViewProvider();
 	}
 
-	@Override
+	/*@Override
 	protected boolean isPsiUpToDate(VirtualFile vFile)
 	{
 		final FileViewProvider viewProvider = myManager.findViewProvider(vFile);
 		assert viewProvider != null;
 		return viewProvider.getPsi(RubyLanguage.INSTANCE) == this;
-	}
+	}*/
 
 	public String toString()
 	{

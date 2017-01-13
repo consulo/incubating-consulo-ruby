@@ -44,11 +44,11 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigur
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationFactory;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.execution.LocatableConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.module.Module;
@@ -64,7 +64,7 @@ import com.intellij.psi.PsiFile;
  * User: oleg
  * Date: 20.07.2006
  */
-public class RubyRunConfigurationType implements LocatableConfigurationType
+public class RubyRunConfigurationType implements ConfigurationType
 {
 	private final RubyRunConfigurationFactory myAppFactory;
 	private final RTestsRunConfigurationFactory myUnitTestsFactory;
@@ -114,7 +114,7 @@ public class RubyRunConfigurationType implements LocatableConfigurationType
 		};
 	}
 
-	@Override
+	//@Override
 	@Nullable
 	public RunnerAndConfigurationSettings createConfigurationByLocation(final @NotNull Location location)
 	{
@@ -276,7 +276,7 @@ public class RubyRunConfigurationType implements LocatableConfigurationType
 		return settings;
 	}
 
-	@Override
+	//@Override
 	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
 	{
 		return RubyRunConfigurationUtil.isConfigurationByElement(runConfiguration, location.getPsiElement());

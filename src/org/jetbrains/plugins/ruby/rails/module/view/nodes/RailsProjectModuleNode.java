@@ -33,8 +33,6 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControlle
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsModelFolderNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsSharedPatialsFolderNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsUserFolderNode;
-import org.mustbe.consulo.roots.ContentFolderScopes;
-import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
@@ -42,6 +40,8 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.roots.ContentFolderScopes;
+import consulo.roots.impl.TestContentFolderTypeProvider;
 
 /**
  * Created by IntelliJ IDEA.

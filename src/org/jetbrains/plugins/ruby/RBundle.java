@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby;
 
-import org.consulo.lombok.annotations.Bundle;
+import consulo.lombok.annotations.Bundle;
 
 @Bundle("org.jetbrains.plugins.ruby.RBundle")
 public class RBundle

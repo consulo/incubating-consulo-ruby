@@ -33,11 +33,11 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigur
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.execution.LocatableConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.module.Module;
@@ -52,7 +52,7 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
-public class RSpecRunConfigurationType implements LocatableConfigurationType
+public class RSpecRunConfigurationType implements ConfigurationType
 {
 	private final RSpecRunConfigurationFactory myRSpecTestsFactory;
 
@@ -97,7 +97,7 @@ public class RSpecRunConfigurationType implements LocatableConfigurationType
 		return new ConfigurationFactory[]{myRSpecTestsFactory};
 	}
 
-	@Override
+	//@Override
 	@Nullable
 	public RunnerAndConfigurationSettings createConfigurationByLocation(final @NotNull Location location)
 	{
@@ -134,7 +134,7 @@ public class RSpecRunConfigurationType implements LocatableConfigurationType
 		return null;
 	}
 
-	@Override
+	//@Override
 	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
 	{
 		return RubyRunConfigurationUtil.isConfigurationByElement(runConfiguration, location.getPsiElement());

@@ -35,7 +35,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import com.intellij.ide.util.gotoByName.GotoFileCellRenderer;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorAction;
@@ -76,14 +76,14 @@ public class SwitchToView extends EditorAction
 		@Override
 		public void execute(Editor editor, DataContext dataContext)
 		{
-			final Module module = DataKeys.MODULE.getData(dataContext);
+			final Module module = CommonDataKeys.MODULE.getData(dataContext);
 			if(module == null || !RailsFacetUtil.hasRailsSupport(module))
 			{
 				cantNavigate();
 				return;
 			}
 
-			final PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
+			final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
 			if(psiFile == null)
 			{
 				cantNavigate();

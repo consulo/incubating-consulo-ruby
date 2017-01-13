@@ -21,7 +21,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.lang.Language;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
@@ -77,7 +78,7 @@ public class DataContextUtil
 	@Nullable
 	public static Project getProject(@NotNull final DataContext dataContext)
 	{
-		return DataKeys.PROJECT.getData(dataContext);
+		return CommonDataKeys.PROJECT.getData(dataContext);
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class DataContextUtil
 	@Nullable
 	public static Module getModule(@NotNull final DataContext dataContext)
 	{
-		return DataKeys.MODULE.getData(dataContext);
+		return CommonDataKeys.MODULE.getData(dataContext);
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class DataContextUtil
 	@Nullable
 	public static Language getLanguage(@NotNull final DataContext dataContext)
 	{
-		return DataKeys.LANGUAGE.getData(dataContext);
+		return LangDataKeys.LANGUAGE.getData(dataContext);
 	}
 
 	/**
@@ -113,7 +114,7 @@ public class DataContextUtil
 	@Nullable
 	public static Editor getEditor(@NotNull final DataContext dataContext)
 	{
-		return DataKeys.EDITOR.getData(dataContext);
+		return CommonDataKeys.EDITOR.getData(dataContext);
 	}
 
 	/**

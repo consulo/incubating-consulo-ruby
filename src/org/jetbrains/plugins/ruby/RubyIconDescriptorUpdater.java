@@ -43,13 +43,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUti
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-import com.intellij.ide.IconDescriptor;
-import com.intellij.ide.IconDescriptorUpdater;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.BitUtil;
+import consulo.ide.IconDescriptor;
+import consulo.ide.IconDescriptorUpdater;
 
 /**
  * Created by IntelliJ IDEA.

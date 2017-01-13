@@ -27,7 +27,7 @@ import com.intellij.psi.PsiElement;
  * @author: oleg
  * @date: 27.10.2006
  */
-public class RubyHighlightInfoType implements HighlightInfoType
+public class RubyHighlightInfoType implements HighlightInfoType, HighlightInfoType.UpdateOnTypingSuppressible
 {
 	public static final RubyHighlightInfoType RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL_ID, RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL);
 	public static final RubyHighlightInfoType RUBY_REQUIRE_OR_LOAD_CALL_ARG_HIGHLIGHT = new RubyHighlightInfoType(RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL_ARG_ID, RubyHighlighterKeys.REQUIRE_OR_LOAD_CALL_ARG);
@@ -74,7 +74,7 @@ public class RubyHighlightInfoType implements HighlightInfoType
 	}
 
 	@Override
-	public boolean needUpdateOnTyping()
+	public boolean needsUpdateOnTyping()
 	{
 		return false;
 	}

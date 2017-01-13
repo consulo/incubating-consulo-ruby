@@ -1,9 +1,9 @@
 package org.consulo.jruby.rails.module.extension;
 
-import org.consulo.module.extension.impl.ModuleExtensionImpl;
 import org.consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.module.extension.impl.ModuleExtensionImpl;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

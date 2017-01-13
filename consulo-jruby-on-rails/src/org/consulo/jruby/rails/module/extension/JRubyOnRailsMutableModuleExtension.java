@@ -2,11 +2,11 @@ package org.consulo.jruby.rails.module.extension;
 
 import javax.swing.JComponent;
 
-import org.consulo.module.extension.ModuleExtension;
-import org.consulo.module.extension.MutableModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.module.extension.ModuleExtension;
+import consulo.module.extension.MutableModuleExtension;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

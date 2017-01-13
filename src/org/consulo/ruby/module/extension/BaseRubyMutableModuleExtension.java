@@ -2,13 +2,15 @@ package org.consulo.ruby.module.extension;
 
 import javax.swing.JComponent;
 
-import org.consulo.module.extension.MutableModuleExtensionWithSdk;
-import org.consulo.module.extension.MutableModuleInheritableNamedPointer;
-import org.consulo.module.extension.ui.ModuleExtensionWithSdkPanel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import com.intellij.util.ui.JBUI;
+import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
+import consulo.module.extension.MutableModuleExtensionWithSdk;
+import consulo.module.extension.MutableModuleInheritableNamedPointer;
+import consulo.roots.ModuleRootLayer;
+import consulo.util.ui.components.VerticalLayoutPanel;
 
 /**
  * @author VISTALL
@@ -32,7 +34,10 @@ public class BaseRubyMutableModuleExtension extends BaseRubyModuleExtension impl
 	@Override
 	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
 	{
-		return wrapToNorth(new ModuleExtensionWithSdkPanel(this, runnable));
+		VerticalLayoutPanel verticalLayoutPanel = JBUI.Panels.verticalPanel();
+		verticalLayoutPanel.addComponent(ModuleExtensionSdkBoxBuilder.createAndDefine(this, runnable).build());
+
+		return verticalLayoutPanel;
 	}
 
 	@Override

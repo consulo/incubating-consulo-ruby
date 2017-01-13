@@ -14,6 +14,7 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.bundle.SdkTableListener;
 
 /**
  * @author: oleg
@@ -21,12 +22,12 @@ import com.intellij.openapi.vfs.VirtualFile;
  */
 public class JRubySdkTableListener implements ApplicationComponent
 {
-	private SdkTable.Listener myJdkTableListener;
+	private SdkTableListener myJdkTableListener;
 	protected Project myProject;
 
 	public JRubySdkTableListener()
 	{
-		myJdkTableListener = new SdkTable.Listener()
+		myJdkTableListener = new SdkTableListener.Adapter()
 		{
 			@Override
 			public void sdkAdded(final Sdk sdk)

@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 
 /**
@@ -41,7 +41,7 @@ public class ShowFileSymbolAction extends AnAction
 	@Override
 	public void actionPerformed(AnActionEvent e)
 	{
-		final Project project = e.getData(DataKeys.PROJECT);
+		final Project project = e.getData(CommonDataKeys.PROJECT);
 		if(project == null)
 		{
 			return;

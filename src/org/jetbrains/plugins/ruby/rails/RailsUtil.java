@@ -21,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.consulo.yaml.lang.fileType.YAMLFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -47,6 +46,7 @@ import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import org.jetbrains.yaml.YAMLFileType;
 import com.intellij.execution.RunManagerEx;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.filters.Filter;

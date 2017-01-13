@@ -52,7 +52,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.RCommandArgumentListImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.ide.IconDescriptorUpdaters;
+import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiClass;

@@ -23,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import com.intellij.ide.caches.CacheUpdater;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.vfs.VirtualFile;
 
@@ -36,7 +35,7 @@ import com.intellij.openapi.vfs.VirtualFile;
  * Base class for filesCache. Used for module cache and for sdk cache.
  * Basic cache operations, as setupFileCache, refresh, save, get file info.
  */
-public interface RubyFilesCache extends CacheUpdater, Disposable
+public interface RubyFilesCache extends /*CacheUpdater, */Disposable
 {
 
 	/**

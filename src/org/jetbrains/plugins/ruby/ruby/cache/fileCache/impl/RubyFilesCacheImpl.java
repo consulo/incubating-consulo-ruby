@@ -43,9 +43,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.RFilesStorage;
 import org.jetbrains.plugins.ruby.ruby.cache.info.impl.RFilesStorageImpl;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.ide.caches.CacheUpdater;
 import com.intellij.ide.caches.FileContent;
-import com.intellij.ide.startup.StartupManagerEx;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -487,7 +485,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	// CacheUpdaterFunctionality
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@Override
+	//@Override
 	public VirtualFile[] queryNeededFiles(ProgressIndicator progressIndicator)
 	{
 		final Set<String> urls2Remove = new HashSet<String>(myRFilesStorage.getAllUrls());
@@ -514,24 +512,24 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 		return neededFiles.toArray(new VirtualFile[neededFiles.size()]);
 	}
 
-	@Override
+	//@Override
 	public int getNumberOfPendingUpdateJobs()
 	{
 		return 0;
 	}
 
-	@Override
+	//@Override
 	public void processFile(@NotNull final FileContent fileContent)
 	{
 		regenerateFileInfo(fileContent.getVirtualFile());
 	}
 
-	@Override
+	//@Override
 	public void updatingDone()
 	{
 	}
 
-	@Override
+	//@Override
 	public void canceled()
 	{
 	}
@@ -648,7 +646,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 			@Override
 			public void run()
 			{
-				StartupManagerEx.getInstanceEx(myProject).registerCacheUpdater(RubyFilesCacheImpl.this);
+				//StartupManagerEx.getInstanceEx(myProject).registerCacheUpdater(RubyFilesCacheImpl.this);
 			}
 		});
 	}
@@ -667,7 +665,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	{
 		DumbServiceImpl dumbService = DumbServiceImpl.getInstance(myProject);
 
-		dumbService.queueCacheUpdateInDumbMode(Collections.<CacheUpdater>singletonList(this));
+		//dumbService.queueCacheUpdateInDumbMode(Collections.<CacheUpdater>singletonList(this));
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

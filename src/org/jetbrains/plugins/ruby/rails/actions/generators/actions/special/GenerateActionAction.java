@@ -39,7 +39,7 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.diagnostic.Logger;
@@ -81,8 +81,8 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		@Override
 		public void run()
 		{
-			final Editor editor = DataKeys.EDITOR.getData(myDataContext);
-			final PsiFile psiFile = DataKeys.PSI_FILE.getData(myDataContext);
+			final Editor editor = CommonDataKeys.EDITOR.getData(myDataContext);
+			final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(myDataContext);
 			if(psiFile == null || editor == null)
 			{
 				LOG.error("Psi element couldn't be found for action.");
@@ -199,7 +199,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 	@Override
 	public void actionPerformed(final AnActionEvent e)
 	{
-		final Module module = DataKeys.MODULE.getData(e.getDataContext());
+		final Module module = CommonDataKeys.MODULE.getData(e.getDataContext());
 
 		invokeDialog(module, e.getDataContext());
 	}
@@ -214,7 +214,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 	{
 		if(dataContext != null)
 		{
-			Project project = DataKeys.PROJECT.getData(dataContext);
+			Project project = CommonDataKeys.PROJECT.getData(dataContext);
 			CommandProcessor.getInstance().executeCommand(project, RModuleUtil.createWriteAction(new ActionStubInserter(dataContext, methodName)), "GenerateActionAction.insertMethodSub", null);
 		}
 	}
@@ -227,7 +227,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		final Presentation presentation = event.getPresentation();
 
 		// Check if module is Rails module, SDK is valid
-		final Module module = DataKeys.MODULE.getData(dataContext);
+		final Module module = CommonDataKeys.MODULE.getData(dataContext);
 		if(module == null || !RailsFacetUtil.hasRailsSupport(module) || !RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module)))
 		{
 
@@ -236,7 +236,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		}
 
 		// Check if file name corresponds to file with controller class
-		final VirtualFile file = DataKeys.VIRTUAL_FILE.getData(dataContext);
+		final VirtualFile file = CommonDataKeys.VIRTUAL_FILE.getData(dataContext);
 		if(ControllersConventions.getControllerName(file) == null)
 		{
 			AnActionUtil.updatePresentation(presentation, false, false);
@@ -286,13 +286,13 @@ public class GenerateActionAction extends SimpleGeneratorAction
 	@Nullable
 	private static RClass determineControllerClass(final DataContext dataContext)
 	{
-		final Editor editor = DataKeys.EDITOR.getData(dataContext);
-		final PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
+		final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
+		final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
 		if(psiFile == null || editor == null)
 		{
 			return null;
 		}
-		PsiElement psiElem = DataKeys.PSI_ELEMENT.getData(dataContext);
+		PsiElement psiElem = CommonDataKeys.PSI_ELEMENT.getData(dataContext);
 		if(psiElem == null)
 		{
 			psiElem = psiFile.findElementAt(editor.getCaretModel().getOffset());
@@ -316,7 +316,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 
 	private void invokeDialog(final Module module, @NotNull final DataContext dataContext)
 	{
-		final VirtualFile file = DataKeys.VIRTUAL_FILE.getData(dataContext);
+		final VirtualFile file = CommonDataKeys.VIRTUAL_FILE.getData(dataContext);
 
 		final ActionInputValidator validator = createValidator(module, file, dataContext);
 		GenerateDialogs.showGenerateActionDialog(module, getGenerateDialogTitle(), validator);

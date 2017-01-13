@@ -20,14 +20,13 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRuby
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections.RHTMLRubyParser;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IFileElementType;
-import com.intellij.util.LanguageVersionUtil;
+import consulo.lang.LanguageVersion;
+import consulo.lang.util.LanguageVersionUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +49,7 @@ public class RubyDeclarationsInRHTMLTypeImpl extends IFileElementType
 
 		final Lexer lexer = new RHTMLRubyLexer();
 
-		LanguageVersion<Language> defaultVersion = LanguageVersionUtil.findDefaultVersion(getLanguage());
+		LanguageVersion defaultVersion = LanguageVersionUtil.findDefaultVersion(getLanguage());
 		final Project project = chameleon.getPsi().getProject();
 
 		final PsiBuilder builder = factory.createBuilder(project, chameleon, lexer, getLanguage(), defaultVersion, chameleon.getChars());

@@ -18,8 +18,6 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RHTMLCompletionData;
-import com.intellij.codeInsight.completion.CompletionUtil;
 import com.intellij.codeInsight.editorActions.HtmlQuoteHandler;
 import com.intellij.codeInsight.editorActions.TypedHandler;
 import com.intellij.openapi.components.ApplicationComponent;
@@ -54,18 +52,6 @@ public class RHTMLApplicationComponent implements ApplicationComponent
 
 		//Quote Handler
 		TypedHandler.registerQuoteHandler(RHTMLFileType.INSTANCE, new HtmlQuoteHandler());
-
-		//TODO Metadata Bindings
-
-		registerCompletionData();
-	}
-
-	/**
-	 * Enables autocompletion for HTML and Ruby in RHTML files.
-	 */
-	private static void registerCompletionData()
-	{
-		CompletionUtil.registerCompletionData(RHTMLFileType.INSTANCE, new RHTMLCompletionData());
 	}
 
 	@Override

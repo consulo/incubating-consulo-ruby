@@ -23,10 +23,10 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfigurationFactory;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
-import com.intellij.execution.LocatableConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
 
 /**
@@ -35,7 +35,7 @@ import com.intellij.execution.configurations.RunConfiguration;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
-public class RailsRunConfigurationType implements LocatableConfigurationType
+public class RailsRunConfigurationType implements ConfigurationType
 {
 	private final RailsServerRunConfigurationFactory myRailsServerFactory;
 
@@ -86,13 +86,13 @@ public class RailsRunConfigurationType implements LocatableConfigurationType
 		return myRailsServerFactory;
 	}
 
-	@Override
+	//@Override
 	public RunnerAndConfigurationSettings createConfigurationByLocation(final Location location)
 	{
 		return null;
 	}
 
-	@Override
+	//@Override
 	public boolean isConfigurationByLocation(RunConfiguration runConfiguration, Location location)
 	{
 		return RubyRunConfigurationUtil.isConfigurationByElement(runConfiguration, location.getPsiElement());

@@ -1,13 +1,13 @@
 package org.jetbrains.plugins.ruby.ruby.roots;
 
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.roots.ContentFolderScopes;
-import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
+import consulo.roots.ContentFolderScopes;
+import consulo.roots.impl.TestContentFolderTypeProvider;
 
 /**
  * @author VISTALL

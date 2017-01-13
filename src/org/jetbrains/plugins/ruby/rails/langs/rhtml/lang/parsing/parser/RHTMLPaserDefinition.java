@@ -24,17 +24,16 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.RHTMLFileImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import consulo.lang.LanguageVersion;
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,7 +58,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 
 	@Override
 	@NotNull
-	public Lexer createLexer(Project project, LanguageVersion languageVersion)
+	public Lexer createLexer(LanguageVersion languageVersion)
 	{
 		return new _RHTMLLexer();
 	}
@@ -103,7 +102,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 
 	@Override
 	@NotNull
-	public PsiParser createParser(final Project project, LanguageVersion languageVersion)
+	public PsiParser createParser(LanguageVersion languageVersion)
 	{
 		//We use RHML_FILE instead of this. Shouldn't be invoked!
 		//throw new UnsupportedOperationException("Should'n be invoked");

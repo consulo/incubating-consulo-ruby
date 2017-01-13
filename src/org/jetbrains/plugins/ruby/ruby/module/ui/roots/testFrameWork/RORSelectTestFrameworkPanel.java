@@ -39,8 +39,6 @@ import org.jetbrains.plugins.ruby.support.OpenLinkInBrowserHyperlinkListener;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import org.mustbe.consulo.roots.ContentFolderScopes;
-import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -53,6 +51,8 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.roots.ContentFolderScopes;
+import consulo.roots.impl.TestContentFolderTypeProvider;
 
 /**
  * Created by IntelliJ IDEA.

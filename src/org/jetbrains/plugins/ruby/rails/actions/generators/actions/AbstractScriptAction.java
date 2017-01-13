@@ -24,8 +24,9 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -72,8 +73,8 @@ public abstract class AbstractScriptAction extends AnAction
 	{
 		final DataContext dataContext = e.getDataContext();
 
-		final IdeView view = DataKeys.IDE_VIEW.getData(dataContext);
-		final Module module = DataKeys.MODULE.getData(dataContext);
+		final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
+		final Module module = CommonDataKeys.MODULE.getData(dataContext);
 		final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
 
 		assert module != null;
@@ -82,7 +83,7 @@ public abstract class AbstractScriptAction extends AnAction
 		PsiDirectory dir = view == null ? null : view.getOrChooseDirectory();
 		if(dir == null)
 		{
-			final PsiFile psiFile = DataKeys.PSI_FILE.getData(dataContext);
+			final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
 			if(psiFile != null)
 			{
 				dir = psiFile.getParent();
@@ -111,7 +112,7 @@ public abstract class AbstractScriptAction extends AnAction
 		final DataContext dataContext = e.getDataContext();
 		final Presentation presentation = e.getPresentation();
 
-		final Module module = DataKeys.MODULE.getData(dataContext);
+		final Module module = CommonDataKeys.MODULE.getData(dataContext);
 		boolean show = false;
 		if(module != null)
 		{

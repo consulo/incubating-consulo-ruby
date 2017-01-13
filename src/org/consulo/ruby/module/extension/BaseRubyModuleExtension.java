@@ -1,12 +1,12 @@
 package org.consulo.ruby.module.extension;
 
-import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

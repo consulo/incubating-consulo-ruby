@@ -39,7 +39,6 @@ public class RHTMLCompletionData extends HtmlCompletionData
 
 	public RHTMLCompletionData()
 	{
-		super();
 		final String[] inTagCompletionVariants = {
 				RHTML_SCRIPTLET_START,
 				RHTML_EXPRESSION_START,

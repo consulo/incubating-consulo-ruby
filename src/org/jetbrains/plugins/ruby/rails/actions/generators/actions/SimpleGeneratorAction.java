@@ -36,7 +36,7 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
@@ -121,7 +121,7 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 		}
 
 		final DataContext dataContext = e.getDataContext();
-		final Module module = DataKeys.MODULE.getData(dataContext);
+		final Module module = CommonDataKeys.MODULE.getData(dataContext);
 
 		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
 

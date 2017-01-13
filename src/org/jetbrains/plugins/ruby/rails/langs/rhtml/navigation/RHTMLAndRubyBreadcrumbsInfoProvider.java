@@ -49,22 +49,36 @@ import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
  * @date: Sep 13, 2007
  */
 
-public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider implements ProjectComponent
+public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
 {
-	private Project myProject;
-
-	public RHTMLAndRubyBreadcrumbsInfoProvider(final Project project)
+	public static class Ruby extends RHTMLAndRubyBreadcrumbsInfoProvider
 	{
-		myProject = project;
+		public Ruby()
+		{
+			super(RubyLanguage.INSTANCE);
+		}
 	}
 
-	@Override
-	public Language[] getLanguages()
+	public static class eRuby extends RHTMLAndRubyBreadcrumbsInfoProvider
 	{
-		return new Language[]{
-				RubyLanguage.INSTANCE,
-				eRubyLanguage.INSTANCE
-		};
+		public eRuby()
+		{
+			super(eRubyLanguage.INSTANCE);
+		}
+	}
+
+	private Language myLanguage;
+
+	public RHTMLAndRubyBreadcrumbsInfoProvider(Language language)
+	{
+		myLanguage = language;
+	}
+
+	@NotNull
+	@Override
+	public Language getLanguage()
+	{
+		return myLanguage;
 	}
 
 	@Override
@@ -114,38 +128,6 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
 	public String getElementTooltip(@NotNull final PsiElement psiElement)
 	{
 		return getPresentation(psiElement, false);
-	}
-
-	@Override
-	public void projectOpened()
-	{
-		// Do nothing
-	}
-
-	@Override
-	public void projectClosed()
-	{
-		// Do nothing
-	}
-
-	@Override
-	@NonNls
-	@NotNull
-	public String getComponentName()
-	{
-		return RailsComponents.RHTML_AND_RUBY_BREADCRUMBS_INFO_PROVIDER;
-	}
-
-	@Override
-	public void initComponent()
-	{
-		//  BreadcrumbsLoaderComponent.registerProvider(myProject, this);
-	}
-
-	@Override
-	public void disposeComponent()
-	{
-		// Do nothing
 	}
 
 	@Override

@@ -25,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RubyWizardSettingsHolder;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
-import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -38,7 +37,7 @@ import com.intellij.openapi.util.Pair;
  * @author: oleg
  * @date: 18.08.2006
  */
-public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePathsBuilder, RubyWizardSettingsHolder
+public abstract class RRModuleBuilder extends ModuleBuilder implements /*SourcePathsBuilder, */RubyWizardSettingsHolder
 {
 	private Sdk mySdk;
 	private boolean myShouldUseRSpec;
@@ -113,19 +112,19 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements SourcePat
 		myContentRootPath = moduleRootPath;
 	}
 
-	@Override
+	//@Override
 	public void setSourcePaths(final List<Pair<String, String>> paths)
 	{
 		mySourcePaths = paths;
 	}
 
-	@Override
+	//@Override
 	public List<Pair<String, String>> getSourcePaths()
 	{
 		return mySourcePaths;
 	}
 
-	@Override
+	//@Override
 	public void addSourcePath(final Pair<String, String> sourcePathInfo)
 	{
 		if(mySourcePaths == null)

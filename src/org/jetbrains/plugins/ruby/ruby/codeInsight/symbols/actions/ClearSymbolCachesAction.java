@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.actions;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 
@@ -35,7 +35,7 @@ public class ClearSymbolCachesAction extends AnAction
 	@Override
 	public void actionPerformed(AnActionEvent e)
 	{
-		final Project project = e.getData(DataKeys.PROJECT);
+		final Project project = e.getData(CommonDataKeys.PROJECT);
 		if(project == null)
 		{
 			return;

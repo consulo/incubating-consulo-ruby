@@ -44,7 +44,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.roots.ModuleRootEvent;
 import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.roots.impl.DirectoryIndex;
@@ -52,6 +51,7 @@ import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.messages.MessageBusConnection;
+import consulo.bundle.SdkTableListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -74,7 +74,7 @@ public class RubySdkCachesManager implements ProjectComponent
 
 	private RubyModuleListenerAdapter rModuleListener;
 	private ModuleRootListener moduleRootListener;
-	private SdkTable.Listener jdkTableListener;
+	private SdkTableListener jdkTableListener;
 	private Project myProject;
 	private MessageBusConnection myConnection;
 
@@ -169,14 +169,8 @@ public class RubySdkCachesManager implements ProjectComponent
 			}
 		};
 
-		jdkTableListener = new SdkTable.Listener()
+		jdkTableListener = new SdkTableListener.Adapter()
 		{
-			@Override
-			public void sdkAdded(final Sdk sdk)
-			{
-				// Do nothing. (Lazy cache creating).
-			}
-
 			@Override
 			public void sdkRemoved(final Sdk sdk)
 			{

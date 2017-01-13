@@ -50,7 +50,7 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RGlobalVariablePresentationUtil;
-import com.intellij.ide.IconDescriptorUpdaters;
+import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
