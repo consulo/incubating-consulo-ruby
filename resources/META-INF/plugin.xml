@@ -62,7 +62,7 @@
 
 		<editorHighlighterProvider filetype="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighterFactory" />
 
-		<completionData fileType="RHTML" className="org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RHTMLCompletionData" />
+		<!--<completionData fileType="RHTML" className="org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RHTMLCompletionData" />-->
 
 		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler" />
 		<moduleExtensionProvider key="ruby"

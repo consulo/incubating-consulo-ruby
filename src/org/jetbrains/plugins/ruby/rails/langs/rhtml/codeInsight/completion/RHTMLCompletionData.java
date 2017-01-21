@@ -19,8 +19,6 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants.RHTMLInjectionInStringsCVariant;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants.RHTMLInjectionInTagContentCVariant;
 import com.intellij.codeInsight.completion.CompletionVariant;
-import com.intellij.codeInsight.completion.HtmlCompletionData;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,7 +26,7 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: 29.04.2007
  */
-public class RHTMLCompletionData extends HtmlCompletionData
+public class RHTMLCompletionData
 {
 	public static final String RHTML_SCRIPTLET_START = "%";
 	public static final String RHTML_EXPRESSION_START = "%=";
@@ -60,12 +58,11 @@ public class RHTMLCompletionData extends HtmlCompletionData
 	{
 		variant.addCompletion(completion_variants);
 		variant.setInsertHandler(new RHTMLTagInsertHandler());
-		registerVariant(variant);
+		//registerVariant(variant);
 	}
 
-	@Override
-	public String findPrefix(final PsiElement insertedElement, final int offset)
+	/*public String findPrefix(final PsiElement insertedElement, final int offset)
 	{
 		return RHTMLInjectionInStringsCVariant.ifInStringTokenAfterInjectionStartChar(insertedElement.getNode()) ? INECTION_START_PREFIX : super.findPrefix(insertedElement, offset);
-	}
+	} */
 }
