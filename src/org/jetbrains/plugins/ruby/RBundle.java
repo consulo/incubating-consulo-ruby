@@ -16,9 +16,27 @@
 
 package org.jetbrains.plugins.ruby;
 
-import consulo.lombok.annotations.Bundle;
+import org.jetbrains.annotations.PropertyKey;
+import com.intellij.AbstractBundle;
 
-@Bundle("org.jetbrains.plugins.ruby.RBundle")
-public class RBundle
+public class RBundle extends AbstractBundle
 {
+	private static final String BUNDLE = "org.jetbrains.plugins.ruby.RBundle";
+
+	private static final RBundle ourInstance = new RBundle();
+
+	private RBundle()
+	{
+		super(BUNDLE);
+	}
+
+	public static String message(@PropertyKey(resourceBundle = BUNDLE) String key)
+	{
+		return ourInstance.getMessage(key);
+	}
+
+	public static String message(@PropertyKey(resourceBundle = BUNDLE) String key, Object... params)
+	{
+		return ourInstance.getMessage(key, params);
+	}
 }

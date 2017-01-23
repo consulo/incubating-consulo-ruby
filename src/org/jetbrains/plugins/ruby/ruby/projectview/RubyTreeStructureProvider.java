@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.projectview;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -29,6 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -38,9 +40,10 @@ import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.TreeStructureProvider;
 import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
-import lombok.val;
+import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -67,17 +70,17 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 		}
 
 		ArrayList<AbstractTreeNode> result = new ArrayList<AbstractTreeNode>();
-		for(val child : children)
+		for(AbstractTreeNode child : children)
 		{
 			Object o = child.getValue();
 			if(o instanceof RFile)
 			{
-				val rFile = (RFile) o;
-				val fileModule = rFile.getModule();
+				RFile rFile = (RFile) o;
+				Module fileModule = rFile.getModule();
 
 				if(fileModule != null && RubyUtil.isRubyModuleType(fileModule))
 				{
-					val file = rFile.getVirtualFile();
+					VirtualFile file = rFile.getVirtualFile();
 
 					//rspec tests
 					if(RSpecUtil.isRSpecTestFile(file))
@@ -86,12 +89,12 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 						continue;
 					}
 
-					val virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
+					RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
 					if(virtualContainer instanceof RVirtualFile)
 					{
-						val rVirtualFile = (RVirtualFile) virtualContainer;
-						val classes = RContainerUtil.getTopLevelClasses(virtualContainer);
-						val modules = RContainerUtil.getTopLevelModules(virtualContainer);
+						RVirtualFile rVirtualFile = (RVirtualFile) virtualContainer;
+						List<RVirtualClass> classes = RContainerUtil.getTopLevelClasses(virtualContainer);
+						List<RVirtualModule> modules = RContainerUtil.getTopLevelModules(virtualContainer);
 
 						// Rails checks
 						if(RailsFacetUtil.hasRailsSupport(fileModule))
@@ -123,12 +126,12 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 						}
 
 						// Default ruby behavour, checking names conventions
-						val fileName = rFile.getVirtualFile().getNameWithoutExtension();
-						val mixedFileName = NamingConventions.toMixedCase(fileName);
+						String fileName = rFile.getVirtualFile().getNameWithoutExtension();
+						String mixedFileName = NamingConventions.toMixedCase(fileName);
 						boolean foundRubyElement = false;
 						for(RVirtualStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements())
 						{
-							val type = structuralElement.getType();
+							StructureType type = structuralElement.getType();
 							if(!foundRubyElement && type == StructureType.CLASS)
 							{
 								if(Comparing.equal(mixedFileName, ((RVirtualClass) structuralElement).getName()))

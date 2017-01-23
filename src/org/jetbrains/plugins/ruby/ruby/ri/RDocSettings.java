@@ -17,11 +17,12 @@
 package org.jetbrains.plugins.ruby.ruby.ri;
 
 import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
-import consulo.lombok.annotations.ApplicationService;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,9 +30,14 @@ import consulo.lombok.annotations.ApplicationService;
  * @author: oleg
  * @date: Nov 8, 2006
  */
-@ApplicationService
 public class RDocSettings implements JDOMExternalizable
 {
+	@NotNull
+	public static RDocSettings getInstance()
+	{
+		return ServiceManager.getService(RDocSettings.class);
+	}
+
 	private boolean doUseDefaults;
 
 	private final CheckableDirectoriesContainer docDirs;

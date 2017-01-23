@@ -34,7 +34,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
-import lombok.val;
 
 /**
  * Created by IntelliJ IDEA.
@@ -92,7 +91,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	{
 		if(lang == RubyLanguage.INSTANCE)
 		{
-			val ruby = new RHTMLRubyFileImpl(this);
+			RHTMLRubyFileImpl ruby = new RHTMLRubyFileImpl(this);
 			ruby.setOriginalFile(getPsi(eRubyLanguage.INSTANCE));
 			return ruby;
 		}
@@ -106,7 +105,7 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 		}
 		else if(lang == eRubyLanguage.INSTANCE)
 		{
-			val def = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+			ParserDefinition def = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
 
 			return def.createFile(this);
 		}

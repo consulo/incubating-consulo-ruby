@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -33,6 +34,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.Instruction;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgument;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.DFAEngine;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.types.TypeDfaInstance;
@@ -44,13 +47,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references.RReferenceBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.util.containers.HashMap;
-import consulo.lombok.annotations.ProjectService;
-import lombok.val;
 
 /**
  * Created by IntelliJ IDEA.
@@ -58,9 +62,14 @@ import lombok.val;
  * @author: oleg
  * @date: Apr 21, 2008
  */
-@ProjectService
 public class TypeInferenceHelper
 {
+	@NotNull
+	public static TypeInferenceHelper getInstance(@NotNull Project project)
+	{
+		return ServiceManager.getService(project, TypeInferenceHelper.class);
+	}
+
 	private Ref<TypeInferenceContext> myTypeContext = new Ref<TypeInferenceContext>();
 
 	public TypeInferenceHelper(PsiManagerEx psiManagerEx)
@@ -79,7 +88,7 @@ public class TypeInferenceHelper
 	{
 		ProgressManager.getInstance().checkCanceled();
 
-		val context = getContext();
+		TypeInferenceContext context = getContext();
 		if(context == null)
 		{
 			return RType.NOT_TYPED;
@@ -91,17 +100,17 @@ public class TypeInferenceHelper
 			context.localVariablesTypesCache.put(owner, map);
 			inferLocalVariablesTypes(context, owner, map);
 		}
-		val type = map.get(usage);
+		RType type = map.get(usage);
 		return type != null ? type : RType.NOT_TYPED;
 	}
 
 	public void inferLocalVariablesTypes(@NotNull final TypeInferenceContext context, @NotNull final RControlFlowOwner owner, final Map<RIdentifier, RType> map)
 	{
 		context.methodsBeingInferred.add(owner);
-		val flow = owner.getControlFlow();
-		val dfaInstance = new TypeDfaInstance(context.fileSymbol, map);
-		val semilattice = new TypesSemilattice();
-		val engine = new DFAEngine<Map<String, RType>>(flow, dfaInstance, semilattice);
+		Instruction[] flow = owner.getControlFlow();
+		TypeDfaInstance dfaInstance = new TypeDfaInstance(context.fileSymbol, map);
+		TypesSemilattice semilattice = new TypesSemilattice();
+		DFAEngine<Map<String, RType>> engine = new DFAEngine<Map<String, RType>>(flow, dfaInstance, semilattice);
 		engine.performDFA();
 		context.methodsBeingInferred.remove(owner);
 	}
@@ -113,13 +122,13 @@ public class TypeInferenceHelper
 		{
 			return RType.NOT_TYPED;
 		}
-		val fileSymbol = context.fileSymbol;
-		val command = call.getPsiCommand();
+		FileSymbol fileSymbol = context.fileSymbol;
+		PsiElement command = call.getPsiCommand();
 
 		// Constructors handling
 		if(command instanceof RReference)
 		{
-			val ref = (RReferenceBase) command;
+			RReferenceBase ref = (RReferenceBase) command;
 			if(ref.isConstructorLike())
 			{
 				return ref.getType(fileSymbol);
@@ -151,9 +160,9 @@ public class TypeInferenceHelper
 		{
 			return RType.NOT_TYPED;
 		}
-		val fileSymbol = context.fileSymbol;
+		FileSymbol fileSymbol = context.fileSymbol;
 
-		val symbol = ResolveUtil.resolveToSymbol(fileSymbol, ref);
+		Symbol symbol = ResolveUtil.resolveToSymbol(fileSymbol, ref);
 		if(symbol == null)
 		{
 			return RType.NOT_TYPED;
@@ -165,24 +174,24 @@ public class TypeInferenceHelper
 	{
 		ProgressManager.getInstance().checkCanceled();
 
-		val context = getInstance(symbol.getProject()).getContext();
+		TypeInferenceContext context = getInstance(symbol.getProject()).getContext();
 		if(context == null)
 		{
 			return RType.NOT_TYPED;
 		}
-		val fileSymbol = context.fileSymbol;
+		FileSymbol fileSymbol = context.fileSymbol;
 		// Java method handling
 		if(symbol.getType() == Type.JAVA_METHOD)
 		{
 			return RTypeUtil.createTypeBySymbol(fileSymbol, symbol, Context.ALL, true);
 		}
 		// Common ruby method call handling
-		val prototype = symbol.getLastVirtualPrototype(fileSymbol);
+		RVirtualElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
 		if(prototype == null)
 		{
 			return RType.NOT_TYPED;
 		}
-		val element = RVirtualPsiUtil.findPsiByVirtualElement(prototype, symbol.getProject());
+		RPsiElement element = RVirtualPsiUtil.findPsiByVirtualElement(prototype, symbol.getProject());
 		if(!(element instanceof RMethod))
 		{
 			return RType.NOT_TYPED;
@@ -194,8 +203,8 @@ public class TypeInferenceHelper
 
 	private RType inferTypeOfMethodCall(@NotNull final RMethod method, final List<RPsiElement> callArgs, @NotNull final TypeInferenceContext context)
 	{
-		val fileSymbol = context.fileSymbol;
-		val commentType = TypeCommentsHelper.tryToExtractTypeFromComment(method, fileSymbol);
+		FileSymbol fileSymbol = context.fileSymbol;
+		RType commentType = TypeCommentsHelper.tryToExtractTypeFromComment(method, fileSymbol);
 		if(commentType != null)
 		{
 			return commentType;
@@ -214,23 +223,23 @@ public class TypeInferenceHelper
 
 			// we remove method variables caches of method
 			context.localVariablesTypesCache.remove(method);
-			val localVariablesTypes = new HashMap<RIdentifier, RType>();
+			HashMap<RIdentifier, RType> localVariablesTypes = new HashMap<RIdentifier, RType>();
 			context.localVariablesTypesCache.put(method, localVariablesTypes);
 
 			// Here we set types of arguments of call
-			val argumentList = method.getArgumentList();
+			RArgumentList argumentList = method.getArgumentList();
 			if(argumentList != null)
 			{
 				// all other types are handled inside TypeDfaInstance.fun in MethodParameterAccess case
-				val arguments = argumentList.getArguments();
+				List<RArgument> arguments = argumentList.getArguments();
 				for(int i = 0; i < arguments.size(); i++)
 				{
-					val argument = arguments.get(i);
-					val id = argument.getIdentifier();
-					val argType = argument.getType();
+					RArgument argument = arguments.get(i);
+					RIdentifier id = argument.getIdentifier();
+					ArgumentInfo.Type argType = argument.getType();
 					if(argType == ArgumentInfo.Type.SIMPLE || argType == ArgumentInfo.Type.PREDEFINED)
 					{
-						val arg = i < callArgs.size() ? callArgs.get(i) : null;
+						RPsiElement arg = i < callArgs.size() ? callArgs.get(i) : null;
 						if(arg instanceof RExpression)
 						{
 							localVariablesTypes.put(id, ((RExpression) arg).getType(fileSymbol));
@@ -238,20 +247,20 @@ public class TypeInferenceHelper
 					}
 				}
 			}
-			val flow = method.getControlFlow();
-			val dfaInstance = new TypeDfaInstance(fileSymbol, localVariablesTypes);
-			val semilattice = new TypesSemilattice();
-			val engine = new DFAEngine<Map<String, RType>>(flow, dfaInstance, semilattice);
+			Instruction[] flow = method.getControlFlow();
+			TypeDfaInstance dfaInstance = new TypeDfaInstance(fileSymbol, localVariablesTypes);
+			TypesSemilattice semilattice = new TypesSemilattice();
+			DFAEngine<Map<String, RType>> engine = new DFAEngine<Map<String, RType>>(flow, dfaInstance, semilattice);
 			engine.performDFA();
 
 
 			// here we iterate over last instructions to get joint type
-			val lastInstruction = flow[flow.length - 1];
+			Instruction lastInstruction = flow[flow.length - 1];
 			RType result = RType.NOT_TYPED;
 			for(Instruction i : lastInstruction.allPred())
 			{
 				// Here we should take types of statements!!!
-				val statement = RubyPsiUtil.getStatement(i.getElement());
+				RPsiElement statement = RubyPsiUtil.getStatement(i.getElement());
 				if(statement instanceof RExpression)
 				{
 					result = RTypeUtil.joinOr(result, ((RExpression) statement).getType(fileSymbol));
@@ -277,7 +286,7 @@ public class TypeInferenceHelper
 
 	public void testAndSet(@Nullable final FileSymbol fileSymbol)
 	{
-		val context = getContext();
+		TypeInferenceContext context = getContext();
 		if(context == null)
 		{
 			myTypeContext.set(new TypeInferenceContext(fileSymbol));
@@ -291,17 +300,17 @@ public class TypeInferenceHelper
 
 	public RType inferUsageType(final Access access)
 	{
-		val context = getContext();
+		TypeInferenceContext context = getContext();
 		if(context == null)
 		{
 			return RType.NOT_TYPED;
 		}
 		if(access instanceof AssignAccess)
 		{
-			val value = ((AssignAccess) access).getValue();
+			RPsiElement value = ((AssignAccess) access).getValue();
 			if(value instanceof RExpression)
 			{
-				val expression = (RExpression) value;
+				RExpression expression = (RExpression) value;
 				// Prevent stack overflow
 				if(context.expressionsBeingInferred.contains(expression))
 				{
