@@ -84,7 +84,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 		String[] unsetAttributes = null;
 		try
 		{
-			unsetAttributes = myTemplate.getUnsetAttributes(myDefaultProperties);
+			unsetAttributes = myTemplate.getUnsetAttributes(myDefaultProperties, project);
 		}
 		catch(ParseException e)
 		{
@@ -186,9 +186,9 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 		@NotNull final Project project = directory.getProject();
 		if(props == null)
 		{
-			props = FileTemplateManager.getInstance().getDefaultProperties();
+			props = FileTemplateManager.getInstance(project).getDefaultProperties();
 		}
-		FileTemplateManager.getInstance().addRecentName(template.getName());
+		FileTemplateManager.getInstance(project).addRecentName(template.getName());
 		// FileTemplateUtil.setPackageNameAttribute(props, directory);
 
 		if(fileName != null && props.getProperty(FileTemplate.ATTRIBUTE_NAME) == null)
@@ -197,7 +197,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 		}
 
 		//Set escaped references to dummy values to remove leading "\" (if not already explicitely set)
-		String[] dummyRefs = FileTemplateUtil.calculateAttributes(template.getText(), props, true);
+		String[] dummyRefs = FileTemplateUtil.calculateAttributes(template.getText(), props, true, project);
 		for(String dummyRef : dummyRefs)
 		{
 			props.setProperty(dummyRef, "");
