@@ -37,8 +37,6 @@ public interface RComponents extends RubyComponents, RailsComponents
 	@NonNls
 	final String RSETTINGS = "RSettings";
 	@NonNls
-	final String RPROJECT_SETTINGS = "RProjectSettings";
-	@NonNls
 	final String RMODULE_SETTINGS_STORAGE = "RModuleSettingsStorage";
 	@NonNls
 	final String RI_MODULE_COMPONENT = "RIModuleComponent";

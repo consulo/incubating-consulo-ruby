@@ -30,15 +30,7 @@ import com.intellij.util.xmlb.annotations.Transient;
  * @author: Roman Chernyatchik, oleg
  * @date: Oct 11, 2007
  */
-@State(
-		name = "RApplicationSettings",
-		storages = {
-				@Storage(
-						id = "main",
-						file = "$APP_CONFIG$/rubysettings.xml"
-				)
-		}
-)
+@State(name = "RApplicationSettings", storages = @Storage("ruby.xml"))
 public class RApplicationSettings implements PersistentStateComponent<RApplicationSettings>
 {
 	//Output console

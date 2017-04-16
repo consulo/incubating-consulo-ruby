@@ -29,15 +29,7 @@ import com.intellij.openapi.components.Storage;
  * @author: Roman Chernyatchik
  * @date: Apr 14, 2008
  */
-@State(
-		name = "RailsApplicationSettings",
-		storages = {
-				@Storage(
-						id = "main",
-						file = "$APP_CONFIG$/rubysettings.xml"
-				)
-		}
-)
+@State(name = "RailsApplicationSettings", storages = @Storage("ruby.xml"))
 public class RailsApplicationSettings implements PersistentStateComponent<RailsApplicationSettings>
 {
 	@Nullable

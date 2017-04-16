@@ -32,15 +32,7 @@ import com.intellij.openapi.components.Storage;
  * @author: Roman Chernyatchik
  * @date: 23.03.2007
  */
-@State(
-		name = "RubyShortcutsSettings",
-		storages = {
-				@Storage(
-						id = "main",
-						file = "$APP_CONFIG$/rubysettings.xml"
-				)
-		}
-)
+@State(name = "RubyShortcutsSettings", storages =  @Storage("ruby.xml"))
 public class RubyShortcutsSettings implements PersistentStateComponent<RubyShortcutsSettings>
 {
 	public RakeTaskSerializableImpl serializableRakeTask;

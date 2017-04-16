@@ -22,12 +22,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.annotations.Transient;
 
@@ -38,15 +38,7 @@ import com.intellij.util.xmlb.annotations.Transient;
  * @date: 25.05.2007
  */
 
-@State(
-		name = RComponents.RPROJECT_SETTINGS,
-		storages = {
-				@Storage(
-						id = "other",
-						file = "$PROJECT_FILE$"
-				)
-		}
-)
+@State(name = "RProjectSettings", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
 public class RProjectSettings implements PersistentStateComponent<RProjectSettings>
 {
 	public ArrayList<String> myOptions = new ArrayList<String>();

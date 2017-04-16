@@ -28,15 +28,7 @@ import com.intellij.openapi.components.Storage;
  * @author: Roman Chernyatchik
  * @date: Apr 12, 2008
  */
-@State(
-		name = "RSpecApplicationSettings",
-		storages = {
-				@Storage(
-						id = "main",
-						file = "$APP_CONFIG$/rubysettings.xml"
-				)
-		}
-)
+@State(name = "RSpecApplicationSettings", storages = @Storage("ruby.xml"))
 public class RSpecApplicationSettings implements PersistentStateComponent<RSpecApplicationSettings>
 {
 	public boolean wizardRubyShouldUseRSpecFramework = false;
