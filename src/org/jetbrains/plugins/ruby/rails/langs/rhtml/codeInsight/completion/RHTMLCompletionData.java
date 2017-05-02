@@ -56,7 +56,10 @@ public class RHTMLCompletionData
 
 	private void setupAndRegistrVariant(final String[] completion_variants, final CompletionVariant variant)
 	{
-		variant.addCompletion(completion_variants);
+		for(String completion_variant : completion_variants)
+		{
+			variant.addCompletion(completion_variant);
+		}
 		variant.setInsertHandler(new RHTMLTagInsertHandler());
 		//registerVariant(variant);
 	}
