@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.sdk;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +38,6 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import junit.framework.Assert;
 
 /**
  * Created by IntelliJ IDEA.
@@ -191,7 +191,7 @@ public class RubySdkUtil
 			if(addStubs)
 			{
 				final VirtualFile stubsFile = LocalFileSystem.getInstance().findFileByPath(sdkHome + File.separator + RubySdkType.RUBYSTUBS_DIR);
-				Assert.assertNotNull("Stubs file cannot be null", stubsFile);
+				Objects.requireNonNull(stubsFile, "Stubs file cannot be null");
 				addToSourceAndClasses(sdkModificator, stubsFile);
 			}
 		}
