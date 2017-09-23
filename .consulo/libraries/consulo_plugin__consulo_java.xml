@@ -9,6 +9,7 @@
       <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/java-i18n.jar!/" />
       <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/coverate_rt.jar!/" />
       <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/java-manifest.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/streamex-0.6.5.jar!/" />
       <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/javascript-impl.jar!/" />
       <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/jdk-annotations.jar!/" />
       <root url="jar://$PROJECT_DIR$/dep/consulo.java/lib/instrumentation-util.jar!/" />

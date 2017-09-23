@@ -28,7 +28,6 @@ import com.intellij.codeInsight.lookup.DeferredUserLookupValue;
 import com.intellij.codeInsight.lookup.LookupItem;
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
 import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
-import com.intellij.codeInsight.lookup.LookupValueWithTail;
 import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
 import com.intellij.codeInsight.lookup.PresentableLookupValue;
 import com.intellij.openapi.project.Project;
@@ -41,7 +40,7 @@ import com.intellij.psi.PsiElement;
  * @author: oleg
  * @date: Apr 22, 2007
  */
-public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue, DeferredUserLookupValue, LookupValueWithUIHint, LookupValueWithPsiElement, LookupValueWithTail, LookupValueWithPriority, Iconable
+public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue, DeferredUserLookupValue, LookupValueWithUIHint, LookupValueWithPsiElement, LookupValueWithPriority, Iconable
 {
 
 
@@ -136,7 +135,6 @@ public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue
 		return myIcon;
 	}
 
-	@Override
 	public String getTailText()
 	{
 		return myTailText != null ? myTailText : "";
