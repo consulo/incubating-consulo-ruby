@@ -64,14 +64,14 @@ public class SwitchToAction extends EditorAction
 		{
 
 			// must be in rails module
-			final Module module = CommonDataKeys.MODULE.getData(dataContext);
+			final Module module = dataContext.getData(CommonDataKeys.MODULE);
 			if(module == null || !RailsFacetUtil.hasRailsSupport(module))
 			{
 				cantNavigate();
 				return;
 			}
 
-			PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
+			PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
 			if(psiFile == null)
 			{
 				cantNavigate();

@@ -78,7 +78,7 @@ public class ShortcutAction extends AnAction
 	{
 		final DataContext dataContext = e.getDataContext();
 
-		final Module module = CommonDataKeys.MODULE.getData(dataContext);
+		final Module module = dataContext.getData(CommonDataKeys.MODULE);
 		if(module == null || !RailsFacetUtil.hasRailsSupport(module))
 		{
 			return;

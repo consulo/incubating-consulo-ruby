@@ -160,10 +160,4 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 		}
 		return result;
 	}
-
-	@Override
-	public Object getData(Collection<AbstractTreeNode> selected, String dataName)
-	{
-		return null;
-	}
 }

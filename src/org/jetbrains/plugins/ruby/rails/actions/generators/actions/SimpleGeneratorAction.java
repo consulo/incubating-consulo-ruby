@@ -120,8 +120,7 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 			return;
 		}
 
-		final DataContext dataContext = e.getDataContext();
-		final Module module = CommonDataKeys.MODULE.getData(dataContext);
+		final Module module = e.getData(CommonDataKeys.MODULE);
 
 		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
 

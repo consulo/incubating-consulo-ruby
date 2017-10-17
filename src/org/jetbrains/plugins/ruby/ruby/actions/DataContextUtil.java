@@ -78,7 +78,7 @@ public class DataContextUtil
 	@Nullable
 	public static Project getProject(@NotNull final DataContext dataContext)
 	{
-		return CommonDataKeys.PROJECT.getData(dataContext);
+		return dataContext.getData(CommonDataKeys.PROJECT);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class DataContextUtil
 	@Nullable
 	public static Module getModule(@NotNull final DataContext dataContext)
 	{
-		return CommonDataKeys.MODULE.getData(dataContext);
+		return dataContext.getData(CommonDataKeys.MODULE);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class DataContextUtil
 	@Nullable
 	public static Language getLanguage(@NotNull final DataContext dataContext)
 	{
-		return LangDataKeys.LANGUAGE.getData(dataContext);
+		return dataContext.getData(LangDataKeys.LANGUAGE);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class DataContextUtil
 	@Nullable
 	public static Editor getEditor(@NotNull final DataContext dataContext)
 	{
-		return CommonDataKeys.EDITOR.getData(dataContext);
+		return dataContext.getData(CommonDataKeys.EDITOR);
 	}
 
 	/**

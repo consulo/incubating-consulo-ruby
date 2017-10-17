@@ -25,7 +25,6 @@ import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.ide.fileTemplates.FileTemplateUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.project.Project;
@@ -52,12 +51,12 @@ public abstract class CreateFromTemplateActionBase extends AnAction
 	{
 		DataContext dataContext = e.getDataContext();
 
-		IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
+		IdeView view = dataContext.getData(LangDataKeys.IDE_VIEW);
 		if(view == null)
 		{
 			return;
 		}
-		Project project = CommonDataKeys.PROJECT.getData(dataContext);
+		Project project = e.getProject();
 
 		PsiDirectory dir = null;//PackageUtil.getOrChooseDirectory(view);
 		if(dir == null)
@@ -101,7 +100,7 @@ public abstract class CreateFromTemplateActionBase extends AnAction
 			return false;
 		}
 		final DataContext dataContext = e.getDataContext();
-		IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
+		IdeView view = dataContext.getData(LangDataKeys.IDE_VIEW);
 		if(view == null)
 		{
 			return false;

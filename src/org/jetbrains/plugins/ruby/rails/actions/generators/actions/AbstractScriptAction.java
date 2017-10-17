@@ -34,6 +34,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
+import consulo.annotations.RequiredDispatchThread;
 
 /**
  * Created by IntelliJ IDEA.
@@ -68,13 +69,14 @@ public abstract class AbstractScriptAction extends AnAction
 
 	protected abstract PsiElement[] invokeDialog(@NotNull final Module module, @Nullable final PsiDirectory directory);
 
+	@RequiredDispatchThread
 	@Override
 	public void actionPerformed(final AnActionEvent e)
 	{
 		final DataContext dataContext = e.getDataContext();
 
-		final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
-		final Module module = CommonDataKeys.MODULE.getData(dataContext);
+		final IdeView view = e.getData(LangDataKeys.IDE_VIEW);
+		final Module module = e.getData(CommonDataKeys.MODULE);
 		final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
 
 		assert module != null;
@@ -83,7 +85,7 @@ public abstract class AbstractScriptAction extends AnAction
 		PsiDirectory dir = view == null ? null : view.getOrChooseDirectory();
 		if(dir == null)
 		{
-			final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
+			final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
 			if(psiFile != null)
 			{
 				dir = psiFile.getParent();
@@ -106,13 +108,13 @@ public abstract class AbstractScriptAction extends AnAction
 		}
 	}
 
+	@RequiredDispatchThread
 	@Override
 	public void update(@NotNull final AnActionEvent e)
 	{
-		final DataContext dataContext = e.getDataContext();
 		final Presentation presentation = e.getPresentation();
 
-		final Module module = CommonDataKeys.MODULE.getData(dataContext);
+		final Module module = e.getData(CommonDataKeys.MODULE);
 		boolean show = false;
 		if(module != null)
 		{

@@ -76,14 +76,14 @@ public class SwitchToView extends EditorAction
 		@Override
 		public void execute(Editor editor, DataContext dataContext)
 		{
-			final Module module = CommonDataKeys.MODULE.getData(dataContext);
+			final Module module = dataContext.getData(CommonDataKeys.MODULE);
 			if(module == null || !RailsFacetUtil.hasRailsSupport(module))
 			{
 				cantNavigate();
 				return;
 			}
 
-			final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
+			final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
 			if(psiFile == null)
 			{
 				cantNavigate();
