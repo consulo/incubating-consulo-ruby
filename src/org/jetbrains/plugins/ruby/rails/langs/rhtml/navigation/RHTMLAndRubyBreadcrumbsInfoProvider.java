@@ -16,11 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation;
 
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsComponents;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLFoldingBuilder;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
@@ -31,8 +29,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
@@ -40,7 +36,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlDocument;
-import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
+import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,7 +45,7 @@ import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider;
  * @date: Sep 13, 2007
  */
 
-public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
+public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 {
 	public static class Ruby extends RHTMLAndRubyBreadcrumbsInfoProvider
 	{
@@ -136,7 +132,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
 	{
 		if(isInRubyDebugMode(psiElement))
 		{
-			return super.getParent(psiElement);
+			return BreadcrumbsProvider.super.getParent(psiElement);
 		}
 
 		if(psiElement instanceof XmlDocument || psiElement instanceof PsiFile || psiElement instanceof PsiDirectory)
@@ -191,7 +187,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider extends BreadcrumbsInfoProvider
 				return parent;
 			}
 		}
-		return super.getParent(psiElement);
+		return BreadcrumbsProvider.super.getParent(psiElement);
 	}
 
 	private boolean isInRubyDebugMode(@NotNull final PsiElement element)
