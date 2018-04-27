@@ -65,7 +65,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.messages.MessageBusConnection;
 
 /**
@@ -357,7 +357,7 @@ public class BaseRailsFacetBuilder
 
 				// Update uncommitedModule content and rails uncommitedModule settings
 				// will be invoked later
-				final ActionRunner.InterruptibleRunnable updateModuleAndSettings = new ActionRunner.InterruptibleRunnable()
+				final ThrowableRunnable<Exception> updateModuleAndSettings = new ThrowableRunnable<Exception>()
 				{
 					@Override
 					public void run() throws Exception
@@ -388,7 +388,7 @@ public class BaseRailsFacetBuilder
 					final String processTitle = RBundle.message("new.generate.spec.generating.title");
 					final String errorTitle = RBundle.message("new.generate.common.error.title");
 
-					final ActionRunner.InterruptibleRunnable generateRSpecStubIfNecessary = new ActionRunner.InterruptibleRunnable()
+					final ThrowableRunnable<Exception> generateRSpecStubIfNecessary = new ThrowableRunnable<Exception>()
 					{
 						@Override
 						public void run() throws Exception
@@ -465,10 +465,10 @@ public class BaseRailsFacetBuilder
 		configuration.loadRakeTasks(forceRegenerate, sdk);
 	}
 
-	private static void installRSpecSupport(final Module module, final RunContentDescriptorFactory descFactory, @Nullable final ActionRunner.InterruptibleRunnable nextAction, final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf, @NotNull final Sdk sdk)
+	private static void installRSpecSupport(final Module module, final RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf, @NotNull final Sdk sdk)
 	{
 
-		final ActionRunner.InterruptibleRunnable installRSpecRails = new ActionRunner.InterruptibleRunnable()
+		final ThrowableRunnable<Exception> installRSpecRails = new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run()
@@ -598,7 +598,7 @@ public class BaseRailsFacetBuilder
 			@Override
 			public void run()
 			{
-				IdeaInternalUtil.runInEDThreadInWriteAction(new ActionRunner.InterruptibleRunnable()
+				IdeaInternalUtil.runInEDThreadInWriteAction(new ThrowableRunnable<Exception>()
 				{
 					@Override
 					public void run()

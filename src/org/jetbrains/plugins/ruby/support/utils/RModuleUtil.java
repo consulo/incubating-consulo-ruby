@@ -19,7 +19,6 @@ package org.jetbrains.plugins.ruby.support.utils;
 import java.util.LinkedList;
 import java.util.List;
 
-import consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
@@ -33,7 +32,8 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
+import consulo.ruby.module.extension.RubyModuleExtension;
 
 /**
  * Created by IntelliJ IDEA.
@@ -120,7 +120,7 @@ public class RModuleUtil
 	 */
 	public static void refreshRubyModuleTypeContent(final Module module)
 	{
-		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception
@@ -141,7 +141,7 @@ public class RModuleUtil
 			@Override
 			public void run()
 			{
-				IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+				IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 				{
 					@Override
 					public void run() throws Exception
@@ -159,7 +159,7 @@ public class RModuleUtil
 	 */
 	public static void synchronizeFSChanged()
 	{
-		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception

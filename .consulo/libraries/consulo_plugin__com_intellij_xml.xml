@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="consulo-plugin: com.intellij.xml" type="consulo-plugin">
+  <library name="consulo-plugin: com.intellij.xml">
     <binaries>
       <root url="jar://$PROJECT_DIR$/dep/com.intellij.xml/lib/jing-20091111.jar!/" />
       <root url="jar://$PROJECT_DIR$/dep/com.intellij.xml/lib/rngom-20051226.jar!/" />

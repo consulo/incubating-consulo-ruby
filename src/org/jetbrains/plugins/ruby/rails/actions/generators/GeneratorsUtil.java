@@ -63,7 +63,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -246,7 +246,7 @@ public class GeneratorsUtil
 		final String generateScriptPath = railsAppHomePath + VirtualFileUtil.VFS_PATH_SEPARATOR + GENERATE_SCRIPT;
 		final Ref<VirtualFile> file = new Ref<VirtualFile>();
 
-		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception
@@ -373,7 +373,8 @@ public class GeneratorsUtil
 	}
 
 
-	public static void invokeGenerator(final Module uncommitedModule, final String processTitle, final String errorTitle, final String[] scriptParameters, @Nullable final RunContentDescriptorFactory descFactory, @Nullable final ActionRunner.InterruptibleRunnable nextAction, @NotNull final Sdk sdk)
+	public static void invokeGenerator(final Module uncommitedModule, final String processTitle, final String errorTitle, final String[] scriptParameters, @Nullable final
+	RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, @NotNull final Sdk sdk)
 	{
 		try
 		{

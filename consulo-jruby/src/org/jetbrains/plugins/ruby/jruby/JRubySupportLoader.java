@@ -32,8 +32,8 @@ import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.ActionRunner;
 import com.intellij.util.PathUtil;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * It`s a class to load jruby support
@@ -99,13 +99,11 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
 
 	public static void loadJRuby()
 	{
-		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception
 			{
-
-
 				// load jruby written components
 				loadJRubyPluginComponents();
 			}

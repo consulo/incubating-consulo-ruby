@@ -38,7 +38,7 @@ import com.intellij.execution.process.ProcessEvent;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,7 +62,7 @@ public class PluginsUtil
 	 * @param descFactory User Factory for creating non default run content descriptors
 	 * @param nextAction  This action will be invoked after process has terminated or finished
 	 */
-	public static void installPluginAndUpdateModuleContent(final Sdk sdk, final Module module, final String rSpecArgs, @Nullable final RunContentDescriptorFactory descFactory, @Nullable final ActionRunner.InterruptibleRunnable nextAction)
+	public static void installPluginAndUpdateModuleContent(final Sdk sdk, final Module module, final String rSpecArgs, @Nullable final RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction)
 	{
 		final Project project = module.getProject();
 		final String title = RBundle.message("rails.plugins.install.process.title", module.getName());

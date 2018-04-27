@@ -29,7 +29,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -67,7 +67,7 @@ public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo
 		if(!isLazyInitialized)
 		{
 			final Ref<VirtualFile> virtualFileRef = new Ref<VirtualFile>(null);
-			IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+			IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 			{
 				@Override
 				public void run() throws Exception

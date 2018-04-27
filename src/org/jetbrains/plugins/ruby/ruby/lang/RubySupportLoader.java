@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.ruby.inspections.scopes.RubyScopesInspection;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.codeInspection.InspectionToolProvider;
 import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 
 
 public class RubySupportLoader implements ApplicationComponent, InspectionToolProvider
@@ -34,7 +34,7 @@ public class RubySupportLoader implements ApplicationComponent, InspectionToolPr
 
 	public static void loadRuby()
 	{
-		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception

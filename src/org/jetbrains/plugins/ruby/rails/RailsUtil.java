@@ -67,8 +67,8 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.util.ActionRunner;
 import com.intellij.util.Function;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -180,7 +180,7 @@ public class RailsUtil
 
 				final RunManagerEx runManagerEx = RunManagerEx.getInstanceEx(project);
 
-				IdeaInternalUtil.runInsideReadAction(new ActionRunner.InterruptibleRunnable()
+				IdeaInternalUtil.runInsideReadAction(new ThrowableRunnable<Exception>()
 				{
 					@Override
 					public void run() throws Exception

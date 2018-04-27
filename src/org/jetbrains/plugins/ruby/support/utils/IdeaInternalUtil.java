@@ -21,8 +21,10 @@ import javax.swing.SwingUtilities;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
+import consulo.application.AccessRule;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,11 +36,11 @@ public class IdeaInternalUtil
 {
 	private static final Logger LOG = Logger.getInstance(IdeaInternalUtil.class.getName());
 
-	public static void runInsideWriteAction(@NotNull ActionRunner.InterruptibleRunnable runnable)
+	public static void runInsideWriteAction(@NotNull ThrowableRunnable<Exception> runnable)
 	{
 		try
 		{
-			ActionRunner.runInsideWriteAction(runnable);
+			WriteAction.run(runnable);
 		}
 		catch(Exception e)
 		{
@@ -72,7 +74,7 @@ public class IdeaInternalUtil
 	}
 
 
-	public static void runInEDThreadInWriteAction(@NotNull final ActionRunner.InterruptibleRunnable runnable, final ModalityState state)
+	public static void runInEDThreadInWriteAction(@NotNull final ThrowableRunnable<Exception> runnable, final ModalityState state)
 	{
 		runInEventDispatchThread(new Runnable()
 		{
@@ -84,7 +86,7 @@ public class IdeaInternalUtil
 		}, state);
 	}
 
-	public static void runInsideReadAction(@NotNull final ActionRunner.InterruptibleRunnable runnable)
+	public static void runInsideReadAction(@NotNull final ThrowableRunnable<Exception> runnable)
 	{
 		if(ApplicationManager.getApplication().isUnitTestMode())
 		{
@@ -108,7 +110,7 @@ public class IdeaInternalUtil
 		{
 			try
 			{
-				ActionRunner.runInsideReadAction(runnable);
+				AccessRule.read(runnable);
 			}
 			catch(Exception e)
 			{

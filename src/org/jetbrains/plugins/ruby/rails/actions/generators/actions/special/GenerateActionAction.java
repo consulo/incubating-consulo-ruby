@@ -38,9 +38,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUti
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
@@ -55,8 +56,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.intellij.util.ActionRunner;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -111,7 +112,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 				{
 					try
 					{
-						ActionRunner.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+						WriteAction.run(new ThrowableRunnable<Exception>()
 						{
 							@Override
 							public void run() throws Exception
@@ -121,7 +122,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 								PsiDocumentManager.getInstance(project).commitDocument(document);
 							}
 						});
-						ActionRunner.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+						WriteAction.run(new ThrowableRunnable<Exception>()
 						{
 							@Override
 							public void run() throws Exception

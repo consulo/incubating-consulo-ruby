@@ -25,7 +25,7 @@ import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -135,7 +135,7 @@ public class RailsFacetUtil
 
 		if(homeDirPath != null)
 		{
-			IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+			IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 			{
 				@Override
 				public void run() throws Exception

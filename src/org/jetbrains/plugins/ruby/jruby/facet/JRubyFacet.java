@@ -33,7 +33,7 @@ import com.intellij.openapi.roots.OrderEntry;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.util.ActionRunner;
+import com.intellij.util.ThrowableRunnable;
 
 public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 {
@@ -117,7 +117,7 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 
 	public void removeSdkLibrary()
 	{
-		IdeaInternalUtil.runInsideWriteAction(new ActionRunner.InterruptibleRunnable()
+		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception
