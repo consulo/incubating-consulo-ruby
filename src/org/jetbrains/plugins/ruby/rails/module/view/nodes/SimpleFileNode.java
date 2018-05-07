@@ -28,6 +28,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -91,7 +92,7 @@ public class SimpleFileNode extends RailsNode
 				return RSpecIcons.TEST_SCRIPT_ICON;
 			}
 		}
-		return FileTypeManager.getInstance().getFileTypeByFile(file).getIcon();
+		return TargetAWT.to(FileTypeManager.getInstance().getFileTypeByFile(file).getIcon());
 	}
 
 	@Override

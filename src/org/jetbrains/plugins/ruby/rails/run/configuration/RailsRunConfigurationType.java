@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -28,6 +26,7 @@ import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,7 +61,7 @@ public class RailsRunConfigurationType implements ConfigurationType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RailsIcons.RAILS_RUN_CONFIGURATION_FOLDER;
 	}

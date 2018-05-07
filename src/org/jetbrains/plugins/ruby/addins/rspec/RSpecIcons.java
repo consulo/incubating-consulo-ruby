@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.addins.rspec;
 import javax.swing.Icon;
 
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,8 +29,7 @@ import com.intellij.openapi.util.IconLoader;
  */
 public interface RSpecIcons
 {
-
-	Icon RUN_CONFIGURATION_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_runConfigurations.png");
+	Image RUN_CONFIGURATION_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_runConfigurations.png");
 	Icon METHOD_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Method.png");
 	Icon TEST_SCRIPT_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Test.png");
 }

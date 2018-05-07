@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.ruby;
 import javax.swing.Icon;
 
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,8 +29,7 @@ import com.intellij.openapi.util.IconLoader;
 public interface RubyIcons
 {
 
-	final Icon RUBY_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby.png");
-	final Icon RUBY_LARGE_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/rubylarge.png");
+	final Image RUBY_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby.png");
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Nodes
@@ -71,7 +71,7 @@ public interface RubyIcons
 	final Icon RUBY_MODULE_BIG = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/rubymedium.png");
 
 	final Icon RUBY_MODULE_OPENED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_opened.png");
-	final Icon RUBY_MODULE_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_closed.png");
+	final Image RUBY_MODULE_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_closed.png");
 
 	final Icon RUBY_ADD_MODULE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/add_ruby_modulewizard.png");
 
@@ -80,21 +80,21 @@ public interface RubyIcons
 	//// Sdk
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Icon RUBY_SDK = RUBY_MODULE_CLOSED;
+	final Image RUBY_SDK = RUBY_MODULE_CLOSED;
 	final Icon RUBY_SDK_EXPANDED = RUBY_MODULE_OPENED;
 
-	final Icon RUBY_SDK_ADD_ICON = RUBY_ICON;
+	final Image RUBY_SDK_ADD_ICON = RUBY_ICON;
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Run configurations
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Icon RUBY_RUN_CONFIGURATION_FOLDER = RUBY_ICON;
+	final Image RUBY_RUN_CONFIGURATION_FOLDER = RUBY_ICON;
 
-	final Icon RUBY_RUN_CONFIGURATION_SCRIPT = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_script.png");
-	final Icon RTEST_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_test_unit.png");
-	final Icon RAILS_SERVER_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/run_conf_server.png");
+	final Image RUBY_RUN_CONFIGURATION_SCRIPT = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_script.png");
+	final Image RTEST_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_test_unit.png");
+	final Image RAILS_SERVER_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/run_conf_server.png");
 
 
 	final Icon RUBY_RUNNER_SHOW_CMDLINE = IconLoader.findIcon("/actions/showViewer.png");
@@ -103,7 +103,7 @@ public interface RubyIcons
 	//// Misc
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Icon RUBY_COLOR_PAGE = RUBY_ICON;
+	final Image RUBY_COLOR_PAGE = RUBY_ICON;
 
 	final Icon RUBY_GUTTER_OVERRIDING = IconLoader.findIcon("/gutter/overridingMethod.png");
 	final Icon RUBY_GUTTER_IMPLEMENTING = IconLoader.findIcon("/gutter/implementingMethod.png");

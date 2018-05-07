@@ -44,6 +44,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -171,7 +172,7 @@ public class GemReference implements RPsiPolyvariantReference
 					{
 						for(GemInfo gemInfo : RubySdkUtil.getAllGems(gemsRoot))
 						{
-							variants.add(new RubySimpleLookupItem(gemInfo.getName(), gemInfo.getVersion(), LookupValueWithPriority.NORMAL, true, RubyIcons.RUBY_ICON));
+							variants.add(new RubySimpleLookupItem(gemInfo.getName(), gemInfo.getVersion(), LookupValueWithPriority.NORMAL, true, TargetAWT.to(RubyIcons.RUBY_ICON)));
 						}
 					}
 				}

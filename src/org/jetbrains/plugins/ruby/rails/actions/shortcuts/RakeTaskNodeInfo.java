@@ -23,6 +23,7 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,7 +60,7 @@ public class RakeTaskNodeInfo extends NodeInfo<RakeTaskSerializableImpl>
 		{
 			return new RakeTaskNodeInfo(RailsIcons.RAILS_FOLDER_OPENED, RailsIcons.RAILS_FOLDER_CLOSED, task, true);
 		}
-		return new RakeTaskNodeInfo(RailsIcons.RAKE_TASK_ICON, task, false);
+		return new RakeTaskNodeInfo(TargetAWT.to(RailsIcons.RAKE_TASK_ICON), task, false);
 	}
 
 	@Override

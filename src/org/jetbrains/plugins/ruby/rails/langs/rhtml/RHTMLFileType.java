@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +28,7 @@ import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +49,7 @@ public class RHTMLFileType extends XmlLikeFileType
 	private static final String ERB_EXTENSION = "erb";
 	@NonNls
 	private static final String DESCRIPTION = RBundle.message("filetype.description.rhtml");
-	private static final Icon ICON = RailsIcons.RHTML_ICON;
+	private static final Image ICON = RailsIcons.RHTML_ICON;
 
 	private RHTMLFileType()
 	{
@@ -86,7 +85,7 @@ public class RHTMLFileType extends XmlLikeFileType
 
 	@Override
 	@Nullable
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ICON;
 	}

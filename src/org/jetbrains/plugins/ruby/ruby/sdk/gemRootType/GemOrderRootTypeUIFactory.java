@@ -7,6 +7,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.ui.SdkPathEditor;
 import com.intellij.openapi.roots.ui.OrderRootTypeUIFactory;
+import consulo.awt.TargetAWT;
 
 /**
  * @author VISTALL
@@ -24,7 +25,7 @@ public class GemOrderRootTypeUIFactory implements OrderRootTypeUIFactory
 	@Override
 	public Icon getIcon()
 	{
-		return RubyIcons.RUBY_ICON;
+		return TargetAWT.to(RubyIcons.RUBY_ICON);
 	}
 
 	@Override

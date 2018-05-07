@@ -171,13 +171,6 @@ public class RubyColorsPage implements ColorSettingsPage
 
 	@Override
 	@NotNull
-	public Icon getIcon()
-	{
-		return RubyIcons.RUBY_COLOR_PAGE;
-	}
-
-	@Override
-	@NotNull
 	public AttributesDescriptor[] getAttributeDescriptors()
 	{
 		return ATTRS;

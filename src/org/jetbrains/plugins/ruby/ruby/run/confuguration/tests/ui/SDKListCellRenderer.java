@@ -23,7 +23,8 @@ import javax.swing.JList;
 
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkType;
+import consulo.awt.TargetAWT;
+import consulo.bundle.SdkUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +41,7 @@ public class SDKListCellRenderer extends DefaultListCellRenderer
 		if(value != null)
 		{
 			setText(((Sdk) value).getName());
-			setIcon(((SdkType) ((Sdk) value).getSdkType()).getIcon());
+			setIcon(TargetAWT.to(SdkUtil.getIcon((Sdk) value)));
 		}
 		else
 		{

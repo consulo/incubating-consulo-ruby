@@ -26,6 +26,7 @@ import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +40,7 @@ public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateAc
 
 	public RailsCreateFromTemplateAction(@NotNull final FileTemplate template)
 	{
-		super(template.getName(), null, FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon());
+		super(template.getName(), null, TargetAWT.to(FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon()));
 		myTemplate = template;
 	}
 

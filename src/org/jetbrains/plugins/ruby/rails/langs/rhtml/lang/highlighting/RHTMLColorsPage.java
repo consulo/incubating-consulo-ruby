@@ -78,13 +78,6 @@ public class RHTMLColorsPage implements ColorSettingsPage
 
 	@Override
 	@NotNull
-	public Icon getIcon()
-	{
-		return RailsIcons.RHTML_ICON;
-	}
-
-	@Override
-	@NotNull
 	public AttributesDescriptor[] getAttributeDescriptors()
 	{
 		return ATTRS;

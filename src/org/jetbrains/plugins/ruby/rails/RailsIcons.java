@@ -20,6 +20,7 @@ import javax.swing.Icon;
 
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,9 +30,7 @@ import com.intellij.openapi.util.IconLoader;
  */
 public interface RailsIcons
 {
-
-	final Icon RAILS_SMALL = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_small.png");
-	final Icon RAILS_LARGE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_large.png");
+	final Image RAILS_SMALL = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_small.png");
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Module
@@ -40,19 +39,17 @@ public interface RailsIcons
 	@Deprecated
 	final Icon RAILS_ADD_MODULE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/add_rails_modulewizard.png");
 	@Deprecated
-	final Icon RAILS_MODULE_NODE = RAILS_SMALL;
+	final Image RAILS_MODULE_NODE = RAILS_SMALL;
 	@Deprecated
 	final Icon RAILS_MODULE_OPENED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_module_opened.png");
 	@Deprecated
 	final Icon RAILS_MODULE_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_module_closed.png");
-	@Deprecated
-	final Icon RAILS_MODULE_BIG = RAILS_LARGE;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Rails project view
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Icon RAILS_PROJECT_VIEW = RAILS_MODULE_NODE;
+	final Image RAILS_PROJECT_VIEW = RAILS_MODULE_NODE;
 	final Icon RAILS_APPlICON_NODES = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/modelesNode.png");
 	//    final Icon RAILS_COMPONENTS_NODES =     IconLoader.findIcon("/modules/globalResources.png");
 	final Icon RAILS_CONTROLERS_NODES = IconLoader.findIcon("/nodes/keymapTools.png");
@@ -83,7 +80,7 @@ public interface RailsIcons
 	//// Rake
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Icon RAKE_TASK_ICON = RAILS_MODULE_NODE;
+	final Image RAKE_TASK_ICON = RAILS_MODULE_NODE;
 	final Icon RAKE_GROUP_ICON = RAILS_FOLDER_CLOSED;
 	final Icon RAKE_TASKS_ROOT_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rake/rakeTasksRoot.png");
 
@@ -99,19 +96,18 @@ public interface RailsIcons
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Misc
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	final Icon RAILS_RUN_CONFIGURATION_FOLDER = RAILS_SMALL;
+	final Image RAILS_RUN_CONFIGURATION_FOLDER = RAILS_SMALL;
 
 	final Icon RAILS_ACTION_TO_VIEW_MARKER = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/actions/navigation/gutter/actionToView.png");
 	final Icon RAILS_VIEW_TO_ACTION_MARKER = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/actions/navigation/gutter/viewToAction.png");
 	final Icon RAILS_VIEW_TO_CONTROLLER_MARKER = RAILS_VIEW_TO_ACTION_MARKER;
 
-	final Icon RJS_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rjs.png");
-	final Icon RHTML_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rhtml.png");
-	final Icon RXTML_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rxml.png");
+	final Image RJS_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rjs.png");
+	final Image RHTML_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rhtml.png");
+	final Image RXTML_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rxml.png");
 
 	final Icon GENERATOR_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/generators/generator.png");
 	final Icon GENERATORS_ROOT_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/generators/generatorsRoot.png");
 
 	final Icon WARINIG_ICON = IconLoader.findIcon("/nodes/warningIntroduction.png");
-	final Icon YAML_ICON = IconLoader.findIcon("/nodes/DataTables.png");
 }

@@ -36,6 +36,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.psi.tree.TokenSet;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,7 +76,7 @@ public class RIHelpAction extends AnAction
 	public void update(final AnActionEvent e)
 	{
 		final Presentation presentation = e.getPresentation();
-		presentation.setIcon(RubyIcons.RUBY_ICON);
+		presentation.setIcon(TargetAWT.to(RubyIcons.RUBY_ICON));
 		// visible only on ruby files
 		presentation.setVisible(DataContextUtil.getLanguage(e.getDataContext()) instanceof RubyLanguage);
 		presentation.setEnabled(canHelp(e));

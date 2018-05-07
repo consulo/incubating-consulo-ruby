@@ -25,6 +25,7 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,7 +42,7 @@ public class RJSFileType extends LanguageFileType
 	private static final String DEFAULT_EXTENSION = "rjs";
 	@NonNls
 	private static final String NAME = "Rjs";
-	private static final Icon ICON = RailsIcons.RJS_ICON;
+	private static final Image ICON = RailsIcons.RJS_ICON;
 
 	private RJSFileType()
 	{
@@ -71,7 +72,7 @@ public class RJSFileType extends LanguageFileType
 
 	@Override
 	@Nullable
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ICON;
 	}

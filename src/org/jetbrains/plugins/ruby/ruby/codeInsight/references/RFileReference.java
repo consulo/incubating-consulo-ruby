@@ -44,6 +44,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.HashSet;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -175,7 +176,7 @@ public class RFileReference implements RPsiPolyvariantReference
 					if(!foundNames.contains(requireUrl))
 					{
 						foundNames.add(requireUrl);
-						variants.add(new RubySimpleLookupItem(requireUrl, null, LookupValueWithPriority.NORMAL, false, RubyFileType.INSTANCE.getIcon()));
+						variants.add(new RubySimpleLookupItem(requireUrl, null, LookupValueWithPriority.NORMAL, false, TargetAWT.to(RubyFileType.INSTANCE.getIcon())));
 					}
 				}
 			}

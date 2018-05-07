@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -30,6 +28,7 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -106,7 +105,7 @@ public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFact
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RubyIcons.RAILS_SERVER_RUN_CONFIGURATION;
 	}

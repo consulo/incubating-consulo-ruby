@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.jruby;
 import javax.swing.Icon;
 
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,5 +33,5 @@ public interface JRubyIcons
 	final Icon JAVA_ICON = IconLoader.findIcon("/general/addJdk.png");
 
 	Icon JRUBY_SDK_ICON_OPEN = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_open.png");
-	Icon JRUBY_SDK_ICON_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_closed.png");
+	Image JRUBY_SDK_ICON_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_closed.png");
 }

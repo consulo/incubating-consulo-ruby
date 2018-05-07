@@ -25,6 +25,7 @@ import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
 import org.jruby.RubySymbol;
+import consulo.awt.TargetAWT;
 
 /**
  * @author yole
@@ -54,7 +55,7 @@ public class EnumParam extends ParamDef
 			{
 				text = variant.toString();
 			}
-			result.add(new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON));
+			result.add(new RubySimpleLookupItem(text, null, 0, true, TargetAWT.to(RubyIcons.RUBY_ICON)));
 		}
 		return result;
 	}

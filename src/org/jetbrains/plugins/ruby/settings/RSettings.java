@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.settings;
 
 import java.util.List;
 
-import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
@@ -33,7 +32,6 @@ import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RakeTaskNodeInfo;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RubyShortcutsSettings;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.ShortcutAction;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.ShortcutsTreeState;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import com.intellij.openapi.actionSystem.KeyboardShortcut;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.keymap.Keymap;
@@ -41,6 +39,7 @@ import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -74,11 +73,6 @@ public class RSettings implements ApplicationComponent, Configurable
 	public String getDisplayName()
 	{
 		return RBundle.message("settings.title");
-	}
-
-	public Icon getIcon()
-	{
-		return RubyIcons.RUBY_LARGE_ICON;
 	}
 
 	@Override
@@ -174,7 +168,7 @@ public class RSettings implements ApplicationComponent, Configurable
 			final String cmd = task.getFullCommand();
 			assert cmd != null;
 			final String actionId = RakeTaskNodeInfo.getActionId(task.getFullCommand());
-			new ShortcutAction(task.getId(), cmd, RailsIcons.RAKE_TASK_ICON, ShortcutsTreeState.RAKE_SUBTREE).registerInKeyMap(actionId);
+			new ShortcutAction(task.getId(), cmd, TargetAWT.to(RailsIcons.RAKE_TASK_ICON), ShortcutsTreeState.RAKE_SUBTREE).registerInKeyMap(actionId);
 			return;
 		}
 		final List<? extends RakeTask> children = task.getSubTasks();

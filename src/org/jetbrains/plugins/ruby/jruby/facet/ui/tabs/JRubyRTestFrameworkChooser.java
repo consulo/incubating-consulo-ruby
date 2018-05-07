@@ -16,14 +16,11 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 
-import javax.swing.Icon;
 import javax.swing.JComponent;
 
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
@@ -73,12 +70,6 @@ public class JRubyRTestFrameworkChooser extends FacetEditorTab
 		final RORSelectTestFrameworkPanel panel = new RORSelectTestFrameworkPanel(useRSpec, false, useTestUnit, module, false);
 		myTestFramworkOptions = panel;
 		return panel.getContentPane();
-	}
-
-	@Nullable
-	public Icon getIcon()
-	{
-		return RSpecIcons.RUN_CONFIGURATION_ICON;
 	}
 
 	public boolean isModified()

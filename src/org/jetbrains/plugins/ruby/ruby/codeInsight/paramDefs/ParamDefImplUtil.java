@@ -22,6 +22,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral;
 import com.intellij.psi.PsiElement;
+import consulo.awt.TargetAWT;
 
 /**
  * @author yole
@@ -42,7 +43,7 @@ public class ParamDefImplUtil
 				text = ":" + value;
 			}
 		}
-		return new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON);
+		return new RubySimpleLookupItem(text, null, 0, true, TargetAWT.to(RubyIcons.RUBY_ICON));
 	}
 
 	public static String getElementText(final RPsiElement contextElement)

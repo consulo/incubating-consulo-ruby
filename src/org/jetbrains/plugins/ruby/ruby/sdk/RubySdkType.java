@@ -24,8 +24,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.Icon;
-
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -54,6 +52,7 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.PathUtil;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -351,7 +350,7 @@ public class RubySdkType extends SdkType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RubyIcons.RUBY_SDK;
 	}

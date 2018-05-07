@@ -18,8 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -58,6 +56,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -93,7 +92,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RubyIcons.RUBY_RUN_CONFIGURATION_FOLDER;
 	}

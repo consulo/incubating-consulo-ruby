@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
+import consulo.awt.TargetAWT;
 
 /**
  * @author yole
@@ -40,7 +41,7 @@ public class HashParamDef extends ParamDef
 		List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
 		for(String key : myParams.keySet())
 		{
-			result.add(new RubySimpleLookupItem(":" + key, null, 0, true, RubyIcons.RUBY_ICON));
+			result.add(new RubySimpleLookupItem(":" + key, null, 0, true, TargetAWT.to(RubyIcons.RUBY_ICON)));
 		}
 		return result;
 	}

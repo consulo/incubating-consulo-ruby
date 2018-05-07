@@ -23,6 +23,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
@@ -52,7 +53,7 @@ public class RFilePresentationUtil
 	 */
 	public static Icon getIcon()
 	{
-		return RubyFileType.INSTANCE.getIcon();
+		return TargetAWT.to(RubyFileType.INSTANCE.getIcon());
 	}
 
 	@NotNull

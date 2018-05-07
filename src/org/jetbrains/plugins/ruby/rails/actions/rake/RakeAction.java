@@ -26,6 +26,7 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.module.Module;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +40,7 @@ class RakeAction extends AnAction
 
 	public RakeAction(@NotNull final RakeTask task)
 	{
-		super(task.getId(), task.getDescription(), RailsIcons.RAKE_TASK_ICON);
+		super(task.getId(), task.getDescription(), TargetAWT.to(RailsIcons.RAKE_TASK_ICON));
 		myTask = task;
 	}
 

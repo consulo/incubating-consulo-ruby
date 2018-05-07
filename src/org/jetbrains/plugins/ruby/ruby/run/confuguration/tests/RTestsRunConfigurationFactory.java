@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import javax.swing.Icon;
-
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -26,6 +24,7 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfi
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,7 +55,7 @@ public class RTestsRunConfigurationFactory extends RubyRunConfigurationFactory
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RubyIcons.RTEST_RUN_CONFIGURATION;
 	}

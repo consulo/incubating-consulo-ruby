@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import javax.swing.Icon;
-
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -26,6 +24,7 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfi
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -60,7 +59,7 @@ public class RSpecRunConfigurationFactory extends RubyRunConfigurationFactory
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RSpecIcons.RUN_CONFIGURATION_ICON;
 	}

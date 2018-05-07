@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -26,6 +24,7 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.SystemInfo;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -98,7 +97,7 @@ public class JRubySdkType extends RubySdkType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return JRubyIcons.JRUBY_SDK_ICON_CLOSED;
 	}

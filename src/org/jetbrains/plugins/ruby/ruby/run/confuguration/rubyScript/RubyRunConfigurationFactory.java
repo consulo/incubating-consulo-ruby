@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import javax.swing.Icon;
-
-import consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -29,6 +26,8 @@ import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import consulo.module.extension.ModuleExtensionHelper;
+import consulo.ruby.module.extension.RubyModuleExtension;
+import consulo.ui.image.Image;
 
 public class RubyRunConfigurationFactory extends ConfigurationFactory
 {
@@ -60,7 +59,7 @@ public class RubyRunConfigurationFactory extends ConfigurationFactory
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return RubyIcons.RUBY_RUN_CONFIGURATION_SCRIPT;
 	}

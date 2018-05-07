@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.langs;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +23,7 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,7 +44,7 @@ public class RXMLFileType extends LanguageFileType
 	private static final String DEFAULT_EXTENSION = "rxml";
 	@NonNls
 	private static final String BUILDER_EXTENSION = "builder";
-	private static final Icon ICON = RailsIcons.RXTML_ICON;
+	private static final Image ICON = RailsIcons.RXTML_ICON;
 
 	private RXMLFileType()
 	{
@@ -54,7 +53,7 @@ public class RXMLFileType extends LanguageFileType
 
 	@Override
 	@NotNull
-	public String getName()
+	public String getId()
 	{
 		return NAME;
 	}
@@ -81,7 +80,7 @@ public class RXMLFileType extends LanguageFileType
 
 	@Override
 	@Nullable
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ICON;
 	}
