@@ -33,6 +33,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.ui.LayeredIcon;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,7 +50,7 @@ public class RMethodPresentationUtil implements RPresentationConstants
 		{
 			final LayeredIcon icon = new LayeredIcon(2);
 			icon.setIcon(RubyIcons.RUBY_METHOD_NODE, 0);
-			icon.setIcon(RubyIcons.RUBY_ATTR_STATIC, 1);
+			icon.setIcon(TargetAWT.to(RubyIcons.RUBY_ATTR_STATIC), 1);
 			return icon;
 		}
 		return RubyIcons.RUBY_METHOD_NODE;

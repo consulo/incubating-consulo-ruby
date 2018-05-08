@@ -42,7 +42,7 @@ public class RFilePresentationUtil
 	 */
 	public static Icon getIconByRFile(final RFile file)
 	{
-		return IconDescriptorUpdaters.getIcon(file, 0);
+		return TargetAWT.to(IconDescriptorUpdaters.getIcon(file, 0));
 	}
 
 
@@ -60,7 +60,7 @@ public class RFilePresentationUtil
 	public static ItemPresentation getPresentation(final RVirtualFile rFile)
 	{
 		final Icon icon = getIcon();
-		return new PresentationData(rFile.getName(), TextUtil.wrapInParens(getLocation(rFile)), icon, icon, null);
+		return new PresentationData(rFile.getName(), TextUtil.wrapInParens(getLocation(rFile)), icon, null);
 	}
 
 	private static String getLocation(@NotNull final RVirtualFile rFile)

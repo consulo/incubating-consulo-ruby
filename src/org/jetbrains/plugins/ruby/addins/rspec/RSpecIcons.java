@@ -31,5 +31,5 @@ public interface RSpecIcons
 {
 	Image RUN_CONFIGURATION_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_runConfigurations.png");
 	Icon METHOD_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Method.png");
-	Icon TEST_SCRIPT_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Test.png");
+	Image TEST_SCRIPT_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/addins/rspec/rspec_Test.png");
 }

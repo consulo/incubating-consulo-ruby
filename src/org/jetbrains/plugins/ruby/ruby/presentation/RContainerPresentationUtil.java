@@ -30,10 +30,12 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.RowIcon;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -126,13 +128,13 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	{
 		final AccessModifier modifier = container.getAccessModifier();
 		final RowIcon icon = new RowIcon(2);
-		icon.setIcon(IconDescriptorUpdaters.getIcon((PsiElement) container, Iconable.ICON_FLAG_OPEN), 0);
-		icon.setIcon(getIconForAccessModifier(modifier), 1);
+		icon.setIcon(TargetAWT.to(IconDescriptorUpdaters.getIcon((PsiElement) container, Iconable.ICON_FLAG_OPEN)), 0);
+		icon.setIcon(TargetAWT.to(getIconForAccessModifier(modifier)), 1);
 		return icon;
 	}
 
 	@Nullable
-	public static Icon getIconForAccessModifier(final AccessModifier modifier)
+	public static Image getIconForAccessModifier(final AccessModifier modifier)
 	{
 		if(modifier == AccessModifier.PRIVATE)
 		{

@@ -35,12 +35,12 @@ public interface RubyIcons
 	//// Nodes
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Icon RUBY_CLASS_NODE = IconLoader.findIcon("/nodes/class.png");
+	final Image RUBY_CLASS_NODE = IconLoader.findIcon("/nodes/class.png");
 	final Icon RUBY_METHOD_NODE = IconLoader.findIcon("/nodes/method.png");
 	final Icon RUBY_REQUIRE_NODE = IconLoader.findIcon("/nodes/aspect.png");
 	final Icon RUBY_PARAMETER_NODE = IconLoader.findIcon("/nodes/parameter.png");
 	final Icon RUBY_VARIABLE_NODE = IconLoader.findIcon("/nodes/variable.png");
-	final Icon RUBY_MODULE_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/module.png");
+	final Image RUBY_MODULE_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/module.png");
 	final Icon RUBY_CONSTANT_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/constant.png");
 	final Icon RUBY_NOT_DEFINED_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/not_defined.png");
 
@@ -56,10 +56,10 @@ public interface RubyIcons
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	final Icon RUBY_ATTR_NODE = IconLoader.findIcon("/nodes/annotationtype.png");
-	final Icon RUBY_ATTR_PUBLIC = IconLoader.findIcon("/nodes/c_public.png");
-	final Icon RUBY_ATTR_PRIVATE = IconLoader.findIcon("/nodes/c_private.png");
-	final Icon RUBY_ATTR_PROTECTED = IconLoader.findIcon("/nodes/c_protected.png");
-	final Icon RUBY_ATTR_STATIC = IconLoader.findIcon("/nodes/staticMark.png");
+	final Image RUBY_ATTR_PUBLIC = IconLoader.findIcon("/nodes/c_public.png");
+	final Image RUBY_ATTR_PRIVATE = IconLoader.findIcon("/nodes/c_private.png");
+	final Image RUBY_ATTR_PROTECTED = IconLoader.findIcon("/nodes/c_protected.png");
+	final Image RUBY_ATTR_STATIC = IconLoader.findIcon("/nodes/staticMark.png");
 
 	final Icon RUBY_ATTR_READER = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/reader.png");
 	final Icon RUBY_ATTR_WRITER = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/writer.png");

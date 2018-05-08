@@ -18,8 +18,6 @@ package org.jetbrains.plugins.ruby;
 
 import java.util.List;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
@@ -50,6 +48,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.BitUtil;
 import consulo.ide.IconDescriptor;
 import consulo.ide.IconDescriptorUpdater;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -60,7 +59,7 @@ import consulo.ide.IconDescriptorUpdater;
 public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 {
 	@Nullable
-	public static Icon getIcon(@NotNull PsiElement element, int flags)
+	public static Image getIcon(@NotNull PsiElement element, int flags)
 	{
 		if(element instanceof RFile)
 		{
@@ -125,7 +124,7 @@ public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 	@Override
 	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i)
 	{
-		Icon icon = getIcon(element, i);
+		Image icon = getIcon(element, i);
 		if(icon != null)
 		{
 			iconDescriptor.setMainIcon(icon);

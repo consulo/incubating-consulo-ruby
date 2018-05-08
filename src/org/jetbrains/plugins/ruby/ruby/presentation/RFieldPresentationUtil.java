@@ -28,6 +28,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.ui.LayeredIcon;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -97,7 +98,7 @@ public class RFieldPresentationUtil implements RubyIcons
 	{
 		if(type == FieldType.CLASS_VARIABLE)
 		{
-			return RUBY_ATTR_STATIC;
+			return TargetAWT.to(RUBY_ATTR_STATIC);
 		}
 		return null;
 	}

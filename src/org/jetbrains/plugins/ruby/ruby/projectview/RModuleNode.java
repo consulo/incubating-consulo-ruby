@@ -19,8 +19,6 @@ package org.jetbrains.plugins.ruby.ruby.projectview;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -41,6 +39,8 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.Navigatable;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +50,7 @@ import com.intellij.pom.Navigatable;
  */
 public class RModuleNode extends ProjectViewNode<RVirtualModule>
 {
-	private final Icon myIcon;
+	private final Image myIcon;
 	private final VirtualFile myVirtualFile;
 
 	public RModuleNode(@NotNull final Project project, @Nullable final Module module, @NotNull final RVirtualFile file, @NotNull final RVirtualModule value, final ViewSettings viewSettings)
@@ -93,7 +93,7 @@ public class RModuleNode extends ProjectViewNode<RVirtualModule>
 	protected void update(PresentationData data)
 	{
 		final RVirtualModule module = getValue();
-		data.setIcons(myIcon);
+		data.setIcon(TargetAWT.to(myIcon));
 		data.setLocationString(RModulePresentationUtil.getLocation(module));
 		data.setPresentableText(RModulePresentationUtil.formatName(module, RPresentationConstants.SHOW_NAME));
 	}

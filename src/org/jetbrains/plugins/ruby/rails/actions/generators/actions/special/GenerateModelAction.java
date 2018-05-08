@@ -26,6 +26,7 @@ import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGenerat
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiDirectory;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +47,7 @@ public class GenerateModelAction extends SimpleGeneratorAction
 
 	public GenerateModelAction(final String actionName)
 	{
-		super(GENERATOR_MODEL, actionName != null ? actionName : RBundle.message("new.generate.model.text"), RBundle.message("new.generate.model.description"), RailsIcons.RAILS_MODEL_NODE);
+		super(GENERATOR_MODEL, actionName != null ? actionName : RBundle.message("new.generate.model.text"), RBundle.message("new.generate.model.description"), TargetAWT.to(RailsIcons.RAILS_MODEL_NODE));
 	}
 
 	@Override

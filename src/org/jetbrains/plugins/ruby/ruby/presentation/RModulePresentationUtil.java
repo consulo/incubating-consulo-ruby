@@ -25,6 +25,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,7 +37,7 @@ import com.intellij.openapi.util.Iconable;
 public class RModulePresentationUtil implements RPresentationConstants
 {
 
-	public static Icon getIcon()
+	public static Image getIcon()
 	{
 		return RubyIcons.RUBY_MODULE_NODE;
 	}
@@ -55,14 +57,14 @@ public class RModulePresentationUtil implements RPresentationConstants
 		{
 			return RContainerPresentationUtil.getIconWithModifiers(rModule);
 		}
-		return getIcon();
+		return TargetAWT.to(getIcon());
 	}
 
 	@NotNull
 	public static ItemPresentation getPresentation(final RVirtualModule rModule)
 	{
 		final Icon icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
-		return new PresentationData(formatName(rModule, SHOW_NAME), TextUtil.wrapInParens(getLocation(rModule)), icon, icon, null);
+		return new PresentationData(formatName(rModule, SHOW_NAME), TextUtil.wrapInParens(getLocation(rModule)), icon, null);
 	}
 
 	public static String getLocation(final RVirtualModule rModule)

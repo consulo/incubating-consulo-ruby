@@ -34,6 +34,8 @@ import com.intellij.openapi.util.Iconable;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.ui.LayeredIcon;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +46,7 @@ import com.intellij.ui.LayeredIcon;
 public class RClassPresentationUtil implements RPresentationConstants
 {
 
-	public static Icon getIcon()
+	public static Image getIcon()
 	{
 		return RubyIcons.RUBY_CLASS_NODE;
 	}
@@ -54,11 +56,11 @@ public class RClassPresentationUtil implements RPresentationConstants
 		if(rClass instanceof RVirtualObjectClass)
 		{
 			final LayeredIcon result = new LayeredIcon(2);
-			result.setIcon(RubyIcons.RUBY_ATTR_STATIC, 1);
-			result.setIcon(RubyIcons.RUBY_CLASS_NODE, 0);
+			result.setIcon(TargetAWT.to(RubyIcons.RUBY_ATTR_STATIC), 1);
+			result.setIcon(TargetAWT.to(RubyIcons.RUBY_CLASS_NODE), 0);
 			return result;
 		}
-		return RubyIcons.RUBY_CLASS_NODE;
+		return TargetAWT.to(RubyIcons.RUBY_CLASS_NODE);
 	}
 
 	/**

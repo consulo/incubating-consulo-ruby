@@ -52,6 +52,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.RCommandArgumentListImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Iconable;
@@ -152,7 +153,7 @@ public class SymbolPresentationUtil
 			{
 				priority = LookupValueWithPriority.HIGHER;
 			}
-			icon = IconDescriptorUpdaters.getIcon(((PsiElement) lastPrototype), Iconable.ICON_FLAG_VISIBILITY);
+			icon = TargetAWT.to(IconDescriptorUpdaters.getIcon(((PsiElement) lastPrototype), Iconable.ICON_FLAG_VISIBILITY));
 		}
 		else if(lastPrototype instanceof RVirtualField)
 		{

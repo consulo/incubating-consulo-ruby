@@ -53,11 +53,11 @@ public interface RailsIcons
 	final Icon RAILS_APPlICON_NODES = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/modelesNode.png");
 	//    final Icon RAILS_COMPONENTS_NODES =     IconLoader.findIcon("/modules/globalResources.png");
 	final Icon RAILS_CONTROLERS_NODES = IconLoader.findIcon("/nodes/keymapTools.png");
-	final Icon RAILS_HELPER_NODE = RubyIcons.RUBY_MODULE_NODE;
+	final Image RAILS_HELPER_NODE = RubyIcons.RUBY_MODULE_NODE;
 	final Icon RAILS_HELPERS_NODES = IconLoader.findIcon("/nodes/unknownJdkClosed.png");
 	//    final Icon RAILS_LIBS_NODES =           IconLoader.findIcon("/objectBrowser/showLibraryContents.png");
 	final Icon RAILS_MODEL_NODES = IconLoader.findIcon("/javaee/webModuleGroup.png");
-	final Icon RAILS_MODEL_NODE = IconLoader.findIcon("/javaee/webModuleGroup.png");
+	final Image RAILS_MODEL_NODE = IconLoader.findIcon("/javaee/webModuleGroup.png");
 	final Icon RAILS_FOLDER_OPENED = IconLoader.findIcon("/nodes/folderOpen.png");
 	final Icon RAILS_FOLDER_CLOSED = IconLoader.findIcon("/nodes/folder.png");
 	final Icon RAILS_PARTIALS_OPEN = IconLoader.findIcon("/nodes/webFolderOpen.png");
@@ -73,7 +73,7 @@ public interface RailsIcons
 	//    final Icon RAILS_VIEW_NODES =           IconLoader.findIcon("/nodes/webFolderClosed.png");
 
 	final Icon RAILS_ACTION_NODE = RubyIcons.RUBY_METHOD_NODE;
-	final Icon RAILS_CONTROLLER_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/controllernode.png");
+	final Image RAILS_CONTROLLER_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/controllernode.png");
 	//    final Icon RAILS_PACKAGE_MODULE_NODE =  IconLoader.findIcon("/nodes/packageClosed.png");
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

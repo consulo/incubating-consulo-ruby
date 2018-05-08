@@ -27,6 +27,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.ui.RowIcon;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +39,7 @@ public class RControllerPresentationUtil
 {
 	public static Icon getIcon()
 	{
-		return RailsIcons.RAILS_CONTROLLER_NODE;
+		return TargetAWT.to(RailsIcons.RAILS_CONTROLLER_NODE);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class RControllerPresentationUtil
 			final AccessModifier modifier = rClass.getAccessModifier();
 			final RowIcon icon = new RowIcon(2);
 			icon.setIcon(getIcon(), 0);
-			icon.setIcon(RContainerPresentationUtil.getIconForAccessModifier(modifier), 1);
+			icon.setIcon(TargetAWT.to(RContainerPresentationUtil.getIconForAccessModifier(modifier)), 1);
 			return icon;
 		}
 		return getIcon();

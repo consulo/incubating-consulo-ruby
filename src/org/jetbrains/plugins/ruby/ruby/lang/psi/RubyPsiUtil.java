@@ -50,6 +50,7 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RGlobalVariablePresentationUtil;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
@@ -354,7 +355,7 @@ public class RubyPsiUtil
 
 		if(element instanceof RObjectClass)
 		{
-			return IconDescriptorUpdaters.getIcon(element, Iconable.ICON_FLAG_VISIBILITY);
+			return TargetAWT.to(IconDescriptorUpdaters.getIcon(element, Iconable.ICON_FLAG_VISIBILITY));
 		}
 
 		if(element instanceof RContainer)

@@ -89,7 +89,7 @@ public class SimpleFileNode extends RailsNode
 		{
 			if(RSpecUtil.isRSpecTestFile(file))
 			{
-				return RSpecIcons.TEST_SCRIPT_ICON;
+				return TargetAWT.to(RSpecIcons.TEST_SCRIPT_ICON);
 			}
 		}
 		return TargetAWT.to(FileTypeManager.getInstance().getFileTypeByFile(file).getIcon());

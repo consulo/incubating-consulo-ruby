@@ -26,6 +26,7 @@ import com.intellij.codeInsight.lookup.LookupValueWithPriority;
 import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
 import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
 import com.intellij.codeInsight.lookup.PresentableLookupValue;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
@@ -87,7 +88,7 @@ public class JavaLookupItem implements RubyLookupItem, PresentableLookupValue, L
 	{
 		final RowIcon icon = new RowIcon(2);
 		icon.setIcon(JavaClassPackagePresentationUtil.getJavaIcon(), 0);
-		icon.setIcon(IconDescriptorUpdaters.getIcon(myElement, 0), 1);
+		icon.setIcon(TargetAWT.to(IconDescriptorUpdaters.getIcon(myElement, 0)), 1);
 		return icon;
 	}
 
