@@ -8,6 +8,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.ui.SdkPathEditor;
 import com.intellij.openapi.roots.ui.OrderRootTypeUIFactory;
 import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * @author VISTALL
@@ -23,9 +24,9 @@ public class GemOrderRootTypeUIFactory implements OrderRootTypeUIFactory
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
-		return TargetAWT.to(RubyIcons.RUBY_ICON);
+		return RubyIcons.RUBY_ICON;
 	}
 
 	@Override
