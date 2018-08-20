@@ -134,6 +134,8 @@
 			<add>ruby</add>
 		</listOfElements>
 
+		<inspectionToolProvider implementation="consulo.ruby.lang.RubyInspectionToolProvider" />
+
 		<toolWindow id="RDoc"
 					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
 					anchor="right"

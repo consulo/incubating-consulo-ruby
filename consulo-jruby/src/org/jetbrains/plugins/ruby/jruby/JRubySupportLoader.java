@@ -20,14 +20,11 @@ import java.util.Collections;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.jruby.inspections.JRubyImplementInterfaceInspection;
-import org.jetbrains.plugins.ruby.jruby.inspections.WrongTopLevelPackageInspection;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import org.jruby.Ruby;
 import org.jruby.javasupport.JavaEmbedUtils;
-import com.intellij.codeInspection.InspectionToolProvider;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -38,7 +35,7 @@ import com.intellij.util.ThrowableRunnable;
 /**
  * It`s a class to load jruby support
  */
-public class JRubySupportLoader implements ApplicationComponent, InspectionToolProvider
+public class JRubySupportLoader implements ApplicationComponent
 {
 	private static final Logger LOG = Logger.getInstance(JRubySupportLoader.class.getName());
 
@@ -124,15 +121,6 @@ public class JRubySupportLoader implements ApplicationComponent, InspectionToolP
 		{
 			Thread.currentThread().setContextClassLoader(oldCtxLoad);
 		}
-	}
-
-	@Override
-	public Class[] getInspectionClasses()
-	{
-		return new Class[]{
-				JRubyImplementInterfaceInspection.class,
-				WrongTopLevelPackageInspection.class
-		};
 	}
 }
 

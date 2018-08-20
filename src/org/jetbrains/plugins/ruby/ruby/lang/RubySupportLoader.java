@@ -20,16 +20,12 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.RubyEditorActionsManager;
-import org.jetbrains.plugins.ruby.ruby.inspections.ducktype.RubyDuckTypeInspection;
-import org.jetbrains.plugins.ruby.ruby.inspections.resolve.RubyResolveInspection;
-import org.jetbrains.plugins.ruby.ruby.inspections.scopes.RubyScopesInspection;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-import com.intellij.codeInspection.InspectionToolProvider;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.util.ThrowableRunnable;
 
 
-public class RubySupportLoader implements ApplicationComponent, InspectionToolProvider
+public class RubySupportLoader implements ApplicationComponent
 {
 
 	public static void loadRuby()
@@ -59,22 +55,5 @@ public class RubySupportLoader implements ApplicationComponent, InspectionToolPr
 	public void initComponent()
 	{
 		loadRuby();
-	}
-
-
-	@Override
-	public void disposeComponent()
-	{
-		// do nothing
-	}
-
-	@Override
-	public Class[] getInspectionClasses()
-	{
-		return new Class[]{
-				RubyDuckTypeInspection.class,
-				RubyResolveInspection.class,
-				RubyScopesInspection.class
-		};
 	}
 }
