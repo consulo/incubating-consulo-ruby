@@ -41,4 +41,7 @@
 	<version>2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>plugin</module>
+	</modules>
 </project>

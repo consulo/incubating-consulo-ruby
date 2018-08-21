@@ -1,0 +1,265 @@
+<!--
+  ~ Copyright 2000-2008 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin>
+	<id>consulo.ruby</id>
+	<name>Ruby</name>
+	<version>SNAPSHOT</version>
+	<description>The Ruby plug-in makes Consulo the smart Ruby and Ruby on Rails editor, ideal for the full cycle application development.</description>
+	<vendor>JetBrains &amp; consulo.io</vendor>
+	<resource-bundle>org.jetbrains.plugins.ruby.RBundle</resource-bundle>
+	<depends>com.intellij.xml</depends>
+	<depends>consulo.java</depends>
+	<depends>org.jetbrains.plugins.yaml</depends>
+
+	<depends optional="true" config-file="ruby-javascript-integration.xml">consulo.javascript</depends>
+
+	<extensions defaultExtensionNs="consulo.java">
+		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
+		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<fileTypeFactory implementation="org.jetbrains.plugins.ruby.RubyFileTypeFactory"/>
+		<gotoClassContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubyClassAndModuleContributor"/>
+		<gotoSymbolContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubySymbolContributor"/>
+		<colorSettingsPage implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyColorsPage"/>
+		<colorSettingsPage implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLColorsPage"/>
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.rails.actions.shortcuts.RubyShortcutsSettings"
+							serviceImplementation="org.jetbrains.plugins.ruby.rails.actions.shortcuts.RubyShortcutsSettings"/>
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.settings.RApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.settings.RApplicationSettings"/>
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings"/>
+		<projectService serviceInterface="org.jetbrains.plugins.ruby.settings.RProjectSettings" serviceImplementation="org.jetbrains.plugins.ruby.settings.RProjectSettings"/>
+
+		<lang.parserDefinition language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition"/>
+		<lang.braceMatcher language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher"/>
+		<lang.commenter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter"/>
+		<lang.foldingBuilder language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder"/>
+		<lang.documentationProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider"/>
+		<lang.syntaxHighlighterFactory language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighterFactory"/>
+		<lang.findUsagesProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider"/>
+		<lang.formatter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder"/>
+		<lang.namesValidator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator"/>
+		<lang.psiStructureViewFactory language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilderFactory"/>
+		<lang.surroundDescriptor language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor"/>
+
+		<editorHighlighterProvider filetype="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighterFactory"/>
+
+		<!--<completionData fileType="RHTML" className="org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RHTMLCompletionData" />-->
+
+		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler"/>
+		<moduleExtensionProvider key="ruby"
+								 name="Ruby"
+								 icon="/org/jetbrains/plugins/ruby/ruby/ruby.png"
+								 immutableClass="consulo.ruby.module.extension.BaseRubyModuleExtension"
+								 mutableClass="consulo.ruby.module.extension.BaseRubyMutableModuleExtension"/>
+
+		<contentFolderSupportPatcher implementation="consulo.ruby.module.extension.BaseRubyContentFolderSupportPatcher"/>
+
+		<iconDescriptorUpdater implementation="org.jetbrains.plugins.ruby.RubyIconDescriptorUpdater"/>
+
+		<lang.fileViewProviderFactory language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.eRubyFileViewProviderFactory"/>
+		<lang.parserDefinition language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition"/>
+
+		<consoleFilterProvider implementation="org.jetbrains.plugins.ruby.ruby.run.filters.RConsoleFiltersProvider"/>
+		<createFromTemplateActionReplacer implementation="org.jetbrains.plugins.ruby.rails.actions.templates.RailsCreateFromTemplateActionReplacer"/>
+		<usageTypeProvider implementation="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider"/>
+
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"
+							serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"/>
+
+		<referencesSearch implementation="org.jetbrains.plugins.ruby.ruby.lang.search.RubyTextReferenceSearch"/>
+
+		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType"/>
+
+		<annotator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.annotator.RubyFastAnnotator"/>
+		<externalAnnotator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.annotator.RubySlowAnnotator"/>
+
+		<internalFileTemplate name="Erb(rhtml) Template"/>
+		<internalFileTemplate name="RSpec test Template"/>
+		<internalFileTemplate name="Ruby Script"/>
+		<internalFileTemplate name="TestUnit test Template"/>
+
+		<orderRootType implementation="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType"/>
+		<orderRootTypeEditor key="rubyGems" implementationClass="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootTypeUIFactory"/>
+
+		<!--<overridingMethodsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyOverridingMethodsSearch"/>-->
+		<!--<definitionsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyImplementingMethodsSearch"/>-->
+
+		<!-- Run Configurations: -->
+		<!-- Common Ruby -->
+		<configurationProducer implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RubyRunConfigurationProducer"/>
+		<!-- Rails -->
+		<configurationProducer implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationProducer"/>
+		<!-- RSpec -->
+		<configurationProducer implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecConfigurationProducer"/>
+
+		<configurationType implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType"/>
+		<configurationType implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationType"/>
+		<configurationType implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecRunConfigurationType"/>
+
+		<!-- RSpec Support -->
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings"
+							serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings"/>
+		<moduleService serviceInterface="org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager"
+					   serviceImplementation="org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager"/>
+		<moduleService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettingsStorage"
+					   serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettingsStorage"/>
+
+		<declarationRangeHandler implementationClass="org.jetbrains.plugins.ruby.ruby.lang.RubyDeclarationRangeHandler"/>
+
+		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.ri.RDocSettings"
+							serviceImplementation="org.jetbrains.plugins.ruby.ruby.ri.RDocSettings"/>
+
+		<treeStructureProvider implementation="org.jetbrains.plugins.ruby.ruby.projectview.RubyTreeStructureProvider"/>
+		<projectService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper"
+						serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper"/>
+
+		<usageGroupingRuleProvider implementation="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsagesGroupingRuleProvider"/>
+
+		<listOfElements name="rdocToolwindowModuleExtensionList">
+			<add>ruby</add>
+		</listOfElements>
+
+		<moduleService serviceImplementation="org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings" />
+
+		<inspectionToolProvider implementation="consulo.ruby.lang.RubyInspectionToolProvider" />
+
+		<toolWindow id="RDoc"
+					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
+					anchor="right"
+					secondary="true"
+					requireModuleExtensions="@@rdocToolwindowModuleExtensionList"
+					factoryClass="consulo.ruby.toolWindow.RDocToolWindowFactory"/>
+		<breadcrumbsInfoProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation.RHTMLAndRubyBreadcrumbsInfoProvider$Ruby"/>
+		<breadcrumbsInfoProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation.RHTMLAndRubyBreadcrumbsInfoProvider$eRuby"/>
+
+		<textEditorHighlightingPassFactory implementation="org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting.RailsHighlightPassFactory" />
+		<textEditorHighlightingPassFactory implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line.RubySlowLineHighlightPassFactory" />
+		<textEditorHighlightingPassFactory implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range.RubyRangeHighlightPassFactory" />
+		<textEditorHighlightingPassFactory implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line.RubyFastLineHighlightPassFactory" />
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij.xml">
+		<structureViewElementProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml.RHTMLStructureViewElementProvider"/>
+	</extensions>
+
+	<application-components>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.ruby.lang.RubySupportLoader</implementation-class>
+		</component>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html.RHTMLFileNSInfoProviderImpl</implementation-class>
+		</component>
+
+
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.settings.RSettings</implementation-class>
+		</component>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLApplicationComponent</implementation-class>
+		</component>
+
+		<!-- RSpec Support -->
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.addins.rspec.RSpecSupportLoader</implementation-class>
+		</component>
+
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener</implementation-class>
+		</component>
+	</application-components>
+
+	<project-components>
+
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.ruby.pom.impl.RubyPomAspectImpl</implementation-class>
+		</component>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.ruby.actions.intention.RubyIntentionActionsManager</implementation-class>
+		</component>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager</implementation-class>
+		</component>
+
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache</implementation-class>
+		</component>
+
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage
+			</implementation-class>
+		</component>
+		<component>
+			<implementation-class>org.jetbrains.plugins.ruby.rails.RailsProjectLoader</implementation-class>
+		</component>
+	</project-components>
+
+	<actions>
+		<action id="RIHelpAction" class="org.jetbrains.plugins.ruby.ruby.ri.RIHelpAction" text="RI search" description="Searches a help for selected text using RDoc">
+			<keyboard-shortcut keymap="$default" first-keystroke="ctrl I"/>
+			<add-to-group group-id="EditorPopupMenu" anchor="last"/>
+		</action>
+
+		<action id="org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToView" class="org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToView" text="Switch to view"
+				description="Searches view for action in rails controller">
+			<keyboard-shortcut keymap="$default" first-keystroke="ctrl alt W"/>
+		</action>
+		<action id="org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToAction" class="org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToAction" text="Switch to action"
+				description="Searches controller action for view">
+			<keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A"/>
+		</action>
+		<action id="org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToController" class="org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToController" text="Switch to controller"
+				description="Searches controller action for partial view">
+			<keyboard-shortcut keymap="$default" first-keystroke="ctrl alt K"/>
+		</action>
+		<group id="RAILS_POPUP" text="Rails..." description="Group of Rails generators" popup="false">
+			<add-to-group group-id="GenerateGroup" anchor="first"/>
+
+			<action id="org.jetbrains.plugins.ruby.rails.actions.generators.actions.special.GenerateActionAction"
+					class="org.jetbrains.plugins.ruby.rails.actions.generators.actions.special.GenerateActionAction" text="Action"
+					description="Generates action for controller"/>
+			<separator/>
+		</group>
+		<group id="GENERATORS_GROUP" class="org.jetbrains.plugins.ruby.rails.actions.generators.actions.GeneratorsActionGroup" popup="false">
+			<add-to-group group-id="NewGroup" anchor="first"/>
+		</group>
+		<group id="RAILS_POPUP_GENERATORS_GROUP" class="org.jetbrains.plugins.ruby.rails.actions.generators.actions.GeneratorsActionGroup" popup="true" text="Generate...">
+			<add-to-group group-id="RAILS_POPUP" anchor="last"/>
+		</group>
+		<group id="RAKE_GROUP" class="org.jetbrains.plugins.ruby.rails.actions.rake.RakeActionGroup" text="Rake" description="Rake actions">
+			<add-to-group group-id="RunContextPopupGroup" anchor="last"/>
+		</group>
+
+		<group id="ROR_TOOLS" text="ROR Plugin" popup="true">
+			<add-to-group group-id="ToolsMenu" anchor="last"/>
+
+			<action id="org.jetbrains.plugins.ruby.rails.actions.generators.ReloadGeneratorsAction" class="org.jetbrains.plugins.ruby.rails.actions.generators.ReloadGeneratorsAction"
+					text="Reload Generators"
+					description="Reloads list of available generators"/>
+
+
+			<action id="org.jetbrains.plugins.ruby.rails.actions.rake.ReloadRakeTasksAction" class="org.jetbrains.plugins.ruby.rails.actions.rake.ReloadRakeTasksAction" text="Reload Rake tasks"
+					description="Reloads list of available rake tasks"/>
+
+			<separator/>
+
+			<action id="org.jetbrains.plugins.ruby.rails.actions.execution.RunRailsScriptAction" class="org.jetbrains.plugins.ruby.rails.actions.execution.RunRailsScriptAction"
+					text="Run Rails script..."
+					description="Runs scripts from ./script folder"/>
+		</group>
+	</actions>
+</idea-plugin>
