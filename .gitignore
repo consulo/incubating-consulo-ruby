@@ -1,3 +1,4 @@
 /out
-/.consulo/workspace.xml
+/.consulo
+target/
 /dep
