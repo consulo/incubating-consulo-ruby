@@ -42,6 +42,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>consulo-jruby</module>
 		<module>plugin</module>
 	</modules>
 </project>
