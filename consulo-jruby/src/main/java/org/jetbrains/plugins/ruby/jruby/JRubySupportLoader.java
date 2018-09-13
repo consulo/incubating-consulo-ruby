@@ -25,7 +25,6 @@ import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import org.jruby.Ruby;
 import org.jruby.javasupport.JavaEmbedUtils;
-import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -35,12 +34,11 @@ import com.intellij.util.ThrowableRunnable;
 /**
  * It`s a class to load jruby support
  */
-public class JRubySupportLoader implements ApplicationComponent
+public class JRubySupportLoader
 {
 	private static final Logger LOG = Logger.getInstance(JRubySupportLoader.class.getName());
 
-	@Override
-	public void initComponent()
+	public JRubySupportLoader()
 	{
 		loadJRuby();
 	}
@@ -80,18 +78,6 @@ public class JRubySupportLoader implements ApplicationComponent
 		{
 			Thread.currentThread().setContextClassLoader(oldCtxLoad);
 		}
-	}
-
-	@Override
-	public void disposeComponent()
-	{
-	}
-
-	@Override
-	@NotNull
-	public String getComponentName()
-	{
-		return JRubyComponents.JRUBY_SUPPORT_LOADER;
 	}
 
 	public static void loadJRuby()

@@ -17,7 +17,7 @@
 
 		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
 
-		<inspectionToolProvider implementation="consulo.jruby.lang.JRubyInspectionToolProvider "/>
+		<inspectionToolProvider implementation="consulo.jruby.lang.JRubyInspectionToolProvider"/>
 
 		<moduleExtensionProvider key="jruby"
 								 parentKey="java"

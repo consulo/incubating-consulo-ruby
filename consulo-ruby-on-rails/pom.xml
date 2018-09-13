@@ -25,7 +25,7 @@
 	</parent>
 
 	<groupId>consulo.plugin</groupId>
-	<artifactId>consulo.jruby</artifactId>
+	<artifactId>consulo.ruby.rails</artifactId>
 	<version>2-SNAPSHOT</version>
 	<packaging>consulo-plugin</packaging>
 
@@ -69,13 +69,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>consulo.ruby-ruby.api</artifactId>
+			<artifactId>consulo.ruby-ruby.on.rails.api</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>org.jetbrains.plugins.yaml</artifactId>
+			<artifactId>consulo.ruby-ruby.api</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>

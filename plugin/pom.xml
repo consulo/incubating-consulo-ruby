@@ -51,7 +51,15 @@
 					<repositoryChannel>nightly</repositoryChannel>
 					<dependencies>
 						<dependency>com.intellij.xml</dependency>
+						<dependency>com.intellij.properties</dependency>
+						<dependency>consulo.java</dependency>
+						<dependency>org.jetbrains.plugins.yaml</dependency>
 					</dependencies>
+					<execution>
+						<pluginDirectories>
+							<pluginDirectory>${project.basedir}/../consulo-jruby/target/consulo-plugin-extracted</pluginDirectory>
+						</pluginDirectories>
+					</execution>
 					<packaging>
 						<skip>${dev.mode}</skip>
 						<version>${build.number}</version>
@@ -74,6 +82,11 @@
 			<groupId>org.jruby</groupId>
 			<artifactId>jruby-complete</artifactId>
 			<version>9.2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>consulo.ruby-ruby.api</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

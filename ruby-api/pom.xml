@@ -25,9 +25,9 @@
 	</parent>
 
 	<groupId>consulo.plugin</groupId>
-	<artifactId>consulo.jruby</artifactId>
+	<artifactId>consulo.ruby-ruby.api</artifactId>
 	<version>2-SNAPSHOT</version>
-	<packaging>consulo-plugin</packaging>
+	<packaging>jar</packaging>
 
 	<repositories>
 		<repository>
@@ -47,18 +47,11 @@
 				<artifactId>consulo-maven-plugin</artifactId>
 				<version>2-SNAPSHOT</version>
 				<extensions>true</extensions>
-				<configuration>
-					<repositoryChannel>nightly</repositoryChannel>
-					<packaging>
-						<skip>${dev.mode}</skip>
-						<version>${build.number}</version>
-					</packaging>
-				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase>
+						<phase>generate-sources</phase>
 						<goals>
-							<goal>workspace</goal>
+							<goal>generate-lexers</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -68,11 +61,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>consulo.ruby-ruby.api</artifactId>
-			<version>${project.version}</version>
-			<scope>provided</scope>
+			<groupId>org.jruby</groupId>
+			<artifactId>jruby-complete</artifactId>
+			<version>9.2.0.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>org.jetbrains.plugins.yaml</artifactId>
