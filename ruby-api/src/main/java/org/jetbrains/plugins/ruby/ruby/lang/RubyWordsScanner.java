@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import com.intellij.lang.cacheBuilder.WordOccurrence;
@@ -39,7 +39,7 @@ public class RubyWordsScanner implements WordsScanner
 	@Override
 	public void processWords(@NotNull final CharSequence fileText, @NotNull final Processor<WordOccurrence> processor)
 	{
-		final RubyLexer lexer = new RubyLexer();
+		final RubyMergeLexer lexer = new RubyMergeLexer();
 		lexer.start(fileText, 0, fileText.length(), 0);
 		WordOccurrence occurence = null; // shared occurence
 

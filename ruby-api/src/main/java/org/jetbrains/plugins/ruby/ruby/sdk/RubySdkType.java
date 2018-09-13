@@ -36,9 +36,8 @@ import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkAdditionalData;
@@ -49,9 +48,9 @@ import com.intellij.openapi.projectRoots.impl.SdkImpl;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.PathUtil;
 import consulo.ui.image.Image;
 
 /**
@@ -76,7 +75,7 @@ public class RubySdkType extends SdkType
 	@NonNls
 	public static final String GEMS_SUBDIR = VirtualFileUtil.VFS_PATH_SEPARATOR + "gems";
 	@NonNls
-	public static final String RUBYSTUBS_DIR = "dist/rubystubs";
+	public static final String RUBYSTUBS_DIR = "rubystubs";
 	@NonNls
 	public static final String MAC_OS_BUNDLED_RUBY_PATH_PREFIX = "/System/Library/Frameworks/Ruby.framework/Versions";
 	@NonNls
@@ -235,77 +234,55 @@ public class RubySdkType extends SdkType
 	@Override
 	public void setupSdkPaths(final Sdk sdk)
 	{
-		final Runnable setupSdkPathsRunnable = new Runnable()
+		final VirtualFileManager virtualFileManager = VirtualFileManager.getInstance();
+		final String rubyInterpreterExecutable = getVMExecutablePath(sdk);
+
+		final Set<String> urls = new LinkedHashSet<String>();
+		final String scriptSource = GET_LOAD_PATH_SCRIPT;
+		final Output result = RubyScriptRunner.runScriptFromSource(rubyInterpreterExecutable, new String[]{}, scriptSource, new String[]{});
+		final String loadPaths[] = TextUtil.splitByLines(result.getStdout());
+		for(String s : loadPaths)
 		{
-			@Override
-			public void run()
+			if(!s.trim().equals("."))
 			{
-				final VirtualFileManager virtualFileManager = VirtualFileManager.getInstance();
-				final String rubyInterpreterExecutable = getVMExecutablePath(sdk);
-
-				final Set<String> urls = new LinkedHashSet<String>();
-				final String scriptSource = GET_LOAD_PATH_SCRIPT;
-				final Output result = RubyScriptRunner.runScriptFromSource(rubyInterpreterExecutable, new String[]{}, scriptSource, new String[]{});
-				final String loadPaths[] = TextUtil.splitByLines(result.getStdout());
-				for(String s : loadPaths)
-				{
-					if(!s.trim().equals("."))
-					{
-						urls.add(VirtualFileUtil.constructLocalUrl(s));
-					}
-				}
-
-				// Adding GEM pathes to search for gems
-				final Output gemsPathesResult = RubyScriptRunner.runScriptFromSource(rubyInterpreterExecutable, new String[]{}, GET_GEM_PATHES_SCRIPT, new String[]{});
-				final String gemPaths[] = TextUtil.splitByLines(gemsPathesResult.getStdout());
-				for(String s : gemPaths)
-				{
-					if(!s.trim().equals("."))
-					{
-						urls.add(VirtualFileUtil.constructLocalUrl(s + GEMS_SUBDIR));
-					}
-				}
-
-				// trying to add rubystubs from plugin jar file
-				final String jarPath = PathUtil.getJarPathForClass(RubySdkType.class);
-				if(jarPath != null && jarPath.endsWith(JAR))
-				{
-					final VirtualFile jarFile = VirtualFileUtil.findFileByLocalPath(jarPath);
-
-					LOG.assertTrue(jarFile != null, "jar file cannot be null");
-					//noinspection ConstantConditions
-					final VirtualFile rubyStubsDir = jarFile.getParent().getParent().findChild(RUBYSTUBS_DIR);
-					LOG.assertTrue(rubyStubsDir != null, "main.rb file cannot be null");
-					urls.add(rubyStubsDir.getUrl());
-				}
-
-				// WARNING: not all ruby LOAD_PATH may exist!
-				final SdkModificator sdkModificator = sdk.getSdkModificator();
-				for(String url : urls)
-				{
-					final VirtualFile vFile = virtualFileManager.findFileByUrl(url);
-					if(vFile != null)
-					{
-						RubySdkUtil.addToSourceAndClasses(sdkModificator, vFile);
-					}
-				}
-				findAndSaveGemsRootsBy(sdkModificator);
-
-				sdkModificator.commitChanges();
+				urls.add(VirtualFileUtil.constructLocalUrl(s));
 			}
-		};
+		}
 
-		final String title = RBundle.message("sdk.setup.progress.title");
-		ProgressManager.getInstance().runProcessWithProgressSynchronously(new Runnable()
+		// Adding GEM pathes to search for gems
+		final Output gemsPathesResult = RubyScriptRunner.runScriptFromSource(rubyInterpreterExecutable, new String[]{}, GET_GEM_PATHES_SCRIPT, new String[]{});
+		final String gemPaths[] = TextUtil.splitByLines(gemsPathesResult.getStdout());
+		for(String s : gemPaths)
 		{
-			@Override
-			public void run()
+			if(!s.trim().equals("."))
 			{
-				final ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
-				indicator.setText(RBundle.message("sdk.setup.progress.setup.pathes"));
-				setupSdkPathsRunnable.run();
+				urls.add(VirtualFileUtil.constructLocalUrl(s + GEMS_SUBDIR));
 			}
-		}, title, false, null);
+		}
+
+		File pluginPath = PluginManager.getPluginPath(RubySdkType.class);
+
+		// trying to add rubystubs from plugin jar file
+		final VirtualFile rubyStubsDir = LocalFileSystem.getInstance().findFileByIoFile(new File(pluginPath, RUBYSTUBS_DIR));
+		if(rubyStubsDir != null)
+		{
+			LOG.assertTrue(rubyStubsDir != null, "main.rb file cannot be null");
+			urls.add(rubyStubsDir.getUrl());
+		}
+
+		// WARNING: not all ruby LOAD_PATH may exist!
+		final SdkModificator sdkModificator = sdk.getSdkModificator();
+		for(String url : urls)
+		{
+			final VirtualFile vFile = virtualFileManager.findFileByUrl(url);
+			if(vFile != null)
+			{
+				RubySdkUtil.addToSourceAndClasses(sdkModificator, vFile);
+			}
+		}
+		findAndSaveGemsRootsBy(sdkModificator);
+
+		sdkModificator.commitChanges();
 	}
 
 	@Override

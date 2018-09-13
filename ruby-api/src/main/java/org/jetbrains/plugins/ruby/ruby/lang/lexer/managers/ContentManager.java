@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +40,7 @@ public class ContentManager extends ReadingManager
 
 	private StatesManager stateManager;
 
-	public ContentManager(@NotNull final _RubyLexer lexer)
+	public ContentManager(@NotNull final RubyRawLexer lexer)
 	{
 		super(lexer);
 		stateManager = lexer.getStatesManager();

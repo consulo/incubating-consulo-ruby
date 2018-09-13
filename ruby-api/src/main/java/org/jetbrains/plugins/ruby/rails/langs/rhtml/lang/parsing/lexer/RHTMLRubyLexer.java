@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyLexer;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerPosition;
 import com.intellij.lexer.MergingLexerAdapter;
@@ -56,7 +56,7 @@ public class RHTMLRubyLexer extends MergingLexerAdapter
 class _RHTMLRubyLexer extends Lexer
 {
 	private Lexer myRHTMLLexer = new _RHTMLLexer();
-	private RubyLexer myRubyLexer = new RubyLexer();
+	private RubyMergeLexer myRubyLexer = new RubyMergeLexer();
 
 	private Lexer myCurRubyLexer = null;
 	private boolean myInHighlighingMode;
@@ -176,7 +176,7 @@ class _RHTMLRubyLexer extends Lexer
 				return;
 			}
 
-			myCurRubyLexer.start(myRHTMLLexer.getBufferSequence(), myRHTMLLexer.getTokenStart(), myRHTMLLexer.getTokenEnd(), _RubyLexer.YYINITIAL);
+			myCurRubyLexer.start(myRHTMLLexer.getBufferSequence(), myRHTMLLexer.getTokenStart(), myRHTMLLexer.getTokenEnd(), RubyRawLexer.YYINITIAL);
 			if(myCurRubyLexer.getTokenType() != null)
 			{
 				return;

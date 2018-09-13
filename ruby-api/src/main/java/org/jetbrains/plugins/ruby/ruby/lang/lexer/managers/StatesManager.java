@@ -23,8 +23,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.BraceCounter;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.Delimiter;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.Expr;
@@ -41,14 +41,13 @@ import com.intellij.psi.tree.IElementType;
  */
 public class StatesManager implements RubyTokenTypes
 {
-
 	@NonNls
 	private static final String STATE_PATTERN = "(YYINITIAL)|(.*_STATE)";
 
 	private Stack<State> myStatesStack;
-	private _RubyLexer myLexer;
+	private RubyRawLexer myLexer;
 
-	public StatesManager(final _RubyLexer lexer)
+	public StatesManager(final RubyRawLexer lexer)
 	{
 		myLexer = lexer;
 		myStatesStack = new Stack<State>();
@@ -106,7 +105,7 @@ public class StatesManager implements RubyTokenTypes
 	 */
 	public void toVarSubtState(final int state)
 	{
-		assert state == _RubyLexer.IN_VAR_SUBT_STATE;
+		assert state == RubyRawLexer.IN_VAR_SUBT_STATE;
 		final State newState = new State(state);
 		changeLexState(newState);
 	}
@@ -118,7 +117,7 @@ public class StatesManager implements RubyTokenTypes
 	 */
 	public void toExprSubtState(final int state)
 	{
-		assert state == _RubyLexer.IN_EXPR_SUBT_STATE;
+		assert state == RubyRawLexer.IN_EXPR_SUBT_STATE;
 		final State newState = new State(state);
 		newState.addComponent(new BraceCounter(1));
 		newState.addComponent(new LexState());
@@ -641,21 +640,21 @@ public class StatesManager implements RubyTokenTypes
 		final int currentState = stateObject.getYYState();
 
 		// we should change states only if in YYINITIAL or in SPECIAL_STATE
-		if(!(currentState == _RubyLexer.YYINITIAL || currentState == _RubyLexer.SPECIAL_STATE))
+		if(!(currentState == RubyRawLexer.YYINITIAL || currentState == RubyRawLexer.SPECIAL_STATE))
 		{
 			return;
 		}
 
-		if(inSpecialState && currentState == _RubyLexer.YYINITIAL)
+		if(inSpecialState && currentState == RubyRawLexer.YYINITIAL)
 		{
-			stateObject.setYYState(_RubyLexer.SPECIAL_STATE);
-			myLexer.yybegin(_RubyLexer.SPECIAL_STATE);
+			stateObject.setYYState(RubyRawLexer.SPECIAL_STATE);
+			myLexer.yybegin(RubyRawLexer.SPECIAL_STATE);
 		}
 
-		if(!inSpecialState && currentState == _RubyLexer.SPECIAL_STATE)
+		if(!inSpecialState && currentState == RubyRawLexer.SPECIAL_STATE)
 		{
-			stateObject.setYYState(_RubyLexer.YYINITIAL);
-			myLexer.yybegin(_RubyLexer.YYINITIAL);
+			stateObject.setYYState(RubyRawLexer.YYINITIAL);
+			myLexer.yybegin(RubyRawLexer.YYINITIAL);
 		}
 	}
 }

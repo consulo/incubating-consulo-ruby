@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import com.intellij.lexer.Lexer;
@@ -43,7 +43,7 @@ public class RubySyntaxHighlighter extends SyntaxHighlighterBase implements Ruby
 	@NotNull
 	public Lexer getHighlightingLexer()
 	{
-		return new RubyLexer();
+		return new RubyMergeLexer();
 	}
 
 	static

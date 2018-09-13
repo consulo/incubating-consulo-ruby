@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings({"AccessStaticViaInstance", "FieldCanBeLocal", "UnusedAssignment", "JavaDoc", "UnusedDeclaration", "SimplifiableIfStatement", "ConstantConditions"})
 %%
 
-%class _RubyLexer
+%public
+%class RubyRawLexer
 %implements FlexLexer, RubyTokenTypes
 %unicode
 %public
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
     * resets lexer to initialState
     * @param initialState initial state to set up.
     */
-    private void reset(int initialState){
+    protected void reset(int initialState){
         mySM.reset();
         myCM.reset(zzStartRead, zzEndRead);
         myTM.reset();

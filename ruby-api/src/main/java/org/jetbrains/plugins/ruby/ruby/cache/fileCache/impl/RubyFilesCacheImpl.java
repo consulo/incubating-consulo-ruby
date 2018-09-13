@@ -50,7 +50,6 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.DumbServiceImpl;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileAdapter;
@@ -158,7 +157,6 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 			indicator.setText("");
 		}
 
-		registerAsCacheUpdater();
 		addVirtualFileListener();
 		registerDisposer();
 	}
@@ -196,7 +194,6 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 			wasClosed = true;
 			myCacheChangedListeners.clear();
 		}
-		unregisterAsCacheUpdater();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -637,24 +634,6 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 			}
 		};
 		VirtualFileManager.getInstance().addVirtualFileListener(listener, this);
-	}
-
-	private void registerAsCacheUpdater()
-	{
-		StartupManager.getInstance(myProject).registerPreStartupActivity(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				//StartupManagerEx.getInstanceEx(myProject).registerCacheUpdater(RubyFilesCacheImpl.this);
-			}
-		});
-	}
-
-	private void unregisterAsCacheUpdater()
-	{
-		//  ProjectRootManagerEx.getInstanceEx(myProject).unregisterChangeUpdater(this);
-		//  ((VirtualFileManagerEx)VirtualFileManagerEx.getInstance()).unregisterRefreshUpdater(this);
 	}
 
 	/**

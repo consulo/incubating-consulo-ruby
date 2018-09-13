@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
 import com.intellij.lang.ASTNode;
@@ -39,7 +39,7 @@ public class RubyParserDefinition implements ParserDefinition, RubyElementTypes
 	@NotNull
 	public Lexer createLexer(LanguageVersion languageVersion)
 	{
-		return new RubyLexer();
+		return new RubyMergeLexer();
 	}
 
 	@Override

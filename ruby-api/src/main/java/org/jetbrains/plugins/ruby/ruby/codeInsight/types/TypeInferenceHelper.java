@@ -19,6 +19,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
@@ -52,6 +55,7 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.util.containers.HashMap;
@@ -62,6 +66,7 @@ import com.intellij.util.containers.HashMap;
  * @author: oleg
  * @date: Apr 21, 2008
  */
+@Singleton
 public class TypeInferenceHelper
 {
 	@NotNull
@@ -72,9 +77,10 @@ public class TypeInferenceHelper
 
 	private Ref<TypeInferenceContext> myTypeContext = new Ref<TypeInferenceContext>();
 
-	public TypeInferenceHelper(PsiManagerEx psiManagerEx)
+	@Inject
+	public TypeInferenceHelper(PsiManager psiManager)
 	{
-		psiManagerEx.registerRunnableToRunOnAnyChange(new Runnable()
+		((PsiManagerEx)psiManager).registerRunnableToRunOnAnyChange(new Runnable()
 		{
 			@Override
 			public void run()

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.Expr;
 import com.intellij.psi.tree.IElementType;
 
@@ -32,7 +32,7 @@ public class TokensManager implements RubyTokenTypes
 	final private StatesManager myStatesManager;
 	private boolean spaceSeen;
 
-	public TokensManager(final _RubyLexer lexer)
+	public TokensManager(final RubyRawLexer lexer)
 	{
 		myStatesManager = lexer.getStatesManager();
 	}

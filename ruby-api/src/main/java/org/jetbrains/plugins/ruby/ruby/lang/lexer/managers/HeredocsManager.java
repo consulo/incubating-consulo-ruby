@@ -22,7 +22,7 @@ import java.util.Queue;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +40,7 @@ public class HeredocsManager
 	@NonNls
 	private static final String INDENTED_PREFIX = "<<-";
 
-	public HeredocsManager(@NotNull final _RubyLexer lexer)
+	public HeredocsManager(@NotNull final RubyRawLexer lexer)
 	{
 		this.contentManager = lexer.getContentManager();
 		myHeredocs = new LinkedList<Heredoc>();

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 
-import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,12 +30,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer._RubyLexer;
  */
 class ReadingManager
 {
-	private _RubyLexer lexer;
+	private RubyRawLexer lexer;
 	private CharSequence zzBuffer;
 	private int lexerEnd;
 	private int lexerStart;
 
-	public ReadingManager(final _RubyLexer lexer)
+	public ReadingManager(final RubyRawLexer lexer)
 	{
 		this.lexer = lexer;
 		zzBuffer = lexer.getBuffer();
