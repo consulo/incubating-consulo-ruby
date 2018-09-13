@@ -37,7 +37,6 @@ public class ContentManager extends ReadingManager
 	public static final int BACKSLASH_SEEN = -2;
 	public static final int EXPR_SUBT_SEEN = -3;
 
-
 	private StatesManager stateManager;
 
 	public ContentManager(@NotNull final RubyRawLexer lexer)
