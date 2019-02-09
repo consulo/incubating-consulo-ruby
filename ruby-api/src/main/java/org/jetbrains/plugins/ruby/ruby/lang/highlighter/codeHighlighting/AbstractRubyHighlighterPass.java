@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
 import com.intellij.codeHighlighting.TextEditorHighlightingPass;
@@ -45,7 +46,7 @@ public abstract class AbstractRubyHighlighterPass extends TextEditorHighlighting
 	protected final int myEndOffset;
 	private final List<PsiElement> myElements;
 
-	public AbstractRubyHighlighterPass(@NotNull final Project project, @NotNull final PsiFile psiFile, @NotNull final Editor editor, final boolean updateVisible, final int passId)
+	public AbstractRubyHighlighterPass(@Nonnull final Project project, @Nonnull final PsiFile psiFile, @Nonnull final Editor editor, final boolean updateVisible, final int passId)
 	{
 		super(project, editor.getDocument());
 		myFile = psiFile;
@@ -67,8 +68,8 @@ public abstract class AbstractRubyHighlighterPass extends TextEditorHighlighting
 		myElements = collectElementsInRange(psiFile, myStartOffset, myEndOffset);
 	}
 
-	@NotNull
-	protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile, final int startOffset, final int endOffset)
+	@Nonnull
+	protected List<PsiElement> collectElementsInRange(@Nonnull final PsiFile psiFile, final int startOffset, final int endOffset)
 	{
 		return psiFile instanceof RHTMLFile ? CollectHighlightsUtil.getElementsInRange(((RHTMLFile) psiFile).getInnerRubyFile(), startOffset, endOffset, false) : CollectHighlightsUtil.getElementsInRange(psiFile, startOffset, endOffset, false);
 	}

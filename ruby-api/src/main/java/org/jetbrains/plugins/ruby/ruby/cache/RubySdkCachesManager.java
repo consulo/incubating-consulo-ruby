@@ -24,9 +24,11 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.impl.RubyFilesCacheImpl;
@@ -89,7 +91,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 			"UnusedDeclaration",
 			"UnusedParameters"
 	})
-	public RubySdkCachesManager(@NotNull final Project project, @NotNull final DirectoryIndex dirIndex, @NotNull final PsiManager psiManager)
+	public RubySdkCachesManager(@Nonnull final Project project, @Nonnull final DirectoryIndex dirIndex, @Nonnull final PsiManager psiManager)
 	{
 		myProject = project;
 		createListeners();
@@ -123,7 +125,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 		});
 	}
 
-	public void registerSymbolsCache(@NotNull final SymbolsCache cache)
+	public void registerSymbolsCache(@Nonnull final SymbolsCache cache)
 	{
 		symbolsCache = cache;
 	}
@@ -207,7 +209,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 	 * @return FilesCache for sdk
 	 */
 	@Nullable
-	public RubyFilesCache getSdkFilesCache(@NotNull final Sdk sdk)
+	public RubyFilesCache getSdkFilesCache(@Nonnull final Sdk sdk)
 	{
 		return sdk2RubyFilesCache.get(sdk);
 	}
@@ -235,7 +237,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 		// Do nothing
 	}
 
-	private void modulesChanged(@NotNull final Project project, @NotNull final Module module)
+	private void modulesChanged(@Nonnull final Project project, @Nonnull final Module module)
 	{
 		if(RModuleUtil.hasRubySupport(module))
 		{
@@ -261,7 +263,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 
 	@Override
 	@NonNls
-	@NotNull
+	@Nonnull
 	public String getComponentName()
 	{
 		return RComponents.RUBY_SDK_CACHE_MANAGER;
@@ -337,8 +339,8 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 	 * @param sdk Jdk to get cached info for
 	 * @return Path to file where cached information is saved.
 	 */
-	@NotNull
-	private String generateCacheFilePath(@NotNull final Sdk sdk)
+	@Nonnull
+	private String generateCacheFilePath(@Nonnull final Sdk sdk)
 	{
 		return generateCacheFilePath(sdk, sdk.getName());
 	}
@@ -348,13 +350,13 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 	 * @param name Sdk name
 	 * @return Path to file where cached information is saved.
 	 */
-	@NotNull
-	private String generateCacheFilePath(@NotNull final Sdk sdk, @NotNull final String name)
+	@Nonnull
+	private String generateCacheFilePath(@Nonnull final Sdk sdk, @Nonnull final String name)
 	{
 		return PathManager.getSystemPath() + "/" + RUBY_CACHE_DIR + "/" + RUBY_CACHE_FILE + "/" + name + "_" + sdk.getHomePath().hashCode();
 	}
 
-	protected void addSDK(@NotNull final Sdk sdk, boolean runProcessWithProgressSynchronously, boolean doSetup)
+	protected void addSDK(@Nonnull final Sdk sdk, boolean runProcessWithProgressSynchronously, boolean doSetup)
 	{
 		assert !sdk2RubyFilesCache.containsKey(sdk);
 		final RubyFilesCache newSdkCache = new RubyFilesCacheImpl(myProject, sdk.getName());
@@ -383,7 +385,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 		}
 	}
 
-	protected void removeSDK(@NotNull final Sdk sdk, final boolean removeCacheFromDisk)
+	protected void removeSDK(@Nonnull final Sdk sdk, final boolean removeCacheFromDisk)
 	{
 		final RubyFilesCache cache = sdk2RubyFilesCache.remove(sdk);
 		if(cache != null)
@@ -439,13 +441,13 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 		}
 	}
 
-	public static RubySdkCachesManager getInstance(@NotNull final Project project)
+	public static RubySdkCachesManager getInstance(@Nonnull final Project project)
 	{
 		return project.getComponent(RubySdkCachesManager.class);
 	}
 
 	@Nullable
-	public RubyFilesCache getFirstCacheByFile(@NotNull final VirtualFile file)
+	public RubyFilesCache getFirstCacheByFile(@Nonnull final VirtualFile file)
 	{
 		final Sdk sdk = getFirstSdkForFile(file);
 		return sdk != null ? getSdkFilesCache(sdk) : null;
@@ -458,7 +460,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 	 * @return Sdk or null
 	 */
 	@Nullable
-	public Sdk getFirstSdkForFile(@NotNull final VirtualFile file)
+	public Sdk getFirstSdkForFile(@Nonnull final VirtualFile file)
 	{
 		final String rootUrl = file.getUrl();
 		final boolean isDirectory = file.isDirectory();

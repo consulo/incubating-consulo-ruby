@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import com.intellij.psi.PsiElement;
@@ -36,7 +37,7 @@ public class PseudoScopeHolderNavigator
 	 * @return Returns the root scope for the given context
 	 */
 	@Nullable
-	public static PseudoScopeHolder getScopeHolder(@NotNull PsiElement element)
+	public static PseudoScopeHolder getScopeHolder(@Nonnull PsiElement element)
 	{
 		if(element.getParent() instanceof RClassObject)
 		{

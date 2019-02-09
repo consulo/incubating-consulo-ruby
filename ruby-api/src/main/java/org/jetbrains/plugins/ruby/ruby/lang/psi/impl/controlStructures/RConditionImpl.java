@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
@@ -36,7 +37,7 @@ public class RConditionImpl extends RPsiElementBase implements RCondition
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{

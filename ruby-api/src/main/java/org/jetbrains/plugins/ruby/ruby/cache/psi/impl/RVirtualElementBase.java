@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 
 /**
@@ -56,7 +56,7 @@ public abstract class RVirtualElementBase implements RVirtualElement
 		return buffer.toString();
 	}
 
-	public void dump(@NotNull final StringBuilder buffer, final int indent)
+	public void dump(@Nonnull final StringBuilder buffer, final int indent)
 	{
 		for(int i = 0; i < indent; i++)
 		{

@@ -21,8 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,8 +49,8 @@ public class RubyScriptRunnerArgumentsProvider implements CommandLineArgumentsPr
 	 * @param argumentsString Arguments.
 	 * @return List of arguments
 	 */
-	@NotNull
-	public static List<String> collectArguments(@NotNull final String argumentsString)
+	@Nonnull
+	public static List<String> collectArguments(@Nonnull final String argumentsString)
 	{
 		return collectArguments(argumentsString, new ArrayList<String>());
 	}
@@ -65,8 +65,8 @@ public class RubyScriptRunnerArgumentsProvider implements CommandLineArgumentsPr
 	 * @param params          List with other params. Arguments will be appended to the end of this list.
 	 * @return List of arguments
 	 */
-	@NotNull
-	public static List<String> collectArguments(@NotNull final String argumentsString, @NotNull final List<String> params)
+	@Nonnull
+	public static List<String> collectArguments(@Nonnull final String argumentsString, @Nonnull final List<String> params)
 	{
 
 		final StringTokenizer tokenizer = new StringTokenizer(argumentsString);

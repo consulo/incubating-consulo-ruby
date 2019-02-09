@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
@@ -42,7 +42,7 @@ public class RubyUsageTypeProvider implements UsageTypeProvider
 
 	@Override
 	@Nullable
-	public UsageType getUsageType(@NotNull final PsiElement element)
+	public UsageType getUsageType(@Nonnull final PsiElement element)
 	{
 		final RubyUsageType type = getType(element);
 		if(type == RubyUsageType.DECLARATION)
@@ -64,14 +64,14 @@ public class RubyUsageTypeProvider implements UsageTypeProvider
 		return null;
 	}
 
-	public static void setType(@NotNull final PsiReference reference, final RubyUsageType type)
+	public static void setType(@Nonnull final PsiReference reference, final RubyUsageType type)
 	{
 		reference.getElement().putUserData(RUBY_USAGE_TYPE_KEY, type);
 
 	}
 
 	@Nullable
-	public static RubyUsageType getType(@NotNull final PsiElement element)
+	public static RubyUsageType getType(@Nonnull final PsiElement element)
 	{
 		return element.getUserData(RUBY_USAGE_TYPE_KEY);
 	}

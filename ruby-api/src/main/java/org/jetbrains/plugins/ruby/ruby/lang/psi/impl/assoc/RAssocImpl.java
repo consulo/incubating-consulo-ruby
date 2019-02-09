@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;

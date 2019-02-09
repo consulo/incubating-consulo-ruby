@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import javax.annotation.Nonnull;
+
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import com.intellij.openapi.module.Module;
@@ -37,7 +38,7 @@ public class BDSchemaNode extends SimpleFileNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.BD_SCHEMA;

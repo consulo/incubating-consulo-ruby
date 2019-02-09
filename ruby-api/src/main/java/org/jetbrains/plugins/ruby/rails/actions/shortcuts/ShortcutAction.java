@@ -20,7 +20,7 @@ import java.util.Map;
 
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.GeneratorsActionGroup;
@@ -54,7 +54,7 @@ public class ShortcutAction extends AnAction
 	private ShortcutsTreeState myState;
 	public Map<String, SimpleGeneratorAction> name2Action;
 
-	public ShortcutAction(@NotNull final String name, @NotNull final String cmd, final Icon icon, final ShortcutsTreeState state)
+	public ShortcutAction(@Nonnull final String name, @Nonnull final String cmd, final Icon icon, final ShortcutsTreeState state)
 	{
 		super(name, getDescription(state, cmd), icon);
 		myCmdName = cmd;
@@ -62,7 +62,7 @@ public class ShortcutAction extends AnAction
 		name2Action = GeneratorsActionGroup.createSpecialGeneratorActionsMap();
 	}
 
-	public static void unregisterInKeyMap(@NotNull final String actionId)
+	public static void unregisterInKeyMap(@Nonnull final String actionId)
 	{
 		final Keymap[] keymaps = (KeymapManagerEx.getInstanceEx()).getAllKeymaps();
 		for(Keymap keymap : keymaps)
@@ -115,7 +115,7 @@ public class ShortcutAction extends AnAction
 		}
 	}
 
-	public void registerInKeyMap(@NotNull final String actionId)
+	public void registerInKeyMap(@Nonnull final String actionId)
 	{
 		final PluginId id = PluginId.getId(RComponents.PLUGIN_ID);
 		ActionManager.getInstance().registerAction(actionId, this, id);

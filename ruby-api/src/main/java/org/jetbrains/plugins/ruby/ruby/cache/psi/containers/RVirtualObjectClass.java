@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,6 +27,6 @@ import org.jetbrains.annotations.NotNull;
 public interface RVirtualObjectClass extends RVirtualFieldContantContainer
 {
 
-	@NotNull
+	@Nonnull
 	public String getPresentableName();
 }

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RUntilStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
@@ -37,7 +37,7 @@ public class RUntilStatementImpl extends RConditionalStatementImpl implements RU
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{

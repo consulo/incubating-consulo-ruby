@@ -7,7 +7,7 @@ package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 
 /**
@@ -20,12 +20,12 @@ public class ExpectedMessages
 	private Set<String> myNames = new HashSet<String>();
 	private Set<Message> myExpectedMessages = new HashSet<Message>();
 
-	public void addRespondsTo(@NotNull final String name)
+	public void addRespondsTo(@Nonnull final String name)
 	{
 		myRespondsTo.add(name);
 	}
 
-	public void addMessage(@NotNull final Message message)
+	public void addMessage(@Nonnull final Message message)
 	{
 		final String name = message.getName();
 		if(!myRespondsTo.contains(name))
@@ -35,7 +35,7 @@ public class ExpectedMessages
 		}
 	}
 
-	public boolean containsName(@NotNull final String name)
+	public boolean containsName(@Nonnull final String name)
 	{
 		return myNames.contains(name);
 	}

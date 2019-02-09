@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -48,7 +48,7 @@ public class Children
 		myBaseChildren = children;
 	}
 
-	public void addSymbol(@NotNull final Symbol symbol)
+	public void addSymbol(@Nonnull final Symbol symbol)
 	{
 		synchronized(LOCK)
 		{
@@ -56,7 +56,7 @@ public class Children
 		}
 	}
 
-	public void addSymbols(@NotNull final Collection<Symbol> collection)
+	public void addSymbols(@Nonnull final Collection<Symbol> collection)
 	{
 		for(Symbol symbol : collection)
 		{
@@ -64,13 +64,13 @@ public class Children
 		}
 	}
 
-	public void addChildren(@NotNull final Children children)
+	public void addChildren(@Nonnull final Children children)
 	{
 		addSymbols(children.getAll());
 	}
 
 
-	@NotNull
+	@Nonnull
 	public List<Symbol> getAll()
 	{
 		final ArrayList<Symbol> all = new ArrayList<Symbol>();
@@ -78,7 +78,7 @@ public class Children
 		return all;
 	}
 
-	protected void addAll(@NotNull final List<Symbol> list)
+	protected void addAll(@Nonnull final List<Symbol> list)
 	{
 		ProgressManager.getInstance().checkCanceled();
 
@@ -93,7 +93,7 @@ public class Children
 	}
 
 	@Nullable
-	public Symbol getSymbolByNameAndTypes(@NotNull final String name, final TypeSet typeSet)
+	public Symbol getSymbolByNameAndTypes(@Nonnull final String name, final TypeSet typeSet)
 	{
 		// We don`t want to return something NOT_DEFINED, if something better can be found
 		Symbol foundSymbol = null;
@@ -107,13 +107,13 @@ public class Children
 		return foundSymbol;
 	}
 
-	@NotNull
-	public Children getSymbolsByNameAndTypes(@NotNull final String name, final TypeSet typeSet)
+	@Nonnull
+	public Children getSymbolsByNameAndTypes(@Nonnull final String name, final TypeSet typeSet)
 	{
 		return getChildrenByFilter(SymbolFilterFactory.createFilterByNameAndTypeSet(name, typeSet));
 	}
 
-	@NotNull
+	@Nonnull
 	public Children getSymbolsOfTypes(final TypeSet typeSet)
 	{
 		return getChildrenByFilter(SymbolFilterFactory.createFilterByTypeSet(typeSet));
@@ -124,14 +124,14 @@ public class Children
 		return !myList.isEmpty() || myBaseChildren != null && myBaseChildren.hasChildren();
 	}
 
-	public Children getChildrenByFilter(@NotNull final SymbolFilter filter)
+	public Children getChildrenByFilter(@Nonnull final SymbolFilter filter)
 	{
 		final Children children = new Children(null);
 		addChildrenByFilter(children, filter);
 		return children;
 	}
 
-	protected void addChildrenByFilter(@NotNull final Children children, @NotNull final SymbolFilter filter)
+	protected void addChildrenByFilter(@Nonnull final Children children, @Nonnull final SymbolFilter filter)
 	{
 		ProgressManager.getInstance().checkCanceled();
 		if(myBaseChildren != null)

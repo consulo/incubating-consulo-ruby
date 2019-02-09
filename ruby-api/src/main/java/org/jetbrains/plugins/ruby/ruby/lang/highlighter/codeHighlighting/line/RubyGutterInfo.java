@@ -22,8 +22,8 @@ import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiMethod;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -57,7 +57,7 @@ public class RubyGutterInfo extends RubyLineMarkerInfo
 	private String myToolTip;
 	private static final String NEWLINE_AND_SPACES = "<br>&nbsp;&nbsp;&nbsp;";
 
-	public RubyGutterInfo(final Mode mode, @NotNull final Project project, @NotNull final Symbol symbol, @NotNull final List elements, int startOffset)
+	public RubyGutterInfo(final Mode mode, @Nonnull final Project project, @Nonnull final Symbol symbol, @Nonnull final List elements, int startOffset)
 	{
 		super(startOffset, true);
 		myMode = mode;
@@ -134,7 +134,7 @@ public class RubyGutterInfo extends RubyLineMarkerInfo
 	private class MyGutterIconRenderer extends GutterIconRenderer
 	{
 		@Override
-		@NotNull
+		@Nonnull
 		public Image getIcon()
 		{
 			return myMode == Mode.OVERRIDE ? RubyIcons.RUBY_GUTTER_OVERRIDING : RubyIcons.RUBY_GUTTER_IMPLEMENTING;

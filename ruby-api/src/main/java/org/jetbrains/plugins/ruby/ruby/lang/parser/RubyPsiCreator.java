@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc.RAssocImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc.RAssocListImpl;
@@ -98,7 +98,7 @@ import com.intellij.psi.tree.IElementType;
 class RubyPsiCreator implements RubyElementTypes
 {
 
-	@NotNull
+	@Nonnull
 	public static PsiElement create(ASTNode node)
 	{
 		IElementType type = node.getElementType();

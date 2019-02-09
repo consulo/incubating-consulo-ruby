@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 import java.util.Collection;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 
 /**
@@ -31,20 +32,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  */
 public interface Scope
 {
-	@NotNull
+	@Nonnull
 	public PseudoScopeHolder getHolder();
 
-	@NotNull
+	@Nonnull
 	public Collection<ScopeVariable> getVariables();
 
-	void processIdentifier(@NotNull final RIdentifier identifier);
+	void processIdentifier(@Nonnull final RIdentifier identifier);
 
 	@Nullable
-	public ScopeVariable getVariableByName(@NotNull final String name);
+	public ScopeVariable getVariableByName(@Nonnull final String name);
 
-	@NotNull
+	@Nonnull
 	public Set<String> getScopeNames();
 
-	@NotNull
+	@Nonnull
 	public Collection<Scope> getSubScopes();
 }

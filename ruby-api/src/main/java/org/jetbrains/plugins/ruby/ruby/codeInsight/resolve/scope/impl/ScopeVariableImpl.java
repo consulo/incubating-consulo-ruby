@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -42,7 +43,7 @@ public class ScopeVariableImpl implements ScopeVariable
 	private RIdentifier myPrototype;
 	private Symbol mySymbol;
 
-	public ScopeVariableImpl(@NotNull final String name, @NotNull final RIdentifier element, final boolean isParameter)
+	public ScopeVariableImpl(@Nonnull final String name, @Nonnull final RIdentifier element, final boolean isParameter)
 	{
 		myName = name;
 		myPrototype = element;
@@ -50,14 +51,14 @@ public class ScopeVariableImpl implements ScopeVariable
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RIdentifier getPrototype()
 	{
 		return myPrototype;
@@ -72,7 +73,7 @@ public class ScopeVariableImpl implements ScopeVariable
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Symbol createSymbol()
 	{
 		if(mySymbol == null)
@@ -83,7 +84,7 @@ public class ScopeVariableImpl implements ScopeVariable
 	}
 
 	@Override
-	public RType getType(@Nullable final FileSymbol fileSymbol, @NotNull final RIdentifier usage)
+	public RType getType(@Nullable final FileSymbol fileSymbol, @Nonnull final RIdentifier usage)
 	{
 		final RControlFlowOwner controlFlowOwner = PsiTreeUtil.getParentOfType(myPrototype, RControlFlowOwner.class);
 		assert controlFlowOwner != null;

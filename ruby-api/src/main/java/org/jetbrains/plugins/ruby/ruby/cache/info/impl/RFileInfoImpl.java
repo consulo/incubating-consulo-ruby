@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.info.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
@@ -46,14 +46,14 @@ public class RFileInfoImpl implements RFileInfo
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Project getProject()
 	{
 		return myProject;
 	}
 
 	@Override
-	public void setProject(@NotNull Project project)
+	public void setProject(@Nonnull Project project)
 	{
 		myProject = project;
 	}
@@ -65,7 +65,7 @@ public class RFileInfoImpl implements RFileInfo
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getUrl()
 	{
 		return myUrl;
@@ -79,13 +79,13 @@ public class RFileInfoImpl implements RFileInfo
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RVirtualFile getRVirtualFile()
 	{
 		return myVirtualFile;
 	}
 
-	public void setRVirtualFile(@NotNull final RVirtualFile virtualFile)
+	public void setRVirtualFile(@Nonnull final RVirtualFile virtualFile)
 	{
 		myVirtualFile = virtualFile;
 	}

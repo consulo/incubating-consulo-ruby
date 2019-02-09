@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
@@ -41,7 +42,7 @@ public class RAssocListImpl extends RPsiElementBase implements RAssocList
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Hash), Context.INSTANCE, true);

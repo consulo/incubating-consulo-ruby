@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RGlobalVarHolder;
@@ -42,7 +43,7 @@ public class RGlobalVarHolderUtil
 	 * @param list      List of GlobalVars, already found
 	 * @param globalVar constant expression to add
 	 */
-	private static void addDefinition(@NotNull final List<GlobalVarDefinition> list, @NotNull final RGlobalVariable globalVar)
+	private static void addDefinition(@Nonnull final List<GlobalVarDefinition> list, @Nonnull final RGlobalVariable globalVar)
 	{
 		for(GlobalVarDefinition f : list)
 		{
@@ -55,7 +56,7 @@ public class RGlobalVarHolderUtil
 		list.add(new GlobalVarDefinitionImpl(globalVar));
 	}
 
-	@NotNull
+	@Nonnull
 	public static List<GlobalVarDefinition> gatherGlobalVarDefinitions(final RGlobalVarHolder holder)
 	{
 		final ArrayList<GlobalVarDefinition> list = new ArrayList<GlobalVarDefinition>();

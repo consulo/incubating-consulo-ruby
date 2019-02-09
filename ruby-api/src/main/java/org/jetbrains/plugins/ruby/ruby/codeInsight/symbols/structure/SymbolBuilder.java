@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -76,7 +77,7 @@ public class SymbolBuilder
 	}
 
 
-	public SymbolBuilder(@NotNull final FileSymbol fileSymbol, @NotNull final RVirtualFile file, final InterpretationMode mode)
+	public SymbolBuilder(@Nonnull final FileSymbol fileSymbol, @Nonnull final RVirtualFile file, final InterpretationMode mode)
 	{
 		myFileSymbol = fileSymbol;
 		myMode = mode;
@@ -106,7 +107,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void process(@NotNull final RVirtualElement virtualElement, @NotNull final Symbol symbol, final Context context)
+	private void process(@Nonnull final RVirtualElement virtualElement, @Nonnull final Symbol symbol, final Context context)
 	{
 		if(virtualElement instanceof RVirtualFieldHolder)
 		{
@@ -214,7 +215,7 @@ public class SymbolBuilder
 		}
 	}
 
-	public void registerContainerSymbol(@NotNull final RVirtualContainer container, @NotNull final Symbol symbol)
+	public void registerContainerSymbol(@Nonnull final RVirtualContainer container, @Nonnull final Symbol symbol)
 	{
 		myFileSymbol.registerContainerSymbol(container, symbol);
 	}
@@ -223,7 +224,7 @@ public class SymbolBuilder
 	//// Processing virtual containers
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	private void processModule(@NotNull final RVirtualModule rVirtualModule, @NotNull final Symbol symbol)
+	private void processModule(@Nonnull final RVirtualModule rVirtualModule, @Nonnull final Symbol symbol)
 	{
 		final List<String> path = rVirtualModule.getFullPath();
 		final Symbol moduleSymbol = SymbolCoreUtil.create(myFileSymbol, symbol, path, rVirtualModule.isGlobal(), Type.MODULE, rVirtualModule);
@@ -231,7 +232,7 @@ public class SymbolBuilder
 		process(rVirtualModule, moduleSymbol, Context.INSTANCE);
 	}
 
-	private void processClass(@NotNull final RVirtualClass rVirtualClass, @NotNull final Symbol symbol)
+	private void processClass(@Nonnull final RVirtualClass rVirtualClass, @Nonnull final Symbol symbol)
 	{
 		// creating superclass
 		Symbol superClassSymbol = null;
@@ -253,7 +254,7 @@ public class SymbolBuilder
 		process(rVirtualClass, classSymbol, Context.INSTANCE);
 	}
 
-	private void processObjectClass(@NotNull final RVirtualObjectClass rVirtualObjectClass, @NotNull final Symbol symbol)
+	private void processObjectClass(@Nonnull final RVirtualObjectClass rVirtualObjectClass, @Nonnull final Symbol symbol)
 	{
 		final String name = rVirtualObjectClass.getName();
 		final Symbol objectToAdd = SymbolCoreUtil.find(myFileSymbol, symbol, Arrays.asList(name), false, true, Types.MODULE_OR_CLASS);
@@ -270,7 +271,7 @@ public class SymbolBuilder
 		process(rVirtualObjectClass, objectToAdd, Context.CLASS);
 	}
 
-	private void processSingletonMethod(@NotNull final RVirtualSingletonMethod rVirtualSingletonMethod, @NotNull final Symbol symbol)
+	private void processSingletonMethod(@Nonnull final RVirtualSingletonMethod rVirtualSingletonMethod, @Nonnull final Symbol symbol)
 	{
 		final List<String> path = rVirtualSingletonMethod.getFullPath();
 		final Symbol singletonMethodSymbol;
@@ -292,7 +293,7 @@ public class SymbolBuilder
 		process(rVirtualSingletonMethod, singletonMethodSymbol, Context.INSTANCE);
 	}
 
-	private void processMethod(@NotNull final RVirtualMethod rVirtualMethod, @NotNull final Symbol symbol, final Context context)
+	private void processMethod(@Nonnull final RVirtualMethod rVirtualMethod, @Nonnull final Symbol symbol, final Context context)
 	{
 		final String name = rVirtualMethod.getName();
 		final Type type = context == Context.INSTANCE && !RMethod.INITIALIZE.equals(name) ? Type.INSTANCE_METHOD : Type.CLASS_METHOD;
@@ -303,7 +304,7 @@ public class SymbolBuilder
 		process(rVirtualMethod, methodSymbol, Context.INSTANCE);
 	}
 
-	private void addParameters(@NotNull final RVirtualMethod method, @NotNull final Symbol symbol)
+	private void addParameters(@Nonnull final RVirtualMethod method, @Nonnull final Symbol symbol)
 	{
 		for(ArgumentInfo arg : method.getArgumentInfos())
 		{
@@ -312,7 +313,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processField(@NotNull final RVirtualField field, @NotNull final Symbol symbol, final Context context)
+	private void processField(@Nonnull final RVirtualField field, @Nonnull final Symbol symbol, final Context context)
 	{
 		if(field.getType() == FieldType.CLASS_VARIABLE && context == Context.CLASS)
 		{
@@ -335,17 +336,17 @@ public class SymbolBuilder
 		myFileSymbol.addChild(symbol, new Symbol(myFileSymbol, field.getName(), type, symbol, field));
 	}
 
-	private void processGlobalVar(@NotNull final RVirtualGlobalVar var, @NotNull final Symbol symbol)
+	private void processGlobalVar(@Nonnull final RVirtualGlobalVar var, @Nonnull final Symbol symbol)
 	{
 		myFileSymbol.addChild(symbol, new Symbol(myFileSymbol, var.getText(), Type.GLOBAL_VARIABLE, symbol, var));
 	}
 
-	private void processConstant(@NotNull final RVirtualConstant constant, @NotNull final Symbol symbol)
+	private void processConstant(@Nonnull final RVirtualConstant constant, @Nonnull final Symbol symbol)
 	{
 		myFileSymbol.addChild(symbol, new Symbol(myFileSymbol, constant.getName(), Type.CONSTANT, symbol, constant));
 	}
 
-	private void processIncludeOrExtend(@NotNull final RVirtualInclude include, @NotNull final Symbol symbol)
+	private void processIncludeOrExtend(@Nonnull final RVirtualInclude include, @Nonnull final Symbol symbol)
 	{
 		final Type type = include.getType() == StructureType.CALL_INCLUDE ? Type.INCLUDE : Type.EXTEND;
 		for(RVirtualName path : include.getNames())
@@ -359,7 +360,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processFieldAttr(@NotNull final RVirtualFieldAttr fieldAttr, @NotNull final Symbol symbol)
+	private void processFieldAttr(@Nonnull final RVirtualFieldAttr fieldAttr, @Nonnull final Symbol symbol)
 	{
 		final FieldAttrType type = fieldAttr.getFieldAttrType();
 		for(String name : fieldAttr.getNames())
@@ -409,7 +410,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processAlias(@NotNull final RVirtualAlias alias, @NotNull final Symbol symbol)
+	private void processAlias(@Nonnull final RVirtualAlias alias, @Nonnull final Symbol symbol)
 	{
 		// Searching in parent!
 		final Symbol original = SymbolCoreUtil.find(myFileSymbol, symbol, Arrays.asList(alias.getOldName()), false, true, Types.ALIAS_OBJECTS);
@@ -428,7 +429,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processRequireOrLoad(@NotNull final RVirtualRequire require, @NotNull final Symbol symbol, @NotNull final InterpretationMode mode)
+	private void processRequireOrLoad(@Nonnull final RVirtualRequire require, @Nonnull final Symbol symbol, @Nonnull final InterpretationMode mode)
 	{
 
 		for(String name : require.getNames())
@@ -450,7 +451,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processImportJavaClass(@NotNull final RVirtualImportJavaClass importJavaClass, @NotNull final Symbol symbol)
+	private void processImportJavaClass(@Nonnull final RVirtualImportJavaClass importJavaClass, @Nonnull final Symbol symbol)
 	{
 		final Symbol context = SymbolUtil.getClassModuleFileSymbol(symbol);
 		LOG.assertTrue(context != null, "Context cannot be null");
@@ -464,7 +465,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processIncludeJavaClass(@NotNull final RVirtualIncludeJavaClass includeJavaClass, @NotNull final Symbol symbol)
+	private void processIncludeJavaClass(@Nonnull final RVirtualIncludeJavaClass includeJavaClass, @Nonnull final Symbol symbol)
 	{
 		final Symbol context = SymbolUtil.getClassModuleFileSymbol(symbol);
 		LOG.assertTrue(context != null, "Context cannot be null");
@@ -476,7 +477,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processIncludeJavaPackage(@NotNull final RVirtualIncludeJavaPackage includeJavaPackage, @NotNull final Symbol symbol)
+	private void processIncludeJavaPackage(@Nonnull final RVirtualIncludeJavaPackage includeJavaPackage, @Nonnull final Symbol symbol)
 	{
 		final Symbol context = SymbolUtil.getClassModuleFileSymbol(symbol);
 		LOG.assertTrue(context != null, "Context cannot be null");
@@ -491,7 +492,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private Symbol findJRubyOrRuby(@NotNull final Symbol symbol, @NotNull final RVirtualElement prototype, @NotNull final RVirtualName path, final TypeSet typeSet)
+	private Symbol findJRubyOrRuby(@Nonnull final Symbol symbol, @Nonnull final RVirtualElement prototype, @Nonnull final RVirtualName path, final TypeSet typeSet)
 	{
 		final List<String> fullPath = path.getPath();
 		// Try to find JRuby
@@ -505,7 +506,7 @@ public class SymbolBuilder
 		return includeSymbol;
 	}
 
-	private void addPrototypeIfNeeded(@NotNull final Symbol symbol, @NotNull final RVirtualElement element)
+	private void addPrototypeIfNeeded(@Nonnull final Symbol symbol, @Nonnull final RVirtualElement element)
 	{
 		if(symbol.getType() == Type.NOT_DEFINED)
 		{

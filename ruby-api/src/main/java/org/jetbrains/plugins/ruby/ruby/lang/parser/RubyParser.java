@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.PROGRAM;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
@@ -38,8 +38,8 @@ public class RubyParser implements PsiParser
 	private static final Logger LOG = Logger.getInstance(RubyParser.class.getName());
 
 	@Override
-	@NotNull
-	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion)
+	@Nonnull
+	public ASTNode parse(@Nonnull final IElementType root, @Nonnull final PsiBuilder builder, LanguageVersion languageVersion)
 	{
 
 		final RBuilder rBuilder = createBuilder(builder);
@@ -59,7 +59,7 @@ public class RubyParser implements PsiParser
 		return rBuilder.getTreeBuilt();
 	}
 
-	protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder)
+	protected RBuilderImpl createBuilder(@Nonnull final PsiBuilder builder)
 	{
 		return new RBuilderImpl(builder);
 	}

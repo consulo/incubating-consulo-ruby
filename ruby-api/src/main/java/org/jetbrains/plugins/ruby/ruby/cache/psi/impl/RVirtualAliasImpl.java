@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -26,6 +26,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import java.io.Serializable;
 
@@ -40,7 +41,7 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
 	private String myOldName;
 	private String myNewName;
 
-	public RVirtualAliasImpl(final RVirtualContainer container, @NotNull final String oldName, @NotNull final String newName)
+	public RVirtualAliasImpl(final RVirtualContainer container, @Nonnull final String oldName, @Nonnull final String newName)
 	{
 		super(container);
 		myOldName = oldName;
@@ -48,14 +49,14 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getOldName()
 	{
 		return myOldName;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getNewName()
 	{
 		return myNewName;
@@ -68,7 +69,7 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualAlias(this);
 	}
@@ -79,7 +80,7 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableText()
 	{
 		return RubyTokenTypes.kALIAS.toString() + " '" + getNewName() + "' '" + getOldName() + "'";

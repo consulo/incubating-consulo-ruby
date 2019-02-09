@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.actions.generators;
 
 import java.util.HashSet;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +34,7 @@ public class GeneratorOptions
 	{
 	}
 
-	public void setOption(@NotNull final Option option, boolean value)
+	public void setOption(@Nonnull final Option option, boolean value)
 	{
 		if(value)
 		{

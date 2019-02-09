@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl.RootScopeImpl;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl.ScopeImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RAssignmentExpressionNavigator;
@@ -41,7 +41,7 @@ import com.intellij.psi.PsiElement;
 public class ScopeBuilder
 {
 
-	public static RootScope buildScope(@NotNull final ScopeHolder holder)
+	public static RootScope buildScope(@Nonnull final ScopeHolder holder)
 	{
 		final RootScope rootScope = new RootScopeImpl(holder);
 		//noinspection unchecked
@@ -50,7 +50,7 @@ public class ScopeBuilder
 		return rootScope;
 	}
 
-	public static Scope buildScope(@NotNull final RootScope root, @NotNull final Set<String> outerNames, @NotNull final PseudoScopeHolder holder, final boolean isRoot)
+	public static Scope buildScope(@Nonnull final RootScope root, @Nonnull final Set<String> outerNames, @Nonnull final PseudoScopeHolder holder, final boolean isRoot)
 	{
 		final Scope scope = isRoot ? root : new ScopeImpl(holder);
 		final ScopeVisitor scopeVisitor = new ScopeVisitor();
@@ -81,7 +81,7 @@ public class ScopeBuilder
 		private List<RIdentifier> candidates = new ArrayList<RIdentifier>();
 
 		@Override
-		public void visitRIdentifier(@NotNull final RIdentifier rIdentifier)
+		public void visitRIdentifier(@Nonnull final RIdentifier rIdentifier)
 		{
 			if(rIdentifier.isParameter() ||
 					RAssignmentExpressionNavigator.getAssignmentByLeftPart(rIdentifier) != null ||
@@ -92,7 +92,7 @@ public class ScopeBuilder
 		}
 
 		@Override
-		public void visitRBlockVariables(@NotNull final RBlockVariables blockVariables)
+		public void visitRBlockVariables(@Nonnull final RBlockVariables blockVariables)
 		{
 			for(RIdentifier identifier : blockVariables.getVariables())
 			{
@@ -101,7 +101,7 @@ public class ScopeBuilder
 		}
 
 		@Override
-		public void visitElement(@NotNull final PsiElement element)
+		public void visitElement(@Nonnull final PsiElement element)
 		{
 			if(element instanceof PseudoScopeHolder)
 			{
@@ -111,13 +111,13 @@ public class ScopeBuilder
 			element.acceptChildren(this);
 		}
 
-		@NotNull
+		@Nonnull
 		public List<PseudoScopeHolder> getSubHolders()
 		{
 			return subHolders;
 		}
 
-		@NotNull
+		@Nonnull
 		public List<RIdentifier> getCandidates()
 		{
 			return candidates;

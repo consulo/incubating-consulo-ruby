@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.RFieldResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -58,7 +58,7 @@ public class RFieldAttrReference implements RPsiPolyvariantReference
 	private final String myName;
 
 
-	public RFieldAttrReference(@NotNull final RCall call, @NotNull final PsiElement element, @NotNull final RFieldHolder holder)
+	public RFieldAttrReference(@Nonnull final RCall call, @Nonnull final PsiElement element, @Nonnull final RFieldHolder holder)
 	{
 		myCall = call;
 		myHolder = holder;
@@ -145,7 +145,7 @@ public class RFieldAttrReference implements RPsiPolyvariantReference
 		return rename(myElement, newName);
 	}
 
-	private PsiElement rename(final PsiElement element, @NotNull final String newName) throws IncorrectOperationException
+	private PsiElement rename(final PsiElement element, @Nonnull final String newName) throws IncorrectOperationException
 	{
 		if(element instanceof RBaseString)
 		{
@@ -187,7 +187,7 @@ public class RFieldAttrReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException
 	{
 		return null;
 	}
@@ -212,21 +212,21 @@ public class RFieldAttrReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getRefValue()
 	{
 		return myElement;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		throw new UnsupportedOperationException("multiResolveToSymbols is not implemented in org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFieldAttrReference");
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		final FileSymbol fileSymbol = ((RPsiElementBase) myCall).forceFileSymbolUpdate();

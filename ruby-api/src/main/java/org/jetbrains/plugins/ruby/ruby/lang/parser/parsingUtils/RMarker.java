@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.psi.tree.IElementType;
 
 /**
@@ -31,7 +31,7 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface RMarker
 {
-	@NotNull
+	@Nonnull
 	public RMarker precede();
 
 	public void drop();

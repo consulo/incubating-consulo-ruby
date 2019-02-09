@@ -18,9 +18,10 @@ package org.jetbrains.plugins.ruby.addins.rspec;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -55,7 +56,7 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
 	@NonNls
 	private static final String RSPEC_MODULE_SETTINGS_STORAGE_ID = "RSPEC_MODULE_SETTINGS_STORAGE_ID";
 
-	public static RSpecModuleSettingsStorage getInstance(@NotNull final Module module)
+	public static RSpecModuleSettingsStorage getInstance(@Nonnull final Module module)
 	{
 		return ModuleServiceManager.getService(module, RSpecModuleSettingsStorage.class);
 	}
@@ -72,7 +73,7 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
 	}
 
 	@Override
-	public void loadState(@NotNull final Element elem)
+	public void loadState(@Nonnull final Element elem)
 	{
 		//readExternal
 		final Map<String, String> optionsByName = buildOptionsByElement(elem);

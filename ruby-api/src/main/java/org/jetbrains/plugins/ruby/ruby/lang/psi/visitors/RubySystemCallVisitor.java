@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.visitors;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
 import com.intellij.psi.PsiElement;
@@ -33,7 +34,7 @@ import com.intellij.psi.PsiElement;
 public abstract class RubySystemCallVisitor extends RubyElementVisitor
 {
 	@Override
-	public void visitRCall(@NotNull final RCall rCall)
+	public void visitRCall(@Nonnull final RCall rCall)
 	{
 		// require command
 		if(rCall.getCallType() == RubyCallType.RAISE_CALL)
@@ -147,93 +148,93 @@ public abstract class RubySystemCallVisitor extends RubyElementVisitor
 	///////////// Methods to ovveride //////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void visitRaiseCall(@NotNull final RCall rCall)
+	public void visitRaiseCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitRequireCall(@NotNull final RCall rCall)
+	public void visitRequireCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitLoadCall(@NotNull final RCall rCall)
+	public void visitLoadCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitIncludeCall(@NotNull final RCall rCall)
+	public void visitIncludeCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitExtendCall(@NotNull final RCall rCall)
+	public void visitExtendCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitAttrAccessorCall(@NotNull final RCall rCall)
+	public void visitAttrAccessorCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitAttrInternalCall(@NotNull final RCall rCall)
+	public void visitAttrInternalCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitCAttrAccessorCall(@NotNull final RCall rCall)
+	public void visitCAttrAccessorCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitAttrWriterCall(@NotNull final RCall rCall)
+	public void visitAttrWriterCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitAttrReaderCall(@NotNull final RCall rCall)
+	public void visitAttrReaderCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitPublicCall(@NotNull final RCall rCall)
+	public void visitPublicCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitProtectedCall(@NotNull final RCall rCall)
+	public void visitProtectedCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitPrivateCall(@NotNull final RCall rCall)
+	public void visitPrivateCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitImportClassCall(@NotNull final RCall rCall)
+	public void visitImportClassCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitIncludeClassCall(@NotNull final RCall rCall)
+	public void visitIncludeClassCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitIncludePackageCall(@NotNull final RCall rCall)
+	public void visitIncludePackageCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
-	public void visitGemCall(@NotNull final RCall rCall)
+	public void visitGemCall(@Nonnull final RCall rCall)
 	{
 		visitElement(rCall);
 	}
 
 	@Override
-	public void visitElement(@NotNull final PsiElement element)
+	public void visitElement(@Nonnull final PsiElement element)
 	{
 		element.acceptChildren(this);
 	}

@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
@@ -57,7 +59,7 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
 	protected abstract PsiReference createReference();
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		final String text = getText();
@@ -68,10 +70,10 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
 	@Nullable
 	abstract protected String getPrefix();
 
-	protected abstract void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException;
+	protected abstract void checkName(@NonNls @Nonnull final String newName) throws IncorrectOperationException;
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull final String newName) throws IncorrectOperationException
+	public PsiElement setName(@NonNls @Nonnull final String newName) throws IncorrectOperationException
 	{
 		// We shouldn`t do anything if name is the same
 		if(newName.equals(getName()))
@@ -88,7 +90,7 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);

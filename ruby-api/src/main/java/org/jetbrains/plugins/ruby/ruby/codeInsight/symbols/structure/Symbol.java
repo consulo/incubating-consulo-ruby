@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -48,17 +48,17 @@ public class Symbol
 	private Symbol myRootSymbol;
 
 
-	public Symbol(@NotNull final Project project, @Nullable final String name, @NotNull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	public Symbol(@Nonnull final Project project, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
 	{
 		this(project, null, name, type, parent, prototype);
 	}
 
-	public Symbol(@NotNull final FileSymbol fileSymbol, @Nullable final String name, @NotNull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	public Symbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
 	{
 		this(fileSymbol.getProject(), fileSymbol, name, type, parent, prototype);
 	}
 
-	private Symbol(@NotNull final Project project, @Nullable final FileSymbol fileSymbol, @Nullable final String name, @NotNull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	private Symbol(@Nonnull final Project project, @Nullable final FileSymbol fileSymbol, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
 	{
 		myId = currentID++;
 		myProject = project;
@@ -81,13 +81,13 @@ public class Symbol
 		return myName;
 	}
 
-	@NotNull
+	@Nonnull
 	public Type getType()
 	{
 		return myType;
 	}
 
-	public void setType(@NotNull final Type type)
+	public void setType(@Nonnull final Type type)
 	{
 		myType = type;
 	}
@@ -102,14 +102,14 @@ public class Symbol
 		return myId;
 	}
 
-	@NotNull
+	@Nonnull
 	public Symbol getLinkedSymbol()
 	{
 		return this;
 	}
 
 
-	@NotNull
+	@Nonnull
 	public Project getProject()
 	{
 		return myProject;
@@ -127,7 +127,7 @@ public class Symbol
 		return myRootSymbol;
 	}
 
-	public void setRootSymbol(@NotNull final Symbol rootSymbol)
+	public void setRootSymbol(@Nonnull final Symbol rootSymbol)
 	{
 		assert myType == Type.FILE;
 		myRootSymbol = rootSymbol;
@@ -140,19 +140,19 @@ public class Symbol
 		return fileSymbol != null ? fileSymbol.getLastVirualPrototype(this) : null;
 	}
 
-	@NotNull
+	@Nonnull
 	public Prototypes getVirtualPrototypes(@Nullable final FileSymbol fileSymbol)
 	{
 		return fileSymbol != null ? fileSymbol.getVirtualPrototypes(this) : Prototypes.EMPTY_PROTOTYPES;
 	}
 
-	@NotNull
+	@Nonnull
 	public Children getChildren(@Nullable final FileSymbol fileSymbol)
 	{
 		return fileSymbol != null ? fileSymbol.getChildren(this) : Children.EMPTY_CHILDREN;
 	}
 
-	public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml)
+	public String toString(@Nonnull final FileSymbol fileSymbol, final boolean useHtml)
 	{
 		final StringBuilder builder = new StringBuilder();
 		builder.append("[").append(myId).append("] ");

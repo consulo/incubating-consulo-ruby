@@ -24,8 +24,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaReferencesBuilder;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
@@ -53,6 +53,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
 import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,14 +72,14 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RubyCallType getCallType()
 	{
 		return RCallBaseUtil.getCallType(this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getPsiCommand()
 	{
 		final PsiElement command = getFirstChild();
@@ -87,7 +88,7 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiReference[] getReferences()
 	{
 		final RubyCallType callType = getCallType();
@@ -163,7 +164,7 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RListOfExpressions getCallArguments()
 	{
 		//noinspection ConstantConditions
@@ -171,14 +172,14 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getCommand()
 	{
 		return getPsiCommand().getText();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RPsiElement> getArguments()
 	{
 		return getCallArguments().getElements();
@@ -186,7 +187,7 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RVirtualStructuralElement createVirtualCopy(@Nullable RVirtualContainer container, @Nullable RFileInfo info)
 	{
 		final StructureType type = getType();
@@ -258,7 +259,7 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
 	{
 		final StructureType myType = getType();
 		if(myType == StructureType.FAKE)
@@ -380,7 +381,7 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(getProject());

@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.ConstantAccess;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
@@ -23,7 +23,7 @@ public class ConstantAccessImpl extends AbstractReferenceAccess implements Const
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RConstant getConstant()
 	{
 		return (RConstant) myValue;

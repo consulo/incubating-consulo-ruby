@@ -21,14 +21,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.annotation.Nonnull;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
@@ -170,7 +170,7 @@ public class RubyRunConfigurationUIUtil
 		myAlternativeSdksComboBox.setModel(new DefaultComboBoxModel(foundSdks.toArray(new Sdk[foundSdks.size()])));
 	}
 
-	public static FileChooserDescriptor addFolderChooser(@NotNull final String title, @NotNull final TextFieldWithBrowseButton textField, final Project project)
+	public static FileChooserDescriptor addFolderChooser(@Nonnull final String title, @Nonnull final TextFieldWithBrowseButton textField, final Project project)
 	{
 		final FileChooserDescriptor folderChooserDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
 		folderChooserDescriptor.setTitle(title);
@@ -178,7 +178,7 @@ public class RubyRunConfigurationUIUtil
 		return folderChooserDescriptor;
 	}
 
-	public static FileChooserDescriptor addFileChooser(@NotNull final String title, @NotNull final TextFieldWithBrowseButton textField, @Nullable final Project project)
+	public static FileChooserDescriptor addFileChooser(@Nonnull final String title, @Nonnull final TextFieldWithBrowseButton textField, @Nullable final Project project)
 	{
 		final FileChooserDescriptor fileChooserDescriptor = FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor();
 		fileChooserDescriptor.setTitle(title);

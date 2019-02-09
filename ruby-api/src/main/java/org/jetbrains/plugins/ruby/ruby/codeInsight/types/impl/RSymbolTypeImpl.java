@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
@@ -40,7 +40,7 @@ public class RSymbolTypeImpl extends RTypeBase implements RSymbolType
 	private DuckType myDuckType;
 	private Symbol mySymbol;
 
-	public RSymbolTypeImpl(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, final Context context, final boolean inReference)
+	public RSymbolTypeImpl(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, final Context context, final boolean inReference)
 	{
 		// TODO[oleg]: OPTIMIZE! Don`t use ducktype
 		mySymbol = symbol;
@@ -53,7 +53,7 @@ public class RSymbolTypeImpl extends RTypeBase implements RSymbolType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<Message> getMessages()
 	{
 		return myDuckType.getMessages();

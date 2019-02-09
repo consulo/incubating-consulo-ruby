@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -48,7 +49,7 @@ public class SYMBOL implements RubyTokenTypes
 					| string
 					;
 	*/
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(builder.compare(tSYMBEG))

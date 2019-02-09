@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.COMPSTMT;
@@ -44,7 +45,7 @@ public class OPT_RESCUE implements RubyTokenTypes
             ;
 */
 
-	@NotNull
+	@Nonnull
 	private static IElementType parseEXC_LIST(final RBuilder builder)
 	{
 		IElementType result = MRHS.parse(builder);
@@ -87,7 +88,7 @@ public class OPT_RESCUE implements RubyTokenTypes
             ;
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();

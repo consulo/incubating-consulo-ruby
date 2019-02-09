@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -47,20 +47,20 @@ import com.intellij.psi.util.PsiTreeUtil;
  */
 public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
 {
-	public RPsiElementBase(@NotNull final ASTNode astNode)
+	public RPsiElementBase(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Language getLanguage()
 	{
 		return RubyFileType.INSTANCE.getLanguage();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return getText();
@@ -72,14 +72,14 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
 	}
 
 	@Override
-	public PsiElement replace(@NotNull PsiElement element)
+	public PsiElement replace(@Nonnull PsiElement element)
 	{
 		RubyPsiUtil.replaceInParent(this, element);
 		return element;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<PsiElement> getChildrenByFilter(IElementType filter)
 	{
 		return RubyPsiUtil.getChildrenByFilter(this, filter);
@@ -101,7 +101,7 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public <T extends PsiElement> List<T> getChildrenByType(Class<T> c)
 	{
 		return RubyPsiUtil.getChildrenByType(this, c);
@@ -128,7 +128,7 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitElement(this);
 	}

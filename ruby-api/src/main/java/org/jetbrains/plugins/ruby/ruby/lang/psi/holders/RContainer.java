@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeHolder;
@@ -36,7 +36,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
 public interface RContainer extends RVirtualContainer, RPsiElement, ScopeHolder, RControlFlowOwner, RStructuralElement
 {
 
-	@NotNull
+	@Nonnull
 	public List<RStructuralElement> getStructureElements();
 
 	/**
@@ -44,7 +44,7 @@ public interface RContainer extends RVirtualContainer, RPsiElement, ScopeHolder,
 	 */
 	@Override
 	@SuppressWarnings({"JavaDoc"})
-	@NotNull
-	public abstract RVirtualContainer createVirtualCopy(@Nullable final RVirtualContainer container, @NotNull final RFileInfo info);
+	@Nonnull
+	public abstract RVirtualContainer createVirtualCopy(@Nullable final RVirtualContainer container, @Nonnull final RFileInfo info);
 
 }

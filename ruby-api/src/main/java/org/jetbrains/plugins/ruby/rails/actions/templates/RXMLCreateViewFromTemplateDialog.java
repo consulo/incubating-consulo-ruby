@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.fileTypes.FileType;
@@ -35,7 +35,7 @@ import com.intellij.util.IncorrectOperationException;
 public class RXMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDialog
 {
 
-	public RXMLCreateViewFromTemplateDialog(@NotNull final Project project, @NotNull final PsiDirectory directory, @NotNull final FileTemplate template)
+	public RXMLCreateViewFromTemplateDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory, @Nonnull final FileTemplate template)
 	{
 		super(project, directory, template);
 	}

@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
@@ -43,7 +44,7 @@ public class RListOfExpressionsImpl extends RPsiElementBase implements RListOfEx
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RPsiElement> getElements()
 	{
 		LinkedList<RPsiElement> elements = new LinkedList<RPsiElement>();
@@ -67,7 +68,7 @@ public class RListOfExpressionsImpl extends RPsiElementBase implements RListOfEx
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{

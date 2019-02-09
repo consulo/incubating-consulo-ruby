@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Prototypes;
@@ -35,7 +35,7 @@ public class CallSymbol extends Symbol
 	protected Prototypes myPrototypes;
 	protected RPsiElement myElement;
 
-	public CallSymbol(@Nullable String name, final Type type, @NotNull final RPsiElement element)
+	public CallSymbol(@Nullable String name, final Type type, @Nonnull final RPsiElement element)
 	{
 		super(element.getProject(), name, type, null, null);
 		myElement = element;
@@ -50,7 +50,7 @@ public class CallSymbol extends Symbol
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Prototypes getVirtualPrototypes(@Nullable final FileSymbol fileSymbol)
 	{
 		return myPrototypes;

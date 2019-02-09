@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
+import javax.annotation.Nonnull;
+
 import consulo.psi.PsiPackage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JavaPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -44,8 +46,8 @@ import com.intellij.psi.PsiType;
  */
 public class JRubyDuckTypeUtil
 {
-	@NotNull
-	public static Children getChildrenByJavaClass(@Nullable final FileSymbol fileSymbol, @Nullable final PsiClass clazzz, @NotNull final Context context)
+	@Nonnull
+	public static Children getChildrenByJavaClass(@Nullable final FileSymbol fileSymbol, @Nullable final PsiClass clazzz, @Nonnull final Context context)
 	{
 		final Children children = new Children(null);
 
@@ -119,7 +121,7 @@ public class JRubyDuckTypeUtil
 		return children;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Children getChildrenByJavaPackage(@Nullable final FileSymbol fileSymbol, @Nullable final PsiJavaPackage packaggge)
 	{
 		final Children children = new Children(null);
@@ -143,18 +145,18 @@ public class JRubyDuckTypeUtil
 	}
 
 
-	@NotNull
-	public static Children getChildrenByJavaMethod(@Nullable final FileSymbol fileSymbol, @NotNull final PsiMethod method)
+	@Nonnull
+	public static Children getChildrenByJavaMethod(@Nullable final FileSymbol fileSymbol, @Nonnull final PsiMethod method)
 	{
 		return getChildrenByPsiType(fileSymbol, method.getReturnType());
 	}
 
-	public static Children getChildrenByJavaField(@Nullable final FileSymbol fileSymbol, @NotNull final PsiField psiField)
+	public static Children getChildrenByJavaField(@Nullable final FileSymbol fileSymbol, @Nonnull final PsiField psiField)
 	{
 		return getChildrenByPsiType(fileSymbol, psiField.getType());
 	}
 
-	@NotNull
+	@Nonnull
 	public static Children getChildrenByPsiType(@Nullable final FileSymbol fileSymbol, @Nullable final PsiType type)
 	{
 		if(type instanceof PsiClassType)
@@ -186,8 +188,8 @@ public class JRubyDuckTypeUtil
 		return Children.EMPTY_CHILDREN;
 	}
 
-	@NotNull
-	public static Children getChildrenByRubyCoreType(@Nullable final FileSymbol fileSymbol, @NotNull final String coreTypeName)
+	@Nonnull
+	public static Children getChildrenByRubyCoreType(@Nullable final FileSymbol fileSymbol, @Nonnull final String coreTypeName)
 	{
 		final Symbol array = SymbolUtil.getTopLevelClassByName(fileSymbol, coreTypeName);
 		return array != null ? array.getChildren(fileSymbol) : Children.EMPTY_CHILDREN;

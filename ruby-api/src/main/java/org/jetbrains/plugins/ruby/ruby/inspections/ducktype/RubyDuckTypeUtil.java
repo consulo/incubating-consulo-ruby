@@ -21,7 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.MessageImpl;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.Access;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.CallAccess;
@@ -45,7 +46,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  */
 public class RubyDuckTypeUtil
 {
-	public static List<ExpectedMessages> getMethodRequiredTypes(@NotNull final RMethod method)
+	public static List<ExpectedMessages> getMethodRequiredTypes(@Nonnull final RMethod method)
 	{
 		// TODO[oleg]: add stubs method arguments notations
 		final Map<String, ExpectedMessages> map = getTypeOfParameters(method);
@@ -67,7 +68,7 @@ public class RubyDuckTypeUtil
 	/*
 	 * creates required types for method
 	 */
-	private static Map<String, ExpectedMessages> getTypeOfParameters(@NotNull final RMethod method)
+	private static Map<String, ExpectedMessages> getTypeOfParameters(@Nonnull final RMethod method)
 	{
 		final HashMap<String, ExpectedMessages> map = new HashMap<String, ExpectedMessages>();
 		// Fill map with argsInfo

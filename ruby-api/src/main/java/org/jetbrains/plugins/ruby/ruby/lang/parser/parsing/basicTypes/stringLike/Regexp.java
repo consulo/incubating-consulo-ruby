@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
@@ -39,7 +39,7 @@ public class Regexp implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return Result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return StringParsingUtil.parse(builder, tREGEXP_ENDS, BNF.tREGEXP_TOKENS);

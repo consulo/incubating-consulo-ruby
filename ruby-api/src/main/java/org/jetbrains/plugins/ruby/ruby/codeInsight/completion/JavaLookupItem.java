@@ -26,7 +26,7 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.ui.RowIcon;
 import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
 
 import javax.swing.*;
@@ -44,19 +44,19 @@ public class JavaLookupItem implements RubyLookupItem, PresentableLookupValue, L
 	private PsiElement myElement;
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myLookupString;
 	}
 
-	public JavaLookupItem(@NotNull final String name, @NotNull final PsiElement element)
+	public JavaLookupItem(@Nonnull final String name, @Nonnull final PsiElement element)
 	{
 		myLookupString = name;
 		myElement = element;
 	}
 
-	public JavaLookupItem(@NotNull final PsiElement element)
+	public JavaLookupItem(@Nonnull final PsiElement element)
 	{
 		if(element instanceof PsiNamedElement)
 		{
@@ -70,7 +70,7 @@ public class JavaLookupItem implements RubyLookupItem, PresentableLookupValue, L
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentation()
 	{
 		return myLookupString;

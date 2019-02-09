@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 
@@ -27,13 +27,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable
  */
 public interface GlobalVarDefinition
 {
-	@NotNull
+	@Nonnull
 	public RGlobalVariable getFirstDefinition();
 
-	public void process(@NotNull RGlobalVariable constant);
+	public void process(@Nonnull RGlobalVariable constant);
 
-	@NotNull
+	@Nonnull
 	public String getText();
 
-	public boolean isFor(@NotNull RVirtualGlobalVar constant);
+	public boolean isFor(@Nonnull RVirtualGlobalVar constant);
 }

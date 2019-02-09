@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -43,7 +43,7 @@ class MatchingExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseLowPriority(builder);
@@ -56,7 +56,7 @@ class MatchingExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseLowPriority(final RBuilder builder)
 	{
 		return parseLowPriorityWithLeadHigh(builder, builder.mark(), parseHighPriority(builder));
@@ -70,13 +70,13 @@ class MatchingExpression implements RubyTokenTypes
 	 * @param result  result of high priority match parsed
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseLowPriorityWithLeadHigh(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return parseHighPriority(builder);
@@ -93,7 +93,7 @@ class MatchingExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseHighPriority(final RBuilder builder)
 	{
 		return parseHighPriorityWithLeadBitExpr(builder, builder.mark(), BitExpression.parse(builder));
@@ -107,13 +107,13 @@ class MatchingExpression implements RubyTokenTypes
 	 * @param result  Result of bit expr parsed
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseHighPriorityWithLeadBitExpr(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return BitExpression.parse(builder);

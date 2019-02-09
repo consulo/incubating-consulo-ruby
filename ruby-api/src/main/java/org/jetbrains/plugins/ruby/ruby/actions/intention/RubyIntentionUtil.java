@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
@@ -28,7 +29,7 @@ import com.intellij.psi.PsiFile;
  */
 public class RubyIntentionUtil
 {
-	public static boolean isAvailable(@NotNull final Editor editor, @NotNull final PsiFile psiFile)
+	public static boolean isAvailable(@Nonnull final Editor editor, @Nonnull final PsiFile psiFile)
 	{
 		return editor.getDocument().isWritable() && psiFile.getLanguage() instanceof RubyLanguage;
 	}

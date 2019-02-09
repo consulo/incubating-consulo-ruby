@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 
@@ -27,13 +28,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
  */
 public interface ConstantDefinitions
 {
-	@NotNull
+	@Nonnull
 	public RConstant getFirstDefinition();
 
-	public void process(@NotNull RConstant constant);
+	public void process(@Nonnull RConstant constant);
 
-	@NotNull
+	@Nonnull
 	public String getName();
 
-	public boolean isFor(@NotNull RVirtualConstant constant);
+	public boolean isFor(@Nonnull RVirtualConstant constant);
 }

@@ -23,7 +23,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
@@ -78,7 +78,7 @@ public class GenerateDialogs
 		 * @return GeneratorPanel
 		 */
 		@Override
-		@NotNull
+		@Nonnull
 		protected GeneratorPanel createGeneratorContent()
 		{
 			return new ActionPanel(((ActionInputValidator) myValidator).getRelativePath());
@@ -107,7 +107,7 @@ public class GenerateDialogs
 		 * @return GeneratorPanel
 		 */
 		@Override
-		@NotNull
+		@Nonnull
 		protected GeneratorPanel createGeneratorContent()
 		{
 			final BaseRailsFacetConfiguration configuration = RailsFacetUtil.getRailsFacetConfiguration(myModule);
@@ -129,7 +129,7 @@ public class GenerateDialogs
 		private final Ref<Output> helpData = new Ref<Output>();
 		private GeneratorPanel myGenerateDialogContent;
 
-		public GenerateDialog(@NotNull final Module module, final String title, final SimpleGeneratorInputValidator validator)
+		public GenerateDialog(@Nonnull final Module module, final String title, final SimpleGeneratorInputValidator validator)
 		{
 			super(module.getProject(), false);
 			myModule = module;
@@ -174,7 +174,7 @@ public class GenerateDialogs
 		 *
 		 * @return GeneratorPanel
 		 */
-		@NotNull
+		@Nonnull
 		protected GeneratorPanel createGeneratorContent()
 		{
 			return new SimpleGeneratorPanel();

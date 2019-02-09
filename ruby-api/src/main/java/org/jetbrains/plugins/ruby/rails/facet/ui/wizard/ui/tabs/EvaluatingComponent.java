@@ -25,8 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.util.Ref;
 import com.intellij.util.Function;
 import com.intellij.util.ui.AsyncProcessIcon;
@@ -48,7 +48,7 @@ public class EvaluatingComponent<T> extends JPanel
 	private JLabel myLoadingLabel;
 	private volatile boolean myIsRunning;
 
-	public EvaluatingComponent(@NotNull final JComponent originalComponent)
+	public EvaluatingComponent(@Nonnull final JComponent originalComponent)
 	{
 		myOriginalComponent = originalComponent;
 
@@ -79,7 +79,7 @@ public class EvaluatingComponent<T> extends JPanel
 	 * @param afterHandler     Function:(T)evaluated value -> null. Performs the result of action in EventDispatch Thread
 	 * @param loadingLabelText Text during loading
 	 */
-	public void setHanlders(@Nullable final Runnable beforeHandler, @Nullable final Function<Object, T> evaluatingFun, @Nullable final Function<T, Object> afterHandler, @NotNull final String loadingLabelText)
+	public void setHanlders(@Nullable final Runnable beforeHandler, @Nullable final Function<Object, T> evaluatingFun, @Nullable final Function<T, Object> afterHandler, @Nonnull final String loadingLabelText)
 	{
 		myBeforeLoadingHandler = beforeHandler;
 		myEvaluatingFun = evaluatingFun;

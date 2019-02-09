@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
@@ -42,13 +42,13 @@ import com.intellij.psi.ResolveResult;
  */
 public class JavaClassReference extends RQualifiedReference
 {
-	public JavaClassReference(@NotNull final Project project, @NotNull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @NotNull final PsiElement refValue)
+	public JavaClassReference(@Nonnull final Project project, @Nonnull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @Nonnull final PsiElement refValue)
 	{
 		super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.JAVA_CLASS);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected ResolveResult[] multiResolveInner(final boolean incompleteCode)
 	{
 		if(((RPsiElementBase) myWholeReference).isClassOrModuleName())

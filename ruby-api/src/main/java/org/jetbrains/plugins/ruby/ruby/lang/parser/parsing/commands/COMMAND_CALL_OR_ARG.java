@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -36,7 +37,7 @@ public class COMMAND_CALL_OR_ARG implements RubyTokenTypes
 {
 	private static final TokenSet TS_COMMAND_TOKENS = TokenSet.create(kRETURN, kBREAK, kNEXT, kYIELD);
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import com.intellij.psi.tree.IElementType;
 
@@ -28,10 +28,10 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface RBinaryExpression extends RExpression
 {
-	@NotNull
+	@Nonnull
 	public IElementType getOperationType();
 
-	@NotNull
+	@Nonnull
 	public RPsiElement getLeftOperand();
 
 	@Nullable

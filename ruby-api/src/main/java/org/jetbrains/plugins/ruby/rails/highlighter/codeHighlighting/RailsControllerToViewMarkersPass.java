@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToView;
@@ -79,7 +80,7 @@ public class RailsControllerToViewMarkersPass extends ElementsStartsAtRangeHighl
 		}
 	}
 
-	private void addActionViewInfo(@NotNull final Collection<RailsLineMarkerInfo> viewMarkers, @NotNull final RContainer methodOrClass)
+	private void addActionViewInfo(@Nonnull final Collection<RailsLineMarkerInfo> viewMarkers, @Nonnull final RContainer methodOrClass)
 	{
 
 		if(SwitchToView.isSwitchToViewEnabled(methodOrClass, myModule))

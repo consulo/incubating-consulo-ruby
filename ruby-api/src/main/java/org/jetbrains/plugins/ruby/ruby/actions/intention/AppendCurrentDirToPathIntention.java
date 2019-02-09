@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -45,21 +46,21 @@ public class AppendCurrentDirToPathIntention extends RequirePathIntention
 	private static final String TEXT = RBundle.message("ruby.intentions.append.cur.dir.to.path");
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFamilyName()
 	{
 		return NAME;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getText()
 	{
 		return TEXT;
 	}
 
 	@Override
-	public void invoke(@NotNull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException
+	public void invoke(@Nonnull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException
 	{
 		final RBaseString myString = RBaseStringNavigator.getByPsiElement(getElementAt(psiFile, editor));
 		if(myString == null)
@@ -79,7 +80,7 @@ public class AppendCurrentDirToPathIntention extends RequirePathIntention
 	}
 
 	@Override
-	public boolean isAvailable(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiFile psiFile)
+	public boolean isAvailable(@Nonnull final Project project, @Nonnull final Editor editor, @Nonnull final PsiFile psiFile)
 	{
 		if(!RubyIntentionUtil.isAvailable(editor, psiFile))
 		{
@@ -90,7 +91,7 @@ public class AppendCurrentDirToPathIntention extends RequirePathIntention
 		return string != null && !string.hasExpressionSubstitutions() && canIntent(string);
 	}
 
-	protected boolean canIntent(@NotNull final RBaseString string)
+	protected boolean canIntent(@Nonnull final RBaseString string)
 	{
 		// If parent is MathBinExpr and string is LeftOperand.
 		// e.g :

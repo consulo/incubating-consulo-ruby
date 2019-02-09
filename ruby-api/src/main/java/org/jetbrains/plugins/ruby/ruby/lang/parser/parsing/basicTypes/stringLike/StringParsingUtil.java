@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -135,7 +136,7 @@ class StringParsingUtil implements RubyTokenTypes
 	 * @param type DuckType of the beginning token
 	 * @return Returns type of a string like object by it`s beginning
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType getType(final IElementType type)
 	{
 		if(type == tDOUBLE_QUOTED_STRING_BEG)

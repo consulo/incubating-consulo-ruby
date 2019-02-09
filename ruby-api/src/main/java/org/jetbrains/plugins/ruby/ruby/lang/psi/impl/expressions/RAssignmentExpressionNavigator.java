@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RMultiAssignmentExpression;
@@ -33,7 +34,7 @@ import com.intellij.psi.PsiElement;
 public class RAssignmentExpressionNavigator
 {
 	@Nullable
-	public static RAssignmentExpression getAssignmentByLeftPart(@NotNull final PsiElement element)
+	public static RAssignmentExpression getAssignmentByLeftPart(@Nonnull final PsiElement element)
 	{
 		PsiElement parent = element.getParent();
 		if(parent instanceof RAssignmentExpression &&

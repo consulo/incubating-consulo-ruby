@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -31,8 +33,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
@@ -94,7 +94,7 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams
 	//System Environment
 	protected EnvironmentVariablesComponent myEnvVariablesComponent;
 
-	public RSpecRunConfigurationForm(@NotNull final Project project, @NotNull final RSpecRunConfiguration configuration)
+	public RSpecRunConfigurationForm(@Nonnull final Project project, @Nonnull final RSpecRunConfiguration configuration)
 	{
 		myProject = project;
 		myConfiguration = configuration;
@@ -380,7 +380,7 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams
 	}
 
 	@Override
-	public void setTestType(@NotNull final TestType testType)
+	public void setTestType(@Nonnull final TestType testType)
 	{
 		clearTestTypeSettings(testType);
 

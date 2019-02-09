@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
@@ -60,7 +60,7 @@ public class RTernaryExpressionImpl extends RPsiElementBase implements RTernaryE
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RPsiElement trueCommand = getTrueCommand();

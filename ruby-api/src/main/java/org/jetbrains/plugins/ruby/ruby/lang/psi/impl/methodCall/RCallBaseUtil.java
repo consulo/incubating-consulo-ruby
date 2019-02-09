@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualNameImpl;
@@ -42,8 +42,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 public class RCallBaseUtil
 {
 
-	@NotNull
-	public static RubyCallType getCallType(@NotNull final RCall call)
+	@Nonnull
+	public static RubyCallType getCallType(@Nonnull final RCall call)
 	{
 		final String command = call.getCommand();
 		if(RCall.REQUIRE_COMMAND.equals(command))
@@ -125,7 +125,7 @@ public class RCallBaseUtil
 		return RubyCallType.UNKNOWN;
 	}
 
-	public static StructureType getType(@NotNull final RCall call)
+	public static StructureType getType(@Nonnull final RCall call)
 	{
 		final RubyCallType callType = call.getCallType();
 		if(callType == RubyCallType.REQUIRE_CALL)
@@ -166,7 +166,7 @@ public class RCallBaseUtil
 	/*
 	 * returns fieldAttr by CallType
 	 */
-	public static FieldAttrType getFieldAttrType(@NotNull final RCall call)
+	public static FieldAttrType getFieldAttrType(@Nonnull final RCall call)
 	{
 		final RubyCallType callType = getCallType(call);
 		if(callType == RubyCallType.ATTR_ACCESSOR_CALL)
@@ -195,7 +195,7 @@ public class RCallBaseUtil
 	/*
 	 * Gathers virtual names. Used in include, extend
 	 */
-	public static List<RVirtualName> gatherVirtualNames(@NotNull final RCall call)
+	public static List<RVirtualName> gatherVirtualNames(@Nonnull final RCall call)
 	{
 		final ArrayList<RVirtualName> includes = new ArrayList<RVirtualName>();
 		for(RPsiElement include : call.getArguments())
@@ -209,7 +209,7 @@ public class RCallBaseUtil
 	/*
 	 * Gathers possible urls. Used in require, load
 	 */
-	public static List<String> gatherUrls(@NotNull final RCall call, @Nullable final VirtualFile file)
+	public static List<String> gatherUrls(@Nonnull final RCall call, @Nullable final VirtualFile file)
 	{
 		final ArrayList<String> requires = new ArrayList<String>();
 		for(RPsiElement require : call.getArguments())
@@ -222,7 +222,7 @@ public class RCallBaseUtil
 	/*
 	 * Gathers strings and symbols. Used in field attr calls
 	 */
-	public static List<String> gatherStrings(@NotNull final RCall call)
+	public static List<String> gatherStrings(@Nonnull final RCall call)
 	{
 		final ArrayList<String> names = new ArrayList<String>();
 		for(RPsiElement arg : call.getArguments())

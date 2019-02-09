@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.util.TextRange;
@@ -37,7 +38,7 @@ public class RubyHighlightUtil
 	 * @param element PsiElement to get start offset
 	 * @return Start Offset of given element
 	 */
-	public static int getStartOffset(@NotNull final PsiElement element)
+	public static int getStartOffset(@Nonnull final PsiElement element)
 	{
 		return element.getTextRange().getStartOffset();
 	}
@@ -48,7 +49,7 @@ public class RubyHighlightUtil
 	 * @param editor Editor to get visible area
 	 * @return TextRange - the visible area
 	 */
-	public static TextRange getVisibleRange(@NotNull final Editor editor)
+	public static TextRange getVisibleRange(@Nonnull final Editor editor)
 	{
 		final Rectangle rect = editor.getScrollingModel().getVisibleArea();
 		final LogicalPosition startPosition = editor.xyToLogicalPosition(new Point(rect.x, rect.y));

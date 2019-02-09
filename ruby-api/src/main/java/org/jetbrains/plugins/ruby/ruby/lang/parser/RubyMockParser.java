@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import consulo.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
@@ -35,8 +35,8 @@ import com.intellij.psi.tree.IElementType;
 public class RubyMockParser implements PsiParser
 {
 	@Override
-	@NotNull
-	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, LanguageVersion languageVersion)
+	@Nonnull
+	public ASTNode parse(@Nonnull final IElementType root, @Nonnull final PsiBuilder builder, LanguageVersion languageVersion)
 	{
 		List<IElementType> lexems = new ArrayList<IElementType>();
 		final PsiBuilder.Marker marker = builder.mark();

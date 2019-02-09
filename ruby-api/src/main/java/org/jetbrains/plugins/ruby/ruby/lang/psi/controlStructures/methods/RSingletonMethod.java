@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructureElement;

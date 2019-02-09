@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
@@ -54,8 +54,8 @@ public class RHTMLFormattingModelBuilder implements FormattingModelBuilder
 	private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class.getName());
 
 	@Override
-	@NotNull
-	public FormattingModel createModel(@NotNull final PsiElement element, final CodeStyleSettings settings)
+	@Nonnull
+	public FormattingModel createModel(@Nonnull final PsiElement element, final CodeStyleSettings settings)
 	{
 		final PsiFile psiFile = element.getContainingFile();
 

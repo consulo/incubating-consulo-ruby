@@ -16,12 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
 import consulo.ui.image.ImageEffects;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -35,7 +36,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
  */
 public class RFieldAttrPresentationUtil implements RubyIcons
 {
-	public static Image getAttrIcon(@NotNull final FieldAttrType fieldAttrType)
+	public static Image getAttrIcon(@Nonnull final FieldAttrType fieldAttrType)
 	{
 		Image mainIcon = null;
 		if(fieldAttrType != FieldAttrType.ATTR_INTERNAL && fieldAttrType != FieldAttrType.CATTR_ACCESSOR)
@@ -49,7 +50,7 @@ public class RFieldAttrPresentationUtil implements RubyIcons
 		return ImageEffects.layered(mainIcon, getFieldAttrIcon(fieldAttrType));
 	}
 
-	private static Image getFieldAttrIcon(@NotNull final FieldAttrType fieldAttrType)
+	private static Image getFieldAttrIcon(@Nonnull final FieldAttrType fieldAttrType)
 	{
 		if(fieldAttrType == FieldAttrType.ATTR_ACCESSOR)
 		{
@@ -62,8 +63,8 @@ public class RFieldAttrPresentationUtil implements RubyIcons
 		return RUBY_ATTR_READER;
 	}
 
-	@NotNull
-	public static String getFieldAttrText(@NotNull final FieldAttrType fieldAttrType)
+	@Nonnull
+	public static String getFieldAttrText(@Nonnull final FieldAttrType fieldAttrType)
 	{
 		if(fieldAttrType == FieldAttrType.ATTR_ACCESSOR)
 		{
@@ -84,15 +85,15 @@ public class RFieldAttrPresentationUtil implements RubyIcons
 		return RCall.ATTR_WRITER_COMMAND;
 	}
 
-	@NotNull
-	public static ItemPresentation getPresentation(@NotNull final RCallBase rCall)
+	@Nonnull
+	public static ItemPresentation getPresentation(@Nonnull final RCallBase rCall)
 	{
 		assert rCall.getCallType().isAttributeCall();
 		final Image icon = getAttrIcon(rCall.getFieldAttrType());
 		return new PresentationData(rCall.getText(), TextUtil.wrapInParens(getLocation(rCall)), TargetAWT.to(icon), null);
 	}
 
-	public static String getLocation(@NotNull final RCall call)
+	public static String getLocation(@Nonnull final RCall call)
 	{
 		return RContainerPresentationUtil.getLocation(call);
 	}

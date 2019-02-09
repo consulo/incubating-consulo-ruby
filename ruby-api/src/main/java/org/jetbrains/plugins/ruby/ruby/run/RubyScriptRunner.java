@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -63,7 +63,7 @@ public class RubyScriptRunner
 	 * @param scriptName system script name
 	 * @return true if script or script.bat or script.sh can be found in ruby sdk bin folder
 	 */
-	public static boolean isSystemScriptValid(@NotNull final Sdk sdk, @NotNull final String scriptName)
+	public static boolean isSystemScriptValid(@Nonnull final Sdk sdk, @Nonnull final String scriptName)
 	{
 		return getSystemScriptCommand(sdk, scriptName, false) != null;
 	}
@@ -81,8 +81,8 @@ public class RubyScriptRunner
 	 * @param arguments        Script arguments
 	 * @return Output
 	 */
-	@NotNull
-	public static Output runRubyScript(@Nullable final Sdk sdk, @Nullable final Project project, @NotNull final String scriptPath, @Nullable final String workingDir, @NotNull final Runner.ExecutionMode mode, final boolean showStdErrErrors, @Nullable final String errorTitle, @NotNull final String... arguments)
+	@Nonnull
+	public static Output runRubyScript(@Nullable final Sdk sdk, @Nullable final Project project, @Nonnull final String scriptPath, @Nullable final String workingDir, @Nonnull final Runner.ExecutionMode mode, final boolean showStdErrErrors, @Nullable final String errorTitle, @Nonnull final String... arguments)
 	{
 
 		try
@@ -106,7 +106,7 @@ public class RubyScriptRunner
 	}
 
 
-	public static Output runSystemCommand(@NotNull final Sdk sdk, @Nullable final String additionalPath, @Nullable final String workingDirectory, @NotNull final String... arguments)
+	public static Output runSystemCommand(@Nonnull final Sdk sdk, @Nullable final String additionalPath, @Nullable final String workingDirectory, @Nonnull final String... arguments)
 	{
 		try
 		{
@@ -135,7 +135,7 @@ public class RubyScriptRunner
 	 * @param sdk                   Ruby/JRuby Sdk
 	 * @param project               Idea Project
 	 */
-	public static void runRubyScriptInCosole(@Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String consoleTitle, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory, @Nullable final String workingDir, @Nullable final Sdk sdk, @NotNull final Project project)
+	public static void runRubyScriptInCosole(@Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String consoleTitle, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory, @Nullable final String workingDir, @Nullable final Sdk sdk, @Nonnull final Project project)
 	{
 
 		try
@@ -153,7 +153,7 @@ public class RubyScriptRunner
 		ConsoleRunner.run(project, processListener, consoleFilters, userActions, runInBackgroundThread, consoleTitle, workingDir, new RubyScriptRunnerArgumentsProvider(params, provider, null), descFactory);
 	}
 
-	@NotNull
+	@Nonnull
 	public static String[] getVMDefaultParams(Sdk sdk)
 	{
 		final String[] params = (JRubySdkType.isJRubySDK(sdk)) ? new String[1] : new String[RubyUtil.RUN_IN_CONSOLE_HACK_ARGUMENTS.length + 1];
@@ -176,7 +176,7 @@ public class RubyScriptRunner
 	 * @param scriptArgs   script arguments
 	 * @return Out object
 	 */
-	@NotNull
+	@Nonnull
 	public static Output runScriptFromSource(final String rubyExe, final String[] rubyArgs, final String scriptSource, final String[] scriptArgs)
 	{
 		Output result = null;
@@ -263,7 +263,7 @@ public class RubyScriptRunner
 	 * @return true if script or script.bat or script.sh can be found in ruby sdk bin folder
 	 */
 	@Nullable
-	public static String[] getSystemScriptCommand(@Nullable final Sdk sdk, @NotNull final String scriptName, final boolean showErrMsg)
+	public static String[] getSystemScriptCommand(@Nullable final Sdk sdk, @Nonnull final String scriptName, final boolean showErrMsg)
 	{
 		try
 		{
@@ -313,7 +313,7 @@ public class RubyScriptRunner
 	 * @param path Path to check
 	 * @return true, if path exists
 	 */
-	private static boolean checkIfPathExists(@NotNull final String path)
+	private static boolean checkIfPathExists(@Nonnull final String path)
 	{
 		File file = new File(path);
 		return file.exists() && file.isFile();

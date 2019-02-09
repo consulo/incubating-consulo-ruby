@@ -20,9 +20,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.run.RailsScriptRunner;
@@ -107,8 +110,8 @@ public class PluginsUtil
 		return parameters.toArray(new String[parameters.size()]);
 	}
 
-	@NotNull
-	private static String pathToCmdLinePathFormat(@NotNull final String scriptPath)
+	@Nonnull
+	private static String pathToCmdLinePathFormat(@Nonnull final String scriptPath)
 	{
 		final String formatedStr = scriptPath.replace(VirtualFileUtil.VFS_PATH_SEPARATOR, File.separatorChar);
 		if(formatedStr.contains(" "))

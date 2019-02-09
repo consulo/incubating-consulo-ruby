@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -65,8 +66,8 @@ public class RVirtualUtil
 	 * @param fileInfo RFileInfo for realFile
 	 * @return RVirtualContainer instance
 	 */
-	@NotNull
-	public static RVirtualFile createBy(@NotNull final RFile realFile, @NotNull final RFileInfo fileInfo)
+	@Nonnull
+	public static RVirtualFile createBy(@Nonnull final RFile realFile, @Nonnull final RFileInfo fileInfo)
 	{
 		return realFile.createVirtualCopy(null, fileInfo);
 	}
@@ -101,7 +102,7 @@ public class RVirtualUtil
 		}
 	}
 
-	public static List<RVirtualField> getVirtualFields(@NotNull final RVirtualContainer container, @NotNull final RFieldHolder holder)
+	public static List<RVirtualField> getVirtualFields(@Nonnull final RVirtualContainer container, @Nonnull final RFieldHolder holder)
 	{
 		List<RVirtualField> fields = new ArrayList<RVirtualField>();
 		for(FieldDefinition fieldUsages : holder.getFieldsDefinitions())
@@ -111,7 +112,7 @@ public class RVirtualUtil
 		return fields;
 	}
 
-	public static void addVirtualConstants(@NotNull final RVirtualContainer container, @NotNull final RConstantHolder holder)
+	public static void addVirtualConstants(@Nonnull final RVirtualContainer container, @Nonnull final RConstantHolder holder)
 	{
 		final List<RVirtualConstant> constants = getVirtualConstants(container, holder);
 
@@ -149,7 +150,7 @@ public class RVirtualUtil
 	}
 
 
-	public static void addVirtualGlobalVars(@NotNull final RVirtualContainer container, @NotNull final RGlobalVarHolder holder)
+	public static void addVirtualGlobalVars(@Nonnull final RVirtualContainer container, @Nonnull final RGlobalVarHolder holder)
 	{
 		final List<RVirtualGlobalVar> vars = getVirtualGlobalVars(container, holder);
 
@@ -180,14 +181,14 @@ public class RVirtualUtil
 	 * @param container Root container
 	 * @return List of RVirtualStructuralElements
 	 */
-	public static List<RVirtualStructuralElement> gatherAllStructuralElement(@NotNull final RVirtualContainer container)
+	public static List<RVirtualStructuralElement> gatherAllStructuralElement(@Nonnull final RVirtualContainer container)
 	{
 		final ArrayList<RVirtualStructuralElement> list = new ArrayList<RVirtualStructuralElement>();
 		gatherAllStructuralElementRec(container, list);
 		return list;
 	}
 
-	private static void gatherAllStructuralElementRec(@NotNull final RVirtualStructuralElement element, @NotNull final ArrayList<RVirtualStructuralElement> list)
+	private static void gatherAllStructuralElementRec(@Nonnull final RVirtualStructuralElement element, @Nonnull final ArrayList<RVirtualStructuralElement> list)
 	{
 		list.add(element);
 		if(element instanceof RVirtualContainer)

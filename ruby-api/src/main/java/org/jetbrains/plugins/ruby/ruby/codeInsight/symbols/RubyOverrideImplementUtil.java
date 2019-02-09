@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
@@ -47,8 +48,8 @@ public class RubyOverrideImplementUtil
 	 * Gathers override virtual elements for given virtual element
 	 * returns list of RVirtualElement or PsiMethod
 	 */
-	@NotNull
-	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, @Nullable final RVirtualElement anchorElement)
+	@Nonnull
+	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nullable final RVirtualElement anchorElement)
 	{
 		return getOverridenElements(fileSymbol, symbol, anchorElement, getOverridenSymbols(fileSymbol, symbol));
 	}
@@ -58,8 +59,8 @@ public class RubyOverrideImplementUtil
 	 * returns list of RVirtualElement or PsiMethod
 	 */
 	@SuppressWarnings({"unchecked"})
-	@NotNull
-	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, @Nullable final RVirtualElement anchorElement, @NotNull final List<Symbol> overridenSymbols)
+	@Nonnull
+	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nullable final RVirtualElement anchorElement, @Nonnull final List<Symbol> overridenSymbols)
 	{
 		final ArrayList elements = new ArrayList();
 		// we should add all the prototypes of overriden symbols
@@ -93,8 +94,8 @@ public class RubyOverrideImplementUtil
 	/*
 	 * Gathers implemented Java methods
 	 */
-	@NotNull
-	public static List<PsiMethod> getImplementedJavaMethods(@NotNull final List<Symbol> overridenSymbols)
+	@Nonnull
+	public static List<PsiMethod> getImplementedJavaMethods(@Nonnull final List<Symbol> overridenSymbols)
 	{
 		final ArrayList<PsiMethod> implemented = new ArrayList<PsiMethod>();
 		// we should add all the prototypes of overriden symbols
@@ -121,7 +122,7 @@ public class RubyOverrideImplementUtil
 	 * @param method PsiMethod
 	 * @return true or false
 	 */
-	public static boolean isAbstract(@NotNull final PsiMethod method)
+	public static boolean isAbstract(@Nonnull final PsiMethod method)
 	{
 		return method.getModifierList().hasModifierProperty(PsiModifier.ABSTRACT) || method.getContainingClass().isInterface();
 	}
@@ -129,8 +130,8 @@ public class RubyOverrideImplementUtil
 	/*
 	 * Gathers override symbols for given symbol, e.g. overriden methods for methods
 	 */
-	@NotNull
-	public static List<Symbol> getOverridenSymbols(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol)
+	@Nonnull
+	public static List<Symbol> getOverridenSymbols(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
 	{
 		final Type type = symbol.getType();
 		final String name = symbol.getName();
@@ -171,7 +172,7 @@ public class RubyOverrideImplementUtil
 		return overridenSymbols;
 	}
 
-	public static String classMembersToString(@NotNull final List<ClassMember> list)
+	public static String classMembersToString(@Nonnull final List<ClassMember> list)
 	{
 		final StringBuilder builder = new StringBuilder();
 		for(ClassMember member : list)

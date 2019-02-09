@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -46,7 +47,7 @@ public class CALL_ARGS implements RubyTokenTypes
 		| COMMAND
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(!builder.compare(BNF.tCALL_ARG_FIRST_TOKEN))
@@ -69,7 +70,7 @@ public class CALL_ARGS implements RubyTokenTypes
 		ParsingMethod parsingMethod = new ParsingMethod()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parse(final RBuilder builder)
 			{
 				if(amperSeen.get())

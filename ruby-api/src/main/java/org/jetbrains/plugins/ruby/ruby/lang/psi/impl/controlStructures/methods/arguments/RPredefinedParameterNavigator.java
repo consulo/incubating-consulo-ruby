@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.arguments;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RPredefinedArgument;
 import com.intellij.psi.PsiElement;
 
@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 public class RPredefinedParameterNavigator
 {
 	@Nullable
-	public static RPredefinedArgument getByExp(@NotNull final PsiElement element)
+	public static RPredefinedArgument getByExp(@Nonnull final PsiElement element)
 	{
 		final PsiElement parent = element.getParent();
 		if(parent instanceof RPredefinedArgument)

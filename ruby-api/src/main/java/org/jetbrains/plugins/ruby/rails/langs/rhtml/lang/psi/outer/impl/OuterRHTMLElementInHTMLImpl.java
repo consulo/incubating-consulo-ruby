@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -42,7 +43,7 @@ public class OuterRHTMLElementInHTMLImpl extends LeafPsiElement implements Outer
 	}
 
 	@Override
-	public void accept(@NotNull final PsiElementVisitor visitor)
+	public void accept(@Nonnull final PsiElementVisitor visitor)
 	{
 		visitor.visitOuterLanguageElement(this);
 	}

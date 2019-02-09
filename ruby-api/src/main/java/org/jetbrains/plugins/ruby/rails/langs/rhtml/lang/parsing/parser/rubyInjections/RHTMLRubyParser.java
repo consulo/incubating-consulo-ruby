@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParser;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
 import com.intellij.lang.PsiBuilder;
@@ -31,7 +32,7 @@ public class RHTMLRubyParser extends RubyParser implements PsiParser
 {
 
 	@Override
-	protected RBuilderImpl createBuilder(@NotNull final PsiBuilder builder)
+	protected RBuilderImpl createBuilder(@Nonnull final PsiBuilder builder)
 	{
 		return new RHTMLRubyBuilder(builder);
 	}

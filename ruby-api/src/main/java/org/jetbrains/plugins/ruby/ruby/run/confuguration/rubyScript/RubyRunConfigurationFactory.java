@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -47,7 +47,7 @@ public class RubyRunConfigurationFactory extends ConfigurationFactory
 	}
 
 	@Override
-	public boolean isApplicable(@NotNull Project project)
+	public boolean isApplicable(@Nonnull Project project)
 	{
 		return ModuleExtensionHelper.getInstance(project).hasModuleExtension(RubyModuleExtension.class);
 	}

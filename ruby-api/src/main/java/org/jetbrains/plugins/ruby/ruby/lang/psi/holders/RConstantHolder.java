@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 
@@ -35,9 +36,9 @@ public interface RConstantHolder extends RContainer, RVirtualConstantHolder
 	 *
 	 * @return List of ConstantDefinitions objects
 	 */
-	@NotNull
+	@Nonnull
 	public List<ConstantDefinitions> getConstantDefinitions();
 
 	@Nullable
-	public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant);
+	public ConstantDefinitions getDefinition(@Nonnull final RVirtualConstant constant);
 }

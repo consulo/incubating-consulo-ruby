@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
 import java.io.Serializable;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
@@ -39,7 +40,7 @@ public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualFi
 	private RVirtualFieldHolder myHolder;
 	private FieldType myType;
 
-	public RVirtualFieldImpl(@NotNull final String name, @NotNull final RVirtualFieldHolder holder, final FieldType type)
+	public RVirtualFieldImpl(@Nonnull final String name, @Nonnull final RVirtualFieldHolder holder, final FieldType type)
 	{
 		myName = name;
 		myHolder = holder;
@@ -47,14 +48,14 @@ public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualFi
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RVirtualFieldHolder getHolder()
 	{
 		return myHolder;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName;
@@ -67,7 +68,7 @@ public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualFi
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitElement(this);
 	}
@@ -78,7 +79,7 @@ public class RVirtualFieldImpl extends RVirtualElementBase implements RVirtualFi
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getText()
 	{
 		return getPrefix() + myName;

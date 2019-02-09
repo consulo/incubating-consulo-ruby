@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
@@ -30,33 +31,33 @@ public class GlobalVarDefinitionImpl implements GlobalVarDefinition
 {
 	private RGlobalVariable myFirstDefinition;
 
-	public GlobalVarDefinitionImpl(@NotNull final RGlobalVariable globalVariable)
+	public GlobalVarDefinitionImpl(@Nonnull final RGlobalVariable globalVariable)
 	{
 		myFirstDefinition = globalVariable;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RGlobalVariable getFirstDefinition()
 	{
 		return myFirstDefinition;
 	}
 
 	@Override
-	public void process(@NotNull final RGlobalVariable globalVariable)
+	public void process(@Nonnull final RGlobalVariable globalVariable)
 	{
 		// do nothing
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getText()
 	{
 		return myFirstDefinition.getText();
 	}
 
 	@Override
-	public boolean isFor(@NotNull final RVirtualGlobalVar virtualGlobalVar)
+	public boolean isFor(@Nonnull final RVirtualGlobalVar virtualGlobalVar)
 	{
 		return getText().equals(virtualGlobalVar.getText());
 	}

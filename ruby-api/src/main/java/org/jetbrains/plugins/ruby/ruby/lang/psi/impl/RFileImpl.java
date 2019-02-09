@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -30,9 +30,9 @@ import com.intellij.psi.tree.IFileElementType;
 
 public class RFileImpl extends RPsiFileBase implements RFile
 {
-	@NotNull
+	@Nonnull
 	private Language myLanguage;
-	@NotNull
+	@Nonnull
 	private ParserDefinition myParserDefinition;
 
 	public RFileImpl(final FileViewProvider viewProvider)
@@ -49,7 +49,7 @@ public class RFileImpl extends RPsiFileBase implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public FileType getFileType()
 	{
 		return RubyFileType.INSTANCE;
@@ -61,7 +61,7 @@ public class RFileImpl extends RPsiFileBase implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public final Language getLanguage()
 	{
 		return myLanguage;

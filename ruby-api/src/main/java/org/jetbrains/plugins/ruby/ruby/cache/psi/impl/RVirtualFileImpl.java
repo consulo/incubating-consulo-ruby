@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
@@ -50,14 +50,14 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 	private List<RVirtualRequire> myRequires;
 	private List<RVirtualGlobalVar> myGlobalVars;
 
-	public RVirtualFileImpl(final String name, final String location, final RVirtualContainer parentContainer, final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	public RVirtualFileImpl(final String name, final String location, final RVirtualContainer parentContainer, final AccessModifier defaultChildAccessModifier, @Nonnull final RFileInfo containingFileInfo)
 	{
 		super(parentContainer, new RVirtualNameImpl(Arrays.asList(name), false), defaultChildAccessModifier, containingFileInfo);
 		myLocation = location;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public synchronized List<RVirtualRequire> getRequires()
 	{
 		if(myRequires == null)
@@ -78,7 +78,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 				}
 
 				@Override
-				public void visitRVirtualRequire(@NotNull final RVirtualRequire virtualRequire)
+				public void visitRVirtualRequire(@Nonnull final RVirtualRequire virtualRequire)
 				{
 					myRequires.add(virtualRequire);
 				}
@@ -96,7 +96,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RFilePresentationUtil.getPresentation(this);
@@ -109,7 +109,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualFile(this);
 	}
@@ -127,7 +127,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 	}
 
 	@Override
-	public void dump(@NotNull StringBuilder buffer, int indent)
+	public void dump(@Nonnull StringBuilder buffer, int indent)
 	{
 		super.dump(buffer, indent);
 		for(RVirtualGlobalVar var : myGlobalVars)
@@ -150,7 +150,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualGlobalVar> getVirtualGlobalVars()
 	{
 		return myGlobalVars;

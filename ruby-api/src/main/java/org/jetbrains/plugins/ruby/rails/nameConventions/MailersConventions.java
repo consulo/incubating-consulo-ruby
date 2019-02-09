@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.nameConventions;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -51,12 +51,12 @@ public class MailersConventions
 	private static final String ACTION_MAILER_BUILT_IN_GEMS_TMAIL = RailsConstants.ACTION_MAILER_BUILT_IN_GEMS_TMAIL_NAME;
 
 
-	public static boolean isMailerFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isMailerFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		return isModelFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isModelFile(@NotNull final RVirtualFile rFile, @Nullable final Module module, @NotNull final List<RVirtualClass> classes)
+	public static boolean isModelFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
 	{
 		if(module == null)
 		{
@@ -85,7 +85,7 @@ public class MailersConventions
 		return false;
 	}
 
-	public static boolean isMailerClass(@Nullable final RVirtualClass rClass, @NotNull final Module module)
+	public static boolean isMailerClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{
@@ -143,7 +143,7 @@ public class MailersConventions
 		return (path.size() == 2 && MailersConventions.ACTION_MAILER_MODULE.equals(path.get(0))) && MailersConventions.BASE_CLASS.equals(path.get(1));
 	}
 
-	public static void loadBuiltInGems(@Nullable final FileSymbol fileSymbol, @NotNull final InterpretationMode mode)
+	public static void loadBuiltInGems(@Nullable final FileSymbol fileSymbol, @Nonnull final InterpretationMode mode)
 	{
 		if(fileSymbol == null)
 		{

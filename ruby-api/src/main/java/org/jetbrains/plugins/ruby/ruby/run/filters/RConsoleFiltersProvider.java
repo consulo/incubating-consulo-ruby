@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.filters;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.filters.ConsoleFilterProvider;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
@@ -30,8 +31,8 @@ import com.intellij.openapi.project.Project;
 public class RConsoleFiltersProvider implements ConsoleFilterProvider
 {
 	@Override
-	@NotNull
-	public Filter[] getDefaultFilters(@NotNull final Project project)
+	@Nonnull
+	public Filter[] getDefaultFilters(@Nonnull final Project project)
 	{
 		return new Filter[]{new RStackTraceFilter(project)};
 	}

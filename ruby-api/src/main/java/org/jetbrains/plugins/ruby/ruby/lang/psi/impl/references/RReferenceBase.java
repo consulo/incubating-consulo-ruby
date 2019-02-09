@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.JavaClassReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.NewReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
@@ -62,7 +64,7 @@ public abstract class RReferenceBase extends RPsiElementBase implements RReferen
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -84,7 +86,7 @@ public abstract class RReferenceBase extends RPsiElementBase implements RReferen
 		return PsiTreeUtil.getPrevSiblingOfType(getDelimiter(), RPsiElement.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public abstract PsiElement getDelimiter();
 
 	@Override
@@ -109,7 +111,7 @@ public abstract class RReferenceBase extends RPsiElementBase implements RReferen
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		if(isConstructorLike())

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
@@ -37,9 +38,9 @@ public class RSpecApplicationSettings implements PersistentStateComponent<RSpecA
 	public boolean wizardRailsFacetIsRSpecEnabled = false;
 	public boolean wizardRailsFacetIsRSpecRailsEnabled = false;
 	public SrcType wizardRailsFacetRSpecPluginSrcType = SrcType.LATEST;
-	@NotNull
+	@Nonnull
 	public String wizardRailsFacetRSpecArgs = "";
-	@NotNull
+	@Nonnull
 	public String wizardRailsFacetRSpecRailsArgs = "";
 
 
@@ -55,7 +56,7 @@ public class RSpecApplicationSettings implements PersistentStateComponent<RSpecA
 	}
 
 	@Override
-	public void loadState(@NotNull final RSpecApplicationSettings settings)
+	public void loadState(@Nonnull final RSpecApplicationSettings settings)
 	{
 		//tests
 		wizardRubyShouldUseRSpecFramework = settings.wizardRubyShouldUseRSpecFramework;

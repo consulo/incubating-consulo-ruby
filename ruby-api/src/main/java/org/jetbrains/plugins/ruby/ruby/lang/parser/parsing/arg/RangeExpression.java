@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -42,7 +43,7 @@ class RangeExpression
 	 * @param builder current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseWithLeadBool(builder, builder.mark(), BooleanExpression.parse(builder));
@@ -56,13 +57,13 @@ class RangeExpression
 	 * @param result  result of Bool parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parseWithLeadBool(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return BooleanExpression.parse(builder);

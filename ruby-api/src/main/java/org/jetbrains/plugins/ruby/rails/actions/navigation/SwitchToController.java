@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -118,7 +119,7 @@ public class SwitchToController extends EditorAction
 	}
 
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	public static boolean isSwitchToControllerEnabled(@NotNull final PsiFile file, @NotNull final Module module)
+	public static boolean isSwitchToControllerEnabled(@Nonnull final PsiFile file, @Nonnull final Module module)
 	{
 		return ViewsConventions.isPartialViewName(file.getName()) && ControllersConventions.getControllerByViewFile(file, module) != null;
 	}

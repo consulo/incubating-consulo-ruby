@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -41,7 +41,7 @@ public class SimpleGeneratorInputValidator implements InputValidator
 	protected final PsiDirectory myDirectory;
 	protected final SimpleGeneratorAction myGeneratorAction;
 
-	public SimpleGeneratorInputValidator(@NotNull final SimpleGeneratorAction generatorAction, @NotNull final Module module, @Nullable final PsiDirectory directory)
+	public SimpleGeneratorInputValidator(@Nonnull final SimpleGeneratorAction generatorAction, @Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		myGeneratorAction = generatorAction;
 		myModule = module;

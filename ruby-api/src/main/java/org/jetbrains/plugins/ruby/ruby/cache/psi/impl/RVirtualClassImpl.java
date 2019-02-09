@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -41,7 +41,7 @@ public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl impleme
 
 	private RVirtualName myVirtualSuperClass;
 
-	public RVirtualClassImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName virtualName, @Nullable final RVirtualName virtualSuperClass, @NotNull final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	public RVirtualClassImpl(@Nonnull final RVirtualContainer parentContainer, @Nonnull final RVirtualName virtualName, @Nullable final RVirtualName virtualSuperClass, @Nonnull final AccessModifier defaultChildAccessModifier, @Nonnull final RFileInfo containingFileInfo)
 	{
 		super(parentContainer, virtualName, defaultChildAccessModifier, containingFileInfo);
 		myVirtualSuperClass = virtualSuperClass;
@@ -49,7 +49,7 @@ public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl impleme
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RClassPresentationUtil.getPresentation(this);
@@ -69,7 +69,7 @@ public class RVirtualClassImpl extends RVirtualFieldContantContainerImpl impleme
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualClass(this);
 	}

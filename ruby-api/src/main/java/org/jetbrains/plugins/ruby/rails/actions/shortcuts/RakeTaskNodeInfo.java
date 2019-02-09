@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
+import javax.annotation.Nonnull;
+
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -43,7 +44,7 @@ public class RakeTaskNodeInfo extends NodeInfo<RakeTaskSerializableImpl>
 		return new RakeTaskNodeInfo(RailsIcons.RAKE_TASKS_ROOT_ICON, task, true);
 	}
 
-	public static RakeTaskNodeInfo createTaskNode(@NotNull final String name, @NotNull final RakeTaskSerializableImpl parentTask, final boolean isGroup)
+	public static RakeTaskNodeInfo createTaskNode(@Nonnull final String name, @Nonnull final RakeTaskSerializableImpl parentTask, final boolean isGroup)
 	{
 		final String parentCmd = parentTask.getFullCommand();
 		String fullCmd = name;

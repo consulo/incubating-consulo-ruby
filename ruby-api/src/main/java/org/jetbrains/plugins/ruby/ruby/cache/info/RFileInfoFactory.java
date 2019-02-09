@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.info;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.impl.RFileInfoImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
@@ -45,7 +45,7 @@ public class RFileInfoFactory
 	 *         or null if file cannot be found or isn`t ruby file
 	 */
 	@Nullable
-	public static RFileInfo createRFileInfo(@NotNull final Project project, @NotNull final VirtualFile file)
+	public static RFileInfo createRFileInfo(@Nonnull final Project project, @Nonnull final VirtualFile file)
 	{
 		final RFile rFile = getRFile(project, file);
 		if(rFile == null)
@@ -64,7 +64,7 @@ public class RFileInfoFactory
 	 * @param file    VirtualFile
 	 * @return RFile object if found, null otherwise
 	 */
-	private static RFile getRFile(@NotNull final Project project, @NotNull final VirtualFile file)
+	private static RFile getRFile(@Nonnull final Project project, @Nonnull final VirtualFile file)
 	{
 		if(!file.isValid())
 		{
@@ -86,7 +86,7 @@ public class RFileInfoFactory
 	 * @param rFile RFile
 	 * @return RFileInfo object, containing information about RFile inside
 	 */
-	private static RFileInfo createRFileInfoByRFile(@NotNull final VirtualFile file, @NotNull final RFile rFile)
+	private static RFileInfo createRFileInfoByRFile(@Nonnull final VirtualFile file, @Nonnull final RFile rFile)
 	{
 		final RFileInfo fileInfo = new RFileInfoImpl(file.getUrl(), file.getTimeStamp(), rFile.getProject());
 		final RVirtualFile virtualFile = RVirtualUtil.createBy(rFile, fileInfo);
@@ -100,7 +100,7 @@ public class RFileInfoFactory
 	 * @param rFile RFile
 	 * @return RFileInfo object, containing information about RFile inside
 	 */
-	public static RFileInfo createRFileInfoByPseudPhysicalRFile(@NotNull final RFile rFile)
+	public static RFileInfo createRFileInfoByPseudPhysicalRFile(@Nonnull final RFile rFile)
 	{
 		final RFileInfo fileInfo = new RFileInfoImpl(VirtualFileUtil.constructLocalUrl(rFile.getName()), 0, rFile.getProject());
 		final RVirtualFile virtualFile = RVirtualUtil.createBy(rFile, fileInfo);

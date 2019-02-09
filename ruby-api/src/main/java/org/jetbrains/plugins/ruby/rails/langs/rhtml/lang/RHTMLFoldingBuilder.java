@@ -19,9 +19,12 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import com.intellij.lang.ASTNode;
@@ -60,15 +63,15 @@ public class RHTMLFoldingBuilder implements FoldingBuilder
 	private static final TokenSet FOLDED_ELEMENTS = TokenSet.create(RHTMLElementType.RHTML_XML_TAG, RHTMLElementType.RHTML_COMMENT_ELEMENT);
 
 	@Override
-	@NotNull
-	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document)
+	@Nonnull
+	public FoldingDescriptor[] buildFoldRegions(@Nonnull ASTNode astNode, @Nonnull Document document)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 		gatherDescriptors(astNode, descriptors, document);
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
 	}
 
-	private void gatherDescriptors(@NotNull final ASTNode node, @NotNull final List<FoldingDescriptor> descriptors, @NotNull final Document document)
+	private void gatherDescriptors(@Nonnull final ASTNode node, @Nonnull final List<FoldingDescriptor> descriptors, @Nonnull final Document document)
 	{
 		final IElementType type = node.getElementType();
 
@@ -96,7 +99,7 @@ public class RHTMLFoldingBuilder implements FoldingBuilder
 
 	@Override
 	@Nullable
-	public String getPlaceholderText(@NotNull final ASTNode node)
+	public String getPlaceholderText(@Nonnull final ASTNode node)
 	{
 		final IElementType nodeType = node.getElementType();
 		if(nodeType == RHTMLElementType.RHTML_XML_TAG)
@@ -133,7 +136,7 @@ public class RHTMLFoldingBuilder implements FoldingBuilder
 	}
 
 	@Override
-	public boolean isCollapsedByDefault(@NotNull ASTNode node)
+	public boolean isCollapsedByDefault(@Nonnull ASTNode node)
 	{
 		return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
 	}

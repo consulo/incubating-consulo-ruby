@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -29,6 +30,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  */
 public interface RExpression extends RPsiElement
 {
-	@NotNull
+	@Nonnull
 	RType getType(@Nullable final FileSymbol fileSymbol);
 }

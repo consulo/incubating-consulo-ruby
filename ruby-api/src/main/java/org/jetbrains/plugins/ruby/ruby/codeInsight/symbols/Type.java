@@ -1,7 +1,8 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilter;
 
@@ -15,7 +16,7 @@ public class Type
 	private final SymbolFilter myFilter = new SymbolFilter()
 	{
 		@Override
-		public boolean accept(@NotNull final Symbol symbol)
+		public boolean accept(@Nonnull final Symbol symbol)
 		{
 			return symbol.getType() == Type.this;
 		}

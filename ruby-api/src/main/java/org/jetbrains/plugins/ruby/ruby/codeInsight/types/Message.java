@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 
 /**
@@ -28,7 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
  */
 public interface Message
 {
-	@NotNull
+	@Nonnull
 	public String getName();
 
 	public int getArgumentsNumber();
@@ -37,7 +37,7 @@ public interface Message
 	 * @param patternMessage Patern message
 	 * @return true, if this can be matched by patterMessage
 	 */
-	public boolean matchesMessage(@NotNull final Message patternMessage);
+	public boolean matchesMessage(@Nonnull final Message patternMessage);
 
 	@Nullable
 	public Symbol getSymbol();

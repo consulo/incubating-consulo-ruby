@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.actions.generators.RSpecSpecialGeneratorsNames;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.special.GenerateControllerAction;
@@ -140,7 +140,7 @@ public class GeneratorsActionGroup extends ActionGroup
 	 * @param generator   Generator name
 	 * @return If generator is registered as special then method returns corresponding action otherwise common action.
 	 */
-	public static SimpleGeneratorAction createGeneratorAction(@Nullable final Map<String, SimpleGeneratorAction> name2Action, @NotNull final String generator)
+	public static SimpleGeneratorAction createGeneratorAction(@Nullable final Map<String, SimpleGeneratorAction> name2Action, @Nonnull final String generator)
 	{
 		final SimpleGeneratorAction action = name2Action != null ? name2Action.get(generator) : null;
 		if(action != null)

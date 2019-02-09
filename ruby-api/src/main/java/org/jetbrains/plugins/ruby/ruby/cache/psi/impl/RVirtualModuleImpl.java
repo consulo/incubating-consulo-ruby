@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -38,14 +38,14 @@ import com.intellij.navigation.ItemPresentation;
  */
 public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implements RVirtualModule
 {
-	public RVirtualModuleImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName virtualName, @NotNull final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	public RVirtualModuleImpl(@Nonnull final RVirtualContainer parentContainer, @Nonnull final RVirtualName virtualName, @Nonnull final AccessModifier defaultChildAccessModifier, @Nonnull final RFileInfo containingFileInfo)
 	{
 		super(parentContainer, virtualName, defaultChildAccessModifier, containingFileInfo);
 	}
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RModulePresentationUtil.getPresentation(this);
@@ -58,7 +58,7 @@ public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implem
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualModule(this);
 	}

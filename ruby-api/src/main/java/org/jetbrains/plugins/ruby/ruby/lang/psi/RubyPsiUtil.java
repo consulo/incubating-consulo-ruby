@@ -28,12 +28,11 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -91,21 +90,21 @@ public class RubyPsiUtil
 		return (RFile) file;
 	}
 
-	public static RFile createDummyRubyFile(final Project project, @NotNull final String text)
+	public static RFile createDummyRubyFile(final Project project, @Nonnull final String text)
 	{
 		final FileType type = RubyFileType.INSTANCE;
 		return (RFile) createFileFromText(project, TEMP_FILE_NAME, type, text);
 	}
 
 
-	public static List<RPsiElement> getTopLevelElements(final Project project, @NotNull final String text)
+	public static List<RPsiElement> getTopLevelElements(final Project project, @Nonnull final String text)
 	{
 		final RFile rFile = createDummyRubyFile(project, text);
 		return rFile.getCompoundStatement().getStatements();
 	}
 
-	@NotNull
-	private static PsiFile createFileFromText(@NotNull final Project project, @NotNull final String name, @NotNull final FileType fileType, @NotNull final String text)
+	@Nonnull
+	private static PsiFile createFileFromText(@Nonnull final Project project, @Nonnull final String name, @Nonnull final FileType fileType, @Nonnull final String text)
 	{
 		return getPsiElementFactory(project).createFileFromText(name, fileType, text);
 	}
@@ -122,8 +121,8 @@ public class RubyPsiUtil
 	 * @param element tree parent node
 	 * @return PsiElement - child psiElement
 	 */
-	@NotNull
-	public static List<PsiElement> getChildrenByFilter(@NotNull final PsiElement element, @NotNull final TokenSet filter)
+	@Nonnull
+	public static List<PsiElement> getChildrenByFilter(@Nonnull final PsiElement element, @Nonnull final TokenSet filter)
 	{
 		ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 		final ASTNode node = element.getNode();
@@ -145,8 +144,8 @@ public class RubyPsiUtil
 	 * @return PsiElement - child psiElement
 	 */
 
-	@NotNull
-	public static List<PsiElement> getChildrenByFilter(@NotNull final PsiElement element, final IElementType filter)
+	@Nonnull
+	public static List<PsiElement> getChildrenByFilter(@Nonnull final PsiElement element, final IElementType filter)
 	{
 		return getChildrenByFilter(element, TokenSet.create(filter));
 	}
@@ -160,7 +159,7 @@ public class RubyPsiUtil
 	 * @return PsiElement - child psiElement
 	 */
 	@Nullable
-	public static PsiElement getChildByFilter(@NotNull final PsiElement element, final @NotNull TokenSet filter, final int number)
+	public static PsiElement getChildByFilter(@Nonnull final PsiElement element, final @Nonnull TokenSet filter, final int number)
 	{
 		List<PsiElement> list = getChildrenByFilter(element, filter);
 		return (0 <= number && number < list.size()) ? list.get(number) : null;
@@ -175,7 +174,7 @@ public class RubyPsiUtil
 	 * @return PsiElement - child psiElement
 	 */
 	@Nullable
-	public static PsiElement getChildByFilter(@NotNull final PsiElement element, final IElementType filter, final int number)
+	public static PsiElement getChildByFilter(@Nonnull final PsiElement element, final IElementType filter, final int number)
 	{
 		return getChildByFilter(element, TokenSet.create(filter), number);
 	}
@@ -188,7 +187,7 @@ public class RubyPsiUtil
 	 * @return RElement object if found, null otherwise
 	 */
 	@Nullable
-	public static <T extends PsiElement> T getElementToLeftWithSameParent(@NotNull final PsiElement element, final Class<T> c)
+	public static <T extends PsiElement> T getElementToLeftWithSameParent(@Nonnull final PsiElement element, final Class<T> c)
 	{
 		PsiElement left = element.getPrevSibling();
 		while(left != null && !(c.isInstance(left)))
@@ -207,7 +206,7 @@ public class RubyPsiUtil
 	 * @return RElement object if found, null otherwise
 	 */
 	@Nullable
-	public static <T extends PsiElement> T getElementToRightWithSameParent(@NotNull final PsiElement element, final Class<T> c)
+	public static <T extends PsiElement> T getElementToRightWithSameParent(@Nonnull final PsiElement element, final Class<T> c)
 	{
 		PsiElement right = element.getNextSibling();
 		while(right != null && !(c.isInstance(right)))
@@ -223,7 +222,7 @@ public class RubyPsiUtil
 	 *
 	 * @param element PsiElement to reformat
 	 */
-	public static void reformat(@NotNull final PsiElement element)
+	public static void reformat(@Nonnull final PsiElement element)
 	{
 		final Project project = element.getProject();
 		final PsiFile file = element.getContainingFile();
@@ -241,7 +240,7 @@ public class RubyPsiUtil
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public static <T extends PsiElement> List<T> getChildrenByType(RPsiElement rPsiElement, Class<T> c)
 	{
 		ArrayList<T> list = new ArrayList<T>();
@@ -275,7 +274,7 @@ public class RubyPsiUtil
 	 * @param element element to get presentable name for
 	 * @return String - name
 	 */
-	public static String getPresentableName(@NotNull final PsiElement element)
+	public static String getPresentableName(@Nonnull final PsiElement element)
 	{
 		if(element instanceof RFile)
 		{
@@ -404,19 +403,19 @@ public class RubyPsiUtil
 	}
 
 	@Nullable
-	public static RFile getRFile(@NotNull final PsiElement element)
+	public static RFile getRFile(@Nonnull final PsiElement element)
 	{
 		final PsiFile containingFile = element.getContainingFile();
 		return containingFile instanceof RFile ? (RFile) containingFile : null;
 	}
 
-	public static void replaceInParent(@NotNull final PsiElement oldElement, @NotNull final PsiElement... newElements)
+	public static void replaceInParent(@Nonnull final PsiElement oldElement, @Nonnull final PsiElement... newElements)
 	{
 		addBeforeInParent(oldElement, newElements);
 		removeElements(oldElement);
 	}
 
-	public static void addToEnd(@NotNull final PsiElement psiElement, @NotNull final PsiElement... newElements)
+	public static void addToEnd(@Nonnull final PsiElement psiElement, @Nonnull final PsiElement... newElements)
 	{
 		final ASTNode psiNode = psiElement.getNode();
 		LOG.assertTrue(psiNode != null);
@@ -427,7 +426,7 @@ public class RubyPsiUtil
 		}
 	}
 
-	public static void addBeforeInParent(@NotNull final PsiElement anchor, @NotNull final PsiElement... newElements)
+	public static void addBeforeInParent(@Nonnull final PsiElement anchor, @Nonnull final PsiElement... newElements)
 	{
 		final PsiElement psiParent = anchor.getParent();
 		LOG.assertTrue(psiParent != null);
@@ -442,7 +441,7 @@ public class RubyPsiUtil
 		}
 	}
 
-	public static void removeElements(@NotNull final PsiElement... elements)
+	public static void removeElements(@Nonnull final PsiElement... elements)
 	{
 		final ASTNode parentNode = elements[0].getParent().getNode();
 		LOG.assertTrue(parentNode != null);
@@ -454,7 +453,7 @@ public class RubyPsiUtil
 	}
 
 	@Nullable
-	public static RPsiElement getCoveringRPsiElement(@NotNull final PsiElement psiElement)
+	public static RPsiElement getCoveringRPsiElement(@Nonnull final PsiElement psiElement)
 	{
 		PsiElement current = psiElement;
 		while(current != null)
@@ -476,7 +475,7 @@ public class RubyPsiUtil
 	 * @return Null if element hasn't any class that contains him
 	 */
 	@Nullable
-	public static RClass getContainingUpperRClass(@NotNull final RContainer rContainer)
+	public static RClass getContainingUpperRClass(@Nonnull final RContainer rContainer)
 	{
 		RClass upperRClass = rContainer instanceof RClass ? (RClass) rContainer : null;
 		RClass curr = getContainingRClassByContainer(rContainer);
@@ -490,7 +489,7 @@ public class RubyPsiUtil
 	}
 
 	@Nullable
-	public static RClass getContainingRClassByContainer(@NotNull final RContainer rContainer)
+	public static RClass getContainingRClassByContainer(@Nonnull final RContainer rContainer)
 	{
 		RContainer current = rContainer.getParentContainer();
 		while(current != null)
@@ -505,7 +504,7 @@ public class RubyPsiUtil
 	}
 
 	@Nullable
-	public static RVirtualContainer getParentVContainer(@NotNull final PsiElement psiElement)
+	public static RVirtualContainer getParentVContainer(@Nonnull final PsiElement psiElement)
 	{
 		PsiElement element = psiElement;
 		while(element != null)
@@ -520,7 +519,7 @@ public class RubyPsiUtil
 	}
 
 	@Nullable
-	public static RClass getContainingRClass(@NotNull final PsiElement psiElement)
+	public static RClass getContainingRClass(@Nonnull final PsiElement psiElement)
 	{
 		PsiElement element = psiElement;
 		while(element != null)
@@ -556,7 +555,7 @@ public class RubyPsiUtil
 	 * @return null or method
 	 */
 	@Nullable
-	public static RMethod getContainingRMethod(@NotNull final PsiElement psiElement)
+	public static RMethod getContainingRMethod(@Nonnull final PsiElement psiElement)
 	{
 		PsiElement element = psiElement;
 		while(element != null)
@@ -605,7 +604,7 @@ public class RubyPsiUtil
 	 * Looks for statement, containing this PsiElement
 	 */
 	@Nullable
-	public static RPsiElement getStatement(@NotNull final RPsiElement compoundStatement, PsiElement element)
+	public static RPsiElement getStatement(@Nonnull final RPsiElement compoundStatement, PsiElement element)
 	{
 		while(element != null && element.getParent() != compoundStatement)
 		{
@@ -614,8 +613,8 @@ public class RubyPsiUtil
 		return element instanceof RPsiElement ? (RPsiElement) element : null;
 	}
 
-	@NotNull
-	public static String evaluate(@NotNull final PsiElement element)
+	@Nonnull
+	public static String evaluate(@Nonnull final PsiElement element)
 	{
 		if(element instanceof RSymbol)
 		{

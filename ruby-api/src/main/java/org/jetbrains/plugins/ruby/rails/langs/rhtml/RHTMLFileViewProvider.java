@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rubyRoot.RHTMLRubyFileImpl;
@@ -51,20 +52,20 @@ public class RHTMLFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPr
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Language getBaseLanguage()
 	{
 		return eRubyLanguage.INSTANCE;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Language getTemplateDataLanguage()
 	{
 		return HTMLLanguage.INSTANCE;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Set<Language> getLanguages()
 	{

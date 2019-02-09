@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 
 /**
@@ -27,6 +27,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  */
 public interface ScopeHolder extends RPsiElement, PseudoScopeHolder
 {
-	@NotNull
+	@Nonnull
 	public RootScope getScope();
 }

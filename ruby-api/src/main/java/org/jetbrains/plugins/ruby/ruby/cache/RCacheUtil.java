@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -65,8 +65,8 @@ public class RCacheUtil
 	 * @param project Project
 	 * @return Caches
 	 */
-	@NotNull
-	public static RubyFilesCache[] getCachesByFile(@NotNull final VirtualFile file, @NotNull final GlobalSearchScope scope, @NotNull final Project project)
+	@Nonnull
+	public static RubyFilesCache[] getCachesByFile(@Nonnull final VirtualFile file, @Nonnull final GlobalSearchScope scope, @Nonnull final Project project)
 	{
 		final RubyFilesCache[] caches = new RubyFilesCache[2];
 		final Module module = getModuleByFile(file, project);
@@ -110,8 +110,8 @@ public class RCacheUtil
 	 * @param project Project
 	 * @return WordIndexes
 	 */
-	@NotNull
-	public static DeclarationsIndex[] getDeclarationsIndexByFile(@NotNull final VirtualFile file, @NotNull final GlobalSearchScope scope, @NotNull final Project project)
+	@Nonnull
+	public static DeclarationsIndex[] getDeclarationsIndexByFile(@Nonnull final VirtualFile file, @Nonnull final GlobalSearchScope scope, @Nonnull final Project project)
 	{
 		final RubyFilesCache[] caches = getCachesByFile(file, scope, project);
 		return new DeclarationsIndex[]{
@@ -126,7 +126,7 @@ public class RCacheUtil
 	 */
 	@Nullable
 	@Deprecated
-	public static RubyModuleCachesManager getCachesManager(@NotNull final Module module)
+	public static RubyModuleCachesManager getCachesManager(@Nonnull final Module module)
 	{
 		//        if (RailsUtil.isRailsModule(module)) {
 		//            return RailsModuleCachesManager.getInstance(module);
@@ -145,8 +145,8 @@ public class RCacheUtil
 	 * @param project    Project
 	 * @return Array with ruby classes
 	 */
-	@NotNull
-	public static RClass[] getClassesByName(@NotNull final String simpleName, @Nullable final GlobalSearchScope scope, @NotNull final Project project)
+	@Nonnull
+	public static RClass[] getClassesByName(@Nonnull final String simpleName, @Nullable final GlobalSearchScope scope, @Nonnull final Project project)
 	{
 		return getClassessByName(simpleName, scope, project, false);
 	}
@@ -160,7 +160,7 @@ public class RCacheUtil
 	 * @return null if nothing was found
 	 */
 	@Nullable
-	public static RClass getFirstClassByName(@NotNull final String name, @Nullable final GlobalSearchScope scope, @NotNull final Project project)
+	public static RClass getFirstClassByName(@Nonnull final String name, @Nullable final GlobalSearchScope scope, @Nonnull final Project project)
 	{
 		final RClass[] classes = getClassessByName(name, scope, project, true);
 		return classes.length != 0 ? classes[0] : null;
@@ -176,7 +176,7 @@ public class RCacheUtil
 	 * @return Cached ruby class or null
 	 */
 	@Nullable
-	public static RVirtualClass getFirstClassByNameInScript(@NotNull final String className, @NotNull final Project project, @Nullable final GlobalSearchScope sScope, @NotNull final VirtualFile scriptFile)
+	public static RVirtualClass getFirstClassByNameInScript(@Nonnull final String className, @Nonnull final Project project, @Nullable final GlobalSearchScope sScope, @Nonnull final VirtualFile scriptFile)
 	{
 		final GlobalSearchScope scope = (sScope != null ? sScope : GlobalSearchScope.allScope(project));
 		final DeclarationsIndex[] indexes = getDeclarationsIndexByFile(scriptFile, scope, project);
@@ -212,7 +212,7 @@ public class RCacheUtil
 	 * @return Cached ruby class or null
 	 */
 	@Nullable
-	public static RVirtualClass getClassByNameInScriptInRubyTestMode(@NotNull final String qualifiedClassName, @NotNull final Project project, @Nullable final GlobalSearchScope sScope, @NotNull final VirtualFile scriptFile, @Nullable final Ref<FileSymbol> fSWrapper)
+	public static RVirtualClass getClassByNameInScriptInRubyTestMode(@Nonnull final String qualifiedClassName, @Nonnull final Project project, @Nullable final GlobalSearchScope sScope, @Nonnull final VirtualFile scriptFile, @Nullable final Ref<FileSymbol> fSWrapper)
 	{
 		final GlobalSearchScope scope = (sScope != null ? sScope : GlobalSearchScope.allScope(project));
 		final DeclarationsIndex[] indexes = getDeclarationsIndexByFile(scriptFile, scope, project);
@@ -243,12 +243,12 @@ public class RCacheUtil
 	}
 
 	@Nullable
-	public static Module getModuleByFile(@NotNull final VirtualFile file, @NotNull final Project project)
+	public static Module getModuleByFile(@Nonnull final VirtualFile file, @Nonnull final Project project)
 	{
 		return ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(file);
 	}
 
-	private static <T extends RVirtualElement> List<T> getItems(@NotNull final List<RVirtualClass> elements, @NotNull final Project project, @Nullable final GlobalSearchScope sScope)
+	private static <T extends RVirtualElement> List<T> getItems(@Nonnull final List<RVirtualClass> elements, @Nonnull final Project project, @Nullable final GlobalSearchScope sScope)
 	{
 		final ArrayList<T> items = new ArrayList<T>();
 		for(RVirtualElement prototype : elements)
@@ -271,8 +271,8 @@ public class RCacheUtil
 		return items;
 	}
 
-	@NotNull
-	private static RClass[] getClassessByName(@NotNull final String className, @Nullable final GlobalSearchScope sScope, @NotNull final Project project, final boolean firstOnly)
+	@Nonnull
+	private static RClass[] getClassessByName(@Nonnull final String className, @Nullable final GlobalSearchScope sScope, @Nonnull final Project project, final boolean firstOnly)
 	{
 		final GlobalSearchScope scope = (sScope != null ? sScope : GlobalSearchScope.allScope(project));
 		final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);

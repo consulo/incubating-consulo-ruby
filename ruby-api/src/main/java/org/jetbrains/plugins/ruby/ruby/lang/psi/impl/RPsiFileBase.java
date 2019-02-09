@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
@@ -100,7 +100,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getContainingFileUrl()
 	{
 		final VirtualFile file = getVirtualFile();
@@ -109,7 +109,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getAccessModifier()
 	{
 		return AccessModifier.PUBLIC;
@@ -142,7 +142,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getDefaultChildAccessModifier()
 	{
 		return AccessModifier.PUBLIC;
@@ -157,7 +157,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public FileType getFileType()
 	{
 		return getViewProvider().getVirtualFile().getFileType();
@@ -181,7 +181,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -193,7 +193,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getCompoundStatement()
 	{
 		//noinspection ConstantConditions
@@ -205,7 +205,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	//// RPsiElement methods implementation
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	@NotNull
+	@Nonnull
 	public List<PsiElement> getChildrenByFilter(IElementType filter)
 	{
 		return RubyPsiUtil.getChildrenByFilter(this, filter);
@@ -226,7 +226,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public <T extends PsiElement> List<T> getChildrenByType(Class<T> c)
 	{
 		return RubyPsiUtil.getChildrenByType(this, c);
@@ -240,7 +240,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualFile(this);
 	}
@@ -250,7 +250,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	@NotNull
+	@Nonnull
 	public final List<RStructuralElement> getStructureElements()
 	{
 		if(myStructureElements == null)
@@ -261,29 +261,29 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualConstant> getVirtualConstants()
 	{
 		return RVirtualUtil.getVirtualConstants(this, this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getVirtualFields()
 	{
 		return RVirtualUtil.getVirtualFields(this, this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualGlobalVar> getVirtualGlobalVars()
 	{
 		return RVirtualUtil.getVirtualGlobalVars(this, this);
 	}
 
 	@Override
-	@NotNull
-	public RVirtualFile createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo fileInfo)
+	@Nonnull
+	public RVirtualFile createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo fileInfo)
 	{
 		final VirtualFile file = getVirtualFile();
 		assert file != null;
@@ -310,7 +310,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualRequire> getRequires()
 	{
 		throw new UnsupportedOperationException("getRequires is not implemented in org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiFileBase");
@@ -328,7 +328,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	private List<FieldDefinition> myFieldDefinitions;
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<FieldDefinition> getFieldsDefinitions()
 	{
 		if(myFieldDefinitions == null)
@@ -340,13 +340,13 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nullable
-	public FieldDefinition getDefinition(@NotNull final RVirtualField field)
+	public FieldDefinition getDefinition(@Nonnull final RVirtualField field)
 	{
 		return RFieldHolderUtil.getDefinition(this, field);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ConstantDefinitions> getConstantDefinitions()
 	{
 		if(myConstantDefinitions == null)
@@ -358,13 +358,13 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nullable
-	public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant)
+	public ConstantDefinitions getDefinition(@Nonnull final RVirtualConstant constant)
 	{
 		return RConstantHolderUtil.getDefinition(this, constant);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<GlobalVarDefinition> getGlobalVarDefinitions()
 	{
 		if(myGlobalVarDefinitions == null)
@@ -376,7 +376,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nullable
-	public GlobalVarDefinition getDefinition(@NotNull RVirtualGlobalVar globalVar)
+	public GlobalVarDefinition getDefinition(@Nonnull RVirtualGlobalVar globalVar)
 	{
 		return RGlobalVarHolderUtil.getDefinition(this, globalVar);
 	}
@@ -413,7 +413,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualStructuralElement> getVirtualStructureElements()
 	{
 		// I do really hate JAVA Type system with covariant typing!!!
@@ -426,14 +426,14 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getFullPath()
 	{
 		return Collections.emptyList();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFullName()
 	{
 		return "foo";
@@ -450,7 +450,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RFilePresentationUtil.getPresentation(this);
@@ -481,7 +481,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 
 	@Override
-	public int getIndexOf(@NotNull RVirtualStructuralElement element)
+	public int getIndexOf(@Nonnull RVirtualStructuralElement element)
 	{
 		final List<RStructuralElement> structuralElements = getStructureElements();
 		for(int i = 0; i < structuralElements.size(); i++)
@@ -502,7 +502,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
 	{
 		// TODO: to be honest, we must add another 2 check!
 		// RVPsiUtuils.areConstantHoldersEqual and RVPsiUtuils.areFieldHoldersEqual
@@ -517,7 +517,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 	private RootScope myScope;
 
 	@Override
-	@NotNull
+	@Nonnull
 	public synchronized RootScope getScope()
 	{
 		if(myScope == null)

@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
@@ -53,13 +53,13 @@ public class RubyDuckTypeVisitor extends RubyInspectionVisitor
 {
 	private static final Logger LOG = Logger.getInstance(RubyDuckTypeVisitor.class.getName());
 
-	public RubyDuckTypeVisitor(@NotNull final ProblemsHolder holder)
+	public RubyDuckTypeVisitor(@Nonnull final ProblemsHolder holder)
 	{
 		super(holder);
 	}
 
 	@Override
-	public void visitRCall(@NotNull final RCall call)
+	public void visitRCall(@Nonnull final RCall call)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -105,7 +105,7 @@ public class RubyDuckTypeVisitor extends RubyInspectionVisitor
 		matchCallAndMethod(elements.get(0), rIdentifier, Collections.<RPsiElement>emptyList(), fileSymbol);
 	}
 
-	public void matchCallAndMethod(@NotNull final PsiElement element, final RPsiElement call, @NotNull List<RPsiElement> callArgs, @Nullable final FileSymbol fileSymbol)
+	public void matchCallAndMethod(@Nonnull final PsiElement element, final RPsiElement call, @Nonnull List<RPsiElement> callArgs, @Nullable final FileSymbol fileSymbol)
 	{
 		// TODO[oleg] PsiMethod support
 		if(!(element instanceof RMethod))

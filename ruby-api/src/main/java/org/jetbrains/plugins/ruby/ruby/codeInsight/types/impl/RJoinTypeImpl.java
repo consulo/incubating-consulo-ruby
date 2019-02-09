@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RJoinType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
@@ -45,7 +45,7 @@ public class RJoinTypeImpl extends RTypeBase implements RJoinType
 
 	@Override
 	@SuppressWarnings({"unchecked"})
-	@NotNull
+	@Nonnull
 	public Collection<Message> getMessages()
 	{
 		ProgressManager.getInstance().checkCanceled();

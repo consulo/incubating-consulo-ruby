@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -40,13 +41,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
  */
 public class RIdentifierReference extends RNamedReference
 {
-	public RIdentifierReference(@NotNull RNamedElement element)
+	public RIdentifierReference(@Nonnull RNamedElement element)
 	{
 		super(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		final RIdentifier identifier = (RIdentifier) myElement;

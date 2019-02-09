@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.containers.HashSet;
@@ -43,7 +44,7 @@ public class LoadPath
 		myBaseLoadPath = loadPath;
 	}
 
-	@NotNull
+	@Nonnull
 	public Set<VirtualFile> getLoadPathFiles()
 	{
 		final HashSet<VirtualFile> all = new HashSet<VirtualFile>();
@@ -51,7 +52,7 @@ public class LoadPath
 		return all;
 	}
 
-	protected void addAll(@NotNull final Set<VirtualFile> set)
+	protected void addAll(@Nonnull final Set<VirtualFile> set)
 	{
 		if(myBaseLoadPath != null)
 		{
@@ -63,7 +64,7 @@ public class LoadPath
 		}
 	}
 
-	public void addLoadPathUrl(@NotNull final String loadPathUrl)
+	public void addLoadPathUrl(@Nonnull final String loadPathUrl)
 	{
 		final VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(loadPathUrl);
 		if(file != null)

@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
 import static org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType.RHTML_COMMENT_END;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
@@ -41,7 +42,7 @@ import com.intellij.psi.xml.XmlElementType;
 public class RHTMLParser implements PsiParser
 {
 	@Override
-	@NotNull
+	@Nonnull
 	public ASTNode parse(final IElementType root, final PsiBuilder builder, LanguageVersion languageVersion)
 	{
 		builder.enforceCommentTokens(TokenSet.EMPTY);

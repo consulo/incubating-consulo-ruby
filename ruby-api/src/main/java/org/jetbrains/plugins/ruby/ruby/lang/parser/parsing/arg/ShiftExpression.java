@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -43,7 +44,7 @@ class ShiftExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseWithLeadMathExpr(builder, builder.mark(), MathExpression.parse(builder));
@@ -57,13 +58,13 @@ class ShiftExpression implements RubyTokenTypes
 	 * @param result  result of math Expr parsed
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parseWithLeadMathExpr(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return MathExpression.parse(builder);

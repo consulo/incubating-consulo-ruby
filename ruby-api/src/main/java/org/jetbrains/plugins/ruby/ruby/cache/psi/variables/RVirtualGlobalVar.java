@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.variables;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 
@@ -27,9 +28,9 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder
  */
 public interface RVirtualGlobalVar extends RVirtualElement
 {
-	@NotNull
+	@Nonnull
 	public String getText();
 
-	@NotNull
+	@Nonnull
 	public RVirtualGlobalVarHolder getHolder();
 }

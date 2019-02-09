@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -38,7 +39,7 @@ import com.intellij.openapi.ui.Messages;
 public class ReloadGeneratorsAction extends AnAction
 {
 	@Override
-	public void actionPerformed(@NotNull final AnActionEvent event)
+	public void actionPerformed(@Nonnull final AnActionEvent event)
 	{
 		final Module module = DataContextUtil.getModule(event.getDataContext());
 		assert module != null;
@@ -61,7 +62,7 @@ public class ReloadGeneratorsAction extends AnAction
 	}
 
 	@Override
-	public void update(@NotNull final AnActionEvent event)
+	public void update(@Nonnull final AnActionEvent event)
 	{
 		final Module module = DataContextUtil.getModule(event.getDataContext());
 

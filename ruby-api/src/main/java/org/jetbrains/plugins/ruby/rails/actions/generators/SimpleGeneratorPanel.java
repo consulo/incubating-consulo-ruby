@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
+import javax.annotation.Nonnull;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.project.Project;
 
 /**
@@ -50,7 +50,7 @@ public class SimpleGeneratorPanel implements GeneratorPanel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public JPanel getContent()
 	{
 		return myContentPanel;
@@ -63,7 +63,7 @@ public class SimpleGeneratorPanel implements GeneratorPanel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getGeneratorArgs()
 	{
 		final StringBuilder buff = new StringBuilder();

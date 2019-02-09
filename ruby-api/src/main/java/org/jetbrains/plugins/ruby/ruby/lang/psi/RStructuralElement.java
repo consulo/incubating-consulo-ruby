@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -43,8 +43,8 @@ public interface RStructuralElement extends RVirtualStructuralElement, RPsiEleme
 	 * @param info      RFileInfo to store
 	 * @return RVirtualStructuralElement - the copy
 	 */
-	@NotNull
+	@Nonnull
 	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, final RFileInfo info);
 
-	boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element);
+	boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element);
 }

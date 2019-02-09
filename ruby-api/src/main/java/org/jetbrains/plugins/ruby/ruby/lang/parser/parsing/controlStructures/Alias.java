@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -43,7 +43,7 @@ public class Alias implements RubyTokenTypes
 		| kALIAS tGVAR tBACK_REF
 		| kALIAS tGVAR tNTH_REF
 	*/
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();

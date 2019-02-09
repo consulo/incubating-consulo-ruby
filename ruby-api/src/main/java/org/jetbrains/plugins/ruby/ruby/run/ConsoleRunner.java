@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.run;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -83,7 +83,7 @@ public class ConsoleRunner
 	 * @param provider          Provides commandline arguments
 	 * @param descriptorFactory User Factory for creating non default run content descriptors
 	 */
-	private ConsoleRunner(@NotNull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, @NotNull final String consoleTitle, @Nullable final String workingDir, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory)
+	private ConsoleRunner(@Nonnull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, @Nonnull final String consoleTitle, @Nullable final String workingDir, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory)
 	{
 		myProject = project;
 		myConsoleTitle = consoleTitle;
@@ -194,7 +194,7 @@ public class ConsoleRunner
 	 * @param workingDir            Working directory, null to inherit parent add home directory
 	 * @param consoleTitle          Title for console
 	 */
-	public static void run(@NotNull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String consoleTitle, @Nullable final String workingDir, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory)
+	public static void run(@Nonnull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String consoleTitle, @Nullable final String workingDir, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory)
 	{
 		// create runner
 		IdeaInternalUtil.runInEventDispatchThread(new Runnable()

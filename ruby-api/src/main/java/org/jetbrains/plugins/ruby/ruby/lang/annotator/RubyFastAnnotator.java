@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.progress.ProgressManager;
@@ -31,7 +32,7 @@ public class RubyFastAnnotator implements Annotator
 {
 
 	@Override
-	public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder)
+	public void annotate(@Nonnull final PsiElement psiElement, @Nonnull final AnnotationHolder holder)
 	{
 		// We hope it`s enough often operation
 		ProgressManager.getInstance().checkCanceled();

@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.commenter;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.lang.Commenter;
 
 

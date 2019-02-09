@@ -20,11 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
 /**
@@ -51,7 +53,7 @@ public abstract class SettingsExternalizer
 	 * @param elem element to extract options
 	 * @return Map, that contains options by name
 	 */
-	protected Map<String, String> buildOptionsByElement(@NotNull Element elem)
+	protected Map<String, String> buildOptionsByElement(@Nonnull Element elem)
 	{
 		//noinspection unchecked
 		return buildOptionsByName(elem.getChildren(getID()));
@@ -76,8 +78,8 @@ public abstract class SettingsExternalizer
 	 * @param element xml element
 	 * @return value
 	 */
-	@NotNull
-	protected String getAttributeFromElement(@NotNull final String key, @NotNull final Element element)
+	@Nonnull
+	protected String getAttributeFromElement(@Nonnull final String key, @Nonnull final Element element)
 	{
 		final Attribute attr = element.getAttribute(key);
 		return attr != null ? attr.getValue() : TextUtil.EMPTY_STRING;
@@ -90,7 +92,7 @@ public abstract class SettingsExternalizer
 	 * @param value   value
 	 * @param element xml element
 	 */
-	protected void storeAttributeInElement(@NotNull final String key, @Nullable final String value, @NotNull final Element element)
+	protected void storeAttributeInElement(@Nonnull final String key, @Nullable final String value, @Nonnull final Element element)
 	{
 		element.setAttribute(key, value != null ? value : TextUtil.EMPTY_STRING);
 	}
@@ -102,7 +104,7 @@ public abstract class SettingsExternalizer
 	 * @param value value of option
 	 * @param elem  elem to write
 	 */
-	public void writeOption(@Nullable final String name, @Nullable final String value, @NotNull final Element elem)
+	public void writeOption(@Nullable final String name, @Nullable final String value, @Nonnull final Element elem)
 	{
 		Element option = new Element(getID());
 		option.setAttribute(NAME, name == null ? "" : name);

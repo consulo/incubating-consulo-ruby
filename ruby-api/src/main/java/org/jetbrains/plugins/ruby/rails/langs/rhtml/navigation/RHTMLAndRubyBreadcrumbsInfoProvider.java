@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLFoldingBuilder;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
@@ -70,7 +70,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 		myLanguage = language;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Language getLanguage()
 	{
@@ -78,7 +78,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 	}
 
 	@Override
-	public boolean acceptElement(@NotNull final PsiElement element)
+	public boolean acceptElement(@Nonnull final PsiElement element)
 	{
 		if(isInRubyDebugMode(element))
 		{
@@ -113,22 +113,22 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 	}
 
 	@Override
-	@NotNull
-	public String getElementInfo(@NotNull final PsiElement psiElement)
+	@Nonnull
+	public String getElementInfo(@Nonnull final PsiElement psiElement)
 	{
 		return getPresentation(psiElement, true);
 	}
 
 	@Override
 	@Nullable
-	public String getElementTooltip(@NotNull final PsiElement psiElement)
+	public String getElementTooltip(@Nonnull final PsiElement psiElement)
 	{
 		return getPresentation(psiElement, false);
 	}
 
 	@Override
 	@Nullable
-	public PsiElement getParent(@NotNull final PsiElement psiElement)
+	public PsiElement getParent(@Nonnull final PsiElement psiElement)
 	{
 		if(isInRubyDebugMode(psiElement))
 		{
@@ -190,7 +190,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 		return BreadcrumbsProvider.super.getParent(psiElement);
 	}
 
-	private boolean isInRubyDebugMode(@NotNull final PsiElement element)
+	private boolean isInRubyDebugMode(@Nonnull final PsiElement element)
 	{
 		final PsiFile psiFile = element.getContainingFile();
 		return psiFile != null && psiFile instanceof RFileImpl;
@@ -233,7 +233,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 		return builder.toString();
 	}
 
-	private String getPrestentation(@NotNull final IElementType type)
+	private String getPrestentation(@Nonnull final IElementType type)
 	{
 		if(type instanceof PresentableElementType)
 		{
@@ -242,7 +242,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 		return type.toString();
 	}
 
-	private String getPresentation(@NotNull final PsiElement psiElement, final boolean notForToolTip)
+	private String getPresentation(@Nonnull final PsiElement psiElement, final boolean notForToolTip)
 	{
 		if(isInRubyDebugMode(psiElement))
 		{
@@ -301,7 +301,7 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 		return psiElement.toString();
 	}
 
-	private Language getLangageForElement(@NotNull final PsiElement psiElement)
+	private Language getLangageForElement(@Nonnull final PsiElement psiElement)
 	{
 		if(psiElement instanceof PsiWhiteSpace)
 		{

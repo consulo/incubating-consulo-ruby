@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.arguments;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArrayArgument;
@@ -38,7 +39,7 @@ public class RArrayArgumentImpl extends RPsiElementBase implements RArrayArgumen
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		final RIdentifier identifier = getIdentifier();

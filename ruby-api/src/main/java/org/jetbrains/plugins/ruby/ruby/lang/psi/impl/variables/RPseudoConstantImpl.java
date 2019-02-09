@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RPseudoConstantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -64,7 +64,7 @@ public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoCon
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -88,7 +88,7 @@ public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoCon
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final String text = getText();
@@ -112,7 +112,7 @@ public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoCon
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull String newName) throws IncorrectOperationException
 	{
 		if(!TextUtil.isCID(newName))
 		{

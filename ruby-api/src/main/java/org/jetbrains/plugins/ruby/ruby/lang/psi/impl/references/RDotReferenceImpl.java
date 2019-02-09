@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RDotReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
@@ -37,7 +37,7 @@ public class RDotReferenceImpl extends RReferenceBase implements RDotReference
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -49,7 +49,7 @@ public class RDotReferenceImpl extends RReferenceBase implements RDotReference
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getDelimiter()
 	{
 		PsiElement dot = getChildByFilter(RubyTokenTypes.tDOT, 0);
@@ -58,7 +58,7 @@ public class RDotReferenceImpl extends RReferenceBase implements RDotReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Type getType()
 	{
 		return Type.DOT_REF;

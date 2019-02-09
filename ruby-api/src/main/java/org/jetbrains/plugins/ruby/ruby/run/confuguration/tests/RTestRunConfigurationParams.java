@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigurationParams;
 
@@ -49,7 +50,7 @@ public interface RTestRunConfigurationParams extends AbstractRubyRunConfiguratio
 
 	public void setTestMethodName(@Nullable String name);
 
-	public void setTestType(@NotNull AbstractRubyRunConfiguration.TestType testType);
+	public void setTestType(@Nonnull AbstractRubyRunConfiguration.TestType testType);
 
 	public void setTestQualifiedClassName(@Nullable String testClassName);
 

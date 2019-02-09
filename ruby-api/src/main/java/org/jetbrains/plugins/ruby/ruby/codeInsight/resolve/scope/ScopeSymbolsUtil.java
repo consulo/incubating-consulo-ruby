@@ -20,8 +20,8 @@ import com.intellij.codeInsight.lookup.LookupValueWithPriority;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -73,7 +73,7 @@ public class ScopeSymbolsUtil
 	 *         4. local variables and parameters
 	 *         5. Ruby reswords
 	 */
-	public static List<RubyLookupItem> getScopeSymbolsAndKeywordsLookupItems(@Nullable final FileSymbol fileSymbol, @NotNull final RPsiElement element, @NotNull final ScopeAutocompleteFilter filter)
+	public static List<RubyLookupItem> getScopeSymbolsAndKeywordsLookupItems(@Nullable final FileSymbol fileSymbol, @Nonnull final RPsiElement element, @Nonnull final ScopeAutocompleteFilter filter)
 	{
 		final RContainer container = element instanceof RContainer ? (RContainer) element : element.getParentContainer();
 		assert container != null;
@@ -195,8 +195,8 @@ public class ScopeSymbolsUtil
 		return RESWORDS_LOOKUP_ITEMS;
 	}
 
-	@NotNull
-	private static List<RubyLookupItem> getScopeLocalVariables(@NotNull final RPsiElement element)
+	@Nonnull
+	private static List<RubyLookupItem> getScopeLocalVariables(@Nonnull final RPsiElement element)
 	{
 		final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
 		final HashSet<String> names = new HashSet<String>();

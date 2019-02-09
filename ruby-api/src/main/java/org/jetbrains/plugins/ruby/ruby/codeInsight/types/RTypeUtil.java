@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
@@ -61,7 +61,7 @@ import com.intellij.psi.PsiMethod;
 public class RTypeUtil
 {
 
-	public static RType createTypeBySymbol(@Nullable final FileSymbol fileSymbol, @Nullable final Symbol symbol, @NotNull final Context context, final boolean inReference)
+	public static RType createTypeBySymbol(@Nullable final FileSymbol fileSymbol, @Nullable final Symbol symbol, @Nonnull final Context context, final boolean inReference)
 	{
 		if(symbol == null)
 		{
@@ -105,7 +105,7 @@ public class RTypeUtil
 	 * @param element
 	 * @return Type if usage of element is assign usage, NOT_TYPE  otherwise
 	 */
-	private static RType createTypeByUsage(final FileSymbol fileSymbol, @NotNull final RPsiElement element)
+	private static RType createTypeByUsage(final FileSymbol fileSymbol, @Nonnull final RPsiElement element)
 	{
 		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(element.getProject());
 		helper.testAndSet(fileSymbol);
@@ -122,7 +122,7 @@ public class RTypeUtil
 	 * @param inReference Create duck type for reference or for empty context
 	 * @return Ducktype object
 	 */
-	public static DuckType createDuckTypeBySymbol(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final Context context, final boolean inReference)
+	public static DuckType createDuckTypeBySymbol(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Context context, final boolean inReference)
 	{
 		ProgressManager.getInstance().checkCanceled();
 
@@ -171,7 +171,7 @@ public class RTypeUtil
 		return SymbolFilterFactory.createFilterByTypeSet(inReference ? Types.REFERENCE_AUTOCOMPLETE_TYPES : Types.EMPTY_CONTEXT_AUTOCOMPLETE_TYPES);
 	}
 
-	public static DuckType createDuckTypeByChildren(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Set directChildren, @NotNull final SymbolFilter filter)
+	public static DuckType createDuckTypeByChildren(@Nullable final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Set directChildren, @Nonnull final SymbolFilter filter)
 	{
 		final HashMap<String, Symbol> fieldNames = new HashMap<String, Symbol>();
 		final HashMap<String, Symbol> javaFieldNames = new HashMap<String, Symbol>();
@@ -242,8 +242,8 @@ public class RTypeUtil
 		return type;
 	}
 
-	@NotNull
-	private static Message createMessageBySymbol(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final String name, boolean important)
+	@Nonnull
+	private static Message createMessageBySymbol(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final String name, boolean important)
 	{
 		if(!Types.METHODS.contains(symbol.getType()))
 		{
@@ -264,7 +264,7 @@ public class RTypeUtil
 		return message;
 	}
 
-	public static List<RubyLookupItem> getLookupItemsByType(@NotNull final RType type, @Nullable final String name, @Nullable final SymbolFilter filter)
+	public static List<RubyLookupItem> getLookupItemsByType(@Nonnull final RType type, @Nullable final String name, @Nullable final SymbolFilter filter)
 	{
 		final Collection<Message> messagesForName = type.getMessagesForName(name);
 		final ArrayList<RubyLookupItem> items = new ArrayList<RubyLookupItem>();
@@ -282,7 +282,7 @@ public class RTypeUtil
 	}
 
 
-	public static boolean equal(@NotNull final RType type1, @NotNull final RType type2)
+	public static boolean equal(@Nonnull final RType type1, @Nonnull final RType type2)
 	{
 		if(type1.equals(type2))
 		{
@@ -298,7 +298,7 @@ public class RTypeUtil
 	}
 
 
-	public static Collection<Message> intersection(@NotNull final Collection<Message> collection1, @NotNull final Collection<Message> collection2)
+	public static Collection<Message> intersection(@Nonnull final Collection<Message> collection1, @Nonnull final Collection<Message> collection2)
 	{
 
 		if(collection1.isEmpty())
@@ -344,7 +344,7 @@ public class RTypeUtil
 		return result;
 	}
 
-	public static Collection<Message> union(@NotNull final Collection<Message> collection1, @NotNull final Collection<Message> collection2)
+	public static Collection<Message> union(@Nonnull final Collection<Message> collection1, @Nonnull final Collection<Message> collection2)
 	{
 		if(collection1.isEmpty())
 		{
@@ -399,7 +399,7 @@ public class RTypeUtil
 	}
 
 
-	public static RType joinOr(@NotNull final RType type1, @NotNull final RType type2)
+	public static RType joinOr(@Nonnull final RType type1, @Nonnull final RType type2)
 	{
 		if(type1.equals(type2))
 		{
@@ -446,7 +446,7 @@ public class RTypeUtil
 		return new RJoinTypeImpl(type1, type2);
 	}
 
-	public static RType joinAnd(@NotNull final RType type1, @NotNull final RType type2)
+	public static RType joinAnd(@Nonnull final RType type1, @Nonnull final RType type2)
 	{
 		if(type1.equals(type2))
 		{
@@ -511,7 +511,7 @@ public class RTypeUtil
 		return new RUnionTypeImpl(type1, type2);
 	}
 
-	@NotNull
+	@Nonnull
 	public static RType getBooleanType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RType trueType = RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.TrueClass), Context.INSTANCE, true);

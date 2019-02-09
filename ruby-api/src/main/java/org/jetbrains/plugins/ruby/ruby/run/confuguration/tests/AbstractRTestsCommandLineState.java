@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
 import java.io.File;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
@@ -63,7 +64,7 @@ public abstract class AbstractRTestsCommandLineState extends ColouredCommandLine
 
 
 	@Override
-	public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException
+	public ExecutionResult execute(@Nonnull Executor executor, @Nonnull ProgramRunner runner) throws ExecutionException
 	{
 		final ExecutionResult result = super.execute(executor, runner);
 		if(result != null)

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RDuckType;
@@ -59,7 +59,7 @@ public class RDuckTypeImpl extends RTypeBase implements RDuckType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<Message> getMessages()
 	{
 		return myDuckType.getMessages();
@@ -72,7 +72,7 @@ public class RDuckTypeImpl extends RTypeBase implements RDuckType
 	}
 
 	@Override
-	public RType addMessage(@NotNull final Message message)
+	public RType addMessage(@Nonnull final Message message)
 	{
 		((DuckTypeImpl) myDuckType).addMessage(message);
 		return this;

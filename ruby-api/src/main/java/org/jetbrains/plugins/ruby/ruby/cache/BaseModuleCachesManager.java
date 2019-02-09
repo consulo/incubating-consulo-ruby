@@ -16,10 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootManager;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 
@@ -42,13 +43,13 @@ public abstract class BaseModuleCachesManager
 	protected ModuleRootManager myModuleRootManager;
 
 
-	@NotNull
+	@Nonnull
 	public RubyModuleFilesCache getFilesCache()
 	{
 		return myModuleFilesCache;
 	}
 
-	@NotNull
+	@Nonnull
 	public DeclarationsIndex getDeclarationsIndex()
 	{
 		return myModuleFilesCache.getDeclarationsIndex();

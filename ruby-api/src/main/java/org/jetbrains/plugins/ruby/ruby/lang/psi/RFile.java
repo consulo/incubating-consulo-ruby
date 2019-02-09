@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
@@ -38,12 +38,12 @@ import com.intellij.psi.PsiFile;
 public interface RFile extends RVirtualFile, RFieldConstantContainer, RGlobalVarHolder, PsiFile
 {
 
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getCompoundStatement();
 
 	@Override
-	@NotNull
-	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @NotNull RFileInfo fileInfo);
+	@Nonnull
+	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @Nonnull RFileInfo fileInfo);
 
 	@Override
 	@Nullable

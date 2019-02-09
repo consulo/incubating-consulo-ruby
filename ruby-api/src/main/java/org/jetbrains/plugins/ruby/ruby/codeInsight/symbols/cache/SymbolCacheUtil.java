@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -31,7 +31,7 @@ public class SymbolCacheUtil
 {
 
 	@Nullable
-	public static String getStubUrlByType(@NotNull final FileSymbolType type, @Nullable final Sdk sdk, final boolean jrubyEnabled)
+	public static String getStubUrlByType(@Nonnull final FileSymbolType type, @Nullable final Sdk sdk, final boolean jrubyEnabled)
 	{
 		if(type == FileSymbolType.BUILT_IN)
 		{
@@ -45,7 +45,7 @@ public class SymbolCacheUtil
 	}
 
 	@Nullable
-	public static String getStubUrl(@Nullable final Sdk sdk, @NotNull final String name)
+	public static String getStubUrl(@Nullable final Sdk sdk, @Nonnull final String name)
 	{
 		if(RubySdkUtil.isKindOfRubySDK(sdk))
 		{

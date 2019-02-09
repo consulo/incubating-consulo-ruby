@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
@@ -32,21 +33,21 @@ public class FieldDefinitionImpl implements FieldDefinition
 {
 	private final RField myFirstUsage;
 
-	public FieldDefinitionImpl(@NotNull final RField field)
+	public FieldDefinitionImpl(@Nonnull final RField field)
 	{
 		// setting no acess as defaults
 		myFirstUsage = field;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RField getFirstUsage()
 	{
 		return myFirstUsage;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		//noinspection ConstantConditions

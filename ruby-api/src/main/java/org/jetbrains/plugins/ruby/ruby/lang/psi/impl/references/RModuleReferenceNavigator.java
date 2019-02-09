@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RColonReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import com.intellij.psi.PsiElement;
@@ -31,7 +31,7 @@ import com.intellij.psi.PsiElement;
 public class RModuleReferenceNavigator
 {
 	@Nullable
-	public static RColonReference getByRConstant(@NotNull final RConstant cons)
+	public static RColonReference getByRConstant(@Nonnull final RConstant cons)
 	{
 		final PsiElement parent = cons.getParent();
 		return (parent instanceof RColonReference) ? (RColonReference) parent : null;

@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -36,7 +36,7 @@ public class LEnd implements RubyTokenTypes
 	/*
 					| `END' `{' COMPSTMT `}'
 	*/
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();

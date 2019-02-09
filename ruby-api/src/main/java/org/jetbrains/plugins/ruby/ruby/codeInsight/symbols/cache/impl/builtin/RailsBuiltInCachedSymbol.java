@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.nameConventions.MailersConventions;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
@@ -38,13 +38,13 @@ public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol
 {
 	private static final Logger LOG = Logger.getInstance(RailsBuiltInCachedSymbol.class.getName());
 
-	public RailsBuiltInCachedSymbol(@NotNull final Project project, @NotNull final String url, @Nullable final Sdk sdk)
+	public RailsBuiltInCachedSymbol(@Nonnull final Project project, @Nonnull final String url, @Nullable final Sdk sdk)
 	{
 		super(project, url, sdk);
 	}
 
 	@Override
-	public void fileAdded(@NotNull final String url)
+	public void fileAdded(@Nonnull final String url)
 	{
 		super.fileAdded(url);
 		if(mySdk == null)

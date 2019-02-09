@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.annotation.Nonnull;
+
 import consulo.psi.PsiPackage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageType;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
@@ -51,7 +53,7 @@ public class JavaReference implements PsiReference
 	private RPsiElement myElement;
 	private RBaseString myString;
 
-	public JavaReference(@Nullable final JavaReference javaReference, @NotNull final RPsiElement element, @NotNull final RBaseString string, final int index, @NotNull final String token)
+	public JavaReference(@Nullable final JavaReference javaReference, @Nonnull final RPsiElement element, @Nonnull final RBaseString string, final int index, @Nonnull final String token)
 	{
 		psiManager = PsiManager.getInstance(element.getProject());
 		myElement = element;
@@ -133,7 +135,7 @@ public class JavaReference implements PsiReference
 
 	// IDEA calls bindToElement if we rename/move Java class
 	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException
 	{
 		if(element instanceof PsiClass)
 		{
@@ -176,7 +178,7 @@ public class JavaReference implements PsiReference
 		return true;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myToken;

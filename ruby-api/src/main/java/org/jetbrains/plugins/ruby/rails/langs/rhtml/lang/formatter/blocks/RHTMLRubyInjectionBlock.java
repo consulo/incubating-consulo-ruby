@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLWrapProcessor;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
@@ -52,7 +52,7 @@ public class RHTMLRubyInjectionBlock extends RHTMLBlock
 	private RCompoundStatement myParentRCmpSt;
 	private ASTNode myParentNode;
 
-	public RHTMLRubyInjectionBlock(@NotNull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, @NotNull final XmlFormattingPolicy xmlFormattingPolicy, @Nullable final Alignment alignment, @Nullable final ASTNode parentNode, @Nullable final RCompoundStatement parentRCmpSt)
+	public RHTMLRubyInjectionBlock(@Nonnull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, @Nonnull final XmlFormattingPolicy xmlFormattingPolicy, @Nullable final Alignment alignment, @Nullable final ASTNode parentNode, @Nullable final RCompoundStatement parentRCmpSt)
 	{
 		super(node, indent, wrap, xmlFormattingPolicy, alignment);
 
@@ -64,7 +64,7 @@ public class RHTMLRubyInjectionBlock extends RHTMLBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected List<Block> buildChildren()
 	{
 		ChameleonTransforming.transformChildren(myNode);
@@ -97,7 +97,7 @@ public class RHTMLRubyInjectionBlock extends RHTMLBlock
 		return result;
 	}
 
-	private Indent calcIndent(@NotNull final ASTNode node)
+	private Indent calcIndent(@Nonnull final ASTNode node)
 	{
 		final ASTNode nodeStart = node.getFirstChildNode();
 
@@ -133,7 +133,7 @@ public class RHTMLRubyInjectionBlock extends RHTMLBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ChildAttributes getChildAttributes(int newChildIndex)
 	{
 		return new ChildAttributes(myCodeIndent, null);

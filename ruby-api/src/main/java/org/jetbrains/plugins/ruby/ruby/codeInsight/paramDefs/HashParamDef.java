@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
@@ -25,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 /**
  * @author yole

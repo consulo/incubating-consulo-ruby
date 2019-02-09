@@ -20,8 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElementVisitor;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -50,7 +50,7 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -75,22 +75,22 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getOldName()
 	{
 		return getName(getPsiOldName());
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getNewName()
 	{
 		return getName(getPsiNewName());
 	}
 
 	@Override
-	@NotNull
-	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, @NotNull final RFileInfo info)
+	@Nonnull
+	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, @Nonnull final RFileInfo info)
 	{
 		return new RVirtualAliasImpl(container, getOldName(), getNewName());
 	}
@@ -102,13 +102,13 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableText()
 	{
 		return getText();
 	}
 
-	@NotNull
+	@Nonnull
 	private static String getName(RPsiElement element)
 	{
 		if(element != null)
@@ -123,7 +123,7 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
 	{
 		if(!(element instanceof RVirtualAlias))
 		{

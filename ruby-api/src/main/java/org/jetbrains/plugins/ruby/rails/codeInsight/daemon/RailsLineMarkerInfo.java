@@ -28,8 +28,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.reference.SoftReference;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
@@ -58,7 +58,7 @@ public class RailsLineMarkerInfo
 	private Image myIcon;
 	private final Module myModule;
 
-	public RailsLineMarkerInfo(@NotNull final Module module, @NotNull final MarkerType type, final PsiElement element, final int startOffset, final Image icon)
+	public RailsLineMarkerInfo(@Nonnull final Module module, @Nonnull final MarkerType type, final PsiElement element, final int startOffset, final Image icon)
 	{
 		this.type = type;
 		myIcon = icon;
@@ -114,7 +114,7 @@ public class RailsLineMarkerInfo
 	private class MyGutterIconRenderer extends GutterIconRenderer
 	{
 		@Override
-		@NotNull
+		@Nonnull
 		public Image getIcon()
 		{
 			return myIcon;

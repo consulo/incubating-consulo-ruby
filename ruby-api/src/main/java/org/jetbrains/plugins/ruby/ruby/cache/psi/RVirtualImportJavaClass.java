@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,6 +28,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface RVirtualImportJavaClass extends RVirtualStructuralElement
 {
-	@NotNull
+	@Nonnull
 	public List<RVirtualName> getNames();
 }

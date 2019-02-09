@@ -34,8 +34,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
@@ -101,7 +101,7 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams
 	//System Environment
 	protected EnvironmentVariablesComponent myEnvVariablesComponent;
 
-	public RTestsRunConfigurationForm(@NotNull final Project project, @NotNull final RTestsRunConfiguration configuration)
+	public RTestsRunConfigurationForm(@Nonnull final Project project, @Nonnull final RTestsRunConfiguration configuration)
 	{
 		myProject = project;
 		myConfiguration = configuration;
@@ -398,7 +398,7 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams
 	}
 
 	@Override
-	public void setTestType(@NotNull final TestType testType)
+	public void setTestType(@Nonnull final TestType testType)
 	{
 		clearTestTypeSettings(testType);
 

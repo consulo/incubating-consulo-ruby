@@ -16,11 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiDirectory;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;
@@ -62,7 +64,7 @@ public class GenerateModelAction extends SimpleGeneratorAction
 	}
 
 	@Override
-	protected SimpleGeneratorInputValidator createValidator(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	protected SimpleGeneratorInputValidator createValidator(@Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		return new SimpleGeneratorInputValidator(this, module, directory)
 		{

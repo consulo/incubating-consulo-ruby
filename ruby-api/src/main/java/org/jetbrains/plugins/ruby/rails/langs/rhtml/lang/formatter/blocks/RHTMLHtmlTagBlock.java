@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLBlockGenerator;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLIndentProcessor;
@@ -74,7 +75,7 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock
 	private FileViewProvider myViewProvider;
 	private RCompoundStatement myNodeCmpSt;
 
-	public static ASTNode getNextHtmlChild(@NotNull final NodeInfo childNodeInfo, final TextRange textRange)
+	public static ASTNode getNextHtmlChild(@Nonnull final NodeInfo childNodeInfo, final TextRange textRange)
 	{
 		ASTNode child;
 		child = NodeInfo.getNextNodeByInfo(childNodeInfo);
@@ -97,7 +98,7 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ChildAttributes getChildAttributes(final int newChildIndex)
 	{
 		final XmlTag tag = getTag();
@@ -112,14 +113,14 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TextRange getTextRange()
 	{
 		return myTextRange;
 	}
 
 
-	@NotNull
+	@Nonnull
 	protected NodeInfo processChildAndGetNext(final List<Block> result, final ASTNode htmlChild, final NodeInfo childNodeInfo, final Wrap wrap, final Alignment alignment, final Indent rhtmlIndent)
 	{
 		if(htmlChild.getElementType() == XmlElementType.XML_DOCTYPE)
@@ -471,7 +472,7 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock
 	 * @param childRCmpSt Ruby compound statement, that wraps child
 	 * @return indent
 	 */
-	@NotNull
+	@Nonnull
 	private Indent calcTagContentIndent(boolean insideTag, @Nullable final RCompoundStatement childRCmpSt)
 	{
 		Indent indent;
@@ -504,7 +505,7 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock
 		return new SyntheticBlock(localResult, this, Indent.getNoneIndent(), myXmlFormattingPolicy, null);
 	}
 
-	private Block createTagContentNode(@NotNull final ArrayList<Block> localResult, final Indent childIndent)
+	private Block createTagContentNode(@Nonnull final ArrayList<Block> localResult, final Indent childIndent)
 	{
 		return new SyntheticBlock(localResult, this, Indent.getNoneIndent(), myXmlFormattingPolicy, childIndent);
 	}
@@ -543,7 +544,7 @@ public class RHTMLHtmlTagBlock extends XmlTagBlock
 		return NodeInfo.createRHTMLInfo(myNode, child, nextChild);
 	}
 
-	@NotNull
+	@Nonnull
 	private Indent getChildrenIndent(@Nullable final RCompoundStatement childRCmpSt)
 	{
 		if(childRCmpSt == null)

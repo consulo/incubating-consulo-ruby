@@ -20,7 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.ide.wizard.AbstractWizard;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
@@ -38,7 +38,7 @@ public class AddFacetWizard extends AbstractWizard<FacetWizardStep>
 {
 	protected final Project myCurrentProject;
 
-	public AddFacetWizard(@NotNull final String title, final Project project, final FacetWizardStep[] steps)
+	public AddFacetWizard(@Nonnull final String title, final Project project, final FacetWizardStep[] steps)
 	{
 		super(title, project);
 		myCurrentProject = project;

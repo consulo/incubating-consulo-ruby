@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.variables;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 
 /**
@@ -28,12 +28,12 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
  */
 public interface RVirtualFieldAttr extends RVirtualStructuralElement
 {
-	@NotNull
+	@Nonnull
 	public List<String> getNames();
 
-	@NotNull
+	@Nonnull
 	public FieldAttrType getFieldAttrType();
 
-	@NotNull
+	@Nonnull
 	public String getPresentableText();
 }

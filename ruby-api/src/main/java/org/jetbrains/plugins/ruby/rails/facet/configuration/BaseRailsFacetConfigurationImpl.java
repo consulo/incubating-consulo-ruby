@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.RakeUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -74,21 +76,21 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getRailsApplicationRootPath()
 	{
 		return myRailsRootDirPath;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getRailsApplicationRootPathUrl()
 	{
 		return myRailsRootDirPathUrl;
 	}
 
 	@Override
-	public void setRailsApplicationRootPath(@NotNull final String railsRootDirPath)
+	public void setRailsApplicationRootPath(@Nonnull final String railsRootDirPath)
 	{
 		myRailsRootDirPath = railsRootDirPath;
 		myRailsRootDirPathUrl = VirtualFileUtil.constructLocalUrl(railsRootDirPath);
@@ -96,7 +98,7 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public StandardRailsPaths getPaths()
 	{
 		return myRailsPaths;
@@ -139,7 +141,7 @@ public class BaseRailsFacetConfigurationImpl implements BaseRailsFacetConfigurat
 	}
 
 	@Override
-	public void setModule(@NotNull final Module uncommitedModule)
+	public void setModule(@Nonnull final Module uncommitedModule)
 	{
 		myModule = uncommitedModule;
 

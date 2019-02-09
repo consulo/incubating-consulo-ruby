@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLHighlighterKeys;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer._RHTMLLexer;
@@ -54,14 +55,14 @@ public class RHTMLFileHighlighterImpl extends SyntaxHighlighterBase
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Lexer getHighlightingLexer()
 	{
 		return new _RHTMLLexer();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
 		return pack(ATTRIBUTES.get(tokenType));

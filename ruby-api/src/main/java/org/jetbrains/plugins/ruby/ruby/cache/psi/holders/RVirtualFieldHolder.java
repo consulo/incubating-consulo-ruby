@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.holders;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 
@@ -30,6 +31,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
  */
 public interface RVirtualFieldHolder extends RVirtualContainer
 {
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getVirtualFields();
 }

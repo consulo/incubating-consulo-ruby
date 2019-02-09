@@ -27,8 +27,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
@@ -44,6 +44,8 @@ import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -55,13 +57,13 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 {
 	private String myGeneratorName;
 
-	public SimpleGeneratorAction(@NotNull final String scriptName, @NotNull final String actionName, @Nullable final String description, @Nullable final Image icon)
+	public SimpleGeneratorAction(@Nonnull final String scriptName, @Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon)
 	{
 		super(actionName, description, TargetAWT.to(icon));
 		myGeneratorName = scriptName;
 	}
 
-	public SimpleGeneratorAction(@NotNull final String name)
+	public SimpleGeneratorAction(@Nonnull final String name)
 	{
 		this(name, format(name), RBundle.message("new.generate.common.action.title", name), RailsIcons.GENERATOR_ICON);
 	}
@@ -109,7 +111,7 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 	}
 
 	@Override
-	public void update(@NotNull final AnActionEvent e)
+	public void update(@Nonnull final AnActionEvent e)
 	{
 		super.update(e);
 
@@ -128,19 +130,19 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 		AnActionUtil.updatePresentation(presentation, isVisible, isEnabled);
 	}
 
-	protected SimpleGeneratorInputValidator createValidator(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	protected SimpleGeneratorInputValidator createValidator(@Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		return new SimpleGeneratorInputValidator(this, module, directory);
 	}
 
 	@Override
-	protected void checkBeforeCreate(@NotNull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException
+	protected void checkBeforeCreate(@Nonnull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException
 	{
 		// Do nothing
 	}
 
 	@Override
-	protected String[] createScriptParameters(final String inputString, @NotNull final String railsAppHomePath)
+	protected String[] createScriptParameters(final String inputString, @Nonnull final String railsAppHomePath)
 	{
 		final List<String> parameters = new ArrayList<String>();
 		parameters.add(VirtualFileUtil.buildSystemIndependentPath(railsAppHomePath, GeneratorsUtil.GENERATE_SCRIPT));
@@ -164,7 +166,7 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 	}
 
 	@Override
-	protected PsiElement[] invokeDialog(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	protected PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		final SimpleGeneratorInputValidator validator = createValidator(module, directory);
 		GenerateDialogs.showGenerateDialog(module, getGenerateDialogTitle(), validator);

@@ -22,7 +22,7 @@ import java.awt.Cursor;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.ide.BrowserUtil;
 
 /**
@@ -35,7 +35,7 @@ public class OpenLinkInBrowserHyperlinkListener implements HyperlinkListener
 {
 	private final Component myComponent;
 
-	public OpenLinkInBrowserHyperlinkListener(@NotNull final Component component)
+	public OpenLinkInBrowserHyperlinkListener(@Nonnull final Component component)
 	{
 		myComponent = component;
 	}

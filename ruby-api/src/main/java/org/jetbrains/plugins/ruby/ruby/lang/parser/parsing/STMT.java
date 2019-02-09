@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -70,7 +71,7 @@ stmt	: kALIAS fitem  fitem
 		;
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(builder.isDEBUG())
@@ -162,7 +163,7 @@ stmt	: kALIAS fitem  fitem
 	}
 
 
-	@NotNull
+	@Nonnull
 	private static IElementType parseSingleStatement(final RBuilder builder)
 	{
 /*

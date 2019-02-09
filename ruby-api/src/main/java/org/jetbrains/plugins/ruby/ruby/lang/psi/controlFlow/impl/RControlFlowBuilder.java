@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.UsageAnalyzer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -65,7 +65,7 @@ public class RControlFlowBuilder extends RubySystemCallVisitor
 	//// Control flow builder staff
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Instruction[] buildControlFlow(@Nullable final FileSymbol fileSymbol, @NotNull final RPsiElement scope, @Nullable final RPsiElement startInScope, @Nullable final RPsiElement endInScope)
+	public Instruction[] buildControlFlow(@Nullable final FileSymbol fileSymbol, @Nonnull final RPsiElement scope, @Nullable final RPsiElement startInScope, @Nullable final RPsiElement endInScope)
 	{
 		myInstructions = new ArrayList<InstructionImpl>();
 		myInstructionsStack = new Stack<InstructionImpl>();
@@ -245,7 +245,7 @@ public class RControlFlowBuilder extends RubySystemCallVisitor
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void visitElement(@NotNull final PsiElement element)
+	public void visitElement(@Nonnull final PsiElement element)
 	{
 		if(element == myStartElementInScope)
 		{

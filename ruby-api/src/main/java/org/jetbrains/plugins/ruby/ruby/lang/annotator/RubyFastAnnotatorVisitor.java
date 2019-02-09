@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
@@ -48,7 +48,7 @@ public class RubyFastAnnotatorVisitor extends RubyElementVisitor
 {
 	private AnnotationHolder myHolder;
 
-	public RubyFastAnnotatorVisitor(@NotNull final AnnotationHolder holder)
+	public RubyFastAnnotatorVisitor(@Nonnull final AnnotationHolder holder)
 	{
 		myHolder = holder;
 	}

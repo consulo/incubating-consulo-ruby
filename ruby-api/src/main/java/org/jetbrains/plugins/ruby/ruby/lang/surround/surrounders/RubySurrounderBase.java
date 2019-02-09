@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import com.intellij.lang.surroundWith.Surrounder;
@@ -35,7 +35,7 @@ import com.intellij.util.IncorrectOperationException;
 public abstract class RubySurrounderBase implements Surrounder
 {
 	@Override
-	public boolean isApplicable(@NotNull final PsiElement[] elements)
+	public boolean isApplicable(@Nonnull final PsiElement[] elements)
 	{
 		return elements.length > 0;
 	}
@@ -52,7 +52,7 @@ public abstract class RubySurrounderBase implements Surrounder
 
 	@Override
 	@Nullable
-	public TextRange surroundElements(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiElement[] elements) throws IncorrectOperationException
+	public TextRange surroundElements(@Nonnull final Project project, @Nonnull final Editor editor, @Nonnull final PsiElement[] elements) throws IncorrectOperationException
 	{
 		RPsiElement element = RubyPsiUtil.getTopLevelElements(project, getText(elements)).get(0);
 

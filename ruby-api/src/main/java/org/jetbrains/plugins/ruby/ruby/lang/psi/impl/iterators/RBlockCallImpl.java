@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -40,7 +40,7 @@ public class RBlockCallImpl extends RPsiElementBase implements RBlockCall
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RPsiElement call = getCall();
@@ -48,7 +48,7 @@ public class RBlockCallImpl extends RPsiElementBase implements RBlockCall
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getCall()
 	{
 		//noinspection ConstantConditions

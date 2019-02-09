@@ -23,8 +23,8 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.Ref;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -32,6 +32,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.loadPath.RLoadPathChooserUtil;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 
 /**
@@ -44,7 +45,7 @@ public class JRubyLoadPathChooser extends FacetEditorTab
 {
 	private Ref<CheckableDirectoriesContainer> myLoadPathDirsCopyRef = new Ref<CheckableDirectoriesContainer>();
 
-	public JRubyLoadPathChooser(@NotNull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration, @NotNull final FacetEditorContext editorContext)
+	public JRubyLoadPathChooser(@Nonnull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration, @Nonnull final FacetEditorContext editorContext)
 	{
 		myJRubyFacetConfiguration = jRubyFacetConfiguration;
 		myEditorContext = editorContext;
@@ -73,7 +74,7 @@ public class JRubyLoadPathChooser extends FacetEditorTab
 		return RLoadPathChooserUtil.loadPathDirsAreModified(myLoadPathDirsCopyRef.get(), origLoadPathDirs);
 	}
 
-	@NotNull
+	@Nonnull
 	private Module getModule()
 	{
 		final Module module = myEditorContext.getModule();

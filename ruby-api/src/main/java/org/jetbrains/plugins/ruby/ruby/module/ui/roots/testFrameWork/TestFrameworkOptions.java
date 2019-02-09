@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

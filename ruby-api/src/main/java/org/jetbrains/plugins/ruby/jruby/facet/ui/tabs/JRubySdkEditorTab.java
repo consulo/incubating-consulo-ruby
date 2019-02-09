@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 import javax.swing.JComponent;
 
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.SelectJRubySdkPane;
@@ -39,7 +39,7 @@ public class JRubySdkEditorTab extends FacetEditorTab
 	private RSupportPerModuleSettingsImpl myJRubyFacetConfiguration;
 	protected FacetEditorContext myEditorContext;
 
-	public JRubySdkEditorTab(@NotNull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration, @NotNull final FacetEditorContext editorContext)
+	public JRubySdkEditorTab(@Nonnull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration, @Nonnull final FacetEditorContext editorContext)
 	{
 		myJRubyFacetConfiguration = jRubyFacetConfiguration;
 		myEditorContext = editorContext;

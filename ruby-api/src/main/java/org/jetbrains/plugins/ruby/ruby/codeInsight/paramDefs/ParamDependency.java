@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * @author yole

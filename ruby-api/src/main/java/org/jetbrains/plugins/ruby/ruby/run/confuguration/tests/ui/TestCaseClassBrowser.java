@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
 import java.util.HashMap;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -140,7 +140,7 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 	}
 
 	@Nullable
-	protected RClass findClass(@NotNull final String qualifiedNameClassName, @NotNull final VirtualFile scriptFile)
+	protected RClass findClass(@Nonnull final String qualifiedNameClassName, @Nonnull final VirtualFile scriptFile)
 	{
 
 		final Project project = getProject();
@@ -182,7 +182,7 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 		private HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>> processedElements = new HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>>();
 
 		@Override
-		public boolean isAccepted(@NotNull final RVirtualClass rVClass)
+		public boolean isAccepted(@Nonnull final RVirtualClass rVClass)
 		{
 			final VirtualFile virtualFile = rVClass.getVirtualFile();
 			if(virtualFile == null)

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks.RCompoundStatementNavigator;
 import com.intellij.formatting.Indent;
@@ -36,14 +36,14 @@ import com.intellij.psi.xml.XmlTag;
  */
 public class RHTMLIndentProcessor
 {
-	@NotNull
-	public static Indent calcHTMLIndentForChild(@NotNull final ASTNode parentNode, @NotNull final XmlFormattingPolicy fPolicy)
+	@Nonnull
+	public static Indent calcHTMLIndentForChild(@Nonnull final ASTNode parentNode, @Nonnull final XmlFormattingPolicy fPolicy)
 	{
 		return Indent.getSpaceIndent(calcHTMLIndentSize(parentNode, fPolicy));
 	}
 
-	@NotNull
-	public static Indent calcRHTMLIndentForChild(@Nullable final RCompoundStatement childRCmpSt, @Nullable final RCompoundStatement parentRCmpSt, @Nullable final ASTNode parentNode, @NotNull final XmlFormattingPolicy fPolicy, final boolean addHtmlIndent)
+	@Nonnull
+	public static Indent calcRHTMLIndentForChild(@Nullable final RCompoundStatement childRCmpSt, @Nullable final RCompoundStatement parentRCmpSt, @Nullable final ASTNode parentNode, @Nonnull final XmlFormattingPolicy fPolicy, final boolean addHtmlIndent)
 	{
 
 		int indent_size = 0;
@@ -56,13 +56,13 @@ public class RHTMLIndentProcessor
 		return Indent.getSpaceIndent(indent_size);
 	}
 
-	public static Indent calcRubyIndentForNode(@Nullable final RCompoundStatement childRCmpSt, @Nullable final RCompoundStatement parentRCmpSt, @NotNull final CodeStyleSettings settings)
+	public static Indent calcRubyIndentForNode(@Nullable final RCompoundStatement childRCmpSt, @Nullable final RCompoundStatement parentRCmpSt, @Nonnull final CodeStyleSettings settings)
 	{
 
 		return Indent.getSpaceIndent(calcRubyIndentSize(childRCmpSt, parentRCmpSt, settings));
 	}
 
-	public static int calcHTMLIndentSize(@NotNull final ASTNode parentNode, final XmlFormattingPolicy fPolicy)
+	public static int calcHTMLIndentSize(@Nonnull final ASTNode parentNode, final XmlFormattingPolicy fPolicy)
 	{
 		final PsiElement parentPsi = parentNode.getPsi();
 		if(parentPsi instanceof XmlTag)
@@ -82,7 +82,7 @@ public class RHTMLIndentProcessor
 		return getHTMLIndentSize(fPolicy);
 	}
 
-	public static int calcRubyIndentSize(@Nullable final RCompoundStatement childRCmpSt, @Nullable final RCompoundStatement parentRCmpSt, @NotNull final CodeStyleSettings settings)
+	public static int calcRubyIndentSize(@Nullable final RCompoundStatement childRCmpSt, @Nullable final RCompoundStatement parentRCmpSt, @Nonnull final CodeStyleSettings settings)
 	{
 
 		int indent_count = 0;
@@ -106,7 +106,7 @@ public class RHTMLIndentProcessor
 		return fPolicy.getSettings().getIndentSize(XmlFileType.INSTANCE);
 	}
 
-	public static Indent getRTHMLIndent(@NotNull final CodeStyleSettings settings, final int count)
+	public static Indent getRTHMLIndent(@Nonnull final CodeStyleSettings settings, final int count)
 	{
 		return Indent.getSpaceIndent(getRHTMLIndentSize(settings, count));
 	}

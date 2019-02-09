@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -48,7 +49,7 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
 	private RVirtualName myName;
 
 
-	public RVirtualContainerBase(@Nullable final RVirtualContainer container, @NotNull final RVirtualName name, final AccessModifier accessModifier, @NotNull final RFileInfo containingFileInfo)
+	public RVirtualContainerBase(@Nullable final RVirtualContainer container, @Nonnull final RVirtualName name, final AccessModifier accessModifier, @Nonnull final RFileInfo containingFileInfo)
 	{
 
 		super(container);
@@ -58,28 +59,28 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
 	}
 
 
-	@NotNull
+	@Nonnull
 	public RVirtualName getVirtualName()
 	{
 		return myName;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName.getName();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getFullPath()
 	{
 		return myName.getPath();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFullName()
 	{
 		return myName.getFullName();
@@ -92,7 +93,7 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	final public List<RVirtualStructuralElement> getVirtualStructureElements()
 	{
 		return myStructureElements;
@@ -104,28 +105,28 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getDefaultChildAccessModifier()
 	{
 		return AccessModifier.PUBLIC;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getAccessModifier()
 	{
 		return myAccessModifier;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RFileInfo getContainingFileInfo()
 	{
 		return myContainingFileInfo;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getContainingFileUrl()
 	{
 		return myContainingFileInfo.getUrl();
@@ -139,7 +140,7 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
 	}
 
 	@Override
-	public void dump(@NotNull StringBuilder buffer, final int indent)
+	public void dump(@Nonnull StringBuilder buffer, final int indent)
 	{
 		super.dump(buffer, indent);
 		for(RVirtualStructuralElement mySubContainer : myStructureElements)
@@ -150,7 +151,7 @@ public abstract class RVirtualContainerBase extends RVirtualStructuralElementBas
 	}
 
 	@Override
-	public int getIndexOf(@NotNull RVirtualStructuralElement element)
+	public int getIndexOf(@Nonnull RVirtualStructuralElement element)
 	{
 		for(int i = 0; i < myStructureElements.size(); i++)
 		{

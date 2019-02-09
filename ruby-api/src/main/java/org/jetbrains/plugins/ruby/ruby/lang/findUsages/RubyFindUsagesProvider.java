@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyWordsScanner;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -53,7 +53,7 @@ public class RubyFindUsagesProvider implements FindUsagesProvider
 	}
 
 	@Override
-	public boolean canFindUsagesFor(@NotNull final PsiElement psiElement)
+	public boolean canFindUsagesFor(@Nonnull final PsiElement psiElement)
 	{
 		// we can find containers except RObjectClass
 		if(psiElement instanceof RContainer && !(psiElement instanceof RObjectClass))
@@ -83,14 +83,14 @@ public class RubyFindUsagesProvider implements FindUsagesProvider
 
 	@Override
 	@Nullable
-	public String getHelpId(@NotNull PsiElement psiElement)
+	public String getHelpId(@Nonnull PsiElement psiElement)
 	{
 		return null;
 	}
 
 	@Override
-	@NotNull
-	public String getType(@NotNull PsiElement psiElement)
+	@Nonnull
+	public String getType(@Nonnull PsiElement psiElement)
 	{
 		if(psiElement instanceof RIdentifier)
 		{
@@ -108,15 +108,15 @@ public class RubyFindUsagesProvider implements FindUsagesProvider
 	}
 
 	@Override
-	@NotNull
-	public String getDescriptiveName(@NotNull PsiElement element)
+	@Nonnull
+	public String getDescriptiveName(@Nonnull PsiElement element)
 	{
 		return RubyPsiUtil.getPresentableName(element);
 	}
 
 	@Override
-	@NotNull
-	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
+	@Nonnull
+	public String getNodeText(@Nonnull PsiElement element, boolean useFullName)
 	{
 		return RubyPsiUtil.getPresentableName(element);
 	}

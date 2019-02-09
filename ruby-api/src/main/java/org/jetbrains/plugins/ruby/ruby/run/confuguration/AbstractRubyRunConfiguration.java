@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
@@ -55,7 +57,7 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
 
 	private String myModuleName;
 
-	@NotNull
+	@Nonnull
 	private String myWorkingDirectory = TextUtil.EMPTY_STRING;
 	private String myRubyArgs = TextUtil.EMPTY_STRING;
 	private String mySdkName = TextUtil.EMPTY_STRING;
@@ -83,7 +85,7 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
 
 	protected abstract AbstractRubyRunConfiguration createInstance();
 
-	@NotNull
+	@Nonnull
 	public Module[] getModules()
 	{
 		return RModuleUtil.getAllModulesWithRubySupport(getProject());
@@ -124,7 +126,7 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getWorkingDirectory()
 	{
 		return myWorkingDirectory;
@@ -242,7 +244,7 @@ public abstract class AbstractRubyRunConfiguration extends RunConfigurationBase 
 	}
 
 	@Override
-	public void setEnvs(@NotNull final Map<String, String> envs)
+	public void setEnvs(@Nonnull final Map<String, String> envs)
 	{
 		myEnvs = envs;
 	}

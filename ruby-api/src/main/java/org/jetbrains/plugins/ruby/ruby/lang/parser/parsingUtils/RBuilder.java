@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
 import java.util.Map;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;

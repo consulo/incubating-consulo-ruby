@@ -22,8 +22,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import com.intellij.util.containers.HashMap;
@@ -43,7 +44,7 @@ public class DuckTypeImpl implements DuckType
 		myMessages.clear();
 	}
 
-	public void addMessage(@NotNull final Message message)
+	public void addMessage(@Nonnull final Message message)
 	{
 		// Add messsage to all message
 		addForName(message, null);
@@ -51,7 +52,7 @@ public class DuckTypeImpl implements DuckType
 		addForName(message, message.getName());
 	}
 
-	private void addForName(@NotNull final Message message, final String name)
+	private void addForName(@Nonnull final Message message, final String name)
 	{
 		Collection<Message> messages = myMessages.get(name);
 		if(messages == null)
@@ -63,14 +64,14 @@ public class DuckTypeImpl implements DuckType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<Message> getMessages()
 	{
 		return getMessagesForName(null);
 	}
 
 	@Override
-	public Collection<Message> contains(@NotNull final DuckType type)
+	public Collection<Message> contains(@Nonnull final DuckType type)
 	{
 		final List<Message> messages = new ArrayList<Message>();
 		for(Message typeMessage : type.getMessages())

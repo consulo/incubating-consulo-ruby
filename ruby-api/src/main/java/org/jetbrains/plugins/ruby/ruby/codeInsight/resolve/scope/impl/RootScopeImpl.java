@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.impl;
 import java.util.Collection;
 import java.util.HashMap;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.PseudoScopeHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.Scope;
@@ -35,20 +35,20 @@ public class RootScopeImpl extends ScopeImpl implements RootScope
 {
 	private HashMap<PseudoScopeHolder, Scope> mySubScopes = new HashMap<PseudoScopeHolder, Scope>();
 
-	public RootScopeImpl(@NotNull final ScopeHolder holder)
+	public RootScopeImpl(@Nonnull final ScopeHolder holder)
 	{
 		super(holder);
 	}
 
 	@Override
 	@Nullable
-	public Scope getChildScope(@NotNull final PseudoScopeHolder holder)
+	public Scope getChildScope(@Nonnull final PseudoScopeHolder holder)
 	{
 		return mySubScopes.get(holder);
 	}
 
 	@Override
-	public void registerSubScope(@NotNull final PseudoScopeHolder scopeHolder, @NotNull final Scope childScope)
+	public void registerSubScope(@Nonnull final PseudoScopeHolder scopeHolder, @Nonnull final Scope childScope)
 	{
 		mySubScopes.put(scopeHolder, childScope);
 	}

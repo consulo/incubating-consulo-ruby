@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import com.intellij.lang.Language;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -47,7 +47,7 @@ public class DataContextUtil
 	 * @param originalHandler Original handler for some action
 	 * @return true if enabled, false otherwise
 	 */
-	public static boolean isEnabled(@NotNull final Editor editor, @NotNull final DataContext dataContext, @NotNull final EditorActionHandler originalHandler)
+	public static boolean isEnabled(@Nonnull final Editor editor, @Nonnull final DataContext dataContext, @Nonnull final EditorActionHandler originalHandler)
 	{
 		//noinspection SimplifiableIfStatement
 		if(getLanguage(dataContext) == RubyFileType.INSTANCE.getLanguage())
@@ -64,7 +64,7 @@ public class DataContextUtil
 	 * @param dataContext Current DataContext object
 	 * @return PsiFile - current file
 	 */
-	public static PsiFile getPsiFile(@NotNull final Editor editor, @NotNull final DataContext dataContext)
+	public static PsiFile getPsiFile(@Nonnull final Editor editor, @Nonnull final DataContext dataContext)
 	{
 		return PsiDocumentManager.getInstance(getProject(dataContext)).getPsiFile(editor.getDocument());
 	}
@@ -76,7 +76,7 @@ public class DataContextUtil
 	 * @return Project object - current project
 	 */
 	@Nullable
-	public static Project getProject(@NotNull final DataContext dataContext)
+	public static Project getProject(@Nonnull final DataContext dataContext)
 	{
 		return dataContext.getData(CommonDataKeys.PROJECT);
 	}
@@ -88,7 +88,7 @@ public class DataContextUtil
 	 * @return Module object - current module
 	 */
 	@Nullable
-	public static Module getModule(@NotNull final DataContext dataContext)
+	public static Module getModule(@Nonnull final DataContext dataContext)
 	{
 		return dataContext.getData(CommonDataKeys.MODULE);
 	}
@@ -100,7 +100,7 @@ public class DataContextUtil
 	 * @return Language object - current language
 	 */
 	@Nullable
-	public static Language getLanguage(@NotNull final DataContext dataContext)
+	public static Language getLanguage(@Nonnull final DataContext dataContext)
 	{
 		return dataContext.getData(LangDataKeys.LANGUAGE);
 	}
@@ -112,7 +112,7 @@ public class DataContextUtil
 	 * @return Editor object - current editor
 	 */
 	@Nullable
-	public static Editor getEditor(@NotNull final DataContext dataContext)
+	public static Editor getEditor(@Nonnull final DataContext dataContext)
 	{
 		return dataContext.getData(CommonDataKeys.EDITOR);
 	}
@@ -121,7 +121,7 @@ public class DataContextUtil
 	 * @param editor Current editor
 	 * @return true if editor cannot modify opened file
 	 */
-	public static boolean isReadOnly(@NotNull final Editor editor)
+	public static boolean isReadOnly(@Nonnull final Editor editor)
 	{
 		if(editor.isViewer())
 		{

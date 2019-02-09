@@ -23,9 +23,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -67,12 +69,12 @@ public class HelpersConventions
 
 	public static final List<String> ACTION_VIEW_PATH = Arrays.asList(ACTION_VIEW_NAME, HELPERS_NAME);
 
-	public static boolean isHelperFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isHelperFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		return isHelperFile(rFile, module, RContainerUtil.getTopLevelModules(rFile));
 	}
 
-	public static boolean isHelperFile(@NotNull final RVirtualFile rFile, @Nullable final Module module, @NotNull final List<RVirtualModule> modules)
+	public static boolean isHelperFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualModule> modules)
 	{
 		if(module == null)
 		{
@@ -131,7 +133,7 @@ public class HelpersConventions
 		return name.substring(0, name.length() - RailsConstants.HELPERS_FILE_NAME_SUFFIX.length() - 1);
 	}
 
-	public static boolean isHelperModule(@Nullable final RVirtualModule rModule, @NotNull final Module module)
+	public static boolean isHelperModule(@Nullable final RVirtualModule rModule, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module) || getHelperNameByModuleName(rModule) == null)
 		{
@@ -176,8 +178,8 @@ public class HelpersConventions
 		return buff.toString().equals(rModule.getContainingFileUrl());
 	}
 
-	@NotNull
-	public static List<VirtualFile> getBuiltInHelpers(@NotNull final String actionViewFileUrl)
+	@Nonnull
+	public static List<VirtualFile> getBuiltInHelpers(@Nonnull final String actionViewFileUrl)
 	{
 		final VirtualFileManager manager = VirtualFileManager.getInstance();
 		final VirtualFile helpersDir = manager.findFileByUrl(VirtualFileUtil.removeExtension(actionViewFileUrl));
@@ -217,7 +219,7 @@ public class HelpersConventions
 		return root + VirtualFileUtil.VFS_PATH_SEPARATOR + RailsConstants.APPLICATION_HELPER_FILE_NAME + "." + RubyFileType.INSTANCE.getDefaultExtension();
 	}
 
-	@NotNull
+	@Nonnull
 	public static String getHelperFileName(@Nullable final String controllerClassName)
 	{
 		final String name = ControllersConventions.getControllerNameByClassName(controllerClassName);
@@ -232,7 +234,7 @@ public class HelpersConventions
 		return buff.toString();
 	}
 
-	@NotNull
+	@Nonnull
 	public static String getHelperModuleName(@Nullable final String controllerClassName)
 	{
 		final String name = ControllersConventions.getControllerNameByClassName(controllerClassName);
@@ -246,7 +248,7 @@ public class HelpersConventions
 	}
 
 	@Nullable
-	public static String getHelperURL(@NotNull final String controllerDirUrl, @NotNull final String controllerName, final Module module)
+	public static String getHelperURL(@Nonnull final String controllerDirUrl, @Nonnull final String controllerName, final Module module)
 	{
 
 		final String path = ControllersConventions.getRelativePathOfControllerFolder(controllerDirUrl, module);
@@ -280,7 +282,7 @@ public class HelpersConventions
 	 * @return Ruby helper module
 	 */
 	@Nullable
-	public static RVirtualModule getHelperModule(@Nullable final RVirtualFile rFile, @NotNull final String controllerClassName)
+	public static RVirtualModule getHelperModule(@Nullable final RVirtualFile rFile, @Nonnull final String controllerClassName)
 	{
 		if(rFile == null)
 		{
@@ -303,7 +305,7 @@ public class HelpersConventions
 	}
 
 	@Nullable
-	public static String getRelativePathOfHelperFolder(@Nullable final String fileUrl, @NotNull final Module module)
+	public static String getRelativePathOfHelperFolder(@Nullable final String fileUrl, @Nonnull final Module module)
 	{
 		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
 		assert railsPaths != null;
@@ -327,8 +329,8 @@ public class HelpersConventions
 	 * @param controllerClass Controller class
 	 * @return Name of Helper Module or ""(for not Controllers classes)
 	 */
-	@NotNull
-	public static String getHelperModuleNameByController(@NotNull final RVirtualClass controllerClass)
+	@Nonnull
+	public static String getHelperModuleNameByController(@Nonnull final RVirtualClass controllerClass)
 	{
 		final String className = controllerClass.getName();
 		if(!className.endsWith(RailsConstants.CONTROLLERS_CLASS_NAME_SUFFIX))

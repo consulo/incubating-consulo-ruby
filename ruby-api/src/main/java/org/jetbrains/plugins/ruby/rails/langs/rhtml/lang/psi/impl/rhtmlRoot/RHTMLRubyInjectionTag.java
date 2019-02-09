@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 
 /**
@@ -27,7 +28,7 @@ import com.intellij.psi.PsiElement;
  */
 public interface RHTMLRubyInjectionTag extends PsiElement
 {
-	@NotNull
+	@Nonnull
 	public String getTagText();
 
 }

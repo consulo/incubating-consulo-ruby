@@ -18,9 +18,12 @@ package org.jetbrains.plugins.ruby.ruby.ri;
 
 import java.util.ArrayList;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.gems.GemUtil;
 import org.jetbrains.plugins.ruby.addins.gems.GemsRunner;
@@ -80,7 +83,7 @@ class RIUtil
 	 * @param displayWidth   width of info pane
 	 * @return Search result
 	 */
-	public static String lookup(@NotNull final Project project, @Nullable final Sdk jdk, @NotNull final String item, final boolean doUseDefaults, @NotNull final String[] docDirectories, final int displayWidth)
+	public static String lookup(@Nonnull final Project project, @Nullable final Sdk jdk, @Nonnull final String item, final boolean doUseDefaults, @Nonnull final String[] docDirectories, final int displayWidth)
 	{
 		final Ref<String> result = new Ref<String>();
 		// Running add with indefinite progressBar
@@ -125,7 +128,7 @@ class RIUtil
 	 * @param lookupItem lookupItem
 	 * @return resulting string
 	 */
-	public static String processRiOutput(@NotNull final Output output, @NotNull final String lookupItem)
+	public static String processRiOutput(@Nonnull final Output output, @Nonnull final String lookupItem)
 	{
 		final String outStr = TextUtil.replaceEOLS(output.getStdout());
 
@@ -163,7 +166,7 @@ class RIUtil
 		return sb.append("</pre>").toString();
 	}
 
-	private static void processMultipleRefinements(@NotNull final StringBuilder sb, @NotNull final String outStr)
+	private static void processMultipleRefinements(@Nonnull final StringBuilder sb, @Nonnull final String outStr)
 	{
 		sb.append(MULTIPLE_DOCS).append("\n\n");
 		int startPos = outStr.indexOf(MULTIPLE_DOCS) + MULTIPLE_DOCS.length();
@@ -180,7 +183,7 @@ class RIUtil
 		}
 	}
 
-	private static void processClassMethods(@NotNull final StringBuilder sb, @NotNull final String outStr, @NotNull final String lookupItem)
+	private static void processClassMethods(@Nonnull final StringBuilder sb, @Nonnull final String outStr, @Nonnull final String lookupItem)
 	{
 		int classMethodsPos = outStr.indexOf(CLASS_METHODS);
 		sb.append(outStr.substring(0, classMethodsPos));
@@ -205,7 +208,7 @@ class RIUtil
 		csvToLinkedMethodList(sb, csvMethods.trim(), lookupItem, '.');
 	}
 
-	private static void processInstanceMethods(@NotNull final StringBuilder sb, @NotNull final String outStr, @NotNull final String lookupItem)
+	private static void processInstanceMethods(@Nonnull final StringBuilder sb, @Nonnull final String outStr, @Nonnull final String lookupItem)
 	{
 		int instanceMethodsPos = outStr.indexOf(INSTANCE_METHODS);
 		sb.append("\n\n").append(INSTANCE_METHODS);
@@ -223,7 +226,7 @@ class RIUtil
 		csvToLinkedMethodList(sb, methodsStr, lookupItem, '.');
 	}
 
-	private static void processAttributes(@NotNull final StringBuilder sb, @NotNull final String outStr)
+	private static void processAttributes(@Nonnull final StringBuilder sb, @Nonnull final String outStr)
 	{
 		sb.append("\n\n").append(ATTRIBUTES);
 		int attrPost = outStr.indexOf(ATTRIBUTES);
@@ -231,7 +234,7 @@ class RIUtil
 		sb.append(attrStr);
 	}
 
-	private static StringBuilder csvToLinkedMethodList(@NotNull final StringBuilder sb, @NotNull final String csvStr, @NotNull final String lookupItem, final char riDelim)
+	private static StringBuilder csvToLinkedMethodList(@Nonnull final StringBuilder sb, @Nonnull final String csvStr, @Nonnull final String lookupItem, final char riDelim)
 	{
 		String[] methods = csvStr.split(",");
 		for(String method : methods)
@@ -245,7 +248,7 @@ class RIUtil
 		return sb;
 	}
 
-	private static String trimAndEscape(@NotNull final String str)
+	private static String trimAndEscape(@Nonnull final String str)
 	{
 		String out = str.trim();
 		if(out.indexOf("<<") != -1)

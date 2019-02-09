@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 
 /**
@@ -8,9 +9,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  */
 public interface RespondsToAccess extends ReferenceAccess
 {
-	@NotNull
+	@Nonnull
 	RPsiElement getCall();
 
-	@NotNull
+	@Nonnull
 	String getName();
 }

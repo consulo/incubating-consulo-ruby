@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,9 +30,9 @@ public interface RootScope extends Scope
 {
 
 	@Nullable
-	public Scope getChildScope(@NotNull final PseudoScopeHolder holder);
+	public Scope getChildScope(@Nonnull final PseudoScopeHolder holder);
 
-	void registerSubScope(@NotNull PseudoScopeHolder pseudoScopeHolder, @NotNull Scope childScope);
+	void registerSubScope(@Nonnull PseudoScopeHolder pseudoScopeHolder, @Nonnull Scope childScope);
 
 	public Collection<Scope> getAllChildScopes();
 }

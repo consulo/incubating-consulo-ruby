@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 
@@ -32,6 +32,6 @@ public interface RCompoundStatement extends RExpression
 	/**
 	 * @return All the statements
 	 */
-	@NotNull
+	@Nonnull
 	public List<RPsiElement> getStatements();
 }

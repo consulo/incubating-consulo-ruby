@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary.AREF_ARGS;
@@ -41,7 +41,7 @@ public class Array implements RubyTokenTypes
 /*
 		| tLBRACK aref_args ']'
 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();

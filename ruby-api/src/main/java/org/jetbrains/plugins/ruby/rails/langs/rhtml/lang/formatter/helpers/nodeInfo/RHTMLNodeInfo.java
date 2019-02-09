@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 
@@ -36,7 +36,7 @@ public class RHTMLNodeInfo extends NodeInfo
 	@Nullable
 	private final TextRange nextNodeRange;
 
-	protected RHTMLNodeInfo(@NotNull final ASTNode parentNode, @Nullable final ASTNode previousNode,   //TODO remove, really no usages
+	protected RHTMLNodeInfo(@Nonnull final ASTNode parentNode, @Nullable final ASTNode previousNode,   //TODO remove, really no usages
 			@Nullable final ASTNode nextNode, @Nullable final TextRange nextNodeRange)
 	{
 		this.parentNode = parentNode;
@@ -51,7 +51,7 @@ public class RHTMLNodeInfo extends NodeInfo
 		return NodeType.RHTML_NODE;
 	}
 
-	@NotNull
+	@Nonnull
 	public ASTNode getParentNode()
 	{
 		return parentNode;

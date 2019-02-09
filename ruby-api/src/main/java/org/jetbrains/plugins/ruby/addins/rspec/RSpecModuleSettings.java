@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.addins.rspec;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleServiceManager;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,7 +44,7 @@ public class RSpecModuleSettings
 		myStorage = RSpecModuleSettingsStorage.getInstance(module);
 	}
 
-	public static RSpecModuleSettings getInstance(@NotNull final Module module)
+	public static RSpecModuleSettings getInstance(@Nonnull final Module module)
 	{
 		return ModuleServiceManager.getService(module, RSpecModuleSettings.class);
 	}

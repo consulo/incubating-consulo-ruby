@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.iterators;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assignments.MLHS_OR_LHS;
@@ -20,7 +20,7 @@ public class BLOCK_VAR
 				| mlhs
 				;
 	*/
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker iteratorVariablesMarker = builder.mark();

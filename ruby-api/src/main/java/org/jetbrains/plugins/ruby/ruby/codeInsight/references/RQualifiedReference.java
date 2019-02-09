@@ -21,9 +21,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -78,12 +80,12 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 	protected RPsiElement myWholeReference;
 	protected RReference.Type myType;
 
-	public RQualifiedReference(@NotNull final Project project, @NotNull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @NotNull final PsiElement refValue, @NotNull final RReference.Type type)
+	public RQualifiedReference(@Nonnull final Project project, @Nonnull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @Nonnull final PsiElement refValue, @Nonnull final RReference.Type type)
 	{
 		this(project, wholeReference, refObject, refValue, type, getName(wholeReference, refValue));
 	}
 
-	private static String getName(@NotNull final RPsiElement wholeReference, @NotNull final PsiElement refValue)
+	private static String getName(@Nonnull final RPsiElement wholeReference, @Nonnull final PsiElement refValue)
 	{
 		String name = refValue.getText();
 		if(name.equals(RMethod.NEW))
@@ -101,7 +103,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 		return name;
 	}
 
-	public RQualifiedReference(@NotNull final Project project, @NotNull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @NotNull final PsiElement refValue, @NotNull final RReference.Type type, @NotNull final String name)
+	public RQualifiedReference(@Nonnull final Project project, @Nonnull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @Nonnull final PsiElement refValue, @Nonnull final RReference.Type type, @Nonnull final String name)
 	{
 		myProject = project;
 		myWholeReference = wholeReference;
@@ -123,7 +125,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public final ResolveResult[] multiResolve(final boolean incompleteCode)
 	{
 		final PsiManager manager = getElement().getManager();
@@ -138,7 +140,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
 	{
 		if(myRefValue instanceof RPsiElementBase && ((RPsiElementBase) myRefValue).isClassOrModuleName())
@@ -186,7 +188,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getRefValue()
 	{
 		return myRefValue;
@@ -226,7 +228,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 		return element;
 	}
 
-	private static void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException
+	private static void checkName(@NonNls @Nonnull final String newName) throws IncorrectOperationException
 	{
 		if(!TextUtil.isCID(newName) && !TextUtil.isFID(newName))
 		{
@@ -236,7 +238,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 
 	// IDEA calls bindToElement if we rename/move Java class
 	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException
 	{
 		if(element instanceof PsiClass)
 		{
@@ -258,14 +260,14 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		return multiResolveToSymbols(fileSymbol, getRefObjectType(fileSymbol));
 	}
 
-	@NotNull
-	protected List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol, @NotNull final RType refObjectType)
+	@Nonnull
+	protected List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol, @Nonnull final RType refObjectType)
 	{
 		if(((RPsiElementBase) myWholeReference).isClassOrModuleName())
 		{
@@ -346,7 +348,7 @@ public class RQualifiedReference implements RPsiPolyvariantReference
 
 	}
 
-	@NotNull
+	@Nonnull
 	protected RType getRefObjectType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RType refObjType = myRefObject instanceof RExpression ? ((RExpression) myRefObject).getType(fileSymbol) : RType.NOT_TYPED;

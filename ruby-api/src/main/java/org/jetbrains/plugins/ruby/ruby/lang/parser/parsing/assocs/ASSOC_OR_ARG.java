@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assocs;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.ARG;
@@ -33,7 +34,7 @@ import com.intellij.psi.tree.IElementType;
  */
 public class ASSOC_OR_ARG implements RubyTokenTypes
 {
-	@NotNull
+	@Nonnull
 	public static IElementType parseWithLeadArg(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		if(result == RubyElementTypes.EMPTY_INPUT)

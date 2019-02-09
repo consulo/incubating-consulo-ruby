@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.RWrapAndIndentCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.indent.RIndentCOMPSTMT;
@@ -49,8 +49,8 @@ public class RubyIndentProcessor implements RubyTokenTypes
 	 * @param prevBlockNode previous block node
 	 * @return indent
 	 */
-	@NotNull
-	public static Indent getChildIndent(@NotNull final RubyBlock parent, @Nullable final ASTNode prevBlockNode, @NotNull final ASTNode blockNode)
+	@Nonnull
+	public static Indent getChildIndent(@Nonnull final RubyBlock parent, @Nullable final ASTNode prevBlockNode, @Nonnull final ASTNode blockNode)
 	{
 		final PsiElement psiParent = parent.getNode().getPsi();
 		final PsiElement psiChild = blockNode.getPsi();

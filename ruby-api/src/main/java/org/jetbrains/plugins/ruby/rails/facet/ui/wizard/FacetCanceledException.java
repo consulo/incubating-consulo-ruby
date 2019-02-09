@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 
 /**
@@ -32,7 +33,7 @@ public class FacetCanceledException extends RuntimeException
 		this(RBundle.message("rails.facet.wizard.error.add.facet.canceled"));
 	}
 
-	public FacetCanceledException(@NotNull final String causeMsg)
+	public FacetCanceledException(@Nonnull final String causeMsg)
 	{
 		super(causeMsg);
 	}

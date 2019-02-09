@@ -21,6 +21,7 @@ import static org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettin
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.Nullable;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -31,8 +32,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.ExternalRailsSettings;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
@@ -110,7 +111,7 @@ public class RailsProjectGeneratorTab extends TabbedSdkDependSettingsEditorTab i
 	}
 
 	@Override
-	public void setContext(@NotNull final TabbedSettingsContext context)
+	public void setContext(@Nonnull final TabbedSettingsContext context)
 	{
 		final TabbedSettingsContext oldContext = getContext();
 		super.setContext(context);

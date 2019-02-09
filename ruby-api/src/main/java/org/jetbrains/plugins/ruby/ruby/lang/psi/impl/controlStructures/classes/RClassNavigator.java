@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import com.intellij.psi.PsiElement;
@@ -32,14 +33,14 @@ import com.intellij.psi.PsiWhiteSpace;
 public class RClassNavigator
 {
 	@Nullable
-	public static RClass getByRBodyStatement(@NotNull final RBodyStatement statement)
+	public static RClass getByRBodyStatement(@Nonnull final RBodyStatement statement)
 	{
 		final PsiElement parent = statement.getParent();
 		return (parent instanceof RClass) ? (RClass) parent : null;
 	}
 
 	@Nullable
-	public static RClass getByPsiWhiteSpace(@NotNull final PsiWhiteSpace whiteSpace)
+	public static RClass getByPsiWhiteSpace(@Nonnull final PsiWhiteSpace whiteSpace)
 	{
 		final PsiElement parent = whiteSpace.getParent();
 		return (parent instanceof RClass) ? (RClass) parent : null;

@@ -18,9 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.module.ui.roots.loadPath;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoryItem;
 import com.intellij.openapi.diagnostic.Logger;
@@ -37,7 +37,7 @@ public class RLoadPathChooserUtil
 {
 	private static final Logger LOG = Logger.getInstance(RLoadPathChooserUtil.class.getName());
 
-	public static JComponent createLoadPathPanel(@NotNull final Module module, @NotNull final Ref<CheckableDirectoriesContainer> loadPathDirsCopyRef, @NotNull final CheckableDirectoriesContainer loadPathDirs)
+	public static JComponent createLoadPathPanel(@Nonnull final Module module, @Nonnull final Ref<CheckableDirectoriesContainer> loadPathDirsCopyRef, @Nonnull final CheckableDirectoriesContainer loadPathDirs)
 	{
 		try
 		{
@@ -51,7 +51,7 @@ public class RLoadPathChooserUtil
 		return null;
 	}
 
-	public static boolean loadPathDirsAreModified(@NotNull final CheckableDirectoriesContainer newLoadPathDirs, @NotNull final CheckableDirectoriesContainer origLoadPathDirs)
+	public static boolean loadPathDirsAreModified(@Nonnull final CheckableDirectoriesContainer newLoadPathDirs, @Nonnull final CheckableDirectoriesContainer origLoadPathDirs)
 	{
 		final List<CheckableDirectoryItem> newItemList = newLoadPathDirs.getCheckableDirectories();
 		final List<CheckableDirectoryItem> origItemList = origLoadPathDirs.getCheckableDirectories();

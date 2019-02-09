@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,6 +26,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface RubyLookupItem
 {
-	@NotNull
+	@Nonnull
 	public String getName();
 }

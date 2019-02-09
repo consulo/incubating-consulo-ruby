@@ -20,8 +20,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
@@ -55,7 +56,7 @@ public class RClassNode extends ProjectViewNode<RVirtualClass>
 	private final Image myIcon;
 	private final VirtualFile myVirtualFile;
 
-	public RClassNode(@NotNull final Project project, @Nullable final Module module, @NotNull final RVirtualFile file, @NotNull final RVirtualClass value, @NotNull final List<RVirtualClass> classes, final ViewSettings viewSettings)
+	public RClassNode(@Nonnull final Project project, @Nullable final Module module, @Nonnull final RVirtualFile file, @Nonnull final RVirtualClass value, @Nonnull final List<RVirtualClass> classes, final ViewSettings viewSettings)
 	{
 		super(project, value, viewSettings);
 		myVirtualFile = file.getVirtualFile();
@@ -84,13 +85,13 @@ public class RClassNode extends ProjectViewNode<RVirtualClass>
 	}
 
 	@Override
-	public boolean contains(@NotNull VirtualFile file)
+	public boolean contains(@Nonnull VirtualFile file)
 	{
 		return false;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<AbstractTreeNode> getChildren()
 	{
 		return Collections.emptyList();

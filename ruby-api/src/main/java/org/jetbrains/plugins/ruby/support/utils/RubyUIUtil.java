@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.util.ui.UIUtil;
 
 /**
@@ -35,7 +35,7 @@ public class RubyUIUtil
 	 * @param text Plain or Html tex
 	 * @return html
 	 */
-	public static String wrapToHtmlWithLabelFont(@NotNull final String text)
+	public static String wrapToHtmlWithLabelFont(@Nonnull final String text)
 	{
 		final StringBuilder buff = new StringBuilder();
 		buff.append("<html><head>");

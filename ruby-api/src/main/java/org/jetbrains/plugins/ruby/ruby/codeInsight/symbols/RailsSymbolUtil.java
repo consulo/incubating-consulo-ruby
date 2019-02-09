@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
@@ -57,8 +58,8 @@ public class RailsSymbolUtil
 	 * @param context    Context
 	 * @return Children - result
 	 */
-	@NotNull
-	public static Children getRailsSpecificSymbols(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final Context context)
+	@Nonnull
+	public static Children getRailsSpecificSymbols(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Context context)
 	{
 
 		final Children children = new Children(null);
@@ -89,7 +90,7 @@ public class RailsSymbolUtil
 	 * @return Symbol result of search
 	 */
 	@Nullable
-	public static Symbol findRailsSpecificSymbol(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final String name, @NotNull final Context context, @NotNull final TypeSet typeSet)
+	public static Symbol findRailsSpecificSymbol(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final String name, @Nonnull final Context context, @Nonnull final TypeSet typeSet)
 	{
 		for(Symbol child : getRailsSymbols(fileSymbol, symbol, context, true).getAll())
 		{
@@ -102,7 +103,7 @@ public class RailsSymbolUtil
 	}
 
 	@Nullable
-	private static Module getModule(@NotNull final Project project, @Nullable final RVirtualElement prototype)
+	private static Module getModule(@Nonnull final Project project, @Nullable final RVirtualElement prototype)
 	{
 		if(prototype == null)
 		{
@@ -116,8 +117,8 @@ public class RailsSymbolUtil
 		return ModuleUtil.findModuleForPsiElement(psiElement);
 	}
 
-	@NotNull
-	private static Children getRailsSymbols(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final Context context, final boolean forceShowAll)
+	@Nonnull
+	private static Children getRailsSymbols(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Context context, final boolean forceShowAll)
 	{
 		final RVirtualElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
 		final Module module = getModule(symbol.getProject(), prototype);
@@ -178,8 +179,8 @@ public class RailsSymbolUtil
 	 * @param context    Context
 	 * @return List of rails specific children
 	 */
-	@NotNull
-	private static Children getSymbolsForController(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final Context context)
+	@Nonnull
+	private static Children getSymbolsForController(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Context context)
 	{
 		final Symbol parentSymbol = symbol.getParentSymbol();
 		final Children children = new Children(null);
@@ -201,8 +202,8 @@ public class RailsSymbolUtil
 	 * @param context        Context
 	 * @return List of rails specific children
 	 */
-	@NotNull
-	private static Children getSymbolsForHelper(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final String controllerName, @NotNull final Context context)
+	@Nonnull
+	private static Children getSymbolsForHelper(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final String controllerName, @Nonnull final Context context)
 	{
 		final Symbol parentSymbol = symbol.getParentSymbol();
 		final Children children = new Children(null);
@@ -225,7 +226,7 @@ public class RailsSymbolUtil
 		return children;
 	}
 
-	private static Children getSymbolsForView(@NotNull final FileSymbol fileSymbol, @NotNull final Context context, @NotNull final VirtualFile viewFile, @NotNull final Module module)
+	private static Children getSymbolsForView(@Nonnull final FileSymbol fileSymbol, @Nonnull final Context context, @Nonnull final VirtualFile viewFile, @Nonnull final Module module)
 	{
 		final Children children = new Children(null);
 		// add builtin helpers
@@ -258,7 +259,7 @@ public class RailsSymbolUtil
 		return children;
 	}
 
-	private static void addOwnControllerElements(@NotNull final FileSymbol fileSymbol, @NotNull final Context context, @NotNull final Children children, @NotNull final Symbol controllerSymbol)
+	private static void addOwnControllerElements(@Nonnull final FileSymbol fileSymbol, @Nonnull final Context context, @Nonnull final Children children, @Nonnull final Symbol controllerSymbol)
 	{
 		// add controller fields
 		final Children controllerElements = SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, context, controllerSymbol, null);
@@ -280,7 +281,7 @@ public class RailsSymbolUtil
 		children.addSymbol(new Symbol(controllerSymbol.getProject(), "base_path", Type.ATTRIBUTE, null, null));
 	}
 
-	private static void addApplicationHelper(@NotNull final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context)
+	private static void addApplicationHelper(@Nonnull final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context)
 	{
 		final Symbol applicationHelper = SymbolUtil.findSymbol(fileSymbol, fileSymbol.getRootSymbol(), HelpersConventions.APPLICATION_HELPER, true, Type.MODULE.asSet());
 		if(applicationHelper != null)
@@ -289,7 +290,7 @@ public class RailsSymbolUtil
 		}
 	}
 
-	private static void addApplicationController(@NotNull final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context)
+	private static void addApplicationController(@Nonnull final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context)
 	{
 		final Symbol applicationController = SymbolUtil.findSymbol(fileSymbol, fileSymbol.getRootSymbol(), ControllersConventions.APPLICATION_CONTROLLER, true, Type.CLASS.asSet());
 		if(applicationController != null)
@@ -298,7 +299,7 @@ public class RailsSymbolUtil
 		}
 	}
 
-	private static void addBuiltinHelpers(@NotNull final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context)
+	private static void addBuiltinHelpers(@Nonnull final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context)
 	{
 		final Symbol helpersModule = SymbolUtil.findSymbol(fileSymbol, fileSymbol.getRootSymbol(), HelpersConventions.ACTION_VIEW_PATH, true, Type.MODULE.asSet());
 		if(helpersModule != null)

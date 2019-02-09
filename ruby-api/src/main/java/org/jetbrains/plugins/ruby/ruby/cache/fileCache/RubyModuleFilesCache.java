@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.vfs.VirtualFile;
 
 /**

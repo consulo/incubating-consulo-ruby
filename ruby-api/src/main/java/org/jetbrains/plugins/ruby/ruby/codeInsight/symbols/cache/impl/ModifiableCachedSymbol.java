@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
@@ -56,7 +56,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 	private String myUrl;
 	private boolean isJRubyEnabled;
 
-	public ModifiableCachedSymbol(@NotNull final Project project, @NotNull final String url, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	public ModifiableCachedSymbol(@Nonnull final Project project, @Nonnull final String url, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
 	{
 		super(project, module, sdk);
 		myUrl = url;
@@ -64,7 +64,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 	}
 
 	@Override
-	public void fileAdded(@NotNull final String url)
+	public void fileAdded(@Nonnull final String url)
 	{
 		// In common case, we clear cache if file is added
 		myOuterSymbol = null;
@@ -72,7 +72,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 	}
 
 	@Override
-	protected void fileChanged(@NotNull final String url)
+	protected void fileChanged(@Nonnull final String url)
 	{
 		if(myOuterSymbol == null)
 		{
@@ -103,7 +103,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 		}
 	}
 
-	private void updateOuterSymbol(@NotNull final RVirtualFile file)
+	private void updateOuterSymbol(@Nonnull final RVirtualFile file)
 	{
 		if(myOuterSymbol != null)
 		{

@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolCacheUtil;
@@ -39,7 +40,7 @@ public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol
 	private Set<String> myAllExternalUrls;
 	protected final boolean isJRubyEnabled;
 
-	public AbstractLayeredCachedSymbol(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	public AbstractLayeredCachedSymbol(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
 	{
 		super(project, module, sdk);
 		isJRubyEnabled = jRubyEnabled;
@@ -49,7 +50,7 @@ public abstract class AbstractLayeredCachedSymbol extends AbstractCachedSymbol
 	protected abstract CachedSymbol getBaseSymbol();
 
 	@Override
-	protected final void fileChanged(@NotNull String url)
+	protected final void fileChanged(@Nonnull String url)
 	{
 		if(myFileSymbol == null)
 		{

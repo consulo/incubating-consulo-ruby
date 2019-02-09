@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
@@ -31,10 +32,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  */
 public interface ScopeVariable
 {
-	@NotNull
+	@Nonnull
 	public String getName();
 
-	@NotNull
+	@Nonnull
 	public RIdentifier getPrototype();
 
 	/**
@@ -48,7 +49,7 @@ public interface ScopeVariable
 	 *
 	 * @return Symbol object
 	 */
-	@NotNull
+	@Nonnull
 	public Symbol createSymbol();
 
 	/**
@@ -58,5 +59,5 @@ public interface ScopeVariable
 	 * @param rIdentifier Anchor usage
 	 * @return Type
 	 */
-	public RType getType(@Nullable FileSymbol fileSymbol, @NotNull final RIdentifier rIdentifier);
+	public RType getType(@Nullable FileSymbol fileSymbol, @Nonnull final RIdentifier rIdentifier);
 }

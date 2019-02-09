@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.jruby.JavaPsiUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.NamingConventions;
 import com.intellij.psi.PsiMethod;
@@ -38,20 +39,20 @@ public class JRubyNameConventions
 	@NonNls
 	private static final String IS = "is";
 
-	@NotNull
-	public static String getMethodName(@NotNull final PsiMethod method)
+	@Nonnull
+	public static String getMethodName(@Nonnull final PsiMethod method)
 	{
 		return getMethodName(method.getName(), !JavaPsiUtil.isStaticMethod(method));
 	}
 
-	@NotNull
-	public static String getMethodName(@NotNull final String name)
+	@Nonnull
+	public static String getMethodName(@Nonnull final String name)
 	{
 		return getMethodName(name, true);
 	}
 
-	@NotNull
-	private static String getMethodName(@NotNull final String name, boolean getsetisEnabled)
+	@Nonnull
+	private static String getMethodName(@Nonnull final String name, boolean getsetisEnabled)
 	{
 		if(getsetisEnabled)
 		{

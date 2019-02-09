@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgument;
@@ -42,14 +43,14 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RArgument> getArguments()
 	{
 		return RubyPsiUtil.getChildrenByType(this, RArgument.class);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos(final boolean includeDefaultArgs)
 	{
 		List<ArgumentInfo> myInfos = new ArrayList<ArgumentInfo>();
@@ -61,13 +62,13 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos()
 	{
 		return getArgumentInfos(false);
 	}
 
-	private ArgumentInfo getArgumentInfo(@NotNull final RArgument argument, final boolean includeDefaultArgs)
+	private ArgumentInfo getArgumentInfo(@Nonnull final RArgument argument, final boolean includeDefaultArgs)
 	{
 		if(argument instanceof RPredefinedArgument && includeDefaultArgs)
 		{
@@ -78,7 +79,7 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
 	}
 
 	@Override
-	public int getArgNumber(@NotNull final RArgument arg)
+	public int getArgNumber(@Nonnull final RArgument arg)
 	{
 		for(int i = 0; i < getArguments().size(); i++)
 		{
@@ -92,7 +93,7 @@ public class RCommandArgumentListImpl extends RPsiElementBase implements RArgume
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName(boolean includeDefaultArgs)
 	{
 		return getPresentableName(getArgumentInfos(includeDefaultArgs));

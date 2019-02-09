@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiModifier;
@@ -31,12 +32,12 @@ import com.intellij.psi.PsiModifierList;
 public class JavaPsiUtil
 {
 
-	public static boolean isStaticMethod(@NotNull final PsiMethod method)
+	public static boolean isStaticMethod(@Nonnull final PsiMethod method)
 	{
 		return method.getModifierList().hasModifierProperty(PsiModifier.STATIC);
 	}
 
-	public static boolean isStaticField(@NotNull final PsiField method)
+	public static boolean isStaticField(@Nonnull final PsiField method)
 	{
 		final PsiModifierList modifiers = method.getModifierList();
 		return modifiers != null && modifiers.hasModifierProperty(PsiModifier.STATIC);

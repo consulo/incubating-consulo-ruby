@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -40,7 +40,7 @@ public class Undef implements RubyTokenTypes
 	| kUNDEF undef_list
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();
@@ -64,7 +64,7 @@ public class Undef implements RubyTokenTypes
             ;
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parseUndefList(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();
@@ -72,7 +72,7 @@ public class Undef implements RubyTokenTypes
 		ParsingMethod parsingMethod = new ParsingMethod()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parse(final RBuilder builder)
 			{
 				IElementType result = FNAME.parse(builder);

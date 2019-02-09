@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import com.intellij.psi.PsiElement;
 
@@ -32,9 +33,9 @@ public interface RUnaryExpression extends RExpression
 	@Nullable
 	public RPsiElement getElement();
 
-	@NotNull
+	@Nonnull
 	public PsiElement getOperation();
 
-	@NotNull
+	@Nonnull
 	public String getOperationName();
 }

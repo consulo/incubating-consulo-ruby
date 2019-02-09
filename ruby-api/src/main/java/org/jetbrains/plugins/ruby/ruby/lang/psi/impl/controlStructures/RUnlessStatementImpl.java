@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
@@ -42,7 +42,7 @@ public class RUnlessStatementImpl extends RConditionalStatementImpl implements R
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -53,7 +53,7 @@ public class RUnlessStatementImpl extends RConditionalStatementImpl implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getThenBlock()
 	{
 		//noinspection ConstantConditions
@@ -68,7 +68,7 @@ public class RUnlessStatementImpl extends RConditionalStatementImpl implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RCompoundStatement thenBlock = getThenBlock();

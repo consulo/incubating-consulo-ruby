@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.actions.rake;
 
 import java.util.ArrayList;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -58,7 +58,7 @@ public class RakeActionGroup extends ActionGroup
 	}
 
 	@Override
-	public void update(@NotNull AnActionEvent event)
+	public void update(@Nonnull AnActionEvent event)
 	{
 		final Module module = DataContextUtil.getModule(event.getDataContext());
 

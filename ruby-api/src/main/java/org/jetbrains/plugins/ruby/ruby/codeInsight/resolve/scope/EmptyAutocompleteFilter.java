@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilter;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolFilterFactory;
 
@@ -59,7 +60,7 @@ public class EmptyAutocompleteFilter implements ScopeAutocompleteFilter
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public SymbolFilter getSymbolFilter()
 	{
 		return SymbolFilterFactory.EMPTY_FILTER;

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.search;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
@@ -39,7 +40,7 @@ class RubyOccurenceProcessor implements TextOccurenceProcessor
 	private final String myName;
 	private final Processor<PsiReference> myConsumer;
 
-	public RubyOccurenceProcessor(@NotNull final PsiElement element2Search, @NotNull final String name, @NotNull final Processor<PsiReference> consumer)
+	public RubyOccurenceProcessor(@Nonnull final PsiElement element2Search, @Nonnull final String name, @Nonnull final Processor<PsiReference> consumer)
 	{
 		myElement2Search = element2Search;
 		myName = name;

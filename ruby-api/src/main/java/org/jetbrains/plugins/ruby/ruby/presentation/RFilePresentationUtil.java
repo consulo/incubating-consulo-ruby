@@ -21,7 +21,7 @@ import com.intellij.navigation.ItemPresentation;
 import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -56,14 +56,14 @@ public class RFilePresentationUtil
 		return TargetAWT.to(RubyFileType.INSTANCE.getIcon());
 	}
 
-	@NotNull
+	@Nonnull
 	public static ItemPresentation getPresentation(final RVirtualFile rFile)
 	{
 		final Icon icon = getIcon();
 		return new PresentationData(rFile.getName(), TextUtil.wrapInParens(getLocation(rFile)), icon, null);
 	}
 
-	private static String getLocation(@NotNull final RVirtualFile rFile)
+	private static String getLocation(@Nonnull final RVirtualFile rFile)
 	{
 		return RContainerPresentationUtil.getLocation(rFile);
 	}

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -55,13 +55,13 @@ public class SymbolsCache implements ProjectComponent
 	private Project myProject;
 
 	@SuppressWarnings({"UnusedDeclaration"})
-	@NotNull
-	public static SymbolsCache getInstance(@NotNull final Project project)
+	@Nonnull
+	public static SymbolsCache getInstance(@Nonnull final Project project)
 	{
 		return project.getComponent(SymbolsCache.class);
 	}
 
-	public SymbolsCache(@NotNull final Project project, @NotNull final RubySdkCachesManager manager)
+	public SymbolsCache(@Nonnull final Project project, @Nonnull final RubySdkCachesManager manager)
 	{
 		myProject = project;
 		manager.registerSymbolsCache(this);
@@ -163,7 +163,7 @@ public class SymbolsCache implements ProjectComponent
 	 * @return up2dated FileSymbol
 	 */
 	@Nullable
-	public CachedSymbol getModifiableCachedSymbol(@NotNull final FileSymbolType type, @Nullable final String url, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jrubyEnabled)
+	public CachedSymbol getModifiableCachedSymbol(@Nonnull final FileSymbolType type, @Nullable final String url, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jrubyEnabled)
 	{
 		final CacheKey key = new CacheKey(type, url, module, sdk, jrubyEnabled);
 		SoftReference<CachedSymbol> reference = mySoftCache.get(key);
@@ -195,7 +195,7 @@ public class SymbolsCache implements ProjectComponent
 	 * @return up2dated FileSymbol
 	 */
 	@Nullable
-	public CachedSymbol getCachedSymbol(@NotNull final FileSymbolType type, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jrubyEnabled)
+	public CachedSymbol getCachedSymbol(@Nonnull final FileSymbolType type, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jrubyEnabled)
 	{
 		return getModifiableCachedSymbol(type, null, module, sdk, jrubyEnabled);
 	}
@@ -209,7 +209,7 @@ public class SymbolsCache implements ProjectComponent
 	 * @return up2dated FileSymbol
 	 */
 	@Nullable
-	public CachedSymbol getBuiltInCachedSymbol(@NotNull final FileSymbolType type, @Nullable final Sdk sdk, final boolean jrubyEnabled)
+	public CachedSymbol getBuiltInCachedSymbol(@Nonnull final FileSymbolType type, @Nullable final Sdk sdk, final boolean jrubyEnabled)
 	{
 		final String cacheKeyUrl = SymbolCacheUtil.getStubUrlByType(type, sdk, jrubyEnabled);
 		if(cacheKeyUrl == null)
@@ -232,7 +232,7 @@ public class SymbolsCache implements ProjectComponent
 		return builtInCachedSymbol;
 	}
 
-	public void removeKey(@NotNull final CacheKey key)
+	public void removeKey(@Nonnull final CacheKey key)
 	{
 		mySoftCache.remove(key);
 	}

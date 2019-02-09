@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import com.intellij.openapi.module.Module;
@@ -33,7 +34,7 @@ public class ParamContext
 	private int myIndex;
 	private String myHashKey;
 
-	public ParamContext(@NotNull final RPsiElement valueElement, @NotNull RCall call, int index, String hashKey)
+	public ParamContext(@Nonnull final RPsiElement valueElement, @Nonnull RCall call, int index, String hashKey)
 	{
 		myValueElement = valueElement;
 		myCall = call;
@@ -41,13 +42,13 @@ public class ParamContext
 		myHashKey = hashKey;
 	}
 
-	@NotNull
+	@Nonnull
 	public RPsiElement getValueElement()
 	{
 		return myValueElement;
 	}
 
-	@NotNull
+	@Nonnull
 	public RCall getCall()
 	{
 		return myCall;

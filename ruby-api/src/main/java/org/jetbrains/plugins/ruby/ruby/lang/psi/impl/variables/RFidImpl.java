@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RNamedReference;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -48,7 +50,7 @@ public class RFidImpl extends RNamedElementBase implements RFid
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -66,7 +68,7 @@ public class RFidImpl extends RNamedElementBase implements RFid
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull String newName) throws IncorrectOperationException
 	{
 		if(!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName))
 		{

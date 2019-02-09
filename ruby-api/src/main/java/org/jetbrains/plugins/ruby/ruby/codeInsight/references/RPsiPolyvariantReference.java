@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import com.intellij.openapi.util.Key;
@@ -35,7 +35,7 @@ public interface RPsiPolyvariantReference extends PsiPolyVariantReference
 {
 	public static final Key<Boolean> REFERENCE_BEING_COMPLETED = Key.create("Ruby.ReferenceBeingCompleted");
 
-	@NotNull
+	@Nonnull
 	public PsiElement getRefValue();
 
 	/**
@@ -45,7 +45,7 @@ public interface RPsiPolyvariantReference extends PsiPolyVariantReference
 	 *                   in "empty context"
 	 * @return List of symbols
 	 */
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable FileSymbol fileSymbol);
 
 }

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -36,13 +36,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.Argume
  */
 public class RVirtualSingletonMethodImpl extends RVirtualMethodImpl implements RVirtualSingletonMethod
 {
-	public RVirtualSingletonMethodImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName virtualName, @NotNull final List<ArgumentInfo> argumentInfos, final AccessModifier defaultChildAccessModifier, final RFileInfo containingFileInfo)
+	public RVirtualSingletonMethodImpl(@Nonnull final RVirtualContainer parentContainer, @Nonnull final RVirtualName virtualName, @Nonnull final List<ArgumentInfo> argumentInfos, final AccessModifier defaultChildAccessModifier, final RFileInfo containingFileInfo)
 	{
 		super(parentContainer, virtualName, argumentInfos, defaultChildAccessModifier, containingFileInfo);
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualSingletonMethod(this);
 	}

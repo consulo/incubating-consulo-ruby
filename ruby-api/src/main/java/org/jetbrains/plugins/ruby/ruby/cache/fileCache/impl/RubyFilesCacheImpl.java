@@ -31,8 +31,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
@@ -93,27 +93,27 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	}
 
 	@Override
-	public void setCacheFilePath(@NotNull final String dataFilePath)
+	public void setCacheFilePath(@Nonnull final String dataFilePath)
 	{
 		this.myCacheDataFilePath = dataFilePath;
 	}
 
 	@Override
-	public void registerDeaclarationsIndex(@NotNull final DeclarationsIndex wordsIndex)
+	public void registerDeaclarationsIndex(@Nonnull final DeclarationsIndex wordsIndex)
 	{
 		myIndex = wordsIndex;
 		myIndex.setFileCache(this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public DeclarationsIndex getDeclarationsIndex()
 	{
 		return myIndex;
 	}
 
 	@Override
-	public void setCacheRootURLs(@NotNull String[] newRoots)
+	public void setCacheRootURLs(@Nonnull String[] newRoots)
 	{
 		myCacheRootURLs = newRoots;
 	}
@@ -210,7 +210,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	 */
 	@Override
 	@Nullable
-	public RFileInfo getUp2DateFileInfo(@NotNull final VirtualFile file)
+	public RFileInfo getUp2DateFileInfo(@Nonnull final VirtualFile file)
 	{
 		if(myRFilesStorage == null)
 		{
@@ -231,7 +231,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	 */
 	@SuppressWarnings({"UnusedReturnValue"})
 	@Nullable
-	protected RFileInfo regenerateFileInfo(@NotNull final VirtualFile file)
+	protected RFileInfo regenerateFileInfo(@Nonnull final VirtualFile file)
 	{
 		final String url = file.getUrl();
 		final boolean wasRemoved = removeRFileInfo(url);
@@ -256,7 +256,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	 * @param url path for file
 	 * @return true if cache contained file or false otherwise
 	 */
-	protected boolean removeRFileInfo(@NotNull final String url)
+	protected boolean removeRFileInfo(@Nonnull final String url)
 	{
 		final RFileInfo fileInfo = myRFilesStorage.removeInfoByUrl(url);
 		if(myIndex != null)
@@ -273,7 +273,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	 * @return new RFileInfo for file or null.
 	 */
 	@Nullable
-	protected RFileInfo createRFileInfo(@NotNull final VirtualFile file)
+	protected RFileInfo createRFileInfo(@Nonnull final VirtualFile file)
 	{
 		final String url = file.getUrl();
 		myRFilesStorage.addUrl(url);
@@ -410,7 +410,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	}
 
 	@Override
-	public boolean containsUrl(@NotNull final String url)
+	public boolean containsUrl(@Nonnull final String url)
 	{
 		return myRFilesStorage.containsUrl(url);
 	}
@@ -420,7 +420,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory)
 	{
 		if(directory == null)
@@ -432,7 +432,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Set<String> getAllUrls()
 	{
 		if(myRFilesStorage != null)
@@ -442,7 +442,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 		return Collections.emptySet();
 	}
 
-	protected Collection<VirtualFile> scanForFiles(@NotNull final String[] rootUrls)
+	protected Collection<VirtualFile> scanForFiles(@Nonnull final String[] rootUrls)
 	{
 		VirtualFileManager fManager = VirtualFileManager.getInstance();
 		final Set<VirtualFile> filesToAdd = new HashSet<VirtualFile>();
@@ -516,7 +516,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	}
 
 	//@Override
-	public void processFile(@NotNull final FileContent fileContent)
+	public void processFile(@Nonnull final FileContent fileContent)
 	{
 		regenerateFileInfo(fileContent.getVirtualFile());
 	}
@@ -531,7 +531,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	{
 	}
 
-	protected void processFileDeleted(@NotNull final String url)
+	protected void processFileDeleted(@Nonnull final String url)
 	{
 		if(removeRFileInfo(url))
 		{
@@ -621,7 +621,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 				}
 			}
 
-			private boolean processDir(@NotNull final VirtualFile file, @Nullable final VirtualFile parent)
+			private boolean processDir(@Nonnull final VirtualFile file, @Nullable final VirtualFile parent)
 			{
 				if(file.isDirectory() && isInContent(parent))
 				{
@@ -652,7 +652,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void addCacheChangedListener(@NotNull final RubyFilesCacheListener listener, @NotNull final Disposable parentDisposable)
+	public void addCacheChangedListener(@Nonnull final RubyFilesCacheListener listener, @Nonnull final Disposable parentDisposable)
 	{
 		synchronized(LOCK)
 		{
@@ -669,7 +669,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	}
 
 	@Override
-	public void removeCacheChangedListener(@NotNull final RubyFilesCacheListener listener)
+	public void removeCacheChangedListener(@Nonnull final RubyFilesCacheListener listener)
 	{
 		synchronized(LOCK)
 		{
@@ -677,7 +677,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 		}
 	}
 
-	private void fireFileRemoved(@NotNull final String url)
+	private void fireFileRemoved(@Nonnull final String url)
 	{
 		synchronized(LOCK)
 		{
@@ -690,7 +690,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 		}
 	}
 
-	private void fireFileAdded(@NotNull final String url)
+	private void fireFileAdded(@Nonnull final String url)
 	{
 		synchronized(LOCK)
 		{
@@ -703,7 +703,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 		}
 	}
 
-	private void fireFileUpdated(@NotNull final String url)
+	private void fireFileUpdated(@Nonnull final String url)
 	{
 		synchronized(LOCK)
 		{

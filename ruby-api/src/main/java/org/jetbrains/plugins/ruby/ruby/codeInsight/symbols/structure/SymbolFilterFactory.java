@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 
@@ -33,7 +34,7 @@ public class SymbolFilterFactory
 	public static final SymbolFilter EMPTY_FILTER = new SymbolFilter()
 	{
 		@Override
-		public boolean accept(@NotNull final Symbol symbol)
+		public boolean accept(@Nonnull final Symbol symbol)
 		{
 			return true;
 		}
@@ -45,19 +46,19 @@ public class SymbolFilterFactory
 		return new SymbolFilter()
 		{
 			@Override
-			public boolean accept(@NotNull final Symbol symbol)
+			public boolean accept(@Nonnull final Symbol symbol)
 			{
 				return typeSet.contains(symbol.getType());
 			}
 		};
 	}
 
-	public static SymbolFilter createFilterByNameAndTypeSet(@NotNull final String name, final TypeSet typeSet)
+	public static SymbolFilter createFilterByNameAndTypeSet(@Nonnull final String name, final TypeSet typeSet)
 	{
 		return new SymbolFilter()
 		{
 			@Override
-			public boolean accept(@NotNull final Symbol symbol)
+			public boolean accept(@Nonnull final Symbol symbol)
 			{
 				return typeSet.contains(symbol.getType()) && name.equals(symbol.getName());
 			}

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -34,33 +35,33 @@ public class RubyIntentionActionClassLoaderHack implements IntentionAction
 {
 	private final IntentionAction myOriginalIntentionAction;
 
-	public RubyIntentionActionClassLoaderHack(@NotNull final IntentionAction originalIntentionAction)
+	public RubyIntentionActionClassLoaderHack(@Nonnull final IntentionAction originalIntentionAction)
 	{
 		myOriginalIntentionAction = originalIntentionAction;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getText()
 	{
 		return myOriginalIntentionAction.getText();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFamilyName()
 	{
 		return myOriginalIntentionAction.getFamilyName();
 	}
 
 	@Override
-	public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file)
+	public boolean isAvailable(@Nonnull Project project, Editor editor, PsiFile file)
 	{
 		return RubyIntentionUtil.isAvailable(editor, file) && myOriginalIntentionAction.isAvailable(project, editor, file);
 	}
 
 	@Override
-	public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException
+	public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException
 	{
 		myOriginalIntentionAction.invoke(project, editor, file);
 	}

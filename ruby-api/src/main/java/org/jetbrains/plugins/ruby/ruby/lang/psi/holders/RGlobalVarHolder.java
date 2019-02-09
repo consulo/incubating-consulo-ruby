@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 
@@ -30,9 +31,9 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
  */
 public interface RGlobalVarHolder extends RVirtualGlobalVarHolder, RContainer
 {
-	@NotNull
+	@Nonnull
 	public List<GlobalVarDefinition> getGlobalVarDefinitions();
 
 	@Nullable
-	public GlobalVarDefinition getDefinition(@NotNull final RVirtualGlobalVar globalVar);
+	public GlobalVarDefinition getDefinition(@Nonnull final RVirtualGlobalVar globalVar);
 }

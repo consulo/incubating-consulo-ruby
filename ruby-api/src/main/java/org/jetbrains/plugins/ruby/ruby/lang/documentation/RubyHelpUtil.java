@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -74,7 +74,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 public class RubyHelpUtil implements MarkupConstants
 {
 	@Nullable
-	public static String getHelpByElement(@NotNull RPsiElement element)
+	public static String getHelpByElement(@Nonnull RPsiElement element)
 	{
 		if(element instanceof RContainer)
 		{
@@ -235,7 +235,7 @@ public class RubyHelpUtil implements MarkupConstants
 	/*
 	 * Adds links for elements(PsiMethods or Ruby elements) to builder
 	 */
-	private static void addLinksByElements(@NotNull final StringBuilder builder, @NotNull final Project project, @NotNull final List elements, final int size)
+	private static void addLinksByElements(@Nonnull final StringBuilder builder, @Nonnull final Project project, @Nonnull final List elements, final int size)
 	{
 		boolean infoAdded = false;
 		for(int i = 0; i < size; i++)
@@ -276,7 +276,7 @@ public class RubyHelpUtil implements MarkupConstants
 		}
 	}
 
-	private static String getVisibility(@NotNull final RVirtualContainer container)
+	private static String getVisibility(@Nonnull final RVirtualContainer container)
 	{
 		final AccessModifier accessModifier = container.getAccessModifier();
 		if(accessModifier == AccessModifier.PRIVATE)
@@ -295,7 +295,7 @@ public class RubyHelpUtil implements MarkupConstants
 	}
 
 	@Nullable
-	public static String getTypeText(@NotNull final Symbol symbol)
+	public static String getTypeText(@Nonnull final Symbol symbol)
 	{
 		final Type type = symbol.getType();
 		if(type == Type.MODULE)
@@ -338,7 +338,7 @@ public class RubyHelpUtil implements MarkupConstants
 	}
 
 	@Nullable
-	private static String getHelpBySymbols(@NotNull final List<Symbol> list)
+	private static String getHelpBySymbols(@Nonnull final List<Symbol> list)
 	{
 		if(list.isEmpty())
 		{
@@ -432,8 +432,8 @@ public class RubyHelpUtil implements MarkupConstants
 		return formattedName;
 	}
 
-	@NotNull
-	public static String getPresentableName(@NotNull final PsiElement element)
+	@Nonnull
+	public static String getPresentableName(@Nonnull final PsiElement element)
 	{
 		if(element instanceof RVirtualContainer)
 		{
@@ -447,7 +447,7 @@ public class RubyHelpUtil implements MarkupConstants
 		return element.getText();
 	}
 
-	public static List<PsiComment> getPsiComments(@NotNull final RPsiElement element)
+	public static List<PsiComment> getPsiComments(@Nonnull final RPsiElement element)
 	{
 		PsiElement anchor = element;
 
@@ -477,7 +477,7 @@ public class RubyHelpUtil implements MarkupConstants
 	}
 
 	@Nullable
-	public static String getPsiHelp(@NotNull final RPsiElement element)
+	public static String getPsiHelp(@Nonnull final RPsiElement element)
 	{
 		final List<PsiComment> list = getPsiComments(element);
 		final StringBuffer buffer = new StringBuffer();
@@ -492,8 +492,8 @@ public class RubyHelpUtil implements MarkupConstants
 		return buffer.length() > 0 ? buffer.toString() : null;
 	}
 
-	@NotNull
-	private static PsiElement prepareAnchor(@NotNull PsiElement anchor)
+	@Nonnull
+	private static PsiElement prepareAnchor(@Nonnull PsiElement anchor)
 	{
 		PsiElement parent;
 		while(anchor.getPrevSibling() == null && ((parent = anchor.getParent()) instanceof RCompoundStatement || parent instanceof RBodyStatement))
@@ -503,8 +503,8 @@ public class RubyHelpUtil implements MarkupConstants
 		return anchor;
 	}
 
-	@NotNull
-	private static List<PsiComment> getPsiCommentsByAnchor(@NotNull final PsiElement anchor)
+	@Nonnull
+	private static List<PsiComment> getPsiCommentsByAnchor(@Nonnull final PsiElement anchor)
 	{
 		final LinkedList<PsiComment> comments = new LinkedList<PsiComment>();
 
@@ -518,7 +518,7 @@ public class RubyHelpUtil implements MarkupConstants
 	}
 
 	@Nullable
-	public static PsiComment getPrevComment(@NotNull final PsiElement anchorElement)
+	public static PsiComment getPrevComment(@Nonnull final PsiElement anchorElement)
 	{
 		PsiElement comment = anchorElement.getPrevSibling();
 		while(!(isRubyLineComment(comment)))

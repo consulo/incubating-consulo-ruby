@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
@@ -46,14 +47,14 @@ public class MethodNode extends RailsNode
 		assert getVirtualFileUrl().equals(fileUrl);
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId generateNodeId(final RVirtualMethod method)
 	{
 		return NodeIdUtil.createForVirtualContainer(method);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.METHOD;

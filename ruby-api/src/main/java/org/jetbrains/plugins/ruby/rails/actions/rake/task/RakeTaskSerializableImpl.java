@@ -20,8 +20,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.rake.RakeCommand;
 import org.jetbrains.plugins.ruby.rails.actions.rake.RakeUtil;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -74,7 +74,7 @@ public class RakeTaskSerializableImpl implements RakeTask, Serializable
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<? extends RakeTask> getSubTasks()
 	{
 		return children;

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modifierStatements;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RRescueModStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RConditionalStatementImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
@@ -36,7 +36,7 @@ public class RRescueModStatementImpl extends RConditionalStatementImpl implement
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{

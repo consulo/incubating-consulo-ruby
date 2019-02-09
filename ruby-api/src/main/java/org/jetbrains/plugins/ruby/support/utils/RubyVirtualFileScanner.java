@@ -23,9 +23,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
@@ -59,7 +61,7 @@ public class RubyVirtualFileScanner
 	 * @param file     File or directory
 	 * @param allFiles Method adds all found files into this set
 	 */
-	public static void addRubyFiles(@Nullable final VirtualFile file, @NotNull final Set<VirtualFile> allFiles)
+	public static void addRubyFiles(@Nullable final VirtualFile file, @Nonnull final Set<VirtualFile> allFiles)
 	{
 		if(file == null || FileTypeManager.getInstance().isFileIgnored(file.getName()))
 		{
@@ -89,7 +91,7 @@ public class RubyVirtualFileScanner
 	 * @param fileName file name with extension
 	 * @return if file with such name and extension may be ruby file
 	 */
-	public static boolean isRubyFile(@NotNull final String fileName)
+	public static boolean isRubyFile(@Nonnull final String fileName)
 	{
 		final FileType fileType = FileTypeManager.getInstance().getFileTypeByFileName(fileName);
 		return fileType instanceof RubyFileType;
@@ -102,7 +104,7 @@ public class RubyVirtualFileScanner
 	 * @param files
 	 * @return files
 	 */
-	public static void searchRubyFileCacheFiles(@NotNull final ModuleRootManager manager, final Collection<VirtualFile> files)
+	public static void searchRubyFileCacheFiles(@Nonnull final ModuleRootManager manager, final Collection<VirtualFile> files)
 	{
 		final ModuleFileIndex moduleFileIndex = getFileIndex(manager);
 		if(moduleFileIndex == null)
@@ -130,7 +132,7 @@ public class RubyVirtualFileScanner
 	 * @param files
 	 * @return files
 	 */
-	public static void searchAdditionalRailsFileCacheFiles(@NotNull final ModuleRootManager manager, final Collection<VirtualFile> files)
+	public static void searchAdditionalRailsFileCacheFiles(@Nonnull final ModuleRootManager manager, final Collection<VirtualFile> files)
 	{
 		final ModuleFileIndex moduleFileIndex = getFileIndex(manager);
 		if(moduleFileIndex == null)
@@ -160,7 +162,7 @@ public class RubyVirtualFileScanner
 	 * @param includeDirs if true diectories will be also included.
 	 * @return files
 	 */
-	public static List<VirtualFile> searchFilesUnderDirectory(@Nullable final Module module, @NotNull final VirtualFile dirOrFile, final boolean includeDirs)
+	public static List<VirtualFile> searchFilesUnderDirectory(@Nullable final Module module, @Nonnull final VirtualFile dirOrFile, final boolean includeDirs)
 	{
 		final List<VirtualFile> files = new LinkedList<VirtualFile>();
 		final ModuleFileIndex moduleFileIndex = getFileIndex(ModuleRootManager.getInstance(module));
@@ -197,13 +199,13 @@ public class RubyVirtualFileScanner
 	 * @param rootDirectory root File
 	 * @return List of relative pathes to ruby files found in rootFile
 	 */
-	public static List<String> getRelativeUrls(@NotNull final VirtualFile rootDirectory)
+	public static List<String> getRelativeUrls(@Nonnull final VirtualFile rootDirectory)
 	{
 		final List<String> relativeUrls = new ArrayList<String>();
 		return addRelativeUrls(rootDirectory, relativeUrls);
 	}
 
-	public static List<String> addRelativeUrls(@NotNull final VirtualFile rootDirectory, @NotNull final List<String> relativeUrls)
+	public static List<String> addRelativeUrls(@Nonnull final VirtualFile rootDirectory, @Nonnull final List<String> relativeUrls)
 	{
 		final String rootUrl = rootDirectory.getUrl() + '/';
 		final int length = rootUrl.length();
@@ -223,7 +225,7 @@ public class RubyVirtualFileScanner
 	 * @param dirs Directories - array with not null files
 	 * @return List of relative pathes to ruby files found
 	 */
-	public static List<String> getRelativeLibsUrls(@NotNull final VirtualFile[] dirs)
+	public static List<String> getRelativeLibsUrls(@Nonnull final VirtualFile[] dirs)
 	{
 		final List<String> relativeUrls = new ArrayList<String>();
 
@@ -259,7 +261,7 @@ public class RubyVirtualFileScanner
 	 * @param directory          current directory @return List of relative urls
 	 * @return list of relative urls
 	 */
-	public static List<String> getRelativeUrlsForModule(@NotNull final ModuleRootManager manager, final boolean onlyDirectoryFiles, @NotNull final VirtualFile directory)
+	public static List<String> getRelativeUrlsForModule(@Nonnull final ModuleRootManager manager, final boolean onlyDirectoryFiles, @Nonnull final VirtualFile directory)
 	{
 		final List<String> urls = new ArrayList<String>();
 		final ModuleFileIndex moduleFileIndex = getFileIndex(manager);
@@ -293,21 +295,21 @@ public class RubyVirtualFileScanner
 	 * @param checkName true if check enabled: directory name must start with an underscore or a lowercase letter
 	 * @return List of relative urls
 	 */
-	public static List<String> getRelativeUrlsUnderRoot(@NotNull final VirtualFile fileRoot, final boolean checkName)
+	public static List<String> getRelativeUrlsUnderRoot(@Nonnull final VirtualFile fileRoot, final boolean checkName)
 	{
 		final ArrayList<String> list = new ArrayList<String>();
 		getRelativeUrlsUnderRootRec(fileRoot, list, checkName);
 		return list;
 	}
 
-	public static List<VirtualFile> getRelativeFilesUnderRoot(@NotNull final VirtualFile fileRoot, final boolean checkName, final boolean addRubyFiles, final boolean addDirectories)
+	public static List<VirtualFile> getRelativeFilesUnderRoot(@Nonnull final VirtualFile fileRoot, final boolean checkName, final boolean addRubyFiles, final boolean addDirectories)
 	{
 		final ArrayList<VirtualFile> list = new ArrayList<VirtualFile>();
 		getRelativeFilesUnderRootRec(fileRoot, list, checkName, addRubyFiles, addDirectories);
 		return list;
 	}
 
-	private static void getRelativeUrlsUnderRootRec(@NotNull final VirtualFile file, @NotNull final List<String> list, final boolean checkName)
+	private static void getRelativeUrlsUnderRootRec(@Nonnull final VirtualFile file, @Nonnull final List<String> list, final boolean checkName)
 	{
 		if(FileTypeManager.getInstance().isFileIgnored(file.getName()))
 		{
@@ -334,7 +336,7 @@ public class RubyVirtualFileScanner
 		}
 	}
 
-	private static void getRelativeFilesUnderRootRec(@NotNull final VirtualFile file, @NotNull final List<VirtualFile> list, final boolean checkName, final boolean addRubyFiles, final boolean addDirectories)
+	private static void getRelativeFilesUnderRootRec(@Nonnull final VirtualFile file, @Nonnull final List<VirtualFile> list, final boolean checkName, final boolean addRubyFiles, final boolean addDirectories)
 	{
 
 		if(FileTypeManager.getInstance().isFileIgnored(file.getName()))
@@ -375,7 +377,7 @@ public class RubyVirtualFileScanner
 	 * @param addRubyFiles   If true ruby files will be included
 	 * @param addDirectories If true directories will be included
 	 */
-	public static void addFilesFromDirectory(@NotNull final VirtualFile dir, @NotNull final List<VirtualFile> list, final boolean checkName, final boolean addRubyFiles, final boolean addDirectories)
+	public static void addFilesFromDirectory(@Nonnull final VirtualFile dir, @Nonnull final List<VirtualFile> list, final boolean checkName, final boolean addRubyFiles, final boolean addDirectories)
 	{
 
 		if(FileTypeManager.getInstance().isFileIgnored(dir.getName()))
@@ -409,7 +411,7 @@ public class RubyVirtualFileScanner
 
 
 	@Nullable
-	public static ModuleFileIndex getFileIndex(@NotNull final ModuleRootManager manager)
+	public static ModuleFileIndex getFileIndex(@Nonnull final ModuleRootManager manager)
 	{
 		return manager.getModule().isDisposed() ? null : manager.getFileIndex();
 	}

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run.filters;
 
 import java.io.File;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.execution.filters.FileHyperlinkInfo;
 import com.intellij.openapi.application.ApplicationManager;
@@ -47,7 +47,7 @@ public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo
 	private OpenFileDescriptor myDescriptor;
 	private boolean isLazyInitialized;
 
-	public OpenIOFileHyperlinkInfo(final Project project, @NotNull final File file, final int line, final int column)
+	public OpenIOFileHyperlinkInfo(final Project project, @Nonnull final File file, final int line, final int column)
 	{
 		myProject = project;
 		myFile = file;
@@ -55,7 +55,7 @@ public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo
 		myColumn = column;
 	}
 
-	public OpenIOFileHyperlinkInfo(final Project project, @NotNull final File file, final int line)
+	public OpenIOFileHyperlinkInfo(final Project project, @Nonnull final File file, final int line)
 	{
 		this(project, file, line, 0);
 	}

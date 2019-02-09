@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.gems.GemUtil;
 import org.jetbrains.plugins.ruby.addins.gems.GemsRunner;
@@ -100,7 +102,7 @@ public class RSpecUtil
 	}
 
 	@Nullable
-	public static String getRSpecGemVersion(@NotNull final Sdk sdk, final boolean runWithModalProgress, @Nullable final Function<Object, Boolean> shouldCancelFun)
+	public static String getRSpecGemVersion(@Nonnull final Sdk sdk, final boolean runWithModalProgress, @Nullable final Function<Object, Boolean> shouldCancelFun)
 	{
 		final Output output;
 		try
@@ -156,7 +158,7 @@ public class RSpecUtil
 	}
 
 	@Nullable
-	public static String getRSpecGemExecutablePath(@NotNull final Sdk sdk)
+	public static String getRSpecGemExecutablePath(@Nonnull final Sdk sdk)
 	{
 		return GemUtil.getGemExecutableRubyScriptPath(sdk, RailsConstants.RSPEC_GEM_EXECUTABLE);
 	}
@@ -211,20 +213,20 @@ public class RSpecUtil
         }
     }*/
 
-	@NotNull
-	public static String getRailsSpecFolderPathOrUrl(@NotNull final String railsAppRootPathOrUlr)
+	@Nonnull
+	public static String getRailsSpecFolderPathOrUrl(@Nonnull final String railsAppRootPathOrUlr)
 	{
 		return railsAppRootPathOrUlr + VirtualFileUtil.VFS_PATH_SEPARATOR + SPECS_FOLDER;
 	}
 
-	@NotNull
-	public static String getRailsSpecScriptPathOrUrl(@NotNull final String railsAppRootPathOrUlr)
+	@Nonnull
+	public static String getRailsSpecScriptPathOrUrl(@Nonnull final String railsAppRootPathOrUlr)
 	{
 		return railsAppRootPathOrUlr + VirtualFileUtil.VFS_PATH_SEPARATOR + RailsConstants.SPECS_SCRIPT_PATH;
 	}
 
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	public static boolean isSpecScriptSupportInstalledInRailsProject(@NotNull final String rorAppliactionContentRootUrl)
+	public static boolean isSpecScriptSupportInstalledInRailsProject(@Nonnull final String rorAppliactionContentRootUrl)
 	{
 		final VirtualFileManager manager = VirtualFileManager.getInstance();
 		final VirtualFile specFolder = manager.findFileByUrl(getRailsSpecFolderPathOrUrl(rorAppliactionContentRootUrl));

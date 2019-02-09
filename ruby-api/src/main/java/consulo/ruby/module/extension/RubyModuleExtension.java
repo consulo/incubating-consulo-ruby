@@ -1,6 +1,6 @@
 package consulo.ruby.module.extension;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import consulo.module.extension.ModuleExtensionWithSdk;
 
@@ -10,6 +10,6 @@ import consulo.module.extension.ModuleExtensionWithSdk;
  */
 public interface RubyModuleExtension<T extends RubyModuleExtension<T>> extends ModuleExtensionWithSdk<T>
 {
-	@NotNull
+	@Nonnull
 	RSupportPerModuleSettings getSettings();
 }

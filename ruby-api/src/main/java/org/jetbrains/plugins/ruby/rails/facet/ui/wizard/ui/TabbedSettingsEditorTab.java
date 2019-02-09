@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.facet.ui.FacetEditorTab;
 
 /**
@@ -29,7 +30,7 @@ public abstract class TabbedSettingsEditorTab extends FacetEditorTab
 {
 	private TabbedSettingsContext myContext;
 
-	public void setContext(@NotNull final TabbedSettingsContext context)
+	public void setContext(@Nonnull final TabbedSettingsContext context)
 	{
 		myContext = context;
 	}

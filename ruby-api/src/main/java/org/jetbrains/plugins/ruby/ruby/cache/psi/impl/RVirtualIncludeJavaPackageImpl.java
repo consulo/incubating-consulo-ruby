@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaPackage;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;

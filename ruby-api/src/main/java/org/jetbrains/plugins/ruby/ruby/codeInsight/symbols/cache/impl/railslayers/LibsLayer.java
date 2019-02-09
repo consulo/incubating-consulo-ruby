@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
@@ -37,7 +38,7 @@ public class LibsLayer extends AbstractRailsLayeredCachedSymbol
 {
 	private String myLayerRootUrl;
 
-	public LibsLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	public LibsLayer(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
 	{
 		super(FileSymbolType.VENDOR_LAYER, project, module, sdk, isJRubyEnabled);
 
@@ -50,7 +51,7 @@ public class LibsLayer extends AbstractRailsLayeredCachedSymbol
 	}
 
 	@Override
-	public void fileAdded(@NotNull String url)
+	public void fileAdded(@Nonnull String url)
 	{
 		if(url.startsWith(myLayerRootUrl))
 		{

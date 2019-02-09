@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.info;
 import java.io.Serializable;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
@@ -43,32 +43,32 @@ public interface RFilesStorage extends Serializable
 		UP_TO_DATE
 	}
 
-	public void init(@NotNull final Project project);
+	public void init(@Nonnull final Project project);
 
 	@Nullable
-	public RFileInfo getInfoByUrl(@NotNull final String url);
+	public RFileInfo getInfoByUrl(@Nonnull final String url);
 
 	@Nullable
-	public RFileInfo removeInfoByUrl(@NotNull final String url);
+	public RFileInfo removeInfoByUrl(@Nonnull final String url);
 
-	public void addRInfo(@NotNull final RFileInfo rInfo);
+	public void addRInfo(@Nonnull final RFileInfo rInfo);
 
-	@NotNull
+	@Nonnull
 	public Set<String> getAllUrls();
 
-	public FileStatus getFileStatus(@NotNull final VirtualFile file);
+	public FileStatus getFileStatus(@Nonnull final VirtualFile file);
 
 	/**
 	 * @param url Url to check for existance
 	 * @return true if this url contains in storage, even if corresponding RFileInfo is null now
 	 *         not updated yet
 	 */
-	public boolean containsUrl(@NotNull final String url);
+	public boolean containsUrl(@Nonnull final String url);
 
 	/**
 	 * Adds url to file storage, even if file info will be generated later.
 	 *
 	 * @param url Url to add
 	 */
-	void addUrl(@NotNull String url);
+	void addUrl(@Nonnull String url);
 }

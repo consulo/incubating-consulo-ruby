@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assignments;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -61,7 +61,7 @@ mlhs_node == lhs
 	 * @param builder Current builder
 	 * @return parsing result
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(!builder.compare(BNF.tMLHS_FIRST_TOKEN))
@@ -143,7 +143,7 @@ mlhs_node == lhs
 		ParsingMethod parsignMethod = new ParsingMethod()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parse(final RBuilder builder)
 			{
 

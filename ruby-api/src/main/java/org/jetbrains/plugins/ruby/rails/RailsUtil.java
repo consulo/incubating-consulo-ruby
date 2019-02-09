@@ -38,8 +38,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Function;
 import com.intellij.util.ThrowableRunnable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.gems.GemUtil;
 import org.jetbrains.plugins.ruby.addins.gems.GemsRunner;
@@ -87,7 +87,7 @@ public class RailsUtil
 	 * @param descriptorFactory     User Factory for creating non default run content descriptors
 	 * @param onDone                Activity after application will be generated
 	 */
-	public static void generateRailsApp(final Module module, @NotNull final Sdk sdk, @NotNull final String location, final boolean overwrite, @Nullable final String preconfigureForDBName, final RunContentDescriptorFactory descriptorFactory, @Nullable final Runnable onDone)
+	public static void generateRailsApp(final Module module, @Nonnull final Sdk sdk, @Nonnull final String location, final boolean overwrite, @Nullable final String preconfigureForDBName, final RunContentDescriptorFactory descriptorFactory, @Nullable final Runnable onDone)
 	{
 		final Project project = module.getProject();
 		final String moduleName = module.getName();
@@ -215,8 +215,8 @@ public class RailsUtil
 	 * @param project project
 	 * @return array of moduls
 	 */
-	@NotNull
-	public static Module[] getAllModulesWithRailsSupport(final @NotNull Project project)
+	@Nonnull
+	public static Module[] getAllModulesWithRailsSupport(final @Nonnull Project project)
 	{
 		final List<Module> runableModules = new LinkedList<Module>();
 		Module[] allModules = ModuleManager.getInstance(project).getModules();
@@ -238,7 +238,7 @@ public class RailsUtil
 	 * @return relative path in the module or null
 	 */
 	@Nullable
-	public static String getPathRelativeToTailsApplicationRoot(@NotNull final String fileUrl, @NotNull final Module module)
+	public static String getPathRelativeToTailsApplicationRoot(@Nonnull final String fileUrl, @Nonnull final Module module)
 	{
 
 		final String appHomeUrl = RailsFacetUtil.getRailsAppHomeDirPathUrl(module);
@@ -247,7 +247,7 @@ public class RailsUtil
 		return VirtualFileUtil.getRelativePath(fileUrl, appHomeUrl);
 	}
 
-	public static boolean isValidRailsFSPath(@NotNull final String string)
+	public static boolean isValidRailsFSPath(@Nonnull final String string)
 	{
 		final StringTokenizer st = new StringTokenizer(string, String.valueOf(VirtualFileUtil.VFS_PATH_SEPARATOR));
 		boolean isValid = string.length() > 0;
@@ -313,7 +313,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getComponentsRoot(@NotNull Module module)
+	public static VirtualFile getComponentsRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -329,7 +329,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getApisRoot(@NotNull Module module)
+	public static VirtualFile getApisRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -345,7 +345,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getConfigRoot(@NotNull Module module)
+	public static VirtualFile getConfigRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -361,7 +361,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getAppRoot(@NotNull Module module)
+	public static VirtualFile getAppRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -377,7 +377,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getTestMockEnviromentRoot(@NotNull Module module)
+	public static VirtualFile getTestMockEnviromentRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -393,7 +393,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getVendorRoot(@NotNull Module module)
+	public static VirtualFile getVendorRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -409,7 +409,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getPluginsRoot(@NotNull Module module)
+	public static VirtualFile getPluginsRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -425,7 +425,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getEdgeRailsRoot(@NotNull Module module)
+	public static VirtualFile getEdgeRailsRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -441,7 +441,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getLibsRoot(@NotNull Module module)
+	public static VirtualFile getLibsRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -457,7 +457,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getServicesRoot(@NotNull Module module)
+	public static VirtualFile getServicesRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -473,7 +473,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getScriptsRoot(@NotNull Module module)
+	public static VirtualFile getScriptsRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -489,7 +489,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getControllersRoot(@NotNull Module module)
+	public static VirtualFile getControllersRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -505,7 +505,7 @@ public class RailsUtil
 	 * @return null for modules without Rails Support
 	 */
 	@Nullable
-	public static VirtualFile getViewsRoot(@NotNull Module module)
+	public static VirtualFile getViewsRoot(@Nonnull Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		if(settings == null)
@@ -532,7 +532,7 @@ public class RailsUtil
 	 * @return PsiDirectory or null
 	 */
 	@Nullable
-	public static PsiDirectory getPsiDirByRailsNode(@Nullable final RailsNode node, @NotNull final Project project)
+	public static PsiDirectory getPsiDirByRailsNode(@Nullable final RailsNode node, @Nonnull final Project project)
 	{
 		if(node == null)
 		{
@@ -561,7 +561,7 @@ public class RailsUtil
 	 * @return PsiFile or null
 	 */
 	@Nullable
-	public static PsiFile getPsiFileByRailsNode(@Nullable final RailsNode node, @NotNull final Project project)
+	public static PsiFile getPsiFileByRailsNode(@Nullable final RailsNode node, @Nonnull final Project project)
 	{
 		if(node == null)
 		{
@@ -577,7 +577,7 @@ public class RailsUtil
 	}
 
 	@Nullable
-	public static PsiElement getPsiElementByRailsNode(@Nullable final RailsNode node, @NotNull final Project project)
+	public static PsiElement getPsiElementByRailsNode(@Nullable final RailsNode node, @Nonnull final Project project)
 	{
 		if(node == null)
 		{
@@ -588,7 +588,7 @@ public class RailsUtil
 	}
 
 	@Nullable
-	public static PsiElement getPsiElementByNodeId(@NotNull final NodeId nodeId, @Nullable final VirtualFile file, @NotNull final Project project)
+	public static PsiElement getPsiElementByNodeId(@Nonnull final NodeId nodeId, @Nullable final VirtualFile file, @Nonnull final Project project)
 	{
 		if(file != null && file.isValid())
 		{
@@ -615,7 +615,7 @@ public class RailsUtil
 	 * @param fsPath path in virtual file system
 	 * @return modules path. If fsPath is null method returns "".
 	 */
-	@NotNull
+	@Nonnull
 	public static String toModulesPath(@Nullable final String fsPath)
 	{
 		if(TextUtil.isEmpty(fsPath))
@@ -641,7 +641,7 @@ public class RailsUtil
 	}
 
 	@Nullable
-	public static String getRailsVersion(@NotNull final Sdk sdk, final boolean runWithModalProgress, @Nullable final Function<Object, Boolean> shouldCancelFun)
+	public static String getRailsVersion(@Nonnull final Sdk sdk, final boolean runWithModalProgress, @Nullable final Function<Object, Boolean> shouldCancelFun)
 	{
 		final Output output;
 		try

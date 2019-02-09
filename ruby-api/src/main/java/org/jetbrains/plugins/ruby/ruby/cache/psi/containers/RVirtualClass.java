@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import com.intellij.navigation.ItemPresentation;
 
@@ -43,6 +43,6 @@ public interface RVirtualClass extends RVirtualFieldContantContainer
 	public RVirtualName getVirtualSuperClass();
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation();
 }

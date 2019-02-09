@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.controlStructures;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
@@ -33,7 +34,7 @@ import com.intellij.psi.tree.IElementType;
 public class Yield implements RubyTokenTypes
 {
 
-	@NotNull
+	@Nonnull
 	public static IElementType parseWithCommandArgs(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();
@@ -60,7 +61,7 @@ public class Yield implements RubyTokenTypes
         | kYIELD
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parseWithParenthes(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();

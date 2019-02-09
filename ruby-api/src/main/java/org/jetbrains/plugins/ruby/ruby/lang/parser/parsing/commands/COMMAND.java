@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -47,7 +48,7 @@ public class COMMAND implements RubyTokenTypes
             ;
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(!builder.compare(BNF.tCOMMAND_FIRST_TOKENS))
@@ -84,7 +85,7 @@ public class COMMAND implements RubyTokenTypes
 	 * @param result  ARG parsing result
 	 * @return command parsing result
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parseWithLeadARG(final RBuilder builder, RMarker marker, final IElementType result)
 	{
 		if(BNF.COMMAND_OBJECTS.contains(result))

@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.ForeignLanguageBlock;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLCommentBlock;
@@ -70,7 +71,7 @@ public class RHTMLBlockGenerator
 
 	protected static final List<Block> EMPTY = Collections.unmodifiableList(new ArrayList<Block>(0));
 
-	public static List<Block> createRHTMLSubBlocks(@NotNull final ASTNode node, final XmlFormattingPolicy xmlPolicy, final RHTMLBlock rhtmlBlock, @NotNull final FileViewProvider provider)
+	public static List<Block> createRHTMLSubBlocks(@Nonnull final ASTNode node, final XmlFormattingPolicy xmlPolicy, final RHTMLBlock rhtmlBlock, @Nonnull final FileViewProvider provider)
 	{
 		final TextRange nodeBoundsTRange = rhtmlBlock.getTextRange();
 
@@ -100,8 +101,8 @@ public class RHTMLBlockGenerator
 		return EMPTY;
 	}
 
-	@NotNull
-	public static NodeInfo processContentChildNode(@NotNull final ASTNode childNode, @NotNull final NodeInfo info, final ASTNode parentNode, final List<Block> subBlocks, final RCompoundStatement nodeRCmpSt, final XmlFormattingPolicy xmlPolicy, @NotNull final FileViewProvider fileViewProvider, @NotNull final TextRange parentNodeTextRange, @Nullable final Alignment alignment, @Nullable final Indent rhtmlIndentIfWasCalculated)
+	@Nonnull
+	public static NodeInfo processContentChildNode(@Nonnull final ASTNode childNode, @Nonnull final NodeInfo info, final ASTNode parentNode, final List<Block> subBlocks, final RCompoundStatement nodeRCmpSt, final XmlFormattingPolicy xmlPolicy, @Nonnull final FileViewProvider fileViewProvider, @Nonnull final TextRange parentNodeTextRange, @Nullable final Alignment alignment, @Nullable final Indent rhtmlIndentIfWasCalculated)
 	{ //Null if wan;t calced yet
 		final TextRange childTextRange = info.getNextNodeTRange();
 		LOG.assertTrue(childTextRange != null);
@@ -150,7 +151,7 @@ public class RHTMLBlockGenerator
 		return NodeInfo.createRHTMLInfo(parentNode, childNode, childNode.getTreeNext());
 	}
 
-	private static TextRange getHTMLBoundsInRCmpSt(@NotNull final RCompoundStatement st, @NotNull final FileViewProvider vProvider)
+	private static TextRange getHTMLBoundsInRCmpSt(@Nonnull final RCompoundStatement st, @Nonnull final FileViewProvider vProvider)
 	{
 		final TextRange range = st.getTextRange();
 
@@ -200,8 +201,8 @@ public class RHTMLBlockGenerator
 		return new TextRange(resultStart, resultEnd);
 	}
 
-	@NotNull
-	public static NodeInfo processHTMLTemplateData(final ASTNode templateNode, @NotNull final TextRange templateRange, @NotNull final ASTNode parentNode, @NotNull final List<Block> subBlocks, @NotNull final Indent indent, @Nullable final Alignment alignment, @NotNull final XmlFormattingPolicy xmlPolicy, @Nullable final RCompoundStatement childRCmpSt, @NotNull final TextRange parentNodeTextRange, @NotNull final FileViewProvider vProvider)
+	@Nonnull
+	public static NodeInfo processHTMLTemplateData(final ASTNode templateNode, @Nonnull final TextRange templateRange, @Nonnull final ASTNode parentNode, @Nonnull final List<Block> subBlocks, @Nonnull final Indent indent, @Nullable final Alignment alignment, @Nonnull final XmlFormattingPolicy xmlPolicy, @Nullable final RCompoundStatement childRCmpSt, @Nonnull final TextRange parentNodeTextRange, @Nonnull final FileViewProvider vProvider)
 	{
 		final int templateRangeStart = templateRange.getStartOffset();
 		final int templateRangeEnd = templateRange.getEndOffset();
@@ -420,8 +421,8 @@ public class RHTMLBlockGenerator
 		createAndAddRHTMLHtml(isTag, xmlPolicy, htmlPsi, subBlocks, tagBounds, indent, alignment, provider);
 	}
 
-	@NotNull
-	private static RHTMLNodeInfo processRHTMLInjectionTag(@NotNull final ASTNode rhtmlTagNode, final ASTNode parentNode, @NotNull final List<Block> blockList, @NotNull final Indent indent, @Nullable final Alignment alignment, @NotNull final XmlFormattingPolicy xmlPolicy, final RCompoundStatement parentNodeRCmpSt, final FileViewProvider fileViewProvider)
+	@Nonnull
+	private static RHTMLNodeInfo processRHTMLInjectionTag(@Nonnull final ASTNode rhtmlTagNode, final ASTNode parentNode, @Nonnull final List<Block> blockList, @Nonnull final Indent indent, @Nullable final Alignment alignment, @Nonnull final XmlFormattingPolicy xmlPolicy, final RCompoundStatement parentNodeRCmpSt, final FileViewProvider fileViewProvider)
 	{
 		final Wrap wrap = RHTMLWrapProcessor.getWrapForNode(rhtmlTagNode, fileViewProvider);
 		blockList.add(new RHTMLRubyInjectionBlock(rhtmlTagNode, indent, wrap, xmlPolicy, alignment, parentNode, parentNodeRCmpSt));

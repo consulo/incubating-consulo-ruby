@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpressionImpl;
@@ -36,13 +36,13 @@ public class RBaseStringImpl extends RStringLiteralBase implements RBaseString
 	}
 
 	@Override
-	public void replaceByRSymbol(@NotNull final RSymbol rSymbol)
+	public void replaceByRSymbol(@Nonnull final RSymbol rSymbol)
 	{
 		super.replace(rSymbol);
 	}
 
 	@Override
-	public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr)
+	public void replaceByRMathBinExpression(@Nonnull final RMathBinExpressionImpl mathExpr)
 	{
 		super.replace(mathExpr);
 	}

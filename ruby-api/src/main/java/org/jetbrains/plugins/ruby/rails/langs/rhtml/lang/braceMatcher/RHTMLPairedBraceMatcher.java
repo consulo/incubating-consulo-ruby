@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.braceMatcher;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
@@ -49,7 +49,7 @@ public class RHTMLPairedBraceMatcher implements PairedBraceMatcher
 
 	@Override
 	@SuppressWarnings({"UnusedParameters"})
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType iElementType, @Nullable IElementType iElementType1)
+	public boolean isPairedBracesAllowedBeforeType(@Nonnull IElementType iElementType, @Nullable IElementType iElementType1)
 	{
 		return true;
 	}

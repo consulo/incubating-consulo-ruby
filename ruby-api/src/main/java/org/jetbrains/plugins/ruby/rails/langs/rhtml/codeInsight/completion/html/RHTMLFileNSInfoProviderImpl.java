@@ -17,8 +17,9 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html;
 
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.psi.xml.XmlFile;
@@ -47,7 +48,7 @@ public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider
 
 	@Override
 	@Nullable
-	public String[][] getDefaultNamespaces(final @NotNull XmlFile file)
+	public String[][] getDefaultNamespaces(final @Nonnull XmlFile file)
 	{
 		if(RHTMLFileType.INSTANCE.equals(file.getFileType()))
 		{
@@ -57,7 +58,7 @@ public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider
 	}
 
 	@Override
-	public boolean overrideNamespaceFromDocType(@NotNull XmlFile xmlFile)
+	public boolean overrideNamespaceFromDocType(@Nonnull XmlFile xmlFile)
 	{
 		return true;
 	}

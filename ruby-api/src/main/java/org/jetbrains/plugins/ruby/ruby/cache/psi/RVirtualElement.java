@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,5 +26,5 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface RVirtualElement
 {
-	public void accept(@NotNull RubyVirtualElementVisitor visitor);
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor);
 }

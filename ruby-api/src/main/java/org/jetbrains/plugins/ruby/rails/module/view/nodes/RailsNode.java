@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -49,7 +49,7 @@ public abstract class RailsNode extends RailsAbstractNode
 		return VirtualFileManager.getInstance().findFileByUrl(getVirtualFileUrl());
 	}
 
-	@NotNull
+	@Nonnull
 	public String getVirtualFileUrl()
 	{
 		return getElement().getFileUrl();

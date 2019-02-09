@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RIdentifierReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.Scope;
@@ -55,7 +57,7 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -115,7 +117,7 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull final String newName) throws IncorrectOperationException
 	{
 		if(Character.isUpperCase(newName.charAt(0)) || !TextUtil.isCID(newName) && !TextUtil.isFID(newName))
 		{
@@ -149,7 +151,7 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final ScopeVariable scopeVariable = getScopeVariable();
@@ -161,7 +163,7 @@ public class RIdentifierImpl extends RNamedElementBase implements RIdentifier
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public SearchScope getUseScope()
 	{
 		if(isParameter() || isLocalVariable())

@@ -20,7 +20,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -44,7 +44,7 @@ public class RAliasPresentationUtil
 		return new PresentationData(alias.getNewName(), TextUtil.wrapInParens(getLocation(alias)), TargetAWT.to(icon), null);
 	}
 
-	public static String getLocation(@NotNull final RVirtualAlias alias)
+	public static String getLocation(@Nonnull final RVirtualAlias alias)
 	{
 		return RContainerPresentationUtil.getLocation(alias);
 	}

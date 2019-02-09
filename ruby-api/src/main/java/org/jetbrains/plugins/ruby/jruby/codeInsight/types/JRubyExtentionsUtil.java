@@ -16,9 +16,12 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
@@ -75,13 +78,13 @@ public class JRubyExtentionsUtil
 	/*
 	* Each proxy class is extended with JavaProxyMethods symbols
 	*/
-	public static void addJavaProxyMethods(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context)
+	public static void addJavaProxyMethods(@Nullable final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context)
 	{
 		// Here we add JavaProxyMethods to children
 		SymbolUtil.includeTopLevelModuleSymbol(fileSymbol, children, context, JAVA_PROXY_METHODS);
 	}
 
-	public static void extendJavaClassWithStubs(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final PsiClass clazzz, @NotNull final Context context)
+	public static void extendJavaClassWithStubs(@Nullable final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final PsiClass clazzz, @Nonnull final Context context)
 	{
 		final Project project = clazzz.getProject();
 		final JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);

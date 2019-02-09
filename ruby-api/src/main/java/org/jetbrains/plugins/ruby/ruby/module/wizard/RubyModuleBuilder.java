@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom.JDOMException;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
@@ -52,7 +52,7 @@ public class RubyModuleBuilder extends RRModuleBuilder
 	private String myTestUtinRootPath;
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Module createModule(ModifiableModuleModel moduleModel) throws InvalidDataException, IOException, ModuleWithNameAlreadyExistsException, JDOMException, ConfigurationException
 	{
 		final Module myModule = super.createModule(moduleModel);
@@ -99,7 +99,7 @@ public class RubyModuleBuilder extends RRModuleBuilder
     }*/
 
 	@Override
-	public void setTestsUnitRootPath(@NotNull final String path)
+	public void setTestsUnitRootPath(@Nonnull final String path)
 	{
 		myTestUtinRootPath = path;
 	}

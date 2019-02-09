@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -33,13 +33,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
  */
 public class RFieldReference extends RNamedReference
 {
-	public RFieldReference(@NotNull RNamedElement element)
+	public RFieldReference(@Nonnull RNamedElement element)
 	{
 		super(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		//noinspection ConstantConditions

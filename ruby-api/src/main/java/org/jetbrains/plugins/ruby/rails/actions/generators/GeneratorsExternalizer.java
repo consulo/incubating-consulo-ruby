@@ -26,6 +26,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Comment;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -33,8 +35,9 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
@@ -65,7 +68,7 @@ public class GeneratorsExternalizer extends SettingsExternalizer
 	private final String SETTINGS = "Settings";
 
 	@Nullable
-	public static File getDataFile(@NotNull final String railsApplicHomeDirPath)
+	public static File getDataFile(@Nonnull final String railsApplicHomeDirPath)
 	{
 		return new File(railsApplicHomeDirPath + File.separator + GENERATORS_FILE_NAME);
 
@@ -126,7 +129,7 @@ public class GeneratorsExternalizer extends SettingsExternalizer
 	 * @return generators list or null
 	 */
 	@Nullable
-	public String[] loadGeneratorList(@NotNull final String railsApplicHomeDirPath)
+	public String[] loadGeneratorList(@Nonnull final String railsApplicHomeDirPath)
 	{
 		final File cachedList = getDataFile(railsApplicHomeDirPath);
 		try
@@ -159,7 +162,7 @@ public class GeneratorsExternalizer extends SettingsExternalizer
 		return null;
 	}
 
-	private boolean isUpToDate(@NotNull final File cachedList, @NotNull final String railsApplicHomeDirPath)
+	private boolean isUpToDate(@Nonnull final File cachedList, @Nonnull final String railsApplicHomeDirPath)
 	{
 		if(!cachedList.exists())
 		{
@@ -179,7 +182,7 @@ public class GeneratorsExternalizer extends SettingsExternalizer
 	 * @param generators             generators names
 	 * @param railsApplicHomeDirPath Rails Application Home Dir Path
 	 */
-	public void saveGeneratorList(final String[] generators, @NotNull final String railsApplicHomeDirPath)
+	public void saveGeneratorList(final String[] generators, @Nonnull final String railsApplicHomeDirPath)
 	{
 		final File dataFile = getDataFile(railsApplicHomeDirPath);
 		try
@@ -252,7 +255,7 @@ public class GeneratorsExternalizer extends SettingsExternalizer
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	protected String[] readExternal(final Element element)
 	{
 		ArrayList<String> generators = new ArrayList<String>();
@@ -274,7 +277,7 @@ public class GeneratorsExternalizer extends SettingsExternalizer
 		return generators.toArray(new String[generators.size()]);
 	}
 
-	protected Element writeExternal(@NotNull final String[] generators)
+	protected Element writeExternal(@Nonnull final String[] generators)
 	{
 		final Element groupElement = new Element(GENERATORS_GROUP);
 		for(String name : generators)

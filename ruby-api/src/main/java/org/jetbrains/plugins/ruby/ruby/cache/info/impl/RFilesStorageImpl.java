@@ -21,8 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFilesStorage;
 import com.intellij.openapi.project.Project;
@@ -46,13 +47,13 @@ public class RFilesStorageImpl implements RFilesStorage
 	private final Map<String, RFileInfo> myUrl2FileInfoMap = new HashMap<String, RFileInfo>();
 
 	@Override
-	public synchronized void addRInfo(@NotNull final RFileInfo rInfo)
+	public synchronized void addRInfo(@Nonnull final RFileInfo rInfo)
 	{
 		myUrl2FileInfoMap.put(rInfo.getUrl(), rInfo);
 	}
 
 	@Override
-	public synchronized void init(@NotNull final Project project)
+	public synchronized void init(@Nonnull final Project project)
 	{
 		final Collection<RFileInfo> infos = myUrl2FileInfoMap.values();
 		for(RFileInfo info : infos)
@@ -65,13 +66,13 @@ public class RFilesStorageImpl implements RFilesStorage
 	}
 
 	@Override
-	public synchronized RFileInfo getInfoByUrl(@NotNull final String url)
+	public synchronized RFileInfo getInfoByUrl(@Nonnull final String url)
 	{
 		return myUrl2FileInfoMap.get(url);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public synchronized Set<String> getAllUrls()
 	{
 		return new HashSet<String>(myUrl2FileInfoMap.keySet());
@@ -79,13 +80,13 @@ public class RFilesStorageImpl implements RFilesStorage
 
 	@Override
 	@Nullable
-	public synchronized RFileInfo removeInfoByUrl(@NotNull final String url)
+	public synchronized RFileInfo removeInfoByUrl(@Nonnull final String url)
 	{
 		return myUrl2FileInfoMap.remove(url);
 	}
 
 	@Override
-	public FileStatus getFileStatus(@NotNull final VirtualFile file)
+	public FileStatus getFileStatus(@Nonnull final VirtualFile file)
 	{
 		final RFileInfo fileInfo = getInfoByUrl(file.getUrl());
 		if(fileInfo == null)
@@ -101,13 +102,13 @@ public class RFilesStorageImpl implements RFilesStorage
 
 
 	@Override
-	public synchronized boolean containsUrl(@NotNull final String url)
+	public synchronized boolean containsUrl(@Nonnull final String url)
 	{
 		return myUrl2FileInfoMap.containsKey(url);
 	}
 
 	@Override
-	public synchronized void addUrl(@NotNull String url)
+	public synchronized void addUrl(@Nonnull String url)
 	{
 		if(!containsUrl(url))
 		{

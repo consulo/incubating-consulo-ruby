@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,5 +26,5 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface SymbolFilter
 {
-	public boolean accept(@NotNull final Symbol symbol);
+	public boolean accept(@Nonnull final Symbol symbol);
 }

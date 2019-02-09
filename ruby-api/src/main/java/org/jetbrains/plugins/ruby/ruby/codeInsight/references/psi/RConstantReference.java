@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -39,13 +40,13 @@ import com.intellij.psi.ResolveResult;
  */
 public class RConstantReference extends RNamedReference
 {
-	public RConstantReference(@NotNull RNamedElement element)
+	public RConstantReference(@Nonnull RNamedElement element)
 	{
 		super(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
 	{
 		if(((RConstantImpl) myElement).isInDefinition())
@@ -94,7 +95,7 @@ public class RConstantReference extends RNamedReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		if(((RConstantImpl) myElement).isInDefinition() || ((RConstantImpl) myElement).isClassOrModuleName())

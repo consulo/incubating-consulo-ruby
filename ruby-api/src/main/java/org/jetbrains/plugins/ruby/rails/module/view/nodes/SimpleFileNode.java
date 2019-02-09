@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -66,7 +66,7 @@ public class SimpleFileNode extends RailsNode
 		init(generateNodeId(file.getUrl()), initPresentationData(file, icon));
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId generateNodeId(final String fileUrl)
 	{
 		return NodeIdUtil.createForFile(fileUrl);
@@ -96,7 +96,7 @@ public class SimpleFileNode extends RailsNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.UNKNOWN;

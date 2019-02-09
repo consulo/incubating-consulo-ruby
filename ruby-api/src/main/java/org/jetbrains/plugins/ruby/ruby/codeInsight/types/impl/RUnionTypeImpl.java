@@ -17,8 +17,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
@@ -44,7 +45,7 @@ public class RUnionTypeImpl extends RTypeBase implements RUnionType
 
 	@Override
 	@SuppressWarnings({"unchecked"})
-	@NotNull
+	@Nonnull
 	public Collection<Message> getMessages()
 	{
 		return RTypeUtil.union(myType1.getMessages(), myType2.getMessages());
@@ -69,7 +70,7 @@ public class RUnionTypeImpl extends RTypeBase implements RUnionType
 	}
 
 	@Override
-	public RType addMessage(@NotNull final Message message)
+	public RType addMessage(@Nonnull final Message message)
 	{
 		if(myType2 instanceof RDuckTypeImpl)
 		{

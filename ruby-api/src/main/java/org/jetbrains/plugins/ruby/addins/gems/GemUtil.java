@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.addins.gems;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.FileUtil;
@@ -43,7 +44,7 @@ public class GemUtil
 	 * @return path if can be found in gems bin folder, otherwise null
 	 */
 	@Nullable
-	public static String getGemExecutableRubyScriptPath(@Nullable final Sdk sdk, @NotNull final String rubyScriptName)
+	public static String getGemExecutableRubyScriptPath(@Nullable final Sdk sdk, @Nonnull final String rubyScriptName)
 	{
 		if(sdk == null)
 		{
@@ -63,7 +64,7 @@ public class GemUtil
 		return null;
 	}
 
-	public static boolean isGemExecutableRubyScriptExists(@Nullable final Sdk sdk, @NotNull final String rubyScriptName)
+	public static boolean isGemExecutableRubyScriptExists(@Nullable final Sdk sdk, @Nonnull final String rubyScriptName)
 	{
 		return getGemExecutableRubyScriptPath(sdk, rubyScriptName) != null;
 	}

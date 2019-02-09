@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
@@ -35,13 +35,13 @@ import com.intellij.openapi.projectRoots.Sdk;
 public class VendorLayer extends AbstractRailsLayeredCachedSymbol
 {
 
-	public VendorLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	public VendorLayer(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
 	{
 		super(FileSymbolType.RAILS_MODULE_LAYER, project, module, sdk, isJRubyEnabled);
 	}
 
 	@Override
-	public void fileAdded(@NotNull String url)
+	public void fileAdded(@Nonnull String url)
 	{
 		final CachedSymbol baseCachedSymbol = getBaseSymbol();
 		if(baseCachedSymbol != null)

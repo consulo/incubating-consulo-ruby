@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -40,7 +41,7 @@ public class RubySyntaxHighlighter extends SyntaxHighlighterBase implements Ruby
 	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Lexer getHighlightingLexer()
 	{
 		return new RubyMergeLexer();
@@ -93,7 +94,7 @@ public class RubySyntaxHighlighter extends SyntaxHighlighterBase implements Ruby
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
 		return pack(ATTRIBUTES.get(tokenType));

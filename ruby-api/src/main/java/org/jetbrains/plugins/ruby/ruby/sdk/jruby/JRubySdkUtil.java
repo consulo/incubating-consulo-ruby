@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
 import java.util.ArrayList;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTable;

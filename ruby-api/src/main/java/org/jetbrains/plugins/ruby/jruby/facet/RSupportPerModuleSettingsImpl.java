@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubyLoadPathChooser;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubyRTestFrameworkChooser;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.tabs.JRubySdkEditorTab;
@@ -70,7 +72,7 @@ public class RSupportPerModuleSettingsImpl implements RSupportPerModuleSettings
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public CheckableDirectoriesContainer getLoadPathDirs()
 	{
 		return myLoadPathDirs;
@@ -87,7 +89,7 @@ public class RSupportPerModuleSettingsImpl implements RSupportPerModuleSettings
 	}
 
 	@Override
-	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs)
+	public void setLoadPathDirs(@Nonnull final CheckableDirectoriesContainer loadPathDirs)
 	{
 		myLoadPathDirs = loadPathDirs;
 	}

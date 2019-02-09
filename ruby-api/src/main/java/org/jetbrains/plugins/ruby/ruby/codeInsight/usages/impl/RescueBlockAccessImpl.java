@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -38,7 +38,7 @@ public class RescueBlockAccessImpl implements RescueBlockAccess
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getElement()
 	{
 		return myUsage;

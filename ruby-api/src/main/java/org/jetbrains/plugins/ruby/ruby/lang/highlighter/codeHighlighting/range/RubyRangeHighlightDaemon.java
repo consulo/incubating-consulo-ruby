@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;

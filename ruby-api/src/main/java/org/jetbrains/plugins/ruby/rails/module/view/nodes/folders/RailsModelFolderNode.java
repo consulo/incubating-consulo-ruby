@@ -23,7 +23,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.ui.treeStructure.SimpleNode;
 import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -67,7 +67,7 @@ public class RailsModelFolderNode extends ModelSubFolderNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;

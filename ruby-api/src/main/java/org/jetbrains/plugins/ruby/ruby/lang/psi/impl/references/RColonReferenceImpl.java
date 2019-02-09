@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.Colon3Reference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -39,7 +39,7 @@ public class RColonReferenceImpl extends RReferenceBase implements RColonReferen
 	private static final TokenSet TS_COLONS = TokenSet.create(RubyTokenTypes.tCOLON2, RubyTokenTypes.tCOLON3);
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -55,7 +55,7 @@ public class RColonReferenceImpl extends RReferenceBase implements RColonReferen
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getDelimiter()
 	{
 		PsiElement colon = getChildByFilter(TS_COLONS, 0);
@@ -64,7 +64,7 @@ public class RColonReferenceImpl extends RReferenceBase implements RColonReferen
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Type getType()
 	{
 		return Type.COLON_REF;

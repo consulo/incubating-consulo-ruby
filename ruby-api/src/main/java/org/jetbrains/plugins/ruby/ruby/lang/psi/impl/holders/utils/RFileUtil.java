@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
@@ -60,8 +62,8 @@ public class RFileUtil
 	@NonNls
 	private static final String FILE_JOIN = "File.join";
 
-	@NotNull
-	public static List<String> getUrlsByRPsiElement(@NotNull final FileSymbol fileSymbol, @NotNull final RVirtualFile file, final boolean relativeToDirectory, @NotNull final RPsiElement requirement)
+	@Nonnull
+	public static List<String> getUrlsByRPsiElement(@Nonnull final FileSymbol fileSymbol, @Nonnull final RVirtualFile file, final boolean relativeToDirectory, @Nonnull final RPsiElement requirement)
 	{
 		return findUrlsForName(fileSymbol, evaluate(file.getVirtualFile(), requirement), file, relativeToDirectory);
 	}
@@ -130,20 +132,20 @@ public class RFileUtil
 		return null;
 	}
 
-	@NotNull
-	public static List<String> findUrlsForName(@NotNull final FileSymbol fileSymbol, @Nullable final String content)
+	@Nonnull
+	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content)
 	{
 		return findUrlsForName(fileSymbol, content, null, false);
 	}
 
-	@NotNull
-	public static List<String> findUrlsForName(@NotNull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RVirtualFile file)
+	@Nonnull
+	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RVirtualFile file)
 	{
 		return findUrlsForName(fileSymbol, content, file, false);
 	}
 
-	@NotNull
-	public static List<String> findUrlsForName(@NotNull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RVirtualFile file, final boolean relativeToDirectory)
+	@Nonnull
+	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RVirtualFile file, final boolean relativeToDirectory)
 	{
 		final ArrayList<String> urls = new ArrayList<String>();
 		if(content == null)
@@ -159,8 +161,8 @@ public class RFileUtil
 		return urls;
 	}
 
-	@NotNull
-	private static List<String> findUrlsForFileName(@NotNull final FileSymbol fileSymbol, @Nullable final RVirtualFile file, @NotNull String name, final boolean relativeToDirectory)
+	@Nonnull
+	private static List<String> findUrlsForFileName(@Nonnull final FileSymbol fileSymbol, @Nullable final RVirtualFile file, @Nonnull String name, final boolean relativeToDirectory)
 	{
 		final ArrayList<String> urls = new ArrayList<String>();
 
@@ -212,7 +214,7 @@ public class RFileUtil
 		return urls;
 	}
 
-	private static String getDirectoryPath(@NotNull final VirtualFile file)
+	private static String getDirectoryPath(@Nonnull final VirtualFile file)
 	{
 		//noinspection ConstantConditions
 		return file.getParent().getPath();
@@ -225,14 +227,14 @@ public class RFileUtil
 
 
 	@Nullable
-	public static Module getModule(@NotNull final Project project, @NotNull VirtualFile file)
+	public static Module getModule(@Nonnull final Project project, @Nonnull VirtualFile file)
 	{
 		return ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(file);
 	}
 
 
 	@Nullable
-	public static Sdk getSdk(@NotNull final Project project, @NotNull VirtualFile file)
+	public static Sdk getSdk(@Nonnull final Project project, @Nonnull VirtualFile file)
 	{
 		Sdk mySdk = getSdkByModule(project, file);
 		if(mySdk == null)
@@ -242,13 +244,13 @@ public class RFileUtil
 		return mySdk;
 	}
 
-	private static Sdk getSdkByModule(@NotNull final Project project, @NotNull VirtualFile file)
+	private static Sdk getSdkByModule(@Nonnull final Project project, @Nonnull VirtualFile file)
 	{
 		final Module module = getModule(project, file);
 		return module != null ? RModuleUtil.getModuleOrJRubyFacetSdk(module) : null;
 	}
 
-	private static Sdk tryToFindSdk(@NotNull final Project project, @NotNull final VirtualFile file)
+	private static Sdk tryToFindSdk(@Nonnull final Project project, @Nonnull final VirtualFile file)
 	{
 		// in tests cachesManager isn`t loaded
 		final RubySdkCachesManager cachesManager = RubySdkCachesManager.getInstance(project);
@@ -259,8 +261,8 @@ public class RFileUtil
 		return null;
 	}
 
-	@NotNull
-	public static String getCurrentDirUrl(@NotNull final VirtualFile file)
+	@Nonnull
+	public static String getCurrentDirUrl(@Nonnull final VirtualFile file)
 	{
 		// Add own directory
 		final VirtualFile parent = file.getParent();
@@ -268,8 +270,8 @@ public class RFileUtil
 		return parent.getUrl();
 	}
 
-	@NotNull
-	public static List<String> getAvailableRequiresUrls(@NotNull final FileSymbol fileSymbol, @NotNull final VirtualFile file, final boolean relativeToDirectory)
+	@Nonnull
+	public static List<String> getAvailableRequiresUrls(@Nonnull final FileSymbol fileSymbol, @Nonnull final VirtualFile file, final boolean relativeToDirectory)
 	{
 		final RubyFilesCache[] caches = fileSymbol.getCaches();
 
@@ -298,7 +300,7 @@ public class RFileUtil
 		return list;
 	}
 
-	private static List<String> getRelativeUrls(@NotNull final RubyFilesCache[] caches, @NotNull final VirtualFile file, boolean onlyDirectoryFiles)
+	private static List<String> getRelativeUrls(@Nonnull final RubyFilesCache[] caches, @Nonnull final VirtualFile file, boolean onlyDirectoryFiles)
 	{
 		final ArrayList<String> requires = new ArrayList<String>();
 		final VirtualFile dir = file.isDirectory() ? file : file.getParent();

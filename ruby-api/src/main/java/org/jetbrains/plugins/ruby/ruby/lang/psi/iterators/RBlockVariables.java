@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.iterators;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 
@@ -29,6 +30,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
  */
 public interface RBlockVariables extends RPsiElement
 {
-	@NotNull
+	@Nonnull
 	public List<RIdentifier> getVariables();
 }

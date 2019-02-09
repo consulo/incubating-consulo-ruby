@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.iterators;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands.CALL_ARGS;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
@@ -38,7 +39,7 @@ public class BLOCK_COMMAND
 				;
 
 	*/
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseWithLeadBlockCall(builder, builder.mark(), BLOCK_CALL.parse(builder));

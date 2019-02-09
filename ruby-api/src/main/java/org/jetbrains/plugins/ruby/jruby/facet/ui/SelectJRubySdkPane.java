@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import com.intellij.openapi.projectRoots.Sdk;
 
@@ -35,7 +35,7 @@ public class SelectJRubySdkPane
 	private JPanel myPanel;
 	private JRubySDKsComboboxWithBrowseButton mySdksComponent;
 
-	public SelectJRubySdkPane(@NotNull final RSupportPerModuleSettingsImpl configuration)
+	public SelectJRubySdkPane(@Nonnull final RSupportPerModuleSettingsImpl configuration)
 	{
 
 		mySdksComponent.addComboboxActionListener(new ActionListener()

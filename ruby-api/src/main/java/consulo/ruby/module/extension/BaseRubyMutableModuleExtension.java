@@ -1,9 +1,9 @@
 package consulo.ruby.module.extension;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
 import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
@@ -18,12 +18,12 @@ import consulo.util.ui.components.VerticalLayoutPanel;
  */
 public class BaseRubyMutableModuleExtension extends BaseRubyModuleExtension implements RubyModuleExtension<BaseRubyModuleExtension>, MutableModuleExtensionWithSdk<BaseRubyModuleExtension>
 {
-	public BaseRubyMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
+	public BaseRubyMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer module)
 	{
 		super(id, module);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public MutableModuleInheritableNamedPointer<Sdk> getInheritableSdk()
 	{
@@ -47,7 +47,7 @@ public class BaseRubyMutableModuleExtension extends BaseRubyModuleExtension impl
 	}
 
 	@Override
-	public boolean isModified(@NotNull BaseRubyModuleExtension extension)
+	public boolean isModified(@Nonnull BaseRubyModuleExtension extension)
 	{
 		return isModifiedImpl(extension);
 	}

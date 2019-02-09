@@ -19,9 +19,12 @@ package org.jetbrains.plugins.ruby.ruby.lang.folding;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -80,15 +83,15 @@ public class RubyFoldingBuilder implements FoldingBuilder
 			RubyElementTypes.IF_STATEMENT, RubyElementTypes.UNLESS_STATEMENT, RubyElementTypes.WHILE_STATEMENT, RubyElementTypes.BEGIN_END_BLOCK_STATEMENT, RubyElementTypes.LBEGIN_STATEMENT, RubyElementTypes.LEND_STATEMENT);
 
 	@Override
-	@NotNull
-	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode astNode, @NotNull Document document)
+	@Nonnull
+	public FoldingDescriptor[] buildFoldRegions(@Nonnull ASTNode astNode, @Nonnull Document document)
 	{
 		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 		gatherDescriptors(astNode, descriptors);
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
 	}
 
-	private void gatherDescriptors(@NotNull final ASTNode node, @NotNull final List<FoldingDescriptor> descriptors)
+	private void gatherDescriptors(@Nonnull final ASTNode node, @Nonnull final List<FoldingDescriptor> descriptors)
 	{
 		final IElementType type = node.getElementType();
 
@@ -104,8 +107,8 @@ public class RubyFoldingBuilder implements FoldingBuilder
 		}
 	}
 
-	@NotNull
-	private TextRange getFoldingTextRange(@NotNull final ASTNode node)
+	@Nonnull
+	private TextRange getFoldingTextRange(@Nonnull final ASTNode node)
 	{
 		final PsiElement psiElement = node.getPsi();
 		final int endOffset = node.getTextRange().getEndOffset();
@@ -164,14 +167,14 @@ public class RubyFoldingBuilder implements FoldingBuilder
 	 * @param element psiElement
 	 * @return visible text offset
 	 */
-	private int getVisibleTextOffset(@NotNull final PsiElement element)
+	private int getVisibleTextOffset(@Nonnull final PsiElement element)
 	{
 		return element.getTextRange().getStartOffset() + element.getText().trim().length();
 	}
 
 	@Override
 	@Nullable
-	public String getPlaceholderText(@NotNull final ASTNode node)
+	public String getPlaceholderText(@Nonnull final ASTNode node)
 	{
 		final IElementType type = node.getElementType();
 		final PsiElement psiElement = node.getPsi();
@@ -229,7 +232,7 @@ public class RubyFoldingBuilder implements FoldingBuilder
 	}
 
 	@Override
-	public boolean isCollapsedByDefault(@NotNull ASTNode node)
+	public boolean isCollapsedByDefault(@Nonnull ASTNode node)
 	{
 		return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
 	}

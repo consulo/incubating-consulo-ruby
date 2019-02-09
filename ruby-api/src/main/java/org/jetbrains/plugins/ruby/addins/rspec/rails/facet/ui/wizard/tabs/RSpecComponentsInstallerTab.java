@@ -28,8 +28,8 @@ import com.intellij.ui.DocumentAdapter;
 import com.intellij.util.Function;
 import consulo.awt.TargetAWT;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -92,7 +92,7 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 	 */
 	private volatile boolean myIsClosed;
 
-	public RSpecComponentsInstallerTab(@NotNull final RailsWizardSettingsHolder settingsHolder, @Nullable final Project project)
+	public RSpecComponentsInstallerTab(@Nonnull final RailsWizardSettingsHolder settingsHolder, @Nullable final Project project)
 	{
 		mySettingsHolder = settingsHolder;
 
@@ -583,7 +583,7 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 	}
 
 
-	@NotNull
+	@Nonnull
 	public RailsWizardSettingsHolder.RSpecConfiguration getConf()
 	{
 		return new RailsWizardSettingsHolder.RSpecConfiguration()
@@ -613,14 +613,14 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 			}
 
 			@Override
-			@NotNull
+			@Nonnull
 			public String getRSpecArgs()
 			{
 				return myTFRSpecArgs.getText().trim();
 			}
 
 			@Override
-			@NotNull
+			@Nonnull
 			public String getRSpecRailsArgs()
 			{
 				return myTFRSpecRailsArgs.getText().trim();
@@ -677,14 +677,14 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 			}
 
 			@Override
-			@NotNull
+			@Nonnull
 			public String getRSpecArgs()
 			{
 				return rSpecArgs;
 			}
 
 			@Override
-			@NotNull
+			@Nonnull
 			public String getRSpecRailsArgs()
 			{
 				return rSpecRailsArgs;

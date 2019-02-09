@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
 import com.intellij.psi.PsiElement;
@@ -31,7 +32,7 @@ public class PsiElementSymbol extends Symbol
 {
 	private final PsiElement myPsiElement;
 
-	public PsiElementSymbol(@NotNull final PsiElement element, @NotNull final String name, final Type type)
+	public PsiElementSymbol(@Nonnull final PsiElement element, @Nonnull final String name, final Type type)
 	{
 		super(element.getProject(), name, type, null, null);
 		myPsiElement = element;
@@ -39,7 +40,7 @@ public class PsiElementSymbol extends Symbol
 
 	@Override
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-	public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml)
+	public String toString(@Nonnull final FileSymbol fileSymbol, boolean useHtml)
 	{
 		final StringBuilder builder = new StringBuilder();
 		builder.append("[" + getId() + "] " + getType() + " ");
@@ -54,7 +55,7 @@ public class PsiElementSymbol extends Symbol
 		return builder.toString();
 	}
 
-	@NotNull
+	@Nonnull
 	public PsiElement getPsiElement()
 	{
 		return myPsiElement;

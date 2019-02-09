@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import com.intellij.formatting.Alignment;
@@ -43,7 +43,7 @@ public class RHTMLCommentBlock extends RHTMLBlock
 {
 	private Indent myChildrenIndent;
 
-	public RHTMLCommentBlock(@NotNull final ASTNode node, @Nullable final Indent indent, @Nullable final Alignment alignment, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy)
+	public RHTMLCommentBlock(@Nonnull final ASTNode node, @Nullable final Indent indent, @Nullable final Alignment alignment, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy)
 	{
 		super(node, indent, wrap, xmlFormattingPolicy, alignment);
 		// "<$# ".length = 4
@@ -51,7 +51,7 @@ public class RHTMLCommentBlock extends RHTMLBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected List<Block> buildChildren()
 	{
 		ChameleonTransforming.transformChildren(myNode);
@@ -83,7 +83,7 @@ public class RHTMLCommentBlock extends RHTMLBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ChildAttributes getChildAttributes(int newChildIndex)
 	{
 		return new ChildAttributes(myChildrenIndent, null);

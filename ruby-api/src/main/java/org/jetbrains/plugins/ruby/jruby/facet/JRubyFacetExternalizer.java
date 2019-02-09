@@ -18,9 +18,10 @@ package org.jetbrains.plugins.ruby.jruby.facet;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
 
@@ -42,7 +43,7 @@ public class JRubyFacetExternalizer extends SettingsExternalizer
 	@NonNls
 	private static final String TEST_UNIT_FRAMEWORK_ROOT_URL = "TEST_UNIT_FRAMEWORK_ROOT_URL";
 
-	public void writeExternal(@NotNull final RSupportPerModuleSettingsImpl config, @NotNull final Element elem)
+	public void writeExternal(@Nonnull final RSupportPerModuleSettingsImpl config, @Nonnull final Element elem)
 	{
 
 		writeOption(USE_TEST_UNIT_FRAMEWORK, Boolean.toString(config.shouldUseTestUnitTestFramework()), elem);
@@ -50,7 +51,7 @@ public class JRubyFacetExternalizer extends SettingsExternalizer
 		writeOption(TEST_UNIT_FRAMEWORK_ROOT_URL, config.getUnitTestsRootUrl(), elem);
 	}
 
-	public void readExternal(@NotNull final RSupportPerModuleSettingsImpl config, @NotNull final Element elem)
+	public void readExternal(@Nonnull final RSupportPerModuleSettingsImpl config, @Nonnull final Element elem)
 	{
 		//noinspection unchecked
 		final Map<String, String> optionsByName = buildOptionsByElement(elem);

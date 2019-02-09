@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.REmptyType;
 
 /**
@@ -37,9 +37,9 @@ public interface RType
 	@Nullable
 	String getName();
 
-	RType addMessage(@NotNull Message message);
+	RType addMessage(@Nonnull Message message);
 
-	@NotNull
+	@Nonnull
 	Collection<Message> getMessages();
 
 	Collection<Message> getMessagesForName(@Nullable String name);
@@ -48,6 +48,6 @@ public interface RType
 	 * @param message Patern message
 	 * @return true, if this can be matched by patterMessage
 	 */
-	public boolean matchesMessage(@NotNull final Message message);
+	public boolean matchesMessage(@Nonnull final Message message);
 
 }

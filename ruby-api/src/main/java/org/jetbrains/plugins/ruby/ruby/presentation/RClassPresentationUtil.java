@@ -24,8 +24,8 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.ui.LayeredIcon;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -51,7 +51,7 @@ public class RClassPresentationUtil implements RPresentationConstants
 		return RubyIcons.RUBY_CLASS_NODE;
 	}
 
-	public static Icon getIcon(@NotNull final RVirtualClass rClass)
+	public static Icon getIcon(@Nonnull final RVirtualClass rClass)
 	{
 		if(rClass instanceof RVirtualObjectClass)
 		{
@@ -72,7 +72,7 @@ public class RClassPresentationUtil implements RPresentationConstants
 	 * @param flags  com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Icon getIcon(@NotNull final RVirtualClass rClass, final int flags)
+	public static Icon getIcon(@Nonnull final RVirtualClass rClass, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
@@ -81,8 +81,8 @@ public class RClassPresentationUtil implements RPresentationConstants
 		return getIcon(rClass);
 	}
 
-	@NotNull
-	public static ItemPresentation getPresentation(@NotNull final RVirtualClass rClass)
+	@Nonnull
+	public static ItemPresentation getPresentation(@Nonnull final RVirtualClass rClass)
 	{
 		final Icon icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(formatName(rClass, SHOW_NAME), TextUtil.wrapInParens(getLocation(rClass)), icon, icon, null);
@@ -100,7 +100,7 @@ public class RClassPresentationUtil implements RPresentationConstants
 	 * @param options Seee RPresentationConstants
 	 * @return formated class representation
 	 */
-	public static String formatName(@NotNull final RVirtualClass rClass, final int options)
+	public static String formatName(@Nonnull final RVirtualClass rClass, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 
@@ -136,7 +136,7 @@ public class RClassPresentationUtil implements RPresentationConstants
 	 * @param rClass     Ruby class @return return null if ruby class doesn't correspond to last loaded symbol
 	 */
 	@Nullable
-	public static String getRuntimeQualifiedName(@NotNull final FileSymbol fileSymbol, @NotNull final RVirtualClass rClass)
+	public static String getRuntimeQualifiedName(@Nonnull final FileSymbol fileSymbol, @Nonnull final RVirtualClass rClass)
 	{
 		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
 		return symbol != null ? SymbolUtil.getPresentablePath(symbol) : null;
@@ -152,7 +152,7 @@ public class RClassPresentationUtil implements RPresentationConstants
 	 * @return return null if not in ruby test mode and ruby class doesn't correspond to last loaded symbol
 	 */
 	@Nullable
-	public static String getRuntimeQualifiedNameInRubyTestMode(@NotNull final RVirtualClass rClass, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
+	public static String getRuntimeQualifiedNameInRubyTestMode(@Nonnull final RVirtualClass rClass, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
 	{
 		final Pair<Symbol, FileSymbol> pair = SymbolUtil.getSymbolByContainerRubyTestMode(rClass, fileSymbolWrapper);
 		return pair != null && pair.first != null ? SymbolUtil.getPresentablePath(pair.first) : null;
@@ -162,7 +162,7 @@ public class RClassPresentationUtil implements RPresentationConstants
 	 * @param qualifiedClassName Qualified class name
 	 * @return Not qualified name
 	 */
-	public static String getNameByQualifiedName(@NotNull final String qualifiedClassName)
+	public static String getNameByQualifiedName(@Nonnull final String qualifiedClassName)
 	{
 		final int i = qualifiedClassName.lastIndexOf(RubyUtil.MODULES_PATH_SEPARATOR);
 		if(i < 0)

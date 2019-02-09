@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.module;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
@@ -41,7 +41,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 public class ModuleLayer extends AbstractLayeredCachedSymbol
 {
 
-	public ModuleLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	public ModuleLayer(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
 	{
 		super(project, module, sdk, jRubyEnabled);
 	}
@@ -93,7 +93,7 @@ public class ModuleLayer extends AbstractLayeredCachedSymbol
 	}
 
 	@Override
-	public void fileAdded(@NotNull final String url)
+	public void fileAdded(@Nonnull final String url)
 	{
 		// do nothing
 	}

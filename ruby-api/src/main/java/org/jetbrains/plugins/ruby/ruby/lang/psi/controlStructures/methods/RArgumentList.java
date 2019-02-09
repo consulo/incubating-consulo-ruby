@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 
 /**
@@ -28,24 +29,24 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
  */
 public interface RArgumentList extends RPsiElement
 {
-	@NotNull
+	@Nonnull
 	public List<RArgument> getArguments();
 
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos();
 
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos(boolean includeDefaultArgs);
 
 	/*
 	 * returns -1 if not found
 	 */
-	public int getArgNumber(@NotNull final RArgument arg);
+	public int getArgNumber(@Nonnull final RArgument arg);
 
 	/**
 	 * @param includeDefaultArgs Include default values into text or not
 	 * @return PresentableName of argument list
 	 */
-	@NotNull
+	@Nonnull
 	public String getPresentableName(final boolean includeDefaultArgs);
 }

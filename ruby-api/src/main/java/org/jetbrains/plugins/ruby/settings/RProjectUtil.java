@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.settings;
 
 import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.VcsConfiguration;
@@ -34,25 +35,25 @@ import com.intellij.openapi.vcs.ex.ProjectLevelVcsManagerEx;
  */
 public class RProjectUtil
 {
-	public static boolean isVcsAddSilently(@NotNull final Project project)
+	public static boolean isVcsAddSilently(@Nonnull final Project project)
 	{
 		final VcsShowConfirmationOptionImpl opt = ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
 		return opt.getValue() == VcsShowConfirmationOption.Value.DO_ACTION_SILENTLY;
 	}
 
-	public static boolean isVcsAddNothingSilently(@NotNull final Project project)
+	public static boolean isVcsAddNothingSilently(@Nonnull final Project project)
 	{
 		final VcsShowConfirmationOptionImpl opt = ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
 		return opt.getValue() == VcsShowConfirmationOption.Value.DO_NOTHING_SILENTLY;
 	}
 
-	public static boolean isVcsAddShowConfirmation(@NotNull final Project project)
+	public static boolean isVcsAddShowConfirmation(@Nonnull final Project project)
 	{
 		final VcsShowConfirmationOptionImpl opt = ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
 		return opt.getValue() == VcsShowConfirmationOption.Value.SHOW_CONFIRMATION;
 	}
 
-	public static GeneratorOptions getGeneratorsOptions(@NotNull final Project project)
+	public static GeneratorOptions getGeneratorsOptions(@Nonnull final Project project)
 	{
 		final GeneratorOptions options = RProjectSettings.getInstance(project).getGeneratorsOptions();
 		final boolean showConfirmation = isVcsAddShowConfirmation(project);

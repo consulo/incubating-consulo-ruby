@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -32,7 +33,7 @@ import com.intellij.openapi.module.Module;
  */
 public class TestsConventions
 {
-	public static boolean isTestFrameworkFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isTestFrameworkFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		if(module == null)
 		{

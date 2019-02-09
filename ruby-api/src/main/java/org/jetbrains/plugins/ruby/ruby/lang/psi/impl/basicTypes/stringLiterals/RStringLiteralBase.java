@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamContext;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDef;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefReference;
@@ -90,7 +90,7 @@ public class RStringLiteralBase extends RPsiElementBase implements RStringLitera
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.String), Context.INSTANCE, true);

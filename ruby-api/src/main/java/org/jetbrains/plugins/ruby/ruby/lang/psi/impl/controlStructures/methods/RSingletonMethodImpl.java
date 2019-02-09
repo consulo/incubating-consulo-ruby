@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -54,7 +54,7 @@ public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMetho
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -65,8 +65,8 @@ public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMetho
 	}
 
 	@Override
-	@NotNull
-	public RVirtualSingletonMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull RFileInfo info)
+	@Nonnull
+	public RVirtualSingletonMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull RFileInfo info)
 	{
 		final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
 		assert virtualParent != null;

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -37,7 +38,7 @@ public class RubyWordsScanner implements WordsScanner
 
 
 	@Override
-	public void processWords(@NotNull final CharSequence fileText, @NotNull final Processor<WordOccurrence> processor)
+	public void processWords(@Nonnull final CharSequence fileText, @Nonnull final Processor<WordOccurrence> processor)
 	{
 		final RubyMergeLexer lexer = new RubyMergeLexer();
 		lexer.start(fileText, 0, fileText.length(), 0);

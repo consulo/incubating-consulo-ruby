@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
@@ -54,7 +54,7 @@ public class ExecutionHelper
 {
 	private static Logger LOG = Logger.getInstance(ExecutionHelper.class.getName());
 
-	public static void showErrors(@NotNull final Project myProject, @NotNull final List<Exception> exceptionList, @NotNull final String tabDisplayName, @Nullable final VirtualFile file)
+	public static void showErrors(@Nonnull final Project myProject, @Nonnull final List<Exception> exceptionList, @Nonnull final String tabDisplayName, @Nullable final VirtualFile file)
 	{
 		if(ApplicationManager.getApplication().isUnitTestMode() && !exceptionList.isEmpty())
 		{
@@ -107,7 +107,7 @@ public class ExecutionHelper
 		});
 	}
 
-	private static void openMessagesView(@NotNull final RailsErrorViewPanel errorTreeView, @NotNull final Project myProject, @NotNull final String tabDisplayName)
+	private static void openMessagesView(@Nonnull final RailsErrorViewPanel errorTreeView, @Nonnull final Project myProject, @Nonnull final String tabDisplayName)
 	{
 		CommandProcessor commandProcessor = CommandProcessor.getInstance();
 		commandProcessor.executeCommand(myProject, new Runnable()
@@ -125,7 +125,7 @@ public class ExecutionHelper
 		}, RBundle.message("command.name.open.error.message.view"), null);
 	}
 
-	private static void removeContents(@Nullable final Content notToRemove, @NotNull final Project myProject, @NotNull final String tabDisplayName)
+	private static void removeContents(@Nullable final Content notToRemove, @Nonnull final Project myProject, @Nonnull final String tabDisplayName)
 	{
 		MessageView messageView = myProject.getComponent(MessageView.class);
 		Content[] contents = messageView.getContentManager().getContents();
@@ -165,7 +165,7 @@ public class ExecutionHelper
 	}
 
 
-	public static void executeExternalProcess(@Nullable final Project myProject, @NotNull final OSProcessHandler processHandler, @NotNull final Runner.ExecutionMode mode)
+	public static void executeExternalProcess(@Nullable final Project myProject, @Nonnull final OSProcessHandler processHandler, @Nonnull final Runner.ExecutionMode mode)
 	{
 		final String title = mode.getTitle() != null ? mode.getTitle() : RBundle.message("progress.indicator.title.running.please.wait");
 		assert title != null;

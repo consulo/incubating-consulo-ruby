@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
 
@@ -33,19 +34,19 @@ public class SpecialSymbol extends Symbol
 
 	private final Symbol myLinkedSymbol;
 
-	public SpecialSymbol(@NotNull final FileSymbol fileSymbol, @Nullable String name, @Nullable final Symbol parent, @NotNull final Symbol symbol, final Type type)
+	public SpecialSymbol(@Nonnull final FileSymbol fileSymbol, @Nullable String name, @Nullable final Symbol parent, @Nonnull final Symbol symbol, final Type type)
 	{
 		super(fileSymbol, name, type, parent, null);
 		myLinkedSymbol = symbol;
 	}
 
-	public SpecialSymbol(@NotNull final FileSymbol fileSymbol, @Nullable final Symbol parent, @NotNull final Symbol symbol, final Type type)
+	public SpecialSymbol(@Nonnull final FileSymbol fileSymbol, @Nullable final Symbol parent, @Nonnull final Symbol symbol, final Type type)
 	{
 		this(fileSymbol, null, parent, symbol, type);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Symbol getLinkedSymbol()
 	{
 		return myLinkedSymbol;
@@ -53,7 +54,7 @@ public class SpecialSymbol extends Symbol
 
 	@Override
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-	public String toString(@NotNull final FileSymbol fileSymbol, boolean useHtml)
+	public String toString(@Nonnull final FileSymbol fileSymbol, boolean useHtml)
 	{
 		final StringBuilder builder = new StringBuilder();
 		builder.append("[" + getId() + "] " + getType() + " ");

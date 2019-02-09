@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
@@ -42,7 +42,7 @@ public class GeneratorNodeInfo extends NodeInfo<SerializableGenerator>
 		return new GeneratorNodeInfo(RailsIcons.GENERATORS_ROOT_ICON, generator, true);
 	}
 
-	public static GeneratorNodeInfo createGeneratorNode(@NotNull final String name, final boolean isGroup, final SerializableGenerator parent)
+	public static GeneratorNodeInfo createGeneratorNode(@Nonnull final String name, final boolean isGroup, final SerializableGenerator parent)
 	{
 		final SerializableGenerator generator = new SerializableGenerator(name, isGroup, parent);
 		parent.addChild(generator);

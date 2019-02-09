@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFName;
 import com.intellij.psi.PsiElement;
@@ -31,7 +32,7 @@ import com.intellij.psi.PsiElement;
 public class RMethodNameNavigator
 {
 	@Nullable
-	public static RMethodName getByRFName(@NotNull final RFName name)
+	public static RMethodName getByRFName(@Nonnull final RFName name)
 	{
 		final PsiElement parent = name.getParent();
 		return (parent instanceof RMethodName) ? (RMethodName) parent : null;

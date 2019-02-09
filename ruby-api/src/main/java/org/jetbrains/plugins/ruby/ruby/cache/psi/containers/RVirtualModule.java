@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.navigation.ItemPresentation;
 
 /**
@@ -28,6 +29,6 @@ import com.intellij.navigation.ItemPresentation;
 public interface RVirtualModule extends RVirtualFieldContantContainer
 {
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation();
 }

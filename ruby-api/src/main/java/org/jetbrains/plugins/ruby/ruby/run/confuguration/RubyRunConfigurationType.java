@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -97,7 +97,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 		return RubyIcons.RUBY_RUN_CONFIGURATION_FOLDER;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getId()
 	{
@@ -115,7 +115,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 
 	//@Override
 	@Nullable
-	public RunnerAndConfigurationSettings createConfigurationByLocation(final @NotNull Location location)
+	public RunnerAndConfigurationSettings createConfigurationByLocation(final @Nonnull Location location)
 	{
 		// if not in psi file
 		final PsiElement locationElement = location.getPsiElement();
@@ -281,7 +281,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 		return RubyRunConfigurationUtil.isConfigurationByElement(runConfiguration, location.getPsiElement());
 	}
 
-	private RunnerAndConfigurationSettings createRunAllUnitTestsInFolderConf(@NotNull final PsiDirectory psiDirectory)
+	private RunnerAndConfigurationSettings createRunAllUnitTestsInFolderConf(@Nonnull final PsiDirectory psiDirectory)
 	{
 		final Project project = psiDirectory.getProject();
 		final VirtualFile folder = psiDirectory.getVirtualFile();

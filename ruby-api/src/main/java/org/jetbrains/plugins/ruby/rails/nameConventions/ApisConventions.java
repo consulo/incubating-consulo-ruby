@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.nameConventions;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -42,12 +42,12 @@ public class ApisConventions
 	public static final String API_MODULE = RailsConstants.SDK_ACTION_WEB_SERVICE_API_MODULE_NAME;
 	public static final String BASE_CLASS = RailsConstants.BASE_CLASS;
 
-	public static boolean isApisFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isApisFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		return isWebServiceApiFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isWebServiceApiFile(@NotNull final RVirtualFile rFile, @Nullable final Module module, @NotNull final List<RVirtualClass> classes)
+	public static boolean isWebServiceApiFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
 	{
 		if(module == null)
 		{
@@ -75,7 +75,7 @@ public class ApisConventions
 		return false;
 	}
 
-	public static boolean isApiWebServiceClass(@Nullable final RVirtualClass rClass, @NotNull final Module module)
+	public static boolean isApiWebServiceClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{

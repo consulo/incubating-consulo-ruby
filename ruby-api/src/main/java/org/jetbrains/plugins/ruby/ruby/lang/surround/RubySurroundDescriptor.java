@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.surround;
 
 import java.util.ArrayList;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBEGINSurrounder;
@@ -42,8 +43,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 public class RubySurroundDescriptor implements SurroundDescriptor
 {
 	@Override
-	@NotNull
-	public PsiElement[] getElementsToSurround(@NotNull final PsiFile file, final int startOffset, final int endOffset)
+	@Nonnull
+	public PsiElement[] getElementsToSurround(@Nonnull final PsiFile file, final int startOffset, final int endOffset)
 	{
 		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 		PsiElement first = file.getViewProvider().findElementAt(startOffset);
@@ -85,7 +86,7 @@ public class RubySurroundDescriptor implements SurroundDescriptor
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Surrounder[] getSurrounders()
 	{
 		return new Surrounder[]{

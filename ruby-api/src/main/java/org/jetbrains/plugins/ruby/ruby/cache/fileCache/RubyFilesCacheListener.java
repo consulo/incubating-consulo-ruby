@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,19 +36,19 @@ public interface RubyFilesCacheListener
 	 *
 	 * @param url file url
 	 */
-	public void fileAdded(@NotNull final String url);
+	public void fileAdded(@Nonnull final String url);
 
 	/**
 	 * File was removed from cache
 	 *
 	 * @param url file url
 	 */
-	public void fileRemoved(@NotNull final String url);
+	public void fileRemoved(@Nonnull final String url);
 
 	/**
 	 * File was updated in cache
 	 *
 	 * @param url file url
 	 */
-	public void fileUpdated(@NotNull final String url);
+	public void fileUpdated(@Nonnull final String url);
 }

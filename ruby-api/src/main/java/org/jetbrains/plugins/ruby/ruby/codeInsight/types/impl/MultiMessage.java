@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 
@@ -33,7 +34,7 @@ public class MultiMessage extends MessageImpl implements Message
 {
 	protected Message[] myMessages;
 
-	public MultiMessage(@NotNull String name, final boolean important, @NotNull final Message... messages)
+	public MultiMessage(@Nonnull String name, final boolean important, @Nonnull final Message... messages)
 	{
 		super(name, 0, important, null);
 		myMessages = messages;
@@ -51,7 +52,7 @@ public class MultiMessage extends MessageImpl implements Message
 	}
 
 	@Override
-	public boolean matchesMessage(@NotNull final Message patternMessage)
+	public boolean matchesMessage(@Nonnull final Message patternMessage)
 	{
 		for(Message message : myMessages)
 		{

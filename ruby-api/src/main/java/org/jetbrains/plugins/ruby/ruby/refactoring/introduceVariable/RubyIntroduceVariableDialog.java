@@ -24,6 +24,7 @@ import java.awt.event.KeyEvent;
 import java.util.EventListener;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -32,8 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.event.EventListenerList;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -79,7 +79,7 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
 		}
 	}
 
-	public RubyIntroduceVariableDialog(@NotNull final Project project, final int occurrencesCount, @NotNull final IntroduceVariableValidator validator, final String[] possibleNames)
+	public RubyIntroduceVariableDialog(@Nonnull final Project project, final int occurrencesCount, @Nonnull final IntroduceVariableValidator validator, final String[] possibleNames)
 	{
 		super(project, true);
 		myProject = project;

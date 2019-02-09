@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 
@@ -29,7 +30,7 @@ public interface RArgument extends RPsiElement
 {
 	public RIdentifier getIdentifier();
 
-	@NotNull
+	@Nonnull
 	public String getName();
 
 	public ArgumentInfo.Type getType();

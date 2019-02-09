@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
@@ -52,7 +52,7 @@ public class RailsFacetUtil
 	 * @return Rails Application Home directory path for given module
 	 */
 	@Nullable
-	public static String getRailsAppHomeDirPath(@NotNull final Module module)
+	public static String getRailsAppHomeDirPath(@Nonnull final Module module)
 	{
 		final BaseRailsFacetConfiguration conf = getRailsFacetConfiguration(module);
 		return conf != null ? conf.getRailsApplicationRootPath() : null;
@@ -63,7 +63,7 @@ public class RailsFacetUtil
 	 * @return If module hasn't rails support - null, otherwize RailsPathesSettings
 	 */
 	@Nullable
-	public static StandardRailsPaths getRailsAppPaths(@NotNull final Module module)
+	public static StandardRailsPaths getRailsAppPaths(@Nonnull final Module module)
 	{
 		final BaseRailsFacet baseRailsFacet = BaseRailsFacet.getInstance(module);
 		if(baseRailsFacet == null)
@@ -81,7 +81,7 @@ public class RailsFacetUtil
 	 * @return Rails Application Home directory path url for given module
 	 */
 	@Nullable
-	public static String getRailsAppHomeDirPathUrl(@NotNull final Module module)
+	public static String getRailsAppHomeDirPathUrl(@Nonnull final Module module)
 	{
 		final BaseRailsFacetConfiguration conf = getRailsFacetConfiguration(module);
 		return conf != null ? conf.getRailsApplicationRootPathUrl() : null;
@@ -95,7 +95,7 @@ public class RailsFacetUtil
 	 * @return Rails Application Home directory file for given module
 	 */
 	@Nullable
-	public static VirtualFile getRailsAppHomeDir(@NotNull final Module module)
+	public static VirtualFile getRailsAppHomeDir(@Nonnull final Module module)
 	{
 		final String path = getRailsAppHomeDirPath(module);
 		if(path == null)
@@ -113,7 +113,7 @@ public class RailsFacetUtil
 	 * @return Rails Facet Configuration for given module
 	 */
 	@Nullable
-	public static BaseRailsFacetConfiguration getRailsFacetConfiguration(@NotNull final Module module)
+	public static BaseRailsFacetConfiguration getRailsFacetConfiguration(@Nonnull final Module module)
 	{
 		final BaseRailsFacet railsFacet = BaseRailsFacet.getInstance(module);
 		if(railsFacet != null)

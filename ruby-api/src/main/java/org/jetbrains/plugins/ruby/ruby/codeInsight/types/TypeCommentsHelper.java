@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyHelpUtil;
@@ -33,7 +34,7 @@ public class TypeCommentsHelper
 {
 
 	@Nullable
-	public static RType tryToExtractTypeFromComment(@NotNull final RMethod method, final FileSymbol fileSymbol)
+	public static RType tryToExtractTypeFromComment(@Nonnull final RMethod method, final FileSymbol fileSymbol)
 	{
 		final String name = method.getName();
 		if("<=>".equals(name))
@@ -136,7 +137,7 @@ public class TypeCommentsHelper
 		return null;
 	}
 
-	private static String chechPrefix(@NotNull final String s, @NotNull final String prefix)
+	private static String chechPrefix(@Nonnull final String s, @Nonnull final String prefix)
 	{
 		if(s.startsWith(prefix) && s.length() > prefix.length() && Character.isUpperCase(s.charAt(prefix.length())))
 		{

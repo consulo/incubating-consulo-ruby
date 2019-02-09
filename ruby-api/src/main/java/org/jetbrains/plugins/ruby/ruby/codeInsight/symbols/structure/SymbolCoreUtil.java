@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
@@ -38,7 +39,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 class SymbolCoreUtil
 {
 
-	public static Symbol find(@NotNull final FileSymbol fileSymbol, @NotNull Symbol anchorSymbol, @NotNull final List<String> path, final boolean global, final boolean forceCreate, final TypeSet typeSet)
+	public static Symbol find(@Nonnull final FileSymbol fileSymbol, @Nonnull Symbol anchorSymbol, @Nonnull final List<String> path, final boolean global, final boolean forceCreate, final TypeSet typeSet)
 	{
 		if(global)
 		{
@@ -126,8 +127,8 @@ class SymbolCoreUtil
 		return symbol;
 	}
 
-	@NotNull
-	public static Symbol create(@NotNull final FileSymbol fileSymbol, @NotNull Symbol anchorSymbol, @NotNull final List<String> path, final boolean global, final Type newType, @NotNull final RVirtualElement prototype)
+	@Nonnull
+	public static Symbol create(@Nonnull final FileSymbol fileSymbol, @Nonnull Symbol anchorSymbol, @Nonnull final List<String> path, final boolean global, final Type newType, @Nonnull final RVirtualElement prototype)
 	{
 		final int size = path.size();
 		assert size > 0;
@@ -135,8 +136,8 @@ class SymbolCoreUtil
 		return SymbolCoreUtil.add(fileSymbol, parent, new Symbol(fileSymbol, path.get(size - 1), newType, parent, prototype));
 	}
 
-	@NotNull
-	private static Symbol findOrCreateUndef(@NotNull final FileSymbol fileSymbol, @NotNull Symbol anchorSymbol, @NotNull final String name)
+	@Nonnull
+	private static Symbol findOrCreateUndef(@Nonnull final FileSymbol fileSymbol, @Nonnull Symbol anchorSymbol, @Nonnull final String name)
 	{
 		// try to find not_defined symbol
 		final Children children = fileSymbol.getChildren(anchorSymbol);
@@ -158,7 +159,7 @@ class SymbolCoreUtil
 		return child;
 	}
 
-	public static Symbol add(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol parent, @NotNull final Symbol child)
+	public static Symbol add(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol parent, @Nonnull final Symbol child)
 	{
 		// we add symbols that has no children
 		assert !fileSymbol.getChildren(child).hasChildren();

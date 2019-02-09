@@ -20,7 +20,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightInfoType;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.AbstractRubyHighlighterPass;
@@ -53,7 +54,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 {
 	private Collection<HighlightInfo> myRangeHighlighters = Collections.emptyList();
 
-	public RubyRangeHighlightPass(@NotNull final Project project, @NotNull final RFile psiFile, @NotNull final Editor editor)
+	public RubyRangeHighlightPass(@Nonnull final Project project, @Nonnull final RFile psiFile, @Nonnull final Editor editor)
 	{
 		super(project, psiFile, editor, true, HighlightPassConstants.RUBY_HIGHLIGHTER_RANGE_GROUP);
 	}
@@ -168,18 +169,18 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		}
 
 		@Override
-		public void visitRequireCall(@NotNull RCall rCall)
+		public void visitRequireCall(@Nonnull RCall rCall)
 		{
 			visitRequireOrLoad(rCall);
 		}
 
 		@Override
-		public void visitLoadCall(@NotNull RCall rCall)
+		public void visitLoadCall(@Nonnull RCall rCall)
 		{
 			visitRequireOrLoad(rCall);
 		}
 
-		private void visitRequireOrLoad(@NotNull RCall rCall)
+		private void visitRequireOrLoad(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_OR_LOAD_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 			for(RPsiElement arg : rCall.getArguments())
@@ -189,13 +190,13 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		}
 
 		@Override
-		public void visitIncludeCall(@NotNull RCall rCall)
+		public void visitIncludeCall(@Nonnull RCall rCall)
 		{
 			visitIncludeOrExtend(rCall);
 		}
 
 		@Override
-		public void visitExtendCall(@NotNull RCall rCall)
+		public void visitExtendCall(@Nonnull RCall rCall)
 		{
 			visitIncludeOrExtend(rCall);
 		}
@@ -206,61 +207,61 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		}
 
 		@Override
-		public void visitAttrAccessorCall(@NotNull RCall rCall)
+		public void visitAttrAccessorCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_ACCESSOR_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitAttrWriterCall(@NotNull RCall rCall)
+		public void visitAttrWriterCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_WRITER_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitAttrReaderCall(@NotNull RCall rCall)
+		public void visitAttrReaderCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_ATTR_READER_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitAttrInternalCall(@NotNull RCall rCall)
+		public void visitAttrInternalCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_RAILS_ATTR_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitCAttrAccessorCall(@NotNull final RCall rCall)
+		public void visitCAttrAccessorCall(@Nonnull final RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_RAILS_ATTR_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitPublicCall(@NotNull RCall rCall)
+		public void visitPublicCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PUBLIC_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitProtectedCall(@NotNull RCall rCall)
+		public void visitProtectedCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PROTECTED_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitPrivateCall(@NotNull RCall rCall)
+		public void visitPrivateCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_PRIVATE_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}
 
 		@Override
-		public void visitRSymbol(@NotNull RSymbol rSymbol)
+		public void visitRSymbol(@Nonnull RSymbol rSymbol)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_SYMBOL_HIGHLIGHT).range(rSymbol).create());
 		}
 
 		@Override
-		public void visitImportClassCall(@NotNull final RCall rCall)
+		public void visitImportClassCall(@Nonnull final RCall rCall)
 		{
 			final RFile rFile = RubyPsiUtil.getRFile(rCall);
 			assert rFile != null;
@@ -271,7 +272,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		}
 
 		@Override
-		public void visitIncludeClassCall(@NotNull RCall rCall)
+		public void visitIncludeClassCall(@Nonnull RCall rCall)
 		{
 			final RFile rFile = RubyPsiUtil.getRFile(rCall);
 			assert rFile != null;
@@ -282,7 +283,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		}
 
 		@Override
-		public void visitIncludePackageCall(@NotNull RCall rCall)
+		public void visitIncludePackageCall(@Nonnull RCall rCall)
 		{
 			final RFile rFile = RubyPsiUtil.getRFile(rCall);
 			assert rFile != null;
@@ -293,7 +294,7 @@ public class RubyRangeHighlightPass extends AbstractRubyHighlighterPass
 		}
 
 		@Override
-		public void visitGemCall(@NotNull RCall rCall)
+		public void visitGemCall(@Nonnull RCall rCall)
 		{
 			myCollection.add(HighlightInfo.newHighlightInfo(RubyHighlightInfoType.RUBY_REQUIRE_GEM_CALL_HIGHLIGHT).range(rCall.getPsiCommand()).create());
 		}

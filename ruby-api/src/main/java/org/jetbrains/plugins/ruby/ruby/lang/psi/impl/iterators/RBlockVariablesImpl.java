@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
@@ -40,7 +40,7 @@ public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariab
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -51,7 +51,7 @@ public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariab
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RIdentifier> getVariables()
 	{
 		RListOfExpressions list = getChildByType(RListOfExpressions.class, 0);

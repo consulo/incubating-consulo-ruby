@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import com.intellij.psi.PsiElement;
 
@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 public class RListOfExpressionsNavigator
 {
 	@Nullable
-	public static RListOfExpressions getByPsiElement(@NotNull final PsiElement statement)
+	public static RListOfExpressions getByPsiElement(@Nonnull final PsiElement statement)
 	{
 		final PsiElement parent = statement.getParent();
 		return (parent instanceof RListOfExpressions) ? (RListOfExpressions) parent : null;

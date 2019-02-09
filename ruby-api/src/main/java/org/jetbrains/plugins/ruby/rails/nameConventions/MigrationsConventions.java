@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -36,7 +37,7 @@ public class MigrationsConventions
 {
 	public static final String DB_SCHEMA_FILE = RailsConstants.DB_SCHEMA_FILE;
 
-	public static boolean isMigrationFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isMigrationFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		if(module == null)
 		{
@@ -65,7 +66,7 @@ public class MigrationsConventions
 	 * @param migrDir Migrations root
 	 * @return file if found any, null otherwise
 	 */
-	public static VirtualFile getSchema(@NotNull final VirtualFile migrDir)
+	public static VirtualFile getSchema(@Nonnull final VirtualFile migrDir)
 	{
 		final VirtualFile dbDir = migrDir.getParent();
 		assert dbDir != null;

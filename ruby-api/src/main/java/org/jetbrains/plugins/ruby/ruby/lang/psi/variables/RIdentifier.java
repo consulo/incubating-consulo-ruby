@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
 import com.intellij.psi.PsiNamedElement;

@@ -18,9 +18,11 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
 import java.io.File;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
@@ -109,7 +111,7 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
 	}
 
 	@Override
-	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
+	public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
 		try
 		{
@@ -340,7 +342,7 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
 	}
 
 	@Override
-	public void setTestType(@NotNull final TestType testType)
+	public void setTestType(@Nonnull final TestType testType)
 	{
 		myTestType = testType;
 	}

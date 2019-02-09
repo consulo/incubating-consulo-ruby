@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.projectRoots.Sdk;
 
 /**
@@ -35,5 +36,5 @@ public interface RubyWizardSettingsHolder
 
 	public boolean isRSpecSupportEnabled();
 
-	public void setTestsUnitRootPath(@NotNull String contentRootPath);
+	public void setTestsUnitRootPath(@Nonnull String contentRootPath);
 }

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.RWrapAndIndentCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapedAlways;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -30,6 +31,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RConditionalSt
 public interface RElsifBlock extends RPsiElement, RConditionalStatement, RWrapAndIndentCOMPSTMT, RWrapedAlways
 {
 
-	@NotNull
+	@Nonnull
 	RCompoundStatement getBody();
 }

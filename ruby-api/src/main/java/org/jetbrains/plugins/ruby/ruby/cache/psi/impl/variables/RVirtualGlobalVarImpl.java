@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
 import java.io.Serializable;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
@@ -34,28 +35,28 @@ public class RVirtualGlobalVarImpl extends RVirtualElementBase implements RVirtu
 	private String myText;
 	private RVirtualGlobalVarHolder myHolder;
 
-	public RVirtualGlobalVarImpl(@NotNull final String text, @NotNull final RVirtualGlobalVarHolder holder)
+	public RVirtualGlobalVarImpl(@Nonnull final String text, @Nonnull final RVirtualGlobalVarHolder holder)
 	{
 		myText = text;
 		myHolder = holder;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getText()
 	{
 		return myText;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RVirtualGlobalVarHolder getHolder()
 	{
 		return myHolder;
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitElement(this);
 	}

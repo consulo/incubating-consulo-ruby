@@ -15,8 +15,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -33,7 +34,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 public class RMethodTypeUtil
 {
 
-	public static int getMinNumberOfArguments(@NotNull final RMethod method)
+	public static int getMinNumberOfArguments(@Nonnull final RMethod method)
 	{
 		int result = 0;
 		for(ArgumentInfo info : method.getArgumentInfos())
@@ -50,7 +51,7 @@ public class RMethodTypeUtil
 		return result;
 	}
 
-	public static int getMaxNumberOfArguments(@NotNull final RMethod method)
+	public static int getMaxNumberOfArguments(@Nonnull final RMethod method)
 	{
 		int result = 0;
 		for(ArgumentInfo info : method.getArgumentInfos())
@@ -74,7 +75,7 @@ public class RMethodTypeUtil
 	 * @param method     Symbol of method @return returns minimum number of arguments for method
 	 * @return number
 	 */
-	public static int getMinNumberOfArguments(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol method)
+	public static int getMinNumberOfArguments(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol method)
 	{
 		return method.getChildren(fileSymbol).getSymbolsOfTypes(Type.ARG_SIMPLE.asSet()).getAll().size();
 	}
@@ -84,7 +85,7 @@ public class RMethodTypeUtil
 	 * @param method     Symbol of method @return returns maximum number of arguments for method, -1 if infinite
 	 * @return number
 	 */
-	public static int getMaxNumberOfArguments(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol method)
+	public static int getMaxNumberOfArguments(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol method)
 	{
 		int result = 0;
 		for(Symbol child : method.getChildren(fileSymbol).getSymbolsOfTypes(Types.ARGS).getAll())

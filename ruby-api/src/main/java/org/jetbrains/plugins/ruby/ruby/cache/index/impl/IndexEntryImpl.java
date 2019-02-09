@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.index.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.index.IndexEntry;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -50,56 +51,56 @@ public class IndexEntryImpl implements IndexEntry
 	private List<RVirtualFieldAttr> myFieldAttrs = new ArrayList<RVirtualFieldAttr>();
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualClass> getClasses()
 	{
 		return myClasses;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualModule> getModules()
 	{
 		return myModules;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualMethod> getMethods()
 	{
 		return myMethods;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getFields()
 	{
 		return myFields;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualConstant> getConstants()
 	{
 		return myConstants;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualGlobalVar> getGlobalVars()
 	{
 		return myGlobalVars;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualAlias> getAliases()
 	{
 		return myAliases;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualFieldAttr> getFieldAttrs()
 	{
 		return myFieldAttrs;
@@ -119,7 +120,7 @@ public class IndexEntryImpl implements IndexEntry
 	}
 
 
-	public void addContainer(@NotNull final RVirtualContainer container)
+	public void addContainer(@Nonnull final RVirtualContainer container)
 	{
 		final StructureType type = container.getType();
 		if(type.isMethod())
@@ -138,48 +139,48 @@ public class IndexEntryImpl implements IndexEntry
 		}
 	}
 
-	private void addClass(@NotNull final RVirtualClass vClass)
+	private void addClass(@Nonnull final RVirtualClass vClass)
 	{
 		myClasses.add(vClass);
 	}
 
-	private void addModule(@NotNull final RVirtualModule vModule)
+	private void addModule(@Nonnull final RVirtualModule vModule)
 	{
 		myModules.add(vModule);
 	}
 
-	private void addMethod(@NotNull final RVirtualMethod vMethod)
+	private void addMethod(@Nonnull final RVirtualMethod vMethod)
 	{
 		myMethods.add(vMethod);
 	}
 
-	public void addConstant(@NotNull final RVirtualConstant constant)
+	public void addConstant(@Nonnull final RVirtualConstant constant)
 	{
 		myConstants.add(constant);
 	}
 
-	public void addGlobalVar(@NotNull final RVirtualGlobalVar globalVar)
+	public void addGlobalVar(@Nonnull final RVirtualGlobalVar globalVar)
 	{
 		myGlobalVars.add(globalVar);
 	}
 
-	public void addAlias(@NotNull final RVirtualAlias rVirtualAlias)
+	public void addAlias(@Nonnull final RVirtualAlias rVirtualAlias)
 	{
 		myAliases.add(rVirtualAlias);
 	}
 
-	public void addFieldAttr(@NotNull final RVirtualFieldAttr rVirtualFieldAttr)
+	public void addFieldAttr(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)
 	{
 		myFieldAttrs.add(rVirtualFieldAttr);
 	}
 
-	public void addField(@NotNull final RVirtualField field)
+	public void addField(@Nonnull final RVirtualField field)
 	{
 		myFields.add(field);
 	}
 
 
-	public void removeContainer(@NotNull final RVirtualContainer container)
+	public void removeContainer(@Nonnull final RVirtualContainer container)
 	{
 		final StructureType type = container.getType();
 		if(type.isMethod())
@@ -198,42 +199,42 @@ public class IndexEntryImpl implements IndexEntry
 		}
 	}
 
-	private void removeModule(@NotNull final RVirtualModule rVirtualModule)
+	private void removeModule(@Nonnull final RVirtualModule rVirtualModule)
 	{
 		myModules.remove(rVirtualModule);
 	}
 
-	private void removeClass(@NotNull final RVirtualClass rVirtualClass)
+	private void removeClass(@Nonnull final RVirtualClass rVirtualClass)
 	{
 		myClasses.remove(rVirtualClass);
 	}
 
-	private void removeMethod(@NotNull final RVirtualMethod rVirtualMethod)
+	private void removeMethod(@Nonnull final RVirtualMethod rVirtualMethod)
 	{
 		myMethods.remove(rVirtualMethod);
 	}
 
-	public void removeField(@NotNull final RVirtualField field)
+	public void removeField(@Nonnull final RVirtualField field)
 	{
 		myFields.remove(field);
 	}
 
-	public void removeConstant(@NotNull final RVirtualConstant constant)
+	public void removeConstant(@Nonnull final RVirtualConstant constant)
 	{
 		myConstants.remove(constant);
 	}
 
-	public void removeGlobalVar(@NotNull final RVirtualGlobalVar globalVar)
+	public void removeGlobalVar(@Nonnull final RVirtualGlobalVar globalVar)
 	{
 		myGlobalVars.remove(globalVar);
 	}
 
-	public void removeAlias(@NotNull final RVirtualAlias rVirtualAlias)
+	public void removeAlias(@Nonnull final RVirtualAlias rVirtualAlias)
 	{
 		myAliases.remove(rVirtualAlias);
 	}
 
-	public void removeFieldAttr(@NotNull final RVirtualFieldAttr rVirtualFieldAttr)
+	public void removeFieldAttr(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)
 	{
 		myFieldAttrs.remove(rVirtualFieldAttr);
 	}

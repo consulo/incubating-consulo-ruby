@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 
 /**
@@ -30,13 +31,13 @@ public class RVMethodName extends RVirtualNameImpl implements RVirtualName
 {
 	private static final String DOT = ".";
 
-	public RVMethodName(@NotNull List<String> fullPath, boolean global)
+	public RVMethodName(@Nonnull List<String> fullPath, boolean global)
 	{
 		super(fullPath, global);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFullName()
 	{
 		if(myFullName == null)

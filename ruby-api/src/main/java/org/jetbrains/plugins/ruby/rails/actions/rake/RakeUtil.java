@@ -19,9 +19,12 @@ package org.jetbrains.plugins.ruby.rails.actions.rake;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.gems.GemsRunner;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -89,7 +92,7 @@ public class RakeUtil
 	 * @param out Output by rake
 	 * @return List of RakeCommands
 	 */
-	@NotNull
+	@Nonnull
 	public static List<RakeCommand> getCommands(@Nullable final Output out)
 	{
 		ArrayList<RakeCommand> comamnds = new ArrayList<RakeCommand>();
@@ -134,7 +137,7 @@ public class RakeUtil
 		return GemsRunner.runGemsExecutableScript(sdk, project, RAKE, contentRoot, mode, true, errorTitle, ALL_RAKE_TASKS_FLAG);
 	}
 
-	public static RakeTask findTaksByFullCmd(@NotNull final RakeTask rakeTask, @NotNull final String fullCmd)
+	public static RakeTask findTaksByFullCmd(@Nonnull final RakeTask rakeTask, @Nonnull final String fullCmd)
 	{
 		final String[] ids = fullCmd.split(RakeTask.RAKE_COMMAND_DELIMITER);
 		RakeTask curr = rakeTask;
@@ -177,7 +180,7 @@ public class RakeUtil
 	 * @param moduleName              Facet's module name
 	 * @param railsFacetConfiguration facet Configuration
 	 */
-	public static void loadRakeTasksTree(final boolean forceRegenerate, @Nullable final Project project, @Nullable final Sdk sdk, @NotNull final String moduleName, @NotNull final BaseRailsFacetConfiguration railsFacetConfiguration)
+	public static void loadRakeTasksTree(final boolean forceRegenerate, @Nullable final Project project, @Nullable final Sdk sdk, @Nonnull final String moduleName, @Nonnull final BaseRailsFacetConfiguration railsFacetConfiguration)
 	{
 		final String title = RBundle.message("module.rails.create.rake.tasks.title");
 		final String railsApplicHomeDirPath = railsFacetConfiguration.getRailsApplicationRootPath();
@@ -226,7 +229,7 @@ public class RakeUtil
 	 * @param dataContext DataContext
 	 * @param task        RakeTask
 	 */
-	public static void runRakeTask(@NotNull final DataContext dataContext, @NotNull final RakeTask task)
+	public static void runRakeTask(@Nonnull final DataContext dataContext, @Nonnull final RakeTask task)
 	{
 		//Save all opened documents
 		FileDocumentManager.getInstance().saveAllDocuments();
@@ -275,7 +278,7 @@ public class RakeUtil
 	 * @param railsApplicHomeDirPath Rails Application Home Directory
 	 * @return List of rake commands for module content root
 	 */
-	private static List<RakeCommand> getRakeCommands(@Nullable final Project project, @Nullable final Sdk sdk, @NotNull final String moduleName, @NotNull final String railsApplicHomeDirPath)
+	private static List<RakeCommand> getRakeCommands(@Nullable final Project project, @Nullable final Sdk sdk, @Nonnull final String moduleName, @Nonnull final String railsApplicHomeDirPath)
 	{
 		if(sdk == null)
 		{
@@ -292,7 +295,7 @@ public class RakeUtil
 	 * @param commands - list of Rake command
 	 * @return RakeTask - the root of RakeTasks Tree
 	 */
-	@NotNull
+	@Nonnull
 	private static RakeTask getRakeTasksByOutput(final List<RakeCommand> commands)
 	{
 		final RakeTaskSerializableImpl head = new RakeTaskSerializableImpl(RAKE_COMMAND, null, null, true, null);

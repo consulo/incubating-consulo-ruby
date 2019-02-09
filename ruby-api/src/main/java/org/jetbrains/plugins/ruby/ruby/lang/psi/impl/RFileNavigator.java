@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import com.intellij.psi.PsiElement;
@@ -31,7 +31,7 @@ import com.intellij.psi.PsiElement;
 public class RFileNavigator
 {
 	@Nullable
-	public static RFile getByRCompoundStatement(@NotNull final RCompoundStatement statement)
+	public static RFile getByRCompoundStatement(@Nonnull final RCompoundStatement statement)
 	{
 		final PsiElement parent = statement.getParent();
 		return (parent instanceof RFile) ? (RFile) parent : null;

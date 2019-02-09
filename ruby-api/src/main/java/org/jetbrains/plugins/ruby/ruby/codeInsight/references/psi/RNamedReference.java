@@ -21,8 +21,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -61,7 +61,7 @@ public class RNamedReference implements RPsiPolyvariantReference
 {
 	protected RNamedElement myElement;
 
-	public RNamedReference(@NotNull final RNamedElement element)
+	public RNamedReference(@Nonnull final RNamedElement element)
 	{
 		myElement = element;
 	}
@@ -73,7 +73,7 @@ public class RNamedReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public final PsiElement getRefValue()
 	{
 		return myElement;
@@ -99,7 +99,7 @@ public class RNamedReference implements RPsiPolyvariantReference
 
 	// IDEA calls bindToElement if we rename/move Java class
 	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException
 	{
 		if(element instanceof PsiClass)
 		{
@@ -139,7 +139,7 @@ public class RNamedReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public final ResolveResult[] multiResolve(final boolean incompleteCode)
 	{
 		final PsiManager manager = getElement().getManager();
@@ -155,7 +155,7 @@ public class RNamedReference implements RPsiPolyvariantReference
 	}
 
 	@SuppressWarnings({"UnusedDeclaration"})
-	@NotNull
+	@Nonnull
 	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
 	{
 		if(((RPsiElementBase) myElement).isClassOrModuleName())
@@ -216,7 +216,7 @@ public class RNamedReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		if(((RPsiElementBase) myElement).isClassOrModuleName())
@@ -227,8 +227,8 @@ public class RNamedReference implements RPsiPolyvariantReference
 		return multiresolveToSymbols(fileSymbol, myElement.getName(), false, Types.EMPTY_CONTEXT_RESOLVE_TYPES);
 	}
 
-	@NotNull
-	protected List<Symbol> multiresolveToSymbols(@Nullable final FileSymbol fileSymbol, @NotNull final String name, final boolean global, final TypeSet acceptableTypeSet)
+	@Nonnull
+	protected List<Symbol> multiresolveToSymbols(@Nullable final FileSymbol fileSymbol, @Nonnull final String name, final boolean global, final TypeSet acceptableTypeSet)
 	{
 		RContainer container = myElement.getParentContainer();
 		assert container != null;

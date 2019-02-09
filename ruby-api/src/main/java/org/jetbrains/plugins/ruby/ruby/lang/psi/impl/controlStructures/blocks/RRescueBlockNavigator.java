@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RRescueBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators.RBlockVariableNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
@@ -31,7 +32,7 @@ import com.intellij.psi.util.PsiTreeUtil;
  */
 public class RRescueBlockNavigator
 {
-	public static RRescueBlock getByParameter(@NotNull final RIdentifier identifier)
+	public static RRescueBlock getByParameter(@Nonnull final RIdentifier identifier)
 	{
 		final RBlockVariables blockVariables = RBlockVariableNavigator.getByIdentifier(identifier);
 		if(blockVariables == null)

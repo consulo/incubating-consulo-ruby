@@ -24,8 +24,8 @@ import com.intellij.openapi.keymap.KeymapUtil;
 import com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog;
 import com.intellij.openapi.ui.Messages;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
@@ -34,6 +34,7 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -485,7 +486,7 @@ public class RegisteredActionNamesPanel
 		 * @param newChild new child node
 		 */
 		@Override
-		public void add(@NotNull final MutableTreeNode newChild)
+		public void add(@Nonnull final MutableTreeNode newChild)
 		{
 			final String newObjStr = ((MySortableTreeNode) newChild).getUserObject().toString();
 

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
@@ -85,14 +85,14 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TemplateLanguageFileViewProvider getViewProvider()
 	{
 		return (TemplateLanguageFileViewProvider) super.getViewProvider();
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RHTMLElementTypeVisitor)
 		{
@@ -105,7 +105,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public FileType getFileType()
 	{
 		return RHTMLFileType.INSTANCE;
@@ -114,22 +114,22 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	///////////////////// RFile methods ///////////////////////////////
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RFile getInnerRubyFile()
 	{
 		return (RFile) getViewProvider().getPsi(RubyLanguage.INSTANCE);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getCompoundStatement()
 	{
 		return getInnerRubyFile().getCompoundStatement();
 	}
 
 	@Override
-	@NotNull
-	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @NotNull RFileInfo fileInfo)
+	@Nonnull
+	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @Nonnull RFileInfo fileInfo)
 	{
 		return getInnerRubyFile().createVirtualCopy(virtualParent, fileInfo);
 	}
@@ -182,21 +182,21 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getAccessModifier()
 	{
 		return getInnerRubyFile().getAccessModifier();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getDefaultChildAccessModifier()
 	{
 		return getInnerRubyFile().getDefaultChildAccessModifier();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getContainingFileUrl()
 	{
 		return getInnerRubyFile().getContainingFileUrl();
@@ -210,55 +210,55 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualStructuralElement> getVirtualStructureElements()
 	{
 		return getInnerRubyFile().getVirtualStructureElements();
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		getInnerRubyFile().accept(visitor);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getVirtualFields()
 	{
 		return getInnerRubyFile().getVirtualFields();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualConstant> getVirtualConstants()
 	{
 		return getInnerRubyFile().getVirtualConstants();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualGlobalVar> getVirtualGlobalVars()
 	{
 		return getInnerRubyFile().getVirtualGlobalVars();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RStructuralElement> getStructureElements()
 	{
 		return getInnerRubyFile().getStructureElements();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualRequire> getRequires()
 	{
 		return getInnerRubyFile().getRequires();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<PsiElement> getChildrenByFilter(IElementType filter)
 	{
 		return getInnerRubyFile().getChildrenByFilter(filter);
@@ -279,7 +279,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public <T extends PsiElement> List<T> getChildrenByType(Class<T> c)
 	{
 		return getInnerRubyFile().getChildrenByType(c);
@@ -293,7 +293,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<FieldDefinition> getFieldsDefinitions()
 	{
 		return getInnerRubyFile().getFieldsDefinitions();
@@ -301,13 +301,13 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public FieldDefinition getDefinition(@NotNull RVirtualField field)
+	public FieldDefinition getDefinition(@Nonnull RVirtualField field)
 	{
 		return getInnerRubyFile().getDefinition(field);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ConstantDefinitions> getConstantDefinitions()
 	{
 		return getInnerRubyFile().getConstantDefinitions();
@@ -315,19 +315,19 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public ConstantDefinitions getDefinition(@NotNull RVirtualConstant constant)
+	public ConstantDefinitions getDefinition(@Nonnull RVirtualConstant constant)
 	{
 		return getInnerRubyFile().getDefinition(constant);
 	}
 
 	@Override
-	public int getIndexOf(@NotNull RVirtualStructuralElement element)
+	public int getIndexOf(@Nonnull RVirtualStructuralElement element)
 	{
 		return getInnerRubyFile().getIndexOf(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<GlobalVarDefinition> getGlobalVarDefinitions()
 	{
 		return getInnerRubyFile().getGlobalVarDefinitions();
@@ -335,7 +335,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public GlobalVarDefinition getDefinition(@NotNull RVirtualGlobalVar globalVar)
+	public GlobalVarDefinition getDefinition(@Nonnull RVirtualGlobalVar globalVar)
 	{
 		return getInnerRubyFile().getDefinition(globalVar);
 	}
@@ -348,7 +348,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RootScope getScope()
 	{
 		return getInnerRubyFile().getScope();
@@ -361,14 +361,14 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getFullPath()
 	{
 		return getInnerRubyFile().getFullPath();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFullName()
 	{
 		return getInnerRubyFile().getFullName();
@@ -381,7 +381,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
 	{
 		return getInnerRubyFile().equalsToVirtual(element);
 	}

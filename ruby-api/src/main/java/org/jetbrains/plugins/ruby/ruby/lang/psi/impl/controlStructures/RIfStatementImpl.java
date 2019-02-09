@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
@@ -45,7 +45,7 @@ public class RIfStatementImpl extends RConditionalStatementImpl implements RIfSt
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -56,7 +56,7 @@ public class RIfStatementImpl extends RConditionalStatementImpl implements RIfSt
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getThenBlock()
 	{
 		//noinspection ConstantConditions
@@ -64,7 +64,7 @@ public class RIfStatementImpl extends RConditionalStatementImpl implements RIfSt
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RElsifBlock> getElsifBlocks()
 	{
 		return RubyPsiUtil.getChildrenByType(this, RElsifBlock.class);
@@ -78,7 +78,7 @@ public class RIfStatementImpl extends RConditionalStatementImpl implements RIfSt
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RCompoundStatement thenBlock = getThenBlock();

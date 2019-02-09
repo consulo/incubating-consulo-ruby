@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
@@ -52,7 +53,7 @@ public class RubySlowLineHighlightPass extends AbstractRubyHighlighterPass
 	private Collection<RubyLineMarkerInfo> myLineMarkers;
 
 
-	public RubySlowLineHighlightPass(@NotNull final Project project, @NotNull final RFile psiFile, @NotNull final Editor editor)
+	public RubySlowLineHighlightPass(@Nonnull final Project project, @Nonnull final RFile psiFile, @Nonnull final Editor editor)
 	{
 		super(project, psiFile, editor, false, HighlightPassConstants.RUBY_LINE_MARKERS_GROUP);
 

@@ -16,14 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
 import consulo.ui.image.ImageEffects;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -38,7 +40,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 public class RFieldPresentationUtil implements RubyIcons
 {
 
-	public static Image getIcon(@NotNull final RVirtualField rVirtualField)
+	public static Image getIcon(@Nonnull final RVirtualField rVirtualField)
 	{
 		return getIconByRField(rVirtualField);
 	}
@@ -52,7 +54,7 @@ public class RFieldPresentationUtil implements RubyIcons
 	 * @param flags         com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Image getIcon(@NotNull final RVirtualField rVirtualField, final int flags)
+	public static Image getIcon(@Nonnull final RVirtualField rVirtualField, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
@@ -61,13 +63,13 @@ public class RFieldPresentationUtil implements RubyIcons
 		return RubyIcons.RUBY_FIELD_NODE;
 	}
 
-	public static ItemPresentation getPresentation(@NotNull final RVirtualField rVirtualField)
+	public static ItemPresentation getPresentation(@Nonnull final RVirtualField rVirtualField)
 	{
 		final Image icon = getIcon(rVirtualField, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(rVirtualField.getName(), TextUtil.wrapInParens(getLocation(rVirtualField)), TargetAWT.to(icon), null);
 	}
 
-	public static String getLocation(@NotNull final RVirtualField field)
+	public static String getLocation(@Nonnull final RVirtualField field)
 	{
 		return RContainerPresentationUtil.getContainerNameWithLocation(field.getHolder());
 	}

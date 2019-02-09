@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.io.Serializable;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -41,7 +41,7 @@ public class RVirtualIncludeJavaClassImpl extends RVirtualStructuralElementBase 
 	}
 
 	@Override
-	public void accept(@NotNull final RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull final RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualIncludeJavaClass(this);
 	}

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -59,7 +59,7 @@ import consulo.ui.image.Image;
 public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 {
 	@Nullable
-	public static Image getIcon(@NotNull PsiElement element, int flags)
+	public static Image getIcon(@Nonnull PsiElement element, int flags)
 	{
 		if(element instanceof RFile)
 		{
@@ -122,7 +122,7 @@ public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 	}
 
 	@Override
-	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i)
+	public void updateIcon(@Nonnull IconDescriptor iconDescriptor, @Nonnull PsiElement element, int i)
 	{
 		Image icon = getIcon(element, i);
 		if(icon != null)

@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.index;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
@@ -40,29 +40,29 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
  */
 public interface DeclarationsIndex
 {
-	@NotNull
-	public List<RVirtualClass> getClassesByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualClass> getClassesByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualModule> getModulesByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualModule> getModulesByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualMethod> getMethodsByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualMethod> getMethodsByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualField> getFieldsByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualField> getFieldsByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualConstant> getConstantsByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualConstant> getConstantsByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualGlobalVar> getGlobalVarsByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualGlobalVar> getGlobalVarsByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualAlias> getAliasesByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualAlias> getAliasesByName(@Nonnull final String name);
 
-	@NotNull
-	public List<RVirtualFieldAttr> getFieldAttrsByName(@NotNull final String name);
+	@Nonnull
+	public List<RVirtualFieldAttr> getFieldAttrsByName(@Nonnull final String name);
 
 
 	/**
@@ -70,7 +70,7 @@ public interface DeclarationsIndex
 	 *
 	 * @return Array of strings or empty array if nothing found
 	 */
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllClassesNames();
 
 	/**
@@ -78,7 +78,7 @@ public interface DeclarationsIndex
 	 *
 	 * @return Array of strings or empty array if nothing found
 	 */
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllMethodsNames();
 
 	/**
@@ -86,22 +86,22 @@ public interface DeclarationsIndex
 	 *
 	 * @return Array of strings or empty array if nothing found
 	 */
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllModulesNames();
 
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllFieldsNames();
 
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllConstantsNames();
 
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllGlobalVarsNames();
 
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllAliasesNames();
 
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllFieldAttrsNames();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +113,7 @@ public interface DeclarationsIndex
 	 *
 	 * @param fileInfo RFileInfo to add
 	 */
-	public void addFileInfoToIndex(@NotNull final RFileInfo fileInfo);
+	public void addFileInfoToIndex(@Nonnull final RFileInfo fileInfo);
 
 	/**
 	 * Removes all the names usages from fileInfo from index

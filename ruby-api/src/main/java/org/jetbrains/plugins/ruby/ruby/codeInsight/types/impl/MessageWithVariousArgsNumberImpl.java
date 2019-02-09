@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.MessageWithVariousArgsNumber;
@@ -33,7 +34,7 @@ public class MessageWithVariousArgsNumberImpl extends MessageImpl implements Mes
 	private int myMinNumber;
 	private int myMaxNumber;
 
-	public MessageWithVariousArgsNumberImpl(@NotNull String name, int minNumber, int maxNumber, final boolean important, @Nullable final Symbol symbol)
+	public MessageWithVariousArgsNumberImpl(@Nonnull String name, int minNumber, int maxNumber, final boolean important, @Nullable final Symbol symbol)
 	{
 		super(name, 0, important, symbol);
 		myMinNumber = minNumber;
@@ -53,7 +54,7 @@ public class MessageWithVariousArgsNumberImpl extends MessageImpl implements Mes
 	}
 
 	@Override
-	public boolean matchesMessage(@NotNull final Message patternMessage)
+	public boolean matchesMessage(@Nonnull final Message patternMessage)
 	{
 		if(!getName().equals(patternMessage.getName()))
 		{

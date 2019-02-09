@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageType;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.RSymbolNavigator;
@@ -35,13 +35,13 @@ import com.intellij.psi.ResolveResult;
  */
 public class RFNameReference extends RNamedReference
 {
-	public RFNameReference(@NotNull RNamedElement element)
+	public RFNameReference(@Nonnull RNamedElement element)
 	{
 		super(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
 	{
 		if(((RFNameImpl) myElement).isClassOrModuleName())

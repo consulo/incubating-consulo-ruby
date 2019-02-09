@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.spacing.SpacingTokens;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import com.intellij.formatting.Spacing;
@@ -39,7 +39,7 @@ public class RubySpacingProcessor
 	 * @return Spacing object
 	 */
 	@Nullable
-	public static Spacing getSpacing(@Nullable final ASTNode leftChild, @NotNull final ASTNode rightChild, final CodeStyleSettings settings)
+	public static Spacing getSpacing(@Nullable final ASTNode leftChild, @Nonnull final ASTNode rightChild, final CodeStyleSettings settings)
 	{
 		if(leftChild != null && SpacingTokens.SPACING_AFTER.contains(leftChild.getElementType()))
 		{

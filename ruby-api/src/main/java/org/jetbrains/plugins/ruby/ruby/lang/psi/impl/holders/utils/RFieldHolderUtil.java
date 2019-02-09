@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
@@ -58,7 +58,7 @@ public class RFieldHolderUtil
 		list.add(new FieldDefinitionImpl(rField));
 	}
 
-	@NotNull
+	@Nonnull
 	public static List<FieldDefinition> gatherFieldDescriptions(final RFieldHolder holder)
 	{
 		final ArrayList<FieldDefinition> list = new ArrayList<FieldDefinition>();
@@ -100,7 +100,7 @@ public class RFieldHolderUtil
 	}
 
 	@Nullable
-	public static FieldDefinition getDefinition(@NotNull final List<FieldDefinition> list, @NotNull final RVirtualField field)
+	public static FieldDefinition getDefinition(@Nonnull final List<FieldDefinition> list, @Nonnull final RVirtualField field)
 	{
 		for(FieldDefinition definition : list)
 		{

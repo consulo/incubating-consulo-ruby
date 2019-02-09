@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.RWrapAndIndentCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -32,7 +32,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  */
 public interface RUnlessStatement extends RPsiElement, RConditionalStatement, RExpression, RFormatStructureElement, RWrapAndIndentCOMPSTMT, RWrapLastChild
 {
-	@NotNull
+	@Nonnull
 	RCompoundStatement getThenBlock();
 
 	@Nullable

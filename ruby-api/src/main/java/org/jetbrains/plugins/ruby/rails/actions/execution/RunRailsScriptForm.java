@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.execution;
 
+import javax.annotation.Nonnull;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
@@ -45,7 +45,7 @@ public class RunRailsScriptForm extends JDialog
 
 	private JLabel myDescriptionLabel;
 
-	public RunRailsScriptForm(@NotNull final Project project, @NotNull final String moduleName, @NotNull final VirtualFile moduleScriptFolder)
+	public RunRailsScriptForm(@Nonnull final Project project, @Nonnull final String moduleName, @Nonnull final VirtualFile moduleScriptFolder)
 	{
 		myDescriptionLabel.setText(RBundle.message("rails.actions.execution.run.rails.script.dialog.description.caption", moduleName));
 

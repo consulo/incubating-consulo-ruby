@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
@@ -47,8 +47,8 @@ public class RVirtualClassUtil
 	 * @param fileSymbol    FileSymbol
 	 * @return List o ruby classes.
 	 */
-	@NotNull
-	public static List<RVirtualClass> getVirtualSuperClasses(@NotNull final Symbol rVClassSymbol, @NotNull final FileSymbol fileSymbol)
+	@Nonnull
+	public static List<RVirtualClass> getVirtualSuperClasses(@Nonnull final Symbol rVClassSymbol, @Nonnull final FileSymbol fileSymbol)
 	{
 		final List<RVirtualClass> superClasses = new ArrayList<RVirtualClass>();
 		final Children superClassSymbols = rVClassSymbol.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet());
@@ -74,8 +74,8 @@ public class RVirtualClassUtil
 	 * @param context    Context
 	 * @return all metods
 	 */
-	@NotNull
-	public static RVirtualMethod[] getAllMethods(@Nullable final Symbol symbol, @NotNull final FileSymbol fileSymbol, @NotNull final Context context)
+	@Nonnull
+	public static RVirtualMethod[] getAllMethods(@Nullable final Symbol symbol, @Nonnull final FileSymbol fileSymbol, @Nonnull final Context context)
 	{
 		final Children children = symbol != null ? SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, context, symbol, null) : new Children(null);
 		final Children methodSymbols = children.getSymbolsOfTypes(Types.METHODS);
@@ -92,8 +92,8 @@ public class RVirtualClassUtil
 		return methods.toArray(new RVirtualMethod[methods.size()]);
 	}
 
-	@NotNull
-	public static RVirtualMethod[] getAllMethodsWithName(@Nullable final Symbol symbol, @NotNull final FileSymbol fileSymbol, @NotNull final String name, @NotNull final Context context)
+	@Nonnull
+	public static RVirtualMethod[] getAllMethodsWithName(@Nullable final Symbol symbol, @Nonnull final FileSymbol fileSymbol, @Nonnull final String name, @Nonnull final Context context)
 	{
 		final Children children = symbol != null ? SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, context, symbol, null) : new Children(null);
 		final Children methodSymbols = children.getSymbolsByNameAndTypes(name, Types.METHODS);

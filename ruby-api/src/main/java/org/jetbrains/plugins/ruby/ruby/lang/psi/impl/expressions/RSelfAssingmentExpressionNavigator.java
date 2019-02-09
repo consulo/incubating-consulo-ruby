@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RSelfAssignmentExpression;
 import com.intellij.psi.PsiElement;
 
@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 public class RSelfAssingmentExpressionNavigator
 {
 	@Nullable
-	public static RSelfAssignmentExpression getSelfAssignmentByLeftPart(@NotNull final PsiElement element)
+	public static RSelfAssignmentExpression getSelfAssignmentByLeftPart(@Nonnull final PsiElement element)
 	{
 		final PsiElement parent = element.getParent();
 		if(parent instanceof RSelfAssignmentExpression && ((RSelfAssignmentExpression) parent).getObject() == element)

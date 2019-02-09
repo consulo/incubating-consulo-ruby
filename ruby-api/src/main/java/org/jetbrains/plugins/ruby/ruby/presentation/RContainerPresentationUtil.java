@@ -21,8 +21,8 @@ import com.intellij.psi.PsiElement;
 import consulo.ide.IconDescriptorUpdaters;
 import consulo.ui.image.Image;
 import consulo.ui.image.ImageEffects;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -33,6 +33,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,7 +50,7 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @param container Container to get location for
 	 * @return location
 	 */
-	@NotNull
+	@Nonnull
 	public static String getContainerNameWithLocation(RVirtualContainer container)
 	{
 		final StringBuilder buff = new StringBuilder();
@@ -83,7 +85,7 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @param element element
 	 * @return location
 	 */
-	public static String getLocation(@NotNull final RVirtualStructuralElement element)
+	public static String getLocation(@Nonnull final RVirtualStructuralElement element)
 	{
 		final RVirtualContainer parentContainer = element.getVirtualParentContainer();
 		final String location = getContainerNameWithLocation(parentContainer);
@@ -153,7 +155,7 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @param options    Seee RPresentationConstants
 	 * @return formated container representation
 	 */
-	public static String formatName(@NotNull final RVirtualContainer rContainer, final int options)
+	public static String formatName(@Nonnull final RVirtualContainer rContainer, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 

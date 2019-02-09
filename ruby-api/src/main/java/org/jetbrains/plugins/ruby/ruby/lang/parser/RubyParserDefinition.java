@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
@@ -36,14 +37,14 @@ public class RubyParserDefinition implements ParserDefinition, RubyElementTypes
 {
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Lexer createLexer(LanguageVersion languageVersion)
 	{
 		return new RubyMergeLexer();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiParser createParser( LanguageVersion languageVersion)
 	{
 		return new RubyParser();
@@ -51,36 +52,36 @@ public class RubyParserDefinition implements ParserDefinition, RubyElementTypes
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public IFileElementType getFileNodeType()
 	{
 		return RubyElementTypes.FILE;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
 	{
 		return BNF.tWHITESPACES;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TokenSet getCommentTokens(LanguageVersion languageVersion)
 	{
 		return BNF.tCOMMENTS;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
 	{
 		return BNF.tSTRING_TOKENS;
 	}
 
 	@Override
-	@NotNull
-	public PsiElement createElement(@NotNull ASTNode node)
+	@Nonnull
+	public PsiElement createElement(@Nonnull ASTNode node)
 	{
 		return RubyPsiCreator.create(node);
 	}

@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import consulo.psi.PsiPackage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
@@ -45,7 +47,7 @@ public class JavaResolveUtil
 	};
 
 
-	public static boolean isTopLevelPackageOk(@NotNull final PsiPackage packaggge)
+	public static boolean isTopLevelPackageOk(@Nonnull final PsiPackage packaggge)
 	{
 		final String name = packaggge.getName();
 		for(String s : TOP_LEVEL_JAVA_ALLOWED)
@@ -58,8 +60,8 @@ public class JavaResolveUtil
 		return false;
 	}
 
-	@NotNull
-	public static List<PsiElement> getTopLevelPackagesAndClasses(@NotNull final Project project)
+	@Nonnull
+	public static List<PsiElement> getTopLevelPackagesAndClasses(@Nonnull final Project project)
 	{
 		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 		final PsiJavaPackage topLevel = JavaPsiFacade.getInstance(project).findPackage("");
@@ -85,8 +87,8 @@ public class JavaResolveUtil
 		return list;
 	}
 
-	@NotNull
-	public static List<PsiElement> getAllowedTopLevelPackagesAndClasses(@NotNull final Project project)
+	@Nonnull
+	public static List<PsiElement> getAllowedTopLevelPackagesAndClasses(@Nonnull final Project project)
 	{
 		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 		// Add ALLOWED top level packages
@@ -115,7 +117,7 @@ public class JavaResolveUtil
 	}
 
 	@Nullable
-	public static PsiElement getPackageOrClass(@NotNull final Project project, @NotNull final String fullName)
+	public static PsiElement getPackageOrClass(@Nonnull final Project project, @Nonnull final String fullName)
 	{
 		final PsiPackage psiPackage = JavaPsiFacade.getInstance(project).findPackage(fullName);
 		if(psiPackage != null && psiPackage.isValid())
@@ -131,7 +133,7 @@ public class JavaResolveUtil
 	}
 
 	@Nullable
-	public static PsiElement getPackageOrClass(@NotNull final Project project, @NotNull final List<String> path)
+	public static PsiElement getPackageOrClass(@Nonnull final Project project, @Nonnull final List<String> path)
 	{
 		final StringBuffer buffer = new StringBuffer();
 		for(String name : path)

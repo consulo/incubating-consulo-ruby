@@ -19,12 +19,12 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 import java.awt.BorderLayout;
 import java.util.Comparator;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -59,7 +59,7 @@ public class RMethodList extends JPanel
 
 	private final JList myList;
 
-	public RMethodList(@NotNull final RVirtualClass rVClass, @NotNull final Condition<RVirtualMethod> filter, @NotNull final RMethodProvider methodProvider)
+	public RMethodList(@Nonnull final RVirtualClass rVClass, @Nonnull final Condition<RVirtualMethod> filter, @Nonnull final RMethodProvider methodProvider)
 	{
 		super(new BorderLayout());
 
@@ -77,7 +77,7 @@ public class RMethodList extends JPanel
 		ListScrollingUtil.ensureSelectionExists(myList);
 	}
 
-	private void createList(@NotNull final RVirtualMethod[] allMethods, @NotNull final Condition<RVirtualMethod> filter)
+	private void createList(@Nonnull final RVirtualMethod[] allMethods, @Nonnull final Condition<RVirtualMethod> filter)
 	{
 		for(RVirtualMethod method : allMethods)
 		{
@@ -93,7 +93,7 @@ public class RMethodList extends JPanel
 		return (RVirtualMethod) myList.getSelectedValue();
 	}
 
-	public static RVirtualMethod showDialog(final RVirtualClass rClass, final Condition<RVirtualMethod> filter, @NotNull final RMethodProvider methodProvider, final JComponent parent)
+	public static RVirtualMethod showDialog(final RVirtualClass rClass, final Condition<RVirtualMethod> filter, @Nonnull final RMethodProvider methodProvider, final JComponent parent)
 	{
 		final RMethodList RMethodList = new RMethodList(rClass, filter, methodProvider);
 		final DialogBuilder builder = new DialogBuilder(parent);

@@ -15,7 +15,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,5 +25,5 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface RControlFlowProcessor
 {
-	boolean process(@NotNull final Instruction instruction);
+	boolean process(@Nonnull final Instruction instruction);
 }

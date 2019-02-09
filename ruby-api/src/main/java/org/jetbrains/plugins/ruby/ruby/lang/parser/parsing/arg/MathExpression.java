@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -40,7 +41,7 @@ class MathExpression implements RubyTokenTypes
 	private static final TokenSet TS_tPLUS_tMINUS = TokenSet.create(tPLUS, tMINUS);
 	private static final TokenSet TS_tSTAR_tDIV_tPERC = TokenSet.create(tMULT, tDIV, tPERC);
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseSum(builder);
@@ -52,7 +53,7 @@ class MathExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseSum(final RBuilder builder)
 	{
 		return parseSumWithLeadMult(builder, builder.mark(), parseMult(builder));
@@ -66,13 +67,13 @@ class MathExpression implements RubyTokenTypes
 	 * @param result  result of Mult parsed
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseSumWithLeadMult(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return parseMult(builder);
@@ -89,7 +90,7 @@ class MathExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseMult(final RBuilder builder)
 	{
 		return parseMultWithLeadPow(builder, builder.mark(), parsePower(builder));
@@ -103,7 +104,7 @@ class MathExpression implements RubyTokenTypes
 	 * @param result  result of power parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseMultWithLeadPow(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethod()
@@ -126,7 +127,7 @@ class MathExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parsePower(final RBuilder builder)
 	{
 		return parsePowerWithLeadMathTerm(builder, builder.mark(), MathTerm.parse(builder));
@@ -140,7 +141,7 @@ class MathExpression implements RubyTokenTypes
 	 * @param result  result of math term parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parsePowerWithLeadMathTerm(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethod()

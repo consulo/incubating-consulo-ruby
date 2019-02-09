@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -38,8 +40,8 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ThrowableRunnable;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GenerateDialogs;
@@ -72,7 +74,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		protected DataContext myDataContext;
 		public String myMethodName;
 
-		public ActionStubInserter(@NotNull final DataContext dataContext, @NotNull final String methodName)
+		public ActionStubInserter(@Nonnull final DataContext dataContext, @Nonnull final String methodName)
 		{
 			myDataContext = dataContext;
 			myMethodName = methodName;
@@ -191,7 +193,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		this(actionName != null ? actionName : RBundle.message("popup.generate.action.text"), RBundle.message("popup.generate.action.description"), RailsIcons.RAILS_ACTION_NODE);
 	}
 
-	public GenerateActionAction(@NotNull final String actionName, @Nullable final String description, @Nullable final Image icon)
+	public GenerateActionAction(@Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon)
 	{
 		super(GenerateControllerAction.GENERATOR_CONTROLLER, actionName, description, icon);
 	}
@@ -221,7 +223,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 
 
 	@Override
-	public void update(@NotNull final AnActionEvent event)
+	public void update(@Nonnull final AnActionEvent event)
 	{
 		final DataContext dataContext = event.getDataContext();
 		final Presentation presentation = event.getPresentation();
@@ -266,7 +268,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		AnActionUtil.updatePresentation(presentation, false, false);
 	}
 
-	protected ActionInputValidator createValidator(@NotNull final Module module, @Nullable final VirtualFile file, @NotNull final DataContext dataContext)
+	protected ActionInputValidator createValidator(@Nonnull final Module module, @Nullable final VirtualFile file, @Nonnull final DataContext dataContext)
 	{
 		return new ActionInputValidator(this, module, file, dataContext);
 	}
@@ -314,7 +316,7 @@ public class GenerateActionAction extends SimpleGeneratorAction
 		return null;
 	}
 
-	private void invokeDialog(final Module module, @NotNull final DataContext dataContext)
+	private void invokeDialog(final Module module, @Nonnull final DataContext dataContext)
 	{
 		final VirtualFile file = dataContext.getData(CommonDataKeys.VIRTUAL_FILE);
 

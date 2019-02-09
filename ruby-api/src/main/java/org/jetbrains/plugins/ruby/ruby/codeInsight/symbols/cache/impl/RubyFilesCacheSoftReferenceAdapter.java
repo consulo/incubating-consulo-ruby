@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
 import com.intellij.reference.SoftReference;
 
@@ -30,13 +31,13 @@ public class RubyFilesCacheSoftReferenceAdapter implements RubyFilesCacheListene
 {
 	private SoftReference<RubyFilesCacheListener> myReference;
 
-	public RubyFilesCacheSoftReferenceAdapter(@NotNull final RubyFilesCacheListener listener)
+	public RubyFilesCacheSoftReferenceAdapter(@Nonnull final RubyFilesCacheListener listener)
 	{
 		myReference = new SoftReference<RubyFilesCacheListener>(listener);
 	}
 
 	@Override
-	public void fileAdded(@NotNull String url)
+	public void fileAdded(@Nonnull String url)
 	{
 		final RubyFilesCacheListener listener = myReference.get();
 		if(listener != null)
@@ -46,7 +47,7 @@ public class RubyFilesCacheSoftReferenceAdapter implements RubyFilesCacheListene
 	}
 
 	@Override
-	public void fileRemoved(@NotNull String url)
+	public void fileRemoved(@Nonnull String url)
 	{
 		final RubyFilesCacheListener listener = myReference.get();
 		if(listener != null)
@@ -56,7 +57,7 @@ public class RubyFilesCacheSoftReferenceAdapter implements RubyFilesCacheListene
 	}
 
 	@Override
-	public void fileUpdated(@NotNull String url)
+	public void fileUpdated(@Nonnull String url)
 	{
 		final RubyFilesCacheListener listener = myReference.get();
 		if(listener != null)

@@ -23,7 +23,7 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
  * @date: Dec 21, 2007
  */
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.impl.DocumentMarkupModel;

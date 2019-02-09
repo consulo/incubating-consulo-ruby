@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
 import org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkConfigurablePanel;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
@@ -61,7 +61,7 @@ public class RubySdkConfigurable implements AdditionalDataConfigurable
 	}
 
 	@Override
-	public void setSdk(@NotNull final Sdk sdk)
+	public void setSdk(@Nonnull final Sdk sdk)
 	{
 		mySdk = sdk;
 	}

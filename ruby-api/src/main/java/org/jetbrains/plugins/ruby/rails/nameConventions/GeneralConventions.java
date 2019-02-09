@@ -22,7 +22,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
@@ -43,7 +44,7 @@ public class GeneralConventions
 	 * @param activeSupportFileUrl active_support
 	 * @return list of files
 	 */
-	public static List<VirtualFile> getBuiltCoreExtention(@NotNull final String activeSupportFileUrl)
+	public static List<VirtualFile> getBuiltCoreExtention(@Nonnull final String activeSupportFileUrl)
 	{
 		final VirtualFileManager manager = VirtualFileManager.getInstance();
 

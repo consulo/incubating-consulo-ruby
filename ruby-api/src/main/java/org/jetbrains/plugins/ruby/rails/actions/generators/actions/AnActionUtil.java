@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.Presentation;
 

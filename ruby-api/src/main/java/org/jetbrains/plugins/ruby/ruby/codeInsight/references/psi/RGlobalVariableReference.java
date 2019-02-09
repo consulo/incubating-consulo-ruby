@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -39,20 +40,20 @@ import com.intellij.psi.ResolveResult;
  */
 public class RGlobalVariableReference extends RNamedReference
 {
-	public RGlobalVariableReference(@NotNull RNamedElement element)
+	public RGlobalVariableReference(@Nonnull RNamedElement element)
 	{
 		super(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		return multiresolveToSymbols(fileSymbol, myElement.getText(), true, new TypeSet(Type.GLOBAL_VARIABLE, Type.ALIAS));
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected ResolveResult[] multiResolveInner(boolean incompleteCode)
 	{
 		if(((RGlobalVariable) myElement).isInDefinition())

@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -51,7 +52,7 @@ expr	: command_call
 		;
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(builder.isDEBUG())
@@ -73,7 +74,7 @@ expr	: command_call
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseOr(final RBuilder builder)
 	{
 		return parseOrWithLeadAnd(builder, builder.mark(), parseAnd(builder));
@@ -87,7 +88,7 @@ expr	: command_call
 	 * @param result  result of and parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseOrWithLeadAnd(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethod()
@@ -109,7 +110,7 @@ expr	: command_call
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseAnd(final RBuilder builder)
 	{
 		return parseAndWithLeadNot(builder, builder.mark(), parseNot(builder));
@@ -123,7 +124,7 @@ expr	: command_call
 	 * @param result  result of not parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseAndWithLeadNot(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethod()
@@ -144,7 +145,7 @@ expr	: command_call
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseNot(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();
@@ -169,7 +170,7 @@ expr	: command_call
 	 * @param result  result of singleExrp
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseNotWithLeadSingleExpr(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		if(result != RubyElementTypes.EMPTY_INPUT)
@@ -190,7 +191,7 @@ expr	: command_call
 			| arg
 			;
 	*/
-	@NotNull
+	@Nonnull
 	private static IElementType parseSingleExpr(final RBuilder builder)
 	{
 		if(builder.compare(tEXCLAMATION))

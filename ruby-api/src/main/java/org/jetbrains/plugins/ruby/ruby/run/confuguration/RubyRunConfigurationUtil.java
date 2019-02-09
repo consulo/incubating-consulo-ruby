@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import java.io.File;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;

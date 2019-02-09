@@ -25,8 +25,8 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.HashSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -44,6 +44,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +65,7 @@ public class RFileReference implements RPsiPolyvariantReference
 	private RPsiElement myElement;
 
 
-	public RFileReference(@NotNull final RPsiElement owner, @NotNull final RPsiElement fullReference, @NotNull final RPsiElement element, final boolean relativeToDirectory)
+	public RFileReference(@Nonnull final RPsiElement owner, @Nonnull final RPsiElement fullReference, @Nonnull final RPsiElement element, final boolean relativeToDirectory)
 	{
 		myOwner = owner;
 		myFullReference = fullReference;
@@ -72,7 +74,7 @@ public class RFileReference implements RPsiPolyvariantReference
 		isRelativeToDirectory = relativeToDirectory;
 	}
 
-	private TextRange computeTextRange(@NotNull final RPsiElement element)
+	private TextRange computeTextRange(@Nonnull final RPsiElement element)
 	{
 		final int relativeStartOffset = element.getTextOffset() - myOwner.getTextOffset();
 		int start = relativeStartOffset;
@@ -128,7 +130,7 @@ public class RFileReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException
 	{
 		return null;
 	}
@@ -191,7 +193,7 @@ public class RFileReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getRefValue()
 	{
 		return myFullReference;
@@ -203,20 +205,20 @@ public class RFileReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	public PsiElement handleElementRename(@NotNull final String newElementName) throws IncorrectOperationException
+	public PsiElement handleElementRename(@Nonnull final String newElementName) throws IncorrectOperationException
 	{
 		return null;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		throw new UnsupportedOperationException("multiResolveToSymbols is not implemented in org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFileReference");
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(myElement.getProject()).getSymbol();

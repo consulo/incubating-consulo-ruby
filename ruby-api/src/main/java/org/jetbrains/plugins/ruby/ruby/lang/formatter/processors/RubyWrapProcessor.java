@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RNotWraped;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapCOMPSTMT;
@@ -45,7 +46,7 @@ public class RubyWrapProcessor
 	 * @return wrap
 	 */
 	@Nullable
-	public static Wrap getChildWrap(@NotNull final RubyBlock parent, @NotNull final ASTNode child, final int childCount, final int childNumber)
+	public static Wrap getChildWrap(@Nonnull final RubyBlock parent, @Nonnull final ASTNode child, final int childCount, final int childNumber)
 	{
 		final PsiElement psiParent = parent.getNode().getPsi();
 		final PsiElement psiChild = child.getPsi();

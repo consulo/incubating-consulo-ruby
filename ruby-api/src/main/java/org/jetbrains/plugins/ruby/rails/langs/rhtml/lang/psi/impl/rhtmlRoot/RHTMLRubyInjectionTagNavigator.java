@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.psi.PsiElement;
 
 /**
@@ -29,7 +29,7 @@ import com.intellij.psi.PsiElement;
 public class RHTMLRubyInjectionTagNavigator
 {
 	@Nullable
-	public static RHTMLRubyInjectionTag getByPsiElement(@NotNull final PsiElement element)
+	public static RHTMLRubyInjectionTag getByPsiElement(@Nonnull final PsiElement element)
 	{
 		final PsiElement parent = element.getParent();
 		return (parent instanceof RHTMLRubyInjectionTag) ? (RHTMLRubyInjectionTag) parent : null;

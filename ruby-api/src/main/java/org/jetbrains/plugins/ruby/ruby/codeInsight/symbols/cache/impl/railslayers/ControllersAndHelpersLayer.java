@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
@@ -38,7 +38,7 @@ public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol
 	private String myControllersRootUrl;
 	private String myHelpersRootUrl;
 
-	public ControllersAndHelpersLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	public ControllersAndHelpersLayer(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
 	{
 		super(FileSymbolType.MODELS_LAYER, project, module, sdk, isJRubyEnabled);
 
@@ -52,7 +52,7 @@ public class ControllersAndHelpersLayer extends AbstractRailsLayeredCachedSymbol
 	}
 
 	@Override
-	public void fileAdded(@NotNull String url)
+	public void fileAdded(@Nonnull String url)
 	{
 		if(url.startsWith(myControllersRootUrl))
 		{

@@ -21,8 +21,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.PseudoScopeHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.Scope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeVariable;
@@ -41,32 +41,32 @@ public class ScopeImpl implements Scope
 	private PseudoScopeHolder myHolder;
 	private ArrayList<Scope> mySubScopes = new ArrayList<Scope>();
 
-	public ScopeImpl(@NotNull PseudoScopeHolder holder)
+	public ScopeImpl(@Nonnull PseudoScopeHolder holder)
 	{
 		myHolder = holder;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PseudoScopeHolder getHolder()
 	{
 		return myHolder;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<Scope> getSubScopes()
 	{
 		return mySubScopes;
 	}
 
-	public void addSubScope(@NotNull final Scope scope)
+	public void addSubScope(@Nonnull final Scope scope)
 	{
 		mySubScopes.add(scope);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<ScopeVariable> getVariables()
 	{
 		synchronized(LOCK)
@@ -76,7 +76,7 @@ public class ScopeImpl implements Scope
 	}
 
 	@Override
-	public void processIdentifier(@NotNull final RIdentifier identifier)
+	public void processIdentifier(@Nonnull final RIdentifier identifier)
 	{
 		final String name = identifier.getText();
 		synchronized(LOCK)
@@ -90,7 +90,7 @@ public class ScopeImpl implements Scope
 
 	@Override
 	@Nullable
-	public ScopeVariable getVariableByName(@NotNull final String name)
+	public ScopeVariable getVariableByName(@Nonnull final String name)
 	{
 		synchronized(LOCK)
 		{
@@ -99,7 +99,7 @@ public class ScopeImpl implements Scope
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Set<String> getScopeNames()
 	{
 		return myVariables.keySet();

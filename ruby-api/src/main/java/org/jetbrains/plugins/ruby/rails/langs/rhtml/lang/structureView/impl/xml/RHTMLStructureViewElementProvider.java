@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagImpl;
 import com.intellij.ide.structureView.StructureViewTreeElement;
@@ -34,7 +35,7 @@ public class RHTMLStructureViewElementProvider implements XmlStructureViewElemen
 {
 	@Override
 	@Nullable
-	public StructureViewTreeElement createCustomXmlTagTreeElement(@NotNull final XmlTag tag)
+	public StructureViewTreeElement createCustomXmlTagTreeElement(@Nonnull final XmlTag tag)
 	{
 		if(tag instanceof RHTMLRubyInjectionTag)
 		{

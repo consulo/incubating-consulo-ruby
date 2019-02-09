@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.module;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
@@ -39,7 +39,7 @@ public class RailsModuleLayer extends ModuleLayer
 {
 	private final String myLayerRootUrl;
 
-	public RailsModuleLayer(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	public RailsModuleLayer(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
 	{
 		super(project, module, sdk, jRubyEnabled);
 		assert module != null;
@@ -49,7 +49,7 @@ public class RailsModuleLayer extends ModuleLayer
 	}
 
 	@Override
-	public void fileAdded(@NotNull final String url)
+	public void fileAdded(@Nonnull final String url)
 	{
 		if(url.startsWith(myLayerRootUrl))
 		{

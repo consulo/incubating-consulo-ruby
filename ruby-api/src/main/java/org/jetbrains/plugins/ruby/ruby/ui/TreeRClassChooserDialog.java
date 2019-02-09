@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -37,8 +38,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -99,7 +99,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 	//TODO Add opportunity setup baseClass, i.e parent for other classes, also implement ClassFilters
 	//    private RClass myBaseClass;
 
-	public TreeRClassChooserDialog(@NotNull final Project project, @NotNull final String title, @NotNull final GlobalSearchScope scope, @Nullable final RClass initialClass, @Nullable final ClassFilter classFilter)
+	public TreeRClassChooserDialog(@Nonnull final Project project, @Nonnull final String title, @Nonnull final GlobalSearchScope scope, @Nullable final RClass initialClass, @Nullable final ClassFilter classFilter)
 	{
 		super(project, true);
 
@@ -119,7 +119,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 		handleSelectionChanged();
 	}
 
-	public void selectClass(@NotNull final RClass rClass)
+	public void selectClass(@Nonnull final RClass rClass)
 	{
 		selectElementInTree(rClass);
 	}
@@ -232,7 +232,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 	}
 
 	//select element in project view
-	private void selectElementInTree(@NotNull final PsiElement element)
+	private void selectElementInTree(@Nonnull final PsiElement element)
 	{
 		ApplicationManager.getApplication().invokeLater(new Runnable()
 		{
@@ -397,7 +397,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 
 	public static interface ClassFilter
 	{
-		public boolean isAccepted(@NotNull final RVirtualClass rClass);
+		public boolean isAccepted(@Nonnull final RVirtualClass rClass);
 	}
 
 	//    private class SubclassGotoClassModel extends MyGotoClassModel {

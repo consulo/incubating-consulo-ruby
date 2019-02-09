@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfigurationFactory;
@@ -66,7 +66,7 @@ public class RailsRunConfigurationType implements ConfigurationType
 		return RailsIcons.RAILS_RUN_CONFIGURATION_FOLDER;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getId()
 	{
@@ -79,7 +79,7 @@ public class RailsRunConfigurationType implements ConfigurationType
 		return new ConfigurationFactory[]{myRailsServerFactory};
 	}
 
-	@NotNull
+	@Nonnull
 	public RailsServerRunConfigurationFactory getWEBrickFactory()
 	{
 		return myRailsServerFactory;

@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
@@ -89,7 +89,7 @@ public class RubySdkConfigurablePanel
 		return VirtualFileUtil.convertToVFSPathAndNormalizeSlashes(text);
 	}
 
-	public void setGemsBinFolder(@NotNull final String path)
+	public void setGemsBinFolder(@Nonnull final String path)
 	{
 		myGemsBinFolderTF.setText(toSystemDependentName(path));
 	}

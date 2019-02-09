@@ -20,9 +20,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -65,7 +67,7 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -76,7 +78,7 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RClassPresentationUtil.getPresentation(this);
@@ -98,8 +100,8 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	@NotNull
-	public RVirtualClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo info)
+	@Nonnull
+	public RVirtualClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo info)
 	{
 		final RVirtualName virtualClassName = new RVirtualNameImpl(getFullPath(), isGlobal());
 		final RSuperClass superClass = getPsiSuperClass();
@@ -123,7 +125,7 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull final String name) throws IncorrectOperationException
+	public PsiElement setName(@NonNls @Nonnull final String name) throws IncorrectOperationException
 	{
 		return null;
 	}
@@ -149,7 +151,7 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
 	{
 		if(!super.equalsToVirtual(element))
 		{
@@ -190,8 +192,8 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	@NotNull
-	public List<RClass> getSuperClass(@NotNull final FileSymbol fileSymbol)
+	@Nonnull
+	public List<RClass> getSuperClass(@Nonnull final FileSymbol fileSymbol)
 	{
 		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, this);
 		if(symbol == null)

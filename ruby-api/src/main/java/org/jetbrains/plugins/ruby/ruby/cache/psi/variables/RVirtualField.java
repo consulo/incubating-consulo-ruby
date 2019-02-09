@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.variables;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
@@ -29,10 +29,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
  */
 public interface RVirtualField extends RVirtualElement
 {
-	@NotNull
+	@Nonnull
 	public String getName();
 
-	@NotNull
+	@Nonnull
 	public RVirtualFieldHolder getHolder();
 
 	/**
@@ -40,6 +40,6 @@ public interface RVirtualField extends RVirtualElement
 	 */
 	public FieldType getType();
 
-	@NotNull
+	@Nonnull
 	public String getText();
 }

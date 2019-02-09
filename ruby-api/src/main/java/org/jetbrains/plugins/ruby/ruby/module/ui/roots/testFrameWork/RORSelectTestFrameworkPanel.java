@@ -21,14 +21,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.annotation.Nonnull;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
@@ -75,7 +75,7 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions
 	private TextFieldWithBrowseButton testUnitRootDirTextField;
 
 
-	public RORSelectTestFrameworkPanel(final boolean useRSpec, final boolean preferRSpecSplugin, final boolean useTestUnit, @NotNull final Module module, final boolean forRailsModule)
+	public RORSelectTestFrameworkPanel(final boolean useRSpec, final boolean preferRSpecSplugin, final boolean useTestUnit, @Nonnull final Module module, final boolean forRailsModule)
 	{
 
 		myTPRSpecHomePageLink.addHyperlinkListener(new OpenLinkInBrowserHyperlinkListener(myContentPane));

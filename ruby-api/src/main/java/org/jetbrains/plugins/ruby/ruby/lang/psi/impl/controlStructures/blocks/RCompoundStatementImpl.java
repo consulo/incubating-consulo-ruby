@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -50,7 +51,7 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
 
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -61,7 +62,7 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RPsiElement> getStatements()
 	{
 		if(myStatements == null)
@@ -94,7 +95,7 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement[] getChildren()
 	{
 		PsiElement psiChild = getFirstChild();
@@ -117,7 +118,7 @@ public class RCompoundStatementImpl extends RPsiElementBase implements RCompound
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final List<RExpression> expressions = getChildrenByType(RExpression.class);

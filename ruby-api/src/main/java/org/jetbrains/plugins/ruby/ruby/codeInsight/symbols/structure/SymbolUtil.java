@@ -21,9 +21,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import consulo.psi.PsiPackage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -89,7 +91,7 @@ public class SymbolUtil
 	 * @return List of strings
 	 */
 	@Nullable
-	public static String getPresentablePath(@NotNull final Symbol symbol)
+	public static String getPresentablePath(@Nonnull final Symbol symbol)
 	{
 		final List<String> path = getPath(symbol);
 		final StringBuilder buffer = new StringBuilder();
@@ -110,7 +112,7 @@ public class SymbolUtil
 	}
 
 
-	public static Children addAllChildrenWithSuperClassesAndIncludes(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context, @NotNull final Symbol symbol, @Nullable final Symbol before)
+	public static Children addAllChildrenWithSuperClassesAndIncludes(@Nullable final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context, @Nonnull final Symbol symbol, @Nullable final Symbol before)
 	{
 		addAllChildrenWithSuperClassesAndIncludesRec(fileSymbol, symbol, children, before, context, new HashSet<Symbol>());
 		return children;
@@ -126,7 +128,7 @@ public class SymbolUtil
 	 * @param context    Static or instance context
 	 * @param set        Set of visited symbols to prevent cycling
 	 */
-	private static void addAllChildrenWithSuperClassesAndIncludesRec(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final Children children, @Nullable final Symbol before, @NotNull final Context context, @NotNull final Set<Symbol> set)
+	private static void addAllChildrenWithSuperClassesAndIncludesRec(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Children children, @Nullable final Symbol before, @Nonnull final Context context, @Nonnull final Set<Symbol> set)
 	{
 		// Check to prevent cycling
 		if(fileSymbol == null || set.contains(symbol))
@@ -211,7 +213,7 @@ public class SymbolUtil
 	}
 
 	@Nullable
-	public static Symbol getTopLevelClassByName(@Nullable final FileSymbol fileSymbol, @NotNull final String s)
+	public static Symbol getTopLevelClassByName(@Nullable final FileSymbol fileSymbol, @Nonnull final String s)
 	{
 		if(fileSymbol == null)
 		{
@@ -221,7 +223,7 @@ public class SymbolUtil
 	}
 
 	@Nullable
-	public static Symbol getTopLevelModuleByName(@Nullable final FileSymbol fileSymbol, @NotNull final String s)
+	public static Symbol getTopLevelModuleByName(@Nullable final FileSymbol fileSymbol, @Nonnull final String s)
 	{
 		if(fileSymbol == null)
 		{
@@ -230,8 +232,8 @@ public class SymbolUtil
 		return fileSymbol.getChildren(fileSymbol.getRootSymbol()).getSymbolByNameAndTypes(s, Type.MODULE.asSet());
 	}
 
-	@NotNull
-	public static ArrayList<Symbol> filterMethods(@NotNull final List<Symbol> symbols, final TypeSet typeSet)
+	@Nonnull
+	public static ArrayList<Symbol> filterMethods(@Nonnull final List<Symbol> symbols, final TypeSet typeSet)
 	{
 		final ArrayList<Symbol> methods = new ArrayList<Symbol>();
 		for(Symbol method : symbols)
@@ -244,8 +246,8 @@ public class SymbolUtil
 		return methods;
 	}
 
-	@NotNull
-	public static Children getAllChildrenWithSuperClassesAndIncludes(@Nullable FileSymbol fileSymbol, @NotNull final Context context, @NotNull final Symbol symbol, @Nullable final Symbol before)
+	@Nonnull
+	public static Children getAllChildrenWithSuperClassesAndIncludes(@Nullable FileSymbol fileSymbol, @Nonnull final Context context, @Nonnull final Symbol symbol, @Nullable final Symbol before)
 	{
 		final Children children = new Children(null);
 
@@ -271,7 +273,7 @@ public class SymbolUtil
 	 * Tryes to find top level class with given name and includes it`s content to children
 	 * if symbols was found
 	 */
-	public static void includeTopLevelClassSymbol(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context, @NotNull final String name)
+	public static void includeTopLevelClassSymbol(@Nullable final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context, @Nonnull final String name)
 	{
 		if(fileSymbol == null)
 		{
@@ -288,7 +290,7 @@ public class SymbolUtil
 	 * Tryes to find top level module with given name and includes it`s content to children
 	 * if symbols was found
 	 */
-	public static void includeTopLevelModuleSymbol(@Nullable final FileSymbol fileSymbol, @NotNull final Children children, @NotNull final Context context, @NotNull final String name)
+	public static void includeTopLevelModuleSymbol(@Nullable final FileSymbol fileSymbol, @Nonnull final Children children, @Nonnull final Context context, @Nonnull final String name)
 	{
 		if(fileSymbol == null)
 		{
@@ -310,7 +312,7 @@ public class SymbolUtil
 	 * @return Symbol or null
 	 */
 	@Nullable
-	public static Symbol getSymbolByContainer(@Nullable FileSymbol fileSymbol, @NotNull final RVirtualContainer container)
+	public static Symbol getSymbolByContainer(@Nullable FileSymbol fileSymbol, @Nonnull final RVirtualContainer container)
 	{
 		if(fileSymbol == null)
 		{
@@ -342,7 +344,7 @@ public class SymbolUtil
 	 * @return pair with Symbol and not null FileSymbol or null
 	 */
 	@Nullable
-	public static Pair<Symbol, FileSymbol> getSymbolByContainerRubyTestMode(@NotNull final RVirtualContainer container, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
+	public static Pair<Symbol, FileSymbol> getSymbolByContainerRubyTestMode(@Nonnull final RVirtualContainer container, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
 	{
 		final RVirtualFile file;
 		final RVirtualContainer key;
@@ -438,7 +440,7 @@ public class SymbolUtil
 		return Children.EMPTY_CHILDREN;
 	}
 
-	private static Children gatherAllSymbols(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol)
+	private static Children gatherAllSymbols(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
 	{
 		fileSymbol.getAllSymbols();
 		final HashSet<Symbol> visitedSet = new HashSet<Symbol>();
@@ -447,7 +449,7 @@ public class SymbolUtil
 		return children;
 	}
 
-	private static void gatherAllSymbolsRec(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol, @NotNull final Children children, @NotNull final Set<Symbol> symbols)
+	private static void gatherAllSymbolsRec(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Children children, @Nonnull final Set<Symbol> symbols)
 	{
 		if(symbols.contains(symbol))
 		{
@@ -472,8 +474,8 @@ public class SymbolUtil
 	 * @param symbol     AnchorSymbol
 	 * @return Children object
 	 */
-	@NotNull
-	public static Children gatherOuterSymbols(@NotNull final FileSymbol fileSymbol, @NotNull final Symbol symbol)
+	@Nonnull
+	public static Children gatherOuterSymbols(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
 	{
 
 		// we adding children with all superclasses etc
@@ -492,7 +494,7 @@ public class SymbolUtil
 	}
 
 	@Nullable
-	public static Symbol findSymbol(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol anchor, @NotNull final String name, final boolean global, final TypeSet typeSet)
+	public static Symbol findSymbol(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol anchor, @Nonnull final String name, final boolean global, final TypeSet typeSet)
 	{
 		return findSymbol(fileSymbol, anchor, Arrays.asList(name), global, typeSet);
 	}
@@ -508,7 +510,7 @@ public class SymbolUtil
 	 * @return Symbol
 	 */
 	@Nullable
-	public static Symbol findSymbol(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol anchor, @NotNull final List<String> path, final boolean global, final TypeSet typeSet)
+	public static Symbol findSymbol(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol anchor, @Nonnull final List<String> path, final boolean global, final TypeSet typeSet)
 	{
 
 		if(fileSymbol == null)
@@ -544,7 +546,7 @@ public class SymbolUtil
 	}
 
 	@Nullable
-	public static JavaSymbol findJRubySymbol(@NotNull final Project project, @NotNull final List<String> path)
+	public static JavaSymbol findJRubySymbol(@Nonnull final Project project, @Nonnull final List<String> path)
 	{
 		final PsiElement element = JavaResolveUtil.getPackageOrClass(project, path);
 		if(element instanceof PsiPackage)

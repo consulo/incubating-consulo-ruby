@@ -23,8 +23,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
@@ -59,13 +60,13 @@ public class Runner
 	 * @param command    Command to execute @return Output object
 	 * @return Output
 	 */
-	@NotNull
-	public static Output runInPath(@Nullable final String workingDir, @NotNull final String... command)
+	@Nonnull
+	public static Output runInPath(@Nullable final String workingDir, @Nonnull final String... command)
 	{
 		return runInPathInternal(workingDir, null, null, false, new Runner.SameThreadMode(10), command);
 	}
 
-	public static Output runInPathAndShowErrors(@Nullable final String workingDir, @Nullable Project project, @NotNull final ExecutionMode mode, final boolean showStdErrErrors, @Nullable final String errorTitle, @NotNull final String... command)
+	public static Output runInPathAndShowErrors(@Nullable final String workingDir, @Nullable Project project, @Nonnull final ExecutionMode mode, final boolean showStdErrErrors, @Nullable final String errorTitle, @Nonnull final String... command)
 	{
 		return runInPathInternal(workingDir, project, errorTitle, showStdErrErrors, mode, command);
 	}
@@ -81,8 +82,8 @@ public class Runner
 	 * @param command    Command to execute @return Output object
 	 * @return Output       Output
 	 */
-	@NotNull
-	private static Output runInPathInternal(@Nullable final String workingDir, @Nullable Project project, @Nullable final String errorTitle, final boolean showErrors, @NotNull final ExecutionMode mode, @NotNull final String... command)
+	@Nonnull
+	private static Output runInPathInternal(@Nullable final String workingDir, @Nullable Project project, @Nullable final String errorTitle, final boolean showErrors, @Nonnull final ExecutionMode mode, @Nonnull final String... command)
 	{
 		// executing
 		final StringBuilder out = new StringBuilder();
@@ -108,8 +109,8 @@ public class Runner
 		return output;
 	}
 
-	@NotNull
-	public static Output execute(@NotNull final GeneralCommandLine cmdLine) throws ExecutionException
+	@Nonnull
+	public static Output execute(@Nonnull final GeneralCommandLine cmdLine) throws ExecutionException
 	{
 		final StringBuilder out = new StringBuilder();
 		final StringBuilder err = new StringBuilder();
@@ -130,8 +131,8 @@ public class Runner
 	 * @param command Command to execute
 	 * @return Output object
 	 */
-	@NotNull
-	public static Output run(@NotNull final String... command)
+	@Nonnull
+	public static Output run(@Nonnull final String... command)
 	{
 		return runInPath(null, command);
 	}
@@ -144,7 +145,7 @@ public class Runner
 	 * @return add
 	 */
 	@Nullable
-	public static Process createProcess(@Nullable final String workingDir, @NotNull final String... command)
+	public static Process createProcess(@Nullable final String workingDir, @Nonnull final String... command)
 	{
 		Process process = null;
 
@@ -183,7 +184,7 @@ public class Runner
 	 * @param arguments          Process commandLine
 	 * @return process builder
 	 */
-	public static GeneralCommandLine createAndSetupCmdLine(@Nullable final String additionalLoadPath, @Nullable final String workingDir, @Nullable final String jRubyClassPath, @Nullable final Map<String, String> additionalEnvs, final boolean passParentEnvs, @NotNull final String executablePath, @NotNull final String... arguments)
+	public static GeneralCommandLine createAndSetupCmdLine(@Nullable final String additionalLoadPath, @Nullable final String workingDir, @Nullable final String jRubyClassPath, @Nullable final Map<String, String> additionalEnvs, final boolean passParentEnvs, @Nonnull final String executablePath, @Nonnull final String... arguments)
 	{
 		final GeneralCommandLine cmdLine = new GeneralCommandLine();
 
@@ -267,7 +268,7 @@ public class Runner
 		private final StringBuilder out;
 		private final StringBuilder err;
 
-		public OutputListener(@NotNull final StringBuilder out, @NotNull final StringBuilder err)
+		public OutputListener(@Nonnull final StringBuilder out, @Nonnull final StringBuilder err)
 		{
 			this.out = out;
 			this.err = err;

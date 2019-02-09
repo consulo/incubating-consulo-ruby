@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerPosition;
 import com.intellij.psi.tree.IElementType;
@@ -46,7 +47,7 @@ public abstract class BlackAndWhiteLexer extends Lexer
 	 * @param whiteFragmentEnd This token tell us that white fragment has just finished.
 	 * @param blackToken       This will be returned for all other(no significant) tokens
 	 */
-	public BlackAndWhiteLexer(final Lexer separatorLexer, @NotNull final IElementType whiteToken, @Nullable final IElementType whiteFragmentEnd, @NotNull final IElementType blackToken)
+	public BlackAndWhiteLexer(final Lexer separatorLexer, @Nonnull final IElementType whiteToken, @Nullable final IElementType whiteFragmentEnd, @Nonnull final IElementType blackToken)
 	{
 
 		mySeparatorLexer = separatorLexer;

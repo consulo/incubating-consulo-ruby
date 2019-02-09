@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.primary;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -148,7 +149,7 @@ public class PRIMARY implements RubyTokenTypes
 {
 	private static final TokenSet TOKENS = TokenSet.orSet(BNF.tDOT_OR_COLON, BNF.tCODE_BLOCK_BEG_TOKENS, TokenSet.create(tfLPAREN, tfLBRACK));
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		if(builder.isDEBUG())
@@ -283,7 +284,7 @@ primary : primary tCOLON2 tCONSTANT
 					| tCOLON3 tCONSTANT
 					;
 	*/
-	@NotNull
+	@Nonnull
 	private static IElementType parseSinglePrimary(final RBuilder builder)
 	{
 

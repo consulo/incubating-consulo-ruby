@@ -21,8 +21,8 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -54,7 +54,7 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RObjectClassPresentationUtil.getPresentation(this);
@@ -66,7 +66,7 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName()
 	{
 		return "<<" + getFullName();
@@ -81,7 +81,7 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -92,8 +92,8 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
 	}
 
 	@Override
-	@NotNull
-	public RVirtualObjectClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull RFileInfo info)
+	@Nonnull
+	public RVirtualObjectClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull RFileInfo info)
 	{
 		assert virtualParent != null;
 		final RVirtualName name = new RVirtualNameImpl(getFullPath(), isGlobal());

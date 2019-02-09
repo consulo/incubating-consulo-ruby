@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
 
 /**

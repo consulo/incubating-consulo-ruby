@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.sdk;
 
 import java.util.StringTokenizer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.vfs.VirtualFile;
 
 /**
@@ -33,30 +34,30 @@ public class GemInfo
 	private final String myName;
 	private final String myVersion;
 
-	public GemInfo(@NotNull final String name, @NotNull final String version)
+	public GemInfo(@Nonnull final String name, @Nonnull final String version)
 	{
 		myName = name;
 		myVersion = version;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getVersion()
 	{
 		return myVersion;
 	}
 
-	public static GemInfo create(@NotNull final VirtualFile gemFile)
+	public static GemInfo create(@Nonnull final VirtualFile gemFile)
 	{
 		return create(gemFile.getName());
 	}
 
-	private static GemInfo create(@NotNull final String name)
+	private static GemInfo create(@Nonnull final String name)
 	{
 		final StringTokenizer st = new StringTokenizer(name, "-");
 		final String gemName = st.nextToken();
@@ -65,7 +66,7 @@ public class GemInfo
 	}
 
 	@Nullable
-	public static String getGemNameByUrl(@NotNull final String gemsRootUrl, @NotNull final String fileUrl)
+	public static String getGemNameByUrl(@Nonnull final String gemsRootUrl, @Nonnull final String fileUrl)
 	{
 		final String s = fileUrl.substring(gemsRootUrl.length() + 1);
 		final int slashIndex = s.indexOf('/');

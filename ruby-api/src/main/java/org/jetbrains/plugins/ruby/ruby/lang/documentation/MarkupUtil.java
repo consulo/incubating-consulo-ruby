@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +39,7 @@ public class MarkupUtil implements MarkupConstants
 	private static final Pattern RULES = Pattern.compile("(?<=\\s)-{3,}(?>\\s)");
 	private static final Pattern TODOS = Pattern.compile("[tT][oO][dD][oO] [^\\n]*");
 
-	public static String processText(@NotNull String help)
+	public static String processText(@Nonnull String help)
 	{
 		help = help.trim();
 		if(help.startsWith("#"))
@@ -163,17 +163,17 @@ public class MarkupUtil implements MarkupConstants
 		return buffer.toString();
 	}
 
-	public static void appendBold(@NotNull final StringBuilder builder, @Nullable final String s)
+	public static void appendBold(@Nonnull final StringBuilder builder, @Nullable final String s)
 	{
 		builder.append(MarkupConstants.BOLD_PREFIX).append(s).append(MarkupConstants.BOLD_SUFFIX);
 	}
 
-	public static void appendCode(@NotNull final StringBuilder builder, @Nullable final String s)
+	public static void appendCode(@Nonnull final StringBuilder builder, @Nullable final String s)
 	{
 		builder.append(MarkupConstants.CODE_PREFIX).append(s).append(MarkupConstants.CODE_SUFFIX);
 	}
 
-	public static void appendBoldCode(@NotNull final StringBuilder builder, @Nullable final String s)
+	public static void appendBoldCode(@Nonnull final StringBuilder builder, @Nullable final String s)
 	{
 		builder.append(MarkupConstants.BOLD_PREFIX).append(MarkupConstants.CODE_PREFIX).append(s).append(MarkupConstants.CODE_SUFFIX).append(MarkupConstants.BOLD_SUFFIX);
 	}

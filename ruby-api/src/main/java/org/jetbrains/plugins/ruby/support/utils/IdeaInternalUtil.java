@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
+import javax.annotation.Nonnull;
 import javax.swing.SwingUtilities;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.application.WriteAction;
@@ -36,7 +36,7 @@ public class IdeaInternalUtil
 {
 	private static final Logger LOG = Logger.getInstance(IdeaInternalUtil.class.getName());
 
-	public static void runInsideWriteAction(@NotNull ThrowableRunnable<Exception> runnable)
+	public static void runInsideWriteAction(@Nonnull ThrowableRunnable<Exception> runnable)
 	{
 		try
 		{
@@ -49,7 +49,7 @@ public class IdeaInternalUtil
 		}
 	}
 
-	public static void runWriteAction(@NotNull Runnable runnable)
+	public static void runWriteAction(@Nonnull Runnable runnable)
 	{
 		ApplicationManager.getApplication().runWriteAction(runnable);
 	}
@@ -74,7 +74,7 @@ public class IdeaInternalUtil
 	}
 
 
-	public static void runInEDThreadInWriteAction(@NotNull final ThrowableRunnable<Exception> runnable, final ModalityState state)
+	public static void runInEDThreadInWriteAction(@Nonnull final ThrowableRunnable<Exception> runnable, final ModalityState state)
 	{
 		runInEventDispatchThread(new Runnable()
 		{
@@ -86,7 +86,7 @@ public class IdeaInternalUtil
 		}, state);
 	}
 
-	public static void runInsideReadAction(@NotNull final ThrowableRunnable<Exception> runnable)
+	public static void runInsideReadAction(@Nonnull final ThrowableRunnable<Exception> runnable)
 	{
 		if(ApplicationManager.getApplication().isUnitTestMode())
 		{

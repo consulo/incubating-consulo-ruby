@@ -28,15 +28,15 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.DaemonCodeAnalyzerUtil;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,7 +54,7 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
 
 	@Override
 	@Nullable
-	public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile, @NotNull final Editor editor)
+	public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile, @Nonnull final Editor editor)
 	{
 		if(psiFile == null)
 		{

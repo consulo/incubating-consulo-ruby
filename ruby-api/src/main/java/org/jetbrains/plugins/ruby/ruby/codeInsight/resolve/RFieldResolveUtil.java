@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
@@ -55,8 +56,8 @@ public class RFieldResolveUtil
 	 * @param holder     Holder @return array of Strings for autocomplete
 	 * @return variants for autocomplete
 	 */
-	@NotNull
-	public static Object[] getVariants(@Nullable final FileSymbol fileSymbol, @NotNull final RVirtualFieldHolder holder)
+	@Nonnull
+	public static Object[] getVariants(@Nullable final FileSymbol fileSymbol, @Nonnull final RVirtualFieldHolder holder)
 	{
 		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
 		if(symbol == null)
@@ -78,8 +79,8 @@ public class RFieldResolveUtil
 		return variants.toArray(new Object[variants.size()]);
 	}
 
-	@NotNull
-	public static List<PsiElement> resolve(@Nullable final FileSymbol fileSymbol, @NotNull final RVirtualFieldHolder holder, @NotNull final String name, @NotNull final TypeSet acceptableTypes)
+	@Nonnull
+	public static List<PsiElement> resolve(@Nullable final FileSymbol fileSymbol, @Nonnull final RVirtualFieldHolder holder, @Nonnull final String name, @Nonnull final TypeSet acceptableTypes)
 	{
 		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);

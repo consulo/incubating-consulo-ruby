@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
@@ -56,7 +57,7 @@ public abstract class RequirePathIntention implements IntentionAction
 			final RubySystemCallVisitor callVisitor = new RubySystemCallVisitor()
 			{
 				@Override
-				public void visitRequireCall(@NotNull final RCall rCall)
+				public void visitRequireCall(@Nonnull final RCall rCall)
 				{
 					result.set(true);
 				}

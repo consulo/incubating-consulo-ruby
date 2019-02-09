@@ -21,8 +21,8 @@ import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
 import java.io.File;
 import java.util.StringTokenizer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.Output;
@@ -104,7 +104,7 @@ public class OSUtil
 		return null;
 	}
 
-	public static String appendToPATHenvVariable(@Nullable final String path, @NotNull final String additionalPath)
+	public static String appendToPATHenvVariable(@Nullable final String path, @Nonnull final String additionalPath)
 	{
 		final String pathValue;
 		if(TextUtil.isEmpty(path))
@@ -126,7 +126,7 @@ public class OSUtil
 	 * @return true if SVN is in load path
 	 */
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	public static boolean isSVNInExtendedLoadPath(final @Nullable String svnPath, @NotNull final Sdk sdk)
+	public static boolean isSVNInExtendedLoadPath(final @Nullable String svnPath, @Nonnull final Sdk sdk)
 	{
 		//TODO reimplement with parsing PATH environment variable
 		final Output output = RubyScriptRunner.runSystemCommand(sdk, svnPath, null, SVN_CMD_ARGS[0], SVN_CMD_ARGS[1]);
@@ -134,7 +134,7 @@ public class OSUtil
 	}
 
 
-	@NotNull
+	@Nonnull
 	public static String getDefaultSVNPath()
 	{
 		if(SystemInfo.isWindows)
@@ -165,7 +165,7 @@ public class OSUtil
 	 * @return path if found
 	 */
 	@Nullable
-	public static String findExecutableByName(@NotNull final String exeName)
+	public static String findExecutableByName(@Nonnull final String exeName)
 	{
 		final String path = getIdeaSystemPath();
 		final VirtualFileManager manager = VirtualFileManager.getInstance();

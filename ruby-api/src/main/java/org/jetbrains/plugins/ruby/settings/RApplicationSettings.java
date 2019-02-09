@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
@@ -60,7 +61,7 @@ public class RApplicationSettings implements PersistentStateComponent<RApplicati
 	}
 
 	@Override
-	public void loadState(@NotNull final RApplicationSettings settings)
+	public void loadState(@Nonnull final RApplicationSettings settings)
 	{
 		additionalEnvPATH = settings.additionalEnvPATH;
 

@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.sdk.gemRootType;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.roots.OrderRootType;
 
 /**
@@ -9,7 +9,7 @@ import com.intellij.openapi.roots.OrderRootType;
  */
 public class GemOrderRootType extends OrderRootType
 {
-	@NotNull
+	@Nonnull
 	public static GemOrderRootType getInstance()
 	{
 		return getOrderRootType(GemOrderRootType.class);

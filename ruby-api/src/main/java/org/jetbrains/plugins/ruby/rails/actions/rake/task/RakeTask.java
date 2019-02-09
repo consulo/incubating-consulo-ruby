@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.actions.rake.task;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,7 +49,7 @@ public interface RakeTask
 	/**
 	 * @return Children tasks
 	 */
-	@NotNull
+	@Nonnull
 	public List<? extends RakeTask> getSubTasks();
 
 	/**

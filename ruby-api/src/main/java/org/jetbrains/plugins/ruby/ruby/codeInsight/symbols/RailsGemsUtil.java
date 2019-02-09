@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 
@@ -42,7 +43,7 @@ public class RailsGemsUtil
 			"rake"
 	};
 
-	public static List<String> getRailsGems(@NotNull final String gemsRootUrl, @NotNull final VirtualFile gemsRootFile)
+	public static List<String> getRailsGems(@Nonnull final String gemsRootUrl, @Nonnull final VirtualFile gemsRootFile)
 	{
 		final ArrayList<String> railsGemsUrls = new ArrayList<String>();
 		for(String gemUrl : RubySdkUtil.getAllGemsLibUrls(gemsRootFile))
@@ -58,7 +59,7 @@ public class RailsGemsUtil
 	/*
 	 * Checks that gemUrl is rails required!
 	 */
-	private static boolean isRailsGem(@NotNull final String gemsRootUrl, @NotNull final String gemUrl)
+	private static boolean isRailsGem(@Nonnull final String gemsRootUrl, @Nonnull final String gemUrl)
 	{
 		final String gemName = gemUrl.substring(gemsRootUrl.length() + 1);
 		for(String gem : RAILS_GEMS)

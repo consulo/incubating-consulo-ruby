@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.jruby.search;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
@@ -38,7 +38,7 @@ public class JRubyOcurrenceProcessor implements TextOccurenceProcessor
 	private Processor<PsiReference> myPsiReferenceProcessor;
 	private boolean myShouldResolve;
 
-	public JRubyOcurrenceProcessor(@NotNull final PsiMethod method, @NotNull final String name, @NotNull final Processor<PsiReference> psiReferenceProcessor, final boolean shouldResolve)
+	public JRubyOcurrenceProcessor(@Nonnull final PsiMethod method, @Nonnull final String name, @Nonnull final Processor<PsiReference> psiReferenceProcessor, final boolean shouldResolve)
 	{
 		myMethod = method;
 		myName = name;

@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
@@ -55,7 +56,7 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode
 		init(generateNodeId(getVirtualFileUrl()), getPresentation());
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId generateNodeId(final String appControllersRootUrl)
 	{
 		return NodeIdUtil.createForDirectory(appControllersRootUrl, true);
@@ -102,7 +103,7 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;

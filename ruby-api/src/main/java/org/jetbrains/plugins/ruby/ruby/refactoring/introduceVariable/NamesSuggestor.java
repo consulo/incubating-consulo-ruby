@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.refactoring.introduceVariable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
@@ -45,7 +46,7 @@ import com.intellij.psi.PsiElement;
  */
 public class NamesSuggestor
 {
-	public static String[] getSuggestedNames(@NotNull final PsiElement element)
+	public static String[] getSuggestedNames(@Nonnull final PsiElement element)
 	{
 		final NameSuggestingVisitor suggestingVisitor = new NameSuggestingVisitor();
 		element.accept(suggestingVisitor);
@@ -56,18 +57,18 @@ public class NamesSuggestor
 	{
 		private List<String> names = new ArrayList<String>();
 
-		@NotNull
+		@Nonnull
 		public String[] getNames()
 		{
 			return names.toArray(new String[names.size()]);
 		}
 
-		private void generateNamesBy(@NotNull final String name)
+		private void generateNamesBy(@Nonnull final String name)
 		{
 			NameSuggestorUtil.addNames(names, name);
 		}
 
-		private void generateNamesByType(@NotNull final String typeName)
+		private void generateNamesByType(@Nonnull final String typeName)
 		{
 			NameSuggestorUtil.addNamesByType(names, typeName);
 		}

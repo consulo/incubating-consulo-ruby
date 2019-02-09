@@ -25,8 +25,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
@@ -64,7 +64,7 @@ public class GemReference implements RPsiPolyvariantReference
 		myTextRange = computeTextRange(myElement);
 	}
 
-	private TextRange computeTextRange(@NotNull final RPsiElement element)
+	private TextRange computeTextRange(@Nonnull final RPsiElement element)
 	{
 		final int relativeStartOffset = element.getTextOffset() - myOwner.getTextOffset();
 		int start = relativeStartOffset;
@@ -89,21 +89,21 @@ public class GemReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getRefValue()
 	{
 		return myElement;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		throw new UnsupportedOperationException("method multiResolveToSymbols is not supported in org.jetbrains.plugins.ruby.ruby.codeInsight.references.GemReference");
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ResolveResult[] multiResolve(boolean incompleteCode)
 	{
 		return ResolveResult.EMPTY_ARRAY;
@@ -141,7 +141,7 @@ public class GemReference implements RPsiPolyvariantReference
 	}
 
 	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull PsiElement element) throws IncorrectOperationException
 	{
 		return null;
 	}

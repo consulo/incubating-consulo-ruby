@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 
 import java.io.Serializable;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
@@ -35,28 +36,28 @@ public class RVirtualConstantImpl extends RVirtualElementBase implements RVirtua
 	private String myName;
 	private RVirtualConstantHolder myHolder;
 
-	public RVirtualConstantImpl(@NotNull final String name, @NotNull final RVirtualConstantHolder holder)
+	public RVirtualConstantImpl(@Nonnull final String name, @Nonnull final RVirtualConstantHolder holder)
 	{
 		myName = name;
 		myHolder = holder;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RVirtualConstantHolder getHolder()
 	{
 		return myHolder;
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitElement(this);
 	}

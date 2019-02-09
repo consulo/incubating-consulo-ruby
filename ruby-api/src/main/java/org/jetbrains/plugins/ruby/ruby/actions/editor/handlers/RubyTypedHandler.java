@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -306,7 +307,7 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 		}
 	}
 
-	private static int getBraceBalance(@NotNull final Editor editor, final TokenSet openBraces, final IElementType closeBrace)
+	private static int getBraceBalance(@Nonnull final Editor editor, final TokenSet openBraces, final IElementType closeBrace)
 	{
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final HighlighterIterator iterator = highlighter.createIterator(0);

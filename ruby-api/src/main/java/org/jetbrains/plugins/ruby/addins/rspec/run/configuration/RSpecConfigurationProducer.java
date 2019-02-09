@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;

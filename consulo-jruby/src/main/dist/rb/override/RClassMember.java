@@ -20,7 +20,7 @@ import com.intellij.codeInsight.generation.ClassMember;
 import com.intellij.codeInsight.generation.MemberChooserObject;
 import com.intellij.codeInsight.generation.PsiElementMemberChooserObject;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 
@@ -30,7 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
  * Date: Oct 1, 2007
  */
 public class RClassMember extends PsiElementMemberChooserObject implements ClassMember {
-    public RClassMember(@NotNull PsiElement psiElement) {
+    public RClassMember(@Nonnull PsiElement psiElement) {
         super(psiElement, RubyPsiUtil.getPresentableName(psiElement), RubyPsiUtil.getIcon(psiElement));
     }
 

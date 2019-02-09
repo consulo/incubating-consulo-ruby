@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 import javax.swing.JComponent;
 
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
@@ -42,7 +42,7 @@ import com.intellij.openapi.options.ConfigurationException;
 
 public class JRubyRTestFrameworkChooser extends FacetEditorTab
 {
-	public JRubyRTestFrameworkChooser(@NotNull final RSupportPerModuleSettingsImpl myJRubyFacetConfiguration, @NotNull final FacetEditorContext myEditorContext)
+	public JRubyRTestFrameworkChooser(@Nonnull final RSupportPerModuleSettingsImpl myJRubyFacetConfiguration, @Nonnull final FacetEditorContext myEditorContext)
 	{
 		this.myJRubyFacetConfiguration = myJRubyFacetConfiguration;
 		this.myEditorContext = myEditorContext;

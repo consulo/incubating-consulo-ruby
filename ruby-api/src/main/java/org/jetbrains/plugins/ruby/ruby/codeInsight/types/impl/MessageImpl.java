@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.MessageWithVariousArgsNumber;
@@ -36,7 +36,7 @@ public class MessageImpl implements Message
 	protected Symbol mySymbol;
 	protected boolean isImportant;
 
-	public MessageImpl(@NotNull final String name, final int number, final boolean important, @Nullable final Symbol symbol)
+	public MessageImpl(@Nonnull final String name, final int number, final boolean important, @Nullable final Symbol symbol)
 	{
 		myName = name;
 		myNumber = number;
@@ -45,7 +45,7 @@ public class MessageImpl implements Message
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName;
@@ -65,7 +65,7 @@ public class MessageImpl implements Message
 	}
 
 	@Override
-	public boolean matchesMessage(@NotNull final Message patternMessage)
+	public boolean matchesMessage(@Nonnull final Message patternMessage)
 	{
 		if(patternMessage instanceof MessageWithVariousArgsNumber)
 		{

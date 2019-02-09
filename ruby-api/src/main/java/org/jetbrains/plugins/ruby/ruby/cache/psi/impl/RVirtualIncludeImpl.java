@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualInclude;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -37,7 +37,7 @@ public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implement
 {
 	protected List<RVirtualName> myNames;
 
-	public RVirtualIncludeImpl(final RVirtualContainer container, @NotNull List<RVirtualName> includes)
+	public RVirtualIncludeImpl(final RVirtualContainer container, @Nonnull List<RVirtualName> includes)
 	{
 		super(container);
 		myNames = includes;
@@ -55,7 +55,7 @@ public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implement
 	}
 
 	@Override
-	public void dump(@NotNull StringBuilder buffer, int indent)
+	public void dump(@Nonnull StringBuilder buffer, int indent)
 	{
 		super.dump(buffer, indent);
 		for(RVirtualName myInclude : myNames)
@@ -66,13 +66,13 @@ public class RVirtualIncludeImpl extends RVirtualStructuralElementBase implement
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualInclude(this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualName> getNames()
 	{
 		return myNames;

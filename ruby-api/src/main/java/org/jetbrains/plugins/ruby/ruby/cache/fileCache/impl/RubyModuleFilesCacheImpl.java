@@ -22,8 +22,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
@@ -55,7 +55,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
 	protected ModuleRootManager myModuleRootManager;
 	protected List<CacheScannerFilesProvider> myScanProvidersList = new ArrayList<CacheScannerFilesProvider>();
 
-	public RubyModuleFilesCacheImpl(@NotNull final Module module, @NotNull final ModuleRootManager manager)
+	public RubyModuleFilesCacheImpl(@Nonnull final Module module, @Nonnull final ModuleRootManager manager)
 	{
 		super(module.getProject(), module.getName());
 		myModule = module;
@@ -151,7 +151,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
 	}
 
 	@Override
-	public boolean containsUrl(@NotNull String url)
+	public boolean containsUrl(@Nonnull String url)
 	{
 		return isInContent(VirtualFileManager.getInstance().findFileByUrl(url));
 	}
@@ -162,7 +162,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
 
 	@Override
 	@SuppressWarnings({"unchecked"})
-	protected Collection<VirtualFile> scanForFiles(@NotNull final String[] rootUrls)
+	protected Collection<VirtualFile> scanForFiles(@Nonnull final String[] rootUrls)
 	{
 		final List<VirtualFile> files = new LinkedList<VirtualFile>();
 

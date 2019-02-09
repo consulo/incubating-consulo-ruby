@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 
@@ -41,14 +42,14 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
 	protected transient String myFullName;
 
 
-	public RVirtualNameImpl(@NotNull final List<String> fullPath, final boolean global)
+	public RVirtualNameImpl(@Nonnull final List<String> fullPath, final boolean global)
 	{
 		myFullPath = fullPath;
 		isGlobal = global;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		if(myName == null)
@@ -60,14 +61,14 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getPath()
 	{
 		return myFullPath;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFullName()
 	{
 		if(myFullName == null)
@@ -93,7 +94,7 @@ public class RVirtualNameImpl extends RVirtualElementBase implements RVirtualNam
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitElement(this);
 	}

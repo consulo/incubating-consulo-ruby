@@ -16,14 +16,16 @@
 
 package rb.refactoring.introduceVariable;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.refactoring.RefactoringActionHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 public class RubyIntroduceVariableHandlerWrapper implements RefactoringActionHandler {
     private RubyIntroduceVariableHandler myJRubyHandler;
 
-    public void setJRubyHandler(@NotNull final RubyIntroduceVariableHandler handler) {
+    public void setJRubyHandler(@Nonnull final RubyIntroduceVariableHandler handler) {
         myJRubyHandler = handler;
     }
 
@@ -43,12 +45,12 @@ public class RubyIntroduceVariableHandlerWrapper implements RefactoringActionHan
     }
 
     @Override
-	public void invoke(@NotNull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext) {
+	public void invoke(@Nonnull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext) {
         myJRubyHandler.invoke(project, editor, file, dataContext);
     }
 
     @Override
-	public void invoke(@NotNull Project project, @NotNull PsiElement[] elements, @Nullable DataContext dataContext) {
+	public void invoke(@Nonnull Project project, @Nonnull PsiElement[] elements, @Nullable DataContext dataContext) {
         myJRubyHandler.invokeOutter(project, elements, dataContext);
     }
 }

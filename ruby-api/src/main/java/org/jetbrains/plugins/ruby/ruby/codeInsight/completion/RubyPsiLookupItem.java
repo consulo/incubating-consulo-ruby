@@ -22,11 +22,12 @@ import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
 
@@ -50,13 +51,13 @@ public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue
 	private int myPriority;
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myLookupString;
 	}
 
-	public RubyPsiLookupItem(@NotNull final Project project, @NotNull final String lookupString, @Nullable final String tailText, @Nullable final String typeText, @NotNull final RVirtualElement prototype, final int priority, final boolean bold, @Nullable final Image icon)
+	public RubyPsiLookupItem(@Nonnull final Project project, @Nonnull final String lookupString, @Nullable final String tailText, @Nullable final String typeText, @Nonnull final RVirtualElement prototype, final int priority, final boolean bold, @Nullable final Image icon)
 	{
 		myProject = project;
 		myLookupString = lookupString;

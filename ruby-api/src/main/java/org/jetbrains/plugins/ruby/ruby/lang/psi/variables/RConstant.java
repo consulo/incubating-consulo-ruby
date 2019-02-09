@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
@@ -39,6 +40,6 @@ public interface RConstant extends RVirtualConstant, RNamedElement, PsiNamedElem
 	public ConstantDefinitions getConstantDefinitions();
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RConstantHolder getHolder();
 }

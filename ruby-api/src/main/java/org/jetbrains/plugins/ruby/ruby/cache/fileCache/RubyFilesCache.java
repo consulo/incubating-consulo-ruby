@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import com.intellij.openapi.Disposable;
@@ -43,9 +43,9 @@ public interface RubyFilesCache extends /*CacheUpdater, */Disposable
 	 *
 	 * @param index DeclarationIndex to associate for this fileCache
 	 */
-	public void registerDeaclarationsIndex(@NotNull final DeclarationsIndex index);
+	public void registerDeaclarationsIndex(@Nonnull final DeclarationsIndex index);
 
-	@NotNull
+	@Nonnull
 	public DeclarationsIndex getDeclarationsIndex();
 
 	/**
@@ -70,7 +70,7 @@ public interface RubyFilesCache extends /*CacheUpdater, */Disposable
 	 */
 	public void initFileCacheAndRegisterListeners();
 
-	public void setCacheFilePath(@NotNull final String path);
+	public void setCacheFilePath(@Nonnull final String path);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// cache functions
@@ -83,32 +83,32 @@ public interface RubyFilesCache extends /*CacheUpdater, */Disposable
 	 * @return FileInfo cached info associated with file
 	 */
 	@Nullable
-	public RFileInfo getUp2DateFileInfo(@NotNull final VirtualFile file);
+	public RFileInfo getUp2DateFileInfo(@Nonnull final VirtualFile file);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Listeners etc
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void addCacheChangedListener(@NotNull final RubyFilesCacheListener listener, @NotNull final Disposable parent);
+	public void addCacheChangedListener(@Nonnull final RubyFilesCacheListener listener, @Nonnull final Disposable parent);
 
-	public void removeCacheChangedListener(@NotNull final RubyFilesCacheListener listener);
+	public void removeCacheChangedListener(@Nonnull final RubyFilesCacheListener listener);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Files actions
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@NotNull
+	@Nonnull
 	public List<String> getAllRelativeUrlsForDirectory(@Nullable final VirtualFile directory);
 
-	@NotNull
+	@Nonnull
 	public Set<String> getAllUrls();
 
 	/**
 	 * @param url Url to check
 	 * @return true if cache contains such an url
 	 */
-	public boolean containsUrl(@NotNull String url);
+	public boolean containsUrl(@Nonnull String url);
 
-	public void setCacheRootURLs(@NotNull final String[] urls);
+	public void setCacheRootURLs(@Nonnull final String[] urls);
 
 	public String[] getCacheRootURLs();
 

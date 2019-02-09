@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
@@ -52,7 +52,7 @@ public class RTestsRunConfigurationEditor extends SettingsEditor<RTestsRunConfig
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected JComponent createEditor()
 	{
 		return myForm.getPanel();

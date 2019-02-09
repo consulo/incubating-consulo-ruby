@@ -36,8 +36,8 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ThrowableRunnable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -61,6 +61,8 @@ import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -190,7 +192,7 @@ public class BaseRailsFacetBuilder
 	 * @param applicationHomePath Rails Application Home Directory
 	 * @param sdk                 SDK
 	 */
-	public static void initGreenhornFacet(final BaseRailsFacet railsFacet, @NotNull final ModifiableRootModel rootModel, @NotNull final String applicationHomePath, @Nullable final Sdk sdk)
+	public static void initGreenhornFacet(final BaseRailsFacet railsFacet, @Nonnull final ModifiableRootModel rootModel, @Nonnull final String applicationHomePath, @Nullable final Sdk sdk)
 	{
 
 		/**
@@ -213,7 +215,7 @@ public class BaseRailsFacetBuilder
 	 * @param railsFacet Rails Facet
 	 * @param settings   Wizard ettings
 	 */
-	public static void setupGreenhornFacet(final ModifiableRootModel rootModel, final BaseRailsFacet railsFacet, @NotNull final RailsWizardSettingsHolder settings)
+	public static void setupGreenhornFacet(final ModifiableRootModel rootModel, final BaseRailsFacet railsFacet, @Nonnull final RailsWizardSettingsHolder settings)
 	{
 
 		final RailsWizardSettingsHolder.RSpecConfiguration rSpecConfiguration = settings.getRSpecConf();
@@ -280,7 +282,7 @@ public class BaseRailsFacetBuilder
 		//        RModuleUtil.refreshRubyModuleTypeContent(module);
 	}
 
-	private static void generateRailsApplication(final Module module, @NotNull final Sdk sdk, final RunContentDescriptorFactory descriptorFactory, @NotNull final RailsWizardSettingsHolder settings, @NotNull final String applicationHomePath, @Nullable final Runnable onDone)
+	private static void generateRailsApplication(final Module module, @Nonnull final Sdk sdk, final RunContentDescriptorFactory descriptorFactory, @Nonnull final RailsWizardSettingsHolder settings, @Nonnull final String applicationHomePath, @Nullable final Runnable onDone)
 	{
 
 		if(settings.getAppGenerateWay() == RailsWizardSettingsHolder.Generate.NEW)
@@ -386,7 +388,7 @@ public class BaseRailsFacetBuilder
 		};
 	}
 
-	private static void installComponents(@NotNull final Module uncommitedModule, @NotNull final BaseRailsFacet railsFacet, @NotNull final Sdk sdk, @NotNull final RailsWizardSettingsHolder settings, @NotNull final String applicationHomePath)
+	private static void installComponents(@Nonnull final Module uncommitedModule, @Nonnull final BaseRailsFacet railsFacet, @Nonnull final Sdk sdk, @Nonnull final RailsWizardSettingsHolder settings, @Nonnull final String applicationHomePath)
 	{
 
 		final String moduleName = uncommitedModule.getName();
@@ -427,7 +429,7 @@ public class BaseRailsFacetBuilder
 		configuration.loadRakeTasks(forceRegenerate, sdk);
 	}
 
-	private static void installRSpecSupport(final Module module, final RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf, @NotNull final Sdk sdk)
+	private static void installRSpecSupport(final Module module, final RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf, @Nonnull final Sdk sdk)
 	{
 
 		final ThrowableRunnable<Exception> installRSpecRails = new ThrowableRunnable<Exception>()
@@ -509,7 +511,7 @@ public class BaseRailsFacetBuilder
 	}
 
 	@Nullable
-	private static String searchRailsAppInUnderDirectory(@NotNull final Module module, @NotNull final ProgressIndicator indicator)
+	private static String searchRailsAppInUnderDirectory(@Nonnull final Module module, @Nonnull final ProgressIndicator indicator)
 	{
 		final Ref<String> railsRootPathRef = new Ref<String>();
 		final ModuleFileIndex moduleFileIndex = ModuleRootManager.getInstance(module).getFileIndex();
@@ -541,7 +543,7 @@ public class BaseRailsFacetBuilder
 		return railsRootPathRef.get();
 	}
 
-	private static void configureRailsSourcePathes(final RailsViewFoldersManager rootManager, @NotNull final String railsAppHomeRootUrl, final boolean isRSpecSupportEnabled, final Module module)
+	private static void configureRailsSourcePathes(final RailsViewFoldersManager rootManager, @Nonnull final String railsAppHomeRootUrl, final boolean isRSpecSupportEnabled, final Module module)
 	{
 		// add rails view custom folders
 		addAdditionalRailsViewFolders(railsAppHomeRootUrl, rootManager, isRSpecSupportEnabled);
@@ -557,7 +559,7 @@ public class BaseRailsFacetBuilder
 					@Override
 					public void run()
 					{
-						@NotNull final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
+						@Nonnull final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
 
 						final ContentEntry[] entries = modifiableModel.getContentEntries();
 						if(entries.length == 0)
@@ -607,7 +609,7 @@ public class BaseRailsFacetBuilder
         }  */
 	}
 
-	private static void addAdditionalRailsViewFolders(@NotNull final String railsAppHomeRootUrl, @NotNull final RailsViewFoldersManager rootManager, final boolean isRSpecSupportEnabled)
+	private static void addAdditionalRailsViewFolders(@Nonnull final String railsAppHomeRootUrl, @Nonnull final RailsViewFoldersManager rootManager, final boolean isRSpecSupportEnabled)
 	{
 
 		final LinkedList<String> urlsList = new LinkedList<String>();

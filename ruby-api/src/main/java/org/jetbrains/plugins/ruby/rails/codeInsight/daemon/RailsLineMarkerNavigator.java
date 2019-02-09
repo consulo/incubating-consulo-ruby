@@ -21,7 +21,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToAction;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToController;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToView;
@@ -48,7 +48,7 @@ public class RailsLineMarkerNavigator
 {
 	private static final Logger LOG = Logger.getInstance(RailsLineMarkerNavigator.class.getName());
 
-	public static void browse(@NotNull final MouseEvent e, @NotNull final RailsLineMarkerInfo info, @NotNull final Module module)
+	public static void browse(@Nonnull final MouseEvent e, @Nonnull final RailsLineMarkerInfo info, @Nonnull final Module module)
 	{
 		final PsiElement element = info.getElementRef().get();
 		if(element == null || !element.isValid())
@@ -111,7 +111,7 @@ public class RailsLineMarkerNavigator
 		}
 	}
 
-	public static void openTargets(@NotNull final Navigatable[] targets, @NotNull final String title, @NotNull final ListCellRenderer listRenderer, @NotNull final RelativePoint relativePoint)
+	public static void openTargets(@Nonnull final Navigatable[] targets, @Nonnull final String title, @Nonnull final ListCellRenderer listRenderer, @Nonnull final RelativePoint relativePoint)
 	{
 		if(targets.length == 0)
 		{

@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.util.text.StringUtil;
 
 /**
@@ -32,14 +33,14 @@ import com.intellij.openapi.util.text.StringUtil;
 public class NameSuggestorUtil
 {
 
-	private static String deleteNonLetterFromString(@NotNull final String string)
+	private static String deleteNonLetterFromString(@Nonnull final String string)
 	{
 		Pattern pattern = Pattern.compile("[^a-zA-Z_]");
 		Matcher matcher = pattern.matcher(string);
 		return matcher.replaceAll("");
 	}
 
-	public static void addNames(@NotNull final List<String> possibleNames, @NotNull String name)
+	public static void addNames(@Nonnull final List<String> possibleNames, @Nonnull String name)
 	{
 		name = StringUtil.decapitalize(deleteNonLetterFromString(name));
 		if(name.startsWith("get"))
@@ -66,7 +67,7 @@ public class NameSuggestorUtil
 		}
 	}
 
-	public static void addNamesByType(@NotNull final List<String> possibleNames, @NotNull String name)
+	public static void addNamesByType(@Nonnull final List<String> possibleNames, @Nonnull String name)
 	{
 		name = StringUtil.decapitalize(deleteNonLetterFromString(name));
 		possibleNames.add(name);

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.actions.generators;
 
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.project.Project;
 
 /**
@@ -39,7 +39,7 @@ public interface GeneratorPanel
 	 *
 	 * @return script arguments
 	 */
-	@NotNull
+	@Nonnull
 	public String getGeneratorArgs();
 
 	/**
@@ -48,7 +48,7 @@ public interface GeneratorPanel
 	 *
 	 * @return JComponent with GUI for generate dialog.
 	 */
-	@NotNull
+	@Nonnull
 	public JComponent getContent();
 
 	/**

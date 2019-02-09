@@ -22,7 +22,7 @@
  */
 package org.jetbrains.plugins.ruby.rails;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ExternalRailsSettings
 {
@@ -38,31 +38,31 @@ public class ExternalRailsSettings
 	{
 	}
 
-	@NotNull
+	@Nonnull
 	public static String[] getRailsScriptDataBaseTypes()
 	{
 		return getInstance().getRailsSettingsDelegate().getRailsScriptDataBaseTypes();
 	}
 
-	@NotNull
+	@Nonnull
 	public static String[] getRailsServersTypes()
 	{
 		return getInstance().getRailsSettingsDelegate().getRailsServersTypes();
 	}
 
-	@NotNull
-	public static String getRailsServersTitlesByType(@NotNull final String serverType)
+	@Nonnull
+	public static String getRailsServersTitlesByType(@Nonnull final String serverType)
 	{
 		return getInstance().getRailsSettingsDelegate().getRailsServersTitlesByType(serverType);
 	}
 
-	@NotNull
+	@Nonnull
 	public ExternalRailsSettingsDelegate getRailsSettingsDelegate()
 	{
 		return myRailsSettingsDelegate;
 	}
 
-	public void setExternalRailsSettingsDelegate(@NotNull final ExternalRailsSettingsDelegate delegate)
+	public void setExternalRailsSettingsDelegate(@Nonnull final ExternalRailsSettingsDelegate delegate)
 	{
 		myRailsSettingsDelegate = delegate;
 	}

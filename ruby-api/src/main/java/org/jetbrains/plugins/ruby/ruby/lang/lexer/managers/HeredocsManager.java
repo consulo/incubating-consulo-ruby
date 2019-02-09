@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 
@@ -40,7 +41,7 @@ public class HeredocsManager
 	@NonNls
 	private static final String INDENTED_PREFIX = "<<-";
 
-	public HeredocsManager(@NotNull final RubyRawLexer lexer)
+	public HeredocsManager(@Nonnull final RubyRawLexer lexer)
 	{
 		this.contentManager = lexer.getContentManager();
 		myHeredocs = new LinkedList<Heredoc>();
@@ -56,19 +57,19 @@ public class HeredocsManager
 	 *
 	 * @param id Heredoc id to register, as string
 	 */
-	public void registerHeredoc(@NotNull final String id)
+	public void registerHeredoc(@Nonnull final String id)
 	{
 		final boolean isIndented = isIndented(id);
 		final String name = getName(id);
 		myHeredocs.add(new Heredoc(name, isIndented));
 	}
 
-	public static String getName(@NotNull final String id)
+	public static String getName(@Nonnull final String id)
 	{
 		return id.replaceAll(REPLACE_REGEX, "");
 	}
 
-	public static boolean isIndented(@NotNull final String id)
+	public static boolean isIndented(@Nonnull final String id)
 	{
 		return id.startsWith(INDENTED_PREFIX);
 	}

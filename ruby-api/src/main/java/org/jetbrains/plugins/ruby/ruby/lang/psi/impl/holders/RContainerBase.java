@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
@@ -64,14 +64,14 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getDefaultChildAccessModifier()
 	{
 		return AccessModifier.PUBLIC;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getAccessModifier()
 	{
 		// getSubContainers of parentContainer will set correct access modifiers to all of it`s children
@@ -89,7 +89,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public final List<RStructuralElement> getStructureElements()
 	{
 		if(myStructureElements == null)
@@ -128,7 +128,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getContainingFileUrl()
 	{
 		//noinspection ConstantConditions
@@ -142,7 +142,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 		return getContainingFile().getVirtualFile();
 	}
 
-	protected void addVirtualData(@NotNull final RVirtualContainer virtualCopy, @NotNull final RFileInfo fileInfo)
+	protected void addVirtualData(@Nonnull final RVirtualContainer virtualCopy, @Nonnull final RFileInfo fileInfo)
 	{
 		if(this instanceof RFieldHolder)
 		{
@@ -172,7 +172,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualStructuralElement> getVirtualStructureElements()
 	{
 		final ArrayList<RVirtualStructuralElement> elements = new ArrayList<RVirtualStructuralElement>();
@@ -184,7 +184,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 	}
 
 	@Override
-	public int getIndexOf(@NotNull RVirtualStructuralElement element)
+	public int getIndexOf(@Nonnull RVirtualStructuralElement element)
 	{
 		final List<RStructuralElement> structuralElements = getStructureElements();
 		for(int i = 0; i < structuralElements.size(); i++)
@@ -204,7 +204,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 	private RootScope myScope;
 
 	@Override
-	@NotNull
+	@Nonnull
 	public synchronized RootScope getScope()
 	{
 		if(myScope == null)
@@ -220,21 +220,21 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return RNameUtil.getName(getFullPath());
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getFullPath()
 	{
 		return RNameUtil.getPath(getNameElement());
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFullName()
 	{
 		return RNameUtil.getPresentableName(getNameElement().getText());
@@ -249,7 +249,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 	protected abstract RPsiElement getNameElement();
 
 	@Override
-	public boolean equalsToVirtual(@NotNull final RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
 	{
 		if(!(element instanceof RVirtualContainer))
 		{
@@ -278,7 +278,7 @@ public abstract class RContainerBase extends RPsiElementBase implements RContain
 		return RVirtualPsiUtil.areSubStructureEqual(this, container);
 	}
 
-	@NotNull
+	@Nonnull
 	public RBodyStatement getBody()
 	{
 		final List<RBodyStatement> list = getChildrenByType(RBodyStatement.class);

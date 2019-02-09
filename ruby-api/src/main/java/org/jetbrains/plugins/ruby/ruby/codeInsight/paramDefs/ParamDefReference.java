@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -93,7 +94,7 @@ public class ParamDefReference implements PsiReference
 	}
 
 	@Override
-	public PsiElement bindToElement(@NotNull final PsiElement psiElement) throws IncorrectOperationException
+	public PsiElement bindToElement(@Nonnull final PsiElement psiElement) throws IncorrectOperationException
 	{
 		throw new IncorrectOperationException();
 	}

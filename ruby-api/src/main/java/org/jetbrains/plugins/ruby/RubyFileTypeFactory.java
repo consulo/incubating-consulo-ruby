@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.RJSFileType;
 import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
@@ -33,7 +33,7 @@ import com.intellij.openapi.fileTypes.FileTypeFactory;
 public class RubyFileTypeFactory extends FileTypeFactory
 {
 	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer consumer)
+	public void createFileTypes(@Nonnull FileTypeConsumer consumer)
 	{
 		// Loading Ruby file type
 		consumer.consume(RubyFileType.INSTANCE, RubyFileType.RUBY_EXTENTIONS);

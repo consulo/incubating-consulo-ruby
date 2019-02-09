@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.usages.UsageView;
@@ -32,14 +33,14 @@ import com.intellij.usages.rules.UsageGroupingRuleProvider;
 public class RubyUsagesGroupingRuleProvider implements UsageGroupingRuleProvider
 {
 	@Override
-	@NotNull
+	@Nonnull
 	public UsageGroupingRule[] getActiveRules(Project project)
 	{
 		return new UsageGroupingRule[]{new RubyUsageGroupingRule()};
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AnAction[] createGroupingActions(UsageView usageView)
 	{
 		return AnAction.EMPTY_ARRAY;

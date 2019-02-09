@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby;
 
 import consulo.ruby.module.extension.RubyModuleExtension;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 

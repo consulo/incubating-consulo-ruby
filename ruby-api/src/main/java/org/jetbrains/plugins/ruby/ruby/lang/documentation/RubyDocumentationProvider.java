@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
@@ -78,7 +78,7 @@ public class RubyDocumentationProvider implements DocumentationProvider
 	@Override
 	@SuppressWarnings({"ConstantConditions"})
 	@Nullable
-	public PsiElement getDocumentationElementForLink(@NotNull final PsiManager psiManager, @NotNull final String link, @NotNull final PsiElement element)
+	public PsiElement getDocumentationElementForLink(@Nonnull final PsiManager psiManager, @Nonnull final String link, @Nonnull final PsiElement element)
 	{
 		final Project project = psiManager.getProject();
 		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(project).getSymbol();

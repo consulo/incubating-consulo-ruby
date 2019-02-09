@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.gems;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.run.ConsoleRunner;
@@ -61,7 +61,7 @@ public class GemsRunner
 	 * @param filters                 Console Filters
 	 * @param onDone                  Will be executed after gem will have been finished
 	 */
-	public static void runGemScriptInConsoleAndRefreshModule(@NotNull final Module module, @NotNull final Sdk sdk, @NotNull final String consoleTitle, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String gemExecutableScriptName, @Nullable final String workingDir, @Nullable final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory, final Filter[] filters, @Nullable final Runnable onDone)
+	public static void runGemScriptInConsoleAndRefreshModule(@Nonnull final Module module, @Nonnull final Sdk sdk, @Nonnull final String consoleTitle, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String gemExecutableScriptName, @Nullable final String workingDir, @Nullable final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory, final Filter[] filters, @Nullable final Runnable onDone)
 	{
 
 		final String[] scriptCommands = getGemExecutableScriptCommand(sdk, gemExecutableScriptName, true);
@@ -96,7 +96,7 @@ public class GemsRunner
 	 * @return true if gem executable ruby script can be found in gems bin folder
 	 */
 	@Nullable
-	public static String[] getGemExecutableScriptCommand(@Nullable final Sdk sdk, @NotNull final String rubyScriptName, final boolean showErrMsg)
+	public static String[] getGemExecutableScriptCommand(@Nullable final Sdk sdk, @Nonnull final String rubyScriptName, final boolean showErrMsg)
 	{
 		try
 		{
@@ -140,7 +140,7 @@ public class GemsRunner
 	 * @return Output
 	 */
 	@Nullable
-	public static Output runGemsExecutableScript(@Nullable final Sdk sdk, @Nullable final Project project, @NotNull final String rubyScriptName, @Nullable final String workingDir, @NotNull final Runner.ExecutionMode mode, final boolean showStdErrErrors, @Nullable final String errorTitle, @NotNull final String... arguments)
+	public static Output runGemsExecutableScript(@Nullable final Sdk sdk, @Nullable final Project project, @Nonnull final String rubyScriptName, @Nullable final String workingDir, @Nonnull final Runner.ExecutionMode mode, final boolean showStdErrErrors, @Nullable final String errorTitle, @Nonnull final String... arguments)
 	{
 
 		final String scriptPath = GemUtil.getGemExecutableRubyScriptPath(sdk, rubyScriptName);

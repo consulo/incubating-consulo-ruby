@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
@@ -57,27 +59,27 @@ public class RHTMLFileType extends XmlLikeFileType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return NAME;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return DESCRIPTION;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDefaultExtension()
 	{
 		return DEFAULT_EXTENSION;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getERBExtension()
 	{
 		return ERB_EXTENSION;
@@ -90,7 +92,7 @@ public class RHTMLFileType extends XmlLikeFileType
 		return ICON;
 	}
 
-	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors)
+	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @Nonnull EditorColorsScheme colors)
 	{
 		return new RHTMLEditorHighlighter(colors, project, virtualFile);
 	}

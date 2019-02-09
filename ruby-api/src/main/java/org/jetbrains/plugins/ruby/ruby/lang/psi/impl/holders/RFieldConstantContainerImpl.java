@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
@@ -53,7 +53,7 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ConstantDefinitions> getConstantDefinitions()
 	{
 		if(myConstantDefinitions == null)
@@ -65,13 +65,13 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 
 	@Override
 	@Nullable
-	public ConstantDefinitions getDefinition(@NotNull final RVirtualConstant constant)
+	public ConstantDefinitions getDefinition(@Nonnull final RVirtualConstant constant)
 	{
 		return RConstantHolderUtil.getDefinition(this, constant);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<FieldDefinition> getFieldsDefinitions()
 	{
 		if(myFieldDefinitions == null)
@@ -83,7 +83,7 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 
 	@Override
 	@Nullable
-	public FieldDefinition getDefinition(@NotNull final RVirtualField field)
+	public FieldDefinition getDefinition(@Nonnull final RVirtualField field)
 	{
 		return RFieldHolderUtil.getDefinition(this, field);
 	}
@@ -102,21 +102,21 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualConstant> getVirtualConstants()
 	{
 		return RVirtualUtil.getVirtualConstants(this, this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getVirtualFields()
 	{
 		return RVirtualUtil.getVirtualFields(this, this);
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
 	{
 		// TODO: to be honest, we must add another 2 check!
 		// RVPsiUtuils.areConstantHoldersEqual and RVPsiUtuils.areFieldHoldersEqual

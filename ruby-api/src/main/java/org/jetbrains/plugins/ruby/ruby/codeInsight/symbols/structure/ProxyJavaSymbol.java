@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
@@ -33,7 +33,7 @@ public class ProxyJavaSymbol extends Symbol
 
 	private final PsiElement myPsiJavaElement;
 
-	public ProxyJavaSymbol(@NotNull final FileSymbol fileSymbol, @Nullable final String name, @Nullable final PsiElement element, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	public ProxyJavaSymbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String name, @Nullable final PsiElement element, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
 	{
 		super(fileSymbol, name, Type.JAVA_PROXY_CLASS, parent, prototype);
 		myPsiJavaElement = element;
@@ -41,7 +41,7 @@ public class ProxyJavaSymbol extends Symbol
 
 	@Override
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-	public String toString(@NotNull final FileSymbol fileSymbol, final boolean useHtml)
+	public String toString(@Nonnull final FileSymbol fileSymbol, final boolean useHtml)
 	{
 		final StringBuilder builder = new StringBuilder();
 		builder.append("[" + getId() + "] " + getType() + " ");
@@ -56,7 +56,7 @@ public class ProxyJavaSymbol extends Symbol
 		return builder.toString();
 	}
 
-	@NotNull
+	@Nonnull
 	public PsiElement getPsiElement()
 	{
 		return myPsiJavaElement;

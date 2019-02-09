@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.ide.fileTemplates.CreateFromTemplateActionReplacer;
 import com.intellij.ide.fileTemplates.FileTemplate;
@@ -39,7 +40,7 @@ public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplate
 
 	@Override
 	@Nullable
-	public AnAction replaceCreateFromFileTemplateAction(@NotNull final FileTemplate fileTemplate)
+	public AnAction replaceCreateFromFileTemplateAction(@Nonnull final FileTemplate fileTemplate)
 	{
 		final String templateName = fileTemplate.getName();
 		if(templateName.equals(RHTML_TEMPLATE_NAME))
@@ -47,7 +48,7 @@ public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplate
 			return new RailsCreateFromTemplateAction(fileTemplate)
 			{
 				@Override
-				@NotNull
+				@Nonnull
 				protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate)
 				{
 					return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
@@ -59,7 +60,7 @@ public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplate
 			return new RailsCreateFromTemplateAction(fileTemplate)
 			{
 				@Override
-				@NotNull
+				@Nonnull
 				protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate)
 				{
 					return new RXMLCreateViewFromTemplateDialog(project, dir, fileTemplate);

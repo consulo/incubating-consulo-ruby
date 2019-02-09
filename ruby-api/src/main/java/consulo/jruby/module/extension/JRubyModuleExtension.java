@@ -1,7 +1,7 @@
 package consulo.jruby.module.extension;
 
 import consulo.ruby.module.extension.RubyModuleExtension;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
@@ -17,20 +17,20 @@ public class JRubyModuleExtension extends ModuleExtensionWithSdkImpl<JRubyModule
 {
 	private RSupportPerModuleSettings mySettings;
 
-	public JRubyModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
+	public JRubyModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer module)
 	{
 		super(id, module);
 		mySettings = new RSupportPerModuleSettingsImpl();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return JRubySdkType.class;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public RSupportPerModuleSettings getSettings()
 	{

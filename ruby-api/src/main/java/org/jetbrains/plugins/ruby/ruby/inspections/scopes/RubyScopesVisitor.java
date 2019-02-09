@@ -20,7 +20,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.PseudoScopeHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
@@ -42,13 +43,13 @@ import com.intellij.psi.util.PsiTreeUtil;
 public class RubyScopesVisitor extends RubyInspectionVisitor
 {
 
-	public RubyScopesVisitor(@NotNull final ProblemsHolder holder)
+	public RubyScopesVisitor(@Nonnull final ProblemsHolder holder)
 	{
 		super(holder);
 	}
 
 	@Override
-	public void visitElement(@NotNull final PsiElement element)
+	public void visitElement(@Nonnull final PsiElement element)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -60,7 +61,7 @@ public class RubyScopesVisitor extends RubyInspectionVisitor
 	}
 
 	//TODO: optimize. n^2 time. But scopes number is not so big!!!
-	private void visitScopeHolder(@NotNull final ScopeHolder scopeHolder)
+	private void visitScopeHolder(@Nonnull final ScopeHolder scopeHolder)
 	{
 		final RootScope rootScope = scopeHolder.getScope();
 		for(Scope scope : rootScope.getAllChildScopes())

@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
@@ -38,13 +39,13 @@ import com.intellij.psi.xml.XmlTag;
 public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements RHTMLRubyInjectionTag
 {
 
-	public RHTMLRubyInjectionTagImpl(@NotNull ASTNode node)
+	public RHTMLRubyInjectionTagImpl(@Nonnull ASTNode node)
 	{
 		super(node);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getTagText()
 	{
 		final PsiElement[] elements = getElements();
@@ -79,7 +80,7 @@ public class RHTMLRubyInjectionTagImpl extends ASTWrapperPsiElement implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return getTagText().trim();

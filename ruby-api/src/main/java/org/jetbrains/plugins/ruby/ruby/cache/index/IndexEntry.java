@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.index;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
@@ -37,28 +38,28 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 public interface IndexEntry
 {
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualClass> getClasses();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualModule> getModules();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualMethod> getMethods();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getFields();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualConstant> getConstants();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualGlobalVar> getGlobalVars();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualAlias> getAliases();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualFieldAttr> getFieldAttrs();
 
 	public boolean isEmpty();

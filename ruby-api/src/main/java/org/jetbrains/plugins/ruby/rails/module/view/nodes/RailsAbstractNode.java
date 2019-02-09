@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import com.intellij.navigation.ItemPresentation;
@@ -43,7 +44,7 @@ public abstract class RailsAbstractNode extends SimpleNode
 		super(project);
 	}
 
-	public void init(final NodeId id, @NotNull final ItemPresentation presentation)
+	public void init(final NodeId id, @Nonnull final ItemPresentation presentation)
 	{
 		myId = id;
 		myEqObjects = new Object[]{id};
@@ -60,7 +61,7 @@ public abstract class RailsAbstractNode extends SimpleNode
 	/**
 	 * @return Node type for sorting in <code>RailsProjectNodeComparator</code>
 	 */
-	@NotNull
+	@Nonnull
 	public abstract RailsProjectNodeComparator.NodeType getType();
 
 	@Override

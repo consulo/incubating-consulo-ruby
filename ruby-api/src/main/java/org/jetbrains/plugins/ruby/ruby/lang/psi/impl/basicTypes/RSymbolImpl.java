@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamContext;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDef;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefReference;
@@ -52,7 +53,7 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getObject()
 	{
 		//noinspection ConstantConditions
@@ -60,7 +61,7 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol
 	}
 
 	@Override
-	public void accept(@NotNull final PsiElementVisitor visitor)
+	public void accept(@Nonnull final PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -71,7 +72,7 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiReference[] getReferences()
 	{
 		final PsiElement content = getObject();
@@ -90,7 +91,7 @@ public class RSymbolImpl extends RPsiElementBase implements RSymbol
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, SymbolUtil.getTopLevelClassByName(fileSymbol, CoreTypes.Symbol), Context.INSTANCE, true);

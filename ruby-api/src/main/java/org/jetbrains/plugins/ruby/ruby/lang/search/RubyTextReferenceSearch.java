@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.search;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import com.intellij.openapi.application.ApplicationManager;
@@ -40,7 +41,7 @@ public class RubyTextReferenceSearch implements QueryExecutor<PsiReference, Refe
 {
 
 	@Override
-	public boolean execute(@NotNull final ReferencesSearch.SearchParameters params, @NotNull final Processor<PsiReference> consumer)
+	public boolean execute(@Nonnull final ReferencesSearch.SearchParameters params, @Nonnull final Processor<PsiReference> consumer)
 	{
 		final PsiElement element2Search = params.getElementToSearch();
 		if(element2Search instanceof PsiNamedElement && element2Search instanceof RPsiElement)

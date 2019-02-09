@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
 import com.intellij.execution.ExecutorRegistry;
@@ -47,7 +48,7 @@ public class ConsoleWriter
 	 * @param out          Output to be shown in console
 	 * @param filters      message Filters to be added
 	 */
-	public static void print(@NotNull final Project project, @NotNull final String consoleTitle, @NotNull final Output out, final Filter... filters)
+	public static void print(@Nonnull final Project project, @Nonnull final String consoleTitle, @Nonnull final Output out, final Filter... filters)
 	{
 		Runnable myRunnable = new Runnable()
 		{

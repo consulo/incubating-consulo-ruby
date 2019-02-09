@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.pom.impl;
 
 import java.util.Collections;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -55,7 +56,7 @@ public class RubyPomAspectImpl implements RubyPomAspect
 	}
 
 	@NonNls
-	@NotNull
+	@Nonnull
 	public String getComponentName()
 	{
 		return RComponents.RUBY_ASPECT;

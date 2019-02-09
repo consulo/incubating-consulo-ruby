@@ -20,11 +20,9 @@ import com.intellij.codeHighlighting.TextEditorHighlightingPass;
 import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,7 +40,7 @@ public class RubyFastLineHighlightPassFactory implements TextEditorHighlightingP
 
 	@Override
 	@Nullable
-	public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile, @NotNull final Editor editor)
+	public TextEditorHighlightingPass createHighlightingPass(final @Nullable PsiFile psiFile, @Nonnull final Editor editor)
 	{
 		if(psiFile instanceof RFile)
 		{

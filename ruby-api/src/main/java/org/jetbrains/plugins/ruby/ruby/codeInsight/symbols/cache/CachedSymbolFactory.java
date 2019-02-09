@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.ModifiableCachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin.BuiltInCachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin.RailsBuiltInCachedSymbol;
@@ -44,7 +44,7 @@ public class CachedSymbolFactory
 	private static final Logger LOG = Logger.getInstance(CachedSymbolFactory.class.getName());
 
 	@Nullable
-	public static CachedSymbol createCachedSymbol(@NotNull final FileSymbolType type, @Nullable final String url, @NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
+	public static CachedSymbol createCachedSymbol(@Nonnull final FileSymbolType type, @Nullable final String url, @Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean isJRubyEnabled)
 	{
 		// Modifiable
 		if(type == FileSymbolType.MODIFIABLE)

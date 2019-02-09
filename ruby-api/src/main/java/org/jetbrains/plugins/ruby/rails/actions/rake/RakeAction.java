@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -38,7 +38,7 @@ class RakeAction extends AnAction
 {
 	final private RakeTask myTask;
 
-	public RakeAction(@NotNull final RakeTask task)
+	public RakeAction(@Nonnull final RakeTask task)
 	{
 		super(task.getId(), task.getDescription(), TargetAWT.to(RailsIcons.RAKE_TASK_ICON));
 		myTask = task;

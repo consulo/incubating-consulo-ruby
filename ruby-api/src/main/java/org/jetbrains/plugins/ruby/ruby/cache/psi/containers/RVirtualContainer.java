@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
@@ -38,19 +39,19 @@ public interface RVirtualContainer extends RVirtualStructuralElement
 	/**
 	 * @return this container access modifier
 	 */
-	@NotNull
+	@Nonnull
 	public AccessModifier getAccessModifier();
 
 	/**
 	 * @return default access modifier for subclasses
 	 */
-	@NotNull
+	@Nonnull
 	AccessModifier getDefaultChildAccessModifier();
 
 	@Nullable
 	public RFileInfo getContainingFileInfo();
 
-	@NotNull
+	@Nonnull
 	public String getContainingFileUrl();
 
 	@Nullable
@@ -59,27 +60,27 @@ public interface RVirtualContainer extends RVirtualStructuralElement
 	@Nullable
 	public ItemPresentation getPresentation();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualStructuralElement> getVirtualStructureElements();
 
-	public int getIndexOf(@NotNull RVirtualStructuralElement element);
+	public int getIndexOf(@Nonnull RVirtualStructuralElement element);
 
 	/**
 	 * @return only name without path
 	 */
-	@NotNull
+	@Nonnull
 	public String getName();
 
 	/**
 	 * @return List of paths
 	 */
-	@NotNull
+	@Nonnull
 	public List<String> getFullPath();
 
 	/**
 	 * @return full name,i.e. name with path
 	 */
-	@NotNull
+	@Nonnull
 	public String getFullName();
 
 	public boolean isGlobal();

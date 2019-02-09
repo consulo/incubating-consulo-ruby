@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.module.Module;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 
@@ -31,7 +32,7 @@ public class RubyModuleCachesManager extends BaseModuleCachesManager
 {
 	private static final RubyModuleCachesManager ourDummyInstance = new RubyModuleCachesManager();
 
-	public static RubyModuleCachesManager getInstance(@NotNull final Module module)
+	public static RubyModuleCachesManager getInstance(@Nonnull final Module module)
 	{
 //		if(JRubyUtil.hasJRubySupport(module))
 //		{
@@ -98,7 +99,7 @@ public class RubyModuleCachesManager extends BaseModuleCachesManager
 		//myModuleFilesCache.unregisterScanForFilesProvider(provider);
 	}
 
-	public static void registerDeclarationsIndesAndInitFilesCache(@NotNull final Module module, @NotNull final RubyFilesCache myModuleFilesCache)
+	public static void registerDeclarationsIndesAndInitFilesCache(@Nonnull final Module module, @Nonnull final RubyFilesCache myModuleFilesCache)
 	{
 //		final Project project = module.getProject();
 //

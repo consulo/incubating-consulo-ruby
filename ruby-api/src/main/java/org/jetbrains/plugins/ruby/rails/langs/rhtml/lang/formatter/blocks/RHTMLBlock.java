@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLBlockGenerator;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLIndentProcessor;
@@ -56,7 +56,7 @@ public class RHTMLBlock extends AbstractBlock
 	private RCompoundStatement myNodeCmpSt;
 	private FileViewProvider myViewProvider;
 
-	public RHTMLBlock(@NotNull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy, @Nullable final TextRange textRange, @Nullable final Alignment alignment)
+	public RHTMLBlock(@Nonnull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy, @Nullable final TextRange textRange, @Nullable final Alignment alignment)
 	{
 		super(node, wrap, alignment);
 		myIndent = indent;
@@ -70,19 +70,19 @@ public class RHTMLBlock extends AbstractBlock
 		myNodeCmpSt = RHTMLFormatterUtil.getParentRCmpStByRHTMLOrHTMLChildNode(myViewProvider, myNode);
 	}
 
-	public RHTMLBlock(@NotNull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy)
+	public RHTMLBlock(@Nonnull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy)
 	{
 		this(node, indent, wrap, xmlFormattingPolicy, null, null);
 	}
 
-	public RHTMLBlock(@NotNull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy, @Nullable final Alignment alignment)
+	public RHTMLBlock(@Nonnull final ASTNode node, @Nullable final Indent indent, @Nullable final Wrap wrap, final XmlFormattingPolicy xmlFormattingPolicy, @Nullable final Alignment alignment)
 	{
 		this(node, indent, wrap, xmlFormattingPolicy, null, alignment);
 	}
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TextRange getTextRange()
 	{
 		return myTextRange;
@@ -106,7 +106,7 @@ public class RHTMLBlock extends AbstractBlock
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ChildAttributes getChildAttributes(int newChildIndex)
 	{
 		Indent indent = Indent.getNoneIndent();
@@ -138,7 +138,7 @@ public class RHTMLBlock extends AbstractBlock
 	 * @param node Tree node
 	 * @return true if node is incomplete
 	 */
-	public boolean isIncomplete(@NotNull final ASTNode node)
+	public boolean isIncomplete(@Nonnull final ASTNode node)
 	{
 		ASTNode lastChild = node.getLastChildNode();
 		while(lastChild != null && (lastChild.getPsi() instanceof PsiWhiteSpace || lastChild.getPsi() instanceof PsiComment))
@@ -170,7 +170,7 @@ public class RHTMLBlock extends AbstractBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected List<Block> buildChildren()
 	{
 		return RHTMLBlockGenerator.createRHTMLSubBlocks(myNode, myXmlFormattingPolicy, this, myViewProvider);

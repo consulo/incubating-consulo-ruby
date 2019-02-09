@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.FieldWriteAccess;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
@@ -22,7 +23,7 @@ public class FieldWriteAccessImpl extends AbstractReferenceAccess implements Fie
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getField()
 	{
 		return myValue;

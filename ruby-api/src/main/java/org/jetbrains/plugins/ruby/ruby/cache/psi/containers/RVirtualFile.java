@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 
@@ -34,6 +34,6 @@ public interface RVirtualFile extends RVirtualFieldContantContainer, RVirtualGlo
 	@Nullable
 	public String getPresentableLocation();
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualRequire> getRequires();
 }

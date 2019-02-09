@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 
 /**
@@ -28,10 +29,10 @@ import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesCo
 public interface RSupportPerModuleSettings
 {
 
-	@NotNull
+	@Nonnull
 	public CheckableDirectoriesContainer getLoadPathDirs();
 
-	public void setLoadPathDirs(@NotNull final CheckableDirectoriesContainer loadPathDirs);
+	public void setLoadPathDirs(@Nonnull final CheckableDirectoriesContainer loadPathDirs);
 
 	public boolean shouldUseTestUnitTestFramework();
 

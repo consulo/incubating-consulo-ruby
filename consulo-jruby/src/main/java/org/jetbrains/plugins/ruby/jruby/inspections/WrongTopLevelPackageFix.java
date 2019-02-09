@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.jruby.inspections;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import com.intellij.codeInspection.LocalQuickFix;
@@ -33,27 +34,27 @@ public class WrongTopLevelPackageFix implements LocalQuickFix
 	private static final String JAVA = "Java::";
 	protected PsiElement myElement;
 
-	public WrongTopLevelPackageFix(@NotNull final PsiElement element)
+	public WrongTopLevelPackageFix(@Nonnull final PsiElement element)
 	{
 		myElement = element;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return "Add Java:: to package";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFamilyName()
 	{
 		return "JRuby";
 	}
 
 	@Override
-	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor)
+	public void applyFix(@Nonnull final Project project, @Nonnull final ProblemDescriptor descriptor)
 	{
 		final String text = myElement.getText();
 		final RPsiElement element = RubyPsiUtil.getTopLevelElements(project, JAVA + text).get(0);

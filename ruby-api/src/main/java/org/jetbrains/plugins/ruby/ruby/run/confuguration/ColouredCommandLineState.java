@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.run.ColouredProcessHandler;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
@@ -67,7 +68,7 @@ public abstract class ColouredCommandLineState extends CommandLineState
 		return RApplicationSettings.getInstance().useConsoleColorMode ? new ColouredProcessHandler(process, commandLine) : new OSProcessHandler(process, commandLine);
 	}
 
-	protected GeneralCommandLine createGeneralDefaultCmdLine(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException
+	protected GeneralCommandLine createGeneralDefaultCmdLine(@Nonnull final AbstractRubyRunConfiguration config) throws CantRunException
 	{
 		checkConfiguration(config);
 
@@ -101,7 +102,7 @@ public abstract class ColouredCommandLineState extends CommandLineState
 		return Runner.createAndSetupCmdLine(null, workingDir, classPath, config.getEnvs(), config.isPassParentEnvs(), RubySdkUtil.getVMExecutablePath(sdk));
 	}
 
-	protected void checkConfiguration(@NotNull final AbstractRubyRunConfiguration config) throws CantRunException
+	protected void checkConfiguration(@Nonnull final AbstractRubyRunConfiguration config) throws CantRunException
 	{
 		try
 		{

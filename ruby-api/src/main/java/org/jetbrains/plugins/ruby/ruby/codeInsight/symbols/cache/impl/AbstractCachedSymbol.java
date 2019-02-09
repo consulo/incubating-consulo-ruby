@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
@@ -53,7 +53,7 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 	private CacheKey myKey;
 	private Map<CacheKey, SoftReference<CachedSymbol>> myCache;
 
-	public AbstractCachedSymbol(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk)
+	public AbstractCachedSymbol(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk)
 	{
 		myProject = project;
 		myModule = module;
@@ -82,21 +82,21 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 	}
 
 	@Override
-	public final void fileRemoved(@NotNull String url)
+	public final void fileRemoved(@Nonnull String url)
 	{
 		fileChanged(url);
 	}
 
 	@Override
-	public final void fileUpdated(@NotNull String url)
+	public final void fileUpdated(@Nonnull String url)
 	{
 		fileChanged(url);
 	}
 
 	@Override
-	public abstract void fileAdded(@NotNull String url);
+	public abstract void fileAdded(@Nonnull String url);
 
-	protected abstract void fileChanged(@NotNull String url);
+	protected abstract void fileChanged(@Nonnull String url);
 
 	@Override
 	public final boolean isUp2Date()
@@ -134,12 +134,12 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 		super.finalize();
 	}
 
-	public final void setKey(@NotNull final CacheKey key)
+	public final void setKey(@Nonnull final CacheKey key)
 	{
 		myKey = key;
 	}
 
-	public final void setMap(@NotNull final Map<CacheKey, SoftReference<CachedSymbol>> softCache)
+	public final void setMap(@Nonnull final Map<CacheKey, SoftReference<CachedSymbol>> softCache)
 	{
 		myCache = softCache;
 	}

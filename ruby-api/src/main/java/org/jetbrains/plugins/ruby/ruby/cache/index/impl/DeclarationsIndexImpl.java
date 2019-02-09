@@ -24,8 +24,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
@@ -66,13 +67,13 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	final private Map<String, IndexEntry> myIndex = new HashMap<String, IndexEntry>();
 	private RubyFilesCache myRubyFilesCache = null;
 
-	public DeclarationsIndexImpl(@NotNull final Project project)
+	public DeclarationsIndexImpl(@Nonnull final Project project)
 	{
 		myProject = project;
 	}
 
 	@Override
-	public void setFileCache(@NotNull final RubyFilesCache rubyFilesCache)
+	public void setFileCache(@Nonnull final RubyFilesCache rubyFilesCache)
 	{
 		myRubyFilesCache = rubyFilesCache;
 	}
@@ -132,7 +133,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	 * @param fileInfo RFileInfo to add information from
 	 */
 	@Override
-	public void addFileInfoToIndex(@NotNull final RFileInfo fileInfo)
+	public void addFileInfoToIndex(@Nonnull final RFileInfo fileInfo)
 	{
 		final RVirtualFile root = fileInfo.getRVirtualFile();
 		final List<RVirtualStructuralElement> elements = RVirtualUtil.gatherAllStructuralElement(root);
@@ -235,7 +236,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	 *
 	 * @param container Container to add to Index
 	 */
-	private void addVirtualContainerToIndex(@NotNull final RVirtualContainer container)
+	private void addVirtualContainerToIndex(@Nonnull final RVirtualContainer container)
 	{
 		final String name = container.getName();
 		IndexEntry entry = myIndex.get(name);
@@ -247,7 +248,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addContainer(container);
 	}
 
-	private void addVirtualConstantToIndex(@NotNull final RVirtualConstant constant)
+	private void addVirtualConstantToIndex(@Nonnull final RVirtualConstant constant)
 	{
 		final String name = constant.getName();
 		IndexEntry entry = myIndex.get(name);
@@ -259,7 +260,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addConstant(constant);
 	}
 
-	private void addVirtualGlobalVarToIndex(@NotNull final RVirtualGlobalVar globalVar)
+	private void addVirtualGlobalVarToIndex(@Nonnull final RVirtualGlobalVar globalVar)
 	{
 		final String name = globalVar.getText();
 		IndexEntry entry = myIndex.get(name);
@@ -271,7 +272,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addGlobalVar(globalVar);
 	}
 
-	private void addVirtualAliasToIndex(@NotNull final RVirtualAlias rVirtualAlias)
+	private void addVirtualAliasToIndex(@Nonnull final RVirtualAlias rVirtualAlias)
 	{
 		final String name = rVirtualAlias.getNewName();
 		IndexEntry entry = myIndex.get(name);
@@ -283,7 +284,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addAlias(rVirtualAlias);
 	}
 
-	private void addVirtualFieldAttrToIndex(@NotNull final RVirtualFieldAttr rVirtualFieldAttr)
+	private void addVirtualFieldAttrToIndex(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)
 	{
 		for(String name : rVirtualFieldAttr.getNames())
 		{
@@ -297,7 +298,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void addVirtualFieldToIndex(@NotNull final RVirtualField field)
+	private void addVirtualFieldToIndex(@Nonnull final RVirtualField field)
 	{
 		final String name = field.getName();
 		IndexEntry entry = myIndex.get(name);
@@ -315,7 +316,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	 *
 	 * @param container Container to remove from Index
 	 */
-	private void removeVirtualContainerFromIndex(@NotNull final RVirtualContainer container)
+	private void removeVirtualContainerFromIndex(@Nonnull final RVirtualContainer container)
 	{
 		final String name = container.getName();
 		final IndexEntry entry = myIndex.get(name);
@@ -330,7 +331,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualConstantFromIndex(@NotNull final RVirtualConstant constant)
+	private void removeVirtualConstantFromIndex(@Nonnull final RVirtualConstant constant)
 	{
 		final String name = constant.getName();
 		final IndexEntry entry = myIndex.get(name);
@@ -345,7 +346,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualGlobalVarFromIndex(@NotNull final RVirtualGlobalVar globalVar)
+	private void removeVirtualGlobalVarFromIndex(@Nonnull final RVirtualGlobalVar globalVar)
 	{
 		final String name = globalVar.getText();
 		final IndexEntry entry = myIndex.get(name);
@@ -360,7 +361,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualAliasFromIndex(@NotNull final RVirtualAlias rVirtualAlias)
+	private void removeVirtualAliasFromIndex(@Nonnull final RVirtualAlias rVirtualAlias)
 	{
 		final String name = rVirtualAlias.getNewName();
 		final IndexEntry entry = myIndex.get(name);
@@ -375,7 +376,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualFieldAttrFromIndex(@NotNull final RVirtualFieldAttr rVirtualFieldAttr)
+	private void removeVirtualFieldAttrFromIndex(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)
 	{
 		for(String name : rVirtualFieldAttr.getNames())
 		{
@@ -392,7 +393,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualFieldFromIndex(@NotNull final RVirtualField field)
+	private void removeVirtualFieldFromIndex(@Nonnull final RVirtualField field)
 	{
 		final String name = field.getName();
 		final IndexEntry entry = myIndex.get(name);
@@ -409,8 +410,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 
 	@Override
-	@NotNull
-	public List<RVirtualClass> getClassesByName(@NotNull final String name)
+	@Nonnull
+	public List<RVirtualClass> getClassesByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -421,8 +422,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualModule> getModulesByName(@NotNull final String name)
+	@Nonnull
+	public List<RVirtualModule> getModulesByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -433,8 +434,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualMethod> getMethodsByName(@NotNull final String name)
+	@Nonnull
+	public List<RVirtualMethod> getMethodsByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -445,8 +446,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualField> getFieldsByName(@NotNull final String name)
+	@Nonnull
+	public List<RVirtualField> getFieldsByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -457,8 +458,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualConstant> getConstantsByName(@NotNull final String name)
+	@Nonnull
+	public List<RVirtualConstant> getConstantsByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -469,8 +470,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualGlobalVar> getGlobalVarsByName(@NotNull String name)
+	@Nonnull
+	public List<RVirtualGlobalVar> getGlobalVarsByName(@Nonnull String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -481,8 +482,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualAlias> getAliasesByName(@NotNull String name)
+	@Nonnull
+	public List<RVirtualAlias> getAliasesByName(@Nonnull String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -493,8 +494,8 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
-	public List<RVirtualFieldAttr> getFieldAttrsByName(@NotNull String name)
+	@Nonnull
+	public List<RVirtualFieldAttr> getFieldAttrsByName(@Nonnull String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -505,7 +506,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllClassesNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -521,7 +522,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllMethodsNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -537,7 +538,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllModulesNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -553,7 +554,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllFieldsNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -569,7 +570,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllConstantsNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -585,7 +586,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllGlobalVarsNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -601,7 +602,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllAliasesNames()
 	{
 		final List<String> names = new ArrayList<String>();
@@ -617,7 +618,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<String> getAllFieldAttrsNames()
 	{
 		final List<String> names = new ArrayList<String>();

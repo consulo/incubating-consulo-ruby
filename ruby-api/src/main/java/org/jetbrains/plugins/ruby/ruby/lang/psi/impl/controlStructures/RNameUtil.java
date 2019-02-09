@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
@@ -41,7 +41,7 @@ public class RNameUtil
 {
 	private static final Pattern PATTERN = Pattern.compile(" |\\n");
 
-	@NotNull
+	@Nonnull
 	public static List<PsiElement> getPsiPathRec(@Nullable final PsiElement element)
 	{
 		ArrayList<PsiElement> list = new ArrayList<PsiElement>();
@@ -87,7 +87,7 @@ public class RNameUtil
 		return list;
 	}
 
-	@NotNull
+	@Nonnull
 	public static List<String> getPath(@Nullable final PsiElement element)
 	{
 		ArrayList<String> list = new ArrayList<String>();
@@ -99,14 +99,14 @@ public class RNameUtil
 	}
 
 
-	@NotNull
-	public static String getName(@NotNull final List<String> fullPath)
+	@Nonnull
+	public static String getName(@Nonnull final List<String> fullPath)
 	{
 		return fullPath.size() > 0 ? fullPath.get(fullPath.size() - 1) : "";
 	}
 
-	@NotNull
-	public static String getPresentableName(@NotNull final String text)
+	@Nonnull
+	public static String getPresentableName(@Nonnull final String text)
 	{
 		return PATTERN.matcher(text).replaceAll("");
 	}

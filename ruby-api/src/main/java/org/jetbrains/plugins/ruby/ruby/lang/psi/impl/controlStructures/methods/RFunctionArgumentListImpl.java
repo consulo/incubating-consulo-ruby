@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RFunctionArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import com.intellij.lang.ASTNode;
@@ -35,7 +36,7 @@ public class RFunctionArgumentListImpl extends RCommandArgumentListImpl implemen
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -46,7 +47,7 @@ public class RFunctionArgumentListImpl extends RCommandArgumentListImpl implemen
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName(boolean includeDefaultArgs)
 	{
 		return "(" + super.getPresentableName(includeDefaultArgs) + ")";

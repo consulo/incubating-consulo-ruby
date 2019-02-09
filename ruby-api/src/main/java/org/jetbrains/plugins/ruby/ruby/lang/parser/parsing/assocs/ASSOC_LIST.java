@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assocs;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -53,7 +54,7 @@ assoc_list	: none
 			boolean assocSeen = false;
 
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parse(final RBuilder builder)
 			{
 				IElementType result = ASSOC_OR_ARG.parse(builder);

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import com.intellij.psi.PsiElement;
@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 public class RSymbolNavigator
 {
 	@Nullable
-	public static RSymbol getSymbolByObject(@NotNull final RPsiElement object)
+	public static RSymbol getSymbolByObject(@Nonnull final RPsiElement object)
 	{
 		final PsiElement element = object.getParent();
 		if(!(element instanceof RSymbol))

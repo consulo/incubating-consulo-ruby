@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -44,7 +44,7 @@ public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssig
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getObject()
 	{
 		final RPsiElement object = getChildByType(RPsiElement.class, 0);
@@ -66,7 +66,7 @@ public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssig
 	}
 
 	@Override
-	public void accept(@NotNull final PsiElementVisitor visitor)
+	public void accept(@Nonnull final PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -77,7 +77,7 @@ public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssig
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final RPsiElement value = getValue();

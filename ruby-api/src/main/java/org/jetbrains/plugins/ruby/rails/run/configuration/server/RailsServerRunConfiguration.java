@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
@@ -55,9 +57,9 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 	public static final String DEFAULT_SERVER = "Default";
 
 	private boolean myChoosePortManually;
-	@NotNull
+	@Nonnull
 	private String myServerType = DEFAULT_SERVER;
-	@NotNull
+	@Nonnull
 	private RailsEnvironmentType myEnvironmentType = RailsEnvironmentType.DEVELOPMENT;
 	private String myPort = TextUtil.EMPTY_STRING;
 	private String myIP = TextUtil.EMPTY_STRING;
@@ -89,7 +91,7 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 	 * @return Work directory if Rails Application Home Directory or null(if no rails in module)
 	 */
 	@Nullable
-	public static String getRailsWorkDirByModule(@NotNull final Module module)
+	public static String getRailsWorkDirByModule(@Nonnull final Module module)
 	{
 		return RailsFacetUtil.getRailsAppHomeDirPath(module);
 	}
@@ -134,21 +136,21 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getIPAddr()
 	{
 		return myIP;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getServerType()
 	{
 		return myServerType;
 	}
 
 	@Override
-	public void setServerType(@NotNull final String type)
+	public void setServerType(@Nonnull final String type)
 	{
 		myServerType = type;
 	}
@@ -165,7 +167,7 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 	 * @return valid rails modules
 	 */
 	@Override
-	@NotNull
+	@Nonnull
 	public Module[] getModules()
 	{
 		return RailsUtil.getAllModulesWithRailsSupport(getProject());
@@ -191,7 +193,7 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 
 	@Nullable
 	@Override
-	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
+	public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment executionEnvironment) throws ExecutionException
 	{
 		try
 		{

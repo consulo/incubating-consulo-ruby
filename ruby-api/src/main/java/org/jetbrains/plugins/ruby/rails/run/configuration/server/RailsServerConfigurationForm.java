@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -33,7 +34,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.ExternalRailsSettings;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -85,7 +85,7 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 	private JComboBox myRailsServerComboBox;
 	private JComboBox myRailsEnvironmentComboBox;
 
-	public RailsServerConfigurationForm(@NotNull final Project project, @NotNull final RubyRunConfiguration configuration)
+	public RailsServerConfigurationForm(@Nonnull final Project project, @Nonnull final RubyRunConfiguration configuration)
 	{
 		super(project, configuration);
 
@@ -256,7 +256,7 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getIPAddr()
 	{
 		return myIPAddrField.getText().trim();
@@ -300,7 +300,7 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getServerType()
 	{
 		return (String) myRailsServerComboBox.getSelectedItem();
@@ -313,13 +313,13 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 	}
 
 	@Override
-	public void setRailsEnvironmentType(@NotNull final RailsServerRunConfiguration.RailsEnvironmentType type)
+	public void setRailsEnvironmentType(@Nonnull final RailsServerRunConfiguration.RailsEnvironmentType type)
 	{
 		myRailsEnvironmentComboBox.setSelectedItem(type);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType()
 	{
 		final Object selectedObject = myRailsEnvironmentComboBox.getSelectedItem();
@@ -333,7 +333,7 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 	}
 
 	@Override
-	public void setEnvs(@NotNull final Map<String, String> envs)
+	public void setEnvs(@Nonnull final Map<String, String> envs)
 	{
 		myEnvVariablesComponent1.setEnvs(envs);
 	}

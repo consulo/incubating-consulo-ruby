@@ -21,9 +21,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RComponents;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
@@ -58,13 +59,13 @@ public class RailsViewFoldersManager implements PersistentStateComponent<Element
 
 	private Set<String> myViewUserUrls = Collections.synchronizedSet(new HashSet<String>());
 
-	public static RailsViewFoldersManager getInstance(@NotNull final Module module)
+	public static RailsViewFoldersManager getInstance(@Nonnull final Module module)
 	{
 		return ModuleServiceManager.getService(module, RailsViewFoldersManager.class);
 	}
 
 	@NonNls
-	@NotNull
+	@Nonnull
 	public String getComponentName()
 	{
 		return RComponents.RAILS_VIEW_FOLDERS_MANAGER;
@@ -75,7 +76,7 @@ public class RailsViewFoldersManager implements PersistentStateComponent<Element
 		return Collections.unmodifiableSet(myViewUserUrls);
 	}
 
-	public void setRailsViewUserFolderUrls(@NotNull final List<String> urls)
+	public void setRailsViewUserFolderUrls(@Nonnull final List<String> urls)
 	{
 		myViewUserUrls.clear();
 		myViewUserUrls.addAll(urls);

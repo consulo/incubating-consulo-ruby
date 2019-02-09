@@ -18,13 +18,14 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
@@ -78,7 +79,7 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams
 	private final Project myProject;
 	private final RubyRunConfiguration myConfiguration;
 
-	public RubyRunConfigurationForm(@NotNull final Project project, @NotNull final RubyRunConfiguration configuration)
+	public RubyRunConfigurationForm(@Nonnull final Project project, @Nonnull final RubyRunConfiguration configuration)
 	{
 		myProject = project;
 		myConfiguration = configuration;

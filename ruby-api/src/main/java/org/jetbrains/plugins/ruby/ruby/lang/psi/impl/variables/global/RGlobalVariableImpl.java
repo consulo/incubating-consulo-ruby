@@ -24,8 +24,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import consulo.awt.TargetAWT;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RGlobalVariableReference;
@@ -63,7 +63,7 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -98,7 +98,7 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RVirtualGlobalVarHolder getHolder()
 	{
 		if(myHolder == null)
@@ -117,14 +117,14 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull String newName) throws IncorrectOperationException
 	{
 		if(!TextUtil.isCID(newName))
 		{

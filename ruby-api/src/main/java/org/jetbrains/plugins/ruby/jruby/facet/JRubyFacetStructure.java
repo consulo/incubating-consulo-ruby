@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -29,7 +30,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 public class JRubyFacetStructure
 {
 
-	public static boolean isValidForJRubyFacet(@NotNull final VirtualFile file)
+	public static boolean isValidForJRubyFacet(@Nonnull final VirtualFile file)
 	{
 		return RubyVirtualFileScanner.isRubyFile(file) || ViewsConventions.isViewFile(file);
 	}

@@ -2,8 +2,8 @@ package consulo.jruby.rails.module.extension;
 
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import consulo.module.extension.ModuleExtension;
 import consulo.module.extension.MutableModuleExtension;
 import consulo.roots.ModuleRootLayer;
@@ -15,7 +15,7 @@ import consulo.roots.ModuleRootLayer;
 public class JRubyOnRailsMutableModuleExtension extends JRubyOnRailsModuleExtension
 		implements MutableModuleExtension<JRubyOnRailsModuleExtension>, ModuleExtension<JRubyOnRailsModuleExtension>
 {
-	public JRubyOnRailsMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
+	public JRubyOnRailsMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer module)
 	{
 		super(id, module);
 	}
@@ -34,7 +34,7 @@ public class JRubyOnRailsMutableModuleExtension extends JRubyOnRailsModuleExtens
 	}
 
 	@Override
-	public boolean isModified(@NotNull JRubyOnRailsModuleExtension extension)
+	public boolean isModified(@Nonnull JRubyOnRailsModuleExtension extension)
 	{
 		return extension.isEnabled() != isEnabled();
 	}

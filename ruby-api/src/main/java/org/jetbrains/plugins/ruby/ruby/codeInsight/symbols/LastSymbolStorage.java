@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
@@ -43,8 +43,8 @@ public class LastSymbolStorage implements ProjectComponent
 		lastEvaluatedSymbol = symbol;
 	}
 
-	@NotNull
-	public static LastSymbolStorage getInstance(@NotNull final Project project)
+	@Nonnull
+	public static LastSymbolStorage getInstance(@Nonnull final Project project)
 	{
 		return project.getComponent(LastSymbolStorage.class);
 	}

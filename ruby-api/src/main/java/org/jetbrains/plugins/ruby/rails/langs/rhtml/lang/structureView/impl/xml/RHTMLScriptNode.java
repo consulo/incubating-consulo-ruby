@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -57,7 +57,7 @@ public class RHTMLScriptNode extends PsiTreeElementBase<RHTMLRubyInjectionTag>
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<StructureViewTreeElement> getChildrenBase()
 	{
 		return Collections.emptyList();

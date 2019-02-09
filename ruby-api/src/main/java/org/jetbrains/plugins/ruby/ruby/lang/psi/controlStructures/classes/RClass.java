@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
@@ -43,6 +43,6 @@ public interface RClass extends RVirtualClass, RFieldConstantContainer, RFormatS
 	@Nullable
 	public RSuperClass getPsiSuperClass();
 
-	@NotNull
-	public List<RClass> getSuperClass(@NotNull FileSymbol fileSymbol);
+	@Nonnull
+	public List<RClass> getSuperClass(@Nonnull FileSymbol fileSymbol);
 }

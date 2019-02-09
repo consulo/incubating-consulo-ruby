@@ -20,8 +20,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RubyWizardSettingsHolder;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
@@ -46,7 +47,7 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements /*SourceP
 	private String myContentRootPath;
 
 	@Override
-	public abstract void setTestsUnitRootPath(@NotNull final String contentRootPath);
+	public abstract void setTestsUnitRootPath(@Nonnull final String contentRootPath);
 
 	protected abstract void setupContentRoot(final ModifiableRootModel rootModel);
 
@@ -134,7 +135,7 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements /*SourceP
 		mySourcePaths.add(sourcePathInfo);
 	}
 
-	protected void createDir(@NotNull final String path)
+	protected void createDir(@Nonnull final String path)
 	{
 		final File file = new File(path);
 

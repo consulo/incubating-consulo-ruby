@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.codeInsight.RCodeInsightUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.AbstractRubyHighlighterPass;
@@ -35,14 +36,14 @@ import com.intellij.psi.PsiFile;
  */
 public abstract class ElementsStartsAtRangeHighlighterPass extends AbstractRubyHighlighterPass
 {
-	public ElementsStartsAtRangeHighlighterPass(@NotNull final Project project, @NotNull final PsiFile psiFile, @NotNull final Editor editor, final boolean updateVisible, final int passId)
+	public ElementsStartsAtRangeHighlighterPass(@Nonnull final Project project, @Nonnull final PsiFile psiFile, @Nonnull final Editor editor, final boolean updateVisible, final int passId)
 	{
 		super(project, psiFile, editor, updateVisible, passId);
 	}
 
 	@Override
-	@NotNull
-	protected List<PsiElement> collectElementsInRange(@NotNull final PsiFile psiFile, final int startOffset, final int endOffset)
+	@Nonnull
+	protected List<PsiElement> collectElementsInRange(@Nonnull final PsiFile psiFile, final int startOffset, final int endOffset)
 	{
 		final PsiFile file = psiFile instanceof RHTMLFile ? ((RHTMLFile) psiFile).getInnerRubyFile() : psiFile;
 

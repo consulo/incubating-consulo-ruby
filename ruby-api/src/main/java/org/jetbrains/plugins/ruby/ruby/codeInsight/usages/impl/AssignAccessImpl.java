@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.AssignAccess;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpression;
@@ -31,7 +31,7 @@ public class AssignAccessImpl implements AssignAccess
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getElement()
 	{
 		return myUsage;

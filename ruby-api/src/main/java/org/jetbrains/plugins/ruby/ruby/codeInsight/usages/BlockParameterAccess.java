@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 
 /**
@@ -27,6 +27,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
  */
 public interface BlockParameterAccess extends WriteAccess
 {
-	@NotNull
+	@Nonnull
 	RBlockVariables getBlockVariables();
 }

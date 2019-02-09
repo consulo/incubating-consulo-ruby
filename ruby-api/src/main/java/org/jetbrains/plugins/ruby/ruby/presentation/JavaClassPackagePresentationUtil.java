@@ -20,8 +20,8 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallBase;
@@ -36,7 +36,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
 public class JavaClassPackagePresentationUtil
 {
 	@Nullable
-	public static ItemPresentation getIncludeJavaPresentation(@NotNull final RCallBase rCall)
+	public static ItemPresentation getIncludeJavaPresentation(@Nonnull final RCallBase rCall)
 	{
 		if(rCall.getCallType() != RubyCallType.INCLUDE_CLASS_CALL)
 		{
@@ -56,7 +56,7 @@ public class JavaClassPackagePresentationUtil
 		return JRubyIcons.JAVA_ICON;
 	}
 
-	public static String getLocation(@NotNull final RCall call)
+	public static String getLocation(@Nonnull final RCall call)
 	{
 		return RContainerPresentationUtil.getLocation(call);
 	}

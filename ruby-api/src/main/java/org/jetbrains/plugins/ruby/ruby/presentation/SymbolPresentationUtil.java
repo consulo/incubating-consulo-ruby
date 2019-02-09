@@ -19,11 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Icon;
+import javax.annotation.Nonnull;
 
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
@@ -73,7 +73,7 @@ public class SymbolPresentationUtil
 {
 
 	@Nullable
-	public static RubyLookupItem createRubyLookupItem(@NotNull final Symbol symbol, @NotNull String name, boolean bold, final boolean multiMessage)
+	public static RubyLookupItem createRubyLookupItem(@Nonnull final Symbol symbol, @Nonnull String name, boolean bold, final boolean multiMessage)
 	{
 		final Type type = symbol.getType();
 		if(type == Type.FILE)
@@ -233,7 +233,7 @@ public class SymbolPresentationUtil
 	/**
 	 * Creates presentable name for symbol with location
 	 */
-	public static String getPresentableNameWithLocation(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol)
+	public static String getPresentableNameWithLocation(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
 	{
 		String name = symbol.getName();
 		if(name == null)
@@ -271,8 +271,8 @@ public class SymbolPresentationUtil
 	}
 
 
-	@NotNull
-	public static List<RVirtualElement> getPrototypesToShow(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol)
+	@Nonnull
+	public static List<RVirtualElement> getPrototypesToShow(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
 	{
 		final List<RVirtualElement> list = new ArrayList<RVirtualElement>();
 		// We show only last prototype for method!!!

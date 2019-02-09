@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
@@ -20,8 +20,8 @@ import com.intellij.psi.PsiElement;
 public class RubyDeclarationRangeHandler implements DeclarationRangeHandler
 {
 	@Override
-	@NotNull
-	public TextRange getDeclarationRange(@NotNull final PsiElement container)
+	@Nonnull
+	public TextRange getDeclarationRange(@Nonnull final PsiElement container)
 	{
 		final TextRange containerRange = container.getTextRange();
 		int start = containerRange.getStartOffset();

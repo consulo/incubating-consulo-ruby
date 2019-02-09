@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.id;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 
 /**
@@ -36,19 +36,19 @@ public class NodeId
 	private int hash; // Default cached hash code equals to 0
 	private String myString;
 
-	NodeId(@NotNull final String fileUrl)
+	NodeId(@Nonnull final String fileUrl)
 	{
 		this(fileUrl, null, null);
 	}
 
-	public NodeId(@NotNull final String fileUrl, @Nullable final RVirtualContainer container, @Nullable Object params)
+	public NodeId(@Nonnull final String fileUrl, @Nullable final RVirtualContainer container, @Nullable Object params)
 	{
 		myFileUrl = fileUrl;
 		myRContainer = container;
 		myParams = params;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getFileUrl()
 	{
 		return myFileUrl;

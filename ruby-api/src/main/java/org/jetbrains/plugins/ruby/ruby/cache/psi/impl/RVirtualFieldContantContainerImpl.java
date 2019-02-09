@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -40,13 +41,13 @@ public abstract class RVirtualFieldContantContainerImpl extends RVirtualContaine
 	private List<RVirtualField> myFields;
 
 	// RVirtualConstantsHolder methods
-	public void setVirtualConstants(@NotNull final List<RVirtualConstant> containerConstants)
+	public void setVirtualConstants(@Nonnull final List<RVirtualConstant> containerConstants)
 	{
 		myConstants = containerConstants;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualConstant> getVirtualConstants()
 	{
 		return myConstants;
@@ -59,19 +60,19 @@ public abstract class RVirtualFieldContantContainerImpl extends RVirtualContaine
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualField> getVirtualFields()
 	{
 		return myFields;
 	}
 
-	protected RVirtualFieldContantContainerImpl(@Nullable RVirtualContainer container, @NotNull RVirtualName name, AccessModifier accessModifier, @NotNull RFileInfo containingFileInfo)
+	protected RVirtualFieldContantContainerImpl(@Nullable RVirtualContainer container, @Nonnull RVirtualName name, AccessModifier accessModifier, @Nonnull RFileInfo containingFileInfo)
 	{
 		super(container, name, accessModifier, containingFileInfo);
 	}
 
 	@Override
-	public void dump(@NotNull StringBuilder buffer, final int indent)
+	public void dump(@Nonnull StringBuilder buffer, final int indent)
 	{
 		super.dump(buffer, indent);
 		for(RVirtualConstant constant : myConstants)

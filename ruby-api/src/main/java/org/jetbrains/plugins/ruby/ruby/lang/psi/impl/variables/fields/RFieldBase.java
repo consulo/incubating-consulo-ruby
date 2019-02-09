@@ -23,8 +23,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import consulo.awt.TargetAWT;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RFieldReference;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -65,7 +65,7 @@ public abstract class RFieldBase extends RNamedElementBase implements RField
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RFieldHolder getHolder()
 	{
 		if(myHolder == null)
@@ -90,7 +90,7 @@ public abstract class RFieldBase extends RNamedElementBase implements RField
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull String newName) throws IncorrectOperationException
 	{
 		if(!TextUtil.isCID(newName))
 		{

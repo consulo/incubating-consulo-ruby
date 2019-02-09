@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 
 /**
@@ -32,13 +33,13 @@ public interface BaseRailsFacetConfiguration
 
 	public void setShouldUseRSpecPlugin(final boolean useRSpecPlugin);
 
-	@NotNull
+	@Nonnull
 	public String getRailsApplicationRootPath();
 
-	@NotNull
+	@Nonnull
 	public String getRailsApplicationRootPathUrl();
 
-	@NotNull
+	@Nonnull
 	public StandardRailsPaths getPaths();
 
 	@Nullable

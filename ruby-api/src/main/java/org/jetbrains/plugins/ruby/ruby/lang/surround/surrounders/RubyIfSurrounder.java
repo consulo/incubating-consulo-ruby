@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RIfStatement;
@@ -32,7 +32,7 @@ public class RubyIfSurrounder extends RubySurrounderBase
 {
 
 	@Override
-	protected TextRange getTextRange(@NotNull final RPsiElement element)
+	protected TextRange getTextRange(@Nonnull final RPsiElement element)
 	{
 		assert element instanceof RIfStatement;
 		final RCondition condition = ((RIfStatement) element).getCondition();

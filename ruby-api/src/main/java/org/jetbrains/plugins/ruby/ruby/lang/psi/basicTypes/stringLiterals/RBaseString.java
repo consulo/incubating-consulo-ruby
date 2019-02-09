@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpressionImpl;
 
@@ -29,7 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpress
 public interface RBaseString extends RStringLiteral
 {
 
-	public void replaceByRSymbol(@NotNull final RSymbol rSymbol);
+	public void replaceByRSymbol(@Nonnull final RSymbol rSymbol);
 
-	public void replaceByRMathBinExpression(@NotNull final RMathBinExpressionImpl mathExpr);
+	public void replaceByRMathBinExpression(@Nonnull final RMathBinExpressionImpl mathExpr);
 }

@@ -21,8 +21,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -116,7 +116,7 @@ public class RSpecRunCommandLineState extends AbstractRTestsCommandLineState
 		return commandLine;
 	}
 
-	private String pathcSpecArgsWithColouringArgIfNecessary(@NotNull final String args)
+	private String pathcSpecArgsWithColouringArgIfNecessary(@Nonnull final String args)
 	{
 		if(myConfig.shouldUseColoredOutput())
 		{

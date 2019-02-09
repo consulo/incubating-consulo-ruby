@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -96,7 +96,7 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 	{
 		public final RVirtualClass myRVClass;
 
-		public TestMethodFilter(@NotNull final RVirtualClass rClass)
+		public TestMethodFilter(@Nonnull final RVirtualClass rClass)
 		{
 			myRVClass = rClass;
 		}

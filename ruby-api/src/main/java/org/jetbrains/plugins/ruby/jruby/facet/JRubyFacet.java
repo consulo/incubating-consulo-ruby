@@ -26,8 +26,8 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 
@@ -45,7 +45,7 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 
 	private RubyModuleCachesManager myRubyModuleCachesManager;
 
-	public JRubyFacet(@NotNull final Module module, final String name, @NotNull RSupportPerModuleSettingsImpl configuration, final Facet underlyingFacet)
+	public JRubyFacet(@Nonnull final Module module, final String name, @Nonnull RSupportPerModuleSettingsImpl configuration, final Facet underlyingFacet)
 	{
 		super(module, name, configuration, underlyingFacet);
 	}
@@ -139,7 +139,7 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 		});
 	}
 
-	@NotNull
+	@Nonnull
 	public static String getFacetLibraryName(final String sdkName)
 	{
 		return sdkName + JRUBY_FACET_LIBRARY_NAME_SUFFIX;
@@ -153,7 +153,7 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 	}
 
 	@Nullable
-	public static JRubyFacet getInstance(@NotNull final Module module)
+	public static JRubyFacet getInstance(@Nonnull final Module module)
 	{
 		return null;
 	}
@@ -164,7 +164,7 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 		return myRubyModuleCachesManager;
 	}
 
-	@NotNull
+	@Nonnull
 	public Collection<VirtualFile> getFacetRoots()
 	{
 		return Arrays.asList(ModuleRootManager.getInstance(getModule()).getContentRoots());

@@ -16,7 +16,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.types;
 
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.CallSymbol;
@@ -233,7 +234,7 @@ public class TypeDfaInstance implements DfaInstance<Map<String, RType>>
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Map<String, RType> initial()
 	{
 		return new HashMap<String, RType>();

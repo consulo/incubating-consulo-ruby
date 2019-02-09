@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import com.intellij.psi.PsiElement;
@@ -39,7 +39,7 @@ public interface RPsiElement extends PsiElement, RVirtualElement
 	 * @param filter Types of expected child
 	 * @return PsiElement - child psiElement
 	 */
-	@NotNull
+	@Nonnull
 	public List<PsiElement> getChildrenByFilter(IElementType filter);
 
 	/**
@@ -68,7 +68,7 @@ public interface RPsiElement extends PsiElement, RVirtualElement
 	 * @param c object of required type
 	 * @return RElement object if found, null otherwise
 	 */
-	@NotNull
+	@Nonnull
 	public <T extends PsiElement> List<T> getChildrenByType(Class<T> c);
 
 	/**

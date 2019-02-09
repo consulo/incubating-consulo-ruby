@@ -18,11 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -41,7 +40,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.containers.HashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,7 +59,7 @@ public class FileSymbolUtil
 	 * @return The symbol - the lineared sum of file and all required objects
 	 */
 	@Nullable
-	public static FileSymbol getFileSymbol(@NotNull final RFile rFile)
+	public static FileSymbol getFileSymbol(@Nonnull final RFile rFile)
 	{
 		return getFileSymbol(rFile, false);
 	}
@@ -75,7 +73,7 @@ public class FileSymbolUtil
 	 * @return The symbol - the lineared sum of file and all required objects
 	 */
 	@Nullable
-	public static FileSymbol getFileSymbol(@NotNull final RVirtualFile rVFile, final boolean isRubyTestMode)
+	public static FileSymbol getFileSymbol(@Nonnull final RVirtualFile rVFile, final boolean isRubyTestMode)
 	{
 		// Check if this action is not stopped
 		ProgressManager.getInstance().checkCanceled();
@@ -130,14 +128,14 @@ public class FileSymbolUtil
 		return fileSymbol;
 	}
 
-	public static RubyFilesCache[] getCaches(@NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk)
+	public static RubyFilesCache[] getCaches(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk)
 	{
 		final List<RubyFilesCache> cachesList = RVirtualPsiUtil.getCaches(project, module, sdk);
 		return cachesList.toArray(new RubyFilesCache[cachesList.size()]);
 	}
 
 	@Nullable
-	public static RFileInfo getRFileInfo(@NotNull final String url, @NotNull final RubyFilesCache... caches)
+	public static RFileInfo getRFileInfo(@Nonnull final String url, @Nonnull final RubyFilesCache... caches)
 	{
 		final VirtualFile vFile = VirtualFileManager.getInstance().findFileByUrl(url);
 		if(vFile == null)
@@ -155,7 +153,7 @@ public class FileSymbolUtil
 	}
 
 	// Nullable safe operations
-	public static void addLoadPath(@Nullable final FileSymbol fileSymbol, @NotNull final String url)
+	public static void addLoadPath(@Nullable final FileSymbol fileSymbol, @Nonnull final String url)
 	{
 		if(fileSymbol != null)
 		{
@@ -163,7 +161,7 @@ public class FileSymbolUtil
 		}
 	}
 
-	public static void process(@Nullable final FileSymbol fileSymbol, @NotNull final String url, @NotNull final InterpretationMode mode, final boolean forceAdd)
+	public static void process(@Nullable final FileSymbol fileSymbol, @Nonnull final String url, @Nonnull final InterpretationMode mode, final boolean forceAdd)
 	{
 		if(fileSymbol != null)
 		{
@@ -171,7 +169,7 @@ public class FileSymbolUtil
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public static Set<String> getUrls(@Nullable final FileSymbol fileSymbol)
 	{
 		if(fileSymbol != null)

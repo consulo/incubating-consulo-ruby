@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.assignments;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -49,7 +49,7 @@ public class MRHS implements RubyTokenTypes
 		ParsingMethod parsignMethod = new ParsingMethod()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parse(final RBuilder builder)
 			{
 

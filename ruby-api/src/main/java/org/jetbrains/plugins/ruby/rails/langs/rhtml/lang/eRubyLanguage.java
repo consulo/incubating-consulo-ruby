@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLFileHighlighterImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
@@ -55,7 +55,7 @@ public class eRubyLanguage extends Language implements TemplateLanguage
 	}
 
 
-	@NotNull
+	@Nonnull
 	public SyntaxHighlighter getSyntaxHighlighter(final Project project, final VirtualFile virtualFile)
 	{
 		return new RHTMLFileHighlighterImpl();

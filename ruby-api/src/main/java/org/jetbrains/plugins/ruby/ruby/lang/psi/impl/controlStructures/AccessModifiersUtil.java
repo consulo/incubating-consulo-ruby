@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
@@ -35,8 +36,8 @@ public class AccessModifiersUtil
 	 * @param text text
 	 * @return Appropriate <code>ACCESS_MODIFIER</code> or <code>ACCESS_MODIFIER.UNKNOWN</code>
 	 */
-	@NotNull
-	public static AccessModifier getModifierByName(@NotNull final String text)
+	@Nonnull
+	public static AccessModifier getModifierByName(@Nonnull final String text)
 	{
 		if(text.equals(RCall.PUBLIC_COMMAND))
 		{

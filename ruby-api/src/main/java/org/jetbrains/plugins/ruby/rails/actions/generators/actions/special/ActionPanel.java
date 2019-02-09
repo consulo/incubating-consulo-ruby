@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
 import java.awt.FontMetrics;
 
+import javax.annotation.Nonnull;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -25,8 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorPanel;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
@@ -99,7 +99,7 @@ public class ActionPanel implements GeneratorPanel
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public JPanel getContent()
 	{
 		return myContentPanel;
@@ -112,7 +112,7 @@ public class ActionPanel implements GeneratorPanel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getGeneratorArgs()
 	{
 		final StringBuffer buff = new StringBuffer();
@@ -129,7 +129,7 @@ public class ActionPanel implements GeneratorPanel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public JComponent getPreferredFocusedComponent()
 	{
 		return myActionName;

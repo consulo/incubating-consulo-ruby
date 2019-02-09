@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
 import java.util.ArrayList;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -58,7 +59,7 @@ public class RArrayIndexingImpl extends RPsiElementBase implements RArrayIndexin
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiReference[] getReferences()
 	{
 		final PsiElement lBracket = getChildByFilter(RubyTokenTypes.tfLBRACK, 0);

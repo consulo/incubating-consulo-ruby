@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.gotoByName;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
@@ -36,7 +37,7 @@ import com.intellij.openapi.project.Project;
 abstract class RubyBaseContributor implements ChooseByNameContributor
 {
 
-	public static List<NavigationItem> getItems(@NotNull final List<RVirtualElement> elements, @NotNull final Project project)
+	public static List<NavigationItem> getItems(@Nonnull final List<RVirtualElement> elements, @Nonnull final Project project)
 	{
 		final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
 		for(RVirtualElement prototype : elements)

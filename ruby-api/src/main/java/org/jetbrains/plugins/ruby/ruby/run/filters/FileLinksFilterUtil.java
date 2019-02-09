@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.run.filters;
 
 import java.io.File;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 
@@ -42,7 +43,7 @@ public class FileLinksFilterUtil
 	 * @return File
 	 */
 	@Nullable
-	public static File getFileByRubyLink(@NotNull final String filePath)
+	public static File getFileByRubyLink(@Nonnull final String filePath)
 	{
 		File srcFile = new File(filePath);
 
@@ -69,7 +70,7 @@ public class FileLinksFilterUtil
 		return null;
 	}
 
-	public static boolean hasExeExtention(@NotNull final File srcFile)
+	public static boolean hasExeExtention(@Nonnull final File srcFile)
 	{
 		// excludes .exe
 		final String ext = VirtualFileUtil.getExtension(srcFile.getName());

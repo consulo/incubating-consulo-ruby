@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.definitions.method;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -48,7 +48,7 @@ public class Method implements RubyTokenTypes
           kEND
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();
@@ -69,7 +69,7 @@ public class Method implements RubyTokenTypes
 
 
 	//  [singleton dot_or_colon] fname
-	@NotNull
+	@Nonnull
 	private static IElementType parseMethodNameAndGetType(final RBuilder builder)
 	{
 		boolean singletonSeen = false;
@@ -107,7 +107,7 @@ public class Method implements RubyTokenTypes
 		var_ref : variable;
 
 	*/
-	@NotNull
+	@Nonnull
 	private static IElementType parseSingleton(final RBuilder builder)
 	{
 		RMarker statementMarker = builder.mark();

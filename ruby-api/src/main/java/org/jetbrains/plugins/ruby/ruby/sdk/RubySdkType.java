@@ -24,10 +24,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -145,8 +147,8 @@ public class RubySdkType extends SdkType
 		}
 	}
 
-	@NotNull
-	protected static List<VirtualFile> findGemsRoots(@NotNull final SdkModificator sdkModificator)
+	@Nonnull
+	protected static List<VirtualFile> findGemsRoots(@Nonnull final SdkModificator sdkModificator)
 	{
 		final List<VirtualFile> gemsRoots = new ArrayList<VirtualFile>();
 		final VirtualFile[] roots = sdkModificator.getRoots(OrderRootType.SOURCES);
@@ -167,7 +169,7 @@ public class RubySdkType extends SdkType
 		return RUBY_EXE;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Collection<String> suggestHomePaths()
 	{
@@ -195,13 +197,13 @@ public class RubySdkType extends SdkType
 		return BIN_DIR + VirtualFileUtil.VFS_PATH_SEPARATOR + getRubyExecutable();
 	}
 
-	@NotNull
-	public String getGemsBinDirectory(@NotNull final Sdk sdk)
+	@Nonnull
+	public String getGemsBinDirectory(@Nonnull final Sdk sdk)
 	{
 		return getSdkAdditionalData(sdk).getGemsBinDirectory();
 	}
 
-	public void setGemsBinDirectory(@NotNull final Sdk sdk, @NotNull final String path)
+	public void setGemsBinDirectory(@Nonnull final Sdk sdk, @Nonnull final String path)
 	{
 		getSdkAdditionalData(sdk).setGemsBinDirectory(path);
 	}
@@ -301,13 +303,13 @@ public class RubySdkType extends SdkType
 	}
 
 	@Override
-	@NotNull
-	public SdkAdditionalData loadAdditionalData(@NotNull final Sdk sdk, @Nullable Element additional)
+	@Nonnull
+	public SdkAdditionalData loadAdditionalData(@Nonnull final Sdk sdk, @Nullable Element additional)
 	{
 		return RubySdkAdditionalData.load(sdk, additional);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getBinPath(final Sdk sdk)
 	{
 		return sdk.getHomePath() + BIN_DIR;
@@ -332,7 +334,7 @@ public class RubySdkType extends SdkType
 		return RubyIcons.RUBY_SDK;
 	}
 
-	private RubySdkAdditionalData getSdkAdditionalData(@NotNull final Sdk sdk)
+	private RubySdkAdditionalData getSdkAdditionalData(@Nonnull final Sdk sdk)
 	{
 		RubySdkAdditionalData rubySdkAdditionalData = (RubySdkAdditionalData) sdk.getSdkAdditionalData();
 		if(rubySdkAdditionalData == null)
@@ -357,7 +359,7 @@ public class RubySdkType extends SdkType
 		return getSDKVersionByOutput(output, true);
 	}
 
-	private String getSDKVersionByOutput(@NotNull final Output output, final boolean showErrorMsg)
+	private String getSDKVersionByOutput(@Nonnull final Output output, final boolean showErrorMsg)
 	{
 		final String errorTitle = RBundle.message("sdk.error.cannot.create.sdk.title");
 		if(output.getStdout().contains("JAVA_HOME"))

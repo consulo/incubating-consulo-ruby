@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElement;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
@@ -30,13 +31,13 @@ import com.intellij.psi.tree.IElementType;
  */
 public class RHTMLRubyBuilder extends RBuilderImpl
 {
-	public RHTMLRubyBuilder(@NotNull final PsiBuilder psiBuilder)
+	public RHTMLRubyBuilder(@Nonnull final PsiBuilder psiBuilder)
 	{
 		super(psiBuilder);
 	}
 
 	@Override
-	public void error(@NotNull String error)
+	public void error(@Nonnull String error)
 	{
 		super.error("[RUBY] " + error);
 	}

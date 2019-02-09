@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.formatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.indent.RIndentCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.processors.RubyIndentProcessor;
@@ -68,7 +68,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 	 * @param settings         settigs
 	 * @param patchedTextRange patched range or null if patch range isn't necessary
 	 */
-	public RubyBlock(@NotNull final ASTNode node, @NotNull final Indent indent, @Nullable final Wrap wrap, @Nullable final Alignment alignment, final CodeStyleSettings settings, @Nullable final TextRange patchedTextRange)
+	public RubyBlock(@Nonnull final ASTNode node, @Nonnull final Indent indent, @Nullable final Wrap wrap, @Nullable final Alignment alignment, final CodeStyleSettings settings, @Nullable final TextRange patchedTextRange)
 	{
 
 		myNode = node;
@@ -94,13 +94,13 @@ public class RubyBlock implements Block, RubyTokenTypes
 		}
 	}
 
-	public RubyBlock(@NotNull final ASTNode node, @NotNull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings)
+	public RubyBlock(@Nonnull final ASTNode node, @Nonnull final Indent indent, @Nullable final Wrap wrap, final CodeStyleSettings settings)
 	{
 		this(node, indent, wrap, null, settings, null);
 	}
 
 
-	@NotNull
+	@Nonnull
 	public ASTNode getNode()
 	{
 		return myNode;
@@ -108,14 +108,14 @@ public class RubyBlock implements Block, RubyTokenTypes
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TextRange getTextRange()
 	{
 		return myTextRange;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Block> getSubBlocks()
 	{
 		if(mySubBlocks == null)
@@ -150,7 +150,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 
 	@Override
 	@Nullable
-	public Spacing getSpacing(@Nullable final Block child1, @NotNull final Block child2)
+	public Spacing getSpacing(@Nullable final Block child1, @Nonnull final Block child2)
 	{
 		final ASTNode childNode1 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child1);
 		final ASTNode childNode2 = RHTMLFormatterUtil.getNodeByBlockForRubyFormatter(child2);
@@ -159,7 +159,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ChildAttributes getChildAttributes(final int newChildIndex)
 	{
 		final PsiElement psiParent = getNode().getPsi();
@@ -203,7 +203,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 		return isLeaf(myNode);
 	}
 
-	private boolean isLeaf(@NotNull final ASTNode node)
+	private boolean isLeaf(@Nonnull final ASTNode node)
 	{
 		return node.getFirstChildNode() == null;
 	}
@@ -251,7 +251,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 	 * @param node Tree node
 	 * @return true if node is incomplete
 	 */
-	private static boolean isIncomplete(@NotNull final ASTNode node)
+	private static boolean isIncomplete(@Nonnull final ASTNode node)
 	{
 		ASTNode lastChild = node.getLastChildNode();
 		while(lastChild != null && (lastChild.getPsi() instanceof PsiWhiteSpace || lastChild.getPsi() instanceof PsiComment))
@@ -275,7 +275,7 @@ public class RubyBlock implements Block, RubyTokenTypes
 	 * @param node Tree node
 	 * @return true, if the current node can be block node, else otherwise
 	 */
-	private static boolean canBeCorrectBlock(@NotNull final ASTNode node)
+	private static boolean canBeCorrectBlock(@Nonnull final ASTNode node)
 	{
 		return (node.getText().trim().length() > 0) && (!(node.getPsi() instanceof OuterLanguageElement));
 	}

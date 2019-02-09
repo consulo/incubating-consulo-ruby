@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 
@@ -35,10 +36,10 @@ public interface RFieldHolder extends RContainer, RVirtualFieldHolder
 	 *
 	 * @return List of RFieldUsage objects
 	 */
-	@NotNull
+	@Nonnull
 	public List<FieldDefinition> getFieldsDefinitions();
 
 	@Nullable
-	public FieldDefinition getDefinition(@NotNull final RVirtualField field);
+	public FieldDefinition getDefinition(@Nonnull final RVirtualField field);
 
 }

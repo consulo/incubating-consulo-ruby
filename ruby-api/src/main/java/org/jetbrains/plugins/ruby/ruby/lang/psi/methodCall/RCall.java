@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
@@ -86,30 +87,30 @@ public interface RCall extends RPossibleCall, RStructuralElement, RExpression
 	/**
 	 * @return DuckType of current call
 	 */
-	@NotNull
+	@Nonnull
 	public RubyCallType getCallType();
 
 	/**
 	 * @return command object.
 	 */
-	@NotNull
+	@Nonnull
 	public PsiElement getPsiCommand();
 
 	/**
 	 * @return PsiElement - arguments
 	 */
-	@NotNull
+	@Nonnull
 	public RListOfExpressions getCallArguments();
 
 	/**
 	 * @return Command name
 	 */
-	@NotNull
+	@Nonnull
 	public String getCommand();
 
 	/**
 	 * @return call arguments
 	 */
-	@NotNull
+	@Nonnull
 	List<RPsiElement> getArguments();
 }

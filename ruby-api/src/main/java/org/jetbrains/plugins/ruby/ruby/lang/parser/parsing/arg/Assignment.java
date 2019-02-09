@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
@@ -46,7 +46,7 @@ arg		: lhs '=' arg
 		| backref tOP_ASGN arg
 */
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(RBuilder builder)
 	{
 		return parseWithLeadRANGE(builder, builder.mark(), RangeExpression.parse(builder));

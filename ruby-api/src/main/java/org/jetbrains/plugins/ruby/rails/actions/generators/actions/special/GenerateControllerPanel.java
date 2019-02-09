@@ -22,8 +22,8 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.DocumentAdapter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
@@ -35,7 +35,7 @@ import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
@@ -72,7 +72,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 	private final String myRootPath;
 	private GeneratorOptions myOptions;
 
-	public GenerateControllerPanel(@NotNull final String controllersRootPath, @Nullable final String path)
+	public GenerateControllerPanel(@Nonnull final String controllersRootPath, @Nullable final String path)
 	{
 		myControllerDir.setText(path == null ? "" : path);
 		myRootPath = controllersRootPath;
@@ -171,14 +171,14 @@ public class GenerateControllerPanel implements GeneratorPanel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public JPanel getContent()
 	{
 		return myContentPanel;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getGeneratorArgs()
 	{
 		final StringBuffer buff = new StringBuffer();
@@ -208,7 +208,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public JComponent getPreferredFocusedComponent()
 	{
 		return myControllerName;

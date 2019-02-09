@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
@@ -52,28 +53,28 @@ public class RubyStructureViewModel extends TextEditorBasedStructureViewModel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public StructureViewTreeElement getRoot()
 	{
 		return new RubyStructureViewElement(myRoot);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Grouper[] getGroupers()
 	{
 		return Grouper.EMPTY_ARRAY;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Sorter[] getSorters()
 	{
 		return new Sorter[]{Sorter.ALPHA_SORTER};
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Filter[] getFilters()
 	{
 		return Filter.EMPTY_ARRAY;
@@ -86,7 +87,7 @@ public class RubyStructureViewModel extends TextEditorBasedStructureViewModel
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected Class[] getSuitableClasses()
 	{
 		return SUITABLE_CLASSES;

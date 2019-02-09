@@ -21,8 +21,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Iconable;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public class RubySimpleLookupItem implements RubyLookupItem, PresentableLookupVa
 	private Image myIcon;
 	private int myPriority;
 
-	public RubySimpleLookupItem(@NotNull final String lookupString, @Nullable final String typeText, final int priority, final boolean bold, final Image icon)
+	public RubySimpleLookupItem(@Nonnull final String lookupString, @Nullable final String typeText, final int priority, final boolean bold, final Image icon)
 	{
 		myLookupString = lookupString;
 		myTypeText = typeText;
@@ -51,7 +51,7 @@ public class RubySimpleLookupItem implements RubyLookupItem, PresentableLookupVa
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myLookupString;

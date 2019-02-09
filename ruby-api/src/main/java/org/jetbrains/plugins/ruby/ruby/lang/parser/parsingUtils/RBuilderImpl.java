@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike.Heredoc;
@@ -72,7 +72,7 @@ public class RBuilderImpl implements RubyTokenTypes, RBuilder
 	}
 
 	@Override
-	public void error(@NotNull final String error)
+	public void error(@Nonnull final String error)
 	{
 		myBuilder.getTokenType();
 		myBuilder.error(error);

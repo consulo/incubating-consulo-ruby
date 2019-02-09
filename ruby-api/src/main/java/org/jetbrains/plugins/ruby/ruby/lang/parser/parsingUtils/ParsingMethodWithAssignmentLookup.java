@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg.Assignment;
@@ -30,7 +31,7 @@ import com.intellij.psi.tree.IElementType;
  */
 public abstract class ParsingMethodWithAssignmentLookup implements ParsingMethod
 {
-	@NotNull
+	@Nonnull
 	public abstract IElementType parseInner(final RBuilder builder);
 
 	@Override

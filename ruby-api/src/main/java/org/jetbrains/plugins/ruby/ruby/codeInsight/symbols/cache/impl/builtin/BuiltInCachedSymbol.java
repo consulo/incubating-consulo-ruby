@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
@@ -42,7 +42,7 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol
 	protected String myLoadUrl;
 	private static final Logger LOG = Logger.getInstance(BuiltInCachedSymbol.class.getName());
 
-	public BuiltInCachedSymbol(@NotNull final Project project, @NotNull final String url, @Nullable final Sdk sdk)
+	public BuiltInCachedSymbol(@Nonnull final Project project, @Nonnull final String url, @Nullable final Sdk sdk)
 	{
 		super(project, null, sdk, false);
 		myLoadUrl = url;
@@ -91,7 +91,7 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol
 	}
 
 	@Override
-	public void fileAdded(@NotNull String url)
+	public void fileAdded(@Nonnull String url)
 	{
 		if(mySdk != null)
 		{

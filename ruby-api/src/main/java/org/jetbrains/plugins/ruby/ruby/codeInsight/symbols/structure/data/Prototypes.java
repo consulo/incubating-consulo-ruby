@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 
 /**
@@ -44,7 +45,7 @@ public class Prototypes
 		myBasePrototypes = prototypes;
 	}
 
-	@NotNull
+	@Nonnull
 	public List<RVirtualElement> getAll()
 	{
 		final ArrayList<RVirtualElement> all = new ArrayList<RVirtualElement>();
@@ -52,7 +53,7 @@ public class Prototypes
 		return all;
 	}
 
-	protected void addAll(@NotNull final List<RVirtualElement> list)
+	protected void addAll(@Nonnull final List<RVirtualElement> list)
 	{
 		if(myBasePrototypes != null)
 		{
@@ -64,7 +65,7 @@ public class Prototypes
 		}
 	}
 
-	public void add(@NotNull final RVirtualElement prototype)
+	public void add(@Nonnull final RVirtualElement prototype)
 	{
 		myLastPrototype = prototype;
 		synchronized(LOCK)

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBlock;
@@ -38,7 +38,7 @@ public class RElseBlockImpl extends RPsiElementBase implements RElseBlock
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -49,7 +49,7 @@ public class RElseBlockImpl extends RPsiElementBase implements RElseBlock
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getBody()
 	{
 		return RubyPsiUtil.getChildByType(this, RCompoundStatement.class, 0);

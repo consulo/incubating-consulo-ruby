@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
@@ -40,7 +40,7 @@ public class RubyRunCommandLineState extends ColouredCommandLineState
 
 	final protected RubyRunConfiguration myConfig;
 
-	public RubyRunCommandLineState(final @NotNull RubyRunConfiguration config, ExecutionEnvironment executionEnvironment)
+	public RubyRunCommandLineState(final @Nonnull RubyRunConfiguration config, ExecutionEnvironment executionEnvironment)
 	{
 		super(executionEnvironment);
 

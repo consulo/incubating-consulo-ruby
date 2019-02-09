@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.resolve;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -54,14 +55,14 @@ import com.intellij.psi.ResolveResult;
 public class RubyResolveVisitor extends RubyInspectionVisitor
 {
 
-	public RubyResolveVisitor(@NotNull final ProblemsHolder holder)
+	public RubyResolveVisitor(@Nonnull final ProblemsHolder holder)
 	{
 		super(holder);
 	}
 
 
 	@Override
-	public void visitRConstant(@NotNull final RConstant rConstant)
+	public void visitRConstant(@Nonnull final RConstant rConstant)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -78,7 +79,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 	}
 
 	@Override
-	public void visitRFid(@NotNull final RFid rFid)
+	public void visitRFid(@Nonnull final RFid rFid)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -90,7 +91,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 	}
 
 	@Override
-	public void visitRIdentifier(@NotNull final RIdentifier rIdentifier)
+	public void visitRIdentifier(@Nonnull final RIdentifier rIdentifier)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -113,7 +114,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 	}
 
 	@Override
-	public void visitRGlobalVariable(@NotNull final RGlobalVariable globalVariable)
+	public void visitRGlobalVariable(@Nonnull final RGlobalVariable globalVariable)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -126,7 +127,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 
 
 	@Override
-	public void visitRReference(@NotNull final RReference rReference)
+	public void visitRReference(@Nonnull final RReference rReference)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -158,7 +159,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 	}
 
 	@Override
-	public void visitRBinaryExpression(@NotNull final RBinaryExpression rBinaryExpression)
+	public void visitRBinaryExpression(@Nonnull final RBinaryExpression rBinaryExpression)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -191,7 +192,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 	}
 
 	@Override
-	public void visitRUnaryExpression(@NotNull final RUnaryExpression rUnaryExpression)
+	public void visitRUnaryExpression(@Nonnull final RUnaryExpression rUnaryExpression)
 	{
 		// It`s often operation
 		ProgressManager.getInstance().checkCanceled();
@@ -227,7 +228,7 @@ public class RubyResolveVisitor extends RubyInspectionVisitor
 	 * @param element element to check
 	 * @return true if we shoud inspect, false otherwise
 	 */
-	private boolean shouldInspectElement(@NotNull final RPsiElement element)
+	private boolean shouldInspectElement(@Nonnull final RPsiElement element)
 	{
 		return RReferenceNavigator.getReferenceByRightPart(element) == null && !((RPsiElementBase) element).isClassOrModuleName();
 	}

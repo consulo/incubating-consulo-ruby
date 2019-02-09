@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.facet.versions;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.rails.facet.BaseRailsFacetBuilder;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
@@ -61,11 +61,11 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 	 * @param rootModel Root Module
 	 * @return Simple suggests root path for rails application. It is the first content root.
 	 */
-	@NotNull
+	@Nonnull
 	public abstract String getDefaultRailsApplicationHomePath(final ModifiableRootModel rootModel);
 
 
-	public BaseRailsFacet(@NotNull final Module module, final String name, @NotNull final BaseRailsFacetConfiguration configuration, final Facet underlyingFacet)
+	public BaseRailsFacet(@Nonnull final Module module, final String name, @Nonnull final BaseRailsFacetConfiguration configuration, final Facet underlyingFacet)
 	{
 		super(module, name, configuration, underlyingFacet);
 
@@ -190,7 +190,7 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 	 * @return Base Rails facet
 	 */
 	@Nullable
-	public static BaseRailsFacet getInstance(@NotNull final Module module)
+	public static BaseRailsFacet getInstance(@Nonnull final Module module)
 	{
 		return null; //TODO [VISTALl] use consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension
 	}

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -79,25 +79,25 @@ public class NodeIdUtil
 	private static final String APPLICATION_FOLDER = "APPLICATION";
 	private static final String ROOT = "ROOT";
 
-	@NotNull
+	@Nonnull
 	public static NodeId createForFile(final String fileUrl)
 	{
 		return new NodeId(fileUrl);
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId createForDirectory(final String dirUrl, boolean isApplicationDir)
 	{
 		return new NodeId(dirUrl, null, isApplicationDir ? APPLICATION_FOLDER : null);
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId createForRoot()
 	{
 		return new NodeId(ROOT);
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId createForVirtualContainer(final RVirtualContainer elem)
 	{
 		return new NodeId(elem.getContainingFileUrl(), elem, null);
@@ -151,13 +151,13 @@ public class NodeIdUtil
 	 *         method returns null.
 	 */
 	@Nullable
-	public static NodeId[] getRailsTreeNodeParentID(@Nullable final VirtualFile file, @NotNull final String fileUrl, @NotNull final Module module)
+	public static NodeId[] getRailsTreeNodeParentID(@Nullable final VirtualFile file, @Nonnull final String fileUrl, @Nonnull final Module module)
 	{
 		return getRailsTreeNodeCurrentOrParentID(file, fileUrl, module, true, null);
 	}
 
 	@Nullable
-	public static NodeId[] getRailsTreeNodeParentID(@Nullable final VirtualFile file, @NotNull final String fileUrl, @NotNull final Module module, @Nullable final Object element)
+	public static NodeId[] getRailsTreeNodeParentID(@Nullable final VirtualFile file, @Nonnull final String fileUrl, @Nonnull final Module module, @Nullable final Object element)
 	{
 		return getRailsTreeNodeCurrentOrParentID(file, fileUrl, module, true, element);
 	}
@@ -172,13 +172,13 @@ public class NodeIdUtil
 	 * @return NodeId for current element
 	 */
 	@Nullable
-	public static NodeId[] getRailsTreeNodeID(@Nullable final VirtualFile file, @NotNull final String fileUrl, @NotNull final Module module, @Nullable final PsiElement psiElement)
+	public static NodeId[] getRailsTreeNodeID(@Nullable final VirtualFile file, @Nonnull final String fileUrl, @Nonnull final Module module, @Nullable final PsiElement psiElement)
 	{
 		return getRailsTreeNodeCurrentOrParentID(file, fileUrl, module, false, psiElement);
 	}
 
 	@Nullable
-	private static NodeId[] getRailsTreeNodeCurrentOrParentID(@Nullable final VirtualFile file, @NotNull final String fileUrl, @NotNull final Module module, final boolean forParent, @Nullable final Object selectedElement)
+	private static NodeId[] getRailsTreeNodeCurrentOrParentID(@Nullable final VirtualFile file, @Nonnull final String fileUrl, @Nonnull final Module module, final boolean forParent, @Nullable final Object selectedElement)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{
@@ -579,7 +579,7 @@ public class NodeIdUtil
 		}
 	}
 
-	private static NodeId[] getNodeIdForHelper(@Nullable final Object element, @NotNull final Module module, @Nullable final VirtualFile file)
+	private static NodeId[] getNodeIdForHelper(@Nullable final Object element, @Nonnull final Module module, @Nullable final VirtualFile file)
 	{
 		final RVirtualModule rModule;
 		if(element instanceof RModule)
@@ -603,7 +603,7 @@ public class NodeIdUtil
 	}
 
 	@Nullable
-	private static NodeId[] getNodeIdForClassOrControllerOrMethodInFile(@Nullable final VirtualFile file, @NotNull final Module module, @Nullable final Object element)
+	private static NodeId[] getNodeIdForClassOrControllerOrMethodInFile(@Nullable final VirtualFile file, @Nonnull final Module module, @Nullable final Object element)
 	{
 		if(file == null)
 		{
@@ -686,12 +686,12 @@ public class NodeIdUtil
 		}
 	}
 
-	private static boolean isDirectory(@Nullable final VirtualFile file, @NotNull final String fileName)
+	private static boolean isDirectory(@Nullable final VirtualFile file, @Nonnull final String fileName)
 	{
 		return file != null ? file.isDirectory() : TextUtil.isEmpty(VirtualFileUtil.getExtension(fileName));
 	}
 
-	private static RVirtualClass getControllerClass(@NotNull final String controllerUrl, final Module module)
+	private static RVirtualClass getControllerClass(@Nonnull final String controllerUrl, final Module module)
 	{
 		final VirtualFile controllerFile = VirtualFileManager.getInstance().findFileByUrl(controllerUrl);
 		if(controllerFile == null)

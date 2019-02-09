@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
@@ -50,7 +50,7 @@ public class RReturnStatementImpl extends RPsiElementBase implements RReturnStat
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -61,7 +61,7 @@ public class RReturnStatementImpl extends RPsiElementBase implements RReturnStat
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RPsiElement> getReturnValues()
 	{
 		final RListOfExpressions list = getReturnList();
@@ -75,7 +75,7 @@ public class RReturnStatementImpl extends RPsiElementBase implements RReturnStat
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final List<RPsiElement> values = getReturnValues();

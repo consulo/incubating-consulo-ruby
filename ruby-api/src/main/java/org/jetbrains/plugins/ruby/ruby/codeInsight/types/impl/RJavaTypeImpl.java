@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
@@ -41,7 +41,7 @@ public class RJavaTypeImpl extends RTypeBase implements RJavaType
 	private PsiType myPsiType;
 	private DuckType myJavaType;
 
-	public RJavaTypeImpl(@NotNull final PsiType psiType, @Nullable final FileSymbol fileSymbol)
+	public RJavaTypeImpl(@Nonnull final PsiType psiType, @Nullable final FileSymbol fileSymbol)
 	{
 		// TODO: OPTIMIZE! Don`t use ducktype
 		myPsiType = psiType;
@@ -63,7 +63,7 @@ public class RJavaTypeImpl extends RTypeBase implements RJavaType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Collection<Message> getMessages()
 	{
 		return myJavaType.getMessages();

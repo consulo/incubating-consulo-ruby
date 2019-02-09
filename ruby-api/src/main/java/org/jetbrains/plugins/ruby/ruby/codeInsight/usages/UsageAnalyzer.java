@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.usages;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -66,7 +67,7 @@ import com.intellij.psi.PsiParameter;
 public class UsageAnalyzer
 {
 
-	public static Access createUsageAccess(@NotNull final RPsiElement usage)
+	public static Access createUsageAccess(@Nonnull final RPsiElement usage)
 	{
 		// Rescue block
 		if(usage instanceof RIdentifier)
@@ -148,14 +149,14 @@ public class UsageAnalyzer
 				return new BlockParameterAccess()
 				{
 					@Override
-					@NotNull
+					@Nonnull
 					public RPsiElement getElement()
 					{
 						return identifier;
 					}
 
 					@Override
-					@NotNull
+					@Nonnull
 					public RBlockVariables getBlockVariables()
 					{
 						return RBlockVariableNavigator.getByIdentifier(identifier);
@@ -169,14 +170,14 @@ public class UsageAnalyzer
 				return new MethodParameterAccess()
 				{
 					@Override
-					@NotNull
+					@Nonnull
 					public RPsiElement getElement()
 					{
 						return identifier;
 					}
 
 					@Override
-					@NotNull
+					@Nonnull
 					public RArgument getArgument()
 					{
 						//noinspection ConstantConditions
@@ -235,7 +236,7 @@ public class UsageAnalyzer
 		return new ReadAccess()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public RPsiElement getElement()
 			{
 				return usage;

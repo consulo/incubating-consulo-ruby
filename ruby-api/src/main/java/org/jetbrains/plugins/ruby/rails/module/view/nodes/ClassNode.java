@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitorAdapter;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -65,7 +65,7 @@ public class ClassNode extends RailsNode
 		assert getVirtualFileUrl().equals(fileInfo.getUrl());
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId generateNodeId(final RVirtualClass rVClass)
 	{
 		return NodeIdUtil.createForVirtualContainer(rVClass);
@@ -126,7 +126,7 @@ public class ClassNode extends RailsNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.CLASS;

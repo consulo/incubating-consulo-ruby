@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -66,7 +66,7 @@ public class RailsRequireUtil
 	 * @param fileUrl    Url of the file
 	 * @param module     Module for file - rails module
 	 */
-	public static void requireRailsFiles(@Nullable final FileSymbol fileSymbol, @NotNull final RVirtualFile rFile, @NotNull final String fileUrl, @NotNull final Module module)
+	public static void requireRailsFiles(@Nullable final FileSymbol fileSymbol, @Nonnull final RVirtualFile rFile, @Nonnull final String fileUrl, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -162,7 +162,7 @@ public class RailsRequireUtil
 		addFilesToFilesymbol(fileSymbol, fileUrl, files);
 	}
 
-	private static void addFilesToFilesymbol(@NotNull final FileSymbol fileSymbol, @Nullable final String fileUrl, @NotNull final Collection<VirtualFile> files)
+	private static void addFilesToFilesymbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String fileUrl, @Nonnull final Collection<VirtualFile> files)
 	{
 		for(VirtualFile virtualFile : files)
 		{
@@ -175,7 +175,7 @@ public class RailsRequireUtil
 	}
 
 
-	private static void loadAllModels(@NotNull final StandardRailsPaths railsPaths, @NotNull final List<VirtualFile> files, @NotNull final VirtualFileManager manager)
+	private static void loadAllModels(@Nonnull final StandardRailsPaths railsPaths, @Nonnull final List<VirtualFile> files, @Nonnull final VirtualFileManager manager)
 	{
 		final String modelsRootUrl = railsPaths.getModelRootURL();
 		final VirtualFile modelsRoot = manager.findFileByUrl(modelsRootUrl);
@@ -187,7 +187,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadAllModels(@Nullable final FileSymbol fileSymbol, @NotNull final Module module)
+	public static void loadAllModels(@Nullable final FileSymbol fileSymbol, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -202,7 +202,7 @@ public class RailsRequireUtil
 		addFilesToFilesymbol(fileSymbol, null, files);
 	}
 
-	private static void loadAllControllersAndHelpers(@NotNull final StandardRailsPaths railsPaths, @NotNull final List<VirtualFile> files, @NotNull final VirtualFileManager manager)
+	private static void loadAllControllersAndHelpers(@Nonnull final StandardRailsPaths railsPaths, @Nonnull final List<VirtualFile> files, @Nonnull final VirtualFileManager manager)
 	{
 		//controllers
 		final String controllersRootUrl = railsPaths.getControllerRootURL();
@@ -225,7 +225,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadAllControllersAndHelpers(@Nullable final FileSymbol fileSymbol, @NotNull final Module module)
+	public static void loadAllControllersAndHelpers(@Nullable final FileSymbol fileSymbol, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -241,7 +241,7 @@ public class RailsRequireUtil
 		addFilesToFilesymbol(fileSymbol, null, files);
 	}
 
-	private static void loadAllLibs(@NotNull final StandardRailsPaths railsPaths, @NotNull final List<VirtualFile> files, @NotNull final VirtualFileManager manager)
+	private static void loadAllLibs(@Nonnull final StandardRailsPaths railsPaths, @Nonnull final List<VirtualFile> files, @Nonnull final VirtualFileManager manager)
 	{
 		final String libsRootUrl = railsPaths.getLibsRootURL();
 		final VirtualFile libsRoot = manager.findFileByUrl(libsRootUrl);
@@ -253,7 +253,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadAllLibs(@Nullable final FileSymbol fileSymbol, @NotNull final Module module)
+	public static void loadAllLibs(@Nullable final FileSymbol fileSymbol, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -269,7 +269,7 @@ public class RailsRequireUtil
 		addFilesToFilesymbol(fileSymbol, null, files);
 	}
 
-	private static void loadAllVendorsLibsWithoutEdgeRails(@NotNull final StandardRailsPaths railsPaths, @NotNull final List<VirtualFile> files, @NotNull final VirtualFileManager manager)
+	private static void loadAllVendorsLibsWithoutEdgeRails(@Nonnull final StandardRailsPaths railsPaths, @Nonnull final List<VirtualFile> files, @Nonnull final VirtualFileManager manager)
 	{
 		final String vendorRootUrl = railsPaths.getVendorRootURL();
 		final VirtualFile vendorRoot = manager.findFileByUrl(vendorRootUrl);
@@ -282,7 +282,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	private static void addPluginsAndVendorPackagesLibFilesWithoutEdgeRails(final VirtualFile rootDir, final HashSet<VirtualFile> set, @NotNull final String edgeRailsUrl)
+	private static void addPluginsAndVendorPackagesLibFilesWithoutEdgeRails(final VirtualFile rootDir, final HashSet<VirtualFile> set, @Nonnull final String edgeRailsUrl)
 	{
 		final ArrayList<VirtualFile> folder = new ArrayList<VirtualFile>();
 
@@ -311,7 +311,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadAllVendorsLibsWithoutEdgeRails(@Nullable final FileSymbol fileSymbol, @NotNull final Module module)
+	public static void loadAllVendorsLibsWithoutEdgeRails(@Nullable final FileSymbol fileSymbol, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -340,7 +340,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	private static void addIfNotNull(@NotNull final List<VirtualFile> files, @Nullable final VirtualFile file)
+	private static void addIfNotNull(@Nonnull final List<VirtualFile> files, @Nullable final VirtualFile file)
 	{
 		if(file != null)
 		{
@@ -348,7 +348,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadBuiltInHelpers(@Nullable final FileSymbol fileSymbol, @NotNull final InterpretationMode mode)
+	public static void loadBuiltInHelpers(@Nullable final FileSymbol fileSymbol, @Nonnull final InterpretationMode mode)
 	{
 		if(fileSymbol == null)
 		{
@@ -369,7 +369,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadDBAdapters(@Nullable final FileSymbol fileSymbol, @NotNull final InterpretationMode mode)
+	public static void loadDBAdapters(@Nullable final FileSymbol fileSymbol, @Nonnull final InterpretationMode mode)
 	{
 		if(fileSymbol == null)
 		{
@@ -390,7 +390,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static void loadCoreExtentions(@Nullable final FileSymbol fileSymbol, @NotNull final InterpretationMode mode)
+	public static void loadCoreExtentions(@Nullable final FileSymbol fileSymbol, @Nonnull final InterpretationMode mode)
 	{
 		if(fileSymbol == null)
 		{
@@ -415,7 +415,7 @@ public class RailsRequireUtil
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Nullable
-	public static FileSymbolType getRailsLayerType(@NotNull final RVirtualFile file, @NotNull final Module module)
+	public static FileSymbolType getRailsLayerType(@Nonnull final RVirtualFile file, @Nonnull final Module module)
 	{
 		// Controller
 		if(ControllersConventions.isControllerFile(file, module))
@@ -450,7 +450,7 @@ public class RailsRequireUtil
 		return null;
 	}
 
-	public static void addRailsLoadPath(@Nullable final FileSymbol fileSymbol, @NotNull final Module module)
+	public static void addRailsLoadPath(@Nullable final FileSymbol fileSymbol, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -463,7 +463,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	public static List<String> getRailsAdditionalLoadPathes(@NotNull final Module myModule)
+	public static List<String> getRailsAdditionalLoadPathes(@Nonnull final Module myModule)
 	{
 		final List<String> list = new ArrayList<String>();
 		// adding test/mock/environment
@@ -508,7 +508,7 @@ public class RailsRequireUtil
 		return list;
 	}
 
-	private static void addUrlIfNotNull(@NotNull final List<String> list, @Nullable final VirtualFile file)
+	private static void addUrlIfNotNull(@Nonnull final List<String> list, @Nullable final VirtualFile file)
 	{
 		if(file != null)
 		{
@@ -516,7 +516,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	private static void addRelativeDirsUnderRoot(@NotNull final List<String> list, @Nullable final VirtualFile root, final boolean checkName)
+	private static void addRelativeDirsUnderRoot(@Nonnull final List<String> list, @Nullable final VirtualFile root, final boolean checkName)
 	{
 		if(root != null)
 		{
@@ -527,7 +527,7 @@ public class RailsRequireUtil
 		}
 	}
 
-	private static void addAdditionalLoadPathLibsRoots(@NotNull final List<String> list, @Nullable final VirtualFile root)
+	private static void addAdditionalLoadPathLibsRoots(@Nonnull final List<String> list, @Nullable final VirtualFile root)
 	{
 		if(root != null)
 		{

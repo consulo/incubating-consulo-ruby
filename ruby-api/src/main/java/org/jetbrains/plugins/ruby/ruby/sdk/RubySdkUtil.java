@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
@@ -33,7 +35,6 @@ import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.projectRoots.SdkTypeId;
-import com.intellij.openapi.projectRoots.impl.SdkImpl;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -91,13 +92,13 @@ public class RubySdkUtil
 	 * @param sdk Ruby SDK
 	 * @return Gems bin folder path for given GEM.
 	 */
-	@NotNull
-	public static String getGemsBinFolderPath(@NotNull final Sdk sdk)
+	@Nonnull
+	public static String getGemsBinFolderPath(@Nonnull final Sdk sdk)
 	{
 		return RubySdkType.getInstance().getGemsBinDirectory(sdk);
 	}
 
-	private static String[] getSdkContentRootUrls(@NotNull final Sdk sdk)
+	private static String[] getSdkContentRootUrls(@Nonnull final Sdk sdk)
 	{
 		return sdk.getRootProvider().getUrls(OrderRootType.CLASSES);
 	}
@@ -108,7 +109,7 @@ public class RubySdkUtil
 	 * @param sdk Sdk to get roots for
 	 * @return array of roots
 	 */
-	public static String[] getSdkRootsWithAllGems(@NotNull final Sdk sdk)
+	public static String[] getSdkRootsWithAllGems(@Nonnull final Sdk sdk)
 	{
 		final ArrayList<String> urls = new ArrayList<String>();
 		for(String rootUrl : sdk.getRootProvider().getUrls(OrderRootType.CLASSES))
@@ -131,7 +132,7 @@ public class RubySdkUtil
 	}
 
 	@Nullable
-	public static String getRubyStubsDirUrl(@NotNull final Sdk sdk)
+	public static String getRubyStubsDirUrl(@Nonnull final Sdk sdk)
 	{
 		for(String url : getSdkContentRootUrls(sdk))
 		{
@@ -149,12 +150,12 @@ public class RubySdkUtil
 	 * @param url directory url
 	 * @return if directory is gems root directory
 	 */
-	public static boolean isGemsRootUrl(@NotNull final String url)
+	public static boolean isGemsRootUrl(@Nonnull final String url)
 	{
 		return url.endsWith(RubySdkType.GEMS_SUBDIR);
 	}
 
-	public static boolean isRubystubsDirUrl(@NotNull final String url)
+	public static boolean isRubystubsDirUrl(@Nonnull final String url)
 	{
 		return url.endsWith(RubySdkType.RUBYSTUBS_DIR);
 	}
@@ -203,7 +204,7 @@ public class RubySdkUtil
 		return sdk;
 	}
 
-	static void addToSourceAndClasses(@NotNull final SdkModificator sdkModificator, @Nullable final VirtualFile vFile)
+	static void addToSourceAndClasses(@Nonnull final SdkModificator sdkModificator, @Nullable final VirtualFile vFile)
 	{
 		if(vFile != null)
 		{
@@ -213,7 +214,7 @@ public class RubySdkUtil
 	}
 
 	@Nullable
-	private static String findInterpreter(@NotNull final RubySdkType sdkType)
+	private static String findInterpreter(@Nonnull final RubySdkType sdkType)
 	{
 		final String exePath = sdkType.getExePath();
 		final String interpreterName = sdkType.getRubyExecutable();
@@ -266,8 +267,8 @@ public class RubySdkUtil
 		return null;
 	}
 
-	@NotNull
-	public static List<String> getAllGemsLibUrls(@NotNull final VirtualFile gemRoot)
+	@Nonnull
+	public static List<String> getAllGemsLibUrls(@Nonnull final VirtualFile gemRoot)
 	{
 		final List<String> gemsUrls = new ArrayList<String>();
 		for(VirtualFile file : gemRoot.getChildren())
@@ -277,8 +278,8 @@ public class RubySdkUtil
 		return gemsUrls;
 	}
 
-	@NotNull
-	public static List<GemInfo> getAllGems(@NotNull final VirtualFile gemRoot)
+	@Nonnull
+	public static List<GemInfo> getAllGems(@Nonnull final VirtualFile gemRoot)
 	{
 		final List<GemInfo> gemsUrls = new ArrayList<GemInfo>();
 		for(VirtualFile gemFile : gemRoot.getChildren())
@@ -297,7 +298,7 @@ public class RubySdkUtil
 	 * @return String - presentable text
 	 */
 	@Nullable
-	public static String getPresentableLocation(@Nullable final Sdk sdk, @NotNull final String url)
+	public static String getPresentableLocation(@Nullable final Sdk sdk, @Nonnull final String url)
 	{
 		if(sdk != null && RubySdkUtil.isKindOfRubySDK(sdk))
 		{

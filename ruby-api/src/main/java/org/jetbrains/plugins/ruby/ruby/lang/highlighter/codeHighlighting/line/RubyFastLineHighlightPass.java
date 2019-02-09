@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyHelpUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;
@@ -55,7 +56,7 @@ public class RubyFastLineHighlightPass extends AbstractRubyHighlighterPass
 	private Collection<RubyLineMarkerInfo> myLineMarkers;
 
 
-	public RubyFastLineHighlightPass(@NotNull final Project project, @NotNull final RFile psiFile, @NotNull final Editor editor)
+	public RubyFastLineHighlightPass(@Nonnull final Project project, @Nonnull final RFile psiFile, @Nonnull final Editor editor)
 	{
 		super(project, psiFile, editor, false, HighlightPassConstants.RUBY_LINE_MARKERS_GROUP);
 	}

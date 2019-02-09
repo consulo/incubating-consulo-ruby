@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.support.utils;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
@@ -51,7 +51,7 @@ public class RModuleUtil
 	 * @param project Project to search modules in
 	 * @return Array of found modules
 	 */
-	public static Module[] getAllModulesWithRubySupport(@NotNull final Project project)
+	public static Module[] getAllModulesWithRubySupport(@Nonnull final Project project)
 	{
 		final List<Module> result = new LinkedList<Module>();
 
@@ -95,7 +95,7 @@ public class RModuleUtil
 	 * @return VirtualFile corresponding to content root
 	 */
 	@Nullable
-	public static VirtualFile getRubyModuleTypeRoot(@NotNull final Module module)
+	public static VirtualFile getRubyModuleTypeRoot(@Nonnull final Module module)
 	{
 		final VirtualFile[] roots = ModuleRootManager.getInstance(module).getContentRoots();
 		return roots.length > 0 ? roots[0] : null;
@@ -106,7 +106,7 @@ public class RModuleUtil
 	 * @return VirtualFile corresponding to content root
 	 */
 	@Nullable
-	public static VirtualFile getModulesFirstContentRoot(@NotNull final ModifiableRootModel rootModel)
+	public static VirtualFile getModulesFirstContentRoot(@Nonnull final ModifiableRootModel rootModel)
 	{
 		final VirtualFile[] roots = rootModel.getContentRoots();
 		return roots.length > 0 ? roots[0] : null;
@@ -174,7 +174,7 @@ public class RModuleUtil
 	 * @return If module is Ruby module or with JRuby support returns it's settings, otherwize nil
 	 */
 	@Nullable
-	public static RSupportPerModuleSettings getRubySupportSettings(@NotNull final Module module)
+	public static RSupportPerModuleSettings getRubySupportSettings(@Nonnull final Module module)
 	{
 		RubyModuleExtension extension = ModuleUtilCore.getExtension(module, RubyModuleExtension.class);
 		if(extension == null)

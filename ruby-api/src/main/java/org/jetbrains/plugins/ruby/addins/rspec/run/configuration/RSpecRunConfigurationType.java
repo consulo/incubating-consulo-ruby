@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
@@ -43,7 +43,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
-import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
 
 /**
@@ -84,7 +83,7 @@ public class RSpecRunConfigurationType implements ConfigurationType
 		return RSpecIcons.RUN_CONFIGURATION_ICON;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getId()
 	{
@@ -99,7 +98,7 @@ public class RSpecRunConfigurationType implements ConfigurationType
 
 	//@Override
 	@Nullable
-	public RunnerAndConfigurationSettings createConfigurationByLocation(final @NotNull Location location)
+	public RunnerAndConfigurationSettings createConfigurationByLocation(final @Nonnull Location location)
 	{
 		// if not in psi file
 		final PsiElement locationElement = location.getPsiElement();
@@ -183,7 +182,7 @@ public class RSpecRunConfigurationType implements ConfigurationType
 		return settings;
 	}
 
-	private RunnerAndConfigurationSettings createRunAllSpecsInFolderConf(@NotNull final PsiDirectory psiDirectory)
+	private RunnerAndConfigurationSettings createRunAllSpecsInFolderConf(@Nonnull final PsiDirectory psiDirectory)
 	{
 		final Project project = psiDirectory.getProject();
 		final VirtualFile folder = psiDirectory.getVirtualFile();

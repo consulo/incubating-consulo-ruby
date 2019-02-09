@@ -20,7 +20,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
@@ -40,7 +41,7 @@ public class RailsProjectRootNode extends RailsAbstractNode
 {
 	private Map<Module, RailsProjectModuleNode> myModulesNodes = new HashMap<Module, RailsProjectModuleNode>();
 
-	public RailsProjectRootNode(@NotNull final Project project)
+	public RailsProjectRootNode(@Nonnull final Project project)
 	{
 		super(project);
 		init(generateNodeId(), new PresentationData(null, null, null, null, null));
@@ -71,7 +72,7 @@ public class RailsProjectRootNode extends RailsAbstractNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.ROOT;

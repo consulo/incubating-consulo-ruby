@@ -14,7 +14,8 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.Instruction;
 
 /**
@@ -24,7 +25,7 @@ public interface DfaInstance<E>
 {
 	void fun(E e, Instruction instruction);
 
-	@NotNull
+	@Nonnull
 	E initial();
 
 	boolean isForward();

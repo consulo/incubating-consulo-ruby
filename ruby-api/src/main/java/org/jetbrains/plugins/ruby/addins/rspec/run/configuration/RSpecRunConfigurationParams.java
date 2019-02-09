@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigurationParams;
 
@@ -50,7 +51,7 @@ public interface RSpecRunConfigurationParams extends AbstractRubyRunConfiguratio
 
 	public void setTestScriptPath(String pathOrMask);
 
-	public void setTestType(@NotNull AbstractRubyRunConfiguration.TestType testType);
+	public void setTestType(@Nonnull AbstractRubyRunConfiguration.TestType testType);
 
 	public void setTestFileMask(String testFileMask);
 

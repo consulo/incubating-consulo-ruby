@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.run;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
@@ -49,7 +49,7 @@ public class RailsScriptRunner
 	 * @param provider              Arguments provider
 	 * @param descFactory           Content descriptor provider
 	 */
-	public static void runRailsScriptInCosole(@NotNull final Module module, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String consoleTitle, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory)
+	public static void runRailsScriptInCosole(@Nonnull final Module module, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String consoleTitle, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory)
 	{
 		runRailsScriptInCosole(RModuleUtil.getModuleOrJRubyFacetSdk(module), module, processListener, consoleFilters, userActions, runInBackgroundThread, consoleTitle, provider, descFactory);
 	}
@@ -65,7 +65,7 @@ public class RailsScriptRunner
 	 * @param provider              Arguments provider
 	 * @param descFactory           Content descriptor provider
 	 */
-	public static void runRailsScriptInCosole(@Nullable final Sdk sdk, @NotNull final Module uncommitedModule, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @NotNull final String consoleTitle, @NotNull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory)
+	public static void runRailsScriptInCosole(@Nullable final Sdk sdk, @Nonnull final Module uncommitedModule, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String consoleTitle, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descFactory)
 	{
 		try
 		{

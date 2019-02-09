@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 
@@ -87,79 +88,79 @@ public class StandardRailsPaths
 		edgeRailsRootURL = buildEdgeRailsPath(url);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getControllerRootURL()
 	{
 		return controllersRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getApisRootURL()
 	{
 		return apisRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getServicesRootURL()
 	{
 		return servicesRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getScriptsRootURL()
 	{
 		return scriptsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getVendorRootURL()
 	{
 		return vendorRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getLibsRootURL()
 	{
 		return libsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getPluginsRootURL()
 	{
 		return pluginsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getEdgeRailsRootURL()
 	{
 		return edgeRailsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getComponentsRootURL()
 	{
 		return componentsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getModelRootURL()
 	{
 		return modelRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getViewsRootURL()
 	{
 		return viewsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDefaultSharedPartialsRootURL()
 	{
 		return sharedPartialsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getHelpersRootURL()
 	{
 		return helpersRootURL;
@@ -168,13 +169,13 @@ public class StandardRailsPaths
 	/**
 	 * @return Url for standart folder test in RailsApplication
 	 */
-	@NotNull
+	@Nonnull
 	public String getTestsStdUnitRootURL()
 	{
 		return testsRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getLayoutsRootURL()
 	{
 		return layoutsRootURL;
@@ -200,72 +201,72 @@ public class StandardRailsPaths
 		return imagesRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getRailsApplicationRootURL()
 	{
 		return railsApplicationHomeDirURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getAppRootURL()
 	{
 		return appRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getConfigRootURL()
 	{
 		return configRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getTestMockEnviromentRootURL()
 	{
 		return testMockEnviromentRootURL;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getMigrationsRootURL()
 	{
 		return migrationsRootURL;
 	}
 
-	public static String buildComponentsPath(@NotNull final String railsRootUrl)
+	public static String buildComponentsPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.COMPONENTS_PATH);
 	}
 
-	public static String buildDBPath(@NotNull final String railsRootUrl)
+	public static String buildDBPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.DB_PATH);
 	}
 
-	public static String buildLibPath(@NotNull final String railsRootUrl)
+	public static String buildLibPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.LIB_PATH);
 	}
 
-	public static String buildEdgeRailsPath(@NotNull final String railsRootUrl)
+	public static String buildEdgeRailsPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.EDGE_RAILS_PATH);
 	}
 
-	public static String buildPluginsPath(@NotNull final String railsRootUrl)
+	public static String buildPluginsPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.PLUGINS_PATH);
 	}
 
-	public static String buildJavaScriptsPath(@NotNull final String railsRootUrl)
+	public static String buildJavaScriptsPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.PUBLIC_JAVASCRIPTS_PATH);
 	}
 
-	public static String buildStyleSheetsPath(@NotNull final String railsRootUrl)
+	public static String buildStyleSheetsPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.PUBLIC_STYLESHEETS_PATH);
 	}
 
-	public static String buildTmpPath(@NotNull final String railsRootUrl)
+	public static String buildTmpPath(@Nonnull final String railsRootUrl)
 	{
 		return VirtualFileUtil.buildUrl(railsRootUrl, RailsConstants.TMP_PATH);
 	}

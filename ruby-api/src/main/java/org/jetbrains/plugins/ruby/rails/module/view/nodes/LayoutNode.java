@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -36,7 +36,7 @@ public class LayoutNode extends SimpleFileNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.LAYOUT;

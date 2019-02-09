@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -36,14 +36,14 @@ public class RVirtualRequireImpl extends RVirtualStructuralElementBase implement
 {
 	protected List<String> myRequires;
 
-	public RVirtualRequireImpl(final RVirtualContainer container, @NotNull final List<String> requires)
+	public RVirtualRequireImpl(final RVirtualContainer container, @Nonnull final List<String> requires)
 	{
 		super(container);
 		myRequires = requires;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getNames()
 	{
 		return myRequires;
@@ -56,7 +56,7 @@ public class RVirtualRequireImpl extends RVirtualStructuralElementBase implement
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualRequire(this);
 	}

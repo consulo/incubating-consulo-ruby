@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationParams;
 
 /**
@@ -32,10 +33,10 @@ public interface RailsServerRunConfigurationParams extends RubyRunConfigurationP
 
 	public boolean isChoosePortManually();
 
-	@NotNull
+	@Nonnull
 	public String getIPAddr();
 
-	@NotNull
+	@Nonnull
 	public String getServerType();
 
 	public RailsServerRunConfiguration.RailsEnvironmentType getRailsEnvironmentType();
@@ -46,7 +47,7 @@ public interface RailsServerRunConfigurationParams extends RubyRunConfigurationP
 
 	public void setIPAddr(String ip);
 
-	public void setServerType(@NotNull String type);
+	public void setServerType(@Nonnull String type);
 
 	public void setRailsEnvironmentType(RailsServerRunConfiguration.RailsEnvironmentType railsEnvironmentType);
 }

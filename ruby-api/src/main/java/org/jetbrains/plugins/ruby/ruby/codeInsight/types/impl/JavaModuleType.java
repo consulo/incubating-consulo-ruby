@@ -3,8 +3,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -23,12 +23,12 @@ import com.intellij.psi.PsiJavaPackage;
  */
 public class JavaModuleType extends RSymbolTypeImpl
 {
-	public JavaModuleType(@Nullable final FileSymbol fileSymbol, @NotNull final Symbol symbol, final Context context, final boolean inReference)
+	public JavaModuleType(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, final Context context, final boolean inReference)
 	{
 		super(fileSymbol, symbol, context, inReference);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Collection<Message> getMessages()
 	{

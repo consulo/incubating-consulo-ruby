@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rubyRoot;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLRubyFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
@@ -37,7 +38,7 @@ public class RHTMLRubyFileImpl extends RPsiFileBase implements RHTMLRubyFile
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RHTMLFileViewProvider getViewProvider()
 	{
 		return (RHTMLFileViewProvider) super.getViewProvider();

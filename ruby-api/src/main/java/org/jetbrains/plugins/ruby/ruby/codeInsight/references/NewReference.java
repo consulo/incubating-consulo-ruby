@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -45,13 +46,13 @@ import com.intellij.psi.PsiMethod;
  */
 public class NewReference extends RQualifiedReference
 {
-	public NewReference(@NotNull final Project project, @NotNull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @NotNull final PsiElement refValue)
+	public NewReference(@Nonnull final Project project, @Nonnull final RPsiElement wholeReference, @Nullable final RPsiElement refObject, @Nonnull final PsiElement refValue)
 	{
 		super(project, wholeReference, refObject, refValue, RReference.Type.COLON_REF, RMethod.INITIALIZE);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		if(((RPsiElementBase) myWholeReference).isClassOrModuleName())

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
@@ -63,7 +63,7 @@ public class ResolveUtil
 	 * @param list       resolve list to add to
 	 * @param symbol     Symbol to add to Resolveresults
 	 */
-	public static void addVariants(@Nullable final FileSymbol fileSymbol, @NotNull final Project project, @NotNull final List<ResolveResult> list, @NotNull final Symbol symbol)
+	public static void addVariants(@Nullable final FileSymbol fileSymbol, @Nonnull final Project project, @Nonnull final List<ResolveResult> list, @Nonnull final Symbol symbol)
 	{
 
 		// Java Symbol
@@ -104,7 +104,7 @@ public class ResolveUtil
 		}
 	}
 
-	private static void add(@NotNull final List<ResolveResult> list, final PsiElement psiElement)
+	private static void add(@Nonnull final List<ResolveResult> list, final PsiElement psiElement)
 	{
 		if(psiElement != null)
 		{
@@ -157,7 +157,7 @@ public class ResolveUtil
 
 
 	@Nullable
-	public static PsiElement resolvePolyVarReference(@NotNull final RPsiPolyvariantReference ref)
+	public static PsiElement resolvePolyVarReference(@Nonnull final RPsiPolyvariantReference ref)
 	{
 		final ResolveResult[] results = ref.multiResolve(false);
 		return results.length == 1 ? results[0].getElement() : null;
@@ -174,7 +174,7 @@ public class ResolveUtil
 		return null;
 	}
 
-	public static boolean isReferenceTo(@NotNull final PsiReference reference, final PsiElement element)
+	public static boolean isReferenceTo(@Nonnull final PsiReference reference, final PsiElement element)
 	{
 		if(reference instanceof PsiPolyVariantReference)
 		{
@@ -194,8 +194,8 @@ public class ResolveUtil
 		return false;
 	}
 
-	@NotNull
-	public static List<PsiElement> multiResolve(@NotNull final PsiElement element)
+	@Nonnull
+	public static List<PsiElement> multiResolve(@Nonnull final PsiElement element)
 	{
 		final PsiReference ref = element.getReference();
 		if(ref instanceof PsiPolyVariantReference)

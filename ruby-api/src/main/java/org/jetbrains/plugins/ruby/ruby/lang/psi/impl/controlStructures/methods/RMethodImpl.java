@@ -24,8 +24,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.IncorrectOperationException;
 import consulo.awt.TargetAWT;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -91,7 +91,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AccessModifier getAccessModifier()
 	{
 		updateIfIsConstructor();
@@ -123,7 +123,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -134,7 +134,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RMethodPresentationUtil.getPresentation(this);
@@ -154,8 +154,8 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	@NotNull
-	public RVirtualMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo info)
+	@Nonnull
+	public RVirtualMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo info)
 	{
 		final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
 		final RVirtualMethodImpl vMethod = new RVirtualMethodImpl(virtualParent, virtualMethodName, getArgumentInfos(), getAccessModifier(), info);
@@ -164,7 +164,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos()
 	{
 		final RArgumentList argumentList = getArgumentList();
@@ -183,7 +183,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	public boolean equalsToVirtual(@NotNull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
 	{
 		return element instanceof RVirtualMethod &&
 				getArgumentInfos().equals(((RVirtualMethod) element).getArgumentInfos()) &&
@@ -197,13 +197,13 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	 * @return true if methods equals.
 	 */
 	@Override
-	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod)
+	public boolean equalsToMethod(@Nonnull final RVirtualMethod otherMethod)
 	{
 		return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName()
 	{
 		final int options = RPresentationConstants.SHOW_NAME | RPresentationConstants.SHOW_PARAMETERS;
@@ -211,7 +211,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName(final boolean includeDefaultArgs)
 	{
 		int options = RPresentationConstants.SHOW_NAME | RPresentationConstants.SHOW_PARAMETERS;
@@ -230,7 +230,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException
 	{
 		return null;
 	}
@@ -248,7 +248,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RCompoundStatement getCompoundStatement()
 	{
 		final RBodyStatement body = RubyPsiUtil.getChildByType(this, RBodyStatement.class, 0);

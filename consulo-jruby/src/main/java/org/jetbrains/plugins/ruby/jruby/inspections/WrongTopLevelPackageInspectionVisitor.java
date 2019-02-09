@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.jruby.inspections;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -49,7 +49,7 @@ public class WrongTopLevelPackageInspectionVisitor extends RubyInspectionVisitor
 		visitLeftElement(rIdentifier);
 	}
 
-	public void visitLeftElement(@NotNull final RPsiElement leftElement)
+	public void visitLeftElement(@Nonnull final RPsiElement leftElement)
 	{
 		// RUBY-1679
 		final List<PsiElement> list = ResolveUtil.multiResolve(leftElement);

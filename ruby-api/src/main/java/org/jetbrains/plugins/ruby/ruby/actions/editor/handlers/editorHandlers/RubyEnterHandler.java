@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.editorHandlers;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.RubyEditorHandlerUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher;
@@ -92,7 +92,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 	 * @return true if some special action perfomed, false otherwise
 	 */
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	private boolean handleEnter(@NotNull final Editor editor, @NotNull final DataContext dataContext)
+	private boolean handleEnter(@Nonnull final Editor editor, @Nonnull final DataContext dataContext)
 	{
 		final Project project = DataContextUtil.getProject(dataContext);
 		if(project == null)
@@ -212,7 +212,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 	 * @param lineNumber Line number to indent
 	 * @return offset of indented line, or -1 if line with such number doesn`t exists
 	 */
-	private int indentLine(@NotNull final Project project, @NotNull final Document document, final int lineNumber)
+	private int indentLine(@Nonnull final Project project, @Nonnull final Document document, final int lineNumber)
 	{
 		if(!(0 <= lineNumber && lineNumber < document.getLineCount()))
 		{
@@ -221,7 +221,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 		return CodeStyleManager.getInstance(project).adjustLineIndent(document, document.getLineStartOffset(lineNumber));
 	}
 
-	private int indentLineAndMoveCarret(@NotNull final Project project, @NotNull final Editor editor, @NotNull final Document document, final int lineNumber)
+	private int indentLineAndMoveCarret(@Nonnull final Project project, @Nonnull final Editor editor, @Nonnull final Document document, final int lineNumber)
 	{
 		int offset = indentLine(project, document, lineNumber);
 		if(offset != -1)
@@ -245,7 +245,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 	 * @param offset Current offset
 	 * @return true is balance>0, i.e. end needed, false otherwise
 	 */
-	private static boolean isEndNeeded(@NotNull final Editor editor, final int offset)
+	private static boolean isEndNeeded(@Nonnull final Editor editor, final int offset)
 	{
 		if(offset == 0)
 		{
@@ -291,7 +291,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 		return balance > 0;
 	}
 
-	private static String isHeredocNeeded(@NotNull final Editor editor, final int offset)
+	private static String isHeredocNeeded(@Nonnull final Editor editor, final int offset)
 	{
 		if(offset == 0)
 		{

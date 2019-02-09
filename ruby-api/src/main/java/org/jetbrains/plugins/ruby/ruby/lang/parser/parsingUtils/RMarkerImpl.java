@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -38,7 +38,7 @@ public class RMarkerImpl implements RMarker
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RMarker precede()
 	{
 		return new RMarkerImpl(myBuilder, myOriginalMarker.precede());

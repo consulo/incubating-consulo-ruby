@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
@@ -55,7 +55,7 @@ public class RHTMLFormatterUtil
 {
 	private static RApplicationSettings myRApplicationSettings;
 
-	static boolean checkIfInParentClosingTagEnd(@NotNull final ASTNode parentNode, @Nullable final PsiElement htmlPsi)
+	static boolean checkIfInParentClosingTagEnd(@Nonnull final ASTNode parentNode, @Nullable final PsiElement htmlPsi)
 	{
 		if(htmlPsi != null)
 		{
@@ -118,7 +118,7 @@ public class RHTMLFormatterUtil
 	 * @return Found RCompoundStatement or null.
 	 */
 	@Nullable
-	public static RCompoundStatement getParentRCmpStByRHTMLOrHTMLChildNode(@NotNull final FileViewProvider provider, @NotNull final ASTNode node)
+	public static RCompoundStatement getParentRCmpStByRHTMLOrHTMLChildNode(@Nonnull final FileViewProvider provider, @Nonnull final ASTNode node)
 	{
 		final RCompoundStatement cmpSt = getRCmpStNodeStartOffset(provider, node);
 		if(cmpSt == null)
@@ -132,7 +132,7 @@ public class RHTMLFormatterUtil
 	}
 
 	@Nullable
-	public static RCompoundStatement getRCmpStNodeStartOffset(@NotNull final FileViewProvider provider, @NotNull final ASTNode node)
+	public static RCompoundStatement getRCmpStNodeStartOffset(@Nonnull final FileViewProvider provider, @Nonnull final ASTNode node)
 	{
 		final int boundsStart = node.getStartOffset();
 		final PsiElement rubyPsi = provider.findElementAt(boundsStart, RubyLanguage.INSTANCE);
@@ -161,7 +161,7 @@ public class RHTMLFormatterUtil
 	 * @return Found PsiElement or null
 	 */
 	@Nullable
-	public static PsiElement findUpperHTMLElement(@NotNull final FileViewProvider provider, final int startOffset, @Nullable final TextRange boundsTRange)
+	public static PsiElement findUpperHTMLElement(@Nonnull final FileViewProvider provider, final int startOffset, @Nullable final TextRange boundsTRange)
 	{
 		PsiElement htmlPsi = provider.findElementAt(startOffset, HTMLLanguage.INSTANCE);
 		PsiElement htmlPsiParent = (htmlPsi != null ? htmlPsi.getParent() : null);
@@ -219,7 +219,7 @@ public class RHTMLFormatterUtil
 		return psiElement;
 	}
 
-	public static boolean isRHTMLXmlTagForRubyBlockEnd(@NotNull final ASTNode rhtmlTagNode, @NotNull RCompoundStatement nodeCmpSt, @NotNull final FileViewProvider vProvider)
+	public static boolean isRHTMLXmlTagForRubyBlockEnd(@Nonnull final ASTNode rhtmlTagNode, @Nonnull RCompoundStatement nodeCmpSt, @Nonnull final FileViewProvider vProvider)
 	{
 		final PsiElement cmpStEndInRHTML = findRHTMLElementByStartOffset(vProvider, nodeCmpSt.getTextRange().getEndOffset() - 1, false);
 		if(cmpStEndInRHTML != null)
@@ -258,7 +258,7 @@ public class RHTMLFormatterUtil
 	 * @param rhtmlTagNode RHTMLElementType.RHTML_XML_TAG node
 	 * @return if tag is scriplet tag
 	 */
-	public static boolean isScripletRHTMLXmlTagNode(@NotNull final ASTNode rhtmlTagNode)
+	public static boolean isScripletRHTMLXmlTagNode(@Nonnull final ASTNode rhtmlTagNode)
 	{
 		final ASTNode firstChildNode = rhtmlTagNode.getFirstChildNode();
 		return firstChildNode != null && firstChildNode.getElementType() == RHTMLTokenType.RHTML_SCRIPTLET_START;

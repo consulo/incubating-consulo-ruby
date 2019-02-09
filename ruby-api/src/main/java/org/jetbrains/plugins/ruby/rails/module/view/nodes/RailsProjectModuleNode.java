@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -52,14 +52,14 @@ import consulo.roots.impl.TestContentFolderTypeProvider;
 public class RailsProjectModuleNode extends RailsNode
 {
 
-	public RailsProjectModuleNode(@NotNull final Module module)
+	public RailsProjectModuleNode(@Nonnull final Module module)
 	{
 		super(module);
 
 		init(generateNodeId(module), initPresentationData());
 	}
 
-	@NotNull
+	@Nonnull
 	public static NodeId generateNodeId(final Module module)
 	{
 		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
@@ -70,7 +70,7 @@ public class RailsProjectModuleNode extends RailsNode
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RailsProjectNodeComparator.NodeType getType()
 	{
 		return RailsProjectNodeComparator.NodeType.RMODULE;

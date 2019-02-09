@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
@@ -42,7 +42,7 @@ public class RConstantHolderUtil
 	 * @param list      List of RConstants, already found
 	 * @param rConstant constant expression to add
 	 */
-	private static void addDefinition(@NotNull final List<ConstantDefinitions> list, @NotNull final RConstant rConstant)
+	private static void addDefinition(@Nonnull final List<ConstantDefinitions> list, @Nonnull final RConstant rConstant)
 	{
 		for(ConstantDefinitions f : list)
 		{
@@ -55,7 +55,7 @@ public class RConstantHolderUtil
 		list.add(new ConstantDefinitionsImpl(rConstant));
 	}
 
-	@NotNull
+	@Nonnull
 	public static List<ConstantDefinitions> gatherConstantDefinitions(final RConstantHolder holder)
 	{
 		final ArrayList<ConstantDefinitions> list = new ArrayList<ConstantDefinitions>();

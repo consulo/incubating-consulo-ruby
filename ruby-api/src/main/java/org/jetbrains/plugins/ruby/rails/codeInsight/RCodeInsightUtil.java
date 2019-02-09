@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
@@ -40,14 +41,14 @@ public class RCodeInsightUtil
 {
 	private static final Logger LOG = Logger.getInstance(RCodeInsightUtil.class.getName());
 
-	@NotNull
-	public static List<PsiElement> getElementsStartsInRange(@NotNull final PsiElement root, final int startOffset, final int endOffset, boolean includeAllParents)
+	@Nonnull
+	public static List<PsiElement> getElementsStartsInRange(@Nonnull final PsiElement root, final int startOffset, final int endOffset, boolean includeAllParents)
 	{
 		return getElementsStartsInRange(root, startOffset, endOffset, includeAllParents, null);
 	}
 
-	@NotNull
-	public static List<PsiElement> getElementsStartsInRange(@NotNull final PsiElement root, final int startOffset, final int endOffset, boolean includeAllParents, final RubyElementVisitor elVisitor)
+	@Nonnull
+	public static List<PsiElement> getElementsStartsInRange(@Nonnull final PsiElement root, final int startOffset, final int endOffset, boolean includeAllParents, final RubyElementVisitor elVisitor)
 	{
 
 		final PsiElement commonParent = findCommonParent(root, startOffset, endOffset);
@@ -76,7 +77,7 @@ public class RCodeInsightUtil
 
 	//TODO refactor with IDEA CodeInsightUtil
 	@Nullable
-	private static PsiElement findCommonParent(@NotNull final PsiElement root, final int startOffset, final int endOffset)
+	private static PsiElement findCommonParent(@Nonnull final PsiElement root, final int startOffset, final int endOffset)
 	{
 		if(startOffset == endOffset)
 		{
@@ -104,7 +105,7 @@ public class RCodeInsightUtil
 
 	//TODO refactor with IDEA CodeInsightUtil
 	@Nullable
-	private static PsiElement findElementAtInRoot(@NotNull final PsiElement root, final int offset)
+	private static PsiElement findElementAtInRoot(@Nonnull final PsiElement root, final int offset)
 	{
 		if(root instanceof PsiFile)
 		{

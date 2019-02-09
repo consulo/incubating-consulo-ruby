@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
@@ -43,13 +44,13 @@ import com.intellij.psi.tree.IElementType;
  */
 public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpression
 {
-	public RUnaryExpressionBase(@NotNull ASTNode astNode)
+	public RUnaryExpressionBase(@Nonnull ASTNode astNode)
 	{
 		super(astNode);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -67,7 +68,7 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement getOperation()
 	{
 		final PsiElement operation = getChildByFilter(TokenBNF.tUNARY_OPS, 0);
@@ -88,7 +89,7 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getOperationName()
 	{
 		//noinspection ConstantConditions
@@ -109,7 +110,7 @@ public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpre
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(getProject());

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.fileTypes.FileType;
@@ -37,7 +38,7 @@ public class RHTMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDia
 	//    @NonNls
 	//    public static final String PATCHED_HTML_ERB_VIEW_EXTENSION = "html_erb";
 
-	public RHTMLCreateViewFromTemplateDialog(@NotNull final Project project, @NotNull final PsiDirectory directory, @NotNull final FileTemplate template)
+	public RHTMLCreateViewFromTemplateDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory, @Nonnull final FileTemplate template)
 	{
 		super(project, directory, template);
 	}

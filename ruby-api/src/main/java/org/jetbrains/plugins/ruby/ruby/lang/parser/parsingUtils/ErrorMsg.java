@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
 import java.util.HashSet;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
@@ -38,19 +39,19 @@ public class ErrorMsg
 	private static final String UNEXPECTED_MESSAGE = RBundle.message("parsing.message.unexpected");
 	public static final String EXPRESSION_EXPECTED_MESSAGE = expected(RBundle.message("parsing.error.expression"));
 
-	@NotNull
+	@Nonnull
 	public static String expected(String s)
 	{
 		return EXPECTED_MESSAGE + " " + s;
 	}
 
-	@NotNull
+	@Nonnull
 	private static String unexpected(String s)
 	{
 		return UNEXPECTED_MESSAGE + " " + s;
 	}
 
-	@NotNull
+	@Nonnull
 	public static String expected(IElementType type)
 	{
 		return expected(getPresentableName(type));
@@ -66,26 +67,26 @@ public class ErrorMsg
 		return type != null ? type.toString() : "null";
 	}
 
-	@NotNull
+	@Nonnull
 	public static String unexpected(IElementType type)
 	{
 		return unexpected(getPresentableName(type));
 	}
 
-	@NotNull
+	@Nonnull
 	public static String expected(final TokenSet types, final RBuilder builder)
 	{
 		return EXPECTED_MESSAGE + " " + setToString(types, builder);
 	}
 
-	@NotNull
+	@Nonnull
 	public static String unexpected(final TokenSet types, final RBuilder builder)
 	{
 		return UNEXPECTED_MESSAGE + " " + setToString(types, builder);
 	}
 
-	@NotNull
-	private static String setToString(@NotNull final TokenSet set, @NotNull final RBuilder builder)
+	@Nonnull
+	private static String setToString(@Nonnull final TokenSet set, @Nonnull final RBuilder builder)
 	{
 		final String cachedString = builder.getErrorCache().get(set);
 		if(cachedString != null)

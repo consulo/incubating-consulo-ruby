@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
@@ -62,7 +63,7 @@ public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFact
 	 * @param module Ruby / Java module
 	 * @return Rails Server Run configuration settings
 	 */
-	public RunnerAndConfigurationSettings createRunConfigurationSettings(@NotNull final Module module)
+	public RunnerAndConfigurationSettings createRunConfigurationSettings(@Nonnull final Module module)
 	{
 		final RunnerAndConfigurationSettings settings = RubyRunConfigurationUtil.create(module.getProject(), this, "");
 		final RubyRunConfiguration conf = (RubyRunConfiguration) settings.getConfiguration();
@@ -78,7 +79,7 @@ public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFact
 	 * @param module Ruby / Java module
 	 * @param conf   RailsServer Run Configuration
 	 */
-	private void initDefaultConfiguration(@NotNull final Module module, @NotNull final RubyRunConfiguration conf)
+	private void initDefaultConfiguration(@Nonnull final Module module, @Nonnull final RubyRunConfiguration conf)
 	{
 
 		initDefaultParams(conf);

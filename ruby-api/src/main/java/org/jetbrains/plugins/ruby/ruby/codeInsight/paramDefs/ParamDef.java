@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import com.intellij.psi.PsiElement;
 

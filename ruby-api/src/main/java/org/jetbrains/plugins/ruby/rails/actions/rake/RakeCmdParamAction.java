@@ -16,12 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.ToggleAction;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
 /**
@@ -36,7 +38,7 @@ class RakeCmdParamAction extends ToggleAction
 	private boolean myIsSelected;
 	private boolean myIsDisabled;
 
-	public RakeCmdParamAction(@NotNull final String cmdArgument, @Nullable final String description, @Nullable final Image icon)
+	public RakeCmdParamAction(@Nonnull final String cmdArgument, @Nullable final String description, @Nullable final Image icon)
 	{
 		super(cmdArgument, description, TargetAWT.to(icon));
 		myCmdArgument = cmdArgument;
@@ -54,7 +56,7 @@ class RakeCmdParamAction extends ToggleAction
 		this.myIsSelected = state;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getMyCmdArgument()
 	{
 		return myIsSelected ? myCmdArgument : TextUtil.EMPTY_STRING;

@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.support.ui.checkableDir;
 
+import javax.annotation.Nonnull;
 import javax.swing.JCheckBox;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.util.io.FileUtil;
 
 /**
@@ -32,7 +32,7 @@ public class CheckableDirectoryItem
 	private String myDirectoryPath;
 	private boolean isChecked;
 
-	public CheckableDirectoryItem(@NotNull final String directoryPath, final boolean checked)
+	public CheckableDirectoryItem(@Nonnull final String directoryPath, final boolean checked)
 	{
 		myDirectoryPath = directoryPath;
 		isChecked = checked;
@@ -48,13 +48,13 @@ public class CheckableDirectoryItem
 		return isChecked;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDirectoryPath()
 	{
 		return myDirectoryPath;
 	}
 
-	@NotNull
+	@Nonnull
 	public Object createCheckBox()
 	{
 		return new JCheckBox(FileUtil.toSystemDependentName(getDirectoryPath()), isChecked());

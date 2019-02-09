@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -30,7 +31,7 @@ public class RubyBEGINSurrounder extends RubySurrounderBase
 {
 
 	@Override
-	protected TextRange getTextRange(@NotNull final RPsiElement element)
+	protected TextRange getTextRange(@Nonnull final RPsiElement element)
 	{
 		return element.getTextRange();
 	}

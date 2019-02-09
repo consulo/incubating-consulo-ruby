@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerNavigator;
@@ -191,7 +192,7 @@ public class SwitchToView extends EditorAction
 		return psiFiles;
 	}
 
-	private static String getRClassDirectoryUrl(@NotNull final RClass rClass)
+	private static String getRClassDirectoryUrl(@Nonnull final RClass rClass)
 	{
 		final VirtualFile file = rClass.getContainingFile().getVirtualFile();
 		assert file != null;
@@ -202,7 +203,7 @@ public class SwitchToView extends EditorAction
 		return parentDir.getUrl();
 	}
 
-	public static boolean isSwitchToViewEnabled(@Nullable final RContainer methodOrClass, @NotNull final Module module)
+	public static boolean isSwitchToViewEnabled(@Nullable final RContainer methodOrClass, @Nonnull final Module module)
 	{
 		if(methodOrClass instanceof RMethod)
 		{

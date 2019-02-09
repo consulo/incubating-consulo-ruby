@@ -20,11 +20,11 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
@@ -61,7 +61,7 @@ public class RunRailsScriptAction extends AnAction
 	private static Logger LOG = Logger.getInstance(RunRailsScriptAction.class.getName());
 
 	@Override
-	public void actionPerformed(@NotNull final AnActionEvent event)
+	public void actionPerformed(@Nonnull final AnActionEvent event)
 	{
 		final Module module = DataContextUtil.getModule(event.getDataContext());
 		assert module != null;
@@ -131,7 +131,7 @@ public class RunRailsScriptAction extends AnAction
 	}
 
 	@Override
-	public void update(@NotNull final AnActionEvent event)
+	public void update(@Nonnull final AnActionEvent event)
 	{
 		final Module module = DataContextUtil.getModule(event.getDataContext());
 
@@ -167,7 +167,7 @@ public class RunRailsScriptAction extends AnAction
 		private TextFieldWithBrowseButton myScriptNameComponent;
 		private RawCommandLineEditor myArgumentsComponent;
 
-		protected RunRailsScriptDialog(final Project project, @NotNull final String moduleName, @NotNull final VirtualFile moduleScriptFolder)
+		protected RunRailsScriptDialog(final Project project, @Nonnull final String moduleName, @Nonnull final VirtualFile moduleScriptFolder)
 		{
 			super(project, true);
 			myProject = project;
@@ -176,14 +176,14 @@ public class RunRailsScriptAction extends AnAction
 			init();
 		}
 
-		@NotNull
+		@Nonnull
 		public String getArguments()
 		{
 			assert myArgumentsComponent != null;
 			return myArgumentsComponent.getText().trim();
 		}
 
-		@NotNull
+		@Nonnull
 		public String getScriptName()
 		{
 			assert myScriptNameComponent != null;

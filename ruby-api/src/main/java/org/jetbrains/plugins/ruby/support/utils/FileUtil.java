@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.support.utils;
 
 import java.io.File;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class FileUtil
 {
-	public static boolean checkIfIsExistingFile(@NotNull final String path)
+	public static boolean checkIfIsExistingFile(@Nonnull final String path)
 	{
 		final File file = new File(path);
 		try
@@ -41,7 +41,7 @@ public class FileUtil
 		}
 	}
 
-	public static boolean checkIfIsExistingDirectory(@NotNull final String path)
+	public static boolean checkIfIsExistingDirectory(@Nonnull final String path)
 	{
 		final File file = new File(path);
 		try

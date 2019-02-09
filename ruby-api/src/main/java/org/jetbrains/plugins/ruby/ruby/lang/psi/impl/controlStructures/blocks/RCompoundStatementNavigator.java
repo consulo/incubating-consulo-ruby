@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -32,20 +32,20 @@ public class RCompoundStatementNavigator
 {
 
 	@Nullable
-	public static RCompoundStatement getByPsiElement(@NotNull final PsiElement element)
+	public static RCompoundStatement getByPsiElement(@Nonnull final PsiElement element)
 	{
 		final PsiElement parent = element.getParent();
 		return (parent instanceof RCompoundStatement) ? (RCompoundStatement) parent : null;
 	}
 
 	@Nullable
-	public static RCompoundStatement getParentCompoundStatement(@NotNull final PsiElement element)
+	public static RCompoundStatement getParentCompoundStatement(@Nonnull final PsiElement element)
 	{
 		return PsiTreeUtil.getParentOfType(element, RCompoundStatement.class);
 	}
 
 	@Nullable
-	public static RCompoundStatement getNotStrictCompoundStatement(@NotNull final PsiElement element)
+	public static RCompoundStatement getNotStrictCompoundStatement(@Nonnull final PsiElement element)
 	{
 		System.err.println("element: " + element + "text: " + element.getText());
 		final RCompoundStatement parent = getByPsiElement(element);

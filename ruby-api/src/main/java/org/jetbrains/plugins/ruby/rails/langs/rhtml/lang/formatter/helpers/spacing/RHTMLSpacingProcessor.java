@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.spacing;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import com.intellij.formatting.Block;
@@ -49,7 +49,7 @@ public class RHTMLSpacingProcessor
 	 * @return spacing
 	 */
 	@Nullable
-	public static Spacing getSpacing(@NotNull final Block parentBlock, @NotNull final ASTNode parentNode, @NotNull final ASTNode leftBlockNode, @NotNull final ASTNode rightBlockNode, final CodeStyleSettings settings)
+	public static Spacing getSpacing(@Nonnull final Block parentBlock, @Nonnull final ASTNode parentNode, @Nonnull final ASTNode leftBlockNode, @Nonnull final ASTNode rightBlockNode, final CodeStyleSettings settings)
 	{
 
 		final IElementType leftBlockType = leftBlockNode.getElementType();
@@ -126,12 +126,12 @@ public class RHTMLSpacingProcessor
 		return null;
 	}
 
-	private static Spacing createNoSPacing(final @NotNull CodeStyleSettings settings)
+	private static Spacing createNoSPacing(final @Nonnull CodeStyleSettings settings)
 	{
 		return Spacing.createSpacing(0, 0, 0, settings.KEEP_LINE_BREAKS, settings.KEEP_BLANK_LINES_IN_CODE);
 	}
 
-	private static Spacing createSingleSpacing(final @NotNull CodeStyleSettings settings)
+	private static Spacing createSingleSpacing(final @Nonnull CodeStyleSettings settings)
 	{
 		return Spacing.createSpacing(1, 1, 0, settings.KEEP_LINE_BREAKS, settings.KEEP_BLANK_LINES_IN_CODE);
 	}

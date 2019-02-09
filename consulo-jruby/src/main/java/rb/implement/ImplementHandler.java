@@ -19,8 +19,8 @@ package rb.implement;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import com.intellij.codeInsight.generation.ClassMember;
 import com.intellij.lang.LanguageCodeInsightActionHandler;
@@ -40,7 +40,7 @@ public interface ImplementHandler extends LanguageCodeInsightActionHandler
 	/*
 	 * Creates list of classMembers to implement
 	 */
-	public List<ClassMember> create_implement_members(@NotNull final Symbol class_symbol);
+	public List<ClassMember> create_implement_members(@Nonnull final Symbol class_symbol);
 
-	public void execute(@Nullable Editor editor, @NotNull Project project, @Nullable PsiElement element, @Nullable Symbol symbol);
+	public void execute(@Nullable Editor editor, @Nonnull Project project, @Nullable PsiElement element, @Nullable Symbol symbol);
 }

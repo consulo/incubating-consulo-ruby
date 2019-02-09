@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import com.intellij.psi.PsiElement;
@@ -32,14 +33,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 public class RSuperClassNavigator
 {
 	@Nullable
-	public static RSuperClass getByRConstant(@NotNull final RConstant cons)
+	public static RSuperClass getByRConstant(@Nonnull final RConstant cons)
 	{
 		final PsiElement parent = cons.getParent();
 		return (parent instanceof RSuperClass) ? (RSuperClass) parent : null;
 	}
 
 	@Nullable
-	public static RSuperClass getByPsiElement(@NotNull final PsiElement element)
+	public static RSuperClass getByPsiElement(@Nonnull final PsiElement element)
 	{
 		return PsiTreeUtil.getParentOfType(element, RSuperClass.class);
 	}

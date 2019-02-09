@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.iterators;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -51,7 +52,7 @@ public class BLOCK_CALL implements RubyTokenTypes
 	 * @param builder current RBuilder
 	 * @return result
 	 */
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseWithLeadSINGLE_BLOCK(builder, builder.mark(), parseBlockCallSingle(builder));
@@ -60,7 +61,7 @@ public class BLOCK_CALL implements RubyTokenTypes
 	/*
 		: command do_block
 	*/
-	@NotNull
+	@Nonnull
 	private static IElementType parseBlockCallSingle(final RBuilder builder)
 	{
 		return parseSingleWithLeadCOMMAND(builder, builder.mark(), COMMAND.parse(builder));

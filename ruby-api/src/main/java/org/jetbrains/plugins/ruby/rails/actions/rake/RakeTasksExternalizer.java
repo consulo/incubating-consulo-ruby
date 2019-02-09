@@ -32,8 +32,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -93,7 +93,7 @@ public class RakeTasksExternalizer extends SettingsExternalizer
 	private final String SETTINGS = "Settings";
 
 	@Nullable
-	public static File getDataFile(@NotNull final String railsApplicHomeDirPath)
+	public static File getDataFile(@Nonnull final String railsApplicHomeDirPath)
 	{
 		return new File(railsApplicHomeDirPath + File.separator + RAKE_TASKS_FILE_NAME);
 	}
@@ -154,7 +154,7 @@ public class RakeTasksExternalizer extends SettingsExternalizer
 	 * @return rake tasks tree
 	 */
 	@Nullable
-	public RakeTask loadRakeTasksTree(@NotNull final String railsApplicHomeDirPath)
+	public RakeTask loadRakeTasksTree(@Nonnull final String railsApplicHomeDirPath)
 	{
 		final File cachedTasks = getDataFile(railsApplicHomeDirPath);
 		try
@@ -187,7 +187,7 @@ public class RakeTasksExternalizer extends SettingsExternalizer
 		return null;
 	}
 
-	private boolean isUpToDate(@NotNull final File cachedTasks, @NotNull final String railsApplicHomeDirPath)
+	private boolean isUpToDate(@Nonnull final File cachedTasks, @Nonnull final String railsApplicHomeDirPath)
 	{
 		if(!cachedTasks.exists())
 		{
@@ -219,7 +219,7 @@ public class RakeTasksExternalizer extends SettingsExternalizer
 	 * @param rootTask               the root of tasks tree
 	 * @param railsApplicHomeDirPath Rails Application Home Directory Path
 	 */
-	public void saveRakeTasksTree(@NotNull final RakeTask rootTask, @NotNull final String railsApplicHomeDirPath)
+	public void saveRakeTasksTree(@Nonnull final RakeTask rootTask, @Nonnull final String railsApplicHomeDirPath)
 	{
 		final File dataFile = getDataFile(railsApplicHomeDirPath);
 		if(dataFile == null)
@@ -290,7 +290,7 @@ public class RakeTasksExternalizer extends SettingsExternalizer
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	protected RakeTask readExternal(final Element element, final RakeTaskSerializableImpl parent)
 	{
 		final List list = element.getChildren();
@@ -310,7 +310,7 @@ public class RakeTasksExternalizer extends SettingsExternalizer
 		return task;
 	}
 
-	protected Element writeExternal(@NotNull final RakeTask rakeTask, @Nullable final Element parent)
+	protected Element writeExternal(@Nonnull final RakeTask rakeTask, @Nullable final Element parent)
 	{
 		final Element element = new Element(rakeTask.isGroup() ? RAKE_GROUP : RAKE_TASK);
 		storeAttributeInElement(RAKE_TASK_DESCRIPTION, rakeTask.getDescription(), element);

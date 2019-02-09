@@ -21,7 +21,7 @@ import java.math.BigInteger;
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -87,7 +87,7 @@ public class RDocPanel
 	}
 
 
-	public String lookup(@NotNull final String name)
+	public String lookup(@Nonnull final String name)
 	{
 		boolean doUseDefaults = mySettingPane.doUseDefaults();
 		int displayWidth = calculateInfoPaneWidth();
@@ -110,7 +110,7 @@ public class RDocPanel
 		return width.intValue();
 	}
 
-	public void showHelp(@NotNull final String name)
+	public void showHelp(@Nonnull final String name)
 	{
 		myPane.getModel().setSelectedIndex(0);
 		myInfoPane.showHelp(name);

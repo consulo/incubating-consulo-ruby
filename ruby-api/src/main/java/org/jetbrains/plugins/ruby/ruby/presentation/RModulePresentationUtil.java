@@ -21,7 +21,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.Iconable;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -60,7 +60,7 @@ public class RModulePresentationUtil implements RPresentationConstants
 		return TargetAWT.to(getIcon());
 	}
 
-	@NotNull
+	@Nonnull
 	public static ItemPresentation getPresentation(final RVirtualModule rModule)
 	{
 		final Icon icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
@@ -72,7 +72,7 @@ public class RModulePresentationUtil implements RPresentationConstants
 		return RContainerPresentationUtil.getLocation(rModule);
 	}
 
-	public static String formatName(@NotNull final RVirtualModule rModule, final int options)
+	public static String formatName(@Nonnull final RVirtualModule rModule, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 

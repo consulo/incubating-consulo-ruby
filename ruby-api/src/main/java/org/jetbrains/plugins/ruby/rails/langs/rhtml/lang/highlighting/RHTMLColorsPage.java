@@ -18,10 +18,10 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLColorsPageHighlightingLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLFileHighlighterImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighter;
@@ -68,35 +68,35 @@ public class RHTMLColorsPage implements ColorSettingsPage
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDisplayName()
 	{
 		return RBundle.message("color.settings.rhtml.name");
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public AttributesDescriptor[] getAttributeDescriptors()
 	{
 		return ATTRS;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ColorDescriptor[] getColorDescriptors()
 	{
 		return COLORS;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public SyntaxHighlighter getHighlighter()
 	{
 		return new MyRHTMLFileHighlighterImpl();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDemoText()
 	{
 		return DEMO_TEXT;
@@ -114,14 +114,14 @@ public class RHTMLColorsPage implements ColorSettingsPage
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		public Lexer getHighlightingLexer()
 		{
 			return new RHTMLColorsPageHighlightingLexer();
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 		{
 			final TextAttributesKey[] keys = super.getTokenHighlights(tokenType);

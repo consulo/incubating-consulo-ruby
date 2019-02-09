@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 
@@ -31,7 +31,7 @@ public class TemplateNodeInfo extends NodeInfo
 	@Nullable
 	private final ASTNode nextTemplateNode;
 
-	protected TemplateNodeInfo(@NotNull final ASTNode templateParentNode, @NotNull final ASTNode templateDataNode, @Nullable final TextRange nextNodeTRange, @Nullable final ASTNode nextTemplateNode)
+	protected TemplateNodeInfo(@Nonnull final ASTNode templateParentNode, @Nonnull final ASTNode templateDataNode, @Nullable final TextRange nextNodeTRange, @Nullable final ASTNode nextTemplateNode)
 	{
 
 		this.templateParentNode = templateParentNode;
@@ -46,13 +46,13 @@ public class TemplateNodeInfo extends NodeInfo
 		return NodeType.TEMPLATE_NODE;
 	}
 
-	@NotNull
+	@Nonnull
 	public ASTNode getTemplateParentNode()
 	{
 		return templateParentNode;
 	}
 
-	@NotNull
+	@Nonnull
 	public ASTNode getTemplateDataNode()
 	{
 		return templateDataNode;

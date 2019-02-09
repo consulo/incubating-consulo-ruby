@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -41,21 +42,21 @@ public class RelativePathToAbsolutePathIntention extends RequirePathIntention
 	private static final String TEXT = RBundle.message("ruby.intentions.relative.path.to.absolute");
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFamilyName()
 	{
 		return NAME;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getText()
 	{
 		return TEXT;
 	}
 
 	@Override
-	public boolean isAvailable(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiFile psiFile)
+	public boolean isAvailable(@Nonnull final Project project, @Nonnull final Editor editor, @Nonnull final PsiFile psiFile)
 	{
 		if(!RubyIntentionUtil.isAvailable(editor, psiFile))
 		{
@@ -75,7 +76,7 @@ public class RelativePathToAbsolutePathIntention extends RequirePathIntention
 
 
 	@Override
-	public void invoke(@NotNull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException
+	public void invoke(@Nonnull final Project project, final Editor editor, final PsiFile psiFile) throws IncorrectOperationException
 	{
 		final PsiElement element = findRequireRoot(getElementAt(psiFile, editor));
 		if(element == null)
@@ -91,7 +92,7 @@ public class RelativePathToAbsolutePathIntention extends RequirePathIntention
 		RubyPsiUtil.replaceInParent(element, newElement);
 	}
 
-	protected PsiElement findRequireRoot(@NotNull final PsiElement psiElement)
+	protected PsiElement findRequireRoot(@Nonnull final PsiElement psiElement)
 	{
 		RListOfExpressions exprList;
 

@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 
 /**
@@ -30,7 +31,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.Argume
 public interface RVirtualMethod extends RVirtualContainer
 {
 
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos();
 
 	/**
@@ -39,6 +40,6 @@ public interface RVirtualMethod extends RVirtualContainer
 	 */
 	public String getPresentableName();
 
-	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod);
+	public boolean equalsToMethod(@Nonnull final RVirtualMethod otherMethod);
 
 }

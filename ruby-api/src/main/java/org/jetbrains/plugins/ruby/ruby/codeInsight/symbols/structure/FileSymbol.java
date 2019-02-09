@@ -21,9 +21,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
@@ -68,7 +70,7 @@ public class FileSymbol
 	private int listNumber;
 	private boolean isJRubyEnabled;
 
-	public FileSymbol(@Nullable final FileSymbol baseFileSymbol, @NotNull final Project project, final boolean jrubyEnabled, @NotNull final RubyFilesCache... caches)
+	public FileSymbol(@Nullable final FileSymbol baseFileSymbol, @Nonnull final Project project, final boolean jrubyEnabled, @Nonnull final RubyFilesCache... caches)
 	{
 		myBaseFileSymbol = baseFileSymbol;
 		myProject = project;
@@ -88,7 +90,7 @@ public class FileSymbol
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public Project getProject()
 	{
 		return myProject;
@@ -98,7 +100,7 @@ public class FileSymbol
 	//////// Symbols management
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void addChild(@NotNull final Symbol parent, @NotNull final Symbol child)
+	public void addChild(@Nonnull final Symbol parent, @Nonnull final Symbol child)
 	{
 		Children children = myChildrenMap.get(parent);
 		if(children == null)
@@ -109,12 +111,12 @@ public class FileSymbol
 		children.addSymbol(child);
 	}
 
-	public void setEmptyChildren(@NotNull final Symbol parent)
+	public void setEmptyChildren(@Nonnull final Symbol parent)
 	{
 		myChildrenMap.put(parent, new Children(null));
 	}
 
-	public void addPrototype(@NotNull final Symbol symbol, @NotNull final RVirtualElement prototype)
+	public void addPrototype(@Nonnull final Symbol symbol, @Nonnull final RVirtualElement prototype)
 	{
 		Prototypes prototypes = myPrototypesMap.get(symbol);
 		if(prototypes == null)
@@ -131,22 +133,22 @@ public class FileSymbol
 	 * @param symbol Symbol to get list of children for
 	 * @return list of children
 	 */
-	@NotNull
-	Children getChildren(@NotNull final Symbol symbol)
+	@Nonnull
+	Children getChildren(@Nonnull final Symbol symbol)
 	{
 		final Children myChildren = myChildrenMap.get(symbol);
 		return myChildren != null ? myChildren : myBaseFileSymbol != null ? myBaseFileSymbol.getChildren(symbol) : Children.EMPTY_CHILDREN;
 	}
 
-	@NotNull
-	Prototypes getVirtualPrototypes(@NotNull final Symbol symbol)
+	@Nonnull
+	Prototypes getVirtualPrototypes(@Nonnull final Symbol symbol)
 	{
 		final Prototypes myPrototypes = myPrototypesMap.get(symbol);
 		return myPrototypes != null ? myPrototypes : myBaseFileSymbol != null ? myBaseFileSymbol.getVirtualPrototypes(symbol) : Prototypes.EMPTY_PROTOTYPES;
 	}
 
 	@Nullable
-	RVirtualElement getLastVirualPrototype(@NotNull final Symbol symbol)
+	RVirtualElement getLastVirualPrototype(@Nonnull final Symbol symbol)
 	{
 		final Prototypes myPrototypes = myPrototypesMap.get(symbol);
 		return myPrototypes != null ? myPrototypes.getLast() : myBaseFileSymbol != null ? myBaseFileSymbol.getLastVirualPrototype(symbol) : null;
@@ -162,7 +164,7 @@ public class FileSymbol
 		return isJRubyEnabled;
 	}
 
-	public void process(@NotNull final String url, @NotNull final InterpretationMode mode, final boolean forceAdd)
+	public void process(@Nonnull final String url, @Nonnull final InterpretationMode mode, final boolean forceAdd)
 	{
 		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(url, myCaches);
 		if(fileInfo == null)
@@ -194,7 +196,7 @@ public class FileSymbol
 	private final Object URLS_LOCK = new Object();
 
 
-	private boolean containsUrl(@NotNull final String url)
+	private boolean containsUrl(@Nonnull final String url)
 	{
 		synchronized(URLS_LOCK)
 		{
@@ -202,7 +204,7 @@ public class FileSymbol
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public Set<String> getUrls()
 	{
 		final HashSet<String> all = new HashSet<String>();
@@ -217,7 +219,7 @@ public class FileSymbol
 		return all;
 	}
 
-	@NotNull
+	@Nonnull
 	public RubyFilesCache[] getCaches()
 	{
 		return myCaches;
@@ -229,7 +231,7 @@ public class FileSymbol
 
 	private final HashMap<RVirtualContainer, Symbol> myContainer2SymbolsMap = new HashMap<RVirtualContainer, Symbol>();
 
-	public void registerContainerSymbol(@NotNull final RVirtualContainer container, @NotNull final Symbol symbol)
+	public void registerContainerSymbol(@Nonnull final RVirtualContainer container, @Nonnull final Symbol symbol)
 	{
 		myContainer2SymbolsMap.put(container, symbol);
 	}
@@ -253,7 +255,7 @@ public class FileSymbol
 		return myAllSymbols;
 	}
 
-	public void setAllSymbols(@NotNull final Children children)
+	public void setAllSymbols(@Nonnull final Children children)
 	{
 		myAllSymbols = children;
 	}
@@ -272,7 +274,7 @@ public class FileSymbol
 		return myLoadPath.getLoadPathFiles();
 	}
 
-	public void addLoadPathUrl(@NotNull final String loadPathUrl)
+	public void addLoadPathUrl(@Nonnull final String loadPathUrl)
 	{
 		myLoadPath.addLoadPathUrl(loadPathUrl);
 	}
@@ -288,7 +290,7 @@ public class FileSymbol
 		return buffer.toString();
 	}
 
-	public void dump(@NotNull final Symbol symbol, @NotNull final StringBuilder buffer, final int indent)
+	public void dump(@Nonnull final Symbol symbol, @Nonnull final StringBuilder buffer, final int indent)
 	{
 		for(int i = 0; i < indent; i++)
 		{
@@ -322,7 +324,7 @@ public class FileSymbol
 	}
 
 	@SuppressWarnings({"StringConcatenationInsideStringBufferAppend"})
-	public void dumpHTML(@NotNull final Symbol symbol, @NotNull final StringBuilder buffer)
+	public void dumpHTML(@Nonnull final Symbol symbol, @Nonnull final StringBuilder buffer)
 	{
 		buffer.append(processSymbol(symbol));
 

@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modules;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -54,7 +55,7 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -65,7 +66,7 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RModulePresentationUtil.getPresentation(this);
@@ -85,14 +86,14 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
 	}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException
 	{
 		return null;
 	}
 
 	@Override
-	@NotNull
-	public RVirtualModule createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @NotNull final RFileInfo info)
+	@Nonnull
+	public RVirtualModule createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo info)
 	{
 		final RVirtualName virtualModuleName = new RVirtualNameImpl(getFullPath(), isGlobal());
 		assert virtualParent != null;

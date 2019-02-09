@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.arg;
 
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -36,7 +37,7 @@ import com.intellij.psi.tree.IElementType;
 class BooleanExpression implements RubyTokenTypes
 {
 
-	@NotNull
+	@Nonnull
 	public static IElementType parse(final RBuilder builder)
 	{
 		return parseOr(builder);
@@ -48,7 +49,7 @@ class BooleanExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseOr(final RBuilder builder)
 	{
 		return parseOrWithLeadAND(builder, builder.mark(), parseAnd(builder));
@@ -62,13 +63,13 @@ class BooleanExpression implements RubyTokenTypes
 	 * @param result  result of AND parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseOrWithLeadAND(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return parseAnd(builder);
@@ -85,7 +86,7 @@ class BooleanExpression implements RubyTokenTypes
 	 * @param builder Current builder
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseAnd(final RBuilder builder)
 	{
 		return parseAndWithLeadMatch(builder, builder.mark(), MatchingExpression.parse(builder));
@@ -99,13 +100,13 @@ class BooleanExpression implements RubyTokenTypes
 	 * @param result  result of Match parsing
 	 * @return result of parsing
 	 */
-	@NotNull
+	@Nonnull
 	private static IElementType parseAndWithLeadMatch(final RBuilder builder, final RMarker marker, final IElementType result)
 	{
 		ParsingMethod parsingMethod = new ParsingMethodWithAssignmentLookup()
 		{
 			@Override
-			@NotNull
+			@Nonnull
 			public IElementType parseInner(final RBuilder builder)
 			{
 				return MatchingExpression.parse(builder);

@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLBlockGenerator;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.NodeInfo;

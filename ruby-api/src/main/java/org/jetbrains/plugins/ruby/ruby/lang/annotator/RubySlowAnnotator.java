@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.ExternalAnnotator;
@@ -31,7 +32,7 @@ import com.intellij.psi.PsiFile;
 public class RubySlowAnnotator extends ExternalAnnotator
 {
 
-	public void annotate(@NotNull final PsiFile file, @NotNull final AnnotationHolder holder)
+	public void annotate(@Nonnull final PsiFile file, @Nonnull final AnnotationHolder holder)
 	{
 		// We hope it`s enough often operation
 		ProgressManager.getInstance().checkCanceled();

@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
@@ -30,10 +31,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 public interface FieldDefinition
 {
 
-	@NotNull
+	@Nonnull
 	public RField getFirstUsage();
 
-	@NotNull
+	@Nonnull
 	public String getName();
 
 	public FieldType getType();

@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -39,13 +39,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
  */
 public class RPseudoConstantReference extends RNamedReference
 {
-	public RPseudoConstantReference(@NotNull RNamedElement element)
+	public RPseudoConstantReference(@Nonnull RNamedElement element)
 	{
 		super(element);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		// kSUPER

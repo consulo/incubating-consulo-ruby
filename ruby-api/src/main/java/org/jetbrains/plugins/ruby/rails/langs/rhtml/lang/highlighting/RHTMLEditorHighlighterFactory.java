@@ -1,7 +1,8 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
@@ -16,7 +17,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 public class RHTMLEditorHighlighterFactory implements EditorHighlighterProvider
 {
 	@Override
-	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
+	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nonnull FileType fileType, @Nullable VirtualFile virtualFile, @Nonnull EditorColorsScheme editorColorsScheme)
 	{
 		return new RHTMLEditorHighlighter(editorColorsScheme, project, virtualFile);
 	}

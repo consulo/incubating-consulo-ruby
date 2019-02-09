@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
 import java.io.Serializable;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,7 +32,7 @@ public class ArgumentInfo implements Serializable
 	private final Type myType;
 	private int myHash;
 
-	public ArgumentInfo(@NotNull final String name, final Type type)
+	public ArgumentInfo(@Nonnull final String name, final Type type)
 	{
 		myName = name;
 		myType = type;

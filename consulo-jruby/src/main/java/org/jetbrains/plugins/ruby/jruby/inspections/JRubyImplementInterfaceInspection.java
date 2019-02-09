@@ -16,9 +16,10 @@
 
 package org.jetbrains.plugins.ruby.jruby.inspections;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.codeHighlighting.HighlightDisplayLevel;
 import com.intellij.codeInspection.LocalInspectionTool;
@@ -37,7 +38,7 @@ public class JRubyImplementInterfaceInspection extends LocalInspectionTool
 	private static final String SHORT_NAME = "JRubyImplement";
 
 	@Override
-	@NotNull
+	@Nonnull
 	@Nls
 	public String getGroupDisplayName()
 	{
@@ -45,7 +46,7 @@ public class JRubyImplementInterfaceInspection extends LocalInspectionTool
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	@Nls
 	public String getDisplayName()
 	{
@@ -53,7 +54,7 @@ public class JRubyImplementInterfaceInspection extends LocalInspectionTool
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	@NonNls
 	public String getShortName()
 	{
@@ -67,14 +68,14 @@ public class JRubyImplementInterfaceInspection extends LocalInspectionTool
 	}
 
 	@Override
-	@NotNull
-	public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly)
+	@Nonnull
+	public PsiElementVisitor buildVisitor(@Nonnull ProblemsHolder holder, boolean isOnTheFly)
 	{
 		return new JRubyImplementInterfaceVisitor(holder);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public HighlightDisplayLevel getDefaultLevel()
 	{
 		return HighlightDisplayLevel.ERROR;

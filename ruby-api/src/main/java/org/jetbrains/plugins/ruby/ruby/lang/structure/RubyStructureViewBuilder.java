@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
@@ -32,13 +33,13 @@ public class RubyStructureViewBuilder extends TreeBasedStructureViewBuilder
 {
 	private PsiFile myPsiFile;
 
-	public RubyStructureViewBuilder(@NotNull final PsiFile psiFile)
+	public RubyStructureViewBuilder(@Nonnull final PsiFile psiFile)
 	{
 		myPsiFile = psiFile;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public StructureViewModel createStructureViewModel(Editor editor)
 	{
 		return new RubyStructureViewModel((RPsiElement) myPsiFile);

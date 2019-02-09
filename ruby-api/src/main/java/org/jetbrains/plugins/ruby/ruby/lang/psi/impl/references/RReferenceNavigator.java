@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import com.intellij.psi.PsiElement;
 
@@ -30,7 +31,7 @@ import com.intellij.psi.PsiElement;
 public class RReferenceNavigator
 {
 	@Nullable
-	public static RReference getReferenceByLeftPart(@NotNull final PsiElement element)
+	public static RReference getReferenceByLeftPart(@Nonnull final PsiElement element)
 	{
 		PsiElement parent = element.getParent();
 		if(parent instanceof RReference && ((RReference) parent).getReciever() == element)
@@ -41,7 +42,7 @@ public class RReferenceNavigator
 	}
 
 	@Nullable
-	public static RReference getReferenceByRightPart(@NotNull final PsiElement element)
+	public static RReference getReferenceByRightPart(@Nonnull final PsiElement element)
 	{
 		PsiElement parent = element.getParent();
 		if(parent instanceof RReference && ((RReference) parent).getValue() == element)

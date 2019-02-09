@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +29,7 @@ public class RArgumentInfoWithDefaultArgs extends ArgumentInfo
 {
 	private String myDefValue;
 
-	public RArgumentInfoWithDefaultArgs(@NotNull final String name, @Nullable final String defValue, final Type type)
+	public RArgumentInfoWithDefaultArgs(@Nonnull final String name, @Nullable final String defValue, final Type type)
 	{
 		super(name, type);
 		myDefValue = defValue;

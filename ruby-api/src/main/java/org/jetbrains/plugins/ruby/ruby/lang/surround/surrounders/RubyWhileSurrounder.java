@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RWhileStatement;
@@ -32,7 +32,7 @@ public class RubyWhileSurrounder extends RubySurrounderBase
 {
 
 	@Override
-	protected TextRange getTextRange(@NotNull final RPsiElement element)
+	protected TextRange getTextRange(@Nonnull final RPsiElement element)
 	{
 		assert element instanceof RWhileStatement;
 		final RCondition condition = ((RWhileStatement) element).getCondition();

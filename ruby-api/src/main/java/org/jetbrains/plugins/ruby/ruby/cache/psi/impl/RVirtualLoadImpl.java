@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -32,7 +33,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
  */
 public class RVirtualLoadImpl extends RVirtualRequireImpl implements RVirtualLoad
 {
-	public RVirtualLoadImpl(RVirtualContainer container, @NotNull List<String> requires)
+	public RVirtualLoadImpl(RVirtualContainer container, @Nonnull List<String> requires)
 	{
 		super(container, requires);
 	}
@@ -44,7 +45,7 @@ public class RVirtualLoadImpl extends RVirtualRequireImpl implements RVirtualLoa
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualLoad(this);
 	}

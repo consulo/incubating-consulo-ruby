@@ -24,11 +24,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JCheckBox;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.lexer.OutputLexer;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -112,8 +113,8 @@ public class GeneratorsUtil
 	 * @param railsApplicHomeDirPath Rails Application Home Directory
 	 * @return array of installed generators
 	 */
-	@NotNull
-	public static String[] getInstalledGenerators(@Nullable final Project project, @Nullable final Sdk sdk, @NotNull final String moduleName, @NotNull final String railsApplicHomeDirPath)
+	@Nonnull
+	public static String[] getInstalledGenerators(@Nullable final Project project, @Nullable final Sdk sdk, @Nonnull final String moduleName, @Nonnull final String railsApplicHomeDirPath)
 	{
 		final List<Exception> exceptions = new LinkedList<Exception>();
 		String[] generators = EMPTY_STRING_ARRAY;
@@ -192,7 +193,7 @@ public class GeneratorsUtil
 	 * @param moduleName              Module name
 	 * @param railsFacetConfiguration Settings
 	 */
-	public static void loadGeneratorsList(final boolean forceRegenerate, @Nullable final Project project, @Nullable final Sdk sdk, @NotNull final String moduleName, @NotNull final BaseRailsFacetConfigurationImpl railsFacetConfiguration)
+	public static void loadGeneratorsList(final boolean forceRegenerate, @Nullable final Project project, @Nullable final Sdk sdk, @Nonnull final String moduleName, @Nonnull final BaseRailsFacetConfigurationImpl railsFacetConfiguration)
 	{
 		final String title = RBundle.message("module.rails.create.rake.generators.title");
 
@@ -235,7 +236,7 @@ public class GeneratorsUtil
 		}, ModalityState.defaultModalityState());
 	}
 
-	public static boolean checkIfGenerateScriptExists(@NotNull final Module module)
+	public static boolean checkIfGenerateScriptExists(@Nonnull final Module module)
 	{
 		final String railsAppHomePath = RailsFacetUtil.getRailsAppHomeDirPath(module);
 		if(railsAppHomePath == null)
@@ -299,7 +300,7 @@ public class GeneratorsUtil
 		return null;
 	}
 
-	public static void initOptionsCheckBoxes(@NotNull final JCheckBox pretendCheckBox, @NotNull final JCheckBox forceCheckBox, @NotNull final JCheckBox skipCheckBox, @NotNull final JCheckBox backtraceCheckBox, @NotNull final JCheckBox svnCheckBox, @NotNull final GeneratorOptions options)
+	public static void initOptionsCheckBoxes(@Nonnull final JCheckBox pretendCheckBox, @Nonnull final JCheckBox forceCheckBox, @Nonnull final JCheckBox skipCheckBox, @Nonnull final JCheckBox backtraceCheckBox, @Nonnull final JCheckBox svnCheckBox, @Nonnull final GeneratorOptions options)
 	{
 		pretendCheckBox.setSelected(options.containsValue(Option.PRETEND));
 		forceCheckBox.setSelected(options.containsValue(Option.FORCE));
@@ -310,7 +311,7 @@ public class GeneratorsUtil
 		svnCheckBox.setSelected(options.containsValue(Option.SVN));
 	}
 
-	public static void saveSettings(@NotNull final JCheckBox pretendCheckBox, @NotNull final JCheckBox forceCheckBox, @NotNull final JCheckBox skipCheckBox, @NotNull final JCheckBox backtraceCheckBox, @NotNull final JCheckBox svnCheckBox, @NotNull final GeneratorOptions options, @NotNull final Project project)
+	public static void saveSettings(@Nonnull final JCheckBox pretendCheckBox, @Nonnull final JCheckBox forceCheckBox, @Nonnull final JCheckBox skipCheckBox, @Nonnull final JCheckBox backtraceCheckBox, @Nonnull final JCheckBox svnCheckBox, @Nonnull final GeneratorOptions options, @Nonnull final Project project)
 	{
 		options.setOption(Option.PRETEND, pretendCheckBox.isSelected());
 		options.setOption(Option.FORCE, forceCheckBox.isSelected());
@@ -323,7 +324,7 @@ public class GeneratorsUtil
 		}
 	}
 
-	public static String calcGeneralOptionsString(@NotNull final JCheckBox backtraceCheckBox, @NotNull final JCheckBox forceCheckBox, @NotNull final JCheckBox pretendCheckBox, @NotNull final JCheckBox skipCheckBox, @NotNull final JCheckBox svnCheckBox)
+	public static String calcGeneralOptionsString(@Nonnull final JCheckBox backtraceCheckBox, @Nonnull final JCheckBox forceCheckBox, @Nonnull final JCheckBox pretendCheckBox, @Nonnull final JCheckBox skipCheckBox, @Nonnull final JCheckBox svnCheckBox)
 	{
 		final StringBuilder buff = new StringBuilder();
 
@@ -374,7 +375,7 @@ public class GeneratorsUtil
 
 
 	public static void invokeGenerator(final Module uncommitedModule, final String processTitle, final String errorTitle, final String[] scriptParameters, @Nullable final
-	RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, @NotNull final Sdk sdk)
+	RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, @Nonnull final Sdk sdk)
 	{
 		try
 		{

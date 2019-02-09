@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import com.intellij.navigation.ItemPresentation;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -38,13 +38,13 @@ import javax.swing.*;
  */
 public class RVirtualObjectClassImpl extends RVirtualFieldContantContainerImpl implements RVirtualObjectClass
 {
-	public RVirtualObjectClassImpl(@NotNull final RVirtualContainer parentContainer, @NotNull final RVirtualName name, final AccessModifier accessModifier, @NotNull RFileInfo containingFileInfo)
+	public RVirtualObjectClassImpl(@Nonnull final RVirtualContainer parentContainer, @Nonnull final RVirtualName name, final AccessModifier accessModifier, @Nonnull RFileInfo containingFileInfo)
 	{
 		super(parentContainer, name, accessModifier, containingFileInfo);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RObjectClassPresentationUtil.getPresentation(this);
@@ -56,14 +56,14 @@ public class RVirtualObjectClassImpl extends RVirtualFieldContantContainerImpl i
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName()
 	{
 		return "<<" + getFullName();
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualObjectClass(this);
 	}

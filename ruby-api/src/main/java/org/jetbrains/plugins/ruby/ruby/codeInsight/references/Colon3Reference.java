@@ -21,8 +21,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -49,7 +50,7 @@ public class Colon3Reference extends RQualifiedReference implements RPsiPolyvari
 {
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol)
 	{
 		if(fileSymbol == null)
@@ -64,9 +65,9 @@ public class Colon3Reference extends RQualifiedReference implements RPsiPolyvari
 		return Collections.emptyList();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol, @NotNull final RType refObjectType)
+	protected List<Symbol> multiResolveToSymbols(@Nullable final FileSymbol fileSymbol, @Nonnull final RType refObjectType)
 	{
 		return multiResolveToSymbols(fileSymbol);
 	}
@@ -106,7 +107,7 @@ public class Colon3Reference extends RQualifiedReference implements RPsiPolyvari
 		}
 	}
 
-	public Colon3Reference(@NotNull Project project, @NotNull RPsiElement wholeReference, @NotNull PsiElement refValue)
+	public Colon3Reference(@Nonnull Project project, @Nonnull RPsiElement wholeReference, @Nonnull PsiElement refValue)
 	{
 		super(project, wholeReference, null, refValue, RReference.Type.COLON_REF, refValue.getText());
 	}

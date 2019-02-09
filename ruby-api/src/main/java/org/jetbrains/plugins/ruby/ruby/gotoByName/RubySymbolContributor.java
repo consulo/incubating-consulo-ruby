@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.gotoByName;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
@@ -132,7 +133,7 @@ public class RubySymbolContributor extends RubyBaseContributor implements Choose
 		return items.toArray(new NavigationItem[items.size()]);
 	}
 
-	private void addItems(@NotNull final List elements, @NotNull final Project project, @NotNull final ArrayList<NavigationItem> items)
+	private void addItems(@Nonnull final List elements, @Nonnull final Project project, @Nonnull final ArrayList<NavigationItem> items)
 	{
 		//noinspection unchecked
 		items.addAll(getItems(elements, project));

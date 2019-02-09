@@ -33,7 +33,7 @@ import javax.swing.JTextField;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
@@ -195,7 +195,7 @@ class InfoPane
 		});
 	}
 
-	private void createAndExecuteCmd(@NotNull final String data)
+	private void createAndExecuteCmd(@Nonnull final String data)
 	{
 		if(!undoStack.empty() && data.equals(undoStack.peek().getData()))
 		{

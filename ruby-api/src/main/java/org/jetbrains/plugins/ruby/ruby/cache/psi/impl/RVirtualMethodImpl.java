@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import com.intellij.navigation.ItemPresentation;
 import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -32,6 +32,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.Argume
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
 
 	private final List<ArgumentInfo> myArgumentInfos;
 
-	public RVirtualMethodImpl(final RVirtualContainer parentContainer, @NotNull final RVirtualName name, @NotNull final List<ArgumentInfo> arguments, final AccessModifier defaultChildAccessModifier, @NotNull final RFileInfo containingFileInfo)
+	public RVirtualMethodImpl(final RVirtualContainer parentContainer, @Nonnull final RVirtualName name, @Nonnull final List<ArgumentInfo> arguments, final AccessModifier defaultChildAccessModifier, @Nonnull final RFileInfo containingFileInfo)
 	{
 		super(parentContainer, name, defaultChildAccessModifier, containingFileInfo);
 		myArgumentInfos = arguments;
@@ -54,7 +55,7 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
 
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ItemPresentation getPresentation()
 	{
 		return RMethodPresentationUtil.getPresentation(this);
@@ -67,20 +68,20 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualMethod(this);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos()
 	{
 		return myArgumentInfos;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableName()
 	{
 		final int options = RPresentationConstants.SHOW_FULL_NAME | RPresentationConstants.SHOW_PARAMETERS;
@@ -94,7 +95,7 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
 	 * @return true if methods equals.
 	 */
 	@Override
-	public boolean equalsToMethod(@NotNull final RVirtualMethod otherMethod)
+	public boolean equalsToMethod(@Nonnull final RVirtualMethod otherMethod)
 	{
 		return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
 	}

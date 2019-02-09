@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
@@ -48,7 +49,7 @@ public class RailsApplicationSettings implements PersistentStateComponent<RailsA
 	}
 
 	@Override
-	public void loadState(@NotNull final RailsApplicationSettings settings)
+	public void loadState(@Nonnull final RailsApplicationSettings settings)
 	{
 		wizardRailsFacetPreconfigureDBName = settings.wizardRailsFacetPreconfigureDBName;
 	}

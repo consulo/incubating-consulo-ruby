@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
@@ -51,7 +51,7 @@ public class RubyRunConfigurationEditor extends SettingsEditor<RubyRunConfigurat
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected JComponent createEditor()
 	{
 		return myForm.getPanel();

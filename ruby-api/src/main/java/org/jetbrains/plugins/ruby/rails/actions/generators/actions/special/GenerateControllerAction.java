@@ -16,9 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GenerateDialogs;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;
@@ -62,13 +64,13 @@ public class GenerateControllerAction extends SimpleGeneratorAction
 	}
 
 	@Override
-	protected ControllerInputValidator createValidator(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	protected ControllerInputValidator createValidator(@Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		return new ControllerInputValidator(this, module, directory);
 	}
 
 	@Override
-	protected PsiElement[] invokeDialog(@NotNull final Module module, @Nullable final PsiDirectory directory)
+	protected PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		final ControllerInputValidator validator = createValidator(module, directory);
 		GenerateDialogs.showGenerateControllerDialog(module, getGenerateDialogTitle(), validator);

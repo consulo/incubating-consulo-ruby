@@ -21,10 +21,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
 import com.intellij.util.xmlb.annotations.Property;
 
@@ -59,7 +62,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 	 * @param directory Direcotry
 	 * @return false if direcotry is already exists otherwise true
 	 */
-	public boolean addCheckableDir(@NotNull final CheckableDirectoryItem directory)
+	public boolean addCheckableDir(@Nonnull final CheckableDirectoryItem directory)
 	{
 		if(containsDirectoryPath(directory))
 		{
@@ -69,12 +72,12 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 		return true;
 	}
 
-	public boolean containsDirectoryPath(@NotNull final CheckableDirectoryItem directory)
+	public boolean containsDirectoryPath(@Nonnull final CheckableDirectoryItem directory)
 	{
 		return getDirByPath(directory.getDirectoryPath()) != null;
 	}
 
-	@NotNull
+	@Nonnull
 	public List<CheckableDirectoryItem> getCheckableDirectories()
 	{
 		return myDirectories;
@@ -85,7 +88,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 	 *
 	 * @param optionsByName Options map
 	 */
-	public void loadCheckableDirectores(@NotNull final Map<String, String> optionsByName)
+	public void loadCheckableDirectores(@Nonnull final Map<String, String> optionsByName)
 	{
 		removeAll();
 
@@ -104,7 +107,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 		}
 	}
 
-	public void stateChanged(@NotNull final String path, final boolean isChecked)
+	public void stateChanged(@Nonnull final String path, final boolean isChecked)
 	{
 		final List<CheckableDirectoryItem> list = getCheckableDirectories();
 		for(CheckableDirectoryItem directoryItem : list)
@@ -117,7 +120,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 		}
 	}
 
-	public void writeCheckableDirectores(@NotNull final Element elem, @NotNull final SettingsExternalizer ext)
+	public void writeCheckableDirectores(@Nonnull final Element elem, @Nonnull final SettingsExternalizer ext)
 	{
 		final List<CheckableDirectoryItem> dirs = getCheckableDirectories();
 		ext.writeOption(NUMBER, Integer.toString(dirs.size()), elem);
@@ -133,7 +136,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 		getCheckableDirectories().clear();
 	}
 
-	public void removeDirByPath(@NotNull final String path)
+	public void removeDirByPath(@Nonnull final String path)
 	{
 		final List<CheckableDirectoryItem> list = getCheckableDirectories();
 
@@ -145,7 +148,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 	}
 
 	@Nullable
-	public CheckableDirectoryItem getDirByPath(@NotNull final String path)
+	public CheckableDirectoryItem getDirByPath(@Nonnull final String path)
 	{
 		final List<CheckableDirectoryItem> list = getCheckableDirectories();
 
@@ -161,7 +164,7 @@ public class CheckableDirectoriesContainer implements Cloneable, Serializable
 
 	@Override
 	@SuppressWarnings({"CloneDoesntCallSuperClone"})
-	@NotNull
+	@Nonnull
 	public CheckableDirectoriesContainer clone() throws CloneNotSupportedException
 	{
 		final CheckableDirectoriesContainer copy = new CheckableDirectoriesContainer();

@@ -18,9 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.ri;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
 import com.intellij.openapi.diagnostic.Logger;
 
@@ -42,7 +43,7 @@ class RDocSettingsExternalizer extends SettingsExternalizer
 	@NonNls
 	private static final String RDOC_SETTINGS_ID = "RUBY_DOC";
 
-	public void writeExternal(@NotNull final RDocSettings settings, @NotNull final Element elem)
+	public void writeExternal(@Nonnull final RDocSettings settings, @Nonnull final Element elem)
 	{
 		boolean doUseDefaults = settings.doUseDefaults();
 		writeOption(USE_DEFAULTS, Boolean.toString(doUseDefaults), elem);
@@ -50,7 +51,7 @@ class RDocSettingsExternalizer extends SettingsExternalizer
 		settings.getDocDirs().writeCheckableDirectores(elem, this);
 	}
 
-	public void readExternal(@NotNull final RDocSettings settings, @NotNull final Element elem)
+	public void readExternal(@Nonnull final RDocSettings settings, @Nonnull final Element elem)
 	{
 		try
 		{

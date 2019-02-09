@@ -1,6 +1,6 @@
 package consulo.ruby.rails.module.extension;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import consulo.module.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
 
@@ -11,7 +11,7 @@ import consulo.roots.ModuleRootLayer;
 public class BaseRubyOnRailsModuleExtension extends ModuleExtensionImpl<BaseRubyOnRailsModuleExtension> implements
 		RubyOnRailsModuleExtension<BaseRubyOnRailsModuleExtension>
 {
-	public BaseRubyOnRailsModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
+	public BaseRubyOnRailsModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer module)
 	{
 		super(id, module);
 	}

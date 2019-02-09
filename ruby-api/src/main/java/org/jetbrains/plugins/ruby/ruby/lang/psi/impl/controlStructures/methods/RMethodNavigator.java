@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import com.intellij.psi.PsiElement;
@@ -31,7 +32,7 @@ import com.intellij.psi.PsiElement;
 public class RMethodNavigator
 {
 	@Nullable
-	public static RMethod getByRBodyStatement(@NotNull final RBodyStatement statement)
+	public static RMethod getByRBodyStatement(@Nonnull final RBodyStatement statement)
 	{
 		final PsiElement parent = statement.getParent();
 		return (parent instanceof RMethod) ? (RMethod) parent : null;

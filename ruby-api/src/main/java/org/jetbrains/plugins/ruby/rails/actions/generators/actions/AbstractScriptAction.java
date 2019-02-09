@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -61,13 +61,13 @@ public abstract class AbstractScriptAction extends AnAction
 	protected abstract String getErrorTitle();
 
 	@SuppressWarnings({"UnusedParameters"})
-	protected abstract void checkBeforeCreate(@NotNull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException;
+	protected abstract void checkBeforeCreate(@Nonnull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException;
 
 	protected abstract String[] createScriptParameters(final String inputString, final String railsAppHomePath);
 
 	protected abstract boolean validateBeforeInvokeDialog(final Module module);
 
-	protected abstract PsiElement[] invokeDialog(@NotNull final Module module, @Nullable final PsiDirectory directory);
+	protected abstract PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory);
 
 	@RequiredDispatchThread
 	@Override
@@ -110,7 +110,7 @@ public abstract class AbstractScriptAction extends AnAction
 
 	@RequiredDispatchThread
 	@Override
-	public void update(@NotNull final AnActionEvent e)
+	public void update(@Nonnull final AnActionEvent e)
 	{
 		final Presentation presentation = e.getPresentation();
 

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -38,7 +38,7 @@ public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateAc
 {
 	private FileTemplate myTemplate;
 
-	public RailsCreateFromTemplateAction(@NotNull final FileTemplate template)
+	public RailsCreateFromTemplateAction(@Nonnull final FileTemplate template)
 	{
 		super(template.getName(), null, TargetAWT.to(FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon()));
 		myTemplate = template;
@@ -50,7 +50,7 @@ public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateAc
 		return createDilog(project, dir, selectedTemplate).create();
 	}
 
-	@NotNull
+	@Nonnull
 	protected abstract CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
 
 	@Override

@@ -19,11 +19,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -69,8 +69,8 @@ import com.intellij.util.containers.HashMap;
 @Singleton
 public class TypeInferenceHelper
 {
-	@NotNull
-	public static TypeInferenceHelper getInstance(@NotNull Project project)
+	@Nonnull
+	public static TypeInferenceHelper getInstance(@Nonnull Project project)
 	{
 		return ServiceManager.getService(project, TypeInferenceHelper.class);
 	}
@@ -90,7 +90,7 @@ public class TypeInferenceHelper
 		});
 	}
 
-	public RType inferLocalVariableType(@NotNull final RControlFlowOwner owner, @NotNull final RIdentifier usage)
+	public RType inferLocalVariableType(@Nonnull final RControlFlowOwner owner, @Nonnull final RIdentifier usage)
 	{
 		ProgressManager.getInstance().checkCanceled();
 
@@ -110,7 +110,7 @@ public class TypeInferenceHelper
 		return type != null ? type : RType.NOT_TYPED;
 	}
 
-	public void inferLocalVariablesTypes(@NotNull final TypeInferenceContext context, @NotNull final RControlFlowOwner owner, final Map<RIdentifier, RType> map)
+	public void inferLocalVariablesTypes(@Nonnull final TypeInferenceContext context, @Nonnull final RControlFlowOwner owner, final Map<RIdentifier, RType> map)
 	{
 		context.methodsBeingInferred.add(owner);
 		Instruction[] flow = owner.getControlFlow();
@@ -176,7 +176,7 @@ public class TypeInferenceHelper
 		return inferCallTypeBySymbol(symbol, callArgs);
 	}
 
-	public RType inferCallTypeBySymbol(@NotNull final Symbol symbol, final List<RPsiElement> callArgs)
+	public RType inferCallTypeBySymbol(@Nonnull final Symbol symbol, final List<RPsiElement> callArgs)
 	{
 		ProgressManager.getInstance().checkCanceled();
 
@@ -207,7 +207,7 @@ public class TypeInferenceHelper
 		return inferTypeOfMethodCall((RMethod) element, callArgs, context);
 	}
 
-	private RType inferTypeOfMethodCall(@NotNull final RMethod method, final List<RPsiElement> callArgs, @NotNull final TypeInferenceContext context)
+	private RType inferTypeOfMethodCall(@Nonnull final RMethod method, final List<RPsiElement> callArgs, @Nonnull final TypeInferenceContext context)
 	{
 		FileSymbol fileSymbol = context.fileSymbol;
 		RType commentType = TypeCommentsHelper.tryToExtractTypeFromComment(method, fileSymbol);

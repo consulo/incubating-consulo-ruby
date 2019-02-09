@@ -18,10 +18,13 @@ package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
 import com.intellij.openapi.components.PathMacroManager;
 import com.intellij.openapi.module.Module;
@@ -43,7 +46,7 @@ public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalize
 	@NonNls
 	public static final String RAILS_FACET_APPLIATION_ROOT = "RAILS_FACET_APPLICATION_ROOT";
 
-	public void writeExternal(@NotNull final BaseRailsFacetConfigurationLowLevel config, @NotNull final Element elem)
+	public void writeExternal(@Nonnull final BaseRailsFacetConfigurationLowLevel config, @Nonnull final Element elem)
 	{
 		writeOption(SHOULD_USE_RSPEC_PLUGIN, String.valueOf(config.shouldUseRSpecPlugin()), elem);
 
@@ -64,7 +67,7 @@ public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalize
 		return PathMacroManager.getInstance(module).collapsePath(expandedPath);
 	}
 
-	public void readExternal(@NotNull final BaseRailsFacetConfigurationLowLevel config, @NotNull final Element elem)
+	public void readExternal(@Nonnull final BaseRailsFacetConfigurationLowLevel config, @Nonnull final Element elem)
 	{
 		//noinspection unchecked
 		final Map<String, String> optionsByName = buildOptionsByElement(elem);

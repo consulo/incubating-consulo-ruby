@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -43,7 +44,7 @@ public class RVirtualFieldAttrImpl extends RVirtualStructuralElementBase impleme
 	@NonNls
 	private static final String SPACE = " ";
 
-	public RVirtualFieldAttrImpl(final RVirtualContainer container, final FieldAttrType type, @NotNull List<String> names)
+	public RVirtualFieldAttrImpl(final RVirtualContainer container, final FieldAttrType type, @Nonnull List<String> names)
 	{
 		super(container);
 		myType = type;
@@ -51,7 +52,7 @@ public class RVirtualFieldAttrImpl extends RVirtualStructuralElementBase impleme
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualFieldAttr(this);
 	}
@@ -63,21 +64,21 @@ public class RVirtualFieldAttrImpl extends RVirtualStructuralElementBase impleme
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<String> getNames()
 	{
 		return myNames;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public FieldAttrType getFieldAttrType()
 	{
 		return myType;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getPresentableText()
 	{
 		final StringBuffer buffer = new StringBuffer();

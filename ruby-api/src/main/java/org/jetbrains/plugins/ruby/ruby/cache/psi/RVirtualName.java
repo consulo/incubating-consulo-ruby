@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,19 +31,19 @@ public interface RVirtualName extends RVirtualElement
 	/**
 	 * @return only name without path
 	 */
-	@NotNull
+	@Nonnull
 	public String getName();
 
 	/**
 	 * @return List of paths
 	 */
-	@NotNull
+	@Nonnull
 	public List<String> getPath();
 
 	/**
 	 * @return full name,i.e. name with path
 	 */
-	@NotNull
+	@Nonnull
 	public String getFullName();
 
 	public boolean isGlobal();

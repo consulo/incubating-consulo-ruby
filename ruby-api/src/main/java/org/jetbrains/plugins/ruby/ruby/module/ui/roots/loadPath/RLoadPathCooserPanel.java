@@ -25,7 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxList;
 import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxListListener;
@@ -56,7 +56,7 @@ public class RLoadPathCooserPanel implements CheckBoxListListener
 	private final Module myModule;
 	private final CheckableDirectoriesContainer myDirsContainer;
 
-	public RLoadPathCooserPanel(@NotNull final Module module, @NotNull final CheckableDirectoriesContainer dirsContainer)
+	public RLoadPathCooserPanel(@Nonnull final Module module, @Nonnull final CheckableDirectoriesContainer dirsContainer)
 	{
 		myModule = module;
 		myDirsContainer = dirsContainer;

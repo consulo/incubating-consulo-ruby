@@ -18,9 +18,11 @@ package org.jetbrains.plugins.ruby.rails.nameConventions;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -58,12 +60,12 @@ public class ControllersConventions
 	public static String APPLICATION_CONTROLLER = RailsConstants.APPLICATION_CONTROLLER_NAME;
 
 
-	public static boolean isControllerFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isControllerFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		return isControllerFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isControllerFile(@NotNull final RVirtualFile rFile, @Nullable final Module module, @NotNull final List<RVirtualClass> classes)
+	public static boolean isControllerFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
 	{
 		if(module == null)
 		{
@@ -103,7 +105,7 @@ public class ControllersConventions
 	}
 
 	@Nullable
-	public static String getControllerName(@NotNull final String controllerFileName)
+	public static String getControllerName(@Nonnull final String controllerFileName)
 	{
 		final String name = VirtualFileUtil.removeExtension(controllerFileName);
 		if(RailsConstants.APPLICATION_NAME.equals(name))
@@ -134,8 +136,8 @@ public class ControllersConventions
 	 * @param helperModule HelperModule
 	 * @return Name of Controller Class or ""(for not Controllers classes)
 	 */
-	@NotNull
-	public static String getControllerClassNameByHelper(@NotNull final RVirtualModule helperModule)
+	@Nonnull
+	public static String getControllerClassNameByHelper(@Nonnull final RVirtualModule helperModule)
 	{
 		final String moduleName = helperModule.getName();
 		if(!moduleName.endsWith(RailsConstants.HELPERS_MODULE_NAME_SUFFIX))
@@ -196,7 +198,7 @@ public class ControllersConventions
 	 * @return name of corresponding controller
 	 */
 	@Nullable
-	public static String getControllerNameByLayoutFileName(@NotNull final String nameWOExt)
+	public static String getControllerNameByLayoutFileName(@Nonnull final String nameWOExt)
 	{
 		return NamingConventions.toMixedCase(ViewsConventions.getActionMethodNameByView(nameWOExt));
 	}
@@ -251,12 +253,12 @@ public class ControllersConventions
 		return buff.toString();
 	}
 
-	public static boolean isApplicationControllerFile(@NotNull final VirtualFile controller, final Module module)
+	public static boolean isApplicationControllerFile(@Nonnull final VirtualFile controller, final Module module)
 	{
 		return isApplicationControllerFile(controller.getUrl(), controller.getNameWithoutExtension(), module);
 	}
 
-	public static boolean isApplicationControllerFile(@NotNull final String fileUrl, @NotNull final String fileNameWOExt, final Module module)
+	public static boolean isApplicationControllerFile(@Nonnull final String fileUrl, @Nonnull final String fileNameWOExt, final Module module)
 	{
 		/**
 		 * Check for file name is used only for optimization
@@ -295,7 +297,7 @@ public class ControllersConventions
 	 * @return url for file
 	 */
 	@Nullable
-	public static String getControllerDependentFileUrl(@NotNull final String controllerDirUrl, @NotNull final Module module, final String fileName, final String pathPrefix)
+	public static String getControllerDependentFileUrl(@Nonnull final String controllerDirUrl, @Nonnull final Module module, final String fileName, final String pathPrefix)
 	{
 		final String path = getRelativePathOfControllerFolder(controllerDirUrl, module);
 		if(path == null)
@@ -354,7 +356,7 @@ public class ControllersConventions
 	 * @return full controller name
 	 */
 	@Nullable
-	public static String getControllerFullName(@NotNull final Module module, @NotNull final VirtualFile controllerFile)
+	public static String getControllerFullName(@Nonnull final Module module, @Nonnull final VirtualFile controllerFile)
 	{
 		final StringBuilder pathBuffer = new StringBuilder();
 		final VirtualFile controllersRoot = org.jetbrains.plugins.ruby.rails.RailsUtil.getControllersRoot(module);
@@ -390,7 +392,7 @@ public class ControllersConventions
 		return pathBuffer.toString();
 	}
 
-	public static boolean isControllerClass(@Nullable final RVirtualClass rClass, @NotNull final Module module)
+	public static boolean isControllerClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module) || getControllerNameByClassName(rClass) == null)
 		{
@@ -455,7 +457,7 @@ public class ControllersConventions
 	 *         or corresponding dir can't be calculated.
 	 */
 	@Nullable
-	public static String getControllerCorrespondingDir(@NotNull final String dirUrl, @NotNull final Module module)
+	public static String getControllerCorrespondingDir(@Nonnull final String dirUrl, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{
@@ -543,8 +545,8 @@ public class ControllersConventions
 	 *          if file isn't in templates folder.
 	 *          At first you should check <code>hasValidTemplatePath()</code>.
 	 */
-	@NotNull
-	public static String getControllerUrlByViewUrl(@NotNull final String viewFileUrl, @NotNull final StandardRailsPaths railsPaths)
+	@Nonnull
+	public static String getControllerUrlByViewUrl(@Nonnull final String viewFileUrl, @Nonnull final StandardRailsPaths railsPaths)
 	{
 		// supports rails 2.0 views
 		return getControllerUrlByViewUrl(viewFileUrl, railsPaths.getViewsRootURL(), railsPaths.getControllerRootURL());
@@ -558,8 +560,8 @@ public class ControllersConventions
 	 * @param railsPaths Rails module settings
 	 * @return Url
 	 */
-	@NotNull
-	public static String getControllerUrlByViewsFolderUrl(@NotNull final String folderUrl, @NotNull final StandardRailsPaths railsPaths)
+	@Nonnull
+	public static String getControllerUrlByViewsFolderUrl(@Nonnull final String folderUrl, @Nonnull final StandardRailsPaths railsPaths)
 	{
 
 		// supports rails 2.0 views
@@ -591,8 +593,8 @@ public class ControllersConventions
 	 *          if file isn't in templates folder.
 	 *          At first you should check <code>hasValidTemplatePath()</code>.
 	 */
-	@NotNull
-	public static String getControllerUrlByViewUrl(@NotNull final String viewFileUrl, @NotNull final String viewsRootUrl, @NotNull final String controllersRootUrl)
+	@Nonnull
+	public static String getControllerUrlByViewUrl(@Nonnull final String viewFileUrl, @Nonnull final String viewsRootUrl, @Nonnull final String controllersRootUrl)
 	{
 		// supports rails 2.0 views
 		final StringBuilder buff = new StringBuilder();
@@ -678,7 +680,7 @@ public class ControllersConventions
 	}
 
 	@Nullable
-	public static String getRelativePathOfControllerFolder(@NotNull final String fileUrl, @NotNull final Module module)
+	public static String getRelativePathOfControllerFolder(@Nonnull final String fileUrl, @Nonnull final Module module)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		assert settings != null;
@@ -686,7 +688,7 @@ public class ControllersConventions
 		return VirtualFileUtil.getRelativePath(fileUrl, root);
 	}
 
-	@NotNull
+	@Nonnull
 	public static String toValidActionName(@Nullable final String name)
 	{
 		String newName = NamingConventions.toUnderscoreCase(name);
@@ -698,7 +700,7 @@ public class ControllersConventions
 	}
 
 	@Nullable
-	public static RClass getControllerClassByShortName(@NotNull final Module module, @NotNull final String name)
+	public static RClass getControllerClassByShortName(@Nonnull final Module module, @Nonnull final String name)
 	{
 		final StandardRailsPaths settings = RailsFacetUtil.getRailsAppPaths(module);
 		assert settings != null;

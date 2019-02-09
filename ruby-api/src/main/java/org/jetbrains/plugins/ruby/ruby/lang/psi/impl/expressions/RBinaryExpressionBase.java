@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
@@ -44,13 +44,13 @@ import com.intellij.psi.util.PsiTreeUtil;
  */
 public abstract class RBinaryExpressionBase extends RPsiElementBase implements RBinaryExpression
 {
-	public RBinaryExpressionBase(@NotNull ASTNode astNode)
+	public RBinaryExpressionBase(@Nonnull ASTNode astNode)
 	{
 		super(astNode);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -61,7 +61,7 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public IElementType getOperationType()
 	{
 		final PsiElement op = getOperation();
@@ -69,7 +69,7 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
 		return op.getNode().getElementType();
 	}
 
-	@NotNull
+	@Nonnull
 	private PsiElement getOperation()
 	{
 		//noinspection ConstantConditions
@@ -77,7 +77,7 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getLeftOperand()
 	{
 		//noinspection ConstantConditions
@@ -93,7 +93,7 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiReference getReference()
 	{
 		if(getOperation().getText().equals(RubyTokenTypes.tNEQ.toString()))
@@ -108,7 +108,7 @@ public abstract class RBinaryExpressionBase extends RPsiElementBase implements R
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		final TypeInferenceHelper helper = TypeInferenceHelper.getInstance(getProject());

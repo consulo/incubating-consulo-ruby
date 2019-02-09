@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;
@@ -34,14 +34,14 @@ import com.intellij.psi.PsiDirectory;
  */
 public class ControllerInputValidator extends SimpleGeneratorInputValidator
 {
-	public ControllerInputValidator(@NotNull final SimpleGeneratorAction generatorAction, @NotNull final Module module, @Nullable final PsiDirectory directory)
+	public ControllerInputValidator(@Nonnull final SimpleGeneratorAction generatorAction, @Nonnull final Module module, @Nullable final PsiDirectory directory)
 	{
 		super(generatorAction, module, directory);
 	}
 
 
 	@Override
-	public boolean checkInput(@NotNull final String inputString)
+	public boolean checkInput(@Nonnull final String inputString)
 	{
 		if(RailsUtil.isValidRailsFSPath(inputString))
 		{

@@ -21,13 +21,14 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Properties;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.apache.velocity.runtime.parser.ParseException;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.CommonBundle;
 import com.intellij.ide.fileTemplates.FileTemplate;
@@ -57,18 +58,18 @@ import com.intellij.util.IncorrectOperationException;
  */
 public class CreateFileFromTemplateDialog extends DialogWrapper
 {
-	@NotNull
+	@Nonnull
 	private final PsiDirectory myDirectory;
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 	private PsiElement myCreatedElement;
 	private final CreateFromTemplatePanel myAttrPanel;
 	private final JComponent myAttrComponent;
-	@NotNull
+	@Nonnull
 	private final FileTemplate myTemplate;
 	private Properties myDefaultProperties;
 
-	public CreateFileFromTemplateDialog(@NotNull final Project project, @NotNull final PsiDirectory directory, @NotNull final FileTemplate template)
+	public CreateFileFromTemplateDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory, @Nonnull final FileTemplate template)
 	{
 		super(project, true);
 		myDirectory = directory;
@@ -181,9 +182,9 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 		return IdeFocusTraversalPolicy.getPreferredFocusedComponent(myAttrComponent);
 	}
 
-	protected PsiElement createFromTemplate(@NotNull final FileTemplate template, @NonNls @Nullable final String fileName, @Nullable Properties props, @NotNull final PsiDirectory directory) throws Exception
+	protected PsiElement createFromTemplate(@Nonnull final FileTemplate template, @NonNls @Nullable final String fileName, @Nullable Properties props, @Nonnull final PsiDirectory directory) throws Exception
 	{
-		@NotNull final Project project = directory.getProject();
+		@Nonnull final Project project = directory.getProject();
 		if(props == null)
 		{
 			props = FileTemplateManager.getInstance(project).getDefaultProperties();
@@ -246,7 +247,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 		return createPsiFile(project, directory, templateText, fileName, template.getExtension());
 	}
 
-	public static PsiFile createPsiFile(final Project project, final @NotNull PsiDirectory directory, final String content, final String fileName, final String extension) throws IncorrectOperationException
+	public static PsiFile createPsiFile(final Project project, final @Nonnull PsiDirectory directory, final String content, final String fileName, final String extension) throws IncorrectOperationException
 	{
 		final String suggestedFileNameEnd = "." + extension;
 

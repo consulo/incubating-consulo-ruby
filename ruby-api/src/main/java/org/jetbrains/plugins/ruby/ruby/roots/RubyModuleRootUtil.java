@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.roots;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
@@ -15,7 +15,7 @@ import consulo.roots.impl.TestContentFolderTypeProvider;
  */
 public class RubyModuleRootUtil
 {
-	public static boolean isUnderTestUnitRoot(@NotNull Project project, @NotNull final String url)
+	public static boolean isUnderTestUnitRoot(@Nonnull Project project, @Nonnull final String url)
 	{
 		ModuleManager moduleManager = ModuleManager.getInstance(project);
 

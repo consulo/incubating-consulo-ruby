@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.Language;
 import com.intellij.lang.cacheBuilder.SimpleWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
@@ -43,7 +44,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 	}
 
 	@Override
-	public boolean canFindUsagesFor(final @NotNull PsiElement psiElement)
+	public boolean canFindUsagesFor(final @Nonnull PsiElement psiElement)
 	{
 		if(super.canFindUsagesFor(psiElement))
 		{
@@ -60,8 +61,8 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 	}
 
 	@Override
-	@NotNull
-	public String getType(@NotNull PsiElement element)
+	@Nonnull
+	public String getType(@Nonnull PsiElement element)
 	{
 		final String supertype = super.getType(element);
 		if(supertype != null)
@@ -78,8 +79,8 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 	}
 
 	@Override
-	@NotNull
-	public String getDescriptiveName(@NotNull PsiElement element)
+	@Nonnull
+	public String getDescriptiveName(@Nonnull PsiElement element)
 	{
 		final String supertext = super.getDescriptiveName(element);
 		if(supertext != null)
@@ -97,8 +98,8 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 	}
 
 	@Override
-	@NotNull
-	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
+	@Nonnull
+	public String getNodeText(@Nonnull PsiElement element, boolean useFullName)
 	{
 		final String supertext = super.getNodeText(element, useFullName);
 		if(supertext != null)

@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 import java.lang.reflect.Field;
 import java.util.Stack;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -186,7 +188,7 @@ public class StatesManager implements RubyTokenTypes
 	/**
 	 * @return current state Object
 	 */
-	@NotNull
+	@Nonnull
 	private State getStateObject()
 	{
 		State currentState = myStatesStack.peek();

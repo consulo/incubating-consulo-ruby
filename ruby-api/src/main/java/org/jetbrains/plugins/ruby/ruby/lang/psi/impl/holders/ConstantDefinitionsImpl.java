@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
@@ -30,33 +30,33 @@ public class ConstantDefinitionsImpl implements ConstantDefinitions
 {
 	private RConstant myFirstDefinition;
 
-	public ConstantDefinitionsImpl(@NotNull final RConstant constant)
+	public ConstantDefinitionsImpl(@Nonnull final RConstant constant)
 	{
 		myFirstDefinition = constant;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RConstant getFirstDefinition()
 	{
 		return myFirstDefinition;
 	}
 
 	@Override
-	public void process(@NotNull final RConstant constant)
+	public void process(@Nonnull final RConstant constant)
 	{
 		// do nothing
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myFirstDefinition.getName();
 	}
 
 	@Override
-	public boolean isFor(@NotNull final RVirtualConstant constant)
+	public boolean isFor(@Nonnull final RVirtualConstant constant)
 	{
 		return getName().equals(constant.getName());
 	}

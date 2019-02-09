@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.refactoring;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import com.intellij.codeInsight.PsiEquivalenceUtil;
@@ -40,14 +41,14 @@ public class RubyRefactoringUtil
 	 * @param context Search context
 	 * @return list of occurences
 	 */
-	@NotNull
-	public static List<PsiElement> getOccurences(@NotNull final RPsiElement pattern, @NotNull final RPsiElement context)
+	@Nonnull
+	public static List<PsiElement> getOccurences(@Nonnull final RPsiElement pattern, @Nonnull final RPsiElement context)
 	{
 		final ArrayList<PsiElement> occurences = new ArrayList<PsiElement>();
 		final RubyElementVisitor visitor = new RubyElementVisitor()
 		{
 			@Override
-			public void visitElement(@NotNull final PsiElement element)
+			public void visitElement(@Nonnull final PsiElement element)
 			{
 				if(PsiEquivalenceUtil.areElementsEquivalent(pattern, element))
 				{

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
@@ -32,7 +32,7 @@ import com.intellij.psi.PsiElement;
 public class RCallNavigator
 {
 	@Nullable
-	public static RCall getByRListOfExpressions(@NotNull final RListOfExpressions list)
+	public static RCall getByRListOfExpressions(@Nonnull final RListOfExpressions list)
 	{
 		final PsiElement parent = list.getParent();
 		if(parent instanceof RCall && ((RCall) parent).getCallArguments() == list)
@@ -43,7 +43,7 @@ public class RCallNavigator
 	}
 
 	@Nullable
-	public static RCall getByCommand(@NotNull final RPsiElement command)
+	public static RCall getByCommand(@Nonnull final RPsiElement command)
 	{
 		final PsiElement parent = command.getParent();
 		if(parent instanceof RCall && ((RCall) parent).getPsiCommand() == command)

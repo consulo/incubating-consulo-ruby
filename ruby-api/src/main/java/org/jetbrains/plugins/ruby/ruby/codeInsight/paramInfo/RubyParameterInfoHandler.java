@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -91,12 +91,12 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 	}
 
 	@Override
-	public RPossibleCall findElementForParameterInfo(@NotNull final CreateParameterInfoContext context)
+	public RPossibleCall findElementForParameterInfo(@Nonnull final CreateParameterInfoContext context)
 	{
 		return findCall(context);
 	}
 
-	private RPossibleCall findCall(@NotNull final CreateParameterInfoContext context)
+	private RPossibleCall findCall(@Nonnull final CreateParameterInfoContext context)
 	{
 		final PsiFile file = context.getFile();
 		final int offset = context.getOffset();
@@ -116,13 +116,13 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 	}
 
 	@Override
-	public void showParameterInfo(@NotNull final RPossibleCall element, @NotNull final CreateParameterInfoContext context)
+	public void showParameterInfo(@Nonnull final RPossibleCall element, @Nonnull final CreateParameterInfoContext context)
 	{
 		context.showHint(element, element.getTextRange().getStartOffset(), this);
 	}
 
 	@Override
-	public RPossibleCall findElementForUpdatingParameterInfo(@NotNull final UpdateParameterInfoContext context)
+	public RPossibleCall findElementForUpdatingParameterInfo(@Nonnull final UpdateParameterInfoContext context)
 	{
 		return findCall(context.getFile(), context.getOffset());
 	}
@@ -140,7 +140,7 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 	}
 
 	@Override
-	public void updateUI(@NotNull final Symbol symbol, @NotNull final ParameterInfoUIContext context)
+	public void updateUI(@Nonnull final Symbol symbol, @Nonnull final ParameterInfoUIContext context)
 	{
 		if(symbol.getType() == Type.JAVA_METHOD)
 		{
@@ -171,7 +171,7 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 	}
 
 
-	public static void updateRMethodPresentation(@NotNull final RMethod method, @NotNull final ParameterInfoUIContext context)
+	public static void updateRMethodPresentation(@Nonnull final RMethod method, @Nonnull final ParameterInfoUIContext context)
 	{
 		// Index to show
 		final int index = context.getCurrentParameterIndex();
@@ -290,8 +290,8 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 		return call;
 	}
 
-	@NotNull
-	private static List<Symbol> tryToResolveCommand(@NotNull final RPossibleCall element)
+	@Nonnull
+	private static List<Symbol> tryToResolveCommand(@Nonnull final RPossibleCall element)
 	{
 		if(element instanceof RCall)
 		{
@@ -304,7 +304,7 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 	}
 
 	@Override
-	public void updateParameterInfo(@NotNull final RPossibleCall element, @NotNull final UpdateParameterInfoContext context)
+	public void updateParameterInfo(@Nonnull final RPossibleCall element, @Nonnull final UpdateParameterInfoContext context)
 	{
 		int index = -1;
 		final int carret = context.getOffset();

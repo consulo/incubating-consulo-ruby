@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.CoreTypes;
 
 /**
@@ -54,7 +54,7 @@ public class JRubyTypeConventions
 	private static final String JAVA_LANG_BOOLEAN = "java.lang.Boolean";
 
 	@Nullable
-	public static String getRubyType(@NotNull final String javaType)
+	public static String getRubyType(@Nonnull final String javaType)
 	{
 		if(CHAR.equals(javaType) || JAVA_LANG_STRING.equals(javaType))
 		{

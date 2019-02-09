@@ -24,8 +24,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import consulo.awt.TargetAWT;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamContext;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDef;
@@ -49,6 +49,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RConstantPresentationUtil;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 
 /**
@@ -81,7 +82,7 @@ public class RConstantImpl extends RNamedElementBase implements RConstant
 
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
+	public void accept(@Nonnull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -92,7 +93,7 @@ public class RConstantImpl extends RNamedElementBase implements RConstant
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RConstantHolder getHolder()
 	{
 		if(myHolder == null)
@@ -156,7 +157,7 @@ public class RConstantImpl extends RNamedElementBase implements RConstant
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull final String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull final String newName) throws IncorrectOperationException
 	{
 		if(!Character.isUpperCase(newName.charAt(0)) || !TextUtil.isCID(newName))
 		{
@@ -165,7 +166,7 @@ public class RConstantImpl extends RNamedElementBase implements RConstant
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.CLASS, true);

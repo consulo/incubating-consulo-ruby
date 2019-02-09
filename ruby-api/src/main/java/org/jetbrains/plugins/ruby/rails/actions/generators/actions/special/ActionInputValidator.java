@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
@@ -40,7 +40,7 @@ public class ActionInputValidator extends SimpleGeneratorInputValidator
 	public DataContext myDataContext;
 	public VirtualFile myFile;
 
-	public ActionInputValidator(@NotNull final GenerateActionAction generatorAction, @NotNull final Module module, @Nullable final VirtualFile file, @Nullable final DataContext dataContext)
+	public ActionInputValidator(@Nonnull final GenerateActionAction generatorAction, @Nonnull final Module module, @Nullable final VirtualFile file, @Nullable final DataContext dataContext)
 	{
 		super(generatorAction, module, new PsiDirectoryImpl((PsiManagerImpl) PsiManager.getInstance(module.getProject()), file));
 		myDataContext = dataContext;
@@ -48,7 +48,7 @@ public class ActionInputValidator extends SimpleGeneratorInputValidator
 	}
 
 	@Override
-	public boolean checkInput(@NotNull final String actionName)
+	public boolean checkInput(@Nonnull final String actionName)
 	{
 		if(ControllersConventions.isValidActionName(actionName))
 		{

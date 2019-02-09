@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
@@ -49,7 +50,7 @@ public class RIHelpAction extends AnAction
 	public static final TokenSet TOKENS_TO_SEARCH = TokenSet.orSet(BNF.kRESWORDS, BNF.tCID);
 
 	@Override
-	public void actionPerformed(@NotNull final AnActionEvent e)
+	public void actionPerformed(@Nonnull final AnActionEvent e)
 	{
 		assert canHelp(e);
 
@@ -88,7 +89,7 @@ public class RIHelpAction extends AnAction
 	 * @param e Current action event
 	 * @return true if help is available, false otherwise
 	 */
-	private boolean canHelp(@NotNull final AnActionEvent e)
+	private boolean canHelp(@Nonnull final AnActionEvent e)
 	{
 		final DataContext dataContext = e.getDataContext();
 		final Project project = DataContextUtil.getProject(dataContext);

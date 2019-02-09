@@ -20,9 +20,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -59,7 +61,7 @@ public class ViewsConventions
 	public static final String CONTROLLER = "controller";
 	public static final String HTML_ERB_VIEW_EXTENSION = "html.erb";
 
-	public static boolean isRHTMLOrRJSViewFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isRHTMLOrRJSViewFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		// supports rails 2.0 views
 		if(module == null)
@@ -112,7 +114,7 @@ public class ViewsConventions
 		return fileType instanceof RXMLFileType;
 	}
 
-	public static boolean containsViewsByViewsFolder(@Nullable VirtualFile viewsFolder, @NotNull final String actionName)
+	public static boolean containsViewsByViewsFolder(@Nullable VirtualFile viewsFolder, @Nonnull final String actionName)
 	{
 		//change with isValidViewFileName
 		if(viewsFolder == null)
@@ -124,7 +126,7 @@ public class ViewsConventions
 		return !list.isEmpty();
 	}
 
-	@NotNull
+	@Nonnull
 	public static String getViewsFolderName(@Nullable final String controllerClassName)
 	{
 		// supports rails 2.0 views
@@ -132,8 +134,8 @@ public class ViewsConventions
 		return name != null ? name : TextUtil.EMPTY_STRING;
 	}
 
-	@NotNull
-	public static List<VirtualFile> getLayouts(@Nullable final String controllerDirUrl, @NotNull final String controllerName, final Module module)
+	@Nonnull
+	public static List<VirtualFile> getLayouts(@Nullable final String controllerDirUrl, @Nonnull final String controllerName, final Module module)
 	{
 		// supports rails 2.0 views
 		//supports application layout
@@ -164,7 +166,7 @@ public class ViewsConventions
 	}
 
 	@Nullable
-	public static VirtualFile getViewsFolder(@Nullable final VirtualFile controller, @NotNull final Module module)
+	public static VirtualFile getViewsFolder(@Nullable final VirtualFile controller, @Nonnull final Module module)
 	{
 		// supports rails 2.0 views
 		if(controller == null || RailsConstants.APPLICATION_NAME.equals(controller.getNameWithoutExtension()))
@@ -211,8 +213,8 @@ public class ViewsConventions
 	//                                       module);
 	//    }
 
-	@NotNull
-	public static List<VirtualFile> getViews(@NotNull final RVirtualMethod method, @NotNull final String controllerDirUrl, @NotNull final String controllerName, @NotNull final Module module)
+	@Nonnull
+	public static List<VirtualFile> getViews(@Nonnull final RVirtualMethod method, @Nonnull final String controllerDirUrl, @Nonnull final String controllerName, @Nonnull final Module module)
 	{
 
 		final String actionName = method.getName();
@@ -221,8 +223,8 @@ public class ViewsConventions
 		return findViewsInFolder(actionName, url);
 	}
 
-	@NotNull
-	public static List<VirtualFile> getPartialViews(@NotNull final String controllerDirUrl, @NotNull final String controllerName, @NotNull final Module module)
+	@Nonnull
+	public static List<VirtualFile> getPartialViews(@Nonnull final String controllerDirUrl, @Nonnull final String controllerName, @Nonnull final Module module)
 	{
 
 		final String url = ControllersConventions.getControllerDependentFileUrl(controllerDirUrl, module, controllerName, RailsConstants.VIEWS_PATH);
@@ -233,7 +235,7 @@ public class ViewsConventions
 		return Collections.emptyList();
 	}
 
-	protected static List<VirtualFile> findViewsInFolder(final @NotNull String actionName, final @Nullable String url)
+	protected static List<VirtualFile> findViewsInFolder(final @Nonnull String actionName, final @Nullable String url)
 	{
 		final VirtualFileManager vFManager = VirtualFileManager.getInstance();
 		final List<VirtualFile> viewsUrls = new ArrayList<VirtualFile>();
@@ -255,7 +257,7 @@ public class ViewsConventions
 		return viewsUrls;
 	}
 
-	protected static List<VirtualFile> findLayoutsInFolder(final @NotNull String controllerName, final @Nullable String url)
+	protected static List<VirtualFile> findLayoutsInFolder(final @Nonnull String controllerName, final @Nullable String url)
 	{
 		final VirtualFileManager vFManager = VirtualFileManager.getInstance();
 		final List<VirtualFile> viewsUrls = new ArrayList<VirtualFile>();
@@ -278,7 +280,7 @@ public class ViewsConventions
 	}
 
 	@Nullable
-	public static String getRelativePathOfLayoutsFolder(@Nullable final String fileUrl, @NotNull final Module module)
+	public static String getRelativePathOfLayoutsFolder(@Nullable final String fileUrl, @Nonnull final Module module)
 	{
 		// supports rails 2.0 views
 		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
@@ -292,7 +294,7 @@ public class ViewsConventions
 	}
 
 	@Nullable
-	public static String getRelativePathOfViewsFolder(@Nullable final String fileUrl, @NotNull final Module module)
+	public static String getRelativePathOfViewsFolder(@Nullable final String fileUrl, @Nonnull final Module module)
 	{
 		// supports rails 2.0 views
 		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
@@ -331,7 +333,7 @@ public class ViewsConventions
 		return partials;
 	}
 
-	public static boolean isValidPartialViewFile(@NotNull final VirtualFile file)
+	public static boolean isValidPartialViewFile(@Nonnull final VirtualFile file)
 	{
 		// supports rails 2.0 views
 		final String ext = file.getExtension();
@@ -346,7 +348,7 @@ public class ViewsConventions
 	 * @param fileName File name with extension
 	 * @return true if is partial view.
 	 */
-	public static boolean isPartialViewName(@NotNull final String fileName)
+	public static boolean isPartialViewName(@Nonnull final String fileName)
 	{
 		// supports rails 2.0 views
 		return fileName.startsWith("_") && isValidViewFileName(fileName);
@@ -362,7 +364,7 @@ public class ViewsConventions
 	 * @param settings    Rails module settings
 	 * @return if view is located in templates folder
 	 */
-	public static boolean hasValidTemplatePath(@NotNull final String viewFileUrl, @NotNull final StandardRailsPaths settings)
+	public static boolean hasValidTemplatePath(@Nonnull final String viewFileUrl, @Nonnull final StandardRailsPaths settings)
 	{
 		// supports rails 2.0 views
 		final String templatesRoot = settings.getViewsRootURL();
@@ -398,7 +400,7 @@ public class ViewsConventions
 	}
 
 	@Nullable
-	public static RVirtualClass getControllerByView(@NotNull final VirtualFile viewFile, @NotNull final Module moduleWithRails)
+	public static RVirtualClass getControllerByView(@Nonnull final VirtualFile viewFile, @Nonnull final Module moduleWithRails)
 	{
 		// supports rails 2.0 views
 		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(moduleWithRails);
@@ -431,8 +433,8 @@ public class ViewsConventions
 	 * @param viewFile View file
 	 * @return action name
 	 */
-	@NotNull
-	public static String getActionMethodNameByView(@NotNull final VirtualFile viewFile)
+	@Nonnull
+	public static String getActionMethodNameByView(@Nonnull final VirtualFile viewFile)
 	{
 		// action.formatRenderer or action.format.renderer
 		//e.g. "view.rhtml" or "view.rjs" or "view.html.erb"
@@ -445,8 +447,8 @@ public class ViewsConventions
 	 * @param viewFileNameWOExt View file name without extension
 	 * @return action name
 	 */
-	@NotNull
-	public static String getActionMethodNameByView(@NotNull final String viewFileNameWOExt)
+	@Nonnull
+	public static String getActionMethodNameByView(@Nonnull final String viewFileNameWOExt)
 	{
 		// action.formatRenderer or action.format.renderer
 		//e.g. "view.rhtml" or "view.rjs" or "view.html.erb"
@@ -469,7 +471,7 @@ public class ViewsConventions
 	 * @return views folder if class is controller or null
 	 */
 	@Nullable
-	public static VirtualFile getViewsFolderByClass(@NotNull final Module module, @NotNull final RClass rClass)
+	public static VirtualFile getViewsFolderByClass(@Nonnull final Module module, @Nonnull final RClass rClass)
 	{
 		//Controller class must belong to ruby file or module
 		final RVirtualContainer rClassParentContainer = rClass.getParentContainer();

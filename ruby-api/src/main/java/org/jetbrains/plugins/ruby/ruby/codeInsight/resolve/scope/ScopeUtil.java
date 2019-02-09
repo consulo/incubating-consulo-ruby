@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -40,7 +41,7 @@ public class ScopeUtil
 	 * @return Scope
 	 */
 	@Nullable
-	public static Scope findScopeByIdentifier(@NotNull final RIdentifier identifier)
+	public static Scope findScopeByIdentifier(@Nonnull final RIdentifier identifier)
 	{
 		final String name = identifier.getName();
 		PseudoScopeHolder holder = PseudoScopeHolderNavigator.getScopeHolder(identifier);
@@ -69,8 +70,8 @@ public class ScopeUtil
 	 * @param element context
 	 * @return Returns the root scope for the given context
 	 */
-	@NotNull
-	public static RootScope getRootScope(@NotNull final PsiElement element)
+	@Nonnull
+	public static RootScope getRootScope(@Nonnull final PsiElement element)
 	{
 		final ScopeHolder holder = element instanceof ScopeHolder ? (ScopeHolder) element : PsiTreeUtil.getParentOfType(element, ScopeHolder.class);
 		assert holder != null;
@@ -83,7 +84,7 @@ public class ScopeUtil
 	 * @param context Context context
 	 * @return List of ScopeVariables
 	 */
-	public static List<ScopeVariable> gatherScopeVariables(@NotNull PsiElement context)
+	public static List<ScopeVariable> gatherScopeVariables(@Nonnull PsiElement context)
 	{
 		final RootScope rootScope = ScopeUtil.getRootScope(context);
 		final ScopeHolder holder = PsiTreeUtil.getParentOfType(context, ScopeHolder.class);

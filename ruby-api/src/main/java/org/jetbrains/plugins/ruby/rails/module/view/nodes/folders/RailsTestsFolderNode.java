@@ -22,7 +22,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -56,7 +56,7 @@ public class RailsTestsFolderNode extends TestsSubFolderNode
 
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public RailsProjectNodeComparator.NodeType getType()
 	{

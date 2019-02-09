@@ -19,7 +19,8 @@ package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import com.intellij.psi.PsiReference;
@@ -33,8 +34,8 @@ import com.intellij.util.text.StringTokenizer;
 public class JavaReferencesBuilder
 {
 
-	@NotNull
-	public static List<PsiReference> createReferences(@NotNull final RPsiElement element, @NotNull final RBaseString rBaseString)
+	@Nonnull
+	public static List<PsiReference> createReferences(@Nonnull final RPsiElement element, @Nonnull final RBaseString rBaseString)
 	{
 		final ArrayList<PsiReference> list = new ArrayList<PsiReference>();
 		if(rBaseString.hasExpressionSubstitutions())

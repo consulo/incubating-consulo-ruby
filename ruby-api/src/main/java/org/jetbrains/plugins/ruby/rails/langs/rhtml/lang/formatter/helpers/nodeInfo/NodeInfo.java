@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 
@@ -33,18 +33,18 @@ public abstract class NodeInfo
 
 	public abstract TextRange getNextNodeTRange();
 
-	public static TemplateNodeInfo createTemplateInfo(@NotNull final ASTNode templateParentNode, @NotNull final ASTNode templateDateNode, @Nullable final ASTNode nextNode, @Nullable final TextRange nextNodeTRange)
+	public static TemplateNodeInfo createTemplateInfo(@Nonnull final ASTNode templateParentNode, @Nonnull final ASTNode templateDateNode, @Nullable final ASTNode nextNode, @Nullable final TextRange nextNodeTRange)
 	{
 		return new TemplateNodeInfo(templateParentNode, templateDateNode, nextNodeTRange, nextNode);
 	}
 
-	public static RHTMLNodeInfo createRHTMLInfo(@NotNull final ASTNode parentNode, @Nullable final ASTNode previousNode, @Nullable final ASTNode nextNode)
+	public static RHTMLNodeInfo createRHTMLInfo(@Nonnull final ASTNode parentNode, @Nullable final ASTNode previousNode, @Nullable final ASTNode nextNode)
 	{
 		return new RHTMLNodeInfo(parentNode, previousNode, nextNode, nextNode == null ? null : nextNode.getTextRange());
 	}
 
 	@Nullable
-	public static ASTNode getNextRHTMLNodeByInfo(@NotNull final NodeInfo childNodeInfo)
+	public static ASTNode getNextRHTMLNodeByInfo(@Nonnull final NodeInfo childNodeInfo)
 	{
 		ASTNode childNode;
 		switch(childNodeInfo.getType())
@@ -63,7 +63,7 @@ public abstract class NodeInfo
 	}
 
 	@Nullable
-	public static ASTNode getNextNodeByInfo(@NotNull final NodeInfo childNodeInfo)
+	public static ASTNode getNextNodeByInfo(@Nonnull final NodeInfo childNodeInfo)
 	{
 		ASTNode childNode;
 		switch(childNodeInfo.getType())

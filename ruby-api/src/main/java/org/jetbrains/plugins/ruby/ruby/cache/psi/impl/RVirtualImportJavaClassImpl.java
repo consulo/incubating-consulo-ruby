@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -36,14 +37,14 @@ public class RVirtualImportJavaClassImpl extends RVirtualStructuralElementBase i
 {
 	private final List<RVirtualName> myNames;
 
-	public RVirtualImportJavaClassImpl(final RVirtualContainer container, @NotNull final List<RVirtualName> names)
+	public RVirtualImportJavaClassImpl(final RVirtualContainer container, @Nonnull final List<RVirtualName> names)
 	{
 		super(container);
 		myNames = names;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<RVirtualName> getNames()
 	{
 		return myNames;
@@ -61,7 +62,7 @@ public class RVirtualImportJavaClassImpl extends RVirtualStructuralElementBase i
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualImportJavaClass(this);
 	}

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
@@ -35,7 +35,7 @@ abstract class AbstractRailsLayeredCachedSymbol extends AbstractLayeredCachedSym
 {
 	private final FileSymbolType myNextLayerType;
 
-	public AbstractRailsLayeredCachedSymbol(@NotNull final FileSymbolType nextLayerType, @NotNull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
+	public AbstractRailsLayeredCachedSymbol(@Nonnull final FileSymbolType nextLayerType, @Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk, final boolean jRubyEnabled)
 	{
 		super(project, module, sdk, jRubyEnabled);
 		myNextLayerType = nextLayerType;

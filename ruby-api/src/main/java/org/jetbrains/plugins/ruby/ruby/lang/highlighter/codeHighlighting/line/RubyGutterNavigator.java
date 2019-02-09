@@ -20,10 +20,10 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.annotation.Nonnull;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
@@ -46,7 +46,7 @@ public class RubyGutterNavigator
 {
 	private static final Logger LOG = Logger.getInstance(RubyGutterNavigator.class.getName());
 
-	public static void browse(@NotNull final MouseEvent e, @NotNull final RubyGutterInfo info)
+	public static void browse(@Nonnull final MouseEvent e, @Nonnull final RubyGutterInfo info)
 	{
 		final Project project = info.getProject();
 		final ArrayList<Navigatable> navigatable = new ArrayList<Navigatable>();
@@ -70,7 +70,7 @@ public class RubyGutterNavigator
 		openTargets(e, info.getMode() == RubyGutterInfo.Mode.OVERRIDE ? RBundle.message("line.marker.override.select.variant") : RBundle.message("line.marker.implement.select.variant"), new DefaultPsiElementCellRenderer(), navigatable.toArray(new Navigatable[navigatable.size()]));
 	}
 
-	public static void openTargets(@NotNull final MouseEvent e, @NotNull final String title, @NotNull final ListCellRenderer listRenderer, @NotNull final Navigatable... targets)
+	public static void openTargets(@Nonnull final MouseEvent e, @Nonnull final String title, @Nonnull final ListCellRenderer listRenderer, @Nonnull final Navigatable... targets)
 	{
 		if(targets.length == 0)
 		{

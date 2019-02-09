@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RFieldAttrReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RFNameReference;
@@ -50,7 +50,7 @@ import com.intellij.util.IncorrectOperationException;
  */
 public class RFNameImpl extends RNamedElementBase implements RFName
 {
-	public RFNameImpl(@NotNull final ASTNode astNode)
+	public RFNameImpl(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
 	}
@@ -84,7 +84,7 @@ public class RFNameImpl extends RNamedElementBase implements RFName
 	}
 
 	@Override
-	public void accept(@NotNull final PsiElementVisitor visitor)
+	public void accept(@Nonnull final PsiElementVisitor visitor)
 	{
 		if(visitor instanceof RubyElementVisitor)
 		{
@@ -102,7 +102,7 @@ public class RFNameImpl extends RNamedElementBase implements RFName
 	}
 
 	@Override
-	protected void checkName(@NonNls @NotNull String newName) throws IncorrectOperationException
+	protected void checkName(@NonNls @Nonnull String newName) throws IncorrectOperationException
 	{
 		if(!TextUtil.isCID(newName) && !TextUtil.isFID(newName) && !TextUtil.isAID(newName))
 		{
@@ -111,7 +111,7 @@ public class RFNameImpl extends RNamedElementBase implements RFName
 	}
 
 	@Override
-	public PsiElement setName(@NotNull String newElementName) throws IncorrectOperationException
+	public PsiElement setName(@Nonnull String newElementName) throws IncorrectOperationException
 	{
 		// We shouldn`t do anything if name is the same
 		if(newElementName.equals(getName()))
@@ -127,7 +127,7 @@ public class RFNameImpl extends RNamedElementBase implements RFName
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RType getType(@Nullable final FileSymbol fileSymbol)
 	{
 		return RTypeUtil.createTypeBySymbol(fileSymbol, ResolveUtil.resolveToSymbol(fileSymbol, getReference()), Context.INSTANCE, true);

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.rails.facet.ui.wizard.tabs.RSpecComponentsInstallerTab;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -57,7 +57,7 @@ public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder
 	}
 
 	@Override
-	public void setAppGenerateWay(@NotNull final Generate generateWay)
+	public void setAppGenerateWay(@Nonnull final Generate generateWay)
 	{
 		myGenerateRailsAppWay = generateWay;
 	}
@@ -76,14 +76,14 @@ public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RSpecConfiguration getRSpecConf()
 	{
 		return myRSpecConf;
 	}
 
 	@Override
-	public void setRSpecConf(@NotNull final RSpecConfiguration rSpecConf)
+	public void setRSpecConf(@Nonnull final RSpecConfiguration rSpecConf)
 	{
 		myRSpecConf = rSpecConf;
 	}
@@ -96,7 +96,7 @@ public class RailsWizardSettingsHolderImpl implements RailsWizardSettingsHolder
 	}
 
 	@Override
-	public void setTestsUnitRootPath(@NotNull final String contentRootPath)
+	public void setTestsUnitRootPath(@Nonnull final String contentRootPath)
 	{
 		//To change body of implemented methods use File | Settings | File Templates.
 	}

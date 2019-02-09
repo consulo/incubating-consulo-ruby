@@ -22,7 +22,7 @@ import com.intellij.openapi.util.Iconable;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
 import consulo.ui.image.ImageEffects;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
@@ -70,7 +70,7 @@ public class RMethodPresentationUtil implements RPresentationConstants
 		return getIcon(rMethod);
 	}
 
-	@NotNull
+	@Nonnull
 	public static ItemPresentation getPresentation(final RVirtualMethod rMethod)
 	{
 		final Image icon = getIcon(rMethod, Iconable.ICON_FLAG_VISIBILITY);
@@ -89,7 +89,7 @@ public class RMethodPresentationUtil implements RPresentationConstants
 	 * @param options Seee RPresentationConstants
 	 * @return formated method representation
 	 */
-	public static String formatName(@NotNull final RVirtualMethod method, final int options)
+	public static String formatName(@Nonnull final RVirtualMethod method, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 		if((options & SHOW_NAME) != 0)

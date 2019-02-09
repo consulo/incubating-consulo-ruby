@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -59,8 +59,8 @@ import com.intellij.psi.util.PsiTreeUtil;
  */
 public abstract class RContainerUtil
 {
-	@NotNull
-	public static List<RStructuralElement> selectElementsByType(@NotNull List<RStructuralElement> fullList, @NotNull final StructureType type)
+	@Nonnull
+	public static List<RStructuralElement> selectElementsByType(@Nonnull List<RStructuralElement> fullList, @Nonnull final StructureType type)
 	{
 		ArrayList<RStructuralElement> list = new ArrayList<RStructuralElement>();
 		for(RStructuralElement element : fullList)
@@ -73,8 +73,8 @@ public abstract class RContainerUtil
 		return list;
 	}
 
-	@NotNull
-	public static List<RVirtualStructuralElement> selectVirtualElementsByType(@NotNull List<RVirtualStructuralElement> fullList, @NotNull final StructureType type)
+	@Nonnull
+	public static List<RVirtualStructuralElement> selectVirtualElementsByType(@Nonnull List<RVirtualStructuralElement> fullList, @Nonnull final StructureType type)
 	{
 		ArrayList<RVirtualStructuralElement> list = new ArrayList<RVirtualStructuralElement>();
 		for(RVirtualStructuralElement element : fullList)
@@ -97,7 +97,7 @@ public abstract class RContainerUtil
 	 * @return Class element or null.
 	 */
 	@Nullable
-	public static RClass getClassByName(@NotNull final RContainer container, @Nullable final String className)
+	public static RClass getClassByName(@Nonnull final RContainer container, @Nullable final String className)
 	{
 		for(RStructuralElement element : selectElementsByType(container.getStructureElements(), StructureType.CLASS))
 		{
@@ -120,7 +120,7 @@ public abstract class RContainerUtil
 	 * @return Class element or null.
 	 */
 	@Nullable
-	public static RVirtualClass getVClassByName(@NotNull final RVirtualContainer container, @Nullable final String className)
+	public static RVirtualClass getVClassByName(@Nonnull final RVirtualContainer container, @Nullable final String className)
 	{
 		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS))
 		{
@@ -142,7 +142,7 @@ public abstract class RContainerUtil
 	 * @return Method element or null.
 	 */
 	@Nullable
-	public static RMethod getMethodByName(@NotNull final RContainer container, @Nullable final String methodName)
+	public static RMethod getMethodByName(@Nonnull final RContainer container, @Nullable final String methodName)
 	{
 		for(RStructuralElement element : selectElementsByType(container.getStructureElements(), StructureType.METHOD))
 		{
@@ -174,7 +174,7 @@ public abstract class RContainerUtil
 	 * @return Method element or null.
 	 */
 	@Nullable
-	public static RModule getModuleByName(@NotNull final RContainer container, @Nullable final String moduleName)
+	public static RModule getModuleByName(@Nonnull final RContainer container, @Nullable final String moduleName)
 	{
 		for(RStructuralElement element : selectElementsByType(container.getStructureElements(), StructureType.MODULE))
 		{
@@ -195,7 +195,7 @@ public abstract class RContainerUtil
 	 * @param element       RPsiElement to check
 	 * @return true, if belongs
 	 */
-	public static boolean belongsToRContainer(@NotNull final RPsiElement element, @NotNull final StructureType containerType)
+	public static boolean belongsToRContainer(@Nonnull final RPsiElement element, @Nonnull final StructureType containerType)
 	{
 		final RContainer container = PsiTreeUtil.getParentOfType(element, RContainer.class);
 		//noinspection SimplifiableIfStatement
@@ -206,8 +206,8 @@ public abstract class RContainerUtil
 		return container.getType() == containerType;
 	}
 
-	@NotNull
-	public static List<RStructuralElement> getStructureElements(@NotNull final RContainer container)
+	@Nonnull
+	public static List<RStructuralElement> getStructureElements(@Nonnull final RContainer container)
 	{
 		final Ref<AccessModifier> scopeAccessModifier = new Ref<AccessModifier>(container.getDefaultChildAccessModifier());
 		final List<RStructuralElement> elements = new ArrayList<RStructuralElement>();
@@ -258,19 +258,19 @@ public abstract class RContainerUtil
 		RubySystemCallVisitor callVisitor = new RubySystemCallVisitor()
 		{
 			@Override
-			public void visitPublicCall(@NotNull RCall rCall)
+			public void visitPublicCall(@Nonnull RCall rCall)
 			{
 				setAccessModifiers(elements, rCall.getArguments(), AccessModifier.PUBLIC);
 			}
 
 			@Override
-			public void visitProtectedCall(@NotNull RCall rCall)
+			public void visitProtectedCall(@Nonnull RCall rCall)
 			{
 				setAccessModifiers(elements, rCall.getArguments(), AccessModifier.PROTECTED);
 			}
 
 			@Override
-			public void visitPrivateCall(@NotNull RCall rCall)
+			public void visitPrivateCall(@Nonnull RCall rCall)
 			{
 				setAccessModifiers(elements, rCall.getArguments(), AccessModifier.PRIVATE);
 			}
@@ -283,7 +283,7 @@ public abstract class RContainerUtil
 
 
 	@Nullable
-	private static RContainerBase getContainerByName(final List<RStructuralElement> list, @NotNull final String name)
+	private static RContainerBase getContainerByName(final List<RStructuralElement> list, @Nonnull final String name)
 	{
 		for(RStructuralElement element : list)
 		{
@@ -299,7 +299,7 @@ public abstract class RContainerUtil
 		return null;
 	}
 
-	private static void setAccessModifiers(@NotNull final List<RStructuralElement> list, @NotNull final List<RPsiElement> args, final AccessModifier modifier)
+	private static void setAccessModifiers(@Nonnull final List<RStructuralElement> list, @Nonnull final List<RPsiElement> args, final AccessModifier modifier)
 	{
 		for(RPsiElement arg : args)
 		{
@@ -331,15 +331,15 @@ public abstract class RContainerUtil
 	 * @param container Container for classes.
 	 * @return list of RVirtualClasses
 	 */
-	@NotNull
-	public static List<RVirtualClass> getTopLevelClasses(@NotNull final RVirtualContainer container)
+	@Nonnull
+	public static List<RVirtualClass> getTopLevelClasses(@Nonnull final RVirtualContainer container)
 	{
 		List<RVirtualClass> allClasses = new ArrayList<RVirtualClass>();
 		gatherClasses(container, allClasses);
 		return allClasses;
 	}
 
-	private static void gatherClasses(@NotNull final RVirtualContainer container, @NotNull final List<RVirtualClass> allClasses)
+	private static void gatherClasses(@Nonnull final RVirtualContainer container, @Nonnull final List<RVirtualClass> allClasses)
 	{
 		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS))
 		{
@@ -353,7 +353,7 @@ public abstract class RContainerUtil
 		}
 	}
 
-	public static List<RVirtualModule> getTopLevelModules(@NotNull final RVirtualContainer container)
+	public static List<RVirtualModule> getTopLevelModules(@Nonnull final RVirtualContainer container)
 	{
 		final ArrayList<RVirtualModule> modules = new ArrayList<RVirtualModule>();
 		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.MODULE))
@@ -365,7 +365,7 @@ public abstract class RContainerUtil
 	}
 
 
-	public static RVirtualClass getFirstClassInFile(@Nullable final VirtualFile file, @NotNull final Module module)
+	public static RVirtualClass getFirstClassInFile(@Nullable final VirtualFile file, @Nonnull final Module module)
 	{
 		if(file != null)
 		{
@@ -384,7 +384,7 @@ public abstract class RContainerUtil
 		return null;
 	}
 
-	public static RVirtualModule getFirstModuleInFile(@Nullable final VirtualFile file, @NotNull final Module module)
+	public static RVirtualModule getFirstModuleInFile(@Nullable final VirtualFile file, @Nonnull final Module module)
 	{
 		if(file != null)
 		{

@@ -16,13 +16,15 @@
 
 package rb.refactoring;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,10 +35,10 @@ public interface RubyRefactoringHandler {
     /*
      * Same as RefactoringActionHandler.invoke(@NotNull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext);
      */
-    void invoke(@NotNull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext);
+    void invoke(@Nonnull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext);
 
     /*
      * Same as RefactoringActionHandler.invokeOutter(@NotNull Project project, @NotNull PsiElement[] elements, @Nullable DataContext dataContext);
      */
-    void invokeOutter(@NotNull Project project, @NotNull PsiElement[] elements, @Nullable DataContext dataContext);
+    void invokeOutter(@Nonnull Project project, @Nonnull PsiElement[] elements, @Nullable DataContext dataContext);
 }

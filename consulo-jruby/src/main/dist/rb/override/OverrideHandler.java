@@ -19,7 +19,7 @@ package rb.override;
 import com.intellij.codeInsight.generation.ClassMember;
 import com.intellij.lang.LanguageCodeInsightActionHandler;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public interface OverrideHandler extends LanguageCodeInsightActionHandler {
     /*
      * Creates list of classMembers to override
      */
-    public List<ClassMember> create_override_members(@NotNull final Project project,
-                                                     @NotNull final Symbol class_symbol);
+    public List<ClassMember> create_override_members(@Nonnull final Project project,
+                                                     @Nonnull final Symbol class_symbol);
     
 }

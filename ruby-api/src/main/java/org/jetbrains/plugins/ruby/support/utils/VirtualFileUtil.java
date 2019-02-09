@@ -22,9 +22,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -46,7 +48,7 @@ public class VirtualFileUtil
 	 * @param name file name
 	 * @return url for file with name in directory dir
 	 */
-	public static String constructUrl(@NotNull final VirtualFile dir, final String name)
+	public static String constructUrl(@Nonnull final VirtualFile dir, final String name)
 	{
 		return dir.getUrl() + VFS_PATH_SEPARATOR + name;
 	}
@@ -57,8 +59,8 @@ public class VirtualFileUtil
 	 * @param urls Urls
 	 * @return found files or empty array
 	 */
-	@NotNull
-	public static VirtualFile[] getFiles(@NotNull final List<String> urls)
+	@Nonnull
+	public static VirtualFile[] getFiles(@Nonnull final List<String> urls)
 	{
 		final VirtualFileManager virtualFileManager = VirtualFileManager.getInstance();
 		final List<VirtualFile> files = new ArrayList<VirtualFile>();
@@ -81,8 +83,8 @@ public class VirtualFileUtil
 	 * @param url Url for virtual file
 	 * @return file name with extension
 	 */
-	@NotNull
-	public static String getFileName(@NotNull final String url)
+	@Nonnull
+	public static String getFileName(@Nonnull final String url)
 	{
 		final int index = url.lastIndexOf(VFS_PATH_SEPARATOR);
 		return index < 0 ? url : url.substring(index + 1);
@@ -108,7 +110,7 @@ public class VirtualFileUtil
 	 * @return file extension
 	 */
 	@Nullable
-	public static String getExtension(@NotNull final String fileName)
+	public static String getExtension(@Nonnull final String fileName)
 	{
 		int index = fileName.lastIndexOf('.');
 		return index < 0 ? null : fileName.substring(index + 1);
@@ -118,8 +120,8 @@ public class VirtualFileUtil
 	 * @param fileName virtual file name
 	 * @return name without extension
 	 */
-	@NotNull
-	public static String removeExtension(@NotNull final String fileName)
+	@Nonnull
+	public static String removeExtension(@Nonnull final String fileName)
 	{
 		int i = fileName.length() - 1;
 		for(; i >= 0; i--)
@@ -138,14 +140,14 @@ public class VirtualFileUtil
 	 * @param path Path
 	 * @return url
 	 */
-	@NotNull
-	public static String constructLocalUrl(@NotNull final String path)
+	@Nonnull
+	public static String constructLocalUrl(@Nonnull final String path)
 	{
 		return VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL, toSystemIndependentName(path));
 	}
 
-	@NotNull
-	public static String getNameWithoutExtension(@NotNull final String fileName)
+	@Nonnull
+	public static String getNameWithoutExtension(@Nonnull final String fileName)
 	{
 		int index = fileName.lastIndexOf('.');
 		return index < 0 ? fileName : fileName.substring(0, index);
@@ -158,7 +160,7 @@ public class VirtualFileUtil
 	 * @param file2 file2
 	 * @return compare result
 	 */
-	public static int compareVirtualFiles(@NotNull final VirtualFile file1, @NotNull final VirtualFile file2)
+	public static int compareVirtualFiles(@Nonnull final VirtualFile file1, @Nonnull final VirtualFile file2)
 	{
 		String path1 = file1.getPath();
 		String path2 = file2.getPath();
@@ -170,14 +172,14 @@ public class VirtualFileUtil
 		return file != null && file.isValid();
 	}
 
-	public static String buildUrl(@NotNull final String rootUrl, @NotNull final String relativePath)
+	public static String buildUrl(@Nonnull final String rootUrl, @Nonnull final String relativePath)
 	{
 		return rootUrl +
 				//#TODO normalize
 				(rootUrl.endsWith(String.valueOf(VFS_PATH_SEPARATOR)) ? "" : VFS_PATH_SEPARATOR) + toSystemIndependentName(relativePath);
 	}
 
-	public static String buildSystemIndependentPath(@NotNull final String rootPath, @NotNull final String relativePath)
+	public static String buildSystemIndependentPath(@Nonnull final String rootPath, @Nonnull final String relativePath)
 	{
 		final String rootPathIN = toSystemIndependentName(rootPath);
 		return rootPathIN + (rootPathIN.endsWith(String.valueOf(VFS_PATH_SEPARATOR)) ? "" : VFS_PATH_SEPARATOR) + toSystemIndependentName(relativePath);
@@ -200,12 +202,12 @@ public class VirtualFileUtil
 		return constructLocalUrl(path);
 	}
 
-	public static VirtualFile findFileByLocalPath(@NotNull final String generateScriptPath)
+	public static VirtualFile findFileByLocalPath(@Nonnull final String generateScriptPath)
 	{
 		return VirtualFileManager.getInstance().findFileByUrl(constructLocalUrl(generateScriptPath));
 	}
 
-	public static VirtualFile refreshAndFindFileByLocalPath(@NotNull final String generateScriptPath)
+	public static VirtualFile refreshAndFindFileByLocalPath(@Nonnull final String generateScriptPath)
 	{
 		return VirtualFileManager.getInstance().refreshAndFindFileByUrl(constructLocalUrl(generateScriptPath));
 	}
@@ -216,7 +218,7 @@ public class VirtualFileUtil
 	}
 
 	@Nullable
-	public static String getRelativePath(@NotNull final String filePathOrUrl, @NotNull final String rootPathOrUrl)
+	public static String getRelativePath(@Nonnull final String filePathOrUrl, @Nonnull final String rootPathOrUrl)
 	{
 		if(filePathOrUrl.length() < rootPathOrUrl.length())
 		{
@@ -239,8 +241,8 @@ public class VirtualFileUtil
 		}
 	}
 
-	@NotNull
-	public static String convertToVFSPathAndNormalizeSlashes(@NotNull final String path)
+	@Nonnull
+	public static String convertToVFSPathAndNormalizeSlashes(@Nonnull final String path)
 	{
 		final String newPath = toSystemIndependentName(path);
 		if(newPath.length() != 0 && newPath.charAt(newPath.length() - 1) == VFS_PATH_SEPARATOR)

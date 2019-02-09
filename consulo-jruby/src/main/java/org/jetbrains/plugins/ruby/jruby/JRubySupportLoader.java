@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.jruby;
 import java.util.Collections;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
@@ -93,7 +93,7 @@ public class JRubySupportLoader
 		});
 	}
 
-	public static void loadJRubyTestComponents(@NotNull final String path)
+	public static void loadJRubyTestComponents(@Nonnull final String path)
 	{
 		ClassLoader oldCtxLoad = Thread.currentThread().getContextClassLoader();
 		try

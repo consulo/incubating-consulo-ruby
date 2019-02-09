@@ -21,7 +21,8 @@ import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptio
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
@@ -50,7 +51,7 @@ public class RProjectSettings implements PersistentStateComponent<RProjectSettin
 		generatorsOptions.setOption(Option.SKIP, true);
 	}
 
-	public static RProjectSettings getInstance(@NotNull final Project project)
+	public static RProjectSettings getInstance(@Nonnull final Project project)
 	{
 		return ServiceManager.getService(project, RProjectSettings.class);
 	}
@@ -87,7 +88,7 @@ public class RProjectSettings implements PersistentStateComponent<RProjectSettin
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public GeneratorOptions getGeneratorsOptions()
 	{
 		return generatorsOptions;

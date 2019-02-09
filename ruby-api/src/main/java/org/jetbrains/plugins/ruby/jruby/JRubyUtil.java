@@ -16,10 +16,13 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
+import javax.annotation.Nonnull;
+
 import consulo.jruby.module.extension.JRubyModuleExtension;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -38,7 +41,7 @@ public class JRubyUtil
 	 * @param module some module
 	 * @return true if module is Java module with JRuby facet
 	 */
-	public static boolean hasJRubySupport(@NotNull final Module module)
+	public static boolean hasJRubySupport(@Nonnull final Module module)
 	{
 		return ModuleUtilCore.getExtension(module, JRubyModuleExtension.class) != null;
 	}
@@ -48,7 +51,7 @@ public class JRubyUtil
 	 * @return Jdk selected for given module
 	 */
 	@Nullable
-	public static Sdk getJRubyFacetSdk(@NotNull final Module module)
+	public static Sdk getJRubyFacetSdk(@Nonnull final Module module)
 	{
 		JRubyModuleExtension extension = ModuleUtilCore.getExtension(module, JRubyModuleExtension.class);
 		if(extension == null)

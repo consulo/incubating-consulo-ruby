@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
@@ -43,7 +43,7 @@ public class NamingConventions
 	}
 
 	//TODO rename to "camelize"
-	@NotNull
+	@Nonnull
 	public static String toMixedCase(@Nullable final String name)
 	{
 		if(name == null)
@@ -82,7 +82,7 @@ public class NamingConventions
 		return buffer.toString();
 	}
 
-	@NotNull
+	@Nonnull
 	public static String toUnderscoreCase(@Nullable final String name)
 	{
 		if(name == null)

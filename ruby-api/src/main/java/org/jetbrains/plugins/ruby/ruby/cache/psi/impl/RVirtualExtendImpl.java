@@ -18,7 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualExtend;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -33,7 +34,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
  */
 public class RVirtualExtendImpl extends RVirtualIncludeImpl implements RVirtualExtend
 {
-	public RVirtualExtendImpl(RVirtualContainer container, @NotNull List<RVirtualName> names)
+	public RVirtualExtendImpl(RVirtualContainer container, @Nonnull List<RVirtualName> names)
 	{
 		super(container, names);
 	}
@@ -50,7 +51,7 @@ public class RVirtualExtendImpl extends RVirtualIncludeImpl implements RVirtualE
 	}
 
 	@Override
-	public void accept(@NotNull RubyVirtualElementVisitor visitor)
+	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
 	{
 		visitor.visitRVirtualExtend(this);
 	}

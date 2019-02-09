@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.jruby.inspections;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
@@ -41,28 +41,28 @@ public class JRubyImplementInterfaceFix implements LocalQuickFix
 	protected Symbol mySymbol;
 	protected PsiElement myEndElement;
 
-	public JRubyImplementInterfaceFix(@NotNull final PsiElement endElement, @NotNull final Symbol symbol)
+	public JRubyImplementInterfaceFix(@Nonnull final PsiElement endElement, @Nonnull final Symbol symbol)
 	{
 		myEndElement = endElement;
 		mySymbol = symbol;
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return "Implement methods";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getFamilyName()
 	{
 		return "JRuby";
 	}
 
 	@Override
-	public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor)
+	public void applyFix(@Nonnull final Project project, @Nonnull final ProblemDescriptor descriptor)
 	{
 		final ImplementHandler handler = null; //(ImplementHandler) RubyLanguage.INSTANCE.getImplementMethodsHandler();
 		if(handler != null)

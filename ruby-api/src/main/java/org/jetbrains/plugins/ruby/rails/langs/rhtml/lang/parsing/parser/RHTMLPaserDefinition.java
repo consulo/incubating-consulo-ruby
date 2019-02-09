@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer._RHTMLLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
@@ -57,7 +57,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Lexer createLexer(LanguageVersion languageVersion)
 	{
 		return new _RHTMLLexer();
@@ -70,7 +70,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
 	{
 		if(myWhitespaceTokens == null)
@@ -81,7 +81,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public TokenSet getCommentTokens(LanguageVersion languageVersion)
 	{
 		if(myCommentTokens == null)
@@ -93,15 +93,15 @@ public class RHTMLPaserDefinition implements ParserDefinition
 		return myCommentTokens;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
 	{
 		return myTemplateParserDefinition.getStringLiteralElements(languageVersion);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiParser createParser(LanguageVersion languageVersion)
 	{
 		//We use RHML_FILE instead of this. Shouldn't be invoked!
@@ -126,7 +126,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public PsiElement createElement(final ASTNode node)
 	{
 		return RHTMLPsiCreator.createElement(node);

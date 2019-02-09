@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.CallAccess;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
@@ -25,7 +26,7 @@ public class CallAccessImpl extends AbstractReferenceAccess implements CallAcces
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public RPsiElement getCall()
 	{
 		return myValue;

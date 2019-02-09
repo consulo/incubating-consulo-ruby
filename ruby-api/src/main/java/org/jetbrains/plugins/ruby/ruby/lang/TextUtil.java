@@ -20,7 +20,7 @@ import java.awt.FontMetrics;
 import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -302,14 +302,14 @@ public class TextUtil
 		}
 	}
 
-	@NotNull
-	public static String wrapInParens(@NotNull final String s)
+	@Nonnull
+	public static String wrapInParens(@Nonnull final String s)
 	{
 		return "(" + s + ")";
 	}
 
-	@NotNull
-	public static String replaceEOLS(@NotNull final String s)
+	@Nonnull
+	public static String replaceEOLS(@Nonnull final String s)
 	{
 		return s.replace("\r\n", "\n").replace("\r", "\n");
 	}

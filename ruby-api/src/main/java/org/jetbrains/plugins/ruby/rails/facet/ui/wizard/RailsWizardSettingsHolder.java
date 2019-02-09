@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,11 +35,11 @@ public interface RailsWizardSettingsHolder extends RubyWizardSettingsHolder
 
 	public Generate getAppGenerateWay();
 
-	public void setAppGenerateWay(@NotNull final Generate generateWay);
+	public void setAppGenerateWay(@Nonnull final Generate generateWay);
 
-	public void setRSpecConf(@NotNull final RSpecConfiguration RSpecConf);
+	public void setRSpecConf(@Nonnull final RSpecConfiguration RSpecConf);
 
-	@NotNull
+	@Nonnull
 	public RSpecConfiguration getRSpecConf();
 
 	/**
@@ -68,10 +68,10 @@ public interface RailsWizardSettingsHolder extends RubyWizardSettingsHolder
 
 		public boolean shouldInstallRSpecRailsPlugin();
 
-		@NotNull
+		@Nonnull
 		public String getRSpecArgs();
 
-		@NotNull
+		@Nonnull
 		public String getRSpecRailsArgs();
 
 		@Nullable

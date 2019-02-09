@@ -22,8 +22,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -49,12 +49,12 @@ public class ModelsConventions
 	public static final String ACTIVE_RECORD_MODULE = RailsConstants.SDK_ACTIVE_RECORD_MODULE;
 	public static final String BASE_CLASS = RailsConstants.BASE_CLASS;
 
-	public static boolean isModelFile(@NotNull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isModelFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
 	{
 		return isModelFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isModelFile(@NotNull final RVirtualFile rFile, @Nullable final Module module, @NotNull final List<RVirtualClass> classes)
+	public static boolean isModelFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
 	{
 		if(module == null)
 		{
@@ -82,7 +82,7 @@ public class ModelsConventions
 		return false;
 	}
 
-	public static boolean isModelClass(@Nullable final RVirtualClass rClass, @NotNull final Module module)
+	public static boolean isModelClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{
@@ -151,8 +151,8 @@ public class ModelsConventions
 		//        return buff.toString().equals(rClass.getContainingFileUrl());
 	}
 
-	@NotNull
-	public static List<VirtualFile> getBuiltInAdapters(@NotNull final String activeRecordViewFileUrl)
+	@Nonnull
+	public static List<VirtualFile> getBuiltInAdapters(@Nonnull final String activeRecordViewFileUrl)
 	{
 		final VirtualFileManager manager = VirtualFileManager.getInstance();
 

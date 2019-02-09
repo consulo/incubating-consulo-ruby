@@ -16,8 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.util.InvalidDataException;
@@ -32,7 +33,7 @@ import com.intellij.openapi.util.WriteExternalException;
  */
 public class RDocSettings implements JDOMExternalizable
 {
-	@NotNull
+	@Nonnull
 	public static RDocSettings getInstance()
 	{
 		return ServiceManager.getService(RDocSettings.class);

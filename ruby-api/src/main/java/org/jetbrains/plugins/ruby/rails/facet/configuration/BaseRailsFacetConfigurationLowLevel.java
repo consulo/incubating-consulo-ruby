@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 
@@ -34,9 +34,9 @@ public interface BaseRailsFacetConfigurationLowLevel extends BaseRailsFacetConfi
 
 	public void loadRakeTasks(final boolean forceRegenerate, final Sdk sdk);
 
-	public void setRailsApplicationRootPath(@NotNull final String rootPath);
+	public void setRailsApplicationRootPath(@Nonnull final String rootPath);
 
-	public void setModule(@NotNull final Module uncommitedModule);
+	public void setModule(@Nonnull final Module uncommitedModule);
 
 	@Nullable
 	public String getNullableRailsApplicationRootPath();

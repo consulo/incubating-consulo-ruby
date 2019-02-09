@@ -2,7 +2,7 @@ package consulo.ruby.module.extension;
 
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import consulo.roots.ContentFolderSupportPatcher;
 import consulo.roots.ContentFolderTypeProvider;
@@ -18,7 +18,7 @@ import consulo.roots.impl.TestContentFolderTypeProvider;
 public class BaseRubyContentFolderSupportPatcher implements ContentFolderSupportPatcher
 {
 	@Override
-	public void patch(@NotNull ModifiableRootModel model, @NotNull Set<ContentFolderTypeProvider> set)
+	public void patch(@Nonnull ModifiableRootModel model, @Nonnull Set<ContentFolderTypeProvider> set)
 	{
 		BaseRubyModuleExtension extension = model.getExtension(BaseRubyModuleExtension.class);
 		if(extension != null)

@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.iterators;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.PseudoScopeHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
@@ -28,6 +29,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
  */
 public interface RBlockCall extends RPsiElement, PseudoScopeHolder, RExpression
 {
-	@NotNull
+	@Nonnull
 	RPsiElement getCall();
 }

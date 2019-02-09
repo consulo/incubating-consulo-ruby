@@ -18,10 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.run;
 
 import java.awt.BorderLayout;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -35,12 +35,12 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
  */
 class ConsolePanel extends JPanel
 {
-	public ConsolePanel(@NotNull final ExecutionConsole consoleView, @NotNull final ActionGroup toolbarActions)
+	public ConsolePanel(@Nonnull final ExecutionConsole consoleView, @Nonnull final ActionGroup toolbarActions)
 	{
 		this(consoleView, toolbarActions, null);
 	}
 
-	public ConsolePanel(@NotNull final ExecutionConsole consoleView, @NotNull final ActionGroup toolbarActions, @Nullable final ActionGroup userActions)
+	public ConsolePanel(@Nonnull final ExecutionConsole consoleView, @Nonnull final ActionGroup toolbarActions, @Nullable final ActionGroup userActions)
 	{
 		super(new BorderLayout());
 		JPanel toolbarPanel = new JPanel(new BorderLayout());

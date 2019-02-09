@@ -19,9 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.sdk;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -41,13 +43,13 @@ public class RubySdkAdditionalData implements SdkAdditionalData
 
 	private String myGemsBinDirectory;
 
-	@NotNull
+	@Nonnull
 	public String getGemsBinDirectory()
 	{
 		return myGemsBinDirectory;
 	}
 
-	public void setGemsBinDirectory(@NotNull final String path)
+	public void setGemsBinDirectory(@Nonnull final String path)
 	{
 		myGemsBinDirectory = path;
 	}
@@ -82,13 +84,13 @@ public class RubySdkAdditionalData implements SdkAdditionalData
 		}
 	}
 
-	public void save(@NotNull final Element rootElement)
+	public void save(@Nonnull final Element rootElement)
 	{
 		rootElement.setAttribute(GEMS_BIN_DIR_PATH, getGemsBinDirectory());
 	}
 
-	@NotNull
-	public static SdkAdditionalData load(@NotNull final Sdk sdk, @Nullable Element additional)
+	@Nonnull
+	public static SdkAdditionalData load(@Nonnull final Sdk sdk, @Nullable Element additional)
 	{
 		final RubySdkAdditionalData data = new RubySdkAdditionalData();
 

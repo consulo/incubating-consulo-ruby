@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import com.intellij.psi.PsiElement;
 
@@ -30,7 +30,7 @@ import com.intellij.psi.PsiElement;
 public class RMathBinExpressionNavigator
 {
 	@Nullable
-	public static RMathBinExpressionImpl getByRBaseString(@NotNull final RBaseString string)
+	public static RMathBinExpressionImpl getByRBaseString(@Nonnull final RBaseString string)
 	{
 		final PsiElement parent = string.getParent();
 		return (parent instanceof RMathBinExpressionImpl) ? (RMathBinExpressionImpl) parent : null;
