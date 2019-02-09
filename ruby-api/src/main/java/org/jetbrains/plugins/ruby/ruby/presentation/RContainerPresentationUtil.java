@@ -16,12 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
-import consulo.ide.IconDescriptorUpdaters;
-import consulo.ui.image.Image;
-import consulo.ui.image.ImageEffects;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
@@ -31,10 +29,10 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
-
-import java.util.List;
-
-import javax.annotation.Nullable;
+import com.intellij.psi.PsiElement;
+import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
+import consulo.ui.image.ImageEffects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -126,7 +124,7 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	public static Image getIconWithModifiers(final RVirtualContainer container)
 	{
 		final AccessModifier modifier = container.getAccessModifier();
-		return ImageEffects.appendRight(IconDescriptorUpdaters.getIcon((PsiElement) container, Iconable.ICON_FLAG_OPEN), getIconForAccessModifier(modifier));
+		return ImageEffects.appendRight(IconDescriptorUpdaters.getIcon((PsiElement) container, 0), getIconForAccessModifier(modifier));
 	}
 
 	@Nullable

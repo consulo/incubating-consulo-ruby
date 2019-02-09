@@ -20,10 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-
-import consulo.ui.image.Image;
-
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
@@ -53,8 +51,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.RCommandArgumentListImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import consulo.awt.TargetAWT;
-import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiClass;
@@ -62,6 +58,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiJavaPackage;
 import com.intellij.psi.PsiMethod;
+import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -174,7 +172,7 @@ public class SymbolPresentationUtil
 		}
 		else if(lastPrototype instanceof RVirtualAlias)
 		{
-			icon = TargetAWT.from(((RVirtualAlias) lastPrototype).getIcon(Iconable.ICON_FLAG_OPEN));
+			icon = ((RVirtualAlias) lastPrototype).getIcon(0);
 		}
 		else if(lastPrototype instanceof RVirtualFieldAttr)
 		{

@@ -16,8 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import consulo.awt.TargetAWT;
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -25,10 +27,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
-import java.io.Serializable;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -88,9 +87,9 @@ public class RVirtualAliasImpl extends RVirtualStructuralElementBase implements 
 
 	@Override
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
-		return TargetAWT.to(RAliasPresentationUtil.getIcon());
+		return RAliasPresentationUtil.getIcon();
 	}
 
 }

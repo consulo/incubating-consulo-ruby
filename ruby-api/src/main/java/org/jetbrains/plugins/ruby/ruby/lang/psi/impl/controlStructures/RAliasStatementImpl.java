@@ -16,12 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElementVisitor;
-import consulo.awt.TargetAWT;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -34,8 +31,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatemen
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElementVisitor;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -135,9 +134,9 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 
 	@Override
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
-		return TargetAWT.to(RAliasPresentationUtil.getIcon());
+		return RAliasPresentationUtil.getIcon();
 	}
 
 	@Override

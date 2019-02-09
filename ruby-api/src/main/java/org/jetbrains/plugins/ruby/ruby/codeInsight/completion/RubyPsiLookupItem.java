@@ -16,20 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
-import com.intellij.codeInsight.lookup.*;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
+import java.awt.Color;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
-import java.awt.*;
+import com.intellij.codeInsight.lookup.DeferredUserLookupValue;
+import com.intellij.codeInsight.lookup.LookupItem;
+import com.intellij.codeInsight.lookup.LookupValueWithPriority;
+import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
+import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
+import com.intellij.codeInsight.lookup.PresentableLookupValue;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiElement;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +42,6 @@ import java.awt.*;
  */
 public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue, DeferredUserLookupValue, LookupValueWithUIHint, LookupValueWithPsiElement, LookupValueWithPriority, Iconable
 {
-
 	private RVirtualElement myPrototype;
 	private String myLookupString;
 	private String myTypeText;
@@ -126,9 +128,9 @@ public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue
 	}
 
 	@Override
-	public Icon getIcon(int flags)
+	public Image getIcon(int flags)
 	{
-		return TargetAWT.to(myIcon);
+		return myIcon;
 	}
 
 	public String getTailText()

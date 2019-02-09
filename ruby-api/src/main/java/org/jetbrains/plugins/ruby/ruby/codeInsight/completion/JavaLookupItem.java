@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
+import java.awt.Color;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.lookup.LookupValueWithPriority;
 import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
 import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
@@ -23,14 +27,8 @@ import com.intellij.codeInsight.lookup.PresentableLookupValue;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.ui.RowIcon;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
-import javax.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
-
-import javax.swing.*;
-import java.awt.*;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -83,12 +81,9 @@ public class JavaLookupItem implements RubyLookupItem, PresentableLookupValue, L
 	}
 
 	@Override
-	public Icon getIcon(int flags)
+	public Image getIcon(int flags)
 	{
-		final RowIcon icon = new RowIcon(2);
-		icon.setIcon(TargetAWT.to(JavaClassPackagePresentationUtil.getJavaIcon()), 0);
-		icon.setIcon(TargetAWT.to(IconDescriptorUpdaters.getIcon(myElement, 0)), 1);
-		return icon;
+		return IconDescriptorUpdaters.getIcon(myElement, 0);
 	}
 
 	@Override
