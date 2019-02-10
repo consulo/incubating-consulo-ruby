@@ -16,13 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
-import consulo.ui.image.ImageEffects;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
@@ -31,8 +28,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.Argume
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods.RCommandArgumentListImpl;
-
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import consulo.ui.image.Image;
+import consulo.ui.image.ImageEffects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -74,7 +74,7 @@ public class RMethodPresentationUtil implements RPresentationConstants
 	public static ItemPresentation getPresentation(final RVirtualMethod rMethod)
 	{
 		final Image icon = getIcon(rMethod, Iconable.ICON_FLAG_VISIBILITY);
-		return new PresentationData(rMethod.getPresentableName(), TextUtil.wrapInParens(getLocation(rMethod)), TargetAWT.to(icon), null);
+		return new PresentationData(rMethod.getPresentableName(), TextUtil.wrapInParens(getLocation(rMethod)), icon, null);
 	}
 
 	private static String getLocation(final RVirtualMethod rMethod)

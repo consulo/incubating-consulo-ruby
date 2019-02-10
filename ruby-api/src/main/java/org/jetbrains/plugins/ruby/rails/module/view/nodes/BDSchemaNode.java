@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
 import javax.annotation.Nonnull;
 
-import consulo.awt.TargetAWT;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import com.intellij.openapi.module.Module;
@@ -34,7 +33,7 @@ public class BDSchemaNode extends SimpleFileNode
 {
 	public BDSchemaNode(final Module module, final VirtualFile file)
 	{
-		super(module, file, TargetAWT.to(RailsIcons.RAILS_SCHEMA_FILE));
+		super(module, file, RailsIcons.RAILS_SCHEMA_FILE);
 	}
 
 	@Override

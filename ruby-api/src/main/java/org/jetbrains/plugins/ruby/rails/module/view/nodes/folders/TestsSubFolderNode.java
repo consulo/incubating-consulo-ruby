@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
+import java.util.List;
+
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -65,6 +64,6 @@ public class TestsSubFolderNode extends FolderNode
 
 	private static PresentationData initPresentationData(final String name)
 	{
-		return new PresentationData(name, name, TargetAWT.to(TESTS_CLOSED), null);
+		return new PresentationData(name, name, TESTS_CLOSED, null);
 	}
 }

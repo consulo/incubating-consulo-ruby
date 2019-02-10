@@ -44,7 +44,7 @@ public class RailsControllersFolderNode extends ControllerSubFolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(CONTROLLERS_VIEW_NAME, CONTROLLERS_VIEW_NAME, RailsIcons.RAILS_CONTROLERS_NODES, RailsIcons.RAILS_CONTROLERS_NODES, null);
+		return new PresentationData(CONTROLLERS_VIEW_NAME, CONTROLLERS_VIEW_NAME, RailsIcons.RAILS_CONTROLERS_NODES, null);
 	}
 
 	@Override

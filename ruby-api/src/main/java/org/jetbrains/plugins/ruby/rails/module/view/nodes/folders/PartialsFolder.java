@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import consulo.awt.TargetAWT;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,6 +60,6 @@ public class PartialsFolder extends FolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(PARTIALS_FOLDER, PARTIALS_FOLDER, TargetAWT.to(RailsIcons.RAILS_PARTIALS_CLOSED), null);
+		return new PresentationData(PARTIALS_FOLDER, PARTIALS_FOLDER, RailsIcons.RAILS_PARTIALS_CLOSED, null);
 	}
 }

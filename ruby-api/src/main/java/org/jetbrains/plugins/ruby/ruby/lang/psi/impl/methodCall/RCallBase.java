@@ -16,21 +16,31 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import consulo.awt.TargetAWT;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaReferencesBuilder;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualExtend;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualInclude;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaPackage;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.*;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualExtendImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualImportJavaClassImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualIncludeImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualIncludeJavaClassImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualIncludeJavaPackageImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualLoadImpl;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualRequireImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables.RVirtualFieldAttrImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
@@ -52,11 +62,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
 import org.jetbrains.plugins.ruby.ruby.presentation.JavaClassPackagePresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldAttrPresentationUtil;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Comparing;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -346,19 +359,19 @@ public abstract class RCallBase extends RPsiElementBase implements RPsiElement, 
 	}
 
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
 		final FieldAttrType type = getFieldAttrType();
 		if(type != null)
 		{
-			return TargetAWT.to(RFieldAttrPresentationUtil.getAttrIcon(type));
+			return RFieldAttrPresentationUtil.getAttrIcon(type);
 		}
 
 		if(getCallType() == RubyCallType.IMPORT_CALL ||
 				getCallType() == RubyCallType.INCLUDE_CLASS_CALL ||
 				getCallType() == RubyCallType.INCLUDE_PACKAGE_CALL)
 		{
-			return TargetAWT.to(JavaClassPackagePresentationUtil.getIncludeIcon());
+			return JavaClassPackagePresentationUtil.getIncludeIcon();
 		}
 		return null;
 	}

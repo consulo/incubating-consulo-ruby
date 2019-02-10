@@ -42,7 +42,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.Navigatable;
-import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
 
 /**
@@ -101,7 +100,7 @@ public class RClassNode extends ProjectViewNode<RVirtualClass>
 	protected void update(PresentationData data)
 	{
 		final RVirtualClass aClass = getValue();
-		data.setIcon(TargetAWT.to(myIcon));
+		data.setIcon(myIcon);
 		data.setLocationString(RClassPresentationUtil.getLocation(aClass));
 		data.setPresentableText(RClassPresentationUtil.formatName(aClass, RPresentationConstants.SHOW_NAME));
 	}

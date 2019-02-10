@@ -16,21 +16,21 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
-
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -60,7 +60,7 @@ public class UserSubFolderNode extends FolderNode
 			iconClosed = RailsIcons.RAILS_FOLDER_CLOSED;
 		}
 		final String name = dir.getName();
-		return new PresentationData(name, name, TargetAWT.to(iconClosed), null);
+		return new PresentationData(name, name, iconClosed, null);
 	}
 
 

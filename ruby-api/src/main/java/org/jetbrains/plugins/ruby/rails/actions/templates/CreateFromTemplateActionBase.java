@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
 import javax.annotation.Nullable;
-import javax.swing.Icon;
 
 import com.intellij.ide.IdeView;
 import com.intellij.ide.fileTemplates.FileTemplate;
@@ -30,6 +29,7 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +40,7 @@ import com.intellij.psi.PsiElement;
 public abstract class CreateFromTemplateActionBase extends AnAction
 {
 
-	public CreateFromTemplateActionBase(final String text, final String description, final Icon icon)
+	public CreateFromTemplateActionBase(final String text, final String description, final Image icon)
 	{
 		super(text, description, icon);
 	}

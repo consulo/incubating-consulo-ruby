@@ -18,16 +18,15 @@ package org.jetbrains.plugins.ruby.ruby.presentation;
 
 import javax.annotation.Nonnull;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
-import consulo.ui.image.ImageEffects;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
+import consulo.ui.image.ImageEffects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -90,7 +89,7 @@ public class RFieldAttrPresentationUtil implements RubyIcons
 	{
 		assert rCall.getCallType().isAttributeCall();
 		final Image icon = getAttrIcon(rCall.getFieldAttrType());
-		return new PresentationData(rCall.getText(), TextUtil.wrapInParens(getLocation(rCall)), TargetAWT.to(icon), null);
+		return new PresentationData(rCall.getText(), TextUtil.wrapInParens(getLocation(rCall)), icon, null);
 	}
 
 	public static String getLocation(@Nonnull final RCall call)

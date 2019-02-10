@@ -21,9 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
-
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualLoad;
@@ -37,6 +36,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
 import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -102,7 +102,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 		return RFilePresentationUtil.getPresentation(this);
 	}
 
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
 		return RFilePresentationUtil.getIcon();
 	}

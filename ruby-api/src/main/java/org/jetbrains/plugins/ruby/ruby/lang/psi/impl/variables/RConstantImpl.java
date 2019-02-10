@@ -16,16 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NonNls;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamContext;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDef;
@@ -48,9 +42,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RConstantPresentationUtil;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -105,9 +103,9 @@ public class RConstantImpl extends RNamedElementBase implements RConstant
 	}
 
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
-		return TargetAWT.to(RConstantPresentationUtil.getIcon());
+		return RConstantPresentationUtil.getIcon();
 	}
 
 	@Override

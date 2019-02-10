@@ -18,13 +18,12 @@ package org.jetbrains.plugins.ruby.ruby.presentation;
 
 import javax.annotation.Nonnull;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,7 +41,7 @@ public class RGlobalVariablePresentationUtil
 	public static ItemPresentation getPresentation(@Nonnull final RVirtualGlobalVar var)
 	{
 		final Image icon = getIcon();
-		return new PresentationData(var.getText(), TextUtil.wrapInParens(getLocation(var)), TargetAWT.to(icon), null);
+		return new PresentationData(var.getText(), TextUtil.wrapInParens(getLocation(var)), icon, null);
 	}
 
 	public static String getLocation(@Nonnull final RVirtualGlobalVar var)

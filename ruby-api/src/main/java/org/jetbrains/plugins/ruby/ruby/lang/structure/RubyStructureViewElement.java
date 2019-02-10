@@ -16,21 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.navigation.NavigationItem;
-import consulo.awt.TargetAWT;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.*;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyStructureVisitor;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.navigation.NavigationItem;
+import consulo.ui.image.Image;
 
 class RubyStructureViewElement implements StructureViewTreeElement
 {
@@ -124,9 +130,9 @@ class RubyStructureViewElement implements StructureViewTreeElement
 			}
 
 			@Override
-			public Icon getIcon()
+			public Image getIcon()
 			{
-				return TargetAWT.to(RubyPsiUtil.getIcon(myElement));
+				return RubyPsiUtil.getIcon(myElement);
 			}
 
 			@Override

@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.Icon;
 
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -29,6 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
 import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,7 +52,7 @@ public class RVirtualModuleImpl extends RVirtualFieldContantContainerImpl implem
 	}
 
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
 		return RModulePresentationUtil.getIcon(this, flags);
 	}

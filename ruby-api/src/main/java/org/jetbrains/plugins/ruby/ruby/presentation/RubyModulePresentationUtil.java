@@ -31,6 +31,6 @@ public class RubyModulePresentationUtil
 {
 	public static ItemPresentation getPresentation(final Module module)
 	{
-		return new PresentationData(module.getName(), module.getModuleDirPath(), RailsIcons.RAILS_MODULE_OPENED, RailsIcons.RAILS_MODULE_CLOSED, null);
+		return new PresentationData(module.getName(), module.getModuleDirPath(), RailsIcons.RAILS_MODULE_CLOSED, null);
 	}
 }

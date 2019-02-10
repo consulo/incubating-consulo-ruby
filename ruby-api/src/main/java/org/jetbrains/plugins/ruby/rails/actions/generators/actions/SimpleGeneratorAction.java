@@ -16,18 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -40,11 +33,16 @@ import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,7 +57,7 @@ public class SimpleGeneratorAction extends AbstractScriptAction
 
 	public SimpleGeneratorAction(@Nonnull final String scriptName, @Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon)
 	{
-		super(actionName, description, TargetAWT.to(icon));
+		super(actionName, description, icon);
 		myGeneratorName = scriptName;
 	}
 

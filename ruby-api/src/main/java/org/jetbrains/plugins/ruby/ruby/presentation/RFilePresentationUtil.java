@@ -16,18 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import consulo.awt.TargetAWT;
-import consulo.ide.IconDescriptorUpdaters;
-import consulo.ui.image.Image;
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import consulo.ide.IconDescriptorUpdaters;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,15 +49,15 @@ public class RFilePresentationUtil
 	 *
 	 * @return Icon
 	 */
-	public static Icon getIcon()
+	public static Image getIcon()
 	{
-		return TargetAWT.to(RubyFileType.INSTANCE.getIcon());
+		return RubyFileType.INSTANCE.getIcon();
 	}
 
 	@Nonnull
 	public static ItemPresentation getPresentation(final RVirtualFile rFile)
 	{
-		final Icon icon = getIcon();
+		final Image icon = getIcon();
 		return new PresentationData(rFile.getName(), TextUtil.wrapInParens(getLocation(rFile)), icon, null);
 	}
 

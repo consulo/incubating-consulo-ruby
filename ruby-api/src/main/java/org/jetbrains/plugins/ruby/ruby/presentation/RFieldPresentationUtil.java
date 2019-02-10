@@ -17,19 +17,17 @@
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
 import javax.annotation.Nonnull;
-
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
-import consulo.ui.image.ImageEffects;
-
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import consulo.ui.image.Image;
+import consulo.ui.image.ImageEffects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -66,7 +64,7 @@ public class RFieldPresentationUtil implements RubyIcons
 	public static ItemPresentation getPresentation(@Nonnull final RVirtualField rVirtualField)
 	{
 		final Image icon = getIcon(rVirtualField, Iconable.ICON_FLAG_VISIBILITY);
-		return new PresentationData(rVirtualField.getName(), TextUtil.wrapInParens(getLocation(rVirtualField)), TargetAWT.to(icon), null);
+		return new PresentationData(rVirtualField.getName(), TextUtil.wrapInParens(getLocation(rVirtualField)), icon, null);
 	}
 
 	public static String getLocation(@Nonnull final RVirtualField field)

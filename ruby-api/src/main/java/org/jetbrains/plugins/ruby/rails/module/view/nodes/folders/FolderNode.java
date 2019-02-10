@@ -16,13 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
-import consulo.awt.TargetAWT;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitorAdapter;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -34,9 +32,11 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -171,7 +171,7 @@ public abstract class FolderNode extends SimpleFileNode
 
 	private static PresentationData initPresentationData(final String name)
 	{
-		return new PresentationData(name, name, TargetAWT.to(RailsIcons.RAILS_FOLDER_CLOSED), null);
+		return new PresentationData(name, name, RailsIcons.RAILS_FOLDER_CLOSED, null);
 	}
 
 	protected SimpleNode getParentNode()

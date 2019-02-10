@@ -16,15 +16,32 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
-import com.intellij.openapi.actionSystem.Shortcut;
-import com.intellij.openapi.keymap.KeyMapBundle;
-import com.intellij.openapi.keymap.Keymap;
-import com.intellij.openapi.keymap.KeymapManager;
-import com.intellij.openapi.keymap.KeymapUtil;
-import com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog;
-import com.intellij.openapi.ui.Messages;
-import consulo.awt.TargetAWT;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
@@ -33,16 +50,14 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.RakeUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
+import com.intellij.openapi.actionSystem.Shortcut;
+import com.intellij.openapi.keymap.KeyMapBundle;
+import com.intellij.openapi.keymap.Keymap;
+import com.intellij.openapi.keymap.KeymapManager;
+import com.intellij.openapi.keymap.KeymapUtil;
+import com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog;
+import com.intellij.openapi.ui.Messages;
+import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -281,7 +296,7 @@ public class RegisteredActionNamesPanel
 			//Register action
 			if(!isGroup && !isRegistered)
 			{
-				new ShortcutAction(info.toString(), cmd, TargetAWT.to(info.getClosedIcon()), treeState).registerInKeyMap(info.getActionId());
+				new ShortcutAction(info.toString(), cmd, info.getClosedIcon(), treeState).registerInKeyMap(info.getActionId());
 			}
 
 			//Add to tree

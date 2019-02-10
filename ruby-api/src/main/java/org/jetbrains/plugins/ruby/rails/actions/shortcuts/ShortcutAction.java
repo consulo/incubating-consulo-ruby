@@ -18,9 +18,8 @@ package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
 import java.util.Map;
 
-import javax.swing.Icon;
-
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.GeneratorsActionGroup;
@@ -32,14 +31,15 @@ import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfig
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.ui.Messages;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,7 +54,7 @@ public class ShortcutAction extends AnAction
 	private ShortcutsTreeState myState;
 	public Map<String, SimpleGeneratorAction> name2Action;
 
-	public ShortcutAction(@Nonnull final String name, @Nonnull final String cmd, final Icon icon, final ShortcutsTreeState state)
+	public ShortcutAction(@Nonnull final String name, @Nonnull final String cmd, final Image icon, final ShortcutsTreeState state)
 	{
 		super(name, getDescription(state, cmd), icon);
 		myCmdName = cmd;

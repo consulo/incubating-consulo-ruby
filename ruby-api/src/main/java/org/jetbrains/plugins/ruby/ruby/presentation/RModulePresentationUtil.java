@@ -16,17 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,19 +49,19 @@ public class RModulePresentationUtil implements RPresentationConstants
 	 * @param flags   com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Icon getIcon(final RVirtualModule rModule, final int flags)
+	public static Image getIcon(final RVirtualModule rModule, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
-			return TargetAWT.to(RContainerPresentationUtil.getIconWithModifiers(rModule));
+			return RContainerPresentationUtil.getIconWithModifiers(rModule);
 		}
-		return TargetAWT.to(getIcon());
+		return getIcon();
 	}
 
 	@Nonnull
 	public static ItemPresentation getPresentation(final RVirtualModule rModule)
 	{
-		final Icon icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
+		final Image icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(formatName(rModule, SHOW_NAME), TextUtil.wrapInParens(getLocation(rModule)), icon, null);
 	}
 

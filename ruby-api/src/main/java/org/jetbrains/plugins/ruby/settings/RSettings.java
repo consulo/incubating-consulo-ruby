@@ -36,7 +36,6 @@ import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -152,7 +151,7 @@ public class RSettings implements Configurable
 			final String cmd = task.getFullCommand();
 			assert cmd != null;
 			final String actionId = RakeTaskNodeInfo.getActionId(task.getFullCommand());
-			new ShortcutAction(task.getId(), cmd, TargetAWT.to(RailsIcons.RAKE_TASK_ICON), ShortcutsTreeState.RAKE_SUBTREE).registerInKeyMap(actionId);
+			new ShortcutAction(task.getId(), cmd, RailsIcons.RAKE_TASK_ICON, ShortcutsTreeState.RAKE_SUBTREE).registerInKeyMap(actionId);
 			return;
 		}
 		final List<? extends RakeTask> children = task.getSubTasks();
@@ -167,7 +166,7 @@ public class RSettings implements Configurable
 		if(!generator.isGroup())
 		{
 			final String actionId = GeneratorNodeInfo.getActionId(generator.getName());
-			new ShortcutAction(generator.getName(), generator.getName(), TargetAWT.to(RailsIcons.GENERATOR_ICON), ShortcutsTreeState.GENERATORS_SUBTREE).registerInKeyMap(actionId);
+			new ShortcutAction(generator.getName(), generator.getName(), RailsIcons.GENERATOR_ICON, ShortcutsTreeState.GENERATORS_SUBTREE).registerInKeyMap(actionId);
 			return;
 		}
 		final List<SerializableGenerator> children = generator.getChildren();

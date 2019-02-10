@@ -18,16 +18,15 @@ package org.jetbrains.plugins.ruby.rails.presentation;
 
 import javax.annotation.Nonnull;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
-import consulo.ui.image.ImageEffects;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import consulo.ui.image.Image;
+import consulo.ui.image.ImageEffects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,6 +63,6 @@ public class RControllerPresentationUtil
 	public static ItemPresentation getPresentation(@Nonnull final RVirtualClass rClass)
 	{
 		final Image icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
-		return new PresentationData(rClass.getName(), RContainerPresentationUtil.getLocation(rClass), TargetAWT.to(icon), null);
+		return new PresentationData(rClass.getName(), RContainerPresentationUtil.getLocation(rClass), icon, null);
 	}
 }

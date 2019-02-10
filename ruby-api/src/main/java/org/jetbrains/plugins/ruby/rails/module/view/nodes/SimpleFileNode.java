@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
 
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -28,7 +27,7 @@ import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
-import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -59,7 +58,7 @@ public class SimpleFileNode extends RailsNode
 	 * @param icon   Icon
 	 * @param file   File
 	 */
-	public SimpleFileNode(final Module module, final VirtualFile file, final Icon icon)
+	public SimpleFileNode(final Module module, final VirtualFile file, final Image icon)
 	{
 		super(module);
 		myFile = file;
@@ -72,14 +71,14 @@ public class SimpleFileNode extends RailsNode
 		return NodeIdUtil.createForFile(fileUrl);
 	}
 
-	private static PresentationData initPresentationData(final VirtualFile file, final Icon icon)
+	private static PresentationData initPresentationData(final VirtualFile file, final Image icon)
 	{
-		final Icon fileIcon = getFileIcon(file, icon);
-		return new PresentationData(file.getName(), file.getName(), fileIcon, fileIcon, null);
+		final Image fileIcon = getFileIcon(file, icon);
+		return new PresentationData(file.getName(), file.getName(), fileIcon, null);
 
 	}
 
-	private static Icon getFileIcon(final VirtualFile file, final Icon icon)
+	private static Image getFileIcon(final VirtualFile file, final Image icon)
 	{
 		if(icon != null)
 		{
@@ -89,10 +88,10 @@ public class SimpleFileNode extends RailsNode
 		{
 			if(RSpecUtil.isRSpecTestFile(file))
 			{
-				return TargetAWT.to(RSpecIcons.TEST_SCRIPT_ICON);
+				return RSpecIcons.TEST_SCRIPT_ICON;
 			}
 		}
-		return TargetAWT.to(FileTypeManager.getInstance().getFileTypeByFile(file).getIcon());
+		return FileTypeManager.getInstance().getFileTypeByFile(file).getIcon();
 	}
 
 	@Override

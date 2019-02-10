@@ -17,9 +17,8 @@
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
-
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -35,6 +34,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
 import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,7 +45,7 @@ import consulo.annotations.RequiredDispatchThread;
 public abstract class AbstractScriptAction extends AnAction
 {
 
-	public AbstractScriptAction(@Nullable final String text, @Nullable final String description, @Nullable final Icon icon)
+	public AbstractScriptAction(@Nullable final String text, @Nullable final String description, @Nullable final Image icon)
 	{
 		super(text, description, icon);
 	}

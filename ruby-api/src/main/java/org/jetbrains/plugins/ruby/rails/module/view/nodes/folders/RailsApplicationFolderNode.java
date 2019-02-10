@@ -99,7 +99,7 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(APPLICATION_NAME, APPLICATION_NAME, RailsIcons.RAILS_APPlICON_NODES, RailsIcons.RAILS_APPlICON_NODES, null);
+		return new PresentationData(APPLICATION_NAME, APPLICATION_NAME, RailsIcons.RAILS_APPlICON_NODES, null);
 	}
 
 	@Override

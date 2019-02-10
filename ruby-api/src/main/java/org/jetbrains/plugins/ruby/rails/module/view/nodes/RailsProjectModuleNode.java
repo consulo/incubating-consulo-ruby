@@ -145,7 +145,7 @@ public class RailsProjectModuleNode extends RailsNode
 	{
 		//TODO add JRails or Rails modules
 		String name = getModule().getName();
-		return new PresentationData(name, name, RailsIcons.RAILS_MODULE_OPENED, RailsIcons.RAILS_MODULE_CLOSED, null);
+		return new PresentationData(name, name, RailsIcons.RAILS_MODULE_CLOSED, null);
 
 	}
 }

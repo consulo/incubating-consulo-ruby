@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import javax.annotation.Nonnull;
+
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
+import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNodeVisitor;
-import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-import javax.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
-import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -65,7 +65,7 @@ public class RailsTestsFolderNode extends TestsSubFolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(TESTS_VIEW_NAME, null, TargetAWT.to(TEST_ROOT_CLOSED), null);
+		return new PresentationData(TESTS_VIEW_NAME, null, TEST_ROOT_CLOSED, null);
 	}
 }
 

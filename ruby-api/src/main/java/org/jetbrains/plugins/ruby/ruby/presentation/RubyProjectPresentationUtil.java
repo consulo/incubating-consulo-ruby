@@ -20,7 +20,6 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.project.Project;
-import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +31,6 @@ public class RubyProjectPresentationUtil
 {
 	public static ItemPresentation getPresentation(final Project project)
 	{
-		return new PresentationData(project.getName(), project.getPresentableUrl(), TargetAWT.to(RailsIcons.RAILS_PROJECT_VIEW), null);
+		return new PresentationData(project.getName(), project.getPresentableUrl(), RailsIcons.RAILS_PROJECT_VIEW, null);
 	}
 }

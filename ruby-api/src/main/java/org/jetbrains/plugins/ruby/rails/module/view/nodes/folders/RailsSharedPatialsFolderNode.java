@@ -16,7 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import consulo.awt.TargetAWT;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
@@ -53,6 +52,6 @@ public class RailsSharedPatialsFolderNode extends SharedPartialsSubFolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(SHARED_PARTIALS_FOLDER, SHARED_PARTIALS_FOLDER, TargetAWT.to(RailsIcons.RAILS_PARTIALS_CLOSED), null);
+		return new PresentationData(SHARED_PARTIALS_FOLDER, SHARED_PARTIALS_FOLDER, RailsIcons.RAILS_PARTIALS_CLOSED, null);
 	}
 }

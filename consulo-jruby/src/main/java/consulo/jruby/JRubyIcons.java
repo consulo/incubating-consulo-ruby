@@ -1,8 +1,7 @@
 package consulo.jruby;
 
-import javax.swing.Icon;
-
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 
 /**
  * @author VISTALL
@@ -10,5 +9,5 @@ import com.intellij.openapi.util.IconLoader;
  */
 public interface JRubyIcons
 {
-	Icon JRuby = IconLoader.findIcon("/icons/jruby.png");
+	Image JRuby = IconLoader.findIcon("/icons/jruby.png");
 }

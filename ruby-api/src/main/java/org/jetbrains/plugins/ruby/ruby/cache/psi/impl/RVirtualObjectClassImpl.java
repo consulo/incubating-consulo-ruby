@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import com.intellij.navigation.ItemPresentation;
-import consulo.awt.TargetAWT;
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
@@ -27,8 +26,8 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RObjectClassPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,9 +49,9 @@ public class RVirtualObjectClassImpl extends RVirtualFieldContantContainerImpl i
 		return RObjectClassPresentationUtil.getPresentation(this);
 	}
 
-	public Icon getIcon(int flags)
+	public Image getIcon(int flags)
 	{
-		return TargetAWT.to(RObjectClassPresentationUtil.getIcon());
+		return RObjectClassPresentationUtil.getIcon();
 	}
 
 	@Override

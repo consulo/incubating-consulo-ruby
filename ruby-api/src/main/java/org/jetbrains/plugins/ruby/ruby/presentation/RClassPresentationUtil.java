@@ -16,16 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
-import com.intellij.ui.LayeredIcon;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -34,8 +27,13 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-
-import javax.swing.*;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
+import consulo.ui.image.Image;
+import consulo.ui.image.ImageEffects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,16 +49,13 @@ public class RClassPresentationUtil implements RPresentationConstants
 		return RubyIcons.RUBY_CLASS_NODE;
 	}
 
-	public static Icon getIcon(@Nonnull final RVirtualClass rClass)
+	public static Image getIcon(@Nonnull final RVirtualClass rClass)
 	{
 		if(rClass instanceof RVirtualObjectClass)
 		{
-			final LayeredIcon result = new LayeredIcon(2);
-			result.setIcon(TargetAWT.to(RubyIcons.RUBY_ATTR_STATIC), 1);
-			result.setIcon(TargetAWT.to(RubyIcons.RUBY_CLASS_NODE), 0);
-			return result;
+			return ImageEffects.layered(RubyIcons.RUBY_CLASS_NODE, RubyIcons.RUBY_ATTR_STATIC);
 		}
-		return TargetAWT.to(RubyIcons.RUBY_CLASS_NODE);
+		return RubyIcons.RUBY_CLASS_NODE;
 	}
 
 	/**
@@ -72,11 +67,11 @@ public class RClassPresentationUtil implements RPresentationConstants
 	 * @param flags  com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Icon getIcon(@Nonnull final RVirtualClass rClass, final int flags)
+	public static Image getIcon(@Nonnull final RVirtualClass rClass, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
-			return TargetAWT.to(RContainerPresentationUtil.getIconWithModifiers(rClass));
+			return RContainerPresentationUtil.getIconWithModifiers(rClass);
 		}
 		return getIcon(rClass);
 	}
@@ -84,8 +79,8 @@ public class RClassPresentationUtil implements RPresentationConstants
 	@Nonnull
 	public static ItemPresentation getPresentation(@Nonnull final RVirtualClass rClass)
 	{
-		final Icon icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
-		return new PresentationData(formatName(rClass, SHOW_NAME), TextUtil.wrapInParens(getLocation(rClass)), icon, icon, null);
+		final Image icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
+		return new PresentationData(formatName(rClass, SHOW_NAME), TextUtil.wrapInParens(getLocation(rClass)), icon, null);
 	}
 
 	public static String getLocation(final RVirtualClass rClass)

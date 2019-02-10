@@ -16,9 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
-import com.intellij.navigation.ItemPresentation;
-import consulo.awt.TargetAWT;
+import java.util.List;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -31,10 +32,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
-
-import javax.annotation.Nullable;
-import javax.swing.*;
-import java.util.List;
+import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,9 +61,9 @@ public class RVirtualMethodImpl extends RVirtualContainerBase implements RVirtua
 	}
 
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
-		return TargetAWT.to(RMethodPresentationUtil.getIcon(this, flags));
+		return RMethodPresentationUtil.getIcon(this, flags);
 	}
 
 	@Override

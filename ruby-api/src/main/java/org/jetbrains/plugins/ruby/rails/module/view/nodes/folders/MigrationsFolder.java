@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
-import consulo.awt.TargetAWT;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -29,10 +29,10 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.BDSchemaNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.MigrationsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.treeStructure.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,7 +51,7 @@ public class MigrationsFolder extends FolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(MIGRATIONS_FOLDER, MIGRATIONS_FOLDER, TargetAWT.to(RailsIcons.RAILS_MIGRATIONS_CLOSED), null);
+		return new PresentationData(MIGRATIONS_FOLDER, MIGRATIONS_FOLDER, RailsIcons.RAILS_MIGRATIONS_CLOSED, null);
 	}
 
 	@Override

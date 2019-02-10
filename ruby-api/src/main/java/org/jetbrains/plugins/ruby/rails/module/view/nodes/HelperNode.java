@@ -79,6 +79,6 @@ public class HelperNode extends RailsNode
 
 	private static PresentationData initPresentationData(final String name)
 	{
-		return new PresentationData(name, name, RailsIcons.RAILS_HELPERS_NODES, RailsIcons.RAILS_HELPERS_NODES, null);
+		return new PresentationData(name, name, RailsIcons.RAILS_HELPERS_NODES, null);
 	}
 }

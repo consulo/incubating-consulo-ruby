@@ -16,16 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.global;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
-import consulo.awt.TargetAWT;
-import org.jetbrains.annotations.NonNls;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RGlobalVariableReference;
@@ -41,8 +35,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RNamedElementBase
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RGlobalVariablePresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -80,9 +79,9 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
 	}
 
 	@Nullable
-	public Icon getIcon(int flags)
+	public Image getIcon(int flags)
 	{
-		return TargetAWT.to(RGlobalVariablePresentationUtil.getIcon());
+		return RGlobalVariablePresentationUtil.getIcon();
 	}
 
 	@Override

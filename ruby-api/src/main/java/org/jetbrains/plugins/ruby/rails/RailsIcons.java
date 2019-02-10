@@ -16,11 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails;
 
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,24 +35,24 @@ public interface RailsIcons
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//TODO Remove me after JRails UI will be completed!
 	@Deprecated
-	final Icon RAILS_ADD_MODULE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/add_rails_modulewizard.png");
+	final Image RAILS_ADD_MODULE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/add_rails_modulewizard.png");
 	@Deprecated
 	final Image RAILS_MODULE_NODE = RAILS_SMALL;
 	@Deprecated
-	final Icon RAILS_MODULE_OPENED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_module_opened.png");
+	final Image RAILS_MODULE_OPENED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_module_opened.png");
 	@Deprecated
-	final Icon RAILS_MODULE_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_module_closed.png");
+	final Image RAILS_MODULE_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/rails_module_closed.png");
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Rails project view
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	final Image RAILS_PROJECT_VIEW = RAILS_MODULE_NODE;
-	final Icon RAILS_APPlICON_NODES = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/modelesNode.png");
+	final Image RAILS_APPlICON_NODES = IconLoader.findIcon("/org/jetbrains/plugins/ruby/rails/modelesNode.png");
 	//    final Icon RAILS_COMPONENTS_NODES =     IconLoader.findIcon("/modules/globalResources.png");
-	final Icon RAILS_CONTROLERS_NODES = IconLoader.findIcon("/nodes/keymapTools.png");
+	final Image RAILS_CONTROLERS_NODES = IconLoader.findIcon("/nodes/keymapTools.png");
 	final Image RAILS_HELPER_NODE = RubyIcons.RUBY_MODULE_NODE;
-	final Icon RAILS_HELPERS_NODES = IconLoader.findIcon("/nodes/unknownJdkClosed.png");
+	final Image RAILS_HELPERS_NODES = IconLoader.findIcon("/nodes/unknownJdkClosed.png");
 	//    final Icon RAILS_LIBS_NODES =           IconLoader.findIcon("/objectBrowser/showLibraryContents.png");
 	final Image RAILS_MODEL_NODES = IconLoader.findIcon("/javaee/webModuleGroup.png");
 	final Image RAILS_MODEL_NODE = IconLoader.findIcon("/javaee/webModuleGroup.png");

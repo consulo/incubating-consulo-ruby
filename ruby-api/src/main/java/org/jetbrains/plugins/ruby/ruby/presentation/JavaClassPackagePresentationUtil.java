@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RubyCallType;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,7 +43,7 @@ public class JavaClassPackagePresentationUtil
 			return null;
 		}
 		final Image icon = getIncludeIcon();
-		return new PresentationData(rCall.getText(), TextUtil.wrapInParens(getLocation(rCall)), TargetAWT.to(icon), null);
+		return new PresentationData(rCall.getText(), TextUtil.wrapInParens(getLocation(rCall)), icon, null);
 	}
 
 	public static Image getIncludeIcon()

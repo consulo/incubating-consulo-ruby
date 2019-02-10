@@ -16,23 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.ui.treeStructure.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
-import consulo.awt.TargetAWT;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.annotation.Nonnull;
+
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.intellij.ide.projectView.PresentationData;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.ui.treeStructure.SimpleNode;
+import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +63,7 @@ public class RailsModelFolderNode extends ModelSubFolderNode
 
 	private static PresentationData initPresentationData()
 	{
-		return new PresentationData(MODELS_VIEW_NAME, MODELS_VIEW_NAME, TargetAWT.to(RailsIcons.RAILS_MODEL_NODES), null);
+		return new PresentationData(MODELS_VIEW_NAME, MODELS_VIEW_NAME, RailsIcons.RAILS_MODEL_NODES, null);
 	}
 
 	@Override

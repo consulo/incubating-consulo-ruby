@@ -16,13 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import consulo.awt.TargetAWT;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -38,8 +34,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RObjectClassPresentationUtil;
-
-import javax.swing.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -60,9 +59,9 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
 		return RObjectClassPresentationUtil.getPresentation(this);
 	}
 
-	public Icon getIcon(int flags)
+	public Image getIcon(int flags)
 	{
-		return TargetAWT.to(RObjectClassPresentationUtil.getIcon());
+		return RObjectClassPresentationUtil.getIcon();
 	}
 
 	@Override

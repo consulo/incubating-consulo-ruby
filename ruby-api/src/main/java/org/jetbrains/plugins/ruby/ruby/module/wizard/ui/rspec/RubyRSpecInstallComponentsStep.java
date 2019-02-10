@@ -30,6 +30,8 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ui.UIUtil;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,12 +43,12 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep
 {
 
 	protected final RubyRSpecInstallComponentsForm myPanel;
-	private Icon myIcon;
+	private Image myIcon;
 	private String myHelp;
 	private RRModuleBuilder myBuilder;
 	private Project myProject;
 
-	public RubyRSpecInstallComponentsStep(final RRModuleBuilder builder, final Icon icon, final String helpId, final Project project)
+	public RubyRSpecInstallComponentsStep(final RRModuleBuilder builder, final Image icon, final String helpId, final Project project)
 	{
 		super();
 		myIcon = icon;
@@ -78,7 +80,7 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep
 	@Override
 	public Icon getIcon()
 	{
-		return myIcon;
+		return TargetAWT.to(myIcon);
 	}
 
 	@Override

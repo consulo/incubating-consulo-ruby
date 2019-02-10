@@ -16,15 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import javax.swing.Icon;
-
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,6 +48,6 @@ public class RailsUserFolderNode extends UserSubFolderNode
 			iconClosed = RailsIcons.RAILS_FOLDER_CLOSED;
 		}
 		final String name = dir.getName();
-		return new PresentationData(name, name, TargetAWT.to(iconClosed), null);
+		return new PresentationData(name, name, iconClosed, null);
 	}
 }

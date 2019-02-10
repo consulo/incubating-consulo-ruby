@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby;
 
-import javax.swing.Icon;
-
 import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
 
@@ -107,6 +105,6 @@ public interface RubyIcons
 	final Image RUBY_GUTTER_OVERRIDING = IconLoader.findIcon("/gutter/overridingMethod.png");
 	final Image RUBY_GUTTER_IMPLEMENTING = IconLoader.findIcon("/gutter/implementingMethod.png");
 
-	final Icon RI_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ri.png");
+	final Image RI_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ri.png");
 }
 

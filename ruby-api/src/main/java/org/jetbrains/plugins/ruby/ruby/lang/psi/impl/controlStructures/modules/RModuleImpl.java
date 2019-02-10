@@ -17,11 +17,9 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modules;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -40,6 +38,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,7 +72,7 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
 	}
 
 	@Nullable
-	public Icon getIcon(final int flags)
+	public Image getIcon(final int flags)
 	{
 		return RModulePresentationUtil.getIcon(this, flags);
 	}

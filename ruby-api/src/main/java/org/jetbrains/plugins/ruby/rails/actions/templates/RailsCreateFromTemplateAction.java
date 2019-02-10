@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.rails.actions.templates;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -26,7 +27,6 @@ import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
-import consulo.awt.TargetAWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +40,7 @@ public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateAc
 
 	public RailsCreateFromTemplateAction(@Nonnull final FileTemplate template)
 	{
-		super(template.getName(), null, TargetAWT.to(FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon()));
+		super(template.getName(), null, FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon());
 		myTemplate = template;
 	}
 

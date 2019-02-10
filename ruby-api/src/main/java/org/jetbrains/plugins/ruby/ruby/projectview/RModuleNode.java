@@ -40,7 +40,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.Navigatable;
-import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
 
 /**
@@ -94,7 +93,7 @@ public class RModuleNode extends ProjectViewNode<RVirtualModule>
 	protected void update(PresentationData data)
 	{
 		final RVirtualModule module = getValue();
-		data.setIcon(TargetAWT.to(myIcon));
+		data.setIcon(myIcon);
 		data.setLocationString(RModulePresentationUtil.getLocation(module));
 		data.setPresentableText(RModulePresentationUtil.formatName(module, RPresentationConstants.SHOW_NAME));
 	}

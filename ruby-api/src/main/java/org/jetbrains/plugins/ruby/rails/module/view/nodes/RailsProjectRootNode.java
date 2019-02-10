@@ -39,12 +39,12 @@ import com.intellij.ui.treeStructure.SimpleNode;
  */
 public class RailsProjectRootNode extends RailsAbstractNode
 {
-	private Map<Module, RailsProjectModuleNode> myModulesNodes = new HashMap<Module, RailsProjectModuleNode>();
+	private Map<Module, RailsProjectModuleNode> myModulesNodes = new HashMap<>();
 
 	public RailsProjectRootNode(@Nonnull final Project project)
 	{
 		super(project);
-		init(generateNodeId(), new PresentationData(null, null, null, null, null));
+		init(generateNodeId(), new PresentationData(null, null, null, null));
 	}
 
 	public static NodeId generateNodeId()

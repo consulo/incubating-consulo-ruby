@@ -22,6 +22,8 @@ import javax.swing.JComponent;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.FacetWizardStep;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,12 +33,12 @@ import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
  */
 public class TestUnitSourceRootStep extends FacetWizardStep
 {
-	private Icon myIcon;
+	private Image myIcon;
 	private RubyModuleBuilder mySettingsHolder;
 	private String myHelp;
 	private final TestSourceRootPanel myForm;
 
-	public TestUnitSourceRootStep(final RubyModuleBuilder settingsHolder, final Icon icon, final String help)
+	public TestUnitSourceRootStep(final RubyModuleBuilder settingsHolder, final Image icon, final String help)
 	{
 		super();
 		myIcon = icon;
@@ -48,7 +50,7 @@ public class TestUnitSourceRootStep extends FacetWizardStep
 	@Override
 	public Icon getIcon()
 	{
-		return myIcon;
+		return TargetAWT.to(myIcon);
 	}
 
 	@Override
