@@ -16,12 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import javax.swing.Icon;
-
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.openapi.vcs.FileStatus;
 import com.intellij.usages.UsageGroup;
 import com.intellij.usages.UsageView;
+import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,9 +30,8 @@ import com.intellij.usages.UsageView;
  */
 class RubyTextMatchedGroup implements UsageGroup
 {
-
 	@Override
-	public Icon getIcon(boolean isOpen)
+	public Image getIcon()
 	{
 		return null;
 	}
