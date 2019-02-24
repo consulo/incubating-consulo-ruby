@@ -1,18 +1,18 @@
 package consulo.jruby.module.extension;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JComponent;
 
-import consulo.ruby.module.extension.RubyModuleExtension;
-
-import javax.annotation.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
+import consulo.desktop.util.awt.component.VerticalLayoutPanel;
 import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.roots.ModuleRootLayer;
-import consulo.util.ui.components.VerticalLayoutPanel;
+import consulo.ruby.module.extension.RubyModuleExtension;
+import consulo.ui.RequiredUIAccess;
 
 /**
  * @author VISTALL
@@ -32,6 +32,7 @@ public class JRubyMutableModuleExtension extends JRubyModuleExtension implements
 		return (MutableModuleInheritableNamedPointer<Sdk>) super.getInheritableSdk();
 	}
 
+	@RequiredUIAccess
 	@Nullable
 	@Override
 	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
