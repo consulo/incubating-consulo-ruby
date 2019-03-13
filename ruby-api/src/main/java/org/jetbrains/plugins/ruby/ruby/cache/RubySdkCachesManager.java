@@ -25,10 +25,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.impl.RubyFilesCacheImpl;
@@ -94,6 +93,12 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 	public RubySdkCachesManager(@Nonnull final Project project, @Nonnull final DirectoryIndex dirIndex, @Nonnull final PsiManager psiManager)
 	{
 		myProject = project;
+
+		if(myProject.isDefault())
+		{
+			return;
+		}
+
 		createListeners();
 
 		myConnection = myProject.getMessageBus().connect();
