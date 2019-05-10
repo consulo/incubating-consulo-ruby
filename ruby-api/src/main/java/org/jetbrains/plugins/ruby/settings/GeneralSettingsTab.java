@@ -72,12 +72,6 @@ public class GeneralSettingsTab implements UnnamedConfigurable
 		return settings.useConsoleOutputOtherFilters != otherFiltersCheckBox.isSelected() || settings.useConsoleOutputRubyStacktraceFilter != rubyStacktraceFilterCheckBox.isSelected() || settings.useConsoleColorMode != colorModeCheckBox.isSelected() || settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected() || !Comparing.equal(myTFAdditioanlPath.getText().trim(), settings.additionalEnvPATH);
 	}
 
-	public boolean isProjectViewStyleChanged()
-	{
-		final RApplicationSettings settings = RApplicationSettings.getInstance();
-		return settings.useRubySpecificProjectView != useRubyProjectViewBox.isSelected();
-	}
-
 	@Override
 	public void apply() throws ConfigurationException
 	{
@@ -87,27 +81,7 @@ public class GeneralSettingsTab implements UnnamedConfigurable
 		settings.useConsoleColorMode = colorModeCheckBox.isSelected();
 		settings.additionalEnvPATH = myTFAdditioanlPath.getText().trim();
 
-		final boolean isProjectViewStyleChanged = isProjectViewStyleChanged();
 		settings.useRubySpecificProjectView = useRubyProjectViewBox.isSelected();
-		if(isProjectViewStyleChanged)
-		{
-			final int result = Messages.showYesNoDialog(myContentPane.getParent(), RBundle.message("settings.plugin.general.tab.use.ruby.project.view.changed.message"), RBundle.message("settings.plugin.general.tab.use.ruby.project.view.changed.title"), Messages.getQuestionIcon());
-			if(result == DialogWrapper.OK_EXIT_CODE)
-			{
-				ApplicationManager.getApplication().invokeLater(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						// reload all projects
-						for(Project project : ProjectManager.getInstance().getOpenProjects())
-						{
-							ProjectManager.getInstance().reloadProject(project);
-						}
-					}
-				}, ModalityState.NON_MODAL);
-			}
-		}
 	}
 
 	@Override
