@@ -16,21 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RubyWizardSettingsHolder;
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Pair;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RubyWizardSettingsHolder;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,7 +36,7 @@ import com.intellij.openapi.util.Pair;
  * @author: oleg
  * @date: 18.08.2006
  */
-public abstract class RRModuleBuilder extends ModuleBuilder implements /*SourcePathsBuilder, */RubyWizardSettingsHolder
+public abstract class RRModuleBuilder  implements /*SourcePathsBuilder, */RubyWizardSettingsHolder
 {
 	private Sdk mySdk;
 	private boolean myShouldUseRSpec;
@@ -79,7 +77,6 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements /*SourceP
 		return mySdk;
 	}
 
-	@Override
 	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
 	{
 		/*if (mySdk != null) {
@@ -100,14 +97,12 @@ public abstract class RRModuleBuilder extends ModuleBuilder implements /*SourceP
 		mySdk = jdk;
 	}
 
-	@Override
 	@Nullable
 	public String getContentEntryPath()
 	{
 		return myContentRootPath;
 	}
 
-	@Override
 	public void setContentEntryPath(final String moduleRootPath)
 	{
 		myContentRootPath = moduleRootPath;

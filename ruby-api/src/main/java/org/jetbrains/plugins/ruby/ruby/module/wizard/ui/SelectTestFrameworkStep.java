@@ -16,18 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.swing.Icon;
-import javax.swing.JComponent;
-
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.FacetWizardStep;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
+
+import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,51 +61,43 @@ public class SelectTestFrameworkStep extends FacetWizardStep
 			@Override
 			public void itemStateChanged(final ItemEvent e)
 			{
-				fireStateChanged();
 			}
 		}, shouldUseTestUnit, shouldUseRSpecFramework);
 	}
 
-	@Override
 	public Icon getIcon()
 	{
 		return TargetAWT.to(myIcon);
 	}
 
-	@Override
 	public String getHelpId()
 	{
 		return myHelp;
 	}
 
-	@Override
 	public JComponent getComponent()
 	{
 		return myForm.getContentPane();
 	}
 
-	@Override
 	public void updateStep()
 	{
 		updateDataModel();
 	}
 
-	@Override
 	public void onStepLeaving()
 	{
 		RSpecApplicationSettings.getInstance().wizardRubyShouldUseRSpecFramework = myForm.shouldUseRSpecFramework();
 	}
 
-	@Override
 	public void updateDataModel()
 	{
 		mySettingsHolder.enableRSpecSupport(myForm.shouldUseRSpecFramework());
 		mySettingsHolder.enableTestUnitSupport(myForm.shouldUseTestUnitFramework());
 	}
 
-	@Override
 	public boolean isStepVisible()
 	{
-		return super.isStepVisible() && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
+		return !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
 	}
 }

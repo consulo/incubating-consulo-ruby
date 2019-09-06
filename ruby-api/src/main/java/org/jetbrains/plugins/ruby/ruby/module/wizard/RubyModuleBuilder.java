@@ -16,20 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
-import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.GEM;
-import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.NONE;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jdom.JDOMException;
-import javax.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
-import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleWithNameAlreadyExistsException;
@@ -39,6 +25,20 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jdom.JDOMException;
+import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
+import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
+import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+
+import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.GEM;
+import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecSupportType.NONE;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,11 +51,10 @@ public class RubyModuleBuilder extends RRModuleBuilder
 
 	private String myTestUtinRootPath;
 
-	@Override
 	@Nonnull
 	public Module createModule(ModifiableModuleModel moduleModel) throws InvalidDataException, IOException, ModuleWithNameAlreadyExistsException, JDOMException, ConfigurationException
 	{
-		final Module myModule = super.createModule(moduleModel);
+		final Module myModule = null; //super.createModule(moduleModel);
 
 		///////////////// Setup default tests folder /////////////////////////////////////////////////////////////////////////
 		final List<String> testUnitFolderUrls = new ArrayList<String>();

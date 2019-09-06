@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
-import javax.swing.Icon;
-import javax.swing.JComponent;
-
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.FacetWizardStep;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
-import consulo.awt.TargetAWT;
-import consulo.ui.image.Image;
+
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,43 +46,36 @@ public class TestUnitSourceRootStep extends FacetWizardStep
 		myHelp = help;
 	}
 
-	@Override
 	public Icon getIcon()
 	{
 		return TargetAWT.to(myIcon);
 	}
 
-	@Override
 	public JComponent getPreferredFocusedComponent()
 	{
 		return myForm.getPreferredFocusedComponent();
 	}
 
-	@Override
 	public String getHelpId()
 	{
 		return myHelp;
 	}
 
-	@Override
 	public JComponent getComponent()
 	{
 		return myForm.getContentPane();
 	}
 
-	@Override
 	public void updateStep()
 	{
 		myForm.update();
 	}
 
-	@Override
 	public boolean isStepVisible()
 	{
 		return mySettingsHolder.isTestUnitSupportEnabled() && !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent());
 	}
 
-	@Override
 	public void updateDataModel()
 	{
 		if(!myForm.shouldSearchInWholeModule())

@@ -16,33 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
-import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
-import static com.intellij.openapi.util.io.FileUtil.toSystemIndependentName;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-
-import javax.annotation.Nullable;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
 import com.intellij.ide.util.BrowseFilesListener;
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
@@ -53,6 +27,22 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.FieldPanel;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
+import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
+
+import javax.annotation.Nullable;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+
+import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
+import static com.intellij.openapi.util.io.FileUtil.toSystemIndependentName;
 
 /**
  * Created by IntelliJ IDEA.
@@ -95,7 +85,7 @@ public class TestSourceRootPanel
 		myContentPane.add(testPathLabel, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(8, 30, 0, 0), 0, 0));
 		final FileChooserDescriptor chooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
 		chooserDescriptor.setIsTreeRootVisible(true);
-		myFieldPanel = ModuleWizardStep.createFieldPanel(myTFRelativeTestsPath, null, new BrowsePathListener(myTFRelativeTestsPath, chooserDescriptor));
+		myFieldPanel = new FieldPanel("", "", new BrowsePathListener(myTFRelativeTestsPath, chooserDescriptor), null);
 		myContentPane.add(myFieldPanel, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(8, 30, 0, 10), 0, 0));
 
 		myRBSearchInModule = new JRadioButton(RBundle.message("module.settings.dialog.source.roots.choose.test.do.not.create"), false);

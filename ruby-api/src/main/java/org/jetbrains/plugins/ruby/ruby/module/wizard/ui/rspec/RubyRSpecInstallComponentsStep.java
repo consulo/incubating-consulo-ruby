@@ -16,14 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec;
 
-import javax.swing.Icon;
-import javax.swing.JComponent;
-
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
-import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
-import org.jetbrains.plugins.ruby.ruby.module.wizard.RRModuleBuilder;
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -32,6 +24,12 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ui.UIUtil;
 import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
+import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;
+import org.jetbrains.plugins.ruby.ruby.module.wizard.RRModuleBuilder;
+
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +37,7 @@ import consulo.ui.image.Image;
  * @author: Roman Chernyatchik
  * @date: Sep 5, 2007
  */
-public class RubyRSpecInstallComponentsStep extends ModuleWizardStep
+public class RubyRSpecInstallComponentsStep
 {
 
 	protected final RubyRSpecInstallComponentsForm myPanel;
@@ -58,38 +56,32 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep
 		myProject = project;
 	}
 
-	@Override
 	public String getHelpId()
 	{
 		return myHelp;
 	}
 
-	@Override
 	public JComponent getComponent()
 	{
 		return myPanel.getContentPane();
 	}
 
 
-	@Override
 	public void updateDataModel()
 	{
 		// Do nothing
 	}
 
-	@Override
 	public Icon getIcon()
 	{
 		return TargetAWT.to(myIcon);
 	}
 
-	@Override
 	public void updateStep()
 	{
 		myPanel.initBeforeShow();
 	}
 
-	@Override
 	public boolean isStepVisible()
 	{
 		if(!myBuilder.isRSpecSupportEnabled() || !NiiChAVOUtil.isRailsFacetEnabledMagic(getComponent()))
@@ -102,7 +94,6 @@ public class RubyRSpecInstallComponentsStep extends ModuleWizardStep
 		return sdk != null;
 	}
 
-	@Override
 	public boolean validate() throws ConfigurationException
 	{
 		final Sdk sdk = myBuilder.getSdk();
