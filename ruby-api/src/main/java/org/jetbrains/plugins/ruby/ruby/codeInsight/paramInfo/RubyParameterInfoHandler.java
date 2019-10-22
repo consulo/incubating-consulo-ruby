@@ -16,11 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.intellij.codeInsight.CodeInsightBundle;
+import com.intellij.codeInsight.CodeInsightSettings;
+import com.intellij.codeInsight.hint.api.impls.MethodParameterInfoHandler;
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.parameterInfo.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -31,11 +37,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
@@ -43,23 +45,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.codeInsight.CodeInsightBundle;
-import com.intellij.codeInsight.CodeInsightSettings;
-import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
-import com.intellij.codeInsight.hint.api.impls.MethodParameterInfoHandler;
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.parameterInfo.CreateParameterInfoContext;
-import com.intellij.lang.parameterInfo.ParameterInfoContext;
-import com.intellij.lang.parameterInfo.ParameterInfoHandler;
-import com.intellij.lang.parameterInfo.ParameterInfoUIContext;
-import com.intellij.lang.parameterInfo.ParameterInfoUtils;
-import com.intellij.lang.parameterInfo.UpdateParameterInfoContext;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.util.PsiTreeUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -106,7 +96,6 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 			final ArrayList<Symbol> methods = SymbolUtil.filterMethods(tryToResolveCommand(call), Types.METHODS);
 			if(methods.size() == 0)
 			{
-				DaemonCodeAnalyzer.getInstance(context.getProject()).updateVisibleHighlighters(context.getEditor());
 				return null;
 			}
 			context.setItemsToShow(methods.toArray());
