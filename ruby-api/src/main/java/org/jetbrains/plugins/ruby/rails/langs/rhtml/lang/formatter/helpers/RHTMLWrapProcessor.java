@@ -16,10 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
 import com.intellij.formatting.Wrap;
 import com.intellij.formatting.WrapType;
 import com.intellij.lang.ASTNode;
@@ -27,6 +23,11 @@ import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +41,7 @@ public class RHTMLWrapProcessor
 	{
 		if(node == null)
 		{
-			return Wrap.createWrap(Wrap.NONE, true);
+			return Wrap.createWrap(WrapType.NONE, true);
 		}
 
 		final IElementType nodeType = node.getElementType();
@@ -52,12 +53,12 @@ public class RHTMLWrapProcessor
 			final String text = trimEndSpaces(psiElement != null ? psiElement.getText() : null);
 			//for html comments
 			final boolean shouldIgnoreIndent = text != null && text.endsWith("\n");
-			return Wrap.createWrap(shouldIgnoreIndent ? Wrap.NONE : Wrap.ALWAYS, true);
+			return Wrap.createWrap(shouldIgnoreIndent ? WrapType.NONE : WrapType.ALWAYS, true);
 		}
 
 		if(nodeType instanceof RubyElementType)
 		{
-			Wrap.createWrap(Wrap.NORMAL, true);
+			Wrap.createWrap(WrapType.NORMAL, true);
 		}
 
 		//RHTMLTokenType.RHTML_SEPARATORS.contains(childNodeType)
@@ -66,7 +67,7 @@ public class RHTMLWrapProcessor
 		//RHTMLElementType.RHTML_XML_TAG:scriplet
 		//RHTMLElementType.RHTML_COMMENT_ELEMENT
 		//RHTMLFormatterUtil.isHTMLDocomentRootOrProlog(node)
-		return Wrap.createWrap(Wrap.NONE, true);
+		return Wrap.createWrap(WrapType.NONE, true);
 	}
 
 	@Nullable

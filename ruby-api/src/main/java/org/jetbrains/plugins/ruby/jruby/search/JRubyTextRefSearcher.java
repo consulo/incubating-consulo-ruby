@@ -39,7 +39,7 @@ public class JRubyTextRefSearcher implements QueryExecutor<PsiReference, MethodR
 {
 
 	@Override
-	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<PsiReference> psiReferenceProcessor)
+	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> psiReferenceProcessor)
 	{
 		final PsiMethod method = params.getMethod();
 		final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>()

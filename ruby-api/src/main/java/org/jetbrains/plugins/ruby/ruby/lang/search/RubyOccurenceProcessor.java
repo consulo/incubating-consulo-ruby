@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.search;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.TextOccurenceProcessor;
 import com.intellij.util.Processor;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,9 +38,9 @@ class RubyOccurenceProcessor implements TextOccurenceProcessor
 {
 	private final PsiElement myElement2Search;
 	private final String myName;
-	private final Processor<PsiReference> myConsumer;
+	private final Processor<? super PsiReference> myConsumer;
 
-	public RubyOccurenceProcessor(@Nonnull final PsiElement element2Search, @Nonnull final String name, @Nonnull final Processor<PsiReference> consumer)
+	public RubyOccurenceProcessor(@Nonnull final PsiElement element2Search, @Nonnull final String name, @Nonnull final Processor<? super PsiReference> consumer)
 	{
 		myElement2Search = element2Search;
 		myName = name;

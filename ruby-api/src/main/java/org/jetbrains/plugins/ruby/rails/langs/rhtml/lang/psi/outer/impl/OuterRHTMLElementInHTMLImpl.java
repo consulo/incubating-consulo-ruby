@@ -16,13 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.impl;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.CharTable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,9 +31,9 @@ import com.intellij.util.CharTable;
  */
 public class OuterRHTMLElementInHTMLImpl extends LeafPsiElement implements OuterRHTMLElementInHTML
 {
-	public OuterRHTMLElementInHTMLImpl(final IElementType type, final CharSequence buffer, final int startOffset, final int endOffset, CharTable table)
+	public OuterRHTMLElementInHTMLImpl(final IElementType type, final CharSequence buffer)
 	{
-		super(type, buffer, startOffset, endOffset, table);
+		super(type, buffer);
 	}
 
 	public String toString()

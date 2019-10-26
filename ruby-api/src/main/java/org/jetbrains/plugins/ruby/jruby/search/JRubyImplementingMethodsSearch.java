@@ -35,7 +35,7 @@ import com.intellij.util.QueryExecutor;
 public class JRubyImplementingMethodsSearch implements QueryExecutor<PsiElement, PsiElement>
 {
 	@Override
-	public boolean execute(final PsiElement sourceElement, final Processor<PsiElement> consumer)
+	public boolean execute(final PsiElement sourceElement, final Processor<? super PsiElement> consumer)
 	{
 		if(sourceElement instanceof PsiMethod)
 		{

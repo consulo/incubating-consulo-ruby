@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.jruby.search;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.text.StringUtil;
@@ -29,6 +26,9 @@ import com.intellij.psi.search.UsageSearchContext;
 import com.intellij.psi.search.searches.MethodReferencesSearch;
 import com.intellij.util.Processor;
 import com.intellij.util.QueryExecutor;
+import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +40,7 @@ public class JRubyNamesReferenceSearcher implements QueryExecutor<PsiReference, 
 {
 
 	@Override
-	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<PsiReference> psiReferenceProcessor)
+	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> psiReferenceProcessor)
 	{
 		final PsiMethod method = params.getMethod();
 		final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>()

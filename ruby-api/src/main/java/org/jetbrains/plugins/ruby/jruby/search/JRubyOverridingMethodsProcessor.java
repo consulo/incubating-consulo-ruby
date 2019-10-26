@@ -16,8 +16,10 @@
 
 package org.jetbrains.plugins.ruby.jruby.search;
 
-import java.util.List;
-
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.search.TextOccurenceProcessor;
+import com.intellij.util.Processor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -30,10 +32,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.names.RNameNavigator;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.search.TextOccurenceProcessor;
-import com.intellij.util.Processor;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,9 +45,9 @@ public class JRubyOverridingMethodsProcessor implements TextOccurenceProcessor
 {
 	protected PsiMethod myMethod;
 	protected String myName;
-	protected Processor<PsiElement> myConsumer;
+	protected Processor<? super PsiElement> myConsumer;
 
-	public JRubyOverridingMethodsProcessor(final PsiMethod method, final String name, final Processor<PsiElement> consumer)
+	public JRubyOverridingMethodsProcessor(final PsiMethod method, final String name, final Processor<? super PsiElement> consumer)
 	{
 		myMethod = method;
 		myName = name;

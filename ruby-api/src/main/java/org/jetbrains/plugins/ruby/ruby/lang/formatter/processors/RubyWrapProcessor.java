@@ -16,18 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import com.intellij.formatting.Wrap;
+import com.intellij.formatting.WrapType;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RNotWraped;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapCOMPSTMT;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapedAlways;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import com.intellij.formatting.Wrap;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,7 +57,7 @@ public class RubyWrapProcessor
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if(psiChild instanceof RNotWraped)
 		{
-			return Wrap.createWrap(Wrap.NONE, true);
+			return Wrap.createWrap(WrapType.NONE, true);
 		}
 
 
@@ -65,7 +66,7 @@ public class RubyWrapProcessor
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if(psiChild instanceof RWrapedAlways)
 		{
-			return Wrap.createWrap(Wrap.ALWAYS, true);
+			return Wrap.createWrap(WrapType.ALWAYS, true);
 		}
 
 
@@ -76,7 +77,7 @@ public class RubyWrapProcessor
 		{
 			if(childNumber == childCount - 1)
 			{
-				return Wrap.createWrap(Wrap.ALWAYS, true);
+				return Wrap.createWrap(WrapType.ALWAYS, true);
 			}
 		}
 
@@ -87,7 +88,7 @@ public class RubyWrapProcessor
 		{
 			if(psiChild instanceof RCompoundStatement)
 			{
-				return Wrap.createWrap(Wrap.ALWAYS, true);
+				return Wrap.createWrap(WrapType.ALWAYS, true);
 			}
 		}
 

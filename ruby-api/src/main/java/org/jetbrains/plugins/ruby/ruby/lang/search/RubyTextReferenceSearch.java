@@ -41,7 +41,7 @@ public class RubyTextReferenceSearch implements QueryExecutor<PsiReference, Refe
 {
 
 	@Override
-	public boolean execute(@Nonnull final ReferencesSearch.SearchParameters params, @Nonnull final Processor<PsiReference> consumer)
+	public boolean execute(@Nonnull final ReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> consumer)
 	{
 		final PsiElement element2Search = params.getElementToSearch();
 		if(element2Search instanceof PsiNamedElement && element2Search instanceof RPsiElement)
