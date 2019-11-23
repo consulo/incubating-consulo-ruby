@@ -16,10 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.keymap.Keymap;
+import com.intellij.openapi.keymap.ex.KeymapManagerEx;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.ui.Messages;
+import consulo.container.plugin.PluginId;
+import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.GeneratorsActionGroup;
@@ -28,18 +31,9 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.RakeUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.extensions.PluginId;
-import com.intellij.openapi.keymap.Keymap;
-import com.intellij.openapi.keymap.ex.KeymapManagerEx;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
-import consulo.ui.image.Image;
+
+import javax.annotation.Nonnull;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
