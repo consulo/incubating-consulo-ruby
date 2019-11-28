@@ -16,25 +16,20 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.ide.IdeView;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.image.Image;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,7 +64,7 @@ public abstract class AbstractScriptAction extends AnAction
 
 	protected abstract PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory);
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	@Override
 	public void actionPerformed(final AnActionEvent e)
 	{
@@ -108,7 +103,7 @@ public abstract class AbstractScriptAction extends AnAction
 		}
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	@Override
 	public void update(@Nonnull final AnActionEvent e)
 	{

@@ -1,9 +1,5 @@
 package consulo.ruby.module.extension;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.JComponent;
-
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
 import consulo.desktop.util.awt.component.VerticalLayoutPanel;
@@ -11,7 +7,11 @@ import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.roots.ModuleRootLayer;
-import consulo.ui.RequiredUIAccess;
+import consulo.ui.annotation.RequiredUIAccess;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
 
 /**
  * @author VISTALL
