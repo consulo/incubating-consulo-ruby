@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.usages.impl.rules.UsageType;
 import com.intellij.usages.impl.rules.UsageTypeProvider;
+import consulo.util.dataholder.Key;
+import org.jetbrains.plugins.ruby.RBundle;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,8 +34,7 @@ import com.intellij.usages.impl.rules.UsageTypeProvider;
  */
 public class RubyUsageTypeProvider implements UsageTypeProvider
 {
-
-	public static final Key<RubyUsageType> RUBY_USAGE_TYPE_KEY = new Key<RubyUsageType>("RubyUsageType");
+	public static final Key<RubyUsageType> RUBY_USAGE_TYPE_KEY = Key.create("RubyUsageType");
 
 	private static final UsageType TEXT_TYPED = new UsageType(RBundle.message("find.usages.text.matched.group"));
 	private static final UsageType EXPLICITLY_TYPED = new UsageType(RBundle.message("find.usages.explicitly.typed.group"));

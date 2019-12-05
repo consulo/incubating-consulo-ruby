@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 
-import javax.annotation.Nullable;
-
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.impl.DocumentMarkupModel;
 import com.intellij.openapi.editor.markup.MarkupModel;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

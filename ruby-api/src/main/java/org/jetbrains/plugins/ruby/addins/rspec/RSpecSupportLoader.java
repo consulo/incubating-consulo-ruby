@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import java.awt.Color;
-
-import org.jetbrains.annotations.NonNls;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+import org.jetbrains.annotations.NonNls;
+
+import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.

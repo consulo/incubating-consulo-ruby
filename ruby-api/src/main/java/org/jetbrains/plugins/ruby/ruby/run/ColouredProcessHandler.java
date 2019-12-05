@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import org.jetbrains.plugins.ruby.addins.rspec.RSpecSupportLoader;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessOutputTypes;
-import com.intellij.openapi.util.Key;
 import com.intellij.util.text.StringTokenizer;
+import consulo.util.dataholder.Key;
+import org.jetbrains.plugins.ruby.addins.rspec.RSpecSupportLoader;
 
 /**
  * Created by IntelliJ IDEA.

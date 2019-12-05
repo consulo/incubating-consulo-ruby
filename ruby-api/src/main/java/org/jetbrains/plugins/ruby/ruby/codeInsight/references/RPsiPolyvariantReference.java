@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import java.util.List;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReference;
+import consulo.util.dataholder.Key;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import com.intellij.openapi.util.Key;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
