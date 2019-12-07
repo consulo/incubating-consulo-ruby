@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.ruby</id>
 	<name>Ruby</name>
 	<version>SNAPSHOT</version>
@@ -262,4 +262,4 @@
 					description="Runs scripts from ./script folder"/>
 		</group>
 	</actions>
-</idea-plugin>
+</consulo-plugin>
