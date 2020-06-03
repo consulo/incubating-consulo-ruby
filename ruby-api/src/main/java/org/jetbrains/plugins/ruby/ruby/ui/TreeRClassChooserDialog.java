@@ -16,8 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -26,9 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.annotation.Nullable;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -38,7 +36,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -62,7 +59,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ex.IdeFocusTraversalPolicy;
 import com.intellij.psi.PsiElement;
@@ -74,6 +70,8 @@ import com.intellij.ui.TabbedPaneWrapper;
 import com.intellij.ui.TreeSpeedSearch;
 import com.intellij.util.ui.Tree;
 import com.intellij.util.ui.UIUtil;
+import consulo.disposer.Disposable;
+import consulo.disposer.Disposer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -354,7 +352,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 		myGotoByNamePanel = new MyChooseByNamePanel(name, dummyPanel);
 		//
 		//
-		myTabbedPane = new TabbedPaneWrapper(Disposer.newDisposable());
+		myTabbedPane = new TabbedPaneWrapper(Disposable.newDisposable());
 		myTabbedPane.addTab(RBundle.message("tab.chooser.search.by.name"), dummyPanel);
 		myTabbedPane.addTab(RBundle.message("tab.chooser.project"), scrollPane);
 

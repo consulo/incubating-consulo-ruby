@@ -1,12 +1,14 @@
 package consulo.jruby.rails.module.extension;
 
-import javax.swing.JComponent;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import consulo.disposer.Disposable;
 import consulo.module.extension.ModuleExtension;
 import consulo.module.extension.MutableModuleExtension;
 import consulo.roots.ModuleRootLayer;
+import consulo.ui.Component;
+import consulo.ui.annotation.RequiredUIAccess;
 
 /**
  * @author VISTALL
@@ -20,9 +22,10 @@ public class JRubyOnRailsMutableModuleExtension extends JRubyOnRailsModuleExtens
 		super(id, module);
 	}
 
+	@RequiredUIAccess
 	@Nullable
 	@Override
-	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
+	public Component createConfigurationComponent(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
 	{
 		return null;
 	}

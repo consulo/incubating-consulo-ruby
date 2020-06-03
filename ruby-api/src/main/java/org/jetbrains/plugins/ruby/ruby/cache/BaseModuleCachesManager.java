@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
-import com.intellij.openapi.Disposable;
+import consulo.disposer.Disposable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;

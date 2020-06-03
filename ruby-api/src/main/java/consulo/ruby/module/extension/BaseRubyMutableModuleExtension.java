@@ -1,17 +1,17 @@
 package consulo.ruby.module.extension;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.util.ui.JBUI;
-import consulo.desktop.util.awt.component.VerticalLayoutPanel;
-import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
+import consulo.disposer.Disposable;
+import consulo.extension.ui.ModuleExtensionBundleBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.roots.ModuleRootLayer;
+import consulo.ui.Component;
 import consulo.ui.annotation.RequiredUIAccess;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.*;
+import consulo.ui.layout.VerticalLayout;
 
 /**
  * @author VISTALL
@@ -34,12 +34,11 @@ public class BaseRubyMutableModuleExtension extends BaseRubyModuleExtension impl
 	@RequiredUIAccess
 	@Nullable
 	@Override
-	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
+	public Component createConfigurationComponent(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
 	{
-		VerticalLayoutPanel verticalLayoutPanel = JBUI.Panels.verticalPanel();
-		verticalLayoutPanel.addComponent(ModuleExtensionSdkBoxBuilder.createAndDefine(this, runnable).build());
-
-		return verticalLayoutPanel;
+		VerticalLayout layout = VerticalLayout.create();
+		layout.add(ModuleExtensionBundleBoxBuilder.createAndDefine(this, disposable, runnable).build());
+		return layout;
 	}
 
 	@Override

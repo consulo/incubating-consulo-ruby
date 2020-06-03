@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.cache;
 
 import com.intellij.ProjectTopics;
 import com.intellij.ide.startup.StartupManagerEx;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
@@ -31,6 +30,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.messages.MessageBusConnection;
 import consulo.bundle.SdkTableListener;
+import consulo.disposer.Disposable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;

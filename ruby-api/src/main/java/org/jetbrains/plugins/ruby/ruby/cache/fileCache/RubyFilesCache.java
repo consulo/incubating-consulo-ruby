@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import com.intellij.openapi.Disposable;
+import consulo.disposer.Disposable;
 import com.intellij.openapi.vfs.VirtualFile;
 
 /**
