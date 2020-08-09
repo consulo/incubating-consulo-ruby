@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
 import com.intellij.lexer.HtmlHighlightingLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerPosition;
-import com.intellij.lexer.LexerState;
 import com.intellij.lexer._HtmlLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.text.CharArrayCharSequence;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by IntelliJ IDEA.
@@ -337,7 +336,7 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer
 		}
 	}
 
-	private static class MyState implements LexerState
+	private static class MyState
 	{
 		public Queue<Token> queue;
 
@@ -349,12 +348,6 @@ public class RHTMLColorsPageHighlightingLexer extends Lexer
 			this.queue = queue;
 			this.state = state;
 			this.start = start;
-		}
-
-		@Override
-		public short intern()
-		{
-			return 0;
 		}
 	}
 
