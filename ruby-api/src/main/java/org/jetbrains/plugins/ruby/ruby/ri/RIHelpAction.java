@@ -16,12 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import com.intellij.lang.Language;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -37,7 +31,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.psi.tree.TokenSet;
-import consulo.awt.TargetAWT;
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -77,7 +76,7 @@ public class RIHelpAction extends AnAction
 	public void update(final AnActionEvent e)
 	{
 		final Presentation presentation = e.getPresentation();
-		presentation.setIcon(TargetAWT.to(RubyIcons.RUBY_ICON));
+		presentation.setIcon(RubyIcons.RUBY_ICON);
 		// visible only on ruby files
 		presentation.setVisible(DataContextUtil.getLanguage(e.getDataContext()) instanceof RubyLanguage);
 		presentation.setEnabled(canHelp(e));
