@@ -40,7 +40,7 @@ class RakeAction extends AnAction
 
 	public RakeAction(@Nonnull final RakeTask task)
 	{
-		super(task.getId(), task.getDescription(), TargetAWT.to(RailsIcons.RAKE_TASK_ICON));
+		super(task.getId(), task.getDescription(), RailsIcons.RAKE_TASK_ICON);
 		myTask = task;
 	}
 

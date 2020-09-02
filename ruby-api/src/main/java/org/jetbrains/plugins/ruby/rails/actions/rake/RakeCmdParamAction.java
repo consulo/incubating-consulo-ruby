@@ -40,7 +40,7 @@ class RakeCmdParamAction extends ToggleAction
 
 	public RakeCmdParamAction(@Nonnull final String cmdArgument, @Nullable final String description, @Nullable final Image icon)
 	{
-		super(cmdArgument, description, TargetAWT.to(icon));
+		super(cmdArgument, description, icon);
 		myCmdArgument = cmdArgument;
 	}
 
