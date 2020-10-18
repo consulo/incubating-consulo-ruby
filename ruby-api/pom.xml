@@ -52,6 +52,7 @@
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate-lexers</goal>
+							<goal>generate-icon</goal>
 						</goals>
 					</execution>
 				</executions>

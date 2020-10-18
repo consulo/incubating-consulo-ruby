@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby;
 
-import com.intellij.openapi.util.IconLoader;
+import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.ruby.api.icon.RubyApiIconGroup;
 import consulo.ui.image.Image;
 
 /**
@@ -26,54 +27,52 @@ import consulo.ui.image.Image;
  */
 public interface RubyIcons
 {
-
-	final Image RUBY_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby.png");
+	final Image RUBY_ICON = RubyApiIconGroup.rubyRuby();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Nodes
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Image RUBY_CLASS_NODE = IconLoader.findIcon("/nodes/class.png");
-	final Image RUBY_METHOD_NODE = IconLoader.findIcon("/nodes/method.png");
-	final Image RUBY_REQUIRE_NODE = IconLoader.findIcon("/nodes/aspect.png");
-	final Image RUBY_PARAMETER_NODE = IconLoader.findIcon("/nodes/parameter.png");
-	final Image RUBY_VARIABLE_NODE = IconLoader.findIcon("/nodes/variable.png");
-	final Image RUBY_MODULE_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/module.png");
-	final Image RUBY_CONSTANT_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/constant.png");
-	final Image RUBY_NOT_DEFINED_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/not_defined.png");
+	final Image RUBY_CLASS_NODE = PlatformIconGroup.nodesClass();
+	final Image RUBY_METHOD_NODE = PlatformIconGroup.nodesMethod();
+	final Image RUBY_REQUIRE_NODE = PlatformIconGroup.nodesAspect();
+	final Image RUBY_PARAMETER_NODE = PlatformIconGroup.nodesParameter();
+	final Image RUBY_VARIABLE_NODE = PlatformIconGroup.nodesVariable();
+	final Image RUBY_MODULE_NODE = RubyApiIconGroup.rubyNodesModule();
+	final Image RUBY_CONSTANT_NODE = RubyApiIconGroup.rubyNodesConstant();
+	final Image RUBY_NOT_DEFINED_NODE = RubyApiIconGroup.rubyNodesNot_defined();
 
-	final Image RUBY_OBJECT_CLASS_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/include.png");
-	final Image RUBY_GLOBAL_VAR_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/variable$.png");
-	final Image RUBY_FIELD_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/variable@.png");
+	final Image RUBY_OBJECT_CLASS_NODE = RubyApiIconGroup.rubyNodesInclude();
+	final Image RUBY_GLOBAL_VAR_NODE = RubyApiIconGroup.rubyNodesVariableDollar();
+	final Image RUBY_FIELD_NODE = RubyApiIconGroup.rubyNodesVariableAt();
 
-	final Image RUBY_INCLUDE_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/include.png");
-	final Image RUBY_ALIAS_NODE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/nodes/alias.png");
+	final Image RUBY_INCLUDE_NODE = RubyApiIconGroup.rubyNodesInclude();
+	final Image RUBY_ALIAS_NODE = RubyApiIconGroup.rubyNodesAlias();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Node attributes
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Image RUBY_ATTR_NODE = IconLoader.findIcon("/nodes/annotationtype.png");
-	final Image RUBY_ATTR_PUBLIC = IconLoader.findIcon("/nodes/c_public.png");
-	final Image RUBY_ATTR_PRIVATE = IconLoader.findIcon("/nodes/c_private.png");
-	final Image RUBY_ATTR_PROTECTED = IconLoader.findIcon("/nodes/c_protected.png");
-	final Image RUBY_ATTR_STATIC = IconLoader.findIcon("/nodes/staticMark.png");
+	final Image RUBY_ATTR_NODE = PlatformIconGroup.nodesAnnotationtype();
+	final Image RUBY_ATTR_PUBLIC = PlatformIconGroup.nodesC_public();
+	final Image RUBY_ATTR_PRIVATE = PlatformIconGroup.nodesC_private();
+	final Image RUBY_ATTR_PROTECTED = PlatformIconGroup.nodesC_protected();
+	final Image RUBY_ATTR_STATIC = PlatformIconGroup.nodesStaticMark();
 
-	final Image RUBY_ATTR_READER = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/reader.png");
-	final Image RUBY_ATTR_WRITER = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/writer.png");
+	final Image RUBY_ATTR_READER = RubyApiIconGroup.rubyReader();
+	final Image RUBY_ATTR_WRITER = RubyApiIconGroup.rubyWriter();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Module
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Image RUBY_MODULE_BIG = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/rubymedium.png");
+	final Image RUBY_MODULE_BIG = RubyApiIconGroup.rubyRubymedium();
 
-	final Image RUBY_MODULE_OPENED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_opened.png");
-	final Image RUBY_MODULE_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ruby_module_closed.png");
+	final Image RUBY_MODULE_OPENED = RubyApiIconGroup.rubyRuby_module_opened();
+	final Image RUBY_MODULE_CLOSED = RubyApiIconGroup.rubyRuby_module_closed();
 
-	final Image RUBY_ADD_MODULE = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/add_ruby_modulewizard.png");
+	final Image RUBY_ADD_MODULE = RubyApiIconGroup.rubyAdd_ruby_modulewizard();
 
-	final Image RUBY_MODULE_SETTINGS_LOADPATH = IconLoader.findIcon("/modules/classpath.png");
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Sdk
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,12 +88,12 @@ public interface RubyIcons
 
 	final Image RUBY_RUN_CONFIGURATION_FOLDER = RUBY_ICON;
 
-	final Image RUBY_RUN_CONFIGURATION_SCRIPT = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_script.png");
-	final Image RTEST_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/ruby_test_unit.png");
-	final Image RAILS_SERVER_RUN_CONFIGURATION = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/configuration/run_conf_server.png");
+	final Image RUBY_RUN_CONFIGURATION_SCRIPT = RubyApiIconGroup.rubyConfigurationRuby_script();
+	final Image RTEST_RUN_CONFIGURATION = RubyApiIconGroup.rubyConfigurationRuby_test_unit();
+	final Image RAILS_SERVER_RUN_CONFIGURATION = RubyApiIconGroup.rubyConfigurationRun_conf_server();
 
 
-	final Image RUBY_RUNNER_SHOW_CMDLINE = IconLoader.findIcon("/actions/showViewer.png");
+	final Image RUBY_RUNNER_SHOW_CMDLINE = PlatformIconGroup.actionsShowViewer();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Misc
@@ -102,9 +101,9 @@ public interface RubyIcons
 
 	final Image RUBY_COLOR_PAGE = RUBY_ICON;
 
-	final Image RUBY_GUTTER_OVERRIDING = IconLoader.findIcon("/gutter/overridingMethod.png");
-	final Image RUBY_GUTTER_IMPLEMENTING = IconLoader.findIcon("/gutter/implementingMethod.png");
+	final Image RUBY_GUTTER_OVERRIDING = PlatformIconGroup.gutterOverridingMethod();
+	final Image RUBY_GUTTER_IMPLEMENTING = PlatformIconGroup.gutterImplementingMethod();
 
-	final Image RI_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/ruby/ri.png");
+	final Image RI_ICON = RubyApiIconGroup.rubyRi();
 }
 

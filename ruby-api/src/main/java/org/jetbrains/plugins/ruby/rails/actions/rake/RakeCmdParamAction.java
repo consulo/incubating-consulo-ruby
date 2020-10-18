@@ -16,15 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import javax.annotation.Nonnull;
-
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.ToggleAction;
-import consulo.awt.TargetAWT;
 import consulo.ui.image.Image;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

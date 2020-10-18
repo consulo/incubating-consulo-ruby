@@ -63,7 +63,7 @@
 		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler"/>
 		<moduleExtensionProvider key="ruby"
 								 name="Ruby"
-								 icon="/org/jetbrains/plugins/ruby/ruby/ruby.png"
+								 icon="consulo.ruby.api.RubyApiIconGroup@ruby.ruby"
 								 immutableClass="consulo.ruby.module.extension.BaseRubyModuleExtension"
 								 mutableClass="consulo.ruby.module.extension.BaseRubyMutableModuleExtension"/>
 
@@ -139,7 +139,7 @@
 		<inspectionToolProvider implementation="consulo.ruby.lang.RubyInspectionToolProvider" />
 
 		<toolWindow id="RDoc"
-					icon="/org/jetbrains/plugins/ruby/ruby/ri.png"
+					icon="consulo.ruby.api.RubyApiIconGroup@ruby.ri"
 					anchor="right"
 					secondary="true"
 					requireModuleExtensions="@@rdocToolwindowModuleExtensionList"

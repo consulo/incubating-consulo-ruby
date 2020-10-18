@@ -16,17 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
-import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
 import com.intellij.execution.ExecutorRegistry;
@@ -38,12 +27,7 @@ import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.actions.CloseAction;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonShortcuts;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -51,8 +35,19 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.io.FileUtil;
+import consulo.platform.base.icon.PlatformIconGroup;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
+import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
+import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -272,7 +267,7 @@ public class ConsoleRunner
 
 		public RerunAction(final ConsoleView consoleView, Runnable rerun)
 		{
-			super(RBundle.message("action.rerun"), RBundle.message("action.rerun"), IconLoader.getIcon("/actions/refreshUsages.png"));
+			super(RBundle.message("action.rerun"), RBundle.message("action.rerun"), PlatformIconGroup.actionsRerun());
 
 			registerCustomShortcutSet(CommonShortcuts.getRerun(), consoleView.getComponent());
 			myRerunTask = rerun;

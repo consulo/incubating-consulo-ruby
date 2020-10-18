@@ -18,9 +18,11 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import java.awt.Component;
 
+import javax.annotation.Nonnull;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
+import com.intellij.ui.ColoredListCellRenderer;
 import org.jetbrains.plugins.ruby.RBundle;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.module.Module;
@@ -31,21 +33,19 @@ import com.intellij.openapi.module.Module;
  * @author: Roman Chernyatchik
  * @date: 04.08.2007
  */
-public class ModuleListCellRenderer extends DefaultListCellRenderer
+public class ModuleListCellRenderer extends ColoredListCellRenderer<Module>
 {
 	@Override
-	public Component getListCellRendererComponent(JList list, final Object value, int index, boolean isSelected, boolean cellHasFocus)
+	protected void customizeCellRenderer(@Nonnull JList<? extends Module> jList, Module value, int i, boolean b, boolean b1)
 	{
-		super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		if(value != null)
 		{
-			setText(((Module) value).getName());
+			append(((Module) value).getName());
 			setIcon(AllIcons.Nodes.Module);
 		}
 		else
 		{
-			setText(RBundle.message("run.configuration.messages.none"));
+			append(RBundle.message("run.configuration.messages.none"));
 		}
-		return this;
 	}
 }

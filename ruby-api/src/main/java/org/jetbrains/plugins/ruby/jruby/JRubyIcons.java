@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import com.intellij.openapi.util.IconLoader;
+import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.ruby.api.icon.RubyApiIconGroup;
 import consulo.ui.image.Image;
 
 /**
@@ -26,10 +27,10 @@ import consulo.ui.image.Image;
  */
 public interface JRubyIcons
 {
-	final Image JRUBY_ICON = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby.png");
+	final Image JRUBY_ICON = RubyApiIconGroup.jrubyJruby();
 	final Image JRUBY_SDK_ADD_ICON = JRUBY_ICON;
-	final Image JAVA_ICON = IconLoader.findIcon("/general/addJdk.png");
+	final Image JAVA_ICON = PlatformIconGroup.generalAdd();
 
-	Image JRUBY_SDK_ICON_OPEN = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_open.png");
-	Image JRUBY_SDK_ICON_CLOSED = IconLoader.findIcon("/org/jetbrains/plugins/ruby/jruby/jruby_sdk_closed.png");
+	Image JRUBY_SDK_ICON_OPEN = RubyApiIconGroup.jrubyJruby_sdk_open();
+	Image JRUBY_SDK_ICON_CLOSED = RubyApiIconGroup.jrubyJruby_sdk_closed();
 }

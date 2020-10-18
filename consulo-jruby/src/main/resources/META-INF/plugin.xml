@@ -1,4 +1,4 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.jruby</id>
 	<name>JRuby</name>
 	<version>SNAPSHOT</version>
@@ -21,9 +21,9 @@
 
 		<moduleExtensionProvider key="jruby"
 								 parentKey="java"
-								 icon="/icons/jruby.png"
+								 icon="consulo.jruby.JRubyIconGroup@jruby"
 								 name="JRuby"
 								 immutableClass="consulo.jruby.module.extension.JRubyModuleExtension"
 								 mutableClass="consulo.jruby.module.extension.JRubyMutableModuleExtension" />
 	</extensions>
-</idea-plugin>
+</consulo-plugin>

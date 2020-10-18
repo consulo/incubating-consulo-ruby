@@ -94,10 +94,4 @@ public class JRubyLoadPathChooser extends FacetEditorTab
 			SymbolsCache.getInstance(module.getProject()).clearCachesExceptBuiltIn();
 		}
 	}
-
-	@Nullable
-	public Image getIcon()
-	{
-		return RubyIcons.RUBY_MODULE_SETTINGS_LOADPATH;
-	}
 }

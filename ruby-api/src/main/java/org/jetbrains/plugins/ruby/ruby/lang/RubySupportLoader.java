@@ -23,22 +23,8 @@ import com.intellij.util.ThrowableRunnable;
 
 public class RubySupportLoader
 {
-	public static void loadRuby()
-	{
-		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
-		{
-			@Override
-			public void run() throws Exception
-			{
-				// Registering Ruby editor actions
-				RubyEditorActionsManager.registerRubyEditorActions();
-
-			}
-		});
-	}
-
 	public RubySupportLoader()
 	{
-		loadRuby();
+		RubyEditorActionsManager.registerRubyEditorActions();
 	}
 }
