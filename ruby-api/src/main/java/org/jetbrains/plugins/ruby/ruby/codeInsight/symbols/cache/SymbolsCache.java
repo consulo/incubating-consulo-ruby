@@ -16,17 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
-import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -36,6 +25,17 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.reference.SoftReference;
 import com.intellij.util.containers.HashMap;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
+import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
+import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,6 +64,10 @@ public class SymbolsCache implements ProjectComponent
 	public SymbolsCache(@Nonnull final Project project, @Nonnull final RubySdkCachesManager manager)
 	{
 		myProject = project;
+		if(project.isDefault())
+		{
+			return;
+		}
 		manager.registerSymbolsCache(this);
 
 		//Also we must be sure that RubySdkCachesManager will initialize sdk caches(in post startUp activity)
