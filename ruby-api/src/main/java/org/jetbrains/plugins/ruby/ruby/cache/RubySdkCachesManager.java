@@ -31,6 +31,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.util.messages.MessageBusConnection;
 import consulo.bundle.SdkTableListener;
 import consulo.disposer.Disposable;
+import jakarta.inject.Inject;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
@@ -42,7 +43,6 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 

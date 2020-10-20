@@ -18,10 +18,11 @@ package org.jetbrains.plugins.ruby.addins.rspec;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleServiceManager;
+import jakarta.inject.Inject;
+
 import javax.annotation.Nonnull;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  * Created by IntelliJ IDEA.
