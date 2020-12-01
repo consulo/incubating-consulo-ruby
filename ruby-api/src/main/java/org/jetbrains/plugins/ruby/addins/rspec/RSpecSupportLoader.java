@@ -18,10 +18,9 @@ package org.jetbrains.plugins.ruby.addins.rspec;
 
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import consulo.ui.color.RGBColor;
 import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;
-
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -65,11 +64,11 @@ public class RSpecSupportLoader
 
 	static
 	{
-		RED_TEXT_ATTRIBUTES.setForegroundColor(new Color(221, 33, 33));
-		GREEN_TEXT_ATTRIBUTES.setForegroundColor(new Color(61, 164, 61));
-		MAGENTA_TEXT_ATTRIBUTES.setForegroundColor(new Color(255, 0, 255));
-		BLUE_TEXT_ATTRIBUTES.setForegroundColor(new Color(0, 0, 255));
-		YELLOW_TEXT_ATTRIBUTES.setForegroundColor(new Color(255, 205, 0));
+		RED_TEXT_ATTRIBUTES.setForegroundColor(new RGBColor(221, 33, 33));
+		GREEN_TEXT_ATTRIBUTES.setForegroundColor(new RGBColor(61, 164, 61));
+		MAGENTA_TEXT_ATTRIBUTES.setForegroundColor(new RGBColor(255, 0, 255));
+		BLUE_TEXT_ATTRIBUTES.setForegroundColor(new RGBColor(0, 0, 255));
+		YELLOW_TEXT_ATTRIBUTES.setForegroundColor(new RGBColor(255, 205, 0));
 	}
 
 	public static class MyConsoleViewContentType extends ConsoleViewContentType

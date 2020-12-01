@@ -16,9 +16,6 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
@@ -28,6 +25,10 @@ import com.intellij.openapi.editor.markup.HighlighterTargetArea;
 import com.intellij.openapi.editor.markup.MarkupModel;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.project.Project;
+import consulo.awt.TargetAWT;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,7 +74,7 @@ public class RubyLineHighlightingUtil
 			assert info.isSlow == slow;
 			RangeHighlighter marker = markupModel.addRangeHighlighter(info.startOffset, info.startOffset, HighlighterLayer.ADDITIONAL_SYNTAX, info.attributes, HighlighterTargetArea.LINES_IN_RANGE);
 			marker.setGutterIconRenderer(info.createGutterRenderer());
-			marker.setLineSeparatorColor(info.separatorColor);
+			marker.setLineSeparatorColor(TargetAWT.to(info.separatorColor));
 			marker.setLineSeparatorPlacement(info.separatorPlacement);
 			info.highlighter = marker;
 			array.add(info);

@@ -16,7 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
-import java.awt.Color;
+import com.intellij.openapi.editor.colors.EditorColors;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.LabeledComponent;
+import consulo.awt.TargetAWT;
+import consulo.ui.color.ColorValue;
+import consulo.ui.style.StandardColors;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -24,23 +38,6 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
-
-import javax.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.openapi.editor.colors.EditorColors;
-import com.intellij.openapi.editor.colors.EditorColorsManager;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.LabeledComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,8 +66,8 @@ class InfoPane
 	public InfoPane(final RDocPanel docPanel)
 	{
 		myDocPanel = docPanel;
-		final Color bgColor = EditorColorsManager.getInstance().getGlobalScheme().getColor(EditorColors.CARET_ROW_COLOR);
-		myOutputPane.setBackground(bgColor != null ? bgColor : Color.WHITE);
+		final ColorValue bgColor = EditorColorsManager.getInstance().getGlobalScheme().getColor(EditorColors.CARET_ROW_COLOR);
+		myOutputPane.setBackground(TargetAWT.to(bgColor != null ? bgColor : StandardColors.WHITE));
 		myOutputPane.setEditable(false);
 		myOutputPane.setContentType(CONTENT_TYPE);
 

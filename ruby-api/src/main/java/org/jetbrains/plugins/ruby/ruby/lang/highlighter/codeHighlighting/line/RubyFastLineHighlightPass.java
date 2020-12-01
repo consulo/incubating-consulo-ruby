@@ -51,7 +51,6 @@ import com.intellij.psi.PsiElement;
 public class RubyFastLineHighlightPass extends AbstractRubyHighlighterPass
 {
 	private static final DaemonCodeAnalyzerSettings mySettings = DaemonCodeAnalyzerSettings.getInstance();
-	private static final EditorColorsScheme myScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
 	private Collection<RubyLineMarkerInfo> myLineMarkers;
 
@@ -117,7 +116,7 @@ public class RubyFastLineHighlightPass extends AbstractRubyHighlighterPass
 						// we should show separator before the comments
 						final List<PsiComment> comments = RubyHelpUtil.getPsiComments(child);
 						final RubyLineMarkerInfo info = comments.isEmpty() ? new RubyLineMarkerInfo(RubyHighlightUtil.getStartOffset(child), false) : new RubyLineMarkerInfo(RubyHighlightUtil.getStartOffset(comments.get(0)), false);
-						info.separatorColor = myScheme.getColor(CodeInsightColors.METHOD_SEPARATORS_COLOR);
+						info.separatorColor = EditorColorsManager.getInstance().getGlobalScheme().getColor(CodeInsightColors.METHOD_SEPARATORS_COLOR);
 						info.separatorPlacement = SeparatorPlacement.TOP;
 						myLineMarkers.add(info);
 					}

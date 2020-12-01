@@ -16,12 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import java.awt.Color;
-
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.editor.markup.SeparatorPlacement;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import consulo.ui.color.ColorValue;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,11 +30,10 @@ import com.intellij.openapi.editor.markup.TextAttributes;
  */
 public class RubyLineMarkerInfo
 {
-
 	public final int startOffset;
 	public final boolean isSlow;
 	public TextAttributes attributes;
-	public Color separatorColor;
+	public ColorValue separatorColor;
 	public SeparatorPlacement separatorPlacement;
 	public RangeHighlighter highlighter;
 
