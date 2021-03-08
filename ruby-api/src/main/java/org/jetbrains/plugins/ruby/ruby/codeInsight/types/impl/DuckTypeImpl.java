@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
-import com.intellij.util.containers.HashMap;
+import java.util.HashMap;
 
 /**
  * Created by IntelliJ IDEA.

@@ -39,8 +39,8 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.LoadPa
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Prototypes;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.HashMap;
-import com.intellij.util.containers.HashSet;
+import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**

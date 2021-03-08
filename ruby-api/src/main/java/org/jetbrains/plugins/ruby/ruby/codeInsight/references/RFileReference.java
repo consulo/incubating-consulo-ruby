@@ -24,9 +24,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.containers.HashSet;
-import javax.annotation.Nonnull;
-
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -42,10 +39,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.index;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.testFramework.IdeaTestCase;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.index.impl.DeclarationsIndexImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;

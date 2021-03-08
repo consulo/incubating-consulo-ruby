@@ -28,7 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFilesStorage;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.

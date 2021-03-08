@@ -58,7 +58,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.PsiManagerEx;
-import com.intellij.util.containers.HashMap;
+import java.util.HashMap;
 
 /**
  * Created by IntelliJ IDEA.

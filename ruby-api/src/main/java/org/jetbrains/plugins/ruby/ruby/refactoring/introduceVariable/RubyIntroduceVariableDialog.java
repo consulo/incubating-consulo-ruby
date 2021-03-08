@@ -51,7 +51,7 @@ import com.intellij.ui.EditorComboBoxEditor;
 import com.intellij.ui.EditorComboBoxRenderer;
 import com.intellij.ui.EditorTextField;
 import com.intellij.ui.StringComboboxEditor;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 
 public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIntroduceVariableSettings
 {

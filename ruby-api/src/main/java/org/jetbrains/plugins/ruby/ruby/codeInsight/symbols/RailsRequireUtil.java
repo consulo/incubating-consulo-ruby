@@ -46,7 +46,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.

@@ -14,20 +14,19 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.types;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.Semilattice;
-import com.intellij.util.containers.HashMap;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author oleg
  */
 public class TypesSemilattice implements Semilattice<Map<String, RType>>
 {
-
 	@Override
 	public Map<String, RType> join(final ArrayList<Map<String, RType>> ins)
 	{

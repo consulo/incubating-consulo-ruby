@@ -50,7 +50,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiType;
-import com.intellij.util.containers.HashMap;
+import java.util.HashMap;
 
 /**
  * @author oleg

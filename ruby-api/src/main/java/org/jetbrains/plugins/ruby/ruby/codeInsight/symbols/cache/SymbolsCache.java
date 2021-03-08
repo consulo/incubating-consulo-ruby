@@ -24,7 +24,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.reference.SoftReference;
-import com.intellij.util.containers.HashMap;
+import java.util.HashMap;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;

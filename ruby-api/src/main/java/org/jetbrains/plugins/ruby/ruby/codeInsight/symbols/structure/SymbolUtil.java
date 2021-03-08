@@ -49,7 +49,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.containers.HashSet;
+import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.
