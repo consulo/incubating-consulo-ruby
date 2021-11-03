@@ -1,9 +1,16 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.ruby.rails</id>
 	<name>Ruby on Rails</name>
 	<version>SNAPSHOT</version>
 
 	<depends>consulo.ruby</depends>
+
+	<tags>
+		<tag>language.extension</tag>
+		<tag>experimental</tag>
+	</tags>
+
+	<experimental>true</experimental>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<moduleExtensionProvider key="ruby-on-rails"
@@ -13,4 +20,4 @@
 								 immutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtension"
 								 mutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsMutableModuleExtension" />
 	</extensions>
-</idea-plugin>
+</consulo-plugin>

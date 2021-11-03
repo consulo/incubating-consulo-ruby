@@ -1,9 +1,17 @@
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.jruby.rails</id>
 	<name>JRuby on Rails</name>
 	<version>SNAPSHOT</version>
 
 	<depends>consulo.ruby.rails</depends>
+
+	<tags>
+		<tag>language.extension</tag>
+		<tag>web.framework</tag>
+		<tag>experimental</tag>
+	</tags>
+
+	<experimental>true</experimental>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<moduleExtensionProvider key="jruby-on-rails"
@@ -13,4 +21,4 @@
 								 immutableClass="consulo.jruby.rails.module.extension.JRubyOnRailsModuleExtension"
 								 mutableClass="consulo.jruby.rails.module.extension.JRubyOnRailsMutableModuleExtension" />
 	</extensions>
-</idea-plugin>
+</consulo-plugin>

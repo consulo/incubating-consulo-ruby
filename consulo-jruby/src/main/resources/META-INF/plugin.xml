@@ -6,6 +6,13 @@
 	<depends>consulo.ruby</depends>
 	<depends>consulo.java</depends>
 
+	<tags>
+		<tag>language.extension</tag>
+		<tag>experimental</tag>
+	</tags>
+
+	<experimental>true</experimental>
+
 	<!--<project-components>
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.jruby.JRubySupportLoader</implementation-class>
