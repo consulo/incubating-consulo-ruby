@@ -7,7 +7,6 @@
 
 	<tags>
 		<tag>language.extension</tag>
-		<tag>experimental</tag>
 	</tags>
 
 	<experimental>true</experimental>

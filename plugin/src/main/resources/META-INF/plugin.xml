@@ -28,7 +28,6 @@
 	<experimental>true</experimental>
 	<tags>
 		<tag>custom.language</tag>
-		<tag>experimental</tag>
 	</tags>
 
 	<depends optional="true" config-file="ruby-javascript-integration.xml">consulo.javascript</depends>
