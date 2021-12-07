@@ -37,8 +37,6 @@ public interface RailsIcons
 	@Deprecated
 	final Image RAILS_MODULE_NODE = RAILS_SMALL;
 	@Deprecated
-	final Image RAILS_MODULE_OPENED = RubyApiIconGroup.railsRails_module_opened();
-	@Deprecated
 	final Image RAILS_MODULE_CLOSED = RubyApiIconGroup.railsRails_module_closed();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +56,6 @@ public interface RailsIcons
 	final Image RAILS_FOLDER_CLOSED = PlatformIconGroup.nodesFolder();
 	final Image RAILS_PARTIALS_OPEN = PlatformIconGroup.nodesWebFolder();
 	final Image RAILS_PARTIALS_CLOSED = PlatformIconGroup.nodesWebFolder();
-	final Image RAILS_MIGRATIONS_OPEN = RubyApiIconGroup.railsMigrationsOpen();
 	final Image RAILS_MIGRATIONS_CLOSED = RubyApiIconGroup.railsMigrationsClosed();
 	final Image RAILS_SCHEMA_FILE = RubyApiIconGroup.railsSchema();
 	//    final Icon RAILS_MODELS_NODES =      IconLoader.findIcon(DATA_PATH+"modelesNode.png");
