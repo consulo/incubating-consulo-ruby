@@ -31,6 +31,5 @@ public interface JRubyIcons
 	final Image JRUBY_SDK_ADD_ICON = JRUBY_ICON;
 	final Image JAVA_ICON = PlatformIconGroup.generalAdd();
 
-	Image JRUBY_SDK_ICON_OPEN = RubyApiIconGroup.jrubyJruby_sdk_open();
 	Image JRUBY_SDK_ICON_CLOSED = RubyApiIconGroup.jrubyJruby_sdk_closed();
 }

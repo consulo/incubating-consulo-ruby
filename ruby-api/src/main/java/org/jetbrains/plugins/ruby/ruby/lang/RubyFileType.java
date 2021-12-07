@@ -16,13 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ruby.api.icon.RubyApiIconGroup;
 import consulo.ui.image.Image;
+import org.jetbrains.plugins.ruby.RBundle;
+
+import javax.annotation.Nonnull;
 
 
 public class RubyFileType extends LanguageFileType
@@ -58,10 +57,10 @@ public class RubyFileType extends LanguageFileType
 	}
 
 	@Override
-	@Nullable
+	@Nonnull
 	public Image getIcon()
 	{
-		return RubyIcons.RUBY_ICON;
+		return RubyApiIconGroup.rubyRubyFile();
 	}
 }
 

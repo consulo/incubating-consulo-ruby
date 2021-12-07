@@ -16,36 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
-import org.jdom.Element;
-import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.Output;
-import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
-import org.jetbrains.plugins.ruby.ruby.run.Runner;
-import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
-import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkAdditionalData;
-import com.intellij.openapi.projectRoots.SdkModel;
-import com.intellij.openapi.projectRoots.SdkModificator;
-import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.projectRoots.impl.SdkImpl;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.ui.Messages;
@@ -54,6 +27,21 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import consulo.ui.image.Image;
+import org.jdom.Element;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.RubyIcons;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.Output;
+import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
+import org.jetbrains.plugins.ruby.ruby.run.Runner;
+import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
+import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -331,7 +319,7 @@ public class RubySdkType extends SdkType
 	@Override
 	public Image getIcon()
 	{
-		return RubyIcons.RUBY_SDK;
+		return RubyIcons.RUBY_ICON;
 	}
 
 	private RubySdkAdditionalData getSdkAdditionalData(@Nonnull final Sdk sdk)

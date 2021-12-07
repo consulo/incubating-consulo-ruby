@@ -15,7 +15,7 @@
 		<moduleExtensionProvider key="ruby-on-rails"
 								 parentKey="ruby"
 								 name="Rails"
-								 icon="/org/jetbrains/plugins/ruby/rails/rails_small.png"
+								 icon="consulo.ruby.api.RubyApiIconGroup@rails.rails_small"
 								 immutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtension"
 								 mutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsMutableModuleExtension" />
 	</extensions>

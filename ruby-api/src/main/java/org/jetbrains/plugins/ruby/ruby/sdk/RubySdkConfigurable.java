@@ -16,20 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.JComponent;
-
-import org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener;
-import org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkConfigurablePanel;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ThrowableRunnable;
+import org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkConfigurablePanel;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -87,24 +82,20 @@ public class RubySdkConfigurable implements AdditionalDataConfigurable
 
 		//Patch source roots according to classpath
 		final SdkModificator modificator = mySdk.getSdkModificator();
-		modificator.removeRoots(OrderRootType.CLASSES);
-		for(VirtualFile file : modificator.getRoots(OrderRootType.CLASSES))
-		{
-			modificator.addRoot(file, OrderRootType.SOURCES);
-		}
+
 		RubySdkType.findAndSaveGemsRootsBy(modificator);
 
 		modificator.commitChanges();
 
 		// Change libraries facet libraries
-		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
-		{
-			@Override
-			public void run() throws Exception
-			{
-				JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(OrderRootType.CLASSES));
-			}
-		});
+//		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
+//		{
+//			@Override
+//			public void run() throws Exception
+//			{
+//				JRubySdkTableListener.updateLibrary(mySdk.getName(), modificator.getRoots(OrderRootType.CLASSES));
+//			}
+//		});
 	}
 
 	@Override
