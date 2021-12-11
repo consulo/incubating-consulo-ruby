@@ -1006,11 +1006,11 @@ inspection.wrong.top.level.package:
   text: Wrong java top level package
 inspection.wrong.top.level.package.should.be.one.of:
   text: 'Top level java package used should be one of: {0}'
-overrides:
+line.marker.overrides:
   text: Overrides
-implements:
+line.marker.implements:
   text: Implements
-aliases:
+line.marker.aliases:
   text: Aliases
 line.marker.override.select.variant:
   text: Select overriden symbol
