@@ -1,0 +1,1316 @@
+module.ruby.title:
+  text: Ruby Module
+module.ruby.description:
+  text: Provides facilities for developing <b>Ruby</b> and <b>Ruby On Rails</b> applications.
+project.jruby.title:
+  text: JRuby Project
+module.jruby.title:
+  text: JRuby Module
+module.jruby.description:
+  text: Provides facilities for developing <b>JRuby</b> applications.
+sdk.ruby.title:
+  text: Ruby SDK
+sdk.jruby.title:
+  text: JRuby SDK
+ruby.configuration.interpreter.path:
+  text: Interpreter path
+ruby.configuration.gems.bin.dir.path:
+  text: Gems bin directory
+ruby.configuration.gems.bin.dir.path.tooltip:
+  text: The path where gems executable scipts are installed
+ruby.configuration.gems.bin.dir.select.path:
+  text: Select gems bin directory
+sdk.no.specified:
+  text: No SDK specified
+sdk.type.incorrect:
+  text: Wrong SDK type
+sdk.type.incorrect.homepath:
+  text: Home path for SDK doesn''t exist
+sdk.error.homepath.doesnt.exists:
+  text: Home path for ruby SDK ''{0}'' doesn''t exist.
+sdk.error.isnt.valid:
+  text: SDK ''{0}'' isn`t valid Ruby SDK
+sdk.error.gems.bindir.doesnt.exist:
+  text: Gems bin directory doesn't exist
+sdk.error.gems.bindir.isnt.directory:
+  text: Gems bin directory isn't a direcotory
+sdk.error.cannot.create.sdk.title:
+  text: Cannot create SDK
+sdk.setup.progress.title:
+  text: Creating SDK
+sdk.setup.progress.setup.pathes:
+  text: Setup paths...
+sdk.error.no.rails.found:
+  text: '[No Rails found in SDK]'
+sdk.error.rails.unknown.verson:
+  text: '[Unknown version]'
+sdk.error.no.rails.found.prompt.message.confirm.no.rails:
+  text: No Rails script found in SDK bin path. With no Rails installed you will not be able to generate Rails applications. Continue anyway?
+execution.error.title:
+  text: Execution Error
+execution.error.no.executable.cmd.for.script:
+  text: Unable to run ''{0}''
+execution.error.no.executable.cmd.for.gem:
+  text: Unable to run gem ''{0}''
+execution.ruby.script.get.available.generators:
+  text: |-
+    Get available generators script executes with errors:
+    {0}
+execution.ruby.script.get.available.raketasks:
+  text: |-
+    Get available rake tasks script executes with errors:
+    {0}
+run.configuration.type.name:
+  text: Ruby Scripts and Tests
+run.configuration.type.description:
+  text: Ruby and Test::Unit run configurations
+run.configuration.script.name:
+  text: Ruby script
+run.configuration.test.name:
+  text: Ruby test
+run.configuration.messages.select.working.dir:
+  text: Select working directory
+run.configuration.messages.script.args:
+  text: Script arguments
+run.configuration.messages.edit.script.args:
+  text: Edit Script Arguments
+run.configuration.messages.suggested.name:
+  text: this script
+run.configuration.messages.select.ruby.scipt.path:
+  text: Select Ruby Script
+run.configuration.messages.select.module:
+  text: 'Choose Ruby SDK from module:'
+run.configuration.messages.working.dir:
+  text: Working directory
+run.configuration.messages.ruby.args:
+  text: Ruby arguments
+run.configuration.messages.edit.ruby.args:
+  text: Edit Ruby Arguments
+run.configuration.messages.script.path:
+  text: 'Ruby Script:'
+run.configuration.messages.folder.path:
+  text: 'Folder:'
+run.configuration.messages.select.folder.path:
+  text: Select Folder
+run.configuration.dialog.components.sdk:
+  text: SDK
+run.configuration.tests.messages.class.name:
+  text: 'Class:'
+run.configuration.tests.messages.method.name:
+  text: 'Method:'
+run.configuration.test.form.testtype.title:
+  text: 'Test:'
+run.configuration.tests.dialog.components.folder:
+  text: Tests folder
+run.configuration.tests.dialog.components.search.mask:
+  text: 'Test file name mask:'
+run.configuration.tests.dialog.components.file:
+  text: Ruby script
+run.configuration.tests.dialog.components.class:
+  text: Class
+run.configuration.tests.dialog.components.method:
+  text: Method
+run.configuration.tests.dialog.rb.allInFolder:
+  text: '&All tests in folder'
+run.configuration.tests.dialog.rb.class:
+  text: TestCase &class
+run.configuration.tests.dialog.rb.method:
+  text: Test &method
+run.configuration.tests.dialog.rb.file:
+  text: Test &script
+run.configuration.tests.no.data:
+  text: '[none]'
+run.configuration.tests.no.qualified.name:
+  text: '[Unable to evaluate qualified name]'
+run.configuration.test.use.alternate.sdk.checkbox:
+  text: Use alternative S&DK
+run.configuration.test.ignore.testcase.inheritance:
+  text: D&isable check that class must be inherited from Test::Unit::TestCase
+rails.run.configuration.type.name:
+  text: Rails
+rails.run.configuration.type.description:
+  text: Rails run configurations
+run.configuration.server.title:
+  text: Server
+run.configuration.server.dialog.port:
+  text: Port
+run.configuration.server.dialog.ip:
+  text: IP Address
+run.configuration.server.dialog.environment:
+  text: Environment
+run.configuration.server.dialog.server:
+  text: Choose Server
+run.configuration.server.args:
+  text: Server Arguments
+run.configuration.server.dialog.use.free.port:
+  text: Use &any free port
+run.configuration.server.dialog.manually.port:
+  text: Choose port &manually
+run.configuration.server.panel.port:
+  text: Port
+run.configuration.messages.none:
+  text: '[none]'
+rspec.run.configuration.type.name:
+  text: RSpec
+rspec.run.configuration.type.description:
+  text: RSpec examples run configurations
+rspec.run.configuration.rspec.name:
+  text: RSpec
+rspec.run.configuration.tests.dialog.components.search.mask:
+  text: 'Spec file name mask:'
+rspec.run.configuration.tests.dialog.components.folder:
+  text: Specs folder
+rspec.run.configuration.tests.dialog.rb.allInFolder:
+  text: '&All specs in folder'
+rspec.run.configuration.tests.dialog.rb.file:
+  text: '&Spec script'
+rspec.run.configuration.tests.form.testtype.title:
+  text: 'Spec:'
+rspec.run.configuration.tests.coloured.output:
+  text: Enable &coloured output
+rspec.run.configuration.messages.script.path:
+  text: 'Spec script:'
+rspec.run.configuration.messages.args:
+  text: Spec arguments
+rspec.run.configuration.messages.edit.spec.args:
+  text: Edit Spec Arguments
+rspec.run.configuration.tests.dialog.components.spec.custom.runner:
+  text: Runner
+rspec.run.configuration.tests.dialog.components.select.spec.custom.runner:
+  text: Select Custom Spec Runner
+rspec.run.configuration.tests.dialog.components.spec.custom.use:
+  text: Use custom Spec &runner
+rspec.run.configuration.tests.runner.run.separately:
+  text: Run specs s&eparately
+rspec.run.configuration.tests.use.gem.from.sdk.checkbox:
+  text: Use RSpec Gem from S&DK
+rspec.run.configuration.messages.spec.args:
+  text: Spec arguments
+run.configuration.script.port.cant.find.free:
+  text: Can''t find free port
+run.configuration.script.port.is.busy:
+  text: Port {0} is busy
+run.configuration.script.port.bad.format:
+  text: Incorrect ''port'' value
+run.configuration.script.ip.bad.format:
+  text: Incorrect ''ip adress'' value
+run.configuration.script.not.specified:
+  text: Ruby script not specified
+run.configuration.script.not.exists:
+  text: Ruby script doesn`t exist
+run.configuration.script.is.not.file:
+  text: Ruby script doesn`t seem to be file
+run.configuration.no.alternative.skd.specified:
+  text: No Ruby SDK specified for configuration
+run.configuration.test.cant.create.tempory.file:
+  text: Can't create tempory file
+run.configuration.no.module.specified:
+  text: No ruby runable module specified for configuration
+run.configuration.working.directory.not.exists:
+  text: Working directory doesn`t exist
+run.configuration.working.directory.error:
+  text: Working directory isn't a dirrectory
+run.configuration.test.folder.not.exists:
+  text: Tests folder doesn`t exist
+run.configuration.test.folder.not.dir:
+  text: Tests folder isn't a directory
+run.configuration.test.no.mask:
+  text: Define mask for test names
+run.configuration.test.script.not.exists:
+  text: Test script doesn`t exist
+run.configuration.test.class.not.exists:
+  text: Test class not found
+run.configuration.test.class.must.inherited.from.testcase:
+  text: Test class must be inherited from Test::Unit::TestCase
+run.configuration.test.method.not.exists:
+  text: Test method not found
+run.configuration.test.script.is.dir:
+  text: Test script is directory
+run.configuration.test.default.name:
+  text: 'All in: {0}'
+rspec.run.configuration.test.folder.not.exists:
+  text: Specs folder doesn`t exist
+rspec.run.configuration.test.folder.not.dir:
+  text: Specs folder isn't a directory
+rspec.run.configuration.test.no.mask:
+  text: Define mask for specs names
+rspec.run.configuration.test.script.not.exists:
+  text: Spec script doesn`t exist
+rspec.run.configuration.test.custom.runner.not.exists:
+  text: Custom Spec runner doesn`t exist
+rspec.run.configuration.test.custom.runner.is.dir:
+  text: Custom Spec runner is directory
+rspec.run.configuration.test.script.is.dir:
+  text: Spec script is directory
+rspec.run.configuration.test.default.name:
+  text: 'All specs in: {0}'
+rspec.run.configuration.test.no.gem.in.alternative.sdk:
+  text: You use alternative SDK without installed RSpec Gem
+rspec.run.configuration.test.no.gem.in.module.sdk:
+  text: You use module SDK without installed RSpec Gem
+rspec.run.configuration.test.module.should.be.ror:
+  text: You must use Ruby or Rails Module
+rspec.run.configuration.test.plugin.not.installed.install.or.change.to.gem:
+  text: 'RSpec plugin isn''t installed. Install plugin or choose "Use RSpec Gem" in Module Settings dialog '
+rspec.run.configuration.test.plugin.doesnt.support.win32console.gem:
+  text: ROR Plugin doesn't support colouring mode when 'win32console' gem is installed. Please disable colouring option in run configuration or uninstall 'win32console' gem.
+rails.plugins.install.error.title:
+  text: Installation Error
+rails.plugins.install.process.title:
+  text: '{0}: plugin installation'
+new.generate.common.action.prompt.title:
+  text: Add New ''{0}''
+new.generate.common.error.title:
+  text: Generate Error
+new.generate.common.action.title:
+  text: Generate New ''{0}''
+new.generate.common.generating.title:
+  text: generate script
+new.generate.common.error.script.arguments.should.be.specified:
+  text: Script arguments must be specified!
+new.generate.common.error.script.argument.is.not.valid:
+  text: is not valid argument.
+new.generate.common.error.no.rails:
+  text: Rails script hasn't been found in your SDK. Without Rails installed you can't invoke Rails Generators. Choose another SDK in module settings or install Rails Framework.
+dialog.generate.common.label.arguments.text:
+  text: 'Generator &arguments:'
+dialog.generate.common.checkBox.pretend.text:
+  text: '&Pretend'
+dialog.generate.common.checkBox.pretend.tooltip:
+  text: Run but do not make any changes.
+dialog.generate.common.checkBox.force.text:
+  text: '&Force'
+dialog.generate.common.checkBox.force.tooltip:
+  text: Overwrite files that already exist.
+dialog.generate.common.checkBox.skip.text:
+  text: '&Skip'
+dialog.generate.common.checkBox.skip.tooltip:
+  text: Skip files that already exist.
+dialog.generate.common.checkBox.backtrace.text:
+  text: '&Backtrace'
+dialog.generate.common.checkBox.backtrace.tooltip:
+  text: 'Debugging: show backtrace on errors.'
+dialog.generate.common.checkBox.svn.text:
+  text: S&vn
+dialog.generate.common.checkBox.svn.tooltip:
+  text: 'Modify files with subversion. (Note: svn must be in path).'
+dialog.generate.common.help.title:
+  text: 'Help For: ''''{0}'''''
+progress.dialog.generate.common.help.wait.title:
+  text: Loading help...
+new.generate.spec.generating.title:
+  text: generate spec
+popup.generate.action.text:
+  text: Action
+popup.generate.action.description:
+  text: Generates Action For Controller
+popup.generate.action.command:
+  text: Generate Action For Controller
+popup.generate.action.prompt.title:
+  text: Add New Action
+popup.generate.action.error.title:
+  text: Generate Action Error
+popup.generate.action.error.script.argument.is.not.valid:
+  text: |-
+    Invalid Action name: ''{0}''.
+    Action name must correspond to Rails naming convention e.g.: ''{1}''.
+new.generate.rspec.controller.text:
+  text: RSpec Controller
+new.generate.rspec.model.text:
+  text: RSpec Model
+new.generate.controller.text:
+  text: Controller
+new.generate.controller.description:
+  text: Generate Controller For Rails Application
+new.generate.controller.action.prompt.title:
+  text: Add New Controller
+new.generate.controller.error.title:
+  text: Generate Controller Error
+dialog.generate.action.label.name.text:
+  text: 'Action &name:'
+dialog.generate.action.label.location.text:
+  text: 'Location:'
+dialog.generate.controller.button.add.text:
+  text: '&Add'
+dialog.generate.controller.button.remove.text:
+  text: '&Remove'
+dialog.generate.controller.label.actions.names.text:
+  text: 'Actions &names:'
+dialog.generate.controller.label.dir.text:
+  text: '&Directory: (e.g. ''admin'')'
+dialog.generate.controller.label.location.text:
+  text: 'Location:'
+dialog.generate.controller.label.name.text:
+  text: '&Controller name: (e.g. ''CreditCard'')'
+dialog.generate.controller.actions.promt:
+  text: Edit action name (e.g. 'open' or 'debit' or 'late_fee')
+dialog.generate.controller.actions.promt.title:
+  text: Add New Action
+dialog.generate.controller.actions.error.title:
+  text: Add New Action Error
+new.generate.model.text:
+  text: Model
+new.generate.model.description:
+  text: Generates Model For Rails Application
+new.generate.model.action.prompt.title:
+  text: Add New Model
+new.generate.model.error.title:
+  text: Generate Model Error
+rails.actions.execution.run.rails.script.title:
+  text: Run Rails Script
+rails.actions.execution.run.rails.script.dialog.button.ok.caption:
+  text: Run
+rails.actions.execution.run.rails.script.dialog.button.cancel.caption:
+  text: Cancel
+rails.actions.execution.run.rails.script.dialog.description.caption:
+  text: Dialog allows you to run Rails Scripts from "[{0}]/script" folder
+rails.actions.execution.run.rails.script.dialog.component.script.args.caption:
+  text: Arguments
+rails.actions.execution.run.rails.script.dialog.component.script.args.caption.edit:
+  text: Edit Arguments
+rails.actions.execution.run.rails.script.dialog.component.script.path.caption:
+  text: Script
+rails.actions.execution.run.rails.script.dialog.component.script.path.caption.select:
+  text: Select Script
+rails.actions.execution.run.rails.script.error.title:
+  text: Execution Error
+rails.actions.execution.run.rails.script.error.no.scripts.folder:
+  text: Unable to execute Rails script. "[{0}]/script" folder wasn''t found!
+rails.actions.execution.run.rails.script.error.script.want.found:
+  text: Unable to execute Rails script. Script "{0}" wasn''t found!
+dialog.register.shortcut.button.register:
+  text: Add &name
+dialog.register.shortcut.button.unregister:
+  text: '&Remove'
+dialog.register.shortcut.button.show.keymap:
+  text: '&Open Keymap'
+dialog.register.shortcut.label.names:
+  text: R&egistered names
+dialog.register.shortcut.roots.generators:
+  text: Generators
+dialog.register.shortcut.roots.raketasks:
+  text: Rake tasks
+dialog.register.shortcut.input.dialog.title:
+  text: Add Name
+dialog.register.shortcut.input.dialog.group.title:
+  text: Add Group
+dialog.register.shortcut.input.dialog.label:
+  text: 'Enter name:'
+dialog.register.shortcut.button.register.group:
+  text: Add &group
+dialog.register.shortcut.action.description.generators:
+  text: 'Action for generator : {0}'
+dialog.register.shortcut.action.description.raketasks:
+  text: 'Action for rake task : {0}'
+action.registered.shortcut.execute.disabled.title:
+  text: Incorrect Action
+action.registered.shortcut.execute.disabled.generators.msg:
+  text: Generator ''{0}'' is inaccessible for module ''{1}''.
+action.registered.shortcut.execute.disabled.raketasks.msg:
+  text: Rake task ''{0}'' is inaccessible for module ''{1}''.
+action.consolerunner.edit.cmdline.description:
+  text: Edit command line arguments
+action.consolerunner.edit.cmdline.text:
+  text: Edit Command line arguments
+action.consolerunner.edit.cmdline.dialog.text:
+  text: 'Command line arguments:'
+action.consolerunner.edit.cmdline.dialog.title:
+  text: Edit Command Line Arguments
+template.ruby.script.name:
+  text: Ruby Script
+template.rhtml.script.name:
+  text: Erb(rhtml) Template
+template.rxml.script.name:
+  text: Builder(rxml) Template
+template.rjs.script.name:
+  text: Rjs Template
+template.rspec.script.name:
+  text: RSpec test Template
+template.testunit.script.name:
+  text: TestUnit test Template
+template.rails.action.implement.body:
+  text: '#TODO: Implement body of action'
+color.settings.rhtml.name:
+  text: RHTML
+color.settings.rhtml.scriptlet.start:
+  text: Scriptlet start
+color.settings.rhtml.scriptlet.end:
+  text: Scriptlet end
+color.settings.rhtml.expr.start:
+  text: Expression start
+color.settings.rhtml.expr.end:
+  text: Expression end
+color.settings.rhtml.scripting.bkg:
+  text: Ruby injection background
+color.settings.rhtml.omit.new.line:
+  text: Omit new line modifier
+color.settings.rhtml.comment:
+  text: Comments
+color.settings.ruby.name:
+  text: Ruby
+color.settings.ruby.keyword:
+  text: Keywords
+color.settings.ruby.comment:
+  text: Comments
+color.settings.ruby.heredoc_id:
+  text: Heredoc Ids
+color.settings.ruby.number:
+  text: Numbers
+color.settings.ruby.string:
+  text: Strings
+color.settings.ruby.escape_sequence:
+  text: Escape sequences
+color.settings.ruby.invalid_escape_sequence:
+  text: Invalid escape sequences
+color.settings.ruby.operation:
+  text: Operation signs
+color.settings.ruby.brackets:
+  text: Braces
+color.settings.ruby.expression_subtitution_marks:
+  text: Expression subtitution marks
+color.settings.ruby.bad_character:
+  text: Bad characters
+color.settings.ruby.comma:
+  text: Comma marks
+color.settings.ruby.semicolon:
+  text: Semicolon marks
+color.settings.ruby.symbol:
+  text: Symbols
+color.settings.ruby.hash_assoc:
+  text: Hash association
+color.settings.ruby.line_continuation:
+  text: Line continuations
+color.settings.ruby.regexp:
+  text: Regular expressions
+color.settings.ruby.words:
+  text: Words
+color.settings.ruby.heredoc_content:
+  text: Heredoc contents
+color.settings.ruby.back_ref:
+  text: Back references
+color.settings.ruby.gvar:
+  text: Global variables
+color.settings.ruby.cvar:
+  text: Class variables
+color.settings.ruby.ivar:
+  text: Instance variables
+color.settings.ruby.identifier:
+  text: Identifiers
+color.settings.ruby.local.variable:
+  text: Local variables or parameters
+color.settings.ruby.constant:
+  text: Constants
+color.settings.ruby.constant.in.definition:
+  text: Constants, defined for classes/modules etc
+color.settings.ruby.nth_ref:
+  text: Nth references
+color.settings.ruby.attr_reader:
+  text: Attr_reader call
+color.settings.ruby.attr_writer:
+  text: Attr_writer call
+color.settings.ruby.attr_accessor:
+  text: Attr_accessor call
+color.settings.ruby.rails_attr:
+  text: Rails attribute call
+color.settings.ruby.require.gem:
+  text: Require gem call
+color.settings.ruby.require.or.load:
+  text: Require or load call
+color.settings.ruby.require.or.load.arg:
+  text: Require or load call argument
+color.settings.ruby.include.or.extend:
+  text: Include or extend call
+color.settings.ruby.jruby.include:
+  text: Include java class or package
+color.settings.ruby.private:
+  text: Private call
+color.settings.ruby.protected:
+  text: Protected call
+color.settings.ruby.public:
+  text: Public call
+color.settings.ruby.inspection.inspection:
+  text: 'Inspection: {0}'
+module.common.selectlocation.label:
+  text: Please specify a module name and a module content root. A module content root is the directory where all the source files will be stored.
+module.common.selectlocation.module.name:
+  text: Module name
+module.common.selectlocation.content.root:
+  text: Content root
+module.common.selectlocation.select.content.root.msg:
+  text: Select module content root
+module.common.selectlocation.select.source.directory:
+  text: Select the directory where the source files will be stored
+module.common.selectlocation.module.files.root.msg:
+  text: Module file will be saved in
+module.common.selectlocation.prompt.module.name:
+  text: Please specify a module name
+module.common.selectlocation.module.not.specified.title:
+  text: Module Name Not Specified
+module.common.selectlocation.module.exists.text:
+  text: A module with the name ''{0}'' already exists in the project
+module.common.selectlocation.module.exists.title:
+  text: Module Already Exists
+module.common.selectlocation.specify.module.location.prompt:
+  text: Please specify a module file location
+module.common.selectlocation.module.location.not.specified.title:
+  text: Module File Location Not Specified
+module.common.selectlocation.root.already.defined.text:
+  text: |-
+    Content root ''{0}'' already defined for module ''{1}''.
+    Two modules in a project cannot share the same content root.
+module.common.selectlocation.root.already.defined.title:
+  text: Module Content Root Already Exists
+module.common.selectlocation.select.module.file.location.title:
+  text: Select Module File Location
+module.common.selectlocation.module.file.location.text:
+  text: The module file will be saved in the selected directory.
+module.common.selectlocation.module.content.root.label:
+  text: |
+    The module content root
+module.common.selectlocation.module.file.label:
+  text: |
+    The module file directory
+module.common.rubydoc:
+  text: RDoc
+module.rails.selectlocation.content.root:
+  text: 'Content root:'
+module.rails.change.directory:
+  text: Change directory
+button.configure:
+  text: Configure...
+sdk.select.prompt.title:
+  text: Select SDK
+sdk.error.no.sdk.prompt.messge.confirm.without.sdk:
+  text: Continue without any SDK specified?
+sdk.error.prompt.message.sdk.not.valid:
+  text: The SDK you have selected is not compatible with Ruby or Rails application. Ruby or JRuby SDK required.
+module.rails.prompt.label.project.jdk:
+  text: 'Project SDK:'
+module.rails.select.jdk:
+  text: Specify the Ruby SDK
+module.rails.generateapp.label:
+  text: Specifiy the way Rails Application will be created.
+module.rails.generateapp.rails.label:
+  text: 'Rails Version:'
+module.rails.generateapp.rails.generate.new:
+  text: Generate &new Rails application (exisiting non-Rails files will be ignored)
+module.rails.generateapp.rails.generate.missing:
+  text: Generate only &missing files
+module.rails.generateapp.rails.generate.nothing:
+  text: '&Use existing Rails application'
+module.rails.generateapp.progress.title:
+  text: '{0}: Generating Rails Application...'
+module.rails.generateapp.rails.new.overwrite.title:
+  text: Generate New Rails Application
+module.rails.generateapp.rails.new.overwrite.message:
+  text: |-
+    Rails application already exists in ''{0}''.
+    Overwrite?
+module.rails.generateapp.result:
+  text: Rails application status
+module.settings.title:
+  text: 'Loading settings: ''''{0}'''''
+module.rails.create.rake.tasks.title:
+  text: Generating rake tasks hierarchy...
+module.rails.create.rake.generators.title:
+  text: Searching for available generators...
+module.rails.generateapp.rake.result:
+  text: Rake task "{0}"
+parsing.message.expected:
+  text: 'Expected:'
+parsing.message.unexpected:
+  text: 'Unexpected:'
+parsing.error.expression:
+  text: expression
+parsing.symbol.content:
+  text: symbol content
+parsing.alias.object:
+  text: alias object
+parsing.operation:
+  text: operation
+parsing.method.name:
+  text: method name
+parsing.module.name:
+  text: module name
+parsing.class.name:
+  text: class name
+parsing.singleton:
+  text: singleton
+parsing.identifier.or.operation:
+  text: identifier or operation
+parsing.block.variables:
+  text: block variable(s)
+parsing.rhtml.injection.in.ruby.title:
+  text: '%> or <% or <%='
+os.not.supported:
+  text: OS not supported!
+building.index.message:
+  text: Building ruby indexes
+select.in.rails:
+  text: Rails Project View
+cache.symbol.building.builtins.title:
+  text: Creating ruby built-in caches...
+cache.symbol.recreating.builtins.title:
+  text: Updating ruby built-in caches...
+rails.project.module.view.presentable:
+  text: Rails
+rails.project.module.view.nodes.appication.presentable:
+  text: Application
+rails.project.module.view.nodes.components.presentable:
+  text: Components
+rails.project.module.view.nodes.controllers.presentable:
+  text: Controllers
+rails.project.module.view.nodes.helpers.presentable:
+  text: Helpers
+rails.project.module.view.nodes.libs.presentable:
+  text: Libraries
+rails.project.module.view.nodes.model.presentable:
+  text: Model
+rails.project.module.view.nodes.tests.presentable:
+  text: Tests
+rails.project.module.view.nodes.user.folders.presentable:
+  text: User Folders
+rails.project.module.view.nodes.partials.presentable:
+  text: Partials
+rails.project.module.view.nodes.shared.partials.presentable:
+  text: Shared partials
+rails.project.module.view.nodes.migrations.presentable:
+  text: Migrations
+tab.structurevew.rhtml.view:
+  text: RHTML View
+tab.structurevew.ruby.view:
+  text: Ruby View
+filetype.description.rb:
+  text: Ruby
+filetype.description.rjs:
+  text: RJS
+filetype.description.rhtml:
+  text: RHTML
+filetype.description.rxml:
+  text: RXML
+ruby.intentions:
+  text: Ruby
+ruby.intentions.relative.path.to.absolute:
+  text: Convert relative path to absolute
+ruby.intentions.append.cur.dir.to.path:
+  text: Append current directory to path
+ruby.intentions.string.to.symbol:
+  text: Convert string to symbol
+ruby.intentions.qualified.name.to.include_class:
+  text: Include Java class
+ruby.intentions.qualified.name.to.import:
+  text: Import Java class
+ruby.intentions.java.full.class.name:
+  text: To Java full qualified name
+ruby.sdk.used:
+  text: SDK version
+ruby.ri.wrong.project.jdk:
+  text: Wrong project SDK set
+ruby.ri.wrong.project.jdk.prompt:
+  text: Please set Ruby SDK as default Project JDK
+ruby.ri.error:
+  text: RI error
+ruby.ri.ri.used:
+  text: RI version
+ruby.ri.ri.unknown.version:
+  text: Unknown version
+ruby.ri.no.ri.found:
+  text: No RI found
+ruby.ri.name:
+  text: Name
+ruby.ri.info.pane:
+  text: Info
+ruby.ri.settings.pane:
+  text: Settings
+ruby.ri.about.pane:
+  text: About
+ruby.ri.about.message:
+  text: 'Ruby SDK and RI used:'
+ruby.ri.settings.pane.description:
+  text: Use defaults to use RI default directories or manually select directories
+ruby.ri.settings.pane.label:
+  text: Paths used to search ruby documentation
+ruby.ri.settings.pane.add:
+  text: Add
+ruby.ri.settings.pane.remove:
+  text: Remove
+ruby.ri.search.title:
+  text: Fetching rdoc for ''{0}'', please wait...
+ruby.ri.update.title:
+  text: Updating rdoc data, please wait...
+ruby.ri.button.clear:
+  text: '&Clear'
+ruby.ri.button.clear.tooltip:
+  text: Clears RDoc caches and panel
+ruby.ri.button.back.tooltip:
+  text: Go back doc
+ruby.ri.button.forward.tooltip:
+  text: Go forward doc
+progress.indicator.title.directories.scanning:
+  text: Scanning directories.
+progress.indicator.title.paths.initialization:
+  text: Initializing paths...
+progress.indicator.title.cache.datafile.loading:
+  text: Loading cache...
+progress.indicator.title.cache.files.scanning:
+  text: 'Scanning files: ''''{0}'''''
+progress.indicator.title.cache.files.parsing:
+  text: Parsing files. Please wait...
+progress.indicator.title.cache.files.removing:
+  text: Removing files...
+progress.indicator.title.cache.loading:
+  text: Loading cache for ''{0}''...
+progress.indicator.title.cache.saving:
+  text: 'Saving cache: ''''{0}'''''
+progress.indicator.title.cache.creating:
+  text: 'Creating cache: ''''{0}'''''
+progress.indicator.title.cache.updating:
+  text: 'Updating cache: ''''{0}'''''
+progress.indicator.title.please.wait:
+  text: Please wait...
+progress.backgnd.indicator.title.please.wait:
+  text: '{0}. Please wait...'
+progress.indicator.title.running.please.wait:
+  text: Running. Please wait...
+settings.title:
+  text: Ruby On Rails
+settings.raketasks.externalizer.info:
+  text: "This file was automatically generated by Ruby plugin.\nYou are allowed to: \n1. Remove rake task\n2. Add existing rake tasks\nTo add existing rake tasks automatically delete this file and reload the project.\n"
+settings.raketasks.cant.save.message:
+  text: Unable to save rake tasks settings. Unable to overwrite '{0}' file.
+settings.generators.externalizer.info:
+  text: "This file was automatically generated by Ruby plugin.\nYou are allowed to: \n1. Reorder generators\n2. Remove generators\n3. Add installed generators\nTo add new installed generators automatically delete this file and reload the project.\n"
+settings.generators.cant.save.message:
+  text: Unable to save generators settings. Unable to overwrite '{0}' file.
+progress.title.console.runner.modaldialog.running:
+  text: 'Running: ''''{0}'''''
+error.report.to.jetbrains.action:
+  text: Report To Jetbrains
+error.report.submit.label:
+  text: This error report will be created as new <b>JIRA</b> issue <br><b>''{0}''</b><br>at <b><a href="{1}{2}">{1}{2}</a></b> as component <b>''{3}''</b>.<br><br>Please provide a short description of the error and how can it be reproduced
+error.report.submit.register.in.jira:
+  text: <a href="{0}">Signup for an account</a>
+error.report.submit.new.issue.url:
+  text: Your issue was successfully added, see<br>     <a href="{0}">{0}</a>
+error.report.submit.new.issue.title:
+  text: Issue Added
+error.report.wrong.login:
+  text: Invalid username of password.
+error.report.canceled:
+  text: Canceled sending report
+error.report.error.creating.issue:
+  text: Error creating new JIRA issue
+error.report.jira.issue:
+  text: 'Ruby issue #{0}'
+error.report.dialog.title:
+  text: Submit Error
+error.report.dialog.wrong.password.title:
+  text: Sending Failed
+error.report.button.sendreport.caption:
+  text: '&Send Report'
+error.report.button.cancel.caption:
+  text: '&Cancel'
+error.report.form.rb.not.jira:
+  text: '&I have no account on JIRA, create issue on behalf of ''Ruby plugin error reporter'''
+error.report.form.rb.jira:
+  text: I'm &JIRA user
+error.report.form.rb.jira.login:
+  text: '&Login'
+error.report.form.rb.jira.password:
+  text: '&Password'
+error.report.form.rb.jira.password.save:
+  text: Save password
+codeInsight.rails.action_to_view.tooltip:
+  text: View for ''{0}'' action
+codeInsight.rails.view_to_action.tooltip:
+  text: Action for ''{0}'' view
+codeInsight.rails.switch.to.view.title:
+  text: Switch to view
+codeInsight.rails.switch.to.view.description:
+  text: Searches view for action in Rails controller
+codeInsight.rails.switch.to.action.title:
+  text: Switch to action
+codeInsight.rails.switch.to.controller.title:
+  text: Switch to Controller
+codeInsight.rails.switch.to.action.description:
+  text: Searches Controller's action for view
+codeInsight.rails.switch.to.controller.description:
+  text: Searches Controller for partial view
+codeInsight.rails.navigation.title.action.view:
+  text: Choose View of ''{0}''
+codeInsight.rails.navigation.title.action.partial.view:
+  text: Choose Partial View of ''{0}''
+codeInsight.rails.switch.to.view.cant.navigate:
+  text: Can't navigate to appropriate view
+codeInsight.rails.switch.to.action.cant.navigate:
+  text: Can't navigate to appropriate action
+codeInsight.rails.switch.to.controller.cant.navigate:
+  text: Can't navigate to appropriate controller
+annotation.warning.unnecessary.semicolon:
+  text: Unnecessary semicolon ''{0}''
+annotation.error.cannot.make.alias.for.nth.variable:
+  text: can`t make alias for the number variables
+annotation.error.begin.in.method:
+  text: BEGIN in method
+annotation.error.dynamic.constant.assignment:
+  text: dynamic constant assignment
+annotation.error.class.module.name.must.be.constant:
+  text: class/module name must be CONSTANT
+annotation.error.constant.reassignment:
+  text: constant re-assignment
+annotation.error.class.in.method:
+  text: class definition if method body
+annotation.error.module.in.method:
+  text: module definition in method body
+annotation.error.formal.arg.cannot.be.constant:
+  text: formal argument cannot be a constant
+annotation.error.formal.arg.cannot.be.inst.var:
+  text: formal argument cannot be an instance variable
+annotation.error.formal.arg.cannot.be.global.var:
+  text: formal argument cannot be a global variable
+annotation.error.formal.arg.cannot.be.class.var:
+  text: formal argument cannot be a class variable
+annotation.error.cannot.find.required.file:
+  text: No such file to load
+annotation.warning.implicit.required.item:
+  text: Implicit required file, not inspected
+annotation.warning.implicit.multivariant.required.item:
+  text: More then one file is available for given name
+annotation.warning.cannot.find.variable:
+  text: Cannot find variable with given name
+annotation.warning.multivariable.found:
+  text: More than one field with given name
+annotation.warning.cannot.resolve.include:
+  text: Cannot resolve properly, was not processed
+annotation.error.no.arguments:
+  text: No arguments found
+annotation.error.should.be.java.class:
+  text: Argument should be java class
+annotation.error.should.be.java.package:
+  text: Argument should be java package
+annotation.error.should.be.java:
+  text: Argument should be java class or package
+settings.plugin.general.tab.title:
+  text: General
+settings.plugin.general.tab.cb.filters.rstaketrace:
+  text: Ruby &Stacktrace filter
+settings.plugin.general.tab.cb.filters.other:
+  text: '&Other output filters'
+settings.plugin.general.tab.console.panel.title:
+  text: ROR Console
+settings.plugin.general.tab.console.cb.color.mode.title:
+  text: '&Color mode'
+settings.plugin.general.tab.project.view.panel.title:
+  text: Project View
+settings.plugin.general.tab.use.ruby.project.view.title:
+  text: '&Use Ruby specific Class/Module Project View'
+settings.plugin.general.tab.use.ruby.project.view.changed.title:
+  text: Project view style changed
+settings.plugin.general.tab.use.ruby.project.view.changed.message:
+  text: Opened projects reload is required for changes to take effect. Reload after settings dialog closed?
+settings.plugin.general.tab.environment.variables.panel.title:
+  text: Environment
+settings.plugin.general.tab.environment.path.idea.label:
+  text: Idea PATH
+settings.plugin.general.tab.environment.path.additional.label:
+  text: Additional Paths(s)
+settings.plugin.general.tab.environment.path.additional.tooltip:
+  text: (e.g. ~/bin:/usr/local/mysql/bin)
+settings.plugin.about.tab.title:
+  text: Plugin Info
+plugin.about.build.label:
+  text: 'Plugin build:'
+plugin.about.revision.label:
+  text: 'Svn revision:'
+plugin.about.recent.changes.label:
+  text: 'Recent changes:'
+plugin.about.home.page.label:
+  text: 'Home page:'
+plugin.about.issue.tracker.label:
+  text: 'Issue tracker:'
+plugin.info.unknown.value:
+  text: unknown
+plugin.about.recent.forum.label:
+  text: 'Forum:'
+plugin.about.issue.plugin.repository.label:
+  text: 'Plugin repository:'
+settings.register.shortcut.tab.title:
+  text: Special shortcuts
+in:
+  text: in
+parameter:
+  text: parameter
+local.variable:
+  text: local variable
+constant:
+  text: constant
+global.variable:
+  text: global variable
+class.variable:
+  text: class variable
+instance.variable:
+  text: instance variable
+field.write:
+  text: field write
+call:
+  text: call
+rename.incorrect.name:
+  text: Incorrect name
+ruby.doc.module:
+  text: module
+ruby.doc.class:
+  text: class
+ruby.doc.method.class:
+  text: class method
+ruby.doc.method.instance:
+  text: instance method
+ruby.doc.not.found:
+  text: No documentation found.
+ruby.doc.select.symbol:
+  text: 'Select symbol to show help for:'
+ruby.doc.documentation:
+  text: Documentation
+ruby.doc.private:
+  text: private
+ruby.doc.protected:
+  text: protected
+ruby.doc.public:
+  text: public
+ruby.doc.overrides:
+  text: 'Overrides:'
+inspection.group.name:
+  text: Ruby
+inspection.duck.type.name:
+  text: Call argument mismatch
+inspection.duck.typing.number.of.arguments.error:
+  text: Wrong number of arguments. Found {1}. Required {0}
+inspection.duck.typing.number.of.arguments.at.least.error:
+  text: Wrong number of arguments. Found {1}. Required >= {0}
+inspection.duck.typing.number.of.arguments.max.error:
+  text: Wrong number of arguments. Found {1}. Required <= {0}
+inspection.duck.typing.cannot.find.method:
+  text: Value ''{0}'' does not seem to have method ''{1}'' with {2} arg(s)
+inspection.resolve.name:
+  text: Unresolved Ruby reference
+inspection.resolve.cannot.find:
+  text: Cannot find ''{0}''
+inspection.scopes.name:
+  text: Parameter shadows local variable
+inspection.scopes.parameter.shadows.outer:
+  text: Parameter shadows outer local variable
+inspection.implement.interface.name:
+  text: Java interface not fully implemented
+inspection.implement.interface.class.should.implement.method:
+  text: 'Class must implement method:'
+inspection.wrong.top.level.package:
+  text: Wrong java top level package
+inspection.wrong.top.level.package.should.be.one.of:
+  text: 'Top level java package used should be one of: {0}'
+overrides:
+  text: Overrides
+implements:
+  text: Implements
+aliases:
+  text: Aliases
+line.marker.override.select.variant:
+  text: Select overriden symbol
+line.marker.implement.select.variant:
+  text: Select implemented symbol
+action.create.new.rails.template.filetype:
+  text: '{0} Template'
+action.description.create.new.rails.template.file:
+  text: Create New {0}
+class.to.import.chooser.title:
+  text: Choose class
+module.settings.dialog.select.test.spec.cb.install.rspec:
+  text: '&RSpec'
+module.settings.dialog.select.test.spec.cb.install.rspec_rails:
+  text: '&Spec::Rails'
+module.settings.dialog.select.test.spec.panel.rspec.title:
+  text: RSpec
+module.settings.dialog.select.test.spec.panel.rspec_rails.title:
+  text: RSpec on Rails
+module.settings.dialog.select.test.spec.rb.use.rspec.gem:
+  text: 'Use RSpec &Gem: {0}'
+module.settings.dialog.select.test.spec.rb.use.rspec.gem.version.not.installed:
+  text: '[not installed]'
+module.settings.dialog.select.test.spec.rb.install.rspec.plugin:
+  text: RSpec &Plugin
+module.settings.dialog.select.test.spec.rb.rspec.plugin.latest:
+  text: Install &Latest release
+module.settings.dialog.select.test.spec.rb.rspec_rails.plugin.latest:
+  text: Install L&atest release
+module.settings.dialog.select.test.spec.rb.rspec.plugin.any:
+  text: Install Sp&ecific release (replace X, Y, Z with the version of RSpec)
+module.settings.dialog.select.test.spec.rb.rspec_rails.plugin.any:
+  text: Install Speci&fic release (replace X, Y, Z with the version of RSpec)
+module.settings.dialog.select.test.spec.rb.label.plugin.arguments:
+  text: 'Arguments for script/plugin install :'
+module.settings.dialog.select.test.spec.rb.rspec.plugin.trunk:
+  text: Install &Trunk version
+module.settings.dialog.select.test.spec.rb.rspec_rails.plugin.trunk:
+  text: Install Tr&unk version
+module.settings.dialog.select.test.ruby.spec.gem.text:
+  text: Would you like to install RSpec gem.
+module.settings.dialog.select.test.ruby.spec.gem.install.text:
+  text: '&Yes'
+module.settings.dialog.select.test.ruby.spec.gem.dont.intstall.text:
+  text: '&No'
+module.settings.dialog.select.test.framework.choose.text:
+  text: Please specify a Test Framework for your module.
+module.settings.dialog.select.test.framework.choose.test.unit.text:
+  text: '&Test::Unit framework'
+module.settings.dialog.select.test.framework.choose.rspec.text:
+  text: '&RSpec framework'
+module.settings.dialog.select.test.framework.choose.rspec.html.link:
+  text: For more information about RSpec Test Framework, see <a href="{0}">{0}</a>
+module.settings.dialog.select.test.spec.ruby.installed.rspec.gem:
+  text: 'Your RSpec Gem version: <font color="#2554C7">{0}</font>.'
+module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.html:
+  text: Please <font color="#E41B17">install RSpec Gem </font> for current Ruby SDK or chose <font color="#E41B17">Ruby SDK with installed RSpec</font> before continuing.
+module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.text:
+  text: RSpec Gem isn't installed for chosen Ruby SDK. Continue anyway?
+module.settings.dialog.select.test.spec.ruby.please.install.rspec.gem.title:
+  text: Install RSpec Gem
+module.settings.dialog.svn.not.in.path.msg:
+  text: 'Plugins installation requires svn client. At first setup svn folder path. '
+module.settings.dialog.svn.not.in.path.title:
+  text: Svn not found
+module.settings.dialog.source.roots.choose.test.text:
+  text: |-
+    Please specify a directory where ruby Test::Unit source files for your module can be found.
+
+    Note: the plugin will search correctly only those test files, that are located under tests directories.
+    Your can add additional test source roots later in module settings dialog.
+module.settings.dialog.source.roots.choose.test.create:
+  text: '&Create test source directory (recommended)'
+module.settings.dialog.source.roots.choose.test.comment:
+  text: 'Enter relative path to module content root :'
+module.settings.dialog.source.roots.choose.test.do.not.create:
+  text: '&Search tests in whole module content'
+module.settings.dialog.source.roots.choose.test.full.path:
+  text: 'The following directory will be marked as a Test::Unit source directory :'
+module.settings.dialog.test.framework.tab.title:
+  text: Test Framework
+module.settings.dialog.test.framework.rspec.use.gem:
+  text: Use RSpec &Gem
+module.settings.dialog.test.framework.rspec.use.plugin:
+  text: Use RSpec &Plugin
+module.settings.dialog.test.framework.rspec.use.no.sdk.messages:
+  text: No Ruby SDK. At first setup Ruby SDK for this Module.
+module.settings.dialog.test.framework.rspec.use.no.sdk.title:
+  text: Show RSpec Gem Version
+module.settings.dialog.test.framework.rspec.get.gem.version:
+  text: '&Show RSpec Gem version'
+module.settings.dialog.test.framework.test.unit.root.path.title:
+  text: Test::Unit tests' sources root directory
+module.settings.dialog.test.framework.test.unit.root.path.chooser.caption:
+  text: Select Test::Unit tests' sources Root
+module.create.dialog.init.errors.title:
+  text: 'Module ''{0}'': Setup Error'
+module.toggle.rails.view.sources.action:
+  text: Rails View User Folders
+module.toggle.rails.view.additional.sources.action.description:
+  text: Mark directory as a Rails View user folder
+module.paths.rails.view.additional.group:
+  text: Rails View User Folders
+module.settings.dialog.load.path.tab.title:
+  text: Autocompletion Load Path
+module.settings.dialog.load.path.description:
+  text: Here you can setup custom Load Path for autocompletion in requires.
+module.settings.dialog.load.path.list.caption:
+  text: '&Load paths:'
+module.settings.dialog.load.path.button.add:
+  text: '&Add'
+module.settings.dialog.load.path.filechooser.add.dialog.title:
+  text: Select directory
+module.settings.dialog.load.path.button.remove:
+  text: '&Remove'
+module.settings.dialog.load.path.error.add.title:
+  text: Add Directory
+module.settings.dialog.load.path.error.add.message:
+  text: This directory is already included in the Load Path
+module.wizard.test.framework.rspec.svn.note:
+  text: 'Note: Svn must be in PATH. You can add folder containing snv to load path right here '
+file.cant.create.folder.text:
+  text: 'Can''t create folder : "{0}"'
+file.cant.create.folder.title:
+  text: Create Folder
+module.toggle.excluded.action:
+  text: Excluded
+module.toggle.excluded.action.description:
+  text: Include/Exclude directory from module
+module.toggle.test.sources.action:
+  text: Test::Unit Sources
+module.toggle.test.sources.action.description:
+  text: Mark directory as a Test Sources root
+module.paths.test.sources.group:
+  text: Test::Unit Source Folders
+module.paths.excluded.group:
+  text: Excluded Folders
+module.paths.unmark.tests.tooltip:
+  text: Unmark Tests
+module.paths.unmark.source.tooltip:
+  text: Unmark Source
+module.paths.remove.tooltip:
+  text: Remove
+module.paths.include.excluded.tooltip:
+  text: Include
+module.paths.empty.node:
+  text: <empty>
+project.root.change.loading.progress:
+  text: Loading Files...
+prompt.enter.new.filetype.name:
+  text: 'Enter a new {0} file name:'
+title.new.filetype:
+  text: New {0}
+title.new.from.template:
+  text: New {0}
+title.cannot.create.filetype:
+  text: Cannot Create {0}
+title.cannot.create.file:
+  text: Cannot Create File
+command.name.create.new.file:
+  text: Create {0}
+command.create.file.from.template:
+  text: Create File From Template
+progress.creating.filetype.in.directory:
+  text: Creating {0} ''{1}'' in {2}
+progress.deleting:
+  text: Deleting
+error.please.enter.a.file.name:
+  text: Please enter a file name
+error.unable.to.parse.template.message:
+  text: |-
+    Unable to parse template "{0}"
+    Error message: {1}
+tab.chooser.project:
+  text: Project
+tab.chooser.search.by.name:
+  text: Search by Name
+choose.test.method.dialog.title:
+  text: Choose Test Method
+choose.test.class.dialog.title:
+  text: Choose Test Class
+set.class.name.message:
+  text: Set class name first
+cannot.browse.method.dialog.title:
+  text: Cannot Browse Methods
+class.does.not.exists.error.message:
+  text: Class {0} does not exist
+action.rerun:
+  text: Rerun
+jruby.facet:
+  text: JRuby
+jruby.facet.error.wrong.sdk:
+  text: Chosen SDK isn't JRuby SDK
+jruby.select.sdk:
+  text: Select JRuby SDK
+jruby.settings.tabs.sdk.title:
+  text: JRuby SDK Selection
+jruby.settings.tabs.sdk.configure.button.title:
+  text: '&Configure'
+rails.facet:
+  text: Rails
+rails.facet.wizard.more.button:
+  text: More...
+rails.facet.wizard.more.dialog.title:
+  text: Rails Facet Settings
+rails.facet.wizard.error.no.skd:
+  text: You didn't select Ruby SDK with Rails Framework
+rails.facet.wizard.error.skd.without.rails:
+  text: Your SDK doesn't contain Rails Framework
+rails.facet.wizard.error.add.facet.canceled:
+  text: Rails Facet creation was canceled.
+rails.facet.wizard.tab.rails.project.generator.title:
+  text: Rails Application
+rails.facet.wizard.tab.rails.project.generator.select.rails.relative.path:
+  text: "Please specify a directory where will be generated Rails Application's files.\nA path should be relative to module content directory.\nIf you leave this field empty module content directory will be used.\n(examples: 'myapp' or 'src/rails/myapp' or leave empty): "
+rails.facet.wizard.tab.rails.project.generator.select.rails.preconfigure.for.db:
+  text: '&Preconfigure for selected database: '
+rspec.rails.facet.wizard.tab.rails.project.generator.title:
+  text: RSpec Components
+rails.facet.builder.run.configuration.server.creating:
+  text: Creating Rails Run Configuration
+rails.facet.builder.rails.application.searching:
+  text: Searching for Rails Application
+rails.facet.builder.rails.application.choose.title:
+  text: Rails Application Root Folder
+rails.facet.builder.rails.application.choose.relative.path:
+  text: Choose relative path to module content root.
+rails.facet.settings.tab.general.title:
+  text: Info
+rails.facet.settings.tab.general.railsHomePath.caption:
+  text: 'Rails Application Home Directory:'
+rails.facet.settings.tab.railsView.title:
+  text: Rails View
+rails.facet.action.regenerate.generators.error.wrong.sdk:
+  text: Can't reload available generators. No SDK is specified for module.
+rails.facet.action.regenerate.rakeTasks.error.wrong.sdk:
+  text: Can't reload available rake tasks. No SDK is specified for module.
+rails.facet.action.rake.run.error.home.dir.not.found:
+  text: 'Can''t find Rails application home directory : ''{0}'';'
+rhtml.parsing.flex.error:
+  text: Lexer error!!!
+rhtml.parsing.named.element.is.not.closed:
+  text: Element {0} is not closed
+rhtml.parsing.unexpected.end.of.file:
+  text: Unexpected end of file
+breadcrumbs.rhtml.presentation.omit.new.line:
+  text: Omit new line
+breadcrumbs.rhtml.presentation.comment:
+  text: Comment
+breadcrumbs.rhtml.presentation.ruby.injection:
+  text: Ruby injection
+breadcrumbs.rhtml.tooltip.textrange:
+  text: 'TextRange: {0}'
+refactoring.introduce.variable.dialog.title:
+  text: Introduce variable
+refactoring.introduce.variable.scope.error:
+  text: Name clashes with local variable in scope
+refactoring.introduce.variable.resword.error:
+  text: Name cannot be a resword
+refactoring.override.methods.title:
+  text: Choose methods to override
+refactoring.implement.java.methods.title:
+  text: Choose methods to implement
+exception.text.unknown.error:
+  text: Unknown Error
+command.name.open.error.message.view:
+  text: Open message view
+execution.error.title.generators.list:
+  text: '{0}: Get available generators list'
+execution.error.title.rake.tasks:
+  text: '{0}: Get available rake tasks'
+execution.error.title.ri:
+  text: RI
+execution.error.title.generate.rails.app:
+  text: '{0}: Generate Rails Application'
+execution.error.title.abstract.script:
+  text: '{0}: Script Execution Error'
+execution.get.rspec.gem.version:
+  text: '"Getting RSpec gem version. Please wait..."'
+execution.get.rails.gem.version:
+  text: '"Getting Rails gem version. Please wait..."'
+project.new.wizard.from.existent.sources.title:
+  text: Create ROR {0} from &existing sources
+project.new.wizard.from.existent.sources.description:
+  text: Create {0} ROR {1} structure over existing sources
+find.usages.ruby.group:
+  text: Ruby usage
+find.usages.text.matched.group:
+  text: Text matched usage
+find.usages.explicitly.typed.group:
+  text: Explicitly typed usage
+find.usages.ruby.declarations.group:
+  text: Ruby declaration
+module.wizard.test.framework.rspec.svn.path.label.text:
+  text: Svn path
+module.wizard.test.framework.rspec.svn.path.label.select.dialog.title:
+  text: Select Svn Path
+gem.unknown.version:
+  text: '[unknown version]'
+error.module.ror.valid.expected:
+  text: 'Ruby, Rails or Java module with JRuby Facet is expected, but was found: {0}'
+common.msgs.fetching.version:
+  text: Fetching... Please wait.

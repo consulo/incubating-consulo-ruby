@@ -16,42 +16,31 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighter;
 import com.intellij.ide.highlighter.XmlLikeFileType;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import consulo.localize.LocalizeValue;
+import consulo.ruby.api.localize.RubyApiLocalize;
 import consulo.ui.image.Image;
+import org.jetbrains.plugins.ruby.rails.RailsIcons;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighter;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
  *
- * @author: Roman Chernyatchik
- * @date: 17.10.2006
+ * @author Roman Chernyatchik
+ * @date 17.10.2006
  */
 public class RHTMLFileType extends XmlLikeFileType
 {
 	public static final String VALID_EXTENTIONS = "rhtml;erb;";
 	public static final RHTMLFileType INSTANCE = new RHTMLFileType();
-
-	@NonNls
-	private static final String NAME = "RHTML";
-	@NonNls
-	private static final String DEFAULT_EXTENSION = "rhtml";
-	@NonNls
-	private static final String ERB_EXTENSION = "erb";
-	@NonNls
-	private static final String DESCRIPTION = RBundle.message("filetype.description.rhtml");
-	private static final Image ICON = RailsIcons.RHTML_ICON;
 
 	private RHTMLFileType()
 	{
@@ -60,36 +49,36 @@ public class RHTMLFileType extends XmlLikeFileType
 
 	@Override
 	@Nonnull
-	public String getName()
+	public String getId()
 	{
-		return NAME;
+		return "RHTML";
 	}
 
 	@Override
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return DESCRIPTION;
+		return RubyApiLocalize.filetypeDescriptionRhtml();
 	}
 
 	@Override
 	@Nonnull
 	public String getDefaultExtension()
 	{
-		return DEFAULT_EXTENSION;
+		return "rhtml";
 	}
 
 	@Nonnull
 	public String getERBExtension()
 	{
-		return ERB_EXTENSION;
+		return "erb";
 	}
 
 	@Override
 	@Nullable
 	public Image getIcon()
 	{
-		return ICON;
+		return RailsIcons.RHTML_ICON;
 	}
 
 	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile, @Nonnull EditorColorsScheme colors)

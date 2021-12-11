@@ -18,10 +18,10 @@ package org.jetbrains.plugins.ruby.rails.langs;
 
 import javax.annotation.Nonnull;
 
-import org.jetbrains.annotations.NonNls;
-
 import javax.annotation.Nullable;
 
+import consulo.localize.LocalizeValue;
+import consulo.ruby.api.localize.RubyApiLocalize;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
@@ -37,13 +37,6 @@ import consulo.ui.image.Image;
 public class RJSFileType extends LanguageFileType
 {
 	public static final RJSFileType RJS = new RJSFileType();
-	@NonNls
-	private static final String DESCRIPTION = RBundle.message("filetype.description.rjs");
-	@NonNls
-	private static final String DEFAULT_EXTENSION = "rjs";
-	@NonNls
-	private static final String NAME = "Rjs";
-	private static final Image ICON = RailsIcons.RJS_ICON;
 
 	private RJSFileType()
 	{
@@ -52,29 +45,29 @@ public class RJSFileType extends LanguageFileType
 
 	@Override
 	@Nonnull
-	public String getName()
+	public String getId()
 	{
-		return NAME;
+		return "Rjs";
 	}
 
 	@Override
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return DESCRIPTION;
+		return RubyApiLocalize.filetypeDescriptionRjs();
 	}
 
 	@Override
 	@Nonnull
 	public String getDefaultExtension()
 	{
-		return DEFAULT_EXTENSION;
+		return "rjs";
 	}
 
 	@Override
 	@Nullable
 	public Image getIcon()
 	{
-		return ICON;
+		return RailsIcons.RJS_ICON;
 	}
 }

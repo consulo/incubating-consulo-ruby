@@ -17,9 +17,10 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.localize.LocalizeValue;
 import consulo.ruby.api.icon.RubyApiIconGroup;
+import consulo.ruby.api.localize.RubyApiLocalize;
 import consulo.ui.image.Image;
-import org.jetbrains.plugins.ruby.RBundle;
 
 import javax.annotation.Nonnull;
 
@@ -44,9 +45,9 @@ public class RubyFileType extends LanguageFileType
 
 	@Override
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return RBundle.message("filetype.description.rb");
+		return RubyApiLocalize.filetypeDescriptionRb();
 	}
 
 	@Override

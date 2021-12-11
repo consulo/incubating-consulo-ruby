@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs;
 
-import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.plugins.ruby.RBundle;
+import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.localize.LocalizeValue;
+import consulo.ruby.api.localize.RubyApiLocalize;
+import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import consulo.ui.image.Image;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,15 +37,8 @@ public class RXMLFileType extends LanguageFileType
 	public static final String VALID_EXTENTIONS = "rxml;builder;";
 
 	public static final RXMLFileType RXML = new RXMLFileType();
-	@NonNls
-	private static final String NAME = "RXML";
-	@NonNls
-	private static final String DESCRIPTION = RBundle.message("filetype.description.rxml");
-	@NonNls
-	private static final String DEFAULT_EXTENSION = "rxml";
-	@NonNls
+
 	private static final String BUILDER_EXTENSION = "builder";
-	private static final Image ICON = RailsIcons.RXTML_ICON;
 
 	private RXMLFileType()
 	{
@@ -56,21 +49,21 @@ public class RXMLFileType extends LanguageFileType
 	@Nonnull
 	public String getId()
 	{
-		return NAME;
+		return "RXML";
 	}
 
 	@Override
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return DESCRIPTION;
+		return RubyApiLocalize.filetypeDescriptionRxml();
 	}
 
 	@Override
 	@Nonnull
 	public String getDefaultExtension()
 	{
-		return DEFAULT_EXTENSION;
+		return "rxml";
 	}
 
 	@Nonnull
@@ -83,7 +76,7 @@ public class RXMLFileType extends LanguageFileType
 	@Nullable
 	public Image getIcon()
 	{
-		return ICON;
+		return RailsIcons.RXTML_ICON;
 	}
 }
 
