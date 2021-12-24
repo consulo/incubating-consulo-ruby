@@ -1,4 +1,4 @@
-<consulo-plugin>
+<consulo-plugin url="https://github.com/consulo/incubating-consulo-ruby">
 	<id>consulo.jruby</id>
 	<name>JRuby</name>
 	<version>SNAPSHOT</version>

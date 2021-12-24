@@ -1,4 +1,4 @@
-<consulo-plugin>
+<consulo-plugin url="https://github.com/consulo/incubating-consulo-ruby">
 	<id>consulo.jruby.rails</id>
 	<name>JRuby on Rails</name>
 	<version>SNAPSHOT</version>
@@ -15,7 +15,7 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<moduleExtensionProvider key="jruby-on-rails"
 								 parentKey="jruby"
-								 icon="/org/jetbrains/plugins/ruby/rails/rails_small.png"
+								 icon="consulo.ruby.api.RubyApiIconGroup@rails.rails_small"
 								 name="Rails"
 								 immutableClass="consulo.jruby.rails.module.extension.JRubyOnRailsModuleExtension"
 								 mutableClass="consulo.jruby.rails.module.extension.JRubyOnRailsMutableModuleExtension" />
