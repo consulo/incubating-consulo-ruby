@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.names;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.

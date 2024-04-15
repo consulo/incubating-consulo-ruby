@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.InputValidator;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.ui.ColoredListCellRenderer;
-import com.intellij.ui.DocumentAdapter;
-import javax.annotation.Nonnull;
+import consulo.project.Project;
+import consulo.ui.ex.InputValidator;
+import consulo.ui.ex.awt.ColoredListCellRenderer;
+import consulo.ui.ex.awt.Messages;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
+import consulo.ui.ex.awt.event.DocumentAdapter;
+import jakarta.annotation.Nonnull;
 
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
@@ -35,7 +36,6 @@ import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
-import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
@@ -184,7 +184,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 		final StringBuffer buff = new StringBuffer();
 		buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox, myForceCheckBox, myPretendCheckBox, mySkipCheckBox, mySVNCheckBox));
 
-		final String path = FileUtil.toSystemIndependentName(myControllerDir.getText()).trim();
+		final String path = consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemIndependentName(myControllerDir.getText()).trim();
 		if(!TextUtil.isEmpty(path))
 		{
 			buff.append(path);
@@ -238,7 +238,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 		final int width = myControllerName.getWidth() - myLocationLabel.getSize().width;
 		final FontMetrics fontMetrics = myLocationPanel.getFontMetrics(myLocationPanel.getFont());
 		TextUtil.truncWithDots(myBuff, width, fontMetrics);
-		myControllerLocationValueLabel.setText(FileUtil.toSystemDependentName(myBuff.toString()));
+		myControllerLocationValueLabel.setText(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(myBuff.toString()));
 	}
 
 	private class MyActionInputValidator implements InputValidator

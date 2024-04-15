@@ -16,11 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.intellij.java.language.JavaLanguage;
+import com.intellij.java.language.impl.codeInsight.javadoc.JavaDocUtil;
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.language.ast.ASTNode;
+import consulo.language.editor.documentation.DocumentationManagerUtil;
+import consulo.language.editor.documentation.LanguageDocumentationProvider;
+import consulo.language.psi.PsiComment;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiWhiteSpace;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
@@ -52,18 +59,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.SymbolPresentationUtil;
-import com.intellij.codeInsight.documentation.DocumentationManagerUtil;
-import com.intellij.codeInsight.javadoc.JavaDocUtil;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageDocumentation;
-import com.intellij.lang.java.JavaLanguage;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.util.PsiTreeUtil;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -126,7 +126,7 @@ public class RubyHelpUtil implements MarkupConstants
 		if(Types.JAVA.contains(symbol.getType()))
 		{
 			//noinspection ConstantConditions
-			return LanguageDocumentation.INSTANCE.forLanguage(JavaLanguage.INSTANCE).generateDoc(((JavaSymbol) symbol).getPsiElement(), null);
+			return LanguageDocumentationProvider.forLanguageComposite(JavaLanguage.INSTANCE).generateDoc(((JavaSymbol) symbol).getPsiElement(), null);
 		}
 		final StringBuilder builder = new StringBuilder();
 		final Project project = symbol.getProject();

@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.CoreTypes;
 
 /**

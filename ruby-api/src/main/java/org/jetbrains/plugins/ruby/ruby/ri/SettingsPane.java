@@ -29,18 +29,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import consulo.content.bundle.Sdk;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxList;
 import org.jetbrains.plugins.ruby.ruby.ri.ui.CheckBoxListListener;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoryItem;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.fileChooser.FileChooserDialog;
-import com.intellij.openapi.fileChooser.FileChooserFactory;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.fileChooser.FileChooserDescriptor;
+import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.fileChooser.FileChooserDialog;
+import consulo.fileChooser.FileChooserFactory;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import consulo.jruby.module.extension.JRubyModuleExtension;
+import consulo.module.Module;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.language.util.ModuleUtilCore;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
-import com.intellij.ProjectTopics;
-import com.intellij.ide.startup.StartupManagerEx;
-import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootEvent;
-import com.intellij.openapi.roots.ModuleRootListener;
-import com.intellij.openapi.roots.impl.DirectoryIndex;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.util.messages.MessageBusConnection;
-import consulo.bundle.SdkTableListener;
+import consulo.component.messagebus.MessageBusConnection;
+import consulo.content.bundle.event.SdkTableListener;
+import consulo.module.content.layer.event.ModuleRootListener;
+import consulo.module.event.ModuleListener;
+import consulo.project.Project;
+import consulo.project.internal.StartupManagerEx;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.content.bundle.Sdk;
+import consulo.module.content.layer.event.ModuleRootEvent;
+import consulo.module.content.DirectoryIndex;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.language.psi.PsiManager;
 import consulo.disposer.Disposable;
 import jakarta.inject.Inject;
 import org.jetbrains.annotations.NonNls;
@@ -41,8 +40,8 @@ import org.jetbrains.plugins.ruby.ruby.module.RubyModuleListenerAdapter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,10 +51,9 @@ import java.util.Map;
  * @author: oleg, Roman.Chernyatchik
  * @date: Jan 23, 2007
  */
-public class RubySdkCachesManager implements ProjectComponent, Disposable
+public class RubySdkCachesManager implements Disposable
 {
-
-	private static final Logger LOG = Logger.getInstance(RubySdkCachesManager.class.getName());
+	private static final Logger LOG = Logger.getInstance(RubySdkCachesManager.class);
 
 	// map with RubyFilesCaches for each sdk
 	private Map<Sdk, RubyFilesCache> sdk2RubyFilesCache = new HashMap<Sdk, RubyFilesCache>();
@@ -98,9 +96,9 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 				initSkdCaches(myProject);
 
 				// registering listeners
-				myConnection.subscribe(ProjectTopics.MODULES, rModuleListener);
+				myConnection.subscribe(ModuleListener.class, rModuleListener);
 				//SdkTable.getInstance().addListener(jdkTableListener);
-				myConnection.subscribe(ProjectTopics.PROJECT_ROOTS, moduleRootListener);
+				myConnection.subscribe(ModuleRootListener.class, moduleRootListener);
 			}
 		});
 	}
@@ -190,12 +188,6 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 		return cache != null ? cache.getDeclarationsIndex() : null;
 	}
 
-	@Override
-	public void projectOpened()
-	{
-		// Do nothing
-	}
-
 	private void modulesChanged(@Nonnull final Project project, @Nonnull final Module module)
 	{
 		if(RModuleUtil.hasRubySupport(module))
@@ -205,11 +197,8 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 	}
 
 	@Override
-	public void projectClosed()
+	public void dispose()
 	{
-		// unregistering listeners
-		//  SdkTable.getInstance().removeListener(jdkTableListener);
-
 		myConnection.disconnect();
 
 		// dispose all the filesCaches
@@ -218,26 +207,7 @@ public class RubySdkCachesManager implements ProjectComponent, Disposable
 			final RubyFilesCache sdkCache = sdk2RubyFilesCache.get(sdk);
 			sdkCache.saveCacheToDisk();
 		}
-	}
 
-	@Override
-	@NonNls
-	@Nonnull
-	public String getComponentName()
-	{
-		return RComponents.RUBY_SDK_CACHE_MANAGER;
-	}
-
-
-	@Override
-	public void initComponent()
-	{
-		//Do nothing
-	}
-
-	@Override
-	public void dispose()
-	{
 		sdk2RubyFilesCache.clear();
 	}
 

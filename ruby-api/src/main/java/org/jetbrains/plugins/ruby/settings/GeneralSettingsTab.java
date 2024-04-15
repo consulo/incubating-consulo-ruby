@@ -24,17 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-import org.jetbrains.plugins.ruby.RBundle;
+import consulo.configurable.ConfigurationException;
+import consulo.configurable.UnnamedConfigurable;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.UnnamedConfigurable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Comparing;
+import consulo.util.lang.Comparing;
 
 /**
  * Created by IntelliJ IDEA.

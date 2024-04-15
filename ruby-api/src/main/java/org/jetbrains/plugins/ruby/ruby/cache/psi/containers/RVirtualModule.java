@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.navigation.ItemPresentation;
+import consulo.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.

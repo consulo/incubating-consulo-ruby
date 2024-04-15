@@ -1,7 +1,7 @@
 package com.intellij.psi.impl.source.parsing;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.impl.source.tree.TreeElement;
+import consulo.language.ast.ASTNode;
+import consulo.language.impl.ast.TreeElement;
 
 /**
  * @author VISTALL

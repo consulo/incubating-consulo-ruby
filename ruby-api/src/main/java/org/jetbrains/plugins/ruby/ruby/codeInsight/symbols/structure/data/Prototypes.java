@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 

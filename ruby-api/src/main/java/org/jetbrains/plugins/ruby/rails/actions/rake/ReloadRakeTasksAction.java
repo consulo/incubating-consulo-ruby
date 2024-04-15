@@ -16,19 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.document.FileDocumentManager;
+import consulo.ui.ex.action.AnAction;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.module.Module;
+import consulo.ui.ex.awt.Messages;
 
 /**
  * Created by IntelliJ IDEA.

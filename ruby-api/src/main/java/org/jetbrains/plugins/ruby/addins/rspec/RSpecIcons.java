@@ -27,7 +27,7 @@ import consulo.ui.image.Image;
  */
 public interface RSpecIcons
 {
-	Image RUN_CONFIGURATION_ICON = RubyApiIconGroup.addinsRspecRspec_runConfigurations();
-	Image METHOD_ICON = RubyApiIconGroup.addinsRspecRspec_Method();
-	Image TEST_SCRIPT_ICON = RubyApiIconGroup.addinsRspecRspec_Test();
+	Image RUN_CONFIGURATION_ICON = RubyApiIconGroup.addinsRspecRspec_runconfigurations();
+	Image METHOD_ICON = RubyApiIconGroup.addinsRspecRspec_method();
+	Image TEST_SCRIPT_ICON = RubyApiIconGroup.addinsRspecRspec_test();
 }

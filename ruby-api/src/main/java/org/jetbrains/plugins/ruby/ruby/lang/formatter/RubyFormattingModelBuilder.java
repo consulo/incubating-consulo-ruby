@@ -16,21 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelBuilder;
-import com.intellij.formatting.FormattingModelProvider;
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.impl.source.SourceTreeToPsiMap;
-import com.intellij.psi.impl.source.tree.FileElement;
-import com.intellij.psi.impl.source.tree.TreeElement;
-import com.intellij.psi.impl.source.tree.TreeUtil;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.*;
+import consulo.document.util.TextRange;
+import consulo.language.impl.ast.FileElement;
+import consulo.language.impl.ast.TreeUtil;
+import consulo.language.impl.ast.TreeElement;
+import consulo.language.impl.psi.SourceTreeToPsiMap;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

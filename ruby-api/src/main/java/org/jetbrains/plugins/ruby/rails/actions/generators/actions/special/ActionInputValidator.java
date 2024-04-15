@@ -16,18 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.dataContext.DataContext;
+import consulo.language.impl.internal.psi.PsiManagerImpl;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.PsiManagerImpl;
-import com.intellij.psi.impl.file.PsiDirectoryImpl;
+import consulo.module.Module;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.language.psi.PsiManager;
+import consulo.language.impl.psi.PsiDirectoryImpl;
 
 /**
  * Created by IntelliJ IDEA.

@@ -23,8 +23,8 @@ import javax.swing.JComboBox;
 
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.ui.ComboboxWithBrowseButton;
+import consulo.content.bundle.Sdk;
+import consulo.ui.ex.awt.ComboboxWithBrowseButton;
 
 /**
  * Created by IntelliJ IDEA.

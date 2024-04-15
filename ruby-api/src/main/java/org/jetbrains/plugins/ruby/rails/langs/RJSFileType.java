@@ -16,16 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
-import javax.annotation.Nullable;
-
+import consulo.language.file.LanguageFileType;
 import consulo.localize.LocalizeValue;
 import consulo.ruby.api.localize.RubyApiLocalize;
-import org.jetbrains.plugins.ruby.RBundle;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.ui.image.Image;
 
 /**

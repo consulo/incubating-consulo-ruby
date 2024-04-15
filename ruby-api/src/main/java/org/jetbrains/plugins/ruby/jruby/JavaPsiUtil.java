@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.jruby;
 
-import javax.annotation.Nonnull;
+import com.intellij.java.language.psi.PsiField;
+import com.intellij.java.language.psi.PsiMethod;
+import com.intellij.java.language.psi.PsiModifier;
+import com.intellij.java.language.psi.PsiModifierList;
 
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiModifier;
-import com.intellij.psi.PsiModifierList;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

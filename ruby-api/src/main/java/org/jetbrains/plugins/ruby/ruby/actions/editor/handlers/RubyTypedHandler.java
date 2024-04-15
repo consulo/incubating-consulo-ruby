@@ -16,25 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers;
 
-import javax.annotation.Nonnull;
-
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.EditorEx;
+import consulo.codeEditor.EditorHighlighter;
+import consulo.codeEditor.HighlighterIterator;
+import consulo.codeEditor.action.TypedActionHandler;
+import consulo.codeEditor.util.EditorModificationUtil;
+import consulo.dataContext.DataContext;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.editor.CodeInsightSettings;
+import consulo.language.editor.completion.lookup.LookupManager;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
-import com.intellij.codeInsight.CodeInsightSettings;
-import com.intellij.codeInsight.lookup.LookupManager;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.editor.actionSystem.TypedActionHandler;
-import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -133,7 +133,7 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 			do
 			{
 				iterator.retreat();
-				type = iterator.getTokenType();
+				type = (IElementType) iterator.getTokenType();
 			}
 			while(type != null && BNF.tWHITESPACES_OR_COMMENTS.contains(type));
 
@@ -156,7 +156,7 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 		EditorModificationUtil.insertStringAtCaret(editor, String.valueOf(new char[]{charTyped}));
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final HighlighterIterator iterator = highlighter.createIterator(editor.getCaretModel().getOffset() - 1);
-		final IElementType tokenType = !iterator.atEnd() ? iterator.getTokenType() : null;
+		final IElementType tokenType = !iterator.atEnd() ? (IElementType) iterator.getTokenType() : null;
 
 		// if are string, regexp, words or we have to close brace
 		if(settings.AUTOINSERT_PAIR_BRACKET && (TokenBNF.tSTRINGS_BEGINNINGS.contains(tokenType) || TokenBNF.tWORDS_BEGINNINGS.contains(tokenType)))
@@ -195,7 +195,7 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 
 		// If we are in comments or strings like, we should skip
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
-		final IElementType type = highlighter.createIterator(caret).getTokenType();
+		final IElementType type = (IElementType) highlighter.createIterator(caret).getTokenType();
 		if(TokenBNF.tCOMMENTS.contains(type) ||
 				TokenBNF.tSTRING_TOKENS.contains(type) || TokenBNF.tREGEXP_TOKENS.contains(type) || TokenBNF.tWORDS_TOKENS.contains(type))
 		{
@@ -233,9 +233,9 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 		final int caret = editor.getCaretModel().getOffset();
 		final HighlighterIterator iterator = highlighter.createIterator(caret - 1);
 
-		final IElementType tokenType = !iterator.atEnd() ? iterator.getTokenType() : null;
+		final IElementType tokenType = !iterator.atEnd() ? (IElementType) iterator.getTokenType() : null;
 		iterator.advance();
-		final IElementType nextTokenType = !iterator.atEnd() ? iterator.getTokenType() : null;
+		final IElementType nextTokenType = !iterator.atEnd() ? (IElementType) iterator.getTokenType() : null;
 
 		// if are string, regexp, words or we have to close brace
 		if(iterator.atEnd() || INSERT_QUOTE_OR_BRACE_BEFORE.contains(nextTokenType) ||
@@ -267,7 +267,7 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final int caret = editor.getCaretModel().getOffset();
 		final HighlighterIterator iterator = highlighter.createIterator(caret);
-		final IElementType tokenType = !iterator.atEnd() ? iterator.getTokenType() : null;
+		final IElementType tokenType = !iterator.atEnd() ? (IElementType) iterator.getTokenType() : null;
 
 		// if in string, we should put only 1 quote
 		if(tokenType != tSTRING_DEND && BNF.tSTRING_TOKENS.contains(tokenType))
@@ -315,7 +315,7 @@ public class RubyTypedHandler implements TypedActionHandler, RubyTokenTypes
 		int balance = 0;
 		while(!iterator.atEnd())
 		{
-			IElementType type = iterator.getTokenType();
+			IElementType type = (IElementType) iterator.getTokenType();
 			if(openBraces.contains(type))
 			{
 				balance++;

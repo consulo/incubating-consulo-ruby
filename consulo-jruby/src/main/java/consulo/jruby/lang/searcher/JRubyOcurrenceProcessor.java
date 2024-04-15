@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.jruby.search;
+package consulo.jruby.lang.searcher;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.TextOccurenceProcessor;
-import com.intellij.util.Processor;
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.application.util.function.Processor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiNamedElement;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.search.TextOccurenceProcessor;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
-
-import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

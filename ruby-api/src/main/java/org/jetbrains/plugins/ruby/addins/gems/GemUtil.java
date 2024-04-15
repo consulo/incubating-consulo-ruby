@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.addins.gems;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.FileUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

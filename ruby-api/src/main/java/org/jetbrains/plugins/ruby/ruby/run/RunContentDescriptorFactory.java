@@ -21,11 +21,11 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.ui.ConsoleView;
-import com.intellij.execution.ui.ExecutionConsole;
-import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.ui.content.Content;
+import consulo.execution.ui.ExecutionConsole;
+import consulo.execution.ui.console.ConsoleView;
+import consulo.process.ProcessHandler;
+import consulo.execution.ui.RunContentDescriptor;
+import consulo.ui.ex.content.Content;
 
 /**
  * Created by IntelliJ IDEA.

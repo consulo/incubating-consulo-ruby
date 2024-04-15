@@ -18,15 +18,15 @@ package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.psi.PsiElement;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.rails.codeInsight.RCodeInsightUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.AbstractRubyHighlighterPass;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

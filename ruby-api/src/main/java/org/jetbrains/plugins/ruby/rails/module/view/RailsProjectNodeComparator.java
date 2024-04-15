@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.module.view;
 import java.util.Comparator;
 
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsAbstractNode;
-import com.intellij.ide.util.treeView.NodeDescriptor;
+import consulo.ui.ex.tree.NodeDescriptor;
 
 /**
  * Created by IntelliJ IDEA.

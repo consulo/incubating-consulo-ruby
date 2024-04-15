@@ -1,11 +1,10 @@
 package org.jetbrains.plugins.ruby.ruby.sdk.gemRootType;
 
+import consulo.fileChooser.FileChooserDescriptor;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.ui.SdkPathEditor;
-import com.intellij.openapi.roots.ui.OrderRootTypeUIFactory;
-import consulo.awt.TargetAWT;
+import consulo.content.bundle.Sdk;
+import consulo.ide.ui.SdkPathEditor;
+import consulo.ide.ui.OrderRootTypeUIFactory;
 import consulo.ui.image.Image;
 
 /**

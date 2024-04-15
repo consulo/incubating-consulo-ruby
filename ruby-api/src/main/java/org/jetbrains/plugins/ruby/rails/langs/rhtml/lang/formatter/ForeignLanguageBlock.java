@@ -23,13 +23,13 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
  * @date: Dec 21, 2007
  */
 
-import javax.annotation.Nullable;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.formatter.xml.AnotherLanguageBlockWrapper;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.Block;
+import consulo.language.codeStyle.Indent;
+import consulo.xml.psi.formatter.xml.AnotherLanguageBlockWrapper;
+import consulo.xml.psi.formatter.xml.XmlFormattingPolicy;
+import jakarta.annotation.Nullable;
 
 //TODO separate with AnotherLanguageBlockWrapper after IDEA #7613
 public class ForeignLanguageBlock extends AnotherLanguageBlockWrapper

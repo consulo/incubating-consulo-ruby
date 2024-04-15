@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
-import javax.annotation.Nonnull;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RIfStatement;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

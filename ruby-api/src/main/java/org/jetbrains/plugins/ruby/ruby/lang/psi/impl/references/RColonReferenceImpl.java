@@ -16,18 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.language.ast.TokenSet;
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.Colon3Reference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RColonReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
 
 /**
  * Created by IntelliJ IDEA.

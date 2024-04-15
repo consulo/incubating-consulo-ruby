@@ -16,11 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nullable;
+
 import java.util.List;
-
-import javax.annotation.Nullable;
-
-import com.intellij.openapi.vfs.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.

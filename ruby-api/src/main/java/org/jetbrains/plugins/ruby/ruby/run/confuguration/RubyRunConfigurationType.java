@@ -18,8 +18,17 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.execution.RunManager;
+import consulo.execution.RunnerAndConfigurationSettings;
+import consulo.execution.action.Location;
+import consulo.execution.configuration.ConfigurationFactory;
+import consulo.language.psi.PsiFile;
+import consulo.navigation.OpenFileDescriptor;
+import consulo.util.lang.ref.Ref;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -42,20 +51,12 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigur
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationFactory;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.execution.Location;
-import com.intellij.execution.RunManager;
-import com.intellij.execution.RunnerAndConfigurationSettings;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.execution.configuration.ConfigurationType;
+import consulo.execution.configuration.RunConfiguration;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
 import consulo.ui.image.Image;
 
 /**
@@ -76,7 +77,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 
 	public static RubyRunConfigurationType getInstance()
 	{
-		return CONFIGURATION_TYPE_EP.findExtension(RubyRunConfigurationType.class);
+		return EP_NAME.findExtension(RubyRunConfigurationType.class);
 	}
 
 	@Override
@@ -168,7 +169,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 				// "currentContainer" maybe nested class so we should
 				// find the upper class contained him
 				final RClass upperClass = RubyPsiUtil.getContainingUpperRClass(currentContainer);
-				final Ref<FileSymbol> fSWrapper = new Ref<FileSymbol>();
+				final Ref<FileSymbol> fSWrapper = new consulo.util.lang.ref.Ref<FileSymbol>();
 				fileSemantic = (upperClass != null && RTestUnitUtil.isClassUnitTestCase(upperClass, fSWrapper)) ? FileSemantic.TEST_UNIT_TEST : FileSemantic.RUBY_SCRIPT;
 
 				if(fileSemantic == FileSemantic.TEST_UNIT_TEST)
@@ -187,7 +188,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 			{
 				final RClass upperClass = RubyPsiUtil.getContainingUpperRClass(currentContainer);
 
-				final Ref<FileSymbol> fSWrapper = new Ref<FileSymbol>();
+				final consulo.util.lang.ref.Ref<FileSymbol> fSWrapper = new consulo.util.lang.ref.Ref<FileSymbol>();
 				fileSemantic = (upperClass != null && RTestUnitUtil.isClassUnitTestCase(upperClass, fSWrapper)) ? FileSemantic.TEST_UNIT_TEST : FileSemantic.RUBY_SCRIPT;
 
 				methodName = currentContainer.getName();

@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.jruby.facet;
 
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
+
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.

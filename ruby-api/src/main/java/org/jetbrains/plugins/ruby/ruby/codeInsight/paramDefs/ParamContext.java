@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.project.Project;
+import consulo.module.Module;
+import consulo.ide.impl.idea.openapi.module.ModuleUtil;
+import consulo.project.Project;
 
 /**
  * @author yole
@@ -66,7 +66,7 @@ public class ParamContext
 
 	public Module getModule()
 	{
-		return ModuleUtil.findModuleForPsiElement(myValueElement);
+		return consulo.ide.impl.idea.openapi.module.ModuleUtil.findModuleForPsiElement(myValueElement);
 	}
 
 	public Project getProject()

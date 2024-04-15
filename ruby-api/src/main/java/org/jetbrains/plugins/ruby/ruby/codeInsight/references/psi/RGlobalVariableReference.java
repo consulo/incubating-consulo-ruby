@@ -18,9 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -29,8 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageType;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
+import consulo.language.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.

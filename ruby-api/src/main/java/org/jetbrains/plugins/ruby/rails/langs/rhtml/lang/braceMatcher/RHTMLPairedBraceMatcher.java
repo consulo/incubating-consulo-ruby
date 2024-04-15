@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.braceMatcher;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.language.BracePair;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import com.intellij.lang.BracePair;
-import com.intellij.lang.PairedBraceMatcher;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.PairedBraceMatcher;
+import consulo.language.psi.PsiFile;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,9 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.presentation;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
+import consulo.language.icon.IconDescriptorUpdaters;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -29,8 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
-import com.intellij.psi.PsiElement;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.language.psi.PsiElement;
 import consulo.ui.image.Image;
 import consulo.ui.image.ImageEffects;
 

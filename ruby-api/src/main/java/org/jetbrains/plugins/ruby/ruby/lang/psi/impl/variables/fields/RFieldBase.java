@@ -16,9 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.fields;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.language.util.IncorrectOperationException;
+import consulo.navigation.ItemPresentation;
+import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RFieldReference;
@@ -28,12 +33,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RNamedElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFieldPresentationUtil;
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
-import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.

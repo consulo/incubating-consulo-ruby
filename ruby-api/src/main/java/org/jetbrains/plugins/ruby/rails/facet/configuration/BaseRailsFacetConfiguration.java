@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 
 /**

@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
+import consulo.content.bundle.Sdk;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.SystemInfo;
+import consulo.application.util.SystemInfo;
 import consulo.ui.image.Image;
 
 /**

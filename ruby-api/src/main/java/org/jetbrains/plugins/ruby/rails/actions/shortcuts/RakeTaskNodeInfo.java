@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
-import javax.annotation.Nonnull;
-
 import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;

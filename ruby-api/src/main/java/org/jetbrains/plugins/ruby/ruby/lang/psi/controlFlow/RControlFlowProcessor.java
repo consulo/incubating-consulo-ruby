@@ -15,7 +15,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

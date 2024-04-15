@@ -19,11 +19,12 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 import java.lang.reflect.Field;
 import java.util.Stack;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.ast.IElementType;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -34,7 +35,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.LexState;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.State;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

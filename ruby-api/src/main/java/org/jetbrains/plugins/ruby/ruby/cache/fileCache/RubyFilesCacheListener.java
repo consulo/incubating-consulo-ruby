@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

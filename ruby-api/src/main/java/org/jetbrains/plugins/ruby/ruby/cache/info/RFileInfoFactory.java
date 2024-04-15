@@ -16,17 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.info;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.language.psi.PsiManager;
 import org.jetbrains.plugins.ruby.ruby.cache.info.impl.RFileInfoImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

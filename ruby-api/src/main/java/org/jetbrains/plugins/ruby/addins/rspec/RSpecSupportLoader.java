@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.editor.markup.TextAttributes;
+import consulo.colorScheme.TextAttributes;
+import consulo.execution.ui.console.ConsoleViewContentType;
 import consulo.ui.color.RGBColor;
 import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NonNls;

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.facet.converting;
 
 import com.intellij.openapi.components.ExpandMacroToPathMap;
 import com.intellij.openapi.util.JDOMUtil;
-import com.intellij.openapi.util.io.FileUtil;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
 import org.jdom.Element;
 
 import java.io.File;

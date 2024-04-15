@@ -19,11 +19,12 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.JavaClassReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.NewReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
@@ -40,10 +41,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.

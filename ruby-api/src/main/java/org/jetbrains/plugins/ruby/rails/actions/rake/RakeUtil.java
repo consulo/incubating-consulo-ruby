@@ -19,11 +19,16 @@ package org.jetbrains.plugins.ruby.rails.actions.rake;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.application.progress.ProgressManager;
+import consulo.document.FileDocumentManager;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.project.Project;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.gems.GemsRunner;
@@ -41,18 +46,13 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.execution.filters.Filter;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.dataContext.DataContext;
+import consulo.ui.ModalityState;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.Task;
+import consulo.content.bundle.Sdk;
+import consulo.ui.ex.awt.Messages;
+import consulo.virtualFileSystem.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,12 +18,12 @@ package org.jetbrains.plugins.ruby.rails.facet.ui.settings.tabs.general;
 
 import javax.swing.JComponent;
 
+import consulo.configurable.ConfigurationException;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.versions.BaseRailsFacet;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.

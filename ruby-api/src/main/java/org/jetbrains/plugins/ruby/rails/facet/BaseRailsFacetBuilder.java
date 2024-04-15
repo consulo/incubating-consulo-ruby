@@ -17,27 +17,31 @@
 package org.jetbrains.plugins.ruby.rails.facet;
 
 import com.intellij.facet.Facet;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.fileChooser.FileChooserDialog;
-import com.intellij.openapi.fileChooser.FileChooserFactory;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.*;
-import com.intellij.openapi.startup.StartupManager;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ThrowableRunnable;
-import javax.annotation.Nonnull;
-
+import consulo.application.Application;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.application.progress.Task;
+import consulo.content.ContentIterator;
+import consulo.content.bundle.Sdk;
+import consulo.fileChooser.FileChooserDescriptor;
+import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.fileChooser.FileChooserDialog;
+import consulo.fileChooser.FileChooserFactory;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.module.content.ModuleFileIndex;
+import consulo.module.content.ModuleRootManager;
+import consulo.module.content.layer.ContentEntry;
+import consulo.module.content.layer.ModifiableRootModel;
+import consulo.project.Project;
+import consulo.project.startup.StartupManager;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.Messages;
+import consulo.util.lang.function.ThrowableRunnable;
+import consulo.util.lang.ref.Ref;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -61,8 +65,6 @@ import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -321,7 +323,7 @@ public class BaseRailsFacetBuilder
 
 				// Update uncommitedModule content and rails uncommitedModule settings
 				// will be invoked later
-				final ThrowableRunnable<Exception> updateModuleAndSettings = new ThrowableRunnable<Exception>()
+				final consulo.util.lang.function.ThrowableRunnable<Exception> updateModuleAndSettings = new consulo.util.lang.function.ThrowableRunnable<Exception>()
 				{
 					@Override
 					public void run() throws Exception
@@ -352,7 +354,7 @@ public class BaseRailsFacetBuilder
 					final String processTitle = RBundle.message("new.generate.spec.generating.title");
 					final String errorTitle = RBundle.message("new.generate.common.error.title");
 
-					final ThrowableRunnable<Exception> generateRSpecStubIfNecessary = new ThrowableRunnable<Exception>()
+					final consulo.util.lang.function.ThrowableRunnable<Exception> generateRSpecStubIfNecessary = new consulo.util.lang.function.ThrowableRunnable<Exception>()
 					{
 						@Override
 						public void run() throws Exception
@@ -429,10 +431,10 @@ public class BaseRailsFacetBuilder
 		configuration.loadRakeTasks(forceRegenerate, sdk);
 	}
 
-	private static void installRSpecSupport(final Module module, final RunContentDescriptorFactory descFactory, @Nullable final ThrowableRunnable<Exception> nextAction, final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf, @Nonnull final Sdk sdk)
+	private static void installRSpecSupport(final Module module, final RunContentDescriptorFactory descFactory, @Nullable final consulo.util.lang.function.ThrowableRunnable<Exception> nextAction, final RailsWizardSettingsHolder.RSpecConfiguration rSpecConf, @Nonnull final Sdk sdk)
 	{
 
-		final ThrowableRunnable<Exception> installRSpecRails = new ThrowableRunnable<Exception>()
+		final consulo.util.lang.function.ThrowableRunnable<Exception> installRSpecRails = new ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run()
@@ -554,7 +556,7 @@ public class BaseRailsFacetBuilder
 			@Override
 			public void run()
 			{
-				IdeaInternalUtil.runInEDThreadInWriteAction(new ThrowableRunnable<Exception>()
+				IdeaInternalUtil.runInEDThreadInWriteAction(new consulo.util.lang.function.ThrowableRunnable<Exception>()
 				{
 					@Override
 					public void run()
@@ -584,7 +586,7 @@ public class BaseRailsFacetBuilder
 
 						modifiableModel.commit();
 					}
-				}, ModalityState.defaultModalityState());
+				}, Application.get().getDefaultModalityState());
 			}
 		};
 

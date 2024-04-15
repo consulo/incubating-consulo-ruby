@@ -20,7 +20,7 @@ package org.jetbrains.plugins.ruby.support.utils;
  *
  */
 @SuppressWarnings({"ConstantConditions"})
-public class DebugUtil extends com.intellij.psi.impl.DebugUtil
+public class DebugUtil extends consulo.language.impl.DebugUtil
 {
 
 }

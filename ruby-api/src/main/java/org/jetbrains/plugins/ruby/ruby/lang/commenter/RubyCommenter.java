@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.commenter;
 
+import consulo.language.Commenter;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nullable;
-import com.intellij.lang.Commenter;
 
 
 public class RubyCommenter implements Commenter

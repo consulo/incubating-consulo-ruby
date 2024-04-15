@@ -16,22 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import com.intellij.java.language.psi.PsiMethod;
+import com.intellij.java.language.psi.PsiParameter;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.AssignAccessImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.CallAccessImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.ConstantAccessImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.FieldWriteAccessImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.JavaTypedAccessImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.RescueBlockAccessImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.SelfAssignAccessImpl;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RRescueBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
@@ -55,8 +48,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFid;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiParameter;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

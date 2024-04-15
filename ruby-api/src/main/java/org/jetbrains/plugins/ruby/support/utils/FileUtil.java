@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.support.utils;
 
 import java.io.File;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

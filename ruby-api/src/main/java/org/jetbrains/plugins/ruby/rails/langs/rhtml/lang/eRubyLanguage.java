@@ -16,28 +16,28 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
-import javax.annotation.Nonnull;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.Block;
+import consulo.language.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.FormattingDocumentModel;
+import consulo.language.editor.highlight.SyntaxHighlighter;
+import consulo.language.impl.psi.SourceTreeToPsiMap;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.template.TemplateLanguage;
+import consulo.language.template.TemplateLanguageFileViewProvider;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.xml.lang.html.HTMLLanguage;
+import consulo.xml.lang.xhtml.XHTMLLanguage;
+import consulo.xml.psi.formatter.xml.HtmlPolicy;
+import consulo.xml.psi.formatter.xml.ReadOnlyBlock;
+import consulo.xml.psi.formatter.xml.XmlBlock;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLFileHighlighterImpl;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.FormattingDocumentModel;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.lang.xhtml.XHTMLLanguage;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.formatter.xml.HtmlPolicy;
-import com.intellij.psi.formatter.xml.ReadOnlyBlock;
-import com.intellij.psi.formatter.xml.XmlBlock;
-import com.intellij.psi.impl.source.SourceTreeToPsiMap;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
-import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 
 /**
  * Created by IntelliJ IDEA.

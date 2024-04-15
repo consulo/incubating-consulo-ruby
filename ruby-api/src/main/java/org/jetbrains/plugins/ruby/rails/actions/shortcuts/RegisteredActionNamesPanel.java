@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
-import com.intellij.openapi.actionSystem.Shortcut;
-import com.intellij.openapi.keymap.KeyMapBundle;
-import com.intellij.openapi.keymap.Keymap;
-import com.intellij.openapi.keymap.KeymapManager;
-import com.intellij.openapi.keymap.KeymapUtil;
-import com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog;
-import com.intellij.openapi.ui.Messages;
-import consulo.awt.TargetAWT;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.keymap.KeyMapBundle;
+import consulo.ui.ex.keymap.util.KeymapUtil;
+import consulo.ide.impl.idea.openapi.keymap.impl.ui.EditKeymapsDialog;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
+import consulo.ui.ex.action.Shortcut;
+import consulo.ui.ex.keymap.Keymap;
+import consulo.ui.ex.keymap.KeymapManager;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
@@ -32,8 +33,7 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -316,7 +316,7 @@ public class RegisteredActionNamesPanel
 
 	private void openKeyMap()
 	{
-		new EditKeymapsDialog(null, getSelectedActionId()).show();
+		new consulo.ide.impl.idea.openapi.keymap.impl.ui.EditKeymapsDialog(null, getSelectedActionId()).show();
 		updateShortcutsList();
 	}
 

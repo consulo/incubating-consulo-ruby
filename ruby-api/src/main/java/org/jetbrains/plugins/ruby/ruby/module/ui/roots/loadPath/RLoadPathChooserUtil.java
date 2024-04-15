@@ -18,14 +18,14 @@ package org.jetbrains.plugins.ruby.ruby.module.ui.roots.loadPath;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoryItem;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.util.Ref;
 
 /**
  * Created by IntelliJ IDEA.

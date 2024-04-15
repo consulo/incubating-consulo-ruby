@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.language.ast.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.spacing.SpacingTokens;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
-import com.intellij.formatting.Spacing;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.Spacing;
+import consulo.language.codeStyle.CodeStyleSettings;
 
 public class RubySpacingProcessor
 {

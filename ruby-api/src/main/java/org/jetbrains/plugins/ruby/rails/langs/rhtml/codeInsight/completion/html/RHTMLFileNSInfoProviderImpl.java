@@ -17,9 +17,9 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import com.intellij.psi.xml.XmlFile;

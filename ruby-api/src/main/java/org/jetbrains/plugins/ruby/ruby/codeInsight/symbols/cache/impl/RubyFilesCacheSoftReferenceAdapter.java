@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
-import com.intellij.reference.SoftReference;
+import consulo.util.lang.ref.SoftReference;
 
 /**
  * Created by IntelliJ IDEA.

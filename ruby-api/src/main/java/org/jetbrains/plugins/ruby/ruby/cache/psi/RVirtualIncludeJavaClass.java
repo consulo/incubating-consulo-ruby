@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

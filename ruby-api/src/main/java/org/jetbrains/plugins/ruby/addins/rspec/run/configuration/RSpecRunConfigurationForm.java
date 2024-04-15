@@ -16,35 +16,28 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
+import consulo.content.bundle.Sdk;
+import consulo.execution.ui.awt.EnvironmentVariablesComponent;
+import consulo.execution.ui.awt.RawCommandLineEditor;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.io.FileUtil;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-
-import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.ui.RawCommandLineEditor;
+import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -166,39 +159,39 @@ public class RSpecRunConfigurationForm implements RSpecRunConfigurationParams
 	{
 		mySpecsArgsComponent = createSpecArgsComponent();
 
-		final Ref<TextFieldWithBrowseButton> testsFolderTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		final consulo.util.lang.ref.Ref<TextFieldWithBrowseButton> testsFolderTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
 		mySpecsFolderComponent = RubyRunConfigurationUIUtil.createTestFolderComponent(testsFolderTextFieldWrapper);
 		mySpecsFolderTextField = testsFolderTextFieldWrapper.get();
 
-		final Ref<TextFieldWithBrowseButton> testScriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		final consulo.util.lang.ref.Ref<TextFieldWithBrowseButton> testScriptTextFieldWrapper = new consulo.util.lang.ref.Ref<TextFieldWithBrowseButton>();
 		final String specFileTitle = RBundle.message("rspec.run.configuration.messages.script.path");
 		mySpecsScriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(testScriptTextFieldWrapper, specFileTitle);
 		mySpecsScriptTextField = testScriptTextFieldWrapper.get();
 
-		final Ref<TextFieldWithBrowseButton> specRunnerScriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		final consulo.util.lang.ref.Ref<TextFieldWithBrowseButton> specRunnerScriptTextFieldWrapper = new consulo.util.lang.ref.Ref<TextFieldWithBrowseButton>();
 		final String specRunnerTitle = RBundle.message("rspec.run.configuration.tests.dialog.components.spec.custom.runner");
 		myCustomSpecsRunnerComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(specRunnerScriptTextFieldWrapper, specRunnerTitle);
 		myCustomSpecsRunnerComponent.setLabelLocation(BorderLayout.WEST);
 		myCustomSpecsRunnerTextField = specRunnerScriptTextFieldWrapper.get();
 
-		final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		final consulo.util.lang.ref.Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new consulo.util.lang.ref.Ref<TextFieldWithBrowseButton>();
 		myWorkingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
 		myWorkDirTextField = wordDirComponentWrapper.get();
 
-		final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		final consulo.util.lang.ref.Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new consulo.util.lang.ref.Ref<RawCommandLineEditor>();
 		myRubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
 		myRubyArgsEditor = rubyArgsEditorWrapper.get();
 
-		final Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
+		final consulo.util.lang.ref.Ref<JComboBox> modulesComboBoxWrapper = new consulo.util.lang.ref.Ref<JComboBox>();
 		myModulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
 		myModulesComboBox = modulesComboBoxWrapper.get();
 
-		final Ref<JTextField> testFileMaskTextFieldWrapper = new Ref<JTextField>();
+		final consulo.util.lang.ref.Ref<JTextField> testFileMaskTextFieldWrapper = new consulo.util.lang.ref.Ref<JTextField>();
 		final String text = RBundle.message("rspec.run.configuration.tests.dialog.components.search.mask");
 		mySpecsFileMaskComponent = RubyRunConfigurationUIUtil.createTestFileMaskComponent(testFileMaskTextFieldWrapper, text);
 		mySpecsFileMaskTextField = testFileMaskTextFieldWrapper.get();
 
-		final Ref<JComboBox> altSdksComboBoxWrapper = new Ref<JComboBox>();
+		final consulo.util.lang.ref.Ref<JComboBox> altSdksComboBoxWrapper = new consulo.util.lang.ref.Ref<JComboBox>();
 		myAlternativeSdksComponent = RubyRunConfigurationUIUtil.createAlternativeSdksComponent(altSdksComboBoxWrapper);
 		myAlternativeSdksComboBox = altSdksComboBoxWrapper.get();
 	}

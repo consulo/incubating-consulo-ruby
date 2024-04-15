@@ -17,11 +17,11 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl;
 
 import com.intellij.lexer.HtmlHighlightingLexer;
-import com.intellij.lexer.Lexer;
-import com.intellij.lexer.LexerPosition;
+import consulo.language.lexer.LexerPosition;
 import com.intellij.lexer._HtmlLexer;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.text.CharArrayCharSequence;
+import consulo.language.ast.IElementType;
+import consulo.util.lang.CharArrayCharSequence;
+import consulo.language.lexer.Lexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
 

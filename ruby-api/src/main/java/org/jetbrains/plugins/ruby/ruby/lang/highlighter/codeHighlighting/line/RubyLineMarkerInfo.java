@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import com.intellij.openapi.editor.markup.GutterIconRenderer;
-import com.intellij.openapi.editor.markup.RangeHighlighter;
-import com.intellij.openapi.editor.markup.SeparatorPlacement;
-import com.intellij.openapi.editor.markup.TextAttributes;
+import consulo.codeEditor.markup.RangeHighlighter;
+import consulo.colorScheme.TextAttributes;
+import consulo.codeEditor.markup.GutterIconRenderer;
+import consulo.codeEditor.markup.SeparatorPlacement;
 import consulo.ui.color.ColorValue;
 
 /**

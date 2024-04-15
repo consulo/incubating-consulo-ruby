@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.spacing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.codeStyle.Block;
+import consulo.language.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.Spacing;
+import consulo.language.psi.PsiWhiteSpace;
+import consulo.xml.psi.xml.XmlElementType;
+import consulo.xml.psi.xml.XmlTokenType;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.Spacing;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.xml.XmlElementType;
-import com.intellij.psi.xml.XmlTokenType;
 
 /**
  * Created by IntelliJ IDEA.

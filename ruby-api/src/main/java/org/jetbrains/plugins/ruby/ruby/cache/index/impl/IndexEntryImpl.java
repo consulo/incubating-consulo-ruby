@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.index.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.cache.index.IndexEntry;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;

@@ -16,11 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.action.EditorAction;
+import consulo.codeEditor.action.EditorActionHandler;
+import consulo.dataContext.DataContext;
+import consulo.language.editor.CommonDataKeys;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
+import consulo.module.Module;
+import consulo.project.ui.wm.WindowManager;
+import consulo.ui.ex.RelativePoint;
+import consulo.ui.ex.action.Presentation;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.popup.JBPopupFactory;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerNavigator;
@@ -34,22 +46,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.ide.util.gotoByName.GotoFileCellRenderer;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.actionSystem.EditorAction;
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.wm.ex.WindowManagerEx;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.ui.awt.RelativePoint;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -146,7 +144,7 @@ public class SwitchToView extends EditorAction
 	public static void switchToView(final Module module, final RContainer container, final RelativePoint relativePoint)
 	{
 
-		final int maxSize = WindowManagerEx.getInstanceEx().getFrame(module.getProject()).getSize().width;
+		final int maxSize = WindowManager.getInstance().getFrame(module.getProject()).getSize().width;
 		if(container instanceof RMethod)
 		{
 			final RMethod method = (RMethod) container;

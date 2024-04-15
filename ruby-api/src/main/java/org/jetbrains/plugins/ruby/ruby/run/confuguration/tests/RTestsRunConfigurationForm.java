@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
-import static com.intellij.openapi.util.io.FileUtil.toSystemIndependentName;
+import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
+import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemIndependentName;
 import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
 import java.awt.event.ActionEvent;
@@ -34,23 +34,24 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.execution.ui.awt.EnvironmentVariablesComponent;
+import consulo.execution.ui.awt.RawCommandLineEditor;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestCaseClassBrowser;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestMethodBrowser;
-import com.intellij.execution.configuration.BrowseModuleValueActionListener;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.ui.RawCommandLineEditor;
+import consulo.ide.impl.idea.execution.configuration.BrowseModuleValueActionListener;
+import consulo.module.Module;
+import consulo.content.bundle.Sdk;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.lang.ref.Ref;
 
 /**
  * Created by IntelliJ IDEA.
@@ -197,7 +198,7 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams
 		myTestClassComponent = createTestClassComponent();
 		myTestMethodComponent = createTestMethodComponent();
 
-		final Ref<TextFieldWithBrowseButton> testsFolderTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		final Ref<TextFieldWithBrowseButton> testsFolderTextFieldWrapper = new consulo.util.lang.ref.Ref<TextFieldWithBrowseButton>();
 		myTestFolderComponent = RubyRunConfigurationUIUtil.createTestFolderComponent(testsFolderTextFieldWrapper);
 		myTestFolderTextField = testsFolderTextFieldWrapper.get();
 
@@ -209,15 +210,15 @@ public class RTestsRunConfigurationForm implements RTestRunConfigurationParams
 		myWorkingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
 		myWorkDirTextField = wordDirComponentWrapper.get();
 
-		final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		final consulo.util.lang.ref.Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new consulo.util.lang.ref.Ref<RawCommandLineEditor>();
 		myRubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
 		myRubyArgsEditor = rubyArgsEditorWrapper.get();
 
-		final Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
+		final consulo.util.lang.ref.Ref<JComboBox> modulesComboBoxWrapper = new Ref<JComboBox>();
 		myModulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
 		myModulesComboBox = modulesComboBoxWrapper.get();
 
-		final Ref<JTextField> testFileMaskTextFieldWrapper = new Ref<JTextField>();
+		final Ref<JTextField> testFileMaskTextFieldWrapper = new consulo.util.lang.ref.Ref<JTextField>();
 		final String text = RBundle.message("run.configuration.tests.dialog.components.search.mask");
 		myTestFileMaskComponent = RubyRunConfigurationUIUtil.createTestFileMaskComponent(testFileMaskTextFieldWrapper, text);
 		myTestFileMaskTextField = testFileMaskTextFieldWrapper.get();

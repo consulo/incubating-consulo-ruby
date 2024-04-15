@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;

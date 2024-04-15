@@ -20,7 +20,7 @@ import java.awt.FontMetrics;
 import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

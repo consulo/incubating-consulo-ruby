@@ -16,19 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.content.bundle.Sdk;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.file.FileViewProvider;
+import consulo.language.impl.psi.PsiFileImpl;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiFile;
+import consulo.module.Module;
+import consulo.navigation.ItemPresentation;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.fileType.FileType;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualContainerBase;
@@ -54,26 +58,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RConstantHolderUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFieldHolderUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RGlobalVarHolderUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.PsiFileImpl;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

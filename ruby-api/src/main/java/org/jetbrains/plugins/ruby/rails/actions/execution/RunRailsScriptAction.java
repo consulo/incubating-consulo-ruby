@@ -20,11 +20,17 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.process.event.ProcessAdapter;
+import consulo.process.event.ProcessEvent;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
@@ -36,19 +42,14 @@ import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.run.filters.FileLinksFilterUtil;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import com.intellij.execution.filters.Filter;
-import com.intellij.execution.process.ProcessAdapter;
-import com.intellij.execution.process.ProcessEvent;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.RawCommandLineEditor;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.logging.Logger;
+import consulo.document.FileDocumentManager;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.ui.ex.awt.Messages;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.execution.ui.awt.RawCommandLineEditor;
 
 /**
  * Created by IntelliJ IDEA.

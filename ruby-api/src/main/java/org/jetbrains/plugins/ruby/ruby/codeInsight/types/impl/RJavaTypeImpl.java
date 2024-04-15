@@ -16,11 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.intellij.java.language.psi.PsiType;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
@@ -28,7 +26,9 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.DuckType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RJavaType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
-import com.intellij.psi.PsiType;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by IntelliJ IDEA.

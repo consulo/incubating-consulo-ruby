@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.module.Module;
 import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**

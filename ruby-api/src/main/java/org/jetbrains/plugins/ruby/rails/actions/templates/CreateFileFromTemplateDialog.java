@@ -16,39 +16,34 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.Properties;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
-import org.apache.velocity.runtime.parser.ParseException;
+import com.intellij.java.language.psi.PsiJavaPackage;
+import consulo.application.ApplicationManager;
+import consulo.application.CommonBundle;
+import consulo.fileTemplate.FileTemplate;
+import consulo.fileTemplate.FileTemplateManager;
+import consulo.fileTemplate.FileTemplateParseException;
+import consulo.fileTemplate.FileTemplateUtil;
+import consulo.ide.action.ui.CreateFromTemplatePanel;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiFileFactory;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.IdeFocusTraversalPolicy;
+import consulo.ui.ex.awt.Messages;
+import consulo.undoRedo.CommandProcessor;
+import consulo.util.lang.StringUtil;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.CommonBundle;
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.ide.fileTemplates.FileTemplateManager;
-import com.intellij.ide.fileTemplates.FileTemplateUtil;
-import com.intellij.ide.fileTemplates.ui.CreateFromTemplatePanel;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.wm.ex.IdeFocusTraversalPolicy;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.PsiJavaPackage;
-import com.intellij.util.IncorrectOperationException;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Properties;
 
 /**
  * Created by IntelliJ IDEA.
@@ -87,7 +82,7 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 		{
 			unsetAttributes = myTemplate.getUnsetAttributes(myDefaultProperties, project);
 		}
-		catch(ParseException e)
+		catch(FileTemplateParseException e)
 		{
 			showErrorDialog(e);
 		}
@@ -209,8 +204,8 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 
 		final String templateText = StringUtil.convertLineSeparators(mergedText);
 
-		final Ref<Exception> commandExceptionWrapper = new Ref<Exception>();
-		final Ref<PsiElement> psiFileWrapper = new Ref<PsiElement>();
+		final consulo.util.lang.ref.Ref<Exception> commandExceptionWrapper = new consulo.util.lang.ref.Ref<Exception>();
+		final Ref<PsiElement> psiFileWrapper = new consulo.util.lang.ref.Ref<PsiElement>();
 
 		CommandProcessor.getInstance().executeCommand(project, new Runnable()
 		{

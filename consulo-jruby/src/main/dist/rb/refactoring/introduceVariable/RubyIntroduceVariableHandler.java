@@ -16,14 +16,14 @@
 
 package rb.refactoring.introduceVariable;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
+import consulo.language.psi.PsiFile;
 
-import javax.annotation.Nullable;
+import consulo.codeEditor.Editor;
+import consulo.dataContext.DataContext;
+import consulo.project.Project;
+import jakarta.annotation.Nullable;
 import rb.refactoring.RubyRefactoringHandler;
 
 /**
@@ -37,5 +37,5 @@ public interface RubyIntroduceVariableHandler extends RubyRefactoringHandler {
      * Same as RefactoringActionHandler.invoke(@NotNull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext);
      */
     void introduceVariable(@Nonnull Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext,
-                           @Nullable String name, boolean replaceAll);
+						   @Nullable String name, boolean replaceAll);
 }

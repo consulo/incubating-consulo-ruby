@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.editorHandlers;
 
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.action.EditorActionHandler;
+import consulo.codeEditor.action.EditorWriteActionHandler;
+import consulo.codeEditor.util.EditorModificationUtil;
+import consulo.dataContext.DataContext;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.RubyEditorHandlerUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
-import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
-import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

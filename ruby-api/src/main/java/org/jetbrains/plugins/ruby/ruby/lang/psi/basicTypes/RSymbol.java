@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

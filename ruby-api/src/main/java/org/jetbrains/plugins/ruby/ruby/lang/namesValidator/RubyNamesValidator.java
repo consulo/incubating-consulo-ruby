@@ -16,18 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.namesValidator;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import com.intellij.lang.refactoring.NamesValidator;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.editor.refactoring.NamesValidator;
+import consulo.project.Project;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
  *
- * @author: oleg
- * @date: Dec 3, 2007
+ * @author oleg
+ * @date Dec 3, 2007
  */
+@ExtensionImpl
 public class RubyNamesValidator implements NamesValidator
 {
 	@Override
@@ -48,5 +53,12 @@ public class RubyNamesValidator implements NamesValidator
 	public boolean isIdentifier(String name, Project project)
 	{
 		return TextUtil.isCID(name) || TextUtil.isFID(name) || TextUtil.isAID(name);
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
 	}
 }

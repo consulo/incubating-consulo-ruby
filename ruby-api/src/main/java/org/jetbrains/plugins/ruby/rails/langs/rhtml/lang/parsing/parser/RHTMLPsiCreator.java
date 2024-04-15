@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

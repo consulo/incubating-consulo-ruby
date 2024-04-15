@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
 
-import javax.annotation.Nullable;
-
+import consulo.language.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.FormattingDocumentModel;
+import consulo.language.codeStyle.WrapType;
+import consulo.xml.psi.formatter.xml.HtmlPolicy;
+import consulo.xml.psi.xml.XmlTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
-import com.intellij.formatting.FormattingDocumentModel;
-import com.intellij.formatting.WrapType;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.formatter.xml.HtmlPolicy;
-import com.intellij.psi.xml.XmlTag;
+
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

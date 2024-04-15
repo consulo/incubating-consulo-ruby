@@ -16,8 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.psi.PsiElement;
+import consulo.util.lang.IncorrectOperationException;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -28,11 +30,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RListOfExpressi
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpressionImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RMathBinExpressionNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.codeEditor.Editor;
+import consulo.project.Project;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

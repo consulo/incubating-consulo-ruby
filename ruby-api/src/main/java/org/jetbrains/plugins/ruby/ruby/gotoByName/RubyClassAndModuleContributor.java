@@ -19,19 +19,18 @@ package org.jetbrains.plugins.ruby.ruby.gotoByName;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
+import consulo.module.ModuleManager;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import com.intellij.navigation.ChooseByNameContributor;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.ide.navigation.ChooseByNameContributor;
+import consulo.navigation.NavigationItem;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

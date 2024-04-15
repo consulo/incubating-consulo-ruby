@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.xString;
 
+import consulo.language.ast.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals.RStringLiteralBase;
-import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.

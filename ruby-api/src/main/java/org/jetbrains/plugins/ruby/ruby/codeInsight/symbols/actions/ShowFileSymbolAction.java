@@ -20,14 +20,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import consulo.language.editor.CommonDataKeys;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.ide.BrowserUtil;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.project.Project;
+import consulo.ide.impl.idea.ide.BrowserUtil;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
 
 /**
  * Created by IntelliJ IDEA.

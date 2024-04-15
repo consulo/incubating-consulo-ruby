@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.types;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.jruby.JavaPsiUtil;

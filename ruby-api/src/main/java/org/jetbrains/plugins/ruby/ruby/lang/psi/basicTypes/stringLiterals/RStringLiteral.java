@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals;
 
 import java.util.List;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RLiteral;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

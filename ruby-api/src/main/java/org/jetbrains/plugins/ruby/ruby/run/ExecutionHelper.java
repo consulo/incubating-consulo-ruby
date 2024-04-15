@@ -16,33 +16,33 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.ide.errorTreeView.NewErrorTreeViewPanel;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
+import consulo.application.ApplicationManager;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.application.progress.Task;
+import consulo.application.util.Semaphore;
 import consulo.disposer.Disposer;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.wm.ToolWindowId;
-import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.ui.content.Content;
-import com.intellij.ui.content.ContentFactory;
-import com.intellij.ui.content.MessageView;
-import com.intellij.util.Function;
-import com.intellij.util.concurrency.Semaphore;
-import com.intellij.util.ui.ErrorTreeView;
-import com.intellij.util.ui.MessageCategory;
+import consulo.logging.Logger;
+import consulo.process.ProcessHandler;
+import consulo.process.internal.OSProcessHandler;
+import consulo.project.Project;
+import consulo.project.ui.view.MessageView;
+import consulo.project.ui.wm.ToolWindowId;
+import consulo.project.ui.wm.ToolWindowManager;
+import consulo.ui.ex.MessageCategory;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.content.Content;
+import consulo.ui.ex.content.ContentFactory;
+import consulo.ui.ex.errorTreeView.ErrorTreeView;
+import consulo.ui.ex.errorTreeView.NewErrorTreeViewPanel;
+import consulo.undoRedo.CommandProcessor;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.RBundle;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -116,7 +116,7 @@ public class ExecutionHelper
 			public void run()
 			{
 				final MessageView messageView = myProject.getComponent(MessageView.class);
-				final Content content = ContentFactory.SERVICE.getInstance().createContent(errorTreeView, tabDisplayName, true);
+				final Content content = ContentFactory.SERVICE.getInstance().createContent(errorTreeView.getComponent(), tabDisplayName, true);
 				messageView.getContentManager().addContent(content);
 				Disposer.register(content, errorTreeView);
 				messageView.getContentManager().setSelectedContent(content);
@@ -245,7 +245,7 @@ public class ExecutionHelper
 				{
 					for(; ; )
 					{
-						if(myProgressIndicator != null && (myProgressIndicator.isCanceled() || !myProgressIndicator.isRunning()) || (cancelableFun != null && cancelableFun.fun(null)))
+						if(myProgressIndicator != null && (myProgressIndicator.isCanceled() || !myProgressIndicator.isRunning()) || (cancelableFun != null && cancelableFun.apply(null)))
 						{
 
 							processHandler.destroyProcess();

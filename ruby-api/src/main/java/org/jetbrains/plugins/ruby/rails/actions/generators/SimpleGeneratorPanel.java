@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import javax.annotation.Nonnull;
+import consulo.project.Project;
+
+import jakarta.annotation.Nonnull;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.language.file.LanguageFileType;
 import consulo.localize.LocalizeValue;
 import consulo.ruby.api.icon.RubyApiIconGroup;
 import consulo.ruby.api.localize.RubyApiLocalize;
 import consulo.ui.image.Image;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 
 public class RubyFileType extends LanguageFileType

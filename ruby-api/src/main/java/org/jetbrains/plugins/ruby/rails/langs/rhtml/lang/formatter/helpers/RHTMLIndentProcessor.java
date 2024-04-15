@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.CodeStyleSettings;
+import consulo.language.codeStyle.Indent;
+import consulo.language.psi.PsiElement;
+import consulo.xml.ide.highlighter.XmlFileType;
+import consulo.xml.psi.formatter.xml.XmlFormattingPolicy;
+import consulo.xml.psi.xml.XmlTag;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.blocks.RCompoundStatementNavigator;
-import com.intellij.formatting.Indent;
-import com.intellij.ide.highlighter.XmlFileType;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
-import com.intellij.psi.xml.XmlTag;
 
 /**
  * Created by IntelliJ IDEA.

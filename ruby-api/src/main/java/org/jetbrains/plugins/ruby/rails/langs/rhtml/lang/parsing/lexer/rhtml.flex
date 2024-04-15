@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
-import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+import consulo.language.lexer.FlexLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 
 /* Auto generated File */

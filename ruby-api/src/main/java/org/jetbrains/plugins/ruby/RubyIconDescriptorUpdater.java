@@ -16,10 +16,17 @@
 
 package org.jetbrains.plugins.ruby;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.component.util.Iconable;
+import consulo.language.icon.IconDescriptor;
+import consulo.language.icon.IconDescriptorUpdater;
+import consulo.language.psi.PsiElement;
+import consulo.module.Module;
+import consulo.ui.image.Image;
+import consulo.util.lang.BitUtil;
+import consulo.util.lang.Comparing;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -41,14 +48,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUti
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.BitUtil;
-import consulo.ide.IconDescriptor;
-import consulo.ide.IconDescriptorUpdater;
-import consulo.ui.image.Image;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,6 +57,7 @@ import consulo.ui.image.Image;
  * @author: Roman Chernyatchik
  * @date: Aug 21, 2007
  */
+@ExtensionImpl
 public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 {
 	@Nullable

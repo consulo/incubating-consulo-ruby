@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.names;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

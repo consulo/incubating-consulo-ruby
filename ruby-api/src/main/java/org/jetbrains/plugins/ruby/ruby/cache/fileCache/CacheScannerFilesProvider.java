@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.cache.fileCache;
 
 import java.util.Collection;
 
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.module.content.ModuleRootManager;
+import consulo.virtualFileSystem.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.

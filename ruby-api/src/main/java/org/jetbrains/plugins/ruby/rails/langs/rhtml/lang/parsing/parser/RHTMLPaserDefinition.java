@@ -16,24 +16,26 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IFileElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.file.FileViewProvider;
+import consulo.language.lexer.Lexer;
+import consulo.language.parser.ParserDefinition;
+import consulo.language.parser.PsiParser;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.version.LanguageVersion;
+import consulo.xml.lang.html.HTMLLanguage;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer._RHTMLLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.RHTMLFileImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
-import consulo.lang.LanguageVersion;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,7 +43,7 @@ import consulo.lang.LanguageVersion;
  * @author: Roman Chernyatchik
  * @date: 03.04.2007
  */
-
+@ExtensionImpl
 public class RHTMLPaserDefinition implements ParserDefinition
 {
 	private TokenSet myCommentTokens;
@@ -50,10 +52,15 @@ public class RHTMLPaserDefinition implements ParserDefinition
 
 	public RHTMLPaserDefinition()
 	{
-		myTemplateParserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(HTMLLanguage.INSTANCE);
+		myTemplateParserDefinition = ParserDefinition.forLanguage(HTMLLanguage.INSTANCE);
 		assert myTemplateParserDefinition != null;
+	}
 
-
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return eRubyLanguage.INSTANCE;
 	}
 
 	@Override

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.ROperation;
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.

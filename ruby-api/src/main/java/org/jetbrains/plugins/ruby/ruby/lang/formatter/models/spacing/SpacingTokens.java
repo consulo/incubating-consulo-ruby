@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.models.spacing;
 
+import consulo.language.ast.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
-import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.

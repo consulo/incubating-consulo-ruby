@@ -23,7 +23,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
@@ -38,15 +38,15 @@ import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.settings.RProjectUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.util.Ref;
+import consulo.application.Application;
+import consulo.application.ApplicationManager;
+import consulo.module.Module;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.project.Project;
+import consulo.content.bundle.Sdk;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.util.lang.ref.Ref;
 
 /**
  * Created by IntelliJ IDEA.
@@ -126,7 +126,7 @@ public class GenerateDialogs
 	{
 		protected final Module myModule;
 		protected final SimpleGeneratorInputValidator myValidator;
-		private final Ref<Output> helpData = new Ref<Output>();
+		private final Ref<Output> helpData = new consulo.util.lang.ref.Ref<Output>();
 		private GeneratorPanel myGenerateDialogContent;
 
 		public GenerateDialog(@Nonnull final Module module, final String title, final SimpleGeneratorInputValidator validator)

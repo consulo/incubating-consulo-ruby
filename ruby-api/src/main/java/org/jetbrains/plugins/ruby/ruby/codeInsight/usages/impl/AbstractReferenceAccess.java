@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.ReferenceAccess;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;

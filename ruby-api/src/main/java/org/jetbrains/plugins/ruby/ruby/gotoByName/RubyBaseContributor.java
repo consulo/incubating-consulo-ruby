@@ -19,14 +19,14 @@ package org.jetbrains.plugins.ruby.ruby.gotoByName;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-import com.intellij.navigation.ChooseByNameContributor;
-import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.project.Project;
+import consulo.ide.navigation.ChooseByNameContributor;
+import consulo.navigation.NavigationItem;
 
 /**
  * Created by IntelliJ IDEA.

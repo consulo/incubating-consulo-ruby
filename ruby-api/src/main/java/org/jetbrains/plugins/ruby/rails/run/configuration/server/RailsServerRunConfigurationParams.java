@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationParams;
 

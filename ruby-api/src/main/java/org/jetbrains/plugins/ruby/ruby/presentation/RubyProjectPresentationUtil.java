@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.project.Project;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.

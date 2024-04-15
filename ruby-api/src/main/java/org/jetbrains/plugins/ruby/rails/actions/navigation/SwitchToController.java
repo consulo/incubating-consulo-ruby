@@ -16,27 +16,27 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.dataContext.DataContext;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.popup.JBPopupFactory;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.actionSystem.EditorAction;
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.pom.Navigatable;
-import com.intellij.psi.PsiFile;
-import com.intellij.ui.awt.RelativePoint;
+import consulo.language.editor.CommonDataKeys;
+import consulo.ui.ex.action.Presentation;
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.impl.action.EditorAction;
+import consulo.codeEditor.action.EditorActionHandler;
+import consulo.module.Module;
+import consulo.navigation.Navigatable;
+import consulo.language.psi.PsiFile;
+import consulo.ui.ex.RelativePoint;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +44,7 @@ import com.intellij.ui.awt.RelativePoint;
  * @author: Roman Chernyatchik
  * @date: Sep 4, 2007
  */
-public class SwitchToController extends EditorAction
+public class SwitchToController extends consulo.codeEditor.impl.action.EditorAction
 {
 	private static final String CANT_NAVIGATE = RBundle.message("codeInsight.rails.switch.to.controller.cant.navigate");
 	private static final String SWITCH_TO_CONTROLLER_TITLE = RBundle.message("codeInsight.rails.switch.to.controller.title");

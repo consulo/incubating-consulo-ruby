@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby;
 
+import consulo.language.util.ModuleUtilCore;
 import consulo.ruby.module.extension.RubyModuleExtension;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nullable;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtilCore;
+import consulo.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

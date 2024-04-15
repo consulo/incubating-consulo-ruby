@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RBinaryExpression;
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.

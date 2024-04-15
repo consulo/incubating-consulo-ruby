@@ -1,7 +1,7 @@
 package consulo.ruby.lang.lexer;
 
+import consulo.language.lexer.FlexAdapter;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
-import com.intellij.lexer.FlexAdapter;
 
 /**
  * @author VISTALL

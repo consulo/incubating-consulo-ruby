@@ -16,23 +16,24 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
+import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
 
 import java.io.File;
 import java.util.StringTokenizer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.process.cmd.GeneralCommandLine;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.Output;
 import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import consulo.logging.Logger;
+import consulo.content.bundle.Sdk;
+import consulo.application.util.SystemInfo;
+import consulo.virtualFileSystem.VirtualFileManager;
 
 /**
  * Created by IntelliJ IDEA.

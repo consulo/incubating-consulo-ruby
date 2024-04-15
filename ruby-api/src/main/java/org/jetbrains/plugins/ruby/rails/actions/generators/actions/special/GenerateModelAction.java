@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.psi.PsiDirectory;
+import consulo.language.psi.PsiDirectory;
+import consulo.module.Module;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;

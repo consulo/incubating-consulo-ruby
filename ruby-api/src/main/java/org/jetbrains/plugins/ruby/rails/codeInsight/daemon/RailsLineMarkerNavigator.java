@@ -21,7 +21,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.psi.PsiElement;
+import consulo.ui.ex.RelativePoint;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToAction;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToController;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToView;
@@ -30,13 +33,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.popup.PopupChooserBuilder;
-import com.intellij.pom.Navigatable;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.ui.awt.RelativePoint;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.navigation.Navigatable;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

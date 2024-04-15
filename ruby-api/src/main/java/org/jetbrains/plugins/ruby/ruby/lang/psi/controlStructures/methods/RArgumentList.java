@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 

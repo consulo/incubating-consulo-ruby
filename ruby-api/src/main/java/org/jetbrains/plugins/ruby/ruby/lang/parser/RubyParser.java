@@ -16,17 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.ast.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.PROGRAM;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
-import com.intellij.lang.ASTNode;
-import consulo.lang.LanguageVersion;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.version.LanguageVersion;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.PsiParser;
+import consulo.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.

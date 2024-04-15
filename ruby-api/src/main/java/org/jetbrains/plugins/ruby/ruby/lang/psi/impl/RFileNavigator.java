@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

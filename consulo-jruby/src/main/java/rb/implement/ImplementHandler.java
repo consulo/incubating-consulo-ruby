@@ -19,14 +19,15 @@ package rb.implement;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.codeEditor.Editor;
+import consulo.language.editor.action.LanguageCodeInsightActionHandler;
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import com.intellij.codeInsight.generation.ClassMember;
-import com.intellij.lang.LanguageCodeInsightActionHandler;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
+import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.settings.tabs.general;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.jetbrains.plugins.ruby.rails.facet.ui.RailsUIUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.EvaluatingComponent;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.support.ui.checkableDir;
 
-import javax.annotation.Nonnull;
 import javax.swing.JCheckBox;
 
-import com.intellij.openapi.util.io.FileUtil;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,6 +57,6 @@ public class CheckableDirectoryItem
 	@Nonnull
 	public Object createCheckBox()
 	{
-		return new JCheckBox(FileUtil.toSystemDependentName(getDirectoryPath()), isChecked());
+		return new JCheckBox(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(getDirectoryPath()), isChecked());
 	}
 }

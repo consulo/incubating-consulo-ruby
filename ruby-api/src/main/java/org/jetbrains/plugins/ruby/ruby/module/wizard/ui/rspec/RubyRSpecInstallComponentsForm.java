@@ -19,13 +19,13 @@ package org.jetbrains.plugins.ruby.ruby.module.wizard.ui.rspec;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
+import consulo.content.bundle.Sdk;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RRModuleBuilder;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
-import com.intellij.openapi.projectRoots.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

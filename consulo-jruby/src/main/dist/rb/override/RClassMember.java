@@ -16,11 +16,12 @@
 
 package rb.override;
 
-import com.intellij.codeInsight.generation.ClassMember;
-import com.intellij.codeInsight.generation.MemberChooserObject;
-import com.intellij.codeInsight.generation.PsiElementMemberChooserObject;
-import com.intellij.psi.PsiElement;
-import javax.annotation.Nonnull;
+import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.ide.impl.idea.codeInsight.generation.MemberChooserObject;
+import consulo.ide.impl.idea.codeInsight.generation.PsiElementMemberChooserObject;
+
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 
@@ -35,7 +36,7 @@ public class RClassMember extends PsiElementMemberChooserObject implements Class
     }
 
     @Override
-	public MemberChooserObject getParentNodeDelegate() {
+	public consulo.ide.impl.idea.codeInsight.generation.MemberChooserObject getParentNodeDelegate() {
         final RPsiElement element = (RPsiElement) getPsiElement();
         final PsiElement parent = element.getParentContainer();
         //noinspection ConstantConditions

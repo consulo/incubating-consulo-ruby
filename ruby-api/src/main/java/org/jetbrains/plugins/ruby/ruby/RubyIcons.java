@@ -43,8 +43,8 @@ public interface RubyIcons
 	final Image RUBY_NOT_DEFINED_NODE = RubyApiIconGroup.rubyNodesNot_defined();
 
 	final Image RUBY_OBJECT_CLASS_NODE = RubyApiIconGroup.rubyNodesInclude();
-	final Image RUBY_GLOBAL_VAR_NODE = RubyApiIconGroup.rubyNodesVariableDollar();
-	final Image RUBY_FIELD_NODE = RubyApiIconGroup.rubyNodesVariableAt();
+	final Image RUBY_GLOBAL_VAR_NODE = RubyApiIconGroup.rubyNodesVariabledollar();
+	final Image RUBY_FIELD_NODE = RubyApiIconGroup.rubyNodesVariableat();
 
 	final Image RUBY_INCLUDE_NODE = RubyApiIconGroup.rubyNodesInclude();
 	final Image RUBY_ALIAS_NODE = RubyApiIconGroup.rubyNodesAlias();
@@ -57,7 +57,7 @@ public interface RubyIcons
 	final Image RUBY_ATTR_PUBLIC = PlatformIconGroup.nodesC_public();
 	final Image RUBY_ATTR_PRIVATE = PlatformIconGroup.nodesC_private();
 	final Image RUBY_ATTR_PROTECTED = PlatformIconGroup.nodesC_protected();
-	final Image RUBY_ATTR_STATIC = PlatformIconGroup.nodesStaticMark();
+	final Image RUBY_ATTR_STATIC = PlatformIconGroup.nodesStaticmark();
 
 	final Image RUBY_ATTR_READER = RubyApiIconGroup.rubyReader();
 	final Image RUBY_ATTR_WRITER = RubyApiIconGroup.rubyWriter();
@@ -73,7 +73,7 @@ public interface RubyIcons
 	final Image RAILS_SERVER_RUN_CONFIGURATION = RubyApiIconGroup.rubyConfigurationRun_conf_server();
 
 
-	final Image RUBY_RUNNER_SHOW_CMDLINE = PlatformIconGroup.actionsShowViewer();
+	final Image RUBY_RUNNER_SHOW_CMDLINE = PlatformIconGroup.actionsShowviewer();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Misc
@@ -81,8 +81,8 @@ public interface RubyIcons
 
 	final Image RUBY_COLOR_PAGE = RUBY_ICON;
 
-	final Image RUBY_GUTTER_OVERRIDING = PlatformIconGroup.gutterOverridingMethod();
-	final Image RUBY_GUTTER_IMPLEMENTING = PlatformIconGroup.gutterImplementingMethod();
+	final Image RUBY_GUTTER_OVERRIDING = PlatformIconGroup.gutterOverridingmethod();
+	final Image RUBY_GUTTER_IMPLEMENTING = PlatformIconGroup.gutterImplementingmethod();
 
 	final Image RI_ICON = RubyApiIconGroup.rubyRi();
 }

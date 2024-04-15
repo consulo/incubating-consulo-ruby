@@ -16,25 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.execution.configuration.CommandLineState;
+import consulo.module.Module;
 import org.jetbrains.plugins.ruby.ruby.run.ColouredProcessHandler;
 import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
-import com.intellij.execution.CantRunException;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.CommandLineState;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.RuntimeConfigurationException;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessTerminatedListener;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.OrderEnumerator;
+import consulo.execution.CantRunException;
+import consulo.process.ExecutionException;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.execution.RuntimeConfigurationException;
+import consulo.process.internal.OSProcessHandler;
+import consulo.execution.process.ProcessTerminatedListener;
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.content.bundle.Sdk;
+import consulo.module.content.ModuleRootManager;
+import consulo.module.content.layer.OrderEnumerator;
 
 /**
  * Created by IntelliJ IDEA.

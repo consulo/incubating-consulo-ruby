@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
+import consulo.language.psi.PsiNamedElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
-import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.

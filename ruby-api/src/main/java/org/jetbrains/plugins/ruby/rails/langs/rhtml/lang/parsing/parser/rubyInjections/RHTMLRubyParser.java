@@ -16,12 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections;
 
-import javax.annotation.Nonnull;
-
+import consulo.language.parser.PsiParser;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParser;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilderImpl;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
+import consulo.language.parser.PsiBuilder;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
-import javax.annotation.Nonnull;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
 import java.util.HashMap;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -31,14 +31,14 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestUnitUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationForm;
 import org.jetbrains.plugins.ruby.ruby.ui.TreeRClassChooserDialog;
-import com.intellij.execution.configuration.BrowseModuleValueActionListener;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.reference.SoftReference;
+import consulo.ide.impl.idea.execution.configuration.BrowseModuleValueActionListener;
+import consulo.project.Project;
+import consulo.util.lang.Pair;
+import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.language.psi.PsiManager;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.util.lang.ref.SoftReference;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +46,7 @@ import com.intellij.reference.SoftReference;
  * @author: Roman Chernyatchik
  * @date: 06.08.2007
  */
-public class TestCaseClassBrowser extends BrowseModuleValueActionListener
+public class TestCaseClassBrowser extends consulo.ide.impl.idea.execution.configuration.BrowseModuleValueActionListener
 {
 	private final String myTitle;
 	public GlobalSearchScope mySearchScope;

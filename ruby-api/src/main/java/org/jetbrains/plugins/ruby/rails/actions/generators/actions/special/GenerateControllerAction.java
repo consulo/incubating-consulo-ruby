@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import javax.annotation.Nonnull;
-
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GenerateDialogs;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorAction;
 import org.jetbrains.plugins.ruby.rails.presentation.RControllerPresentationUtil;
-import com.intellij.openapi.module.Module;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
+import consulo.module.Module;
+import consulo.language.psi.PsiDirectory;
 
 /**
  * Created by IntelliJ IDEA.

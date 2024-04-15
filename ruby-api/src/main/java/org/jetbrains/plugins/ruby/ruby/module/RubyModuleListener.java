@@ -16,9 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.module;
 
-import com.intellij.openapi.project.ModuleListener;
-
-/**
+import consulo.module.event.ModuleListener; /**
  * Created by IntelliJ IDEA.
  * @author: Roman Chernyatchik
  * @date: 26.09.2006

@@ -18,14 +18,14 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
 import java.util.List;
 
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.module.Module;
+import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.ui.image.Image;
 
 /**

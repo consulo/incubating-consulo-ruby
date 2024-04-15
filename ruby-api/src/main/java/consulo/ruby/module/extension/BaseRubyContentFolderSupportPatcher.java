@@ -1,20 +1,20 @@
 package consulo.ruby.module.extension;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.content.ContentFolderTypeProvider;
+import consulo.language.content.ProductionContentFolderTypeProvider;
+import consulo.language.content.TestContentFolderTypeProvider;
+import consulo.module.content.layer.ContentFolderSupportPatcher;
+import consulo.module.content.layer.ModifiableRootModel;
+
+import jakarta.annotation.Nonnull;
 import java.util.Set;
-
-import javax.annotation.Nonnull;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import consulo.roots.ContentFolderSupportPatcher;
-import consulo.roots.ContentFolderTypeProvider;
-import consulo.roots.impl.ProductionContentFolderTypeProvider;
-import consulo.roots.impl.TestContentFolderTypeProvider;
-
-;
 
 /**
  * @author VISTALL
  * @since 13.02.15
  */
+@ExtensionImpl
 public class BaseRubyContentFolderSupportPatcher implements ContentFolderSupportPatcher
 {
 	@Override

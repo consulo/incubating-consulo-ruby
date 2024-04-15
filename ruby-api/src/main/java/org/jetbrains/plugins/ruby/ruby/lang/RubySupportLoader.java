@@ -17,8 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
 import org.jetbrains.plugins.ruby.ruby.actions.editor.RubyEditorActionsManager;
-import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-import com.intellij.util.ThrowableRunnable;
+import consulo.util.lang.function.ThrowableRunnable;
 
 
 public class RubySupportLoader

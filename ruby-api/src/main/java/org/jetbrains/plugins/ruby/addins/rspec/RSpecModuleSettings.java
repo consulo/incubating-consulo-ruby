@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleServiceManager;
+import consulo.module.Module;
+import consulo.ide.impl.idea.openapi.module.ModuleServiceManager;
 import jakarta.inject.Inject;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import jakarta.inject.Singleton;
 

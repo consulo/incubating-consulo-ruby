@@ -16,8 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.*;
+import consulo.language.file.FileViewProvider;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.logging.Logger;
+import consulo.xml.psi.formatter.xml.XmlFormattingPolicy;
+import consulo.xml.psi.xml.XmlAttribute;
+import consulo.xml.psi.xml.XmlAttributeValue;
+import consulo.xml.psi.xml.XmlElementType;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
@@ -25,23 +36,6 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLR
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLElementInHTML;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelBuilder;
-import com.intellij.formatting.FormattingModelProvider;
-import com.intellij.formatting.Indent;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.formatter.FormattingDocumentModelImpl;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
-import com.intellij.psi.xml.XmlAttribute;
-import com.intellij.psi.xml.XmlAttributeValue;
-import com.intellij.psi.xml.XmlElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,7 +45,7 @@ import com.intellij.psi.xml.XmlElementType;
  */
 public class RHTMLFormattingModelBuilder implements FormattingModelBuilder
 {
-	private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class.getName());
+	private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class);
 
 	@Override
 	@Nonnull
@@ -59,7 +53,7 @@ public class RHTMLFormattingModelBuilder implements FormattingModelBuilder
 	{
 		final PsiFile psiFile = element.getContainingFile();
 
-		final FormattingDocumentModelImpl documentModel = FormattingDocumentModelImpl.createOn(psiFile);
+		final FormattingDocumentModel documentModel = FormattingDocumentModel.create(psiFile);
 		final XmlFormattingPolicy rhtmlPolicy = new RHTMLPolicy(settings, documentModel);
 
 		//noinspection ConstantConditions

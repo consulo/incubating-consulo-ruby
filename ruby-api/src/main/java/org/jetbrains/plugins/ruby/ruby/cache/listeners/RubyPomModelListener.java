@@ -18,18 +18,18 @@ package org.jetbrains.plugins.ruby.ruby.cache.listeners;
 
 import java.util.List;
 
+import consulo.language.pom.PomModelAspect;
+import consulo.language.pom.event.PomChangeSet;
+import consulo.module.content.ProjectFileIndex;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeSet;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.pom.PomModel;
-import com.intellij.pom.PomModelAspect;
-import com.intellij.pom.event.PomChangeSet;
-import com.intellij.pom.event.PomModelEvent;
-import com.intellij.pom.event.PomModelListener;
+import consulo.module.Module;
+import consulo.module.content.ProjectRootManager;
+import consulo.language.pom.PomModel;
+import consulo.language.pom.event.PomModelEvent;
+import consulo.language.pom.event.PomModelListener;
 
 /**
  * Created by IntelliJ IDEA.

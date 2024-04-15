@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.surround;
 
 import java.util.ArrayList;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.psi.PsiFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBEGINSurrounder;
@@ -29,11 +30,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyENDSurround
 import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyIfSurrounder;
 import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyUnlessSurrounder;
 import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyWhileSurrounder;
-import com.intellij.lang.surroundWith.SurroundDescriptor;
-import com.intellij.lang.surroundWith.Surrounder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
+import consulo.language.editor.surroundWith.SurroundDescriptor;
+import consulo.language.editor.surroundWith.Surrounder;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.util.PsiTreeUtil;
 
 /**
  * Created by IntelliJ IDEA.

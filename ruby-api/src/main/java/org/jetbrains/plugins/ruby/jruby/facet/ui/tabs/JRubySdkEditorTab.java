@@ -18,14 +18,14 @@ package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 
 import javax.swing.JComponent;
 
+import consulo.configurable.ConfigurationException;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.SelectJRubySdkPane;
 import com.intellij.facet.ui.FacetEditorContext;
 import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.options.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.

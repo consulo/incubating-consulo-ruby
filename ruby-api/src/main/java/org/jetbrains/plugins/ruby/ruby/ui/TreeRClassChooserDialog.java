@@ -24,8 +24,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -36,6 +36,15 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import consulo.application.ApplicationManager;
+import consulo.language.psi.PsiElement;
+import consulo.project.Project;
+import consulo.ui.ex.awt.IdeFocusTraversalPolicy;
+import consulo.ui.ex.awt.TabbedPaneWrapper;
+import consulo.ui.ex.awt.UIUtil;
+import consulo.ui.ex.awt.speedSearch.TreeSpeedSearch;
+import consulo.ui.ex.tree.AlphaComparator;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -45,31 +54,22 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.ruby.projectview.RClassNode;
-import com.intellij.ide.projectView.impl.AbstractProjectTreeStructure;
-import com.intellij.ide.projectView.impl.ProjectAbstractTreeStructureBase;
-import com.intellij.ide.projectView.impl.ProjectTreeBuilder;
-import com.intellij.ide.projectView.impl.nodes.PsiFileNode;
-import com.intellij.ide.util.gotoByName.ChooseByNameModel;
-import com.intellij.ide.util.gotoByName.ChooseByNamePanel;
-import com.intellij.ide.util.gotoByName.ChooseByNamePopupComponent;
-import com.intellij.ide.util.gotoByName.GotoClassModel2;
-import com.intellij.ide.util.treeView.AlphaComparator;
-import com.intellij.ide.util.treeView.NodeRenderer;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.wm.ex.IdeFocusTraversalPolicy;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileSystemItem;
-import com.intellij.psi.search.GlobalSearchScope;
+import consulo.ide.impl.idea.ide.projectView.impl.AbstractProjectTreeStructure;
+import consulo.ide.impl.idea.ide.projectView.impl.ProjectAbstractTreeStructureBase;
+import consulo.ide.impl.idea.ide.projectView.impl.ProjectTreeBuilder;
+import consulo.project.ui.view.tree.PsiFileNode;
+import consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNameModel;
+import consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNamePanel;
+import consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNamePopupComponent;
+import consulo.ide.impl.idea.ide.util.gotoByName.GotoClassModel2;
+import consulo.ui.ex.awt.tree.NodeRenderer;
+import consulo.ui.ModalityState;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiFileSystemItem;
+import consulo.language.psi.scope.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtil;
-import com.intellij.ui.TabbedPaneWrapper;
-import com.intellij.ui.TreeSpeedSearch;
 import com.intellij.util.ui.Tree;
-import com.intellij.util.ui.UIUtil;
 import consulo.disposer.Disposable;
 import consulo.disposer.Disposer;
 
@@ -86,8 +86,8 @@ public class TreeRClassChooserDialog extends DialogWrapper
 	private Tree myTree;
 
 	private RClass myInitialClass;
-	private ProjectTreeBuilder myBuilder;
-	private ChooseByNamePanel myGotoByNamePanel;
+	private consulo.ide.impl.idea.ide.projectView.impl.ProjectTreeBuilder myBuilder;
+	private consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNamePanel myGotoByNamePanel;
 	private TabbedPaneWrapper myTabbedPane;
 
 	private RClass mySelectedClass;
@@ -296,7 +296,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 			}
 		};
 
-		myBuilder = new ProjectTreeBuilder(myProject, myTree, model, AlphaComparator.INSTANCE, treeStructure);
+		myBuilder = new consulo.ide.impl.idea.ide.projectView.impl.ProjectTreeBuilder(myProject, myTree, model, AlphaComparator.INSTANCE, treeStructure);
 
 		myTree.setRootVisible(false);
 		myTree.setShowsRootHandles(true);
@@ -370,7 +370,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 		return myTabbedPane.getComponent();
 	}
 
-	protected ChooseByNameModel createChooseByNameModel()
+	protected consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNameModel createChooseByNameModel()
 	{
 		return new MyGotoClassModel(myProject);
 	}
@@ -425,7 +425,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 	//
 	//    }
 
-	private class MyCallback extends ChooseByNamePopupComponent.Callback
+	private class MyCallback extends consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNamePopupComponent.Callback
 	{
 		@Override
 		public void elementChosen(Object element)
@@ -466,7 +466,7 @@ public class TreeRClassChooserDialog extends DialogWrapper
 		}
 
 		@Override
-		protected void initUI(ChooseByNamePopupComponent.Callback callback, ModalityState modalityState, boolean allowMultipleSelection)
+		protected void initUI(consulo.ide.impl.idea.ide.util.gotoByName.ChooseByNamePopupComponent.Callback callback, ModalityState modalityState, boolean allowMultipleSelection)
 		{
 			super.initUI(callback, modalityState, allowMultipleSelection);
 			dummyPanel.add(myGotoByNamePanel.getPanel(), BorderLayout.CENTER);

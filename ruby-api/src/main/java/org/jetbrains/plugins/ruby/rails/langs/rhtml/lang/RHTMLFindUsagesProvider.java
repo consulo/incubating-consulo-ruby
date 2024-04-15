@@ -16,16 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.intellij.lang.Language;
-import com.intellij.lang.cacheBuilder.SimpleWordsScanner;
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.lang.findUsages.LanguageFindUsages;
-import com.intellij.lang.xml.XmlFindUsagesProvider;
-import com.intellij.psi.PsiElement;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.cacheBuilder.SimpleWordsScanner;
+import consulo.language.cacheBuilder.WordsScanner;
+import consulo.language.findUsage.FindUsagesProvider;
+import consulo.language.psi.PsiElement;
+import consulo.xml.lang.xml.XmlFindUsagesProvider;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,8 +32,15 @@ import com.intellij.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: 11.04.2007
  */
+@ExtensionImpl
 public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 {
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return eRubyLanguage.INSTANCE;
+	}
 
 	@Override
 	@Nullable
@@ -56,7 +62,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 		{
 			return false;
 		}
-		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		final FindUsagesProvider delegateProvider = FindUsagesProvider.forLanguage(lang);
 		return delegateProvider.canFindUsagesFor(psiElement);
 	}
 
@@ -74,7 +80,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 		{
 			return "";
 		}
-		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		final FindUsagesProvider delegateProvider = FindUsagesProvider.forLanguage(lang);
 		return delegateProvider != null ? delegateProvider.getType(element) : "";
 	}
 
@@ -93,7 +99,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 		{
 			return "";
 		}
-		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		final FindUsagesProvider delegateProvider = FindUsagesProvider.forLanguage(lang);
 		return delegateProvider != null ? delegateProvider.getDescriptiveName(element) : "";
 	}
 
@@ -112,7 +118,7 @@ public class RHTMLFindUsagesProvider extends XmlFindUsagesProvider
 		{
 			return "";
 		}
-		final FindUsagesProvider delegateProvider = LanguageFindUsages.INSTANCE.forLanguage(lang);
+		final FindUsagesProvider delegateProvider = FindUsagesProvider.forLanguage(lang);
 		return delegateProvider != null ? delegateProvider.getNodeText(element, useFullName) : "";
 	}
 }

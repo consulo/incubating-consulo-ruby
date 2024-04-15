@@ -18,8 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.util.lang.Pair;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -36,9 +38,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperCl
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleRootUtil;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
+import consulo.util.lang.Comparing;
+import consulo.util.lang.ref.Ref;
 
 /**
  * Created by IntelliJ IDEA.

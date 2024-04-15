@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global;
 
+import consulo.language.psi.PsiNamedElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
-import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.

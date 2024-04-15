@@ -16,10 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
+import jakarta.annotation.Nullable;
+
+import consulo.content.bundle.Sdk;
+import consulo.module.Module;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

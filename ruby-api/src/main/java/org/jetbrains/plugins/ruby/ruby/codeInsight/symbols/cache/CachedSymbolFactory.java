@@ -16,8 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.content.bundle.Sdk;
+import consulo.module.Module;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.ModifiableCachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin.BuiltInCachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin.RailsBuiltInCachedSymbol;
@@ -29,10 +32,8 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayer
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers.ModelsLayer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers.VendorLayer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.railslayers.WebServicesLayer;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.logging.Logger;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

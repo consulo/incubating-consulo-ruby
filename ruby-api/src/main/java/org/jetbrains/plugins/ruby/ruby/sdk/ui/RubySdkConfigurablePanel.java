@@ -16,20 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.ui;
 
-import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
+import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.lang.ref.Ref;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,7 +64,7 @@ public class RubySdkConfigurablePanel
 		myRubyInterpreterComponent.setComponent(myRubyInterpreterPathTP);
 		myRubyInterpreterComponent.setText(RBundle.message("ruby.configuration.interpreter.path"));
 
-		final Ref<TextFieldWithBrowseButton> gemsBinDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		final consulo.util.lang.ref.Ref<TextFieldWithBrowseButton> gemsBinDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
 		final String gemsBinDirChooserTitle = RBundle.message("ruby.configuration.gems.bin.dir.path");
 		myGemsBinFolderComponent = RubyRunConfigurationUIUtil.createDirChooserComponent(gemsBinDirComponentWrapper, gemsBinDirChooserTitle);
 		myGemsBinFolderTF = gemsBinDirComponentWrapper.get();

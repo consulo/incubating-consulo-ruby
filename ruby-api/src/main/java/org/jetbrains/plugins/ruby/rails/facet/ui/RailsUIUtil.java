@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui;
 
-import javax.swing.JLabel;
-
-import javax.annotation.Nullable;
+import consulo.content.bundle.Sdk;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs.EvaluatingComponent;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.util.Function;
+
+import javax.swing.*;
+import java.util.function.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,12 +61,12 @@ public class RailsUIUtil
 					new Function<Object, String>()
 					{
 						@Override
-						public String fun(final Object o)
+						public String apply(final Object o)
 						{
 							return RailsUtil.getRailsVersion(sdk, false, new Function<Object, Boolean>()
 							{
 								@Override
-								public Boolean fun(final Object o)
+								public Boolean apply(final Object o)
 								{
 									// Cancel process if form was closed
 									return componet.isCloosed();
@@ -78,7 +78,7 @@ public class RailsUIUtil
 					new Function<String, Object>()
 					{
 						@Override
-						public Object fun(final String vers)
+						public Object apply(final String vers)
 						{
 							componet.setRailsVersion(vers);
 							railsVersionLabel.setText(TextUtil.isEmpty(vers) ? RBundle.message("sdk.error.rails.unknown.verson") : vers);

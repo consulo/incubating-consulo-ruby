@@ -17,24 +17,21 @@
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-import javax.annotation.Nonnull;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.language.editor.ui.DefaultPsiElementCellRenderer;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+import consulo.navigation.Navigatable;
+import consulo.project.Project;
+import consulo.ui.ex.RelativePoint;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
-import com.intellij.ide.util.DefaultPsiElementCellRenderer;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.PopupChooserBuilder;
-import com.intellij.pom.Navigatable;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
-import com.intellij.ui.awt.RelativePoint;
+
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.

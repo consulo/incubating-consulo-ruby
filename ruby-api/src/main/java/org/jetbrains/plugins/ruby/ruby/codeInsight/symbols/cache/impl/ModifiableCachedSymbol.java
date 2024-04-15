@@ -19,8 +19,10 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.content.bundle.Sdk;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
@@ -34,9 +36,8 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolCacheUtil
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.module.Module;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

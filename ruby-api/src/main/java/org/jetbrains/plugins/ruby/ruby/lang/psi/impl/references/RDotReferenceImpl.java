@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.psi.PsiElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RDotReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

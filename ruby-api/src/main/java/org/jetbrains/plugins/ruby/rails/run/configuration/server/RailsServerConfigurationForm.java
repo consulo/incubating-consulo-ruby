@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -34,21 +34,21 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import consulo.execution.ui.awt.EnvironmentVariablesComponent;
+import consulo.project.Project;
+import consulo.ui.ex.awt.LabeledComponent;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.ExternalRailsSettings;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationForm;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.ui.RawCommandLineEditor;
+import consulo.module.Module;
+import consulo.ui.ex.awt.ComboBox;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.lang.ref.Ref;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
+import consulo.execution.ui.awt.RawCommandLineEditor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -120,9 +120,9 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 				else
 				{
 					final String text = RailsServerRunConfiguration.getServerScriptPathByModule(module);
-					scriptPathTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(text)));
+					scriptPathTextField.setText(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(TextUtil.getAsNotNull(text)));
 					final String wd = RailsServerRunConfiguration.getRailsWorkDirByModule(module);
-					workDirTextField.setText(FileUtil.toSystemDependentName(TextUtil.getAsNotNull(wd)));
+					workDirTextField.setText(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(TextUtil.getAsNotNull(wd)));
 				}
 			}
 		});
@@ -155,7 +155,7 @@ public class RailsServerConfigurationForm extends RubyRunConfigurationForm imple
 
 	private void createUIComponents()
 	{
-		final Ref<TextFieldWithBrowseButton> scriptTextFieldWrapper = new Ref<TextFieldWithBrowseButton>();
+		final Ref<TextFieldWithBrowseButton> scriptTextFieldWrapper = new consulo.util.lang.ref.Ref<TextFieldWithBrowseButton>();
 		scriptComponent1 = scriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptTextFieldWrapper, RBundle.message("run.configuration.messages.script.path"));
 		scriptPathTextField = scriptTextFieldWrapper.get();
 

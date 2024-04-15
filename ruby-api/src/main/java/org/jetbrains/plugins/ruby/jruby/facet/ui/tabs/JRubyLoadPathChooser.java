@@ -18,21 +18,18 @@ package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 
 import com.intellij.facet.ui.FacetEditorContext;
 import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.util.Ref;
-import consulo.ui.image.Image;
+import consulo.configurable.ConfigurationException;
+import consulo.module.Module;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
-import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.module.ui.roots.loadPath.RLoadPathChooserUtil;
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 
-import javax.annotation.Nullable;
 import javax.swing.*;
 
 /**
@@ -43,7 +40,7 @@ import javax.swing.*;
  */
 public class JRubyLoadPathChooser extends FacetEditorTab
 {
-	private Ref<CheckableDirectoriesContainer> myLoadPathDirsCopyRef = new Ref<CheckableDirectoriesContainer>();
+	private consulo.util.lang.ref.Ref<CheckableDirectoriesContainer> myLoadPathDirsCopyRef = new Ref<CheckableDirectoriesContainer>();
 
 	public JRubyLoadPathChooser(@Nonnull final RSupportPerModuleSettingsImpl jRubyFacetConfiguration, @Nonnull final FacetEditorContext editorContext)
 	{

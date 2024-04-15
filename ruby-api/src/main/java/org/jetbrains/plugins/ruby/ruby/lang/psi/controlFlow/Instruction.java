@@ -14,9 +14,9 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow;
 
-import javax.annotation.Nullable;
+import consulo.language.psi.PsiElement;
 
-import com.intellij.psi.PsiElement;
+import jakarta.annotation.Nullable;
 
 public interface Instruction
 {

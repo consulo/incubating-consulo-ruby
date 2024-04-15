@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.editor.impl.internal.completion.CompletionUtil;
+import consulo.language.editor.impl.internal.completion.CompletionVariant;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.filter.ElementFilter;
+import consulo.xml.psi.xml.XmlTokenType;
 import org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationUtil;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
-import com.intellij.codeInsight.completion.CompletionUtil;
-import com.intellij.codeInsight.completion.CompletionVariant;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.filters.ElementFilter;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.xml.XmlTokenType;
 
 /**
  * Created by IntelliJ IDEA.

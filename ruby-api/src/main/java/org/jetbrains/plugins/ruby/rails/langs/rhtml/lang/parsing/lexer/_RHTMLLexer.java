@@ -18,10 +18,10 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
 import java.io.Reader;
 
+import consulo.language.lexer.FlexAdapter;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.lexer.MergingLexerAdapter;
+import consulo.language.ast.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.

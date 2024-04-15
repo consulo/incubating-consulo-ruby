@@ -17,12 +17,13 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.basicTypes.stringLike;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.ast.TokenSet;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,32 +16,31 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.application.WriteAction;
-import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.ThrowableRunnable;
+import consulo.application.WriteAction;
+import consulo.dataContext.DataContext;
+import consulo.document.Document;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiWhiteSpace;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import consulo.ui.ex.action.Presentation;
+import consulo.undoRedo.CommandProcessor;
+import consulo.codeEditor.Editor;
+import consulo.ide.impl.idea.openapi.editor.EditorModificationUtil;
+import consulo.module.Module;
+import consulo.util.lang.function.ThrowableRunnable;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.language.psi.PsiDocumentManager;
+import consulo.language.psi.PsiFile;
+import consulo.language.codeStyle.CodeStyleManager;
+import consulo.util.lang.IncorrectOperationException;
+import consulo.language.editor.CommonDataKeys;
+import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.image.Image;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GenerateDialogs;
@@ -119,11 +118,11 @@ public class GenerateActionAction extends SimpleGeneratorAction
 							public void run() throws Exception
 							{
 								// insert method stub
-								EditorModificationUtil.insertStringAtCaret(editor, text);
+								consulo.ide.impl.idea.openapi.editor.EditorModificationUtil.insertStringAtCaret(editor, text);
 								PsiDocumentManager.getInstance(project).commitDocument(document);
 							}
 						});
-						WriteAction.run(new ThrowableRunnable<Exception>()
+						WriteAction.run(new consulo.util.lang.function.ThrowableRunnable<Exception>()
 						{
 							@Override
 							public void run() throws Exception

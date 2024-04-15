@@ -16,28 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import java.util.Map;
-
-import javax.annotation.Nullable;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
-import javax.annotation.Nonnull;
-
+import consulo.content.bundle.Sdk;
+import consulo.execution.ui.awt.EnvironmentVariablesComponent;
+import consulo.execution.ui.awt.RawCommandLineEditor;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.io.FileUtil;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.ui.RawCommandLineEditor;
+
+import javax.swing.*;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -122,11 +117,11 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams
 		scriptComponent = RubyRunConfigurationUIUtil.createScriptPathComponent(scriptTextFieldWrapper, RBundle.message("run.configuration.messages.script.path"));
 		scriptPathTextField = scriptTextFieldWrapper.get();
 
-		final Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
+		final consulo.util.lang.ref.Ref<TextFieldWithBrowseButton> wordDirComponentWrapper = new Ref<TextFieldWithBrowseButton>();
 		workingDirComponent = RubyRunConfigurationUIUtil.createWorkDirComponent(wordDirComponentWrapper);
 		workDirTextField = wordDirComponentWrapper.get();
 
-		final Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new Ref<RawCommandLineEditor>();
+		final consulo.util.lang.ref.Ref<RawCommandLineEditor> rubyArgsEditorWrapper = new consulo.util.lang.ref.Ref<RawCommandLineEditor>();
 		rubyArgsComponent = RubyRunConfigurationUIUtil.createRubyArgsComponent(rubyArgsEditorWrapper);
 		rubyArgsEditor = rubyArgsEditorWrapper.get();
 
@@ -134,7 +129,7 @@ public class RubyRunConfigurationForm implements RubyRunConfigurationParams
 		modulesComponent = RubyRunConfigurationUIUtil.createModulesComponent(modulesComboBoxWrapper);
 		myModulesComboBox = modulesComboBoxWrapper.get();
 
-		final Ref<JComboBox> altSdksComboBoxWrapper = new Ref<JComboBox>();
+		final consulo.util.lang.ref.Ref<JComboBox> altSdksComboBoxWrapper = new consulo.util.lang.ref.Ref<JComboBox>();
 		myAlternativeSdksComponent = RubyRunConfigurationUIUtil.createAlternativeSdksComponent(altSdksComboBoxWrapper);
 		myAlternativeSdksComboBox = altSdksComboBoxWrapper.get();
 	}

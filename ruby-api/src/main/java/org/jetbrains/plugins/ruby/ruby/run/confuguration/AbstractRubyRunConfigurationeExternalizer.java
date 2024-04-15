@@ -21,7 +21,7 @@ import java.util.Map;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-import com.intellij.execution.configuration.EnvironmentVariablesComponent;
+import consulo.execution.ui.awt.EnvironmentVariablesComponent;
 
 /**
  * Created by IntelliJ IDEA.

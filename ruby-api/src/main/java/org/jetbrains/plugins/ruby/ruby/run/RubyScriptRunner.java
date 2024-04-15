@@ -21,9 +21,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import consulo.process.event.ProcessListener;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -32,15 +33,14 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.execution.ExecutionException;
+import consulo.process.ExecutionException;
 import com.intellij.execution.filters.Filter;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.SystemInfo;
+import consulo.ui.ex.action.AnAction;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import consulo.content.bundle.Sdk;
+import consulo.ui.ex.awt.Messages;
+import consulo.application.util.SystemInfo;
 
 /**
  * Created by IntelliJ IDEA.

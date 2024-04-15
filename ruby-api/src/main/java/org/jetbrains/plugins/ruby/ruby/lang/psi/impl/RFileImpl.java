@@ -16,17 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
-import javax.annotation.Nonnull;
+import consulo.language.Language;
+import consulo.language.ast.IFileElementType;
+import consulo.language.file.FileViewProvider;
+import consulo.language.parser.ParserDefinition;
+import consulo.virtualFileSystem.fileType.FileType;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.openapi.application.ex.ApplicationManagerEx;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.tree.IFileElementType;
 
 public class RFileImpl extends RPsiFileBase implements RFile
 {
@@ -39,13 +37,6 @@ public class RFileImpl extends RPsiFileBase implements RFile
 	{
 		super(viewProvider);
 		initLanguage(RubyLanguage.INSTANCE);
-
-		// For debug mode
-		// This enables bread crumbs loader for ruby files.
-		if(ApplicationManagerEx.getApplicationEx().isInternal())
-		{
-			//  putUserData(BreadcrumbsLoaderComponentImpl.BREADCRUMBS_SUITABLE_FILE, new Object());
-		}
 	}
 
 	@Override
@@ -73,7 +64,7 @@ public class RFileImpl extends RPsiFileBase implements RFile
 	private void initLanguage(final Language language)
 	{
 		myLanguage = language;
-		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(language);
+		final ParserDefinition parserDefinition = ParserDefinition.forLanguage(language);
 		if(parserDefinition == null)
 		{
 			throw new RuntimeException("PsiFileBase: language.getParserDefinition() returned null.");

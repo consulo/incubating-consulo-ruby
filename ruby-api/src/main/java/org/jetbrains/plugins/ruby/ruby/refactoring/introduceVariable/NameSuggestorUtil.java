@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.refactoring.introduceVariable;
 
+import consulo.util.lang.StringUtil;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.openapi.util.text.StringUtil;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

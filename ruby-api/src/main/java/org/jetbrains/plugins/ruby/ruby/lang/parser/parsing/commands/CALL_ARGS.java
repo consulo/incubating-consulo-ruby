@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.parsing.commands;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.ParsingMethod;
@@ -29,8 +29,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ErrorMsg;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.ListParsingUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RMarker;
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.tree.IElementType;
+import consulo.util.lang.ref.Ref;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,9 +64,9 @@ public class CALL_ARGS implements RubyTokenTypes
 		}
 
 
-		final Ref<Boolean> assocSeen = new Ref<Boolean>(false);
-		final Ref<Boolean> starSeen = new Ref<Boolean>(false);
-		final Ref<Boolean> amperSeen = new Ref<Boolean>(false);
+		final consulo.util.lang.ref.Ref<Boolean> assocSeen = new consulo.util.lang.ref.Ref<Boolean>(false);
+		final consulo.util.lang.ref.Ref<Boolean> starSeen = new consulo.util.lang.ref.Ref<Boolean>(false);
+		final consulo.util.lang.ref.Ref<Boolean> amperSeen = new Ref<Boolean>(false);
 		ParsingMethod parsingMethod = new ParsingMethod()
 		{
 			@Override

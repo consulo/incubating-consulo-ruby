@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree;
 
+import consulo.xml.psi.tree.xml.IXmlElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
-import com.intellij.psi.tree.xml.IXmlElementType;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import javax.annotation.Nullable;
+import consulo.execution.RunnerAndConfigurationSettings;
+import consulo.execution.action.ConfigurationContext;
+import consulo.execution.action.Location;
+import consulo.execution.action.RuntimeConfigurationProducer;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import com.intellij.execution.Location;
-import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
-import com.intellij.execution.junit.RuntimeConfigurationProducer;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
+
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,7 +49,7 @@ public class RSpecConfigurationProducer extends RuntimeConfigurationProducer imp
 
 	@Override
 	@Nullable
-	protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context)
+	protected RunnerAndConfigurationSettings createConfigurationByElement(Location location, ConfigurationContext context)
 	{
 		final PsiElement element = location.getPsiElement();
 
@@ -57,7 +58,7 @@ public class RSpecConfigurationProducer extends RuntimeConfigurationProducer imp
 			return null;
 		}
 		mySourceElement = element;
-		return (RunnerAndConfigurationSettingsImpl) RSpecRunConfigurationType.getInstance().createConfigurationByLocation(location);
+		return RSpecRunConfigurationType.getInstance().createConfigurationByLocation(location);
 	}
 
 	@Override

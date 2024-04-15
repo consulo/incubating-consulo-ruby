@@ -16,24 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs;
 
-import static org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder.Generate;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.annotation.Nullable;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-
+import consulo.configurable.ConfigurationException;
+import consulo.content.bundle.Sdk;
+import consulo.util.io.FileUtil;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
-
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.ExternalRailsSettings;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
@@ -41,9 +29,12 @@ import org.jetbrains.plugins.ruby.rails.facet.RailsApplicationSettings;
 import org.jetbrains.plugins.ruby.rails.facet.ui.RailsUIUtil;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.TabbedSettingsContext;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.io.FileUtil;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RailsWizardSettingsHolder.Generate;
 
 /**
  * Created by IntelliJ IDEA.

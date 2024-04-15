@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 
+import com.intellij.java.language.psi.JavaPsiFacade;
+import com.intellij.java.language.psi.PsiClass;
+import com.intellij.java.language.psi.PsiJavaPackage;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiPackage;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.project.Project;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import consulo.psi.PsiPackage;
-
-import javax.annotation.Nullable;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.JavaPsiFacade;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiJavaPackage;
-import com.intellij.psi.search.GlobalSearchScope;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,14 +37,12 @@ import com.intellij.psi.search.GlobalSearchScope;
  */
 public class JavaResolveUtil
 {
-
 	public static final String[] TOP_LEVEL_JAVA_ALLOWED = new String[]{
 			"java",
 			"javax",
 			"org",
 			"com"
 	};
-
 
 	public static boolean isTopLevelPackageOk(@Nonnull final PsiPackage packaggge)
 	{

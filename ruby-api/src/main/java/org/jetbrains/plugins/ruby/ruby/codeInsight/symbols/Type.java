@@ -1,6 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;

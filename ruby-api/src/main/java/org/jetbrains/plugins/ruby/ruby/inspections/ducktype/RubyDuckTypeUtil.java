@@ -21,8 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.MessageImpl;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.Access;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.CallAccess;

@@ -1,10 +1,9 @@
 package consulo.jruby.rails.module.extension;
 
-import javax.annotation.Nonnull;
-
 import consulo.ruby.rails.module.extension.RubyOnRailsModuleExtension;
 import consulo.module.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

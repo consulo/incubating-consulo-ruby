@@ -1,13 +1,13 @@
 package consulo.jruby.module.extension;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.content.bundle.Sdk;
 import consulo.disposer.Disposable;
-import consulo.extension.ui.ModuleExtensionBundleBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
+import consulo.module.ui.extension.ModuleExtensionBundleBoxBuilder;
 import consulo.roots.ModuleRootLayer;
 import consulo.ruby.module.extension.RubyModuleExtension;
 import consulo.ui.Component;

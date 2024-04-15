@@ -19,12 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.LogicalPosition;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.LogicalPosition;
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

@@ -19,8 +19,10 @@ package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.logging.Logger;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
@@ -38,10 +40,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references.RReferenceNaviga
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RArrayToArguments;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiElement;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.application.progress.ProgressManager;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.visitors;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjectClass;
@@ -23,7 +24,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.module;
 
-import java.util.List;
+import consulo.module.Module;
+import consulo.project.Project;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

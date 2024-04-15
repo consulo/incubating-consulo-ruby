@@ -18,8 +18,9 @@ package org.jetbrains.plugins.ruby.jruby.facet.ui.tabs;
 
 import javax.swing.JComponent;
 
+import consulo.configurable.ConfigurationException;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
@@ -30,8 +31,7 @@ import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import com.intellij.facet.ui.FacetEditorContext;
 import com.intellij.facet.ui.FacetEditorTab;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
+import consulo.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

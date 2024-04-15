@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import javax.annotation.Nonnull;
-import javax.swing.SwingUtilities;
-
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.application.WriteAction;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.util.ThrowableRunnable;
 import consulo.application.AccessRule;
+import consulo.application.ApplicationManager;
+import consulo.application.WriteAction;
+import consulo.logging.Logger;
+import consulo.ui.ModalityState;
+import consulo.util.lang.function.ThrowableRunnable;
+import jakarta.annotation.Nonnull;
+
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,9 +34,9 @@ import consulo.application.AccessRule;
  */
 public class IdeaInternalUtil
 {
-	private static final Logger LOG = Logger.getInstance(IdeaInternalUtil.class.getName());
+	private static final Logger LOG = Logger.getInstance(IdeaInternalUtil.class);
 
-	public static void runInsideWriteAction(@Nonnull ThrowableRunnable<Exception> runnable)
+	public static void runInsideWriteAction(@Nonnull consulo.util.lang.function.ThrowableRunnable<Exception> runnable)
 	{
 		try
 		{
@@ -86,7 +86,7 @@ public class IdeaInternalUtil
 		}, state);
 	}
 
-	public static void runInsideReadAction(@Nonnull final ThrowableRunnable<Exception> runnable)
+	public static void runInsideReadAction(@Nonnull final consulo.util.lang.function.ThrowableRunnable<Exception> runnable)
 	{
 		if(ApplicationManager.getApplication().isUnitTestMode())
 		{

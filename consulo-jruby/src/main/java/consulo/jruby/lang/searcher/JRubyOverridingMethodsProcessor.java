@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.jruby.search;
+package consulo.jruby.lang.searcher;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.search.TextOccurenceProcessor;
-import com.intellij.util.Processor;
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.application.util.function.Processor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.search.TextOccurenceProcessor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -43,13 +41,13 @@ import java.util.List;
  * @author: oleg
  * @date: Mar 18, 2008
  */
-public class JRubyImplementingMethodsProcessor implements TextOccurenceProcessor
+public class JRubyOverridingMethodsProcessor implements TextOccurenceProcessor
 {
 	protected PsiMethod myMethod;
 	protected String myName;
-	protected Processor<? super PsiElement> myConsumer;
+	protected Processor<? super PsiMethod> myConsumer;
 
-	public JRubyImplementingMethodsProcessor(final PsiMethod method, final String name, final Processor<? super PsiElement> consumer)
+	public JRubyOverridingMethodsProcessor(final PsiMethod method, final String name, final Processor<? super PsiMethod> consumer)
 	{
 		myMethod = method;
 		myName = name;
@@ -86,16 +84,13 @@ public class JRubyImplementingMethodsProcessor implements TextOccurenceProcessor
 			{
 				return true;
 			}
-			final List elements = RubyOverrideImplementUtil.getImplementedJavaMethods(RubyOverrideImplementUtil.getOverridenSymbols(fileSymbol, symbol));
+			final List elements = RubyOverrideImplementUtil.getOverridenElements(fileSymbol, symbol, virtualContainer);
 			for(Object o : elements)
 			{
-				if(o instanceof Symbol && ((Symbol) o).getType() == Type.JAVA_METHOD)
+				if(myMethod == o)
 				{
-					if(myMethod == ((JavaSymbol) o).getPsiElement())
-					{
-						myConsumer.process(container);
-						break;
-					}
+					myConsumer.process((PsiMethod) container);
+					break;
 				}
 			}
 		}

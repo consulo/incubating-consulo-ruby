@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
-import com.intellij.openapi.module.ModifiableModuleModel;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleWithNameAlreadyExistsException;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.module.ModuleWithNameAlreadyExistsException;
+import consulo.configurable.ConfigurationException;
+import consulo.module.content.layer.ModifiableRootModel;
+import consulo.util.xml.serializer.InvalidDataException;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.module.ModifiableModuleModel;
+import consulo.module.Module;
+import consulo.virtualFileSystem.LocalFileSystem;
 import org.jdom.JDOMException;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -32,7 +32,7 @@ import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

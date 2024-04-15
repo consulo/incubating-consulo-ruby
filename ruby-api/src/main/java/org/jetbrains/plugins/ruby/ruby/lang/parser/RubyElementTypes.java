@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
+import consulo.language.ast.IFileElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
-import com.intellij.lang.Language;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
+import consulo.language.Language;
+import consulo.language.ast.IElementType;
 
 
 public interface RubyElementTypes

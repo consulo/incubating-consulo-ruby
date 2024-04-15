@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.stringLiterals;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.util.PsiTreeUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
+import consulo.language.psi.PsiElement;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

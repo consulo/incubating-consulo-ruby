@@ -16,8 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.navigation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.file.FileViewProvider;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiWhiteSpace;
+import consulo.xml.lang.html.HTMLLanguage;
+import consulo.xml.psi.xml.XmlDocument;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.RHTMLFoldingBuilder;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
@@ -26,17 +34,9 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTM
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.xml.XmlDocument;
-import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

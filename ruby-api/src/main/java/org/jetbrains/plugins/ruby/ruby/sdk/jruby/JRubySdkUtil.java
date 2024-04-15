@@ -18,11 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
 import java.util.ArrayList;
 
-import javax.annotation.Nullable;
-
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
+import consulo.content.bundle.Sdk;
+import consulo.content.bundle.SdkTable;
 
 /**
  * Created by IntelliJ IDEA.

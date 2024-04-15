@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.editor.annotation.ExternalAnnotator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.ExternalAnnotator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiFile;
+import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.application.progress.ProgressManager;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

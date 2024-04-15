@@ -44,19 +44,19 @@ public interface RailsIcons
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	final Image RAILS_PROJECT_VIEW = RAILS_MODULE_NODE;
-	final Image RAILS_APPlICON_NODES = RubyApiIconGroup.railsModelesNode();
+	final Image RAILS_APPlICON_NODES = RubyApiIconGroup.railsModelesnode();
 	//    final Icon RAILS_COMPONENTS_NODES =     IconLoader.findIcon("/modules/globalResources.png");
-	final Image RAILS_CONTROLERS_NODES = PlatformIconGroup.nodesKeymapTools();
+	final Image RAILS_CONTROLERS_NODES = PlatformIconGroup.nodesKeymaptools();
 	final Image RAILS_HELPER_NODE = RubyIcons.RUBY_MODULE_NODE;
-	final Image RAILS_HELPERS_NODES = PlatformIconGroup.nodesUnknownJdk();
+	final Image RAILS_HELPERS_NODES = PlatformIconGroup.nodesUnknownjdk();
 	//    final Icon RAILS_LIBS_NODES =           IconLoader.findIcon("/objectBrowser/showLibraryContents.png");
-	final Image RAILS_MODEL_NODES = PlatformIconGroup.modulesWebRoot();
-	final Image RAILS_MODEL_NODE = PlatformIconGroup.modulesWebRoot();
+	final Image RAILS_MODEL_NODES = PlatformIconGroup.modulesWebroot();
+	final Image RAILS_MODEL_NODE = PlatformIconGroup.modulesWebroot();
 	final Image RAILS_FOLDER_OPENED = PlatformIconGroup.nodesFolder();
 	final Image RAILS_FOLDER_CLOSED = PlatformIconGroup.nodesFolder();
-	final Image RAILS_PARTIALS_OPEN = PlatformIconGroup.nodesWebFolder();
-	final Image RAILS_PARTIALS_CLOSED = PlatformIconGroup.nodesWebFolder();
-	final Image RAILS_MIGRATIONS_CLOSED = RubyApiIconGroup.railsMigrationsClosed();
+	final Image RAILS_PARTIALS_OPEN = PlatformIconGroup.nodesWebfolder();
+	final Image RAILS_PARTIALS_CLOSED = PlatformIconGroup.nodesWebfolder();
+	final Image RAILS_MIGRATIONS_CLOSED = RubyApiIconGroup.railsMigrationsclosed();
 	final Image RAILS_SCHEMA_FILE = RubyApiIconGroup.railsSchema();
 	//    final Icon RAILS_MODELS_NODES =      IconLoader.findIcon(DATA_PATH+"modelesNode.png");
 	//    final Icon RAILS_TESTS_NODES =      IconLoader.findIcon(DATA_PATH +"testsFolder.png");
@@ -75,13 +75,13 @@ public interface RailsIcons
 
 	final Image RAKE_TASK_ICON = RAILS_MODULE_NODE;
 	final Image RAKE_GROUP_ICON = RAILS_FOLDER_CLOSED;
-	final Image RAKE_TASKS_ROOT_ICON = RubyApiIconGroup.railsRakeRakeTasksRoot();
+	final Image RAKE_TASKS_ROOT_ICON = RubyApiIconGroup.railsRakeRaketasksroot();
 
 	final Image RAKE_PARAMS_TRACE = PlatformIconGroup.debuggerConsole();
 	//    final Icon RAKE_PARAMS_LIBDIR =         IconLoader.findIcon("/modules/libraries.png");
 	final Image RAKE_PARAMS_PREREQS = null;
 	//    final Icon RAKE_PARAMS_USAGE =          IconLoader.findIcon("/actions/find.png");
-	final Image RAKE_PARAMS_DRY_RUN = RubyApiIconGroup.railsRakeDryRun();
+	final Image RAKE_PARAMS_DRY_RUN = RubyApiIconGroup.railsRakeDryrun();
 	final Image RAKE_PARAMS_NOSEARCH = RubyApiIconGroup.railsRakeNosearch();
 	//    final Icon RAKE_PARAMS_MODULE =         IconLoader.findIcon(DATA_ROOT + "rails/rake/module.png");
 	//    final Icon RAKE_PARAMS_AUTOIMPORT =     IconLoader.findIcon("/nodes/aspect.png");
@@ -91,8 +91,8 @@ public interface RailsIcons
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	final Image RAILS_RUN_CONFIGURATION_FOLDER = RAILS_SMALL;
 
-	final Image RAILS_ACTION_TO_VIEW_MARKER = RubyApiIconGroup.railsActionsNavigationGutterActionToView();
-	final Image RAILS_VIEW_TO_ACTION_MARKER = RubyApiIconGroup.railsActionsNavigationGutterViewToAction();
+	final Image RAILS_ACTION_TO_VIEW_MARKER = RubyApiIconGroup.railsActionsNavigationGutterActiontoview();
+	final Image RAILS_VIEW_TO_ACTION_MARKER = RubyApiIconGroup.railsActionsNavigationGutterViewtoaction();
 	final Image RAILS_VIEW_TO_CONTROLLER_MARKER = RAILS_VIEW_TO_ACTION_MARKER;
 
 	final Image RJS_ICON = RubyApiIconGroup.railsRjs();
@@ -100,7 +100,7 @@ public interface RailsIcons
 	final Image RXTML_ICON = RubyApiIconGroup.railsRxml();
 
 	final Image GENERATOR_ICON = RubyApiIconGroup.railsGenerator();
-	final Image GENERATORS_ROOT_ICON = RubyApiIconGroup.railsGeneratorsGeneratorsRoot();
+	final Image GENERATORS_ROOT_ICON = RubyApiIconGroup.railsGeneratorsGeneratorsroot();
 
-	final Image WARINIG_ICON = PlatformIconGroup.nodesWarningIntroduction();
+	final Image WARINIG_ICON = PlatformIconGroup.generalWarning();
 }

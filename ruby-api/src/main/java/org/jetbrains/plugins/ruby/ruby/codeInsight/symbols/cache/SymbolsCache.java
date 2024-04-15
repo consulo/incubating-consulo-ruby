@@ -17,13 +17,13 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
 import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.startup.StartupManager;
-import com.intellij.reference.SoftReference;
+import consulo.module.Module;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.project.Project;
+import consulo.content.bundle.Sdk;
+import consulo.project.startup.StartupManager;
+import consulo.util.lang.ref.SoftReference;
 import java.util.HashMap;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
@@ -33,8 +33,8 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.util.Map;
 
 /**

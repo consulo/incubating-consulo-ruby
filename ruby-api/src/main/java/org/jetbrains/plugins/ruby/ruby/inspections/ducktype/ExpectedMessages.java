@@ -7,7 +7,7 @@ package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;
 
 /**

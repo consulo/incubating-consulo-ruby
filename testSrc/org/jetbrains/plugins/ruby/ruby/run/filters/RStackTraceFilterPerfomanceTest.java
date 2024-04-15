@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.filters;
 
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
+import consulo.util.lang.ref.Ref;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
 import junit.framework.Assert;
 import junit.framework.Test;
 import org.jetbrains.plugins.ruby.PathUtil;

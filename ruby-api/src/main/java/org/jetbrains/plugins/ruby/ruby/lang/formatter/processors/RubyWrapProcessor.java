@@ -16,10 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter.processors;
 
-import com.intellij.formatting.Wrap;
-import com.intellij.formatting.WrapType;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import consulo.language.codeStyle.WrapType;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.Wrap;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyBlock;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RNotWraped;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapCOMPSTMT;
@@ -27,8 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapedAlways;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

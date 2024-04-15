@@ -18,16 +18,16 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
 import java.util.List;
 
+import consulo.module.Module;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.ClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.ControllerClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.ui.ex.awt.tree.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,10 +1,13 @@
 package org.jetbrains.plugins.ruby.ruby.lang.lexer;
 
-import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.*;
+import consulo.language.ast.IElementType;
+import consulo.language.lexer.FlexLexer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.ContentManager;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.HeredocsManager;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.StatesManager;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.TokensManager;
 
 /* Auto generated File */
 @SuppressWarnings({"AccessStaticViaInstance", "FieldCanBeLocal", "UnusedAssignment", "JavaDoc", "UnusedDeclaration", "SimplifiableIfStatement", "ConstantConditions"})

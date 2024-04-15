@@ -1,11 +1,12 @@
 package org.jetbrains.plugins.ruby.ruby.roots;
 
-import javax.annotation.Nonnull;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModuleRootManager;
+import jakarta.annotation.Nonnull;
+
+import consulo.module.content.layer.ContentEntry;
+import consulo.module.content.ModuleRootManager;
+import consulo.module.Module;
+import consulo.module.ModuleManager;
+import consulo.project.Project;
 import consulo.roots.ContentFolderScopes;
 import consulo.roots.impl.TestContentFolderTypeProvider;
 

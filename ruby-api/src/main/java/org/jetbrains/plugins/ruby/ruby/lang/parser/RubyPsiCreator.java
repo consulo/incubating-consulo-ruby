@@ -16,7 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc.RAssocImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc.RAssocListImpl;
@@ -86,9 +88,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.fields.RInstanceV
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.global.RBackRefImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.global.RGlobalVariableImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.global.RNthRefImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

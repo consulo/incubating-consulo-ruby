@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 
+import consulo.codeEditor.DefaultLanguageHighlighterColors;
+import consulo.codeEditor.HighlighterColors;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.xml.editor.XmlHighlighterColors;
 import org.jetbrains.annotations.NonNls;
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.XmlHighlighterColors;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 
 @SuppressWarnings("UseJBColor")
 public class RubyHighlighterKeys
@@ -196,9 +196,9 @@ public class RubyHighlighterKeys
 	public static final TextAttributesKey HEREDOC_ID = TextAttributesKey.createTextAttributesKey(HEREDOC_ID_ID);
 	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(NUMBER_ID, DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey(STRING_ID, DefaultLanguageHighlighterColors.STRING);
-	public static final TextAttributesKey ESCAPE_SEQUENCE = TextAttributesKey.createTextAttributesKey(ESCAPE_SEQUENCE_ID, DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
-	public static final TextAttributesKey INVALID_ESCAPE_SEQUENCE = TextAttributesKey.createTextAttributesKey(INVALID_ESCAPE_SEQUENCE_ID, DefaultLanguageHighlighterColors.INVALID_STRING_ESCAPE);
-	public static final TextAttributesKey OPERATION_SIGN = TextAttributesKey.createTextAttributesKey(OPERATION_SIGN_ID, DefaultLanguageHighlighterColors.OPERATION_SIGN);
+	public static final TextAttributesKey ESCAPE_SEQUENCE = TextAttributesKey.createTextAttributesKey(ESCAPE_SEQUENCE_ID,DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
+	public static final TextAttributesKey INVALID_ESCAPE_SEQUENCE = TextAttributesKey.createTextAttributesKey(INVALID_ESCAPE_SEQUENCE_ID,DefaultLanguageHighlighterColors.INVALID_STRING_ESCAPE);
+	public static final TextAttributesKey OPERATION_SIGN = TextAttributesKey.createTextAttributesKey(OPERATION_SIGN_ID,DefaultLanguageHighlighterColors.OPERATION_SIGN);
 	public static final TextAttributesKey BRACKETS = TextAttributesKey.createTextAttributesKey(BRACKETS_ID, DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey EXPR_SUBST_MARKS = TextAttributesKey.createTextAttributesKey(EXPR_IN_STRING_ID);
 	public static final TextAttributesKey BAD_CHARACTER = TextAttributesKey.createTextAttributesKey(BAD_CHARACTER_ID, HighlighterColors.BAD_CHARACTER);

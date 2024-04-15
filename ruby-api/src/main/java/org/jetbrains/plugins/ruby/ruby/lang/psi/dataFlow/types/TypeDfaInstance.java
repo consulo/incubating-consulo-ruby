@@ -16,8 +16,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.types;
 
 import java.util.Map;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.application.progress.ProgressManager;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.CallSymbol;
@@ -48,7 +49,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.DfaInstance;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiType;
 import java.util.HashMap;
 

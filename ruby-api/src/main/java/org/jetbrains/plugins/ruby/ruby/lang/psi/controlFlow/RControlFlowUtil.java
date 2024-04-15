@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import consulo.logging.Logger;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.Access;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.ImplicitTypeAccess;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.MethodParameterAccess;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.WriteAccess;
-import com.intellij.openapi.diagnostic.Logger;
 
 /**
  * Created by IntelliJ IDEA.

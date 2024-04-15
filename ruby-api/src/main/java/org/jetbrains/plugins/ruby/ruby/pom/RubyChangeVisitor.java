@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

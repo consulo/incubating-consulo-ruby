@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.jruby.inspections;
 
 import java.util.List;
 
+import consulo.application.progress.ProgressManager;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -25,10 +26,9 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.inspections.RubyInspectionVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import com.intellij.codeInsight.generation.ClassMember;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.progress.ProcessCanceledException;
-import com.intellij.openapi.progress.ProgressManager;
+import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.component.ProcessCanceledException;
 import rb.implement.ImplementHandler;
 
 /**

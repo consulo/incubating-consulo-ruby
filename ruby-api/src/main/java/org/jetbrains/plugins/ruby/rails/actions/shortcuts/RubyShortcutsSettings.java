@@ -18,13 +18,13 @@ package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
 import java.util.List;
 
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.ide.ServiceManager;
 import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableImpl;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
+import consulo.component.persist.Storage;
 
 /**
  * Created by IntelliJ IDEA.

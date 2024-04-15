@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
@@ -28,7 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgum
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RPredefinedArgument;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.

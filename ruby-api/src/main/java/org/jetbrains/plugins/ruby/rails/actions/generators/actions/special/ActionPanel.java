@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.actions.generators.actions.special;
 
 import java.awt.FontMetrics;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -26,15 +26,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorPanel;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.NamingConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.DocumentAdapter;
+import consulo.ui.ex.awt.event.DocumentAdapter;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby;
 
-import com.intellij.openapi.util.Ref;
+import consulo.util.lang.ref.Ref;
 
 /**
  * Created by IntelliJ IDEA.

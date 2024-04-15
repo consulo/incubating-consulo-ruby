@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.filesCache;
 
-import com.intellij.openapi.util.Disposer;
+import consulo.ide.impl.idea.openapi.util.Disposer;
 import com.intellij.testFramework.IdeaTestCase;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;

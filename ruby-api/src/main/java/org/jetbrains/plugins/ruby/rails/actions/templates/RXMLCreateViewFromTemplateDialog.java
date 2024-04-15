@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import javax.annotation.Nonnull;
+import consulo.fileTemplate.FileTemplate;
+import consulo.language.file.FileTypeManager;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import consulo.virtualFileSystem.fileType.FileType;
 import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +35,6 @@ import com.intellij.util.IncorrectOperationException;
  */
 public class RXMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDialog
 {
-
 	public RXMLCreateViewFromTemplateDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory, @Nonnull final FileTemplate template)
 	{
 		super(project, directory, template);
@@ -44,7 +44,7 @@ public class RXMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDial
 	protected PsiFile createPsiFile(final FileTemplate template, final Project project, final PsiDirectory directory, final String templateText, final String fileName) throws IncorrectOperationException
 	{
 		final String defaultExt = template.getExtension();
-		final FileType fileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(defaultExt);
+		final FileType fileType = FileTypeManager.getInstance().getFileTypeByExtension(defaultExt);
 		assert fileType == RXMLFileType.RXML;
 
 		final String rxmlExt = RXMLFileType.RXML.getDefaultExtension();

@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="fed06" class="com.intellij.openapi.ui.LabeledComponent" binding="scriptComponent" custom-create="true">
+      <component id="fed06" class="consulo.ui.ex.awt.LabeledComponent" binding="scriptComponent" custom-create="true">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -16,7 +16,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.script.path"/>
         </properties>
       </component>
-      <component id="46a2a" class="com.intellij.openapi.ui.LabeledComponent" binding="scriptArgsComponent" custom-create="true">
+      <component id="46a2a" class="consulo.ui.ex.awt.LabeledComponent" binding="scriptArgsComponent" custom-create="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -24,7 +24,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.script.args"/>
         </properties>
       </component>
-      <component id="2435" class="com.intellij.openapi.ui.LabeledComponent" binding="workingDirComponent" custom-create="true">
+      <component id="2435" class="consulo.ui.ex.awt.LabeledComponent" binding="workingDirComponent" custom-create="true">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -32,7 +32,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.working.dir"/>
         </properties>
       </component>
-      <component id="8bf27" class="com.intellij.openapi.ui.LabeledComponent" binding="rubyArgsComponent" custom-create="true">
+      <component id="8bf27" class="consulo.ui.ex.awt.LabeledComponent" binding="rubyArgsComponent" custom-create="true">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -40,7 +40,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.ruby.args"/>
         </properties>
       </component>
-      <component id="9d471" class="com.intellij.openapi.ui.LabeledComponent" binding="modulesComponent" custom-create="true">
+      <component id="9d471" class="consulo.ui.ex.awt.LabeledComponent" binding="modulesComponent" custom-create="true">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -64,7 +64,7 @@
               <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.test.use.alternate.sdk.checkbox"/>
             </properties>
           </component>
-          <component id="9bb16" class="com.intellij.openapi.ui.LabeledComponent" binding="myAlternativeSdksComponent" custom-create="true">
+          <component id="9bb16" class="consulo.ui.ex.awt.LabeledComponent" binding="myAlternativeSdksComponent" custom-create="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -83,7 +83,7 @@
           </hspacer>
         </children>
       </grid>
-      <component id="d69b4" class="com.intellij.execution.configuration.EnvironmentVariablesComponent" binding="myEnvVariablesComponent">
+      <component id="d69b4" class="consulo.execution.ui.awt.EnvironmentVariablesComponent" binding="myEnvVariablesComponent">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

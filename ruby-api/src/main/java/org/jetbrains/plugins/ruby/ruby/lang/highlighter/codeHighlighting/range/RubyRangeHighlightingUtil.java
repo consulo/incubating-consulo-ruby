@@ -19,13 +19,13 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiFile;
+import consulo.document.Document;
+import consulo.language.psi.PsiDocumentManager;
+import consulo.language.psi.PsiFile;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.language.editor.rawHighlight.HighlightInfo;
 
 /**
  * Created by IntelliJ IDEA.

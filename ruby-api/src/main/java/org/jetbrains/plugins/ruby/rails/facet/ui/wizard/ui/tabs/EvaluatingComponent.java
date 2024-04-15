@@ -16,20 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui.tabs;
 
-import java.awt.Cursor;
-import java.awt.FlowLayout;
+import consulo.ui.ex.awt.AsyncProcessIcon;
+import consulo.util.lang.ref.Ref;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import com.intellij.openapi.util.Ref;
-import com.intellij.util.Function;
-import com.intellij.util.ui.AsyncProcessIcon;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import javax.swing.*;
+import java.awt.*;
+import java.util.function.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -107,7 +101,7 @@ public class EvaluatingComponent<T> extends JPanel
 		myBeforeLoadingHandler.run();
 
 
-		final Ref<T> returnValue = new Ref<T>(null);
+		final consulo.util.lang.ref.Ref<T> returnValue = new Ref<T>(null);
 
 		final Thread evalThread = new Thread(new Runnable()
 		{
@@ -120,7 +114,7 @@ public class EvaluatingComponent<T> extends JPanel
 				{
 					try
 					{
-						returnValue.set(myEvaluatingFun.fun(null));
+						returnValue.set(myEvaluatingFun.apply(null));
 					}
 					finally
 					{
@@ -145,7 +139,7 @@ public class EvaluatingComponent<T> extends JPanel
 
 						if(myAfterHandler != null)
 						{
-							myAfterHandler.fun(returnValue.get());
+							myAfterHandler.apply(returnValue.get());
 						}
 						myIsRunning = false;
 					}

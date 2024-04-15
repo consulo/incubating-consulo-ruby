@@ -19,16 +19,16 @@ package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import consulo.codeEditor.DocumentMarkupModel;
+import consulo.codeEditor.markup.RangeHighlighter;
+import consulo.document.Document;
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.impl.DocumentMarkupModel;
-import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.openapi.editor.markup.HighlighterTargetArea;
-import com.intellij.openapi.editor.markup.MarkupModel;
-import com.intellij.openapi.editor.markup.RangeHighlighter;
-import com.intellij.openapi.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.logging.Logger;
+import consulo.codeEditor.markup.HighlighterLayer;
+import consulo.codeEditor.markup.HighlighterTargetArea;
+import consulo.codeEditor.markup.MarkupModel;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer;
 
-import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.lexer.MergingLexerAdapter;
+import consulo.language.ast.TokenSet;
 import consulo.ruby.lang.lexer.RubyLexer;
 
 public class RubyMergeLexer extends MergingLexerAdapter

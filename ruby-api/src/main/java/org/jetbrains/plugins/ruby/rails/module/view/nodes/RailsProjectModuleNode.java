@@ -20,7 +20,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.module.content.ModuleRootManager;
+import consulo.virtualFileSystem.VirtualFileManager;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -33,13 +36,11 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControlle
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsModelFolderNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsSharedPatialsFolderNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsUserFolderNode;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.module.Module;
+import consulo.module.content.layer.ContentEntry;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.roots.ContentFolderScopes;
 import consulo.roots.impl.TestContentFolderTypeProvider;
 

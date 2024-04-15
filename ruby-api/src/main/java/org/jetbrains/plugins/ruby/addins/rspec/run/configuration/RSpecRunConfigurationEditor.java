@@ -18,10 +18,11 @@ package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
 import javax.swing.JComponent;
 
-import javax.annotation.Nonnull;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
+import jakarta.annotation.Nonnull;
+
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.project.Project;
+import consulo.configurable.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.

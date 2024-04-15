@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessOutputTypes;
-import com.intellij.util.text.StringTokenizer;
+import consulo.process.ProcessOutputTypes;
+import consulo.util.lang.text.StringTokenizer;
+import consulo.process.internal.OSProcessHandler;
 import consulo.util.dataholder.Key;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecSupportLoader;
 
@@ -33,7 +33,7 @@ public class ColouredProcessHandler extends OSProcessHandler
 	public static final char TEXT_ATTRS_PREFIX_CH = '\u001B';
 	public static final String TEXT_ATTRS_PREFIX = Character.toString(TEXT_ATTRS_PREFIX_CH);
 
-	private StringTokenizer mySt;
+	private consulo.util.lang.text.StringTokenizer mySt;
 	private Key previousColor;
 
 	public ColouredProcessHandler(Process process, String commandLine)
@@ -53,7 +53,7 @@ public class ColouredProcessHandler extends OSProcessHandler
 
 		if(mySt == null)
 		{
-			mySt = new StringTokenizer(text, TEXT_ATTRS_PREFIX);
+			mySt = new consulo.util.lang.text.StringTokenizer(text, TEXT_ATTRS_PREFIX);
 		}
 		else
 		{

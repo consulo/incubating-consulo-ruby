@@ -19,11 +19,13 @@ package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.execution.executor.Executor;
+import consulo.execution.runner.ExecutionEnvironment;
+import jakarta.annotation.Nullable;
 import org.jdom.Element;
 
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
@@ -33,18 +35,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.configurations.RunProfileState;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.util.text.StringTokenizer;
+import consulo.process.ExecutionException;
+import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.RunConfiguration;
+import consulo.execution.configuration.RunProfileState;
+import consulo.module.Module;
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.project.Project;
+import consulo.util.xml.serializer.InvalidDataException;
+import consulo.util.xml.serializer.WriteExternalException;
+import consulo.util.lang.text.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -227,7 +227,7 @@ public class RailsServerRunConfiguration extends RubyRunConfiguration implements
 	{
 		final String msg = "run.configuration.script.ip.bad.format";
 		final String ip_str = getIPAddr();
-		final StringTokenizer st = new StringTokenizer(ip_str, ".", true);
+		final consulo.util.lang.text.StringTokenizer st = new StringTokenizer(ip_str, ".", true);
 		if(st.countTokens() != 7)
 		{
 			RubyRunConfigurationUtil.throwExecutionOrRuntimeException(RBundle.message(msg), isExecution);

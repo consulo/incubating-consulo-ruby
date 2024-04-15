@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.language.ast.ASTNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
-import com.intellij.lang.ASTNode;
 
 /**
  * Created by IntelliJ IDEA.

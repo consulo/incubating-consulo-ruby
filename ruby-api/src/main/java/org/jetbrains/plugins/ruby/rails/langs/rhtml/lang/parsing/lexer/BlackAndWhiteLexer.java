@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.lexer.LexerPosition;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.text.CharArrayCharSequence;
+import consulo.language.lexer.LexerPosition;
+import consulo.language.ast.IElementType;
+import consulo.util.lang.CharArrayCharSequence;
+import consulo.language.lexer.Lexer;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

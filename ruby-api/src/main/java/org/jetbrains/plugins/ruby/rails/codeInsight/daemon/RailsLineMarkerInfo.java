@@ -16,20 +16,21 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight.daemon;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.editor.markup.GutterIconRenderer;
-import com.intellij.openapi.editor.markup.RangeHighlighter;
-import com.intellij.openapi.editor.markup.SeparatorPlacement;
-import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.reference.SoftReference;
+import consulo.codeEditor.markup.GutterIconRenderer;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.codeEditor.markup.RangeHighlighter;
+import consulo.codeEditor.markup.SeparatorPlacement;
+import consulo.colorScheme.TextAttributes;
+import consulo.module.Module;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.util.lang.ref.SoftReference;
+import consulo.ui.ex.action.AnAction;
 import consulo.ui.image.Image;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
@@ -141,7 +142,7 @@ public class RailsLineMarkerInfo
 				return null;
 			}
 
-			final Ref<String> toolTip = new Ref<String>();
+			final Ref<String> toolTip = new consulo.util.lang.ref.Ref<String>();
 			element.accept(new RubyElementVisitor()
 			{
 
@@ -161,7 +162,7 @@ public class RailsLineMarkerInfo
 		}
 
 		@Override
-		public com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment getAlignment()
+		public GutterIconRenderer.Alignment getAlignment()
 		{
 			return type == MarkerType.CONTROLLER_TO_VIEW ? Alignment.LEFT : Alignment.RIGHT;
 		}

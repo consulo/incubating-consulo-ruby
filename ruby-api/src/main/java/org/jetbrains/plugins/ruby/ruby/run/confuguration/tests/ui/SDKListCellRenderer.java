@@ -22,9 +22,9 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.openapi.projectRoots.Sdk;
-import consulo.awt.TargetAWT;
-import consulo.bundle.SdkUtil;
+import consulo.content.bundle.Sdk;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
+import consulo.content.bundle.SdkUtil;
 
 /**
  * Created by IntelliJ IDEA.

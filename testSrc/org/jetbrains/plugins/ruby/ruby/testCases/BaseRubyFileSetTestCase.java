@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.testCases;
 
-import com.intellij.openapi.util.io.FileUtil;
+import consulo.ide.impl.idea.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import junit.framework.Assert;
 import org.jetbrains.annotations.NonNls;

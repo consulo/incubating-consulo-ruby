@@ -16,15 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.impl.DocumentMarkupModel;
-import com.intellij.openapi.editor.markup.MarkupModel;
-import com.intellij.openapi.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.codeEditor.markup.MarkupModel;
+import consulo.document.Document;
+import consulo.language.editor.rawHighlight.HighlightInfo;
+import consulo.codeEditor.DocumentMarkupModel;
+import consulo.project.Project;
 import consulo.util.dataholder.Key;
-
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

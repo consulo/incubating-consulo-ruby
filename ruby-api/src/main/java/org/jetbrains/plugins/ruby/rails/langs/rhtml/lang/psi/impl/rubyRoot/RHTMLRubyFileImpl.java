@@ -16,13 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rubyRoot;
 
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLRubyFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiFileBase;
-import com.intellij.psi.FileViewProvider;
+import consulo.language.file.FileViewProvider;
 
 /**
  * Created by IntelliJ IDEA.

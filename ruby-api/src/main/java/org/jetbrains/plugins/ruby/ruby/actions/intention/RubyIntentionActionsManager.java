@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.codeInsight.intention.IntentionManager;
+import consulo.language.editor.intention.IntentionManager;
 import com.intellij.openapi.components.ProjectComponent;
 
 /**

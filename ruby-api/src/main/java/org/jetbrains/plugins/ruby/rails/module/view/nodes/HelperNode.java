@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
@@ -29,8 +29,8 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

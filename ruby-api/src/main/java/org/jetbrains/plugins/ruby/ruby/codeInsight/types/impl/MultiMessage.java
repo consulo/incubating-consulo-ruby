@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Message;

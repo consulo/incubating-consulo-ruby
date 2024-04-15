@@ -23,10 +23,10 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import consulo.configurable.ConfigurationException;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RegisteredActionNamesPanel;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.UnnamedConfigurable;
+import consulo.configurable.UnnamedConfigurable;
 
 /**
  * Created by IntelliJ IDEA.

@@ -23,10 +23,10 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.module.Module;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.ui.ex.awt.tree.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.

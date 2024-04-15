@@ -19,8 +19,12 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.util.lang.ref.Ref;
 import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
@@ -46,11 +50,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyStructureVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubySystemCallVisitor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
+import consulo.module.Module;
+import consulo.virtualFileSystem.VirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -209,7 +210,7 @@ public abstract class RContainerUtil
 	@Nonnull
 	public static List<RStructuralElement> getStructureElements(@Nonnull final RContainer container)
 	{
-		final Ref<AccessModifier> scopeAccessModifier = new Ref<AccessModifier>(container.getDefaultChildAccessModifier());
+		final consulo.util.lang.ref.Ref<AccessModifier> scopeAccessModifier = new Ref<AccessModifier>(container.getDefaultChildAccessModifier());
 		final List<RStructuralElement> elements = new ArrayList<RStructuralElement>();
 
 		// Adding all the subcontainers with default scope access modifiers

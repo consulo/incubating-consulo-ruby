@@ -24,7 +24,7 @@ import java.awt.event.KeyEvent;
 import java.util.EventListener;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -33,24 +33,25 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.event.EventListenerList;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.application.HelpManager;
+import consulo.language.ast.IElementType;
+import consulo.language.editor.ui.awt.EditorComboBoxEditor;
+import consulo.project.Project;
+import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.Messages;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
-import com.intellij.openapi.editor.event.DocumentEvent;
-import com.intellij.openapi.editor.event.DocumentListener;
-import com.intellij.openapi.help.HelpManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.psi.tree.IElementType;
+import consulo.document.event.DocumentEvent;
+import consulo.document.event.DocumentListener;
+import consulo.ui.ex.awt.ComboBox;
 import com.intellij.refactoring.HelpID;
-import com.intellij.ui.EditorComboBoxEditor;
-import com.intellij.ui.EditorComboBoxRenderer;
-import com.intellij.ui.EditorTextField;
-import com.intellij.ui.StringComboboxEditor;
+import consulo.language.editor.ui.awt.EditorComboBoxRenderer;
+import consulo.language.editor.ui.awt.EditorTextField;
+import consulo.language.editor.ui.awt.StringComboboxEditor;
 import java.util.HashSet;
 
 public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIntroduceVariableSettings

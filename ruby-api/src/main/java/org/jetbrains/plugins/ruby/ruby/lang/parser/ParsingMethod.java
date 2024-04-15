@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
 import org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils.RBuilder;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

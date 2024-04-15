@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.support.ui.checkableDir.CheckableDirectoriesContainer;
 

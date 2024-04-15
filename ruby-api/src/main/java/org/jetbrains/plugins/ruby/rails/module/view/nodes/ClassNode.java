@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.module.Module;
+import consulo.navigation.ItemPresentation;
+import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitorAdapter;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -34,10 +35,10 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by IntelliJ IDEA.
@@ -72,7 +73,7 @@ public class ClassNode extends RailsNode
 	}
 
 	@Override
-	public void accept(final SimpleNodeVisitor visitor)
+	public void accept(final Predicate<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

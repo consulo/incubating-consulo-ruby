@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.project.Project;
-import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.navigation.ItemPresentation;
+import consulo.project.Project;
+import consulo.ui.ex.awt.tree.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.

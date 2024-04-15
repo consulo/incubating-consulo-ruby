@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view;
 
-import com.intellij.ui.treeStructure.SimpleNode;
+import consulo.ui.ex.awt.tree.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,7 +27,7 @@ import com.intellij.ui.treeStructure.SimpleNode;
 public abstract class RailsNodeVisitorAdapter implements RailsNodeVisitor
 {
 	@Override
-	public boolean accept(final SimpleNode simpleNode)
+	public boolean test(final SimpleNode simpleNode)
 	{
 		return true;
 	}

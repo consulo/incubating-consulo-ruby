@@ -14,7 +14,7 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.Instruction;
 

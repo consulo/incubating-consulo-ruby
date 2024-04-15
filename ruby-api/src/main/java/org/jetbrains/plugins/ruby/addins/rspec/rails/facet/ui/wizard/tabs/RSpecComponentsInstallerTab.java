@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.rails.facet.ui.wizard.tabs;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.MultiLineLabelUI;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.ui.DocumentAdapter;
-import com.intellij.util.Function;
-import consulo.awt.TargetAWT;
+import consulo.configurable.ConfigurationException;
+import consulo.content.bundle.Sdk;
+import consulo.project.Project;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.ui.ex.awt.event.DocumentAdapter;
+import consulo.ui.ex.awt.internal.laf.MultiLineLabelUI;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
+import consulo.util.io.FileUtil;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.Nls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -46,6 +45,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.function.Function;
 
 /**
  * Created by IntelliJ IDEA.
@@ -390,12 +390,12 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 						new Function<Object, String>()
 						{
 							@Override
-							public String fun(final Object o)
+							public String apply(final Object o)
 							{
 								return RSpecUtil.getRSpecGemVersion(sdk, false, new Function<Object, Boolean>()
 								{
 									@Override
-									public Boolean fun(final Object o)
+									public Boolean apply(final Object o)
 									{
 										// Cancel process if form was closed
 										return myIsClosed;
@@ -477,7 +477,7 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 			myLSvnMustBeInPath.setText(text);
 			if(TextUtil.isEmpty(mySvnPathTextField.getText().trim()))
 			{
-				mySvnPathTextField.setText(FileUtil.toSystemDependentName(OSUtil.getDefaultSVNPath()));
+				mySvnPathTextField.setText(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(OSUtil.getDefaultSVNPath()));
 			}
 			mySvnPathComponent.setVisible(true);
 		}

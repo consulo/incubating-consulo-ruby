@@ -21,9 +21,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

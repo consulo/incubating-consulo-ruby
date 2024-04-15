@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
+import consulo.codeEditor.DefaultLanguageHighlighterColors;
 import org.jetbrains.annotations.NonNls;
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
+import consulo.codeEditor.HighlighterColors;
+import consulo.colorScheme.TextAttributesKey;
 
 /**
  * Created by IntelliJ IDEA.

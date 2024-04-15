@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer;
 
 
-import com.intellij.psi.templateLanguages.OuterLanguageElement;
+import consulo.language.psi.OuterLanguageElement;
 
 /**
  * Created by IntelliJ IDEA.

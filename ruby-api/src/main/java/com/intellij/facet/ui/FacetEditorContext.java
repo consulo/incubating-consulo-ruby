@@ -1,7 +1,7 @@
 package com.intellij.facet.ui;
 
 import com.intellij.facet.Facet;
-import com.intellij.openapi.module.Module;
+import consulo.module.Module;
 
 /**
  * @author VISTALL

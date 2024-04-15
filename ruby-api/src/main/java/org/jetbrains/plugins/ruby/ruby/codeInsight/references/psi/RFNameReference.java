@@ -16,16 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageType;
 import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.basicTypes.RSymbolNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RAliasNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RFNameImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveResult;
+import consulo.language.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.

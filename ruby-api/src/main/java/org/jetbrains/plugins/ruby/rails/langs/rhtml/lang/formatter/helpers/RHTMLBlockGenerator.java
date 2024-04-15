@@ -16,19 +16,21 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
+import consulo.document.util.TextRange;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.codeStyle.*;
+import consulo.language.file.FileViewProvider;
+import consulo.language.impl.ast.CompositeElement;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+import consulo.xml.lang.html.HTMLLanguage;
+import consulo.xml.psi.formatter.xml.XmlFormattingPolicy;
+import consulo.xml.psi.xml.XmlTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.ForeignLanguageBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLCommentBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlTagBlock;
-import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLRubyInjectionBlock;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.*;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.NodeInfo;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.nodeInfo.RHTMLNodeInfo;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
@@ -38,26 +40,12 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTM
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.support.utils.DebugUtil;
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.FormattingModelBuilder;
-import com.intellij.formatting.Indent;
-import com.intellij.formatting.Wrap;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageFormatting;
-import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
-import com.intellij.psi.impl.source.parsing.ChameleonTransforming;
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.xml.XmlTag;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -377,7 +365,7 @@ public class RHTMLBlockGenerator
 	private static void createAnotherLanguageBlockWrapper(final Language childLanguage, final ASTNode child, final List<Block> result, final Indent indent, final XmlFormattingPolicy policy, final CodeStyleSettings settings)
 	{
 		final PsiElement childPsi = child.getPsi();
-		final FormattingModelBuilder builder = LanguageFormatting.INSTANCE.forLanguage(childPsi.getLanguage());
+		final FormattingModelBuilder builder = FormattingModelBuilder.forContext(childPsi.getLanguage(), childPsi);
 		LOG.assertTrue(builder != null);
 		final FormattingModel childModel = builder.createModel(childPsi, settings);
 		result.add(new ForeignLanguageBlock(child, policy, childModel.getRootBlock(), indent, 0, child.getTextRange()));

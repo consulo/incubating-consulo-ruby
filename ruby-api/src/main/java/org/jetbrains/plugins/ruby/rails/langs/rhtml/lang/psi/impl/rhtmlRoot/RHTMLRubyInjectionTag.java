@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

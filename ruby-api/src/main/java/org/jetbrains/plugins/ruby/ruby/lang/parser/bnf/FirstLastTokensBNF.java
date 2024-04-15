@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser.bnf;
 
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.

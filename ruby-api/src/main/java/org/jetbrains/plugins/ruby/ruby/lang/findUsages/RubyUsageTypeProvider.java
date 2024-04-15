@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.usages.impl.rules.UsageType;
-import com.intellij.usages.impl.rules.UsageTypeProvider;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.psi.PsiElement;
+import consulo.usage.UsageType;
+import consulo.usage.UsageTypeProvider;
+import consulo.language.psi.PsiReference;
 import consulo.util.dataholder.Key;
 import org.jetbrains.plugins.ruby.RBundle;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +33,7 @@ import javax.annotation.Nullable;
  * @author: oleg
  * @date: Nov 9, 2007
  */
+@ExtensionImpl
 public class RubyUsageTypeProvider implements UsageTypeProvider
 {
 	public static final Key<RubyUsageType> RUBY_USAGE_TYPE_KEY = Key.create("RubyUsageType");

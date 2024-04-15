@@ -19,10 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.cache.info;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
+import jakarta.annotation.Nonnull;
+
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

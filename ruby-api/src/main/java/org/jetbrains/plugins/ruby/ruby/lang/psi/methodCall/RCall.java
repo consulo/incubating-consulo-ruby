@@ -18,15 +18,15 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPossibleCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

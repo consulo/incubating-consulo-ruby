@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.usages.Usage;
-import com.intellij.usages.UsageGroup;
-import com.intellij.usages.rules.OrderableUsageGroupingRule;
-import com.intellij.usages.rules.PsiElementUsage;
+import consulo.usage.Usage;
+import consulo.usage.UsageGroup;
+import consulo.usage.rule.OrderableUsageGroupingRule;
+import consulo.usage.rule.PsiElementUsage;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

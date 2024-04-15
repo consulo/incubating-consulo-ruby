@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.module.Module;
+import consulo.virtualFileSystem.VirtualFile;
 import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 import consulo.ui.image.Image;
 

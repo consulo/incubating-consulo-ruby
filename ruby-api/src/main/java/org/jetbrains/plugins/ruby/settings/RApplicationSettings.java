@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import javax.annotation.Nonnull;
-
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.util.xml.serializer.annotation.Transient;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.util.xmlb.annotations.Transient;
+import consulo.ide.ServiceManager;
+import consulo.component.persist.Storage;
 
 /**
  * Created by IntelliJ IDEA.

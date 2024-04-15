@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import javax.annotation.Nullable;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.Presentation;
+import jakarta.annotation.Nullable;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.Presentation;
 
 /**
  * Created by IntelliJ IDEA.

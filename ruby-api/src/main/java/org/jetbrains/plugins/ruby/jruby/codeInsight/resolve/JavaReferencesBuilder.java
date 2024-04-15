@@ -19,12 +19,10 @@ package org.jetbrains.plugins.ruby.jruby.codeInsight.resolve;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
-import com.intellij.psi.PsiReference;
-import com.intellij.util.text.StringTokenizer;
+import consulo.language.psi.PsiReference;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +48,7 @@ public class JavaReferencesBuilder
 			list.add(new JavaReference(null, element, rBaseString, offset, ""));
 			return list;
 		}
-		final StringTokenizer tokenizer = new StringTokenizer(content, ".");
+		final consulo.util.lang.text.StringTokenizer tokenizer = new consulo.util.lang.text.StringTokenizer(content, ".");
 		JavaReference lastJavaReference = null;
 		while(tokenizer.hasMoreTokens())
 		{

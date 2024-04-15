@@ -1,14 +1,14 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.codeEditor.EditorHighlighter;
+import consulo.project.Project;
+import consulo.colorScheme.EditorColorsScheme;
+import consulo.language.editor.highlight.EditorHighlighterProvider;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.fileType.FileType;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

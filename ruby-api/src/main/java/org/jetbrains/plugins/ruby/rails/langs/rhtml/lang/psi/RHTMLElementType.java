@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IXMLRHTMLElementType;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

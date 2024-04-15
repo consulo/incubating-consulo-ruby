@@ -16,30 +16,24 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.document.util.TextRange;
+import consulo.language.ast.ASTNode;
+import consulo.language.codeStyle.*;
+import consulo.language.file.FileViewProvider;
+import consulo.language.psi.PsiComment;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiErrorElement;
+import consulo.language.psi.PsiWhiteSpace;
+import consulo.xml.psi.formatter.xml.XmlFormattingPolicy;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLBlockGenerator;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLFormatterUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.RHTMLIndentProcessor;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.helpers.spacing.RHTMLSpacingProcessor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.ChildAttributes;
-import com.intellij.formatting.Indent;
-import com.intellij.formatting.Spacing;
-import com.intellij.formatting.Wrap;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.formatter.common.AbstractBlock;
-import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
+
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,7 +43,6 @@ import com.intellij.psi.formatter.xml.XmlFormattingPolicy;
  */
 public class RHTMLBlock extends AbstractBlock
 {
-
 	final protected XmlFormattingPolicy myXmlFormattingPolicy;
 	final private Indent myIndent;
 	private TextRange myTextRange;

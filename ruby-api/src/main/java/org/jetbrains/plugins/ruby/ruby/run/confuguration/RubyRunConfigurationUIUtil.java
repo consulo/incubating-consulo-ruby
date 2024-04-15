@@ -21,27 +21,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.fileChooser.FileChooserDescriptorFactory;
+import consulo.ui.ex.awt.ComboBox;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.SDKListCellRenderer;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.ui.RawCommandLineEditor;
+import consulo.fileChooser.FileChooserDescriptor;
+import consulo.project.Project;
+import consulo.content.bundle.Sdk;
+import consulo.content.bundle.SdkTable;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.lang.ref.Ref;
+import consulo.execution.ui.awt.RawCommandLineEditor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -117,7 +118,7 @@ public class RubyRunConfigurationUIUtil
 		return myComponent;
 	}
 
-	public static LabeledComponent createTestFileMaskComponent(final Ref<JTextField> testFileMaskTFWrapper, final String text)
+	public static LabeledComponent createTestFileMaskComponent(final consulo.util.lang.ref.Ref<JTextField> testFileMaskTFWrapper, final String text)
 	{
 		final JTextField testFileMaskTextField = new JTextField();
 		testFileMaskTFWrapper.set(testFileMaskTextField);

@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.lexer;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
 
 
 public interface RubyTokenTypes

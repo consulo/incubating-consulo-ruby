@@ -18,12 +18,12 @@ package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
 import java.io.IOException;
 
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.process.cmd.GeneralCommandLine;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.util.net.NetUtils;
+import consulo.process.ExecutionException;
+import consulo.ide.impl.idea.util.net.NetUtils;
 
 /**
  * Created by IntelliJ IDEA.

@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.jruby.search;
+package consulo.jruby.lang.searcher;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.util.Computable;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.search.PsiSearchHelper;
-import com.intellij.psi.search.UsageSearchContext;
-import com.intellij.psi.search.searches.OverridingMethodsSearch;
-import com.intellij.util.Processor;
-import com.intellij.util.QueryExecutor;
+import com.intellij.java.indexing.search.searches.OverridingMethodsSearch;
+import com.intellij.java.indexing.search.searches.OverridingMethodsSearchExecutor;
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.application.ApplicationManager;
+import consulo.application.util.function.Computable;
+import consulo.application.util.function.Processor;
+import consulo.application.util.query.QueryExecutor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.search.PsiSearchHelper;
+import consulo.language.psi.search.UsageSearchContext;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,10 +34,10 @@ import com.intellij.util.QueryExecutor;
  * @author: oleg
  * @date: Mar 17, 2008
  */
-public class JRubyOverridingMethodsSearch implements QueryExecutor<PsiElement, OverridingMethodsSearch.SearchParameters>
+public class JRubyOverridingMethodsSearch implements OverridingMethodsSearchExecutor
 {
 	@Override
-	public boolean execute(final OverridingMethodsSearch.SearchParameters params, final Processor<? super PsiElement> consumer)
+	public boolean execute(@Nonnull OverridingMethodsSearch.SearchParameters params, @Nonnull Processor<? super PsiMethod> consumer)
 	{
 		final PsiMethod method = params.getMethod();
 

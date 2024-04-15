@@ -16,8 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.resolve;
 
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RQualifiedReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
@@ -41,10 +40,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFid;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import consulo.language.editor.inspection.ProblemsHolder;
+import consulo.application.progress.ProgressManager;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.ResolveResult;
 
 /**
  * Created by IntelliJ IDEA.

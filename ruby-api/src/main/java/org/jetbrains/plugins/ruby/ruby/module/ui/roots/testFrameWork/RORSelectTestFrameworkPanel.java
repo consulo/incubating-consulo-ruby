@@ -16,19 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.ui.roots.testFrameWork;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.annotation.Nonnull;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
-
-import javax.annotation.Nullable;
+import consulo.content.bundle.Sdk;
+import consulo.fileChooser.FileChooserDescriptor;
+import consulo.language.content.LanguageContentFolderScopes;
+import consulo.language.content.TestContentFolderTypeProvider;
+import consulo.module.Module;
+import consulo.module.content.ModuleRootManager;
+import consulo.module.content.layer.ContentEntry;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.io.FileUtil;
+import consulo.util.lang.ref.Ref;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
@@ -39,20 +41,12 @@ import org.jetbrains.plugins.ruby.support.OpenLinkInBrowserHyperlinkListener;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import consulo.roots.ContentFolderScopes;
-import consulo.roots.impl.TestContentFolderTypeProvider;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -102,7 +96,7 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions
 			String testUnitFolderUrl = null;
 			for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
 			{
-				for(VirtualFile virtualFile : o.getFolderFiles(ContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
+				for(VirtualFile virtualFile : o.getFolderFiles(LanguageContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
 				{
 					testUnitFolderUrl = virtualFile.getUrl();
 					break;
@@ -111,7 +105,7 @@ public class RORSelectTestFrameworkPanel implements TestFrameworkOptions
 
 			if(testUnitFolderUrl != null)
 			{
-				final String path = FileUtil.toSystemDependentName(VfsUtil.urlToPath(testUnitFolderUrl));
+				final String path = FileUtil.toSystemDependentName(consulo.virtualFileSystem.util.VirtualFileUtil.urlToPath(testUnitFolderUrl));
 				testUnitRootDirTextField.setText(path);
 			}
 			else

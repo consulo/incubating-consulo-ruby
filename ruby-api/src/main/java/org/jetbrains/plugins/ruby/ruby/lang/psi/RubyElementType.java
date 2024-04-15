@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

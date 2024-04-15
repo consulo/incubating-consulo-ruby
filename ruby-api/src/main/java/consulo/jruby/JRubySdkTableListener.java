@@ -1,17 +1,17 @@
-package org.jetbrains.plugins.ruby.jruby;
+package consulo.jruby;
 
+import consulo.application.ApplicationManager;
+import consulo.content.base.BinariesOrderRootType;
+import consulo.content.base.SourcesOrderRootType;
+import consulo.content.bundle.Sdk;
+import consulo.content.bundle.event.SdkTableListener;
+import consulo.content.library.Library;
+import consulo.content.library.LibraryTable;
+import consulo.content.library.LibraryTablesRegistrar;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTable;
-import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
-import com.intellij.openapi.vfs.VirtualFile;
-import consulo.bundle.SdkTableListener;
 
 /**
  * @author: oleg
@@ -24,7 +24,7 @@ public class JRubySdkTableListener
 
 	public JRubySdkTableListener()
 	{
-		myJdkTableListener = new SdkTableListener.Adapter()
+		myJdkTableListener = new SdkTableListener()
 		{
 			@Override
 			public void sdkAdded(final Sdk sdk)
@@ -54,7 +54,7 @@ public class JRubySdkTableListener
 			}
 		};
 
-		ApplicationManager.getApplication().getMessageBus().connect().subscribe(SdkTable.SDK_TABLE_TOPIC, myJdkTableListener);
+		ApplicationManager.getApplication().getMessageBus().connect().subscribe(SdkTableListener.class, myJdkTableListener);
 		// SdkTable.getInstance().addListener(myJdkTableListener);
 	}
 
@@ -87,10 +87,10 @@ public class JRubySdkTableListener
 		final LibraryTable.ModifiableModel libraryTableModel = LibraryTablesRegistrar.getInstance().getLibraryTable().getModifiableModel();
 		final Library library = libraryTableModel.createLibrary(JRubyFacet.getFacetLibraryName(sdk.getName()));
 		final Library.ModifiableModel model = library.getModifiableModel();
-		for(String url : sdk.getRootProvider().getUrls(OrderRootType.CLASSES))
+		for(String url : sdk.getRootProvider().getUrls(BinariesOrderRootType.getInstance()))
 		{
-			model.addRoot(url, OrderRootType.CLASSES);
-			model.addRoot(url, OrderRootType.SOURCES);
+			model.addRoot(url, BinariesOrderRootType.getInstance());
+			model.addRoot(url, SourcesOrderRootType.getInstance());
 		}
 		model.commit();
 		libraryTableModel.commit();
@@ -104,18 +104,18 @@ public class JRubySdkTableListener
 		if(library != null)
 		{
 			final Library.ModifiableModel model = library.getModifiableModel();
-			for(String url : model.getUrls(OrderRootType.CLASSES))
+			for(String url : model.getUrls(BinariesOrderRootType.getInstance()))
 			{
-				model.removeRoot(url, OrderRootType.CLASSES);
+				model.removeRoot(url, BinariesOrderRootType.getInstance());
 			}
-			for(String url : model.getUrls(OrderRootType.SOURCES))
+			for(String url : model.getUrls(SourcesOrderRootType.getInstance()))
 			{
-				model.removeRoot(url, OrderRootType.SOURCES);
+				model.removeRoot(url, SourcesOrderRootType.getInstance());
 			}
 			for(VirtualFile root : roots)
 			{
-				model.addRoot(root, OrderRootType.CLASSES);
-				model.addRoot(root, OrderRootType.SOURCES);
+				model.addRoot(root, BinariesOrderRootType.getInstance());
+				model.addRoot(root, SourcesOrderRootType.getInstance());
 			}
 			model.commit();
 		}

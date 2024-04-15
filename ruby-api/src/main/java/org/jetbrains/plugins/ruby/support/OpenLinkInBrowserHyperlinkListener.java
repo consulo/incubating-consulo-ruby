@@ -16,14 +16,12 @@
 
 package org.jetbrains.plugins.ruby.support;
 
-import java.awt.Component;
-import java.awt.Cursor;
+import consulo.platform.Platform;
 
+import jakarta.annotation.Nonnull;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-
-import javax.annotation.Nonnull;
-import com.intellij.ide.BrowserUtil;
+import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +44,7 @@ public class OpenLinkInBrowserHyperlinkListener implements HyperlinkListener
 		final HyperlinkEvent.EventType eventType = e.getEventType();
 		if(eventType.equals(HyperlinkEvent.EventType.ACTIVATED))
 		{
-			BrowserUtil.launchBrowser(e.getURL().toExternalForm());
+			Platform.current().openInBrowser(e.getURL().toExternalForm());
 		}
 		else if(eventType.equals(HyperlinkEvent.EventType.ENTERED))
 		{

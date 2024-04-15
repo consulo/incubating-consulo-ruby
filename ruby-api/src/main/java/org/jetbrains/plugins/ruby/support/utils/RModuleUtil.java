@@ -19,20 +19,21 @@ package org.jetbrains.plugins.ruby.support.utils;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.language.util.ModuleUtilCore;
+import consulo.module.ModuleManager;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFileManager;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.ThrowableRunnable;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.content.bundle.Sdk;
+import consulo.module.content.layer.ModifiableRootModel;
+import consulo.module.content.ModuleRootManager;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.util.lang.function.ThrowableRunnable;
 import consulo.ruby.module.extension.RubyModuleExtension;
 
 /**
@@ -120,7 +121,7 @@ public class RModuleUtil
 	 */
 	public static void refreshRubyModuleTypeContent(final Module module)
 	{
-		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
+		IdeaInternalUtil.runInsideWriteAction(new consulo.util.lang.function.ThrowableRunnable<Exception>()
 		{
 			@Override
 			public void run() throws Exception

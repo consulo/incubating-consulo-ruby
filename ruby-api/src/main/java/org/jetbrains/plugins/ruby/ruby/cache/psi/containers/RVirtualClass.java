@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.containers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-import com.intellij.navigation.ItemPresentation;
+import consulo.navigation.ItemPresentation;
 
 /**
  * Created by IntelliJ IDEA.

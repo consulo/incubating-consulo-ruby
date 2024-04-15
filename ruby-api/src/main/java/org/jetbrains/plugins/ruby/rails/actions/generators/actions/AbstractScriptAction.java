@@ -16,20 +16,25 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import com.intellij.ide.IdeView;
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.content.bundle.Sdk;
+import consulo.language.editor.CommonDataKeys;
+import consulo.language.psi.PsiFile;
+import consulo.module.Module;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.dataContext.DataContext;
+import consulo.ide.IdeView;
+import consulo.language.editor.LangDataKeys;
 import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
 import consulo.ui.image.Image;
+import consulo.util.lang.IncorrectOperationException;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

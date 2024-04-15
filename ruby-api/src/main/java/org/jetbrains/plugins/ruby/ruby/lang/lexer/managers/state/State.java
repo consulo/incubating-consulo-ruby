@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
 
 import java.util.HashMap;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

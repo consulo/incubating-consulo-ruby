@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state;
 
 import java.util.Stack;
 
-import com.intellij.openapi.diagnostic.Logger;
+import consulo.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.

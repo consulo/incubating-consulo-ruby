@@ -1,6 +1,6 @@
 package com.intellij.facet.ui;
 
-import com.intellij.openapi.options.ConfigurationException;
+import consulo.configurable.ConfigurationException;
 
 /**
  * @author VISTALL

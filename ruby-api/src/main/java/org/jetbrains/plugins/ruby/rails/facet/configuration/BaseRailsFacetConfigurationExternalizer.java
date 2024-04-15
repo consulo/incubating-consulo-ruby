@@ -18,16 +18,15 @@ package org.jetbrains.plugins.ruby.rails.facet.configuration;
 
 import java.util.Map;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import jakarta.annotation.Nullable;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Nullable;
-
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-import com.intellij.openapi.components.PathMacroManager;
-import com.intellij.openapi.module.Module;
+import consulo.component.macro.PathMacroManager;
+import consulo.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

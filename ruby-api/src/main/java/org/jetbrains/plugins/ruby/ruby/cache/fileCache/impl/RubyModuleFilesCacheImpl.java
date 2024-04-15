@@ -22,8 +22,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+
+import consulo.component.messagebus.MessageBusConnection;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
@@ -31,13 +33,12 @@ import org.jetbrains.plugins.ruby.ruby.cache.listeners.RubyPomModelListener;
 import org.jetbrains.plugins.ruby.ruby.module.RubyModuleListenerAdapter;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import com.intellij.ProjectTopics;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleFileIndex;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.messages.MessageBusConnection;
+import consulo.module.Module;
+import consulo.project.Project;
+import consulo.module.content.ModuleFileIndex;
+import consulo.module.content.ModuleRootManager;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileManager;
 import consulo.disposer.Disposer;
 
 /**

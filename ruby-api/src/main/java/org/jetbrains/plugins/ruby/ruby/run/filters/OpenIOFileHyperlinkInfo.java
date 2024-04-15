@@ -18,18 +18,18 @@ package org.jetbrains.plugins.ruby.ruby.run.filters;
 
 import java.io.File;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.application.ApplicationManager;
+import consulo.execution.ui.console.FileHyperlinkInfo;
+import consulo.project.Project;
+import consulo.virtualFileSystem.LocalFileSystem;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
-import com.intellij.execution.filters.FileHyperlinkInfo;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ThrowableRunnable;
+import consulo.fileEditor.FileEditorManager;
+import consulo.navigation.OpenFileDescriptor;
+import consulo.util.lang.ref.Ref;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.util.lang.function.ThrowableRunnable;
 
 /**
  * Created by IntelliJ IDEA.

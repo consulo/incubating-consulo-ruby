@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;

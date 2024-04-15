@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.structure;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.codeEditor.Editor;
+import consulo.fileEditor.structureView.StructureViewModel;
+import consulo.fileEditor.structureView.TreeBasedStructureViewBuilder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
-import com.intellij.ide.structureView.StructureViewModel;
-import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

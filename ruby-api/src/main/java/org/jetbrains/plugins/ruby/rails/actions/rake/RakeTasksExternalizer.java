@@ -25,6 +25,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nullable;
 import org.jdom.Comment;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -32,8 +34,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
@@ -41,9 +42,8 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTaskSerializableIm
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
+import consulo.logging.Logger;
+import consulo.virtualFileSystem.LocalFileSystem;
 
 /**
  * Created by IntelliJ IDEA.

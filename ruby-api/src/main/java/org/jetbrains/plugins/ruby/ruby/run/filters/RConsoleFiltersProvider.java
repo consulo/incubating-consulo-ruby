@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.filters;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.execution.filters.ConsoleFilterProvider;
-import com.intellij.execution.filters.Filter;
-import com.intellij.openapi.project.Project;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.ui.console.ConsoleFilterProvider;
+import consulo.execution.ui.console.Filter;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,6 +28,7 @@ import com.intellij.openapi.project.Project;
  * @author: Roman Chernyatchik
  * @date: Sep 4, 2007
  */
+@ExtensionImpl
 public class RConsoleFiltersProvider implements ConsoleFilterProvider
 {
 	@Override

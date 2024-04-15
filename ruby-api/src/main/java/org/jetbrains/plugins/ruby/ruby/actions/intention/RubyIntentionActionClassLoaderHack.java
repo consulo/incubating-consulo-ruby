@@ -16,13 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
+import consulo.codeEditor.Editor;
+import consulo.language.editor.intention.IntentionAction;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,13 +44,6 @@ public class RubyIntentionActionClassLoaderHack implements IntentionAction
 	public String getText()
 	{
 		return myOriginalIntentionAction.getText();
-	}
-
-	@Override
-	@Nonnull
-	public String getFamilyName()
-	{
-		return myOriginalIntentionAction.getFamilyName();
 	}
 
 	@Override

@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
+import consulo.application.progress.ProgressManager;
+import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.language.editor.annotation.Annotator;
 
 /**
  * Created by IntelliJ IDEA.

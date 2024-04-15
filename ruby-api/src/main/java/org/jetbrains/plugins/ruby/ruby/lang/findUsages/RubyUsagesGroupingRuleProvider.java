@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.project.Project;
-import com.intellij.usages.UsageView;
-import com.intellij.usages.rules.UsageGroupingRule;
-import com.intellij.usages.rules.UsageGroupingRuleProvider;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
+import consulo.usage.UsageView;
+import consulo.usage.rule.UsageGroupingRule;
+import consulo.usage.rule.UsageGroupingRuleProvider;
 
 /**
  * Created by IntelliJ IDEA.

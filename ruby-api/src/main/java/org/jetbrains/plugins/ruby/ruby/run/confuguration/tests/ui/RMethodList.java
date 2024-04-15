@@ -19,12 +19,14 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 import java.awt.BorderLayout;
 import java.util.Comparator;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
+import consulo.ui.ex.awt.*;
+import consulo.util.lang.function.Condition;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -35,15 +37,9 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
 import com.intellij.ide.structureView.impl.StructureNodeRenderer;
-import com.intellij.openapi.ui.DialogBuilder;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.ui.ColoredListCellRenderer;
-import com.intellij.ui.ListScrollingUtil;
-import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.SimpleTextAttributes;
-import com.intellij.ui.SortedListModel;
+import consulo.component.util.Iconable;
+import consulo.ide.impl.idea.ui.ListScrollingUtil;
+import consulo.ui.ex.SimpleTextAttributes;
 
 /**
  * Created by IntelliJ IDEA.
@@ -74,10 +70,10 @@ public class RMethodList extends JPanel
 
 		myList.setCellRenderer(new MyMethodsListCellRenderer());
 		myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		ListScrollingUtil.ensureSelectionExists(myList);
+		consulo.ide.impl.idea.ui.ListScrollingUtil.ensureSelectionExists(myList);
 	}
 
-	private void createList(@Nonnull final RVirtualMethod[] allMethods, @Nonnull final Condition<RVirtualMethod> filter)
+	private void createList(@Nonnull final RVirtualMethod[] allMethods, @Nonnull final consulo.util.lang.function.Condition<RVirtualMethod> filter)
 	{
 		for(RVirtualMethod method : allMethods)
 		{
@@ -93,7 +89,7 @@ public class RMethodList extends JPanel
 		return (RVirtualMethod) myList.getSelectedValue();
 	}
 
-	public static RVirtualMethod showDialog(final RVirtualClass rClass, final Condition<RVirtualMethod> filter, @Nonnull final RMethodProvider methodProvider, final JComponent parent)
+	public static RVirtualMethod showDialog(final RVirtualClass rClass, final consulo.util.lang.function.Condition<RVirtualMethod> filter, @Nonnull final RMethodProvider methodProvider, final JComponent parent)
 	{
 		final RMethodList RMethodList = new RMethodList(rClass, filter, methodProvider);
 		final DialogBuilder builder = new DialogBuilder(parent);

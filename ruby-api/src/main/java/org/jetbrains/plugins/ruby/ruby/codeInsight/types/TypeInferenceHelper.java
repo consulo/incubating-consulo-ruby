@@ -19,11 +19,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.application.progress.ProgressManager;
+import consulo.ide.ServiceManager;
+import consulo.language.psi.PsiReference;
+import consulo.project.Project;
+import consulo.util.lang.ref.Ref;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -50,14 +56,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.references.RReferenceBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.PsiManagerEx;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiManager;
+import consulo.language.impl.internal.psi.PsiManagerEx;
 import java.util.HashMap;
 
 /**
@@ -75,7 +76,7 @@ public class TypeInferenceHelper
 		return ServiceManager.getService(project, TypeInferenceHelper.class);
 	}
 
-	private Ref<TypeInferenceContext> myTypeContext = new Ref<TypeInferenceContext>();
+	private consulo.util.lang.ref.Ref<TypeInferenceContext> myTypeContext = new Ref<TypeInferenceContext>();
 
 	@Inject
 	public TypeInferenceHelper(PsiManager psiManager)

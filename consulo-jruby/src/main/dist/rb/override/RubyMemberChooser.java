@@ -16,9 +16,9 @@
 
 package rb.override;
 
-import com.intellij.codeInsight.generation.ClassMember;
-import com.intellij.ide.util.MemberChooser;
-import com.intellij.openapi.project.Project;
+import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.ide.impl.idea.ide.util.MemberChooser;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +29,8 @@ import com.intellij.openapi.project.Project;
 /**
  * It`s just a wrapper for MemberChooser
  */
-public class RubyMemberChooser extends MemberChooser<ClassMember>{
+public class RubyMemberChooser extends consulo.ide.impl.idea.ide.util.MemberChooser<ClassMember>
+{
 
     public RubyMemberChooser(ClassMember[] elements, Project project) {
         super(elements, false, true, project);

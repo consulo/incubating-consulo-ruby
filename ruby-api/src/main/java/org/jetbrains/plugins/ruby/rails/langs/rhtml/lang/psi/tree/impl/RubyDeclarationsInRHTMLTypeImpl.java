@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IFileElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer.RHTMLRubyLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.rubyInjections.RHTMLRubyParser;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.tree.IFileElementType;
-import consulo.lang.LanguageVersion;
-import consulo.lang.util.LanguageVersionUtil;
+import consulo.language.parser.PsiBuilderFactory;
+import consulo.language.lexer.Lexer;
+import consulo.language.version.LanguageVersion;
+import consulo.language.version.LanguageVersionUtil;
 
 /**
  * Created by IntelliJ IDEA.

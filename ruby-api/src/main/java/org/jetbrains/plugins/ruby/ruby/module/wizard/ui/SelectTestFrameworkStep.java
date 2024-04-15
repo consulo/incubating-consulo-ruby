@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
-import consulo.awt.TargetAWT;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings;
 import org.jetbrains.plugins.ruby.jruby.facet.ui.NiiChAVOUtil;

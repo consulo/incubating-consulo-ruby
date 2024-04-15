@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion;
 
+import consulo.language.editor.impl.internal.completion.CompletionVariant;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants.RHTMLInjectionInStringsCVariant;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants.RHTMLInjectionInTagContentCVariant;
-import com.intellij.codeInsight.completion.CompletionVariant;
 
 /**
  * Created by IntelliJ IDEA.

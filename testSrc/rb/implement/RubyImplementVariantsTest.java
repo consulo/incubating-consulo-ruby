@@ -16,10 +16,10 @@
 
 package rb.implement;
 
-import com.intellij.codeInsight.generation.ClassMember;
+import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
 import com.intellij.openapi.projectRoots.ProjectJdk;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import consulo.ide.impl.idea.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NonNls;

@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.Iconable;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.navigation.ItemPresentation;
+import consulo.component.util.Iconable;
 import consulo.ui.image.Image;
 
 /**

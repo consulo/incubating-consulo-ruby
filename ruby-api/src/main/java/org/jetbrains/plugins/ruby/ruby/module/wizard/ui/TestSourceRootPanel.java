@@ -16,22 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
-import com.intellij.ide.util.BrowseFilesListener;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.ui.MultiLineLabelUI;
-import com.intellij.openapi.util.Computable;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.DocumentAdapter;
-import com.intellij.ui.FieldPanel;
+import consulo.application.ApplicationManager;
+import consulo.ui.ex.awt.event.DocumentAdapter;
+import consulo.ui.ex.awt.internal.laf.MultiLineLabelUI;
+import consulo.ui.ex.awt.util.BrowseFilesListener;
+import consulo.logging.Logger;
+import consulo.fileChooser.FileChooserDescriptor;
+import consulo.application.util.function.Computable;
+import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.ide.impl.idea.openapi.vfs.VfsUtil;
+import consulo.ui.ex.awt.FieldPanel;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
@@ -41,8 +41,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 
-import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
-import static com.intellij.openapi.util.io.FileUtil.toSystemIndependentName;
+import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
+import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemIndependentName;
 
 /**
  * Created by IntelliJ IDEA.

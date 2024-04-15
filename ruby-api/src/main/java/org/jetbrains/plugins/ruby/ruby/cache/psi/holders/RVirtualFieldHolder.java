@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.holders;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;

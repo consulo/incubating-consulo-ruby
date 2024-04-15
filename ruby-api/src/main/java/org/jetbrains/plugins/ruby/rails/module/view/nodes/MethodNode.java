@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import javax.annotation.Nonnull;
-
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.module.Module;
+import consulo.navigation.ItemPresentation;
+import consulo.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,8 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages;
 
-import javax.annotation.Nullable;
-
 import com.intellij.psi.PsiType;
+import jakarta.annotation.Nullable;
 
 /**
  * @author: oleg

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.actions.generators;
 
 import javax.swing.JComponent;
 
-import javax.annotation.Nonnull;
-import com.intellij.openapi.project.Project;
+import jakarta.annotation.Nonnull;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

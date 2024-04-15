@@ -16,17 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import com.intellij.ide.plugins.PluginManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.projectRoots.*;
-import com.intellij.openapi.projectRoots.impl.SdkImpl;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import consulo.application.util.SystemInfo;
+import consulo.container.plugin.PluginManager;
+import consulo.content.OrderRootType;
+import consulo.content.base.BinariesOrderRootType;
+import consulo.content.base.DocumentationOrderRootType;
+import consulo.content.base.SourcesOrderRootType;
+import consulo.content.bundle.*;
+import consulo.logging.Logger;
+import consulo.ui.ex.awt.Messages;
 import consulo.ui.image.Image;
+import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileManager;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -38,8 +42,6 @@ import org.jetbrains.plugins.ruby.ruby.run.Runner;
 import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.util.*;
 
@@ -139,7 +141,7 @@ public class RubySdkType extends SdkType
 	protected static List<VirtualFile> findGemsRoots(@Nonnull final SdkModificator sdkModificator)
 	{
 		final List<VirtualFile> gemsRoots = new ArrayList<VirtualFile>();
-		final VirtualFile[] roots = sdkModificator.getRoots(OrderRootType.SOURCES);
+		final VirtualFile[] roots = sdkModificator.getRoots(SourcesOrderRootType.getInstance());
 		for(VirtualFile root : roots)
 		{
 			final String url = root.getUrl();
@@ -327,8 +329,7 @@ public class RubySdkType extends SdkType
 		RubySdkAdditionalData rubySdkAdditionalData = (RubySdkAdditionalData) sdk.getSdkAdditionalData();
 		if(rubySdkAdditionalData == null)
 		{
-			rubySdkAdditionalData = (RubySdkAdditionalData) loadAdditionalData(sdk, null);
-			((SdkImpl) sdk).setSdkAdditionalData(rubySdkAdditionalData);
+			rubySdkAdditionalData = new RubySdkAdditionalData();
 		}
 		return rubySdkAdditionalData;
 	}
@@ -372,9 +373,9 @@ public class RubySdkType extends SdkType
 	@Override
 	public boolean isRootTypeApplicable(OrderRootType type)
 	{
-		return type == OrderRootType.SOURCES ||
-				type == OrderRootType.CLASSES ||
-				type == OrderRootType.DOCUMENTATION ||
+		return type == SourcesOrderRootType.getInstance() ||
+				type == BinariesOrderRootType.getInstance() ||
+				type == DocumentationOrderRootType.getInstance() ||
 				type == GemOrderRootType.getInstance();
 	}
 }

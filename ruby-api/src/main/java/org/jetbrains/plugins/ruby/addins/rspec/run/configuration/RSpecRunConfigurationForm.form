@@ -55,7 +55,7 @@
         <properties/>
         <border type="etched" title-resource-bundle="org/jetbrains/plugins/ruby/RBundle" title-key="rspec.run.configuration.tests.form.testtype.title"/>
         <children>
-          <component id="1dc9e" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsFolderComponent" custom-create="true">
+          <component id="1dc9e" class="consulo.ui.ex.awt.LabeledComponent" binding="mySpecsFolderComponent" custom-create="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -63,7 +63,7 @@
               <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.dialog.components.folder"/>
             </properties>
           </component>
-          <component id="cb481" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsScriptComponent" custom-create="true">
+          <component id="cb481" class="consulo.ui.ex.awt.LabeledComponent" binding="mySpecsScriptComponent" custom-create="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -71,7 +71,7 @@
               <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.tests.dialog.components.file"/>
             </properties>
           </component>
-          <component id="8dd3b" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsFileMaskComponent" custom-create="true">
+          <component id="8dd3b" class="consulo.ui.ex.awt.LabeledComponent" binding="mySpecsFileMaskComponent" custom-create="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -88,7 +88,7 @@
               <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.coloured.output"/>
             </properties>
           </component>
-          <component id="4cd13" class="com.intellij.openapi.ui.LabeledComponent" binding="mySpecsArgsComponent" custom-create="true">
+          <component id="4cd13" class="consulo.ui.ex.awt.LabeledComponent" binding="mySpecsArgsComponent" custom-create="true">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -96,7 +96,7 @@
               <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.messages.spec.args"/>
             </properties>
           </component>
-          <component id="37427" class="com.intellij.openapi.ui.LabeledComponent" binding="myCustomSpecsRunnerComponent" custom-create="true">
+          <component id="37427" class="consulo.ui.ex.awt.LabeledComponent" binding="myCustomSpecsRunnerComponent" custom-create="true">
             <constraints>
               <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -134,7 +134,7 @@
           </component>
         </children>
       </grid>
-      <component id="c4756" class="com.intellij.openapi.ui.LabeledComponent" binding="myWorkingDirComponent" custom-create="true">
+      <component id="c4756" class="consulo.ui.ex.awt.LabeledComponent" binding="myWorkingDirComponent" custom-create="true">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -142,7 +142,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.working.dir"/>
         </properties>
       </component>
-      <component id="eeab2" class="com.intellij.openapi.ui.LabeledComponent" binding="myRubyArgsComponent" custom-create="true">
+      <component id="eeab2" class="consulo.ui.ex.awt.LabeledComponent" binding="myRubyArgsComponent" custom-create="true">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -150,7 +150,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="run.configuration.messages.ruby.args"/>
         </properties>
       </component>
-      <component id="afdbd" class="com.intellij.openapi.ui.LabeledComponent" binding="myModulesComponent" custom-create="true">
+      <component id="afdbd" class="consulo.ui.ex.awt.LabeledComponent" binding="myModulesComponent" custom-create="true">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -174,7 +174,7 @@
               <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rspec.run.configuration.tests.use.gem.from.sdk.checkbox"/>
             </properties>
           </component>
-          <component id="62390" class="com.intellij.openapi.ui.LabeledComponent" binding="myAlternativeSdksComponent" custom-create="true">
+          <component id="62390" class="consulo.ui.ex.awt.LabeledComponent" binding="myAlternativeSdksComponent" custom-create="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -193,7 +193,7 @@
           </hspacer>
         </children>
       </grid>
-      <component id="b7401" class="com.intellij.execution.configuration.EnvironmentVariablesComponent" binding="myEnvVariablesComponent">
+      <component id="b7401" class="consulo.execution.ui.awt.EnvironmentVariablesComponent" binding="myEnvVariablesComponent">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

@@ -16,16 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import javax.annotation.Nullable;
-
+import consulo.execution.action.RuntimeConfigurationProducer;
+import consulo.language.psi.PsiDirectory;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType;
-import com.intellij.execution.Location;
-import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
-import com.intellij.execution.junit.RuntimeConfigurationProducer;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
+import consulo.execution.action.Location;
+import consulo.execution.action.ConfigurationContext;
+import consulo.ide.impl.idea.execution.impl.RunnerAndConfigurationSettingsImpl;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +49,7 @@ public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer i
 
 	@Override
 	@Nullable
-	protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context)
+	protected consulo.ide.impl.idea.execution.impl.RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context)
 	{
 		final PsiElement element = location.getPsiElement();
 
@@ -59,7 +58,7 @@ public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer i
 			return null;
 		}
 		mySourceElement = element;
-		return (RunnerAndConfigurationSettingsImpl) RubyRunConfigurationType.getInstance().createConfigurationByLocation(location);
+		return (consulo.ide.impl.idea.execution.impl.RunnerAndConfigurationSettingsImpl) RubyRunConfigurationType.getInstance().createConfigurationByLocation(location);
 	}
 
 	@Override

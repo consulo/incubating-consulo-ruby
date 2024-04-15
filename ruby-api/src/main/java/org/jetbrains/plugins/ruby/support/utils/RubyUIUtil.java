@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import javax.annotation.Nonnull;
-import com.intellij.util.ui.UIUtil;
+import consulo.ui.ex.awt.UIUtil;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

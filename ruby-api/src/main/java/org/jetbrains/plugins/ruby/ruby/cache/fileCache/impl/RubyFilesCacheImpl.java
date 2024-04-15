@@ -16,23 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.fileCache.impl;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.disposer.Disposable;
+import consulo.disposer.Disposer;
+import consulo.language.psi.stub.FileContent;
+import consulo.logging.Logger;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileManager;
+import consulo.virtualFileSystem.event.*;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
@@ -43,21 +38,9 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.RFilesStorage;
 import org.jetbrains.plugins.ruby.ruby.cache.info.impl.RFilesStorageImpl;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.ide.caches.FileContent;
-import consulo.disposer.Disposable;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.DumbServiceImpl;
-import com.intellij.openapi.project.Project;
-import consulo.disposer.Disposer;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileAdapter;
-import com.intellij.openapi.vfs.VirtualFileEvent;
-import com.intellij.openapi.vfs.VirtualFileListener;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.openapi.vfs.VirtualFileMoveEvent;
-import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
+
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -67,10 +50,9 @@ import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
  */
 public class RubyFilesCacheImpl implements RubyFilesCache
 {
-
 	protected final Project myProject;
 
-	private final static Logger LOG = Logger.getInstance(RubyFilesCacheImpl.class.getName());
+	private final static Logger LOG = Logger.getInstance(RubyFilesCacheImpl.class);
 
 	private DeclarationsIndex myIndex;
 
@@ -518,7 +500,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	//@Override
 	public void processFile(@Nonnull final FileContent fileContent)
 	{
-		regenerateFileInfo(fileContent.getVirtualFile());
+		regenerateFileInfo(fileContent.getFile());
 	}
 
 	//@Override
@@ -642,7 +624,7 @@ public class RubyFilesCacheImpl implements RubyFilesCache
 	@Override
 	public void forceUpdate()
 	{
-		DumbServiceImpl dumbService = DumbServiceImpl.getInstance(myProject);
+		//DumbServiceImpl dumbService = consulo.ide.impl.idea.openapi.project.DumbServiceImpl.getInstance(myProject);
 
 		//dumbService.queueCacheUpdateInDumbMode(Collections.<CacheUpdater>singletonList(this));
 	}

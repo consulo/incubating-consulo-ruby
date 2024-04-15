@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import java.util.HashSet;
+import jakarta.annotation.Nonnull;
 
-import javax.annotation.Nonnull;
+import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,16 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
-import java.awt.Component;
-
-import javax.annotation.Nonnull;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-import com.intellij.ui.ColoredListCellRenderer;
+import consulo.ui.ex.awt.ColoredListCellRenderer;
+import consulo.application.AllIcons;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.module.Module;
+import consulo.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

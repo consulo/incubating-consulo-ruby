@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkModificator;
+import consulo.configurable.ConfigurationException;
+import consulo.content.bundle.AdditionalDataConfigurable;
+import consulo.content.bundle.Sdk;
+import consulo.content.bundle.SdkModificator;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.sdk.ui.RubySdkConfigurablePanel;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.swing.*;
 
 /**

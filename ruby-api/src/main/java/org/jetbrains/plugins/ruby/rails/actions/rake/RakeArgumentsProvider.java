@@ -22,7 +22,7 @@ import java.util.Arrays;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.CommandLineArgumentsProvider;
-import com.intellij.openapi.actionSystem.AnAction;
+import consulo.ui.ex.action.AnAction;
 
 /**
  * Created by IntelliJ IDEA.

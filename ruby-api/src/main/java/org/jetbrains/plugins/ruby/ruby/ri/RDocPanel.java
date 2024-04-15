@@ -21,11 +21,12 @@ import java.math.BigInteger;
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.content.bundle.Sdk;
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ProjectRootManager;
+import consulo.project.Project;
+import consulo.module.content.ProjectRootManager;
 
 /**
  * Created by IntelliJ IDEA.

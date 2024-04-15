@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
-import com.intellij.openapi.components.ServiceManager;
+import consulo.ide.ServiceManager;
 
 /**
  * @author yole

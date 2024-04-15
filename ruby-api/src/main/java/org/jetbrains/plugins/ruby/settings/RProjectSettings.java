@@ -21,16 +21,16 @@ import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptio
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.component.persist.PersistentStateComponent;
+import consulo.util.xml.serializer.annotation.Transient;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.xmlb.annotations.Transient;
+import consulo.ide.ServiceManager;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
+import consulo.component.persist.StoragePathMacros;
+import consulo.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,9 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.findUsage.FindUsagesProvider;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyWordsScanner;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjectClass;
@@ -27,9 +32,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.lang.findUsages.FindUsagesProvider;
-import com.intellij.psi.PsiElement;
+import consulo.language.cacheBuilder.WordsScanner;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,6 +41,7 @@ import com.intellij.psi.PsiElement;
  * @author: oleg
  * @date: Mar 9, 2007
  */
+@ExtensionImpl
 public class RubyFindUsagesProvider implements FindUsagesProvider
 {
 	private RubyWordsScanner rubyWordsScanner;
@@ -119,5 +124,12 @@ public class RubyFindUsagesProvider implements FindUsagesProvider
 	public String getNodeText(@Nonnull PsiElement element, boolean useFullName)
 	{
 		return RubyPsiUtil.getPresentableName(element);
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
 	}
 }

@@ -16,16 +16,16 @@
 
 package rb.refactoring.introduceVariable;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.refactoring.RefactoringActionHandler;
+import consulo.codeEditor.Editor;
+import consulo.dataContext.DataContext;
+import consulo.language.editor.refactoring.action.RefactoringActionHandler;
+import consulo.language.psi.PsiElement;
+import consulo.project.Project;
+import consulo.language.psi.PsiFile;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +33,8 @@ import javax.annotation.Nullable;
  * Date: Sep 21, 2007
  * It`s just a wrapper for JRubyWritten handler 
  */
-public class RubyIntroduceVariableHandlerWrapper implements RefactoringActionHandler {
+public class RubyIntroduceVariableHandlerWrapper implements RefactoringActionHandler
+{
     private RubyIntroduceVariableHandler myJRubyHandler;
 
     public void setJRubyHandler(@Nonnull final RubyIntroduceVariableHandler handler) {

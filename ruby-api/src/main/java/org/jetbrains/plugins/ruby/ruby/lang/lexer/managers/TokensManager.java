@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.lexer.managers;
 
+import consulo.language.ast.IElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.state.Expr;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

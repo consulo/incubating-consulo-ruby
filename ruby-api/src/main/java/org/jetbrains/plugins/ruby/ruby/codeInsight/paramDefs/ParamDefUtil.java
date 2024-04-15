@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SpecialSymbol;
@@ -30,8 +30,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RArray;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssocList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.psi.PsiElement;
+import consulo.application.ApplicationManager;
 
 /**
  * @author yole

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom;
 
-import com.intellij.pom.PomModelAspect;
+import consulo.language.pom.PomModelAspect;
 
 /**
  * Created by IntelliJ IDEA.

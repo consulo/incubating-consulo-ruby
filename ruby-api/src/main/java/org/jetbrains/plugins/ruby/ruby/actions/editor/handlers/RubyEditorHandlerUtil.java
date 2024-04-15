@@ -18,9 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers;
 
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
+import consulo.dataContext.DataContext;
+import consulo.codeEditor.Editor;
+import consulo.ide.impl.idea.openapi.editor.actionSystem.EditorWriteActionHandler;
 
 /**
  * Created by IntelliJ IDEA.

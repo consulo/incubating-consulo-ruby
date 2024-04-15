@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
 
 /**
  * @author VISTALL

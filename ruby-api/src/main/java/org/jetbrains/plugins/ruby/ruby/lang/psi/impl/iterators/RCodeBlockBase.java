@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.iterators;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceContext;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.TypeInferenceHelper;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
@@ -24,8 +26,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.impl.RControlFlowBui
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RCodeBlock;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

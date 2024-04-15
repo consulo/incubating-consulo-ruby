@@ -16,27 +16,31 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.configurations.JavaParameters;
-import com.intellij.execution.process.*;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.Function;
+import consulo.java.execution.configurations.OwnJavaParameters;
+import consulo.logging.Logger;
+import consulo.process.ExecutionException;
+import consulo.process.ProcessHandler;
+import consulo.process.ProcessOutputTypes;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.process.event.ProcessAdapter;
+import consulo.process.event.ProcessEvent;
+import consulo.process.internal.OSProcessHandler;
+import consulo.project.Project;
 import consulo.util.dataholder.Key;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
-import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
+import static consulo.util.io.FileUtil.toSystemDependentName;
 
 /**
  * Created by IntelliJ IDEA.
@@ -224,7 +228,7 @@ public class Runner
 		}
 
 		//User's custom ENV variables
-		final JavaParameters params = new JavaParameters();
+		final OwnJavaParameters params = new OwnJavaParameters();
 		params.setPassParentEnvs(passParentEnvs);
 		//   EnvironmentVariablesComponent.setupEnvs(params, cutstomEnvVariables, passParentEnvs);
 

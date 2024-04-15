@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.openapi.module.Module;
+import consulo.module.Module;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 

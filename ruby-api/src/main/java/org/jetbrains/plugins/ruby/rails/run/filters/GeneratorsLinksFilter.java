@@ -16,22 +16,21 @@
 
 package org.jetbrains.plugins.ruby.rails.run.filters;
 
-import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.annotation.Nullable;
-
+import consulo.application.util.SystemInfo;
+import consulo.execution.ui.console.Filter;
+import consulo.module.Module;
+import consulo.project.Project;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.run.filters.FileLinksFilterUtil;
 import org.jetbrains.plugins.ruby.ruby.run.filters.OpenIOFileHyperlinkInfo;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
-import com.intellij.execution.filters.Filter;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
+
+import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by IntelliJ IDEA.

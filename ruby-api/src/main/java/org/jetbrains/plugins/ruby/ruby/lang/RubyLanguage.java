@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import com.intellij.lang.Language;
+import consulo.language.Language;
 
 
 public class RubyLanguage extends Language

@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,8 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
-import javax.annotation.Nullable;
-
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 
 /**

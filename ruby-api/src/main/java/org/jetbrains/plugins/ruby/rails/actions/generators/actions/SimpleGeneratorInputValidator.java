@@ -16,16 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.language.psi.PsiElement;
+import consulo.module.Module;
+import consulo.ui.ex.InputValidator;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.InputValidator;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
+import consulo.project.Project;
+import consulo.ui.ex.awt.Messages;
+import consulo.language.psi.PsiDirectory;
+import consulo.util.lang.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.

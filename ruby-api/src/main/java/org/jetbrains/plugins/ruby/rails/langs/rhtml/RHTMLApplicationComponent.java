@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
 import com.intellij.codeInsight.editorActions.HtmlQuoteHandler;
-import com.intellij.codeInsight.editorActions.TypedHandler;
-import com.intellij.openapi.fileTypes.FileTypeManager;
+import consulo.ide.impl.idea.codeInsight.editorActions.TypedHandler;
+import consulo.language.file.FileTypeManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,7 +28,6 @@ import com.intellij.openapi.fileTypes.FileTypeManager;
  */
 public class RHTMLApplicationComponent
 {
-
 	@SuppressWarnings({
 			"UnusedDeclaration",
 			"UnusedParameters"

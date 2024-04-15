@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.commenter.block;
 
-import com.intellij.codeInsight.generation.actions.CommentByBlockCommentAction;
+import consulo.ide.impl.idea.codeInsight.generation.actions.CommentByBlockCommentAction;
 import junit.framework.Test;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.PathUtil;

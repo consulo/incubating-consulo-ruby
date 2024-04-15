@@ -16,9 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.ui.wizard.ui;
 
-import javax.annotation.Nonnull;
-
 import com.intellij.facet.ui.FacetEditorTab;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

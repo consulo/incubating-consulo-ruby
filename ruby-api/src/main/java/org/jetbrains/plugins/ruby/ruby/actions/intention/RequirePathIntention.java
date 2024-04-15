@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiElement;
+import consulo.util.lang.ref.Ref;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.methodCall.RCallNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubySystemCallVisitor;
-import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.Ref;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.language.editor.intention.IntentionAction;
+import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,7 +52,7 @@ public abstract class RequirePathIntention implements IntentionAction
 		final RCall cmdCall = RCallNavigator.getByRListOfExpressions(exprList);
 		if(cmdCall != null)
 		{
-			final Ref<Boolean> result = new Ref<Boolean>(false);
+			final Ref<Boolean> result = new consulo.util.lang.ref.Ref<Boolean>(false);
 
 			final RubySystemCallVisitor callVisitor = new RubySystemCallVisitor()
 			{

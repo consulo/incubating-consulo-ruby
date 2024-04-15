@@ -16,13 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.shortcuts;
 
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.keymap.Keymap;
-import com.intellij.openapi.keymap.ex.KeymapManagerEx;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.ui.Messages;
 import consulo.container.plugin.PluginId;
+import consulo.dataContext.DataContext;
+import consulo.language.editor.CommonDataKeys;
+import consulo.module.Module;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.keymap.Keymap;
+import consulo.ui.ex.keymap.KeymapManager;
 import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.GeneratorsActionGroup;
@@ -32,7 +38,6 @@ import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 
 /**
@@ -58,12 +63,12 @@ public class ShortcutAction extends AnAction
 
 	public static void unregisterInKeyMap(@Nonnull final String actionId)
 	{
-		final Keymap[] keymaps = (KeymapManagerEx.getInstanceEx()).getAllKeymaps();
+		final Keymap[] keymaps = (KeymapManager.getInstance()).getAllKeymaps();
 		for(Keymap keymap : keymaps)
 		{
 			keymap.removeAllActionShortcuts(actionId);
 		}
-		KeymapManagerEx.getInstanceEx().getActiveKeymap().removeAllActionShortcuts(actionId);
+		KeymapManager.getInstance().getActiveKeymap().removeAllActionShortcuts(actionId);
 		ActionManager.getInstance().unregisterAction(actionId);
 	}
 

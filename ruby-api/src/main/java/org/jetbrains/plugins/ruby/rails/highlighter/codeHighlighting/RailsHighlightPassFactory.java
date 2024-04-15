@@ -16,27 +16,28 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
-import com.intellij.codeHighlighting.Pass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.impl.DocumentMarkupModel;
-import com.intellij.openapi.editor.markup.MarkupModel;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
-import javax.annotation.Nonnull;
+import consulo.codeEditor.markup.MarkupModel;
+import consulo.language.editor.Pass;
+import consulo.language.editor.impl.highlight.TextEditorHighlightingPass;
+import consulo.document.Document;
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.DocumentMarkupModel;
+import consulo.ide.impl.idea.openapi.module.ModuleUtil;
+import consulo.language.psi.PsiFile;
+import consulo.virtualFileSystem.VirtualFile;
 
+import jakarta.annotation.Nonnull;
+
+import consulo.language.editor.impl.highlight.TextEditorHighlightingPassFactory;
+import consulo.module.Module;
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.DaemonCodeAnalyzerUtil;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,7 +62,7 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
 			return null;
 		}
 
-		final Module module = ModuleUtil.findModuleForPsiElement(psiFile);
+		final Module module = consulo.ide.impl.idea.openapi.module.ModuleUtil.findModuleForPsiElement(psiFile);
 		if(module != null && RailsFacetUtil.hasRailsSupport(module))
 		{
 			final VirtualFile file = psiFile.getVirtualFile();

@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.impl.DocumentMarkupModel;
-import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.openapi.editor.markup.HighlighterTargetArea;
-import com.intellij.openapi.editor.markup.MarkupModel;
-import com.intellij.openapi.editor.markup.RangeHighlighter;
-import com.intellij.openapi.project.Project;
-import consulo.awt.TargetAWT;
+import consulo.codeEditor.DocumentMarkupModel;
+import consulo.codeEditor.markup.HighlighterTargetArea;
+import consulo.document.Document;
+import consulo.codeEditor.markup.HighlighterLayer;
+import consulo.codeEditor.markup.MarkupModel;
+import consulo.codeEditor.markup.RangeHighlighter;
+import consulo.project.Project;
+import consulo.application.ApplicationManager;
+import consulo.logging.Logger;
+import consulo.ui.ex.awtUnsafe.TargetAWT;
 
 import java.util.ArrayList;
 import java.util.Collection;

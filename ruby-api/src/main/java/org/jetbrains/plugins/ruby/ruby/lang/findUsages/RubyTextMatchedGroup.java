@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
+import consulo.virtualFileSystem.status.FileStatus;
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.openapi.vcs.FileStatus;
-import com.intellij.usages.UsageGroup;
-import com.intellij.usages.UsageView;
+import consulo.usage.UsageGroup;
+import consulo.usage.UsageView;
 import consulo.ui.image.Image;
 
 /**

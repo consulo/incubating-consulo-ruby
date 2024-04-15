@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
+import consulo.fileTemplate.FileTemplate;
+import consulo.language.psi.PsiElement;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ide.impl.idea.openapi.fileTypes.ex.FileTypeManagerEx;
+import consulo.project.Project;
+import consulo.language.psi.PsiDirectory;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.Presentation;
 
 /**
  * Created by IntelliJ IDEA.

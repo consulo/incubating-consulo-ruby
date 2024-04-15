@@ -16,28 +16,28 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.editorHandlers;
 
-import javax.annotation.Nonnull;
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.EditorEx;
+import consulo.codeEditor.EditorHighlighter;
+import consulo.codeEditor.HighlighterIterator;
+import consulo.codeEditor.action.EditorActionHandler;
+import consulo.codeEditor.action.EditorWriteActionHandler;
+import consulo.codeEditor.util.EditorModificationUtil;
+import consulo.dataContext.DataContext;
+import consulo.document.Document;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.codeStyle.CodeStyleManager;
+import consulo.language.editor.CodeInsightSettings;
+import consulo.language.psi.PsiDocumentManager;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.RubyEditorHandlerUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.managers.HeredocsManager;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import com.intellij.codeInsight.CodeInsightSettings;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
-import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
-import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -118,7 +118,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final HighlighterIterator iterator = highlighter.createIterator(carret - 1);
-		final IElementType type = !iterator.atEnd() ? iterator.getTokenType() : null;
+		final IElementType type = !iterator.atEnd() ? (IElementType) iterator.getTokenType() : null;
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////////////// Enter in line comment //////////////////////////////////////////////////////////////////////////////

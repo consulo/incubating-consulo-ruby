@@ -18,18 +18,18 @@ package org.jetbrains.plugins.ruby.addins.rspec;
 
 import java.util.Map;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleServiceManager;
+import consulo.component.persist.Storage;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.ide.impl.idea.openapi.module.ModuleServiceManager;
 
 /**
  * Created by IntelliJ IDEA.

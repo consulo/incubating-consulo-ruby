@@ -21,6 +21,9 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import consulo.ui.ex.action.KeyboardShortcut;
+import consulo.ui.ex.keymap.Keymap;
+import consulo.ui.ex.keymap.KeymapManager;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.SerializableGenerator;
@@ -30,12 +33,9 @@ import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RakeTaskNodeInfo;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.RubyShortcutsSettings;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.ShortcutAction;
 import org.jetbrains.plugins.ruby.rails.actions.shortcuts.ShortcutsTreeState;
-import com.intellij.openapi.actionSystem.KeyboardShortcut;
-import com.intellij.openapi.keymap.Keymap;
-import com.intellij.openapi.keymap.KeymapManager;
-import com.intellij.openapi.keymap.ex.KeymapManagerEx;
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
+import consulo.ide.impl.idea.openapi.keymap.ex.KeymapManagerEx;
+import consulo.configurable.Configurable;
+import consulo.configurable.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.

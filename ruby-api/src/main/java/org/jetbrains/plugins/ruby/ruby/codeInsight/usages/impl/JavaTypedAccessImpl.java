@@ -1,7 +1,7 @@
 package org.jetbrains.plugins.ruby.ruby.codeInsight.usages.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.JavaTypedAccess;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import com.intellij.psi.PsiParameter;

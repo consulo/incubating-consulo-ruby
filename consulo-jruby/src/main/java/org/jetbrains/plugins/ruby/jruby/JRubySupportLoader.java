@@ -18,18 +18,18 @@ package org.jetbrains.plugins.ruby.jruby;
 
 import java.util.Collections;
 
+import consulo.virtualFileSystem.VirtualFileManager;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import org.jruby.Ruby;
 import org.jruby.javasupport.JavaEmbedUtils;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import consulo.logging.Logger;
+import consulo.virtualFileSystem.VirtualFile;
 import com.intellij.util.PathUtil;
-import com.intellij.util.ThrowableRunnable;
+import consulo.util.lang.function.ThrowableRunnable;
 
 /**
  * It`s a class to load jruby support

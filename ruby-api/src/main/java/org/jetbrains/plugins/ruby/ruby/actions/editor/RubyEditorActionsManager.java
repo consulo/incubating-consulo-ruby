@@ -19,11 +19,11 @@ package org.jetbrains.plugins.ruby.ruby.actions.editor;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.RubyTypedHandler;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.editorHandlers.RubyBackspaceHandler;
 import org.jetbrains.plugins.ruby.ruby.actions.editor.handlers.editorHandlers.RubyEnterHandler;
-import com.intellij.openapi.actionSystem.IdeActions;
-import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
-import com.intellij.openapi.editor.actionSystem.EditorActionManager;
-import com.intellij.openapi.editor.actionSystem.TypedAction;
-import com.intellij.openapi.editor.actionSystem.TypedActionHandler;
+import consulo.ui.ex.action.IdeActions;
+import consulo.codeEditor.action.EditorActionHandler;
+import consulo.codeEditor.action.EditorActionManager;
+import consulo.codeEditor.action.TypedAction;
+import consulo.codeEditor.action.TypedActionHandler;
 
 /**
  * Created by IntelliJ IDEA.

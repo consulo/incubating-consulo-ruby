@@ -16,24 +16,24 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import consulo.annotation.component.ExtensionImpl;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.colorScheme.setting.AttributesDescriptor;
+import consulo.colorScheme.setting.ColorDescriptor;
+import consulo.language.ast.IElementType;
+import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
+import consulo.language.editor.highlight.SyntaxHighlighter;
+import consulo.language.lexer.Lexer;
+import consulo.xml.ide.highlighter.HtmlFileHighlighter;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLColorsPageHighlightingLexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.impl.RHTMLFileHighlighterImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighter;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
-import com.intellij.ide.highlighter.HtmlFileHighlighter;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.options.colors.AttributesDescriptor;
-import com.intellij.openapi.options.colors.ColorDescriptor;
-import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.psi.tree.IElementType;
+
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,6 +41,7 @@ import com.intellij.psi.tree.IElementType;
  * @author: Roman Chernyatchik
  * @date: Sep 15, 2007
  */
+@ExtensionImpl
 public class RHTMLColorsPage implements ColorSettingsPage
 {
 	private static final String DEMO_TEXT = "<%# Sample comment %> \n" +

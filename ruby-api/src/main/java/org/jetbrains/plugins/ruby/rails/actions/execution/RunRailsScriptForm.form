@@ -29,7 +29,7 @@
         <border type="none"/>
         <children/>
       </grid>
-      <component id="e07b5" class="com.intellij.openapi.ui.LabeledComponent" binding="scriptPathComponent" custom-create="true">
+      <component id="e07b5" class="consulo.ui.ex.awt.LabeledComponent" binding="scriptPathComponent" custom-create="true">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -37,7 +37,7 @@
           <text resource-bundle="org/jetbrains/plugins/ruby/RBundle" key="rails.actions.execution.run.rails.script.dialog.component.script.path.caption"/>
         </properties>
       </component>
-      <component id="22468" class="com.intellij.openapi.ui.LabeledComponent" binding="scriptArgsComponent" custom-create="true">
+      <component id="22468" class="consulo.ui.ex.awt.LabeledComponent" binding="scriptArgsComponent" custom-create="true">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="2" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

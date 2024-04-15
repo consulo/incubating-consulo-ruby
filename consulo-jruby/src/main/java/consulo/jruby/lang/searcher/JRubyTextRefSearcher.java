@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.jruby.search;
+package consulo.jruby.lang.searcher;
 
-import javax.annotation.Nonnull;
-
+import com.intellij.java.indexing.search.searches.MethodReferencesSearch;
+import com.intellij.java.indexing.search.searches.MethodReferencesSearchExecutor;
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.ApplicationManager;
+import consulo.application.util.function.Computable;
+import consulo.application.util.function.Processor;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.search.PsiSearchHelper;
+import consulo.language.psi.search.UsageSearchContext;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.util.Computable;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.PsiSearchHelper;
-import com.intellij.psi.search.UsageSearchContext;
-import com.intellij.psi.search.searches.MethodReferencesSearch;
-import com.intellij.util.Processor;
-import com.intellij.util.QueryExecutor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,9 +35,9 @@ import com.intellij.util.QueryExecutor;
  * @author: oleg
  * @date: Jan 12, 2008
  */
-public class JRubyTextRefSearcher implements QueryExecutor<PsiReference, MethodReferencesSearch.SearchParameters>
+@ExtensionImpl
+public class JRubyTextRefSearcher implements MethodReferencesSearchExecutor
 {
-
 	@Override
 	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> psiReferenceProcessor)
 	{

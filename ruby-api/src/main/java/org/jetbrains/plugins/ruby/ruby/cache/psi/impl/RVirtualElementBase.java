@@ -17,7 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 
 /**

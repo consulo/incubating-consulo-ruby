@@ -16,23 +16,23 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.*;
-import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.IncorrectOperationException;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.component.util.Iconable;
+import consulo.document.Document;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.codeStyle.CodeStyleManager;
+import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.language.psi.*;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.language.util.IncorrectOperationException;
+import consulo.logging.Logger;
+import consulo.project.Project;
 import consulo.ui.image.Image;
+import consulo.virtualFileSystem.fileType.FileType;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -66,7 +66,7 @@ import java.util.List;
  */
 public class RubyPsiUtil
 {
-	private static final Logger LOG = Logger.getInstance(RubyPsiUtil.class.getName());
+	private static final Logger LOG = Logger.getInstance(RubyPsiUtil.class);
 	@NonNls
 	private static final String TEMP_FILE_NAME = "ruby_temp_file_" + RubyPsiUtil.class.hashCode() + "." + RubyFileType.INSTANCE.getDefaultExtension();
 
@@ -77,7 +77,7 @@ public class RubyPsiUtil
 	 * @param directory psiDirectory, where file will be created
 	 * @param text      Text
 	 * @return file
-	 * @throws com.intellij.util.IncorrectOperationException
+	 * @throws IncorrectOperationException
 	 *
 	 */
 	@SuppressWarnings({"JavaDoc"})

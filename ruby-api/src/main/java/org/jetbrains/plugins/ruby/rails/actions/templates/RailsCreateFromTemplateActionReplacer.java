@@ -16,15 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.psi.PsiDirectory;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.ide.fileTemplates.CreateFromTemplateActionReplacer;
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDirectory;
+import consulo.fileTemplate.FileTemplate;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,9 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import java.util.Map;
 
-import javax.annotation.Nullable;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
+import jakarta.annotation.Nullable;
+import consulo.module.Module;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

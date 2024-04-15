@@ -18,23 +18,23 @@ package org.jetbrains.plugins.ruby.ruby.pom.impl;
 
 import java.util.Collections;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.application.progress.ProgressManager;
+import consulo.language.pom.PomModel;
+import consulo.language.pom.PomModelAspect;
+import consulo.language.pom.TreeAspect;
+import consulo.language.pom.event.PomModelEvent;
+import consulo.language.pom.event.TreeChangeEvent;
+import consulo.language.psi.PsiFile;
+import consulo.project.Project;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.pom.PomModel;
-import com.intellij.pom.PomModelAspect;
-import com.intellij.pom.event.PomModelEvent;
-import com.intellij.pom.tree.TreeAspect;
-import com.intellij.pom.tree.events.TreeChangeEvent;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.virtualFileSystem.fileType.FileTypeFactory;
 import org.jetbrains.plugins.ruby.rails.langs.RJSFileType;
 import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import consulo.virtualFileSystem.fileType.FileTypeConsumer;
 
 /**
  * Created by IntelliJ IDEA.

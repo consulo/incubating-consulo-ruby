@@ -21,13 +21,13 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import consulo.language.pom.PomModel;
+import consulo.language.pom.PomModelAspect;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyChange;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyChangeSet;
 import org.jetbrains.plugins.ruby.ruby.pom.RubyPomAspect;
-import com.intellij.pom.PomModel;
-import com.intellij.pom.PomModelAspect;
-import com.intellij.pom.event.PomChangeSet;
+import consulo.language.pom.event.PomChangeSet;
 
 /**
  * Created by IntelliJ IDEA.

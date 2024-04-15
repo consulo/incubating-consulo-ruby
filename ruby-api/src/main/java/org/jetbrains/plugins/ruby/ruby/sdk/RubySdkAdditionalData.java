@@ -19,17 +19,17 @@ package org.jetbrains.plugins.ruby.ruby.sdk;
 import java.io.File;
 import java.io.IOException;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.application.util.SystemInfo;
+import consulo.content.bundle.SdkAdditionalData;
+import consulo.content.bundle.SdkModel;
 import org.jdom.Element;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkAdditionalData;
-import com.intellij.openapi.projectRoots.SdkModel;
-import com.intellij.openapi.util.SystemInfo;
+import consulo.configurable.ConfigurationException;
+import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.

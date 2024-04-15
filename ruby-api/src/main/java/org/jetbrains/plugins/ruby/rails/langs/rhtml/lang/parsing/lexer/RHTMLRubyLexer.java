@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.lexer;
 
+import consulo.language.ast.TokenSet;
+import consulo.language.lexer.Lexer;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyRawLexer;
-import com.intellij.lexer.Lexer;
-import com.intellij.lexer.LexerPosition;
-import com.intellij.lexer.MergingLexerAdapter;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.text.CharArrayCharSequence;
+import consulo.language.lexer.LexerPosition;
+import consulo.language.lexer.MergingLexerAdapter;
+import consulo.language.ast.IElementType;
+import consulo.util.lang.CharArrayCharSequence;
 
 /**
  * Created by IntelliJ IDEA.

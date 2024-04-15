@@ -18,14 +18,15 @@ package org.jetbrains.plugins.ruby.ruby.run;
 
 import java.awt.BorderLayout;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+
 import javax.swing.JPanel;
 
-import com.intellij.execution.ui.ExecutionConsole;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionPlaces;
+import consulo.execution.ui.ExecutionConsole;
+import consulo.ui.ex.action.ActionManager;
+import consulo.ui.ex.action.ActionPlaces;
+import consulo.ui.ex.action.ActionGroup;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

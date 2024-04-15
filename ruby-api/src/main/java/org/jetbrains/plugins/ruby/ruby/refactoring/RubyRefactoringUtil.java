@@ -19,12 +19,12 @@ package org.jetbrains.plugins.ruby.ruby.refactoring;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import com.intellij.codeInsight.PsiEquivalenceUtil;
-import com.intellij.psi.PsiElement;
+import consulo.language.editor.PsiEquivalenceUtil;
+import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.

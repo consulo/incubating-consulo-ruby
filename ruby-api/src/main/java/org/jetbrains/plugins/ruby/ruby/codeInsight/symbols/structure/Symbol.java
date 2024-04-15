@@ -18,8 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -28,7 +30,6 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Protot
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
-import com.intellij.openapi.project.Project;
 
 /**
  * Created by IntelliJ IDEA.

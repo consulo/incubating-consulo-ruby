@@ -202,7 +202,7 @@
           <text value="module.wizard.test.framework.rspec.svn.note"/>
         </properties>
       </component>
-      <component id="b13c3" class="com.intellij.openapi.ui.LabeledComponent" binding="mySvnPathComponent" custom-create="true">
+      <component id="b13c3" class="consulo.ui.ex.awt.LabeledComponent" binding="mySvnPathComponent" custom-create="true">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

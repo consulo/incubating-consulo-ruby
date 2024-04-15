@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion;
 
-import com.intellij.codeInsight.completion.BasicInsertHandler;
-import com.intellij.codeInsight.completion.InsertionContext;
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.psi.PsiDocumentManager;
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.util.EditorModificationUtil;
+import consulo.language.editor.completion.lookup.InsertHandler;
+import consulo.language.editor.completion.lookup.InsertionContext;
+import consulo.language.editor.completion.lookup.LookupElement;
+import consulo.language.psi.PsiDocumentManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +29,7 @@ import com.intellij.psi.PsiDocumentManager;
  * @author: Roman Chernyatchik
  * @date: 02.05.2007
  */
-public class RHTMLTagInsertHandler extends BasicInsertHandler
+public class RHTMLTagInsertHandler implements InsertHandler<LookupElement>
 {
 	private void insertRubyCodeCloseTag(final Editor editor, char completionChar)
 	{
@@ -43,7 +43,6 @@ public class RHTMLTagInsertHandler extends BasicInsertHandler
 	@Override
 	public void handleInsert(InsertionContext context, LookupElement item)
 	{
-		super.handleInsert(context, item);
 		insertRubyCodeCloseTag(context.getEditor(), context.getCompletionChar());
 	}
 }

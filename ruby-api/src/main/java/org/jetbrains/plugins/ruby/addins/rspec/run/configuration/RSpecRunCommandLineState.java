@@ -21,8 +21,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.process.cmd.GeneralCommandLine;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
@@ -31,11 +33,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.AbstractRTestsCommandLineState;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.Sdk;
+import consulo.process.ExecutionException;
+import consulo.module.Module;
+import consulo.content.bundle.Sdk;
 
 
 /**

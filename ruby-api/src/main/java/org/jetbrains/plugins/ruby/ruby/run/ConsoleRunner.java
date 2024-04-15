@@ -16,27 +16,30 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import com.intellij.execution.ExecutionManager;
-import com.intellij.execution.Executor;
-import com.intellij.execution.ExecutorRegistry;
-import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.filters.Filter;
-import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.execution.ui.ConsoleView;
-import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.execution.ui.actions.CloseAction;
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.io.FileUtil;
+import consulo.application.Application;
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.application.progress.Task;
+import consulo.document.FileDocumentManager;
+import consulo.execution.ExecutionManager;
+import consulo.execution.action.CloseAction;
+import consulo.execution.executor.DefaultRunExecutor;
+import consulo.execution.executor.Executor;
+import consulo.execution.executor.ExecutorRegistry;
+import consulo.execution.ui.RunContentDescriptor;
+import consulo.execution.ui.console.ConsoleView;
+import consulo.execution.ui.console.Filter;
+import consulo.execution.ui.console.TextConsoleBuilderFactory;
 import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.process.ProcessHandler;
+import consulo.process.event.ProcessListener;
+import consulo.project.Project;
+import consulo.ui.ModalityState;
+import consulo.ui.ex.action.*;
+import consulo.ui.ex.awt.Messages;
+import consulo.util.io.FileUtil;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
@@ -44,8 +47,6 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineStat
 import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -201,7 +202,7 @@ public class ConsoleRunner
 				final ConsoleRunner runner = new ConsoleRunner(project, processListener, consoleFilters, userActions, consoleTitle, workingDir, provider, descriptorFactory);
 				runner.startProcess(runInBackgroundThread);
 			}
-		}, ModalityState.defaultModalityState());
+		}, Application.get().getDefaultModalityState());
 	}
 
 	public ProcessHandler getProcessHandler()
@@ -237,7 +238,7 @@ public class ConsoleRunner
 						FileDocumentManager.getInstance().saveAllDocuments();
 					}
 				};
-				IdeaInternalUtil.runInEventDispatchThread(runnable, ModalityState.NON_MODAL);
+				IdeaInternalUtil.runInEventDispatchThread(runnable, ModalityState.nonModal());
 			}
 		};
 

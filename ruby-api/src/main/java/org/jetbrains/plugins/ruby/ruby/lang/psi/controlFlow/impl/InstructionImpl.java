@@ -3,13 +3,14 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.impl;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
+
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.CallEnvironment;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.CallInstruction;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.Instruction;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RLiteral;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.psi.PsiElement;
 
 class InstructionImpl implements Instruction, Cloneable
 {

@@ -1,6 +1,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
@@ -9,9 +11,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RClassNa
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
-import com.intellij.codeInsight.hint.DeclarationRangeHandler;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
+import consulo.language.editor.hint.DeclarationRangeHandler;
+import consulo.document.util.TextRange;
 
 /**
  * @author VISTALL

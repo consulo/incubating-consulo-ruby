@@ -16,8 +16,22 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.RunManager;
+import consulo.execution.RunnerAndConfigurationSettings;
+import consulo.execution.action.Location;
+import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.ConfigurationType;
+import consulo.execution.configuration.RunConfiguration;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.module.Module;
+import consulo.navigation.OpenFileDescriptor;
+import consulo.project.Project;
+import consulo.ui.image.Image;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
@@ -31,19 +45,6 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfigur
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.execution.Location;
-import com.intellij.execution.RunManager;
-import com.intellij.execution.RunnerAndConfigurationSettings;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,6 +52,7 @@ import consulo.ui.image.Image;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
+@ExtensionImpl
 public class RSpecRunConfigurationType implements ConfigurationType
 {
 	private final RSpecRunConfigurationFactory myRSpecTestsFactory;
@@ -62,7 +64,7 @@ public class RSpecRunConfigurationType implements ConfigurationType
 
 	public static RSpecRunConfigurationType getInstance()
 	{
-		return CONFIGURATION_TYPE_EP.findExtension(RSpecRunConfigurationType.class);
+		return EP_NAME.findExtension(RSpecRunConfigurationType.class);
 	}
 
 	@Override

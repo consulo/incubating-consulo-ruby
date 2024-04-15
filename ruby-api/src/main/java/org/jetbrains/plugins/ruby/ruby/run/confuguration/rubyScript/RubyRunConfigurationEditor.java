@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript;
 
-import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
+import consulo.configurable.ConfigurationException;
+import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 
 public class RubyRunConfigurationEditor extends SettingsEditor<RubyRunConfiguration>
 {

@@ -33,8 +33,7 @@
 	<depends optional="true" config-file="ruby-javascript-integration.xml">consulo.javascript</depends>
 
 	<extensions defaultExtensionNs="consulo.java">
-		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyNamesReferenceSearcher"/>
-		<methodReferencesSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyTextRefSearcher"/>
+		<methodReferencesSearch implementation="consulo.jruby.lang.searcher.JRubyTextRefSearcher"/>
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
@@ -42,7 +41,6 @@
 		<gotoClassContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubyClassAndModuleContributor"/>
 		<gotoSymbolContributor implementation="org.jetbrains.plugins.ruby.ruby.gotoByName.RubySymbolContributor"/>
 		<colorSettingsPage implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyColorsPage"/>
-		<colorSettingsPage implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLColorsPage"/>
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.rails.actions.shortcuts.RubyShortcutsSettings"
 							serviceImplementation="org.jetbrains.plugins.ruby.rails.actions.shortcuts.RubyShortcutsSettings"/>
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.settings.RApplicationSettings" serviceImplementation="org.jetbrains.plugins.ruby.settings.RApplicationSettings"/>
@@ -52,36 +50,24 @@
 		<lang.parserDefinition language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition"/>
 		<lang.braceMatcher language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher"/>
 		<lang.commenter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter"/>
-		<lang.foldingBuilder language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.folding.RubyFoldingBuilder"/>
 		<lang.documentationProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider"/>
-		<lang.syntaxHighlighterFactory language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubySyntaxHighlighterFactory"/>
-		<lang.findUsagesProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider"/>
 		<lang.formatter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder"/>
-		<lang.namesValidator language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.namesValidator.RubyNamesValidator"/>
-		<lang.psiStructureViewFactory language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.structure.RubyStructureViewBuilderFactory"/>
 		<lang.surroundDescriptor language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor"/>
 
 		<editorHighlighterProvider filetype="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighterFactory"/>
 
 		<!--<completionData fileType="RHTML" className="org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RHTMLCompletionData" />-->
 
-		<codeInsight.parameterInfo language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo.RubyParameterInfoHandler"/>
 		<moduleExtensionProvider key="ruby"
 								 name="Ruby"
 								 icon="consulo.ruby.api.RubyApiIconGroup@ruby.ruby"
 								 immutableClass="consulo.ruby.module.extension.BaseRubyModuleExtension"
 								 mutableClass="consulo.ruby.module.extension.BaseRubyMutableModuleExtension"/>
 
-		<contentFolderSupportPatcher implementation="consulo.ruby.module.extension.BaseRubyContentFolderSupportPatcher"/>
 
-		<iconDescriptorUpdater implementation="org.jetbrains.plugins.ruby.RubyIconDescriptorUpdater"/>
 
-		<lang.fileViewProviderFactory language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.eRubyFileViewProviderFactory"/>
-		<lang.parserDefinition language="E-RUBY" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser.RHTMLPaserDefinition"/>
 
-		<consoleFilterProvider implementation="org.jetbrains.plugins.ruby.ruby.run.filters.RConsoleFiltersProvider"/>
 		<createFromTemplateActionReplacer implementation="org.jetbrains.plugins.ruby.rails.actions.templates.RailsCreateFromTemplateActionReplacer"/>
-		<usageTypeProvider implementation="org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyUsageTypeProvider"/>
 
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"
 							serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"/>
@@ -101,8 +87,6 @@
 		<orderRootType implementation="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType"/>
 		<orderRootTypeEditor key="rubyGems" implementationClass="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootTypeUIFactory"/>
 
-		<!--<overridingMethodsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyOverridingMethodsSearch"/>-->
-		<!--<definitionsSearch implementation="org.jetbrains.plugins.ruby.jruby.search.JRubyImplementingMethodsSearch"/>-->
 
 		<!-- Run Configurations: -->
 		<!-- Common Ruby -->
@@ -113,8 +97,6 @@
 		<configurationProducer implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecConfigurationProducer"/>
 
 		<configurationType implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType"/>
-		<configurationType implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationType"/>
-		<configurationType implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecRunConfigurationType"/>
 
 		<!-- RSpec Support -->
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings"
@@ -184,7 +166,7 @@
 		</component>
 
 		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.jruby.JRubySdkTableListener</implementation-class>
+			<implementation-class>consulo.jruby.JRubySdkTableListener</implementation-class>
 		</component>
 	</application-components>
 

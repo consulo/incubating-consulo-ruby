@@ -16,16 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Pair;
+import consulo.content.bundle.Sdk;
+import consulo.module.content.layer.ModifiableRootModel;
+import consulo.util.lang.Pair;
+import consulo.configurable.ConfigurationException;
+import consulo.ui.ex.awt.Messages;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.facet.ui.wizard.RubyWizardSettingsHolder;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

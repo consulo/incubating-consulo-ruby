@@ -16,13 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.psi.PsiNamedElement;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
-import com.intellij.psi.PsiNamedElement;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,18 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import com.intellij.execution.CantRunException;
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionResult;
-import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.filters.TextConsoleBuilder;
-import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
-import com.intellij.openapi.project.Project;
+import consulo.execution.CantRunException;
+import consulo.execution.ExecutionResult;
+import consulo.execution.runner.ExecutionEnvironment;
+import consulo.execution.runner.ProgramRunner;
+import consulo.execution.ui.console.TextConsoleBuilderFactory;
+import consulo.process.ExecutionException;
+import consulo.execution.executor.Executor;
+import consulo.process.cmd.GeneralCommandLine;
+import consulo.execution.ui.console.TextConsoleBuilder;
+import consulo.process.event.ProcessEvent;
+import consulo.project.Project;
+import consulo.process.event.ProcessListener;
 import consulo.util.dataholder.Key;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.ColouredCommandLineState;
@@ -35,7 +35,7 @@ import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunComma
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RStackTraceFilter;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.File;
 
 /**

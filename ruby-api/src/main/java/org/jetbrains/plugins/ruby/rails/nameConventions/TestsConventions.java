@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
+import consulo.module.Module;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import com.intellij.openapi.module.Module;
 
 /**
  * Created by IntelliJ IDEA.

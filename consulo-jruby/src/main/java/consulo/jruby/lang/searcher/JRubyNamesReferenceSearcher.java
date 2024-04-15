@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package org.jetbrains.plugins.ruby.jruby.search;
+package consulo.jruby.lang.searcher;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.util.Computable;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.PsiSearchHelper;
-import com.intellij.psi.search.UsageSearchContext;
-import com.intellij.psi.search.searches.MethodReferencesSearch;
-import com.intellij.util.Processor;
-import com.intellij.util.QueryExecutor;
+import com.intellij.java.indexing.search.searches.MethodReferencesSearch;
+import com.intellij.java.indexing.search.searches.MethodReferencesSearchExecutor;
+import com.intellij.java.language.psi.PsiMethod;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.ApplicationManager;
+import consulo.application.util.function.Computable;
+import consulo.application.util.function.Processor;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.search.PsiSearchHelper;
+import consulo.language.psi.search.UsageSearchContext;
+import consulo.util.lang.StringUtil;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
-
-import javax.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,9 +36,9 @@ import javax.annotation.Nonnull;
  * @author: oleg
  * @date: Jan 11, 2008
  */
-public class JRubyNamesReferenceSearcher implements QueryExecutor<PsiReference, MethodReferencesSearch.SearchParameters>
+@ExtensionImpl
+public class JRubyNamesReferenceSearcher implements MethodReferencesSearchExecutor
 {
-
 	@Override
 	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> psiReferenceProcessor)
 	{

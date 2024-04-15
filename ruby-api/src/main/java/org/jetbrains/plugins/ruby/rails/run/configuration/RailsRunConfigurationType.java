@@ -16,16 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration;
 
-import javax.annotation.Nonnull;
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.annotation.Nonnull;
+
+import consulo.execution.action.Location;
+import consulo.execution.configuration.ConfigurationFactory;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfigurationFactory;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
-import com.intellij.execution.Location;
-import com.intellij.execution.RunnerAndConfigurationSettings;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.execution.configurations.RunConfiguration;
+import consulo.execution.RunnerAndConfigurationSettings;
+import consulo.execution.configuration.ConfigurationType;
+import consulo.execution.configuration.RunConfiguration;
 import consulo.ui.image.Image;
 
 /**
@@ -34,6 +36,7 @@ import consulo.ui.image.Image;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
+@ExtensionImpl
 public class RailsRunConfigurationType implements ConfigurationType
 {
 	private final RailsServerRunConfigurationFactory myRailsServerFactory;
@@ -45,7 +48,7 @@ public class RailsRunConfigurationType implements ConfigurationType
 
 	public static RailsRunConfigurationType getInstance()
 	{
-		return CONFIGURATION_TYPE_EP.findExtension(RailsRunConfigurationType.class);
+		return EP_NAME.findExtensionOrFail(RailsRunConfigurationType.class);
 	}
 
 	@Override

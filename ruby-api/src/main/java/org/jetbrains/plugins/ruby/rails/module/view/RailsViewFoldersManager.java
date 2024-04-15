@@ -21,16 +21,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleServiceManager;
+import consulo.component.persist.PersistentStateComponent;
+import consulo.component.persist.State;
+import consulo.component.persist.Storage;
+import consulo.module.Module;
+import consulo.ide.impl.idea.openapi.module.ModuleServiceManager;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,7 +61,7 @@ public class RailsViewFoldersManager implements PersistentStateComponent<Element
 
 	public static RailsViewFoldersManager getInstance(@Nonnull final Module module)
 	{
-		return ModuleServiceManager.getService(module, RailsViewFoldersManager.class);
+		return consulo.ide.impl.idea.openapi.module.ModuleServiceManager.getService(module, RailsViewFoldersManager.class);
 	}
 
 	@NonNls

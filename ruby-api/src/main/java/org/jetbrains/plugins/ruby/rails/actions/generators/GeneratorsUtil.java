@@ -16,20 +16,26 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
-import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.swing.JCheckBox;
-
+import consulo.application.progress.ProgressIndicator;
+import consulo.application.progress.ProgressManager;
+import consulo.application.progress.Task;
+import consulo.content.bundle.Sdk;
+import consulo.document.FileDocumentManager;
+import consulo.execution.ui.console.Filter;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import consulo.process.event.ProcessAdapter;
+import consulo.process.event.ProcessEvent;
+import consulo.process.event.ProcessListener;
+import consulo.project.Project;
+import consulo.ui.ModalityState;
+import consulo.util.lang.function.ThrowableRunnable;
+import consulo.util.lang.ref.Ref;
+import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.lexer.OutputLexer;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -37,34 +43,21 @@ import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfig
 import org.jetbrains.plugins.ruby.rails.run.RailsScriptRunner;
 import org.jetbrains.plugins.ruby.rails.run.filters.GeneratorsLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import org.jetbrains.plugins.ruby.ruby.run.ExecutionHelper;
-import org.jetbrains.plugins.ruby.ruby.run.Output;
-import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunner;
-import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
-import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
-import org.jetbrains.plugins.ruby.ruby.run.Runner;
+import org.jetbrains.plugins.ruby.ruby.run.*;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.settings.RProjectUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.execution.filters.Filter;
-import com.intellij.execution.process.ProcessAdapter;
-import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.process.ProcessListener;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ThrowableRunnable;
+
+import javax.swing.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
 
 /**
  * Created by IntelliJ IDEA.
@@ -245,7 +238,7 @@ public class GeneratorsUtil
 		}
 
 		final String generateScriptPath = railsAppHomePath + VirtualFileUtil.VFS_PATH_SEPARATOR + GENERATE_SCRIPT;
-		final Ref<VirtualFile> file = new Ref<VirtualFile>();
+		final consulo.util.lang.ref.Ref<VirtualFile> file = new Ref<VirtualFile>();
 
 		IdeaInternalUtil.runInsideWriteAction(new ThrowableRunnable<Exception>()
 		{

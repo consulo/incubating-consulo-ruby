@@ -16,9 +16,9 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi;
 
-import javax.annotation.Nonnull;
+import consulo.component.util.Iconable;
 
-import com.intellij.openapi.util.Iconable;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

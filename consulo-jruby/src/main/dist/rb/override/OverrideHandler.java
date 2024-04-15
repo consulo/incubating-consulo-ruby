@@ -16,10 +16,11 @@
 
 package rb.override;
 
-import com.intellij.codeInsight.generation.ClassMember;
-import com.intellij.lang.LanguageCodeInsightActionHandler;
-import com.intellij.openapi.project.Project;
-import javax.annotation.Nonnull;
+import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.editor.action.LanguageCodeInsightActionHandler;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 
 import java.util.List;
@@ -30,7 +31,8 @@ import java.util.List;
  * @author: oleg
  * @date: Jan 30, 2008
  */
-public interface OverrideHandler extends LanguageCodeInsightActionHandler {
+public interface OverrideHandler extends LanguageCodeInsightActionHandler
+{
 
     /*
      * Creates list of classMembers to override

@@ -1,18 +1,18 @@
 package consulo.ruby.module.extension;
 
-import javax.annotation.Nonnull;
+import consulo.content.bundle.SdkType;
+import consulo.module.content.layer.ModuleRootLayer;
+import consulo.module.content.layer.extension.ModuleExtensionWithSdkBase;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.facet.RSupportPerModuleSettingsImpl;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkType;
 import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
-import com.intellij.openapi.projectRoots.SdkType;
-import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
-import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL
  * @since 25.09.13.
  */
-public class BaseRubyModuleExtension extends ModuleExtensionWithSdkImpl<BaseRubyModuleExtension> implements RubyModuleExtension<BaseRubyModuleExtension>
+public class BaseRubyModuleExtension extends ModuleExtensionWithSdkBase<BaseRubyModuleExtension> implements RubyModuleExtension<BaseRubyModuleExtension>
 {
 	private RSupportPerModuleSettings mySettings;
 

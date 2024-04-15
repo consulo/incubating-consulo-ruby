@@ -1,6 +1,6 @@
 package consulo.ruby.rails.module.extension;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import consulo.module.extension.impl.ModuleExtensionImpl;
 import consulo.roots.ModuleRootLayer;
 

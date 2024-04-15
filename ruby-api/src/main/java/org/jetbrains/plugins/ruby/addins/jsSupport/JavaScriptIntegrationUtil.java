@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.jsSupport;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.psi.PsiElement;
+import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.

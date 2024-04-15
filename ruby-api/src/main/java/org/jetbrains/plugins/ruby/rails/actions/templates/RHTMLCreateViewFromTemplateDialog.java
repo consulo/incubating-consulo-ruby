@@ -16,16 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import javax.annotation.Nonnull;
-
+import consulo.fileTemplate.FileTemplate;
+import consulo.language.file.FileTypeManager;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.project.Project;
+import consulo.virtualFileSystem.fileType.FileType;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
-import com.intellij.ide.fileTemplates.FileTemplate;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiFile;
-import com.intellij.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +46,7 @@ public class RHTMLCreateViewFromTemplateDialog extends CreateFileFromTemplateDia
 	protected PsiFile createPsiFile(final FileTemplate template, final Project project, final PsiDirectory directory, final String templateText, final String fileName) throws IncorrectOperationException
 	{
 		final String defaultExt = template.getExtension();
-		final FileType fileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(defaultExt);
+		final FileType fileType = FileTypeManager.getInstance().getFileTypeByExtension(defaultExt);
 		assert fileType == RHTMLFileType.INSTANCE;
 
 		final String rhtmlExt = RHTMLFileType.INSTANCE.getDefaultExtension();

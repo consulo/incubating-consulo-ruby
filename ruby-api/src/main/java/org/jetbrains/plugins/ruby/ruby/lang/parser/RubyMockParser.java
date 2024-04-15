@@ -19,12 +19,13 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import com.intellij.lang.ASTNode;
-import consulo.lang.LanguageVersion;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
-import com.intellij.psi.tree.IElementType;
+import jakarta.annotation.Nonnull;
+
+import consulo.language.version.LanguageVersion;
+import consulo.language.parser.PsiParser;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.parser.PsiBuilder;
 
 /**
  * Created by IntelliJ IDEA.

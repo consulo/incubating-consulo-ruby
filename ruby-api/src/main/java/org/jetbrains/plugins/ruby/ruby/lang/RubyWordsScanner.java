@@ -16,16 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.application.util.function.Processor;
+import consulo.language.ast.IElementType;
+import consulo.language.cacheBuilder.WordsScanner;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-import com.intellij.lang.cacheBuilder.WordOccurrence;
-import com.intellij.lang.cacheBuilder.WordsScanner;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.Processor;
+import consulo.language.cacheBuilder.WordOccurrence;
+import consulo.language.ast.TokenSet;
 
 
 /**

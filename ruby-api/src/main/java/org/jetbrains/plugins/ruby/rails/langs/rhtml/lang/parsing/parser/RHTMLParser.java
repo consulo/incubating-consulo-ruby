@@ -16,22 +16,21 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.parser;
 
-import static org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType.RHTML_COMMENT_END;
-
-import javax.annotation.Nonnull;
-
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.PsiParser;
+import consulo.language.version.LanguageVersion;
+import consulo.xml.psi.impl.source.parsing.xml.XmlParsing;
+import consulo.xml.psi.xml.XmlElementType;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
-import com.intellij.lang.ASTNode;
-import consulo.lang.LanguageVersion;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
-import com.intellij.psi.impl.source.parsing.xml.XmlParsing;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.xml.XmlElementType;
+
+import static org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType.RHTML_COMMENT_END;
 
 /**
  * Created by IntelliJ IDEA.

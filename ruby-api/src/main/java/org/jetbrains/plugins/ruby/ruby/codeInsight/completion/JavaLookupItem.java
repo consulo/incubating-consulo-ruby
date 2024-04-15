@@ -18,16 +18,16 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
 import java.awt.Color;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
-import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
-import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
-import com.intellij.codeInsight.lookup.PresentableLookupValue;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.component.util.Iconable;
+import consulo.language.editor.completion.lookup.LookupValueWithPsiElement;
+import consulo.language.editor.completion.lookup.LookupValueWithUIHint;
+import consulo.language.editor.completion.lookup.PresentableLookupValue;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiNamedElement;
+import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.language.editor.completion.lookup.LookupValueWithPriority;
 import consulo.ui.image.Image;
 
 /**

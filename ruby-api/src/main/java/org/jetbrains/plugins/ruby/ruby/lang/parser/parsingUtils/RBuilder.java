@@ -18,11 +18,11 @@ package org.jetbrains.plugins.ruby.ruby.lang.parser.parsingUtils;
 
 import java.util.Map;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
-import com.intellij.codeHighlighting.TextEditorHighlightingPass;
-import com.intellij.codeHighlighting.TextEditorHighlightingPassFactory;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
-import javax.annotation.Nonnull;
+import consulo.codeEditor.Editor;
+import consulo.language.editor.impl.highlight.TextEditorHighlightingPassFactory;
+import consulo.language.psi.PsiFile;
+import jakarta.annotation.Nonnull;
 
+import consulo.language.editor.impl.highlight.TextEditorHighlightingPass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.

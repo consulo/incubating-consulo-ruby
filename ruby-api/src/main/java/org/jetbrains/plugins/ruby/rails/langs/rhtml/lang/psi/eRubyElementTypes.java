@@ -1,9 +1,9 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
+import consulo.language.impl.psi.template.TemplateDataElementType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.impl.RubyDeclarationsInRHTMLTypeImpl;
-import com.intellij.psi.templateLanguages.TemplateDataElementType;
-import com.intellij.psi.tree.IFileElementType;
+import consulo.language.ast.IFileElementType;
 
 /**
  * @author VISTALL

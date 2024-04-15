@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
+import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiFile;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

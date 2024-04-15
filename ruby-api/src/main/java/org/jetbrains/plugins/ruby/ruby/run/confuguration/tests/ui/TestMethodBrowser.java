@@ -16,7 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import javax.annotation.Nonnull;
+import consulo.execution.ui.awt.BrowseModuleValueActionListener;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.project.Project;
+import consulo.ui.ex.awt.Messages;
+import consulo.util.lang.Pair;
+import consulo.util.lang.function.Condition;
+import consulo.util.lang.ref.Ref;
+import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
@@ -28,15 +37,6 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestUnitUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationForm;
-import com.intellij.execution.configuration.BrowseModuleValueActionListener;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.search.GlobalSearchScope;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,12 +75,12 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 			return null;
 		}
 
-		final Ref<FileSymbol> fSWrapper = new Ref<FileSymbol>();
+		final Ref<FileSymbol> fSWrapper = new consulo.util.lang.ref.Ref<FileSymbol>();
 
 		final RVirtualClass testClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(classQualifiedName, getProject(), myScope, file, fSWrapper);
 		if(testClass == null)
 		{
-			Messages.showMessageDialog(getField(), RBundle.message("class.does.not.exists.error.message", classQualifiedName), RBundle.message("cannot.browse.method.dialog.title"), Messages.getInformationIcon());
+			Messages.showMessageDialog(getField(), RBundle.message("class.does.not.exists.error.message", classQualifiedName), RBundle.message("cannot.browse.method.dialog.title"),Messages.getInformationIcon());
 			return null;
 		}
 
@@ -117,9 +117,9 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 		private static final RVirtualMethod[] EMPTY_VIRT_METHODS = new RVirtualMethod[0];
 
 		private final RVirtualClass testClass;
-		private final Ref<FileSymbol> fSWrapper;
+		private final consulo.util.lang.ref.Ref<FileSymbol> fSWrapper;
 
-		public TestMethodProvider(final RVirtualClass testClass, final Ref<FileSymbol> fSWrapper)
+		public TestMethodProvider(final RVirtualClass testClass, final consulo.util.lang.ref.Ref<FileSymbol> fSWrapper)
 		{
 			this.testClass = testClass;
 			this.fSWrapper = fSWrapper;

@@ -16,10 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
+import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunConfigurationEditor;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
+import consulo.configurable.ConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.

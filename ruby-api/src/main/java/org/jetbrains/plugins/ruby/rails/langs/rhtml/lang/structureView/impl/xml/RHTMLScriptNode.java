@@ -19,13 +19,13 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml
 import java.util.Collection;
 import java.util.Collections;
 
+import consulo.fileEditor.structureView.StructureViewTreeElement;
+import consulo.language.editor.structureView.PsiTreeElementBase;
 import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 
 /**
  * Created by IntelliJ IDEA.

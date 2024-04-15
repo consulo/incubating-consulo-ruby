@@ -16,27 +16,26 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import consulo.annotation.component.ExtensionImpl;
+import consulo.document.Document;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.editor.folding.FoldingBuilder;
+import consulo.language.editor.folding.FoldingDescriptor;
+import consulo.language.psi.PsiElement;
+import consulo.logging.Logger;
+import consulo.xml.psi.xml.XmlComment;
+import consulo.xml.psi.xml.XmlTag;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
-
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.folding.FoldingBuilder;
-import com.intellij.lang.folding.FoldingDescriptor;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Document;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.xml.XmlComment;
-import com.intellij.psi.xml.XmlTag;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,9 +43,10 @@ import com.intellij.psi.xml.XmlTag;
  * @author: Roman Chernyatchik
  * @date: 11.04.2007
  */
+@ExtensionImpl
 public class RHTMLFoldingBuilder implements FoldingBuilder
 {
-	private static final Logger LOG = Logger.getInstance(RHTMLFoldingBuilder.class.getName());
+	private static final Logger LOG = Logger.getInstance(RHTMLFoldingBuilder.class);
 
 	@NonNls
 	public static final String RHTML_COMMENT_FOLD_TEXT = "<%#...%>";
@@ -139,5 +139,12 @@ public class RHTMLFoldingBuilder implements FoldingBuilder
 	public boolean isCollapsedByDefault(@Nonnull ASTNode node)
 	{
 		return COLLAPSED_BY_DEFAULT.contains(node.getElementType());
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return eRubyLanguage.INSTANCE;
 	}
 }
