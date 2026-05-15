@@ -23,7 +23,6 @@ import jakarta.annotation.Nonnull;
 
 import consulo.language.ast.ASTNode;
 import consulo.navigation.ItemPresentation;
-import consulo.util.lang.IncorrectOperationException;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;

@@ -16,28 +16,25 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
+import consulo.codeEditor.DocumentMarkupModel;
+import consulo.codeEditor.Editor;
 import consulo.codeEditor.markup.MarkupModel;
+import consulo.document.Document;
 import consulo.language.editor.Pass;
 import consulo.language.editor.impl.highlight.TextEditorHighlightingPass;
-import consulo.document.Document;
-import consulo.codeEditor.Editor;
-import consulo.codeEditor.DocumentMarkupModel;
-import consulo.ide.impl.idea.openapi.module.ModuleUtil;
-import consulo.language.psi.PsiFile;
-import consulo.virtualFileSystem.VirtualFile;
-
-import jakarta.annotation.Nonnull;
-
 import consulo.language.editor.impl.highlight.TextEditorHighlightingPassFactory;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.ModuleUtilCore;
 import consulo.module.Module;
 import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.DaemonCodeAnalyzerUtil;
 import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerInfo;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import jakarta.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,7 +59,7 @@ public class RailsHighlightPassFactory implements TextEditorHighlightingPassFact
 			return null;
 		}
 
-		final Module module = consulo.ide.impl.idea.openapi.module.ModuleUtil.findModuleForPsiElement(psiFile);
+		final Module module = ModuleUtilCore.findModuleForPsiElement(psiFile);
 		if(module != null && RailsFacetUtil.hasRailsSupport(module))
 		{
 			final VirtualFile file = psiFile.getVirtualFile();

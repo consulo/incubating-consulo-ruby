@@ -16,20 +16,18 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
-import java.util.Map;
-
-import jakarta.annotation.Nonnull;
-
 import consulo.component.persist.PersistentStateComponent;
 import consulo.component.persist.State;
+import consulo.component.persist.Storage;
+import consulo.logging.Logger;
+import consulo.module.Module;
+import jakarta.annotation.Nonnull;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-import consulo.component.persist.Storage;
-import consulo.logging.Logger;
-import consulo.module.Module;
-import consulo.ide.impl.idea.openapi.module.ModuleServiceManager;
+
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -58,7 +56,7 @@ public class RSpecModuleSettingsStorage extends SettingsExternalizer implements 
 
 	public static RSpecModuleSettingsStorage getInstance(@Nonnull final Module module)
 	{
-		return ModuleServiceManager.getService(module, RSpecModuleSettingsStorage.class);
+		return module.getInstance(RSpecModuleSettingsStorage.class);
 	}
 
 	@Override

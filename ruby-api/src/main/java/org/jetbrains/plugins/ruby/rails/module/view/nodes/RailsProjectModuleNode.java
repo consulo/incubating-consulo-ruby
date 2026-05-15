@@ -16,14 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
-import jakarta.annotation.Nonnull;
-
+import consulo.language.content.LanguageContentFolderScopes;
+import consulo.language.content.TestContentFolderTypeProvider;
+import consulo.module.Module;
 import consulo.module.content.ModuleRootManager;
+import consulo.module.content.layer.ContentEntry;
+import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.VirtualFileManager;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
@@ -31,18 +33,11 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsViewFoldersManager;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsApplicationFolderNode;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControllersFolderNode;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsModelFolderNode;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsSharedPatialsFolderNode;
-import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsUserFolderNode;
-import consulo.ui.ex.tree.PresentationData;
-import consulo.module.Module;
-import consulo.module.content.layer.ContentEntry;
-import consulo.virtualFileSystem.VirtualFile;
-import consulo.ui.ex.awt.tree.SimpleNode;
-import consulo.roots.ContentFolderScopes;
-import consulo.roots.impl.TestContentFolderTypeProvider;
+import org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -125,7 +120,7 @@ public class RailsProjectModuleNode extends RailsNode
 		final Set<String> testUrls = new HashSet<String>();
 		for(ContentEntry o : ModuleRootManager.getInstance(module).getContentEntries())
 		{
-			for(String url : o.getFolderUrls(ContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
+			for(String url : o.getFolderUrls(LanguageContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
 			{
 				testUrls.add(url);
 			}

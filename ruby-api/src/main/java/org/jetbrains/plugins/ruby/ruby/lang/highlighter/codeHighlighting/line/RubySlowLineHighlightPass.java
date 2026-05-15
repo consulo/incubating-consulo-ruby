@@ -16,15 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-
+import com.intellij.java.language.psi.PsiMethod;
 import consulo.application.ApplicationManager;
+import consulo.application.progress.ProgressIndicator;
 import consulo.application.progress.ProgressManager;
 import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
@@ -36,11 +36,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.Abstrac
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
-import consulo.application.progress.ProgressIndicator;
-import consulo.project.Project;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.PsiFile;
-import com.intellij.psi.PsiMethod;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,18 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.commenter;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.Commenter;
+import consulo.language.Language;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 
 
+@ExtensionImpl
 public class RubyCommenter implements Commenter
 {
-	@NonNls
 	private static final String LINE_COMMENT_PREFIX = "#";
-	@NonNls
 	private static final String BLOCK_COMMENT_PREFIX = "\n=begin\n";
-	@NonNls
 	private static final String BLOCK_COMMAND_SUFFIX = "\n=end\n";
 
 	@Override
@@ -63,5 +65,12 @@ public class RubyCommenter implements Commenter
 	public String getCommentedBlockCommentSuffix()
 	{
 		return null;
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
 	}
 }

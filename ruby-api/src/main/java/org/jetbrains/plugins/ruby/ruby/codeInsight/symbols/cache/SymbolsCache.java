@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache;
 
-import com.intellij.openapi.components.ProjectComponent;
-import consulo.module.Module;
 import consulo.application.progress.ProgressIndicator;
 import consulo.application.progress.ProgressManager;
-import consulo.project.Project;
 import consulo.content.bundle.Sdk;
+import consulo.disposer.Disposable;
+import consulo.module.Module;
+import consulo.project.Project;
 import consulo.project.startup.StartupManager;
 import consulo.util.lang.ref.SoftReference;
-import java.util.HashMap;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -33,8 +34,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.AbstractCachedSymbol;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -43,7 +43,7 @@ import java.util.Map;
  * @author: oleg
  * @date: Jun 17, 2007
  */
-public class SymbolsCache implements ProjectComponent
+public class SymbolsCache implements Disposable
 {
 
 	// Here we store info about modifiable symbols
@@ -143,13 +143,7 @@ public class SymbolsCache implements ProjectComponent
 	}
 
 	@Override
-	public void projectOpened()
-	{
-		// N/A
-	}
-
-	@Override
-	public void projectClosed()
+	public void dispose()
 	{
 		mySoftCache.clear();
 		myBuiltInCache.clear();

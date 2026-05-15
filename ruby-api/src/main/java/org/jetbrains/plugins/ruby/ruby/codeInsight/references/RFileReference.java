@@ -16,14 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import consulo.language.editor.completion.lookup.LookupValueWithPriority;
 import consulo.document.util.TextRange;
+import consulo.language.editor.completion.lookup.LookupValueWithPriority;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
-import consulo.language.psi.ResolveResult;
-import consulo.util.lang.IncorrectOperationException;
 import consulo.language.psi.PsiReference;
+import consulo.language.psi.ResolveResult;
+import consulo.language.util.IncorrectOperationException;
 import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
@@ -39,8 +40,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseString;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
-
-import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.HashSet;

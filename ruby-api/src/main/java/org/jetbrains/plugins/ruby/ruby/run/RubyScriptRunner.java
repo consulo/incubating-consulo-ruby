@@ -16,15 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import java.io.File;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-
+import consulo.application.util.SystemInfo;
+import consulo.content.bundle.Sdk;
+import consulo.execution.ui.console.Filter;
+import consulo.logging.Logger;
+import consulo.process.ExecutionException;
 import consulo.process.event.ProcessListener;
-import org.jetbrains.annotations.NonNls;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.awt.Messages;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
@@ -33,14 +36,11 @@ import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import consulo.process.ExecutionException;
-import com.intellij.execution.filters.Filter;
-import consulo.ui.ex.action.AnAction;
-import consulo.logging.Logger;
-import consulo.project.Project;
-import consulo.content.bundle.Sdk;
-import consulo.ui.ex.awt.Messages;
-import consulo.application.util.SystemInfo;
+
+import java.io.File;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -64,6 +65,7 @@ import consulo.ui.image.Image;
  * User: oleg
  * Date: 20.07.2006
  */
+@ExtensionImpl
 public class RubyRunConfigurationType implements ConfigurationType
 {
 	private final RubyRunConfigurationFactory myAppFactory;

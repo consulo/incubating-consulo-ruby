@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.module.wizard;
 
-import consulo.module.ModuleWithNameAlreadyExistsException;
 import consulo.configurable.ConfigurationException;
-import consulo.module.content.layer.ModifiableRootModel;
-import consulo.util.xml.serializer.InvalidDataException;
-import consulo.ide.impl.idea.openapi.util.io.FileUtil;
-import consulo.virtualFileSystem.VirtualFile;
 import consulo.module.ModifiableModuleModel;
 import consulo.module.Module;
+import consulo.module.ModuleWithNameAlreadyExistsException;
+import consulo.module.content.layer.ModifiableRootModel;
+import consulo.util.io.FileUtil;
+import consulo.util.xml.serializer.InvalidDataException;
 import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 import org.jdom.JDOMException;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
@@ -32,7 +33,6 @@ import org.jetbrains.plugins.ruby.settings.RSupportPerModuleSettings;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 
-import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,6 @@ import static org.jetbrains.plugins.ruby.addins.rspec.RSpecModuleSettings.RSpecS
  */
 public class RubyModuleBuilder extends RRModuleBuilder
 {
-
 	private String myTestUtinRootPath;
 
 	@Nonnull

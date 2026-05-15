@@ -32,9 +32,6 @@
 
 	<depends optional="true" config-file="ruby-javascript-integration.xml">consulo.javascript</depends>
 
-	<extensions defaultExtensionNs="consulo.java">
-		<methodReferencesSearch implementation="consulo.jruby.lang.searcher.JRubyTextRefSearcher"/>
-	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="org.jetbrains.plugins.ruby.RubyFileTypeFactory"/>
@@ -49,10 +46,6 @@
 
 		<lang.parserDefinition language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.parser.RubyParserDefinition"/>
 		<lang.braceMatcher language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.braceMatcher.RubyPairedBraceMatcher"/>
-		<lang.commenter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.commenter.RubyCommenter"/>
-		<lang.documentationProvider language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.documentation.RubyDocumentationProvider"/>
-		<lang.formatter language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.formatter.RubyFormattingModelBuilder"/>
-		<lang.surroundDescriptor language="RUBY" implementationClass="org.jetbrains.plugins.ruby.ruby.lang.surround.RubySurroundDescriptor"/>
 
 		<editorHighlighterProvider filetype="RHTML" implementationClass="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting.RHTMLEditorHighlighterFactory"/>
 
@@ -66,8 +59,6 @@
 
 
 
-
-		<createFromTemplateActionReplacer implementation="org.jetbrains.plugins.ruby.rails.actions.templates.RailsCreateFromTemplateActionReplacer"/>
 
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"
 							serviceImplementation="org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs.ParamDefManager"/>
@@ -88,15 +79,6 @@
 		<orderRootTypeEditor key="rubyGems" implementationClass="org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootTypeUIFactory"/>
 
 
-		<!-- Run Configurations: -->
-		<!-- Common Ruby -->
-		<configurationProducer implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RubyRunConfigurationProducer"/>
-		<!-- Rails -->
-		<configurationProducer implementation="org.jetbrains.plugins.ruby.rails.run.configuration.RailsRunConfigurationProducer"/>
-		<!-- RSpec -->
-		<configurationProducer implementation="org.jetbrains.plugins.ruby.addins.rspec.run.configuration.RSpecConfigurationProducer"/>
-
-		<configurationType implementation="org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType"/>
 
 		<!-- RSpec Support -->
 		<applicationService serviceInterface="org.jetbrains.plugins.ruby.addins.rspec.RSpecApplicationSettings"
@@ -140,9 +122,6 @@
 		<textEditorHighlightingPassFactory implementation="org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line.RubyFastLineHighlightPassFactory" />
 	</extensions>
 
-	<extensions defaultExtensionNs="com.intellij.xml">
-		<structureViewElementProvider implementation="org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml.RHTMLStructureViewElementProvider"/>
-	</extensions>
 
 	<application-components>
 		<component>
@@ -175,9 +154,7 @@
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.pom.impl.RubyPomAspectImpl</implementation-class>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.ruby.actions.intention.RubyIntentionActionsManager</implementation-class>
-		</component>
+
 		<component>
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager</implementation-class>
 		</component>
@@ -190,9 +167,7 @@
 			<implementation-class>org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage
 			</implementation-class>
 		</component>
-		<component>
-			<implementation-class>org.jetbrains.plugins.ruby.rails.RailsProjectLoader</implementation-class>
-		</component>
+
 	</project-components>
 
 	<actions>

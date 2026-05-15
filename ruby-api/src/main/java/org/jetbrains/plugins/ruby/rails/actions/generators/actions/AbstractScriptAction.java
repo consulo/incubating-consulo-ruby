@@ -17,24 +17,22 @@
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
 import consulo.content.bundle.Sdk;
-import consulo.language.editor.CommonDataKeys;
-import consulo.language.psi.PsiFile;
-import consulo.module.Module;
-import consulo.language.psi.PsiDirectory;
-import consulo.language.psi.PsiElement;
 import consulo.dataContext.DataContext;
 import consulo.ide.IdeView;
-import consulo.language.editor.LangDataKeys;
+import consulo.language.editor.CommonDataKeys;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
+import consulo.module.Module;
 import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.ex.action.Presentation;
 import consulo.ui.image.Image;
-import consulo.util.lang.IncorrectOperationException;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-
 import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,7 +73,7 @@ public abstract class AbstractScriptAction extends AnAction
 	{
 		final DataContext dataContext = e.getDataContext();
 
-		final IdeView view = e.getData(LangDataKeys.IDE_VIEW);
+		final IdeView view = e.getData(IdeView.KEY);
 		final Module module = e.getData(CommonDataKeys.MODULE);
 		final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
 

@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import com.intellij.codeInsight.editorActions.HtmlQuoteHandler;
-import consulo.ide.impl.idea.codeInsight.editorActions.TypedHandler;
 import consulo.language.file.FileTypeManager;
 
 /**
@@ -47,6 +45,6 @@ public class RHTMLApplicationComponent
 		//BraceMatchingUtil.registerBraceMatcher(RHTMLFileType.RHTML, new RHTMLBraceMather());
 
 		//Quote Handler
-		TypedHandler.registerQuoteHandler(RHTMLFileType.INSTANCE, new HtmlQuoteHandler());
+		//TypedHandler.registerQuoteHandler(RHTMLFileType.INSTANCE, new HtmlQuoteHandler());
 	}
 }

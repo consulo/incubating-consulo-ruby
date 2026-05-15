@@ -16,17 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import java.awt.BorderLayout;
-import java.util.Comparator;
-
-import jakarta.annotation.Nonnull;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
-
+import com.intellij.java.language.impl.codeInsight.StructureNodeRenderer;
+import consulo.component.util.Iconable;
+import consulo.ui.ex.SimpleTextAttributes;
 import consulo.ui.ex.awt.*;
 import consulo.util.lang.function.Condition;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -36,10 +31,10 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
-import com.intellij.ide.structureView.impl.StructureNodeRenderer;
-import consulo.component.util.Iconable;
-import consulo.ide.impl.idea.ui.ListScrollingUtil;
-import consulo.ui.ex.SimpleTextAttributes;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Comparator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -70,7 +65,7 @@ public class RMethodList extends JPanel
 
 		myList.setCellRenderer(new MyMethodsListCellRenderer());
 		myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		consulo.ide.impl.idea.ui.ListScrollingUtil.ensureSelectionExists(myList);
+		ScrollingUtil.ensureSelectionExists(myList);
 	}
 
 	private void createList(@Nonnull final RVirtualMethod[] allMethods, @Nonnull final consulo.util.lang.function.Condition<RVirtualMethod> filter)

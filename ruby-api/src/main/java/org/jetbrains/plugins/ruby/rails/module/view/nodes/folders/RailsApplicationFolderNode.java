@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import consulo.module.Module;
+import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
-
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
@@ -34,11 +34,10 @@ import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import consulo.ui.ex.tree.PresentationData;
-import consulo.module.Module;
-import consulo.virtualFileSystem.VirtualFile;
-import consulo.ui.ex.awt.tree.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +62,7 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode
 	}
 
 	@Override
-	public void accept(final SimpleNodeVisitor visitor)
+	public void accept(Predicate<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.codeInsight;
 
+import com.intellij.java.language.psi.PsiReferenceExpression;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.logging.Logger;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
-import consulo.language.psi.PsiFile;
-import consulo.language.psi.util.PsiTreeUtil;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import consulo.logging.Logger;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReferenceExpression;
 
 /**
  * Created by IntelliJ IDEA.

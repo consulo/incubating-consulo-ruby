@@ -16,11 +16,15 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.global;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.PsiReference;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.language.util.IncorrectOperationException;
+import consulo.navigation.ItemPresentation;
+import consulo.ui.image.Image;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-
-import consulo.language.ast.ASTNode;
-import consulo.language.psi.PsiReference;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
@@ -37,11 +41,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables.RNamedElementBase
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RGlobalVariablePresentationUtil;
-import consulo.navigation.ItemPresentation;
-import consulo.language.psi.PsiElementVisitor;
-import consulo.language.psi.util.PsiTreeUtil;
-import consulo.util.lang.IncorrectOperationException;
-import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +49,6 @@ import consulo.ui.image.Image;
  */
 public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVariable
 {
-
 	private RGlobalVarHolder myHolder;
 
 	@NonNls

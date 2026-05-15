@@ -16,20 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi;
 
-import jakarta.annotation.Nullable;
-
 import consulo.language.Language;
 import consulo.language.ast.IElementType;
 import consulo.language.file.FileViewProvider;
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.util.PsiTreeUtil;
+import consulo.xml.lang.html.HTMLLanguage;
+import consulo.xml.psi.xml.XmlFile;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import com.intellij.lang.html.HTMLLanguage;
-import consulo.language.psi.PsiFile;
-import consulo.language.psi.util.PsiTreeUtil;
-import com.intellij.psi.xml.XmlFile;
 
 /**
  * Created by IntelliJ IDEA.

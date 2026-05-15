@@ -20,10 +20,9 @@ import consulo.project.Project;
 import consulo.ui.ex.InputValidator;
 import consulo.ui.ex.awt.ColoredListCellRenderer;
 import consulo.ui.ex.awt.Messages;
-import consulo.ide.impl.idea.openapi.util.io.FileUtil;
 import consulo.ui.ex.awt.event.DocumentAdapter;
+import consulo.util.io.FileUtil;
 import jakarta.annotation.Nonnull;
-
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
@@ -63,7 +62,6 @@ public class GenerateControllerPanel implements GeneratorPanel
 	private JCheckBox mySkipCheckBox;
 	private JCheckBox myBacktraceCheckBox;
 	private JLabel myControllerLocationValueLabel;
-	private JCheckBox mySVNCheckBox;
 	private JPanel myLocationPanel;
 	private JTextField myControllerDir;
 	private final DefaultListModel myListModel;
@@ -167,7 +165,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 	public void initPanel(final GeneratorOptions options)
 	{
 		myOptions = options;
-		GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, mySVNCheckBox, myOptions);
+		GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, myOptions);
 	}
 
 	@Override
@@ -182,9 +180,9 @@ public class GenerateControllerPanel implements GeneratorPanel
 	public String getGeneratorArgs()
 	{
 		final StringBuffer buff = new StringBuffer();
-		buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox, myForceCheckBox, myPretendCheckBox, mySkipCheckBox, mySVNCheckBox));
+		buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox, myForceCheckBox, myPretendCheckBox, mySkipCheckBox));
 
-		final String path = consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemIndependentName(myControllerDir.getText()).trim();
+		final String path = FileUtil.toSystemIndependentName(myControllerDir.getText()).trim();
 		if(!TextUtil.isEmpty(path))
 		{
 			buff.append(path);
@@ -217,7 +215,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 	@Override
 	public void saveSettings(final Project project)
 	{
-		GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, mySVNCheckBox, myOptions, project);
+		GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, myOptions, project);
 	}
 
 	private void updateLocation()
@@ -238,7 +236,7 @@ public class GenerateControllerPanel implements GeneratorPanel
 		final int width = myControllerName.getWidth() - myLocationLabel.getSize().width;
 		final FontMetrics fontMetrics = myLocationPanel.getFontMetrics(myLocationPanel.getFont());
 		TextUtil.truncWithDots(myBuff, width, fontMetrics);
-		myControllerLocationValueLabel.setText(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(myBuff.toString()));
+		myControllerLocationValueLabel.setText(FileUtil.toSystemDependentName(myBuff.toString()));
 	}
 
 	private class MyActionInputValidator implements InputValidator

@@ -16,26 +16,26 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import jakarta.annotation.Nonnull;
-
-import consulo.content.OrderRootType;
-import consulo.content.bundle.*;
-import consulo.virtualFileSystem.LocalFileSystem;
+import consulo.application.util.SystemInfo;
+import consulo.content.base.BinariesOrderRootType;
+import consulo.content.base.SourcesOrderRootType;
+import consulo.content.bundle.Sdk;
+import consulo.content.bundle.SdkModificator;
+import consulo.content.bundle.SdkType;
+import consulo.content.bundle.SdkTypeId;
+import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.VirtualFileManager;
-import org.jetbrains.annotations.NonNls;
-
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.sdk.gemRootType.GemOrderRootType;
 import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType;
 import org.jetbrains.plugins.ruby.support.utils.OSUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import consulo.application.util.SystemInfo;
-import consulo.virtualFileSystem.VirtualFile;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -96,7 +96,7 @@ public class RubySdkUtil
 
 	private static String[] getSdkContentRootUrls(@Nonnull final Sdk sdk)
 	{
-		return sdk.getRootProvider().getUrls(OrderRootType.CLASSES);
+		return sdk.getRootProvider().getUrls(BinariesOrderRootType.getInstance());
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class RubySdkUtil
 	 */
 	public static String[] getSdkRootsWithAllGems(@Nonnull final Sdk sdk)
 	{
-		final ArrayList<String> urls = new ArrayList<String>();
-		for(String rootUrl : sdk.getRootProvider().getUrls(OrderRootType.CLASSES))
+		final ArrayList<String> urls = new ArrayList<>();
+		for(String rootUrl : sdk.getRootProvider().getUrls(BinariesOrderRootType.getInstance()))
 		{
 			if(isGemsRootUrl(rootUrl))
 			{
@@ -156,56 +156,13 @@ public class RubySdkUtil
 		return url.endsWith(RubySdkType.RUBYSTUBS_DIR);
 	}
 
-	@SuppressWarnings({"HardCodedStringLiteral"})
-	/**
-	 * Creates mock sdk
-	 *
-	 * You can set forced sdk home path with system property "idea.ruby.testingFramework.mockSDK";
-	 */
-	public static Sdk getMockSdk(final String versionName)
-	{
-		return createMockSdk(RubySdkType.getInstance(), versionName);
-	}
-
-	public static Sdk createMockSdk(final SdkType sdkType, final String versionName)
-	{
-		return createMockSdk(sdkType, versionName, true);
-	}
-
-	public static Sdk createMockSdkWithoutStubs(final SdkType sdkType, final String versionName)
-	{
-		return createMockSdk(sdkType, versionName, false);
-	}
-
-	public static Sdk createMockSdk(final SdkType sdkType, final String versionName, final boolean addStubs)
-	{
-		final Sdk sdk = SdkTable.getInstance().createSdk(versionName, sdkType);
-		final SdkModificator sdkModificator = sdk.getSdkModificator();
-		final String sdkHome = System.getProperty("idea.ruby.mock.sdk");
-		if(sdkHome != null)
-		{
-			sdkModificator.setHomePath(sdkHome);
-			//adding ruby stubs
-			if(addStubs)
-			{
-				final VirtualFile stubsFile = LocalFileSystem.getInstance().findFileByPath(sdkHome + File.separator + RubySdkType.RUBYSTUBS_DIR);
-				Objects.requireNonNull(stubsFile, "Stubs file cannot be null");
-				addToSourceAndClasses(sdkModificator, stubsFile);
-			}
-		}
-		sdkModificator.setVersionString(versionName); // must be set after home path, otherwise setting home path clears the version string
-		RubySdkType.findAndSaveGemsRootsBy(sdkModificator);
-		sdkModificator.commitChanges();
-
-		return sdk;
-	}
 
 	static void addToSourceAndClasses(@Nonnull final SdkModificator sdkModificator, @Nullable final VirtualFile vFile)
 	{
 		if(vFile != null)
 		{
-			sdkModificator.addRoot(vFile, OrderRootType.CLASSES);
-			sdkModificator.addRoot(vFile, OrderRootType.CLASSES);
+			sdkModificator.addRoot(vFile, BinariesOrderRootType.getInstance());
+			sdkModificator.addRoot(vFile, SourcesOrderRootType.getInstance());
 		}
 	}
 
@@ -266,7 +223,7 @@ public class RubySdkUtil
 	@Nonnull
 	public static List<String> getAllGemsLibUrls(@Nonnull final VirtualFile gemRoot)
 	{
-		final List<String> gemsUrls = new ArrayList<String>();
+		final List<String> gemsUrls = new ArrayList<>();
 		for(VirtualFile file : gemRoot.getChildren())
 		{
 			gemsUrls.add(file.getUrl() + GEM_LIB_DIR);
@@ -277,7 +234,7 @@ public class RubySdkUtil
 	@Nonnull
 	public static List<GemInfo> getAllGems(@Nonnull final VirtualFile gemRoot)
 	{
-		final List<GemInfo> gemsUrls = new ArrayList<GemInfo>();
+		final List<GemInfo> gemsUrls = new ArrayList<>();
 		for(VirtualFile gemFile : gemRoot.getChildren())
 		{
 			gemsUrls.add(GemInfo.create(gemFile));

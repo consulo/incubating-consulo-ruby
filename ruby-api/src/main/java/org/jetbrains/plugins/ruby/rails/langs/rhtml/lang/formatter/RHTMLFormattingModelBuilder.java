@@ -47,10 +47,13 @@ public class RHTMLFormattingModelBuilder implements FormattingModelBuilder
 {
 	private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class);
 
-	@Override
 	@Nonnull
-	public FormattingModel createModel(@Nonnull final PsiElement element, final CodeStyleSettings settings)
+	@Override
+	public FormattingModel createModel(@Nonnull FormattingContext formattingContext)
 	{
+		PsiElement element = formattingContext.getPsiElement();
+		CodeStyleSettings settings = formattingContext.getCodeStyleSettings();
+
 		final PsiFile psiFile = element.getContainingFile();
 
 		final FormattingDocumentModel documentModel = FormattingDocumentModel.create(psiFile);

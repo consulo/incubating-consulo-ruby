@@ -16,20 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.ui;
 
-import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.border.EtchedBorder;
-
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.lang.ref.Ref;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import consulo.ui.ex.awt.LabeledComponent;
-import consulo.ui.ex.awt.TextFieldWithBrowseButton;
-import consulo.util.lang.ref.Ref;
+
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
+import static consulo.util.io.FileUtil.toSystemDependentName;
 
 /**
  * Created by IntelliJ IDEA.

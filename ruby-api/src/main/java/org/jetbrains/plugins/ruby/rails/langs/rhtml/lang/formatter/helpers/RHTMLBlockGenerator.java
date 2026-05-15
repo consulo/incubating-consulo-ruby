@@ -367,7 +367,7 @@ public class RHTMLBlockGenerator
 		final PsiElement childPsi = child.getPsi();
 		final FormattingModelBuilder builder = FormattingModelBuilder.forContext(childPsi.getLanguage(), childPsi);
 		LOG.assertTrue(builder != null);
-		final FormattingModel childModel = builder.createModel(childPsi, settings);
+		final FormattingModel childModel = builder.createModel(FormattingContext.create(childPsi, settings));
 		result.add(new ForeignLanguageBlock(child, policy, childModel.getRootBlock(), indent, 0, child.getTextRange()));
 	}
 

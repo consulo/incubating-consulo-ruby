@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import consulo.execution.ui.console.Filter;
 import jakarta.annotation.Nonnull;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -41,7 +42,6 @@ import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.run.filters.FileLinksFilterUtil;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
-import com.intellij.execution.filters.Filter;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.logging.Logger;
 import consulo.document.FileDocumentManager;
@@ -59,7 +59,7 @@ import consulo.execution.ui.awt.RawCommandLineEditor;
  */
 public class RunRailsScriptAction extends AnAction
 {
-	private static Logger LOG = Logger.getInstance(RunRailsScriptAction.class.getName());
+	private static Logger LOG = Logger.getInstance(RunRailsScriptAction.class);
 
 	@Override
 	public void actionPerformed(@Nonnull final AnActionEvent event)

@@ -16,11 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modules;
 
-import jakarta.annotation.Nullable;
-
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.util.IncorrectOperationException;
 import consulo.navigation.ItemPresentation;
-import consulo.util.lang.IncorrectOperationException;
+import consulo.ui.image.Image;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -35,10 +38,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleN
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
-import consulo.language.ast.ASTNode;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.PsiElementVisitor;
-import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -47,7 +46,6 @@ import consulo.ui.image.Image;
  */
 public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
 {
-
 	public RModuleImpl(ASTNode astNode)
 	{
 		super(astNode);

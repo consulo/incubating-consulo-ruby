@@ -37,7 +37,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import consulo.module.Module;
-import consulo.ide.impl.idea.openapi.module.ModuleUtil;
 import consulo.project.Project;
 import consulo.virtualFileSystem.VirtualFile;
 import java.util.HashSet;
@@ -49,7 +48,6 @@ import java.util.HashSet;
  */
 public class RailsSymbolUtil
 {
-
 	/**
 	 * Adds rails specified symbols for symbol
 	 *
@@ -114,7 +112,7 @@ public class RailsSymbolUtil
 		{
 			return null;
 		}
-		return consulo.ide.impl.idea.openapi.module.ModuleUtil.findModuleForPsiElement(psiElement);
+		return psiElement.getModule();
 	}
 
 	@Nonnull

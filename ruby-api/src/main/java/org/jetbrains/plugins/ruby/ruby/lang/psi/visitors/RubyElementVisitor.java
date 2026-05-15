@@ -16,40 +16,24 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.visitors;
 
+import com.intellij.java.language.psi.PsiReferenceExpression;
+import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.*;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBeginEndBlockStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RBodyStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElseBlock;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RElsifBlock;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.REnsureBlock;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RRescueBlock;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjectClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgument;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RFunctionArgumentList;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RIfModStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RRescueModStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RUnlessModStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RUntilModStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.RWhileModStatement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modifierStatements.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RClassName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RMethodName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpression;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RBinaryExpression;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RMultiAssignmentExpression;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RUnaryExpression;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.*;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RLBeginStatementImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.iterators.RBlockVariables;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
@@ -58,16 +42,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RFunctionCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RColonReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RDotReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFName;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RFid;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RPseudoConstant;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
-import consulo.language.psi.PsiElement;
-import com.intellij.psi.PsiReferenceExpression;
 
 /**
  * Created by IntelliJ IDEA.

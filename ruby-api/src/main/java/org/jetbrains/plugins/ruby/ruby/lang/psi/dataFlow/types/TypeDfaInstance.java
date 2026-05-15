@@ -14,11 +14,9 @@
  */
 package org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.types;
 
-import java.util.Map;
-
-import jakarta.annotation.Nonnull;
-
+import com.intellij.java.language.psi.PsiType;
 import consulo.application.progress.ProgressManager;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.CallSymbol;
@@ -30,15 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.RTypeUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.MessageImpl;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.impl.RJavaTypeImpl;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.Access;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.AssignAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.CallAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.ConstantAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.FieldWriteAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.JavaTypedAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.MethodParameterAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.RescueBlockAccess;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.SelfAssignAccess;
+import org.jetbrains.plugins.ruby.ruby.codeInsight.usages.*;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.Instruction;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.ReadWriteInstruction;
@@ -49,8 +39,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.dataFlow.DfaInstance;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
-import com.intellij.psi.PsiType;
+
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author oleg

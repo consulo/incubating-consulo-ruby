@@ -25,6 +25,7 @@ import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.RunConfiguration;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;
+import consulo.localize.LocalizeValue;
 import consulo.module.Module;
 import consulo.navigation.OpenFileDescriptor;
 import consulo.project.Project;
@@ -68,15 +69,15 @@ public class RSpecRunConfigurationType implements ConfigurationType
 	}
 
 	@Override
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("rspec.run.configuration.type.name");
+		return LocalizeValue.localizeTODO(RBundle.message("rspec.run.configuration.type.name"));
 	}
 
 	@Override
-	public String getConfigurationTypeDescription()
+	public LocalizeValue getConfigurationTypeDescription()
 	{
-		return RBundle.message("rspec.run.configuration.type.description");
+		return LocalizeValue.localizeTODO(RBundle.message("rspec.run.configuration.type.description"));
 	}
 
 	@Override

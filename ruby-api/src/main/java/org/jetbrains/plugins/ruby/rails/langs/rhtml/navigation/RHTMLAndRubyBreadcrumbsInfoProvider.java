@@ -45,7 +45,7 @@ import jakarta.annotation.Nullable;
  * @date: Sep 13, 2007
  */
 
-public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
+public class RHTMLAndRubyBreadcrumbsInfoProvider
 {
 	public static class Ruby extends RHTMLAndRubyBreadcrumbsInfoProvider
 	{
@@ -71,13 +71,11 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 	}
 
 	@Nonnull
-	@Override
 	public Language getLanguage()
 	{
 		return myLanguage;
 	}
 
-	@Override
 	public boolean acceptElement(@Nonnull final PsiElement element)
 	{
 		if(isInRubyDebugMode(element))
@@ -112,27 +110,25 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 		return false;
 	}
 
-	@Override
 	@Nonnull
 	public String getElementInfo(@Nonnull final PsiElement psiElement)
 	{
 		return getPresentation(psiElement, true);
 	}
 
-	@Override
 	@Nullable
 	public String getElementTooltip(@Nonnull final PsiElement psiElement)
 	{
 		return getPresentation(psiElement, false);
 	}
 
-	@Override
 	@Nullable
 	public PsiElement getParent(@Nonnull final PsiElement psiElement)
 	{
 		if(isInRubyDebugMode(psiElement))
 		{
-			return BreadcrumbsProvider.super.getParent(psiElement);
+			return null;
+			//return BreadcrumbsProvider.super.getParent(psiElement);
 		}
 
 		if(psiElement instanceof XmlDocument || psiElement instanceof PsiFile || psiElement instanceof PsiDirectory)
@@ -187,7 +183,8 @@ public class RHTMLAndRubyBreadcrumbsInfoProvider implements BreadcrumbsProvider
 				return parent;
 			}
 		}
-		return BreadcrumbsProvider.super.getParent(psiElement);
+		return null;
+		//return BreadcrumbsProvider.super.getParent(psiElement);
 	}
 
 	private boolean isInRubyDebugMode(@Nonnull final PsiElement element)

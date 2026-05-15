@@ -16,11 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.editor.handlers;
 
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.action.EditorWriteActionHandler;
+import consulo.dataContext.DataContext;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
-import consulo.dataContext.DataContext;
-import consulo.codeEditor.Editor;
-import consulo.ide.impl.idea.openapi.editor.actionSystem.EditorWriteActionHandler;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,7 +30,6 @@ import consulo.ide.impl.idea.openapi.editor.actionSystem.EditorWriteActionHandle
  */
 public abstract class RubyEditorHandlerUtil extends EditorWriteActionHandler
 {
-
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
 	public static boolean shouldHandle(final Editor editor, final DataContext dataContext)
 	{

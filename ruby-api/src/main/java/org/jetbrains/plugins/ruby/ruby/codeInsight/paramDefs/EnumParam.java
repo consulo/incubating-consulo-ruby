@@ -25,7 +25,6 @@ import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
-import org.jruby.RubySymbol;
 
 /**
  * @author yole
@@ -46,15 +45,7 @@ public class EnumParam extends ParamDef
 		List<RubyLookupItem> result = new ArrayList<RubyLookupItem>();
 		for(Object variant : myVariants)
 		{
-			String text;
-			if(variant instanceof RubySymbol)
-			{
-				text = ':' + variant.toString();
-			}
-			else
-			{
-				text = variant.toString();
-			}
+			String text = variant.toString();
 			result.add(new RubySimpleLookupItem(text, null, 0, true, RubyIcons.RUBY_ICON));
 		}
 		return result;

@@ -16,27 +16,26 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
-import jakarta.annotation.Nonnull;
-
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.action.EditorAction;
+import consulo.codeEditor.action.EditorActionHandler;
 import consulo.dataContext.DataContext;
+import consulo.language.editor.CommonDataKeys;
+import consulo.language.psi.PsiFile;
+import consulo.module.Module;
+import consulo.navigation.Navigatable;
+import consulo.ui.ex.RelativePoint;
+import consulo.ui.ex.action.Presentation;
 import consulo.ui.ex.awt.Messages;
 import consulo.ui.ex.popup.JBPopupFactory;
 import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import consulo.language.editor.CommonDataKeys;
-import consulo.ui.ex.action.Presentation;
-import consulo.codeEditor.Editor;
-import consulo.codeEditor.impl.action.EditorAction;
-import consulo.codeEditor.action.EditorActionHandler;
-import consulo.module.Module;
-import consulo.navigation.Navigatable;
-import consulo.language.psi.PsiFile;
-import consulo.ui.ex.RelativePoint;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +43,7 @@ import consulo.ui.ex.RelativePoint;
  * @author: Roman Chernyatchik
  * @date: Sep 4, 2007
  */
-public class SwitchToController extends consulo.codeEditor.impl.action.EditorAction
+public class SwitchToController extends EditorAction
 {
 	private static final String CANT_NAVIGATE = RBundle.message("codeInsight.rails.switch.to.controller.cant.navigate");
 	private static final String SWITCH_TO_CONTROLLER_TITLE = RBundle.message("codeInsight.rails.switch.to.controller.title");

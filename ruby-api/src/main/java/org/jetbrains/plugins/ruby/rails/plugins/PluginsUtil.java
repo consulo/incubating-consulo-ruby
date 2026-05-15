@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import consulo.execution.ui.console.Filter;
 import jakarta.annotation.Nonnull;
 
 import consulo.content.bundle.Sdk;
@@ -38,7 +39,6 @@ import org.jetbrains.plugins.ruby.ruby.run.RunContentDescriptorFactory;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import com.intellij.execution.filters.Filter;
 import consulo.process.event.ProcessAdapter;
 import consulo.process.event.ProcessEvent;
 import consulo.module.Module;

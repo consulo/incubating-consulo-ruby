@@ -56,20 +56,13 @@ public class IdeaInternalUtil
 
 	public static void runInEventDispatchThread(final Runnable runnable, final ModalityState state)
 	{
-		try
+		if(SwingUtilities.isEventDispatchThread())
 		{
-			if(SwingUtilities.isEventDispatchThread())
-			{
-				runnable.run();
-			}
-			else
-			{
-				ApplicationManager.getApplication().invokeAndWait(runnable, state);
-			}
+			runnable.run();
 		}
-		catch(Exception e)
+		else
 		{
-			throw new RuntimeException(e);
+			ApplicationManager.getApplication().invokeAndWait(runnable, state);
 		}
 	}
 

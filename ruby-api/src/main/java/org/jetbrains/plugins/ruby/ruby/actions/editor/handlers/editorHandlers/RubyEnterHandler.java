@@ -260,7 +260,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 		boolean endNeededTokenSeenInLine = false;
 		while(!endNeededTokenSeenInLine && !iterator.atEnd() && iterator.getEnd() <= offset)
 		{
-			if(RubyPairedBraceMatcher.kEND_BRACE_TOKENS.contains(!iterator.atEnd() ? iterator.getTokenType() : null))
+			if(RubyPairedBraceMatcher.kEND_BRACE_TOKENS.contains(!iterator.atEnd() ? (IElementType) iterator.getTokenType() : null))
 			{
 				endNeededTokenSeenInLine = true;
 			}
@@ -277,7 +277,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 		int balance = 0;
 		while(!iterator.atEnd())
 		{
-			IElementType token = iterator.getTokenType();
+			IElementType token = (IElementType) iterator.getTokenType();
 			if(RubyPairedBraceMatcher.kEND_BRACE_TOKENS.contains(token))
 			{
 				balance++;
@@ -325,7 +325,7 @@ public class RubyEnterHandler extends EditorWriteActionHandler implements RubyTo
 
 		while(!iterator.atEnd())
 		{
-			IElementType token = iterator.getTokenType();
+			IElementType token = (IElementType) iterator.getTokenType();
 			if(token == tHEREDOC_ID)
 			{
 				balance++;

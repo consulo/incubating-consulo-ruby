@@ -16,19 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.actions.intention;
 
-import jakarta.annotation.Nonnull;
-
+import consulo.codeEditor.Editor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.util.IncorrectOperationException;
 import consulo.project.Project;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RListOfExpressions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.expressions.RListOfExpressionsNavigator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
-import consulo.codeEditor.Editor;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.PsiFile;
-import consulo.util.lang.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,15 +37,7 @@ import consulo.util.lang.IncorrectOperationException;
  */
 public class RelativePathToAbsolutePathIntention extends RequirePathIntention
 {
-	private static final String NAME = "RelativePathToAbsolute";
 	private static final String TEXT = RBundle.message("ruby.intentions.relative.path.to.absolute");
-
-	@Override
-	@Nonnull
-	public String getFamilyName()
-	{
-		return NAME;
-	}
 
 	@Override
 	@Nonnull

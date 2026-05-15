@@ -31,13 +31,12 @@ import consulo.fileTemplate.FileTemplate;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public class RailsCreateFromTemplateActionReplacer implements CreateFromTemplateActionReplacer
+public class RailsCreateFromTemplateActionReplacer
 {
 	public static final String RHTML_TEMPLATE_NAME = RBundle.message("template.rhtml.script.name");
 
 	public static final String RXML_TEMPLATE_NAME = RBundle.message("template.rxml.script.name");
 
-	@Override
 	@Nullable
 	public AnAction replaceCreateFromFileTemplateAction(@Nonnull final FileTemplate fileTemplate)
 	{

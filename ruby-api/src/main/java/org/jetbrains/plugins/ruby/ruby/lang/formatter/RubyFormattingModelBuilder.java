@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.formatter;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.ast.ASTNode;
@@ -28,21 +30,27 @@ import consulo.language.impl.psi.SourceTreeToPsiMap;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 01.08.2006
  */
+@ExtensionImpl
 public class RubyFormattingModelBuilder implements FormattingModelBuilder
 {
-	@Override
 	@Nonnull
-	public FormattingModel createModel(final PsiElement element, final CodeStyleSettings settings)
+	@Override
+	public FormattingModel createModel(@Nonnull FormattingContext formattingContext)
 	{
+		PsiElement element = formattingContext.getPsiElement();
+		CodeStyleSettings settings = formattingContext.getCodeStyleSettings();
+
 		// TODO: why do we need to use fileElement except element.getNode?
 		final FileElement fileElement = TreeUtil.getFileElement((TreeElement) SourceTreeToPsiMap.psiElementToTree(element));
 		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), new RubyBlock(fileElement, Indent.getAbsoluteNoneIndent(), null, settings), settings);
+
 	}
 
 	@Nullable
@@ -50,5 +58,12 @@ public class RubyFormattingModelBuilder implements FormattingModelBuilder
 	public TextRange getRangeAffectingIndent(PsiFile psiFile, int i, ASTNode astNode)
 	{
 		return astNode.getTextRange();
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
 	}
 }

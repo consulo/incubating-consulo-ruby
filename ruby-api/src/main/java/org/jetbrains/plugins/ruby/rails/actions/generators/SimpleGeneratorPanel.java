@@ -46,7 +46,7 @@ public class SimpleGeneratorPanel implements GeneratorPanel
 	public void initPanel(final GeneratorOptions options)
 	{
 		myOptions = options;
-		GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, mySVNCheckBox, myOptions);
+		GeneratorsUtil.initOptionsCheckBoxes(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, myOptions);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class SimpleGeneratorPanel implements GeneratorPanel
 	public String getGeneratorArgs()
 	{
 		final StringBuilder buff = new StringBuilder();
-		buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox, myForceCheckBox, myPretendCheckBox, mySkipCheckBox, mySVNCheckBox));
+		buff.append(GeneratorsUtil.calcGeneralOptionsString(myBacktraceCheckBox, myForceCheckBox, myPretendCheckBox, mySkipCheckBox));
 
 		buff.append(myGeneratorArgsLabelTextField.getText().trim());
 		return buff.toString();
@@ -82,6 +82,6 @@ public class SimpleGeneratorPanel implements GeneratorPanel
 	@Override
 	public void saveSettings(final Project project)
 	{
-		GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, mySVNCheckBox, myOptions, project);
+		GeneratorsUtil.saveSettings(myPretendCheckBox, myForceCheckBox, mySkipCheckBox, myBacktraceCheckBox, myOptions, project);
 	}
 }

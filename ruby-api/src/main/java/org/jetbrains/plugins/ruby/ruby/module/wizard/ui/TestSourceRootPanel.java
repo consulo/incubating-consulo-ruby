@@ -17,21 +17,21 @@
 package org.jetbrains.plugins.ruby.ruby.module.wizard.ui;
 
 import consulo.application.ApplicationManager;
+import consulo.application.util.function.Computable;
+import consulo.fileChooser.FileChooserDescriptor;
+import consulo.logging.Logger;
+import consulo.ui.ex.awt.FieldPanel;
 import consulo.ui.ex.awt.event.DocumentAdapter;
 import consulo.ui.ex.awt.internal.laf.MultiLineLabelUI;
 import consulo.ui.ex.awt.util.BrowseFilesListener;
-import consulo.logging.Logger;
-import consulo.fileChooser.FileChooserDescriptor;
-import consulo.application.util.function.Computable;
 import consulo.virtualFileSystem.LocalFileSystem;
-import consulo.ide.impl.idea.openapi.vfs.VfsUtil;
-import consulo.ui.ex.awt.FieldPanel;
 import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.util.VirtualFileUtil;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.ruby.module.wizard.RubyModuleBuilder;
 
-import jakarta.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
@@ -41,8 +41,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 
-import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
-import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemIndependentName;
+import static consulo.util.io.FileUtil.toSystemDependentName;
+import static consulo.util.io.FileUtil.toSystemIndependentName;
 
 /**
  * Created by IntelliJ IDEA.
@@ -248,7 +248,7 @@ public class TestSourceRootPanel
 					final String fullPath = toSystemIndependentName(myField.getText().trim());
 					final VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(fullPath);
 					LOG.assertTrue(fileByPath != null);
-					myField.setText(VfsUtil.getRelativePath(fileByPath, contentEntryDir, File.separatorChar));
+					myField.setText(VirtualFileUtil.getRelativePath(fileByPath, contentEntryDir, File.separatorChar));
 				}
 			}
 		}

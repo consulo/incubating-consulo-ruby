@@ -16,21 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
-import jakarta.annotation.Nonnull;
-
 import consulo.execution.ExecutionManager;
+import consulo.execution.action.CloseAction;
+import consulo.execution.executor.DefaultRunExecutor;
 import consulo.execution.executor.Executor;
 import consulo.execution.executor.ExecutorRegistry;
-import consulo.execution.executor.DefaultRunExecutor;
-import com.intellij.execution.filters.Filter;
-import consulo.execution.ui.console.ConsoleView;
-import consulo.execution.ui.console.TextConsoleBuilderFactory;
-import consulo.execution.ui.console.ConsoleViewContentType;
 import consulo.execution.ui.RunContentDescriptor;
-import com.intellij.execution.ui.actions.CloseAction;
+import consulo.execution.ui.console.ConsoleView;
+import consulo.execution.ui.console.ConsoleViewContentType;
+import consulo.execution.ui.console.Filter;
+import consulo.execution.ui.console.TextConsoleBuilderFactory;
 import consulo.project.Project;
-import consulo.ui.ex.action.DefaultActionGroup;
 import consulo.project.startup.StartupManager;
+import consulo.ui.ex.action.DefaultActionGroup;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.

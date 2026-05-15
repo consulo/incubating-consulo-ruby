@@ -19,7 +19,9 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
+import consulo.ui.ex.awt.tree.SimpleNode;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
@@ -46,7 +48,6 @@ import com.intellij.ui.treeStructure.SimpleNodeVisitor;
  */
 public class ControllerClassNode extends ClassNode
 {
-
 	public ControllerClassNode(final Module module, final RVirtualClass rVClass, final RFileInfo fileInfo)
 	{
 
@@ -56,7 +57,7 @@ public class ControllerClassNode extends ClassNode
 	}
 
 	@Override
-	public void accept(final SimpleNodeVisitor visitor)
+	public void accept(Predicate<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

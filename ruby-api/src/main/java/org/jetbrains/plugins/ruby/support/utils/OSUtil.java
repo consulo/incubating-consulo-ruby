@@ -21,6 +21,7 @@ import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentNa
 import java.io.File;
 import java.util.StringTokenizer;
 
+import consulo.util.io.FileUtil;
 import jakarta.annotation.Nullable;
 
 import consulo.process.cmd.GeneralCommandLine;
@@ -116,7 +117,7 @@ public class OSUtil
 		{
 			pathValue = path + File.pathSeparatorChar + additionalPath;
 		}
-		return toSystemDependentName(pathValue);
+		return FileUtil.toSystemDependentName(pathValue);
 	}
 
 	/**

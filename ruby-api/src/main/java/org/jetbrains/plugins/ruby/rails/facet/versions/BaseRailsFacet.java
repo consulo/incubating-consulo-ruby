@@ -16,17 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.facet.versions;
 
-import java.util.Collection;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
+import com.intellij.facet.Facet;
+import consulo.component.messagebus.MessageBusConnection;
+import consulo.content.bundle.Sdk;
+import consulo.module.Module;
 import consulo.module.content.ModuleRootManager;
 import consulo.module.content.layer.ModifiableRootModel;
 import consulo.module.content.layer.event.ModuleRootEvent;
 import consulo.module.content.layer.event.ModuleRootListener;
+import consulo.project.Project;
 import consulo.project.startup.StartupManager;
 import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
 import org.jetbrains.plugins.ruby.rails.facet.BaseRailsFacetBuilder;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
@@ -36,12 +38,8 @@ import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.ProjectTopics;
-import com.intellij.facet.Facet;
-import consulo.module.Module;
-import consulo.project.Project;
-import consulo.content.bundle.Sdk;
-import consulo.component.messagebus.MessageBusConnection;
+
+import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -167,7 +165,7 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 			}
 		};
 		myConnection = module.getProject().getMessageBus().connect();
-		myConnection.subscribe(ProjectTopics.PROJECT_ROOTS, moduleRootListener);
+		myConnection.subscribe(ModuleRootListener.class, moduleRootListener);
 	}
 
 	@Override

@@ -16,29 +16,19 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
-import java.util.HashMap;
-
+import consulo.execution.ui.awt.BrowseModuleValueActionListener;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
-import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestUnitUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.RTestsRunConfigurationForm;
-import org.jetbrains.plugins.ruby.ruby.ui.TreeRClassChooserDialog;
-import consulo.ide.impl.idea.execution.configuration.BrowseModuleValueActionListener;
-import consulo.project.Project;
-import consulo.util.lang.Pair;
-import consulo.virtualFileSystem.LocalFileSystem;
-import consulo.virtualFileSystem.VirtualFile;
-import consulo.language.psi.PsiManager;
-import consulo.language.psi.scope.GlobalSearchScope;
-import consulo.util.lang.ref.SoftReference;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,12 +36,12 @@ import consulo.util.lang.ref.SoftReference;
  * @author: Roman Chernyatchik
  * @date: 06.08.2007
  */
-public class TestCaseClassBrowser extends consulo.ide.impl.idea.execution.configuration.BrowseModuleValueActionListener
+public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 {
 	private final String myTitle;
 	public GlobalSearchScope mySearchScope;
 	public RTestsRunConfigurationForm myForm;
-	public final TestCachingFilter myClassCachingFilter;
+	//public final TestCachingFilter myClassCachingFilter;
 
 	public TestCaseClassBrowser(final Project project, final RTestsRunConfigurationForm form)
 	{
@@ -60,39 +50,40 @@ public class TestCaseClassBrowser extends consulo.ide.impl.idea.execution.config
 
 		myTitle = RBundle.message("choose.test.class.dialog.title");
 		mySearchScope = GlobalSearchScope.projectScope(getProject());
-		myClassCachingFilter = new TestCachingFilter();
+		//myClassCachingFilter = new TestCachingFilter();
 	}
 
 	@Override
 	@Nullable
 	protected String showDialog()
 	{
-		final TreeRClassChooserDialog dialog = new TreeRClassChooserDialog(getProject(), myTitle, mySearchScope, null, myClassCachingFilter);
-		//        final TreeClassChooser dialog = TreeClassChooserFactory.getInstance(getProject()).createWithInnerClassesScopeChooser(myTitle, classFilter.getScope(), classFilter, null);
-		configureDialog(dialog);
+		// TODO reuse TreeClassChooserFactory.getInstance(getProject()).newChooser(RVirtualClass.class)
 
-		// get result
-		if(!dialog.showDialog())
-		{
-			//on cancel
-			return null;
-		}
-		// on ok
-		final RVirtualClass rClass = dialog.getSelectedClass();
-		onClassChoosen(rClass);
-		if(rClass == null)
-		{
-			return RBundle.message("run.configuration.tests.no.data");
-		}
-		final String qualifiedName = RClassPresentationUtil.getRuntimeQualifiedNameInRubyTestMode(rClass, null);
-		// Here assertion is more correct, but I don't believe, that
-		// somebody will be able to post all necessary about his project in error submiter.
-		// maybe such error message induce him to ask us for help
-		if(TextUtil.isEmpty(qualifiedName))
-		{
-			return RBundle.message("run.configuration.tests.no.qualified.name");
-		}
-		return qualifiedName;
+//		configureDialog(dialog);
+//
+//		// get result
+//		if(!dialog.showDialog())
+//		{
+//			//on cancel
+//			return null;
+//		}
+//		// on ok
+//		final RVirtualClass rClass = dialog.getSelectedClass();
+//		onClassChoosen(rClass);
+//		if(rClass == null)
+//		{
+//			return RBundle.message("run.configuration.tests.no.data");
+//		}
+//		final String qualifiedName = RClassPresentationUtil.getRuntimeQualifiedNameInRubyTestMode(rClass, null);
+//		// Here assertion is more correct, but I don't believe, that
+//		// somebody will be able to post all necessary about his project in error submiter.
+//		// maybe such error message induce him to ask us for help
+//		if(TextUtil.isEmpty(qualifiedName))
+//		{
+//			return RBundle.message("run.configuration.tests.no.qualified.name");
+//		}
+//		return qualifiedName;
+		return null;
 	}
 
 	protected void onClassChoosen(@Nullable final RVirtualClass psiClass)
@@ -111,33 +102,33 @@ public class TestCaseClassBrowser extends consulo.ide.impl.idea.execution.config
 		myForm.setTestScriptPath(testScriptPath);
 	}
 
-	private void configureDialog(final TreeRClassChooserDialog dialog)
-	{
-		final String qualifiedName = getText();
-
-		final String path = myForm.getTestScriptPath();
-		final VirtualFile file = TextUtil.isEmpty(path) ? null : LocalFileSystem.getInstance().findFileByPath(path);
-
-		if(file == null)
-		{
-			return;
-		}
-
-		final RClass rClass = findClass(qualifiedName, file);
-		if(rClass != null)
-		{
-			dialog.selectClass(rClass);
-		}
-
-		if(file.isDirectory())
-		{
-			dialog.selectFile(PsiManager.getInstance(getProject()).findDirectory(file));
-		}
-		else
-		{
-			dialog.selectFile(PsiManager.getInstance(getProject()).findFile(file));
-		}
-	}
+//	private void configureDialog(final TreeRClassChooserDialog dialog)
+//	{
+//		final String qualifiedName = getText();
+//
+//		final String path = myForm.getTestScriptPath();
+//		final VirtualFile file = TextUtil.isEmpty(path) ? null : LocalFileSystem.getInstance().findFileByPath(path);
+//
+//		if(file == null)
+//		{
+//			return;
+//		}
+//
+//		final RClass rClass = findClass(qualifiedName, file);
+//		if(rClass != null)
+//		{
+//			dialog.selectClass(rClass);
+//		}
+//
+//		if(file.isDirectory())
+//		{
+//			dialog.selectFile(PsiManager.getInstance(getProject()).findDirectory(file));
+//		}
+//		else
+//		{
+//			dialog.selectFile(PsiManager.getInstance(getProject()).findFile(file));
+//		}
+//	}
 
 	@Nullable
 	protected RClass findClass(@Nonnull final String qualifiedNameClassName, @Nonnull final VirtualFile scriptFile)
@@ -177,34 +168,34 @@ public class TestCaseClassBrowser extends consulo.ide.impl.idea.execution.config
 
 	// Use this filter only if PsiElements can't be changed at that time
 	// e.g. in modal select smth. dialog
-	private static class TestCachingFilter implements TreeRClassChooserDialog.ClassFilter
-	{
-		private HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>> processedElements = new HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>>();
-
-		@Override
-		public boolean isAccepted(@Nonnull final RVirtualClass rVClass)
-		{
-			final VirtualFile virtualFile = rVClass.getVirtualFile();
-			if(virtualFile == null)
-			{
-				return false;
-			}
-
-			final int key = rVClass.hashCode();
-			final Pair<SoftReference<RVirtualClass>, Boolean> pair = processedElements.get(key);
-			boolean isTestCase;
-			if(pair == null || pair.first.get() != rVClass)
-			{
-				isTestCase = RTestUnitUtil.isClassUnitTestCase(rVClass, null);
-				//TODO replace rVClass with its path..
-				processedElements.put(key, new Pair<SoftReference<RVirtualClass>, Boolean>(new SoftReference<RVirtualClass>(rVClass), isTestCase));
-
-			}
-			else
-			{
-				isTestCase = pair.second;
-			}
-			return isTestCase;
-		}
-	}
+//	private static class TestCachingFilter implements TreeRClassChooserDialog.ClassFilter
+//	{
+//		private HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>> processedElements = new HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>>();
+//
+//		@Override
+//		public boolean isAccepted(@Nonnull final RVirtualClass rVClass)
+//		{
+//			final VirtualFile virtualFile = rVClass.getVirtualFile();
+//			if(virtualFile == null)
+//			{
+//				return false;
+//			}
+//
+//			final int key = rVClass.hashCode();
+//			final Pair<SoftReference<RVirtualClass>, Boolean> pair = processedElements.get(key);
+//			boolean isTestCase;
+//			if(pair == null || pair.first.get() != rVClass)
+//			{
+//				isTestCase = RTestUnitUtil.isClassUnitTestCase(rVClass, null);
+//				//TODO replace rVClass with its path..
+//				processedElements.put(key, new Pair<SoftReference<RVirtualClass>, Boolean>(new SoftReference<RVirtualClass>(rVClass), isTestCase));
+//
+//			}
+//			else
+//			{
+//				isTestCase = pair.second;
+//			}
+//			return isTestCase;
+//		}
+//	}
 }

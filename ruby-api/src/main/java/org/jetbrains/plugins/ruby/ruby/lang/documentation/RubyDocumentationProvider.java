@@ -16,16 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 
-import java.util.Collections;
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
-import consulo.language.editor.documentation.DocumentationProvider;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
+import consulo.language.editor.documentation.LanguageDocumentationProvider;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiManager;
 import consulo.project.Project;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
@@ -35,9 +33,13 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,8 +47,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
  * @author: oleg
  * @date: Apr 22, 2007
  */
-public class RubyDocumentationProvider implements DocumentationProvider
+@ExtensionImpl
+public class RubyDocumentationProvider implements LanguageDocumentationProvider
 {
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
+	}
 
 	@Nullable
 	@Override

@@ -47,7 +47,7 @@ public class RSpecModuleSettings
 
 	public static RSpecModuleSettings getInstance(@Nonnull final Module module)
 	{
-		return ModuleServiceManager.getService(module, RSpecModuleSettings.class);
+		return module.getInstance(RSpecModuleSettings.class);
 	}
 
 	public boolean shouldUseRSpecTestFramework()

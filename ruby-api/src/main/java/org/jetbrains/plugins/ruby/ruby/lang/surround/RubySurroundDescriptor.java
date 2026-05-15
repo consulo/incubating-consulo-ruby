@@ -16,30 +16,27 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround;
 
-import java.util.ArrayList;
-
-import jakarta.annotation.Nonnull;
-
-import consulo.language.psi.PsiFile;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBEGINSurrounder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBeginEndSurrounder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyBraceSurrounder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyENDSurrounder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyIfSurrounder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyUnlessSurrounder;
-import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.RubyWhileSurrounder;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Language;
 import consulo.language.editor.surroundWith.SurroundDescriptor;
 import consulo.language.editor.surroundWith.Surrounder;
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
 import consulo.language.psi.util.PsiTreeUtil;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
+import org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders.*;
+
+import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 4, 2007
  */
+@ExtensionImpl
 public class RubySurroundDescriptor implements SurroundDescriptor
 {
 	@Override
@@ -104,5 +101,12 @@ public class RubySurroundDescriptor implements SurroundDescriptor
 	public boolean isExclusive()
 	{
 		return false;
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
 	}
 }

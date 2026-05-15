@@ -16,16 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-
+import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
-import org.jetbrains.annotations.NonNls;
-
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.util.IncorrectOperationException;
+import consulo.navigation.ItemPresentation;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
@@ -49,10 +47,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RNameUtil
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
-import consulo.language.ast.ASTNode;
-import consulo.navigation.ItemPresentation;
-import consulo.language.psi.PsiElementVisitor;
-import consulo.util.lang.IncorrectOperationException;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

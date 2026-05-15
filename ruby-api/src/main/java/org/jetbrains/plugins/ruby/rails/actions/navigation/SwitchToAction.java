@@ -16,11 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.navigation;
 
+import consulo.codeEditor.Editor;
+import consulo.codeEditor.action.EditorAction;
 import consulo.codeEditor.action.EditorActionHandler;
 import consulo.dataContext.DataContext;
 import consulo.language.editor.CommonDataKeys;
+import consulo.language.psi.PsiFile;
+import consulo.module.Module;
+import consulo.navigation.Navigatable;
 import consulo.ui.ex.RelativePoint;
 import consulo.ui.ex.action.Presentation;
+import consulo.ui.ex.awt.Messages;
+import consulo.ui.ex.popup.JBPopupFactory;
 import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
@@ -28,13 +35,6 @@ import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
-import consulo.codeEditor.Editor;
-import consulo.codeEditor.impl.action.EditorAction;
-import consulo.module.Module;
-import consulo.ui.ex.awt.Messages;
-import consulo.ui.ex.popup.JBPopupFactory;
-import consulo.navigation.Navigatable;
-import consulo.language.psi.PsiFile;
 
 /**
  * Created by IntelliJ IDEA.

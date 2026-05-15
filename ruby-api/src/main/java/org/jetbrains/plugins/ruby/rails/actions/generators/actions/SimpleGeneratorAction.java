@@ -16,17 +16,18 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
 import consulo.document.FileDocumentManager;
 import consulo.language.editor.CommonDataKeys;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.language.util.IncorrectOperationException;
+import consulo.module.Module;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
 import consulo.ui.ex.awt.Messages;
-import consulo.util.lang.IncorrectOperationException;
+import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
@@ -38,11 +39,9 @@ import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import consulo.ui.ex.action.Presentation;
-import consulo.module.Module;
-import consulo.language.psi.PsiDirectory;
-import consulo.language.psi.PsiElement;
-import consulo.ui.image.Image;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

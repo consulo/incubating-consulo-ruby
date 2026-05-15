@@ -79,11 +79,7 @@ public interface RubyIcons
 	//// Misc
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final Image RUBY_COLOR_PAGE = RUBY_ICON;
-
 	final Image RUBY_GUTTER_OVERRIDING = PlatformIconGroup.gutterOverridingmethod();
 	final Image RUBY_GUTTER_IMPLEMENTING = PlatformIconGroup.gutterImplementingmethod();
-
-	final Image RI_ICON = RubyApiIconGroup.rubyRi();
 }
 

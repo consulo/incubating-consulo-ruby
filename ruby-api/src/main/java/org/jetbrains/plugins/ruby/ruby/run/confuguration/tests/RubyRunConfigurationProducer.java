@@ -16,15 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.execution.RunnerAndConfigurationSettings;
+import consulo.execution.action.ConfigurationContext;
+import consulo.execution.action.Location;
 import consulo.execution.action.RuntimeConfigurationProducer;
 import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationType;
-import consulo.execution.action.Location;
-import consulo.execution.action.ConfigurationContext;
-import consulo.ide.impl.idea.execution.impl.RunnerAndConfigurationSettingsImpl;
-import consulo.language.psi.PsiElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +33,7 @@ import consulo.language.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: Aug 18, 2007
  */
+@ExtensionImpl
 public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable
 {
 	private PsiElement mySourceElement;
@@ -49,7 +51,7 @@ public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer i
 
 	@Override
 	@Nullable
-	protected consulo.ide.impl.idea.execution.impl.RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, ConfigurationContext context)
+	protected RunnerAndConfigurationSettings createConfigurationByElement(Location location, ConfigurationContext context)
 	{
 		final PsiElement element = location.getPsiElement();
 
@@ -58,7 +60,7 @@ public class RubyRunConfigurationProducer extends RuntimeConfigurationProducer i
 			return null;
 		}
 		mySourceElement = element;
-		return (consulo.ide.impl.idea.execution.impl.RunnerAndConfigurationSettingsImpl) RubyRunConfigurationType.getInstance().createConfigurationByLocation(location);
+		return RubyRunConfigurationType.getInstance().createConfigurationByLocation(location);
 	}
 
 	@Override

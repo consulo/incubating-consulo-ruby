@@ -42,24 +42,6 @@ public class JRubySdkUtil
 		return sdk != null && sdk.getSdkType() instanceof JRubySdkType;
 	}
 
-	/**
-	 * Creates mock sdk
-	 */
-	@SuppressWarnings({"JavaDoc"})
-	public static Sdk getMockSdk(final String versionName)
-	{
-		return RubySdkUtil.createMockSdk(JRubySdkType.getInstance(), versionName);
-	}
-
-	/**
-	 * Creates mock sdk without stubs
-	 */
-	@SuppressWarnings({"JavaDoc"})
-	public static Sdk getMockSdkWithoutStubs(final String versionName)
-	{
-		return RubySdkUtil.createMockSdkWithoutStubs(JRubySdkType.getInstance(), versionName);
-	}
-
 	public static Sdk[] getValidSdks()
 	{
 		final ArrayList<Sdk> foundSdks = new ArrayList<Sdk>();

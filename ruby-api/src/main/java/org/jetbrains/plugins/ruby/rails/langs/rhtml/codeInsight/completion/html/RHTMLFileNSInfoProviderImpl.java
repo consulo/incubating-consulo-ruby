@@ -16,24 +16,20 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html;
 
-
+import com.intellij.xml.util.XmlUtil;
+import consulo.xml.psi.xml.XmlFile;
+import consulo.xml.psi.xml.XmlFileNSInfoProvider;
 import jakarta.annotation.Nonnull;
-
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
-import com.intellij.psi.xml.XmlFile;
-import com.intellij.psi.xml.XmlFileNSInfoProvider;
-import com.intellij.xml.util.XmlUtil;
 
 /**
  * Created by IntelliJ IDEA.
  *
- * @author: Roman Chernyatchik
- * @date: 15.02.2007
- */
+ * @author Roman Chernyatchik
+ * @date 15.02.2007
 
-/**
  * This class adds html tags auto completion for *.rhtml files.
  */
 @SuppressWarnings({"ComponentRegistrationProblems"})

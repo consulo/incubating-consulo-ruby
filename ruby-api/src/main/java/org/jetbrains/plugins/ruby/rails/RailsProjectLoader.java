@@ -16,8 +16,6 @@
 
 package org.jetbrains.plugins.ruby.rails;
 
-import com.intellij.openapi.components.ProjectComponent;
-
 /**
  * Created by IntelliJ IDEA.
  *
@@ -25,7 +23,7 @@ import com.intellij.openapi.components.ProjectComponent;
  * @date: Aug 30, 2007
  */
 //TODO
-public class RailsProjectLoader implements ProjectComponent
+public class RailsProjectLoader
 {
    /* public RailsProjectLoader(final CssSupportLoader loader,
 							  final ReferenceProvidersRegistry referenceProvidersRegistry) {

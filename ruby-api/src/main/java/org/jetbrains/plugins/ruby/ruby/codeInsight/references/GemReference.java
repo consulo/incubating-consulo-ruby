@@ -16,18 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import consulo.language.editor.completion.lookup.LookupValueWithPriority;
 import consulo.content.bundle.Sdk;
 import consulo.document.util.TextRange;
-import consulo.virtualFileSystem.VirtualFileManager;
+import consulo.language.editor.completion.lookup.LookupValueWithPriority;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiReference;
 import consulo.language.psi.ResolveResult;
-import consulo.util.lang.IncorrectOperationException;
+import consulo.language.util.IncorrectOperationException;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileManager;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-
-import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;

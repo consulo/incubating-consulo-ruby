@@ -1,18 +1,17 @@
 package consulo.jruby.module.extension;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
 import consulo.content.bundle.Sdk;
 import consulo.disposer.Disposable;
+import consulo.module.content.layer.ModuleRootLayer;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.module.ui.extension.ModuleExtensionBundleBoxBuilder;
-import consulo.roots.ModuleRootLayer;
 import consulo.ruby.module.extension.RubyModuleExtension;
 import consulo.ui.Component;
 import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.layout.VerticalLayout;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * @author VISTALL

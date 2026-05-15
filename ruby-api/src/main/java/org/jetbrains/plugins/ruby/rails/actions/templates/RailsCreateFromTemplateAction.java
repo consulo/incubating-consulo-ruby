@@ -16,17 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
+import consulo.fileTemplate.FileTemplate;
+import consulo.language.file.FileTypeManager;
+import consulo.language.psi.PsiDirectory;
+import consulo.language.psi.PsiElement;
+import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.Presentation;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-
-import consulo.fileTemplate.FileTemplate;
-import consulo.language.psi.PsiElement;
-import consulo.ui.ex.action.AnActionEvent;
-import consulo.ide.impl.idea.openapi.fileTypes.ex.FileTypeManagerEx;
-import consulo.project.Project;
-import consulo.language.psi.PsiDirectory;
-import consulo.ui.ex.action.AnAction;
-import consulo.ui.ex.action.Presentation;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +39,7 @@ public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateAc
 
 	public RailsCreateFromTemplateAction(@Nonnull final FileTemplate template)
 	{
-		super(template.getName(), null, FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension()).getIcon());
+		super(template.getName(), null, FileTypeManager.getInstance().getFileTypeByExtension(template.getExtension()).getIcon());
 		myTemplate = template;
 	}
 

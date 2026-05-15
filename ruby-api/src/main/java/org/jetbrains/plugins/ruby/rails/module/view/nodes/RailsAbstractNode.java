@@ -32,7 +32,6 @@ import consulo.ui.ex.awt.tree.SimpleNode;
  */
 public abstract class RailsAbstractNode extends SimpleNode
 {
-
 	protected RailsAbstractNode[] CHILDREN_EMPTY = new RailsAbstractNode[0];
 
 	private NodeId myId;

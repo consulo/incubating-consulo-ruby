@@ -17,15 +17,13 @@
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
 import consulo.dataContext.DataContext;
-import consulo.fileTemplate.FileTemplateManager;
-import consulo.fileTemplate.FileTemplateUtil;
-import consulo.ide.IdeView;
 import consulo.fileTemplate.FileTemplate;
+import consulo.fileTemplate.FileTemplateManager;
+import consulo.ide.IdeView;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;
-import consulo.ui.ex.action.AnAction;
-import consulo.language.editor.LangDataKeys;
 import consulo.project.Project;
+import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.ui.image.Image;
 import jakarta.annotation.Nullable;
@@ -38,7 +36,6 @@ import jakarta.annotation.Nullable;
  */
 public abstract class CreateFromTemplateActionBase extends AnAction
 {
-
 	public CreateFromTemplateActionBase(final String text, final String description, final Image icon)
 	{
 		super(text, description, icon);
@@ -50,12 +47,12 @@ public abstract class CreateFromTemplateActionBase extends AnAction
 	{
 		DataContext dataContext = e.getDataContext();
 
-		IdeView view = dataContext.getData(LangDataKeys.IDE_VIEW);
+		IdeView view = dataContext.getData(IdeView.KEY);
 		if(view == null)
 		{
 			return;
 		}
-		Project project = e.getProject();
+		Project project = e.getData(Project.KEY);
 
 		PsiDirectory dir = null;//PackageUtil.getOrChooseDirectory(view);
 		if(dir == null)
@@ -99,7 +96,7 @@ public abstract class CreateFromTemplateActionBase extends AnAction
 			return false;
 		}
 		final DataContext dataContext = e.getDataContext();
-		IdeView view = dataContext.getData(LangDataKeys.IDE_VIEW);
+		IdeView view = dataContext.getData(IdeView.KEY);
 		if(view == null)
 		{
 			return false;
@@ -111,6 +108,7 @@ public abstract class CreateFromTemplateActionBase extends AnAction
 		{
 			return false;
 		}
-		return FileTemplateUtil.canCreateFromTemplate(dirs, template);
+		return true;
+		//return FileTemplateUtil.canCreateFromTemplate(dirs, template);
 	}
 }

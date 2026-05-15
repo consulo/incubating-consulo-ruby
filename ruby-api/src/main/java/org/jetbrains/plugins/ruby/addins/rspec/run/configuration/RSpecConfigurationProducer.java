@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.execution.RunnerAndConfigurationSettings;
 import consulo.execution.action.ConfigurationContext;
 import consulo.execution.action.Location;
@@ -32,6 +33,7 @@ import jakarta.annotation.Nullable;
  * @author: Roman Chernyatchik
  * @date: May 8, 2008
  */
+@ExtensionImpl
 public class RSpecConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable
 {
 	private PsiElement mySourceElement;

@@ -16,11 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.PsiReference;
+import consulo.language.util.IncorrectOperationException;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
@@ -36,8 +35,9 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RPseudoConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
-import consulo.language.ast.ASTNode;
-import consulo.util.lang.IncorrectOperationException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +46,6 @@ import consulo.util.lang.IncorrectOperationException;
  */
 public class RPseudoConstantImpl extends RNamedElementBase implements RPseudoConstant
 {
-
 	public static Map<String, String> TYPE_MAP = new HashMap<String, String>();
 
 	static

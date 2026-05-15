@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.generators;
 
+import consulo.application.Application;
 import consulo.application.progress.ProgressIndicator;
 import consulo.application.progress.ProgressManager;
 import consulo.application.progress.Task;
@@ -28,7 +29,6 @@ import consulo.process.event.ProcessAdapter;
 import consulo.process.event.ProcessEvent;
 import consulo.process.event.ProcessListener;
 import consulo.project.Project;
-import consulo.ui.ModalityState;
 import consulo.util.lang.function.ThrowableRunnable;
 import consulo.util.lang.ref.Ref;
 import consulo.virtualFileSystem.LocalFileSystem;
@@ -46,7 +46,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.*;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
-import org.jetbrains.plugins.ruby.settings.RProjectUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 
@@ -79,8 +78,6 @@ public class GeneratorsUtil
 	public static final String PRETEND_CMD_OPTION = "-p";
 	@NonNls
 	public static final String SKIP_CMD_OPTION = "-s";
-	@NonNls
-	public static final String SVN_CMD_OPTION = "-c";
 
 	protected final static Logger LOG = Logger.getInstance(GeneratorsUtil.class.getName());
 
@@ -226,7 +223,7 @@ public class GeneratorsUtil
 				// Must be executed in EDT
 				ProgressManager.getInstance().run(task);
 			}
-		}, ModalityState.defaultModalityState());
+		}, Application.get().getDefaultModalityState());
 	}
 
 	public static boolean checkIfGenerateScriptExists(@Nonnull final Module module)
@@ -293,31 +290,35 @@ public class GeneratorsUtil
 		return null;
 	}
 
-	public static void initOptionsCheckBoxes(@Nonnull final JCheckBox pretendCheckBox, @Nonnull final JCheckBox forceCheckBox, @Nonnull final JCheckBox skipCheckBox, @Nonnull final JCheckBox backtraceCheckBox, @Nonnull final JCheckBox svnCheckBox, @Nonnull final GeneratorOptions options)
+	public static void initOptionsCheckBoxes(@Nonnull final JCheckBox pretendCheckBox,
+											 @Nonnull final JCheckBox forceCheckBox,
+											 @Nonnull final JCheckBox skipCheckBox,
+											 @Nonnull final JCheckBox backtraceCheckBox,
+											 @Nonnull final GeneratorOptions options)
 	{
 		pretendCheckBox.setSelected(options.containsValue(Option.PRETEND));
 		forceCheckBox.setSelected(options.containsValue(Option.FORCE));
 		skipCheckBox.setSelected(options.containsValue(Option.SKIP));
 		backtraceCheckBox.setSelected(options.containsValue(Option.BACK_TRACE));
-
-		svnCheckBox.setEnabled(options.containsValue(Option.SVN_SHOW_CONFIRMATION));
-		svnCheckBox.setSelected(options.containsValue(Option.SVN));
 	}
 
-	public static void saveSettings(@Nonnull final JCheckBox pretendCheckBox, @Nonnull final JCheckBox forceCheckBox, @Nonnull final JCheckBox skipCheckBox, @Nonnull final JCheckBox backtraceCheckBox, @Nonnull final JCheckBox svnCheckBox, @Nonnull final GeneratorOptions options, @Nonnull final Project project)
+	public static void saveSettings(@Nonnull final JCheckBox pretendCheckBox,
+									@Nonnull final JCheckBox forceCheckBox,
+									@Nonnull final JCheckBox skipCheckBox,
+									@Nonnull final JCheckBox backtraceCheckBox,
+									@Nonnull final GeneratorOptions options,
+									@Nonnull final Project project)
 	{
 		options.setOption(Option.PRETEND, pretendCheckBox.isSelected());
 		options.setOption(Option.FORCE, forceCheckBox.isSelected());
 		options.setOption(Option.SKIP, skipCheckBox.isSelected());
 		options.setOption(Option.BACK_TRACE, backtraceCheckBox.isSelected());
-
-		if(RProjectUtil.isVcsAddShowConfirmation(project))
-		{
-			options.setOption(Option.SVN, svnCheckBox.isSelected());
-		}
 	}
 
-	public static String calcGeneralOptionsString(@Nonnull final JCheckBox backtraceCheckBox, @Nonnull final JCheckBox forceCheckBox, @Nonnull final JCheckBox pretendCheckBox, @Nonnull final JCheckBox skipCheckBox, @Nonnull final JCheckBox svnCheckBox)
+	public static String calcGeneralOptionsString(@Nonnull final JCheckBox backtraceCheckBox,
+												  @Nonnull final JCheckBox forceCheckBox,
+												  @Nonnull final JCheckBox pretendCheckBox,
+												  @Nonnull final JCheckBox skipCheckBox)
 	{
 		final StringBuilder buff = new StringBuilder();
 
@@ -344,11 +345,7 @@ public class GeneratorsUtil
 			buff.append(SKIP_CMD_OPTION);
 			buff.append(" ");
 		}
-		if(svnCheckBox.isSelected())
-		{
-			buff.append(SVN_CMD_OPTION);
-			buff.append(" ");
-		}
+
 		return buff.toString();
 	}
 

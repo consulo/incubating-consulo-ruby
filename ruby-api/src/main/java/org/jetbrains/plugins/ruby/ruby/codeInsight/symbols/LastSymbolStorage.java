@@ -16,12 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
+import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-
-import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
-import com.intellij.openapi.components.ProjectComponent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,7 +27,7 @@ import com.intellij.openapi.components.ProjectComponent;
  * @author: oleg
  * @date: Aug 18, 2007
  */
-public class LastSymbolStorage implements ProjectComponent
+public class LastSymbolStorage
 {
 	private FileSymbol lastEvaluatedSymbol;
 

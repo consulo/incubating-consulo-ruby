@@ -16,8 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 
-import java.util.Collection;
-
+import consulo.document.util.TextRange;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReference;
+import consulo.language.util.IncorrectOperationException;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
@@ -25,10 +27,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral;
-import consulo.document.util.TextRange;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.PsiReference;
-import consulo.util.lang.IncorrectOperationException;
+
+import java.util.Collection;
 
 /**
  * @author yole

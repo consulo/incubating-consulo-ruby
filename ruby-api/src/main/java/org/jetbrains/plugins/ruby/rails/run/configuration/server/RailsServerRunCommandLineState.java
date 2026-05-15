@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
-import java.io.IOException;
-
 import consulo.execution.runner.ExecutionEnvironment;
+import consulo.process.ExecutionException;
 import consulo.process.cmd.GeneralCommandLine;
+import consulo.util.io.NetUtil;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.rubyScript.RubyRunCommandLineState;
-import consulo.process.ExecutionException;
-import consulo.ide.impl.idea.util.net.NetUtils;
+
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +33,6 @@ import consulo.ide.impl.idea.util.net.NetUtils;
  */
 public class RailsServerRunCommandLineState extends RubyRunCommandLineState
 {
-
 	public RailsServerRunCommandLineState(final RailsServerRunConfiguration config, ExecutionEnvironment executionEnvironment)
 	{
 		super(config, executionEnvironment);
@@ -54,7 +53,7 @@ public class RailsServerRunCommandLineState extends RubyRunCommandLineState
 		{
 			try
 			{
-				port_int = NetUtils.findAvailableSocketPort();
+				port_int = NetUtil.findAvailableSocketPort();
 			}
 			catch(IOException e)
 			{

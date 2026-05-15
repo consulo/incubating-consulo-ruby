@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.run;
 
+import consulo.application.Application;
 import consulo.application.ApplicationManager;
 import consulo.application.progress.ProgressIndicator;
 import consulo.application.progress.ProgressManager;
@@ -35,6 +36,7 @@ import consulo.ui.ex.content.Content;
 import consulo.ui.ex.content.ContentFactory;
 import consulo.ui.ex.errorTreeView.ErrorTreeView;
 import consulo.ui.ex.errorTreeView.NewErrorTreeViewPanel;
+import consulo.ui.ex.errorTreeView.NewErrorTreeViewPanelFactory;
 import consulo.undoRedo.CommandProcessor;
 import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
@@ -75,7 +77,9 @@ public class ExecutionHelper
 					return;
 				}
 
-				final RailsErrorViewPanel errorTreeView = new RailsErrorViewPanel(myProject);
+				NewErrorTreeViewPanelFactory errorTreeViewPanelFactory = Application.get().getInstance(NewErrorTreeViewPanelFactory.class);
+
+				final NewErrorTreeViewPanel errorTreeView = errorTreeViewPanelFactory.createPanel(myProject, null);
 				try
 				{
 					openMessagesView(errorTreeView, myProject, tabDisplayName);
@@ -107,7 +111,7 @@ public class ExecutionHelper
 		});
 	}
 
-	private static void openMessagesView(@Nonnull final RailsErrorViewPanel errorTreeView, @Nonnull final Project myProject, @Nonnull final String tabDisplayName)
+	private static void openMessagesView(@Nonnull final NewErrorTreeViewPanel errorTreeView, @Nonnull final Project myProject, @Nonnull final String tabDisplayName)
 	{
 		CommandProcessor commandProcessor = CommandProcessor.getInstance();
 		commandProcessor.executeCommand(myProject, new Runnable()
@@ -116,7 +120,7 @@ public class ExecutionHelper
 			public void run()
 			{
 				final MessageView messageView = myProject.getComponent(MessageView.class);
-				final Content content = ContentFactory.SERVICE.getInstance().createContent(errorTreeView.getComponent(), tabDisplayName, true);
+				final Content content = ContentFactory.getInstance().createContent(errorTreeView.getComponent(), tabDisplayName, true);
 				messageView.getContentManager().addContent(content);
 				Disposer.register(content, errorTreeView);
 				messageView.getContentManager().setSelectedContent(content);
@@ -149,21 +153,6 @@ public class ExecutionHelper
 			}
 		}
 	}
-
-	public static class RailsErrorViewPanel extends NewErrorTreeViewPanel
-	{
-		public RailsErrorViewPanel(final Project project)
-		{
-			super(project, null);
-		}
-
-		@Override
-		protected boolean canHideWarningsOrInfos()
-		{
-			return false;
-		}
-	}
-
 
 	public static void executeExternalProcess(@Nullable final Project myProject, @Nonnull final OSProcessHandler processHandler, @Nonnull final Runner.ExecutionMode mode)
 	{

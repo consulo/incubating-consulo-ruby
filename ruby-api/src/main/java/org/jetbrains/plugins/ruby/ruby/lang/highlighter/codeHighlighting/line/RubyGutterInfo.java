@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
+import com.intellij.java.language.psi.PsiMethod;
 import consulo.codeEditor.markup.GutterIconRenderer;
-import com.intellij.psi.PsiMethod;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;

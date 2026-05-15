@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.references;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
 import consulo.document.util.TextRange;
 import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.ResolveResult;
+import consulo.language.util.IncorrectOperationException;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.RFieldResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -39,19 +38,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RBaseS
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
-import consulo.language.psi.PsiElement;
-import consulo.language.psi.ResolveResult;
-import consulo.util.lang.IncorrectOperationException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- *
+ *                                                      ```````````````
  * @author: oleg
  * @date: Mar 12, 2007
  */
 public class RFieldAttrReference implements RPsiPolyvariantReference
 {
-
 	private final RCall myCall;
 	private final TextRange myTextRange;
 	private final PsiElement myElement;

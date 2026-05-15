@@ -16,42 +16,34 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
-import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
-import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemIndependentName;
-import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Map;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-
+import consulo.content.bundle.Sdk;
+import consulo.execution.ui.awt.BrowseModuleValueActionListener;
 import consulo.execution.ui.awt.EnvironmentVariablesComponent;
 import consulo.execution.ui.awt.RawCommandLineEditor;
+import consulo.module.Module;
 import consulo.project.Project;
+import consulo.ui.ex.awt.LabeledComponent;
+import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUIUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestCaseClassBrowser;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui.TestMethodBrowser;
-import consulo.ide.impl.idea.execution.configuration.BrowseModuleValueActionListener;
-import consulo.module.Module;
-import consulo.content.bundle.Sdk;
-import consulo.ui.ex.awt.LabeledComponent;
-import consulo.ui.ex.awt.TextFieldWithBrowseButton;
-import consulo.util.lang.ref.Ref;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Map;
+
+import static consulo.util.io.FileUtil.toSystemDependentName;
+import static consulo.util.io.FileUtil.toSystemIndependentName;
+import static org.jetbrains.plugins.ruby.ruby.run.confuguration.AbstractRubyRunConfiguration.TestType;
 
 /**
  * Created by IntelliJ IDEA.

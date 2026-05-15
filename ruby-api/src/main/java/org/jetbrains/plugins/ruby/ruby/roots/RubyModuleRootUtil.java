@@ -1,14 +1,13 @@
 package org.jetbrains.plugins.ruby.ruby.roots;
 
-import jakarta.annotation.Nonnull;
-
-import consulo.module.content.layer.ContentEntry;
-import consulo.module.content.ModuleRootManager;
+import consulo.language.content.LanguageContentFolderScopes;
+import consulo.language.content.TestContentFolderTypeProvider;
 import consulo.module.Module;
 import consulo.module.ModuleManager;
+import consulo.module.content.ModuleRootManager;
+import consulo.module.content.layer.ContentEntry;
 import consulo.project.Project;
-import consulo.roots.ContentFolderScopes;
-import consulo.roots.impl.TestContentFolderTypeProvider;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL
@@ -25,7 +24,7 @@ public class RubyModuleRootUtil
 			ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
 			for(ContentEntry contentEntry : moduleRootManager.getContentEntries())
 			{
-				for(String t : contentEntry.getFolderUrls(ContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
+				for(String t : contentEntry.getFolderUrls(LanguageContentFolderScopes.of(TestContentFolderTypeProvider.getInstance())))
 				{
 					if(url.equals(t))
 					{

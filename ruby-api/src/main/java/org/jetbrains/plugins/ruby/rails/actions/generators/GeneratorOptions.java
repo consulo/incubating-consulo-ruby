@@ -72,7 +72,5 @@ public class GeneratorOptions
 		FORCE,
 		SKIP,
 		BACK_TRACE,
-		SVN,
-		SVN_SHOW_CONFIRMATION
 	}
 }

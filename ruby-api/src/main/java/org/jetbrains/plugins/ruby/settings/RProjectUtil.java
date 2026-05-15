@@ -16,16 +16,9 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
-import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions.Option;
-
-import jakarta.annotation.Nonnull;
-
-import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 import consulo.project.Project;
-import consulo.versionControlSystem.VcsConfiguration;
-import consulo.versionControlSystem.VcsShowConfirmationOption;
-import consulo.ide.impl.idea.openapi.vcs.VcsShowConfirmationOptionImpl;
-import consulo.ide.impl.idea.openapi.vcs.ex.ProjectLevelVcsManagerEx;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptions;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,36 +28,8 @@ import consulo.ide.impl.idea.openapi.vcs.ex.ProjectLevelVcsManagerEx;
  */
 public class RProjectUtil
 {
-	public static boolean isVcsAddSilently(@Nonnull final Project project)
-	{
-		final VcsShowConfirmationOptionImpl opt = consulo.ide.impl.idea.openapi.vcs.ex.ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
-		return opt.getValue() == VcsShowConfirmationOption.Value.DO_ACTION_SILENTLY;
-	}
-
-	public static boolean isVcsAddNothingSilently(@Nonnull final Project project)
-	{
-		final consulo.ide.impl.idea.openapi.vcs.VcsShowConfirmationOptionImpl opt = consulo.ide.impl.idea.openapi.vcs.ex.ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
-		return opt.getValue() == VcsShowConfirmationOption.Value.DO_NOTHING_SILENTLY;
-	}
-
-	public static boolean isVcsAddShowConfirmation(@Nonnull final Project project)
-	{
-		final consulo.ide.impl.idea.openapi.vcs.VcsShowConfirmationOptionImpl opt = consulo.ide.impl.idea.openapi.vcs.ex.ProjectLevelVcsManagerEx.getInstanceEx(project).getConfirmation(VcsConfiguration.StandardConfirmation.ADD);
-		return opt.getValue() == VcsShowConfirmationOption.Value.SHOW_CONFIRMATION;
-	}
-
 	public static GeneratorOptions getGeneratorsOptions(@Nonnull final Project project)
 	{
-		final GeneratorOptions options = RProjectSettings.getInstance(project).getGeneratorsOptions();
-		final boolean showConfirmation = isVcsAddShowConfirmation(project);
-
-		options.setOption(Option.SVN_SHOW_CONFIRMATION, showConfirmation);
-
-		if(!showConfirmation)
-		{
-			// set SVN option from Vcs settings
-			options.setOption(Option.SVN, isVcsAddSilently(project));
-		}
-		return options;
+		return RProjectSettings.getInstance(project).getGeneratorsOptions();
 	}
 }

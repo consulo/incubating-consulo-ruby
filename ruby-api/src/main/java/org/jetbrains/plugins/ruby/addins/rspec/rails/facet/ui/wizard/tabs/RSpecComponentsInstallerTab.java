@@ -407,7 +407,7 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 						new Function<String, Object>()
 						{
 							@Override
-							public Object fun(final String vers)
+							public Object apply(final String vers)
 							{
 								myRSpecGemVersion = vers;
 								myUseGemAllowed = !TextUtil.isEmpty(vers);
@@ -477,7 +477,7 @@ public class RSpecComponentsInstallerTab extends TabbedSdkDependSettingsEditorTa
 			myLSvnMustBeInPath.setText(text);
 			if(TextUtil.isEmpty(mySvnPathTextField.getText().trim()))
 			{
-				mySvnPathTextField.setText(consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName(OSUtil.getDefaultSVNPath()));
+				mySvnPathTextField.setText(FileUtil.toSystemDependentName(OSUtil.getDefaultSVNPath()));
 			}
 			mySvnPathComponent.setVisible(true);
 		}

@@ -16,14 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.fileEditor.structureView.StructureViewTreeElement;
+import consulo.xml.ide.structureView.xml.XmlStructureViewElementProvider;
+import consulo.xml.psi.xml.XmlTag;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTagImpl;
-import consulo.fileEditor.structureView.StructureViewTreeElement;
-import com.intellij.ide.structureView.xml.XmlStructureViewElementProvider;
-import com.intellij.psi.xml.XmlTag;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,6 +31,7 @@ import com.intellij.psi.xml.XmlTag;
  * @author: Roman Chernyatchik
  * @date: 21.05.2007
  */
+@ExtensionImpl
 public class RHTMLStructureViewElementProvider implements XmlStructureViewElementProvider
 {
 	@Override

@@ -16,30 +16,18 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import jakarta.annotation.Nonnull;
-
+import com.intellij.java.language.psi.PsiClass;
+import com.intellij.java.language.psi.PsiJavaPackage;
+import consulo.language.psi.PsiElement;
 import consulo.logging.Logger;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.*;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.*;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.*;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
@@ -52,9 +40,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import org.jetbrains.plugins.ruby.ruby.roots.RubyModuleRootUtil;
-import com.intellij.psi.PsiClass;
-import consulo.language.psi.PsiElement;
-import com.intellij.psi.PsiJavaPackage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
