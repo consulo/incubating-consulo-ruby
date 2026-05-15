@@ -23,7 +23,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.language.psi.PsiElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.FieldDefinitionImpl;
@@ -95,13 +94,13 @@ public class RFieldHolderUtil
 	}
 
 
-	public static FieldDefinition getDefinition(RFieldHolder holder, RVirtualField field)
+	public static FieldDefinition getDefinition(RFieldHolder holder, RField field)
 	{
 		return getDefinition(holder.getFieldsDefinitions(), field);
 	}
 
 	@Nullable
-	public static FieldDefinition getDefinition(@Nonnull final List<FieldDefinition> list, @Nonnull final RVirtualField field)
+	public static FieldDefinition getDefinition(@Nonnull final List<FieldDefinition> list, @Nonnull final RField field)
 	{
 		for(FieldDefinition definition : list)
 		{

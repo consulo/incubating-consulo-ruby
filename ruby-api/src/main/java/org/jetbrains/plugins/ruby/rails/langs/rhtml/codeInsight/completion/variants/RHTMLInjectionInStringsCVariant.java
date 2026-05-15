@@ -22,7 +22,7 @@ import consulo.language.editor.impl.internal.completion.CompletionUtil;
 import consulo.language.editor.impl.internal.completion.CompletionVariant;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.filter.ElementFilter;
-import consulo.xml.psi.xml.XmlTokenType;
+import consulo.xml.language.psi.XmlTokenType;
 import org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationUtil;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 

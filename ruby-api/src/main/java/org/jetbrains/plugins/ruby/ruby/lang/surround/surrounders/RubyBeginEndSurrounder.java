@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
 import consulo.document.util.TextRange;
 import consulo.language.psi.PsiElement;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 
@@ -42,8 +43,8 @@ public class RubyBeginEndSurrounder extends RubySurrounderBase
 	}
 
 	@Override
-	public String getTemplateDescription()
+	public LocalizeValue getTemplateDescription()
 	{
-		return "begin ... end";
+		return LocalizeValue.localizeTODO("begin ... end");
 	}
 }

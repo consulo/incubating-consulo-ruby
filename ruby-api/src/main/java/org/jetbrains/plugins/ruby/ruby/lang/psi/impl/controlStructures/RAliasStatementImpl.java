@@ -16,25 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.navigation.ItemPresentation;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import consulo.language.ast.ASTNode;
-import consulo.navigation.ItemPresentation;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualAliasImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
-import consulo.language.psi.PsiElementVisitor;
-import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -89,9 +86,9 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 
 	@Override
 	@Nonnull
-	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, @Nonnull final RFileInfo info)
+	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, final RFileInfo info)
 	{
-		return new RVirtualAliasImpl(container, getOldName(), getNewName());
+		return this;
 	}
 
 	@Override
@@ -124,19 +121,12 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	@Override
 	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
 	{
-		if(!(element instanceof RVirtualAlias))
+		if(!(element instanceof RAliasStatement))
 		{
 			return false;
 		}
-		final RVirtualAlias alias = (RVirtualAlias) element;
+		final RAliasStatement alias = (RAliasStatement) element;
 		return getNewName().equals(alias.getNewName()) && getOldName().equals(alias.getOldName());
-	}
-
-	@Override
-	@Nullable
-	public Image getIcon(final int flags)
-	{
-		return RAliasPresentationUtil.getIcon();
 	}
 
 	@Override

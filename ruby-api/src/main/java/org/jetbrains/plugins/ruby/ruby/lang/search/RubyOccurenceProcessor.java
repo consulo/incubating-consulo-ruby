@@ -20,7 +20,8 @@ import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiNamedElement;
 import consulo.language.psi.PsiReference;
 import consulo.language.psi.search.TextOccurenceProcessor;
-import consulo.application.util.function.Processor;
+
+import java.util.function.Predicate;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RClassVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RInstanceVariable;
@@ -38,9 +39,9 @@ class RubyOccurenceProcessor implements TextOccurenceProcessor
 {
 	private final PsiElement myElement2Search;
 	private final String myName;
-	private final Processor<? super PsiReference> myConsumer;
+	private final Predicate<? super PsiReference> myConsumer;
 
-	public RubyOccurenceProcessor(@Nonnull final PsiElement element2Search, @Nonnull final String name, @Nonnull final Processor<? super PsiReference> consumer)
+	public RubyOccurenceProcessor(@Nonnull final PsiElement element2Search, @Nonnull final String name, @Nonnull final Predicate<? super PsiReference> consumer)
 	{
 		myElement2Search = element2Search;
 		myName = name;
@@ -70,7 +71,7 @@ class RubyOccurenceProcessor implements TextOccurenceProcessor
 			final String refName = refValue instanceof PsiNamedElement ? ((PsiNamedElement) refValue).getName() : refValue.getText();
 			if(myName.equals(refName))
 			{
-				return myConsumer.process(ref);
+				return myConsumer.test(ref);
 			}
 		}
 		return true;

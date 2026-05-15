@@ -19,8 +19,8 @@ package org.jetbrains.plugins.ruby.ruby.presentation;
 import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.navigation.ItemPresentation;
 import consulo.ui.image.Image;
@@ -38,13 +38,13 @@ public class RAliasPresentationUtil
 		return RubyIcons.RUBY_ALIAS_NODE;
 	}
 
-	public static ItemPresentation getPresentation(RVirtualAlias alias)
+	public static ItemPresentation getPresentation(RAliasStatement alias)
 	{
 		final Image icon = getIcon();
 		return new PresentationData(alias.getNewName(), TextUtil.wrapInParens(getLocation(alias)), icon, null);
 	}
 
-	public static String getLocation(@Nonnull final RVirtualAlias alias)
+	public static String getLocation(@Nonnull final RAliasStatement alias)
 	{
 		return RContainerPresentationUtil.getLocation(alias);
 	}

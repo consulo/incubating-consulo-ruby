@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.index.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +41,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.ruby.cache.index.IndexEntry;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
@@ -47,10 +52,8 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.VirtualFileManager;
 
@@ -146,7 +149,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 			}
 			else if(element.getType() == StructureType.ALIAS)
 			{
-				addVirtualAliasToIndex((RVirtualAlias) element);
+				addVirtualAliasToIndex((RAliasStatement) element);
 			}
 			else if(element.getType() == StructureType.FIELD_ATTR_CALL)
 			{
@@ -155,7 +158,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 			if(element instanceof RVirtualFieldHolder)
 			{
-				for(RVirtualField field : ((RVirtualFieldHolder) element).getVirtualFields())
+				for(RField field : ((RVirtualFieldHolder) element).getVirtualFields())
 				{
 					addVirtualFieldToIndex(field);
 				}
@@ -163,7 +166,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 			if(element instanceof RVirtualConstantHolder)
 			{
-				for(RVirtualConstant constant : ((RVirtualConstantHolder) element).getVirtualConstants())
+				for(RConstant constant : ((RVirtualConstantHolder) element).getVirtualConstants())
 				{
 					addVirtualConstantToIndex(constant);
 				}
@@ -171,7 +174,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 			if(element instanceof RVirtualGlobalVarHolder)
 			{
-				for(RVirtualGlobalVar globalVar : ((RVirtualGlobalVarHolder) element).getVirtualGlobalVars())
+				for(RGlobalVariable globalVar : ((RVirtualGlobalVarHolder) element).getVirtualGlobalVars())
 				{
 					addVirtualGlobalVarToIndex(globalVar);
 				}
@@ -198,7 +201,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 			}
 			else if(element.getType() == StructureType.ALIAS)
 			{
-				removeVirtualAliasFromIndex((RVirtualAlias) element);
+				removeVirtualAliasFromIndex((RAliasStatement) element);
 			}
 			else if(element.getType() == StructureType.FIELD_ATTR_CALL)
 			{
@@ -207,7 +210,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 			if(element instanceof RVirtualFieldHolder)
 			{
-				for(RVirtualField field : ((RVirtualFieldHolder) element).getVirtualFields())
+				for(RField field : ((RVirtualFieldHolder) element).getVirtualFields())
 				{
 					removeVirtualFieldFromIndex(field);
 				}
@@ -215,7 +218,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 			if(element instanceof RVirtualConstantHolder)
 			{
-				for(RVirtualConstant constant : ((RVirtualConstantHolder) element).getVirtualConstants())
+				for(RConstant constant : ((RVirtualConstantHolder) element).getVirtualConstants())
 				{
 					removeVirtualConstantFromIndex(constant);
 				}
@@ -223,7 +226,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 			if(element instanceof RVirtualGlobalVarHolder)
 			{
-				for(RVirtualGlobalVar globalVar : ((RVirtualGlobalVarHolder) element).getVirtualGlobalVars())
+				for(RGlobalVariable globalVar : ((RVirtualGlobalVarHolder) element).getVirtualGlobalVars())
 				{
 					removeVirtualGlobalVarFromIndex(globalVar);
 				}
@@ -248,7 +251,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addContainer(container);
 	}
 
-	private void addVirtualConstantToIndex(@Nonnull final RVirtualConstant constant)
+	private void addVirtualConstantToIndex(@Nonnull final RConstant constant)
 	{
 		final String name = constant.getName();
 		IndexEntry entry = myIndex.get(name);
@@ -260,7 +263,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addConstant(constant);
 	}
 
-	private void addVirtualGlobalVarToIndex(@Nonnull final RVirtualGlobalVar globalVar)
+	private void addVirtualGlobalVarToIndex(@Nonnull final RGlobalVariable globalVar)
 	{
 		final String name = globalVar.getText();
 		IndexEntry entry = myIndex.get(name);
@@ -272,16 +275,16 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		((IndexEntryImpl) entry).addGlobalVar(globalVar);
 	}
 
-	private void addVirtualAliasToIndex(@Nonnull final RVirtualAlias rVirtualAlias)
+	private void addVirtualAliasToIndex(@Nonnull final RAliasStatement alias)
 	{
-		final String name = rVirtualAlias.getNewName();
+		final String name = alias.getNewName();
 		IndexEntry entry = myIndex.get(name);
 		if(entry == null)
 		{
 			entry = new IndexEntryImpl();
 			myIndex.put(name, entry);
 		}
-		((IndexEntryImpl) entry).addAlias(rVirtualAlias);
+		((IndexEntryImpl) entry).addAlias(alias);
 	}
 
 	private void addVirtualFieldAttrToIndex(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)
@@ -298,7 +301,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void addVirtualFieldToIndex(@Nonnull final RVirtualField field)
+	private void addVirtualFieldToIndex(@Nonnull final RField field)
 	{
 		final String name = field.getName();
 		IndexEntry entry = myIndex.get(name);
@@ -331,7 +334,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualConstantFromIndex(@Nonnull final RVirtualConstant constant)
+	private void removeVirtualConstantFromIndex(@Nonnull final RConstant constant)
 	{
 		final String name = constant.getName();
 		final IndexEntry entry = myIndex.get(name);
@@ -346,7 +349,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualGlobalVarFromIndex(@Nonnull final RVirtualGlobalVar globalVar)
+	private void removeVirtualGlobalVarFromIndex(@Nonnull final RGlobalVariable globalVar)
 	{
 		final String name = globalVar.getText();
 		final IndexEntry entry = myIndex.get(name);
@@ -361,15 +364,15 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualAliasFromIndex(@Nonnull final RVirtualAlias rVirtualAlias)
+	private void removeVirtualAliasFromIndex(@Nonnull final RAliasStatement alias)
 	{
-		final String name = rVirtualAlias.getNewName();
+		final String name = alias.getNewName();
 		final IndexEntry entry = myIndex.get(name);
 		if(entry == null)
 		{
 			return;
 		}
-		((IndexEntryImpl) entry).removeAlias(rVirtualAlias);
+		((IndexEntryImpl) entry).removeAlias(alias);
 		if(entry.isEmpty())
 		{
 			myIndex.remove(name);
@@ -393,7 +396,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		}
 	}
 
-	private void removeVirtualFieldFromIndex(@Nonnull final RVirtualField field)
+	private void removeVirtualFieldFromIndex(@Nonnull final RField field)
 	{
 		final String name = field.getName();
 		final IndexEntry entry = myIndex.get(name);
@@ -447,7 +450,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 	@Override
 	@Nonnull
-	public List<RVirtualField> getFieldsByName(@Nonnull final String name)
+	public List<RField> getFieldsByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -459,7 +462,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 	@Override
 	@Nonnull
-	public List<RVirtualConstant> getConstantsByName(@Nonnull final String name)
+	public List<RConstant> getConstantsByName(@Nonnull final String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -471,7 +474,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 	@Override
 	@Nonnull
-	public List<RVirtualGlobalVar> getGlobalVarsByName(@Nonnull String name)
+	public List<RGlobalVariable> getGlobalVarsByName(@Nonnull String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -483,7 +486,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 
 	@Override
 	@Nonnull
-	public List<RVirtualAlias> getAliasesByName(@Nonnull String name)
+	public List<RAliasStatement> getAliasesByName(@Nonnull String name)
 	{
 		final IndexEntry entry = myIndex.get(name);
 		if(entry != null)
@@ -683,7 +686,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		System.out.println("\n\nFields names: " + fieldNames.size());
 		for(String s : fieldNames)
 		{
-			final List<RVirtualField> fields = getFieldsByName(s);
+			final List<RField> fields = getFieldsByName(s);
 			System.out.println("  " + s + ": " + fields.size());
 		}
 
@@ -691,7 +694,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		System.out.println("\n\nConstant names: " + constantNames.size());
 		for(String s : constantNames)
 		{
-			final List<RVirtualConstant> constants = getConstantsByName(s);
+			final List<RConstant> constants = getConstantsByName(s);
 			System.out.println("  " + s + ": " + constants.size());
 		}
 
@@ -699,7 +702,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		System.out.println("\n\nGlobal variable names: " + globalVarNames.size());
 		for(String s : globalVarNames)
 		{
-			final List<RVirtualGlobalVar> globalVars = getGlobalVarsByName(s);
+			final List<RGlobalVariable> globalVars = getGlobalVarsByName(s);
 			System.out.println("  " + s + ": " + globalVars.size());
 		}
 
@@ -707,7 +710,7 @@ public class DeclarationsIndexImpl implements DeclarationsIndex
 		System.out.println("\n\nAlias names: " + aliasNames.size());
 		for(String s : aliasNames)
 		{
-			final List<RVirtualAlias> aliases = getAliasesByName(s);
+			final List<RAliasStatement> aliases = getAliasesByName(s);
 			System.out.println("  " + s + ": " + aliases.size());
 		}
 

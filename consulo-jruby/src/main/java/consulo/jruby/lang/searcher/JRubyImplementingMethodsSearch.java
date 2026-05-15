@@ -19,7 +19,7 @@ package consulo.jruby.lang.searcher;
 import com.intellij.java.language.psi.PsiMethod;
 import consulo.application.ApplicationManager;
 import consulo.application.util.function.Computable;
-import consulo.application.util.function.Processor;
+import java.util.function.Predicate;
 import consulo.application.util.query.QueryExecutor;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.scope.GlobalSearchScope;
@@ -35,7 +35,7 @@ import consulo.language.psi.search.UsageSearchContext;
 public class JRubyImplementingMethodsSearch implements QueryExecutor<PsiElement, PsiElement>
 {
 	@Override
-	public boolean execute(final PsiElement sourceElement, final Processor<? super PsiElement> consumer)
+	public boolean execute(final PsiElement sourceElement, final Predicate<? super PsiElement> consumer)
 	{
 		if(sourceElement instanceof PsiMethod)
 		{

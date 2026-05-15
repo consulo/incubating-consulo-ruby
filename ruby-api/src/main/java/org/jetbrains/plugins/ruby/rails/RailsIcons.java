@@ -29,7 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.RubyIcons;
  */
 public interface RailsIcons
 {
-	final Image RAILS_SMALL = RubyApiIconGroup.railsRails_small();
+	final Image RAILS_SMALL = RubyApiIconGroup.railsRails_module_closed();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Module
@@ -77,7 +77,7 @@ public interface RailsIcons
 	final Image RAKE_GROUP_ICON = RAILS_FOLDER_CLOSED;
 	final Image RAKE_TASKS_ROOT_ICON = RubyApiIconGroup.railsRakeRaketasksroot();
 
-	final Image RAKE_PARAMS_TRACE = PlatformIconGroup.debuggerConsole();
+	final Image RAKE_PARAMS_TRACE = PlatformIconGroup.toolwindowsToolwindowdebugger();
 	//    final Icon RAKE_PARAMS_LIBDIR =         IconLoader.findIcon("/modules/libraries.png");
 	final Image RAKE_PARAMS_PREREQS = null;
 	//    final Icon RAKE_PARAMS_USAGE =          IconLoader.findIcon("/actions/find.png");

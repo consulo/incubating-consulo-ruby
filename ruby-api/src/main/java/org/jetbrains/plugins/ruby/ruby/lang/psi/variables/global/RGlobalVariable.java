@@ -17,7 +17,8 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global;
 
 import consulo.language.psi.PsiNamedElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 
 /**
@@ -25,7 +26,13 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RGlobalVariable extends RVirtualGlobalVar, RNamedElement, PsiNamedElement
+public interface RGlobalVariable extends RNamedElement, PsiNamedElement
 {
+	@Nonnull
+	String getText();
+
+	@Nonnull
+	RGlobalVarHolder getHolder();
+
 	public boolean isInDefinition();
 }

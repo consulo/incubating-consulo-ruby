@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.inspections.RubyInspectionVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.language.editor.generation.ClassMember;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.component.ProcessCanceledException;
 import rb.implement.ImplementHandler;

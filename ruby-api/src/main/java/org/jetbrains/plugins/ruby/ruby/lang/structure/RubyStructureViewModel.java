@@ -28,7 +28,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
 import consulo.fileEditor.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.smartTree.Filter;
+import consulo.fileEditor.structureView.tree.Filter;
 import consulo.fileEditor.structureView.tree.Grouper;
 import consulo.fileEditor.structureView.tree.Sorter;
 

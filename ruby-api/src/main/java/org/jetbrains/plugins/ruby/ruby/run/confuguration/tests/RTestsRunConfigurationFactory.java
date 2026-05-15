@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
+import consulo.localize.LocalizeValue;
+
 import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.RunConfiguration;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -49,9 +51,9 @@ public class RTestsRunConfigurationFactory extends RubyRunConfigurationFactory
 	}
 
 	@Override
-	public String getName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("run.configuration.test.name");
+		return LocalizeValue.localizeTODO(RBundle.message("run.configuration.test.name"));
 	}
 
 	@Override

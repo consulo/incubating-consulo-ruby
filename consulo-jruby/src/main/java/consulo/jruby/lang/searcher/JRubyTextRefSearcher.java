@@ -22,7 +22,7 @@ import com.intellij.java.language.psi.PsiMethod;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.application.ApplicationManager;
 import consulo.application.util.function.Computable;
-import consulo.application.util.function.Processor;
+import java.util.function.Predicate;
 import consulo.language.psi.PsiReference;
 import consulo.language.psi.search.PsiSearchHelper;
 import consulo.language.psi.search.UsageSearchContext;
@@ -39,7 +39,7 @@ import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
 public class JRubyTextRefSearcher implements MethodReferencesSearchExecutor
 {
 	@Override
-	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> psiReferenceProcessor)
+	public boolean execute(@Nonnull final MethodReferencesSearch.SearchParameters params, @Nonnull final Predicate<? super PsiReference> psiReferenceProcessor)
 	{
 		final PsiMethod method = params.getMethod();
 		final String name = ApplicationManager.getApplication().runReadAction(new Computable<String>()

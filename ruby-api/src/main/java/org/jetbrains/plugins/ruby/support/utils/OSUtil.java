@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.support.utils;
 
-import static consulo.ide.impl.idea.openapi.util.io.FileUtil.toSystemDependentName;
+import static consulo.util.io.FileUtil.toSystemDependentName;
 
 import java.io.File;
 import java.util.StringTokenizer;

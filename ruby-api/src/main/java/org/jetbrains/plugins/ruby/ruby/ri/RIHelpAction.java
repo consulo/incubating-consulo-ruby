@@ -22,6 +22,7 @@ import consulo.project.Project;
 import consulo.project.ui.wm.ToolWindowManager;
 import consulo.ui.ex.action.AnActionEvent;
 import consulo.util.lang.ref.Ref;
+import consulo.language.ast.IElementType;
 import consulo.language.ast.TokenSet;
 import consulo.language.Language;
 import consulo.ui.ex.action.AnAction;
@@ -129,6 +130,6 @@ public class RIHelpAction extends AnAction
 			return false;
 		}
 		final HighlighterIterator iterator = highlighter.createIterator(offset);
-		return TOKENS_TO_SEARCH.contains(!iterator.atEnd() ? iterator.getTokenType() : null);
+		return TOKENS_TO_SEARCH.contains(!iterator.atEnd() ? (IElementType) iterator.getTokenType() : null);
 	}
 }

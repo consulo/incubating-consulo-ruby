@@ -24,6 +24,7 @@ import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
 import consulo.execution.configuration.ConfigurationFactory;
+import consulo.localize.LocalizeValue;
 import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.RunConfiguration;
 import consulo.module.extension.ModuleExtensionHelper;
@@ -54,9 +55,9 @@ public class RubyRunConfigurationFactory extends ConfigurationFactory
 	}
 
 	@Override
-	public String getName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("run.configuration.script.name");
+		return LocalizeValue.localizeTODO(RBundle.message("run.configuration.script.name"));
 	}
 
 	@Override

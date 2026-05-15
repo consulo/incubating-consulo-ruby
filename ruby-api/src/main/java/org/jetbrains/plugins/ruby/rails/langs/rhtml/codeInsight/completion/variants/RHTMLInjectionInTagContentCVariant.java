@@ -21,7 +21,7 @@ import consulo.language.editor.impl.internal.completion.CompletionVariant;
 import consulo.language.impl.ast.TreeElement;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.filter.ElementFilter;
-import consulo.xml.psi.xml.XmlTag;
+import consulo.xml.language.psi.XmlTag;
 
 /**
  * Created by IntelliJ IDEA.

@@ -38,7 +38,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUti
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,7 +73,7 @@ public class ClassNode extends RailsNode
 	}
 
 	@Override
-	public void accept(final Predicate<SimpleNode> visitor)
+	public void accept(final Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

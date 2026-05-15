@@ -29,7 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.inspections.RubyInspectionVisitor;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import consulo.language.psi.PsiElement;
-import com.intellij.psi.PsiJavaPackage;
+import com.intellij.java.language.psi.PsiJavaPackage;
 
 /**
  * @author: oleg

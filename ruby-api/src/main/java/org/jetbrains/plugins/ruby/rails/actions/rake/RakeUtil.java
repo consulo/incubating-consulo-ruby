@@ -45,7 +45,7 @@ import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import com.intellij.execution.filters.Filter;
+import consulo.execution.ui.console.Filter;
 import consulo.dataContext.DataContext;
 import consulo.ui.ModalityState;
 import consulo.application.progress.ProgressIndicator;
@@ -220,7 +220,7 @@ public class RakeUtil
 				// Must be executed in EDT
 				ProgressManager.getInstance().run(task);
 			}
-		}, ModalityState.defaultModalityState());
+		}, ModalityState.nonModal());
 	}
 
 	/**

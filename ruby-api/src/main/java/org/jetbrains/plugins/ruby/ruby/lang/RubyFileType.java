@@ -61,7 +61,7 @@ public class RubyFileType extends LanguageFileType
 	@Nonnull
 	public Image getIcon()
 	{
-		return RubyApiIconGroup.rubyRubyFile();
+		return RubyApiIconGroup.rubyRubyfile();
 	}
 }
 

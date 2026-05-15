@@ -17,6 +17,7 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.highlighting;
 
 import consulo.annotation.component.ExtensionImpl;
+import consulo.application.Application;
 import consulo.colorScheme.TextAttributesKey;
 import consulo.colorScheme.setting.AttributesDescriptor;
 import consulo.colorScheme.setting.ColorDescriptor;
@@ -25,6 +26,7 @@ import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
 import consulo.language.editor.highlight.SyntaxHighlighter;
 import consulo.language.lexer.Lexer;
 import consulo.xml.ide.highlighter.HtmlFileHighlighter;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -70,9 +72,9 @@ public class RHTMLColorsPage implements ColorSettingsPage
 
 	@Override
 	@Nonnull
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("color.settings.rhtml.name");
+		return LocalizeValue.localizeTODO(RBundle.message("color.settings.rhtml.name"));
 	}
 
 	@Override
@@ -111,7 +113,7 @@ public class RHTMLColorsPage implements ColorSettingsPage
 		public MyRHTMLFileHighlighterImpl()
 		{
 			myRubyHighlighter = new RubySyntaxHighlighter();
-			myHTMLHighlighter = new HtmlFileHighlighter();
+			myHTMLHighlighter = new HtmlFileHighlighter(Application.get());
 		}
 
 		@Override

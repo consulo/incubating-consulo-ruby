@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import consulo.disposer.Disposable;
 import consulo.module.Module;
 import consulo.virtualFileSystem.VirtualFile;
@@ -25,14 +31,11 @@ import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -107,28 +110,28 @@ public abstract class BaseModuleCachesManager
 
 				@Nonnull
 				@Override
-				public List<RVirtualField> getFieldsByName(@Nonnull String name)
+				public List<RField> getFieldsByName(@Nonnull String name)
 				{
 					return Collections.emptyList();
 				}
 
 				@Nonnull
 				@Override
-				public List<RVirtualConstant> getConstantsByName(@Nonnull String name)
+				public List<RConstant> getConstantsByName(@Nonnull String name)
 				{
 					return Collections.emptyList();
 				}
 
 				@Nonnull
 				@Override
-				public List<RVirtualGlobalVar> getGlobalVarsByName(@Nonnull String name)
+				public List<RGlobalVariable> getGlobalVarsByName(@Nonnull String name)
 				{
 					return Collections.emptyList();
 				}
 
 				@Nonnull
 				@Override
-				public List<RVirtualAlias> getAliasesByName(@Nonnull String name)
+				public List<RAliasStatement> getAliasesByName(@Nonnull String name)
 				{
 					return Collections.emptyList();
 				}

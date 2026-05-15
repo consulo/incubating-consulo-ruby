@@ -18,11 +18,13 @@ package org.jetbrains.plugins.ruby.jruby.inspections;
 
 import jakarta.annotation.Nonnull;
 
+import consulo.localize.LocalizeValue;
 import consulo.language.editor.inspection.LocalInspectionTool;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
+import consulo.localize.LocalizeValue;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElementVisitor;
 
@@ -40,17 +42,17 @@ public class JRubyImplementInterfaceInspection extends LocalInspectionTool
 	@Override
 	@Nonnull
 	@Nls
-	public String getGroupDisplayName()
+	public LocalizeValue getGroupDisplayName()
 	{
-		return RBundle.message("inspection.group.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.group.name"));
 	}
 
 	@Override
 	@Nonnull
 	@Nls
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("inspection.implement.interface.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.implement.interface.name"));
 	}
 
 	@Override

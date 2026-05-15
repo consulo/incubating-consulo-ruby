@@ -21,7 +21,6 @@ import java.util.List;
 
 import consulo.language.psi.PsiElement;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.GlobalVarDefinitionImpl;
@@ -87,7 +86,7 @@ public class RGlobalVarHolderUtil
 		return list;
 	}
 
-	private static GlobalVarDefinition getGlobalVarDefinition(final List<GlobalVarDefinition> definitions, final RVirtualGlobalVar globalVariable)
+	private static GlobalVarDefinition getGlobalVarDefinition(final List<GlobalVarDefinition> definitions, final RGlobalVariable globalVariable)
 	{
 		for(GlobalVarDefinition def : definitions)
 		{
@@ -99,7 +98,7 @@ public class RGlobalVarHolderUtil
 		return null;
 	}
 
-	public static GlobalVarDefinition getDefinition(RGlobalVarHolder holder, RVirtualGlobalVar globalVar)
+	public static GlobalVarDefinition getDefinition(RGlobalVarHolder holder, RGlobalVariable globalVar)
 	{
 		return getGlobalVarDefinition(holder.getGlobalVarDefinitions(), globalVar);
 	}

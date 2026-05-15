@@ -192,12 +192,6 @@ public class CreateFileFromTemplateDialog extends DialogWrapper
 			props.setProperty(FileTemplate.ATTRIBUTE_NAME, fileName);
 		}
 
-		//Set escaped references to dummy values to remove leading "\" (if not already explicitely set)
-		String[] dummyRefs = FileTemplateUtil.calculateAttributes(template.getText(), props, true, project);
-		for(String dummyRef : dummyRefs)
-		{
-			props.setProperty(dummyRef, "");
-		}
 		String mergedText;
 
 		mergedText = template.getText(props);

@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec.run.configuration;
 
+import consulo.localize.LocalizeValue;
+
 import consulo.execution.configuration.RunConfiguration;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecIcons;
@@ -53,9 +55,9 @@ public class RSpecRunConfigurationFactory extends RubyRunConfigurationFactory
 	}
 
 	@Override
-	public String getName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("rspec.run.configuration.rspec.name");
+		return LocalizeValue.localizeTODO(RBundle.message("rspec.run.configuration.rspec.name"));
 	}
 
 	@Override

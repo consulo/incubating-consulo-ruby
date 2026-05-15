@@ -16,18 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.index;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,16 +51,16 @@ public interface IndexEntry
 	public List<RVirtualMethod> getMethods();
 
 	@Nonnull
-	public List<RVirtualField> getFields();
+	public List<RField> getFields();
 
 	@Nonnull
-	public List<RVirtualConstant> getConstants();
+	public List<RConstant> getConstants();
 
 	@Nonnull
-	public List<RVirtualGlobalVar> getGlobalVars();
+	public List<RGlobalVariable> getGlobalVars();
 
 	@Nonnull
-	public List<RVirtualAlias> getAliases();
+	public List<RAliasStatement> getAliases();
 
 	@Nonnull
 	public List<RVirtualFieldAttr> getFieldAttrs();

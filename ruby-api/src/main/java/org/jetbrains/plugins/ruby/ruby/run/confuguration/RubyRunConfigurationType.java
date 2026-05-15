@@ -26,6 +26,8 @@ import consulo.execution.RunManager;
 import consulo.execution.RunnerAndConfigurationSettings;
 import consulo.execution.action.Location;
 import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.ConfigurationTypeUtil;
+import consulo.localize.LocalizeValue;
 import consulo.language.psi.PsiFile;
 import consulo.navigation.OpenFileDescriptor;
 import consulo.util.lang.ref.Ref;
@@ -79,19 +81,21 @@ public class RubyRunConfigurationType implements ConfigurationType
 
 	public static RubyRunConfigurationType getInstance()
 	{
-		return EP_NAME.findExtension(RubyRunConfigurationType.class);
+		return ConfigurationTypeUtil.findConfigurationType(RubyRunConfigurationType.class);
 	}
 
+	@Nonnull
 	@Override
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("run.configuration.type.name");
+		return LocalizeValue.localizeTODO(RBundle.message("run.configuration.type.name"));
 	}
 
+	@Nonnull
 	@Override
-	public String getConfigurationTypeDescription()
+	public LocalizeValue getConfigurationTypeDescription()
 	{
-		return RBundle.message("run.configuration.type.description");
+		return LocalizeValue.localizeTODO(RBundle.message("run.configuration.type.description"));
 	}
 
 	@Override

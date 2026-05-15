@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorsUtil;
 import consulo.project.Project;
 import consulo.ui.ex.awt.Messages;
 import consulo.language.psi.PsiDirectory;
-import consulo.util.lang.IncorrectOperationException;
+import consulo.language.util.IncorrectOperationException;
 
 /**
  * Created by IntelliJ IDEA.

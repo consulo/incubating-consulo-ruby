@@ -22,6 +22,7 @@ import java.util.List;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.ast.ASTNode;
+import consulo.language.util.IncorrectOperationException;
 import consulo.navigation.ItemPresentation;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;

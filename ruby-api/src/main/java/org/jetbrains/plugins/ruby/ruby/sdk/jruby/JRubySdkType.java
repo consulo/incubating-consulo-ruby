@@ -18,7 +18,10 @@ package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
 import jakarta.annotation.Nullable;
 
+import consulo.application.Application;
 import consulo.content.bundle.Sdk;
+import consulo.content.bundle.SdkType;
+import consulo.localize.LocalizeValue;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.jruby.JRubyIcons;
@@ -65,12 +68,12 @@ public class JRubySdkType extends RubySdkType
 
 	public JRubySdkType()
 	{
-		super("JRUBY_SDK");
+		super("JRUBY_SDK", LocalizeValue.localizeTODO(RBundle.message("sdk.jruby.title")), JRubyIcons.JRUBY_SDK_ICON_CLOSED);
 	}
 
 	public static JRubySdkType getInstance()
 	{
-		return EP_NAME.findExtension(JRubySdkType.class);
+		return Application.get().getExtensionPoint(SdkType.class).findExtensionOrFail(JRubySdkType.class);
 	}
 
 	public static boolean isJRubySDK(@Nullable final Sdk sdk)
@@ -86,20 +89,8 @@ public class JRubySdkType extends RubySdkType
 	}
 
 	@Override
-	public String getPresentableName()
-	{
-		return RBundle.message("sdk.jruby.title");
-	}
-
-	@Override
 	protected String suggestHomePath()
 	{
 		return RubySdkUtil.suggestJRubyHomePath();
-	}
-
-	@Override
-	public Image getIcon()
-	{
-		return JRubyIcons.JRUBY_SDK_ICON_CLOSED;
 	}
 }

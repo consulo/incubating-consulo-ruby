@@ -17,7 +17,7 @@
 package consulo.jruby.lang.searcher;
 
 import com.intellij.java.language.psi.PsiMethod;
-import consulo.application.util.function.Processor;
+import java.util.function.Predicate;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiNamedElement;
 import consulo.language.psi.PsiReference;
@@ -35,10 +35,10 @@ public class JRubyOcurrenceProcessor implements TextOccurenceProcessor
 {
 	private PsiMethod myMethod;
 	private String myName;
-	private Processor<? super PsiReference> myPsiReferenceProcessor;
+	private Predicate<? super PsiReference> myPsiReferenceProcessor;
 	private boolean myShouldResolve;
 
-	public JRubyOcurrenceProcessor(@Nonnull final PsiMethod method, @Nonnull final String name, @Nonnull final Processor<? super PsiReference> psiReferenceProcessor, final boolean shouldResolve)
+	public JRubyOcurrenceProcessor(@Nonnull final PsiMethod method, @Nonnull final String name, @Nonnull final Predicate<? super PsiReference> psiReferenceProcessor, final boolean shouldResolve)
 	{
 		myMethod = method;
 		myName = name;
@@ -58,7 +58,7 @@ public class JRubyOcurrenceProcessor implements TextOccurenceProcessor
 				final String refName = refValue instanceof PsiNamedElement ? ((PsiNamedElement) refValue).getName() : refValue.getText();
 				if(myName.equals(refName))
 				{
-					return myPsiReferenceProcessor.process(ref);
+					return myPsiReferenceProcessor.test(ref);
 				}
 			}
 		}

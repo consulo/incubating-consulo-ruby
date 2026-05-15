@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 
 /**
@@ -35,5 +34,5 @@ public interface GlobalVarDefinition
 	@Nonnull
 	public String getText();
 
-	public boolean isFor(@Nonnull RVirtualGlobalVar constant);
+	public boolean isFor(@Nonnull RGlobalVariable constant);
 }

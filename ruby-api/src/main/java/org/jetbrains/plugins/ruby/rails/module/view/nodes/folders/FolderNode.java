@@ -35,7 +35,7 @@ import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -88,7 +88,7 @@ public abstract class FolderNode extends SimpleFileNode
 	}
 
 	@Override
-	public void accept(Predicate<SimpleNode> visitor)
+	public void accept(Consumer<SimpleNode> visitor)
 	{
 		myParentNode.accept(visitor);
 	}

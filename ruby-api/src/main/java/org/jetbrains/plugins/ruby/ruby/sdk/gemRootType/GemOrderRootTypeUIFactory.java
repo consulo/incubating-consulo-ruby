@@ -14,6 +14,12 @@ import consulo.ui.image.Image;
 public class GemOrderRootTypeUIFactory implements OrderRootTypeUIFactory
 {
 	@Override
+	public String getOrderRootTypeId()
+	{
+		return "rubyGems";
+	}
+
+	@Override
 	public SdkPathEditor createPathEditor(Sdk sdk)
 	{
 		return new SdkPathEditor(getNodeText(), GemOrderRootType.getInstance(), new FileChooserDescriptor(true, false, false, false, false, true),

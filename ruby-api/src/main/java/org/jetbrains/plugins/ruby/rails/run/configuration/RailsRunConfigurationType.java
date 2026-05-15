@@ -17,18 +17,19 @@
 package org.jetbrains.plugins.ruby.rails.run.configuration;
 
 import consulo.annotation.component.ExtensionImpl;
-import jakarta.annotation.Nonnull;
-
+import consulo.execution.RunnerAndConfigurationSettings;
 import consulo.execution.action.Location;
 import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.ConfigurationType;
+import consulo.execution.configuration.ConfigurationTypeUtil;
+import consulo.execution.configuration.RunConfiguration;
+import consulo.localize.LocalizeValue;
+import consulo.ui.image.Image;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.run.configuration.server.RailsServerRunConfigurationFactory;
 import org.jetbrains.plugins.ruby.ruby.run.confuguration.RubyRunConfigurationUtil;
-import consulo.execution.RunnerAndConfigurationSettings;
-import consulo.execution.configuration.ConfigurationType;
-import consulo.execution.configuration.RunConfiguration;
-import consulo.ui.image.Image;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,19 +49,21 @@ public class RailsRunConfigurationType implements ConfigurationType
 
 	public static RailsRunConfigurationType getInstance()
 	{
-		return EP_NAME.findExtensionOrFail(RailsRunConfigurationType.class);
+		return ConfigurationTypeUtil.findConfigurationType(RailsRunConfigurationType.class);
 	}
 
+	@Nonnull
 	@Override
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("rails.run.configuration.type.name");
+		return LocalizeValue.localizeTODO(RBundle.message("rails.run.configuration.type.name"));
 	}
 
+	@Nonnull
 	@Override
-	public String getConfigurationTypeDescription()
+	public LocalizeValue getConfigurationTypeDescription()
 	{
-		return RBundle.message("rails.run.configuration.type.description");
+		return LocalizeValue.localizeTODO(RBundle.message("rails.run.configuration.type.description"));
 	}
 
 	@Override

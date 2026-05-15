@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.function.Consumer;
 import jakarta.annotation.Nonnull;
 
 import consulo.virtualFileSystem.VirtualFile;
@@ -32,7 +33,6 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.module.Module;
 import consulo.ui.ex.awt.tree.SimpleNode;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +50,7 @@ public class RailsModelFolderNode extends ModelSubFolderNode
 	}
 
 	@Override
-	public void accept(final SimpleNodeVisitor visitor)
+	public void accept(final Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.List;
 
 import jakarta.annotation.Nullable;
@@ -25,8 +29,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFieldContantContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 
 /**
@@ -37,31 +39,31 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier
  */
 public abstract class RVirtualFieldContantContainerImpl extends RVirtualContainerBase implements RVirtualFieldContantContainer
 {
-	private List<RVirtualConstant> myConstants;
-	private List<RVirtualField> myFields;
+	private List<RConstant> myConstants;
+	private List<RField> myFields;
 
 	// RVirtualConstantsHolder methods
-	public void setVirtualConstants(@Nonnull final List<RVirtualConstant> containerConstants)
+	public void setVirtualConstants(@Nonnull final List<RConstant> containerConstants)
 	{
 		myConstants = containerConstants;
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualConstant> getVirtualConstants()
+	public List<RConstant> getVirtualConstants()
 	{
 		return myConstants;
 	}
 
 	// RVirtualFieldsHolder methods
-	public void setVirtualFields(List<RVirtualField> fields)
+	public void setVirtualFields(List<RField> fields)
 	{
 		myFields = fields;
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualField> getVirtualFields()
+	public List<RField> getVirtualFields()
 	{
 		return myFields;
 	}
@@ -75,12 +77,12 @@ public abstract class RVirtualFieldContantContainerImpl extends RVirtualContaine
 	public void dump(@Nonnull StringBuilder buffer, final int indent)
 	{
 		super.dump(buffer, indent);
-		for(RVirtualConstant constant : myConstants)
+		for(RConstant constant : myConstants)
 		{
 			buffer.append(NEW_LINE);
 			((RVirtualElementBase) constant).dump(buffer, indent + 1);
 		}
-		for(RVirtualField myField : myFields)
+		for(RField myField : myFields)
 		{
 			buffer.append(NEW_LINE);
 			((RVirtualElementBase) myField).dump(buffer, indent + 1);

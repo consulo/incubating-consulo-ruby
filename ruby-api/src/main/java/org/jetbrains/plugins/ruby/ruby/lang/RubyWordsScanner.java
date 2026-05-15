@@ -16,9 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang;
 
+import java.util.function.Predicate;
+
 import jakarta.annotation.Nonnull;
 
-import consulo.application.util.function.Processor;
 import consulo.language.ast.IElementType;
 import consulo.language.cacheBuilder.WordsScanner;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
@@ -38,7 +39,7 @@ public class RubyWordsScanner implements WordsScanner
 
 
 	@Override
-	public void processWords(@Nonnull final CharSequence fileText, @Nonnull final Processor<WordOccurrence> processor)
+	public void processWords(@Nonnull final CharSequence fileText, @Nonnull final Predicate<WordOccurrence> processor)
 	{
 		final RubyMergeLexer lexer = new RubyMergeLexer();
 		lexer.start(fileText, 0, fileText.length(), 0);
@@ -82,7 +83,7 @@ public class RubyWordsScanner implements WordsScanner
 				{
 					occurence.init(fileText, start, end, WordOccurrence.Kind.CODE);
 				}
-				if(!processor.process(occurence))
+				if(!processor.test(occurence))
 				{
 					return;
 				}
@@ -105,7 +106,7 @@ public class RubyWordsScanner implements WordsScanner
 		}
 	}
 
-	private static boolean stripWords(final Processor<WordOccurrence> processor, final CharSequence tokenText, int from, int to, final WordOccurrence.Kind kind, WordOccurrence occurence)
+	private static boolean stripWords(final Predicate<WordOccurrence> processor, final CharSequence tokenText, int from, int to, final WordOccurrence.Kind kind, WordOccurrence occurence)
 	{
 		// This code seems strange but it is more effective as Character.isJavaIdentifier_xxx_ is quite costly operation due to unicode
 		int index = from;
@@ -154,7 +155,7 @@ public class RubyWordsScanner implements WordsScanner
 			{
 				occurence.init(tokenText, index1, index, kind);
 			}
-			if(!processor.process(occurence))
+			if(!processor.test(occurence))
 			{
 				return false;
 			}

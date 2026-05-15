@@ -48,7 +48,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.TokenBNF;
 import consulo.document.event.DocumentEvent;
 import consulo.document.event.DocumentListener;
 import consulo.ui.ex.awt.ComboBox;
-import com.intellij.refactoring.HelpID;
 import consulo.language.editor.ui.awt.EditorComboBoxRenderer;
 import consulo.language.editor.ui.awt.EditorTextField;
 import consulo.language.editor.ui.awt.StringComboboxEditor;
@@ -224,7 +223,7 @@ public class RubyIntroduceVariableDialog extends DialogWrapper implements RubyIn
 	@Override
 	protected void doHelpAction()
 	{
-		HelpManager.getInstance().invokeHelp(HelpID.INTRODUCE_VARIABLE);
+		HelpManager.getInstance().invokeHelp("refactoring.introduceVariable");
 	}
 
 	class DataChangedListener implements EventListener

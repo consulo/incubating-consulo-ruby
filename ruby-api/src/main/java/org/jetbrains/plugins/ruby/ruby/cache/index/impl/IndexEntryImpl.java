@@ -16,22 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.index.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.cache.index.IndexEntry;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,10 +47,10 @@ public class IndexEntryImpl implements IndexEntry
 	private List<RVirtualClass> myClasses = new ArrayList<RVirtualClass>();
 	private List<RVirtualModule> myModules = new ArrayList<RVirtualModule>();
 	private List<RVirtualMethod> myMethods = new ArrayList<RVirtualMethod>();
-	private List<RVirtualField> myFields = new ArrayList<RVirtualField>();
-	private List<RVirtualConstant> myConstants = new ArrayList<RVirtualConstant>();
-	private List<RVirtualGlobalVar> myGlobalVars = new ArrayList<RVirtualGlobalVar>();
-	private List<RVirtualAlias> myAliases = new ArrayList<RVirtualAlias>();
+	private List<RField> myFields = new ArrayList<RField>();
+	private List<RConstant> myConstants = new ArrayList<RConstant>();
+	private List<RGlobalVariable> myGlobalVars = new ArrayList<RGlobalVariable>();
+	private List<RAliasStatement> myAliases = new ArrayList<RAliasStatement>();
 	private List<RVirtualFieldAttr> myFieldAttrs = new ArrayList<RVirtualFieldAttr>();
 
 	@Override
@@ -73,28 +76,28 @@ public class IndexEntryImpl implements IndexEntry
 
 	@Override
 	@Nonnull
-	public List<RVirtualField> getFields()
+	public List<RField> getFields()
 	{
 		return myFields;
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualConstant> getConstants()
+	public List<RConstant> getConstants()
 	{
 		return myConstants;
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualGlobalVar> getGlobalVars()
+	public List<RGlobalVariable> getGlobalVars()
 	{
 		return myGlobalVars;
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualAlias> getAliases()
+	public List<RAliasStatement> getAliases()
 	{
 		return myAliases;
 	}
@@ -154,19 +157,19 @@ public class IndexEntryImpl implements IndexEntry
 		myMethods.add(vMethod);
 	}
 
-	public void addConstant(@Nonnull final RVirtualConstant constant)
+	public void addConstant(@Nonnull final RConstant constant)
 	{
 		myConstants.add(constant);
 	}
 
-	public void addGlobalVar(@Nonnull final RVirtualGlobalVar globalVar)
+	public void addGlobalVar(@Nonnull final RGlobalVariable globalVar)
 	{
 		myGlobalVars.add(globalVar);
 	}
 
-	public void addAlias(@Nonnull final RVirtualAlias rVirtualAlias)
+	public void addAlias(@Nonnull final RAliasStatement alias)
 	{
-		myAliases.add(rVirtualAlias);
+		myAliases.add(alias);
 	}
 
 	public void addFieldAttr(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)
@@ -174,7 +177,7 @@ public class IndexEntryImpl implements IndexEntry
 		myFieldAttrs.add(rVirtualFieldAttr);
 	}
 
-	public void addField(@Nonnull final RVirtualField field)
+	public void addField(@Nonnull final RField field)
 	{
 		myFields.add(field);
 	}
@@ -214,24 +217,24 @@ public class IndexEntryImpl implements IndexEntry
 		myMethods.remove(rVirtualMethod);
 	}
 
-	public void removeField(@Nonnull final RVirtualField field)
+	public void removeField(@Nonnull final RField field)
 	{
 		myFields.remove(field);
 	}
 
-	public void removeConstant(@Nonnull final RVirtualConstant constant)
+	public void removeConstant(@Nonnull final RConstant constant)
 	{
 		myConstants.remove(constant);
 	}
 
-	public void removeGlobalVar(@Nonnull final RVirtualGlobalVar globalVar)
+	public void removeGlobalVar(@Nonnull final RGlobalVariable globalVar)
 	{
 		myGlobalVars.remove(globalVar);
 	}
 
-	public void removeAlias(@Nonnull final RVirtualAlias rVirtualAlias)
+	public void removeAlias(@Nonnull final RAliasStatement alias)
 	{
-		myAliases.remove(rVirtualAlias);
+		myAliases.remove(alias);
 	}
 
 	public void removeFieldAttr(@Nonnull final RVirtualFieldAttr rVirtualFieldAttr)

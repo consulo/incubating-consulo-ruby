@@ -20,6 +20,7 @@ import consulo.codeEditor.Editor;
 import consulo.codeEditor.action.EditorAction;
 import consulo.codeEditor.action.EditorActionHandler;
 import consulo.dataContext.DataContext;
+import consulo.ide.impl.idea.ide.util.gotoByName.GotoFileCellRenderer;
 import consulo.language.editor.CommonDataKeys;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;

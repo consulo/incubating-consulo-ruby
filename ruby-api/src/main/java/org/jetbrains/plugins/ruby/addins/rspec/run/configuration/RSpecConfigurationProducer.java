@@ -64,7 +64,7 @@ public class RSpecConfigurationProducer extends RuntimeConfigurationProducer imp
 	}
 
 	@Override
-	public int compareTo(Object o)
+	public int compareTo(RuntimeConfigurationProducer o)
 	{
 		return PREFERED;
 	}

@@ -153,16 +153,6 @@ public class TypeDfaInstance implements DfaInstance<Map<String, RType>>
 				}
 			}
 
-			// override/implement java method
-			else if(access instanceof JavaTypedAccess)
-			{
-				final PsiType psiType = ((JavaTypedAccess) access).getType();
-				if(psiType != null)
-				{
-					map.put(name, new RJavaTypeImpl(psiType, myFileSymbol));
-				}
-			}
-
 			// a.variable = smth
 			else if(access instanceof FieldWriteAccess)
 			{

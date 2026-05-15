@@ -21,7 +21,7 @@ import java.util.List;
 import jakarta.annotation.Nonnull;
 
 import consulo.document.util.TextRange;
-import consulo.language.editor.impl.highlight.TextEditorHighlightingPass;
+import consulo.language.editor.highlight.TextEditorHighlightingPass;
 import consulo.language.editor.util.CollectHighlightsUtil;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.ruby.lang.highlighter.RubyHighlightUtil;

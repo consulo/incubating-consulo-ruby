@@ -110,7 +110,7 @@ public class UsageAnalyzer
 										final PsiParameter[] params = element.getParameterList().getParameters();
 										if(number < params.length)
 										{
-											return new JavaTypedAccessImpl(params, number, usage);
+											return null;
 										}
 									}
 									// Then we look for overriden PsiMethods
@@ -121,7 +121,8 @@ public class UsageAnalyzer
 											final PsiParameter[] params = ((PsiMethod) element).getParameterList().getParameters();
 											if(number < params.length)
 											{
-												return new JavaTypedAccessImpl(params, number, usage);
+												// JRuby Java method typed access moved to consulo-jruby module
+												return null;
 											}
 										}
 									}

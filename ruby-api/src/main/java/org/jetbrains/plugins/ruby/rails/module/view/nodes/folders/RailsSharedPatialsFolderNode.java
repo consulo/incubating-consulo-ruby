@@ -16,13 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import consulo.module.Module;
+import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
 import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
-import consulo.ui.ex.tree.PresentationData;
-import consulo.module.Module;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
+
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,7 +42,7 @@ public class RailsSharedPatialsFolderNode extends SharedPartialsSubFolderNode
 	}
 
 	@Override
-	public void accept(SimpleNodeVisitor visitor)
+	public void accept(Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

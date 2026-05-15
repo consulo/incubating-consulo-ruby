@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.visitors;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import com.intellij.java.language.psi.PsiReferenceExpression;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;

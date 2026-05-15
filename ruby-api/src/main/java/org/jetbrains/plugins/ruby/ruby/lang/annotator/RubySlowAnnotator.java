@@ -20,6 +20,8 @@ import jakarta.annotation.Nonnull;
 
 import consulo.language.editor.annotation.ExternalAnnotator;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import consulo.language.Language;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import consulo.language.editor.annotation.AnnotationHolder;
 import consulo.application.progress.ProgressManager;
 import consulo.language.psi.PsiFile;
@@ -31,6 +33,13 @@ import consulo.language.psi.PsiFile;
  */
 public class RubySlowAnnotator extends ExternalAnnotator
 {
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
+	}
+
 
 	public void annotate(@Nonnull final PsiFile file, @Nonnull final AnnotationHolder holder)
 	{

@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.jruby.inspections;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.editor.inspection.ProblemDescriptor;
+import consulo.localize.LocalizeValue;
 import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -41,12 +42,11 @@ public class WrongTopLevelPackageFix implements LocalQuickFix
 
 	@Override
 	@Nonnull
-	public String getName()
+	public LocalizeValue getName()
 	{
-		return "Add Java:: to package";
+		return LocalizeValue.localizeTODO("Add Java:: to package");
 	}
 
-	@Override
 	@Nonnull
 	public String getFamilyName()
 	{

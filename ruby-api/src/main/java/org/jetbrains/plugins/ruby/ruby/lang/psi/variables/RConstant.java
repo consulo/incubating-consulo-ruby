@@ -20,7 +20,6 @@ import jakarta.annotation.Nonnull;
 
 import consulo.language.psi.PsiNamedElement;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
 
@@ -29,8 +28,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RConstant extends RVirtualConstant, RNamedElement, PsiNamedElement
+public interface RConstant extends RNamedElement, PsiNamedElement
 {
+	@Nonnull
+	String getName();
 
 	public boolean isInDefinition();
 
@@ -39,7 +40,6 @@ public interface RConstant extends RVirtualConstant, RNamedElement, PsiNamedElem
 	@Nullable
 	public ConstantDefinitions getConstantDefinitions();
 
-	@Override
 	@Nonnull
 	public RConstantHolder getHolder();
 }

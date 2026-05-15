@@ -35,13 +35,10 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualClassImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualFileImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualModuleImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualObjectClassImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables.RVirtualConstantImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables.RVirtualFieldImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.variables.RVirtualGlobalVarImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
@@ -74,7 +71,7 @@ public class RVirtualUtil
 
 	public static void addVirtualFields(RVirtualContainer container, RFieldHolder holder)
 	{
-		final List<RVirtualField> fields = getVirtualFields(container, holder);
+		final List<RField> fields = getVirtualFields(container, holder);
 
 		// setting RVirtualFields
 		if(container instanceof RVirtualFile)
@@ -102,19 +99,19 @@ public class RVirtualUtil
 		}
 	}
 
-	public static List<RVirtualField> getVirtualFields(@Nonnull final RVirtualContainer container, @Nonnull final RFieldHolder holder)
+	public static List<RField> getVirtualFields(@Nonnull final RVirtualContainer container, @Nonnull final RFieldHolder holder)
 	{
-		List<RVirtualField> fields = new ArrayList<RVirtualField>();
+		List<RField> fields = new ArrayList<RField>();
 		for(FieldDefinition fieldUsages : holder.getFieldsDefinitions())
 		{
-			fields.add(new RVirtualFieldImpl(fieldUsages.getName(), (RVirtualFieldHolder) container, fieldUsages.getType()));
+			fields.add(fieldUsages.getFirstUsage());
 		}
 		return fields;
 	}
 
 	public static void addVirtualConstants(@Nonnull final RVirtualContainer container, @Nonnull final RConstantHolder holder)
 	{
-		final List<RVirtualConstant> constants = getVirtualConstants(container, holder);
+		final List<RConstant> constants = getVirtualConstants(container, holder);
 
 		// setting RVirtualConstants
 		if(container instanceof RVirtualFile)
@@ -139,12 +136,12 @@ public class RVirtualUtil
 		}
 	}
 
-	public static List<RVirtualConstant> getVirtualConstants(RVirtualContainer container, RConstantHolder holder)
+	public static List<RConstant> getVirtualConstants(RVirtualContainer container, RConstantHolder holder)
 	{
-		List<RVirtualConstant> constants = new ArrayList<RVirtualConstant>();
+		List<RConstant> constants = new ArrayList<RConstant>();
 		for(ConstantDefinitions constantDefinitions : holder.getConstantDefinitions())
 		{
-			constants.add(new RVirtualConstantImpl(constantDefinitions.getName(), (RVirtualConstantHolder) container));
+			constants.add(constantDefinitions.getFirstDefinition());
 		}
 		return constants;
 	}
@@ -152,9 +149,9 @@ public class RVirtualUtil
 
 	public static void addVirtualGlobalVars(@Nonnull final RVirtualContainer container, @Nonnull final RGlobalVarHolder holder)
 	{
-		final List<RVirtualGlobalVar> vars = getVirtualGlobalVars(container, holder);
+		final List<RGlobalVariable> vars = getVirtualGlobalVars(container, holder);
 
-		// setting RVirtualGlobalVar
+		// setting RGlobalVariable
 		if(container instanceof RVirtualFile)
 		{
 			((RVirtualFileImpl) container).setVirtualGlobalVars(vars);
@@ -165,12 +162,12 @@ public class RVirtualUtil
 		}
 	}
 
-	public static List<RVirtualGlobalVar> getVirtualGlobalVars(RVirtualContainer container, RGlobalVarHolder holder)
+	public static List<RGlobalVariable> getVirtualGlobalVars(RVirtualContainer container, RGlobalVarHolder holder)
 	{
-		List<RVirtualGlobalVar> vars = new ArrayList<RVirtualGlobalVar>();
+		List<RGlobalVariable> vars = new ArrayList<RGlobalVariable>();
 		for(GlobalVarDefinition definition : holder.getGlobalVarDefinitions())
 		{
-			vars.add(new RVirtualGlobalVarImpl(definition.getText(), (RVirtualGlobalVarHolder) container));
+			vars.add(definition.getFirstDefinition());
 		}
 		return vars;
 	}

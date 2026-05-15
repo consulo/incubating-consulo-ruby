@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 
@@ -56,7 +55,7 @@ public class ConstantDefinitionsImpl implements ConstantDefinitions
 	}
 
 	@Override
-	public boolean isFor(@Nonnull final RVirtualConstant constant)
+	public boolean isFor(@Nonnull final RConstant constant)
 	{
 		return getName().equals(constant.getName());
 	}

@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import consulo.navigation.ItemPresentation;
 import consulo.ui.ex.tree.PresentationData;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import consulo.ui.image.Image;
 
@@ -38,13 +39,13 @@ public class RConstantPresentationUtil
 		return RubyIcons.RUBY_CONSTANT_NODE;
 	}
 
-	public static ItemPresentation getPresentation(@Nonnull final RVirtualConstant constant)
+	public static ItemPresentation getPresentation(@Nonnull final RConstant constant)
 	{
 		final Image icon = getIcon();
 		return new PresentationData(constant.getName(), TextUtil.wrapInParens(getLocation(constant)), icon, null);
 	}
 
-	public static String getLocation(@Nonnull final RVirtualConstant constant)
+	public static String getLocation(@Nonnull final RConstant constant)
 	{
 		return RContainerPresentationUtil.getContainerNameWithLocation(constant.getHolder());
 	}

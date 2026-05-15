@@ -22,7 +22,7 @@ import consulo.language.codeStyle.Wrap;
 import consulo.language.codeStyle.WrapType;
 import consulo.language.file.FileViewProvider;
 import consulo.language.psi.PsiElement;
-import consulo.xml.lang.html.HTMLLanguage;
+import consulo.html.language.HTMLLanguage;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeEx;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLElementType;

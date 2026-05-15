@@ -19,7 +19,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>consulo</groupId>
-		<artifactId>arch.ide-api-provided</artifactId>
+		<artifactId>arch.bind.java</artifactId>
 		<version>3-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
@@ -32,7 +32,7 @@
 	<repositories>
 		<repository>
 			<id>consulo</id>
-			<url>https://maven.consulo.io/repository/snapshots/</url>
+			<url>https://maven.consulo.dev/repository/snapshots/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>interval:60</updatePolicy>

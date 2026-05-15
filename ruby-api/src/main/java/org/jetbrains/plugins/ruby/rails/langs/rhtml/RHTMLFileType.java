@@ -23,7 +23,7 @@ import consulo.project.Project;
 import consulo.ruby.api.localize.RubyApiLocalize;
 import consulo.ui.image.Image;
 import consulo.virtualFileSystem.VirtualFile;
-import consulo.xml.ide.highlighter.XmlLikeFileType;
+import consulo.xml.language.XmlLikeFileType;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;

@@ -22,7 +22,9 @@ import consulo.content.OrderRootType;
 import consulo.content.base.BinariesOrderRootType;
 import consulo.content.base.DocumentationOrderRootType;
 import consulo.content.base.SourcesOrderRootType;
+import consulo.application.Application;
 import consulo.content.bundle.*;
+import consulo.localize.LocalizeValue;
 import consulo.logging.Logger;
 import consulo.ui.ex.awt.Messages;
 import consulo.ui.image.Image;
@@ -115,17 +117,17 @@ public class RubySdkType extends SdkType
 
 	protected RubySdkType()
 	{
-		super(RUBY_SDK_NAME);
+		super(RUBY_SDK_NAME, LocalizeValue.localizeTODO(RBundle.message("sdk.ruby.title")), RubyIcons.RUBY_ICON);
 	}
 
-	protected RubySdkType(final String type)
+	protected RubySdkType(final String type, LocalizeValue displayName, Image icon)
 	{
-		super(type);
+		super(type, displayName, icon);
 	}
 
 	public static RubySdkType getInstance()
 	{
-		return EP_NAME.findExtension(RubySdkType.class);
+		return Application.get().getExtensionPoint(SdkType.class).findExtensionOrFail(RubySdkType.class);
 	}
 
 	public static void findAndSaveGemsRootsBy(final SdkModificator sdkModificator)
@@ -215,7 +217,7 @@ public class RubySdkType extends SdkType
 	public String suggestSdkName(final String currentSdkName, final String sdkHome)
 	{
 		final String version = getShortVersion(sdkHome);
-		return getPresentableName() + (TextUtil.isEmpty(version) ? TextUtil.EMPTY_STRING : " " + version);
+		return getDisplayName().get() + (TextUtil.isEmpty(version) ? TextUtil.EMPTY_STRING : " " + version);
 	}
 
 	/**
@@ -312,17 +314,6 @@ public class RubySdkType extends SdkType
 		return sdk.getHomePath() + getExePath();
 	}
 
-	@Override
-	public String getPresentableName()
-	{
-		return RBundle.message("sdk.ruby.title");
-	}
-
-	@Override
-	public Image getIcon()
-	{
-		return RubyIcons.RUBY_ICON;
-	}
 
 	private RubySdkAdditionalData getSdkAdditionalData(@Nonnull final Sdk sdk)
 	{

@@ -17,6 +17,7 @@
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
 import consulo.document.util.TextRange;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
@@ -46,8 +47,8 @@ public class RubyUnlessSurrounder extends RubySurrounderBase
 	}
 
 	@Override
-	public String getTemplateDescription()
+	public LocalizeValue getTemplateDescription()
 	{
-		return "unless ... then ... end";
+		return LocalizeValue.localizeTODO("unless ... then ... end");
 	}
 }

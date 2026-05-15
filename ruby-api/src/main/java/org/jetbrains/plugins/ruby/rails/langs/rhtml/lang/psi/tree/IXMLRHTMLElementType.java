@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree;
 
-import consulo.xml.psi.tree.xml.IXmlElementType;
+import consulo.xml.language.psi.IXmlElementType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.PresentableElementType;
 
 /**

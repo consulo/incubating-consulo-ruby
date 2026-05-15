@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter;
 import java.util.HashMap;
 import java.util.Map;
 
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
@@ -161,9 +162,9 @@ public class RubyColorsPage implements ColorSettingsPage
 
 	@Override
 	@Nonnull
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("color.settings.ruby.name");
+		return LocalizeValue.localizeTODO(RBundle.message("color.settings.ruby.name"));
 	}
 
 	@Override

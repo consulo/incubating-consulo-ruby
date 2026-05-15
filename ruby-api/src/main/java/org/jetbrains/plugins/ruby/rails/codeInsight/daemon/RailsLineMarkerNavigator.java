@@ -23,6 +23,7 @@ import javax.swing.ListCellRenderer;
 
 import jakarta.annotation.Nonnull;
 
+import consulo.ide.impl.ui.impl.PopupChooserBuilder;
 import consulo.language.psi.PsiElement;
 import consulo.ui.ex.RelativePoint;
 import org.jetbrains.plugins.ruby.rails.actions.navigation.SwitchToAction;

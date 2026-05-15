@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.module.view;
 
 import consulo.ui.ex.awt.tree.SimpleNode;
 
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  * @author: Roman Chernyatchik
  * @date: 08.10.2006
  */
-public interface RailsNodeVisitor extends Predicate<SimpleNode>
+public interface RailsNodeVisitor extends Consumer<SimpleNode>
 {
 	public void visitClassNode();
 

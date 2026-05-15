@@ -23,6 +23,7 @@ import jakarta.annotation.Nonnull;
 import consulo.application.progress.ProgressManager;
 import consulo.language.pom.PomModel;
 import consulo.language.pom.PomModelAspect;
+import consulo.language.pom.PomModelAspectRegistrator;
 import consulo.language.pom.TreeAspect;
 import consulo.language.pom.event.PomModelEvent;
 import consulo.language.pom.event.TreeChangeEvent;
@@ -52,7 +53,12 @@ public class RubyPomAspectImpl implements RubyPomAspect
 	{
 		myModel = model;
 		myTreeAspect = treeAspect;
-		myModel.registerAspect(RubyPomAspect.class, this, Collections.singleton((PomModelAspect) myTreeAspect));
+	}
+
+	@Override
+	public void register(PomModelAspectRegistrator registrator)
+	{
+		registrator.register(RubyPomAspect.class, this, Collections.singleton((PomModelAspect) myTreeAspect));
 	}
 
 	@NonNls

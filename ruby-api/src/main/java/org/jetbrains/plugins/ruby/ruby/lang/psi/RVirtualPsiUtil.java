@@ -43,9 +43,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
@@ -143,19 +140,19 @@ public class RVirtualPsiUtil
 		{
 			return findInPsi(project, (RVirtualStructuralElement) element);
 		}
-		if(element instanceof RVirtualConstant)
+		if(element instanceof RConstant)
 		{
-			final RVirtualConstant constant = (RVirtualConstant) element;
+			final RConstant constant = (RConstant) element;
 			return findRConstant(constant, project);
 		}
-		if(element instanceof RVirtualField)
+		if(element instanceof RField)
 		{
-			final RVirtualField field = (RVirtualField) element;
+			final RField field = (RField) element;
 			return findRField(field, project);
 		}
-		if(element instanceof RVirtualGlobalVar)
+		if(element instanceof RGlobalVariable)
 		{
-			final RVirtualGlobalVar var = (RVirtualGlobalVar) element;
+			final RGlobalVariable var = (RGlobalVariable) element;
 			return findRGlobalVar(var, project);
 		}
 		return null;
@@ -206,7 +203,7 @@ public class RVirtualPsiUtil
 	}
 
 	@Nullable
-	public static RConstant findRConstant(@Nonnull final RVirtualConstant constant, @Nonnull final Project project)
+	public static RConstant findRConstant(@Nonnull final RConstant constant, @Nonnull final Project project)
 	{
 		final RVirtualConstantHolder holder = constant.getHolder();
 		final RStructuralElement element = findInPsi(project, holder);
@@ -220,7 +217,7 @@ public class RVirtualPsiUtil
 	}
 
 	@Nullable
-	public static RField findRField(@Nonnull final RVirtualField field, @Nonnull final Project project)
+	public static RField findRField(@Nonnull final RField field, @Nonnull final Project project)
 	{
 		final RVirtualFieldHolder vHolder = field.getHolder();
 		final RStructuralElement element = findInPsi(project, vHolder);
@@ -234,7 +231,7 @@ public class RVirtualPsiUtil
 	}
 
 	@Nullable
-	public static RGlobalVariable findRGlobalVar(@Nonnull final RVirtualGlobalVar var, @Nonnull final Project project)
+	public static RGlobalVariable findRGlobalVar(@Nonnull final RGlobalVariable var, @Nonnull final Project project)
 	{
 		final RVirtualGlobalVarHolder holder = var.getHolder();
 		final RStructuralElement element = findInPsi(project, holder);
@@ -388,8 +385,8 @@ public class RVirtualPsiUtil
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
 	public static boolean areConstantHoldersEqual(@Nonnull final RVirtualConstantHolder holder1, @Nonnull final RVirtualConstantHolder holder2)
 	{
-		final List<RVirtualConstant> constants1 = holder1.getVirtualConstants();
-		final List<RVirtualConstant> constants2 = holder2.getVirtualConstants();
+		final List<RConstant> constants1 = holder1.getVirtualConstants();
+		final List<RConstant> constants2 = holder2.getVirtualConstants();
 		final int size = constants1.size();
 		if(size != constants2.size())
 		{
@@ -397,8 +394,8 @@ public class RVirtualPsiUtil
 		}
 		for(int i = 0; i < size; i++)
 		{
-			final RVirtualConstant constant1 = constants1.get(i);
-			final RVirtualConstant constant2 = constants2.get(i);
+			final RConstant constant1 = constants1.get(i);
+			final RConstant constant2 = constants2.get(i);
 			if(!constant1.getName().equals(constant2.getName()))
 			{
 				return false;
@@ -410,8 +407,8 @@ public class RVirtualPsiUtil
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
 	public static boolean areGlobalVariableHoldersEqual(@Nonnull final RVirtualGlobalVarHolder holder1, @Nonnull final RVirtualGlobalVarHolder holder2)
 	{
-		final List<RVirtualGlobalVar> vars1 = holder1.getVirtualGlobalVars();
-		final List<RVirtualGlobalVar> vars2 = holder2.getVirtualGlobalVars();
+		final List<RGlobalVariable> vars1 = holder1.getVirtualGlobalVars();
+		final List<RGlobalVariable> vars2 = holder2.getVirtualGlobalVars();
 		final int size = vars1.size();
 		if(size != vars2.size())
 		{
@@ -419,8 +416,8 @@ public class RVirtualPsiUtil
 		}
 		for(int i = 0; i < size; i++)
 		{
-			final RVirtualGlobalVar var1 = vars1.get(i);
-			final RVirtualGlobalVar var2 = vars2.get(i);
+			final RGlobalVariable var1 = vars1.get(i);
+			final RGlobalVariable var2 = vars2.get(i);
 			if(!var1.getText().equals(var2.getText()))
 			{
 				return false;
@@ -432,8 +429,8 @@ public class RVirtualPsiUtil
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
 	public static boolean areFieldHoldersEqual(@Nonnull final RVirtualFieldHolder holder1, @Nonnull final RVirtualFieldHolder holder2)
 	{
-		final List<RVirtualField> fields1 = holder1.getVirtualFields();
-		final List<RVirtualField> fields2 = holder2.getVirtualFields();
+		final List<RField> fields1 = holder1.getVirtualFields();
+		final List<RField> fields2 = holder2.getVirtualFields();
 		final int size = fields1.size();
 		if(size != fields2.size())
 		{
@@ -441,8 +438,8 @@ public class RVirtualPsiUtil
 		}
 		for(int i = 0; i < size; i++)
 		{
-			final RVirtualField field1 = fields1.get(i);
-			final RVirtualField field2 = fields2.get(i);
+			final RField field1 = fields1.get(i);
+			final RField field2 = fields2.get(i);
 			if(field1.getType() != field2.getType())
 			{
 				return false;

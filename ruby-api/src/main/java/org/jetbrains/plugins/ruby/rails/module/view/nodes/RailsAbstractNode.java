@@ -34,6 +34,7 @@ public abstract class RailsAbstractNode extends SimpleNode
 {
 	protected RailsAbstractNode[] CHILDREN_EMPTY = new RailsAbstractNode[0];
 
+	protected final Project myProject;
 	private NodeId myId;
 	private ItemPresentation myPresentation;
 	private Object[] myEqObjects;
@@ -41,6 +42,7 @@ public abstract class RailsAbstractNode extends SimpleNode
 	public RailsAbstractNode(final Project project)
 	{
 		super(project);
+		myProject = project;
 	}
 
 	public void init(final NodeId id, @Nonnull final ItemPresentation presentation)

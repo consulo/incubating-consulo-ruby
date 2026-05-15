@@ -26,7 +26,7 @@ import consulo.codeEditor.Editor;
 import consulo.language.editor.action.LanguageCodeInsightActionHandler;
 import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
-import consulo.ide.impl.idea.codeInsight.generation.ClassMember;
+import consulo.language.editor.generation.ClassMember;
 import consulo.project.Project;
 
 /**

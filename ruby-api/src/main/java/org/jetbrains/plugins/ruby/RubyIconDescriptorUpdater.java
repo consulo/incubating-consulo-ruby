@@ -43,6 +43,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
@@ -140,6 +141,11 @@ public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 			{
 				iconDescriptor.setRightIcon(RContainerPresentationUtil.getIconForAccessModifier(((RClass) element).getAccessModifier()));
 			}
+		}
+
+		if(element instanceof RAliasStatement)
+		{
+			iconDescriptor.setMainIcon(RubyIcons.RUBY_ALIAS_NODE);
 		}
 	}
 }

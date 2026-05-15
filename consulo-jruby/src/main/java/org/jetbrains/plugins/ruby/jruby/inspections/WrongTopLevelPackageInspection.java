@@ -2,7 +2,9 @@ package org.jetbrains.plugins.ruby.jruby.inspections;
 
 import jakarta.annotation.Nonnull;
 
+import consulo.localize.LocalizeValue;
 import consulo.language.editor.inspection.LocalInspectionTool;
+import consulo.localize.LocalizeValue;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
 import org.jetbrains.annotations.Nls;
@@ -21,17 +23,17 @@ public class WrongTopLevelPackageInspection extends LocalInspectionTool
 	@Override
 	@Nonnull
 	@Nls
-	public String getGroupDisplayName()
+	public LocalizeValue getGroupDisplayName()
 	{
-		return RBundle.message("inspection.group.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.group.name"));
 	}
 
 	@Override
 	@Nonnull
 	@Nls
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("inspection.wrong.top.level.package");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.wrong.top.level.package"));
 	}
 
 	@Override

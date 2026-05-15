@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.actions.templates;
 import consulo.dataContext.DataContext;
 import consulo.fileTemplate.FileTemplate;
 import consulo.fileTemplate.FileTemplateManager;
-import consulo.ide.IdeView;
+import consulo.language.editor.util.IdeView;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;
 import consulo.project.Project;

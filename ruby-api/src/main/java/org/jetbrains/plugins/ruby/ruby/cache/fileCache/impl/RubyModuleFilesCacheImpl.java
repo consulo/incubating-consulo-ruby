@@ -32,7 +32,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.listeners.RubyPomModelListener;
 import org.jetbrains.plugins.ruby.ruby.module.RubyModuleListenerAdapter;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import com.intellij.ProjectTopics;
+import consulo.module.event.ModuleListener;
 import consulo.module.Module;
 import consulo.project.Project;
 import consulo.module.content.ModuleFileIndex;
@@ -133,7 +133,7 @@ public class RubyModuleFilesCacheImpl extends RubyFilesCacheImpl implements Ruby
 	private void registerModuleDeleteListener()
 	{
 		final MessageBusConnection messageBusConnection = myModule.getMessageBus().connect(this);
-		messageBusConnection.subscribe(ProjectTopics.MODULES, new RubyModuleListenerAdapter()
+		messageBusConnection.subscribe(ModuleListener.class, new RubyModuleListenerAdapter()
 		{
 			@Override
 			public void beforeModuleRemoved(final Project project, final Module module)

@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 
@@ -27,12 +27,20 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
  * @author: oleg
  * @date: Feb 5, 2007
  */
-public interface RAliasStatement extends RStructuralElement, RVirtualAlias
+public interface RAliasStatement extends RStructuralElement
 {
 	@Nullable
-	public RPsiElement getPsiOldName();
+	RPsiElement getPsiOldName();
 
 	@Nullable
-	public RPsiElement getPsiNewName();
+	RPsiElement getPsiNewName();
 
+	@Nonnull
+	String getOldName();
+
+	@Nonnull
+	String getNewName();
+
+	@Nonnull
+	String getPresentableText();
 }

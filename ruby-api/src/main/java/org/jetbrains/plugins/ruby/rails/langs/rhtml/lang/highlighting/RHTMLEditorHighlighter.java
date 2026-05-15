@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenTypeE
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import com.intellij.lang.html.HTMLLanguage;
+import consulo.html.language.HTMLLanguage;
 import consulo.language.editor.highlight.LayerDescriptor;
 import consulo.language.editor.highlight.LayeredLexerEditorHighlighter;
 import consulo.language.editor.highlight.SyntaxHighlighter;

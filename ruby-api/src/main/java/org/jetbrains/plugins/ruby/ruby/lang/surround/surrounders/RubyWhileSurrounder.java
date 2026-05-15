@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RCondition;
@@ -46,8 +47,8 @@ public class RubyWhileSurrounder extends RubySurrounderBase
 	}
 
 	@Override
-	public String getTemplateDescription()
+	public LocalizeValue getTemplateDescription()
 	{
-		return "while ... do ... end";
+		return LocalizeValue.localizeTODO("while ... do ... end");
 	}
 }

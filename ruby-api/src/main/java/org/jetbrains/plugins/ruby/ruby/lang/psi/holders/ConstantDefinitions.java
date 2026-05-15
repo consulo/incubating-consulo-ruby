@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 
 /**
@@ -35,5 +34,5 @@ public interface ConstantDefinitions
 	@Nonnull
 	public String getName();
 
-	public boolean isFor(@Nonnull RVirtualConstant constant);
+	public boolean isFor(@Nonnull RConstant constant);
 }

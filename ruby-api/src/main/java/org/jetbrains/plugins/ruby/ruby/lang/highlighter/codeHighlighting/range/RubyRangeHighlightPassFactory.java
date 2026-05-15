@@ -17,11 +17,12 @@
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
 import consulo.codeEditor.Editor;
-import consulo.language.editor.impl.highlight.TextEditorHighlightingPassFactory;
+import consulo.language.editor.highlight.TextEditorHighlightingPassFactory;
+import consulo.language.editor.highlight.TextEditorHighlightingPassFactory.Registrar;
 import consulo.language.psi.PsiFile;
 import jakarta.annotation.Nonnull;
 
-import consulo.language.editor.impl.highlight.TextEditorHighlightingPass;
+import consulo.language.editor.highlight.TextEditorHighlightingPass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 
 import jakarta.annotation.Nullable;

@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 
 import consulo.document.util.TextRange;
@@ -31,9 +32,9 @@ public class RubyBraceSurrounder extends RubySurrounderBase
 {
 
 	@Override
-	public String getTemplateDescription()
+	public LocalizeValue getTemplateDescription()
 	{
-		return "(...)";
+		return LocalizeValue.localizeTODO("(...)");
 	}
 
 	@Override

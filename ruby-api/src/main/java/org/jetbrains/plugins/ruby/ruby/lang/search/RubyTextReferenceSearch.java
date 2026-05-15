@@ -19,8 +19,9 @@ package org.jetbrains.plugins.ruby.ruby.lang.search;
 import jakarta.annotation.Nonnull;
 
 import consulo.application.ApplicationManager;
-import consulo.application.util.function.Processor;
 import consulo.language.psi.PsiElement;
+
+import java.util.function.Predicate;
 import consulo.language.psi.search.ReferencesSearch;
 import consulo.language.psi.search.UsageSearchContext;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -41,7 +42,7 @@ public class RubyTextReferenceSearch implements QueryExecutor<PsiReference, Refe
 {
 
 	@Override
-	public boolean execute(@Nonnull final ReferencesSearch.SearchParameters params, @Nonnull final Processor<? super PsiReference> consumer)
+	public boolean execute(@Nonnull final ReferencesSearch.SearchParameters params, @Nonnull final Predicate<? super PsiReference> consumer)
 	{
 		final PsiElement element2Search = params.getElementToSearch();
 		if(element2Search instanceof PsiNamedElement && element2Search instanceof RPsiElement)

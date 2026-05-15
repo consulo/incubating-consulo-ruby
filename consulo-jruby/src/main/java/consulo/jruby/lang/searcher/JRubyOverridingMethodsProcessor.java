@@ -17,7 +17,7 @@
 package consulo.jruby.lang.searcher;
 
 import com.intellij.java.language.psi.PsiMethod;
-import consulo.application.util.function.Processor;
+import java.util.function.Predicate;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.search.TextOccurenceProcessor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
@@ -45,9 +45,9 @@ public class JRubyOverridingMethodsProcessor implements TextOccurenceProcessor
 {
 	protected PsiMethod myMethod;
 	protected String myName;
-	protected Processor<? super PsiMethod> myConsumer;
+	protected Predicate<? super PsiMethod> myConsumer;
 
-	public JRubyOverridingMethodsProcessor(final PsiMethod method, final String name, final Processor<? super PsiMethod> consumer)
+	public JRubyOverridingMethodsProcessor(final PsiMethod method, final String name, final Predicate<? super PsiMethod> consumer)
 	{
 		myMethod = method;
 		myName = name;
@@ -89,7 +89,7 @@ public class JRubyOverridingMethodsProcessor implements TextOccurenceProcessor
 			{
 				if(myMethod == o)
 				{
-					myConsumer.process((PsiMethod) container);
+					myConsumer.test((PsiMethod) container);
 					break;
 				}
 			}

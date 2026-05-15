@@ -29,7 +29,7 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -63,7 +63,7 @@ public class UserSubFolderNode extends FolderNode
 	}
 
 	@Override
-	public void accept(Predicate<SimpleNode> visitor)
+	public void accept(Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

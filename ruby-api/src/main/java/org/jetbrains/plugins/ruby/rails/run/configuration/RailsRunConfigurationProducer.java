@@ -70,7 +70,7 @@ public class RailsRunConfigurationProducer extends RuntimeConfigurationProducer 
 	}
 
 	@Override
-	public int compareTo(Object o)
+	public int compareTo(RuntimeConfigurationProducer o)
 	{
 		return PREFERED;
 	}

@@ -25,7 +25,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-import consulo.component.macro.PathMacroManager;
+import consulo.module.macro.ModulePathMacroManager;
 import consulo.module.Module;
 
 /**
@@ -63,7 +63,7 @@ public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalize
 			return expandedPath;
 		}
 
-		return PathMacroManager.getInstance(module).collapsePath(expandedPath);
+		return ModulePathMacroManager.getInstance(module).collapsePath(expandedPath);
 	}
 
 	public void readExternal(@Nonnull final BaseRailsFacetConfigurationLowLevel config, @Nonnull final Element elem)
@@ -91,7 +91,7 @@ public class BaseRailsFacetConfigurationExternalizer extends SettingsExternalize
 		}
 
 		//expand
-		return PathMacroManager.getInstance(module).expandPath(pathCollapsed);
+		return ModulePathMacroManager.getInstance(module).expandPath(pathCollapsed);
 	}
 
 	public static BaseRailsFacetConfigurationExternalizer getInstance()

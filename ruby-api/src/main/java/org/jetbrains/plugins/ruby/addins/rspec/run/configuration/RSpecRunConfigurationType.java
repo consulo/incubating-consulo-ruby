@@ -21,6 +21,7 @@ import consulo.execution.RunManager;
 import consulo.execution.RunnerAndConfigurationSettings;
 import consulo.execution.action.Location;
 import consulo.execution.configuration.ConfigurationFactory;
+import consulo.execution.configuration.ConfigurationTypeUtil;
 import consulo.execution.configuration.ConfigurationType;
 import consulo.execution.configuration.RunConfiguration;
 import consulo.language.psi.PsiDirectory;
@@ -65,7 +66,7 @@ public class RSpecRunConfigurationType implements ConfigurationType
 
 	public static RSpecRunConfigurationType getInstance()
 	{
-		return EP_NAME.findExtension(RSpecRunConfigurationType.class);
+		return ConfigurationTypeUtil.findConfigurationType(RSpecRunConfigurationType.class);
 	}
 
 	@Override

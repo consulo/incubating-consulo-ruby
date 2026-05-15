@@ -35,7 +35,7 @@ public interface RubyIcons
 
 	final Image RUBY_CLASS_NODE = PlatformIconGroup.nodesClass();
 	final Image RUBY_METHOD_NODE = PlatformIconGroup.nodesMethod();
-	final Image RUBY_REQUIRE_NODE = PlatformIconGroup.nodesAspect();
+	final Image RUBY_REQUIRE_NODE = PlatformIconGroup.nodesPlugin();
 	final Image RUBY_PARAMETER_NODE = PlatformIconGroup.nodesParameter();
 	final Image RUBY_VARIABLE_NODE = PlatformIconGroup.nodesVariable();
 	final Image RUBY_MODULE_NODE = RubyApiIconGroup.rubyNodesModule();
@@ -73,7 +73,7 @@ public interface RubyIcons
 	final Image RAILS_SERVER_RUN_CONFIGURATION = RubyApiIconGroup.rubyConfigurationRun_conf_server();
 
 
-	final Image RUBY_RUNNER_SHOW_CMDLINE = PlatformIconGroup.actionsShowviewer();
+	final Image RUBY_RUNNER_SHOW_CMDLINE = PlatformIconGroup.actionsPreview();
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Misc

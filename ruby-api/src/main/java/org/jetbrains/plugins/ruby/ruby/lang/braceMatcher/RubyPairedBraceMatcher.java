@@ -19,16 +19,25 @@ package org.jetbrains.plugins.ruby.ruby.lang.braceMatcher;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import consulo.language.ast.IElementType;
-import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 import consulo.language.BracePair;
+import consulo.language.Language;
 import consulo.language.PairedBraceMatcher;
-import consulo.language.psi.PsiFile;
+import consulo.language.ast.IElementType;
 import consulo.language.ast.TokenSet;
+import consulo.language.psi.PsiFile;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
 
 
 public class RubyPairedBraceMatcher implements PairedBraceMatcher, RubyTokenTypes
 {
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return RubyLanguage.INSTANCE;
+	}
+
 	public static final TokenSet kEND_BRACE_TOKENS = TokenSet.create(kDEF, kCLASS, kMODULE, kBEGIN, kIF, kUNLESS, kWHILE, kUNTIL, kCASE, kFOR, kDO);
 
 	private static final BracePair[] PAIRS = new BracePair[]{

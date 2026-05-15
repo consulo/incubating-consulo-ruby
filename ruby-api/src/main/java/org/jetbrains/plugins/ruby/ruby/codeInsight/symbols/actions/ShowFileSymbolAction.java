@@ -25,7 +25,7 @@ import consulo.project.Project;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
-import consulo.ide.impl.idea.ide.BrowserUtil;
+import consulo.webBrowser.BrowserUtil;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
 
@@ -56,7 +56,7 @@ public class ShowFileSymbolAction extends AnAction
 				final FileWriter writer = new FileWriter(file);
 				writer.append(string);
 				writer.close();
-				BrowserUtil.launchBrowser(VirtualFileUtil.constructLocalUrl(file.getPath()));
+				BrowserUtil.browse(file);
 			}
 			catch(IOException e1)
 			{

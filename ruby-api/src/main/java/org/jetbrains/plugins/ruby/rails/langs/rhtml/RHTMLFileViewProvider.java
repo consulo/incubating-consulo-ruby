@@ -24,7 +24,7 @@ import consulo.language.psi.PsiFile;
 import consulo.language.psi.PsiManager;
 import consulo.language.template.TemplateLanguageFileViewProvider;
 import consulo.virtualFileSystem.VirtualFile;
-import consulo.xml.lang.html.HTMLLanguage;
+import consulo.html.language.HTMLLanguage;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;

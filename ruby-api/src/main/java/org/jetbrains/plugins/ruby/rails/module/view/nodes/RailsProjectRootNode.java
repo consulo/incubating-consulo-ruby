@@ -44,7 +44,7 @@ public class RailsProjectRootNode extends RailsAbstractNode
 	public RailsProjectRootNode(@Nonnull final Project project)
 	{
 		super(project);
-		init(generateNodeId(), new PresentationData(null, null, null, null));
+		init(generateNodeId(), new PresentationData((String) null, null, null, null));
 	}
 
 	public static NodeId generateNodeId()

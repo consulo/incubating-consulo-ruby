@@ -27,7 +27,7 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.virtualFileSystem.VirtualFile;
 
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +50,7 @@ public class RailsControllersFolderNode extends ControllerSubFolderNode
 	}
 
 	@Override
-	public void accept(Predicate<SimpleNode> visitor)
+	public void accept(Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

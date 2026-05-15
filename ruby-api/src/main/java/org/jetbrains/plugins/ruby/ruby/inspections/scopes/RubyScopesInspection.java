@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.inspections.scopes;
 
 import jakarta.annotation.Nonnull;
 
+import consulo.localize.LocalizeValue;
 import consulo.language.editor.inspection.LocalInspectionTool;
 import consulo.language.editor.inspection.ProblemsHolder;
 import consulo.language.psi.PsiElementVisitor;
@@ -39,17 +40,17 @@ public class RubyScopesInspection extends LocalInspectionTool
 	@Override
 	@Nonnull
 	@Nls
-	public String getGroupDisplayName()
+	public LocalizeValue getGroupDisplayName()
 	{
-		return RBundle.message("inspection.group.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.group.name"));
 	}
 
 	@Override
 	@Nonnull
 	@Nls
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("inspection.scopes.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.scopes.name"));
 	}
 
 	@Override

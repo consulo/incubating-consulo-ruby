@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 import consulo.ui.ex.awt.tree.SimpleNode;
 import jakarta.annotation.Nonnull;
@@ -38,7 +38,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import consulo.module.Module;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.VirtualFileManager;
-import com.intellij.ui.treeStructure.SimpleNodeVisitor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,7 +56,7 @@ public class ControllerClassNode extends ClassNode
 	}
 
 	@Override
-	public void accept(Predicate<SimpleNode> visitor)
+	public void accept(Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

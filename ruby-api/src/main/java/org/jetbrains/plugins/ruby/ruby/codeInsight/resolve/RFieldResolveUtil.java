@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,6 @@ import jakarta.annotation.Nullable;
 import consulo.language.editor.completion.lookup.LookupValueWithPriority;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
@@ -72,7 +73,7 @@ public class RFieldResolveUtil
 		final List<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
 		for(Symbol fieldSymbol : fields.getAll())
 		{
-			final RVirtualField field = (RVirtualField) fieldSymbol.getLastVirtualPrototype(fileSymbol);
+			final RField field = (RField) fieldSymbol.getLastVirtualPrototype(fileSymbol);
 			//noinspection ConstantConditions
 			variants.add(new RubySimpleLookupItem(fieldSymbol.getName(), null, LookupValueWithPriority.NORMAL, false, RFieldPresentationUtil.getIcon(field)));
 		}

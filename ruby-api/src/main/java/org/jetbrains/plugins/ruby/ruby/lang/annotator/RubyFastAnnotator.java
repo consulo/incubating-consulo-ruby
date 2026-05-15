@@ -20,6 +20,8 @@ import jakarta.annotation.Nonnull;
 
 import consulo.language.psi.PsiElement;
 import consulo.application.progress.ProgressManager;
+import consulo.language.Language;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import consulo.language.editor.annotation.AnnotationHolder;
 import consulo.language.editor.annotation.Annotator;
 

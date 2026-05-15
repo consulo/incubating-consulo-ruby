@@ -20,6 +20,7 @@ import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import consulo.language.editor.inspection.LocalQuickFix;
 import consulo.language.editor.inspection.ProblemDescriptor;
+import consulo.localize.LocalizeValue;
 import consulo.codeEditor.Editor;
 import consulo.fileEditor.FileEditor;
 import consulo.fileEditor.FileEditorManager;
@@ -49,12 +50,11 @@ public class JRubyImplementInterfaceFix implements LocalQuickFix
 
 	@Override
 	@Nonnull
-	public String getName()
+	public LocalizeValue getName()
 	{
-		return "Implement methods";
+		return LocalizeValue.localizeTODO("Implement methods");
 	}
 
-	@Override
 	@Nonnull
 	public String getFamilyName()
 	{

@@ -16,14 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
@@ -65,7 +67,7 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 
 	@Override
 	@Nullable
-	public ConstantDefinitions getDefinition(@Nonnull final RVirtualConstant constant)
+	public ConstantDefinitions getDefinition(@Nonnull final RConstant constant)
 	{
 		return RConstantHolderUtil.getDefinition(this, constant);
 	}
@@ -83,7 +85,7 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 
 	@Override
 	@Nullable
-	public FieldDefinition getDefinition(@Nonnull final RVirtualField field)
+	public FieldDefinition getDefinition(@Nonnull final RField field)
 	{
 		return RFieldHolderUtil.getDefinition(this, field);
 	}
@@ -103,14 +105,14 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 
 	@Override
 	@Nonnull
-	public List<RVirtualConstant> getVirtualConstants()
+	public List<RConstant> getVirtualConstants()
 	{
 		return RVirtualUtil.getVirtualConstants(this, this);
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualField> getVirtualFields()
+	public List<RField> getVirtualFields()
 	{
 		return RVirtualUtil.getVirtualFields(this, this);
 	}

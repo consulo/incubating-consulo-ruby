@@ -19,7 +19,7 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.structureView.impl.xml
 import consulo.annotation.component.ExtensionImpl;
 import consulo.fileEditor.structureView.StructureViewTreeElement;
 import consulo.xml.ide.structureView.xml.XmlStructureViewElementProvider;
-import consulo.xml.psi.xml.XmlTag;
+import consulo.xml.language.psi.XmlTag;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl.rhtmlRoot.RHTMLRubyInjectionTag;

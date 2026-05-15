@@ -54,11 +54,7 @@ class ReadWriteInstructionImpl extends InstructionImpl implements ReadWriteInstr
 		{
 			return "FIELD_ASSIGN " + myName;
 		}
-		if(myAccess instanceof JavaTypedAccess)
-		{
-			return "JAVA_TYPED " + myName;
-		}
-		if(myAccess instanceof RescueBlockAccess)
+if(myAccess instanceof RescueBlockAccess)
 		{
 			return "RESCUE_VALUE " + myName;
 		}

@@ -27,7 +27,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi.RGlobalVariableReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -96,7 +95,7 @@ public class RGlobalVariableImpl extends RNamedElementBase implements RGlobalVar
 
 	@Override
 	@Nonnull
-	public RVirtualGlobalVarHolder getHolder()
+	public RGlobalVarHolder getHolder()
 	{
 		if(myHolder == null)
 		{

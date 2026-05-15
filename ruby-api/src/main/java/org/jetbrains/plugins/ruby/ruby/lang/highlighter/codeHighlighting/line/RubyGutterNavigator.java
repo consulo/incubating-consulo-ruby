@@ -18,6 +18,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
 
 import com.intellij.java.language.psi.PsiMethod;
+import consulo.ide.impl.ui.impl.PopupChooserBuilder;
 import consulo.language.editor.ui.DefaultPsiElementCellRenderer;
 import consulo.language.psi.PsiElement;
 import consulo.logging.Logger;

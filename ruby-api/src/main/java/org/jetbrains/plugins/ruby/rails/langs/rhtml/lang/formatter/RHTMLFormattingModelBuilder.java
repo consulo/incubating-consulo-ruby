@@ -24,12 +24,14 @@ import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import consulo.logging.Logger;
 import consulo.xml.psi.formatter.xml.XmlFormattingPolicy;
-import consulo.xml.psi.xml.XmlAttribute;
-import consulo.xml.psi.xml.XmlAttributeValue;
-import consulo.xml.psi.xml.XmlElementType;
+import consulo.xml.language.psi.XmlAttribute;
+import consulo.xml.language.psi.XmlAttributeValue;
+import consulo.xml.language.psi.XmlElementType;
+import consulo.language.Language;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileViewProvider;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLBlock;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLHtmlBlock;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.formatter.blocks.RHTMLRubyInjectionBlock;
@@ -46,6 +48,13 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.outer.OuterRHTMLEle
 public class RHTMLFormattingModelBuilder implements FormattingModelBuilder
 {
 	private static final Logger LOG = Logger.getInstance(RHTMLFormattingModelBuilder.class);
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return eRubyLanguage.INSTANCE;
+	}
 
 	@Nonnull
 	@Override

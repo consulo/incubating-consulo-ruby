@@ -26,7 +26,7 @@ import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +46,7 @@ public class RailsTestsFolderNode extends TestsSubFolderNode
 	}
 
 	@Override
-	public void accept(Predicate<SimpleNode> visitor)
+	public void accept(Consumer<SimpleNode> visitor)
 	{
 		if(visitor instanceof RailsNodeVisitor)
 		{

@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing;
 
 import consulo.language.ast.IElementType;
 import consulo.language.ast.TokenSet;
-import consulo.xml.psi.xml.XmlTokenType;
+import consulo.xml.language.psi.XmlTokenType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.tree.IRHTMLElementType;
 
 /**

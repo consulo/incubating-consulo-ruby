@@ -88,7 +88,7 @@ public class RubySdkCachesManager implements Disposable
 		final StartupManagerEx startupManagerEx = StartupManagerEx.getInstanceEx(myProject);
 
 		//Initialize cahe. Cache should be signed on StartupFileSystemSynchronizer
-		startupManagerEx.registerPreStartupActivity(new Runnable()
+		startupManagerEx.registerPostStartupActivity(new Runnable()
 		{
 			@Override
 			public void run()

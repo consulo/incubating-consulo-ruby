@@ -23,6 +23,7 @@ import consulo.language.psi.PsiElementVisitor;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RBundle;
+import consulo.localize.LocalizeValue;
 import consulo.language.editor.inspection.LocalInspectionTool;
 import consulo.language.editor.inspection.ProblemsHolder;
 
@@ -40,17 +41,17 @@ public class RubyDuckTypeInspection extends LocalInspectionTool
 	@Override
 	@Nonnull
 	@Nls
-	public String getGroupDisplayName()
+	public LocalizeValue getGroupDisplayName()
 	{
-		return RBundle.message("inspection.group.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.group.name"));
 	}
 
 	@Override
 	@Nonnull
 	@Nls
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return RBundle.message("inspection.duck.type.name");
+		return LocalizeValue.localizeTODO(RBundle.message("inspection.duck.type.name"));
 	}
 
 	@Override

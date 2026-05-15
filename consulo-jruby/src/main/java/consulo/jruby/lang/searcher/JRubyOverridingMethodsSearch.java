@@ -21,7 +21,7 @@ import com.intellij.java.indexing.search.searches.OverridingMethodsSearchExecuto
 import com.intellij.java.language.psi.PsiMethod;
 import consulo.application.ApplicationManager;
 import consulo.application.util.function.Computable;
-import consulo.application.util.function.Processor;
+import java.util.function.Predicate;
 import consulo.application.util.query.QueryExecutor;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.search.PsiSearchHelper;
@@ -37,7 +37,7 @@ import jakarta.annotation.Nonnull;
 public class JRubyOverridingMethodsSearch implements OverridingMethodsSearchExecutor
 {
 	@Override
-	public boolean execute(@Nonnull OverridingMethodsSearch.SearchParameters params, @Nonnull Processor<? super PsiMethod> consumer)
+	public boolean execute(@Nonnull OverridingMethodsSearch.SearchParameters params, @Nonnull Predicate<? super PsiMethod> consumer)
 	{
 		final PsiMethod method = params.getMethod();
 

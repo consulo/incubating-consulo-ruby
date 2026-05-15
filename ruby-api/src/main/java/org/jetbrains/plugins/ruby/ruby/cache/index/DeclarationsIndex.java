@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.index;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -23,14 +29,11 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,16 +53,16 @@ public interface DeclarationsIndex
 	public List<RVirtualMethod> getMethodsByName(@Nonnull final String name);
 
 	@Nonnull
-	public List<RVirtualField> getFieldsByName(@Nonnull final String name);
+	public List<RField> getFieldsByName(@Nonnull final String name);
 
 	@Nonnull
-	public List<RVirtualConstant> getConstantsByName(@Nonnull final String name);
+	public List<RConstant> getConstantsByName(@Nonnull final String name);
 
 	@Nonnull
-	public List<RVirtualGlobalVar> getGlobalVarsByName(@Nonnull final String name);
+	public List<RGlobalVariable> getGlobalVarsByName(@Nonnull final String name);
 
 	@Nonnull
-	public List<RVirtualAlias> getAliasesByName(@Nonnull final String name);
+	public List<RAliasStatement> getAliasesByName(@Nonnull final String name);
 
 	@Nonnull
 	public List<RVirtualFieldAttr> getFieldAttrsByName(@Nonnull final String name);

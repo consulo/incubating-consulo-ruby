@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import consulo.content.bundle.Sdk;
 import consulo.language.ast.IElementType;
 import consulo.language.ast.TokenSet;
@@ -37,9 +43,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualContainerBase;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualFileImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeBuilder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
@@ -254,21 +257,21 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nonnull
-	public List<RVirtualConstant> getVirtualConstants()
+	public List<RConstant> getVirtualConstants()
 	{
 		return RVirtualUtil.getVirtualConstants(this, this);
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualField> getVirtualFields()
+	public List<RField> getVirtualFields()
 	{
 		return RVirtualUtil.getVirtualFields(this, this);
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualGlobalVar> getVirtualGlobalVars()
+	public List<RGlobalVariable> getVirtualGlobalVars()
 	{
 		return RVirtualUtil.getVirtualGlobalVars(this, this);
 	}
@@ -332,7 +335,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nullable
-	public FieldDefinition getDefinition(@Nonnull final RVirtualField field)
+	public FieldDefinition getDefinition(@Nonnull final RField field)
 	{
 		return RFieldHolderUtil.getDefinition(this, field);
 	}
@@ -350,7 +353,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nullable
-	public ConstantDefinitions getDefinition(@Nonnull final RVirtualConstant constant)
+	public ConstantDefinitions getDefinition(@Nonnull final RConstant constant)
 	{
 		return RConstantHolderUtil.getDefinition(this, constant);
 	}
@@ -368,7 +371,7 @@ public abstract class RPsiFileBase extends PsiFileImpl implements RFile
 
 	@Override
 	@Nullable
-	public GlobalVarDefinition getDefinition(@Nonnull RVirtualGlobalVar globalVar)
+	public GlobalVarDefinition getDefinition(@Nonnull RGlobalVariable globalVar)
 	{
 		return RGlobalVarHolderUtil.getDefinition(this, globalVar);
 	}

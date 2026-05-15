@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
@@ -40,9 +46,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
@@ -225,21 +228,21 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nonnull
-	public List<RVirtualField> getVirtualFields()
+	public List<RField> getVirtualFields()
 	{
 		return getInnerRubyFile().getVirtualFields();
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualConstant> getVirtualConstants()
+	public List<RConstant> getVirtualConstants()
 	{
 		return getInnerRubyFile().getVirtualConstants();
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualGlobalVar> getVirtualGlobalVars()
+	public List<RGlobalVariable> getVirtualGlobalVars()
 	{
 		return getInnerRubyFile().getVirtualGlobalVars();
 	}
@@ -302,7 +305,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public FieldDefinition getDefinition(@Nonnull RVirtualField field)
+	public FieldDefinition getDefinition(@Nonnull RField field)
 	{
 		return getInnerRubyFile().getDefinition(field);
 	}
@@ -316,7 +319,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public ConstantDefinitions getDefinition(@Nonnull RVirtualConstant constant)
+	public ConstantDefinitions getDefinition(@Nonnull RConstant constant)
 	{
 		return getInnerRubyFile().getDefinition(constant);
 	}
@@ -336,7 +339,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public GlobalVarDefinition getDefinition(@Nonnull RVirtualGlobalVar globalVar)
+	public GlobalVarDefinition getDefinition(@Nonnull RGlobalVariable globalVar)
 	{
 		return getInnerRubyFile().getDefinition(globalVar);
 	}

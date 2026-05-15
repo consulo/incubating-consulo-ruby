@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import com.intellij.java.language.psi.PsiClass;
 import com.intellij.java.language.psi.PsiJavaPackage;
 import consulo.language.psi.PsiElement;
@@ -34,6 +40,7 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
@@ -100,21 +107,21 @@ public class SymbolBuilder
 	{
 		if(virtualElement instanceof RVirtualFieldHolder)
 		{
-			for(RVirtualField field : ((RVirtualFieldHolder) virtualElement).getVirtualFields())
+			for(RField field : ((RVirtualFieldHolder) virtualElement).getVirtualFields())
 			{
 				processField(field, symbol, context);
 			}
 		}
 		if(virtualElement instanceof RVirtualConstantHolder)
 		{
-			for(RVirtualConstant constant : ((RVirtualConstantHolder) virtualElement).getVirtualConstants())
+			for(RConstant constant : ((RVirtualConstantHolder) virtualElement).getVirtualConstants())
 			{
 				processConstant(constant, symbol);
 			}
 		}
 		if(virtualElement instanceof RVirtualGlobalVarHolder)
 		{
-			for(RVirtualGlobalVar var : ((RVirtualGlobalVarHolder) virtualElement).getVirtualGlobalVars())
+			for(RGlobalVariable var : ((RVirtualGlobalVarHolder) virtualElement).getVirtualGlobalVars())
 			{
 				processGlobalVar(var, symbol);
 			}
@@ -147,7 +154,7 @@ public class SymbolBuilder
 				}
 				else if(type == StructureType.ALIAS)
 				{
-					processAlias((RVirtualAlias) element, symbol);
+					processAlias((RAliasStatement) element, symbol);
 				}
 				else
 					// require or load
@@ -302,7 +309,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processField(@Nonnull final RVirtualField field, @Nonnull final Symbol symbol, final Context context)
+	private void processField(@Nonnull final RField field, @Nonnull final Symbol symbol, final Context context)
 	{
 		if(field.getType() == FieldType.CLASS_VARIABLE && context == Context.CLASS)
 		{
@@ -325,12 +332,12 @@ public class SymbolBuilder
 		myFileSymbol.addChild(symbol, new Symbol(myFileSymbol, field.getName(), type, symbol, field));
 	}
 
-	private void processGlobalVar(@Nonnull final RVirtualGlobalVar var, @Nonnull final Symbol symbol)
+	private void processGlobalVar(@Nonnull final RGlobalVariable var, @Nonnull final Symbol symbol)
 	{
 		myFileSymbol.addChild(symbol, new Symbol(myFileSymbol, var.getText(), Type.GLOBAL_VARIABLE, symbol, var));
 	}
 
-	private void processConstant(@Nonnull final RVirtualConstant constant, @Nonnull final Symbol symbol)
+	private void processConstant(@Nonnull final RConstant constant, @Nonnull final Symbol symbol)
 	{
 		myFileSymbol.addChild(symbol, new Symbol(myFileSymbol, constant.getName(), Type.CONSTANT, symbol, constant));
 	}
@@ -399,7 +406,7 @@ public class SymbolBuilder
 		}
 	}
 
-	private void processAlias(@Nonnull final RVirtualAlias alias, @Nonnull final Symbol symbol)
+	private void processAlias(@Nonnull final RAliasStatement alias, @Nonnull final Symbol symbol)
 	{
 		// Searching in parent!
 		final Symbol original = SymbolCoreUtil.find(myFileSymbol, symbol, Arrays.asList(alias.getOldName()), false, true, Types.ALIAS_OBJECTS);

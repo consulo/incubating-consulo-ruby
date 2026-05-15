@@ -16,12 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
 import jakarta.annotation.Nonnull;
 
 import consulo.ui.ex.tree.PresentationData;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import consulo.navigation.ItemPresentation;
@@ -38,7 +39,7 @@ import consulo.ui.image.ImageEffects;
 public class RFieldPresentationUtil implements RubyIcons
 {
 
-	public static Image getIcon(@Nonnull final RVirtualField rVirtualField)
+	public static Image getIcon(@Nonnull final RField rVirtualField)
 	{
 		return getIconByRField(rVirtualField);
 	}
@@ -52,7 +53,7 @@ public class RFieldPresentationUtil implements RubyIcons
 	 * @param flags         com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Image getIcon(@Nonnull final RVirtualField rVirtualField, final int flags)
+	public static Image getIcon(@Nonnull final RField rVirtualField, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
@@ -61,24 +62,24 @@ public class RFieldPresentationUtil implements RubyIcons
 		return RubyIcons.RUBY_FIELD_NODE;
 	}
 
-	public static ItemPresentation getPresentation(@Nonnull final RVirtualField rVirtualField)
+	public static ItemPresentation getPresentation(@Nonnull final RField rVirtualField)
 	{
 		final Image icon = getIcon(rVirtualField, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(rVirtualField.getName(), TextUtil.wrapInParens(getLocation(rVirtualField)), icon, null);
 	}
 
-	public static String getLocation(@Nonnull final RVirtualField field)
+	public static String getLocation(@Nonnull final RField field)
 	{
 		return RContainerPresentationUtil.getContainerNameWithLocation(field.getHolder());
 	}
 
 	/**
-	 * Generates the icon by RVirtualField
+	 * Generates the icon by RField
 	 *
 	 * @param field Field to get the icon for
 	 * @return Field icon
 	 */
-	public static Image getIconByRField(final RVirtualField field)
+	public static Image getIconByRField(final RField field)
 	{
 		final FieldType type = field.getType();
 		final Image attrIcon = getIconType(type);

@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
 import jakarta.annotation.Nonnull;
 
 import consulo.navigation.ItemPresentation;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.ui.image.Image;
@@ -38,13 +39,13 @@ public class RGlobalVariablePresentationUtil
 		return RubyIcons.RUBY_GLOBAL_VAR_NODE;
 	}
 
-	public static ItemPresentation getPresentation(@Nonnull final RVirtualGlobalVar var)
+	public static ItemPresentation getPresentation(@Nonnull final RGlobalVariable var)
 	{
 		final Image icon = getIcon();
 		return new PresentationData(var.getText(), TextUtil.wrapInParens(getLocation(var)), icon, null);
 	}
 
-	public static String getLocation(@Nonnull final RVirtualGlobalVar var)
+	public static String getLocation(@Nonnull final RGlobalVariable var)
 	{
 		return RContainerPresentationUtil.getContainerNameWithLocation(var.getHolder());
 	}

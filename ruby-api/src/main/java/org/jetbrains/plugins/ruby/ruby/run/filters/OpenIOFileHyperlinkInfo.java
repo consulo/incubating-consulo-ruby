@@ -27,6 +27,7 @@ import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 import consulo.fileEditor.FileEditorManager;
 import consulo.navigation.OpenFileDescriptor;
+import consulo.navigation.OpenFileDescriptorFactory;
 import consulo.util.lang.ref.Ref;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.util.lang.function.ThrowableRunnable;
@@ -76,7 +77,7 @@ public class OpenIOFileHyperlinkInfo implements FileHyperlinkInfo
 				}
 			});
 			final VirtualFile virtualFile = virtualFileRef.get();
-			myDescriptor = virtualFile == null ? null : new OpenFileDescriptor(myProject, virtualFile, myLine, myColumn);
+			myDescriptor = virtualFile == null ? null : OpenFileDescriptorFactory.getInstance(myProject).newBuilder(virtualFile).line(myLine).column(myColumn).build();
 
 			isLazyInitialized = true;
 		}

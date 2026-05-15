@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
+
 import com.intellij.java.language.psi.PsiClass;
 import com.intellij.java.language.psi.PsiField;
 import com.intellij.java.language.psi.PsiJavaPackage;
@@ -28,16 +32,13 @@ import consulo.project.Project;
 import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualAlias;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.JavaLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyPsiLookupItem;
@@ -153,25 +154,25 @@ public class SymbolPresentationUtil
 			}
 			icon = IconDescriptorUpdaters.getIcon(((PsiElement) lastPrototype), Iconable.ICON_FLAG_VISIBILITY);
 		}
-		else if(lastPrototype instanceof RVirtualField)
+		else if(lastPrototype instanceof RField)
 		{
-			final RVirtualField field = (RVirtualField) lastPrototype;
+			final RField field = (RField) lastPrototype;
 			name = field.getText();
 			icon = RFieldPresentationUtil.getIcon(field);
 		}
-		else if(lastPrototype instanceof RVirtualConstant)
+		else if(lastPrototype instanceof RConstant)
 		{
 			icon = RConstantPresentationUtil.getIcon();
 		}
-		else if(lastPrototype instanceof RVirtualGlobalVar)
+		else if(lastPrototype instanceof RGlobalVariable)
 		{
 			priority = LookupValueWithPriority.NORMAL;
 			bold = true;
 			icon = RGlobalVariablePresentationUtil.getIcon();
 		}
-		else if(lastPrototype instanceof RVirtualAlias)
+		else if(lastPrototype instanceof RAliasStatement)
 		{
-			icon = ((RVirtualAlias) lastPrototype).getIcon(0);
+			icon = RAliasPresentationUtil.getIcon();
 		}
 		else if(lastPrototype instanceof RVirtualFieldAttr)
 		{
@@ -196,7 +197,7 @@ public class SymbolPresentationUtil
 		assert parent != null;
 		String typeText = parent.getType() != Type.FILE ? SymbolUtil.getPresentablePath(parent) : "";
 		// See RUBY-1302. Show help for global variables
-		if(lastPrototype instanceof RVirtualGlobalVar)
+		if(lastPrototype instanceof RGlobalVariable)
 		{
 			final RPsiElement elem = RVirtualPsiUtil.findPsiByVirtualElement(lastPrototype, symbol.getProject());
 			if(elem instanceof RGlobalVariable)

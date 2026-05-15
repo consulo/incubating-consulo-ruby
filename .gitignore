@@ -2,3 +2,5 @@
 /.consulo
 target/
 /dep
+
+.claude

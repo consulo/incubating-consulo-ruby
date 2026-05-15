@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.FieldType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
@@ -60,7 +59,7 @@ public class FieldDefinitionImpl implements FieldDefinition
 	}
 
 	@Override
-	public boolean isFor(@Nullable final RVirtualField field)
+	public boolean isFor(@Nullable final RField field)
 	{
 		return field != null && getType() == field.getType() && getName().equals(field.getName());
 	}

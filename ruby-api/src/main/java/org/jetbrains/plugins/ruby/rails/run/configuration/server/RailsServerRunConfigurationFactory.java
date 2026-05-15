@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.run.configuration.server;
 
+import consulo.localize.LocalizeValue;
+
 import jakarta.annotation.Nonnull;
 
 import consulo.execution.RunnerAndConfigurationSettings;
@@ -100,9 +102,9 @@ public class RailsServerRunConfigurationFactory extends RubyRunConfigurationFact
 	}
 
 	@Override
-	public String getName()
+	public LocalizeValue getDisplayName()
 	{
-		return SERVER_TITLE;
+		return LocalizeValue.localizeTODO(SERVER_TITLE);
 	}
 
 	@Override

@@ -216,7 +216,7 @@ public class JRubyDuckTypeUtil
 
 	private static void addMethod(final Children children, final PsiMethod method)
 	{
-		children.addSymbol(new JavaSymbol(method, method.getName(), JRubyNameConventions.getMethodName(method), Type.JAVA_METHOD));
+		children.addSymbol(new JavaSymbol(method, method.getName(), method.getName(), Type.JAVA_METHOD));
 	}
 
 }

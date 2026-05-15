@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NonNls;
 import jakarta.annotation.Nullable;
 
 import org.jetbrains.plugins.ruby.settings.SettingsExternalizer;
-import com.intellij.util.xmlb.annotations.Property;
+import consulo.util.xml.serializer.annotation.Property;
 
 /**
  * Created by IntelliJ IDEA.

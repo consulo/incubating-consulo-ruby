@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,6 +41,6 @@ public interface RFieldHolder extends RContainer, RVirtualFieldHolder
 	public List<FieldDefinition> getFieldsDefinitions();
 
 	@Nullable
-	public FieldDefinition getDefinition(@Nonnull final RVirtualField field);
+	public FieldDefinition getDefinition(@Nonnull final RField field);
 
 }

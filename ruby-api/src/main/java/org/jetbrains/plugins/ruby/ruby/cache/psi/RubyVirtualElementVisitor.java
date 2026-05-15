@@ -78,11 +78,6 @@ public abstract class RubyVirtualElementVisitor
 		visitElement(rVirtualLoad);
 	}
 
-	public void visitRVirtualAlias(RVirtualAlias rVirtualAlias)
-	{
-		visitElement(rVirtualAlias);
-	}
-
 	public void visitRVirtualInclude(RVirtualInclude rVirtualInclude)
 	{
 		visitElement(rVirtualInclude);

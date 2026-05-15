@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.surround.surrounders;
 
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import consulo.document.util.TextRange;
@@ -42,8 +43,8 @@ public class RubyENDSurrounder extends RubySurrounderBase
 	}
 
 	@Override
-	public String getTemplateDescription()
+	public LocalizeValue getTemplateDescription()
 	{
-		return "END {...}";
+		return LocalizeValue.localizeTODO("END {...}");
 	}
 }

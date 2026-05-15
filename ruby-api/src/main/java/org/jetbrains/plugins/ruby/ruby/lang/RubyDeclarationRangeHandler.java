@@ -18,8 +18,15 @@ import consulo.document.util.TextRange;
  * @author VISTALL
  * @since 24.09.13.
  */
-public class RubyDeclarationRangeHandler implements DeclarationRangeHandler
+public class RubyDeclarationRangeHandler implements DeclarationRangeHandler<PsiElement>
 {
+	@Nonnull
+	@Override
+	public Class<PsiElement> getElementClass()
+	{
+		return PsiElement.class;
+	}
+
 	@Override
 	@Nonnull
 	public TextRange getDeclarationRange(@Nonnull final PsiElement container)

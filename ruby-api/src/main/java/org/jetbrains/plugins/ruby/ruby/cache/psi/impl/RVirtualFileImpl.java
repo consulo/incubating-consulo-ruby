@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +35,6 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RFilePresentationUtil;
 import consulo.ui.image.Image;
@@ -48,7 +49,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 {
 	private String myLocation;
 	private List<RVirtualRequire> myRequires;
-	private List<RVirtualGlobalVar> myGlobalVars;
+	private List<RGlobalVariable> myGlobalVars;
 
 	public RVirtualFileImpl(final String name, final String location, final RVirtualContainer parentContainer, final AccessModifier defaultChildAccessModifier, @Nonnull final RFileInfo containingFileInfo)
 	{
@@ -130,7 +131,7 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 	public void dump(@Nonnull StringBuilder buffer, int indent)
 	{
 		super.dump(buffer, indent);
-		for(RVirtualGlobalVar var : myGlobalVars)
+		for(RGlobalVariable var : myGlobalVars)
 		{
 			buffer.append(NEW_LINE);
 			((RVirtualElementBase) var).dump(buffer, indent + 1);
@@ -144,14 +145,14 @@ public class RVirtualFileImpl extends RVirtualFieldContantContainerImpl implemen
 	}
 
 	// RVirtualGlobalVarsHolder methods
-	public void setVirtualGlobalVars(List<RVirtualGlobalVar> vars)
+	public void setVirtualGlobalVars(List<RGlobalVariable> vars)
 	{
 		myGlobalVars = vars;
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualGlobalVar> getVirtualGlobalVars()
+	public List<RGlobalVariable> getVirtualGlobalVars()
 	{
 		return myGlobalVars;
 	}

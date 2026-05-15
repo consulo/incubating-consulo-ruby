@@ -27,9 +27,8 @@ import consulo.ui.ex.awt.tree.SimpleNode;
 public abstract class RailsNodeVisitorAdapter implements RailsNodeVisitor
 {
 	@Override
-	public boolean test(final SimpleNode simpleNode)
+	public void accept(final SimpleNode simpleNode)
 	{
-		return true;
 	}
 
 	@Override

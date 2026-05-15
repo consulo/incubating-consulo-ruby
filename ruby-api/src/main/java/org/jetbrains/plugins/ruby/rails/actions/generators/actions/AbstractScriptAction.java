@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
 import consulo.content.bundle.Sdk;
 import consulo.dataContext.DataContext;
-import consulo.ide.IdeView;
+import consulo.language.editor.util.IdeView;
 import consulo.language.editor.CommonDataKeys;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;

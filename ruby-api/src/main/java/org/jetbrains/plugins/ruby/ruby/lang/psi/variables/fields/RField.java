@@ -16,19 +16,26 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields;
 
-import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualField;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 import consulo.language.psi.PsiNamedElement;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RNamedElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 05.09.2006
  */
-public interface RField extends RVirtualField, RNamedElement, PsiNamedElement
+public interface RField extends RNamedElement, PsiNamedElement
 {
+	@Nonnull
+	RFieldHolder getHolder();
+
+	@Nonnull
+	FieldType getType();
+
 	/**
 	 * @return Holder, some fields can have no holder (if used in file level)
 	 */

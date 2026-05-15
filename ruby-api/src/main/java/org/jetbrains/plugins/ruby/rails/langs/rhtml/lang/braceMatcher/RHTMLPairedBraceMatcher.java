@@ -17,12 +17,14 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.braceMatcher;
 
 import consulo.language.BracePair;
+import consulo.language.Language;
+import consulo.language.PairedBraceMatcher;
+import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiFile;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.eRubyLanguage;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.parsing.RHTMLTokenType;
-import consulo.language.PairedBraceMatcher;
-import consulo.language.psi.PsiFile;
-import consulo.language.ast.IElementType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +34,12 @@ import consulo.language.ast.IElementType;
  */
 public class RHTMLPairedBraceMatcher implements PairedBraceMatcher
 {
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return eRubyLanguage.INSTANCE;
+	}
 
 	private final static BracePair[] BRACE_PAIRS = new BracePair[]{
 			new BracePair(RHTMLTokenType.RHTML_EXPRESSION_START, RHTMLTokenType.RHTML_EXPRESSION_END, false),

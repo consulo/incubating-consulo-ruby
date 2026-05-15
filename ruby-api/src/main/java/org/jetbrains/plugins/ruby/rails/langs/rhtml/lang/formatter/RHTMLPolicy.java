@@ -20,7 +20,7 @@ import consulo.language.codeStyle.CodeStyleSettings;
 import consulo.language.codeStyle.FormattingDocumentModel;
 import consulo.language.codeStyle.WrapType;
 import consulo.xml.psi.formatter.xml.HtmlPolicy;
-import consulo.xml.psi.xml.XmlTag;
+import consulo.xml.language.psi.XmlTag;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 
 import jakarta.annotation.Nullable;

@@ -21,6 +21,7 @@ import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import consulo.language.util.IncorrectOperationException;
 import consulo.project.Project;
+import consulo.localize.LocalizeValue;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -41,11 +42,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFileUtil;
  */
 public class AppendCurrentDirToPathIntention extends RequirePathIntention
 {
-	private static final String TEXT = RBundle.message("ruby.intentions.append.cur.dir.to.path");
+	private static final LocalizeValue TEXT = LocalizeValue.localizeTODO(RBundle.message("ruby.intentions.append.cur.dir.to.path"));
 
 	@Override
 	@Nonnull
-	public String getText()
+	public LocalizeValue getText()
 	{
 		return TEXT;
 	}

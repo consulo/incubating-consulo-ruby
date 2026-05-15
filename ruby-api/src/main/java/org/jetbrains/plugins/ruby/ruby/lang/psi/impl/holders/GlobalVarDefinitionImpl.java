@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
 import jakarta.annotation.Nonnull;
 
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualGlobalVar;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.global.RGlobalVariable;
 
@@ -57,7 +56,7 @@ public class GlobalVarDefinitionImpl implements GlobalVarDefinition
 	}
 
 	@Override
-	public boolean isFor(@Nonnull final RVirtualGlobalVar virtualGlobalVar)
+	public boolean isFor(@Nonnull final RGlobalVariable virtualGlobalVar)
 	{
 		return getText().equals(virtualGlobalVar.getText());
 	}

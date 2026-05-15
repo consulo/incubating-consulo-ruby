@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualConstant;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RConstantHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.ConstantDefinitionsImpl;
@@ -87,7 +86,7 @@ public class RConstantHolderUtil
 		return list;
 	}
 
-	private static ConstantDefinitions getConstantDefinition(final List<ConstantDefinitions> definitions, final RVirtualConstant constant)
+	private static ConstantDefinitions getConstantDefinition(final List<ConstantDefinitions> definitions, final RConstant constant)
 	{
 		for(ConstantDefinitions def : definitions)
 		{
@@ -99,7 +98,7 @@ public class RConstantHolderUtil
 		return null;
 	}
 
-	public static ConstantDefinitions getDefinition(RConstantHolder holder, RVirtualConstant constant)
+	public static ConstantDefinitions getDefinition(RConstantHolder holder, RConstant constant)
 	{
 		return getConstantDefinition(holder.getConstantDefinitions(), constant);
 	}
