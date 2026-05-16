@@ -30,15 +30,6 @@
 		<tag>custom.language</tag>
 	</tags>
 
-	<depends optional="true" config-file="ruby-javascript-integration.xml">consulo.javascript</depends>
-
-
-	<extensions defaultExtensionNs="com.intellij">
-		<listOfElements name="rdocToolwindowModuleExtensionList">
-			<add>ruby</add>
-		</listOfElements>
-	</extensions>
-
 	<actions>
 		<action id="RIHelpAction" class="org.jetbrains.plugins.ruby.ruby.ri.RIHelpAction" text="RI search" description="Searches a help for selected text using RDoc">
 			<keyboard-shortcut keymap="$default" first-keystroke="ctrl I"/>
