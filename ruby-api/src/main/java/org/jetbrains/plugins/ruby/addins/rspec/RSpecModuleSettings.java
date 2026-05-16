@@ -16,6 +16,9 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.module.Module;
 import consulo.ide.impl.idea.openapi.module.ModuleServiceManager;
 import jakarta.inject.Inject;
@@ -30,6 +33,8 @@ import jakarta.inject.Singleton;
  * @author: Roman Chernyatchik
  * @date: Apr 19, 2008
  */
+@ServiceAPI(ComponentScope.MODULE)
+@ServiceImpl
 @Singleton
 public class RSpecModuleSettings
 {

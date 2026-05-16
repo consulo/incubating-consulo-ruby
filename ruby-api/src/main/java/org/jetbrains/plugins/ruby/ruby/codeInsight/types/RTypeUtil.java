@@ -23,7 +23,6 @@ import com.intellij.java.language.psi.PsiMethod;
 import consulo.application.progress.ProgressManager;
 import consulo.language.psi.PsiElement;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -59,7 +58,7 @@ public class RTypeUtil
 		if(type == Type.CONSTANT || type == Type.GLOBAL_VARIABLE)
 		{
 			// Try to find assigned usage
-			final RVirtualElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
+			final RPsiElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
 			if(prototype != null)
 			{
 				final RPsiElement element = RVirtualPsiUtil.findPsiByVirtualElement(prototype, symbol.getProject());

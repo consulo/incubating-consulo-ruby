@@ -19,6 +19,10 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.paramDefs;
 import java.util.HashMap;
 import java.util.Map;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
+import jakarta.inject.Singleton;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
 import consulo.ide.ServiceManager;
@@ -26,6 +30,9 @@ import consulo.ide.ServiceManager;
 /**
  * @author yole
  */
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class ParamDefManager
 {
 	public static ParamDefManager getInstance()

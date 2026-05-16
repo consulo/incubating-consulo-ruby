@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -23,7 +25,6 @@ import consulo.module.Module;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import consulo.virtualFileSystem.VirtualFile;
 
@@ -37,7 +38,7 @@ public class MigrationsConventions
 {
 	public static final String DB_SCHEMA_FILE = RailsConstants.DB_SCHEMA_FILE;
 
-	public static boolean isMigrationFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isMigrationFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		if(module == null)
 		{

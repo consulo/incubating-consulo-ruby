@@ -16,7 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.ri;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Singleton;
 
 import consulo.util.xml.serializer.WriteExternalException;
 import org.jdom.Element;
@@ -31,6 +35,9 @@ import consulo.util.xml.serializer.JDOMExternalizable;
  * @author: oleg
  * @date: Nov 8, 2006
  */
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class RDocSettings implements JDOMExternalizable
 {
 	@Nonnull

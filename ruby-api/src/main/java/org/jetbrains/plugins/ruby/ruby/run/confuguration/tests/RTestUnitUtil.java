@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
@@ -24,9 +28,6 @@ import jakarta.annotation.Nullable;
 import consulo.util.lang.Pair;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -113,7 +114,7 @@ public class RTestUnitUtil
 	 *                          will store evaluated light mode symbol.
 	 * @return true if class is valid testcase class
 	 */
-	public static boolean isClassUnitTestCase(@Nonnull final RVirtualClass rClass, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
+	public static boolean isClassUnitTestCase(@Nonnull final RClass rClass, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
 	{
 		// 1. lets check direct ancestor without symbol cashe
 		final String fullName;
@@ -151,10 +152,10 @@ public class RTestUnitUtil
 	 * @param method Some ruby method
 	 * @return is method test method
 	 */
-	public static boolean hasValidTestNameAndNotSingleton(@Nonnull final RVirtualMethod method)
+	public static boolean hasValidTestNameAndNotSingleton(@Nonnull final RMethod method)
 	{
 		final String methodName = method.getName();
-		return methodName.startsWith(TEST_METHOD_NAME_PREFIX) && methodName.length() > TEST_METHOD_NAME_PREFIX.length() && !(method instanceof RVirtualSingletonMethod);
+		return methodName.startsWith(TEST_METHOD_NAME_PREFIX) && methodName.length() > TEST_METHOD_NAME_PREFIX.length() && !(method instanceof RSingletonMethod);
 	}
 
 	/**
@@ -166,10 +167,10 @@ public class RTestUnitUtil
 	 */
 	public static boolean checkForAnotherTestCases(@Nullable final RContainer currentContainer, @Nonnull final RFile rFile)
 	{
-		final List<RVirtualClass> classes = RContainerUtil.getTopLevelClasses(rFile);
+		final List<RClass> classes = RContainerUtil.getTopLevelClasses(rFile);
 		final Ref<FileSymbol> fileSymbolWrapper = new Ref<FileSymbol>();
 
-		for(RVirtualClass vClass : classes)
+		for(RClass vClass : classes)
 		{
 			// Really all classes are "psi", not "virtual".
 			if(currentContainer == vClass || !(vClass instanceof RClass))

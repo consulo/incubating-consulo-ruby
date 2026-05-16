@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import consulo.module.Module;
 import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.ui.ex.tree.PresentationData;
@@ -27,11 +29,11 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.ClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,24 +69,23 @@ public abstract class FolderNode extends SimpleFileNode
 		{
 			return;
 		}
-		final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(getModule());
-		final RFileInfo rFileInfo = manager.getFilesCache().getUp2DateFileInfo(file);
-		if(rFileInfo == null)
+		final PsiFile psiFile = PsiManager.getInstance(getModule().getProject()).findFile(file);
+		if(!(psiFile instanceof RFile))
 		{
 			return;
 		}
 
-		final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(rFileInfo.getRVirtualFile());
+		final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
 
-		for(final RVirtualClass rClass : allClasses)
+		for(final RClass rClass : allClasses)
 		{
-			nodes.add(createClassNode(rClass, rFileInfo));
+			nodes.add(createClassNode(rClass));
 		}
 	}
 
-	protected ClassNode createClassNode(final RVirtualClass rClass, final RFileInfo rFileInfo)
+	protected ClassNode createClassNode(final RClass rClass)
 	{
-		return new ClassNode(getModule(), rClass, rFileInfo);
+		return new ClassNode(getModule(), rClass);
 	}
 
 	@Override

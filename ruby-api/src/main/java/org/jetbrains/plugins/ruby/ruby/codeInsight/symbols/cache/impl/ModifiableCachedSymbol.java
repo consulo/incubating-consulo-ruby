@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import java.util.List;
 import java.util.Set;
 
@@ -23,10 +25,12 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.content.bundle.Sdk;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
+import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.VirtualFileManager;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RRequire;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RailsRequireUtil;
@@ -47,8 +51,8 @@ import consulo.project.Project;
  */
 public class ModifiableCachedSymbol extends AbstractCachedSymbol
 {
-	// Requires from main file
-	private List<RVirtualRequire> myRequires;
+	// Requires from main file (URLs gathered from require/load calls)
+	private List<String> myRequires;
 
 	// All the list of required files
 	private Set<String> myAllExternalUrls;
@@ -80,8 +84,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 			return;
 		}
 
-		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
-		final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
+		final RFile file = resolveRFile();
 		if(file == null)
 		{
 			return;
@@ -90,7 +93,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 		if(myUrl.equals(url))
 		{
 			myFileSymbol = null;
-			if(myRequires == null || !myRequires.equals(file.getRequires()))
+			if(myRequires == null || !myRequires.equals(file.getRequiredUrls()))
 			{
 				myOuterSymbol = null;
 			}
@@ -104,13 +107,13 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 		}
 	}
 
-	private void updateOuterSymbol(@Nonnull final RVirtualFile file)
+	private void updateOuterSymbol(@Nonnull final RFile file)
 	{
 		if(myOuterSymbol != null)
 		{
 			return;
 		}
-		myOuterSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled, myCaches);
+		myOuterSymbol = new FileSymbol(SymbolCacheUtil.getFileSymbol(getBaseSymbol()), myProject, isJRubyEnabled);
 		FileSymbolUtil.process(myOuterSymbol, myUrl, InterpretationMode.EXTERNAL, false);
 
 		// Adding rails specified symbol if needed
@@ -123,8 +126,7 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 	@Override
 	protected void updateFileSymbol()
 	{
-		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
-		final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
+		final RFile file = resolveRFile();
 		if(file == null)
 		{
 			myFileSymbol = null;
@@ -136,18 +138,29 @@ public class ModifiableCachedSymbol extends AbstractCachedSymbol
 
 		if(myFileSymbol == null)
 		{
-			myFileSymbol = new FileSymbol(myOuterSymbol, myProject, isJRubyEnabled, myCaches);
+			myFileSymbol = new FileSymbol(myOuterSymbol, myProject, isJRubyEnabled);
 			FileSymbolUtil.process(myFileSymbol, myUrl, InterpretationMode.IGNORE_EXTERNAL, true);
 			myAllExternalUrls = FileSymbolUtil.getUrls(myFileSymbol);
-			myRequires = file.getRequires();
+			myRequires = file.getRequiredUrls();
 		}
+	}
+
+	@Nullable
+	private RFile resolveRFile()
+	{
+		final VirtualFile vFile = VirtualFileManager.getInstance().findFileByUrl(myUrl);
+		if(vFile == null)
+		{
+			return null;
+		}
+		final PsiFile psiFile = PsiManager.getInstance(myProject).findFile(vFile);
+		return psiFile instanceof RFile ? (RFile) psiFile : null;
 	}
 
 	@Nullable
 	private CachedSymbol getBaseSymbol()
 	{
-		final RFileInfo fileInfo = FileSymbolUtil.getRFileInfo(myUrl, myCaches);
-		final RVirtualFile file = fileInfo != null ? fileInfo.getRVirtualFile() : null;
+		final RFile file = resolveRFile();
 		if(file == null)
 		{
 			return null;

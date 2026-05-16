@@ -18,14 +18,17 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.holders;
 
 import java.util.List;
 
+import consulo.annotation.access.RequiredReadAction;
+import consulo.navigation.ItemPresentation;
+import consulo.project.Project;
+import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.ScopeHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,18 +36,52 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.RControlFlowOwner;
  * Date: 20.07.2006
  */
 
-public interface RContainer extends RVirtualContainer, RPsiElement, ScopeHolder, RControlFlowOwner, RStructuralElement
+public interface RContainer extends RPsiElement, ScopeHolder, RControlFlowOwner, RStructuralElement
 {
+	/**
+	 * @return this container access modifier
+	 */
+	@Nonnull
+	public AccessModifier getAccessModifier();
+
+	/**
+	 * @return default access modifier for subclasses
+	 */
+	@Nonnull
+	public AccessModifier getDefaultChildAccessModifier();
+
+	@Nonnull
+	public String getContainingFileUrl();
+
+	@Nullable
+	public VirtualFile getVirtualFile();
+
+	@Nullable
+	public ItemPresentation getPresentation();
+
+	@Nonnull
+	public List<RStructuralElement> getVirtualStructureElements();
+
+	public int getIndexOf(@Nonnull RStructuralElement element);
+
+	@Nonnull
+    @RequiredReadAction
+	public String getName();
+
+	@Nonnull
+    @RequiredReadAction
+	public List<String> getFullPath();
+
+	@Nonnull
+	public String getFullName();
+
+	public boolean isGlobal();
+
+	public Project getProject();
+
+	@Nullable
+	public RContainer getParentContainer();
 
 	@Nonnull
 	public List<RStructuralElement> getStructureElements();
-
-	/**
-	 * Container always have only one copy
-	 */
-	@Override
-	@SuppressWarnings({"JavaDoc"})
-	@Nonnull
-	public abstract RVirtualContainer createVirtualCopy(@Nullable final RVirtualContainer container, @Nonnull final RFileInfo info);
-
 }

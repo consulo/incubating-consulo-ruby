@@ -39,13 +39,8 @@ import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.RHTMLFile;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.eRubyElementTypes;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.lang.psi.visitors.RHTMLElementTypeVisitor;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualRequire;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RRequire;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.scope.RootScope;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
@@ -132,13 +127,6 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	@Nonnull
-	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @Nonnull RFileInfo fileInfo)
-	{
-		return getInnerRubyFile().createVirtualCopy(virtualParent, fileInfo);
-	}
-
-	@Override
 	public StructureType getType()
 	{
 		return getInnerRubyFile().getType();
@@ -149,13 +137,6 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	public RContainer getParentContainer()
 	{
 		return getInnerRubyFile().getParentContainer();
-	}
-
-	@Override
-	@Nullable
-	public RFileInfo getContainingFileInfo()
-	{
-		return getInnerRubyFile().getContainingFileInfo();
 	}
 
 	@Override
@@ -208,22 +189,16 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nullable
-	public RVirtualContainer getVirtualParentContainer()
+	public RContainer getVirtualParentContainer()
 	{
 		return getInnerRubyFile().getVirtualParentContainer();
 	}
 
 	@Override
 	@Nonnull
-	public List<RVirtualStructuralElement> getVirtualStructureElements()
+	public List<RStructuralElement> getVirtualStructureElements()
 	{
 		return getInnerRubyFile().getVirtualStructureElements();
-	}
-
-	@Override
-	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
-	{
-		getInnerRubyFile().accept(visitor);
 	}
 
 	@Override
@@ -256,9 +231,16 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 
 	@Override
 	@Nonnull
-	public List<RVirtualRequire> getRequires()
+	public List<RRequire> getRequires()
 	{
 		return getInnerRubyFile().getRequires();
+	}
+
+	@Override
+	@Nonnull
+	public List<String> getRequiredUrls()
+	{
+		return getInnerRubyFile().getRequiredUrls();
 	}
 
 	@Override
@@ -325,7 +307,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	public int getIndexOf(@Nonnull RVirtualStructuralElement element)
+	public int getIndexOf(@Nonnull RStructuralElement element)
 	{
 		return getInnerRubyFile().getIndexOf(element);
 	}
@@ -385,7 +367,7 @@ public class RHTMLFileImpl extends PsiFileImpl implements RHTMLFile
 	}
 
 	@Override
-	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RStructuralElement element)
 	{
 		return getInnerRubyFile().equalsToVirtual(element);
 	}

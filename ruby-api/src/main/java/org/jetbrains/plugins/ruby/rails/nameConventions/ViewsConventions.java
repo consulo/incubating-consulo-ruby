@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,13 +35,9 @@ import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.rails.langs.RJSFileType;
 import org.jetbrains.plugins.ruby.rails.langs.RXMLFileType;
 import org.jetbrains.plugins.ruby.rails.langs.rhtml.RHTMLFileType;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
@@ -61,7 +61,7 @@ public class ViewsConventions
 	public static final String CONTROLLER = "controller";
 	public static final String HTML_ERB_VIEW_EXTENSION = "html.erb";
 
-	public static boolean isRHTMLOrRJSViewFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isRHTMLOrRJSViewFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		// supports rails 2.0 views
 		if(module == null)
@@ -195,7 +195,7 @@ public class ViewsConventions
 	//     * @return List of view urls
 	////     */
 	//    @NotNull
-	//    public static List<VirtualFile> getViews(@NotNull final RVirtualMethod action,
+	//    public static List<VirtualFile> getViews(@NotNull final RMethod action,
 	//                                                @NotNull final Module module) {
 	//        final RClass rClass;
 	//        try {
@@ -214,7 +214,7 @@ public class ViewsConventions
 	//    }
 
 	@Nonnull
-	public static List<VirtualFile> getViews(@Nonnull final RVirtualMethod method, @Nonnull final String controllerDirUrl, @Nonnull final String controllerName, @Nonnull final Module module)
+	public static List<VirtualFile> getViews(@Nonnull final RMethod method, @Nonnull final String controllerDirUrl, @Nonnull final String controllerName, @Nonnull final Module module)
 	{
 
 		final String actionName = method.getName();
@@ -400,7 +400,7 @@ public class ViewsConventions
 	}
 
 	@Nullable
-	public static RVirtualClass getControllerByView(@Nonnull final VirtualFile viewFile, @Nonnull final Module moduleWithRails)
+	public static RClass getControllerByView(@Nonnull final VirtualFile viewFile, @Nonnull final Module moduleWithRails)
 	{
 		// supports rails 2.0 views
 		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(moduleWithRails);
@@ -411,13 +411,13 @@ public class ViewsConventions
 		{
 			return null;
 		}
-		final RFileInfo rInfo = RubyModuleCachesManager.getInstance(moduleWithRails).getFilesCache().getUp2DateFileInfo(controllerFile);
-		if(rInfo == null)
+		final PsiFile psiFile = PsiManager.getInstance(moduleWithRails.getProject()).findFile(controllerFile);
+		if(!(psiFile instanceof RFile))
 		{
 			return null;
 		}
-		final List<RVirtualClass> classes = RContainerUtil.getTopLevelClasses(rInfo.getRVirtualFile());
-		for(RVirtualClass rVirtualClass : classes)
+		final List<RClass> classes = RContainerUtil.getTopLevelClasses((RFile) psiFile);
+		for(RClass rVirtualClass : classes)
 		{
 			if(ControllersConventions.isControllerClass(rVirtualClass, moduleWithRails))
 			{
@@ -474,7 +474,7 @@ public class ViewsConventions
 	public static VirtualFile getViewsFolderByClass(@Nonnull final Module module, @Nonnull final RClass rClass)
 	{
 		//Controller class must belong to ruby file or module
-		final RVirtualContainer rClassParentContainer = rClass.getParentContainer();
+		final RContainer rClassParentContainer = rClass.getParentContainer();
 		if(rClassParentContainer == null || !(rClassParentContainer instanceof RFile || rClassParentContainer instanceof RModule))
 		{
 			return null;

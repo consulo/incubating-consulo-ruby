@@ -17,9 +17,13 @@
 package org.jetbrains.plugins.ruby.ruby.lang.parser;
 
 import consulo.language.ast.IFileElementType;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyElementType;
-import consulo.language.Language;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.elements.RubyClassElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.elements.RubyFileElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.elements.RubyMethodElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.elements.RubyModuleElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.elements.RubyObjectClassElementType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.elements.RubySingletonMethodElementType;
 import consulo.language.ast.IElementType;
 
 
@@ -29,7 +33,7 @@ public interface RubyElementTypes
 	//// These types will be used to mark tree elements in syntactic tree //////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	final IFileElementType FILE = new IFileElementType(Language.findInstance(RubyLanguage.class));
+	IFileElementType FILE = RubyFileElementType.INSTANCE;
 
 	// Expressions
 	IElementType EXPRESSION_IN_PARENS = new RubyElementType("Expression in parens");
@@ -141,13 +145,13 @@ public interface RubyElementTypes
 	IElementType RESCUE_MOD_STATEMENT = new RubyElementType("Rescue modifier statement");
 
 
-	IElementType CLASS = new RubyElementType("Class");
+	IElementType CLASS = new RubyClassElementType();
 	IElementType SUPER_CLASS = new RubyElementType("Superclass");
-	IElementType OBJECT_CLASS = new RubyElementType("Object class");
+	IElementType OBJECT_CLASS = new RubyObjectClassElementType();
 	IElementType CLASS_NAME = new RubyElementType("Class name");
 
-	IElementType METHOD = new RubyElementType("Method");
-	IElementType SINGLETON_METHOD = new RubyElementType("Singleton method");
+	IElementType METHOD = new RubyMethodElementType();
+	IElementType SINGLETON_METHOD = new RubySingletonMethodElementType();
 	IElementType CLASS_OBJECT = new RubyElementType("Class object");
 	IElementType METHOD_NAME = new RubyElementType("Method name");
 	IElementType FNAME = new RubyElementType("Function name");
@@ -157,7 +161,7 @@ public interface RubyElementTypes
 	IElementType ARRAY_ARGUMENT = new RubyElementType("Array argument");
 	IElementType PREDEFINED_ARGUMENT = new RubyElementType("Predefined argument");
 
-	IElementType MODULE = new RubyElementType("Module");
+	IElementType MODULE = new RubyModuleElementType();
 	IElementType MODULE_NAME = new RubyElementType("Module name");
 
 

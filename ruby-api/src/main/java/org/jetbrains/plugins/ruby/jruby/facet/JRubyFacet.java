@@ -28,7 +28,6 @@ import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
 import org.jetbrains.plugins.ruby.support.utils.IdeaInternalUtil;
 
 import java.util.Arrays;
@@ -42,8 +41,6 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 	@NonNls
 	public static final String JRUBY_FACET_LIBRARY_NAME_SUFFIX = " facet library";
 
-
-	private RubyModuleCachesManager myRubyModuleCachesManager;
 
 	public JRubyFacet(@Nonnull final Module module, final String name, @Nonnull RSupportPerModuleSettingsImpl configuration, final Facet underlyingFacet)
 	{
@@ -158,11 +155,6 @@ public class JRubyFacet extends Facet<RSupportPerModuleSettingsImpl>
 		return null;
 	}
 
-
-	public RubyModuleCachesManager getRubyModuleCachesManager()
-	{
-		return myRubyModuleCachesManager;
-	}
 
 	@Nonnull
 	public Collection<VirtualFile> getFacetRoots()

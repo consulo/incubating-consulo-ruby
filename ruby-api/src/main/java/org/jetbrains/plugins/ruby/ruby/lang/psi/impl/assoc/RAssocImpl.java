@@ -19,6 +19,7 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.assoc;
 import jakarta.annotation.Nullable;
 
 import consulo.language.ast.ASTNode;
+import consulo.language.psi.stub.StubElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
@@ -28,7 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
  * User: oleg
  * Date: 08.06.2006
  */
-public class RAssocImpl extends RPsiElementBase implements RAssoc
+public class RAssocImpl extends RPsiElementBase<StubElement> implements RAssoc
 {
 	public RAssocImpl(ASTNode astNode)
 	{

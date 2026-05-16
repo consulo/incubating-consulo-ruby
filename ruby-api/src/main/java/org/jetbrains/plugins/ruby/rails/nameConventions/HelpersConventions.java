@@ -16,6 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,11 +41,7 @@ import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
@@ -69,12 +75,12 @@ public class HelpersConventions
 
 	public static final List<String> ACTION_VIEW_PATH = Arrays.asList(ACTION_VIEW_NAME, HELPERS_NAME);
 
-	public static boolean isHelperFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isHelperFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		return isHelperFile(rFile, module, RContainerUtil.getTopLevelModules(rFile));
 	}
 
-	public static boolean isHelperFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualModule> modules)
+	public static boolean isHelperFile(@Nonnull final RFile rFile, @Nullable final Module module, @Nonnull final List<RModule> modules)
 	{
 		if(module == null)
 		{
@@ -97,7 +103,7 @@ public class HelpersConventions
 			return false;
 		}
 
-		for(RVirtualModule virtualModule : modules)
+		for(RModule virtualModule : modules)
 		{
 			if(isHelperModule(virtualModule, module))
 			{
@@ -108,7 +114,7 @@ public class HelpersConventions
 	}
 
 	@Nullable
-	public static String getHelperNameByModuleName(@Nullable RVirtualModule rModule)
+	public static String getHelperNameByModuleName(@Nullable RModule rModule)
 	{
 		if(rModule == null)
 		{
@@ -133,7 +139,7 @@ public class HelpersConventions
 		return name.substring(0, name.length() - RailsConstants.HELPERS_FILE_NAME_SUFFIX.length() - 1);
 	}
 
-	public static boolean isHelperModule(@Nullable final RVirtualModule rModule, @Nonnull final Module module)
+	public static boolean isHelperModule(@Nullable final RModule rModule, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module) || getHelperNameByModuleName(rModule) == null)
 		{
@@ -148,13 +154,13 @@ public class HelpersConventions
 		 * into RVirtualElements hierarchy
 		 */
 
-          /*  final ArrayList<RVirtualContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
+          /*  final ArrayList<RContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
 			final String controllersRootURL = getControllersRootURL(module);
             assert controllersRootURL != null; // for rails modules isn't null
 
             final StringBuffer buff = new StringBuffer(controllersRootURL);
-            for (RVirtualContainer container : path) {
-                if (container instanceof RVirtualFile) {
+            for (RContainer container : path) {
+                if (container instanceof RFile) {
                     continue;
                 }
                 buff.append(VFS_PATH_SEPARATOR);
@@ -282,7 +288,7 @@ public class HelpersConventions
 	 * @return Ruby helper module
 	 */
 	@Nullable
-	public static RVirtualModule getHelperModule(@Nullable final RVirtualFile rFile, @Nonnull final String controllerClassName)
+	public static RModule getHelperModule(@Nullable final RFile rFile, @Nonnull final String controllerClassName)
 	{
 		if(rFile == null)
 		{
@@ -292,10 +298,10 @@ public class HelpersConventions
 		//TODO Use navigator
 		final String moduleName = getHelperModuleName(controllerClassName);
 
-		for(RVirtualStructuralElement element : RContainerUtil.selectVirtualElementsByType(rFile.getVirtualStructureElements(), StructureType.MODULE))
+		for(RStructuralElement element : RContainerUtil.selectVirtualElementsByType(rFile.getVirtualStructureElements(), StructureType.MODULE))
 		{
-			assert element instanceof RVirtualModule;
-			final RVirtualModule module = (RVirtualModule) element;
+			assert element instanceof RModule;
+			final RModule module = (RModule) element;
 			if(moduleName.equals(module.getName()))
 			{
 				return module;
@@ -330,7 +336,7 @@ public class HelpersConventions
 	 * @return Name of Helper Module or ""(for not Controllers classes)
 	 */
 	@Nonnull
-	public static String getHelperModuleNameByController(@Nonnull final RVirtualClass controllerClass)
+	public static String getHelperModuleNameByController(@Nonnull final RClass controllerClass)
 	{
 		final String className = controllerClass.getName();
 		if(!className.endsWith(RailsConstants.CONTROLLERS_CLASS_NAME_SUFFIX))

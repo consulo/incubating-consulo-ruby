@@ -17,7 +17,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes;
 
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructureElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
@@ -28,9 +27,12 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RObjectClass extends RVirtualObjectClass, RFieldConstantContainer, RFormatStructureElement, RWrapLastChild
+public interface RObjectClass extends RFieldConstantContainer, RFormatStructureElement, RWrapLastChild
 {
 
 	@Nullable
 	public RClassObject getObject();
+
+	@jakarta.annotation.Nonnull
+	public String getPresentableName();
 }

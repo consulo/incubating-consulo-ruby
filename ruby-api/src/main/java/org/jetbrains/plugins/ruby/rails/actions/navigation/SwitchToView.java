@@ -40,7 +40,6 @@ import org.jetbrains.plugins.ruby.rails.codeInsight.daemon.RailsLineMarkerNaviga
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
@@ -220,7 +219,7 @@ public class SwitchToView extends EditorAction
 
 			final String name = method.getName();
 			// Action is method of Controller class
-			final RVirtualContainer parentContainer = method.getParentContainer();
+			final RContainer parentContainer = method.getParentContainer();
 			if(parentContainer == null || !(parentContainer instanceof RClass))
 			{
 				return false;

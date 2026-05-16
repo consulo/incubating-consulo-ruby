@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.pom;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import consulo.language.psi.PsiElement;
 
 /**

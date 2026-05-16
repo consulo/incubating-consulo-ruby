@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
@@ -24,8 +30,6 @@ import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.support.utils.VirtualFileUtil;
 import consulo.module.Module;
@@ -42,12 +46,12 @@ public class ApisConventions
 	public static final String API_MODULE = RailsConstants.SDK_ACTION_WEB_SERVICE_API_MODULE_NAME;
 	public static final String BASE_CLASS = RailsConstants.BASE_CLASS;
 
-	public static boolean isApisFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isApisFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		return isWebServiceApiFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isWebServiceApiFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
+	public static boolean isWebServiceApiFile(@Nonnull final RFile rFile, @Nullable final Module module, @Nonnull final List<RClass> classes)
 	{
 		if(module == null)
 		{
@@ -65,7 +69,7 @@ public class ApisConventions
 			return false;
 		}
 
-		for(RVirtualClass virtualClass : classes)
+		for(RClass virtualClass : classes)
 		{
 			if(isApiWebServiceClass(virtualClass, module))
 			{
@@ -75,7 +79,7 @@ public class ApisConventions
 		return false;
 	}
 
-	public static boolean isApiWebServiceClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
+	public static boolean isApiWebServiceClass(@Nullable final RClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{
@@ -90,13 +94,13 @@ public class ApisConventions
 		 * into RVirtualElements hierarchy
 		 */
 
-          /*  final ArrayList<RVirtualContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
+          /*  final ArrayList<RContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
 			final String controllersRootURL = getControllersRootURL(module);
             assert controllersRootURL != null; // for rails modules isn't null
 
             final StringBuffer buff = new StringBuffer(controllersRootURL);
-            for (RVirtualContainer container : path) {
-                if (container instanceof RVirtualFile) {
+            for (RContainer container : path) {
+                if (container instanceof RFile) {
                     continue;
                 }
                 buff.append(VFS_PATH_SEPARATOR);

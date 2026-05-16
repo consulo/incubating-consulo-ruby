@@ -25,8 +25,6 @@ import consulo.language.Language;
 import consulo.language.ast.ASTNode;
 import consulo.language.ast.TokenSet;
 import consulo.language.psi.util.PsiTreeUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RubyVirtualElementVisitor;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -36,8 +34,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.names.RNameNavigator;
-import consulo.language.impl.psi.ASTWrapperPsiElement;
+import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.stub.IStubElementType;
+import consulo.language.psi.stub.StubElement;
 import consulo.language.ast.IElementType;
 
 
@@ -46,11 +46,16 @@ import consulo.language.ast.IElementType;
  * User: oleg
  * Date: 07.05.2005
  */
-public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
+public class RPsiElementBase<T extends StubElement> extends StubBasedPsiElementBase<T> implements RPsiElement
 {
 	public RPsiElementBase(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
+	}
+
+	public RPsiElementBase(@Nonnull final T stub, @Nonnull final IStubElementType nodeType)
+	{
+		super(stub, nodeType);
 	}
 
 	@Override
@@ -123,15 +128,9 @@ public class RPsiElementBase extends ASTWrapperPsiElement implements RPsiElement
 	}
 
 	@Nullable
-	public RVirtualContainer getVirtualParentContainer()
+	public RContainer getVirtualParentContainer()
 	{
 		return getParentContainer();
-	}
-
-	@Override
-	public void accept(@Nonnull RubyVirtualElementVisitor visitor)
-	{
-		visitor.visitElement(this);
 	}
 
 	public boolean isClassOrModuleName()

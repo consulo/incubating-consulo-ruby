@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldHolder;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 
 import java.util.ArrayList;
@@ -25,8 +27,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.language.editor.completion.lookup.LookupValueWithPriority;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubySimpleLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
@@ -58,7 +58,7 @@ public class RFieldResolveUtil
 	 * @return variants for autocomplete
 	 */
 	@Nonnull
-	public static Object[] getVariants(@Nullable final FileSymbol fileSymbol, @Nonnull final RVirtualFieldHolder holder)
+	public static Object[] getVariants(@Nullable final FileSymbol fileSymbol, @Nonnull final RFieldHolder holder)
 	{
 		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
 		if(symbol == null)
@@ -81,7 +81,7 @@ public class RFieldResolveUtil
 	}
 
 	@Nonnull
-	public static List<PsiElement> resolve(@Nullable final FileSymbol fileSymbol, @Nonnull final RVirtualFieldHolder holder, @Nonnull final String name, @Nonnull final TypeSet acceptableTypes)
+	public static List<PsiElement> resolve(@Nullable final FileSymbol fileSymbol, @Nonnull final RFieldHolder holder, @Nonnull final String name, @Nonnull final TypeSet acceptableTypes)
 	{
 		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
 		final Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, holder);
@@ -95,7 +95,7 @@ public class RFieldResolveUtil
 		{
 			return list;
 		}
-		for(RVirtualElement prototype : fieldSymbol.getVirtualPrototypes(fileSymbol).getAll())
+		for(RPsiElement prototype : fieldSymbol.getVirtualPrototypes(fileSymbol).getAll())
 		{
 			final RPsiElement psiElement = RVirtualPsiUtil.findPsiByVirtualElement(prototype, holder.getProject());
 			if(psiElement != null)

@@ -1,5 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.sdk.gemRootType;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.fileChooser.FileChooserDescriptor;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import consulo.content.bundle.Sdk;
@@ -11,6 +12,7 @@ import consulo.ui.image.Image;
  * @author VISTALL
  * @since 25.09.13.
  */
+@ExtensionImpl
 public class GemOrderRootTypeUIFactory implements OrderRootTypeUIFactory
 {
 	@Override

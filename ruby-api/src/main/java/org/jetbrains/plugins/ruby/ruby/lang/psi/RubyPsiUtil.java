@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
+
 import consulo.component.util.Iconable;
 import consulo.document.Document;
 import consulo.language.ast.ASTNode;
@@ -35,7 +37,6 @@ import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RExpressionSubstitution;
@@ -504,14 +505,14 @@ public class RubyPsiUtil
 	}
 
 	@Nullable
-	public static RVirtualContainer getParentVContainer(@Nonnull final PsiElement psiElement)
+	public static RContainer getParentVContainer(@Nonnull final PsiElement psiElement)
 	{
 		PsiElement element = psiElement;
 		while(element != null)
 		{
-			if(element instanceof RVirtualContainer)
+			if(element instanceof RContainer)
 			{
-				return ((RVirtualContainer) element).getVirtualParentContainer();
+				return ((RContainer) element).getVirtualParentContainer();
 			}
 			element = element.getParent();
 		}

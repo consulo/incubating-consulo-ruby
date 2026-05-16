@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.TypeSet;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
@@ -128,7 +129,7 @@ class SymbolCoreUtil
 	}
 
 	@Nonnull
-	public static Symbol create(@Nonnull final FileSymbol fileSymbol, @Nonnull Symbol anchorSymbol, @Nonnull final List<String> path, final boolean global, final Type newType, @Nonnull final RVirtualElement prototype)
+	public static Symbol create(@Nonnull final FileSymbol fileSymbol, @Nonnull Symbol anchorSymbol, @Nonnull final List<String> path, final boolean global, final Type newType, @Nonnull final RPsiElement prototype)
 	{
 		final int size = path.size();
 		assert size > 0;
@@ -192,7 +193,7 @@ class SymbolCoreUtil
 			if(oldChild != null)
 			{
 				// Here we add prototypes
-				for(RVirtualElement element : fileSymbol.getVirtualPrototypes(child).getAll())
+				for(RPsiElement element : fileSymbol.getVirtualPrototypes(child).getAll())
 				{
 					fileSymbol.addPrototype(oldChild, element);
 				}
@@ -208,7 +209,7 @@ class SymbolCoreUtil
 				// Here we change the type of not_defined
 				not_defined.setType(type);
 				// Here we add prototypes
-				for(RVirtualElement element : fileSymbol.getVirtualPrototypes(child).getAll())
+				for(RPsiElement element : fileSymbol.getVirtualPrototypes(child).getAll())
 				{
 					fileSymbol.addPrototype(not_defined, element);
 				}

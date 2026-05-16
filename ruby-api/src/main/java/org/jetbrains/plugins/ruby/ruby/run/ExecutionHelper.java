@@ -25,7 +25,6 @@ import consulo.application.util.Semaphore;
 import consulo.disposer.Disposer;
 import consulo.logging.Logger;
 import consulo.process.ProcessHandler;
-import consulo.process.internal.OSProcessHandler;
 import consulo.project.Project;
 import consulo.project.ui.view.MessageView;
 import consulo.project.ui.wm.ToolWindowId;
@@ -154,7 +153,7 @@ public class ExecutionHelper
 		}
 	}
 
-	public static void executeExternalProcess(@Nullable final Project myProject, @Nonnull final OSProcessHandler processHandler, @Nonnull final Runner.ExecutionMode mode)
+	public static void executeExternalProcess(@Nullable final Project myProject, @Nonnull final ProcessHandler processHandler, @Nonnull final Runner.ExecutionMode mode)
 	{
 		final String title = mode.getTitle() != null ? mode.getTitle() : RBundle.message("progress.indicator.title.running.please.wait");
 		assert title != null;
@@ -278,7 +277,7 @@ public class ExecutionHelper
 		};
 	}
 
-	private static Runnable createTimelimitedExecutionProcess(final OSProcessHandler processHandler, final int timeout)
+	private static Runnable createTimelimitedExecutionProcess(final ProcessHandler processHandler, final int timeout)
 	{
 		return new Runnable()
 		{

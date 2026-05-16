@@ -16,12 +16,16 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.component.persist.PersistentStateComponent;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
 import consulo.logging.Logger;
 import consulo.module.Module;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Singleton;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.RComponents;
@@ -43,6 +47,9 @@ import java.util.Map;
 				)
 		}
 )
+@ServiceAPI(ComponentScope.MODULE)
+@ServiceImpl
+@Singleton
 public class RSpecModuleSettingsStorage extends SettingsExternalizer implements PersistentStateComponent<Element>
 {
 	private static final Logger LOG = Logger.getInstance(RSpecModuleSettingsStorage.class.getName());

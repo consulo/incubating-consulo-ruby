@@ -21,11 +21,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.AbstractRubyModuleCacheTest;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -43,7 +39,7 @@ import java.util.List;
  * @date: 11.08.2007
  */
 public class RClassPresentationUtilTest extends AbstractRubyModuleCacheTest {
-    private RVirtualFile rClassRVFile;
+    private RFile rClassRVFile;
     private VirtualFile rClassVFile;
 
     protected void setUp() throws Exception {
@@ -62,11 +58,11 @@ public class RClassPresentationUtilTest extends AbstractRubyModuleCacheTest {
     }
 
     public void testGetRuntimeQualifiedName() {
-        final List<RVirtualClass> classes = new ArrayList<RVirtualClass>();
+        final List<RClass> classes = new ArrayList<RClass>();
         collectAllClassesInFile(rClassRVFile, classes);
         final List<String> qualifiedNames = new ArrayList<String>();
         final FileSymbol fileSymbol = FileSymbolUtil.getFileSymbol(rClassRVFile, true);
-        for (RVirtualClass aClass : classes) {
+        for (RClass aClass : classes) {
             //noinspection ConstantConditions
             qualifiedNames.add(RClassPresentationUtil.getRuntimeQualifiedName(fileSymbol, aClass));
         }
@@ -89,14 +85,14 @@ public class RClassPresentationUtilTest extends AbstractRubyModuleCacheTest {
     }
 
     public void testFormatName() {
-        final RVirtualClass rClass = getClassByQualifiedName("M3::M4::M5::C6::C7::C8", rClassVFile);
+        final RClass rClass = getClassByQualifiedName("M3::M4::M5::C6::C7::C8", rClassVFile);
         assertEquals("", RClassPresentationUtil.formatName(rClass, 0));
         assertEquals("C8", RClassPresentationUtil.formatName(rClass, RPresentationConstants.SHOW_NAME));
         assertEquals("C7::C8", RClassPresentationUtil.formatName(rClass, RPresentationConstants.SHOW_FULL_NAME));
     }
 
     public void testGetIcon() {
-        RVirtualClass rClass = getClassByQualifiedName("M2::C1", rClassVFile);
+        RClass rClass = getClassByQualifiedName("M2::C1", rClassVFile);
         assert rClass != null;
         Icon icon = RClassPresentationUtil.getIcon(rClass);
         assertNotNull(icon);
@@ -107,18 +103,18 @@ public class RClassPresentationUtilTest extends AbstractRubyModuleCacheTest {
         assertNotSame(icon, RubyIcons.RUBY_CLASS_NODE);
     }
 
-    private void collectAllClassesInFile(final RVirtualContainer container,
-                                         final List<RVirtualClass> list) {
-        final List<RVirtualStructuralElement> classes
+    private void collectAllClassesInFile(final RContainer container,
+                                         final List<RClass> list) {
+        final List<RStructuralElement> classes
                 = RContainerUtil.selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS);
-        for (RVirtualStructuralElement aClass : classes) {
-            list.add((RVirtualClass)aClass);
-            collectAllClassesInFile((RVirtualContainer)aClass, list);
+        for (RStructuralElement aClass : classes) {
+            list.add((RClass)aClass);
+            collectAllClassesInFile((RContainer)aClass, list);
         }
-        final List<RVirtualStructuralElement> modules
+        final List<RStructuralElement> modules
                 = RContainerUtil.selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.MODULE);
-        for (RVirtualStructuralElement module : modules) {
-            collectAllClassesInFile((RVirtualContainer)module, list);
+        for (RStructuralElement module : modules) {
+            collectAllClassesInFile((RContainer)module, list);
         }
     }
 }

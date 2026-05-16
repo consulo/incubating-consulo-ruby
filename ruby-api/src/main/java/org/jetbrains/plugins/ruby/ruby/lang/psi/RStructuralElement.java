@@ -16,35 +16,22 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
+import consulo.annotation.access.RequiredReadAction;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-
-/**
- * Created by IntelliJ IDEA.
- *
- * @author: oleg
- * @date: Jun 20, 2007
- */
+import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 
 /**
  * This interface is provide the same interface for structural ruby elements such as
  * container, alias call, require call, include call etc.
  */
-public interface RStructuralElement extends RVirtualStructuralElement, RPsiElement
-{
-	/**
-	 * Creates virtual copy for this structural element with container as parent
-	 * In plural, because require, include can have more than one argument
-	 *
-	 * @param container Parent container
-	 * @param info      RFileInfo to store
-	 * @return RVirtualStructuralElement - the copy
-	 */
-	@Nonnull
-	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, final RFileInfo info);
+public interface RStructuralElement extends RPsiElement {
+    @RequiredReadAction
+    public StructureType getType();
 
-	boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element);
+    @Nullable
+    public RContainer getVirtualParentContainer();
+
+    boolean equalsToVirtual(@Nonnull final RStructuralElement element);
 }

@@ -16,9 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
 import consulo.language.psi.PsiElement;
@@ -33,7 +34,7 @@ public class ProxyJavaSymbol extends Symbol
 
 	private final PsiElement myPsiJavaElement;
 
-	public ProxyJavaSymbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String name, @Nullable final PsiElement element, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	public ProxyJavaSymbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String name, @Nullable final PsiElement element, @Nullable final Symbol parent, @Nullable final RPsiElement prototype)
 	{
 		super(fileSymbol, name, Type.JAVA_PROXY_CLASS, parent, prototype);
 		myPsiJavaElement = element;

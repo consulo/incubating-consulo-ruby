@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import consulo.execution.ui.awt.BrowseModuleValueActionListener;
 import consulo.language.psi.scope.GlobalSearchScope;
 import consulo.project.Project;
@@ -28,8 +32,6 @@ import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualClassUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -77,7 +79,7 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 
 		final Ref<FileSymbol> fSWrapper = new consulo.util.lang.ref.Ref<FileSymbol>();
 
-		final RVirtualClass testClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(classQualifiedName, getProject(), myScope, file, fSWrapper);
+		final RClass testClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(classQualifiedName, getProject(), myScope, file, fSWrapper);
 		if(testClass == null)
 		{
 			Messages.showMessageDialog(getField(), RBundle.message("class.does.not.exists.error.message", classQualifiedName), RBundle.message("cannot.browse.method.dialog.title"),Messages.getInformationIcon());
@@ -87,16 +89,16 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 		final TestMethodFilter methodFilter = new TestMethodFilter(testClass);
 		final RMethodList.RMethodProvider methodProvider = new TestMethodProvider(testClass, fSWrapper);
 
-		final RVirtualMethod psiMethod = RMethodList.showDialog(testClass, methodFilter, methodProvider, getField());
+		final RMethod psiMethod = RMethodList.showDialog(testClass, methodFilter, methodProvider, getField());
 
 		return psiMethod != null ? psiMethod.getName() : null;
 	}
 
-	public static class TestMethodFilter implements Condition<RVirtualMethod>
+	public static class TestMethodFilter implements Condition<RMethod>
 	{
-		public final RVirtualClass myRVClass;
+		public final RClass myRVClass;
 
-		public TestMethodFilter(@Nonnull final RVirtualClass rClass)
+		public TestMethodFilter(@Nonnull final RClass rClass)
 		{
 			myRVClass = rClass;
 		}
@@ -106,7 +108,7 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 		 * @return true if is test method
 		 */
 		@Override
-		public boolean value(final RVirtualMethod method)
+		public boolean value(final RMethod method)
 		{
 			return RTestUnitUtil.hasValidTestNameAndNotSingleton(method);
 		}
@@ -114,19 +116,19 @@ public class TestMethodBrowser extends BrowseModuleValueActionListener
 
 	private static class TestMethodProvider implements RMethodList.RMethodProvider
 	{
-		private static final RVirtualMethod[] EMPTY_VIRT_METHODS = new RVirtualMethod[0];
+		private static final RMethod[] EMPTY_VIRT_METHODS = new RMethod[0];
 
-		private final RVirtualClass testClass;
+		private final RClass testClass;
 		private final consulo.util.lang.ref.Ref<FileSymbol> fSWrapper;
 
-		public TestMethodProvider(final RVirtualClass testClass, final consulo.util.lang.ref.Ref<FileSymbol> fSWrapper)
+		public TestMethodProvider(final RClass testClass, final consulo.util.lang.ref.Ref<FileSymbol> fSWrapper)
 		{
 			this.testClass = testClass;
 			this.fSWrapper = fSWrapper;
 		}
 
 		@Override
-		public RVirtualMethod[] getAllMethods()
+		public RMethod[] getAllMethods()
 		{
 			final Pair<Symbol, FileSymbol> fileSymbolPair = SymbolUtil.getSymbolByContainerRubyTestMode(testClass, fSWrapper);
 			if(fileSymbolPair == null)

@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
@@ -28,10 +32,6 @@ import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -60,12 +60,12 @@ public class ControllersConventions
 	public static String APPLICATION_CONTROLLER = RailsConstants.APPLICATION_CONTROLLER_NAME;
 
 
-	public static boolean isControllerFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isControllerFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		return isControllerFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isControllerFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
+	public static boolean isControllerFile(@Nonnull final RFile rFile, @Nullable final Module module, @Nonnull final List<RClass> classes)
 	{
 		if(module == null)
 		{
@@ -88,7 +88,7 @@ public class ControllersConventions
 			return false;
 		}
 
-		for(RVirtualClass virtualClass : classes)
+		for(RClass virtualClass : classes)
 		{
 			if(isControllerClass(virtualClass, module))
 			{
@@ -120,7 +120,7 @@ public class ControllersConventions
 	}
 
 	@Nullable
-	public static String getControllerNameByClassName(@Nullable RVirtualClass rVClass)
+	public static String getControllerNameByClassName(@Nullable RClass rVClass)
 	{
 		if(rVClass == null)
 		{
@@ -137,7 +137,7 @@ public class ControllersConventions
 	 * @return Name of Controller Class or ""(for not Controllers classes)
 	 */
 	@Nonnull
-	public static String getControllerClassNameByHelper(@Nonnull final RVirtualModule helperModule)
+	public static String getControllerClassNameByHelper(@Nonnull final RModule helperModule)
 	{
 		final String moduleName = helperModule.getName();
 		if(!moduleName.endsWith(RailsConstants.HELPERS_MODULE_NAME_SUFFIX))
@@ -392,7 +392,7 @@ public class ControllersConventions
 		return pathBuffer.toString();
 	}
 
-	public static boolean isControllerClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
+	public static boolean isControllerClass(@Nullable final RClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module) || getControllerNameByClassName(rClass) == null)
 		{
@@ -407,13 +407,13 @@ public class ControllersConventions
 		 * into RVirtualElements hierarchy
 		 */
 
-          /*  final ArrayList<RVirtualContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
+          /*  final ArrayList<RContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
 			final String controllersRootURL = getControllersRootURL(module);
             assert controllersRootURL != null; // for rails modules isn't null
 
             final StringBuffer buff = new StringBuffer(controllersRootURL);
-            for (RVirtualContainer container : path) {
-                if (container instanceof RVirtualFile) {
+            for (RContainer container : path) {
+                if (container instanceof RFile) {
                     continue;
                 }
                 buff.append(VFS_PATH_SEPARATOR);
@@ -673,7 +673,7 @@ public class ControllersConventions
 		return NamingConventions.isInUnderscoredCase(name) && name.charAt(0) != '_';
 	}
 
-	public static boolean isValidActionMethod(@Nullable final RVirtualMethod method)
+	public static boolean isValidActionMethod(@Nullable final RMethod method)
 	{
 		return method != null && method.getArgumentInfos().size() == 0;
 		//               && method.getAccessModifier().equals(AccessModifier.PUBLIC); //TODO

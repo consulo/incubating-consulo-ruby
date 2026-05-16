@@ -16,41 +16,39 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import jakarta.annotation.Nonnull;
-
-import consulo.language.editor.annotation.ExternalAnnotator;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import consulo.language.Language;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
-import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.application.progress.ProgressManager;
+import consulo.language.Language;
+import consulo.language.editor.annotation.AnnotationHolder;
+import consulo.language.editor.annotation.ExternalAnnotator;
 import consulo.language.psi.PsiFile;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Sep 6, 2007
  */
-public class RubySlowAnnotator extends ExternalAnnotator
-{
-	@Nonnull
-	@Override
-	public Language getLanguage()
-	{
-		return RubyLanguage.INSTANCE;
-	}
+@ExtensionImpl
+public class RubySlowAnnotator extends ExternalAnnotator {
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return RubyLanguage.INSTANCE;
+    }
 
 
-	public void annotate(@Nonnull final PsiFile file, @Nonnull final AnnotationHolder holder)
-	{
-		// We hope it`s enough often operation
-		ProgressManager.getInstance().checkCanceled();
+    public void annotate(@Nonnull final PsiFile file, @Nonnull final AnnotationHolder holder) {
+        // We hope it`s enough often operation
+        ProgressManager.getInstance().checkCanceled();
 
-		assert file instanceof RFile;
-		// Force Updating symbol before annotattng
-		((RFile) file).getFileSymbol();
+        assert file instanceof RFile;
+        // Force Updating symbol before annotattng
+        ((RFile) file).getFileSymbol();
 
-		final RubySlowAnnotatorVisitor slowAnnotatorVisitor = new RubySlowAnnotatorVisitor(holder, (RFile) file);
-		file.accept(slowAnnotatorVisitor);
-	}
+        final RubySlowAnnotatorVisitor slowAnnotatorVisitor = new RubySlowAnnotatorVisitor(holder, (RFile) file);
+        file.accept(slowAnnotatorVisitor);
+    }
 }

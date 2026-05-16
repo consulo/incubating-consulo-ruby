@@ -16,33 +16,20 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import consulo.content.bundle.Sdk;
 import consulo.language.psi.PsiManager;
-import consulo.module.Module;
 import consulo.project.Project;
 import consulo.virtualFileSystem.VirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.GlobalVarDefinition;
@@ -67,41 +54,6 @@ import consulo.language.psi.scope.GlobalSearchScope;
  */
 public class RVirtualPsiUtil
 {
-
-	public static List<RubyFilesCache> getCaches(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk)
-	{
-		final List<RubyFilesCache> caches = new LinkedList<RubyFilesCache>();
-
-		final RubyModuleCachesManager manager = (module != null) ? RCacheUtil.getCachesManager(module) : null;
-
-		final RubyModuleFilesCache moduleCache = (manager != null ? manager.getFilesCache() : null);
-		if(moduleCache != null)
-		{
-			caches.add(moduleCache);
-		}
-
-		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
-		final RubyFilesCache sdkCache = sdk != null ? sdkCachesManager.getSdkFilesCache(sdk) : null;
-		if(sdkCache != null)
-		{
-			caches.add(sdkCache);
-		}
-		return caches;
-	}
-
-	@Nullable
-	public static RubyFilesCache getCacheForFile(@Nonnull final String url, final RubyFilesCache... caches)
-	{
-		for(RubyFilesCache cache : caches)
-		{
-			if(cache != null && cache.containsUrl(url))
-			{
-				return cache;
-			}
-		}
-		return null;
-	}
-
 
 	/**
 	 * Returns PsiElement by file URL
@@ -129,16 +81,16 @@ public class RVirtualPsiUtil
 	 * @return PsiElement - Real psi element, corresponding virtual element, or null, if nothing found
 	 */
 	@Nullable
-	public static RPsiElement findPsiByVirtualElement(@Nonnull final RVirtualElement element, @Nonnull final Project project)
+	public static RPsiElement findPsiByVirtualElement(@Nonnull final RPsiElement element, @Nonnull final Project project)
 	{
 		if(element instanceof RPsiElement)
 		{
 			return (RPsiElement) element;
 		}
 
-		if(element instanceof RVirtualStructuralElement)
+		if(element instanceof RStructuralElement)
 		{
-			return findInPsi(project, (RVirtualStructuralElement) element);
+			return findInPsi(project, (RStructuralElement) element);
 		}
 		if(element instanceof RConstant)
 		{
@@ -160,7 +112,7 @@ public class RVirtualPsiUtil
 
 
 	@Nullable
-	public static RStructuralElement findInPsi(@Nonnull final Project project, @Nonnull final RVirtualStructuralElement element)
+	public static RStructuralElement findInPsi(@Nonnull final Project project, @Nonnull final RStructuralElement element)
 	{
 		if(element instanceof RStructuralElement)
 		{
@@ -168,13 +120,13 @@ public class RVirtualPsiUtil
 		}
 
 		String url = null;
-		if(element instanceof RVirtualContainer)
+		if(element instanceof RContainer)
 		{
-			url = ((RVirtualContainer) element).getContainingFileUrl();
+			url = ((RContainer) element).getContainingFileUrl();
 		}
 		else
 		{
-			final RVirtualContainer parentContainer = element.getVirtualParentContainer();
+			final RContainer parentContainer = element.getVirtualParentContainer();
 			if(parentContainer != null)
 			{
 				url = parentContainer.getContainingFileUrl();
@@ -191,21 +143,21 @@ public class RVirtualPsiUtil
 			return null;
 		}
 
-		final RVirtualStructuralElement item = findByPath((RContainer) file, createStructurePath(element));
+		final RStructuralElement item = findByPath((RContainer) file, createStructurePath(element));
 		return item instanceof RStructuralElement ? (RStructuralElement) item : (RStructuralElement) file;
 	}
 
 	@Nullable
-	private static RVirtualContainer findVirtualContainer(@Nonnull final RContainer container, @Nonnull final RVirtualFile file)
+	private static RContainer findVirtualContainer(@Nonnull final RContainer container, @Nonnull final RFile file)
 	{
-		final RVirtualStructuralElement item = findByPath(file, createStructurePath(container));
-		return item instanceof RVirtualContainer ? (RVirtualContainer) item : file;
+		final RStructuralElement item = findByPath(file, createStructurePath(container));
+		return item instanceof RContainer ? (RContainer) item : file;
 	}
 
 	@Nullable
 	public static RConstant findRConstant(@Nonnull final RConstant constant, @Nonnull final Project project)
 	{
-		final RVirtualConstantHolder holder = constant.getHolder();
+		final RConstantHolder holder = constant.getHolder();
 		final RStructuralElement element = findInPsi(project, holder);
 		if(element instanceof RConstantHolder)
 		{
@@ -219,7 +171,7 @@ public class RVirtualPsiUtil
 	@Nullable
 	public static RField findRField(@Nonnull final RField field, @Nonnull final Project project)
 	{
-		final RVirtualFieldHolder vHolder = field.getHolder();
+		final RFieldHolder vHolder = field.getHolder();
 		final RStructuralElement element = findInPsi(project, vHolder);
 		if(element instanceof RFieldHolder)
 		{
@@ -233,7 +185,7 @@ public class RVirtualPsiUtil
 	@Nullable
 	public static RGlobalVariable findRGlobalVar(@Nonnull final RGlobalVariable var, @Nonnull final Project project)
 	{
-		final RVirtualGlobalVarHolder holder = var.getHolder();
+		final RGlobalVarHolder holder = var.getHolder();
 		final RStructuralElement element = findInPsi(project, holder);
 		if(element instanceof RGlobalVarHolder)
 		{
@@ -245,13 +197,13 @@ public class RVirtualPsiUtil
 	}
 
 
-	public static LinkedList<Integer> createStructurePath(@Nonnull final RVirtualStructuralElement anchor)
+	public static LinkedList<Integer> createStructurePath(@Nonnull final RStructuralElement anchor)
 	{
 		final LinkedList<Integer> path = new LinkedList<Integer>();
-		RVirtualStructuralElement current = anchor;
+		RStructuralElement current = anchor;
 		do
 		{
-			final RVirtualContainer parent = current.getVirtualParentContainer();
+			final RContainer parent = current.getVirtualParentContainer();
 			if(parent != null)
 			{
 				path.addFirst(parent.getIndexOf(current));
@@ -263,14 +215,14 @@ public class RVirtualPsiUtil
 	}
 
 	@Nullable
-	private static RVirtualStructuralElement findByPath(@Nonnull final RVirtualContainer root, @Nonnull final List<Integer> path)
+	private static RStructuralElement findByPath(@Nonnull final RContainer root, @Nonnull final List<Integer> path)
 	{
-		RVirtualStructuralElement element = root;
+		RStructuralElement element = root;
 		for(Integer index : path)
 		{
-			if(element instanceof RVirtualContainer)
+			if(element instanceof RContainer)
 			{
-				final List<RVirtualStructuralElement> elements = ((RVirtualContainer) element).getVirtualStructureElements();
+				final List<RStructuralElement> elements = ((RContainer) element).getVirtualStructureElements();
 				if(0 <= index && index < elements.size())
 				{
 					element = elements.get(index);
@@ -285,19 +237,18 @@ public class RVirtualPsiUtil
 	}
 
 	@Nullable
-	public static RVirtualContainer findVirtualContainer(@Nonnull final RContainer container)
+	public static RContainer findVirtualContainer(@Nonnull final RContainer container)
 	{
-		final RFileInfo info = getInfoByPsiElement(container);
-		return info != null ? findVirtualContainer(container, info.getRVirtualFile()) : null;
+		return container;
 	}
 
 	@Nullable
-	public static RVirtualMethod getMethodWithoutArgumentsByName(@Nonnull final RVirtualContainer container, @Nullable final String name)
+	public static RMethod getMethodWithoutArgumentsByName(@Nonnull final RContainer container, @Nullable final String name)
 	{
-		for(RVirtualStructuralElement element : RContainerUtil.selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.METHOD))
+		for(RStructuralElement element : RContainerUtil.selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.METHOD))
 		{
-			assert element instanceof RVirtualMethod;
-			final RVirtualMethod method = (RVirtualMethod) element;
+			assert element instanceof RMethod;
+			final RMethod method = (RMethod) element;
 			if(method.getName().equals(name) && method.getArgumentInfos().size() == 0)
 			{
 				return method;
@@ -310,7 +261,7 @@ public class RVirtualPsiUtil
 	// virtual method and new psi method. Sometimes method structure(submethods ets.) really wasn't
 	// and method body change event was sent because of \n inserting
 
-	public static boolean areMethodsEqual(@Nonnull final RVirtualMethod method, @Nonnull final RVirtualMethod otherMethod)
+	public static boolean areMethodsEqual(@Nonnull final RMethod method, @Nonnull final RMethod otherMethod)
 	{
 		if(method == otherMethod)
 		{
@@ -321,8 +272,8 @@ public class RVirtualPsiUtil
 		{
 			return false;
 		}
-		final List<RVirtualStructuralElement> subCandidateMethods = RContainerUtil.selectVirtualElementsByType(otherMethod.getVirtualStructureElements(), StructureType.METHOD);
-		final List<RVirtualStructuralElement> subMethods = RContainerUtil.selectVirtualElementsByType(method.getVirtualStructureElements(), StructureType.METHOD);
+		final List<RStructuralElement> subCandidateMethods = RContainerUtil.selectVirtualElementsByType(otherMethod.getVirtualStructureElements(), StructureType.METHOD);
+		final List<RStructuralElement> subMethods = RContainerUtil.selectVirtualElementsByType(method.getVirtualStructureElements(), StructureType.METHOD);
 
 		//noinspection RedundantIfStatement
 		if(subCandidateMethods.size() != subMethods.size())
@@ -333,37 +284,11 @@ public class RVirtualPsiUtil
 	}
 
 
-	@Nullable
-	public static RFileInfo getInfoByPsiElement(@Nonnull final PsiElement element)
-	{
-		final PsiFile psiFile = element.getContainingFile();
-		return psiFile != null ? getInfoByPsiFile(psiFile) : null;
-	}
-
-	public static RFileInfo getInfoByPsiFile(@Nonnull final PsiFile psiFile)
-	{
-		if(!(psiFile instanceof RFile))
-		{
-			return null;
-		}
-		RFile rFile = (RFile) psiFile;
-		final VirtualFile file = psiFile.getVirtualFile();
-		if(file == null)
-		{
-			return null;
-		}
-		final Project project = rFile.getProject();
-		final String url = file.getUrl();
-		// Getting caches
-		RubyFilesCache cache = getCacheForFile(url, RCacheUtil.getCachesByFile(file, GlobalSearchScope.allScope(project), project));
-		return cache != null ? cache.getUp2DateFileInfo(file) : null;
-	}
-
-	public static boolean areSubStructureEqual(@Nonnull final RContainer container, @Nonnull final RVirtualContainer vContainer)
+	public static boolean areSubStructureEqual(@Nonnull final RContainer container, @Nonnull final RContainer vContainer)
 	{
 		// Substructure check
 		final List<RStructuralElement> myElements = container.getStructureElements();
-		final List<RVirtualStructuralElement> virtualElements = vContainer.getVirtualStructureElements();
+		final List<RStructuralElement> virtualElements = vContainer.getVirtualStructureElements();
 		final int size = myElements.size();
 		if(size != virtualElements.size())
 		{
@@ -372,7 +297,7 @@ public class RVirtualPsiUtil
 		for(int i = 0; i < size; i++)
 		{
 			final RStructuralElement structuralElement = myElements.get(i);
-			RVirtualStructuralElement virtualElement = virtualElements.get(i);
+			RStructuralElement virtualElement = virtualElements.get(i);
 			if(!structuralElement.equalsToVirtual(virtualElement))
 			{
 				//                System.err.println(structuralElement + " is not equal to " + virtualElement);
@@ -383,7 +308,7 @@ public class RVirtualPsiUtil
 	}
 
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	public static boolean areConstantHoldersEqual(@Nonnull final RVirtualConstantHolder holder1, @Nonnull final RVirtualConstantHolder holder2)
+	public static boolean areConstantHoldersEqual(@Nonnull final RConstantHolder holder1, @Nonnull final RConstantHolder holder2)
 	{
 		final List<RConstant> constants1 = holder1.getVirtualConstants();
 		final List<RConstant> constants2 = holder2.getVirtualConstants();
@@ -405,7 +330,7 @@ public class RVirtualPsiUtil
 	}
 
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	public static boolean areGlobalVariableHoldersEqual(@Nonnull final RVirtualGlobalVarHolder holder1, @Nonnull final RVirtualGlobalVarHolder holder2)
+	public static boolean areGlobalVariableHoldersEqual(@Nonnull final RGlobalVarHolder holder1, @Nonnull final RGlobalVarHolder holder2)
 	{
 		final List<RGlobalVariable> vars1 = holder1.getVirtualGlobalVars();
 		final List<RGlobalVariable> vars2 = holder2.getVirtualGlobalVars();
@@ -427,7 +352,7 @@ public class RVirtualPsiUtil
 	}
 
 	@SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-	public static boolean areFieldHoldersEqual(@Nonnull final RVirtualFieldHolder holder1, @Nonnull final RVirtualFieldHolder holder2)
+	public static boolean areFieldHoldersEqual(@Nonnull final RFieldHolder holder1, @Nonnull final RFieldHolder holder2)
 	{
 		final List<RField> fields1 = holder1.getVirtualFields();
 		final List<RField> fields2 = holder2.getVirtualFields();
@@ -453,14 +378,14 @@ public class RVirtualPsiUtil
 	}
 
 	@Nullable
-	public static RVirtualClass getContainingRVClass(@Nonnull final RVirtualContainer rContainer)
+	public static RClass getContainingRVClass(@Nonnull final RContainer rContainer)
 	{
-		RVirtualContainer current = rContainer.getVirtualParentContainer();
+		RContainer current = rContainer.getVirtualParentContainer();
 		while(current != null)
 		{
-			if(current instanceof RVirtualClass)
+			if(current instanceof RClass)
 			{
-				return (RVirtualClass) current;
+				return (RClass) current;
 			}
 			current = current.getVirtualParentContainer();
 		}

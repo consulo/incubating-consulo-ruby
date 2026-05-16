@@ -16,10 +16,11 @@
 
 package org.jetbrains.plugins.ruby.rails.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import consulo.ui.ex.tree.PresentationData;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
 import consulo.navigation.ItemPresentation;
@@ -41,15 +42,15 @@ public class RControllerPresentationUtil
 	}
 
 	/**
-	 * Computes icon for RVirtualClass.
+	 * Computes icon for RClass.
 	 * Be careful, if flags contains information about visibility, method uses
 	 * RIconsUtils.getIconWithModifiers()
 	 *
-	 * @param rClass RVirtualClass
+	 * @param rClass RClass
 	 * @param flags  com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Image getIcon(@Nonnull final RVirtualClass rClass, final int flags)
+	public static Image getIcon(@Nonnull final RClass rClass, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
@@ -59,7 +60,7 @@ public class RControllerPresentationUtil
 		return getIcon();
 	}
 
-	public static ItemPresentation getPresentation(@Nonnull final RVirtualClass rClass)
+	public static ItemPresentation getPresentation(@Nonnull final RClass rClass)
 	{
 		final Image icon = getIcon(rClass, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(rClass.getName(), RContainerPresentationUtil.getLocation(rClass), icon, null);

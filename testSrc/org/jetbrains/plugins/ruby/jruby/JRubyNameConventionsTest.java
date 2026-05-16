@@ -18,7 +18,7 @@ package org.jetbrains.plugins.ruby.jruby;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
+import org.jetbrains.plugins.ruby.jruby.impl.codeInsight.types.JRubyNameConventions;
 
 /**
  * Created by IntelliJ IDEA.

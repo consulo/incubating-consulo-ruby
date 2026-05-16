@@ -31,13 +31,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RAssignmentExpressio
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.06.2006
  */
-public class RAssignmentExpressionImpl extends RPsiElementBase implements RAssignmentExpression
+public class RAssignmentExpressionImpl extends RPsiElementBase<StubElement> implements RAssignmentExpression
 {
 	public RAssignmentExpressionImpl(ASTNode astNode)
 	{

@@ -16,6 +16,16 @@
 
 package org.jetbrains.plugins.ruby.ruby.projectview;
 
+import consulo.annotation.component.ExtensionImpl;
+import jakarta.inject.Inject;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,12 +39,7 @@ import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ModelsConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.NamingConventions;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
@@ -51,10 +56,12 @@ import consulo.util.lang.Comparing;
  * @author: oleg
  * @date: Oct 30, 2007
  */
+@ExtensionImpl
 public class RubyTreeStructureProvider implements TreeStructureProvider
 {
 	private final Project myProject;
 
+	@Inject
 	public RubyTreeStructureProvider(Project project)
 	{
 		myProject = project;
@@ -89,18 +96,18 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 						continue;
 					}
 
-					RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
-					if(virtualContainer instanceof RVirtualFile)
+					RContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
+					if(virtualContainer instanceof RFile)
 					{
-						RVirtualFile rVirtualFile = (RVirtualFile) virtualContainer;
-						List<RVirtualClass> classes = RContainerUtil.getTopLevelClasses(virtualContainer);
-						List<RVirtualModule> modules = RContainerUtil.getTopLevelModules(virtualContainer);
+						RFile rVirtualFile = (RFile) virtualContainer;
+						List<RClass> classes = RContainerUtil.getTopLevelClasses(virtualContainer);
+						List<RModule> modules = RContainerUtil.getTopLevelModules(virtualContainer);
 
 						// Rails checks
 						if(RailsFacetUtil.hasRailsSupport(fileModule))
 						{
 							boolean foundRailsNode = false;
-							for(RVirtualClass aClass : classes)
+							for(RClass aClass : classes)
 							{
 								if(ControllersConventions.isControllerClass(aClass, fileModule) || ModelsConventions.isModelClass(aClass, fileModule))
 								{
@@ -110,7 +117,7 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 							}
 							if(!foundRailsNode)
 							{
-								for(RVirtualModule module : modules)
+								for(RModule module : modules)
 								{
 									if(HelpersConventions.isHelperModule(module, fileModule))
 									{
@@ -129,22 +136,22 @@ public class RubyTreeStructureProvider implements TreeStructureProvider
 						String fileName = rFile.getVirtualFile().getNameWithoutExtension();
 						String mixedFileName = NamingConventions.toMixedCase(fileName);
 						boolean foundRubyElement = false;
-						for(RVirtualStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements())
+						for(RStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements())
 						{
 							StructureType type = structuralElement.getType();
 							if(!foundRubyElement && type == StructureType.CLASS)
 							{
-								if(Comparing.equal(mixedFileName, ((RVirtualClass) structuralElement).getName()))
+								if(Comparing.equal(mixedFileName, ((RClass) structuralElement).getName()))
 								{
-									result.add(new RClassNode(myProject, fileModule, rVirtualFile, (RVirtualClass) structuralElement, classes, ((ProjectViewNode) parent).getSettings()));
+									result.add(new RClassNode(myProject, fileModule, rVirtualFile, (RClass) structuralElement, classes, ((ProjectViewNode) parent).getSettings()));
 									foundRubyElement = true;
 								}
 							}
 							if(!foundRubyElement && type == StructureType.MODULE)
 							{
-								if(Comparing.equal(mixedFileName, ((RVirtualModule) structuralElement).getName()))
+								if(Comparing.equal(mixedFileName, ((RModule) structuralElement).getName()))
 								{
-									result.add(new RModuleNode(myProject, fileModule, rVirtualFile, (RVirtualModule) structuralElement, ((ProjectViewNode) parent).getSettings()));
+									result.add(new RModuleNode(myProject, fileModule, rVirtualFile, (RModule) structuralElement, ((ProjectViewNode) parent).getSettings()));
 									foundRubyElement = true;
 								}
 							}

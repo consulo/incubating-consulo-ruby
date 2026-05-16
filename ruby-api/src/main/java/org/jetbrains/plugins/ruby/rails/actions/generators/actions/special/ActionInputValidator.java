@@ -20,7 +20,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.dataContext.DataContext;
-import consulo.language.impl.internal.psi.PsiManagerImpl;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.SimpleGeneratorInputValidator;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
@@ -28,7 +27,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import consulo.module.Module;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.language.psi.PsiManager;
-import consulo.language.impl.psi.PsiDirectoryImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,7 +41,7 @@ public class ActionInputValidator extends SimpleGeneratorInputValidator
 
 	public ActionInputValidator(@Nonnull final GenerateActionAction generatorAction, @Nonnull final Module module, @Nullable final VirtualFile file, @Nullable final DataContext dataContext)
 	{
-		super(generatorAction, module, new PsiDirectoryImpl((PsiManagerImpl) PsiManager.getInstance(module.getProject()), file));
+		super(generatorAction, module, PsiManager.getInstance(module.getProject()).findDirectory(file));
 		myDataContext = dataContext;
 		myFile = file;
 	}

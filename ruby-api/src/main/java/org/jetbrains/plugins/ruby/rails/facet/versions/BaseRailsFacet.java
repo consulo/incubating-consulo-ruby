@@ -20,13 +20,11 @@ import com.intellij.facet.Facet;
 import consulo.component.messagebus.MessageBusConnection;
 import consulo.content.bundle.Sdk;
 import consulo.module.Module;
-import consulo.module.content.ModuleRootManager;
 import consulo.module.content.layer.ModifiableRootModel;
 import consulo.module.content.layer.event.ModuleRootEvent;
 import consulo.module.content.layer.event.ModuleRootListener;
 import consulo.project.Project;
 import consulo.project.startup.StartupManager;
-import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.facet.JRubyFacet;
@@ -34,12 +32,7 @@ import org.jetbrains.plugins.ruby.rails.facet.BaseRailsFacetBuilder;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfigurationLowLevel;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.CacheScannerFilesProvider;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-
-import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,8 +43,6 @@ import java.util.Collection;
 @Deprecated
 public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 {
-	private CacheScannerFilesProvider myRailsAdditionalScannerProvider;
-
 	private MessageBusConnection myConnection;
 
 	/**
@@ -88,31 +79,6 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 		final BaseRailsFacetConfigurationLowLevel facetConfiguration = (BaseRailsFacetConfigurationLowLevel) this.getConfiguration();
 		facetConfiguration.setSdk(sdk);
 
-
-		///////////////// Setup Cache Manager /////////////////////////////////////////////////
-		myRailsAdditionalScannerProvider = new CacheScannerFilesProvider()
-		{
-			@Override
-			public void scanAndAdd(final String[] rootUrls, final Collection<VirtualFile> files, final ModuleRootManager moduleRootManager)
-			{
-				RubyVirtualFileScanner.searchAdditionalRailsFileCacheFiles(moduleRootManager, files);
-			}
-		};
-
-		//If we load serialized facet, FacetModulManger(thus module) doesn't know about all
-		//facets yet. Thus we can't obtain JRuby face by module.
-		final RubyModuleCachesManager cacheManager;
-		if(underlyingFacet != null && underlyingFacet instanceof JRubyFacet)
-		{
-			//JRuby facet
-			cacheManager = ((JRubyFacet) underlyingFacet).getRubyModuleCachesManager();
-		}
-		else
-		{
-			//Ruby module
-			cacheManager = RubyModuleCachesManager.getInstance(module);
-		}
-		cacheManager.registerScanForFilesProvider(myRailsAdditionalScannerProvider);
 
 		///////////////// Init Facet /////////////////////////////////////////////////
 		BaseRailsFacetBuilder.initFacetInstance(this);
@@ -172,13 +138,6 @@ public abstract class BaseRailsFacet extends Facet<BaseRailsFacetConfiguration>
 	public void disposeFacet()
 	{
 		myConnection.disconnect();
-
-		final Module module = getModule();
-		if(!module.isDisposed())
-		{
-			final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
-			manager.unregisterScanForFilesProvider(myRailsAdditionalScannerProvider);
-		}
 		super.disposeFacet();
 	}
 

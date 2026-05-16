@@ -20,7 +20,6 @@ import com.intellij.java.language.psi.PsiMethod;
 import java.util.function.Predicate;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.search.TextOccurenceProcessor;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -71,7 +70,7 @@ public class JRubyImplementingMethodsProcessor implements TextOccurenceProcessor
 			{
 				return true;
 			}
-			final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(container);
+			final RContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(container);
 			if(virtualContainer == null)
 			{
 				return true;

@@ -16,14 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Types;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -48,18 +51,18 @@ public class RVirtualClassUtil
 	 * @return List o ruby classes.
 	 */
 	@Nonnull
-	public static List<RVirtualClass> getVirtualSuperClasses(@Nonnull final Symbol rVClassSymbol, @Nonnull final FileSymbol fileSymbol)
+	public static List<RClass> getVirtualSuperClasses(@Nonnull final Symbol rVClassSymbol, @Nonnull final FileSymbol fileSymbol)
 	{
-		final List<RVirtualClass> superClasses = new ArrayList<RVirtualClass>();
+		final List<RClass> superClasses = new ArrayList<RClass>();
 		final Children superClassSymbols = rVClassSymbol.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet());
 		for(Symbol superClassSymbol : superClassSymbols.getAll())
 		{
-			final List<RVirtualElement> superVirtPrototypes = superClassSymbol.getLinkedSymbol().getVirtualPrototypes(fileSymbol).getAll();
-			for(RVirtualElement superVirtPrototype : superVirtPrototypes)
+			final List<RPsiElement> superVirtPrototypes = superClassSymbol.getLinkedSymbol().getVirtualPrototypes(fileSymbol).getAll();
+			for(RPsiElement superVirtPrototype : superVirtPrototypes)
 			{
-				if(superVirtPrototype instanceof RVirtualClass)
+				if(superVirtPrototype instanceof RClass)
 				{
-					superClasses.add((RVirtualClass) superVirtPrototype);
+					superClasses.add((RClass) superVirtPrototype);
 				}
 			}
 		}
@@ -75,38 +78,38 @@ public class RVirtualClassUtil
 	 * @return all metods
 	 */
 	@Nonnull
-	public static RVirtualMethod[] getAllMethods(@Nullable final Symbol symbol, @Nonnull final FileSymbol fileSymbol, @Nonnull final Context context)
+	public static RMethod[] getAllMethods(@Nullable final Symbol symbol, @Nonnull final FileSymbol fileSymbol, @Nonnull final Context context)
 	{
 		final Children children = symbol != null ? SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, context, symbol, null) : new Children(null);
 		final Children methodSymbols = children.getSymbolsOfTypes(Types.METHODS);
-		final List<RVirtualMethod> methods = new ArrayList<RVirtualMethod>();
+		final List<RMethod> methods = new ArrayList<RMethod>();
 		for(Symbol mehodSymb : methodSymbols.getAll())
 		{
 			//noinspection unchecked
-			final List<RVirtualElement> prototypes = mehodSymb.getVirtualPrototypes(fileSymbol).getAll();
-			for(RVirtualElement prototype : prototypes)
+			final List<RPsiElement> prototypes = mehodSymb.getVirtualPrototypes(fileSymbol).getAll();
+			for(RPsiElement prototype : prototypes)
 			{
-				methods.add((RVirtualMethod) prototype);
+				methods.add((RMethod) prototype);
 			}
 		}
-		return methods.toArray(new RVirtualMethod[methods.size()]);
+		return methods.toArray(new RMethod[methods.size()]);
 	}
 
 	@Nonnull
-	public static RVirtualMethod[] getAllMethodsWithName(@Nullable final Symbol symbol, @Nonnull final FileSymbol fileSymbol, @Nonnull final String name, @Nonnull final Context context)
+	public static RMethod[] getAllMethodsWithName(@Nullable final Symbol symbol, @Nonnull final FileSymbol fileSymbol, @Nonnull final String name, @Nonnull final Context context)
 	{
 		final Children children = symbol != null ? SymbolUtil.getAllChildrenWithSuperClassesAndIncludes(fileSymbol, context, symbol, null) : new Children(null);
 		final Children methodSymbols = children.getSymbolsByNameAndTypes(name, Types.METHODS);
-		final List<RVirtualMethod> methods = new ArrayList<RVirtualMethod>();
+		final List<RMethod> methods = new ArrayList<RMethod>();
 		for(Symbol mehodSymb : methodSymbols.getAll())
 		{
 			//noinspection unchecked
-			final List<RVirtualElement> prototypes = mehodSymb.getVirtualPrototypes(fileSymbol).getAll();
-			for(RVirtualElement prototype : prototypes)
+			final List<RPsiElement> prototypes = mehodSymb.getVirtualPrototypes(fileSymbol).getAll();
+			for(RPsiElement prototype : prototypes)
 			{
-				methods.add((RVirtualMethod) prototype);
+				methods.add((RMethod) prototype);
 			}
 		}
-		return methods.toArray(new RVirtualMethod[methods.size()]);
+		return methods.toArray(new RMethod[methods.size()]);
 	}
 }

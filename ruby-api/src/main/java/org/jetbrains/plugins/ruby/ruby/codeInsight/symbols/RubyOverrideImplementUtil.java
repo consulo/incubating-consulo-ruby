@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 import com.intellij.java.language.psi.PsiMethod;
 import com.intellij.java.language.psi.PsiModifier;
 import com.intellij.java.language.psi.util.PsiUtil;
@@ -23,7 +25,6 @@ import consulo.language.editor.generation.ClassMember;
 import consulo.language.psi.PsiElement;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.JavaSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -45,21 +46,21 @@ public class RubyOverrideImplementUtil
 {
 	/*
 	 * Gathers override virtual elements for given virtual element
-	 * returns list of RVirtualElement or PsiMethod
+	 * returns list of RPsiElement or PsiMethod
 	 */
 	@Nonnull
-	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nullable final RVirtualElement anchorElement)
+	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nullable final RPsiElement anchorElement)
 	{
 		return getOverridenElements(fileSymbol, symbol, anchorElement, getOverridenSymbols(fileSymbol, symbol));
 	}
 
 	/*
 	 * Gathers override virtual elements for given virtual element
-	 * returns list of RVirtualElement or PsiMethod
+	 * returns list of RPsiElement or PsiMethod
 	 */
 	@SuppressWarnings({"unchecked"})
 	@Nonnull
-	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nullable final RVirtualElement anchorElement, @Nonnull final List<Symbol> overridenSymbols)
+	public static List getOverridenElements(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nullable final RPsiElement anchorElement, @Nonnull final List<Symbol> overridenSymbols)
 	{
 		final ArrayList elements = new ArrayList();
 		// we should add all the prototypes of overriden symbols
@@ -79,7 +80,7 @@ public class RubyOverrideImplementUtil
 		}
 
 		// and all the prototypes of given symbol before anchorElement
-		for(RVirtualElement element : symbol.getVirtualPrototypes(fileSymbol).getAll())
+		for(RPsiElement element : symbol.getVirtualPrototypes(fileSymbol).getAll())
 		{
 			if(element == anchorElement)
 			{

@@ -35,7 +35,6 @@ import org.jetbrains.plugins.ruby.jruby.JRubyUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.impl.DeclarationsIndexImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
@@ -218,7 +217,7 @@ public abstract class AbstractRubyModuleCacheTest extends ModuleTestCase {
         pRootManager.projectOpened();
     }
 
-    protected RVirtualClass getClassByQualifiedName(final String qualifiedName, final VirtualFile file) {
+    protected RClass getClassByQualifiedName(final String qualifiedName, final VirtualFile file) {
         return RCacheUtil.getClassByNameInScriptInRubyTestMode(qualifiedName, myProject,
                 new SearchScope() {
                     public boolean isSearchInModuleContent(@NotNull final Module aModule) {
@@ -239,7 +238,7 @@ public abstract class AbstractRubyModuleCacheTest extends ModuleTestCase {
     protected RMethod getDirectMethodOfClass(final String classQualifiedName,
                                              final String methodName,
                                              final VirtualFile file) {
-        final RVirtualClass rVClass = getClassByQualifiedName(classQualifiedName, file);
+        final RClass rVClass = getClassByQualifiedName(classQualifiedName, file);
         final RClass rClass =
                 (RClass) RVirtualPsiUtil.findPsiByVirtualElement(rVClass, myProject);
         return rClass != null

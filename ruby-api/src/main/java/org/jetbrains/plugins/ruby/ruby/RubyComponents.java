@@ -40,8 +40,6 @@ public interface RubyComponents
 	@NonNls
 	final String RUBY_MODULE_LOCATION_EDITOR_PROVIDER = "RubyModuleLocationEditorProvider";
 	@NonNls
-	final String RUBY_SDK_CACHE_MANAGER = "RubySdkCachesManager";
-	@NonNls
 	final String RUBY_SYMBOL_CACHE = "RubySymbolCache";
 	@NonNls
 	final String RUBY_PROJECT_VIRTUAL_FILE_MANAGER = "RubyProjectVirtualFileManager";

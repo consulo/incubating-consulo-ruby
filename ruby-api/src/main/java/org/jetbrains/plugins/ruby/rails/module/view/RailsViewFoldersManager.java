@@ -21,7 +21,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Singleton;
 
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
@@ -52,6 +56,9 @@ import consulo.ide.impl.idea.openapi.module.ModuleServiceManager;
 /**
  * Manages custom folders for RailsView
  */
+@ServiceAPI(ComponentScope.MODULE)
+@ServiceImpl
+@Singleton
 public class RailsViewFoldersManager implements PersistentStateComponent<Element>
 {
 	protected static final String URL_ATTR = "url";

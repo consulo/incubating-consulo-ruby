@@ -26,13 +26,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpression;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RExpressionInParens;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 07.06.2006
  */
-public class RExpressionInParensImpl extends RPsiElementBase implements RExpressionInParens
+public class RExpressionInParensImpl extends RPsiElementBase<StubElement> implements RExpressionInParens
 {
 	public RExpressionInParensImpl(ASTNode astNode)
 	{

@@ -16,10 +16,14 @@
 
 package org.jetbrains.plugins.ruby.settings;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.component.persist.PersistentStateComponent;
 import consulo.component.persist.State;
 import consulo.util.xml.serializer.annotation.Transient;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Singleton;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import consulo.ide.ServiceManager;
 import consulo.component.persist.Storage;
@@ -31,6 +35,9 @@ import consulo.component.persist.Storage;
  * @date: Oct 11, 2007
  */
 @State(name = "RApplicationSettings", storages = @Storage("ruby.xml"))
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class RApplicationSettings implements PersistentStateComponent<RApplicationSettings>
 {
 	//Output console

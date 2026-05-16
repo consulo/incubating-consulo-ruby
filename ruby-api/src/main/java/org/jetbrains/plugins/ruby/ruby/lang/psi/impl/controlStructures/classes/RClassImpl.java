@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.classes;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
@@ -24,15 +28,8 @@ import consulo.navigation.ItemPresentation;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualClassImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualNameImpl;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -45,8 +42,10 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RClassNa
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.RNameUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.RubyClassStub;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
+import consulo.language.psi.stub.IStubElementType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,11 +56,27 @@ import java.util.List;
  * User: oleg
  * Date: 11.06.2006
  */
-public class RClassImpl extends RFieldConstantContainerImpl implements RClass
+public class RClassImpl extends RFieldConstantContainerImpl<RubyClassStub> implements RClass
 {
 	public RClassImpl(ASTNode astNode)
 	{
 		super(astNode);
+	}
+
+	public RClassImpl(@Nonnull RubyClassStub stub, @Nonnull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
+	@Override
+	public String getName()
+	{
+		final RubyClassStub stub = getGreenStub();
+		if(stub != null)
+		{
+			return stub.getName();
+		}
+		return super.getName();
 	}
 
 	@Override
@@ -98,24 +113,6 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	}
 
 	@Override
-	@Nonnull
-	public RVirtualClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo info)
-	{
-		final RVirtualName virtualClassName = new RVirtualNameImpl(getFullPath(), isGlobal());
-		final RSuperClass superClass = getPsiSuperClass();
-		RVirtualName virtualSuperClass = null;
-		if(superClass != null)
-		{
-			virtualSuperClass = new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass));
-		}
-
-		assert virtualParent != null;
-		final RVirtualClassImpl rVirtualClass = new RVirtualClassImpl(virtualParent, virtualClassName, virtualSuperClass, getAccessModifier(), info);
-		addVirtualData(rVirtualClass, info);
-		return rVirtualClass;
-	}
-
-	@Override
 	public int getTextOffset()
 	{
 		final RClassName className = getClassName();
@@ -144,22 +141,32 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 	@Nullable
 	public RVirtualName getVirtualSuperClass()
 	{
+		final RubyClassStub stub = getGreenStub();
+		if(stub != null)
+		{
+			final List<String> path = stub.getSuperClassPath();
+			if(path == null || path.isEmpty())
+			{
+				return null;
+			}
+			return RVirtualName.of(path, stub.isSuperClassGlobal());
+		}
 		final RSuperClass superClass = getPsiSuperClass();
-		return superClass != null ? new RVirtualNameImpl(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass)) : null;
+		return superClass != null ? RVirtualName.of(RNameUtil.getPath(superClass), RNameUtil.isGlobal(superClass)) : null;
 	}
 
 	@Override
-	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull final RStructuralElement element)
 	{
 		if(!super.equalsToVirtual(element))
 		{
 			return false;
 		}
-		if(!(element instanceof RVirtualClass))
+		if(!(element instanceof RClass))
 		{
 			return false;
 		}
-		final RVirtualClass rvClass = (RVirtualClass) element;
+		final RClass rvClass = (RClass) element;
 
 		// superclass checking
 		final RSuperClass rSuperClass = getPsiSuperClass();
@@ -201,7 +208,7 @@ public class RClassImpl extends RFieldConstantContainerImpl implements RClass
 		final ArrayList<RClass> superClasses = new ArrayList<RClass>();
 		for(Symbol superClass : symbol.getChildren(fileSymbol).getSymbolsOfTypes(Type.SUPERCLASS.asSet()).getAll())
 		{
-			for(RVirtualElement element : superClass.getLinkedSymbol().getVirtualPrototypes(fileSymbol).getAll())
+			for(RPsiElement element : superClass.getLinkedSymbol().getVirtualPrototypes(fileSymbol).getAll())
 			{
 				if(element instanceof RClass)
 				{

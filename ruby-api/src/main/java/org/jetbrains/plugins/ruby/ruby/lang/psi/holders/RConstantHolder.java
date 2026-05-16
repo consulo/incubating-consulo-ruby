@@ -23,14 +23,13 @@ import java.util.List;
 import jakarta.annotation.Nonnull;
 
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.08.2006
  */
-public interface RConstantHolder extends RContainer, RVirtualConstantHolder
+public interface RConstantHolder extends RContainer
 {
 	/**
 	 * Returns list of defined Constants of this Constant holder
@@ -42,4 +41,7 @@ public interface RConstantHolder extends RContainer, RVirtualConstantHolder
 
 	@Nullable
 	public ConstantDefinitions getDefinition(@Nonnull final RConstant constant);
+
+	@Nonnull
+	public List<RConstant> getVirtualConstants();
 }

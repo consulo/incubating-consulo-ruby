@@ -66,6 +66,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>consulo</groupId>
+			<artifactId>consulo-module-api</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>consulo.java</artifactId>
 			<version>${project.version}</version>

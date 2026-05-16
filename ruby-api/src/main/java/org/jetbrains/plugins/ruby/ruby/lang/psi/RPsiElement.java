@@ -23,7 +23,6 @@ import jakarta.annotation.Nullable;
 import consulo.language.ast.IElementType;
 import consulo.language.psi.PsiElement;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import consulo.language.ast.TokenSet;
 
@@ -32,7 +31,7 @@ import consulo.language.ast.TokenSet;
  * User: oleg
  * Date: 14.08.2006
  */
-public interface RPsiElement extends PsiElement, RVirtualElement
+public interface RPsiElement extends PsiElement
 {
 	/**
 	 * Returns child elements in the psi tree

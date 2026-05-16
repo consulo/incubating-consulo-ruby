@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +30,7 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.module.Module;
@@ -40,9 +43,9 @@ import consulo.module.Module;
  */
 public class HelperNode extends RailsNode
 {
-	private RVirtualModule myRModule;
+	private RModule myRModule;
 
-	public HelperNode(final Module module, final RVirtualModule rModule, final String fileUrl)
+	public HelperNode(final Module module, final RModule rModule, final String fileUrl)
 	{
 		super(module);
 
@@ -51,7 +54,7 @@ public class HelperNode extends RailsNode
 		assert getVirtualFileUrl().equals(fileUrl);
 	}
 
-	public static NodeId generateNodeId(final RVirtualModule rModule)
+	public static NodeId generateNodeId(final RModule rModule)
 	{
 		return NodeIdUtil.createForVirtualContainer(rModule);
 	}
@@ -61,10 +64,10 @@ public class HelperNode extends RailsNode
 	{
 		final List<RailsNode> children = new ArrayList<RailsNode>();
 
-		for(RVirtualStructuralElement element : RContainerUtil.selectVirtualElementsByType(myRModule.getVirtualStructureElements(), StructureType.METHOD))
+		for(RStructuralElement element : RContainerUtil.selectVirtualElementsByType(myRModule.getVirtualStructureElements(), StructureType.METHOD))
 		{
-			assert element instanceof RVirtualMethod;
-			children.add(new MethodNode(getModule(), (RVirtualMethod) element, getVirtualFileUrl()));
+			assert element instanceof RMethod;
+			children.add(new MethodNode(getModule(), (RMethod) element, getVirtualFileUrl()));
 		}
 
 		return children.toArray(new RailsNode[children.size()]);

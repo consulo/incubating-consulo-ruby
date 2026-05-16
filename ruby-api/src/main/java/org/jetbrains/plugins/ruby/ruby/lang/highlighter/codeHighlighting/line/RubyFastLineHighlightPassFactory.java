@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.highlight.TextEditorHighlightingPass;
 import consulo.language.editor.highlight.TextEditorHighlightingPassFactory;
 import consulo.language.editor.highlight.TextEditorHighlightingPassFactory.Registrar;
@@ -31,6 +32,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
  * @author: oleg
  * @date: Jun 26, 2007
  */
+@ExtensionImpl
 public class RubyFastLineHighlightPassFactory implements TextEditorHighlightingPassFactory
 {
 	@Override

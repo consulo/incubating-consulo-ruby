@@ -2,5 +2,6 @@
 /.consulo
 target/
 /dep
+plugin/sandbox
 
 .claude

@@ -21,7 +21,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.cache.AbstractRubyModuleCacheTest;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolBuilder;
@@ -46,7 +45,7 @@ public class RMethodPresentationUtilTest extends AbstractRubyModuleCacheTest imp
                 myModuleCacheManager.getFilesCache().getUp2DateFileInfo(rMethodVFile);
 
         assertNotNull(info);
-        RVirtualFile rvFile = info.getRVirtualFile();
+        RFile rvFile = info.getRVirtualFile();
 
         // update symbols relative to this file
         final FileSymbol fileSymbol = new FileSymbol(null, myProject, false);

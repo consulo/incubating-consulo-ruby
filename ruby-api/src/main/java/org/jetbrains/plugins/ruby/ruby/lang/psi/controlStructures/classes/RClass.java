@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes;
 
-import java.util.List;
-
+import consulo.annotation.access.RequiredReadAction;
+import consulo.language.psi.PsiNamedElement;
+import consulo.navigation.ItemPresentation;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructureElement;
@@ -28,21 +29,29 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RClassNa
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RSuperClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
-import consulo.language.psi.PsiNamedElement;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RClass extends RVirtualClass, RFieldConstantContainer, RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer
-{
-	@Nullable
-	public RClassName getClassName();
+public interface RClass extends RFieldConstantContainer, RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer {
+    @Nullable
+    public RClassName getClassName();
 
-	@Nullable
-	public RSuperClass getPsiSuperClass();
+    @Nullable
+    public RSuperClass getPsiSuperClass();
 
-	@Nonnull
-	public List<RClass> getSuperClass(@Nonnull FileSymbol fileSymbol);
+    @Nonnull
+    public List<RClass> getSuperClass(@Nonnull FileSymbol fileSymbol);
+
+    @Nullable
+    @RequiredReadAction
+    public RVirtualName getVirtualSuperClass();
+
+    @Override
+    @Nonnull
+    public ItemPresentation getPresentation();
 }

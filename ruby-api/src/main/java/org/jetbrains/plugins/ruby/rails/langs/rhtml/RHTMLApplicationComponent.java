@@ -16,7 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml;
 
-import consulo.language.file.FileTypeManager;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.event.ApplicationLoadListener;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,14 +25,11 @@ import consulo.language.file.FileTypeManager;
  * @author: Roman Chernyatchik
  * @date: 14.04.2007
  */
-public class RHTMLApplicationComponent
+@ExtensionImpl
+public class RHTMLApplicationComponent implements ApplicationLoadListener
 {
-	@SuppressWarnings({
-			"UnusedDeclaration",
-			"UnusedParameters"
-	})
-	//fileTypeManager: to ensure that file types are initialized
-	public RHTMLApplicationComponent(final FileTypeManager fileTypeManager)
+	@Override
+	public void beforeApplicationLoaded()
 	{
 		loadRHTML();
 	}

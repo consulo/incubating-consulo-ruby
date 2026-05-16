@@ -19,10 +19,10 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.util.List;
+
 import consulo.content.bundle.Sdk;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RRequire;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
@@ -36,23 +36,27 @@ import consulo.language.psi.PsiFile;
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RFile extends RVirtualFile, RFieldConstantContainer, RGlobalVarHolder, PsiFile
+public interface RFile extends RFieldConstantContainer, RGlobalVarHolder, PsiFile
 {
+	@Nullable
+	public String getPresentableLocation();
+
+	@Nonnull
+	public List<RRequire> getRequires();
+
+	/**
+	 * Stub-aware shortcut: returns the URLs gathered from all {@code require}/{@code load} calls
+	 * in this file, reading them from the file stub when available (no AST load).
+	 */
+	@Nonnull
+	public List<String> getRequiredUrls();
 
 	@Nonnull
 	public RCompoundStatement getCompoundStatement();
 
 	@Override
-	@Nonnull
-	public RVirtualFile createVirtualCopy(@Nullable RVirtualContainer virtualParent, @Nonnull RFileInfo fileInfo);
-
-	@Override
 	@Nullable
 	public RContainer getParentContainer();
-
-	@Override
-	@Nullable
-	public RFileInfo getContainingFileInfo();
 
 	@Nullable
 	public Module getModule();

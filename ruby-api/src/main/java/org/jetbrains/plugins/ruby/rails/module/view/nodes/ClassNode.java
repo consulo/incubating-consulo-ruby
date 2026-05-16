@@ -16,6 +16,14 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import consulo.module.Module;
 import consulo.navigation.ItemPresentation;
 import consulo.ui.ex.awt.tree.SimpleNode;
@@ -28,12 +36,7 @@ import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 
 import java.util.ArrayList;
@@ -48,26 +51,24 @@ import java.util.function.Consumer;
  */
 public class ClassNode extends RailsNode
 {
-	private RVirtualClass myRubyClass;
+	private RClass myRubyClass;
 	private final String parentDirFileUrl;
 
-	private RFileInfo myFileInfo;
-
-	public ClassNode(final Module module, final RVirtualClass rVClass, final RFileInfo fileInfo)
+	public ClassNode(final Module module, final RClass rVClass)
 	{
 		super(module);
 
 		myRubyClass = rVClass;
-		myFileInfo = fileInfo;
-		parentDirFileUrl = fileInfo.getFileDirectoryUrl();
+		final VirtualFile vf = rVClass.getContainingFile() != null ? rVClass.getContainingFile().getVirtualFile() : null;
+		final VirtualFile parentDir = vf != null ? vf.getParent() : null;
+		parentDirFileUrl = parentDir != null ? parentDir.getUrl() : null;
 
 		final ItemPresentation presentation = rVClass.getPresentation();
 		init(generateNodeId(rVClass), presentation);
-		assert getVirtualFileUrl().equals(fileInfo.getUrl());
 	}
 
 	@Nonnull
-	public static NodeId generateNodeId(final RVirtualClass rVClass)
+	public static NodeId generateNodeId(final RClass rVClass)
 	{
 		return NodeIdUtil.createForVirtualContainer(rVClass);
 	}
@@ -97,11 +98,11 @@ public class ClassNode extends RailsNode
 		final ArrayList<RailsNode> children = new ArrayList<RailsNode>();
 		final Module module = getModule();
 
-		List<RVirtualStructuralElement> methods = RContainerUtil.selectVirtualElementsByType(myRubyClass.getVirtualStructureElements(), StructureType.METHOD);
-		for(RVirtualElement element : methods)
+		List<RStructuralElement> methods = RContainerUtil.selectVirtualElementsByType(myRubyClass.getVirtualStructureElements(), StructureType.METHOD);
+		for(RPsiElement element : methods)
 		{
-			assert element instanceof RVirtualMethod;
-			final RVirtualMethod method = (RVirtualMethod) element;
+			assert element instanceof RMethod;
+			final RMethod method = (RMethod) element;
 			accept(new RailsNodeVisitorAdapter()
 			{
 				@Override
@@ -118,10 +119,10 @@ public class ClassNode extends RailsNode
 				}
 			});
 		}
-		final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(myRubyClass);
-		for(final RVirtualClass rClass : allClasses)
+		final List<RClass> allClasses = RContainerUtil.getTopLevelClasses(myRubyClass);
+		for(final RClass rClass : allClasses)
 		{
-			children.add(new ClassNode(module, rClass, myFileInfo));
+			children.add(new ClassNode(module, rClass));
 		}
 		return children.toArray(new RailsNode[children.size()]);
 	}
@@ -133,7 +134,7 @@ public class ClassNode extends RailsNode
 		return RailsProjectNodeComparator.NodeType.CLASS;
 	}
 
-	public RVirtualClass getRubyClass()
+	public RClass getRubyClass()
 	{
 		return myRubyClass;
 	}

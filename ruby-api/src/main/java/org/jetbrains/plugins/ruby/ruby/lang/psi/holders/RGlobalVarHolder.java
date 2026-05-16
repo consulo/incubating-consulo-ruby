@@ -23,18 +23,20 @@ import java.util.List;
 import jakarta.annotation.Nonnull;
 
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: Aug 21, 2007
  */
-public interface RGlobalVarHolder extends RVirtualGlobalVarHolder, RContainer
+public interface RGlobalVarHolder extends RContainer
 {
 	@Nonnull
 	public List<GlobalVarDefinition> getGlobalVarDefinitions();
 
 	@Nullable
 	public GlobalVarDefinition getDefinition(@Nonnull final RGlobalVariable globalVar);
+
+	@Nonnull
+	public List<RGlobalVariable> getVirtualGlobalVars();
 }

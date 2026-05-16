@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.scopes;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 
 import consulo.localize.LocalizeValue;
@@ -32,6 +33,7 @@ import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
  * User: oleg
  * Date: Jul 12, 2007
  */
+@ExtensionImpl
 public class RubyScopesInspection extends LocalInspectionTool
 {
 	@NonNls

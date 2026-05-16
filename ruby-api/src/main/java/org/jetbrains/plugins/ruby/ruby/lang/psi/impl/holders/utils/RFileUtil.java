@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +29,6 @@ import consulo.project.Project;
 import org.jetbrains.annotations.NonNls;
 
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyTokenTypes;
@@ -63,7 +61,7 @@ public class RFileUtil
 	private static final String FILE_JOIN = "File.join";
 
 	@Nonnull
-	public static List<String> getUrlsByRPsiElement(@Nonnull final FileSymbol fileSymbol, @Nonnull final RVirtualFile file, final boolean relativeToDirectory, @Nonnull final RPsiElement requirement)
+	public static List<String> getUrlsByRPsiElement(@Nonnull final FileSymbol fileSymbol, @Nonnull final RFile file, final boolean relativeToDirectory, @Nonnull final RPsiElement requirement)
 	{
 		return findUrlsForName(fileSymbol, evaluate(file.getVirtualFile(), requirement), file, relativeToDirectory);
 	}
@@ -139,13 +137,13 @@ public class RFileUtil
 	}
 
 	@Nonnull
-	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RVirtualFile file)
+	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RFile file)
 	{
 		return findUrlsForName(fileSymbol, content, file, false);
 	}
 
 	@Nonnull
-	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RVirtualFile file, final boolean relativeToDirectory)
+	public static List<String> findUrlsForName(@Nonnull final FileSymbol fileSymbol, @Nullable final String content, @Nullable final RFile file, final boolean relativeToDirectory)
 	{
 		final ArrayList<String> urls = new ArrayList<String>();
 		if(content == null)
@@ -162,7 +160,7 @@ public class RFileUtil
 	}
 
 	@Nonnull
-	private static List<String> findUrlsForFileName(@Nonnull final FileSymbol fileSymbol, @Nullable final RVirtualFile file, @Nonnull String name, final boolean relativeToDirectory)
+	private static List<String> findUrlsForFileName(@Nonnull final FileSymbol fileSymbol, @Nullable final RFile file, @Nonnull String name, final boolean relativeToDirectory)
 	{
 		final ArrayList<String> urls = new ArrayList<String>();
 
@@ -252,12 +250,8 @@ public class RFileUtil
 
 	private static Sdk tryToFindSdk(@Nonnull final Project project, @Nonnull final VirtualFile file)
 	{
-		// in tests cachesManager isn`t loaded
-		final RubySdkCachesManager cachesManager = RubySdkCachesManager.getInstance(project);
-		if(cachesManager != null)
-		{
-			return cachesManager.getFirstSdkForFile(file);
-		}
+		// The legacy SDK caches manager has been removed; SDK lookup is now expected
+		// to be resolved exclusively via the module owning the file.
 		return null;
 	}
 
@@ -273,26 +267,24 @@ public class RFileUtil
 	@Nonnull
 	public static List<String> getAvailableRequiresUrls(@Nonnull final FileSymbol fileSymbol, @Nonnull final VirtualFile file, final boolean relativeToDirectory)
 	{
-		final RubyFilesCache[] caches = fileSymbol.getCaches();
-
 		final ArrayList<String> list = new ArrayList<String>();
 		if(!relativeToDirectory)
 		{
 			// LOAD_PATH
 			for(VirtualFile root : fileSymbol.getLoadPathFiles())
 			{
-				list.addAll(getRelativeUrls(caches, root, true));
+				list.addAll(getRelativeUrls(root, true));
 			}
 			// Current directory
 			final VirtualFile parent = file.getParent();
 			if(parent != null)
 			{
-				list.addAll(getRelativeUrls(caches, parent, false));
+				list.addAll(getRelativeUrls(parent, false));
 			}
 		}
 		else
 		{
-			for(String s : getRelativeUrls(caches, file, false))
+			for(String s : getRelativeUrls(file, false))
 			{
 				list.add('/' + s);
 			}
@@ -300,22 +292,44 @@ public class RFileUtil
 		return list;
 	}
 
-	private static List<String> getRelativeUrls(@Nonnull final RubyFilesCache[] caches, @Nonnull final VirtualFile file, boolean onlyDirectoryFiles)
+	private static List<String> getRelativeUrls(@Nonnull final VirtualFile file, boolean onlyDirectoryFiles)
 	{
 		final ArrayList<String> requires = new ArrayList<String>();
 		final VirtualFile dir = file.isDirectory() ? file : file.getParent();
-		for(RubyFilesCache cache : caches)
+		if(dir == null)
 		{
-			if(cache instanceof RubyModuleFilesCache)
+			return requires;
+		}
+		collectRubyFiles(dir, dir, requires, onlyDirectoryFiles);
+		return requires;
+	}
+
+	private static void collectRubyFiles(@Nonnull final VirtualFile root, @Nonnull final VirtualFile current, @Nonnull final List<String> out, final boolean onlyDirectoryFiles)
+	{
+		for(VirtualFile child : current.getChildren())
+		{
+			if(child.isDirectory())
 			{
-				requires.addAll(((RubyModuleFilesCache) cache).getAllRelativeUrlsForDirectory(dir, onlyDirectoryFiles));
+				if(!onlyDirectoryFiles)
+				{
+					collectRubyFiles(root, child, out, false);
+				}
 			}
-			else if(cache != null)
+			else if(child.getFileType() == RubyFileType.INSTANCE)
 			{
-				requires.addAll(cache.getAllRelativeUrlsForDirectory(dir));
+				final String rootPath = root.getPath();
+				final String childPath = child.getPath();
+				if(childPath.startsWith(rootPath))
+				{
+					String rel = childPath.substring(rootPath.length());
+					if(rel.startsWith("/"))
+					{
+						rel = rel.substring(1);
+					}
+					out.add(rel);
+				}
 			}
 		}
-		return requires;
 	}
 
 }

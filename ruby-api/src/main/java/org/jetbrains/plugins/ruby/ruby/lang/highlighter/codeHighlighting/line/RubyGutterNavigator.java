@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 
 import com.intellij.java.language.psi.PsiMethod;
 import consulo.ide.impl.ui.impl.PopupChooserBuilder;
@@ -27,7 +29,6 @@ import consulo.project.Project;
 import consulo.ui.ex.RelativePoint;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 
 import javax.swing.*;
@@ -55,9 +56,9 @@ public class RubyGutterNavigator
 			{
 				psiElem = (PsiMethod) element;
 			}
-			else if(element instanceof RVirtualElement)
+			else if(element instanceof RPsiElement)
 			{
-				psiElem = RVirtualPsiUtil.findPsiByVirtualElement((RVirtualElement) element, project);
+				psiElem = RVirtualPsiUtil.findPsiByVirtualElement((RPsiElement) element, project);
 			}
 			// Add if we found navigatable element
 			if(psiElem instanceof Navigatable)

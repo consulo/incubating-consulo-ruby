@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures;
 
+import consulo.annotation.access.RequiredReadAction;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -27,20 +28,21 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
  * @author: oleg
  * @date: Feb 5, 2007
  */
-public interface RAliasStatement extends RStructuralElement
-{
-	@Nullable
-	RPsiElement getPsiOldName();
+public interface RAliasStatement extends RStructuralElement {
+    @Nullable
+    RPsiElement getPsiOldName();
 
-	@Nullable
-	RPsiElement getPsiNewName();
+    @Nullable
+    RPsiElement getPsiNewName();
 
-	@Nonnull
-	String getOldName();
+    @Nonnull
+    @RequiredReadAction
+    String getOldName();
 
-	@Nonnull
-	String getNewName();
+    @Nonnull
+    @RequiredReadAction
+    String getNewName();
 
-	@Nonnull
-	String getPresentableText();
+    @Nonnull
+    String getPresentableText();
 }

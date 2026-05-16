@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 
 import jakarta.annotation.Nonnull;
@@ -45,11 +47,11 @@ public class RFieldPresentationUtil implements RubyIcons
 	}
 
 	/**
-	 * Computes icon for RVirtualClass.
+	 * Computes icon for RClass.
 	 * Be careful, if flags contains information about visibility, method uses
 	 * RIconsUtils.getIconWithModifiers()
 	 *
-	 * @param rVirtualField RVirtualClass
+	 * @param rVirtualField RClass
 	 * @param flags         com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */

@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgumentList;
@@ -42,9 +42,9 @@ import consulo.ui.image.ImageEffects;
 public class RMethodPresentationUtil implements RPresentationConstants
 {
 
-	public static Image getIcon(final RVirtualMethod rMethod)
+	public static Image getIcon(final RMethod rMethod)
 	{
-		if(rMethod instanceof RVirtualSingletonMethod)
+		if(rMethod instanceof RSingletonMethod)
 		{
 			return ImageEffects.layered(RubyIcons.RUBY_METHOD_NODE, RubyIcons.RUBY_ATTR_STATIC);
 		}
@@ -52,15 +52,15 @@ public class RMethodPresentationUtil implements RPresentationConstants
 	}
 
 	/**
-	 * Computes icon for RVirtualMethod and RVirtualSingletonMethod.
+	 * Computes icon for RMethod and RSingletonMethod.
 	 * Be careful, if flags contains information about visibility, method uses
 	 * RIconsUtils.getIconWithModifiers()
 	 *
-	 * @param rMethod RVirtualMethod
+	 * @param rMethod RMethod
 	 * @param flags   com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Image getIcon(final RVirtualMethod rMethod, final int flags)
+	public static Image getIcon(final RMethod rMethod, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
@@ -70,13 +70,13 @@ public class RMethodPresentationUtil implements RPresentationConstants
 	}
 
 	@Nonnull
-	public static ItemPresentation getPresentation(final RVirtualMethod rMethod)
+	public static ItemPresentation getPresentation(final RMethod rMethod)
 	{
 		final Image icon = getIcon(rMethod, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(rMethod.getPresentableName(), TextUtil.wrapInParens(getLocation(rMethod)), icon, null);
 	}
 
-	private static String getLocation(final RVirtualMethod rMethod)
+	private static String getLocation(final RMethod rMethod)
 	{
 		return RContainerPresentationUtil.getLocation(rMethod);
 	}
@@ -88,7 +88,7 @@ public class RMethodPresentationUtil implements RPresentationConstants
 	 * @param options Seee RPresentationConstants
 	 * @return formated method representation
 	 */
-	public static String formatName(@Nonnull final RVirtualMethod method, final int options)
+	public static String formatName(@Nonnull final RMethod method, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 		if((options & SHOW_NAME) != 0)

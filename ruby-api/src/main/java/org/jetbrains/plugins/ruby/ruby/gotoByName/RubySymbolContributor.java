@@ -17,20 +17,19 @@
 package org.jetbrains.plugins.ruby.ruby.gotoByName;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import consulo.ide.navigation.ChooseByNameContributor;
+import consulo.language.psi.scope.GlobalSearchScope;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.index.RubyClassNameIndex;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.index.RubyMethodNameIndex;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.index.RubyModuleNameIndex;
 import consulo.navigation.NavigationItem;
-import consulo.module.Module;
-import consulo.module.ModuleManager;
 import consulo.project.Project;
-import consulo.content.bundle.Sdk;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,45 +43,10 @@ public class RubySymbolContributor extends RubyBaseContributor implements Choose
 	@Override
 	public String[] getNames(final Project project, boolean includeNonProjectItems)
 	{
-		final ArrayList<String> names = new ArrayList<String>();
-		final Module[] modules = ModuleManager.getInstance(project).getModules();
-		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
-
-		for(Module module : modules)
-		{
-			final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
-			// CachesManager is null for not ruby modules
-			if(cachesManager != null)
-			{
-				final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
-				names.addAll(declarationsIndex.getAllClassesNames());
-				names.addAll(declarationsIndex.getAllModulesNames());
-				names.addAll(declarationsIndex.getAllMethodsNames());
-				names.addAll(declarationsIndex.getAllFieldsNames());
-				names.addAll(declarationsIndex.getAllConstantsNames());
-				names.addAll(declarationsIndex.getAllGlobalVarsNames());
-				names.addAll(declarationsIndex.getAllAliasesNames());
-				names.addAll(declarationsIndex.getAllFieldAttrsNames());
-			}
-
-			// Adding sdk`s info if needed
-			if(includeNonProjectItems)
-			{
-				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-				final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
-				if(declarationsIndex != null)
-				{
-					names.addAll(declarationsIndex.getAllClassesNames());
-					names.addAll(declarationsIndex.getAllModulesNames());
-					names.addAll(declarationsIndex.getAllMethodsNames());
-					names.addAll(declarationsIndex.getAllFieldsNames());
-					names.addAll(declarationsIndex.getAllConstantsNames());
-					names.addAll(declarationsIndex.getAllGlobalVarsNames());
-					names.addAll(declarationsIndex.getAllAliasesNames());
-					names.addAll(declarationsIndex.getAllFieldAttrsNames());
-				}
-			}
-		}
+		final Set<String> names = new LinkedHashSet<String>();
+		names.addAll(RubyClassNameIndex.allKeys(project));
+		names.addAll(RubyModuleNameIndex.allKeys(project));
+		names.addAll(RubyMethodNameIndex.allKeys(project));
 		return names.toArray(new String[names.size()]);
 	}
 
@@ -90,51 +54,18 @@ public class RubySymbolContributor extends RubyBaseContributor implements Choose
 	@Override
 	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems)
 	{
-		final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);
+		final GlobalSearchScope scope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
 		final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
-		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
-
-		for(Module module : modules)
-		{
-			final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
-			// CachesManager is null for not ruby modules
-			if(cachesManager != null)
-			{
-				final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
-				addItems(declarationsIndex.getClassesByName(name), project, items);
-				addItems(declarationsIndex.getModulesByName(name), project, items);
-				addItems(declarationsIndex.getMethodsByName(name), project, items);
-				addItems(declarationsIndex.getFieldsByName(name), project, items);
-				addItems(declarationsIndex.getConstantsByName(name), project, items);
-				addItems(declarationsIndex.getGlobalVarsByName(name), project, items);
-				addItems(declarationsIndex.getAliasesByName(name), project, items);
-				addItems(declarationsIndex.getFieldAttrsByName(name), project, items);
-			}
-
-			// Adding sdk`s info if needed
-			if(includeNonProjectItems)
-			{
-				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-				final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
-				if(declarationsIndex != null)
-				{
-					addItems(declarationsIndex.getClassesByName(name), project, items);
-					addItems(declarationsIndex.getModulesByName(name), project, items);
-					addItems(declarationsIndex.getMethodsByName(name), project, items);
-					addItems(declarationsIndex.getFieldsByName(name), project, items);
-					addItems(declarationsIndex.getConstantsByName(name), project, items);
-					addItems(declarationsIndex.getGlobalVarsByName(name), project, items);
-					addItems(declarationsIndex.getAliasesByName(name), project, items);
-					addItems(declarationsIndex.getFieldAttrsByName(name), project, items);
-				}
-			}
-		}
+		final List<RPsiElement> elements = new ArrayList<RPsiElement>();
+		elements.addAll(RubyClassNameIndex.find(name, project, scope));
+		elements.addAll(RubyModuleNameIndex.find(name, project, scope));
+		elements.addAll(RubyMethodNameIndex.find(name, project, scope));
+		addItems(elements, project, items);
 		return items.toArray(new NavigationItem[items.size()]);
 	}
 
-	private void addItems(@Nonnull final List elements, @Nonnull final Project project, @Nonnull final ArrayList<NavigationItem> items)
+	private void addItems(@Nonnull final List<RPsiElement> elements, @Nonnull final Project project, @Nonnull final ArrayList<NavigationItem> items)
 	{
-		//noinspection unchecked
 		items.addAll(getItems(elements, project));
 	}
 }

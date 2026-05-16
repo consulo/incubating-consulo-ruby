@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
 import consulo.annotation.component.ExtensionImpl;
 import consulo.component.util.Iconable;
 import consulo.language.icon.IconDescriptor;
@@ -35,12 +41,7 @@ import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ModelsConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.NamingConventions;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
@@ -75,12 +76,12 @@ public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 				return RSpecIcons.TEST_SCRIPT_ICON;
 			}
 
-			final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
-			if(virtualContainer instanceof RVirtualFile)
+			final RContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer(rFile);
+			if(virtualContainer instanceof RFile)
 			{
-				final RVirtualFile rVirtualFile = (RVirtualFile) virtualContainer;
-				final List<RVirtualClass> classes = RContainerUtil.getTopLevelClasses(virtualContainer);
-				final List<RVirtualModule> modules = RContainerUtil.getTopLevelModules(virtualContainer);
+				final RFile rVirtualFile = (RFile) virtualContainer;
+				final List<RClass> classes = RContainerUtil.getTopLevelClasses(virtualContainer);
+				final List<RModule> modules = RContainerUtil.getTopLevelModules(virtualContainer);
 
 				// Rails checks
 
@@ -101,19 +102,19 @@ public class RubyIconDescriptorUpdater implements IconDescriptorUpdater
 				//noinspection ConstantConditions
 				final String fileName = rFile.getVirtualFile().getNameWithoutExtension();
 				final String mixedFileName = NamingConventions.toMixedCase(fileName);
-				for(RVirtualStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements())
+				for(RStructuralElement structuralElement : rVirtualFile.getVirtualStructureElements())
 				{
 					final StructureType type = structuralElement.getType();
 					if(type == StructureType.CLASS)
 					{
-						if(Comparing.equal(mixedFileName, ((RVirtualClass) structuralElement).getName()))
+						if(Comparing.equal(mixedFileName, ((RClass) structuralElement).getName()))
 						{
 							return RClassPresentationUtil.getIcon();
 						}
 					}
 					if(type == StructureType.MODULE)
 					{
-						if(Comparing.equal(mixedFileName, ((RVirtualModule) structuralElement).getName()))
+						if(Comparing.equal(mixedFileName, ((RModule) structuralElement).getName()))
 						{
 							return RModulePresentationUtil.getIcon();
 						}

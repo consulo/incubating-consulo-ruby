@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -26,14 +30,8 @@ import consulo.language.util.IncorrectOperationException;
 import consulo.navigation.ItemPresentation;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVMethodName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualMethodImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
@@ -52,6 +50,8 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RMethodPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RPresentationConstants;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.IStubElementType;
+import consulo.language.psi.stub.NamedStub;
 import consulo.language.ast.TokenSet;
 import consulo.ui.image.Image;
 
@@ -60,7 +60,7 @@ import consulo.ui.image.Image;
  * User: oleg
  * Date: 11.06.2006
  */
-public class RMethodImpl extends RContainerBase implements RMethod
+public class RMethodImpl<T extends NamedStub<? extends RMethod>> extends RContainerBase<T> implements RMethod
 {
 	private static final TokenSet TS_ARGUMENT_LISTS = TokenSet.create(RubyElementTypes.FUNCTION_ARGUMENT_LIST, RubyElementTypes.COMMAND_ARGUMENT_LIST);
 	private boolean isClassConstructor;
@@ -69,6 +69,23 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	{
 		super(astNode);
 		updateIfIsConstructor();
+	}
+
+	public RMethodImpl(@Nonnull T stub, @Nonnull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+		updateIfIsConstructor();
+	}
+
+	@Override
+	public String getName()
+	{
+		final T stub = getGreenStub();
+		if(stub != null)
+		{
+			return stub.getName();
+		}
+		return super.getName();
 	}
 
 	private void updateIfIsConstructor()
@@ -155,16 +172,6 @@ public class RMethodImpl extends RContainerBase implements RMethod
 
 	@Override
 	@Nonnull
-	public RVirtualMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo info)
-	{
-		final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
-		final RVirtualMethodImpl vMethod = new RVirtualMethodImpl(virtualParent, virtualMethodName, getArgumentInfos(), getAccessModifier(), info);
-		addVirtualData(vMethod, info);
-		return vMethod;
-	}
-
-	@Override
-	@Nonnull
 	public List<ArgumentInfo> getArgumentInfos()
 	{
 		final RArgumentList argumentList = getArgumentList();
@@ -183,10 +190,10 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	}
 
 	@Override
-	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RStructuralElement element)
 	{
-		return element instanceof RVirtualMethod &&
-				getArgumentInfos().equals(((RVirtualMethod) element).getArgumentInfos()) &&
+		return element instanceof RMethod &&
+				getArgumentInfos().equals(((RMethod) element).getArgumentInfos()) &&
 				super.equalsToVirtual(element);
 	}
 
@@ -197,7 +204,7 @@ public class RMethodImpl extends RContainerBase implements RMethod
 	 * @return true if methods equals.
 	 */
 	@Override
-	public boolean equalsToMethod(@Nonnull final RVirtualMethod otherMethod)
+	public boolean equalsToMethod(@Nonnull final RMethod otherMethod)
 	{
 		return RVirtualPsiUtil.areMethodsEqual(this, otherMethod);
 	}

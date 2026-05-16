@@ -21,56 +21,47 @@ import consulo.language.Commenter;
 import consulo.language.Language;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 
-
 @ExtensionImpl
-public class RubyCommenter implements Commenter
-{
-	private static final String LINE_COMMENT_PREFIX = "#";
-	private static final String BLOCK_COMMENT_PREFIX = "\n=begin\n";
-	private static final String BLOCK_COMMAND_SUFFIX = "\n=end\n";
+public class RubyCommenter implements Commenter {
+    private static final String LINE_COMMENT_PREFIX = "#";
+    private static final String BLOCK_COMMENT_PREFIX = "\n=begin\n";
+    private static final String BLOCK_COMMAND_SUFFIX = "\n=end\n";
 
-	@Override
-	@Nullable
-	public String getLineCommentPrefix()
-	{
-		return LINE_COMMENT_PREFIX;
-	}
+    @Override
+    @Nullable
+    public String getLineCommentPrefix() {
+        return LINE_COMMENT_PREFIX;
+    }
 
-	@Override
-	@Nullable
-	public String getBlockCommentPrefix()
-	{
-		return BLOCK_COMMENT_PREFIX;
-	}
+    @Override
+    @Nullable
+    public String getBlockCommentPrefix() {
+        return BLOCK_COMMENT_PREFIX;
+    }
 
-	@Override
-	@Nullable
-	public String getBlockCommentSuffix()
-	{
-		return BLOCK_COMMAND_SUFFIX;
-	}
+    @Override
+    @Nullable
+    public String getBlockCommentSuffix() {
+        return BLOCK_COMMAND_SUFFIX;
+    }
 
-	@Nullable
-	@Override
-	public String getCommentedBlockCommentPrefix()
-	{
-		return null;
-	}
+    @Nullable
+    @Override
+    public String getCommentedBlockCommentPrefix() {
+        return null;
+    }
 
-	@Nullable
-	@Override
-	public String getCommentedBlockCommentSuffix()
-	{
-		return null;
-	}
+    @Nullable
+    @Override
+    public String getCommentedBlockCommentSuffix() {
+        return null;
+    }
 
-	@Nonnull
-	@Override
-	public Language getLanguage()
-	{
-		return RubyLanguage.INSTANCE;
-	}
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return RubyLanguage.INSTANCE;
+    }
 }

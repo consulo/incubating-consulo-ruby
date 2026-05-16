@@ -16,7 +16,11 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Singleton;
 
 import consulo.ide.ServiceManager;
 import consulo.component.persist.State;
@@ -30,6 +34,9 @@ import consulo.component.persist.PersistentStateComponent;
  * @date: Apr 12, 2008
  */
 @State(name = "RSpecApplicationSettings", storages = @Storage("ruby.xml"))
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class RSpecApplicationSettings implements PersistentStateComponent<RSpecApplicationSettings>
 {
 	public boolean wizardRubyShouldUseRSpecFramework = false;

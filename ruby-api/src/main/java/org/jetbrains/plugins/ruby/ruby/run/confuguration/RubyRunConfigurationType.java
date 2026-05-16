@@ -37,7 +37,6 @@ import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -203,7 +202,7 @@ public class RubyRunConfigurationType implements ConfigurationType
 				{
 					className = RClassPresentationUtil.getRuntimeQualifiedNameInRubyTestMode(upperClass, fSWrapper);
 					// Test Method is TestCase method which name starts with prefix "test"
-					if(upperClass == currentContainer.getParentContainer() && RTestUnitUtil.hasValidTestNameAndNotSingleton((RVirtualMethod) currentContainer))
+					if(upperClass == currentContainer.getParentContainer() && RTestUnitUtil.hasValidTestNameAndNotSingleton((RMethod) currentContainer))
 					{
 						testType = AbstractRubyRunConfiguration.TestType.TEST_METHOD;
 						name = methodName;

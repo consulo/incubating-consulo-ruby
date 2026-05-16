@@ -27,7 +27,7 @@ import consulo.language.psi.PsiReference;
 import consulo.language.psi.search.PsiSearchHelper;
 import consulo.language.psi.search.UsageSearchContext;
 import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyNameConventions;
+import org.jetbrains.plugins.ruby.jruby.impl.codeInsight.types.JRubyNameConventions;
 
 /**
  * Created by IntelliJ IDEA.

@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -38,7 +40,6 @@ import org.jetbrains.plugins.ruby.rails.nameConventions.MigrationsConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ModelsConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.TestsConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyFileType;
@@ -67,7 +68,7 @@ public class RailsRequireUtil
 	 * @param fileUrl    Url of the file
 	 * @param module     Module for file - rails module
 	 */
-	public static void requireRailsFiles(@Nullable final FileSymbol fileSymbol, @Nonnull final RVirtualFile rFile, @Nonnull final String fileUrl, @Nonnull final Module module)
+	public static void requireRailsFiles(@Nullable final FileSymbol fileSymbol, @Nonnull final RFile rFile, @Nonnull final String fileUrl, @Nonnull final Module module)
 	{
 		if(fileSymbol == null)
 		{
@@ -416,7 +417,7 @@ public class RailsRequireUtil
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Nullable
-	public static FileSymbolType getRailsLayerType(@Nonnull final RVirtualFile file, @Nonnull final Module module)
+	public static FileSymbolType getRailsLayerType(@Nonnull final RFile file, @Nonnull final Module module)
 	{
 		// Controller
 		if(ControllersConventions.isControllerFile(file, module))

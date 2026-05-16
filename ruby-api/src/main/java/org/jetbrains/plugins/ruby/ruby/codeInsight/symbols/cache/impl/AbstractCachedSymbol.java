@@ -25,9 +25,6 @@ import consulo.application.progress.ProgressManager;
 import consulo.module.Module;
 import consulo.project.Project;
 import consulo.util.lang.ref.SoftReference;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCacheListener;
-import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CacheKey;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.CachedSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -39,7 +36,7 @@ import consulo.content.bundle.Sdk;
  * @author: oleg
  * @date: Oct 7, 2007
  */
-public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCacheListener
+public abstract class AbstractCachedSymbol implements CachedSymbol
 {
 	// full file symbol
 	protected FileSymbol myFileSymbol;
@@ -49,8 +46,6 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 	protected Sdk mySdk;
 	protected Project myProject;
 
-	protected RubyFilesCache[] myCaches;
-	private RubyFilesCacheSoftReferenceAdapter myAdapter;
 	private CacheKey myKey;
 	private Map<CacheKey, SoftReference<CachedSymbol>> myCache;
 
@@ -59,42 +54,18 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 		myProject = project;
 		myModule = module;
 		mySdk = sdk;
-		myCaches = FileSymbolUtil.getCaches(myProject, myModule, mySdk);
-
-		// registering for cache updates
-		registerAsCacheListener();
 	}
 
-	private void registerAsCacheListener()
-	{
-		myAdapter = new RubyFilesCacheSoftReferenceAdapter(this);
-		for(RubyFilesCache cache : myCaches)
-		{
-			cache.addCacheChangedListener(myAdapter, myProject);
-		}
-	}
-
-	private void unregisterAsCacheListener()
-	{
-		for(RubyFilesCache cache : myCaches)
-		{
-			cache.removeCacheChangedListener(myAdapter);
-		}
-	}
-
-	@Override
 	public final void fileRemoved(@Nonnull String url)
 	{
 		fileChanged(url);
 	}
 
-	@Override
 	public final void fileUpdated(@Nonnull String url)
 	{
 		fileChanged(url);
 	}
 
-	@Override
 	public abstract void fileAdded(@Nonnull String url);
 
 	protected abstract void fileChanged(@Nonnull String url);
@@ -121,17 +92,13 @@ public abstract class AbstractCachedSymbol implements CachedSymbol, RubyFilesCac
 
 	protected abstract void updateFileSymbol();
 
-	/**
-	 * Unregisters as cacheUpdater
-	 *
-	 * @throws Throwable
-	 */
 	@Override
 	public final void finalize() throws Throwable
 	{
-		// unregistering for cache updates
-		unregisterAsCacheListener();
-		myCache.remove(myKey);
+		if(myCache != null && myKey != null)
+		{
+			myCache.remove(myKey);
+		}
 		super.finalize();
 	}
 

@@ -23,14 +23,13 @@ import java.util.List;
 import jakarta.annotation.Nonnull;
 
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 08.08.2006
  */
-public interface RFieldHolder extends RContainer, RVirtualFieldHolder
+public interface RFieldHolder extends RContainer
 {
 	/**
 	 * Returns list of fieldUsages of this Fields Holder
@@ -43,4 +42,6 @@ public interface RFieldHolder extends RContainer, RVirtualFieldHolder
 	@Nullable
 	public FieldDefinition getDefinition(@Nonnull final RField field);
 
+	@Nonnull
+	public List<RField> getVirtualFields();
 }

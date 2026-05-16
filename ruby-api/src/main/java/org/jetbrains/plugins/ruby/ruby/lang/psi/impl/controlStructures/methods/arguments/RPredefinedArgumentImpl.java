@@ -10,13 +10,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.Argume
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RPredefinedArgument;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 11.06.2006
  */
-public class RPredefinedArgumentImpl extends RPsiElementBase implements RPredefinedArgument
+public class RPredefinedArgumentImpl extends RPsiElementBase<StubElement> implements RPredefinedArgument
 {
 	public RPredefinedArgumentImpl(ASTNode astNode)
 	{

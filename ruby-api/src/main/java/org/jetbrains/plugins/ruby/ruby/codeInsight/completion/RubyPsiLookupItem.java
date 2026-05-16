@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.completion;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 import java.awt.Color;
 
 import jakarta.annotation.Nonnull;
@@ -23,7 +25,6 @@ import jakarta.annotation.Nullable;
 
 import consulo.language.editor.completion.lookup.*;
 import consulo.project.Project;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import consulo.component.util.Iconable;
 import consulo.language.psi.PsiElement;
@@ -37,7 +38,7 @@ import consulo.ui.image.Image;
  */
 public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue, DeferredUserLookupValue, LookupValueWithUIHint, LookupValueWithPsiElement, LookupValueWithPriority, Iconable
 {
-	private RVirtualElement myPrototype;
+	private RPsiElement myPrototype;
 	private String myLookupString;
 	private String myTypeText;
 	private boolean isBold;
@@ -54,7 +55,7 @@ public class RubyPsiLookupItem implements RubyLookupItem, PresentableLookupValue
 		return myLookupString;
 	}
 
-	public RubyPsiLookupItem(@Nonnull final Project project, @Nonnull final String lookupString, @Nullable final String tailText, @Nullable final String typeText, @Nonnull final RVirtualElement prototype, final int priority, final boolean bold, @Nullable final Image icon)
+	public RubyPsiLookupItem(@Nonnull final Project project, @Nonnull final String lookupString, @Nullable final String tailText, @Nullable final String typeText, @Nonnull final RPsiElement prototype, final int priority, final boolean bold, @Nullable final Image icon)
 	{
 		myProject = project;
 		myLookupString = lookupString;

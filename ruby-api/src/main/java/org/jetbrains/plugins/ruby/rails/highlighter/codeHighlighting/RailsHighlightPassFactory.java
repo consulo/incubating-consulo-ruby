@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.highlighter.codeHighlighting;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.codeEditor.DocumentMarkupModel;
 import consulo.codeEditor.Editor;
 import consulo.codeEditor.markup.MarkupModel;
@@ -43,6 +44,7 @@ import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
  * @author: Roman Chernyatchik
  * @date: 02.02.2007
  */
+@ExtensionImpl
 public class RailsHighlightPassFactory implements TextEditorHighlightingPassFactory
 {
 	@Override

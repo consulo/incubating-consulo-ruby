@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.IntRef;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.AbstractRubyModuleCacheTest;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -63,7 +62,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClassNotOverriding() throws Exception {
         init("/namespaces/class_not_overriding.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -74,7 +73,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClass1() throws Exception {
         init("/namespaces/class1.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -85,7 +84,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClass2() throws Exception {
         init("/namespaces/class2.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -96,7 +95,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClassInModule1() throws Exception {
         init("/namespaces/class_in_module1.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -107,7 +106,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClassInModule2() throws Exception {
         init("/namespaces/class_in_module2.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -118,7 +117,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClassInModule3() throws Exception {
         init("/namespaces/class_in_module3.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -129,7 +128,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testClassInModule4() throws Exception {
         init("/namespaces/class_in_module4.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -140,7 +139,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testObjectClass1() throws Exception {
         init("/namespaces/objectclass1.rb");
         assertTrue(myContainer instanceof RObjectClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -151,7 +150,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
     public void testObjectClass2() throws Exception {
         init("/namespaces/objectclass2.rb");
         assertTrue(myContainer instanceof RClass);
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -165,7 +164,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethodNoOverrides1() throws Exception {
         init("method_no_overrides1.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -175,7 +174,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethodNoOverrides2() throws Exception {
         init("method_no_overrides2.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -185,7 +184,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethodNoOverrides3() throws Exception {
         init("method_no_overrides3.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -195,7 +194,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethodNoOverrides4() throws Exception {
         init("method_no_overrides4.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -205,7 +204,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethodNoOverrides5() throws Exception {
         init("method_no_overrides5.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -215,7 +214,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethod1() throws Exception {
         init("method1.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -225,7 +224,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethod2() throws Exception {
         init("method2.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -235,7 +234,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethod3() throws Exception {
         init("method3.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -245,7 +244,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethod4() throws Exception {
         init("method4.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -255,7 +254,7 @@ public class RubyOverrideMarkersTest extends AbstractRubyModuleCacheTest {
 
     public void testMethod5() throws Exception {
         init("method5.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);

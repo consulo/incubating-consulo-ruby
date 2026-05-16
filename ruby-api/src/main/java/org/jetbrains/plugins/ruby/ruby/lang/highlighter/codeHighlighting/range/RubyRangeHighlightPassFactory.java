@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.range;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.codeEditor.Editor;
 import consulo.language.editor.highlight.TextEditorHighlightingPassFactory;
 import consulo.language.editor.highlight.TextEditorHighlightingPassFactory.Registrar;
@@ -33,6 +34,7 @@ import jakarta.annotation.Nullable;
  * @author: oleg
  * @date: Jun 26, 2007
  */
+@ExtensionImpl
 public class RubyRangeHighlightPassFactory implements TextEditorHighlightingPassFactory
 {
 	@Override

@@ -16,10 +16,11 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
 import jakarta.annotation.Nonnull;
 
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.navigation.ItemPresentation;
@@ -41,15 +42,15 @@ public class RModulePresentationUtil implements RPresentationConstants
 	}
 
 	/**
-	 * Computes icon for RVirtualModule.
+	 * Computes icon for RModule.
 	 * Be careful, if flags contains information about visibility, method uses
 	 * RIconsUtils.getIconWithModifiers()
 	 *
-	 * @param rModule RVirtualModule
+	 * @param rModule RModule
 	 * @param flags   com.intellij.openapi.util.Iconable flags
 	 * @return Icon
 	 */
-	public static Image getIcon(final RVirtualModule rModule, final int flags)
+	public static Image getIcon(final RModule rModule, final int flags)
 	{
 		if((flags & Iconable.ICON_FLAG_VISIBILITY) == Iconable.ICON_FLAG_VISIBILITY)
 		{
@@ -59,18 +60,18 @@ public class RModulePresentationUtil implements RPresentationConstants
 	}
 
 	@Nonnull
-	public static ItemPresentation getPresentation(final RVirtualModule rModule)
+	public static ItemPresentation getPresentation(final RModule rModule)
 	{
 		final Image icon = getIcon(rModule, Iconable.ICON_FLAG_VISIBILITY);
 		return new PresentationData(formatName(rModule, SHOW_NAME), TextUtil.wrapInParens(getLocation(rModule)), icon, null);
 	}
 
-	public static String getLocation(final RVirtualModule rModule)
+	public static String getLocation(final RModule rModule)
 	{
 		return RContainerPresentationUtil.getLocation(rModule);
 	}
 
-	public static String formatName(@Nonnull final RVirtualModule rModule, final int options)
+	public static String formatName(@Nonnull final RModule rModule, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 

@@ -18,7 +18,9 @@ package org.jetbrains.plugins.ruby.ruby.pom.impl;
 
 import java.util.Collections;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Inject;
 
 import consulo.application.progress.ProgressManager;
 import consulo.language.pom.PomModel;
@@ -43,12 +45,14 @@ import consulo.language.psi.PsiElement;
  * @author: Roman Chernyatchik
  * @date: 03.10.2006
  */
+@ExtensionImpl
 public class RubyPomAspectImpl implements RubyPomAspect
 {
 	private final PomModel myModel;
 	private final TreeAspect myTreeAspect;
 
 
+	@Inject
 	public RubyPomAspectImpl(final PomModel model, final TreeAspect treeAspect, final Project project)
 	{
 		myModel = model;

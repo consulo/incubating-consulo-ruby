@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.findUsages;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 
 import consulo.project.Project;
@@ -30,6 +31,7 @@ import consulo.usage.rule.UsageGroupingRuleProvider;
  * @author: oleg
  * @date: Nov 2, 2007
  */
+@ExtensionImpl
 public class RubyUsagesGroupingRuleProvider implements UsageGroupingRuleProvider
 {
 	@Override

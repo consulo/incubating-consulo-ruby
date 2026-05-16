@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.resolve;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.psi.PsiElementVisitor;
@@ -33,6 +34,7 @@ import consulo.language.editor.inspection.ProblemsHolder;
  * @author: oleg
  * @date: Jun 25, 2007
  */
+@ExtensionImpl
 public class RubyResolveInspection extends LocalInspectionTool
 {
 	@NonNls

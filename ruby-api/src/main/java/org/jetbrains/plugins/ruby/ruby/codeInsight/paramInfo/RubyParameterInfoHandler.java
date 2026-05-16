@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.paramInfo;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import com.intellij.java.impl.codeInsight.hint.api.impls.MethodParameterInfoHandler;
 import com.intellij.java.language.psi.PsiMethod;
 import consulo.annotation.component.ExtensionImpl;
@@ -31,8 +37,6 @@ import consulo.language.psi.PsiWhiteSpace;
 import consulo.language.psi.util.PsiTreeUtil;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -151,10 +155,10 @@ public class RubyParameterInfoHandler implements ParameterInfoHandler<RPossibleC
 		}
 		else
 		{
-			final RVirtualElement prototype = symbol.getLastVirtualPrototype(LastSymbolStorage.getInstance(symbol.getProject()).getSymbol());
-			if(prototype instanceof RVirtualMethod)
+			final RPsiElement prototype = symbol.getLastVirtualPrototype(LastSymbolStorage.getInstance(symbol.getProject()).getSymbol());
+			if(prototype instanceof RMethod)
 			{
-				final RStructuralElement element = RVirtualPsiUtil.findInPsi(symbol.getProject(), (RVirtualMethod) prototype);
+				final RStructuralElement element = RVirtualPsiUtil.findInPsi(symbol.getProject(), (RMethod) prototype);
 				if(element instanceof RMethod)
 				{
 					updateRMethodPresentation((RMethod) element, context);

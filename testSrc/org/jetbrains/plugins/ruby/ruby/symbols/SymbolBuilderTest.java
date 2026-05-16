@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfoFactory;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -55,7 +54,7 @@ public class SymbolBuilderTest extends BaseRubyFileSetTestCase {
 
         RVirtualElementBase.resetIdCounter();
         final RFileInfo fileInfo = RFileInfoFactory.createRFileInfoByPseudPhysicalRFile(rFile);
-        final RVirtualFile rVirtualFile = fileInfo.getRVirtualFile();
+        final RFile rVirtualFile = fileInfo.getRVirtualFile();
         final String dump = ((RVirtualElementBase) rVirtualFile).dump();
 
         Symbol.resetIdCounter();

@@ -23,7 +23,6 @@ import jakarta.annotation.Nullable;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualNameImpl;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.FieldAttrType;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -201,7 +200,7 @@ public class RCallBaseUtil
 		for(RPsiElement include : call.getArguments())
 		{
 			final boolean global = RNameUtil.isGlobal(include);
-			includes.add(new RVirtualNameImpl(RNameUtil.getPath(include), global));
+			includes.add(RVirtualName.of(RNameUtil.getPath(include), global));
 		}
 		return includes;
 	}

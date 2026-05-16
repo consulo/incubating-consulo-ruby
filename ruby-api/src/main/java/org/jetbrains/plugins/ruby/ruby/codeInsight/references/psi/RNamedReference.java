@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.references.psi;
 
 import com.intellij.java.language.psi.PsiClass;
 import consulo.document.util.TextRange;
-import consulo.language.impl.internal.psi.PsiManagerImpl;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiManager;
 import consulo.language.psi.ResolveResult;
@@ -144,15 +143,8 @@ public class RNamedReference implements RPsiPolyvariantReference
 	public final ResolveResult[] multiResolve(final boolean incompleteCode)
 	{
 		final PsiManager manager = getElement().getManager();
-		if(manager instanceof PsiManagerImpl)
-		{
-			final ResolveCache cache = ResolveCache.getInstance(manager.getProject());
-			return cache.resolveWithCaching(this, MyResolver.INSTANCE, false, false);
-		}
-		else
-		{
-			return multiResolveInner(incompleteCode);
-		}
+		final ResolveCache cache = ResolveCache.getInstance(manager.getProject());
+		return cache.resolveWithCaching(this, MyResolver.INSTANCE, false, false);
 	}
 
 	@SuppressWarnings({"UnusedDeclaration"})

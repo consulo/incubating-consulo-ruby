@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests.ui;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import com.intellij.java.language.impl.codeInsight.StructureNodeRenderer;
 import consulo.component.util.Iconable;
 import consulo.ui.ex.SimpleTextAttributes;
@@ -23,9 +29,6 @@ import consulo.ui.ex.awt.*;
 import consulo.util.lang.function.Condition;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RClassPresentationUtil;
 import org.jetbrains.plugins.ruby.ruby.presentation.RContainerPresentationUtil;
@@ -44,19 +47,19 @@ import java.util.Comparator;
  */
 public class RMethodList extends JPanel
 {
-	private final RVirtualClass myRVClass;
+	private final RClass myRVClass;
 
-	private final SortedListModel<RVirtualMethod> myListModel;
+	private final SortedListModel<RMethod> myListModel;
 
 	private final JList myList;
 
-	public RMethodList(@Nonnull final RVirtualClass rVClass, @Nonnull final Condition<RVirtualMethod> filter, @Nonnull final RMethodProvider methodProvider)
+	public RMethodList(@Nonnull final RClass rVClass, @Nonnull final Condition<RMethod> filter, @Nonnull final RMethodProvider methodProvider)
 	{
 		super(new BorderLayout());
 
 		myRVClass = rVClass;
 
-		myListModel = new SortedListModel<RVirtualMethod>(new RMethodComparator());
+		myListModel = new SortedListModel<RMethod>(new RMethodComparator());
 		myList = new JList(myListModel);
 
 		createList(methodProvider.getAllMethods(), filter);
@@ -68,9 +71,9 @@ public class RMethodList extends JPanel
 		ScrollingUtil.ensureSelectionExists(myList);
 	}
 
-	private void createList(@Nonnull final RVirtualMethod[] allMethods, @Nonnull final consulo.util.lang.function.Condition<RVirtualMethod> filter)
+	private void createList(@Nonnull final RMethod[] allMethods, @Nonnull final consulo.util.lang.function.Condition<RMethod> filter)
 	{
-		for(RVirtualMethod method : allMethods)
+		for(RMethod method : allMethods)
 		{
 			if(filter.value(method))
 			{
@@ -79,12 +82,12 @@ public class RMethodList extends JPanel
 		}
 	}
 
-	public RVirtualMethod getSelected()
+	public RMethod getSelected()
 	{
-		return (RVirtualMethod) myList.getSelectedValue();
+		return (RMethod) myList.getSelectedValue();
 	}
 
-	public static RVirtualMethod showDialog(final RVirtualClass rClass, final consulo.util.lang.function.Condition<RVirtualMethod> filter, @Nonnull final RMethodProvider methodProvider, final JComponent parent)
+	public static RMethod showDialog(final RClass rClass, final consulo.util.lang.function.Condition<RMethod> filter, @Nonnull final RMethodProvider methodProvider, final JComponent parent)
 	{
 		final RMethodList RMethodList = new RMethodList(rClass, filter, methodProvider);
 		final DialogBuilder builder = new DialogBuilder(parent);
@@ -94,10 +97,10 @@ public class RMethodList extends JPanel
 		return builder.show() == DialogWrapper.OK_EXIT_CODE ? RMethodList.getSelected() : null;
 	}
 
-	private static class RMethodComparator implements Comparator<RVirtualMethod>
+	private static class RMethodComparator implements Comparator<RMethod>
 	{
 		@Override
-		public int compare(final RVirtualMethod rMethod1, final RVirtualMethod rMethod2)
+		public int compare(final RMethod rMethod1, final RMethod rMethod2)
 		{
 			return rMethod1.getName().compareToIgnoreCase(rMethod2.getName());
 		}
@@ -109,12 +112,12 @@ public class RMethodList extends JPanel
 		protected void customizeCellRenderer(final JList list, final Object value, final int index, final boolean selected, final boolean hasFocus)
 		{
 
-			final RVirtualMethod rVMethod = (RVirtualMethod) value;
+			final RMethod rVMethod = (RMethod) value;
 
 			final SimpleTextAttributes methodAttrs = StructureNodeRenderer.applyDeprecation(rVMethod, SimpleTextAttributes.REGULAR_ATTRIBUTES);
 			append(RMethodPresentationUtil.formatName(rVMethod, RPresentationConstants.SHOW_NAME), methodAttrs);
 
-			final RVirtualClass containingClass = RVirtualPsiUtil.getContainingRVClass(rVMethod);
+			final RClass containingClass = RVirtualPsiUtil.getContainingRVClass(rVMethod);
 			final SimpleTextAttributes locationAttrs = SimpleTextAttributes.GRAY_ATTRIBUTES;
 			//assert containingClass != null;
 			if(containingClass != null)
@@ -126,7 +129,7 @@ public class RMethodList extends JPanel
 			}
 			else
 			{
-				final RVirtualContainer parentCont = rVMethod.getVirtualParentContainer();
+				final RContainer parentCont = rVMethod.getVirtualParentContainer();
 				assert parentCont != null; //belongs to class, module of file
 				append(" (" + RContainerPresentationUtil.formatName(parentCont, RPresentationConstants.SHOW_NAME) + ")", locationAttrs);
 			}
@@ -137,6 +140,6 @@ public class RMethodList extends JPanel
 
 	public interface RMethodProvider
 	{
-		public RVirtualMethod[] getAllMethods();
+		public RMethod[] getAllMethods();
 	}
 }

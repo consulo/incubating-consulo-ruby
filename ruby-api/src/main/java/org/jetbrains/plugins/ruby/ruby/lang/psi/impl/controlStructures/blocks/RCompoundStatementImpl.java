@@ -34,13 +34,14 @@ import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.OuterLanguageElement;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 13.07.2006
  */
-public class RCompoundStatementImpl extends RPsiElementBase implements RCompoundStatement
+public class RCompoundStatementImpl extends RPsiElementBase<StubElement> implements RCompoundStatement
 {
 	private List<RPsiElement> myStatements = null;
 

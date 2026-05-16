@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.plugins.ruby.IntRef;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.jruby.AbstractJRubyModuleTest;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -57,7 +56,7 @@ public class JRubyOverrideImplementMarkersTest extends AbstractJRubyModuleTest {
 
     public void testClassImplement1() throws Exception {
         init("class_implement1.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -68,7 +67,7 @@ public class JRubyOverrideImplementMarkersTest extends AbstractJRubyModuleTest {
 
     public void testClassImplement2() throws Exception {
         init("class_implement2.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -79,7 +78,7 @@ public class JRubyOverrideImplementMarkersTest extends AbstractJRubyModuleTest {
 
     public void testClassOverride1() throws Exception {
         init("class_override1.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);
@@ -89,7 +88,7 @@ public class JRubyOverrideImplementMarkersTest extends AbstractJRubyModuleTest {
 
     public void testClassOverride2() throws Exception {
         init("class_override2.rb");
-        final RVirtualContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
+        final RContainer rVirtualContainer = RVirtualPsiUtil.findVirtualContainer(myContainer);
         assertNotNull(rVirtualContainer);
         final Symbol symbol = SymbolUtil.getSymbolByContainer(myFileSymbol, rVirtualContainer);
         assertNotNull(symbol);

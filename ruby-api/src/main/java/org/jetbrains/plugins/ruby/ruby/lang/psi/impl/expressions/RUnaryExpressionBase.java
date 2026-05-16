@@ -34,6 +34,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import consulo.language.psi.PsiReference;
+import consulo.language.psi.stub.StubElement;
 import consulo.language.ast.IElementType;
 
 /**
@@ -42,7 +43,7 @@ import consulo.language.ast.IElementType;
  * @author: oleg
  * @date: Mar 30, 2007
  */
-public class RUnaryExpressionBase extends RPsiElementBase implements RUnaryExpression
+public class RUnaryExpressionBase extends RPsiElementBase<StubElement> implements RUnaryExpression
 {
 	public RUnaryExpressionBase(@Nonnull ASTNode astNode)
 	{

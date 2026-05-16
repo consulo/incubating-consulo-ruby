@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import consulo.module.Module;
 import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.ui.ex.tree.PresentationData;
@@ -29,11 +31,10 @@ import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,15 +82,13 @@ public class RailsApplicationFolderNode extends ControllerSubFolderNode
 		final VirtualFile appControllerFile = ControllersConventions.getApplicationControllerFile(module);
 		if(appControllerFile != null)
 		{
-			final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
-			final RubyFilesCache cache = manager.getFilesCache();
-			final RFileInfo appContrInfo = cache.getUp2DateFileInfo(appControllerFile);
-			if(appContrInfo != null)
+			final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(appControllerFile);
+			if(psiFile instanceof RFile)
 			{
-				final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(appContrInfo.getRVirtualFile());
-				for(RVirtualClass rClass : allClasses)
+				final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
+				for(RClass rClass : allClasses)
 				{
-					children.add(createClassNode(rClass, appContrInfo));
+					children.add(createClassNode(rClass));
 				}
 			}
 		}

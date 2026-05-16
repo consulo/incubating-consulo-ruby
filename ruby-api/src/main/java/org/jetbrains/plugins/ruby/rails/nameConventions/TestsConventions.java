@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -23,7 +25,6 @@ import consulo.module.Module;
 import org.jetbrains.plugins.ruby.addins.rspec.RSpecUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +34,7 @@ import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
  */
 public class TestsConventions
 {
-	public static boolean isTestFrameworkFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isTestFrameworkFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		if(module == null)
 		{

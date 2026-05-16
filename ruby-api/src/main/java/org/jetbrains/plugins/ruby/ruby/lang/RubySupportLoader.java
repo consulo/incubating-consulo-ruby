@@ -17,13 +17,10 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
 import org.jetbrains.plugins.ruby.ruby.actions.editor.RubyEditorActionsManager;
-import consulo.util.lang.function.ThrowableRunnable;
 
-
-public class RubySupportLoader
-{
-	public RubySupportLoader()
-	{
-		RubyEditorActionsManager.registerRubyEditorActions();
-	}
+public class RubySupportLoader {
+    public void beforeApplicationLoaded() {
+        // TODO find another way
+        RubyEditorActionsManager.registerRubyEditorActions();
+    }
 }

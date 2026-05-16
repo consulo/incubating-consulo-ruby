@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.highlighter.codeHighlighting.line;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
 import com.intellij.java.language.psi.PsiMethod;
 import consulo.codeEditor.markup.GutterIconRenderer;
 import consulo.project.Project;
@@ -26,7 +28,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupConstants;
 import org.jetbrains.plugins.ruby.ruby.lang.documentation.MarkupUtil;
@@ -81,9 +82,9 @@ public class RubyGutterInfo extends RubyLineMarkerInfo
 		for(Object element : myElements)
 		{
 			// Here we process Ruby elements
-			if(element instanceof RVirtualStructuralElement)
+			if(element instanceof RStructuralElement)
 			{
-				locations.add(RContainerPresentationUtil.getLocation((RVirtualStructuralElement) element));
+				locations.add(RContainerPresentationUtil.getLocation((RStructuralElement) element));
 			}
 			// Here we process overriden Java methods
 			if(element instanceof PsiMethod)

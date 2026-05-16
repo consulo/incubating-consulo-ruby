@@ -16,9 +16,13 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import jakarta.inject.Singleton;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 
 /**
@@ -27,6 +31,9 @@ import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
  * @author: oleg
  * @date: Aug 18, 2007
  */
+@ServiceAPI(ComponentScope.PROJECT)
+@ServiceImpl
+@Singleton
 public class LastSymbolStorage
 {
 	private FileSymbol lastEvaluatedSymbol;
@@ -45,6 +52,6 @@ public class LastSymbolStorage
 	@Nonnull
 	public static LastSymbolStorage getInstance(@Nonnull final Project project)
 	{
-		return project.getComponent(LastSymbolStorage.class);
+		return project.getInstance(LastSymbolStorage.class);
 	}
 }

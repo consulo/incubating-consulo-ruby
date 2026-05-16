@@ -19,8 +19,6 @@ package org.jetbrains.plugins.ruby.ruby.cache.psi.impl;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.plugins.ruby.ruby.cache.AbstractRubyModuleCacheTest;
 import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -47,7 +45,7 @@ public class RVirtualClassUtilTest extends AbstractRubyModuleCacheTest {
         final RFileInfo info =
                 myModuleCacheManager.getFilesCache().getUp2DateFileInfo(rClassVFile);
         assert info != null;
-        final RVirtualFile rVFile = info.getRVirtualFile();
+        final RFile rVFile = info.getRVirtualFile();
 
         // update symbols relative to this file
         final RFile rFile = (RFile)RVirtualPsiUtil.findPsiByVirtualElement(rVFile, myProject);
@@ -56,7 +54,7 @@ public class RVirtualClassUtilTest extends AbstractRubyModuleCacheTest {
     }
 
     public void testGetVirtualSuperClasses() {
-        RVirtualClass rClass = getClassByQualifiedName("C0", rClassVFile);
+        RClass rClass = getClassByQualifiedName("C0", rClassVFile);
 
         final FileSymbol fileSymbol = LastSymbolStorage.getInstance(myProject).getSymbol();
         assert fileSymbol != null;
@@ -64,7 +62,7 @@ public class RVirtualClassUtilTest extends AbstractRubyModuleCacheTest {
         Symbol symbol = SymbolUtil.getSymbolByContainer(fileSymbol, rClass);
         assert symbol != null;
 
-        List<RVirtualClass> classes = RVirtualClassUtil.getVirtualSuperClasses(symbol, fileSymbol);
+        List<RClass> classes = RVirtualClassUtil.getVirtualSuperClasses(symbol, fileSymbol);
         assertEquals(0, classes.size());
 
         rClass = getClassByQualifiedName("C1", rClassVFile);

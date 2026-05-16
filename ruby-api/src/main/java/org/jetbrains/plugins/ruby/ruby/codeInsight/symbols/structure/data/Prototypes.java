@@ -16,13 +16,14 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,12 +34,12 @@ public class Prototypes
 {
 	public static Prototypes EMPTY_PROTOTYPES = new Prototypes(null);
 
-	private final List<RVirtualElement> myList = new ArrayList<RVirtualElement>();
+	private final List<RPsiElement> myList = new ArrayList<RPsiElement>();
 	private final Object LOCK = new Object();
 
 	private final Prototypes myBasePrototypes;
 
-	private RVirtualElement myLastPrototype;
+	private RPsiElement myLastPrototype;
 
 	public Prototypes(@Nullable final Prototypes prototypes)
 	{
@@ -46,14 +47,14 @@ public class Prototypes
 	}
 
 	@Nonnull
-	public List<RVirtualElement> getAll()
+	public List<RPsiElement> getAll()
 	{
-		final ArrayList<RVirtualElement> all = new ArrayList<RVirtualElement>();
+		final ArrayList<RPsiElement> all = new ArrayList<RPsiElement>();
 		addAll(all);
 		return all;
 	}
 
-	protected void addAll(@Nonnull final List<RVirtualElement> list)
+	protected void addAll(@Nonnull final List<RPsiElement> list)
 	{
 		if(myBasePrototypes != null)
 		{
@@ -65,7 +66,7 @@ public class Prototypes
 		}
 	}
 
-	public void add(@Nonnull final RVirtualElement prototype)
+	public void add(@Nonnull final RPsiElement prototype)
 	{
 		myLastPrototype = prototype;
 		synchronized(LOCK)
@@ -74,7 +75,7 @@ public class Prototypes
 		}
 	}
 
-	public RVirtualElement getLast()
+	public RPsiElement getLast()
 	{
 		return myLastPrototype != null ? myLastPrototype : myBasePrototypes != null ? myBasePrototypes.getLast() : null;
 	}

@@ -19,23 +19,20 @@ package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.modules;
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.IStubElementType;
 import consulo.language.util.IncorrectOperationException;
 import consulo.navigation.ItemPresentation;
 import consulo.ui.image.Image;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualModuleImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualNameImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.names.RModuleName;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.RubyModuleStub;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
 
@@ -44,11 +41,27 @@ import org.jetbrains.plugins.ruby.ruby.presentation.RModulePresentationUtil;
  * User: oleg
  * Date: 11.06.2006
  */
-public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
+public class RModuleImpl extends RFieldConstantContainerImpl<RubyModuleStub> implements RModule
 {
 	public RModuleImpl(ASTNode astNode)
 	{
 		super(astNode);
+	}
+
+	public RModuleImpl(@Nonnull RubyModuleStub stub, @Nonnull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
+	}
+
+	@Override
+	public String getName()
+	{
+		final RubyModuleStub stub = getGreenStub();
+		if(stub != null)
+		{
+			return stub.getName();
+		}
+		return super.getName();
 	}
 
 	@Override
@@ -86,18 +99,6 @@ public class RModuleImpl extends RFieldConstantContainerImpl implements RModule
 	public PsiElement setName(@NonNls @Nonnull String name) throws IncorrectOperationException
 	{
 		return null;
-	}
-
-	@Override
-	@Nonnull
-	public RVirtualModule createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull final RFileInfo info)
-	{
-		final RVirtualName virtualModuleName = new RVirtualNameImpl(getFullPath(), isGlobal());
-		assert virtualParent != null;
-
-		final RVirtualModuleImpl vModule = new RVirtualModuleImpl(virtualParent, virtualModuleName, getAccessModifier(), info);
-		addVirtualData(vModule, info);
-		return vModule;
 	}
 
 	@Override

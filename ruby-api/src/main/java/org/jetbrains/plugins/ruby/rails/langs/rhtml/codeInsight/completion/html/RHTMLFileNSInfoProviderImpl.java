@@ -17,6 +17,7 @@
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.html;
 
 import com.intellij.xml.util.XmlUtil;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.xml.language.psi.XmlFile;
 import consulo.xml.language.psi.XmlFileNSInfoProvider;
 import jakarta.annotation.Nonnull;
@@ -32,6 +33,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 
  * This class adds html tags auto completion for *.rhtml files.
  */
+@ExtensionImpl
 @SuppressWarnings({"ComponentRegistrationProblems"})
 public class RHTMLFileNSInfoProviderImpl implements XmlFileNSInfoProvider
 {

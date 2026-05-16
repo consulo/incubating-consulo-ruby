@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.run.confuguration.tests;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.io.File;
 
 import jakarta.annotation.Nonnull;
@@ -30,8 +34,6 @@ import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualClassUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
@@ -65,7 +67,7 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
 {
 	public static final String DEFAULT_TESTS_SEARCH_MASK = "**/*." + RubyFileType.INSTANCE.getDefaultExtension();
 
-	private static final RVirtualMethod[] EMPTY_VIRT_METHODS = new RVirtualMethod[0];
+	private static final RMethod[] EMPTY_VIRT_METHODS = new RMethod[0];
 
 	private String myTestsFolderPath = TextUtil.EMPTY_STRING;
 	private String myTestScriptPath = TextUtil.EMPTY_STRING;
@@ -193,12 +195,12 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
 			final String className = getTestQualifiedClassName().trim();
 			final VirtualFile script = LocalFileSystem.getInstance().findFileByPath(getTestScriptPath());
 			assert script != null;
-			final RVirtualClass rClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(className, getProject(), GlobalSearchScope.allScope(getProject()), script, fSWrapper);
+			final RClass rClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(className, getProject(), GlobalSearchScope.allScope(getProject()), script, fSWrapper);
 			assert rClass != null;
 
 			final Pair<Symbol, FileSymbol> pair = SymbolUtil.getSymbolByContainerRubyTestMode(rClass, fSWrapper);
 
-			final RVirtualMethod[] methods;
+			final RMethod[] methods;
 			if(pair == null)
 			{
 				methods = EMPTY_VIRT_METHODS;
@@ -208,7 +210,7 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
 				methods = RVirtualClassUtil.getAllMethodsWithName(pair.first, pair.second, methodName, Context.ALL);
 			}
 
-			for(RVirtualMethod method : methods)
+			for(RMethod method : methods)
 			{
 				final String name = RMethodPresentationUtil.formatName(method, RPresentationConstants.SHOW_NAME);
 				if(methodName.equals(name))
@@ -250,7 +252,7 @@ public class RTestsRunConfiguration extends AbstractRubyRunConfiguration impleme
 				final Project project = getProject();
 				final GlobalSearchScope classSearchScope = GlobalSearchScope.allScope(project);
 
-				final RVirtualClass rClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(className, project, classSearchScope, script, fSWrapper);
+				final RClass rClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(className, project, classSearchScope, script, fSWrapper);
 				if(rClass != null)
 				{
 					if(isInheritanceCheckDisabled() || RTestUnitUtil.isClassUnitTestCase(rClass, fSWrapper))

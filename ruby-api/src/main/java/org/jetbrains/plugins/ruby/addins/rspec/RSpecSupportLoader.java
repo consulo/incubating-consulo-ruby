@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.rspec;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.event.ApplicationLoadListener;
 import consulo.colorScheme.TextAttributes;
 import consulo.execution.ui.console.ConsoleViewContentType;
 import consulo.ui.color.RGBColor;
@@ -28,7 +30,8 @@ import org.jetbrains.annotations.NonNls;
  * @author: Roman Chernyatchik
  * @date: Oct 17, 2007
  */
-public class RSpecSupportLoader
+@ExtensionImpl
+public class RSpecSupportLoader implements ApplicationLoadListener
 {
 	//red color
 	public final static String RED_TEXT_ATTRS = "[31m";
@@ -79,7 +82,8 @@ public class RSpecSupportLoader
 		}
 	}
 
-	public RSpecSupportLoader()
+	@Override
+	public void beforeApplicationLoaded()
 	{
 		ConsoleViewContentType.registerNewConsoleViewType(RED_TEXT, RSPEC_RED_TEXT_TYPE);
 		ConsoleViewContentType.registerNewConsoleViewType(GREEN_TEXT, RSPEC_GREEN_TEXT_TYPE);

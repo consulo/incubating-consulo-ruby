@@ -26,7 +26,7 @@ import java.util.List;
  * @author: oleg
  * @date: Dec 4, 2006
  */
-public interface RVirtualName extends RVirtualElement
+public interface RVirtualName
 {
 	/**
 	 * @return only name without path
@@ -47,4 +47,41 @@ public interface RVirtualName extends RVirtualElement
 	public String getFullName();
 
 	public boolean isGlobal();
+
+	/**
+	 * Build a simple RVirtualName from a path and global flag.
+	 */
+	@Nonnull
+	static RVirtualName of(@Nonnull final List<String> path, final boolean global)
+	{
+		return new RVirtualName()
+		{
+			@Nonnull
+			@Override
+			public String getName()
+			{
+				return path.isEmpty() ? "" : path.get(path.size() - 1);
+			}
+
+			@Nonnull
+			@Override
+			public List<String> getPath()
+			{
+				return path;
+			}
+
+			@Nonnull
+			@Override
+			public String getFullName()
+			{
+				return String.join("::", path);
+			}
+
+			@Override
+			public boolean isGlobal()
+			{
+				return global;
+			}
+		};
+	}
 }

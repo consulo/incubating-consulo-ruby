@@ -96,13 +96,13 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>consulo.javascript</artifactId>
+			<artifactId>com.intellij.xml</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>com.intellij.xml</artifactId>
+			<groupId>consulo</groupId>
+			<artifactId>consulo-file-template-api</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>

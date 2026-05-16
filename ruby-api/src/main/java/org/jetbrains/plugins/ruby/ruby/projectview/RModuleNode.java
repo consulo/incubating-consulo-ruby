@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.projectview;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -27,8 +31,6 @@ import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -47,12 +49,12 @@ import consulo.ui.image.Image;
  * @author: oleg
  * @date: Oct 30, 2007
  */
-public class RModuleNode extends ProjectViewNode<RVirtualModule>
+public class RModuleNode extends ProjectViewNode<RModule>
 {
 	private final Image myIcon;
 	private final VirtualFile myVirtualFile;
 
-	public RModuleNode(@Nonnull final Project project, @Nullable final Module module, @Nonnull final RVirtualFile file, @Nonnull final RVirtualModule value, final ViewSettings viewSettings)
+	public RModuleNode(@Nonnull final Project project, @Nullable final Module module, @Nonnull final RFile file, @Nonnull final RModule value, final ViewSettings viewSettings)
 	{
 		super(project, value, viewSettings);
 		myVirtualFile = file.getVirtualFile();
@@ -91,7 +93,7 @@ public class RModuleNode extends ProjectViewNode<RVirtualModule>
 	@Override
 	protected void update(PresentationData data)
 	{
-		final RVirtualModule module = getValue();
+		final RModule module = getValue();
 		data.setIcon(myIcon);
 		data.setLocationString(RModulePresentationUtil.getLocation(module));
 		data.setPresentableText(RModulePresentationUtil.formatName(module, RPresentationConstants.SHOW_NAME));
@@ -117,7 +119,7 @@ public class RModuleNode extends ProjectViewNode<RVirtualModule>
 
 	public RStructuralElement getPsiElement()
 	{
-		final RVirtualModule element = getValue();
+		final RModule element = getValue();
 		return RVirtualPsiUtil.findInPsi(myProject, element);
 	}
 

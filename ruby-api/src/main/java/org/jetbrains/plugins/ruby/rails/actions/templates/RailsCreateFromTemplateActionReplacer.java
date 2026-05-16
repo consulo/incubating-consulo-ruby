@@ -16,14 +16,13 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.templates;
 
-import jakarta.annotation.Nonnull;
-
+import consulo.fileTemplate.FileTemplate;
 import consulo.language.psi.PsiDirectory;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
-import consulo.fileTemplate.FileTemplate;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,41 +30,33 @@ import consulo.fileTemplate.FileTemplate;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public class RailsCreateFromTemplateActionReplacer
-{
-	public static final String RHTML_TEMPLATE_NAME = RBundle.message("template.rhtml.script.name");
+public class RailsCreateFromTemplateActionReplacer {
+    public static final String RHTML_TEMPLATE_NAME = RBundle.message("template.rhtml.script.name");
 
-	public static final String RXML_TEMPLATE_NAME = RBundle.message("template.rxml.script.name");
+    public static final String RXML_TEMPLATE_NAME = RBundle.message("template.rxml.script.name");
 
-	@Nullable
-	public AnAction replaceCreateFromFileTemplateAction(@Nonnull final FileTemplate fileTemplate)
-	{
-		final String templateName = fileTemplate.getName();
-		if(templateName.equals(RHTML_TEMPLATE_NAME))
-		{
-			return new RailsCreateFromTemplateAction(fileTemplate)
-			{
-				@Override
-				@Nonnull
-				protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate)
-				{
-					return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
-				}
-			};
-		}
-		else if(templateName.equals(RXML_TEMPLATE_NAME))
-		{
-			return new RailsCreateFromTemplateAction(fileTemplate)
-			{
-				@Override
-				@Nonnull
-				protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate)
-				{
-					return new RXMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
-				}
-			};
-		}
-		return null;
-	}
+    @Nullable
+    public AnAction replaceCreateFromFileTemplateAction(@Nonnull final FileTemplate fileTemplate) {
+        final String templateName = fileTemplate.getName();
+        if (templateName.equals(RHTML_TEMPLATE_NAME)) {
+            return new RailsCreateFromTemplateAction(fileTemplate) {
+                @Override
+                @Nonnull
+                protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate) {
+                    return new RHTMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
+                }
+            };
+        }
+        else if (templateName.equals(RXML_TEMPLATE_NAME)) {
+            return new RailsCreateFromTemplateAction(fileTemplate) {
+                @Override
+                @Nonnull
+                protected CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate) {
+                    return new RXMLCreateViewFromTemplateDialog(project, dir, fileTemplate);
+                }
+            };
+        }
+        return null;
+    }
 
 }

@@ -26,7 +26,6 @@ import consulo.language.psi.PsiFile;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.HighlightPassConstants;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -98,7 +97,7 @@ public class RubySlowLineHighlightPass extends AbstractRubyHighlighterPass
 			{
 				return;
 			}
-			final RVirtualContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer((RContainer) element);
+			final RContainer virtualContainer = RVirtualPsiUtil.findVirtualContainer((RContainer) element);
 			if(virtualContainer == null)
 			{
 				return;

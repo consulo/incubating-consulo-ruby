@@ -16,22 +16,21 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures.methods;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
+import consulo.language.psi.stub.IStubElementType;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualSingletonMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVMethodName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualSingletonMethodImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RSingletonMethod;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.RubySingletonMethodStub;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 
 /**
@@ -39,11 +38,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
  * User: oleg
  * Date: 11.06.2006
  */
-public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMethod
+public class RSingletonMethodImpl extends RMethodImpl<RubySingletonMethodStub> implements RSingletonMethod
 {
 	public RSingletonMethodImpl(ASTNode astNode)
 	{
 		super(astNode);
+	}
+
+	public RSingletonMethodImpl(@Nonnull RubySingletonMethodStub stub, @Nonnull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
 	}
 
 	@Override
@@ -63,18 +67,6 @@ public class RSingletonMethodImpl extends RMethodImpl implements RSingletonMetho
 			return;
 		}
 		super.accept(visitor);
-	}
-
-	@Override
-	@Nonnull
-	public RVirtualSingletonMethod createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull RFileInfo info)
-	{
-		final RVirtualName virtualMethodName = new RVMethodName(getFullPath(), isGlobal());
-		assert virtualParent != null;
-
-		final RVirtualSingletonMethodImpl singletonMethod = new RVirtualSingletonMethodImpl(virtualParent, virtualMethodName, getArgumentInfos(), getAccessModifier(), info);
-		addVirtualData(singletonMethod, info);
-		return singletonMethod;
 	}
 
 	@Override

@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
@@ -33,12 +37,9 @@ import consulo.ui.image.Image;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RVirtualFieldAttr;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RImportJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RIncludeJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.variables.RFieldAttr;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.JavaLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyLookupItem;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.completion.RubyPsiLookupItem;
@@ -133,19 +134,19 @@ public class SymbolPresentationUtil
 		// Ruby symbols
 		final Project project = symbol.getProject();
 		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(project).getSymbol();
-		final RVirtualElement lastPrototype = symbol.getLastVirtualPrototype(fileSymbol);
+		final RPsiElement lastPrototype = symbol.getLastVirtualPrototype(fileSymbol);
 
 		String tailText = null;
-		if(lastPrototype instanceof RVirtualMethod)
+		if(lastPrototype instanceof RMethod)
 		{
-			final RVirtualMethod method = (RVirtualMethod) lastPrototype;
+			final RMethod method = (RMethod) lastPrototype;
 			tailText = "(" + RCommandArgumentListImpl.getPresentableName(method.getArgumentInfos()) + ")";
 		}
 
 		int priority = bold ? LookupValueWithPriority.HIGH : LookupValueWithPriority.NORMAL;
 		// Setting icon for lookupItem
 		Image icon = null;
-		if(lastPrototype instanceof RVirtualContainer)
+		if(lastPrototype instanceof RContainer)
 		{
 			// We should set high priority only for methods
 			if(type != Type.INSTANCE_METHOD && type != Type.CLASS_METHOD && type != Type.ALIAS)
@@ -174,16 +175,16 @@ public class SymbolPresentationUtil
 		{
 			icon = RAliasPresentationUtil.getIcon();
 		}
-		else if(lastPrototype instanceof RVirtualFieldAttr)
+		else if(lastPrototype instanceof RFieldAttr)
 		{
-			icon = RFieldAttrPresentationUtil.getAttrIcon(((RVirtualFieldAttr) lastPrototype).getFieldAttrType());
+			icon = RFieldAttrPresentationUtil.getAttrIcon(((RFieldAttr) lastPrototype).getFieldAttrType());
 		}
-		else if(lastPrototype instanceof RVirtualImportJavaClass)
+		else if(lastPrototype instanceof RImportJavaClass)
 		{
 			bold = true;
 			icon = JavaClassPackagePresentationUtil.getIncludeIcon();
 		}
-		else if(lastPrototype instanceof RVirtualIncludeJavaClass)
+		else if(lastPrototype instanceof RIncludeJavaClass)
 		{
 			bold = true;
 			icon = JavaClassPackagePresentationUtil.getIncludeIcon();
@@ -256,10 +257,10 @@ public class SymbolPresentationUtil
 			}
 			return null;
 		}
-		final RVirtualElement lastPrototype = symbol.getLastVirtualPrototype(fileSymbol);
-		if(lastPrototype instanceof RVirtualMethod)
+		final RPsiElement lastPrototype = symbol.getLastVirtualPrototype(fileSymbol);
+		if(lastPrototype instanceof RMethod)
 		{
-			final RVirtualMethod method = (RVirtualMethod) lastPrototype;
+			final RMethod method = (RMethod) lastPrototype;
 			name += "(" + RCommandArgumentListImpl.getPresentableName(method.getArgumentInfos()) + ")";
 		}
 
@@ -270,13 +271,13 @@ public class SymbolPresentationUtil
 
 
 	@Nonnull
-	public static List<RVirtualElement> getPrototypesToShow(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
+	public static List<RPsiElement> getPrototypesToShow(@Nullable final FileSymbol fileSymbol, @Nonnull final Symbol symbol)
 	{
-		final List<RVirtualElement> list = new ArrayList<RVirtualElement>();
+		final List<RPsiElement> list = new ArrayList<RPsiElement>();
 		// We show only last prototype for method!!!
 		if(Types.METHODS.contains(symbol.getType()))
 		{
-			final RVirtualElement element = symbol.getLastVirtualPrototype(fileSymbol);
+			final RPsiElement element = symbol.getLastVirtualPrototype(fileSymbol);
 			if(element != null)
 			{
 				list.add(element);

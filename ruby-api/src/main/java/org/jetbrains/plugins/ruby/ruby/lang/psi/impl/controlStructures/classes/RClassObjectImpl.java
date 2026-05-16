@@ -22,13 +22,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import consulo.language.ast.ASTNode;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 26.06.2006
  */
-public class RClassObjectImpl extends RPsiElementBase implements RClassObject
+public class RClassObjectImpl extends RPsiElementBase<StubElement> implements RClassObject
 {
 	public RClassObjectImpl(ASTNode astNode)
 	{

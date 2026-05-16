@@ -28,84 +28,72 @@ import consulo.language.parser.PsiParser;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import consulo.language.version.LanguageVersion;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.lexer.RubyMergeLexer;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RFileImpl;
 
-import jakarta.annotation.Nonnull;
-
 
 @ExtensionImpl
-public class RubyParserDefinition implements ParserDefinition, RubyElementTypes
-{
-	@Nonnull
-	@Override
-	public Language getLanguage()
-	{
-		return RubyLanguage.INSTANCE;
-	}
+public class RubyParserDefinition implements ParserDefinition, RubyElementTypes {
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return RubyLanguage.INSTANCE;
+    }
 
-	@Override
-	@Nonnull
-	public Lexer createLexer(LanguageVersion languageVersion)
-	{
-		return new RubyMergeLexer();
-	}
+    @Override
+    @Nonnull
+    public Lexer createLexer(LanguageVersion languageVersion) {
+        return new RubyMergeLexer();
+    }
 
-	@Override
-	@Nonnull
-	public PsiParser createParser( LanguageVersion languageVersion)
-	{
-		return new RubyParser();
-		//        return new RubyMockParser();
-	}
+    @Override
+    @Nonnull
+    public PsiParser createParser(LanguageVersion languageVersion) {
+        return new RubyParser();
+        //        return new RubyMockParser();
+    }
 
-	@Override
-	@Nonnull
-	public IFileElementType getFileNodeType()
-	{
-		return RubyElementTypes.FILE;
-	}
+    @Override
+    @Nonnull
+    public IFileElementType getFileNodeType() {
+        return RubyElementTypes.FILE;
+    }
 
-	@Override
-	@Nonnull
-	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
-	{
-		return BNF.tWHITESPACES;
-	}
+    @Override
+    @Nonnull
+    public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
+        return BNF.tWHITESPACES;
+    }
 
-	@Override
-	@Nonnull
-	public TokenSet getCommentTokens(LanguageVersion languageVersion)
-	{
-		return BNF.tCOMMENTS;
-	}
+    @Override
+    @Nonnull
+    public TokenSet getCommentTokens(LanguageVersion languageVersion) {
+        return BNF.tCOMMENTS;
+    }
 
-	@Nonnull
-	@Override
-	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
-	{
-		return BNF.tSTRING_TOKENS;
-	}
+    @Nonnull
+    @Override
+    public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion) {
+        return BNF.tSTRING_TOKENS;
+    }
 
-	@Override
-	@Nonnull
-	public PsiElement createElement(@Nonnull ASTNode node)
-	{
-		return RubyPsiCreator.create(node);
-	}
+    @Override
+    @Nonnull
+    public PsiElement createElement(@Nonnull ASTNode node) {
+        return RubyPsiCreator.create(node);
+    }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new RFileImpl(viewProvider);
-	}
+    @Override
+    public PsiFile createFile(FileViewProvider viewProvider) {
+        return new RFileImpl(viewProvider);
+    }
 
-	@Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
-	{
-		return SpaceRequirements.MAY;
-	}
+    @Override
+    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+        return SpaceRequirements.MAY;
+    }
 
 }

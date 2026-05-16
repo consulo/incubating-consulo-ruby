@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 
 import consulo.virtualFileSystem.fileType.FileTypeFactory;
@@ -31,6 +32,7 @@ import consulo.virtualFileSystem.fileType.FileTypeConsumer;
  * @author: oleg
  * @date: Feb 4, 2008
  */
+@ExtensionImpl
 public class RubyFileTypeFactory extends FileTypeFactory
 {
 	@Override

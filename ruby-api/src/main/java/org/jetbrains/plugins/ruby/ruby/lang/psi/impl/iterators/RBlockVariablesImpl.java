@@ -26,13 +26,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 15.06.2006
  */
-public class RBlockVariablesImpl extends RPsiElementBase implements RBlockVariables
+public class RBlockVariablesImpl extends RPsiElementBase<StubElement> implements RBlockVariables
 {
 	public RBlockVariablesImpl(ASTNode astNode)
 	{

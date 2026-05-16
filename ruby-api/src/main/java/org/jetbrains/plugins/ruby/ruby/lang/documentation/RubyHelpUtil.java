@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.documentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
 import com.intellij.java.language.JavaLanguage;
 import com.intellij.java.language.impl.codeInsight.javadoc.JavaDocUtil;
 import com.intellij.java.language.psi.PsiMethod;
@@ -29,9 +31,6 @@ import consulo.language.psi.PsiWhiteSpace;
 import consulo.language.psi.util.PsiTreeUtil;
 import consulo.project.Project;
 import org.jetbrains.plugins.ruby.RBundle;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
@@ -132,7 +131,7 @@ public class RubyHelpUtil implements MarkupConstants
 		final Project project = symbol.getProject();
 
 		// Searching for psiElement to get help
-		final RVirtualElement prototype;
+		final RPsiElement prototype;
 		final RPsiElement elementToShowHelpFor;
 
 		if(container != null)
@@ -168,12 +167,12 @@ public class RubyHelpUtil implements MarkupConstants
 		}
 		// add presentable name
 		MarkupUtil.appendBoldCode(builder, getPresentableName(elementToShowHelpFor));
-		if(elementToShowHelpFor instanceof RVirtualContainer)
+		if(elementToShowHelpFor instanceof RContainer)
 		{
-			final String access = getVisibility((RVirtualContainer) elementToShowHelpFor);
+			final String access = getVisibility((RContainer) elementToShowHelpFor);
 			builder.insert(0, SPACE).insert(0, access);
 			builder.append(SPACE).append(RBundle.message("in")).append(SPACE);
-			MarkupUtil.appendCode(builder, RContainerPresentationUtil.getLocation((RVirtualContainer) elementToShowHelpFor));
+			MarkupUtil.appendCode(builder, RContainerPresentationUtil.getLocation((RContainer) elementToShowHelpFor));
 		}
 
 		builder.append(HR);
@@ -246,10 +245,10 @@ public class RubyHelpUtil implements MarkupConstants
 			String ref = null;
 
 			// Ruby element
-			if(element instanceof RVirtualStructuralElement)
+			if(element instanceof RStructuralElement)
 			{
-				psiElem = RVirtualPsiUtil.findInPsi(project, (RVirtualStructuralElement) element);
-				label = RContainerPresentationUtil.getLocation((RVirtualStructuralElement) element);
+				psiElem = RVirtualPsiUtil.findInPsi(project, (RStructuralElement) element);
+				label = RContainerPresentationUtil.getLocation((RStructuralElement) element);
 				ref = ELEMENT + i;
 			}
 			else
@@ -276,7 +275,7 @@ public class RubyHelpUtil implements MarkupConstants
 		}
 	}
 
-	private static String getVisibility(@Nonnull final RVirtualContainer container)
+	private static String getVisibility(@Nonnull final RContainer container)
 	{
 		final AccessModifier accessModifier = container.getAccessModifier();
 		if(accessModifier == AccessModifier.PRIVATE)
@@ -378,7 +377,7 @@ public class RubyHelpUtil implements MarkupConstants
 		}
 
 		// Show help by symbol for container if can be found
-		if(element instanceof RVirtualContainer)
+		if(element instanceof RContainer)
 		{
 			final Symbol symbol = SymbolUtil.getSymbolByContainer(LastSymbolStorage.getInstance(element.getProject()).getSymbol(), (RContainer) element);
 			if(symbol == null)
@@ -435,9 +434,9 @@ public class RubyHelpUtil implements MarkupConstants
 	@Nonnull
 	public static String getPresentableName(@Nonnull final PsiElement element)
 	{
-		if(element instanceof RVirtualContainer)
+		if(element instanceof RContainer)
 		{
-			final String name = ((RVirtualContainer) element).getName();
+			final String name = ((RContainer) element).getName();
 			if(element instanceof RMethod)
 			{
 				return ((RMethod) element).getPresentableName(true);

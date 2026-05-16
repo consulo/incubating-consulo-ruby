@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.addins.jsSupport;
 
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.event.ApplicationLoadListener;
 import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
 
 /**
@@ -24,10 +26,11 @@ import org.jetbrains.plugins.ruby.settings.RApplicationSettings;
  * @author: Roman Chernyatchik
  * @date: Nov 6, 2007
  */
-@SuppressWarnings({"ComponentNotRegistered"})
-public class JavaScriptIntegrationSettings
+@ExtensionImpl
+public class JavaScriptIntegrationSettings implements ApplicationLoadListener
 {
-	public JavaScriptIntegrationSettings(final RApplicationSettings applicationSettings)
+	@Override
+	public void beforeApplicationLoaded()
 	{
 		RApplicationSettings.getInstance().setJsSupportEnabled(true);
 	}

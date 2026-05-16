@@ -16,9 +16,4 @@
   ~ limitations under the License.
   -->
 <consulo-plugin>
-    <application-components>
-        <component>
-            <implementation-class>org.jetbrains.plugins.ruby.addins.jsSupport.JavaScriptIntegrationSettings</implementation-class>
-        </component>
-    </application-components>
 </consulo-plugin>

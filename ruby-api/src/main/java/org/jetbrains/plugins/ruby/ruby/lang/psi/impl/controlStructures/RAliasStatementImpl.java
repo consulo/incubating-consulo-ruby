@@ -16,29 +16,29 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.controlStructures;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.navigation.ItemPresentation;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RAliasStatement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.RPsiElementBase;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RAliasPresentationUtil;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 18.06.2006
  */
-public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatement
+public class RAliasStatementImpl extends RPsiElementBase<StubElement> implements RAliasStatement
 {
 	public RAliasStatementImpl(ASTNode astNode)
 	{
@@ -85,13 +85,6 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	}
 
 	@Override
-	@Nonnull
-	public RVirtualStructuralElement createVirtualCopy(@Nullable final RVirtualContainer container, final RFileInfo info)
-	{
-		return this;
-	}
-
-	@Override
 	public StructureType getType()
 	{
 		return StructureType.ALIAS;
@@ -119,7 +112,7 @@ public class RAliasStatementImpl extends RPsiElementBase implements RAliasStatem
 	}
 
 	@Override
-	public boolean equalsToVirtual(@Nonnull final RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull final RStructuralElement element)
 	{
 		if(!(element instanceof RAliasStatement))
 		{

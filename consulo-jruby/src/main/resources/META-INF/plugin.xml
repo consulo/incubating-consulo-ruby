@@ -14,16 +14,5 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<addTo.listOfElements name="rdocToolwindowModuleExtensionList">jruby</addTo.listOfElements>
-
-		<sdkType implementation="org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkType" />
-
-		<inspectionToolProvider implementation="consulo.jruby.lang.JRubyInspectionToolProvider"/>
-
-		<moduleExtensionProvider key="jruby"
-								 parentKey="java"
-								 icon="consulo.jruby.JRubyIconGroup@jruby"
-								 name="JRuby"
-								 immutableClass="consulo.jruby.module.extension.JRubyModuleExtension"
-								 mutableClass="consulo.jruby.module.extension.JRubyMutableModuleExtension" />
 	</extensions>
 </consulo-plugin>

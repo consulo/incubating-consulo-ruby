@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod;
+
 import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeId;
 import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
 import consulo.navigation.ItemPresentation;
 import consulo.module.Module;
 
@@ -32,9 +33,9 @@ import consulo.module.Module;
  */
 public class MethodNode extends RailsNode
 {
-	private final RVirtualMethod myMethod;
+	private final RMethod myMethod;
 
-	public MethodNode(final Module module, final RVirtualMethod method, final String fileUrl)
+	public MethodNode(final Module module, final RMethod method, final String fileUrl)
 	{
 		super(module);
 		myMethod = method;
@@ -47,7 +48,7 @@ public class MethodNode extends RailsNode
 	}
 
 	@Nonnull
-	public static NodeId generateNodeId(final RVirtualMethod method)
+	public static NodeId generateNodeId(final RMethod method)
 	{
 		return NodeIdUtil.createForVirtualContainer(method);
 	}
@@ -59,7 +60,7 @@ public class MethodNode extends RailsNode
 		return RailsProjectNodeComparator.NodeType.METHOD;
 	}
 
-	public RVirtualMethod getMethod()
+	public RMethod getMethod()
 	{
 		return myMethod;
 	}

@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.nameConventions;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.List;
 
 import jakarta.annotation.Nullable;
@@ -26,8 +32,6 @@ import org.jetbrains.plugins.ruby.rails.RailsConstants;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.InterpretationMode;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
@@ -52,12 +56,12 @@ public class MailersConventions
 	private static final String ACTION_MAILER_BUILT_IN_GEMS_TMAIL = RailsConstants.ACTION_MAILER_BUILT_IN_GEMS_TMAIL_NAME;
 
 
-	public static boolean isMailerFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module)
+	public static boolean isMailerFile(@Nonnull final RFile rFile, @Nullable final Module module)
 	{
 		return isModelFile(rFile, module, RContainerUtil.getTopLevelClasses(rFile));
 	}
 
-	public static boolean isModelFile(@Nonnull final RVirtualFile rFile, @Nullable final Module module, @Nonnull final List<RVirtualClass> classes)
+	public static boolean isModelFile(@Nonnull final RFile rFile, @Nullable final Module module, @Nonnull final List<RClass> classes)
 	{
 		if(module == null)
 		{
@@ -76,7 +80,7 @@ public class MailersConventions
 			return false;
 		}
 
-		for(RVirtualClass virtualClass : classes)
+		for(RClass virtualClass : classes)
 		{
 			if(isMailerClass(virtualClass, module))
 			{
@@ -86,7 +90,7 @@ public class MailersConventions
 		return false;
 	}
 
-	public static boolean isMailerClass(@Nullable final RVirtualClass rClass, @Nonnull final Module module)
+	public static boolean isMailerClass(@Nullable final RClass rClass, @Nonnull final Module module)
 	{
 		if(!RailsFacetUtil.hasRailsSupport(module))
 		{
@@ -101,13 +105,13 @@ public class MailersConventions
 		 * into RVirtualElements hierarchy
 		 */
 
-          /*  final ArrayList<RVirtualContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
+          /*  final ArrayList<RContainer> path = RVirtualPsiUtils.getVirtualPath(rClass);
 			final String controllersRootURL = getControllersRootURL(module);
             assert controllersRootURL != null; // for rails modules isn't null
 
             final StringBuffer buff = new StringBuffer(controllersRootURL);
-            for (RVirtualContainer container : path) {
-                if (container instanceof RVirtualFile) {
+            for (RContainer container : path) {
+                if (container instanceof RFile) {
                     continue;
                 }
                 buff.append(VFS_PATH_SEPARATOR);

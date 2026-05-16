@@ -22,8 +22,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.project.Project;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualElementBase;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Prototypes;
@@ -49,17 +47,17 @@ public class Symbol
 	private Symbol myRootSymbol;
 
 
-	public Symbol(@Nonnull final Project project, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	public Symbol(@Nonnull final Project project, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RPsiElement prototype)
 	{
 		this(project, null, name, type, parent, prototype);
 	}
 
-	public Symbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	public Symbol(@Nonnull final FileSymbol fileSymbol, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RPsiElement prototype)
 	{
 		this(fileSymbol.getProject(), fileSymbol, name, type, parent, prototype);
 	}
 
-	private Symbol(@Nonnull final Project project, @Nullable final FileSymbol fileSymbol, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RVirtualElement prototype)
+	private Symbol(@Nonnull final Project project, @Nullable final FileSymbol fileSymbol, @Nullable final String name, @Nonnull final Type type, @Nullable final Symbol parent, @Nullable final RPsiElement prototype)
 	{
 		myId = currentID++;
 		myProject = project;
@@ -136,7 +134,7 @@ public class Symbol
 
 
 	@Nullable
-	public RVirtualElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol)
+	public RPsiElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol)
 	{
 		return fileSymbol != null ? fileSymbol.getLastVirualPrototype(this) : null;
 	}
@@ -173,7 +171,7 @@ public class Symbol
 		final Prototypes prototypes = fileSymbol.getVirtualPrototypes(this);
 		if(myType != Type.FILE && prototypes.hasElements())
 		{
-			final List<RVirtualElement> prototypesList = prototypes.getAll();
+			final List<RPsiElement> prototypesList = prototypes.getAll();
 			builder.append(" prototypes: ");
 
 			if(useHtml)
@@ -182,13 +180,9 @@ public class Symbol
 			}
 			else
 			{
-				for(RVirtualElement element : prototypesList)
+				for(RPsiElement element : prototypesList)
 				{
-					if(element instanceof RVirtualElementBase)
-					{
-						builder.append(" ").append(((RVirtualElementBase) element).getId());
-					}
-					else if(element instanceof RPsiElement)
+					if(element instanceof RPsiElement)
 					{
 						builder.append(" ").append(RubyPsiUtil.getPresentableName((RPsiElement) element));
 					}

@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.variables;
 
+import consulo.annotation.access.RequiredReadAction;
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiReference;
@@ -59,6 +60,7 @@ public abstract class RNamedElementBase extends RPsiElementBase implements RName
 
 	@Override
 	@Nonnull
+    @RequiredReadAction
 	public String getName()
 	{
 		final String text = getText();

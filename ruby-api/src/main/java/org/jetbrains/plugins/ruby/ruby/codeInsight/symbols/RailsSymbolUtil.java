@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
@@ -23,10 +27,6 @@ import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.Symbol;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.SymbolUtil;
@@ -101,7 +101,7 @@ public class RailsSymbolUtil
 	}
 
 	@Nullable
-	private static Module getModule(@Nonnull final Project project, @Nullable final RVirtualElement prototype)
+	private static Module getModule(@Nonnull final Project project, @Nullable final RPsiElement prototype)
 	{
 		if(prototype == null)
 		{
@@ -118,7 +118,7 @@ public class RailsSymbolUtil
 	@Nonnull
 	private static Children getRailsSymbols(@Nonnull final FileSymbol fileSymbol, @Nonnull final Symbol symbol, @Nonnull final Context context, final boolean forceShowAll)
 	{
-		final RVirtualElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
+		final RPsiElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
 		final Module module = getModule(symbol.getProject(), prototype);
 		// We ensure, that we`re working in the rails module context
 		if(module == null || !RailsFacetUtil.hasRailsSupport(module))
@@ -131,26 +131,26 @@ public class RailsSymbolUtil
 		}
 
 		// Controller handling
-		if(prototype instanceof RVirtualClass)
+		if(prototype instanceof RClass)
 		{
-			final RVirtualClass controllerClass = (RVirtualClass) prototype;
+			final RClass controllerClass = (RClass) prototype;
 			if(ControllersConventions.isControllerClass(controllerClass, module))
 			{
 				return getSymbolsForController(fileSymbol, symbol, context);
 			}
 		}
 		// Helper handling
-		if(prototype instanceof RVirtualModule)
+		if(prototype instanceof RModule)
 		{
-			final RVirtualModule helperModule = (RVirtualModule) prototype;
+			final RModule helperModule = (RModule) prototype;
 			if(HelpersConventions.isHelperModule(helperModule, module))
 			{
 				return getSymbolsForHelper(fileSymbol, symbol, ControllersConventions.getControllerClassNameByHelper(helperModule), context);
 			}
 		}
-		if(prototype instanceof RVirtualFile)
+		if(prototype instanceof RFile)
 		{
-			final RStructuralElement file = RVirtualPsiUtil.findInPsi(symbol.getProject(), (RVirtualFile) prototype);
+			final RStructuralElement file = RVirtualPsiUtil.findInPsi(symbol.getProject(), (RFile) prototype);
 			if(file instanceof RFile)
 			{
 				final VirtualFile viewFile = ((RFile) file).getVirtualFile();
@@ -234,7 +234,7 @@ public class RailsSymbolUtil
 		addApplicationHelper(fileSymbol, children, context);
 
 		// add own controller public methods and instance variables, controller, base_path
-		final RVirtualClass controllerVClass = ViewsConventions.getControllerByView(viewFile, module);
+		final RClass controllerVClass = ViewsConventions.getControllerByView(viewFile, module);
 		if(controllerVClass == null)
 		{
 			return children;

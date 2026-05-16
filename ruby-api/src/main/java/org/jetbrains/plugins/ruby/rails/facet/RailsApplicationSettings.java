@@ -16,12 +16,16 @@
 
 package org.jetbrains.plugins.ruby.rails.facet;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import consulo.ide.ServiceManager;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
 import consulo.component.persist.PersistentStateComponent;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import jakarta.inject.Singleton;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,6 +34,9 @@ import jakarta.annotation.Nullable;
  * @date: Apr 14, 2008
  */
 @State(name = "RailsApplicationSettings", storages = @Storage("ruby.xml"))
+@ServiceAPI(ComponentScope.APPLICATION)
+@ServiceImpl
+@Singleton
 public class RailsApplicationSettings implements PersistentStateComponent<RailsApplicationSettings>
 {
 	@Nullable

@@ -1,5 +1,6 @@
 package org.jetbrains.plugins.ruby.ruby.lang;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.psi.PsiElement;
@@ -18,6 +19,7 @@ import consulo.document.util.TextRange;
  * @author VISTALL
  * @since 24.09.13.
  */
+@ExtensionImpl
 public class RubyDeclarationRangeHandler implements DeclarationRangeHandler<PsiElement>
 {
 	@Nonnull

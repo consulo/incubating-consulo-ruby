@@ -24,7 +24,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
@@ -57,7 +56,7 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 	@Nullable
 	protected String showDialog()
 	{
-		// TODO reuse TreeClassChooserFactory.getInstance(getProject()).newChooser(RVirtualClass.class)
+		// TODO reuse TreeClassChooserFactory.getInstance(getProject()).newChooser(RClass.class)
 
 //		configureDialog(dialog);
 //
@@ -68,7 +67,7 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 //			return null;
 //		}
 //		// on ok
-//		final RVirtualClass rClass = dialog.getSelectedClass();
+//		final RClass rClass = dialog.getSelectedClass();
 //		onClassChoosen(rClass);
 //		if(rClass == null)
 //		{
@@ -86,7 +85,7 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 		return null;
 	}
 
-	protected void onClassChoosen(@Nullable final RVirtualClass psiClass)
+	protected void onClassChoosen(@Nullable final RClass psiClass)
 	{
 		String testScriptPath;
 		if(psiClass == null)
@@ -135,7 +134,7 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 	{
 
 		final Project project = getProject();
-		final RVirtualClass rVClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(qualifiedNameClassName, project, mySearchScope, scriptFile, null);
+		final RClass rVClass = RCacheUtil.getClassByNameInScriptInRubyTestMode(qualifiedNameClassName, project, mySearchScope, scriptFile, null);
 		if(rVClass != null)
 		{
 			final RPsiElement psiElem = RVirtualPsiUtil.findPsiByVirtualElement(rVClass, project);
@@ -170,10 +169,10 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 	// e.g. in modal select smth. dialog
 //	private static class TestCachingFilter implements TreeRClassChooserDialog.ClassFilter
 //	{
-//		private HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>> processedElements = new HashMap<Integer, Pair<SoftReference<RVirtualClass>, Boolean>>();
+//		private HashMap<Integer, Pair<SoftReference<RClass>, Boolean>> processedElements = new HashMap<Integer, Pair<SoftReference<RClass>, Boolean>>();
 //
 //		@Override
-//		public boolean isAccepted(@Nonnull final RVirtualClass rVClass)
+//		public boolean isAccepted(@Nonnull final RClass rVClass)
 //		{
 //			final VirtualFile virtualFile = rVClass.getVirtualFile();
 //			if(virtualFile == null)
@@ -182,13 +181,13 @@ public class TestCaseClassBrowser extends BrowseModuleValueActionListener
 //			}
 //
 //			final int key = rVClass.hashCode();
-//			final Pair<SoftReference<RVirtualClass>, Boolean> pair = processedElements.get(key);
+//			final Pair<SoftReference<RClass>, Boolean> pair = processedElements.get(key);
 //			boolean isTestCase;
 //			if(pair == null || pair.first.get() != rVClass)
 //			{
 //				isTestCase = RTestUnitUtil.isClassUnitTestCase(rVClass, null);
 //				//TODO replace rVClass with its path..
-//				processedElements.put(key, new Pair<SoftReference<RVirtualClass>, Boolean>(new SoftReference<RVirtualClass>(rVClass), isTestCase));
+//				processedElements.put(key, new Pair<SoftReference<RClass>, Boolean>(new SoftReference<RClass>(rVClass), isTestCase));
 //
 //			}
 //			else

@@ -30,7 +30,9 @@ import consulo.execution.ui.RunContentDescriptor;
 import consulo.execution.ui.console.ConsoleView;
 import consulo.execution.ui.console.Filter;
 import consulo.execution.ui.console.TextConsoleBuilderFactory;
+import consulo.logging.Logger;
 import consulo.platform.base.icon.PlatformIconGroup;
+import consulo.process.ExecutionException;
 import consulo.process.ProcessHandler;
 import consulo.process.event.ProcessListener;
 import consulo.project.Project;
@@ -56,300 +58,269 @@ import java.util.StringTokenizer;
  * @author: oleg, Roman Chernyatchik
  * @date: 02.09.2006
  */
-public class ConsoleRunner
-{
-	private final Project myProject;
-	private final String myConsoleTitle;
-	private ProcessHandler myProcessHandler;
-	private CommandLineArgumentsProvider myArgumentsProvider;
-	private final Filter[] myConsoleFilters;
-	private final ProcessListener myProcessListener;
-	@Nullable
-	private final String myWorkingDir;
-	private final AnAction[] myUserActions;
-	private RunContentDescriptorFactory myDescriptorFactory;
+public class ConsoleRunner {
+    private final Project myProject;
+    private final String myConsoleTitle;
+    private ProcessHandler myProcessHandler;
+    private CommandLineArgumentsProvider myArgumentsProvider;
+    private final Filter[] myConsoleFilters;
+    private final ProcessListener myProcessListener;
+    @Nullable
+    private final String myWorkingDir;
+    private final AnAction[] myUserActions;
+    private RunContentDescriptorFactory myDescriptorFactory;
 
-	/**
-	 * @param project           Current project
-	 * @param processListener   Listener for add.
-	 * @param consoleFilters    filter console ouput. If is null filter will not be added.
-	 * @param userActions       if these actions are not null, its will be added to console toolbar
-	 * @param consoleTitle      Title for console
-	 * @param workingDir        Working directory, null to inherit parent add home directory
-	 * @param provider          Provides commandline arguments
-	 * @param descriptorFactory User Factory for creating non default run content descriptors
-	 */
-	private ConsoleRunner(@Nonnull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, @Nonnull final String consoleTitle, @Nullable final String workingDir, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory)
-	{
-		myProject = project;
-		myConsoleTitle = consoleTitle;
-		myArgumentsProvider = provider;
-		myConsoleFilters = consoleFilters;
-		myProcessListener = processListener;
-		myWorkingDir = workingDir;
-		myUserActions = userActions;
-		myDescriptorFactory = descriptorFactory;
-		init();
+    /**
+     * @param project           Current project
+     * @param processListener   Listener for add.
+     * @param consoleFilters    filter console ouput. If is null filter will not be added.
+     * @param userActions       if these actions are not null, its will be added to console toolbar
+     * @param consoleTitle      Title for console
+     * @param workingDir        Working directory, null to inherit parent add home directory
+     * @param provider          Provides commandline arguments
+     * @param descriptorFactory User Factory for creating non default run content descriptors
+     */
+    private ConsoleRunner(@Nonnull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, @Nonnull final String consoleTitle, @Nullable final String workingDir, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory) {
+        myProject = project;
+        myConsoleTitle = consoleTitle;
+        myArgumentsProvider = provider;
+        myConsoleFilters = consoleFilters;
+        myProcessListener = processListener;
+        myWorkingDir = workingDir;
+        myUserActions = userActions;
+        myDescriptorFactory = descriptorFactory;
+        init();
 
-	}
+    }
 
-	private void init()
-	{
-		// add holder created
-		final String[] command = myArgumentsProvider.getArguments();
-		myProcessHandler = ColouredCommandLineState.createOSProcessHandler(Runner.createProcess(myWorkingDir, command), toCommandLine(command));
-		if(myProcessListener != null)
-		{
-			myProcessHandler.addProcessListener(myProcessListener);
-		}
-		// consoleview creating
-		ConsoleView myConsoleView = TextConsoleBuilderFactory.getInstance().createBuilder(myProject).getConsole();
-		myConsoleView.setHelpId(myConsoleTitle);
+    private void init() {
+        // add holder created
+        final String[] command = myArgumentsProvider.getArguments();
+        try {
+            myProcessHandler = ColouredCommandLineState.createOSProcessHandler(Runner.createProcess(myWorkingDir, command));
+        }
+        catch (ExecutionException e) {
+            Logger.getInstance(ConsoleRunner.class).error(e);
+        }
 
-		// add stacktrace filter.(extends default filter)
-		myConsoleView.addMessageFilter(new RStackTraceFilter(myProject, myWorkingDir));
-		if(myConsoleFilters != null)
-		{
-			// add other filters
-			for(Filter filter : myConsoleFilters)
-			{
-				myConsoleView.addMessageFilter(filter);
-			}
-		}
-		myConsoleView.attachToProcess(myProcessHandler);
-		// Runner creating
-		final Executor defaultRunner = ExecutorRegistry.getInstance().getExecutorById(DefaultRunExecutor.EXECUTOR_ID);
-		final DefaultActionGroup toolbarActions = new DefaultActionGroup();
-		final DefaultActionGroup userActions = new DefaultActionGroup();
+        if (myProcessListener != null) {
+            myProcessHandler.addProcessListener(myProcessListener);
+        }
+        // consoleview creating
+        ConsoleView myConsoleView = TextConsoleBuilderFactory.getInstance().createBuilder(myProject).getConsole();
+        myConsoleView.setHelpId(myConsoleTitle);
 
-		//run content desciptor factory
-		final RunContentDescriptorFactory factory = myDescriptorFactory == null ? RunContentDescriptorFactory.DEFAULT : myDescriptorFactory;
-		final RunContentDescriptor myDescriptor = factory.createDesc(myConsoleView, myProcessHandler, new ConsolePanel(myConsoleView, toolbarActions, userActions), myConsoleTitle);
+        // add stacktrace filter.(extends default filter)
+        myConsoleView.addMessageFilter(new RStackTraceFilter(myProject, myWorkingDir));
+        if (myConsoleFilters != null) {
+            // add other filters
+            for (Filter filter : myConsoleFilters) {
+                myConsoleView.addMessageFilter(filter);
+            }
+        }
+        myConsoleView.attachToProcess(myProcessHandler);
+        // Runner creating
+        final Executor defaultRunner = ExecutorRegistry.getInstance().getExecutorById(DefaultRunExecutor.EXECUTOR_ID);
+        final DefaultActionGroup toolbarActions = new DefaultActionGroup();
+        final DefaultActionGroup userActions = new DefaultActionGroup();
 
-		// adding actions
-		//user actions
-		if(myUserActions != null)
-		{
-			for(AnAction userAction : myUserActions)
-			{
-				userActions.add(userAction);
-			}
-		}
-		//rerun
-		final Runnable rerun = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				//Remove obsolete listener
-				if(myProcessListener != null)
-				{
-					myProcessHandler.removeProcessListener(myProcessListener);
-				}
-				//Start new add
-				init();
-				startProcess(true);//todo
-			}
-		};
-		toolbarActions.add(new RerunAction(myConsoleView, rerun));
-		//stop
-		toolbarActions.add(ActionManager.getInstance().getAction(IdeActions.ACTION_STOP_PROGRAM));
-		//cmd line arguments
-		toolbarActions.add(new ShowCmdLine());
-		//close
-		toolbarActions.add(new CloseAction(defaultRunner, myDescriptor, myProject));
-		// showing run content
-		ExecutionManager.getInstance(myProject).getContentManager().showRunContent(defaultRunner, myDescriptor);
-	}
+        //run content desciptor factory
+        final RunContentDescriptorFactory factory = myDescriptorFactory == null ? RunContentDescriptorFactory.DEFAULT : myDescriptorFactory;
+        final RunContentDescriptor myDescriptor = factory.createDesc(myConsoleView, myProcessHandler, new ConsolePanel(myConsoleView, toolbarActions, userActions), myConsoleTitle);
 
-	//    /**
-	//     * Runs command in idea Run console
-	//     *
-	//     * @param project      Current project
-	//     * @param command      Command to execute (one command corresponds to one add argument)
-	//     * @param workingDir   Working directory, null to inherit parent add home directory
-	//     * @param consoleTitle Title for console
-	//     */
-	//    public static void run(@NotNull final Project project,
-	//                           @NotNull final String consoleTitle,
-	//                           @Nullable final String workingDir, @NotNull final String ... command) {
-	//        run(project, null, consoleTitle, workingDir,
-	//            new RubyScriptRunnerArgumentsProvider(command, null, null));
-	//    }
+        // adding actions
+        //user actions
+        if (myUserActions != null) {
+            for (AnAction userAction : myUserActions) {
+                userActions.add(userAction);
+            }
+        }
+        //rerun
+        final Runnable rerun = new Runnable() {
+            @Override
+            public void run() {
+                //Remove obsolete listener
+                if (myProcessListener != null) {
+                    myProcessHandler.removeProcessListener(myProcessListener);
+                }
+                //Start new add
+                init();
+                startProcess(true);//todo
+            }
+        };
+        toolbarActions.add(new RerunAction(myConsoleView, rerun));
+        //stop
+        toolbarActions.add(ActionManager.getInstance().getAction(IdeActions.ACTION_STOP_PROGRAM));
+        //cmd line arguments
+        toolbarActions.add(new ShowCmdLine());
+        //close
+        toolbarActions.add(new CloseAction(defaultRunner, myDescriptor, myProject));
+        // showing run content
+        ExecutionManager.getInstance(myProject).getContentManager().showRunContent(defaultRunner, myDescriptor);
+    }
 
-	/**
-	 * Runs command in idea Run console
-	 *
-	 * @param project               Current project
-	 * @param processListener       Listener for add.
-	 * @param consoleFilters        filter console ouput. If is null filter will not be added.
-	 * @param userActions           if these actions are not null, its will be added to console toolbar
-	 * @param runInBackgroundThread Run operation in background thread and show modal dialog
-	 * @param provider              Provides commandline arguments
-	 * @param descriptorFactory     User Factory for creating non default run content descriptors
-	 * @param workingDir            Working directory, null to inherit parent add home directory
-	 * @param consoleTitle          Title for console
-	 */
-	public static void run(@Nonnull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String consoleTitle, @Nullable final String workingDir, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory)
-	{
-		// create runner
-		IdeaInternalUtil.runInEventDispatchThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				// Must be executed in EDT
-				final ConsoleRunner runner = new ConsoleRunner(project, processListener, consoleFilters, userActions, consoleTitle, workingDir, provider, descriptorFactory);
-				runner.startProcess(runInBackgroundThread);
-			}
-		}, Application.get().getDefaultModalityState());
-	}
+    //    /**
+    //     * Runs command in idea Run console
+    //     *
+    //     * @param project      Current project
+    //     * @param command      Command to execute (one command corresponds to one add argument)
+    //     * @param workingDir   Working directory, null to inherit parent add home directory
+    //     * @param consoleTitle Title for console
+    //     */
+    //    public static void run(@NotNull final Project project,
+    //                           @NotNull final String consoleTitle,
+    //                           @Nullable final String workingDir, @NotNull final String ... command) {
+    //        run(project, null, consoleTitle, workingDir,
+    //            new RubyScriptRunnerArgumentsProvider(command, null, null));
+    //    }
 
-	public ProcessHandler getProcessHandler()
-	{
-		return myProcessHandler;
-	}
+    /**
+     * Runs command in idea Run console
+     *
+     * @param project               Current project
+     * @param processListener       Listener for add.
+     * @param consoleFilters        filter console ouput. If is null filter will not be added.
+     * @param userActions           if these actions are not null, its will be added to console toolbar
+     * @param runInBackgroundThread Run operation in background thread and show modal dialog
+     * @param provider              Provides commandline arguments
+     * @param descriptorFactory     User Factory for creating non default run content descriptors
+     * @param workingDir            Working directory, null to inherit parent add home directory
+     * @param consoleTitle          Title for console
+     */
+    public static void run(@Nonnull final Project project, @Nullable final ProcessListener processListener, @Nullable final Filter[] consoleFilters, @Nullable final AnAction[] userActions, final boolean runInBackgroundThread, @Nonnull final String consoleTitle, @Nullable final String workingDir, @Nonnull final CommandLineArgumentsProvider provider, @Nullable final RunContentDescriptorFactory descriptorFactory) {
+        // create runner
+        IdeaInternalUtil.runInEventDispatchThread(new Runnable() {
+            @Override
+            public void run() {
+                // Must be executed in EDT
+                final ConsoleRunner runner = new ConsoleRunner(project, processListener, consoleFilters, userActions, consoleTitle, workingDir, provider, descriptorFactory);
+                runner.startProcess(runInBackgroundThread);
+            }
+        }, Application.get().getDefaultModalityState());
+    }
 
-	private void startProcess(final boolean runInBackgroundThread)
-	{
-		final String title = RBundle.message("progress.title.console.runner.modaldialog.running", myConsoleTitle);
-		final Task task = new Task.Backgroundable(myProject, title, true)
-		{
-			@Override
-			public void run(ProgressIndicator indicator)
-			{
-				if(indicator != null)
-				{
-					indicator.setText(RBundle.message("progress.backgnd.indicator.title.please.wait", getTitle()));
-				}
+    public ProcessHandler getProcessHandler() {
+        return myProcessHandler;
+    }
 
-				myProcessHandler.startNotify();
-				myProcessHandler.waitFor();
-			}
+    private void startProcess(final boolean runInBackgroundThread) {
+        final String title = RBundle.message("progress.title.console.runner.modaldialog.running", myConsoleTitle);
+        final Task task = new Task.Backgroundable(myProject, title, true) {
+            @Override
+            public void run(ProgressIndicator indicator) {
+                if (indicator != null) {
+                    indicator.setText(RBundle.message("progress.backgnd.indicator.title.please.wait", getTitle()));
+                }
 
-			@Override
-			public void onSuccess()
-			{
-				final Runnable runnable = new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						FileDocumentManager.getInstance().saveAllDocuments();
-					}
-				};
-				IdeaInternalUtil.runInEventDispatchThread(runnable, ModalityState.nonModal());
-			}
-		};
+                myProcessHandler.startNotify();
+                myProcessHandler.waitFor();
+            }
 
-		if(runInBackgroundThread)
-		{
-			ProgressManager.getInstance().run(task);
-		}
-		else
-		{
-			task.run(null);
-		}
-	}
+            @Override
+            public void onSuccess() {
+                final Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        FileDocumentManager.getInstance().saveAllDocuments();
+                    }
+                };
+                IdeaInternalUtil.runInEventDispatchThread(runnable, ModalityState.nonModal());
+            }
+        };
 
-	private static String toCommandLine(String... command)
-	{
-		if(command.length > 0)
-		{
-			command[0] = FileUtil.toSystemDependentName(command[0]);
-			return TextUtil.concat(command);
-		}
-		return TextUtil.EMPTY_STRING;
-	}
+        if (runInBackgroundThread) {
+            ProgressManager.getInstance().run(task);
+        }
+        else {
+            task.run(null);
+        }
+    }
 
-	private class RerunAction extends AnAction
-	{
-		private Runnable myRerunTask;
+    private static String toCommandLine(String... command) {
+        if (command.length > 0) {
+            command[0] = FileUtil.toSystemDependentName(command[0]);
+            return TextUtil.concat(command);
+        }
+        return TextUtil.EMPTY_STRING;
+    }
 
-		public RerunAction(final ConsoleView consoleView, Runnable rerun)
-		{
-			super(RBundle.message("action.rerun"), RBundle.message("action.rerun"), PlatformIconGroup.actionsRerun());
+    private class RerunAction extends AnAction {
+        private Runnable myRerunTask;
 
-			registerCustomShortcutSet(CommonShortcuts.getRerun(), consoleView.getComponent());
-			myRerunTask = rerun;
-		}
+        public RerunAction(final ConsoleView consoleView, Runnable rerun) {
+            super(RBundle.message("action.rerun"), RBundle.message("action.rerun"), PlatformIconGroup.actionsRerun());
 
-		@Override
-		public void update(AnActionEvent e)
-		{
-			e.getPresentation().setEnabled(getProcessHandler().isProcessTerminated());
-		}
+            registerCustomShortcutSet(CommonShortcuts.getRerun(), consoleView.getComponent());
+            myRerunTask = rerun;
+        }
 
-		@Override
-		public void actionPerformed(AnActionEvent e)
-		{
-			myRerunTask.run();
-		}
-	}
+        @Override
+        public void update(AnActionEvent e) {
+            e.getPresentation().setEnabled(getProcessHandler().isProcessTerminated());
+        }
 
-	private class ShowCmdLine extends AnAction
-	{
+        @Override
+        public void actionPerformed(AnActionEvent e) {
+            myRerunTask.run();
+        }
+    }
 
-		@SuppressWarnings({"UnresolvedPropertyKey"})
-		public ShowCmdLine()
-		{
-			super(RBundle.message("action.consolerunner.edit.cmdline.text"), RBundle.message("action.consolerunner.edit.cmdline.description"), RubyIcons.RUBY_RUNNER_SHOW_CMDLINE);
-		}
+    private class ShowCmdLine extends AnAction {
 
-		@Override
-		public void update(final AnActionEvent e)
-		{
-			e.getPresentation().setEnabled(getProcessHandler().isProcessTerminated());
-		}
+        @SuppressWarnings({"UnresolvedPropertyKey"})
+        public ShowCmdLine() {
+            super(RBundle.message("action.consolerunner.edit.cmdline.text"), RBundle.message("action.consolerunner.edit.cmdline.description"), RubyIcons.RUBY_RUNNER_SHOW_CMDLINE);
+        }
 
-		@Override
-		public void actionPerformed(final AnActionEvent e)
-		{
-			// Conversts args array to cmdline
-			final String[] args = myArgumentsProvider.getArguments();
-			final StringBuilder buff = new StringBuilder();
-			for(String arg : args)
-			{
-				buff.append(arg);
-				buff.append(" ");
-			}
+        @Override
+        public void update(final AnActionEvent e) {
+            e.getPresentation().setEnabled(getProcessHandler().isProcessTerminated());
+        }
 
-			final String msg = RBundle.message("action.consolerunner.edit.cmdline.dialog.text");
-			final String title = RBundle.message("action.consolerunner.edit.cmdline.dialog.title");
-			final String result = Messages.showInputDialog(msg, title, null, buff.toString(), null);
-			// Exit on "Cancel"
-			if(TextUtil.isEmpty(result))
-			{
-				return;
-			}
+        @Override
+        public void actionPerformed(final AnActionEvent e) {
+            // Conversts args array to cmdline
+            final String[] args = myArgumentsProvider.getArguments();
+            final StringBuilder buff = new StringBuilder();
+            for (String arg : args) {
+                buff.append(arg);
+                buff.append(" ");
+            }
 
-			// Disables actions for cmdline params controling
-			myArgumentsProvider.disableParametersActions();
+            final String msg = RBundle.message("action.consolerunner.edit.cmdline.dialog.text");
+            final String title = RBundle.message("action.consolerunner.edit.cmdline.dialog.title");
+            final String result = Messages.showInputDialog(msg, title, null, buff.toString(), null);
+            // Exit on "Cancel"
+            if (TextUtil.isEmpty(result)) {
+                return;
+            }
 
-			// Parse user cmdline
-			final ArrayList<String> userArgsList = new ArrayList<String>();
-			final StringTokenizer st = new StringTokenizer(result);
-			while(st.hasMoreTokens())
-			{
-				userArgsList.add(st.nextToken());
-			}
-			final String[] userArgs = userArgsList.toArray(new String[userArgsList.size()]);
+            // Disables actions for cmdline params controling
+            myArgumentsProvider.disableParametersActions();
 
-			// Set new arguments provider
-			myArgumentsProvider = new RubyScriptRunnerArgumentsProvider(userArgs, null, null);
-		}
-	}
+            // Parse user cmdline
+            final ArrayList<String> userArgsList = new ArrayList<String>();
+            final StringTokenizer st = new StringTokenizer(result);
+            while (st.hasMoreTokens()) {
+                userArgsList.add(st.nextToken());
+            }
+            final String[] userArgs = userArgsList.toArray(new String[userArgsList.size()]);
 
-	//    public class MyRunContentDescriptor extends RunContentDescriptor {
-	//
-	//        public MyRunContentDescriptor(ExecutionConsole executionConsole, ProcessHandler processHandler, JComponent component, String displayName) {
-	//            super(executionConsole, processHandler, component, displayName);
-	//        }
-	//
-	//        public void setAttachedContent(Content content) {
-	//            super.setAttachedContent(content);
-	//            content.setPinned(true);
-	//            content.setCloseable();
-	//        }
-	//    }
+            // Set new arguments provider
+            myArgumentsProvider = new RubyScriptRunnerArgumentsProvider(userArgs, null, null);
+        }
+    }
+
+    //    public class MyRunContentDescriptor extends RunContentDescriptor {
+    //
+    //        public MyRunContentDescriptor(ExecutionConsole executionConsole, ProcessHandler processHandler, JComponent component, String displayName) {
+    //            super(executionConsole, processHandler, component, displayName);
+    //        }
+    //
+    //        public void setAttachedContent(Content content) {
+    //            super.setAttachedContent(content);
+    //            content.setPinned(true);
+    //            content.setCloseable();
+    //        }
+    //    }
 }

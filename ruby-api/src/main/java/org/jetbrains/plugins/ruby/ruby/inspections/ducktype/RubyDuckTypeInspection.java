@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.inspections.ducktype;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.editor.rawHighlight.HighlightDisplayLevel;
@@ -33,6 +34,7 @@ import consulo.language.editor.inspection.ProblemsHolder;
  * @author: oleg
  * @date: Jun 25, 2007
  */
+@ExtensionImpl
 public class RubyDuckTypeInspection extends LocalInspectionTool
 {
 	@NonNls

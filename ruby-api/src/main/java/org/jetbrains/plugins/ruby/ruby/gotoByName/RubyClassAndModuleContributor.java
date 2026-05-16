@@ -16,21 +16,26 @@
 
 package org.jetbrains.plugins.ruby.ruby.gotoByName;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import consulo.module.ModuleManager;
-import jakarta.annotation.Nonnull;
-import org.jetbrains.plugins.ruby.ruby.cache.RCacheUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
-import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import consulo.ide.navigation.ChooseByNameContributor;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.util.function.Processor;
+import consulo.content.scope.SearchScope;
+import consulo.ide.navigation.GotoClassOrTypeContributor;
+import consulo.language.psi.scope.GlobalSearchScope;
+import consulo.language.psi.search.FindSymbolParameters;
+import consulo.language.psi.stub.IdFilter;
+import consulo.language.psi.stub.StubIndex;
 import consulo.navigation.NavigationItem;
-import consulo.module.Module;
 import consulo.project.Project;
-import consulo.content.bundle.Sdk;
+import consulo.project.content.scope.ProjectAwareSearchScope;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.index.RubyClassNameIndex;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.index.RubyModuleNameIndex;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,80 +43,46 @@ import consulo.content.bundle.Sdk;
  * @author: Roman Chernyatchik, oleg
  * @date: 29.10.2006
  */
+@ExtensionImpl
+public class RubyClassAndModuleContributor extends RubyBaseContributor implements GotoClassOrTypeContributor {
 
-public class RubyClassAndModuleContributor extends RubyBaseContributor implements ChooseByNameContributor
-{
+    @Override
+    public void processNames(Processor<String> processor, SearchScope searchScope, IdFilter idFilter) {
+        StubIndex.getInstance().processAllKeys(RubyClassNameIndex.KEY, processor, (ProjectAwareSearchScope) searchScope, idFilter);
+        StubIndex.getInstance().processAllKeys(RubyModuleNameIndex.KEY, processor, (ProjectAwareSearchScope) searchScope, idFilter);
+    }
 
-	@Override
-	public String[] getNames(final Project project, boolean includeNonProjectItems)
-	{
-		final ArrayList<String> names = new ArrayList<String>();
-		final Module[] modules = ModuleManager.getInstance(project).getModules();
-		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
+    @Override
+    public void processElementsWithName(String s, Processor<NavigationItem> processor, FindSymbolParameters findSymbolParameters) {
+        NavigationItem[] itemsByName = getItemsByName(s, findSymbolParameters.getCompletePattern(), findSymbolParameters.getProject(), findSymbolParameters.isSearchInLibraries());
 
-		for(Module module : modules)
-		{
-			final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
-			// CachesManager is null for not ruby modules
-			if(cachesManager != null)
-			{
-				final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
-				names.addAll(declarationsIndex.getAllClassesNames());
-				names.addAll(declarationsIndex.getAllModulesNames());
-			}
+        for (NavigationItem navigationItem : itemsByName) {
+            if (!processor.process(navigationItem)) {
+                break;
+            }
+        }
+    }
 
-			// Adding sdk`s info if needed
-			if(includeNonProjectItems)
-			{
-				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-				final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
-				if(declarationsIndex != null)
-				{
-					names.addAll(declarationsIndex.getAllClassesNames());
-					names.addAll(declarationsIndex.getAllModulesNames());
-				}
-			}
-		}
-		return names.toArray(new String[names.size()]);
-	}
+    @Override
+    public String[] getNames(final Project project, boolean includeNonProjectItems) {
+        final Set<String> names = new LinkedHashSet<String>();
+        names.addAll(RubyClassNameIndex.allKeys(project));
+        names.addAll(RubyModuleNameIndex.allKeys(project));
+        return names.toArray(new String[names.size()]);
+    }
 
-	@Override
-	public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems)
-	{
-		//TODO Refactor with RCacheUtils
-		final Module[] modules = RModuleUtil.getAllModulesWithRubySupport(project);
-		final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
-		final RubySdkCachesManager sdkCachesManager = RubySdkCachesManager.getInstance(project);
+    @Override
+    public NavigationItem[] getItemsByName(String name, final String pattern, Project project, boolean includeNonProjectItems) {
+        final GlobalSearchScope scope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
+        final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
+        final List<RPsiElement> elements = new ArrayList<RPsiElement>();
+        elements.addAll(RubyClassNameIndex.find(name, project, scope));
+        elements.addAll(RubyModuleNameIndex.find(name, project, scope));
+        addItems(elements, project, items);
+        return items.toArray(new NavigationItem[items.size()]);
+    }
 
-		for(Module module : modules)
-		{
-			final RubyModuleCachesManager cachesManager = RCacheUtil.getCachesManager(module);
-			// CachesManager is null for not ruby modules
-			if(cachesManager != null)
-			{
-				final DeclarationsIndex declarationsIndex = cachesManager.getDeclarationsIndex();
-				addItems(declarationsIndex.getClassesByName(name), project, items);
-				addItems(declarationsIndex.getModulesByName(name), project, items);
-			}
-
-			// Adding sdk`s info if needed
-			if(includeNonProjectItems)
-			{
-				final Sdk sdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
-				final DeclarationsIndex declarationsIndex = sdkCachesManager.getSdkDeclarationsIndex(sdk);
-				if(declarationsIndex != null)
-				{
-					addItems(declarationsIndex.getClassesByName(name), project, items);
-					addItems(declarationsIndex.getModulesByName(name), project, items);
-				}
-			}
-		}
-		return items.toArray(new NavigationItem[items.size()]);
-	}
-
-	private void addItems(@Nonnull final List elements, @Nonnull final Project project, @Nonnull final ArrayList<NavigationItem> items)
-	{
-		//noinspection unchecked
-		items.addAll(getItems(elements, project));
-	}
+    private void addItems(@Nonnull final List<RPsiElement> elements, @Nonnull final Project project, @Nonnull final ArrayList<NavigationItem> items) {
+        items.addAll(getItems(elements, project));
+    }
 }

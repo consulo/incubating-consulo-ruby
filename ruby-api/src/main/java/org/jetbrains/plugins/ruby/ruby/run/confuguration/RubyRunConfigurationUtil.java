@@ -18,11 +18,11 @@ package org.jetbrains.plugins.ruby.ruby.run.confuguration;
 
 import java.io.File;
 
+import consulo.execution.RunManager;
 import jakarta.annotation.Nullable;
 
 import consulo.execution.RunnerAndConfigurationSettings;
 import consulo.execution.configuration.RunConfiguration;
-import consulo.execution.internal.RunManagerEx;
 import consulo.language.psi.PsiElement;
 import consulo.project.Project;
 import consulo.virtualFileSystem.VirtualFile;
@@ -56,8 +56,7 @@ public class RubyRunConfigurationUtil
 	 */
 	public static RunnerAndConfigurationSettings create(final Project project, final RubyRunConfigurationFactory factory, final String name)
 	{
-
-		return RunManagerEx.getInstanceEx(project).createConfiguration(name, factory);
+		return RunManager.getInstance(project).createRunConfiguration(name, factory);
 	}
 
 	public static String collectArguments(final String[] args)

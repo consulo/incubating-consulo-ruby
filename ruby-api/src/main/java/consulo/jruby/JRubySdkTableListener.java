@@ -1,6 +1,8 @@
 package consulo.jruby;
 
+import consulo.annotation.component.ExtensionImpl;
 import consulo.application.ApplicationManager;
+import consulo.application.event.ApplicationLoadListener;
 import consulo.content.base.BinariesOrderRootType;
 import consulo.content.base.SourcesOrderRootType;
 import consulo.content.bundle.Sdk;
@@ -17,12 +19,14 @@ import org.jetbrains.plugins.ruby.ruby.sdk.jruby.JRubySdkUtil;
  * @author: oleg
  * @date: Jul 28, 2008
  */
-public class JRubySdkTableListener
+@ExtensionImpl
+public class JRubySdkTableListener implements ApplicationLoadListener
 {
 	private SdkTableListener myJdkTableListener;
 	protected Project myProject;
 
-	public JRubySdkTableListener()
+	@Override
+	public void beforeApplicationLoaded()
 	{
 		myJdkTableListener = new SdkTableListener()
 		{

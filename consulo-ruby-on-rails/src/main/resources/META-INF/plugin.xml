@@ -10,13 +10,4 @@
 	</tags>
 
 	<experimental>true</experimental>
-
-	<extensions defaultExtensionNs="com.intellij">
-		<moduleExtensionProvider key="ruby-on-rails"
-								 parentKey="ruby"
-								 name="Rails"
-								 icon="consulo.ruby.api.RubyApiIconGroup@rails.rails_small"
-								 immutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsModuleExtension"
-								 mutableClass="consulo.ruby.rails.module.extension.BaseRubyOnRailsMutableModuleExtension" />
-	</extensions>
 </consulo-plugin>

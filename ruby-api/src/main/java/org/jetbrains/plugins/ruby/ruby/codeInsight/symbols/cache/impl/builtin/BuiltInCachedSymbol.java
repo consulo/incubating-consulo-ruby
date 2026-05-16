@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.impl.builtin;
 
+import consulo.application.ReadAction;
 import jakarta.annotation.Nullable;
 
 import consulo.application.ApplicationManager;
@@ -69,7 +70,7 @@ public class BuiltInCachedSymbol extends AbstractLayeredCachedSymbol
 					{
 						indicator.setText(mySdk.getName());
 					}
-					BuiltInCachedSymbol.super.updateFileSymbol();
+                    ReadAction.run(() -> BuiltInCachedSymbol.super.updateFileSymbol());
 				}
 			};
 			if(manager.getProgressIndicator() != null)

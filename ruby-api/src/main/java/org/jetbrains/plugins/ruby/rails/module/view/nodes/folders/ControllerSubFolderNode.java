@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.List;
 
 import consulo.module.Module;
@@ -23,8 +25,6 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.ClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.ControllerClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.ui.ex.awt.tree.SimpleNode;
@@ -60,14 +60,14 @@ public class ControllerSubFolderNode extends FolderNode
 	}
 
 	@Override
-	protected ClassNode createClassNode(final RVirtualClass rClass, final RFileInfo rFileInfo)
+	protected ClassNode createClassNode(final RClass rClass)
 	{
 		final Module module = getModule();
 
 		if(ControllersConventions.isControllerClass(rClass, module))
 		{
-			return new ControllerClassNode(module, rClass, rFileInfo);
+			return new ControllerClassNode(module, rClass);
 		}
-		return new ClassNode(module, rClass, rFileInfo);
+		return new ClassNode(module, rClass);
 	}
 }

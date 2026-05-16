@@ -16,11 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjectClass;
+
 import jakarta.annotation.Nonnull;
 
 import consulo.ui.ex.tree.PresentationData;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import consulo.navigation.ItemPresentation;
 import consulo.ui.image.Image;
@@ -44,13 +45,13 @@ public class RObjectClassPresentationUtil
 	}
 
 	@Nonnull
-	public static ItemPresentation getPresentation(@Nonnull final RVirtualObjectClass objectClass)
+	public static ItemPresentation getPresentation(@Nonnull final RObjectClass objectClass)
 	{
 		final Image icon = getIcon();
 		return new PresentationData(objectClass.getPresentableName(), TextUtil.wrapInParens(getLocation(objectClass)), icon, null);
 	}
 
-	private static String getLocation(RVirtualObjectClass objectClass)
+	private static String getLocation(RObjectClass objectClass)
 	{
 		return RContainerPresentationUtil.getLocation(objectClass);
 	}

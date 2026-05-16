@@ -21,7 +21,6 @@ import com.intellij.psi.PsiManager;
 import org.jetbrains.plugins.ruby.PathUtil;
 import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
 import org.jetbrains.plugins.ruby.ruby.cache.index.DeclarationsIndex;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.FileSymbolUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
@@ -106,7 +105,7 @@ public class RCacheUtilTest extends AbstractRubyModuleCacheTest {
         assert rClassRVFile != null;
         final FileSymbol fileSymbol = FileSymbolUtil.getFileSymbol(rClassRVFile);
 
-        RVirtualClass rClass = RCacheUtil.getFirstClassByNameInScript("Foo", myProject, SearchScopeUtil.getTestUnitClassSearchScope(getProject()), file);
+        RClass rClass = RCacheUtil.getFirstClassByNameInScript("Foo", myProject, SearchScopeUtil.getTestUnitClassSearchScope(getProject()), file);
         assert rClass != null;
         assertEquals("Foo", RClassPresentationUtil.getRuntimeQualifiedName(fileSymbol, rClass));
 
@@ -117,7 +116,7 @@ public class RCacheUtilTest extends AbstractRubyModuleCacheTest {
     public void testGetFirstClassByNameInScript_TestMode() {
         final VirtualFile file = getFile("f1.rb", myModule);
 
-        RVirtualClass rClass =
+        RClass rClass =
                 RCacheUtil.getClassByNameInScriptInRubyTestMode("DoesntExist", myProject, SearchScopeUtil.getTestUnitClassSearchScope(getProject()), file, null);
         assertNull(rClass);
 

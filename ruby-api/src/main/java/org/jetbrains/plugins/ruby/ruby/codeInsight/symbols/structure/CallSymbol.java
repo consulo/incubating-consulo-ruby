@@ -18,7 +18,6 @@ package org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Prototypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
@@ -44,7 +43,7 @@ public class CallSymbol extends Symbol
 	}
 
 	@Override
-	public RVirtualElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol)
+	public RPsiElement getLastVirtualPrototype(@Nullable final FileSymbol fileSymbol)
 	{
 		return myElement;
 	}

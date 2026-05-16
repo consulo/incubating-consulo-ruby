@@ -27,9 +27,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.types.JRubyDuckTypeUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.*;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.data.Children;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.types.Context;
@@ -302,14 +299,14 @@ public class SymbolUtil
 	 * @return Symbol or null
 	 */
 	@Nullable
-	public static Symbol getSymbolByContainer(@Nullable FileSymbol fileSymbol, @Nonnull final RVirtualContainer container)
+	public static Symbol getSymbolByContainer(@Nullable FileSymbol fileSymbol, @Nonnull final RContainer container)
 	{
 		if(fileSymbol == null)
 		{
 			return null;
 		}
 
-		final RVirtualContainer key;
+		final RContainer key;
 		if(container instanceof RContainer)
 		{
 			key = RVirtualPsiUtil.findVirtualContainer((RContainer) container);
@@ -319,7 +316,7 @@ public class SymbolUtil
 			key = container;
 		}
 
-		if(container instanceof RVirtualFile)
+		if(container instanceof RFile)
 		{
 			return fileSymbol.getRootSymbol();
 		}
@@ -334,27 +331,16 @@ public class SymbolUtil
 	 * @return pair with Symbol and not null FileSymbol or null
 	 */
 	@Nullable
-	public static Pair<Symbol, FileSymbol> getSymbolByContainerRubyTestMode(@Nonnull final RVirtualContainer container, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
+	public static Pair<Symbol, FileSymbol> getSymbolByContainerRubyTestMode(@Nonnull final RContainer container, @Nullable final Ref<FileSymbol> fileSymbolWrapper)
 	{
-		final RVirtualFile file;
-		final RVirtualContainer key;
+		final RFile file;
+		final RContainer key;
 
 		//key and file must be pure virtual elements
-		if(container instanceof RContainer)
-		{
-			key = RVirtualPsiUtil.findVirtualContainer((RContainer) container);
-			final RFile rFile = RubyPsiUtil.getRFile((RContainer) container);
-			assert rFile != null; //can't be null here
-			file = (RVirtualFile) RVirtualPsiUtil.findVirtualContainer(rFile);
-		}
-		else
-		{
-			// virtual element
-			final RFileInfo info = container.getContainingFileInfo();
-			assert info != null; // not null for virtual elements
-			file = info.getRVirtualFile();
-			key = container;
-		}
+		key = RVirtualPsiUtil.findVirtualContainer(container);
+		final RFile rFile = RubyPsiUtil.getRFile(container);
+		assert rFile != null; //can't be null here
+		file = (RFile) RVirtualPsiUtil.findVirtualContainer(rFile);
 
 
 		if(file == null)
@@ -380,7 +366,7 @@ public class SymbolUtil
 		}
 
 		final Symbol symbol;
-		if(key instanceof RVirtualFile)
+		if(key instanceof RFile)
 		{
 			symbol = fileSymbol.getRootSymbol();
 		}

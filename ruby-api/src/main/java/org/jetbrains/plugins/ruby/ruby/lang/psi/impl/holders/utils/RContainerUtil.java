@@ -23,16 +23,12 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 import consulo.language.psi.util.PsiTreeUtil;
 import consulo.util.lang.ref.Ref;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol;
@@ -75,10 +71,10 @@ public abstract class RContainerUtil
 	}
 
 	@Nonnull
-	public static List<RVirtualStructuralElement> selectVirtualElementsByType(@Nonnull List<RVirtualStructuralElement> fullList, @Nonnull final StructureType type)
+	public static List<RStructuralElement> selectVirtualElementsByType(@Nonnull List<RStructuralElement> fullList, @Nonnull final StructureType type)
 	{
-		ArrayList<RVirtualStructuralElement> list = new ArrayList<RVirtualStructuralElement>();
-		for(RVirtualStructuralElement element : fullList)
+		ArrayList<RStructuralElement> list = new ArrayList<RStructuralElement>();
+		for(RStructuralElement element : fullList)
 		{
 			if(element.getType() == type)
 			{
@@ -121,11 +117,11 @@ public abstract class RContainerUtil
 	 * @return Class element or null.
 	 */
 	@Nullable
-	public static RVirtualClass getVClassByName(@Nonnull final RVirtualContainer container, @Nullable final String className)
+	public static RClass getVClassByName(@Nonnull final RContainer container, @Nullable final String className)
 	{
-		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS))
+		for(RStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS))
 		{
-			final RVirtualClass rClass = (RVirtualClass) element;
+			final RClass rClass = (RClass) element;
 			if(rClass.getName().equals(className))
 			{
 				return rClass;
@@ -333,49 +329,47 @@ public abstract class RContainerUtil
 	 * @return list of RVirtualClasses
 	 */
 	@Nonnull
-	public static List<RVirtualClass> getTopLevelClasses(@Nonnull final RVirtualContainer container)
+	public static List<RClass> getTopLevelClasses(@Nonnull final RContainer container)
 	{
-		List<RVirtualClass> allClasses = new ArrayList<RVirtualClass>();
+		List<RClass> allClasses = new ArrayList<RClass>();
 		gatherClasses(container, allClasses);
 		return allClasses;
 	}
 
-	private static void gatherClasses(@Nonnull final RVirtualContainer container, @Nonnull final List<RVirtualClass> allClasses)
+	private static void gatherClasses(@Nonnull final RContainer container, @Nonnull final List<RClass> allClasses)
 	{
-		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS))
+		for(RStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.CLASS))
 		{
-			assert element instanceof RVirtualClass;
-			allClasses.add((RVirtualClass) element);
+			assert element instanceof RClass;
+			allClasses.add((RClass) element);
 		}
-		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.MODULE))
+		for(RStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.MODULE))
 		{
-			assert element instanceof RVirtualModule;
-			gatherClasses((RVirtualModule) element, allClasses);
+			assert element instanceof RModule;
+			gatherClasses((RModule) element, allClasses);
 		}
 	}
 
-	public static List<RVirtualModule> getTopLevelModules(@Nonnull final RVirtualContainer container)
+	public static List<RModule> getTopLevelModules(@Nonnull final RContainer container)
 	{
-		final ArrayList<RVirtualModule> modules = new ArrayList<RVirtualModule>();
-		for(RVirtualStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.MODULE))
+		final ArrayList<RModule> modules = new ArrayList<RModule>();
+		for(RStructuralElement element : selectVirtualElementsByType(container.getVirtualStructureElements(), StructureType.MODULE))
 		{
-			assert element instanceof RVirtualModule;
-			modules.add((RVirtualModule) element);
+			assert element instanceof RModule;
+			modules.add((RModule) element);
 		}
 		return modules;
 	}
 
 
-	public static RVirtualClass getFirstClassInFile(@Nullable final VirtualFile file, @Nonnull final Module module)
+	public static RClass getFirstClassInFile(@Nullable final VirtualFile file, @Nonnull final Module module)
 	{
 		if(file != null)
 		{
-			final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
-			final RubyFilesCache cache = manager.getFilesCache();
-			final RFileInfo info = cache.getUp2DateFileInfo(file);
-			if(info != null)
+			final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(file);
+			if(psiFile instanceof RFile)
 			{
-				final List<RVirtualClass> allClasses = getTopLevelClasses(info.getRVirtualFile());
+				final List<RClass> allClasses = getTopLevelClasses((RFile) psiFile);
 				if(!allClasses.isEmpty())
 				{
 					return allClasses.get(0);
@@ -385,16 +379,14 @@ public abstract class RContainerUtil
 		return null;
 	}
 
-	public static RVirtualModule getFirstModuleInFile(@Nullable final VirtualFile file, @Nonnull final Module module)
+	public static RModule getFirstModuleInFile(@Nullable final VirtualFile file, @Nonnull final Module module)
 	{
 		if(file != null)
 		{
-			final RubyModuleCachesManager manager = RubyModuleCachesManager.getInstance(module);
-			final RubyFilesCache cache = manager.getFilesCache();
-			final RFileInfo info = cache.getUp2DateFileInfo(file);
-			if(info != null)
+			final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(file);
+			if(psiFile instanceof RFile)
 			{
-				final List<RVirtualModule> allModules = getTopLevelModules(info.getRVirtualFile());
+				final List<RModule> allModules = getTopLevelModules((RFile) psiFile);
 				if(!allModules.isEmpty())
 				{
 					return allModules.get(0);

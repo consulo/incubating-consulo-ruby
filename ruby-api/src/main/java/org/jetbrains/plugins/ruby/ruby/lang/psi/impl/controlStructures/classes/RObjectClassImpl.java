@@ -20,22 +20,19 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
 import consulo.language.psi.PsiElementVisitor;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.StructureType;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualObjectClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualNameImpl;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.impl.RVirtualObjectClassImpl;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.RubyElementTypes;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RObjectClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RClassObject;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.RFieldConstantContainerImpl;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.stubs.RubyObjectClassStub;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyElementVisitor;
 import org.jetbrains.plugins.ruby.ruby.presentation.RObjectClassPresentationUtil;
 import consulo.language.ast.ASTNode;
+import consulo.language.psi.stub.IStubElementType;
 import consulo.navigation.ItemPresentation;
 import consulo.language.psi.PsiElement;
 import consulo.ui.image.Image;
@@ -45,11 +42,16 @@ import consulo.ui.image.Image;
  * User: oleg
  * Date: 11.06.2006
  */
-public class RObjectClassImpl extends RFieldConstantContainerImpl implements RObjectClass
+public class RObjectClassImpl extends RFieldConstantContainerImpl<RubyObjectClassStub> implements RObjectClass
 {
 	public RObjectClassImpl(ASTNode astNode)
 	{
 		super(astNode);
+	}
+
+	public RObjectClassImpl(@Nonnull RubyObjectClassStub stub, @Nonnull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
 	}
 
 	@Override
@@ -88,17 +90,6 @@ public class RObjectClassImpl extends RFieldConstantContainerImpl implements ROb
 			return;
 		}
 		super.accept(visitor);
-	}
-
-	@Override
-	@Nonnull
-	public RVirtualObjectClass createVirtualCopy(@Nullable final RVirtualContainer virtualParent, @Nonnull RFileInfo info)
-	{
-		assert virtualParent != null;
-		final RVirtualName name = new RVirtualNameImpl(getFullPath(), isGlobal());
-		final RVirtualObjectClassImpl vObjectClass = new RVirtualObjectClassImpl(virtualParent, name, getAccessModifier(), info);
-		addVirtualData(vObjectClass, info);
-		return vObjectClass;
 	}
 
 	@Override

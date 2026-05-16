@@ -16,12 +16,12 @@
 
 package org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.variants;
 
-import consulo.language.editor.impl.internal.completion.CompletionUtil;
-import consulo.language.editor.impl.internal.completion.CompletionVariant;
+import consulo.language.editor.completion.CompletionUtilCore;
 import consulo.language.impl.ast.TreeElement;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.filter.ElementFilter;
 import consulo.xml.language.psi.XmlTag;
+import org.jetbrains.plugins.ruby.rails.langs.rhtml.codeInsight.completion.RCompletionVariant;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,31 +29,25 @@ import consulo.xml.language.psi.XmlTag;
  * @author: Roman Chernyatchik
  * @date: Oct 2, 2007
  */
-public class RHTMLInjectionInTagContentCVariant extends CompletionVariant
-{
-	public RHTMLInjectionInTagContentCVariant()
-	{
-		super(XmlTag.class, new MyRTHMLInjectionStartFilter());
-	}
+public class RHTMLInjectionInTagContentCVariant extends RCompletionVariant {
+    public RHTMLInjectionInTagContentCVariant() {
+        super(XmlTag.class, new MyRTHMLInjectionStartFilter());
+    }
 
-	private static class MyRTHMLInjectionStartFilter implements ElementFilter
-	{
+    private static class MyRTHMLInjectionStartFilter implements ElementFilter {
 
-		@Override
-		public boolean isAcceptable(final Object element, final PsiElement context)
-		{
-			//noinspection SimplifiableIfStatement
-			if(!(element instanceof TreeElement) || !CompletionUtil.DUMMY_IDENTIFIER.trim().equals(((TreeElement) element).getText()))
-			{
-				return false;
-			}
-			return context instanceof XmlTag;
-		}
+        @Override
+        public boolean isAcceptable(final Object element, final PsiElement context) {
+            //noinspection SimplifiableIfStatement
+            if (!(element instanceof TreeElement) || !CompletionUtilCore.DUMMY_IDENTIFIER.trim().equals(((TreeElement) element).getText())) {
+                return false;
+            }
+            return context instanceof XmlTag;
+        }
 
-		@Override
-		public boolean isClassAcceptable(final Class hintClass)
-		{
-			return true;
-		}
-	}
+        @Override
+        public boolean isClassAcceptable(final Class hintClass) {
+            return true;
+        }
+    }
 }

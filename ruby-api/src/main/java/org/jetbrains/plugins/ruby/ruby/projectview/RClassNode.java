@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.ruby.projectview;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -29,8 +33,6 @@ import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ModelsConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -50,12 +52,12 @@ import consulo.ui.image.Image;
  * @author: oleg
  * @date: Oct 30, 2007
  */
-public class RClassNode extends ProjectViewNode<RVirtualClass>
+public class RClassNode extends ProjectViewNode<RClass>
 {
 	private final Image myIcon;
 	private final VirtualFile myVirtualFile;
 
-	public RClassNode(@Nonnull final Project project, @Nullable final Module module, @Nonnull final RVirtualFile file, @Nonnull final RVirtualClass value, @Nonnull final List<RVirtualClass> classes, final ViewSettings viewSettings)
+	public RClassNode(@Nonnull final Project project, @Nullable final Module module, @Nonnull final RFile file, @Nonnull final RClass value, @Nonnull final List<RClass> classes, final ViewSettings viewSettings)
 	{
 		super(project, value, viewSettings);
 		myVirtualFile = file.getVirtualFile();
@@ -99,7 +101,7 @@ public class RClassNode extends ProjectViewNode<RVirtualClass>
 	@Override
 	protected void update(PresentationData data)
 	{
-		final RVirtualClass aClass = getValue();
+		final RClass aClass = getValue();
 		data.setIcon(myIcon);
 		data.setLocationString(RClassPresentationUtil.getLocation(aClass));
 		data.setPresentableText(RClassPresentationUtil.formatName(aClass, RPresentationConstants.SHOW_NAME));
@@ -125,7 +127,7 @@ public class RClassNode extends ProjectViewNode<RVirtualClass>
 
 	public RStructuralElement getPsiElement()
 	{
-		final RVirtualClass element = getValue();
+		final RClass element = getValue();
 		return RVirtualPsiUtil.findInPsi(myProject, element);
 	}
 

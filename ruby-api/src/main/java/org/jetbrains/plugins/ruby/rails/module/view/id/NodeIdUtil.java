@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.id;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -45,14 +47,9 @@ import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.MigrationsConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RubyPsiUtil;
@@ -99,7 +96,7 @@ public class NodeIdUtil
 	}
 
 	@Nonnull
-	public static NodeId createForVirtualContainer(final RVirtualContainer elem)
+	public static NodeId createForVirtualContainer(final RContainer elem)
 	{
 		return new NodeId(elem.getContainingFileUrl(), elem, null);
 	}
@@ -307,8 +304,8 @@ public class NodeIdUtil
 		{
 			if(forParent)
 			{
-				final RVirtualContainer parentVContainer = getParentContanerForSelection(selectedElement);
-				if(parentVContainer == null || parentVContainer instanceof RVirtualFile)
+				final RContainer parentVContainer = getParentContanerForSelection(selectedElement);
+				if(parentVContainer == null || parentVContainer instanceof RFile)
 				{
 					return new NodeId[]{TestsSubFolderNode.generateNodeId(parentDirUrl)};
 				}
@@ -380,7 +377,7 @@ public class NodeIdUtil
 		if(isDirectory(file, fileName))
 		{
 			final String controllerUrl = ControllersConventions.getControllerUrlByViewsFolderUrl(fileUrl, railsPaths);
-			final RVirtualClass rClass = getControllerClass(controllerUrl, module);
+			final RClass rClass = getControllerClass(controllerUrl, module);
 			if(forParent)
 			{
 				return rClass == null ? null  // other directories doesn't supported here
@@ -398,7 +395,7 @@ public class NodeIdUtil
 		LOG.assertTrue(ViewsConventions.hasValidTemplatePath(fileUrl, railsPaths), (forParent ? "Parent" : "Element") + " node id for [" + fileUrl + "]: Url isn't valid template path.");
 
 		final String controllerUrl = ControllersConventions.getControllerUrlByViewUrl(fileUrl, railsPaths);
-		final RVirtualClass rClass = getControllerClass(controllerUrl, module);
+		final RClass rClass = getControllerClass(controllerUrl, module);
 
 		//partial view file
 		if(ViewsConventions.isPartialViewName(fileName))
@@ -412,7 +409,7 @@ public class NodeIdUtil
 			return null;
 		}
 
-		final RVirtualMethod rMethod = RVirtualPsiUtil.getMethodWithoutArgumentsByName(rClass, nameWOExt);
+		final RMethod rMethod = RVirtualPsiUtil.getMethodWithoutArgumentsByName(rClass, nameWOExt);
 		if(rMethod != null)
 		{
 			return forParent ? new NodeId[]{MethodNode.generateNodeId(rMethod)} : new NodeId[]{SimpleFileNode.generateNodeId(fileUrl)};
@@ -432,7 +429,7 @@ public class NodeIdUtil
 		final String controllerName = ControllersConventions.getControllerNameByLayoutFileName(nameWOExt);
 		final String relativePath = ViewsConventions.getRelativePathOfLayoutsFolder(parentDirUrl, module);
 
-		final RVirtualClass rClass = getControllerClass(controllerName, relativePath, controllersRoot, module);
+		final RClass rClass = getControllerClass(controllerName, relativePath, controllersRoot, module);
 		if(rClass != null)
 		{
 			return forParent ? new NodeId[]{ControllerClassNode.generateNodeId(rClass)} : new NodeId[]{SimpleFileNode.generateNodeId(fileUrl)};
@@ -450,13 +447,13 @@ public class NodeIdUtil
 			return null;
 		}
 
-		final RVirtualContainer parentVContainer = getParentContanerForSelection(selectedElement);
-		if(parentVContainer == null || parentVContainer instanceof RVirtualFile)
+		final RContainer parentVContainer = getParentContanerForSelection(selectedElement);
+		if(parentVContainer == null || parentVContainer instanceof RFile)
 		{
 			//toplevel element in file
 			final String controllerName = ControllersConventions.getControllerNameByHelperFileName(nameWOExt);
 			final String relativePath = HelpersConventions.getRelativePathOfHelperFolder(parentDirUrl, module);
-			final RVirtualClass rClass = getControllerClass(controllerName, relativePath, controllersRoot, module);
+			final RClass rClass = getControllerClass(controllerName, relativePath, controllersRoot, module);
 			if(rClass != null)
 			{
 				return forParent ? new NodeId[]{ControllerClassNode.generateNodeId(rClass)} : getNodeIdForHelper(selectedElement, module, file);
@@ -470,7 +467,7 @@ public class NodeIdUtil
 		{
 			final Object elem = forParent ? parentVContainer : selectedElement;
 			//Helper Module
-			if(elem instanceof RVirtualModule)
+			if(elem instanceof RModule)
 			{
 				return getNodeIdForHelper(elem, module, file);
 			}
@@ -497,12 +494,12 @@ public class NodeIdUtil
 		}
 		if(forParent)
 		{
-			if(selectedElement == null || (selectedElement instanceof RVirtualClass && RVirtualPsiUtil.getContainingRVClass((RVirtualClass) selectedElement) == null))
+			if(selectedElement == null || (selectedElement instanceof RClass && RVirtualPsiUtil.getContainingRVClass((RClass) selectedElement) == null))
 			{
 				return new NodeId[]{ControllerSubFolderNode.generateNodeId(parentDirUrl)};
 			}
 
-			final RVirtualContainer parentVContainer = getParentContanerForSelection(selectedElement);
+			final RContainer parentVContainer = getParentContanerForSelection(selectedElement);
 			if(parentVContainer == null)
 			{
 				return new NodeId[]{ControllerSubFolderNode.generateNodeId(parentDirUrl)};
@@ -546,11 +543,11 @@ public class NodeIdUtil
 		//other controllers
 		if(forParent)
 		{
-			if(selectedElement == null || (selectedElement instanceof RVirtualClass && ControllersConventions.isControllerClass((RVirtualClass) selectedElement, module)))
+			if(selectedElement == null || (selectedElement instanceof RClass && ControllersConventions.isControllerClass((RClass) selectedElement, module)))
 			{
 				return new NodeId[]{ControllerSubFolderNode.generateNodeId(parentDirUrl)};
 			}
-			final RVirtualContainer parentVContainer = getParentContanerForSelection(selectedElement);
+			final RContainer parentVContainer = getParentContanerForSelection(selectedElement);
 			if(parentVContainer == null)
 			{
 				return new NodeId[]{ControllerSubFolderNode.generateNodeId(parentDirUrl)};
@@ -564,11 +561,11 @@ public class NodeIdUtil
 	}
 
 	@Nullable
-	private static RVirtualContainer getParentContanerForSelection(@Nullable final Object selectedElement)
+	private static RContainer getParentContanerForSelection(@Nullable final Object selectedElement)
 	{
-		if(selectedElement instanceof RVirtualContainer)
+		if(selectedElement instanceof RContainer)
 		{
-			return ((RVirtualContainer) selectedElement).getVirtualParentContainer();
+			return ((RContainer) selectedElement).getVirtualParentContainer();
 		}
 		else if(selectedElement instanceof PsiElement)
 		{
@@ -582,14 +579,14 @@ public class NodeIdUtil
 
 	private static NodeId[] getNodeIdForHelper(@Nullable final Object element, @Nonnull final Module module, @Nullable final VirtualFile file)
 	{
-		final RVirtualModule rModule;
+		final RModule rModule;
 		if(element instanceof RModule)
 		{
 			rModule = getAsVirtualModule((RModule) element);
 		}
-		else if(element instanceof RVirtualModule)
+		else if(element instanceof RModule)
 		{
-			rModule = (RVirtualModule) element;
+			rModule = (RModule) element;
 		}
 		else
 		{
@@ -611,18 +608,18 @@ public class NodeIdUtil
 			return null;
 		}
 
-		final RVirtualClass vClass;
-		final RVirtualMethod vMethod;
+		final RClass vClass;
+		final RMethod vMethod;
 
-		if(element instanceof RVirtualClass)
+		if(element instanceof RClass)
 		{
-			vClass = getAsVirtualClass((RVirtualClass) element);
+			vClass = getAsVirtualClass((RClass) element);
 			vMethod = null;
 		}
-		else if(element instanceof RVirtualMethod)
+		else if(element instanceof RMethod)
 		{
-			vMethod = getAsVirtualMethod((RVirtualMethod) element);
-			vClass = vMethod == null ? getAsVirtualClass(RVirtualPsiUtil.getContainingRVClass((RVirtualMethod) element)) : getAsVirtualClass(RVirtualPsiUtil.getContainingRVClass(vMethod));
+			vMethod = getAsVirtualMethod((RMethod) element);
+			vClass = vMethod == null ? getAsVirtualClass(RVirtualPsiUtil.getContainingRVClass((RMethod) element)) : getAsVirtualClass(RVirtualPsiUtil.getContainingRVClass(vMethod));
 		}
 		else
 		{
@@ -646,12 +643,12 @@ public class NodeIdUtil
 	}
 
 	@Nullable
-	private static RVirtualClass getAsVirtualClass(@Nullable final RVirtualClass rVirtualClass)
+	private static RClass getAsVirtualClass(@Nullable final RClass rVirtualClass)
 	{
 		if(rVirtualClass instanceof RClass)
 		{
-			final RVirtualContainer container = RVirtualPsiUtil.findVirtualContainer((RContainer) rVirtualClass);
-			return container instanceof RVirtualClass ? (RVirtualClass) container : null;
+			final RContainer container = RVirtualPsiUtil.findVirtualContainer((RContainer) rVirtualClass);
+			return container instanceof RClass ? (RClass) container : null;
 		}
 		else
 		{
@@ -660,12 +657,12 @@ public class NodeIdUtil
 	}
 
 	@Nullable
-	private static RVirtualModule getAsVirtualModule(@Nullable final RVirtualModule rVirtualModule)
+	private static RModule getAsVirtualModule(@Nullable final RModule rVirtualModule)
 	{
 		if(rVirtualModule instanceof RModule)
 		{
-			final RVirtualContainer container = RVirtualPsiUtil.findVirtualContainer((RContainer) rVirtualModule);
-			return container instanceof RVirtualModule ? (RVirtualModule) container : null;
+			final RContainer container = RVirtualPsiUtil.findVirtualContainer((RContainer) rVirtualModule);
+			return container instanceof RModule ? (RModule) container : null;
 		}
 		else
 		{
@@ -674,12 +671,12 @@ public class NodeIdUtil
 	}
 
 	@Nullable
-	private static RVirtualMethod getAsVirtualMethod(@Nullable final RVirtualMethod rVirtualMethod)
+	private static RMethod getAsVirtualMethod(@Nullable final RMethod rVirtualMethod)
 	{
 		if(rVirtualMethod instanceof RMethod)
 		{
-			final RVirtualContainer container = RVirtualPsiUtil.findVirtualContainer((RContainer) rVirtualMethod);
-			return container instanceof RVirtualMethod ? (RVirtualMethod) container : null;
+			final RContainer container = RVirtualPsiUtil.findVirtualContainer((RContainer) rVirtualMethod);
+			return container instanceof RMethod ? (RMethod) container : null;
 		}
 		else
 		{
@@ -692,19 +689,21 @@ public class NodeIdUtil
 		return file != null ? file.isDirectory() : TextUtil.isEmpty(VirtualFileUtil.getExtension(fileName));
 	}
 
-	private static RVirtualClass getControllerClass(@Nonnull final String controllerUrl, final Module module)
+	private static RClass getControllerClass(@Nonnull final String controllerUrl, final Module module)
 	{
 		final VirtualFile controllerFile = VirtualFileManager.getInstance().findFileByUrl(controllerUrl);
 		if(controllerFile == null)
 		{
 			return null;
 		}
-		final RubyModuleFilesCache cache = RubyModuleCachesManager.getInstance(module).getFilesCache();
-		final RFileInfo rFileInfo = cache.getUp2DateFileInfo(controllerFile);
-		assert rFileInfo != null; //controllerUrl should be valid
+		final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(controllerFile);
+		if(!(psiFile instanceof RFile))
+		{
+			return null;
+		}
 
-		final List<RVirtualClass> allClasses = RContainerUtil.getTopLevelClasses(rFileInfo.getRVirtualFile());
-		for(RVirtualClass rClass : allClasses)
+		final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
+		for(RClass rClass : allClasses)
 		{
 			if(ControllersConventions.isControllerClass(rClass, module))
 			{
@@ -714,7 +713,7 @@ public class NodeIdUtil
 		return null;
 	}
 
-	private static RVirtualClass getControllerClass(final String controllerName, final String relativePath, final String controllersRoot, final Module module)
+	private static RClass getControllerClass(final String controllerName, final String relativePath, final String controllersRoot, final Module module)
 	{
 		if(relativePath == null)
 		{

@@ -16,9 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.id;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,7 +32,7 @@ public class NodeId
 
 	private final String myFileUrl;
 	private final Object myParams;
-	private RVirtualContainer myRContainer;
+	private RContainer myRContainer;
 
 	private int hash; // Default cached hash code equals to 0
 	private String myString;
@@ -41,7 +42,7 @@ public class NodeId
 		this(fileUrl, null, null);
 	}
 
-	public NodeId(@Nonnull final String fileUrl, @Nullable final RVirtualContainer container, @Nullable Object params)
+	public NodeId(@Nonnull final String fileUrl, @Nullable final RContainer container, @Nullable Object params)
 	{
 		myFileUrl = fileUrl;
 		myRContainer = container;
@@ -61,7 +62,7 @@ public class NodeId
 	}
 
 	@Nullable
-	public RVirtualContainer getRContainer()
+	public RContainer getRContainer()
 	{
 		return myRContainer;
 	}

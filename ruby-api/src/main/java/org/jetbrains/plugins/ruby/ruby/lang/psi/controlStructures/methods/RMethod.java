@@ -21,7 +21,8 @@ import org.jetbrains.annotations.NonNls;
 
 import jakarta.annotation.Nullable;
 
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualMethod;
+import java.util.List;
+
 import org.jetbrains.plugins.ruby.ruby.lang.formatter.models.wrap.RWrapLastChild;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.RFormatStructureElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.blocks.RCompoundStatement;
@@ -34,7 +35,7 @@ import consulo.language.psi.PsiNamedElement;
  * User: oleg
  * Date: 18.07.2006
  */
-public interface RMethod extends RVirtualMethod, RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer
+public interface RMethod extends RFormatStructureElement, RWrapLastChild, PsiNamedElement, RContainer
 {
 
 	@NonNls
@@ -58,6 +59,14 @@ public interface RMethod extends RVirtualMethod, RFormatStructureElement, RWrapL
 
 	@Nonnull
 	public String getPresentableName(final boolean includeDefaultArgs);
+
+	@Nonnull
+	public List<ArgumentInfo> getArgumentInfos();
+
+	@Nonnull
+	public String getPresentableName();
+
+	public boolean equalsToMethod(@Nonnull final RMethod otherMethod);
 
 	RCompoundStatement getCompoundStatement();
 }

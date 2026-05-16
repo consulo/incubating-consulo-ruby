@@ -22,23 +22,16 @@ import consulo.logging.Logger;
 import consulo.module.Module;
 import consulo.project.Project;
 import consulo.virtualFileSystem.VirtualFile;
-import consulo.virtualFileSystem.VirtualFileManager;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.RubySdkCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.FileSymbolType;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolCacheUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.cache.SymbolsCache;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.structure.FileSymbol;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -73,24 +66,12 @@ public class FileSymbolUtil
 	 * @return The symbol - the lineared sum of file and all required objects
 	 */
 	@Nullable
-	public static FileSymbol getFileSymbol(@Nonnull final RVirtualFile rVFile, final boolean isRubyTestMode)
+	public static FileSymbol getFileSymbol(@Nonnull final RFile rVFile, final boolean isRubyTestMode)
 	{
 		// Check if this action is not stopped
 		ProgressManager.getInstance().checkCanceled();
-		final RFile rFile;
-		final RVirtualFile pureRVFile;
-		if(rVFile instanceof RFile)
-		{
-			rFile = (RFile) rVFile;
-			pureRVFile = (RVirtualFile) RVirtualPsiUtil.findVirtualContainer(rFile);
-		}
-		else
-		{
-			final RFileInfo info = rVFile.getContainingFileInfo();
-			assert info != null; //not null for virtual elements
-			pureRVFile = rVFile;
-			rFile = (RFile) RVirtualPsiUtil.findPsiByVirtualElement(pureRVFile, info.getProject());
-		}
+		final RFile rFile = rVFile;
+		final RFile pureRVFile = rVFile;
 
 		// Psi file is used to obtain module and project
 		LOG.assertTrue(rFile != null, "rFile shouldn`t be null " + rVFile.getContainingFileUrl()); //shouldn't be null
@@ -112,44 +93,18 @@ public class FileSymbolUtil
 
 		if(isRubyTestMode)
 		{
-			final Sdk sdk = rFile.getSdk();
-			final RubyFilesCache[] caches = FileSymbolUtil.getCaches(project, module, sdk);
-			final FileSymbol fileSymbol = new FileSymbol(null, project, jrubyEnabled, caches);
+			final FileSymbol fileSymbol = new FileSymbol(null, project, jrubyEnabled);
 			FileSymbolUtil.process(fileSymbol, url, InterpretationMode.ONLY_TESTS_EXTERNAL, true);
 			return fileSymbol;
 		}
 
 		//noinspection ConstantConditions
-		final Sdk sdk = module != null ? RModuleUtil.getModuleOrJRubyFacetSdk(module) : RubySdkCachesManager.getInstance(project).getFirstSdkForFile(rFile.getVirtualFile());
+		final Sdk sdk = module != null ? RModuleUtil.getModuleOrJRubyFacetSdk(module) : null;
 
 		final FileSymbol fileSymbol = SymbolCacheUtil.getFileSymbol(SymbolsCache.getInstance(project).getModifiableCachedSymbol(FileSymbolType.MODIFIABLE, url, module, sdk, jrubyEnabled));
 		// setting last evaluated symbol
 		LastSymbolStorage.getInstance(project).setSymbol(fileSymbol);
 		return fileSymbol;
-	}
-
-	public static RubyFilesCache[] getCaches(@Nonnull final Project project, @Nullable final Module module, @Nullable final Sdk sdk)
-	{
-		final List<RubyFilesCache> cachesList = RVirtualPsiUtil.getCaches(project, module, sdk);
-		return cachesList.toArray(new RubyFilesCache[cachesList.size()]);
-	}
-
-	@Nullable
-	public static RFileInfo getRFileInfo(@Nonnull final String url, @Nonnull final RubyFilesCache... caches)
-	{
-		final VirtualFile vFile = VirtualFileManager.getInstance().findFileByUrl(url);
-		if(vFile == null)
-		{
-			return null;
-		}
-
-		// There is no info in caches for non ruby files (*.so for example)
-		final RubyFilesCache cacheForFile = RVirtualPsiUtil.getCacheForFile(url, caches);
-		if(cacheForFile == null)
-		{
-			return null;
-		}
-		return cacheForFile.getUp2DateFileInfo(vFile);
 	}
 
 	// Nullable safe operations

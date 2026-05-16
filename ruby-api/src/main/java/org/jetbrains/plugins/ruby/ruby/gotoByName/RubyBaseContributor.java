@@ -22,7 +22,6 @@ import java.util.List;
 import jakarta.annotation.Nonnull;
 
 import consulo.project.Project;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
 import consulo.ide.navigation.ChooseByNameContributor;
@@ -37,10 +36,10 @@ import consulo.navigation.NavigationItem;
 abstract class RubyBaseContributor implements ChooseByNameContributor
 {
 
-	public static List<NavigationItem> getItems(@Nonnull final List<RVirtualElement> elements, @Nonnull final Project project)
+	public static List<NavigationItem> getItems(@Nonnull final List<RPsiElement> elements, @Nonnull final Project project)
 	{
 		final ArrayList<NavigationItem> items = new ArrayList<NavigationItem>();
-		for(RVirtualElement prototype : elements)
+		for(RPsiElement prototype : elements)
 		{
 			final RPsiElement psiElement = RVirtualPsiUtil.findPsiByVirtualElement(prototype, project);
 

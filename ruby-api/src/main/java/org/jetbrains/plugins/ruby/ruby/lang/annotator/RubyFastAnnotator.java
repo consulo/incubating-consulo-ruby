@@ -16,30 +16,25 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.annotator;
 
-import jakarta.annotation.Nonnull;
-
-import consulo.language.psi.PsiElement;
 import consulo.application.progress.ProgressManager;
-import consulo.language.Language;
-import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import consulo.language.editor.annotation.AnnotationHolder;
 import consulo.language.editor.annotation.Annotator;
+import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
  * User: oleg
  * Date: 09.06.2006
  */
-public class RubyFastAnnotator implements Annotator
-{
+public class RubyFastAnnotator implements Annotator {
 
-	@Override
-	public void annotate(@Nonnull final PsiElement psiElement, @Nonnull final AnnotationHolder holder)
-	{
-		// We hope it`s enough often operation
-		ProgressManager.getInstance().checkCanceled();
+    @Override
+    public void annotate(@Nonnull final PsiElement psiElement, @Nonnull final AnnotationHolder holder) {
+        // We hope it`s enough often operation
+        ProgressManager.getInstance().checkCanceled();
 
-		final RubyFastAnnotatorVisitor fastAnnotatorVisitor = new RubyFastAnnotatorVisitor(holder);
-		psiElement.accept(fastAnnotatorVisitor);
-	}
+        final RubyFastAnnotatorVisitor fastAnnotatorVisitor = new RubyFastAnnotatorVisitor(holder);
+        psiElement.accept(fastAnnotatorVisitor);
+    }
 }

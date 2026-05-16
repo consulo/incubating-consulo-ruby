@@ -16,15 +16,17 @@
 
 package org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.RField;
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.ConstantDefinitions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.FieldDefinition;
@@ -32,6 +34,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RFieldConstantContainer;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RConstantHolderUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RFieldHolderUtil;
 import consulo.language.ast.ASTNode;
+import consulo.language.psi.stub.IStubElementType;
+import consulo.language.psi.stub.StubElement;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +43,7 @@ import consulo.language.ast.ASTNode;
  * @author: oleg
  * @date: Mar 13, 2007
  */
-public abstract class RFieldConstantContainerImpl extends RContainerBase implements RFieldConstantContainer
+public abstract class RFieldConstantContainerImpl<T extends StubElement> extends RContainerBase<T> implements RFieldConstantContainer
 {
 
 	// Cached information for ConstantUsages
@@ -51,6 +55,11 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 	public RFieldConstantContainerImpl(ASTNode astNode)
 	{
 		super(astNode);
+	}
+
+	public RFieldConstantContainerImpl(@Nonnull final T stub, @Nonnull final IStubElementType nodeType)
+	{
+		super(stub, nodeType);
 	}
 
 
@@ -107,18 +116,28 @@ public abstract class RFieldConstantContainerImpl extends RContainerBase impleme
 	@Nonnull
 	public List<RConstant> getVirtualConstants()
 	{
-		return RVirtualUtil.getVirtualConstants(this, this);
+		final List<RConstant> result = new ArrayList<RConstant>();
+		for(ConstantDefinitions def : getConstantDefinitions())
+		{
+			result.add(def.getFirstDefinition());
+		}
+		return result;
 	}
 
 	@Override
 	@Nonnull
 	public List<RField> getVirtualFields()
 	{
-		return RVirtualUtil.getVirtualFields(this, this);
+		final List<RField> result = new ArrayList<RField>();
+		for(FieldDefinition def : getFieldsDefinitions())
+		{
+			result.add(def.getFirstUsage());
+		}
+		return result;
 	}
 
 	@Override
-	public boolean equalsToVirtual(@Nonnull RVirtualStructuralElement element)
+	public boolean equalsToVirtual(@Nonnull RStructuralElement element)
 	{
 		// TODO: to be honest, we must add another 2 check!
 		// RVPsiUtuils.areConstantHoldersEqual and RVPsiUtuils.areFieldHoldersEqual

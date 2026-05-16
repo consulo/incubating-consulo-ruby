@@ -16,6 +16,12 @@
 
 package org.jetbrains.plugins.ruby.ruby.presentation;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RStructuralElement;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.holders.RContainer;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
@@ -25,9 +31,6 @@ import consulo.language.icon.IconDescriptorUpdaters;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.RubyUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualStructuralElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualFile;
 import org.jetbrains.plugins.ruby.ruby.lang.TextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.AccessModifier;
 import consulo.language.psi.PsiElement;
@@ -49,19 +52,19 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @return location
 	 */
 	@Nonnull
-	public static String getContainerNameWithLocation(RVirtualContainer container)
+	public static String getContainerNameWithLocation(RContainer container)
 	{
 		final StringBuilder buff = new StringBuilder();
 		while(container != null)
 		{
-			if(buff.length() > 0 && !(container instanceof RVirtualFile))
+			if(buff.length() > 0 && !(container instanceof RFile))
 			{
 				buff.insert(0, RubyUtil.MODULES_PATH_SEPARATOR);
 			}
 
-			if(container instanceof RVirtualFile)
+			if(container instanceof RFile)
 			{
-				String location = ((RVirtualFile) container).getPresentableLocation();
+				String location = ((RFile) container).getPresentableLocation();
 				if(location == null)
 				{
 					location = container.getName();
@@ -83,24 +86,24 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @param element element
 	 * @return location
 	 */
-	public static String getLocation(@Nonnull final RVirtualStructuralElement element)
+	public static String getLocation(@Nonnull final RStructuralElement element)
 	{
-		final RVirtualContainer parentContainer = element.getVirtualParentContainer();
+		final RContainer parentContainer = element.getVirtualParentContainer();
 		final String location = getContainerNameWithLocation(parentContainer);
-		if(element instanceof RVirtualContainer)
+		if(element instanceof RContainer)
 		{
 			final StringBuffer buffer = new StringBuffer();
-			final List<String> path = ((RVirtualContainer) element).getFullPath();
+			final List<String> path = ((RContainer) element).getFullPath();
 			for(int i = 0; i < path.size() - 1; i++)
 			{
 				final String s = path.get(i);
 				buffer.append(s);
-				if(i != path.size() - 2 || !(parentContainer instanceof RVirtualFile))
+				if(i != path.size() - 2 || !(parentContainer instanceof RFile))
 				{
 					buffer.append(RubyUtil.MODULES_PATH_SEPARATOR);
 				}
 			}
-			if(parentContainer instanceof RVirtualFile && path.size() > 1)
+			if(parentContainer instanceof RFile && path.size() > 1)
 			{
 				buffer.append('(');
 				buffer.append(location);
@@ -121,7 +124,7 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @param container Container to get icon for
 	 * @return Icon of container with AccessModifier
 	 */
-	public static Image getIconWithModifiers(final RVirtualContainer container)
+	public static Image getIconWithModifiers(final RContainer container)
 	{
 		final AccessModifier modifier = container.getAccessModifier();
 		return ImageEffects.appendRight(IconDescriptorUpdaters.getIcon((PsiElement) container, 0), getIconForAccessModifier(modifier));
@@ -153,7 +156,7 @@ public class RContainerPresentationUtil implements RubyIcons, RailsIcons, RPrese
 	 * @param options    Seee RPresentationConstants
 	 * @return formated container representation
 	 */
-	public static String formatName(@Nonnull final RVirtualContainer rContainer, final int options)
+	public static String formatName(@Nonnull final RContainer rContainer, final int options)
 	{
 		final StringBuilder buffer = new StringBuilder();
 

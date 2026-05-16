@@ -16,6 +16,8 @@
 
 package org.jetbrains.plugins.ruby.ruby.codeInsight.resolve;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,10 +27,9 @@ import jakarta.annotation.Nullable;
 
 import consulo.project.Project;
 import org.jetbrains.plugins.ruby.jruby.codeInsight.resolve.JavaResolveUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualImportJavaClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualIncludeJavaPackage;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RImportJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RIncludeJavaClass;
+import org.jetbrains.plugins.ruby.ruby.cache.psi.RIncludeJavaPackage;
 import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualName;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.references.RPsiPolyvariantReference;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.Type;
@@ -78,23 +79,23 @@ public class ResolveUtil
 			add(list, ((PsiElementSymbol) symbol).getPsiElement());
 		}
 
-		for(RVirtualElement element : SymbolPresentationUtil.getPrototypesToShow(fileSymbol, symbol))
+		for(RPsiElement element : SymbolPresentationUtil.getPrototypesToShow(fileSymbol, symbol))
 		{
 			// JRuby Specific!
-			if(element instanceof RVirtualImportJavaClass)
+			if(element instanceof RImportJavaClass)
 			{
-				for(RVirtualName name : ((RVirtualImportJavaClass) element).getNames())
+				for(RVirtualName name : ((RImportJavaClass) element).getVirtualNames())
 				{
 					add(list, JavaResolveUtil.getPackageOrClass(project, name.getPath()));
 				}
 			}
-			if(element instanceof RVirtualIncludeJavaClass)
+			if(element instanceof RIncludeJavaClass)
 			{
-				String qualifiedName = ((RVirtualIncludeJavaClass) element).getQualifiedName();
+				String qualifiedName = ((RIncludeJavaClass) element).getQualifiedName();
 				if(qualifiedName != null)
 				{
 					// Hack for RVirtualIncludePackage
-					if(element instanceof RVirtualIncludeJavaPackage)
+					if(element instanceof RIncludeJavaPackage)
 					{
 						qualifiedName += '.' + symbol.getName();
 					}

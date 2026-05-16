@@ -16,6 +16,10 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes;
 
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule;
+
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,11 +34,9 @@ import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.HelpersConventions;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ViewsConventions;
 import org.jetbrains.plugins.ruby.rails.presentation.RControllerPresentationUtil;
-import org.jetbrains.plugins.ruby.ruby.cache.RubyModuleCachesManager;
-import org.jetbrains.plugins.ruby.ruby.cache.fileCache.RubyModuleFilesCache;
-import org.jetbrains.plugins.ruby.ruby.cache.info.RFileInfo;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualClass;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualModule;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 import consulo.module.Module;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.VirtualFileManager;
@@ -47,10 +49,10 @@ import consulo.virtualFileSystem.VirtualFileManager;
  */
 public class ControllerClassNode extends ClassNode
 {
-	public ControllerClassNode(final Module module, final RVirtualClass rVClass, final RFileInfo fileInfo)
+	public ControllerClassNode(final Module module, final RClass rVClass)
 	{
 
-		super(module, rVClass, fileInfo);
+		super(module, rVClass);
 
 		init(getElement(), RControllerPresentationUtil.getPresentation(getRubyClass()));
 	}
@@ -96,13 +98,14 @@ public class ControllerClassNode extends ClassNode
 			final VirtualFile helperFile = VirtualFileManager.getInstance().findFileByUrl(helperUrl);
 			if(helperFile != null)
 			{
-				final RubyModuleFilesCache cache = RubyModuleCachesManager.getInstance(module).getFilesCache();
-				final RFileInfo helperFileInfo = cache.getUp2DateFileInfo(helperFile);
-				assert helperFileInfo != null; // shouldn't be null
-				final RVirtualModule rModule = HelpersConventions.getHelperModule(helperFileInfo.getRVirtualFile(), className);
-				if(rModule != null)
+				final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(helperFile);
+				if(psiFile instanceof RFile)
 				{
-					children.add(new HelperNode(module, rModule, helperUrl));
+					final RModule rModule = HelpersConventions.getHelperModule((RFile) psiFile, className);
+					if(rModule != null)
+					{
+						children.add(new HelperNode(module, rModule, helperUrl));
+					}
 				}
 			}
 		}

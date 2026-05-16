@@ -16,6 +16,7 @@
 
 package org.jetbrains.plugins.ruby.ruby.sdk.jruby;
 
+import consulo.annotation.component.ExtensionImpl;
 import jakarta.annotation.Nullable;
 
 import consulo.application.Application;
@@ -36,6 +37,7 @@ import consulo.ui.image.Image;
  * @author: Roman Chernyatchik
  * @date: Aug 22, 2007
  */
+@ExtensionImpl
 public class JRubySdkType extends RubySdkType
 {
 	@NonNls

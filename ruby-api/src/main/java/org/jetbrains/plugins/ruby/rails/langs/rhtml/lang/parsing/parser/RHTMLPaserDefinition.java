@@ -50,10 +50,17 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	private TokenSet myWhitespaceTokens;
 	private ParserDefinition myTemplateParserDefinition;
 
-	public RHTMLPaserDefinition()
+	@Nonnull
+	private ParserDefinition getTemplateParserDefinition()
 	{
-		myTemplateParserDefinition = ParserDefinition.forLanguage(HTMLLanguage.INSTANCE);
-		assert myTemplateParserDefinition != null;
+		ParserDefinition definition = myTemplateParserDefinition;
+		if(definition == null)
+		{
+			definition = ParserDefinition.forLanguage(HTMLLanguage.INSTANCE);
+			assert definition != null;
+			myTemplateParserDefinition = definition;
+		}
+		return definition;
 	}
 
 	@Nonnull
@@ -82,7 +89,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	{
 		if(myWhitespaceTokens == null)
 		{
-			myWhitespaceTokens = TokenSet.orSet(RHTMLTokenType.RHTML_WHITE_SPECE_TOKENS, myTemplateParserDefinition.getWhitespaceTokens(languageVersion));
+			myWhitespaceTokens = TokenSet.orSet(RHTMLTokenType.RHTML_WHITE_SPECE_TOKENS, getTemplateParserDefinition().getWhitespaceTokens(languageVersion));
 		}
 		return myWhitespaceTokens;
 	}
@@ -95,7 +102,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 		{
 			myCommentTokens = TokenSet.orSet(TokenSet.create(RHTMLElementType.RHTML_COMMENT_ELEMENT,
 
-					RHTMLTokenType.RHTML_COMMENT_START, RHTMLTokenType.RHTML_COMMENT_CHARACTERS, RHTMLTokenType.RHTML_COMMENT_END), myTemplateParserDefinition.getCommentTokens(languageVersion));
+					RHTMLTokenType.RHTML_COMMENT_START, RHTMLTokenType.RHTML_COMMENT_CHARACTERS, RHTMLTokenType.RHTML_COMMENT_END), getTemplateParserDefinition().getCommentTokens(languageVersion));
 		}
 		return myCommentTokens;
 	}
@@ -104,7 +111,7 @@ public class RHTMLPaserDefinition implements ParserDefinition
 	@Override
 	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
 	{
-		return myTemplateParserDefinition.getStringLiteralElements(languageVersion);
+		return getTemplateParserDefinition().getStringLiteralElements(languageVersion);
 	}
 
 	@Override

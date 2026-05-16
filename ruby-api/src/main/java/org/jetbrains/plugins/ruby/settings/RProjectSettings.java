@@ -21,7 +21,11 @@ import static org.jetbrains.plugins.ruby.rails.actions.generators.GeneratorOptio
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import consulo.annotation.component.ComponentScope;
+import consulo.annotation.component.ServiceAPI;
+import consulo.annotation.component.ServiceImpl;
 import jakarta.annotation.Nonnull;
+import jakarta.inject.Singleton;
 
 import consulo.component.persist.PersistentStateComponent;
 import consulo.util.xml.serializer.annotation.Transient;
@@ -40,6 +44,9 @@ import consulo.project.Project;
  */
 
 @State(name = "RProjectSettings", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
+@ServiceAPI(ComponentScope.PROJECT)
+@ServiceImpl
+@Singleton
 public class RProjectSettings implements PersistentStateComponent<RProjectSettings>
 {
 	public ArrayList<String> myOptions = new ArrayList<String>();

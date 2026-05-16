@@ -24,7 +24,6 @@ import consulo.language.psi.PsiManager;
 import consulo.project.Project;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.RVirtualElement;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.LastSymbolStorage;
 import org.jetbrains.plugins.ruby.ruby.codeInsight.symbols.RubyOverrideImplementUtil;
@@ -48,78 +47,66 @@ import java.util.List;
  * @date: Apr 22, 2007
  */
 @ExtensionImpl
-public class RubyDocumentationProvider implements LanguageDocumentationProvider
-{
-	@Nonnull
-	@Override
-	public Language getLanguage()
-	{
-		return RubyLanguage.INSTANCE;
-	}
+public class RubyDocumentationProvider implements LanguageDocumentationProvider {
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return RubyLanguage.INSTANCE;
+    }
 
-	@Nullable
-	@Override
-	public String getQuickNavigateInfo(PsiElement element, PsiElement element2)
-	{
-		return RubyHelpUtil.getShortDescription(element, false);
-	}
+    @Nullable
+    @Override
+    public String getQuickNavigateInfo(PsiElement element, PsiElement element2) {
+        return RubyHelpUtil.getShortDescription(element, false);
+    }
 
-	@Override
-	@Nullable
-	public java.util.List<java.lang.String> getUrlFor(PsiElement element, PsiElement originalElement)
-	{
-		return Collections.emptyList();
-	}
+    @Override
+    @Nullable
+    public java.util.List<java.lang.String> getUrlFor(PsiElement element, PsiElement originalElement) {
+        return Collections.emptyList();
+    }
 
-	@Override
-	@Nullable
-	public String generateDoc(@Nullable final PsiElement element, @Nullable final PsiElement originalElement)
-	{
-		return element instanceof RPsiElement ? RubyHelpUtil.getHelpByElement((RPsiElement) element) : null;
-	}
+    @Override
+    @Nullable
+    public String generateDoc(@Nullable final PsiElement element, @Nullable final PsiElement originalElement) {
+        return element instanceof RPsiElement ? RubyHelpUtil.getHelpByElement((RPsiElement) element) : null;
+    }
 
-	@Override
-	@Nullable
-	public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element)
-	{
-		return null;
-	}
+    @Override
+    @Nullable
+    public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+        return null;
+    }
 
-	@Override
-	@SuppressWarnings({"ConstantConditions"})
-	@Nullable
-	public PsiElement getDocumentationElementForLink(@Nonnull final PsiManager psiManager, @Nonnull final String link, @Nonnull final PsiElement element)
-	{
-		final Project project = psiManager.getProject();
-		final FileSymbol fileSymbol = LastSymbolStorage.getInstance(project).getSymbol();
-		try
-		{
-			if(link.startsWith(RubyHelpUtil.SYMBOL))
-			{
-				final Integer index = Integer.valueOf(link.substring(RubyHelpUtil.SYMBOL.length()));
-				final List<Symbol> symbols = ResolveUtil.resolveToSymbols(element);
-				final Symbol symbol = symbols.get(index);
-				// Java symbols handling
-				if(Types.JAVA.contains(symbol.getType()))
-				{
-					return ((JavaSymbol) symbol).getPsiElement();
-				}
-				final RVirtualElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
-				return prototype != null ? RVirtualPsiUtil.findPsiByVirtualElement(prototype, project) : null;
-			}
+    @Override
+    @SuppressWarnings({"ConstantConditions"})
+    @Nullable
+    public PsiElement getDocumentationElementForLink(@Nonnull final PsiManager psiManager, @Nonnull final String link, @Nonnull final PsiElement element) {
+        final Project project = psiManager.getProject();
+        final FileSymbol fileSymbol = LastSymbolStorage.getInstance(project).getSymbol();
+        try {
+            if (link.startsWith(RubyHelpUtil.SYMBOL)) {
+                final Integer index = Integer.valueOf(link.substring(RubyHelpUtil.SYMBOL.length()));
+                final List<Symbol> symbols = ResolveUtil.resolveToSymbols(element);
+                final Symbol symbol = symbols.get(index);
+                // Java symbols handling
+                if (Types.JAVA.contains(symbol.getType())) {
+                    return ((JavaSymbol) symbol).getPsiElement();
+                }
+                final RPsiElement prototype = symbol.getLastVirtualPrototype(fileSymbol);
+                return prototype != null ? RVirtualPsiUtil.findPsiByVirtualElement(prototype, project) : null;
+            }
 
-			if(link.startsWith(RubyHelpUtil.ELEMENT))
-			{
-				final Integer index = Integer.valueOf(link.substring(RubyHelpUtil.ELEMENT.length()));
-				final Symbol symbol = element instanceof RContainer ? SymbolUtil.getSymbolByContainer(fileSymbol, (RContainer) element) : ResolveUtil.resolveToSymbols(element).get(0);
-				final Object overridenElem = RubyOverrideImplementUtil.getOverridenElements(fileSymbol, symbol, null).get(index);
-				return overridenElem instanceof RVirtualElement ? RVirtualPsiUtil.findPsiByVirtualElement((RVirtualElement) overridenElem, project) : null;
-			}
-		}
-		catch(Exception e)
-		{
-			return null;
-		}
-		return null;
-	}
+            if (link.startsWith(RubyHelpUtil.ELEMENT)) {
+                final Integer index = Integer.valueOf(link.substring(RubyHelpUtil.ELEMENT.length()));
+                final Symbol symbol = element instanceof RContainer ? SymbolUtil.getSymbolByContainer(fileSymbol, (RContainer) element) : ResolveUtil.resolveToSymbols(element).get(0);
+                final Object overridenElem = RubyOverrideImplementUtil.getOverridenElements(fileSymbol, symbol, null).get(index);
+                return overridenElem instanceof RPsiElement ? RVirtualPsiUtil.findPsiByVirtualElement((RPsiElement) overridenElem, project) : null;
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return null;
+    }
 }

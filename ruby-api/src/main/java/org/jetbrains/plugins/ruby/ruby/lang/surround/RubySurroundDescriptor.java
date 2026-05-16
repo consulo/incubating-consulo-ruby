@@ -37,76 +37,63 @@ import java.util.ArrayList;
  * Date: Sep 4, 2007
  */
 @ExtensionImpl
-public class RubySurroundDescriptor implements SurroundDescriptor
-{
-	@Override
-	@Nonnull
-	public PsiElement[] getElementsToSurround(@Nonnull final PsiFile file, final int startOffset, final int endOffset)
-	{
-		final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
-		PsiElement first = file.getViewProvider().findElementAt(startOffset);
-		PsiElement last = file.getViewProvider().findElementAt(endOffset - 1);
-		if(first == null || last == null)
-		{
-			return new PsiElement[]{};
-		}
-		final PsiElement context = first != last ? PsiTreeUtil.findCommonContext(first, last) : first.getParent();
-		if(context instanceof RCompoundStatement)
-		{
-			// we find all the elements under RCompoundStatement in given ranges
-			while(first.getParent() != context)
-			{
-				first = first.getParent();
-			}
-			while(last.getParent() != context)
-			{
-				last = last.getParent();
-			}
-			while(true)
-			{
-				list.add(first);
-				if(first == null || first == last)
-				{
-					return list.toArray(new PsiElement[list.size()]);
-				}
-				first = first.getNextSibling();
-			}
-		}
-		else if(context instanceof RExpression)
-		{
-			return new PsiElement[]{context};
-		}
-		else
-		{
-			return PsiElement.EMPTY_ARRAY;
-		}
-	}
+public class RubySurroundDescriptor implements SurroundDescriptor {
+    @Override
+    @Nonnull
+    public PsiElement[] getElementsToSurround(@Nonnull final PsiFile file, final int startOffset, final int endOffset) {
+        final ArrayList<PsiElement> list = new ArrayList<PsiElement>();
+        PsiElement first = file.getViewProvider().findElementAt(startOffset);
+        PsiElement last = file.getViewProvider().findElementAt(endOffset - 1);
+        if (first == null || last == null) {
+            return new PsiElement[]{};
+        }
+        final PsiElement context = first != last ? PsiTreeUtil.findCommonContext(first, last) : first.getParent();
+        if (context instanceof RCompoundStatement) {
+            // we find all the elements under RCompoundStatement in given ranges
+            while (first.getParent() != context) {
+                first = first.getParent();
+            }
+            while (last.getParent() != context) {
+                last = last.getParent();
+            }
+            while (true) {
+                list.add(first);
+                if (first == null || first == last) {
+                    return list.toArray(new PsiElement[list.size()]);
+                }
+                first = first.getNextSibling();
+            }
+        }
+        else if (context instanceof RExpression) {
+            return new PsiElement[]{context};
+        }
+        else {
+            return PsiElement.EMPTY_ARRAY;
+        }
+    }
 
-	@Override
-	@Nonnull
-	public Surrounder[] getSurrounders()
-	{
-		return new Surrounder[]{
-				new RubyBraceSurrounder(),
-				new RubyBEGINSurrounder(),
-				new RubyENDSurrounder(),
-				new RubyIfSurrounder(),
-				new RubyWhileSurrounder(),
-				new RubyUnlessSurrounder(),
-				new RubyBeginEndSurrounder()
-		};
-	}
+    @Override
+    @Nonnull
+    public Surrounder[] getSurrounders() {
+        return new Surrounder[]{
+            new RubyBraceSurrounder(),
+            new RubyBEGINSurrounder(),
+            new RubyENDSurrounder(),
+            new RubyIfSurrounder(),
+            new RubyWhileSurrounder(),
+            new RubyUnlessSurrounder(),
+            new RubyBeginEndSurrounder()
+        };
+    }
 
-	@Override
-	public boolean isExclusive()
-	{
-		return false;
-	}
+    @Override
+    public boolean isExclusive() {
+        return false;
+    }
 
-	@Nonnull
-	@Override
-	public Language getLanguage()
-	{
-		return RubyLanguage.INSTANCE;
-	}
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return RubyLanguage.INSTANCE;
+    }
 }

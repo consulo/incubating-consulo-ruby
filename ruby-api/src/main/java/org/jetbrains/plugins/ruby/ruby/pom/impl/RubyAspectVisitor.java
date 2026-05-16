@@ -19,10 +19,6 @@ package org.jetbrains.plugins.ruby.ruby.pom.impl;
 import jakarta.annotation.Nonnull;
 
 import consulo.language.psi.PsiElement;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.containers.RVirtualContainer;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualConstantHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualFieldHolder;
-import org.jetbrains.plugins.ruby.ruby.cache.psi.holders.RVirtualGlobalVarHolder;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RVirtualPsiUtil;
@@ -178,7 +174,7 @@ class RubyAspectVisitor extends RubySystemCallVisitor
 			createStructureChange("container was deleted!!!");
 			return;
 		}
-		RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(container);
+		RContainer vContainer = RVirtualPsiUtil.findVirtualContainer(container);
 		if(vContainer == null || !container.equalsToVirtual(vContainer))
 		{
 			createStructureChange("container structural elements changed!!!");
@@ -202,8 +198,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor
 		final RFieldHolder fHolder = element instanceof RFieldHolder ? (RFieldHolder) element : PsiTreeUtil.getParentOfType(element, RFieldHolder.class);
 		if(fHolder != null)
 		{
-			final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(fHolder);
-			if(!(vContainer instanceof RVirtualFieldHolder && RVirtualPsiUtil.areFieldHoldersEqual(fHolder, (RVirtualFieldHolder) vContainer)))
+			final RContainer vContainer = RVirtualPsiUtil.findVirtualContainer(fHolder);
+			if(!(vContainer instanceof RFieldHolder && RVirtualPsiUtil.areFieldHoldersEqual(fHolder, (RFieldHolder) vContainer)))
 			{
 				createStructureChange("fields changed!!!");
 			}
@@ -215,8 +211,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor
 		final RConstantHolder cHolder = element instanceof RConstantHolder ? (RConstantHolder) element : PsiTreeUtil.getParentOfType(element, RConstantHolder.class);
 		if(cHolder != null)
 		{
-			final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(cHolder);
-			if(!(vContainer instanceof RVirtualConstantHolder && RVirtualPsiUtil.areConstantHoldersEqual(cHolder, (RVirtualConstantHolder) vContainer)))
+			final RContainer vContainer = RVirtualPsiUtil.findVirtualContainer(cHolder);
+			if(!(vContainer instanceof RConstantHolder && RVirtualPsiUtil.areConstantHoldersEqual(cHolder, (RConstantHolder) vContainer)))
 			{
 				createStructureChange("constants changed!!!");
 				return true;
@@ -230,8 +226,8 @@ class RubyAspectVisitor extends RubySystemCallVisitor
 		final RGlobalVarHolder vHolder = element instanceof RGlobalVarHolder ? (RGlobalVarHolder) element : PsiTreeUtil.getParentOfType(element, RGlobalVarHolder.class);
 		if(vHolder != null)
 		{
-			final RVirtualContainer vContainer = RVirtualPsiUtil.findVirtualContainer(vHolder);
-			if(!(vContainer instanceof RVirtualGlobalVarHolder && RVirtualPsiUtil.areGlobalVariableHoldersEqual(vHolder, (RVirtualGlobalVarHolder) vContainer)))
+			final RContainer vContainer = RVirtualPsiUtil.findVirtualContainer(vHolder);
+			if(!(vContainer instanceof RGlobalVarHolder && RVirtualPsiUtil.areGlobalVariableHoldersEqual(vHolder, (RGlobalVarHolder) vContainer)))
 			{
 				createStructureChange("global variables changed!!!");
 				return true;
