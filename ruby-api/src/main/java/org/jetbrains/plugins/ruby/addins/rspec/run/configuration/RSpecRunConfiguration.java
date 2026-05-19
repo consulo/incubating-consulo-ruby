@@ -174,7 +174,7 @@ public class RSpecRunConfiguration extends AbstractRubyRunConfiguration implemen
 		{
 			if(SystemInfo.isWindows)
 			{
-				final String[] gemsRootUrls = getSdk().getRootProvider().getUrls(GemOrderRootType.getInstance());
+				final String[] gemsRootUrls = getSdk().getRootProvider().getUrls(GemOrderRootType.ID);
 				for(String gemsRootUrl : gemsRootUrls)
 				{
 					final VirtualFile gemsRoot = VirtualFileManager.getInstance().findFileByUrl(gemsRootUrl);

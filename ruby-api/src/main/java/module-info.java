@@ -328,4 +328,5 @@ open module consulo.ruby.api
     exports org.jetbrains.plugins.ruby.support;
     exports org.jetbrains.plugins.ruby.support.ui.checkableDir;
     exports org.jetbrains.plugins.ruby.support.utils;
+
 }

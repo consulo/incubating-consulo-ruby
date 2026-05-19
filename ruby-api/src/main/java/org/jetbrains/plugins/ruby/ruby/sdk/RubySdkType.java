@@ -127,14 +127,14 @@ public class RubySdkType extends SdkType {
     public static void findAndSaveGemsRootsBy(final SdkModificator sdkModificator) {
         final List<VirtualFile> gemsRoots = findGemsRoots(sdkModificator);
         for (VirtualFile gemsRoot : gemsRoots) {
-            sdkModificator.addRoot(gemsRoot, GemOrderRootType.getInstance());
+            sdkModificator.addRoot(gemsRoot, GemOrderRootType.ID);
         }
     }
 
     @Nonnull
     protected static List<VirtualFile> findGemsRoots(@Nonnull final SdkModificator sdkModificator) {
         final List<VirtualFile> gemsRoots = new ArrayList<VirtualFile>();
-        final VirtualFile[] roots = sdkModificator.getRoots(SourcesOrderRootType.getInstance());
+        final VirtualFile[] roots = sdkModificator.getRoots(SourcesOrderRootType.ID);
         for (VirtualFile root : roots) {
             final String url = root.getUrl();
             if (RubySdkUtil.isGemsRootUrl(url)) {
@@ -317,10 +317,10 @@ public class RubySdkType extends SdkType {
     }
 
     @Override
-    public boolean isRootTypeApplicable(OrderRootType type) {
-        return type == SourcesOrderRootType.getInstance() ||
-            type == BinariesOrderRootType.getInstance() ||
-            type == DocumentationOrderRootType.getInstance() ||
-            type == GemOrderRootType.getInstance();
+    public boolean isRootTypeApplicable(String type) {
+        return SourcesOrderRootType.ID.equals(type) ||
+            BinariesOrderRootType.ID.equals(type) ||
+            DocumentationOrderRootType.ID.equals(type) ||
+            GemOrderRootType.ID.equals(type);
     }
 }

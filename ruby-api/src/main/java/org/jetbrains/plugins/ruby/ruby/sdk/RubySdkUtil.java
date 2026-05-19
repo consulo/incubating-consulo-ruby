@@ -96,7 +96,7 @@ public class RubySdkUtil
 
 	private static String[] getSdkContentRootUrls(@Nonnull final Sdk sdk)
 	{
-		return sdk.getRootProvider().getUrls(BinariesOrderRootType.getInstance());
+		return sdk.getRootProvider().getUrls(BinariesOrderRootType.ID);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class RubySdkUtil
 	public static String[] getSdkRootsWithAllGems(@Nonnull final Sdk sdk)
 	{
 		final ArrayList<String> urls = new ArrayList<>();
-		for(String rootUrl : sdk.getRootProvider().getUrls(BinariesOrderRootType.getInstance()))
+		for(String rootUrl : sdk.getRootProvider().getUrls(BinariesOrderRootType.ID))
 		{
 			if(isGemsRootUrl(rootUrl))
 			{
@@ -161,8 +161,8 @@ public class RubySdkUtil
 	{
 		if(vFile != null)
 		{
-			sdkModificator.addRoot(vFile, BinariesOrderRootType.getInstance());
-			sdkModificator.addRoot(vFile, SourcesOrderRootType.getInstance());
+			sdkModificator.addRoot(vFile, BinariesOrderRootType.ID);
+			sdkModificator.addRoot(vFile, SourcesOrderRootType.ID);
 		}
 	}
 
@@ -255,7 +255,7 @@ public class RubySdkUtil
 	{
 		if(sdk != null && RubySdkUtil.isKindOfRubySDK(sdk))
 		{
-			final String[] gemsRoots = sdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
+			final String[] gemsRoots = sdk.getRootProvider().getUrls(GemOrderRootType.ID);
 			for(String gemsRoot : gemsRoots)
 			{
 				if(url.startsWith(gemsRoot))

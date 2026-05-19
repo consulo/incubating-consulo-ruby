@@ -52,7 +52,7 @@ public class RailsBuiltInCachedSymbol extends BuiltInCachedSymbol
 			return;
 		}
 		// We recreate cache if something added to gems
-		final String[] gemsRootUrls = mySdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
+		final String[] gemsRootUrls = mySdk.getRootProvider().getUrls(GemOrderRootType.ID);
 		for(String gemsRootUrl : gemsRootUrls)
 		{
 			if(url.startsWith(gemsRootUrl))

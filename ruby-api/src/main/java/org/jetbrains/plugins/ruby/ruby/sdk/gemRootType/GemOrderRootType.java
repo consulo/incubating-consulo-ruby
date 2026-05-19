@@ -3,8 +3,6 @@ package org.jetbrains.plugins.ruby.ruby.sdk.gemRootType;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.content.OrderRootType;
 
-import jakarta.annotation.Nonnull;
-
 /**
  * @author VISTALL
  * @since 25.09.13.
@@ -12,14 +10,10 @@ import jakarta.annotation.Nonnull;
 @ExtensionImpl
 public class GemOrderRootType extends OrderRootType
 {
-	@Nonnull
-	public static GemOrderRootType getInstance()
-	{
-		return getOrderRootType(GemOrderRootType.class);
-	}
+	public static final String ID = "rubyGems";
 
 	public GemOrderRootType()
 	{
-		super("rubyGems");
+		super(ID);
 	}
 }

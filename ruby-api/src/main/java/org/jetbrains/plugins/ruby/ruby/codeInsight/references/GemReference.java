@@ -162,7 +162,7 @@ public class GemReference implements RPsiPolyvariantReference
 			final Sdk sdk = rFile.getSdk();
 			if(sdk != null && RubySdkUtil.isKindOfRubySDK(sdk))
 			{
-				final String[] rootUrls = sdk.getRootProvider().getUrls(GemOrderRootType.getInstance());
+				final String[] rootUrls = sdk.getRootProvider().getUrls(GemOrderRootType.ID);
 				final ArrayList<RubyLookupItem> variants = new ArrayList<RubyLookupItem>();
 				for(String rootUrl : rootUrls)
 				{
