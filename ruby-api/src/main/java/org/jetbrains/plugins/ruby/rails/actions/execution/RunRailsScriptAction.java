@@ -16,22 +16,23 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.execution;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-
+import consulo.document.FileDocumentManager;
+import consulo.execution.ui.awt.RawCommandLineEditor;
 import consulo.execution.ui.console.Filter;
-import jakarta.annotation.Nonnull;
-import javax.swing.Action;
-import javax.swing.JComponent;
-
-import jakarta.annotation.Nullable;
-
+import consulo.logging.Logger;
+import consulo.module.Module;
 import consulo.process.event.ProcessAdapter;
 import consulo.process.event.ProcessEvent;
+import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.awt.DialogWrapper;
+import consulo.ui.ex.awt.Messages;
 import consulo.ui.ex.awt.TextFieldWithBrowseButton;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsUtil;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
@@ -42,14 +43,11 @@ import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.run.RubyScriptRunnerArgumentsProvider;
 import org.jetbrains.plugins.ruby.ruby.run.filters.FileLinksFilterUtil;
 import org.jetbrains.plugins.ruby.ruby.run.filters.RFileLinksFilter;
-import consulo.ui.ex.action.AnActionEvent;
-import consulo.logging.Logger;
-import consulo.document.FileDocumentManager;
-import consulo.module.Module;
-import consulo.project.Project;
-import consulo.ui.ex.awt.Messages;
-import consulo.virtualFileSystem.VirtualFile;
-import consulo.execution.ui.awt.RawCommandLineEditor;
+
+import javax.swing.*;
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,159 +55,141 @@ import consulo.execution.ui.awt.RawCommandLineEditor;
  * @author: Roman Chernyatchik
  * @date: Jan 17, 2008
  */
-public class RunRailsScriptAction extends AnAction
-{
-	private static Logger LOG = Logger.getInstance(RunRailsScriptAction.class);
+public class RunRailsScriptAction extends AnAction implements AnActionWithSyncUpdate {
+    private static Logger LOG = Logger.getInstance(RunRailsScriptAction.class);
 
-	@Override
-	public void actionPerformed(@Nonnull final AnActionEvent event)
-	{
-		final Module module = DataContextUtil.getModule(event.getDataContext());
-		assert module != null;
+    @Override
+    public void actionPerformed(@Nonnull final AnActionEvent event) {
+        final Module module = DataContextUtil.getModule(event.getDataContext());
+        assert module != null;
 
-		//Save all opened documents
-		FileDocumentManager.getInstance().saveAllDocuments();
+        //Save all opened documents
+        FileDocumentManager.getInstance().saveAllDocuments();
 
-		//Show dialog
-		final VirtualFile scriptsFolder = RailsUtil.getScriptsRoot(module);
-		LOG.assertTrue(checkScriptsDir(module), "./script directory doesn't exist!");
+        //Show dialog
+        final VirtualFile scriptsFolder = RailsUtil.getScriptsRoot(module);
+        LOG.assertTrue(checkScriptsDir(module), "./script directory doesn't exist!");
 
-		//noinspection ConstantConditions
-		final RunRailsScriptDialog dialog = new RunRailsScriptDialog(module.getProject(), module.getName(), scriptsFolder);
-		dialog.setTitle(RBundle.message("rails.actions.execution.run.rails.script.title"));
-		dialog.show();
-		if(dialog.isOK())
-		{
-			final String scriptName = dialog.getScriptName();
-			final String arguments = dialog.getArguments();
+        //noinspection ConstantConditions
+        final RunRailsScriptDialog dialog = new RunRailsScriptDialog(module.getProject(), module.getName(), scriptsFolder);
+        dialog.setTitle(RBundle.message("rails.actions.execution.run.rails.script.title"));
+        dialog.show();
+        if (dialog.isOK()) {
+            final String scriptName = dialog.getScriptName();
+            final String arguments = dialog.getArguments();
 
-			if(!checkScriptsDir(module))
-			{
-				final String errorMsg = RBundle.message("rails.actions.execution.run.rails.script.error.no.scripts.folder", module.getName());
-				final String errorTitle = RBundle.message("rails.actions.execution.run.rails.script.error.title");
-				Messages.showErrorDialog(module.getProject(), errorMsg, errorTitle);
-			}
+            if (!checkScriptsDir(module)) {
+                final String errorMsg = RBundle.message("rails.actions.execution.run.rails.script.error.no.scripts.folder", module.getName());
+                final String errorTitle = RBundle.message("rails.actions.execution.run.rails.script.error.title");
+                Messages.showErrorDialog(module.getProject(), errorMsg, errorTitle);
+            }
 
-			final String scriptFolderPath = scriptsFolder.getPath();
-			File scriptFile = FileLinksFilterUtil.getFileByRubyLink(scriptFolderPath + File.separator + scriptName);
-			if(scriptFile == null)
-			{
-				scriptFile = FileLinksFilterUtil.getFileByRubyLink(scriptName);
-			}
-			if(scriptFile == null)
-			{
-				final String errorMsg = RBundle.message("rails.actions.execution.run.rails.script.error.script.want.found", scriptName);
-				final String errorTitle = RBundle.message("rails.actions.execution.run.rails.script.error.title");
-				Messages.showErrorDialog(module.getProject(), errorMsg, errorTitle);
-				return;
-			}
+            final String scriptFolderPath = scriptsFolder.getPath();
+            File scriptFile = FileLinksFilterUtil.getFileByRubyLink(scriptFolderPath + File.separator + scriptName);
+            if (scriptFile == null) {
+                scriptFile = FileLinksFilterUtil.getFileByRubyLink(scriptName);
+            }
+            if (scriptFile == null) {
+                final String errorMsg = RBundle.message("rails.actions.execution.run.rails.script.error.script.want.found", scriptName);
+                final String errorTitle = RBundle.message("rails.actions.execution.run.rails.script.error.title");
+                Messages.showErrorDialog(module.getProject(), errorMsg, errorTitle);
+                return;
+            }
 
-			runRailsScript(module, scriptFile.getPath(), arguments);
-		}
-	}
+            runRailsScript(module, scriptFile.getPath(), arguments);
+        }
+    }
 
-	private void runRailsScript(final Module module, final String scriptName, final String arguments)
-	{
-		final String title = RBundle.message("rails.actions.execution.run.rails.script.title");
-		final Filter[] filters = {
-				new RFileLinksFilter(module),
-				new GeneratorsLinksFilter(module)
-		};
+    private void runRailsScript(final Module module, final String scriptName, final String arguments) {
+        final String title = RBundle.message("rails.actions.execution.run.rails.script.title");
+        final Filter[] filters = {
+            new RFileLinksFilter(module),
+            new GeneratorsLinksFilter(module)
+        };
 
-		final String[] params = getRailsScriptRunParams(scriptName, arguments);
-		final RubyScriptRunnerArgumentsProvider provider = new RubyScriptRunnerArgumentsProvider(params, null, null);
+        final String[] params = getRailsScriptRunParams(scriptName, arguments);
+        final RubyScriptRunnerArgumentsProvider provider = new RubyScriptRunnerArgumentsProvider(params, null, null);
 
-		final ProcessAdapter processListener = new ProcessAdapter()
-		{
-			@Override
-			public void processTerminated(ProcessEvent event)
-			{
-				RailsFacetUtil.refreshRailsAppHomeContent(module);
-			}
-		};
+        final ProcessAdapter processListener = new ProcessAdapter() {
+            @Override
+            public void processTerminated(ProcessEvent event) {
+                RailsFacetUtil.refreshRailsAppHomeContent(module);
+            }
+        };
 
-		RailsScriptRunner.runRailsScriptInCosole(module, processListener, filters, null, true, title, provider, null);
-	}
+        RailsScriptRunner.runRailsScriptInCosole(module, processListener, filters, null, true, title, provider, null);
+    }
 
-	@Override
-	public void update(@Nonnull final AnActionEvent event)
-	{
-		final Module module = DataContextUtil.getModule(event.getDataContext());
+    @Override
+    public void update(@Nonnull final AnActionEvent event) {
+        final Module module = DataContextUtil.getModule(event.getDataContext());
 
-		// show only on RailsModuleType and valid Ruby SDK with rails installed
-		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
-		final boolean isEnabled = isVisible && checkScriptsDir(module);
+        // show only on RailsModuleType and valid Ruby SDK with rails installed
+        final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
+        final boolean isEnabled = isVisible && checkScriptsDir(module);
 
-		AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isEnabled);
-	}
+        AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isEnabled);
+    }
 
-	private boolean checkScriptsDir(final Module module)
-	{
-		final VirtualFile scriptsRoot = RailsUtil.getScriptsRoot(module);
-		return scriptsRoot != null && scriptsRoot.isValid();
-	}
+    private boolean checkScriptsDir(final Module module) {
+        final VirtualFile scriptsRoot = RailsUtil.getScriptsRoot(module);
+        return scriptsRoot != null && scriptsRoot.isValid();
+    }
 
-	private String[] getRailsScriptRunParams(final String scriptName, final String arguments)
-	{
-		final String[] params;
-		final List<String> parameters = new LinkedList<String>();
+    private String[] getRailsScriptRunParams(final String scriptName, final String arguments) {
+        final String[] params;
+        final List<String> parameters = new LinkedList<String>();
 
-		parameters.add(scriptName);
-		RubyScriptRunnerArgumentsProvider.collectArguments(arguments, parameters);
-		params = parameters.toArray(new String[parameters.size()]);
-		return params;
-	}
+        parameters.add(scriptName);
+        RubyScriptRunnerArgumentsProvider.collectArguments(arguments, parameters);
+        params = parameters.toArray(new String[parameters.size()]);
+        return params;
+    }
 
-	private static class RunRailsScriptDialog extends DialogWrapper
-	{
-		private final Project myProject;
-		private final String myModuleName;
-		private final VirtualFile myModuleScriptFolder;
-		private TextFieldWithBrowseButton myScriptNameComponent;
-		private RawCommandLineEditor myArgumentsComponent;
+    private static class RunRailsScriptDialog extends DialogWrapper {
+        private final Project myProject;
+        private final String myModuleName;
+        private final VirtualFile myModuleScriptFolder;
+        private TextFieldWithBrowseButton myScriptNameComponent;
+        private RawCommandLineEditor myArgumentsComponent;
 
-		protected RunRailsScriptDialog(final Project project, @Nonnull final String moduleName, @Nonnull final VirtualFile moduleScriptFolder)
-		{
-			super(project, true);
-			myProject = project;
-			myModuleName = moduleName;
-			myModuleScriptFolder = moduleScriptFolder;
-			init();
-		}
+        protected RunRailsScriptDialog(final Project project, @Nonnull final String moduleName, @Nonnull final VirtualFile moduleScriptFolder) {
+            super(project, true);
+            myProject = project;
+            myModuleName = moduleName;
+            myModuleScriptFolder = moduleScriptFolder;
+            init();
+        }
 
-		@Nonnull
-		public String getArguments()
-		{
-			assert myArgumentsComponent != null;
-			return myArgumentsComponent.getText().trim();
-		}
+        @Nonnull
+        public String getArguments() {
+            assert myArgumentsComponent != null;
+            return myArgumentsComponent.getText().trim();
+        }
 
-		@Nonnull
-		public String getScriptName()
-		{
-			assert myScriptNameComponent != null;
-			return myScriptNameComponent.getText().trim();
-		}
+        @Nonnull
+        public String getScriptName() {
+            assert myScriptNameComponent != null;
+            return myScriptNameComponent.getText().trim();
+        }
 
-		@Override
-		@Nullable
-		protected JComponent createCenterPanel()
-		{
-			final RunRailsScriptForm myRunRailsScriptForm = new RunRailsScriptForm(myProject, myModuleName, myModuleScriptFolder);
-			myScriptNameComponent = myRunRailsScriptForm.getScriptNameComponent();
-			myArgumentsComponent = myRunRailsScriptForm.getArgumentsComponent();
+        @Override
+        @Nullable
+        protected JComponent createCenterPanel() {
+            final RunRailsScriptForm myRunRailsScriptForm = new RunRailsScriptForm(myProject, myModuleName, myModuleScriptFolder);
+            myScriptNameComponent = myRunRailsScriptForm.getScriptNameComponent();
+            myArgumentsComponent = myRunRailsScriptForm.getArgumentsComponent();
 
-			return myRunRailsScriptForm.getContentPane();
-		}
+            return myRunRailsScriptForm.getContentPane();
+        }
 
-		@Override
-		protected Action[] createActions()
-		{
-			setOKButtonText(RBundle.message("rails.actions.execution.run.rails.script.dialog.button.ok.caption"));
-			return new Action[]{
-					getOKAction(),
-					getCancelAction()
-			};
-		}
-	}
+        @Override
+        protected Action[] createActions() {
+            setOKButtonText(RBundle.message("rails.actions.execution.run.rails.script.dialog.button.ok.caption"));
+            return new Action[]{
+                getOKAction(),
+                getCancelAction()
+            };
+        }
+    }
 }

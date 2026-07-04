@@ -63,98 +63,81 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
  * @author: Roman Chernyatchik
  * @date: 27.12.2006
  */
-public class GenerateActionAction extends SimpleGeneratorAction
-{
-	protected static class ActionStubInserter implements Runnable
-	{
-		protected final static Logger LOG = Logger.getInstance(ActionStubInserter.class.getName());
-		protected DataContext myDataContext;
-		public String myMethodName;
+public class GenerateActionAction extends SimpleGeneratorAction {
+    protected static class ActionStubInserter implements Runnable {
+        protected final static Logger LOG = Logger.getInstance(ActionStubInserter.class.getName());
+        protected DataContext myDataContext;
+        public String myMethodName;
 
-		public ActionStubInserter(@Nonnull final DataContext dataContext, @Nonnull final String methodName)
-		{
-			myDataContext = dataContext;
-			myMethodName = methodName;
-		}
+        public ActionStubInserter(@Nonnull final DataContext dataContext, @Nonnull final String methodName) {
+            myDataContext = dataContext;
+            myMethodName = methodName;
+        }
 
-		@Override
-		public void run()
-		{
-			final Editor editor = myDataContext.getData(CommonDataKeys.EDITOR);
-			final PsiFile psiFile = myDataContext.getData(CommonDataKeys.PSI_FILE);
-			if(psiFile == null || editor == null)
-			{
-				LOG.error("Psi element couldn't be found for action.");
-				return;
-			}
+        @Override
+        public void run() {
+            final Editor editor = myDataContext.getData(CommonDataKeys.EDITOR);
+            final PsiFile psiFile = myDataContext.getData(CommonDataKeys.PSI_FILE);
+            if (psiFile == null || editor == null) {
+                LOG.error("Psi element couldn't be found for action.");
+                return;
+            }
 
-			final RClass rClass = determineControllerClass(myDataContext);
-			if(rClass == null)
-			{
-				return;
-			}
-			final Project project = rClass.getProject();
+            final RClass rClass = determineControllerClass(myDataContext);
+            if (rClass == null) {
+                return;
+            }
+            final Project project = rClass.getProject();
 
-			final Document document = PsiDocumentManager.getInstance(project).getDocument(psiFile);
-			assert document != null;
+            final Document document = PsiDocumentManager.getInstance(project).getDocument(psiFile);
+            assert document != null;
 
-			//TODO Reimplement this Hack
-			final String tip = RBundle.message("template.rails.action.implement.body");
-			final String text = "def " + myMethodName + "\n  " + tip + "\nend";
+            //TODO Reimplement this Hack
+            final String tip = RBundle.message("template.rails.action.implement.body");
+            final String text = "def " + myMethodName + "\n  " + tip + "\nend";
 
 
-			CommandProcessor.getInstance().executeCommand(project, new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					try
-					{
-						WriteAction.run(new ThrowableRunnable<Exception>()
-						{
-							@Override
-							public void run() throws Exception
-							{
-								// insert method stub
-								consulo.ide.impl.idea.openapi.editor.EditorModificationUtil.insertStringAtCaret(editor, text);
-								PsiDocumentManager.getInstance(project).commitDocument(document);
-							}
-						});
-						WriteAction.run(new consulo.util.lang.function.ThrowableRunnable<Exception>()
-						{
-							@Override
-							public void run() throws Exception
-							{
-								// insert method stub
-								editor.getCaretModel().moveCaretRelatively(0, -1, false, false, true);
+            CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        WriteAction.run(new ThrowableRunnable<Exception>() {
+                            @Override
+                            public void run() throws Exception {
+                                // insert method stub
+                                consulo.ide.impl.idea.openapi.editor.EditorModificationUtil.insertStringAtCaret(editor, text);
+                                PsiDocumentManager.getInstance(project).commitDocument(document);
+                            }
+                        });
+                        WriteAction.run(new consulo.util.lang.function.ThrowableRunnable<Exception>() {
+                            @Override
+                            public void run() throws Exception {
+                                // insert method stub
+                                editor.getCaretModel().moveCaretRelatively(0, -1, false, false, true);
 
-								// reformat method code
-								final RMethod newMethod = RContainerUtil.getMethodByName(rClass, myMethodName);
-								if(newMethod != null)
-								{
-									final TextRange myTextRange = newMethod.getTextRange();
-									try
-									{
-										CodeStyleManager.getInstance(project).reformatText(psiFile, myTextRange.getStartOffset(), myTextRange.getEndOffset());
-										CodeStyleManager.getInstance(project).adjustLineIndent(document, editor.getCaretModel().getOffset());
-									}
-									catch(IncorrectOperationException e)
-									{
-										LOG.error("Inserting method template for : " + myMethodName + ". Code formatting failed.", e);
-									}
-								}
-							}
-						});
-					}
-					catch(Exception e)
-					{
-						LOG.error(e);
-					}
-				}
-			}, RBundle.message("popup.generate.action.command"), null);
-			// insert tip
+                                // reformat method code
+                                final RMethod newMethod = RContainerUtil.getMethodByName(rClass, myMethodName);
+                                if (newMethod != null) {
+                                    final TextRange myTextRange = newMethod.getTextRange();
+                                    try {
+                                        CodeStyleManager.getInstance(project).reformatText(psiFile, myTextRange.getStartOffset(), myTextRange.getEndOffset());
+                                        CodeStyleManager.getInstance(project).adjustLineIndent(document, editor.getCaretModel().getOffset());
+                                    }
+                                    catch (IncorrectOperationException e) {
+                                        LOG.error("Inserting method template for : " + myMethodName + ". Code formatting failed.", e);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    catch (Exception e) {
+                        LOG.error(e);
+                    }
+                }
+            }, RBundle.message("popup.generate.action.command"), null);
+            // insert tip
 /*
-			EditorModificationUtil.insertStringAtCaret(myEditor, tip);
+            EditorModificationUtil.insertStringAtCaret(myEditor, tip);
             PsiDocumentManager.getInstance(project).commitDocument(document);
             myEditor.getCaretModel().moveCaretRelatively(-tip.length(),
                                                          0, false, false, true);
@@ -176,148 +159,125 @@ public class GenerateActionAction extends SimpleGeneratorAction
             catch (IncorrectOperationException e) {
                 LOG.error("Error inserting javadoc for method: " + psiMethod.getName(), e);
             }*/
-		}
-	}
+        }
+    }
 
-	public GenerateActionAction()
-	{
-		this(null);
-	}
-
-
-	public GenerateActionAction(final String actionName)
-	{
-		this(actionName != null ? actionName : RBundle.message("popup.generate.action.text"), RBundle.message("popup.generate.action.description"), RailsIcons.RAILS_ACTION_NODE);
-	}
-
-	public GenerateActionAction(@Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon)
-	{
-		super(GenerateControllerAction.GENERATOR_CONTROLLER, actionName, description, icon);
-	}
-
-	@Override
-	public void actionPerformed(final AnActionEvent e)
-	{
-		final Module module = e.getData(CommonDataKeys.MODULE);
-
-		invokeDialog(module, e.getDataContext());
-	}
-
-	public void invokeAction(final String scriptArguments, final String mainArgument, final Module myModule, final DataContext myDataContext)
-	{
-		insertMethodStub(myDataContext, mainArgument);
-		invokeAction(scriptArguments, mainArgument, myModule);
-	}
-
-	public void insertMethodStub(final DataContext dataContext, final String methodName)
-	{
-		if(dataContext != null)
-		{
-			Project project = dataContext.getData(CommonDataKeys.PROJECT);
-			CommandProcessor.getInstance().executeCommand(project, RModuleUtil.createWriteAction(new ActionStubInserter(dataContext, methodName)), "GenerateActionAction.insertMethodSub", null);
-		}
-	}
+    public GenerateActionAction() {
+        this(null);
+    }
 
 
-	@Override
-	public void update(@Nonnull final AnActionEvent event)
-	{
-		final DataContext dataContext = event.getDataContext();
-		final Presentation presentation = event.getPresentation();
+    public GenerateActionAction(final String actionName) {
+        this(actionName != null ? actionName : RBundle.message("popup.generate.action.text"), RBundle.message("popup.generate.action.description"), RailsIcons.RAILS_ACTION_NODE);
+    }
 
-		// Check if module is Rails module, SDK is valid
-		final Module module = event.getData(CommonDataKeys.MODULE);
-		if(module == null || !RailsFacetUtil.hasRailsSupport(module) || !RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module)))
-		{
+    public GenerateActionAction(@Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon) {
+        super(GenerateControllerAction.GENERATOR_CONTROLLER, actionName, description, icon);
+    }
 
-			AnActionUtil.updatePresentation(presentation, false, false);
-			return;
-		}
+    @Override
+    public void actionPerformed(final AnActionEvent e) {
+        final Module module = e.getData(CommonDataKeys.MODULE);
 
-		// Check if file name corresponds to file with controller class
-		final VirtualFile file = event.getData(CommonDataKeys.VIRTUAL_FILE);
-		if(ControllersConventions.getControllerName(file) == null)
-		{
-			AnActionUtil.updatePresentation(presentation, false, false);
-			return;
-		}
+        invokeDialog(module, e.getDataContext());
+    }
 
-		// Check if caret is situated in ruby class
-		final RClass rClass = determineControllerClass(dataContext);
-		if(rClass != null && file != null)
-		{
-			final Document document = PsiDocumentManager.getInstance(rClass.getProject()).getDocument(rClass.getContainingFile());
-			if(document != null)
-			{
+    public void invokeAction(final String scriptArguments, final String mainArgument, final Module myModule, final DataContext myDataContext) {
+        insertMethodStub(myDataContext, mainArgument);
+        invokeAction(scriptArguments, mainArgument, myModule);
+    }
 
-				// Check if our ruby class is Controller
-				final String controllerFullClassName = ControllersConventions.getControllerClassName(ControllersConventions.getControllerFullName(module, file));
-				assert controllerFullClassName != null; // Controller must exist
+    public void insertMethodStub(final DataContext dataContext, final String methodName) {
+        if (dataContext != null) {
+            Project project = dataContext.getData(CommonDataKeys.PROJECT);
+            CommandProcessor.getInstance().executeCommand(project, RModuleUtil.createWriteAction(new ActionStubInserter(dataContext, methodName)), "GenerateActionAction.insertMethodSub", null);
+        }
+    }
 
-				if(controllerFullClassName.equals(rClass.getFullName()))
-				{
-					AnActionUtil.updatePresentation(presentation, true, true);
-					return;
-				}
-			}
-		}
 
-		AnActionUtil.updatePresentation(presentation, false, false);
-	}
+    @Override
+    public void update(@Nonnull final AnActionEvent event) {
+        final DataContext dataContext = event.getDataContext();
+        final Presentation presentation = event.getPresentation();
 
-	protected ActionInputValidator createValidator(@Nonnull final Module module, @Nullable final VirtualFile file, @Nonnull final DataContext dataContext)
-	{
-		return new ActionInputValidator(this, module, file, dataContext);
-	}
+        // Check if module is Rails module, SDK is valid
+        final Module module = event.getData(CommonDataKeys.MODULE);
+        if (module == null || !RailsFacetUtil.hasRailsSupport(module) || !RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module))) {
 
-	@Override
-	protected String getGenerateDialogTitle()
-	{
-		return RBundle.message("popup.generate.action.prompt.title");
-	}
+            AnActionUtil.updatePresentation(presentation, false, false);
+            return;
+        }
 
-	@Override
-	protected String getErrorTitle()
-	{
-		return RBundle.message("popup.generate.action.error.title");
-	}
+        // Check if file name corresponds to file with controller class
+        final VirtualFile file = event.getData(CommonDataKeys.VIRTUAL_FILE);
+        if (ControllersConventions.getControllerName(file) == null) {
+            AnActionUtil.updatePresentation(presentation, false, false);
+            return;
+        }
 
-	@Nullable
-	private static RClass determineControllerClass(final DataContext dataContext)
-	{
-		final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
-		final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
-		if(psiFile == null || editor == null)
-		{
-			return null;
-		}
-		PsiElement psiElem = dataContext.getData(CommonDataKeys.PSI_ELEMENT);
-		if(psiElem == null)
-		{
-			psiElem = psiFile.findElementAt(editor.getCaretModel().getOffset());
-		}
-		if(psiElem != null && psiElem instanceof PsiWhiteSpace && psiElem.isWritable())
-		{
+        // Check if caret is situated in ruby class
+        final RClass rClass = determineControllerClass(dataContext);
+        if (rClass != null && file != null) {
+            final Document document = PsiDocumentManager.getInstance(rClass.getProject()).getDocument(rClass.getContainingFile());
+            if (document != null) {
 
-			final RCompoundStatement st = RCompoundStatementNavigator.getByPsiElement(psiElem);
-			if(st != null)
-			{
-				final RBodyStatement body = RBodyStatementNavigator.getByRCompoundStatement(st);
-				return body == null ? null : RClassNavigator.getByRBodyStatement(body);
-			}
-			else
-			{
-				return RClassNavigator.getByPsiWhiteSpace((PsiWhiteSpace) psiElem);
-			}
-		}
-		return null;
-	}
+                // Check if our ruby class is Controller
+                final String controllerFullClassName = ControllersConventions.getControllerClassName(ControllersConventions.getControllerFullName(module, file));
+                assert controllerFullClassName != null; // Controller must exist
 
-	private void invokeDialog(final Module module, @Nonnull final DataContext dataContext)
-	{
-		final VirtualFile file = dataContext.getData(CommonDataKeys.VIRTUAL_FILE);
+                if (controllerFullClassName.equals(rClass.getFullName())) {
+                    AnActionUtil.updatePresentation(presentation, true, true);
+                    return;
+                }
+            }
+        }
 
-		final ActionInputValidator validator = createValidator(module, file, dataContext);
-		GenerateDialogs.showGenerateActionDialog(module, getGenerateDialogTitle(), validator);
-	}
+        AnActionUtil.updatePresentation(presentation, false, false);
+    }
+
+    protected ActionInputValidator createValidator(@Nonnull final Module module, @Nullable final VirtualFile file, @Nonnull final DataContext dataContext) {
+        return new ActionInputValidator(this, module, file, dataContext);
+    }
+
+    @Override
+    protected String getGenerateDialogTitle() {
+        return RBundle.message("popup.generate.action.prompt.title");
+    }
+
+    @Override
+    protected String getErrorTitle() {
+        return RBundle.message("popup.generate.action.error.title");
+    }
+
+    @Nullable
+    private static RClass determineControllerClass(final DataContext dataContext) {
+        final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
+        final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
+        if (psiFile == null || editor == null) {
+            return null;
+        }
+        PsiElement psiElem = dataContext.getData(CommonDataKeys.PSI_ELEMENT);
+        if (psiElem == null) {
+            psiElem = psiFile.findElementAt(editor.getCaretModel().getOffset());
+        }
+        if (psiElem != null && psiElem instanceof PsiWhiteSpace && psiElem.isWritable()) {
+
+            final RCompoundStatement st = RCompoundStatementNavigator.getByPsiElement(psiElem);
+            if (st != null) {
+                final RBodyStatement body = RBodyStatementNavigator.getByRCompoundStatement(st);
+                return body == null ? null : RClassNavigator.getByRBodyStatement(body);
+            }
+            else {
+                return RClassNavigator.getByPsiWhiteSpace((PsiWhiteSpace) psiElem);
+            }
+        }
+        return null;
+    }
+
+    private void invokeDialog(final Module module, @Nonnull final DataContext dataContext) {
+        final VirtualFile file = dataContext.getData(CommonDataKeys.VIRTUAL_FILE);
+
+        final ActionInputValidator validator = createValidator(module, file, dataContext);
+        GenerateDialogs.showGenerateActionDialog(module, getGenerateDialogTitle(), validator);
+    }
 }

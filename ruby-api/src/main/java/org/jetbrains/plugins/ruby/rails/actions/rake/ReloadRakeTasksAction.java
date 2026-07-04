@@ -16,19 +16,19 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import jakarta.annotation.Nonnull;
-
 import consulo.document.FileDocumentManager;
+import consulo.module.Module;
 import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
+import consulo.ui.ex.awt.Messages;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.BaseRailsFacetConfiguration;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import consulo.ui.ex.action.AnActionEvent;
-import consulo.module.Module;
-import consulo.ui.ex.awt.Messages;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,39 +36,35 @@ import consulo.ui.ex.awt.Messages;
  * @author: Roman Chernyatchik
  * @date: Jan 17, 2008
  */
-public class ReloadRakeTasksAction extends AnAction
-{
-	@Override
-	public void actionPerformed(@Nonnull final AnActionEvent event)
-	{
-		final Module module = DataContextUtil.getModule(event.getDataContext());
-		assert module != null;
+public class ReloadRakeTasksAction extends AnAction implements AnActionWithSyncUpdate {
+    @Override
+    public void actionPerformed(@Nonnull final AnActionEvent event) {
+        final Module module = DataContextUtil.getModule(event.getDataContext());
+        assert module != null;
 
-		//Save all opened documents
-		FileDocumentManager.getInstance().saveAllDocuments();
+        //Save all opened documents
+        FileDocumentManager.getInstance().saveAllDocuments();
 
-		final BaseRailsFacetConfiguration conf = RailsFacetUtil.getRailsFacetConfiguration(module);
-		assert conf != null;
+        final BaseRailsFacetConfiguration conf = RailsFacetUtil.getRailsFacetConfiguration(module);
+        assert conf != null;
 
-		if(RModuleUtil.getModuleOrJRubyFacetSdk(module) == null)
-		{
-			final String msg = RBundle.message("rails.facet.action.regenerate.rakeTasks.error.wrong.sdk");
-			final String title = RBundle.message("action.registered.shortcut.execute.disabled.title");
-			Messages.showErrorDialog(module.getProject(), msg, title);
+        if (RModuleUtil.getModuleOrJRubyFacetSdk(module) == null) {
+            final String msg = RBundle.message("rails.facet.action.regenerate.rakeTasks.error.wrong.sdk");
+            final String title = RBundle.message("action.registered.shortcut.execute.disabled.title");
+            Messages.showErrorDialog(module.getProject(), msg, title);
 
-			return;
-		}
-		conf.reloadRakeTasks();
-	}
+            return;
+        }
+        conf.reloadRakeTasks();
+    }
 
-	@Override
-	public void update(@Nonnull final AnActionEvent event)
-	{
-		final Module module = DataContextUtil.getModule(event.getDataContext());
+    @Override
+    public void update(@Nonnull final AnActionEvent event) {
+        final Module module = DataContextUtil.getModule(event.getDataContext());
 
-		// show only on RailsModuleType and valid Ruby SDK with rails installed
-		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
+        // show only on RailsModuleType and valid Ruby SDK with rails installed
+        final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
 
-		AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isVisible);
-	}
+        AnActionUtil.updatePresentation(event.getPresentation(), isVisible, isVisible);
+    }
 }

@@ -244,7 +244,7 @@ public class ConsoleRunner {
         return TextUtil.EMPTY_STRING;
     }
 
-    private class RerunAction extends AnAction {
+    private class RerunAction extends AnAction implements AnActionWithSyncUpdate {
         private Runnable myRerunTask;
 
         public RerunAction(final ConsoleView consoleView, Runnable rerun) {
@@ -265,7 +265,7 @@ public class ConsoleRunner {
         }
     }
 
-    private class ShowCmdLine extends AnAction {
+    private class ShowCmdLine extends AnAction implements AnActionWithSyncUpdate {
 
         @SuppressWarnings({"UnresolvedPropertyKey"})
         public ShowCmdLine() {

@@ -18,8 +18,8 @@ package org.jetbrains.plugins.ruby.rails.actions.generators.actions;
 
 import consulo.content.bundle.Sdk;
 import consulo.dataContext.DataContext;
-import consulo.language.editor.util.IdeView;
 import consulo.language.editor.CommonDataKeys;
+import consulo.language.editor.util.IdeView;
 import consulo.language.psi.PsiDirectory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
@@ -28,6 +28,7 @@ import consulo.module.Module;
 import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.action.Presentation;
 import consulo.ui.image.Image;
 import jakarta.annotation.Nonnull;
@@ -40,84 +41,73 @@ import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
  * @author: Roman Chernyatchik
  * @date: 27.11.2006
  */
-public abstract class AbstractScriptAction extends AnAction
-{
+public abstract class AbstractScriptAction extends AnAction implements AnActionWithSyncUpdate {
 
-	public AbstractScriptAction(@Nullable final String text, @Nullable final String description, @Nullable final Image icon)
-	{
-		super(text, description, icon);
-	}
+    public AbstractScriptAction(@Nullable final String text, @Nullable final String description, @Nullable final Image icon) {
+        super(text, description, icon);
+    }
 
-	/**
-	 * @return Caption for Generate dialog.
-	 */
-	protected abstract String getGenerateDialogTitle();
+    /**
+     * @return Caption for Generate dialog.
+     */
+    protected abstract String getGenerateDialogTitle();
 
-	/**
-	 * @return Caption for error message.
-	 */
-	protected abstract String getErrorTitle();
+    /**
+     * @return Caption for error message.
+     */
+    protected abstract String getErrorTitle();
 
-	@SuppressWarnings({"UnusedParameters"})
-	protected abstract void checkBeforeCreate(@Nonnull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException;
+    @SuppressWarnings({"UnusedParameters"})
+    protected abstract void checkBeforeCreate(@Nonnull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException;
 
-	protected abstract String[] createScriptParameters(final String inputString, final String railsAppHomePath);
+    protected abstract String[] createScriptParameters(final String inputString, final String railsAppHomePath);
 
-	protected abstract boolean validateBeforeInvokeDialog(final Module module);
+    protected abstract boolean validateBeforeInvokeDialog(final Module module);
 
-	protected abstract PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory);
+    protected abstract PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory);
 
-	@RequiredUIAccess
-	@Override
-	public void actionPerformed(final AnActionEvent e)
-	{
-		final DataContext dataContext = e.getDataContext();
+    @RequiredUIAccess
+    @Override
+    public void actionPerformed(final AnActionEvent e) {
+        final DataContext dataContext = e.getDataContext();
 
-		final IdeView view = e.getData(IdeView.KEY);
-		final Module module = e.getData(CommonDataKeys.MODULE);
-		final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
+        final IdeView view = e.getData(IdeView.KEY);
+        final Module module = e.getData(CommonDataKeys.MODULE);
+        final Sdk jdk = RModuleUtil.getModuleOrJRubyFacetSdk(module);
 
-		assert module != null;
-		assert jdk != null;
+        assert module != null;
+        assert jdk != null;
 
-		PsiDirectory dir = view == null ? null : view.getOrChooseDirectory();
-		if(dir == null)
-		{
-			final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
-			if(psiFile != null)
-			{
-				dir = psiFile.getParent();
-			}
-		}
+        PsiDirectory dir = view == null ? null : view.getOrChooseDirectory();
+        if (dir == null) {
+            final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
+            if (psiFile != null) {
+                dir = psiFile.getParent();
+            }
+        }
 
-		if(!validateBeforeInvokeDialog(module))
-		{
-			return;
-		}
+        if (!validateBeforeInvokeDialog(module)) {
+            return;
+        }
 
-		final PsiElement[] createdElements = invokeDialog(module, dir);
+        final PsiElement[] createdElements = invokeDialog(module, dir);
 
-		if(view != null)
-		{
-			for(PsiElement createdElement : createdElements)
-			{
-				view.selectElement(createdElement);
-			}
-		}
-	}
+        if (view != null) {
+            for (PsiElement createdElement : createdElements) {
+                view.selectElement(createdElement);
+            }
+        }
+    }
 
-	@RequiredUIAccess
-	@Override
-	public void update(@Nonnull final AnActionEvent e)
-	{
-		final Presentation presentation = e.getPresentation();
+    @Override
+    public void update(@Nonnull final AnActionEvent e) {
+        final Presentation presentation = e.getPresentation();
 
-		final Module module = e.getData(CommonDataKeys.MODULE);
-		boolean show = false;
-		if(module != null)
-		{
-			show = RModuleUtil.getModuleOrJRubyFacetSdk(module) != null;
-		}
-		AnActionUtil.updatePresentation(presentation, show, show);
-	}
+        final Module module = e.getData(CommonDataKeys.MODULE);
+        boolean show = false;
+        if (module != null) {
+            show = RModuleUtil.getModuleOrJRubyFacetSdk(module) != null;
+        }
+        AnActionUtil.updatePresentation(presentation, show, show);
+    }
 }

@@ -16,17 +16,17 @@
 
 package org.jetbrains.plugins.ruby.rails.actions.rake;
 
-import jakarta.annotation.Nonnull;
-
 import consulo.module.Module;
 import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.actions.generators.actions.AnActionUtil;
 import org.jetbrains.plugins.ruby.rails.actions.rake.task.RakeTask;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.sdk.RubySdkUtil;
 import org.jetbrains.plugins.ruby.support.utils.RModuleUtil;
-import consulo.ui.ex.action.AnActionEvent;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,28 +34,24 @@ import consulo.ui.ex.action.AnActionEvent;
  * @author: oleg, Roman Chernyatchik
  * @date: 30.08.2006
  */
-class RakeAction extends AnAction
-{
-	final private RakeTask myTask;
+class RakeAction extends AnAction implements AnActionWithSyncUpdate {
+    final private RakeTask myTask;
 
-	public RakeAction(@Nonnull final RakeTask task)
-	{
-		super(task.getId(), task.getDescription(), RailsIcons.RAKE_TASK_ICON);
-		myTask = task;
-	}
+    public RakeAction(@Nonnull final RakeTask task) {
+        super(task.getId(), task.getDescription(), RailsIcons.RAKE_TASK_ICON);
+        myTask = task;
+    }
 
-	@Override
-	public void actionPerformed(final AnActionEvent e)
-	{
-		RakeUtil.runRakeTask(e.getDataContext(), myTask);
-	}
+    @Override
+    public void actionPerformed(final AnActionEvent e) {
+        RakeUtil.runRakeTask(e.getDataContext(), myTask);
+    }
 
 
-	@Override
-	public void update(final AnActionEvent e)
-	{
-		final Module module = DataContextUtil.getModule(e.getDataContext());
-		final boolean show = RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
-		AnActionUtil.updatePresentation(e.getPresentation(), true, show);
-	}
+    @Override
+    public void update(final AnActionEvent e) {
+        final Module module = DataContextUtil.getModule(e.getDataContext());
+        final boolean show = RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
+        AnActionUtil.updatePresentation(e.getPresentation(), true, show);
+    }
 }

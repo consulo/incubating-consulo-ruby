@@ -50,134 +50,117 @@ import java.util.List;
  * @date: 02.12.2006
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class SimpleGeneratorAction extends AbstractScriptAction
-{
-	private String myGeneratorName;
+public class SimpleGeneratorAction extends AbstractScriptAction {
+    private String myGeneratorName;
 
-	public SimpleGeneratorAction(@Nonnull final String scriptName, @Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon)
-	{
-		super(actionName, description, icon);
-		myGeneratorName = scriptName;
-	}
+    public SimpleGeneratorAction(@Nonnull final String scriptName, @Nonnull final String actionName, @Nullable final String description, @Nullable final Image icon) {
+        super(actionName, description, icon);
+        myGeneratorName = scriptName;
+    }
 
-	public SimpleGeneratorAction(@Nonnull final String name)
-	{
-		this(name, format(name), RBundle.message("new.generate.common.action.title", name), RailsIcons.GENERATOR_ICON);
-	}
+    public SimpleGeneratorAction(@Nonnull final String name) {
+        this(name, format(name), RBundle.message("new.generate.common.action.title", name), RailsIcons.GENERATOR_ICON);
+    }
 
-	private static String format(final String str)
-	{
-		final String result = Character.toUpperCase(str.charAt(0)) + (str.length() > 1 ? str.substring(1) : TextUtil.EMPTY_STRING);
-		return result.replace('_', ' ');
-	}
+    private static String format(final String str) {
+        final String result = Character.toUpperCase(str.charAt(0)) + (str.length() > 1 ? str.substring(1) : TextUtil.EMPTY_STRING);
+        return result.replace('_', ' ');
+    }
 
 
-	public String getGeneratorName()
-	{
-		return myGeneratorName;
-	}
+    public String getGeneratorName() {
+        return myGeneratorName;
+    }
 
-	private String getGeneratingProcessTitle()
-	{
-		return RBundle.message("new.generate.common.generating.title");
-	}
+    private String getGeneratingProcessTitle() {
+        return RBundle.message("new.generate.common.generating.title");
+    }
 
-	/**
-	 * Delegates invokeAction to corresponding <code>SimpleGeneratorAction</code>
-	 *
-	 * @param scriptArguments arguments for script
-	 * @param mainArgument    main argument
-	 * @param module          module
-	 */
-	@SuppressWarnings({
-			"UnusedDeclaration",
-			"UnusedParameters"
-	})
-	public void invokeAction(final String scriptArguments, final String mainArgument, final Module module)
-	{
+    /**
+     * Delegates invokeAction to corresponding <code>SimpleGeneratorAction</code>
+     *
+     * @param scriptArguments arguments for script
+     * @param mainArgument    main argument
+     * @param module          module
+     */
+    @SuppressWarnings({
+        "UnusedDeclaration",
+        "UnusedParameters"
+    })
+    public void invokeAction(final String scriptArguments, final String mainArgument, final Module module) {
 
-		//Save all opened documents
-		FileDocumentManager.getInstance().saveAllDocuments();
+        //Save all opened documents
+        FileDocumentManager.getInstance().saveAllDocuments();
 
-		/**
-		 * Run script in console
-		 */
-		final String railsAppHomePath = RailsFacetUtil.getRailsAppHomeDirPath(module);
-		assert railsAppHomePath != null;
-		GeneratorsUtil.invokeGenerator(module, getGeneratingProcessTitle(), getErrorTitle(), createScriptParameters(scriptArguments, railsAppHomePath), null, null, RModuleUtil.getModuleOrJRubyFacetSdk(module));
-	}
+        /**
+         * Run script in console
+         */
+        final String railsAppHomePath = RailsFacetUtil.getRailsAppHomeDirPath(module);
+        assert railsAppHomePath != null;
+        GeneratorsUtil.invokeGenerator(module, getGeneratingProcessTitle(), getErrorTitle(), createScriptParameters(scriptArguments, railsAppHomePath), null, null, RModuleUtil.getModuleOrJRubyFacetSdk(module));
+    }
 
-	@Override
-	public void update(@Nonnull final AnActionEvent e)
-	{
-		super.update(e);
+    @Override
+    public void update(@Nonnull final AnActionEvent e) {
+        super.update(e);
 
-		final Presentation presentation = e.getPresentation();
-		if(!presentation.isVisible())
-		{
-			return;
-		}
+        final Presentation presentation = e.getPresentation();
+        if (!presentation.isVisible()) {
+            return;
+        }
 
-		final Module module = e.getData(CommonDataKeys.MODULE);
+        final Module module = e.getData(CommonDataKeys.MODULE);
 
-		final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
+        final boolean isVisible = module != null && RailsFacetUtil.hasRailsSupport(module);
 
-		final boolean isEnabled = isVisible && RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
+        final boolean isEnabled = isVisible && RubySdkUtil.isKindOfRubySDK(RModuleUtil.getModuleOrJRubyFacetSdk(module));
 
-		AnActionUtil.updatePresentation(presentation, isVisible, isEnabled);
-	}
+        AnActionUtil.updatePresentation(presentation, isVisible, isEnabled);
+    }
 
-	protected SimpleGeneratorInputValidator createValidator(@Nonnull final Module module, @Nullable final PsiDirectory directory)
-	{
-		return new SimpleGeneratorInputValidator(this, module, directory);
-	}
+    protected SimpleGeneratorInputValidator createValidator(@Nonnull final Module module, @Nullable final PsiDirectory directory) {
+        return new SimpleGeneratorInputValidator(this, module, directory);
+    }
 
-	@Override
-	protected void checkBeforeCreate(@Nonnull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException
-	{
-		// Do nothing
-	}
+    @Override
+    protected void checkBeforeCreate(@Nonnull final String newName, @Nullable final PsiDirectory directory) throws IncorrectOperationException {
+        // Do nothing
+    }
 
-	@Override
-	protected String[] createScriptParameters(final String inputString, @Nonnull final String railsAppHomePath)
-	{
-		final List<String> parameters = new ArrayList<String>();
-		parameters.add(VirtualFileUtil.buildSystemIndependentPath(railsAppHomePath, GeneratorsUtil.GENERATE_SCRIPT));
-		parameters.add(myGeneratorName);
+    @Override
+    protected String[] createScriptParameters(final String inputString, @Nonnull final String railsAppHomePath) {
+        final List<String> parameters = new ArrayList<String>();
+        parameters.add(VirtualFileUtil.buildSystemIndependentPath(railsAppHomePath, GeneratorsUtil.GENERATE_SCRIPT));
+        parameters.add(myGeneratorName);
 
-		RubyScriptRunnerArgumentsProvider.collectArguments(inputString, parameters);
+        RubyScriptRunnerArgumentsProvider.collectArguments(inputString, parameters);
 
-		return parameters.toArray(new String[parameters.size()]);
-	}
+        return parameters.toArray(new String[parameters.size()]);
+    }
 
-	@Override
-	protected String getGenerateDialogTitle()
-	{
-		return RBundle.message("new.generate.common.action.prompt.title", myGeneratorName);
-	}
+    @Override
+    protected String getGenerateDialogTitle() {
+        return RBundle.message("new.generate.common.action.prompt.title", myGeneratorName);
+    }
 
-	@Override
-	protected String getErrorTitle()
-	{
-		return RBundle.message("new.generate.common.error.title");
-	}
+    @Override
+    protected String getErrorTitle() {
+        return RBundle.message("new.generate.common.error.title");
+    }
 
-	@Override
-	protected PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory)
-	{
-		final SimpleGeneratorInputValidator validator = createValidator(module, directory);
-		GenerateDialogs.showGenerateDialog(module, getGenerateDialogTitle(), validator);
-		return validator.getCreatedElements();
-	}
+    @Override
+    protected PsiElement[] invokeDialog(@Nonnull final Module module, @Nullable final PsiDirectory directory) {
+        final SimpleGeneratorInputValidator validator = createValidator(module, directory);
+        GenerateDialogs.showGenerateDialog(module, getGenerateDialogTitle(), validator);
+        return validator.getCreatedElements();
+    }
 
-	@Override
-	protected boolean validateBeforeInvokeDialog(final Module module)
-	{
-		if(!RailsUtil.hasRailsSupportInSDK(RModuleUtil.getModuleOrJRubyFacetSdk(module)))
-		{
-			Messages.showErrorDialog(module.getProject(), RBundle.message("new.generate.common.error.no.rails"), RBundle.message("action.registered.shortcut.execute.disabled.title"));
-			return false;
-		}
-		return true;
-	}
+    @Override
+    protected boolean validateBeforeInvokeDialog(final Module module) {
+        if (!RailsUtil.hasRailsSupportInSDK(RModuleUtil.getModuleOrJRubyFacetSdk(module))) {
+            Messages.showErrorDialog(module.getProject(), RBundle.message("new.generate.common.error.no.rails"), RBundle.message("action.registered.shortcut.execute.disabled.title"));
+            return false;
+        }
+        return true;
+    }
 }

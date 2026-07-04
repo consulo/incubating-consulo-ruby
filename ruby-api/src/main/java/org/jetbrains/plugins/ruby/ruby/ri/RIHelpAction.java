@@ -18,21 +18,21 @@ package org.jetbrains.plugins.ruby.ruby.ri;
 
 import consulo.codeEditor.*;
 import consulo.dataContext.DataContext;
-import consulo.project.Project;
-import consulo.project.ui.wm.ToolWindowManager;
-import consulo.ui.ex.action.AnActionEvent;
-import consulo.util.lang.ref.Ref;
+import consulo.language.Language;
 import consulo.language.ast.IElementType;
 import consulo.language.ast.TokenSet;
-import consulo.language.Language;
+import consulo.project.Project;
+import consulo.project.ui.wm.ToolWindowManager;
 import consulo.ui.ex.action.AnAction;
+import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.action.Presentation;
+import consulo.util.lang.ref.Ref;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.ruby.RubyIcons;
 import org.jetbrains.plugins.ruby.ruby.actions.DataContextUtil;
 import org.jetbrains.plugins.ruby.ruby.lang.RubyLanguage;
 import org.jetbrains.plugins.ruby.ruby.lang.parser.bnf.BNF;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,96 +40,85 @@ import jakarta.annotation.Nonnull;
  * @author: oleg
  * @date: Jan 15, 2007
  */
-public class RIHelpAction extends AnAction
-{
-	public static final TokenSet TOKENS_TO_SEARCH = TokenSet.orSet(BNF.kRESWORDS, BNF.tCID);
+public class RIHelpAction extends AnAction implements AnActionWithSyncUpdate {
+    public static final TokenSet TOKENS_TO_SEARCH = TokenSet.orSet(BNF.kRESWORDS, BNF.tCID);
 
-	@Override
-	public void actionPerformed(@Nonnull final AnActionEvent e)
-	{
-		assert canHelp(e);
+    @Override
+    public void actionPerformed(@Nonnull final AnActionEvent e) {
+        assert canHelp(e);
 
-		final DataContext dataContext = e.getDataContext();
-		final Editor editor = DataContextUtil.getEditor(dataContext);
-		final Project project = DataContextUtil.getProject(dataContext);
-		assert editor != null;
-		final SelectionModel selectionModel = editor.getSelectionModel();
-		final Ref<String> toSearch = new Ref<String>(selectionModel.getSelectedText());
-		if(toSearch.get() == null)
-		{
-			final CaretModel caretModel = editor.getCaretModel();
-			final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
-			final HighlighterIterator iterator = highlighter.createIterator(caretModel.getOffset());
-			toSearch.set(editor.getDocument().getText().substring(iterator.getStart(), iterator.getEnd()));
-		}
-		assert toSearch.get() != null;
-		assert project != null;
+        final DataContext dataContext = e.getDataContext();
+        final Editor editor = DataContextUtil.getEditor(dataContext);
+        final Project project = DataContextUtil.getProject(dataContext);
+        assert editor != null;
+        final SelectionModel selectionModel = editor.getSelectionModel();
+        final Ref<String> toSearch = new Ref<String>(selectionModel.getSelectedText());
+        if (toSearch.get() == null) {
+            final CaretModel caretModel = editor.getCaretModel();
+            final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
+            final HighlighterIterator iterator = highlighter.createIterator(caretModel.getOffset());
+            toSearch.set(editor.getDocument().getText().substring(iterator.getStart(), iterator.getEnd()));
+        }
+        assert toSearch.get() != null;
+        assert project != null;
 
-		ToolWindowManager.getInstance(project).getToolWindow("RDoc").show(null);
-	}
+        ToolWindowManager.getInstance(project).getToolWindow("RDoc").show(null);
+    }
 
-	@Override
-	public void update(final AnActionEvent e)
-	{
-		final Presentation presentation = e.getPresentation();
-		presentation.setIcon(RubyIcons.RUBY_ICON);
-		// visible only on ruby files
-		presentation.setVisible(DataContextUtil.getLanguage(e.getDataContext()) instanceof RubyLanguage);
-		presentation.setEnabled(canHelp(e));
-	}
+    @Override
+    public void update(final AnActionEvent e) {
+        final Presentation presentation = e.getPresentation();
+        presentation.setIcon(RubyIcons.RUBY_ICON);
+        // visible only on ruby files
+        presentation.setVisible(DataContextUtil.getLanguage(e.getDataContext()) instanceof RubyLanguage);
+        presentation.setEnabled(canHelp(e));
+    }
 
-	/**
-	 * Returns true if an action can be executed
-	 *
-	 * @param e Current action event
-	 * @return true if help is available, false otherwise
-	 */
-	private boolean canHelp(@Nonnull final AnActionEvent e)
-	{
-		final DataContext dataContext = e.getDataContext();
-		final Project project = DataContextUtil.getProject(dataContext);
-		if(project == null)
-		{
-			return false;
-		}
+    /**
+     * Returns true if an action can be executed
+     *
+     * @param e Current action event
+     * @return true if help is available, false otherwise
+     */
+    private boolean canHelp(@Nonnull final AnActionEvent e) {
+        final DataContext dataContext = e.getDataContext();
+        final Project project = DataContextUtil.getProject(dataContext);
+        if (project == null) {
+            return false;
+        }
 
-		if((DataContextUtil.getEditor(dataContext) == null))
-		{
-			return false;
-		}
+        if ((DataContextUtil.getEditor(dataContext) == null)) {
+            return false;
+        }
 
 
-		// check if editor is opened
-		final Editor editor = DataContextUtil.getEditor(dataContext);
-		if(editor == null)
-		{
-			return false;
-		}
-		// check if we in ruby file
-		final Language language = DataContextUtil.getLanguage(dataContext);
-		if(!(language instanceof RubyLanguage))
-		{
-			return false;
-		}
+        // check if editor is opened
+        final Editor editor = DataContextUtil.getEditor(dataContext);
+        if (editor == null) {
+            return false;
+        }
+        // check if we in ruby file
+        final Language language = DataContextUtil.getLanguage(dataContext);
+        if (!(language instanceof RubyLanguage)) {
+            return false;
+        }
 
-		// check if some text is selected
-		final SelectionModel selectionModel = editor.getSelectionModel();
-		final String selection = selectionModel.getSelectedText();
-		if(selection != null)
-		{
-			// we can search !!!
-			return true;
-		}
+        // check if some text is selected
+        final SelectionModel selectionModel = editor.getSelectionModel();
+        final String selection = selectionModel.getSelectedText();
+        if (selection != null) {
+            // we can search !!!
+            return true;
+        }
 
-		// check if text at carret is SEARCHABLE
-		final CaretModel caretModel = editor.getCaretModel();
-		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
-		final int offset = caretModel.getOffset();
-		if(offset >= editor.getDocument().getTextLength())
-		{
-			return false;
-		}
-		final HighlighterIterator iterator = highlighter.createIterator(offset);
-		return TOKENS_TO_SEARCH.contains(!iterator.atEnd() ? (IElementType) iterator.getTokenType() : null);
-	}
+        // check if text at carret is SEARCHABLE
+        final CaretModel caretModel = editor.getCaretModel();
+        final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
+        final int offset = caretModel.getOffset();
+        if (offset >= editor.getDocument().getTextLength()) {
+            return false;
+        }
+        final HighlighterIterator iterator = highlighter.createIterator(offset);
+        return TOKENS_TO_SEARCH.contains(!iterator.atEnd() ? (IElementType) iterator.getTokenType() : null);
+    }
 }

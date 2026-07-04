@@ -23,6 +23,7 @@ import consulo.language.psi.PsiElement;
 import consulo.project.Project;
 import consulo.ui.ex.action.AnAction;
 import consulo.ui.ex.action.AnActionEvent;
+import consulo.ui.ex.action.AnActionWithSyncUpdate;
 import consulo.ui.ex.action.Presentation;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -33,45 +34,38 @@ import jakarta.annotation.Nullable;
  * @author: Roman Chernyatchik
  * @date: Oct 6, 2007
  */
-public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateActionBase
-{
-	private FileTemplate myTemplate;
+public abstract class RailsCreateFromTemplateAction extends CreateFromTemplateActionBase implements AnActionWithSyncUpdate {
+    private FileTemplate myTemplate;
 
-	public RailsCreateFromTemplateAction(@Nonnull final FileTemplate template)
-	{
-		super(template.getName(), null, FileTypeManager.getInstance().getFileTypeByExtension(template.getExtension()).getIcon());
-		myTemplate = template;
-	}
+    public RailsCreateFromTemplateAction(@Nonnull final FileTemplate template) {
+        super(template.getName(), null, FileTypeManager.getInstance().getFileTypeByExtension(template.getExtension()).getIcon());
+        myTemplate = template;
+    }
 
-	@Override
-	protected PsiElement invokeDialogAndCreate(Project project, PsiDirectory dir, FileTemplate selectedTemplate)
-	{
-		return createDilog(project, dir, selectedTemplate).create();
-	}
+    @Override
+    protected PsiElement invokeDialogAndCreate(Project project, PsiDirectory dir, FileTemplate selectedTemplate) {
+        return createDilog(project, dir, selectedTemplate).create();
+    }
 
-	@Nonnull
-	protected abstract CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
+    @Nonnull
+    protected abstract CreateFileFromTemplateDialog createDilog(final Project project, final PsiDirectory dir, final FileTemplate selectedTemplate);
 
-	@Override
-	@Nullable
-	protected AnAction getReplacedAction(final FileTemplate template)
-	{
-		return null;
-	}
+    @Override
+    @Nullable
+    protected AnAction getReplacedAction(final FileTemplate template) {
+        return null;
+    }
 
-	@Override
-	protected FileTemplate getTemplate(final Project project, final PsiDirectory dir)
-	{
-		return myTemplate;
-	}
+    @Override
+    protected FileTemplate getTemplate(final Project project, final PsiDirectory dir) {
+        return myTemplate;
+    }
 
-	@Override
-	public void update(AnActionEvent e)
-	{
-		super.update(e);
-		Presentation presentation = e.getPresentation();
-		boolean isEnabled = canCreateFromTemplate(e, myTemplate);
-		presentation.setEnabled(isEnabled);
-		presentation.setVisible(isEnabled);
-	}
+    @Override
+    public void update(AnActionEvent e) {
+        Presentation presentation = e.getPresentation();
+        boolean isEnabled = canCreateFromTemplate(e, myTemplate);
+        presentation.setEnabled(isEnabled);
+        presentation.setVisible(isEnabled);
+    }
 }
