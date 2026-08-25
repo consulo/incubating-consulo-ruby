@@ -16,23 +16,22 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import java.util.function.Consumer;
-import jakarta.annotation.Nonnull;
-
+import consulo.module.Module;
+import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.ui.ex.tree.PresentationData;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.VirtualFileManager;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.facet.RailsFacetUtil;
 import org.jetbrains.plugins.ruby.rails.facet.configuration.StandardRailsPaths;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
-import consulo.ui.ex.tree.PresentationData;
-import consulo.module.Module;
-import consulo.ui.ex.awt.tree.SimpleNode;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,55 +39,47 @@ import consulo.ui.ex.awt.tree.SimpleNode;
  * @author: Roman Chernyatchik
  * @date: 29.09.2006
  */
-public class RailsModelFolderNode extends ModelSubFolderNode
-{
-	private static final String MODELS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.model.presentable");
+public class RailsModelFolderNode extends ModelSubFolderNode {
+    private static final String MODELS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.model.presentable");
 
-	public RailsModelFolderNode(final Module module, final VirtualFile rootDir)
-	{
-		super(module, rootDir, null, initPresentationData());
-	}
+    public RailsModelFolderNode(final Module module, final VirtualFile rootDir) {
+        super(module, rootDir, null, initPresentationData());
+    }
 
-	@Override
-	public void accept(final Consumer<SimpleNode> visitor)
-	{
-		if(visitor instanceof RailsNodeVisitor)
-		{
-			((RailsNodeVisitor) visitor).visitModelNode();
-			return;
-		}
-		super.accept(visitor);
+    @Override
+    public void accept(final Consumer<consulo.ui.ex.tree.SimpleNode> visitor) {
+        if (visitor instanceof RailsNodeVisitor) {
+            ((RailsNodeVisitor) visitor).visitModelNode();
+            return;
+        }
+        super.accept(visitor);
 
-	}
+    }
 
-	private static PresentationData initPresentationData()
-	{
-		return new PresentationData(MODELS_VIEW_NAME, MODELS_VIEW_NAME, RailsIcons.RAILS_MODEL_NODES, null);
-	}
+    private static PresentationData initPresentationData() {
+        return new PresentationData(MODELS_VIEW_NAME, MODELS_VIEW_NAME, RailsIcons.RAILS_MODEL_NODES, null);
+    }
 
-	@Override
-	@Nonnull
-	public RailsProjectNodeComparator.NodeType getType()
-	{
-		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-	}
+    @Override
+    @Nonnull
+    public RailsProjectNodeComparator.NodeType getType() {
+        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+    }
 
-	@Override
-	public SimpleNode[] getChildren()
-	{
-		final ArrayList<SimpleNode> children = new ArrayList<SimpleNode>();
-		//adds migrations
-		final Module module = getModule();
-		final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
-		assert railsPaths != null; //Not null for modules with Rails Support
-		final VirtualFile migr = VirtualFileManager.getInstance().findFileByUrl(railsPaths.getMigrationsRootURL());
-		if(migr != null)
-		{
-			children.add(new MigrationsFolder(module, migr, this));
-		}
+    @Override
+    public SimpleNode[] getChildren() {
+        final ArrayList<SimpleNode> children = new ArrayList<SimpleNode>();
+        //adds migrations
+        final Module module = getModule();
+        final StandardRailsPaths railsPaths = RailsFacetUtil.getRailsAppPaths(module);
+        assert railsPaths != null; //Not null for modules with Rails Support
+        final VirtualFile migr = VirtualFileManager.getInstance().findFileByUrl(railsPaths.getMigrationsRootURL());
+        if (migr != null) {
+            children.add(new MigrationsFolder(module, migr, this));
+        }
 
-		//add other
-		children.addAll(Arrays.asList(super.getChildren()));
-		return children.toArray(new SimpleNode[children.size()]);
-	}
+        //add other
+        children.addAll(Arrays.asList(super.getChildren()));
+        return children.toArray(new SimpleNode[children.size()]);
+    }
 }

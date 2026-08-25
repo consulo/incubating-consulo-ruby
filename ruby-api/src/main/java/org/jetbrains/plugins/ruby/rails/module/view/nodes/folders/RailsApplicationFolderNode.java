@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 import consulo.module.Module;
 import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.ui.ex.tree.PresentationData;
@@ -32,9 +32,8 @@ import org.jetbrains.plugins.ruby.rails.module.view.id.NodeIdUtil;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.nameConventions.ControllersConventions;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
-import consulo.language.psi.PsiFile;
-import consulo.language.psi.PsiManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,64 +45,53 @@ import java.util.function.Consumer;
  * @author: Roman Chernyatchik
  * @date: 12.10.2006
  */
-public class RailsApplicationFolderNode extends ControllerSubFolderNode
-{
-	private static final String APPLICATION_NAME = RBundle.message("rails.project.module.view.nodes.appication.presentable");
+public class RailsApplicationFolderNode extends ControllerSubFolderNode {
+    private static final String APPLICATION_NAME = RBundle.message("rails.project.module.view.nodes.appication.presentable");
 
-	public RailsApplicationFolderNode(final Module module, final VirtualFile appControllerRoot)
-	{
-		super(module, appControllerRoot, null, initPresentationData());
-		init(generateNodeId(getVirtualFileUrl()), getPresentation());
-	}
+    public RailsApplicationFolderNode(final Module module, final VirtualFile appControllerRoot) {
+        super(module, appControllerRoot, null, initPresentationData());
+        init(generateNodeId(getVirtualFileUrl()), getPresentation());
+    }
 
-	@Nonnull
-	public static NodeId generateNodeId(final String appControllersRootUrl)
-	{
-		return NodeIdUtil.createForDirectory(appControllersRootUrl, true);
-	}
+    @Nonnull
+    public static NodeId generateNodeId(final String appControllersRootUrl) {
+        return NodeIdUtil.createForDirectory(appControllersRootUrl, true);
+    }
 
-	@Override
-	public void accept(Consumer<SimpleNode> visitor)
-	{
-		if(visitor instanceof RailsNodeVisitor)
-		{
-			((RailsNodeVisitor) visitor).visitControllerNode();
-			return;
-		}
-		super.accept(visitor);
-	}
+    @Override
+    public void accept(Consumer<consulo.ui.ex.tree.SimpleNode> visitor) {
+        if (visitor instanceof RailsNodeVisitor) {
+            ((RailsNodeVisitor) visitor).visitControllerNode();
+            return;
+        }
+        super.accept(visitor);
+    }
 
-	@Override
-	public SimpleNode[] getChildren()
-	{
-		List<RailsNode> children = new ArrayList<RailsNode>();
-		final Module module = getModule();
+    @Override
+    public SimpleNode[] getChildren() {
+        List<RailsNode> children = new ArrayList<RailsNode>();
+        final Module module = getModule();
 
-		final VirtualFile appControllerFile = ControllersConventions.getApplicationControllerFile(module);
-		if(appControllerFile != null)
-		{
-			final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(appControllerFile);
-			if(psiFile instanceof RFile)
-			{
-				final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
-				for(RClass rClass : allClasses)
-				{
-					children.add(createClassNode(rClass));
-				}
-			}
-		}
-		return children.toArray(new RailsNode[children.size()]);
-	}
+        final VirtualFile appControllerFile = ControllersConventions.getApplicationControllerFile(module);
+        if (appControllerFile != null) {
+            final PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(appControllerFile);
+            if (psiFile instanceof RFile) {
+                final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
+                for (RClass rClass : allClasses) {
+                    children.add(createClassNode(rClass));
+                }
+            }
+        }
+        return children.toArray(new RailsNode[children.size()]);
+    }
 
-	private static PresentationData initPresentationData()
-	{
-		return new PresentationData(APPLICATION_NAME, APPLICATION_NAME, RailsIcons.RAILS_APPlICON_NODES, null);
-	}
+    private static PresentationData initPresentationData() {
+        return new PresentationData(APPLICATION_NAME, APPLICATION_NAME, RailsIcons.RAILS_APPlICON_NODES, null);
+    }
 
-	@Override
-	@Nonnull
-	public RailsProjectNodeComparator.NodeType getType()
-	{
-		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-	}
+    @Override
+    @Nonnull
+    public RailsProjectNodeComparator.NodeType getType() {
+        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+    }
 }

@@ -17,8 +17,8 @@
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
 import consulo.module.Module;
-import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.ui.ex.tree.PresentationData;
+import consulo.ui.ex.tree.SimpleNode;
 import consulo.ui.image.Image;
 import consulo.virtualFileSystem.VirtualFile;
 import jakarta.annotation.Nonnull;
@@ -34,38 +34,32 @@ import java.util.function.Consumer;
  * @author: Roman Chernyatchik
  * @date: 29.09.2006
  */
-public class RailsTestsFolderNode extends TestsSubFolderNode
-{
-	private static final String TESTS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.tests.presentable");
-	protected static final Image TEST_ROOT_OPENED = null /*IconSet.getSourceRootIcon(true, true)*/;
-	protected static final Image TEST_ROOT_CLOSED = null/*IconSet.getSourceRootIcon(true, false)*/;
+public class RailsTestsFolderNode extends TestsSubFolderNode {
+    private static final String TESTS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.tests.presentable");
+    protected static final Image TEST_ROOT_OPENED = null /*IconSet.getSourceRootIcon(true, true)*/;
+    protected static final Image TEST_ROOT_CLOSED = null/*IconSet.getSourceRootIcon(true, false)*/;
 
-	public RailsTestsFolderNode(final Module module, final VirtualFile rootDir)
-	{
-		super(module, rootDir, null, initPresentationData());
-	}
+    public RailsTestsFolderNode(final Module module, final VirtualFile rootDir) {
+        super(module, rootDir, null, initPresentationData());
+    }
 
-	@Override
-	public void accept(Consumer<SimpleNode> visitor)
-	{
-		if(visitor instanceof RailsNodeVisitor)
-		{
-			((RailsNodeVisitor) visitor).visitTestNode();
-			return;
-		}
-		super.accept(visitor);
-	}
+    @Override
+    public void accept(Consumer<SimpleNode> visitor) {
+        if (visitor instanceof RailsNodeVisitor) {
+            ((RailsNodeVisitor) visitor).visitTestNode();
+            return;
+        }
+        super.accept(visitor);
+    }
 
-	@Nonnull
-	@Override
-	public RailsProjectNodeComparator.NodeType getType()
-	{
-		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-	}
+    @Nonnull
+    @Override
+    public RailsProjectNodeComparator.NodeType getType() {
+        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+    }
 
-	private static PresentationData initPresentationData()
-	{
-		return new PresentationData(TESTS_VIEW_NAME, null, TEST_ROOT_CLOSED, null);
-	}
+    private static PresentationData initPresentationData() {
+        return new PresentationData(TESTS_VIEW_NAME, null, TEST_ROOT_CLOSED, null);
+    }
 }
 

@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view;
 
-import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.ui.ex.tree.SimpleNode;
 
 import java.util.function.Consumer;
 
@@ -26,17 +26,16 @@ import java.util.function.Consumer;
  * @author: Roman Chernyatchik
  * @date: 08.10.2006
  */
-public interface RailsNodeVisitor extends Consumer<SimpleNode>
-{
-	public void visitClassNode();
+public interface RailsNodeVisitor extends Consumer<SimpleNode> {
+    public void visitClassNode();
 
-	public void visitControllerNode();
+    public void visitControllerNode();
 
-	public void visitModelNode();
+    public void visitModelNode();
 
-	public void visitTestNode();
+    public void visitTestNode();
 
-	public void visitUserNode(boolean isUnderTestsRoot);
+    public void visitUserNode(boolean isUnderTestsRoot);
 
-	public void visitSharedPartialsNode();
+    public void visitSharedPartialsNode();
 }

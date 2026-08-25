@@ -16,16 +16,15 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import consulo.ui.ex.awt.tree.SimpleNode;
-import jakarta.annotation.Nonnull;
-
 import consulo.module.Module;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.ui.ex.tree.SimpleNode;
+import consulo.virtualFileSystem.VirtualFile;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.plugins.ruby.RBundle;
 import org.jetbrains.plugins.ruby.rails.RailsIcons;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsNodeVisitor;
 import org.jetbrains.plugins.ruby.rails.module.view.RailsProjectNodeComparator;
-import consulo.ui.ex.tree.PresentationData;
-import consulo.virtualFileSystem.VirtualFile;
 
 import java.util.function.Consumer;
 
@@ -35,35 +34,29 @@ import java.util.function.Consumer;
  * @author: Roman Chernyatchik
  * @date: 29.09.2006
  */
-public class RailsControllersFolderNode extends ControllerSubFolderNode
-{
-	private static final String CONTROLLERS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.controllers.presentable");
+public class RailsControllersFolderNode extends ControllerSubFolderNode {
+    private static final String CONTROLLERS_VIEW_NAME = RBundle.message("rails.project.module.view.nodes.controllers.presentable");
 
-	public RailsControllersFolderNode(final Module module, final VirtualFile controllersRoot)
-	{
-		super(module, controllersRoot, null, initPresentationData());
-	}
+    public RailsControllersFolderNode(final Module module, final VirtualFile controllersRoot) {
+        super(module, controllersRoot, null, initPresentationData());
+    }
 
-	private static PresentationData initPresentationData()
-	{
-		return new PresentationData(CONTROLLERS_VIEW_NAME, CONTROLLERS_VIEW_NAME, RailsIcons.RAILS_CONTROLERS_NODES, null);
-	}
+    private static PresentationData initPresentationData() {
+        return new PresentationData(CONTROLLERS_VIEW_NAME, CONTROLLERS_VIEW_NAME, RailsIcons.RAILS_CONTROLERS_NODES, null);
+    }
 
-	@Override
-	public void accept(Consumer<SimpleNode> visitor)
-	{
-		if(visitor instanceof RailsNodeVisitor)
-		{
-			((RailsNodeVisitor) visitor).visitControllerNode();
-			return;
-		}
-		super.accept(visitor);
-	}
+    @Override
+    public void accept(Consumer<SimpleNode> visitor) {
+        if (visitor instanceof RailsNodeVisitor) {
+            ((RailsNodeVisitor) visitor).visitControllerNode();
+            return;
+        }
+        super.accept(visitor);
+    }
 
-	@Override
-	@Nonnull
-	public RailsProjectNodeComparator.NodeType getType()
-	{
-		return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
-	}
+    @Override
+    @Nonnull
+    public RailsProjectNodeComparator.NodeType getType() {
+        return RailsProjectNodeComparator.NodeType.SPECIAL_FOLDER;
+    }
 }

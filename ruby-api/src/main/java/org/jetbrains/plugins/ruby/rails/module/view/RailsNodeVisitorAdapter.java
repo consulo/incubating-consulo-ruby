@@ -16,7 +16,7 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view;
 
-import consulo.ui.ex.awt.tree.SimpleNode;
+import consulo.ui.ex.tree.SimpleNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,47 +24,39 @@ import consulo.ui.ex.awt.tree.SimpleNode;
  * @author: Roman Chernyatchik
  * @date: 15.10.2006
  */
-public abstract class RailsNodeVisitorAdapter implements RailsNodeVisitor
-{
-	@Override
-	public void accept(final SimpleNode simpleNode)
-	{
-	}
+public abstract class RailsNodeVisitorAdapter implements RailsNodeVisitor {
+    @Override
+    public void accept(final SimpleNode simpleNode) {
+    }
 
-	@Override
-	public void visitClassNode()
-	{
-		// Do nothing
-	}
+    @Override
+    public void visitClassNode() {
+        // Do nothing
+    }
 
-	@Override
-	public void visitControllerNode()
-	{
-		// Do nothing
-	}
+    @Override
+    public void visitControllerNode() {
+        // Do nothing
+    }
 
-	@Override
-	public void visitModelNode()
-	{
-		// Do nothing
-	}
+    @Override
+    public void visitModelNode() {
+        // Do nothing
+    }
 
 
-	@Override
-	public void visitTestNode()
-	{
-		// Do nothing
-	}
+    @Override
+    public void visitTestNode() {
+        // Do nothing
+    }
 
-	@Override
-	public void visitUserNode(final boolean isUnderTestsRoot)
-	{
-		// Do nothing
-	}
+    @Override
+    public void visitUserNode(final boolean isUnderTestsRoot) {
+        // Do nothing
+    }
 
-	@Override
-	public void visitSharedPartialsNode()
-	{
-		// Do nothing
-	}
+    @Override
+    public void visitSharedPartialsNode() {
+        // Do nothing
+    }
 }

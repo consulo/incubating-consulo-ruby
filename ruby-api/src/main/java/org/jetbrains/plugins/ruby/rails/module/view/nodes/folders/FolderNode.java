@@ -16,8 +16,8 @@
 
 package org.jetbrains.plugins.ruby.rails.module.view.nodes.folders;
 
-import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
-
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
 import consulo.module.Module;
 import consulo.ui.ex.awt.tree.SimpleNode;
 import consulo.ui.ex.tree.PresentationData;
@@ -30,10 +30,9 @@ import org.jetbrains.plugins.ruby.rails.module.view.nodes.ClassNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsNode;
 import org.jetbrains.plugins.ruby.rails.module.view.nodes.SimpleFileNode;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile;
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass;
 import org.jetbrains.plugins.ruby.ruby.lang.psi.impl.holders.utils.RContainerUtil;
 import org.jetbrains.plugins.ruby.support.utils.RubyVirtualFileScanner;
-import consulo.language.psi.PsiFile;
-import consulo.language.psi.PsiManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,137 +44,114 @@ import java.util.function.Consumer;
  * @author: Roman Chernyatchik
  * @date: 08.10.2006
  */
-public abstract class FolderNode extends SimpleFileNode
-{
-	private final SimpleNode myParentNode;
+public abstract class FolderNode extends SimpleFileNode {
+    private final SimpleNode myParentNode;
 
-	public FolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data)
-	{
+    public FolderNode(final Module module, final VirtualFile dir, final SimpleNode parent, final PresentationData data) {
 
-		super(module, dir);
-		myParentNode = parent;
+        super(module, dir);
+        myParentNode = parent;
 
-		init(getElement(), data);
-	}
+        init(getElement(), data);
+    }
 
-	public FolderNode(final Module module, final VirtualFile dir, final SimpleNode parent)
-	{
-		this(module, dir, parent, initPresentationData(dir.getName()));
-	}
+    public FolderNode(final Module module, final VirtualFile dir, final SimpleNode parent) {
+        this(module, dir, parent, initPresentationData(dir.getName()));
+    }
 
-	protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file, final String url)
-	{
-		if(!RubyVirtualFileScanner.isRubyFile(file))
-		{
-			return;
-		}
-		final PsiFile psiFile = PsiManager.getInstance(getModule().getProject()).findFile(file);
-		if(!(psiFile instanceof RFile))
-		{
-			return;
-		}
+    protected void processNotDirectoryFile(final List<RailsNode> nodes, final VirtualFile file, final String url) {
+        if (!RubyVirtualFileScanner.isRubyFile(file)) {
+            return;
+        }
+        final PsiFile psiFile = PsiManager.getInstance(getModule().getProject()).findFile(file);
+        if (!(psiFile instanceof RFile)) {
+            return;
+        }
 
-		final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
+        final List<RClass> allClasses = RContainerUtil.getTopLevelClasses((RFile) psiFile);
 
-		for(final RClass rClass : allClasses)
-		{
-			nodes.add(createClassNode(rClass));
-		}
-	}
+        for (final RClass rClass : allClasses) {
+            nodes.add(createClassNode(rClass));
+        }
+    }
 
-	protected ClassNode createClassNode(final RClass rClass)
-	{
-		return new ClassNode(getModule(), rClass);
-	}
+    protected ClassNode createClassNode(final RClass rClass) {
+        return new ClassNode(getModule(), rClass);
+    }
 
-	@Override
-	public void accept(Consumer<SimpleNode> visitor)
-	{
-		myParentNode.accept(visitor);
-	}
+    @Override
+    public void accept(Consumer<consulo.ui.ex.tree.SimpleNode> visitor) {
+        myParentNode.accept(visitor);
+    }
 
-	@Override
-	public SimpleNode[] getChildren()
-	{
-		final List<RailsNode> children = new ArrayList<RailsNode>();
-		final Module module = getModule();
+    @Override
+    public SimpleNode[] getChildren() {
+        final List<RailsNode> children = new ArrayList<RailsNode>();
+        final Module module = getModule();
 
-		final VirtualFile directory = getVirtualFile();
-		assert directory != null;
-		final List<VirtualFile> files = RubyVirtualFileScanner.searchFilesUnderDirectory(module, directory, true);
-		for(final VirtualFile file : files)
-		{
-			if(!file.isDirectory())
-			{
-				processNotDirectoryFile(children, file, file.getUrl());
-				continue;
-			}
-			/**
-			 * searchFilesUnderDirectory() includes directory itself
-			 */
-			if(file.equals(directory))
-			{
-				continue;
-			}
-			/**
-			 * Create sub folder with corresponding type
-			 */
-			accept(new RailsNodeVisitorAdapter()
-			{
-				@Override
-				public void visitModelNode()
-				{
-					children.add(new ModelSubFolderNode(module, file, FolderNode.this));
-				}
+        final VirtualFile directory = getVirtualFile();
+        assert directory != null;
+        final List<VirtualFile> files = RubyVirtualFileScanner.searchFilesUnderDirectory(module, directory, true);
+        for (final VirtualFile file : files) {
+            if (!file.isDirectory()) {
+                processNotDirectoryFile(children, file, file.getUrl());
+                continue;
+            }
+            /**
+             * searchFilesUnderDirectory() includes directory itself
+             */
+            if (file.equals(directory)) {
+                continue;
+            }
+            /**
+             * Create sub folder with corresponding type
+             */
+            accept(new RailsNodeVisitorAdapter() {
+                @Override
+                public void visitModelNode() {
+                    children.add(new ModelSubFolderNode(module, file, FolderNode.this));
+                }
 
-				@Override
-				public void visitControllerNode()
-				{
-					children.add(new ControllerSubFolderNode(module, file, FolderNode.this));
-				}
+                @Override
+                public void visitControllerNode() {
+                    children.add(new ControllerSubFolderNode(module, file, FolderNode.this));
+                }
 
-				@Override
-				public void visitTestNode()
-				{
-					children.add(new TestsSubFolderNode(module, file, FolderNode.this));
-				}
+                @Override
+                public void visitTestNode() {
+                    children.add(new TestsSubFolderNode(module, file, FolderNode.this));
+                }
 
-				@Override
-				public void visitUserNode(final boolean isUnderTestsRoot)
-				{
-					children.add(new UserSubFolderNode(module, file, FolderNode.this, isUnderTestsRoot));
-				}
+                @Override
+                public void visitUserNode(final boolean isUnderTestsRoot) {
+                    children.add(new UserSubFolderNode(module, file, FolderNode.this, isUnderTestsRoot));
+                }
 
-				@Override
-				public void visitSharedPartialsNode()
-				{
-					children.add(new SharedPartialsSubFolderNode(module, file, FolderNode.this));
-				}
-			});
-		}
-		return children.toArray(new RailsNode[children.size()]);
-	}
+                @Override
+                public void visitSharedPartialsNode() {
+                    children.add(new SharedPartialsSubFolderNode(module, file, FolderNode.this));
+                }
+            });
+        }
+        return children.toArray(new RailsNode[children.size()]);
+    }
 
-	@Override
-	@Nonnull
-	public RailsProjectNodeComparator.NodeType getType()
-	{
-		return RailsProjectNodeComparator.NodeType.FOLDER;
-	}
+    @Override
+    @Nonnull
+    public RailsProjectNodeComparator.NodeType getType() {
+        return RailsProjectNodeComparator.NodeType.FOLDER;
+    }
 
-	@Override
-	public boolean expandOnDoubleClick()
-	{
-		return true;
-	}
+    @Override
+    public boolean expandOnDoubleClick() {
+        return true;
+    }
 
-	private static PresentationData initPresentationData(final String name)
-	{
-		return new PresentationData(name, name, RailsIcons.RAILS_FOLDER_CLOSED, null);
-	}
+    private static PresentationData initPresentationData(final String name) {
+        return new PresentationData(name, name, RailsIcons.RAILS_FOLDER_CLOSED, null);
+    }
 
-	protected SimpleNode getParentNode()
-	{
-		return myParentNode;
-	}
+    protected SimpleNode getParentNode() {
+        return myParentNode;
+    }
 }
